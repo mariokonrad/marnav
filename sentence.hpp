@@ -26,7 +26,7 @@ std::istream& operator>>(std::istream& is, time& t);
 std::ostream& operator<<(std::ostream& os, const date& d);
 std::istream& operator>>(std::istream& is, date& d);
 
-template <class T> std::ostream& operator<<(std::ostream& os, const optional<T>& data)
+template <class T> inline std::ostream& operator<<(std::ostream& os, const optional<T>& data)
 {
 	if (data) {
 		using namespace std;
@@ -35,7 +35,7 @@ template <class T> std::ostream& operator<<(std::ostream& os, const optional<T>&
 	return os;
 }
 
-template <> std::ostream& operator<<(std::ostream& os, const optional<double>& data)
+template <> inline std::ostream& operator<<(std::ostream& os, const optional<double>& data)
 {
 	if (data) {
 		char buf[32];
