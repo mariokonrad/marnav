@@ -1,0 +1,3 @@
+
+map <F4> :grep -Ernw --include=*.c* --include=*.h* <cword> * <Bar> cw<CR>
+

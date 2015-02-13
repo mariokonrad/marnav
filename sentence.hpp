@@ -102,6 +102,8 @@ private:
 	char talker_[3];
 };
 
+std::string to_string(const sentence& s);
+
 }
 
 #endif

@@ -1,7 +1,7 @@
 .PHONY: all clean
 
 CXX=g++
-CXXFLAGS=-std=c++11 -Wall -Wextra -ggdb
+CXXFLAGS=-std=c++11 -Wall -Wextra -ggdb -O2
 
 all : nmea_sentence
 
@@ -12,6 +12,7 @@ nmea_sentence : \
 	sentence.o \
 	mtw.o \
 	rmc.o \
+	nmea.o \
 	nmea_sentence.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
