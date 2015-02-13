@@ -5,8 +5,15 @@ CXXFLAGS=-std=c++11 -Wall -Wextra -ggdb
 
 all : nmea_sentence
 
-nmea_sentence : nmea_sentence.o
-	$(CXX) -o $@ $^
+nmea_sentence : \
+	angle.o \
+	time.o \
+	date.o \
+	sentence.o \
+	mtw.o \
+	rmc.o \
+	nmea_sentence.o
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean :
 	rm -f *.o nmea_sentence
