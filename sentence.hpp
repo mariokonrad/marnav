@@ -45,11 +45,81 @@ template <> inline std::ostream& operator<<(std::ostream& os, const optional<dou
 	return os;
 }
 
+// TODO: not a complete list
 enum class SentenceID : uint32_t {
 	NONE = 0x00000000,
-	RMC = 0x00000001,
-	MTW = 0x00003006,
+
+	// standard sentences
+	RMB,
+	RMC,
+	GGA,
+	GSA,
+	GSV,
+	GLL,
+	RTE,
+	VTG,
+	BOD,
+	DPT,
+
+	// garmin specific
+	RME,
+	RMM,
+	RMZ,
+
+	// vendor extensions
+	HDG,
+
+	// integrated instumentation
+	MWV, // wind values
+	VWR, // wind relative
+	VWT, // wind true
+	DBT, // water depth
+	VLW, // log distance
+	VHW, // heading
+	MTW, // temperature water
 };
+
+constexpr char EAST  = 'E';
+constexpr char WEST  = 'W';
+constexpr char NORTH = 'N';
+constexpr char SOUTH = 'S';
+
+constexpr char STATUS_OK      = 'A';
+constexpr char STATUS_WARNING = 'V';
+
+constexpr char SIG_INT_AUTONOMOUS   = 'A';
+constexpr char SIG_INT_DIFFERENTIAL = 'D';
+constexpr char SIG_INT_ESTIMATED    = 'E';
+constexpr char SIG_INT_MANUALINPUT  = 'M';
+constexpr char SIG_INT_SIMULATED    = 'S';
+constexpr char SIG_INT_DATANOTVALID = 'N';
+
+constexpr int QUALITY_INVALID  = 0;
+constexpr int QUALITY_GPS_FIX  = 1;
+constexpr int QUALITY_DPGS_FIX = 2;
+constexpr int QUALITY_GUESS    = 6;
+
+constexpr char UNIT_METER   = 'M';
+constexpr char UNIT_FEET    = 'f';
+constexpr char UNIT_NM      = 'N'; // nautical miles
+constexpr char UNIT_FATHOM  = 'F';
+constexpr char UNIT_KNOT    = 'N';
+constexpr char UNIT_KMH     = 'K'; // kilometers per hour
+constexpr char UNIT_MPS     = 'M'; // meters per second
+constexpr char UNIT_CELSIUS = 'C';
+
+constexpr char TRUE     = 'T';
+constexpr char MAGNETIC = 'M';
+constexpr char RELATIVE = 'R';
+
+constexpr char LEFT  = 'L';
+constexpr char RIGHT = 'R';
+
+constexpr char ROUTE_COMPLETE = 'C';
+constexpr char ROUTE_WORKING  = 'W';
+
+constexpr char SELECTIONMODE_MANUAL    = 'M';
+constexpr char SELECTIONMODE_AUTOMATIC = 'A';
 
 /// @note This class behaves like a POD, no complex data with memory operations.
 class sentence
