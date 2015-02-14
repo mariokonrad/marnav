@@ -39,6 +39,9 @@ int main(int, char**)
 	std::cout << "sizeof(sentence) = " << sizeof(nmea::sentence) << "\n";
 	std::cout << "sizeof(rmc)      = " << sizeof(nmea::rmc) << "\n";
 	std::cout << "sizeof(mtw)      = " << sizeof(nmea::mtw) << "\n";
+	std::cout << "\n";
+
+	std::cout << nmea::to_string(nmea::rmc{}) << "\n";
 
 	return 0;
 }

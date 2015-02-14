@@ -113,6 +113,8 @@ public:
 	const char* tag() const;
 	const char* talker() const;
 
+	void set_talker(const std::string& talker);
+
 	friend std::string to_string(const sentence&);
 
 protected:

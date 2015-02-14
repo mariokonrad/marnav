@@ -14,7 +14,7 @@ class rmc : public sentence
 public:
 	constexpr static const SentenceID ID = SentenceID::RMC;
 
-	rmc(const std::string& talker);
+	rmc();
 
 	static std::unique_ptr<sentence>
 	parse(const std::string& talker,

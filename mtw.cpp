@@ -4,8 +4,8 @@
 namespace nmea
 {
 
-mtw::mtw(const std::string& talker)
-	: sentence(ID, "MTW", talker)
+mtw::mtw()
+	: sentence(ID, "MTW", "II")
 {
 }
 
@@ -16,7 +16,8 @@ mtw::parse(const std::string& talker,
 	if (fields.size() != 2)
 		throw std::invalid_argument{"invalid number of fields in mtw::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<mtw>(talker);
+	std::unique_ptr<sentence> result = std::make_unique<mtw>();
+	result->set_talker(talker);
 	mtw& detail = static_cast<mtw&>(*result);
 
 	read(fields[0], detail.temperature);

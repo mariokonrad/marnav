@@ -10,7 +10,7 @@ class mtw : public sentence
 public:
 	constexpr static const SentenceID ID = SentenceID::MTW;
 
-	mtw(const std::string& talker);
+	mtw();
 
 	static std::unique_ptr<sentence>
 	parse(const std::string& talker,

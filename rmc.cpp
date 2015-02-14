@@ -4,8 +4,8 @@
 namespace nmea
 {
 
-rmc::rmc(const std::string& talker)
-	: sentence(ID, "RMC", talker)
+rmc::rmc()
+	: sentence(ID, "RMC", "GP")
 {
 }
 
@@ -17,7 +17,8 @@ rmc::parse(const std::string& talker,
 	if ((fields.size() < 11) || (fields.size() > 12))
 		throw std::invalid_argument{"invalid number of fields in rmc::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<rmc>(talker);
+	std::unique_ptr<sentence> result = std::make_unique<rmc>();
+	result->set_talker(talker);
 	rmc& detail = static_cast<rmc&>(*result);
 
 	read(fields[0], detail.time_utc);

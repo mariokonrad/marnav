@@ -8,8 +8,19 @@ sentence::sentence(SentenceID id, const std::string& tag, const std::string& tal
 	: id_(id)
 {
 	std::copy_n(tag.c_str(), 3, this->tag_);
-	std::copy_n(talker.c_str(), 2, this->talker_);
 	this->tag_[3] = 0;
+
+	std::fill_n(talker_, sizeof(talker_), 0);
+	set_talker(talker);
+}
+
+/// Overwrites the default talker for a sentence.
+void sentence::set_talker(const std::string& talker)
+{
+	if (talker.size() != 2)
+		return;
+
+	std::copy_n(talker.c_str(), 2, this->talker_);
 	this->talker_[2] = 0;
 }
 
