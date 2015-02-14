@@ -4,6 +4,11 @@
 namespace nmea
 {
 
+/// This is a somewhat compatible implementation of std::experimental::optional (as by 2015).
+/// The interface differs partially.
+///
+/// This is (somewhat) necessary, because optional is not part of the standard and may change
+/// its interface in the future.
 template <class T> class optional
 {
 public:
