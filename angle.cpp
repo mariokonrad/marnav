@@ -119,6 +119,16 @@ latitude latitude::parse(const std::string& s) throw(std::invalid_argument)
 	return latitude{a};
 }
 
+std::ostream& operator<<(std::ostream& os, const latitude& p) { return os << to_string(p); }
+
+std::istream& operator>>(std::istream& is, latitude& t)
+{
+	std::string s;
+	is >> s;
+	t = latitude::parse(s);
+	return is;
+}
+
 longitude::longitude()
 	: angle(0.0)
 {
@@ -162,6 +172,16 @@ std::string to_string(const longitude& v)
 	snprintf(buf, sizeof(buf), "%03u%02u.%04u", v.degrees(), v.minutes(),
 			 static_cast<uint32_t>(10000 * v.seconds() / 60));
 	return buf;
+}
+
+std::ostream& operator<<(std::ostream& os, const longitude& p) { return os << to_string(p); }
+
+std::istream& operator>>(std::istream& is, longitude& t)
+{
+	std::string s;
+	is >> s;
+	t = longitude::parse(s);
+	return is;
 }
 
 }

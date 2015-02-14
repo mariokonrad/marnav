@@ -12,52 +12,6 @@
 namespace nmea
 {
 
-std::ostream& operator<<(std::ostream& os, const latitude& p) { return os << to_string(p); }
-
-std::istream& operator>>(std::istream& is, latitude& t)
-{
-	std::string s;
-	is >> s;
-	t = latitude::parse(s);
-	return is;
-}
-
-std::ostream& operator<<(std::ostream& os, const longitude& p) { return os << to_string(p); }
-
-std::istream& operator>>(std::istream& is, longitude& t)
-{
-	std::string s;
-	is >> s;
-	t = longitude::parse(s);
-	return is;
-}
-
-std::ostream& operator<<(std::ostream& os, const time& t)
-{
-	return os << to_string(t);
-}
-
-std::istream& operator>>(std::istream& is, time& t)
-{
-	std::string s;
-	is >> s;
-	t = time::parse(s);
-	return is;
-}
-
-std::ostream& operator<<(std::ostream& os, const date& d)
-{
-	return os << to_string(d);
-}
-
-std::istream& operator>>(std::istream& is, date& d)
-{
-	std::string s;
-	is >> s;
-	d = date::parse(s);
-	return is;
-}
-
 sentence::parse_func instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 {
 	using namespace std;

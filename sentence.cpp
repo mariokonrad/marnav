@@ -37,5 +37,15 @@ std::string to_string(const sentence& s)
 	return result + buf;
 }
 
+std::ostream& operator<<(std::ostream& os, const optional<double>& data)
+{
+	if (data) {
+		char buf[32];
+		snprintf(buf, sizeof(buf), "%.1f", data.value());
+		os << buf;
+	}
+	return os;
+}
+
 }
 

@@ -3,41 +3,41 @@
 namespace nmea
 {
 
-	time::time()
-		: h(0)
-		, m(0)
-		, s(0)
-		, ms(0)
-	{
-	}
+time::time()
+	: h(0)
+	, m(0)
+	, s(0)
+	, ms(0)
+{
+}
 
-	time::time(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(std::invalid_argument)
-		: h(h)
-		, m(m)
-		, s(s)
-		, ms(ms)
-	{
-		// TODO: replace this poor mans time check
+time::time(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(std::invalid_argument)
+	: h(h)
+	, m(m)
+	, s(s)
+	, ms(ms)
+{
+	// TODO: replace this poor mans time check
 
-		if (h > 23)
-			throw std::invalid_argument{"invalid hour in nmea::time"};
-		if (m > 59)
-			throw std::invalid_argument{"invalid minute in nmea::time"};
-		if (s > 59)
-			throw std::invalid_argument{"invalid second in nmea::time"};
-		if (ms > 999)
-			throw std::invalid_argument{"invalid milliseconds in nmea::time"};
-	}
+	if (h > 23)
+		throw std::invalid_argument{"invalid hour in nmea::time"};
+	if (m > 59)
+		throw std::invalid_argument{"invalid minute in nmea::time"};
+	if (s > 59)
+		throw std::invalid_argument{"invalid second in nmea::time"};
+	if (ms > 999)
+		throw std::invalid_argument{"invalid milliseconds in nmea::time"};
+}
 
-	uint32_t time::hour() const { return h; }
+uint32_t time::hour() const { return h; }
 
-	uint32_t time::minutes() const { return m; }
+uint32_t time::minutes() const { return m; }
 
-	/// Returns the seconds component.
-	uint32_t time::seconds() const { return s; }
+/// Returns the seconds component.
+uint32_t time::seconds() const { return s; }
 
-	/// Returns the milliseconds component.
-	uint32_t time::milliseconds() const { return ms; }
+/// Returns the milliseconds component.
+uint32_t time::milliseconds() const { return ms; }
 
 std::string to_string(const time& d)
 {
@@ -69,6 +69,14 @@ time time::parse(const std::string& str) throw(std::invalid_argument)
 	}
 }
 
-//}}}
+std::ostream& operator<<(std::ostream& os, const time& t) { return os << to_string(t); }
+
+std::istream& operator>>(std::istream& is, time& t)
+{
+	std::string s;
+	is >> s;
+	t = time::parse(s);
+	return is;
+}
 
 }

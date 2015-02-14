@@ -53,6 +53,8 @@ private:
 
 bool operator==(const time& a, const time& b) noexcept;
 std::string to_string(const time& d);
+std::ostream& operator<<(std::ostream& os, const time& t);
+std::istream& operator>>(std::istream& is, time& t);
 
 }
 

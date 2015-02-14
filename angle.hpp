@@ -65,6 +65,8 @@ private:
 };
 
 std::string to_string(const latitude& v);
+std::ostream& operator<<(std::ostream& os, const latitude& p);
+std::istream& operator>>(std::istream& is, latitude& t);
 
 class longitude : public angle
 {
@@ -87,6 +89,8 @@ private:
 };
 
 std::string to_string(const longitude& v);
+std::ostream& operator<<(std::ostream& os, const longitude& p);
+std::istream& operator>>(std::istream& is, longitude& t);
 
 }
 
