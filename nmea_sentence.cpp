@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
-#include "nmea.hpp"
-#include "mtw.hpp"
-#include "rmc.hpp"
+#include <nmea/nmea.hpp>
+#include <nmea/mtw.hpp>
+#include <nmea/rmc.hpp>
 
 static void test(const std::string& text)
 {
