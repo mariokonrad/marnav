@@ -9,6 +9,32 @@ rmc::rmc()
 {
 }
 
+void rmc::set_lat(const latitude& t)
+{
+	lat = t;
+	switch (t.hem()) {
+		case latitude::hemisphere::NORTH:
+			lat_hem = NORTH;
+			break;
+		case latitude::hemisphere::SOUTH:
+			lat_hem = SOUTH;
+			break;
+	}
+}
+
+void rmc::set_lon(const longitude& t)
+{
+	lon = t;
+	switch (t.hem()) {
+		case longitude::hemisphere::EAST:
+			lon_hem = EAST;
+			break;
+		case longitude::hemisphere::WEST:
+			lon_hem = WEST;
+			break;
+	}
+}
+
 std::unique_ptr<sentence>
 rmc::parse(const std::string& talker,
 		   const std::vector<std::string>& fields) throw(std::invalid_argument)

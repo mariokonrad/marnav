@@ -50,10 +50,8 @@ public:
 	enum class hemisphere { NORTH, SOUTH };
 
 	latitude();
-
-	latitude(double value);
-
-	explicit latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem);
+	latitude(double value) throw(std::invalid_argument);
+	latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(std::invalid_argument);
 
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;
@@ -74,10 +72,8 @@ public:
 	enum class hemisphere { EAST, WEST };
 
 	longitude();
-
-	longitude(double value);
-
-	explicit longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem);
+	longitude(double value) throw(std::invalid_argument);
+	longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(std::invalid_argument);
 
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;

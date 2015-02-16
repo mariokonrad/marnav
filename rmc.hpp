@@ -15,6 +15,8 @@ public:
 	constexpr static const SentenceID ID = SentenceID::RMC;
 
 	rmc();
+	rmc(const rmc&) = default;
+	rmc& operator=(const rmc&) = default;
 
 	static std::unique_ptr<sentence>
 	parse(const std::string& talker,
@@ -50,6 +52,16 @@ public:
 	decltype(mag) get_mag() const { return mag; }
 	decltype(mag_hem) get_mag_hem() const { return mag_hem; }
 	decltype(faa_mode_indicator) get_faa_mode_indicator() const { return faa_mode_indicator; }
+
+	void set_time_utc(const time& t) { time_utc = t; }
+	void set_status(char t) { status = t; }
+	void set_lat(const latitude& t);
+	void set_lon(const longitude& t);
+	void set_sog(double t) { sog = t; }
+	void set_heading(double t) { heading = t; }
+	void set_date(const nmea::date& t) { date = t; }
+	void set_mag(double t, char h) { mag = t; mag_hem = h; }
+	void set_mode_indicator(char t) { faa_mode_indicator = t; }
 };
 
 }

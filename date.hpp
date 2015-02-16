@@ -11,17 +11,16 @@ class date
 {
 public:
 	date();
-
-	explicit date(uint32_t y, uint32_t m, uint32_t d) throw(std::invalid_argument);
+	date(uint32_t y, uint32_t m, uint32_t d) throw(std::invalid_argument);
 
 	/// Returns the year component.
-	uint32_t year() const;
+	uint32_t year() const noexcept;
 
 	/// Returns the month component.
-	uint32_t month() const;
+	uint32_t month() const noexcept;
 
 	/// Returns the day component.
-	uint32_t day() const;
+	uint32_t day() const noexcept;
 
 	friend bool operator==(const date& a, const date& b) noexcept;
 

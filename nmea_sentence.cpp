@@ -43,6 +43,29 @@ int main(int, char**)
 
 	std::cout << nmea::to_string(nmea::rmc{}) << "\n";
 
+	{
+		nmea::rmc rmc{};
+		rmc.set_time_utc(nmea::time{12, 34, 56, 678});
+		rmc.set_status(nmea::STATUS_OK);
+		std::cout << nmea::to_string(rmc) << "\n";
+	}
+	{
+		nmea::rmc rmc{};
+		rmc.set_lat(nmea::latitude{12, 34, 56, nmea::latitude::hemisphere::NORTH});
+		rmc.set_lon(nmea::longitude{123, 45, 67, nmea::longitude::hemisphere::EAST});
+		std::cout << nmea::to_string(rmc) << "\n";
+	}
+	{
+		nmea::mtw mtw{};
+		mtw.set_temperature(22.5);
+		std::cout << nmea::to_string(mtw) << "\n";
+	}
+	{
+		nmea::mtw mtw{};
+		mtw.set_temperature(9.5);
+		std::cout << nmea::to_string(mtw) << "\n";
+	}
+
 	return 0;
 }
 

@@ -79,13 +79,13 @@ latitude::latitude()
 {
 }
 
-latitude::latitude(double value)
+latitude::latitude(double value) throw(std::invalid_argument)
 	: angle(value)
 {
 	check(get());
 }
 
-latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem)
+latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(std::invalid_argument)
 	: angle((static_cast<double>(d) + static_cast<double>(m) / 60.0
 			 + static_cast<double>(s) / 3600.0) * ((hem == hemisphere::SOUTH) ? -1.0 : 1.0))
 {
@@ -134,17 +134,18 @@ longitude::longitude()
 {
 }
 
-longitude::longitude(double value)
+longitude::longitude(double value) throw(std::invalid_argument)
 	: angle(value)
 {
-	check(*this);
+	check(get());
 }
 
-longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem)
+longitude::longitude(uint32_t d, uint32_t m, uint32_t s,
+					 hemisphere hem) throw(std::invalid_argument)
 	: angle((static_cast<double>(d) + static_cast<double>(m) / 60.0
 			 + static_cast<double>(s) / 3600.0) * ((hem == hemisphere::EAST) ? -1.0 : 1.0))
 {
-	check(*this);
+	check(get());
 }
 
 /// Returns the corresponding hemisphere.
@@ -183,6 +184,5 @@ std::istream& operator>>(std::istream& is, longitude& t)
 	t = longitude::parse(s);
 	return is;
 }
-
 }
 
