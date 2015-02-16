@@ -17,8 +17,6 @@ time::time(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(std::invalid_a
 	, s(s)
 	, ms(ms)
 {
-	// TODO: replace this poor mans time check
-
 	if (h > 23)
 		throw std::invalid_argument{"invalid hour in nmea::time"};
 	if (m > 59)
