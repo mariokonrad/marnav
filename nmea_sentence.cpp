@@ -66,6 +66,11 @@ int main(int, char**)
 		std::cout << nmea::to_string(mtw) << "\n";
 	}
 
+	std::cout << "leap years:\n";
+	for (uint32_t year = 1980; year < 2020; ++year) {
+		std::cout << year << " : " << nmea::date::is_leap_year(year) << "\n";
+	}
+
 	return 0;
 }
 

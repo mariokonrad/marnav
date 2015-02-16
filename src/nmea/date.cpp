@@ -5,8 +5,8 @@ namespace nmea
 
 date::date()
 	: y(0)
-	, m(0)
-	, d(0)
+	, m(1)
+	, d(1)
 {
 }
 
@@ -15,14 +15,39 @@ date::date(uint32_t y, uint32_t m, uint32_t d) throw(std::invalid_argument)
 	, m(m)
 	, d(d)
 {
-	// TODO: replace this poor mans date check
+	if (!check())
+		throw std::invalid_argument{"invalid date"};
+}
 
-	if ((m <= 0) || (m > 12))
-		throw std::invalid_argument{"invalid month"};
-	if ((m == 2) && (d > 29))
-		throw std::invalid_argument{"invalid day"};
-	if ((d <= 0) || (d > 31))
-		throw std::invalid_argument{"invalid day"};
+bool date::check() const noexcept
+{
+	if (d == 0)
+		return false;
+
+	switch (m) {
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			return d <= 31;
+
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			return d <= 30;
+
+		case 2:
+			if (is_leap_year(y))
+				return d <= 29;
+			return d <= 28;
+
+		default:
+			return false;
+	}
 }
 
 /// Returns the year component.

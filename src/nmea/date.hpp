@@ -28,7 +28,19 @@ public:
 	/// The date to be parsed must be in the form: "DDMMYY"
 	static date parse(const std::string& str) throw(std::invalid_argument);
 
+	/// Returns true if the specified year is a leap year. This function
+	/// does not work for dates before 17?? (only for julian calendar).
+	///
+	/// Every fourth year is a leap year except for every 100 years,
+	/// except every 400 years.
+	static constexpr bool is_leap_year(uint32_t year) noexcept
+	{
+		return ((year % 4) == 0) && (((year % 100) != 0) || ((year % 400) == 0));
+	}
+
 private:
+	bool check() const noexcept;
+
 	uint32_t y; // year
 	uint32_t m; // month: 1..12
 	uint32_t d; // day: 1..31
