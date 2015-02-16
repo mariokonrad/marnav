@@ -68,30 +68,18 @@ rmc::parse(const std::string& talker,
 
 void rmc::append_data(std::ostream& os, const std::string& delimiter) const
 {
-	os << delimiter;
-	os << time_utc;
-	os << delimiter;
-	os << status;
-	os << delimiter;
-	os << lat;
-	os << delimiter;
-	os << lat_hem;
-	os << delimiter;
-	os << lon;
-	os << delimiter;
-	os << lon_hem;
-	os << delimiter;
-	os << sog;
-	os << delimiter;
-	os << heading;
-	os << delimiter;
-	os << date;
-	os << delimiter;
-	os << mag;
-	os << delimiter;
-	os << mag_hem;
-	os << delimiter;
-	os << faa_mode_indicator;
+	os << delimiter << time_utc;
+	os << delimiter << status;
+	os << delimiter << lat;
+	os << delimiter << lat_hem;
+	os << delimiter << lon;
+	os << delimiter << lon_hem;
+	os << delimiter << sog;
+	os << delimiter << heading;
+	os << delimiter << date;
+	os << delimiter << mag;
+	os << delimiter << mag_hem;
+	os << delimiter << faa_mode_indicator;
 }
 
 }

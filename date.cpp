@@ -26,13 +26,13 @@ date::date(uint32_t y, uint32_t m, uint32_t d) throw(std::invalid_argument)
 }
 
 /// Returns the year component.
-uint32_t date::year() const { return y; }
+uint32_t date::year() const noexcept { return y; }
 
 /// Returns the month component.
-uint32_t date::month() const { return m; }
+uint32_t date::month() const noexcept { return m; }
 
 /// Returns the day component.
-uint32_t date::day() const { return d; }
+uint32_t date::day() const noexcept { return d; }
 
 bool operator==(const date& a, const date& b) noexcept
 {

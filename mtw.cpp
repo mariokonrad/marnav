@@ -28,10 +28,8 @@ mtw::parse(const std::string& talker,
 
 void mtw::append_data(std::ostream& os, const std::string& delimiter) const
 {
-	os << delimiter;
-	os << temperature;
-	os << delimiter;
-	os << unit;
+	os << delimiter << temperature;
+	os << delimiter << unit;
 }
 
 }
