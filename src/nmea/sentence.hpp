@@ -5,23 +5,10 @@
 #include <memory>
 #include <vector>
 #include <string>
-#include <sstream>
-#include <iostream>
 #include "optional.hpp"
 
 namespace nmea
 {
-
-template <class T> inline std::ostream& operator<<(std::ostream& os, const optional<T>& data)
-{
-	if (data) {
-		using namespace std;
-		os << data.value();
-	}
-	return os;
-}
-
-std::ostream& operator<<(std::ostream& os, const optional<double>& data);
 
 // TODO: not a complete list
 enum class SentenceID : uint32_t {
@@ -106,7 +93,10 @@ public:
 	using parse_func = std::function<std::unique_ptr<sentence>(const std::string&,
 															   const std::vector<std::string>&)>;
 
+	constexpr static int MAX_LENGTH = 82;
+
 	constexpr static char START_TOKEN = '$';
+	constexpr static char START_TOKEN_AIVDM = '!';
 	constexpr static char END_TOKEN = '*';
 
 	SentenceID id() const;
@@ -119,32 +109,7 @@ public:
 
 protected:
 	sentence(SentenceID id, const std::string& tag, const std::string& talker);
-
-	template <class T>
-	static void read(const std::string& s, T& value)
-	{
-		if (s.empty()) {
-			value = T{};
-			return;
-		}
-
-		std::istringstream{s} >> value;
-	}
-
-	template <class T>
-	static void read(const std::string& s, optional<T>& value)
-	{
-		if (s.empty()) {
-			value.reset();
-			return;
-		}
-
-		T tmp;
-		std::istringstream{s} >> tmp;
-		value = tmp;
-	}
-
-	virtual void append_data(std::ostream& os, const std::string& delimiter) const = 0;
+	virtual std::vector<std::string> get_data() const = 0;
 
 private:
 	const SentenceID id_;

@@ -1,5 +1,6 @@
 #include "mtw.hpp"
 #include "unique.hpp"
+#include "io.hpp"
 
 namespace nmea
 {
@@ -26,10 +27,13 @@ mtw::parse(const std::string& talker,
 	return result;
 }
 
-void mtw::append_data(std::ostream& os, const std::string& delimiter) const
+std::vector<std::string> mtw::get_data() const
 {
-	os << delimiter << temperature;
-	os << delimiter << unit;
+	std::vector<std::string> v;
+	v.reserve(2);
+	v.push_back(to_string(temperature));
+	v.push_back(to_string(unit));
+	return v;
 }
 
 }

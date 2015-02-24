@@ -1,5 +1,7 @@
 #include "rmc.hpp"
 #include "unique.hpp"
+#include "io.hpp"
+#include "time.hpp"
 
 namespace nmea
 {
@@ -66,20 +68,23 @@ rmc::parse(const std::string& talker,
 	return result;
 }
 
-void rmc::append_data(std::ostream& os, const std::string& delimiter) const
+std::vector<std::string> rmc::get_data() const
 {
-	os << delimiter << time_utc;
-	os << delimiter << status;
-	os << delimiter << lat;
-	os << delimiter << lat_hem;
-	os << delimiter << lon;
-	os << delimiter << lon_hem;
-	os << delimiter << sog;
-	os << delimiter << heading;
-	os << delimiter << date;
-	os << delimiter << mag;
-	os << delimiter << mag_hem;
-	os << delimiter << faa_mode_indicator;
+	std::vector<std::string> v;
+	v.reserve(12);
+	v.push_back(to_string(time_utc));
+	v.push_back(to_string(status));
+	v.push_back(to_string(lat));
+	v.push_back(to_string(lat_hem));
+	v.push_back(to_string(lon));
+	v.push_back(to_string(lon_hem));
+	v.push_back(to_string(sog));
+	v.push_back(to_string(heading));
+	v.push_back(to_string(date));
+	v.push_back(to_string(mag));
+	v.push_back(to_string(mag_hem));
+	v.push_back(to_string(faa_mode_indicator));
+	return v;
 }
 
 }

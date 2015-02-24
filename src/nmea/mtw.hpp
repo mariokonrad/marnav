@@ -17,7 +17,7 @@ public:
 		  const std::vector<std::string>& fields) throw(std::invalid_argument);
 
 protected:
-	virtual void append_data(std::ostream& os, const std::string& delimiter) const override;
+	virtual std::vector<std::string> get_data() const override;
 
 private:
 	optional<double> temperature; // water temperature

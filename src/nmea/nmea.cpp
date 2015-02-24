@@ -38,6 +38,8 @@ std::unique_ptr<sentence> make_sentence(const std::string& s) throw(std::invalid
 	if (s.empty())
 		throw invalid_argument{"empty string in make_sentence"};
 
+	// TODO: support AIVDM
+
 	if (s[0] != sentence::START_TOKEN)
 		throw invalid_argument{"no start token in make_sentence"};
 
