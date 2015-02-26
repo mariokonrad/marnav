@@ -7,7 +7,7 @@ namespace nmea
 {
 
 rmc::rmc()
-	: sentence(ID, "RMC", "GP")
+	: sentence(ID, "RMC", talker_id::global_positioning_system)
 {
 }
 

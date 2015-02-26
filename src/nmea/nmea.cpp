@@ -12,12 +12,12 @@
 namespace nmea
 {
 
-static sentence::parse_func
+static sentence::parse_function
 instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 {
 	using namespace std;
 
-	using entry = std::pair<std::string, sentence::parse_func>;
+	using entry = std::pair<std::string, sentence::parse_function>;
 	static const std::vector<entry> known_sentences = {{"RMC", rmc::parse}, {"MTW", mtw::parse}};
 
 	auto const& i = std::find_if(begin(known_sentences), end(known_sentences),

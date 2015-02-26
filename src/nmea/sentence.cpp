@@ -4,7 +4,7 @@
 namespace nmea
 {
 
-sentence::sentence(SentenceID id, const std::string& tag, const std::string& talker)
+sentence::sentence(sentence_id id, const std::string& tag, const std::string& talker)
 	: id_(id)
 {
 	std::copy_n(tag.c_str(), 3, this->tag_);
@@ -24,7 +24,7 @@ void sentence::set_talker(const std::string& talker)
 	this->talker_[2] = 0;
 }
 
-SentenceID sentence::id() const { return id_; }
+sentence_id sentence::id() const { return id_; }
 
 const char* sentence::tag() const { return tag_; }
 

@@ -8,7 +8,7 @@ namespace nmea
 class mtw : public sentence
 {
 public:
-	constexpr static const SentenceID ID = SentenceID::MTW;
+	constexpr static const sentence_id ID = sentence_id::MTW;
 
 	mtw();
 

@@ -6,7 +6,7 @@ namespace nmea
 {
 
 mtw::mtw()
-	: sentence(ID, "MTW", "II")
+	: sentence(ID, "MTW", talker_id::integrated_instrumentation)
 {
 }
 

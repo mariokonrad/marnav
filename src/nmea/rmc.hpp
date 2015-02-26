@@ -12,7 +12,7 @@ namespace nmea
 class rmc : public sentence
 {
 public:
-	constexpr static const SentenceID ID = SentenceID::RMC;
+	constexpr static const sentence_id ID = sentence_id::RMC;
 
 	rmc();
 	rmc(const rmc&) = default;
