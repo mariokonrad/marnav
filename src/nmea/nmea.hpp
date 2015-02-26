@@ -22,8 +22,6 @@ std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence>& s)
 	return std::unique_ptr<T>{static_cast<T*>(s.release())};
 }
 
-sentence::parse_func instantiate_sentence(const std::string& tag) throw(std::invalid_argument);
-
 std::unique_ptr<sentence> make_sentence(const std::string& s) throw(std::invalid_argument,
 																	checksum_error);
 

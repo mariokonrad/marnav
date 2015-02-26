@@ -12,7 +12,8 @@
 namespace nmea
 {
 
-sentence::parse_func instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
+static sentence::parse_func
+instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 {
 	using namespace std;
 
