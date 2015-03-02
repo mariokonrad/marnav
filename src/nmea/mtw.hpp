@@ -27,7 +27,7 @@ public:
 	decltype(temperature) get_temperature() const { return temperature; }
 	decltype(unit) get_unit() const { return unit; }
 
-	void set_temperature(double t) { temperature = t; unit = UNIT_CELSIUS; }
+	void set_temperature(double t) { temperature = t; unit = unit::CELSIUS; }
 };
 
 }

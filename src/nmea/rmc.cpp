@@ -16,10 +16,10 @@ void rmc::set_lat(const latitude& t)
 	lat = t;
 	switch (t.hem()) {
 		case latitude::hemisphere::NORTH:
-			lat_hem = NORTH;
+			lat_hem = direction::NORTH;
 			break;
 		case latitude::hemisphere::SOUTH:
-			lat_hem = SOUTH;
+			lat_hem = direction::SOUTH;
 			break;
 	}
 }
@@ -29,10 +29,10 @@ void rmc::set_lon(const longitude& t)
 	lon = t;
 	switch (t.hem()) {
 		case longitude::hemisphere::EAST:
-			lon_hem = EAST;
+			lon_hem = direction::EAST;
 			break;
 		case longitude::hemisphere::WEST:
-			lon_hem = WEST;
+			lon_hem = direction::WEST;
 			break;
 	}
 }
@@ -70,21 +70,11 @@ rmc::parse(const std::string& talker,
 
 std::vector<std::string> rmc::get_data() const
 {
-	std::vector<std::string> v;
-	v.reserve(12);
-	v.push_back(to_string(time_utc));
-	v.push_back(to_string(status));
-	v.push_back(to_string(lat));
-	v.push_back(to_string(lat_hem));
-	v.push_back(to_string(lon));
-	v.push_back(to_string(lon_hem));
-	v.push_back(to_string(sog));
-	v.push_back(to_string(heading));
-	v.push_back(to_string(date));
-	v.push_back(to_string(mag));
-	v.push_back(to_string(mag_hem));
-	v.push_back(to_string(faa_mode_indicator));
-	return v;
+	return {
+		to_string(time_utc), to_string(status),  to_string(lat),	 to_string(lat_hem),
+		to_string(lon),		 to_string(lon_hem), to_string(sog),	 to_string(heading),
+		to_string(date),	 to_string(mag),	 to_string(mag_hem), to_string(faa_mode_indicator),
+	};
 }
 
 }

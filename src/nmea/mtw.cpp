@@ -29,11 +29,7 @@ mtw::parse(const std::string& talker,
 
 std::vector<std::string> mtw::get_data() const
 {
-	std::vector<std::string> v;
-	v.reserve(2);
-	v.push_back(to_string(temperature));
-	v.push_back(to_string(unit));
-	return v;
+	return {to_string(temperature), to_string(unit)};
 }
 
 }

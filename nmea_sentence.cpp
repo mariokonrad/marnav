@@ -46,7 +46,7 @@ int main(int, char**)
 	{
 		nmea::rmc rmc{};
 		rmc.set_time_utc(nmea::time{12, 34, 56, 678});
-		rmc.set_status(nmea::STATUS_OK);
+		rmc.set_status(nmea::status::OK);
 		std::cout << nmea::to_string(rmc) << "\n";
 	}
 	{
