@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <nmea/nmea.hpp>
+#include <nmea/gll.hpp>
 #include <nmea/mtw.hpp>
 #include <nmea/rmc.hpp>
 
@@ -64,6 +65,12 @@ int main(int, char**)
 		nmea::mtw mtw{};
 		mtw.set_temperature(9.5);
 		std::cout << nmea::to_string(mtw) << "\n";
+	}
+	{
+		nmea::gll gll{};
+		gll.set_lat(nmea::latitude{12, 34, 56, nmea::latitude::hemisphere::NORTH});
+		gll.set_lon(nmea::longitude{123, 45, 67, nmea::longitude::hemisphere::EAST});
+		std::cout << nmea::to_string(gll) << "\n";
 	}
 
 	std::cout << "leap years:\n";

@@ -3,6 +3,7 @@
 #include "time.hpp"
 #include "date.hpp"
 #include "sentence.hpp"
+#include "gll.hpp"
 #include "mtw.hpp"
 #include "rmc.hpp"
 #include "unique.hpp"
@@ -18,7 +19,8 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 	using namespace std;
 
 	using entry = std::pair<std::string, sentence::parse_function>;
-	static const std::vector<entry> known_sentences = {{"RMC", rmc::parse}, {"MTW", mtw::parse}};
+	static const std::vector<entry> known_sentences
+		= {{"RMC", rmc::parse}, {"GLL", gll::parse}, {"MTW", mtw::parse}};
 
 	auto const& i = std::find_if(begin(known_sentences), end(known_sentences),
 								 [tag](const entry& e) { return e.first == tag; });
@@ -73,5 +75,4 @@ std::unique_ptr<sentence> make_sentence(const std::string& s) throw(std::invalid
 
 	return instantiate_sentence(tag)(talker, fields);
 }
-
 }

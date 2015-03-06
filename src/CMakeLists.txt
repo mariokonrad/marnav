@@ -7,6 +7,7 @@ add_library(nmea
 	nmea/time.cpp
 	nmea/sentence.cpp
 	nmea/nmea.cpp
+	nmea/gll.cpp
 	nmea/mtw.cpp
 	nmea/rmc.cpp
 	nmea/optional.hpp
@@ -33,6 +34,7 @@ install(
 		nmea/sentence.hpp
 		nmea/unique.hpp
 		nmea/nmea.hpp
+		nmea/gll.hpp
 		nmea/mtw.hpp
 		nmea/rmc.hpp
 	DESTINATION include/nmea
