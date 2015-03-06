@@ -8,6 +8,7 @@ add_library(nmea
 	nmea/sentence.cpp
 	nmea/nmea.cpp
 	nmea/dbt.cpp
+	nmea/dpt.cpp
 	nmea/gll.cpp
 	nmea/mtw.cpp
 	nmea/rmc.cpp
@@ -36,6 +37,7 @@ install(
 		nmea/unique.hpp
 		nmea/nmea.hpp
 		nmea/dbt.hpp
+		nmea/dpt.hpp
 		nmea/gll.hpp
 		nmea/mtw.hpp
 		nmea/rmc.hpp

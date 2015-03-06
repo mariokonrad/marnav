@@ -2,6 +2,7 @@
 #include <string>
 #include <nmea/nmea.hpp>
 #include <nmea/dbt.hpp>
+#include <nmea/dpt.hpp>
 #include <nmea/gll.hpp>
 #include <nmea/mtw.hpp>
 #include <nmea/rmc.hpp>
@@ -79,6 +80,13 @@ int main(int, char**)
 		std::cout << nmea::to_string(dbt) << "\n";
 		dbt.set_depth_meter(4.9);
 		std::cout << nmea::to_string(dbt) << "\n";
+	}
+	{
+		nmea::dpt dpt{};
+		dpt.set_depth_meter(10.56);
+		std::cout << nmea::to_string(dpt) << "\n";
+		dpt.set_transducer_offset(2.1);
+		std::cout << nmea::to_string(dpt) << "\n";
 	}
 
 	std::cout << "leap years:\n";
