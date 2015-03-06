@@ -3,6 +3,7 @@
 #include "time.hpp"
 #include "date.hpp"
 #include "sentence.hpp"
+#include "dbt.hpp"
 #include "gll.hpp"
 #include "mtw.hpp"
 #include "rmc.hpp"
@@ -20,7 +21,7 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 
 	using entry = std::pair<std::string, sentence::parse_function>;
 	static const std::vector<entry> known_sentences
-		= {{"RMC", rmc::parse}, {"GLL", gll::parse}, {"MTW", mtw::parse}};
+		= {{"RMC", rmc::parse}, {"GLL", gll::parse}, {"DBT", dbt::parse}, {"MTW", mtw::parse}};
 
 	auto const& i = std::find_if(begin(known_sentences), end(known_sentences),
 								 [tag](const entry& e) { return e.first == tag; });
