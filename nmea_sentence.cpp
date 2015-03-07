@@ -8,6 +8,7 @@
 #include <nmea/mtw.hpp>
 #include <nmea/rmb.hpp>
 #include <nmea/rmc.hpp>
+#include <nmea/vtg.hpp>
 
 static void test(const std::string& text)
 {
@@ -48,6 +49,7 @@ int main(int, char**)
 	std::cout << "sizeof(mtw)      = " << sizeof(nmea::mtw) << "\n";
 	std::cout << "sizeof(rmb)      = " << sizeof(nmea::rmb) << "\n";
 	std::cout << "sizeof(rmc)      = " << sizeof(nmea::rmc) << "\n";
+	std::cout << "sizeof(vtg)      = " << sizeof(nmea::vtg) << "\n";
 	std::cout << "\n";
 
 	std::cout << nmea::to_string(nmea::rmc{}) << "\n";
@@ -105,6 +107,11 @@ int main(int, char**)
 	{
 		nmea::gga gga{};
 		std::cout << nmea::to_string(gga) << "\n";
+	}
+	{
+		nmea::vtg vtg{};
+		vtg.set_speed_kn(10.4);
+		std::cout << nmea::to_string(vtg) << "\n";
 	}
 
 /*

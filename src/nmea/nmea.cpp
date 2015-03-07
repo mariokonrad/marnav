@@ -10,6 +10,7 @@
 #include "mtw.hpp"
 #include "rmb.hpp"
 #include "rmc.hpp"
+#include "vtg.hpp"
 #include "unique.hpp"
 #include <algorithm>
 #include <regex>
@@ -31,6 +32,7 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 		{"MTW", mtw::parse},
 		{"RMB", rmb::parse},
 		{"RMC", rmc::parse},
+		{"VTG", vtg::parse},
 	};
 
 	auto const& i = std::find_if(begin(known_sentences), end(known_sentences),
