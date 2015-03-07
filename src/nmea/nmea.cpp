@@ -7,6 +7,7 @@
 #include "dpt.hpp"
 #include "gll.hpp"
 #include "mtw.hpp"
+#include "rmb.hpp"
 #include "rmc.hpp"
 #include "unique.hpp"
 #include <algorithm>
@@ -21,11 +22,14 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 	using namespace std;
 
 	using entry = std::pair<std::string, sentence::parse_function>;
-	static const std::vector<entry> known_sentences = {{"RMC", rmc::parse},
-													   {"GLL", gll::parse},
-													   {"DBT", dbt::parse},
-													   {"DPT", dpt::parse},
-													   {"MTW", mtw::parse}};
+	static const std::vector<entry> known_sentences = {
+		{"DBT", dbt::parse},
+		{"DPT", dpt::parse},
+		{"GLL", gll::parse},
+		{"MTW", mtw::parse},
+		{"RMB", rmb::parse},
+		{"RMC", rmc::parse},
+	};
 
 	auto const& i = std::find_if(begin(known_sentences), end(known_sentences),
 								 [tag](const entry& e) { return e.first == tag; });

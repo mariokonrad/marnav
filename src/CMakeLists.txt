@@ -11,6 +11,7 @@ add_library(nmea
 	nmea/dpt.cpp
 	nmea/gll.cpp
 	nmea/mtw.cpp
+	nmea/rmb.cpp
 	nmea/rmc.cpp
 	nmea/optional.hpp
 	nmea/unique.hpp
@@ -40,6 +41,7 @@ install(
 		nmea/dpt.hpp
 		nmea/gll.hpp
 		nmea/mtw.hpp
+		nmea/rmb.hpp
 		nmea/rmc.hpp
 	DESTINATION include/nmea
 	)

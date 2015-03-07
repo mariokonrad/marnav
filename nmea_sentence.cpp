@@ -5,6 +5,7 @@
 #include <nmea/dpt.hpp>
 #include <nmea/gll.hpp>
 #include <nmea/mtw.hpp>
+#include <nmea/rmb.hpp>
 #include <nmea/rmc.hpp>
 
 static void test(const std::string& text)
@@ -87,6 +88,14 @@ int main(int, char**)
 		std::cout << nmea::to_string(dpt) << "\n";
 		dpt.set_transducer_offset(2.1);
 		std::cout << nmea::to_string(dpt) << "\n";
+	}
+	{
+		nmea::rmb rmb{};
+		rmb.set_lat(nmea::latitude{12, 34, 56, nmea::latitude::hemisphere::NORTH});
+		rmb.set_lon(nmea::longitude{123, 45, 67, nmea::longitude::hemisphere::EAST});
+		rmb.set_waypoint_to(13);
+		rmb.set_waypoint_from(12);
+		std::cout << nmea::to_string(rmb) << "\n";
 	}
 
 	std::cout << "leap years:\n";
