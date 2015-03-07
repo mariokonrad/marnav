@@ -5,6 +5,7 @@
 #include "sentence.hpp"
 #include "dbt.hpp"
 #include "dpt.hpp"
+#include "gga.hpp"
 #include "gll.hpp"
 #include "mtw.hpp"
 #include "rmb.hpp"
@@ -25,6 +26,7 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 	static const std::vector<entry> known_sentences = {
 		{"DBT", dbt::parse},
 		{"DPT", dpt::parse},
+		{"GGA", gga::parse},
 		{"GLL", gll::parse},
 		{"MTW", mtw::parse},
 		{"RMB", rmb::parse},
@@ -35,7 +37,7 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 								 [tag](const entry& e) { return e.first == tag; });
 
 	if (i == end(known_sentences))
-		throw std::invalid_argument{"unknown sentence in instantiate_sentence"};
+		throw std::invalid_argument{"unknown sentence in instantiate_sentence: " + tag};
 
 	return i->second;
 }

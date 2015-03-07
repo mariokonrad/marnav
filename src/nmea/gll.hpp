@@ -7,6 +7,7 @@
 
 namespace nmea
 {
+
 class gll : public sentence
 {
 public:
@@ -39,11 +40,12 @@ public:
 	decltype(time_utc) get_time_utc() const { return time_utc; }
 	decltype(status) get_status() const { return status; }
 
-	void set_lat(const latitude& t);
-	void set_lon(const longitude& t);
-	void set_time_utc(const time& t) { time_utc = t; }
+	void set_lat(const nmea::latitude& t);
+	void set_lon(const nmea::longitude& t);
+	void set_time_utc(const nmea::time& t) { time_utc = t; }
 	void set_status(char t) { status = t; }
 };
+
 }
 
 #endif
