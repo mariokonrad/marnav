@@ -5,6 +5,7 @@
 #include <nmea/dpt.hpp>
 #include <nmea/gga.hpp>
 #include <nmea/gll.hpp>
+#include <nmea/gsa.hpp>
 #include <nmea/mtw.hpp>
 #include <nmea/rmb.hpp>
 #include <nmea/rmc.hpp>
@@ -35,6 +36,15 @@ static void test(const std::string& text)
 	cout << "\n";
 }
 
+template <class T>
+static void empty_test()
+{
+	T s{};
+	std::cout << "sizeof(" << s.tag() << ") = " << sizeof(T) << "\n";
+	std::cout << nmea::to_string(s) << "\n";
+	std::cout << "\n";
+}
+
 int main(int, char**)
 {
 	test("$IIMTW,9.5,C*2F");
@@ -42,15 +52,16 @@ int main(int, char**)
 	test("$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
 
 	std::cout << "sizeof(sentence) = " << sizeof(nmea::sentence) << "\n";
-	std::cout << "sizeof(dbt)      = " << sizeof(nmea::dbt) << "\n";
-	std::cout << "sizeof(dpt)      = " << sizeof(nmea::dpt) << "\n";
-	std::cout << "sizeof(gll)      = " << sizeof(nmea::gll) << "\n";
-	std::cout << "sizeof(gll)      = " << sizeof(nmea::gga) << "\n";
-	std::cout << "sizeof(mtw)      = " << sizeof(nmea::mtw) << "\n";
-	std::cout << "sizeof(rmb)      = " << sizeof(nmea::rmb) << "\n";
-	std::cout << "sizeof(rmc)      = " << sizeof(nmea::rmc) << "\n";
-	std::cout << "sizeof(vtg)      = " << sizeof(nmea::vtg) << "\n";
-	std::cout << "\n";
+
+	empty_test<nmea::dbt>();
+	empty_test<nmea::dpt>();
+	empty_test<nmea::gll>();
+	empty_test<nmea::gll>();
+	empty_test<nmea::gsa>();
+	empty_test<nmea::mtw>();
+	empty_test<nmea::rmb>();
+	empty_test<nmea::rmc>();
+	empty_test<nmea::vtg>();
 
 	std::cout << nmea::to_string(nmea::rmc{}) << "\n";
 

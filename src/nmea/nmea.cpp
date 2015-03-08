@@ -7,6 +7,7 @@
 #include "dpt.hpp"
 #include "gga.hpp"
 #include "gll.hpp"
+#include "gsa.hpp"
 #include "mtw.hpp"
 #include "rmb.hpp"
 #include "rmc.hpp"
@@ -29,6 +30,7 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 		{"DPT", dpt::parse},
 		{"GGA", gga::parse},
 		{"GLL", gll::parse},
+		{"GSA", gsa::parse},
 		{"MTW", mtw::parse},
 		{"RMB", rmb::parse},
 		{"RMC", rmc::parse},

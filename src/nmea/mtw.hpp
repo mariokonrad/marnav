@@ -11,6 +11,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::MTW;
 
 	mtw();
+	mtw(const mtw&) = default;
+	mtw& operator=(const mtw&) = default;
 
 	static std::unique_ptr<sentence>
 	parse(const std::string& talker,
