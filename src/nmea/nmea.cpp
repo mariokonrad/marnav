@@ -8,6 +8,7 @@
 #include "gga.hpp"
 #include "gll.hpp"
 #include "gsa.hpp"
+#include "gsv.hpp"
 #include "mtw.hpp"
 #include "rmb.hpp"
 #include "rmc.hpp"
@@ -31,6 +32,7 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 		{"GGA", gga::parse},
 		{"GLL", gll::parse},
 		{"GSA", gsa::parse},
+		{"GSV", gsv::parse},
 		{"MTW", mtw::parse},
 		{"RMB", rmb::parse},
 		{"RMC", rmc::parse},
@@ -80,7 +82,11 @@ std::unique_ptr<sentence> make_sentence(const std::string& s) throw(std::invalid
 	// extract particular data
 	const std::string tag = s.substr(3, 3);
 	const std::string talker = s.substr(1, 2);
-	const std::string data = s.substr(7, end_pos - 7);
+
+	// the additional separator is needed because the last entry can be empty,
+	// therefore there is no separator for the last entry at the end. this additional
+	// separator makes sure there is a separator for the regex to parse them correctly.
+	const std::string data = s.substr(7, end_pos - 7) + ",";
 
 	// extract fields from data
 	std::regex field_regex{","};

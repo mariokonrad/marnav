@@ -6,6 +6,7 @@
 #include <nmea/gga.hpp>
 #include <nmea/gll.hpp>
 #include <nmea/gsa.hpp>
+#include <nmea/gsv.hpp>
 #include <nmea/mtw.hpp>
 #include <nmea/rmb.hpp>
 #include <nmea/rmc.hpp>
@@ -32,6 +33,14 @@ static void test(const std::string& text)
 			cout << "new: " << to_string(*tmp) << "\n";
 		}
 	}
+	{
+		auto tmp = nmea::sentence_cast<nmea::gsv>(s);
+		if (tmp) {
+			cout << "org: " << text << "\n";
+			cout << "new: " << to_string(*tmp) << "\n";
+		}
+	}
+
 
 	cout << "\n";
 }
@@ -50,6 +59,9 @@ int main(int, char**)
 	test("$IIMTW,9.5,C*2F");
 	test("$GPRMC,,V,,,,,,,300510,0.6,E,N*39");
 	test("$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
+	test("$GPGSV,3,1,11,03,03,111,00,04,15,270,00,06,01,010,00,13,06,292,00*74");
+	test("$GPGSV,3,2,11,14,25,170,00,16,57,208,39,18,67,296,40,19,40,246,00*74");
+	test("$GPGSV,3,3,11,22,42,067,42,24,14,311,43,27,05,244,00,,,,*4D");
 
 	std::cout << "sizeof(sentence) = " << sizeof(nmea::sentence) << "\n";
 
@@ -58,6 +70,7 @@ int main(int, char**)
 	empty_test<nmea::gll>();
 	empty_test<nmea::gll>();
 	empty_test<nmea::gsa>();
+	empty_test<nmea::gsv>();
 	empty_test<nmea::mtw>();
 	empty_test<nmea::rmb>();
 	empty_test<nmea::rmc>();
@@ -123,6 +136,11 @@ int main(int, char**)
 		nmea::vtg vtg{};
 		vtg.set_speed_kn(10.4);
 		std::cout << nmea::to_string(vtg) << "\n";
+	}
+	{
+		nmea::gsv gsv{};
+		gsv.set_sat_0(1, 2, 3, 4);
+		std::cout << nmea::to_string(gsv) << "\n";
 	}
 
 /*

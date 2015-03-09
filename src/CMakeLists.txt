@@ -12,6 +12,7 @@ add_library(nmea
 	nmea/gll.cpp
 	nmea/gga.cpp
 	nmea/gsa.cpp
+	nmea/gsv.cpp
 	nmea/mtw.cpp
 	nmea/rmb.cpp
 	nmea/rmc.cpp
@@ -45,6 +46,7 @@ install(
 		nmea/gga.hpp
 		nmea/gll.hpp
 		nmea/gsa.hpp
+		nmea/gsv.hpp
 		nmea/mtw.hpp
 		nmea/rmb.hpp
 		nmea/rmc.hpp

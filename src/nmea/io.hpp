@@ -25,6 +25,17 @@ template <> inline std::string to_string(const optional<uint32_t>& data)
 	return std::to_string(data.value());
 }
 
+inline std::string to_string(const optional<uint32_t>& data, unsigned int width)
+{
+	if (!data)
+		return std::string{};
+	char fmt[8];
+	snprintf(fmt, sizeof(fmt), "%%0%uu", width);
+	char buf[width + 8];
+	snprintf(buf, sizeof(buf), fmt, data.value());
+	return buf;
+}
+
 template <> inline std::string to_string(const optional<double>& data)
 {
 	if (!data)
