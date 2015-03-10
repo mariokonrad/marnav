@@ -7,6 +7,7 @@ include_directories(
 
 add_executable(testrunner
 	nmea/Test_mtw.cpp
+	nmea/Test_rmc.cpp
 	)
 
 target_link_libraries(testrunner

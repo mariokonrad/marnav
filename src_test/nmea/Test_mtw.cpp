@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <nmea/mtw.hpp>
+#include <nmea/nmea.hpp>
 
 namespace
 {
@@ -11,6 +12,23 @@ class Test_mtw : public ::testing::Test
 TEST_F(Test_mtw, contruction)
 {
 	nmea::mtw mtw;
+}
+
+TEST_F(Test_mtw, parse)
+{
+	auto s = nmea::make_sentence("$IIMTW,9.5,C*2F");
+	ASSERT_NE(nullptr, s);
+
+	auto mtw = nmea::sentence_cast<nmea::mtw>(s);
+	ASSERT_NE(nullptr, mtw);
+
+	auto temperature = mtw->get_temperature();
+	EXPECT_TRUE(temperature.available());
+	EXPECT_EQ(9.5, temperature.value());
+
+	auto unit = mtw->get_unit();
+	EXPECT_TRUE(unit.available());
+	EXPECT_EQ(nmea::unit::CELSIUS, unit.value());
 }
 
 TEST_F(Test_mtw, empty_to_string)

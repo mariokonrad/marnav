@@ -1,0 +1,11 @@
+BasedOnStyle: Webkit
+BreakBeforeBraces: Linux
+UseTab: Always
+TabWidth: 4
+IndentWidth: 4
+ColumnLimit: 100
+IndentCaseLabels: true
+MaxEmptyLinesToKeep: 1
+AlignEscapedNewlinesLeft: true
+Cpp11BracedListStyle: true
+Standard: Cpp11
