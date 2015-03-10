@@ -10,8 +10,10 @@
 #include <nmea/mtw.hpp>
 #include <nmea/rmb.hpp>
 #include <nmea/rmc.hpp>
+#include <nmea/rte.hpp>
 #include <nmea/vtg.hpp>
 
+template <class T>
 static void test(const std::string& text)
 {
 	using std::cout;
@@ -19,29 +21,12 @@ static void test(const std::string& text)
 
 	auto s = make_sentence(text);
 	cout << "tag=" << s->tag() << "  talker=" << s->talker() << "\n";
-	{
-		auto tmp = nmea::sentence_cast<nmea::mtw>(s);
-		if (tmp) {
-			cout << "org: " << text << "\n";
-			cout << "new: " << to_string(*tmp) << "\n";
-		}
-	}
-	{
-		auto tmp = nmea::sentence_cast<nmea::rmc>(s);
-		if (tmp) {
-			cout << "org: " << text << "\n";
-			cout << "new: " << to_string(*tmp) << "\n";
-		}
-	}
-	{
-		auto tmp = nmea::sentence_cast<nmea::gsv>(s);
-		if (tmp) {
-			cout << "org: " << text << "\n";
-			cout << "new: " << to_string(*tmp) << "\n";
-		}
-	}
 
-
+	auto tmp = nmea::sentence_cast<T>(s);
+	if (tmp) {
+		cout << "org: " << text << "\n";
+		cout << "new: " << to_string(*tmp) << "\n";
+	}
 	cout << "\n";
 }
 
@@ -56,12 +41,13 @@ static void empty_test()
 
 int main(int, char**)
 {
-	test("$IIMTW,9.5,C*2F");
-	test("$GPRMC,,V,,,,,,,300510,0.6,E,N*39");
-	test("$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
-	test("$GPGSV,3,1,11,03,03,111,00,04,15,270,00,06,01,010,00,13,06,292,00*74");
-	test("$GPGSV,3,2,11,14,25,170,00,16,57,208,39,18,67,296,40,19,40,246,00*74");
-	test("$GPGSV,3,3,11,22,42,067,42,24,14,311,43,27,05,244,00,,,,*4D");
+	test<nmea::rte>("$GPRTE,1,1,c,*37"),
+	test<nmea::mtw>("$IIMTW,9.5,C*2F");
+	test<nmea::rmc>("$GPRMC,,V,,,,,,,300510,0.6,E,N*39");
+	test<nmea::rmc>("$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
+	test<nmea::gsv>("$GPGSV,3,1,11,03,03,111,00,04,15,270,00,06,01,010,00,13,06,292,00*74");
+	test<nmea::gsv>("$GPGSV,3,2,11,14,25,170,00,16,57,208,39,18,67,296,40,19,40,246,00*74");
+	test<nmea::gsv>("$GPGSV,3,3,11,22,42,067,42,24,14,311,43,27,05,244,00,,,,*4D");
 
 	std::cout << "sizeof(sentence) = " << sizeof(nmea::sentence) << "\n";
 
@@ -74,6 +60,7 @@ int main(int, char**)
 	empty_test<nmea::mtw>();
 	empty_test<nmea::rmb>();
 	empty_test<nmea::rmc>();
+	empty_test<nmea::rte>();
 	empty_test<nmea::vtg>();
 
 	std::cout << nmea::to_string(nmea::rmc{}) << "\n";
@@ -141,6 +128,23 @@ int main(int, char**)
 		nmea::gsv gsv{};
 		gsv.set_sat_0(1, 2, 3, 4);
 		std::cout << nmea::to_string(gsv) << "\n";
+	}
+	{
+		nmea::rte rte{};
+		rte.set_n_messages(1);
+		rte.set_message_number(1);
+		rte.set_message_mode('c');
+		rte.set_waypoint_id(0, "abc");
+		std::cout << nmea::to_string(rte) << "\n";
+	}
+
+	{
+		nmea::rte rte{};
+		rte.set_n_messages(1);
+		rte.set_message_number(1);
+		rte.set_message_mode('c');
+		rte.set_waypoint_id(0, "");
+		std::cout << nmea::to_string(rte) << "\n";
 	}
 
 /*
