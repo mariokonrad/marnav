@@ -102,16 +102,13 @@ gsv::parse(const std::string& talker,
 
 std::vector<std::string> gsv::get_data() const
 {
-	return {to_string(n_messages),			 to_string(message_number),
-			to_string(n_satellites_in_view), to_string(sat_0_id, 2),
-			to_string(sat_0_elevation, 2),   to_string(sat_0_azimuth, 3),
-			to_string(sat_0_snr, 2),		 to_string(sat_1_id, 2),
-			to_string(sat_1_elevation, 2),   to_string(sat_1_azimuth, 3),
-			to_string(sat_1_snr, 2),		 to_string(sat_2_id, 2),
-			to_string(sat_2_elevation, 2),   to_string(sat_2_azimuth, 3),
-			to_string(sat_2_snr, 2),		 to_string(sat_3_id, 2),
-			to_string(sat_3_elevation, 2),   to_string(sat_3_azimuth, 3),
-			to_string(sat_3_snr, 2)};
+	return {to_string(n_messages),		to_string(message_number),  to_string(n_satellites_in_view),
+			format(sat_0_id, 2),		format(sat_0_elevation, 2), format(sat_0_azimuth, 3),
+			format(sat_0_snr, 2),		format(sat_1_id, 2),		format(sat_1_elevation, 2),
+			format(sat_1_azimuth, 3),   format(sat_1_snr, 2),		format(sat_2_id, 2),
+			format(sat_2_elevation, 2), format(sat_2_azimuth, 3),   format(sat_2_snr, 2),
+			format(sat_3_id, 2),		format(sat_3_elevation, 2), format(sat_3_azimuth, 3),
+			format(sat_3_snr, 2)};
 }
 }
 
