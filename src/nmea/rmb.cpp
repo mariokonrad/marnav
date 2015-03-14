@@ -36,6 +36,24 @@ void rmb::set_lon(const longitude& t)
 	}
 }
 
+void rmb::set_waypoint_to(const std::string& id)
+{
+	check_waypoint_id(id);
+	waypoint_to = id;
+}
+
+void rmb::set_waypoint_from(const std::string& id)
+{
+	check_waypoint_id(id);
+	waypoint_from = id;
+}
+
+void rmb::check_waypoint_id(const std::string& id) const throw(std::invalid_argument)
+{
+	if (id.size() > 8)
+		throw std::invalid_argument{"string size to large, only 8 characters allowed for id"};
+}
+
 std::unique_ptr<sentence>
 rmb::parse(const std::string& talker,
 		   const std::vector<std::string>& fields) throw(std::invalid_argument)

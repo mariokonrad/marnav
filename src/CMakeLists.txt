@@ -7,6 +7,7 @@ add_library(nmea
 	nmea/time.cpp
 	nmea/sentence.cpp
 	nmea/nmea.cpp
+	nmea/bod.cpp
 	nmea/dbt.cpp
 	nmea/dpt.cpp
 	nmea/gga.cpp
@@ -22,11 +23,21 @@ add_library(nmea
 	nmea/unique.hpp
 	)
 
+# TODO (first of all sentences):
+# hdg
+# mwv
+# vhw
+# vlw
+# vwr
+# vwt
+# rme
+# rmm
+# rmz
+
 # TODO: sentences (obsolete already exluded)
 # AAM - Waypoint Arrival Alarm
 # ALM - GPS Almanac Data
 # APB - Autopilot Sentence "B"
-# BOD - Bearing - Waypoint to Waypoint
 # BWC - Bearing & Distance to Waypoint - Geat Circle
 # BWR - Bearing and Distance to Waypoint - Rhumb Line
 # BWW - Bearing - Waypoint to Waypoint

@@ -111,8 +111,8 @@ int main(int, char**)
 		nmea::rmb rmb{};
 		rmb.set_lat(nmea::latitude{12, 34, 56, nmea::latitude::hemisphere::NORTH});
 		rmb.set_lon(nmea::longitude{123, 45, 67, nmea::longitude::hemisphere::EAST});
-		rmb.set_waypoint_to(13);
-		rmb.set_waypoint_from(12);
+		rmb.set_waypoint_to("P1");
+		rmb.set_waypoint_from("P2");
 		std::cout << nmea::to_string(rmb) << "\n";
 	}
 	{

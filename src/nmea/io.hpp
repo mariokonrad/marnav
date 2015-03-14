@@ -17,6 +17,14 @@ template <class T> inline std::string to_string(const optional<T>& data)
 	return to_string(data.value());
 }
 
+template <> inline std::string to_string(const optional<std::string>& data)
+{
+	if (!data)
+		return std::string{};
+
+	return data.value();
+}
+
 template <> inline std::string to_string(const optional<uint32_t>& data)
 {
 	if (!data)

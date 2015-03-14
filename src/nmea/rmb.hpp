@@ -24,11 +24,13 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
+	void check_waypoint_id(const std::string& id) const throw(std::invalid_argument);
+
 	optional<char> status; // V:warning
 	optional<double> cross_track_error; // cross track error in nautical miles
 	optional<char> steer_dir; // direction to steer, left or right
-	optional<uint32_t> waypoint_to; // TO waypoint ID
-	optional<uint32_t> waypoint_from; // FROM waypoint ID
+	optional<std::string> waypoint_to; // TO waypoint ID
+	optional<std::string> waypoint_from; // FROM waypoint ID
 	optional<nmea::latitude> lat; // destination waypoint latitude
 	optional<char> lat_hem; // destination waypoint latitude dir, N:north, S:south
 	optional<nmea::longitude> lon; // destination waypoint longitude
@@ -56,8 +58,8 @@ public:
 	void set_status(char t) { status = t; }
 	void set_cross_track_error(double t) { cross_track_error = t; }
 	void set_steer_dir(char t) { steer_dir = t; }
-	void set_waypoint_to(uint32_t t) { waypoint_to = t; }
-	void set_waypoint_from(uint32_t t) { waypoint_from = t; }
+	void set_waypoint_to(const std::string& id);
+	void set_waypoint_from(const std::string& id);
 	void set_lat(const nmea::latitude& t);
 	void set_lon(const nmea::longitude& t);
 	void set_range(double t) { range = t; }
