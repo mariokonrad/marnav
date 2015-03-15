@@ -51,14 +51,12 @@ add_library(nmea
 # GST - GPS Pseudorange Noise Statistics
 # GSV - Satellites in view
 # GTD - Geographic Location in Time Differences
-# HDG - Heading - Deviation & Variation
 # HFB - Trawl Headrope to Footrope and Bottom
 # HSC - Heading Steering Command
 # ITS - Trawl Door Spread 2 Distance
 # LCD - Loran-C Signal Data
 # MSK - Control for a Beacon Receiver
 # MSS - Beacon Receiver Status
-# MWV - Wind Speed and Angle
 # OLN - Omega Lane Numbers
 # OSD - Own Ship Data
 # RMA - Recommended Minimum Navigation Information
