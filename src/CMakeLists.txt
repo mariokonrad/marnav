@@ -16,6 +16,7 @@ add_library(nmea
 	nmea/gsv.cpp
 	nmea/hdg.cpp
 	nmea/mtw.cpp
+	nmea/mwv.cpp
 	nmea/rmb.cpp
 	nmea/rmc.cpp
 	nmea/rte.cpp
@@ -25,7 +26,6 @@ add_library(nmea
 	)
 
 # TODO (first of all sentences):
-# mwv
 # vhw
 # vlw
 # vwr

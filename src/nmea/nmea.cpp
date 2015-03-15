@@ -11,6 +11,7 @@
 #include "gsv.hpp"
 #include "hdg.hpp"
 #include "mtw.hpp"
+#include "mwv.hpp"
 #include "rmb.hpp"
 #include "rmc.hpp"
 #include "rte.hpp"
@@ -37,6 +38,7 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 		{"GSV", gsv::parse},
 		{"HDG", hdg::parse},
 		{"MTW", mtw::parse},
+		{"MWV", mwv::parse},
 		{"RMB", rmb::parse},
 		{"RMC", rmc::parse},
 		{"RTE", rte::parse},

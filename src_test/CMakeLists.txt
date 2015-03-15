@@ -8,6 +8,7 @@ include_directories(
 add_executable(testrunner
 	nmea/Test_hdg.cpp
 	nmea/Test_mtw.cpp
+	nmea/Test_mwv.cpp
 	nmea/Test_rmc.cpp
 	)
 
