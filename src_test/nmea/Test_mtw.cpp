@@ -14,6 +14,11 @@ TEST_F(Test_mtw, contruction)
 	nmea::mtw mtw;
 }
 
+TEST_F(Test_mtw, size)
+{
+	EXPECT_EQ(48u, sizeof(nmea::mtw));
+}
+
 TEST_F(Test_mtw, parse)
 {
 	auto s = nmea::make_sentence("$IIMTW,9.5,C*2F");

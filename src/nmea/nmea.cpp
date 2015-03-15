@@ -9,6 +9,7 @@
 #include "gll.hpp"
 #include "gsa.hpp"
 #include "gsv.hpp"
+#include "hdg.hpp"
 #include "mtw.hpp"
 #include "rmb.hpp"
 #include "rmc.hpp"
@@ -34,6 +35,7 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 		{"GLL", gll::parse},
 		{"GSA", gsa::parse},
 		{"GSV", gsv::parse},
+		{"HDG", hdg::parse},
 		{"MTW", mtw::parse},
 		{"RMB", rmb::parse},
 		{"RMC", rmc::parse},

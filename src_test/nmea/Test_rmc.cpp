@@ -14,6 +14,11 @@ TEST_F(Test_rmc, contruction)
 	nmea::rmc rmc;
 }
 
+TEST_F(Test_rmc, size)
+{
+	EXPECT_EQ(168u, sizeof(nmea::rmc));
+}
+
 TEST_F(Test_rmc, parse)
 {
 	auto s = nmea::make_sentence("$GPRMC,,V,,,,,,,300510,0.6,E,N*39");
