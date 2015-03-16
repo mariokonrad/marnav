@@ -95,6 +95,10 @@ enum class sentence_id : uint32_t {
 
 	// integrated instumentation
 	VWT, // wind true
+
+	// AIS
+	VDM,
+	VDO,
 };
 
 namespace talker_id
@@ -154,6 +158,18 @@ namespace talker_id
 	constexpr const char* timekeeper_chronometer = "ZC"; // Timekeeper - Chronometer
 	constexpr const char* timekeeper_quartz = "ZQ"; // Timekeeper - Quartz
 	constexpr const char* timekeeper_radio_update = "ZV"; // Timekeeper - Radio Update, WWV or WWVH
+
+	// AIS
+	constexpr const char* ais_base_station = "AB"; // NMEA 4.0 Base AIS station
+	constexpr const char* ais_dependent_base_station = "AD"; // MMEA 4.0 Dependent AIS Base Station
+	constexpr const char* ais_mobile_station = "AI"; // Mobile AIS station
+	constexpr const char* ais_aid_to_navigation_station = "AN"; // NMEA 4.0 Aid to Navigation AIS station
+	constexpr const char* ais_receiving_station = "AR"; // NMEA 4.0 AIS Receiving Station
+	constexpr const char* ais_limited_base_station = "AS"; // NMEA 4.0 Limited Base Station
+	constexpr const char* ais_transmitting_station = "AT"; // NMEA 4.0 AIS Transmitting Station
+	constexpr const char* ais_repeater_ais_station = "AX"; // NMEA 4.0 Repeater AIS station
+	constexpr const char* ais_base_station_obsolete = "BS"; // Base AIS station (deprecated in NMEA 4.0)
+	constexpr const char* ais_physical_shore_station = "SA"; // NMEA 4.0 Physical Shore AIS Station
 };
 
 namespace direction
@@ -225,6 +241,12 @@ namespace selectionmode
 	constexpr const char AUTOMATIC = 'A';
 }
 
+namespace ais_channel
+{
+	constexpr const char A = 'A';
+	constexpr const char B = 'B';
+}
+
 /// @note This class behaves like a POD, no complex data with memory operations.
 class sentence
 {
@@ -235,7 +257,7 @@ public:
 	constexpr static int MAX_LENGTH = 82;
 
 	constexpr static char START_TOKEN = '$';
-	constexpr static char START_TOKEN_AIVDM = '!';
+	constexpr static char START_TOKEN_AIS = '!';
 	constexpr static char END_TOKEN = '*';
 
 	sentence_id id() const;
@@ -249,6 +271,8 @@ public:
 protected:
 	sentence(sentence_id id, const std::string& tag, const std::string& talker);
 	virtual std::vector<std::string> get_data() const = 0;
+	virtual char get_start_token() const { return START_TOKEN; }
+	virtual char get_end_token() const { return END_TOKEN; }
 
 private:
 	const sentence_id id_;

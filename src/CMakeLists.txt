@@ -29,6 +29,7 @@ add_library(nmea
 	nmea/vlw.cpp
 	nmea/vtg.cpp
 	nmea/vwr.cpp
+	nmea/vdm.cpp
 	nmea/optional.hpp
 	nmea/unique.hpp
 	)
@@ -91,7 +92,7 @@ add_library(nmea
 # ZDA - Time & Date - UTC, day, month, year and local time zone
 # ZFO - UTC & Time from origin Waypoint
 # ZTG - UTC & Time to Destination Waypoint
-# VDM
+# AIVDM/AIVDO
 # vendor extensions
 
 set_target_properties(nmea
@@ -127,6 +128,8 @@ install(
 		nmea/rmc.hpp
 		nmea/rte.hpp
 		nmea/vtg.hpp
+		nmea/vwr.hpp
+		nmea/vdm.hpp
 	DESTINATION include/nmea
 	)
 

@@ -25,6 +25,23 @@ template <> inline std::string to_string(const optional<std::string>& data)
 	return data.value();
 }
 
+inline std::string to_string(char data)
+{
+	char buf[3];
+	snprintf(buf, sizeof(buf), "%c", data);
+	return buf;
+}
+
+inline std::string to_string(uint32_t data)
+{
+	return std::to_string(data);
+}
+
+inline std::string to_string(const std::string& data)
+{
+	return data;
+}
+
 template <> inline std::string to_string(const optional<uint32_t>& data)
 {
 	if (!data)

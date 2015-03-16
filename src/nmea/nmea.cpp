@@ -21,6 +21,7 @@
 #include "vlw.hpp"
 #include "vtg.hpp"
 #include "vwr.hpp"
+#include "vdm.hpp"
 #include "unique.hpp"
 #include <algorithm>
 #include <regex>
@@ -53,6 +54,7 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 		{"VLW", vlw::parse},
 		{"VTG", vtg::parse},
 		{"VWR", vwr::parse},
+		{"VDM", vdm::parse},
 	};
 
 	auto const& i = std::find_if(begin(known_sentences), end(known_sentences),
@@ -74,9 +76,7 @@ std::unique_ptr<sentence> make_sentence(const std::string& s) throw(std::invalid
 	if (s.empty())
 		throw invalid_argument{"empty string in make_sentence"};
 
-	// TODO: support AIVDM
-
-	if (s[0] != sentence::START_TOKEN)
+	if ((s[0] != sentence::START_TOKEN) && (s[0] != sentence::START_TOKEN_AIS))
 		throw invalid_argument{"no start token in make_sentence"};
 
 	auto const end_pos = s.find_first_of(sentence::END_TOKEN, 1);

@@ -14,6 +14,7 @@ add_executable(testrunner
 	nmea/Test_vhw.cpp
 	nmea/Test_vlw.cpp
 	nmea/Test_vwr.cpp
+	nmea/Test_vdm.cpp
 	)
 
 target_link_libraries(testrunner

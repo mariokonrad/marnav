@@ -33,14 +33,14 @@ const char* sentence::talker() const { return talker_; }
 std::string to_string(const sentence& s)
 {
 	std::string result;
-	result += sentence::START_TOKEN;
+	result += s.get_start_token();
 	result += s.talker();
 	result += s.tag();
 	for (auto const& data : s.get_data()) {
 		result += ",";
 		result += data;
 	}
-	result += sentence::END_TOKEN;
+	result += s.get_end_token();
 
 	uint8_t checksum = 0x00;
 	for_each(result.begin() + 1, result.end() - 1, [&checksum](char c) { checksum ^= c; });
