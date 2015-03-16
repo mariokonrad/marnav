@@ -20,13 +20,13 @@ add_library(nmea
 	nmea/rmb.cpp
 	nmea/rmc.cpp
 	nmea/rte.cpp
+	nmea/vhw.cpp
 	nmea/vtg.cpp
 	nmea/optional.hpp
 	nmea/unique.hpp
 	)
 
 # TODO (first of all sentences):
-# vhw
 # vlw
 # vwr
 # vwt
@@ -75,7 +75,6 @@ add_library(nmea
 # TTM - Tracked Target Message
 # VBW - Dual Ground/Water Speed
 # VDR - Set and Drift
-# VHW - Water speed and heading
 # VLW - Distance Traveled through Water
 # VPW - Speed - Measured Parallel to Wind
 # VWR - Relative Wind Speed and Angle
