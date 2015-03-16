@@ -21,6 +21,7 @@ Supported sentences:
 - VHW
 - VLW
 - VTG
+- VWR
 
 EXAMPLES
 --------
