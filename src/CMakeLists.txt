@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 project(nmea)
 
+add_executable(nmeasum
+	nmeasum.cpp
+	)
+
 add_library(nmea
 	nmea/angle.cpp
 	nmea/date.cpp
