@@ -19,6 +19,7 @@ Supported sentences:
 - RMC
 - RTE
 - VHW
+- VLW
 - VTG
 
 EXAMPLES

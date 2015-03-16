@@ -16,6 +16,7 @@
 #include "rmc.hpp"
 #include "rte.hpp"
 #include "vhw.hpp"
+#include "vlw.hpp"
 #include "vtg.hpp"
 #include "unique.hpp"
 #include <algorithm>
@@ -44,6 +45,7 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 		{"RMC", rmc::parse},
 		{"RTE", rte::parse},
 		{"VHW", vhw::parse},
+		{"VLW", vlw::parse},
 		{"VTG", vtg::parse},
 	};
 
