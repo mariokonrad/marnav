@@ -3,6 +3,8 @@
 #include "time.hpp"
 #include "date.hpp"
 #include "sentence.hpp"
+#include "aam.hpp"
+#include "bod.hpp"
 #include "dbt.hpp"
 #include "dpt.hpp"
 #include "gga.hpp"
@@ -33,6 +35,8 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 
 	using entry = std::pair<std::string, sentence::parse_function>;
 	static const std::vector<entry> known_sentences = {
+		{"AAM", aam::parse},
+		{"BOD", bod::parse},
 		{"DBT", dbt::parse},
 		{"DPT", dpt::parse},
 		{"GGA", gga::parse},
@@ -85,8 +89,9 @@ std::unique_ptr<sentence> make_sentence(const std::string& s) throw(std::invalid
 	uint8_t checksum = 0x00;
 	for_each(begin(s) + 1, end, [&checksum](char c) { checksum ^= c; });
 	size_t pos = 0;
-	if (checksum != stoul(s.substr(end_pos + 1, 2), &pos, 16))
-		throw checksum_error{};
+	const uint8_t expected_checksum = stoul(s.substr(end_pos + 1, 2), &pos, 16);
+	if (checksum != expected_checksum)
+		throw checksum_error{expected_checksum, checksum};
 
 	if (end_pos < 7) // talker id (2), tag (3), first comma (1)
 		throw invalid_argument{"malformed sentence in make_sentence"};

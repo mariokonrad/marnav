@@ -7,6 +7,7 @@ add_library(nmea
 	nmea/time.cpp
 	nmea/sentence.cpp
 	nmea/nmea.cpp
+	nmea/aam.cpp
 	nmea/bod.cpp
 	nmea/dbt.cpp
 	nmea/dpt.cpp
@@ -35,7 +36,6 @@ add_library(nmea
 # rmz
 
 # TODO: sentences (obsolete already exluded)
-# AAM - Waypoint Arrival Alarm
 # ALM - GPS Almanac Data
 # APB - Autopilot Sentence "B"
 # BWC - Bearing & Distance to Waypoint - Geat Circle
@@ -110,6 +110,8 @@ install(
 		nmea/sentence.hpp
 		nmea/unique.hpp
 		nmea/nmea.hpp
+		nmea/aam.hpp
+		nmea/bod.hpp
 		nmea/dbt.hpp
 		nmea/dpt.hpp
 		nmea/gga.hpp

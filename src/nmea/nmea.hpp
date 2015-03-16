@@ -9,10 +9,21 @@ namespace nmea
 
 class checksum_error : public std::exception
 {
+public:
+	checksum_error(uint8_t expected, uint8_t actual)
+		: expected(expected)
+		, actual(actual)
+	{
+	}
+
+	virtual const char* what() const noexcept override { return "checksum error"; }
+
+public:
+	const uint8_t expected;
+	const uint8_t actual;
 };
 
-template <class T>
-std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence>& s)
+template <class T> std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence>& s)
 {
 	if (!s)
 		return nullptr;

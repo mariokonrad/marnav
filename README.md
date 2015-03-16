@@ -6,6 +6,8 @@ Copyright (c) 2015, Mario Konrad "mario.konrad@gmx.net"
 This is a C++11 library to read and write NMEA-0183 sentences.
 
 Supported sentences:
+- AAM
+- BOD
 - DBT
 - DPT
 - GGA
