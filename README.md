@@ -18,6 +18,7 @@ Supported sentences:
 - RMB
 - RMC
 - RTE
+- VHW
 - VTG
 
 EXAMPLES
