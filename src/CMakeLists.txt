@@ -23,12 +23,12 @@ add_library(nmea
 	nmea/vhw.cpp
 	nmea/vlw.cpp
 	nmea/vtg.cpp
+	nmea/vwr.cpp
 	nmea/optional.hpp
 	nmea/unique.hpp
 	)
 
 # TODO (first of all sentences):
-# vwr
 # vwt
 # rme
 # rmm
