@@ -22,6 +22,7 @@
 #include "vtg.hpp"
 #include "vwr.hpp"
 #include "vdm.hpp"
+#include "vdo.hpp"
 #include "unique.hpp"
 #include <algorithm>
 #include <regex>
@@ -55,6 +56,7 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 		{"VTG", vtg::parse},
 		{"VWR", vwr::parse},
 		{"VDM", vdm::parse},
+		{"VDO", vdo::parse},
 	};
 
 	auto const& i = std::find_if(begin(known_sentences), end(known_sentences),

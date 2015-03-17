@@ -30,6 +30,7 @@ add_library(nmea
 	nmea/vtg.cpp
 	nmea/vwr.cpp
 	nmea/vdm.cpp
+	nmea/vdo.cpp
 	nmea/optional.hpp
 	nmea/unique.hpp
 	)
@@ -130,6 +131,31 @@ install(
 		nmea/vtg.hpp
 		nmea/vwr.hpp
 		nmea/vdm.hpp
+		nmea/vdo.hpp
 	DESTINATION include/nmea
+	)
+
+add_library(ais
+	ais/ais.cpp
+	ais/message_01.cpp
+	)
+
+set_target_properties(ais
+	PROPERTIES VERSION 0.0.1
+	SOVERSION 0.0.1
+	)
+
+install(
+	TARGETS ais
+	LIBRARY DESTINATION lib
+	ARCHIVE DESTINATION lib
+	)
+
+install(
+	FILES
+		ais/ais.hpp
+		ais/message.hpp
+		ais/message_01.hpp
+	DESTINATION include/ais
 	)
 

@@ -5,6 +5,7 @@
 
 namespace nmea
 {
+
 class vdm : public sentence
 {
 public:
@@ -19,8 +20,12 @@ public:
 		  const std::vector<std::string>& fields) throw(std::invalid_argument);
 
 protected:
+	vdm(sentence_id id, const std::string& tag, const std::string& talker);
+
 	virtual std::vector<std::string> get_data() const override;
 	virtual char get_start_token() const override { return START_TOKEN_AIS; }
+
+	void read_fields(const std::vector<std::string>& fields);
 
 private:
 	uint32_t n_fragments;
@@ -48,6 +53,22 @@ public:
 		n_fill_bits = fill_bits;
 	}
 };
+
+template <class InputIt>
+std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt end)
+{
+	std::vector<std::pair<std::string, int>> v;
+	v.reserve(distance(begin, end));
+
+	for (; begin != end; ++begin) {
+		const auto& vdm = nmea::sentence_cast<nmea::vdm>(*begin);
+		if (!vdm)
+			throw std::invalid_argument{"invalid sentence discovered"};
+		v.push_back(make_pair(vdm->get_payload(), vdm->get_n_fill_bits()));
+	}
+
+	return v;
+}
 
 }
 

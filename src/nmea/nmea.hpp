@@ -23,16 +23,6 @@ public:
 	const uint8_t actual;
 };
 
-template <class T> std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence>& s)
-{
-	if (!s)
-		return nullptr;
-	if (s->id() != T::ID)
-		return nullptr;
-
-	return std::unique_ptr<T>{static_cast<T*>(s.release())};
-}
-
 std::unique_ptr<sentence> make_sentence(const std::string& s) throw(std::invalid_argument,
 																	checksum_error);
 

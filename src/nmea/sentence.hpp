@@ -282,6 +282,16 @@ private:
 
 std::string to_string(const sentence& s);
 
+template <class T> std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence>& s)
+{
+	if (!s)
+		return nullptr;
+	if (s->id() != T::ID)
+		return nullptr;
+
+	return std::unique_ptr<T>{static_cast<T*>(s.release())};
+}
+
 }
 
 #endif

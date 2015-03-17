@@ -1,0 +1,492 @@
+#ifndef __AIS__BITSET__HPP__
+#define __AIS__BITSET__HPP__
+
+#include <vector>
+#include <istream>
+
+namespace ais
+{
+
+/// @TODO: support for const_iterator (partially prepared)
+/// @TODO: test also for big-endian
+/// @TODO: padding for 'append' and 'set'
+/// @TODO: really ignoring the failure of 'set', 'append' and 'get'?
+/// @TODO: documentation
+template <class Block, class Container = std::vector<Block>> class bitset
+{
+public:
+	using block_type = Block;
+	enum { BITS_PER_BYTE = 8 };
+	enum { BITS_PER_BLOCK = sizeof(block_type) * BITS_PER_BYTE };
+
+public:
+	using size_type = typename Container::size_type;
+	using data_const_iterator = typename Container::const_iterator;
+
+	class exception : public std::exception
+	{
+	};
+
+	/// @todo: TEST
+	/// @todo: documentation
+	class const_iterator
+	{
+		friend class bitset;
+
+	private:
+		const bitset* bs;
+		size_type pos;
+
+	private:
+		const_iterator(const bitset* const bs, size_type pos)
+			: bs(bs)
+			, pos(pos)
+		{
+		}
+
+	public:
+		const_iterator()
+			: bs(nullptr)
+			, pos(0)
+		{
+		}
+
+		const_iterator(const const_iterator& other) = default;
+
+		size_type get_pos() const { return pos; }
+
+		const_iterator& operator=(const const_iterator& other) = default;
+
+		bool operator==(const const_iterator& other) const
+		{
+			return bs == other.bs && pos == other.pos;
+		}
+
+		bool operator!=(const const_iterator& other) const
+		{
+			return bs != other.bs || pos != other.pos;
+		}
+
+		bool operator<(const const_iterator& other) const
+		{
+			return bs == other.bs && pos < other.pos;
+		}
+
+		bool operator>(const const_iterator& other) const
+		{
+			return bs == other.bs && pos > other.pos;
+		}
+
+		bool operator<=(const const_iterator& other) const
+		{
+			return bs == other.bs && pos <= other.pos;
+		}
+
+		bool operator>=(const const_iterator& other) const
+		{
+			return bs == other.bs && pos >= other.pos;
+		}
+
+		bool operator*() const
+		{
+			return bs != nullptr && pos < bs->size() && bs->get_bit(pos) == true;
+		}
+
+		const_iterator& operator+=(size_type ofs)
+		{
+			if (bs != nullptr && pos < bs->size()) {
+				pos += ofs;
+				if (pos > bs->size())
+					pos = bs->size();
+			}
+			return *this;
+		}
+
+		const_iterator& operator-=(size_type ofs)
+		{
+			if (bs != nullptr) {
+				pos = (ofs > pos) ? 0 : pos - ofs;
+			}
+			return *this;
+		}
+
+		const_iterator& operator++() // ++const_iterator
+		{
+			if (bs != nullptr && pos < bs->size()) {
+				++pos;
+			}
+			return *this;
+		}
+
+		const_iterator& operator--() // --const_iterator
+		{
+			if (bs != nullptr && pos > 0) {
+				--pos;
+			}
+			return *this;
+		}
+
+		const_iterator operator++(int) // const_iterator++
+		{
+			const_iterator res(*this);
+			if (bs != nullptr && pos < bs->size()) {
+				++pos;
+			}
+			return res;
+		}
+
+		const_iterator operator--(int) // const_iterator--
+		{
+			const_iterator res(*this);
+			if (bs != nullptr && pos > 0) {
+				--pos;
+			}
+			return res;
+		}
+
+		template <typename T>
+		void peek(T& v, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
+		{
+			if (bs == nullptr)
+				return;
+			if (pos + bits > bs->size())
+				throw exception();
+			bs->get(v, pos, bits);
+		}
+
+		template <typename T>
+		void read(T& v, size_type bits = sizeof(T) * BITS_PER_BYTE) throw(exception)
+		{
+			peek(v, bits);
+			*this += bits;
+		}
+	};
+
+private:
+	size_type pos; // number of bits contained within the set
+	Container data;
+
+private:
+	/// Extends the container by the specified number of bits.
+	/// Extension is always one block.
+	void extend(size_type bits)
+	{
+		if (bits <= 0)
+			return;
+		size_type n_blocks = (pos + bits + BITS_PER_BLOCK - 1) / BITS_PER_BLOCK;
+		if (n_blocks > data.capacity()) {
+			data.reserve(n_blocks);
+			while (bits > capacity() - pos) {
+				data.push_back(block_type());
+			}
+		}
+	}
+
+	/// Appends the specified block to the data. The bitset is automatically extended
+	/// to hold all the data.
+	///
+	/// @param[in] v The data to append to the bitset.
+	/// @param[in] bits The number of bits to append. This value must be
+	///            between 0 and BITS_PER_BLOCK. If not all bits are being
+	///            appended, only the least significant bits are being taken.
+	void append_block(block_type v, size_type bits = BITS_PER_BLOCK)
+	{
+		if (bits <= 0)
+			return;
+		extend(bits);
+		size_type i = pos / BITS_PER_BLOCK; // index of current block
+
+		// number of bits unused within the current block
+		size_type u_bits = BITS_PER_BLOCK - (pos % BITS_PER_BLOCK);
+
+		if (u_bits >= bits) {
+			// enough room within current block
+			data[i] |= v << (u_bits - bits);
+		} else {
+			// not enough room, split value to current and next block
+			data[i + 0] |= v >> (bits - u_bits);
+			data[i + 1] |= v << (BITS_PER_BLOCK - (bits - u_bits));
+		}
+		pos += bits;
+	}
+
+	/// Sets the specified block within the bit set. The bitset is automatically
+	/// extended to hold the data.
+	///
+	/// @param[in] v The data to be set.
+	/// @param[in] ofs The offset in bits at which the data has to be written.
+	/// @param[in] bits The number of bits of the data to be written
+	///            If not all bits are being written, only the least significant bits are being
+	///            taken.
+	void set_block(block_type v, size_type ofs, size_type bits = BITS_PER_BLOCK)
+	{
+		if (bits <= 0)
+			return;
+		if (ofs + bits > capacity())
+			extend(ofs + bits - capacity());
+		size_type i = ofs / BITS_PER_BLOCK; // index of current block
+
+		// number of bits unused within the current block
+		size_type u_bits = BITS_PER_BLOCK - (ofs % BITS_PER_BLOCK);
+
+		if (u_bits >= bits) {
+			// enough room within current block
+			block_type mask = ~((1 << (u_bits - bits)) - 1);
+			data[i] = (data[i] & mask) | v << (u_bits - bits);
+		} else {
+			// not enough room, split value to current and next block
+			block_type mask0 = ~((1 << (bits - u_bits)) - 1);
+			block_type mask1 = (1 << (BITS_PER_BLOCK - (bits - u_bits))) - 1;
+
+			data[i + 0] = (data[i + 0] & mask0) | v >> (bits - u_bits);
+			data[i + 1] = (data[i + 1] & mask1) | v << (BITS_PER_BLOCK - (bits - u_bits));
+		}
+		if (ofs + bits > pos)
+			pos = ofs + bits;
+	}
+
+	/// Reads a block from the bit set.
+	///
+	/// @param[out] v The container to hold the data.
+	/// @param[in] ofs The offset in bits at which the data has to be read.
+	/// @param[in] bits Number of bits to be read.
+	///            If the number of bits is smaller than what the specified data can
+	///            hold, only the least significant bits are being set.
+	void get_block(block_type& v, size_type ofs, size_type bits = BITS_PER_BLOCK) const
+	{
+		if (bits <= 0)
+			return;
+		if (ofs + bits > size())
+			return;
+		size_type i = ofs / BITS_PER_BLOCK; // index of current block
+
+		// number of bits unused within the current block
+		size_type u_bits = BITS_PER_BLOCK - (ofs % BITS_PER_BLOCK);
+
+		if (u_bits >= bits) {
+			// desired data fully within the current block
+			block_type mask = (1 << u_bits) - 1;
+			v = (data[i] & mask) >> (u_bits - bits);
+		} else {
+			// desired value is part from current block and part from next
+			block_type mask0 = (1 << u_bits) - 1;
+			block_type mask1 = ((1 << (BITS_PER_BLOCK - (bits - u_bits))) - 1) << (bits - u_bits);
+			v = (data[i + 0] & mask0)
+				<< (bits - u_bits) | (data[i + 1] & mask1) >> (BITS_PER_BLOCK - (bits - u_bits));
+		}
+	}
+
+public:
+	bitset()
+		: pos(0)
+	{
+	}
+
+	/// Initializes the bitset with some content. The data within
+	/// the bitset will be a copy of the specified data.
+	///
+	/// If a zero-copy container is desired, it may be configured
+	/// as template parameter 'Container'.
+	///
+	/// @param[in] begin Start position of the data (inclusive)
+	/// @param[in] end End position of the data (exclusive)
+	bitset(typename Container::const_iterator begin, typename Container::const_iterator end)
+		: pos((end - begin) * BITS_PER_BLOCK)
+		, data(begin, end)
+	{
+	}
+
+	/// Returns the capacity of this bit set. Note: not all bits must have
+	/// been occupied.
+	size_type capacity() const { return data.size() * BITS_PER_BLOCK; }
+
+	/// Returns the number of used bits.
+	size_type size() const { return pos; }
+
+	/// Reserves the number of blocks within this set.
+	void reserve(size_type blocks) { extend(blocks * BITS_PER_BLOCK); }
+
+	/// Clears the bit set.
+	void clear()
+	{
+		data.clear();
+		pos = 0;
+	}
+
+	/// Returns the bit at the specified position.
+	bool operator[](size_type i) const { return get_bit(i); }
+
+	/// Returns the bit at the specified position. If the index is larger
+	/// than the actual number of bits, 'false' will rturn.
+	bool get_bit(size_type i) const
+	{
+		if (i > size())
+			return false;
+
+		// bit within the block to be read
+		size_type n_bit = BITS_PER_BLOCK - (i % BITS_PER_BLOCK) - 1;
+		return (data[i / BITS_PER_BLOCK] >> n_bit) & 1 ? true : false;
+	}
+
+	/// Returns a const iterator to the beginning of the data itself.
+	/// Note: this iterator accesses the data up to capacity(), some bits
+	/// may be unused at the end of the set.
+	data_const_iterator data_begin() const { return data.begin(); }
+
+	/// Returns a const iterator to the end of the data itself.
+	data_const_iterator data_end() const { return data.end(); }
+
+	const_iterator begin() const { return const_iterator(this, 0); }
+
+	const_iterator end() const { return const_iterator(this, size()); }
+
+	/// Appends another bitset to this one.
+	///
+	/// @param[in] bs The bitset to be appended to this one.
+	void append(const bitset& bs)
+	{
+		// TODO
+	}
+
+	/// Sets the specified bitset at the offset within this bitset.
+	///
+	/// @param[in] bs The bitset to copy.
+	/// @param[in] ofs The offset within the bitset to copy the bitset
+	///            to. The entire specified bitset will be set.
+	void set(const bitset& bs, size_type ofs)
+	{
+		// TODO
+	}
+
+	/// @TODO: documentation
+	size_type append(std::istream& is, size_type blocks)
+	{
+		size_type i = 0;
+		block_type block;
+		while (is.good() && !is.eof() && i < blocks) {
+			is.read(reinterpret_cast<char*>(&block), sizeof(block));
+			append_block(block);
+			++i;
+		}
+		return i;
+	}
+
+	/// Appends the lowest significant bits of the specified data to the
+	/// bit set. The set will be extended if necessary.
+	/// The second parameter specifies the number of bits to be used from
+	/// the given data, beginning at the lowest signnificant bit.
+	/// A size of 0 bits will have no effect.
+	///
+	/// @param[in] v The value to append to the bitset.
+	/// @param[in] bits Number of bits from the specified value. This must not
+	///            exceed the number of bits provided by the specified data,
+	///            padding is not supported.
+	template <typename T> void append(T v, size_type bits = sizeof(T) * BITS_PER_BYTE)
+	{
+		if (bits <= 0)
+			return;
+		if (bits > sizeof(v) * BITS_PER_BYTE)
+			return; // TODO: no padding supported
+		block_type* p = reinterpret_cast<block_type*>(&v);
+		size_type n_bits = bits % BITS_PER_BLOCK; // incomplete blocks
+		if (n_bits != 0) {
+			append_block(*p, n_bits);
+			bits -= n_bits;
+		}
+		for (; bits > 0; bits -= BITS_PER_BLOCK, ++p) {
+			append_block(*p);
+		}
+	}
+
+	/// Sets bits within the set. The bitset is automatically exteneded to hold the data.
+	///
+	/// @param[in] v The value to set.
+	/// @param[in] ofs The offset (in bits) at which position the value has to be written.
+	/// @paran[in] bits The number of bits to write. This must not exceed the number of bits
+	///            provided by the specified data, padding is not supported.
+	template <typename T> void set(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE)
+	{
+		if (bits <= 0)
+			return;
+		if (bits > sizeof(v) * BITS_PER_BYTE)
+			return; // TODO: no padding supported
+		if (ofs + bits > capacity())
+			extend(ofs + bits - capacity());
+		block_type* p = reinterpret_cast<block_type*>(&v);
+		size_type n_bits = bits % BITS_PER_BLOCK; // incomplete block
+		if (n_bits != 0) {
+			set_block(*p, ofs, n_bits);
+			ofs += n_bits;
+			bits -= n_bits;
+		}
+		for (; bits > 0; bits -= BITS_PER_BLOCK, ++p) {
+			set_block(*p, ofs);
+			ofs += BITS_PER_BLOCK;
+		}
+	}
+
+	/// Reads data from the bit set. There must be enough capacity in either the
+	/// bitset to be read as well as the provided data type to contain the desired
+	/// number of bits.
+	///
+	/// @param[out] v The container to hold the data.
+	/// @param[in] ofs The offset in bits at which position the data is to be read.
+	/// @param[in] bits Number of bits to be read. This must not exceeed the number of
+	///            bits the specified data type can hold.
+	///            If the number of bits is smaller than what the specified data can
+	///            hold, only the least significant bits are being set.
+	template <class T>
+	void get(T& v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
+	{
+		if (bits <= 0)
+			throw exception{};
+		if (bits > sizeof(T) * BITS_PER_BYTE)
+			throw exception{}; // impossible to read more bits than the specified container can hold
+		if (ofs + bits > pos)
+			throw exception{};
+
+		v = T(); // clear result
+
+		// number of bits unused within the current block
+		size_type u_bits = BITS_PER_BLOCK - (ofs % BITS_PER_BLOCK);
+
+		block_type block;
+
+		if (u_bits > 0) {
+			get_block(block, ofs, u_bits);
+			if (bits < u_bits) {
+				block >>= (u_bits - bits);
+				bits = 0;
+			} else {
+				bits -= u_bits;
+			}
+			v = +block;
+			ofs += u_bits;
+		}
+
+		for (; bits >= BITS_PER_BLOCK; bits -= BITS_PER_BLOCK) {
+			get_block(block, ofs);
+			v <<= BITS_PER_BLOCK;
+			v += block;
+			ofs += BITS_PER_BLOCK;
+		}
+
+		if (bits > 0) {
+			get_block(block, ofs, bits);
+			v <<= bits;
+			v += block;
+		}
+	}
+
+	template <class T>
+	T get(size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
+	{
+		T t;
+		get(t, ofs, bits);
+		return t;
+	}
+};
+
+}
+
+#endif

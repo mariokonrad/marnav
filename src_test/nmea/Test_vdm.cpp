@@ -59,5 +59,22 @@ TEST_F(Test_vdm, empty_to_string)
 	EXPECT_STREQ("!AIVDM,0,0,,B,,0*25", nmea::to_string(vdm).c_str());
 }
 
+TEST_F(Test_vdm, collect_payload)
+{
+	std::vector<std::unique_ptr<nmea::sentence>> v;
+
+	v.push_back(nmea::make_sentence("!AIVDM,2,1,3,B,55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53,0*3E"));
+	v.push_back(nmea::make_sentence("!AIVDM,2,2,3,B,1@0000000000000,2*55"));
+
+	auto result = nmea::collect_payload(v.begin(), v.end());
+
+	ASSERT_EQ(2u, result.size());
+	EXPECT_EQ(0, result[0].second);
+	EXPECT_EQ(2, result[1].second);
+	EXPECT_STREQ("55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53",
+				 result[0].first.c_str());
+	EXPECT_STREQ("1@0000000000000", result[1].first.c_str());
+}
+
 }
 

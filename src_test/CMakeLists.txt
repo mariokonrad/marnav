@@ -15,10 +15,13 @@ add_executable(testrunner
 	nmea/Test_vlw.cpp
 	nmea/Test_vwr.cpp
 	nmea/Test_vdm.cpp
+	nmea/Test_vdo.cpp
+	ais/Test_ais.cpp
 	)
 
 target_link_libraries(testrunner
 	nmea
+	ais
 	gmock
 	pthread
 	)

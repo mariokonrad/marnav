@@ -15,6 +15,25 @@ vdm::vdm()
 {
 }
 
+vdm::vdm(sentence_id id, const std::string& tag, const std::string& talker)
+	: sentence(id, tag, talker)
+	, n_fragments(0)
+	, fragment(0)
+	, radio_channel(ais_channel::B)
+	, n_fill_bits(0)
+{
+}
+
+void vdm::read_fields(const std::vector<std::string>& fields)
+{
+	read(fields[0], n_fragments);
+	read(fields[1], fragment);
+	read(fields[2], seq_msg_id);
+	read(fields[3], radio_channel);
+	read(fields[4], payload);
+	read(fields[5], n_fill_bits);
+}
+
 std::unique_ptr<sentence>
 vdm::parse(const std::string& talker,
 		   const std::vector<std::string>& fields) throw(std::invalid_argument)
@@ -26,12 +45,7 @@ vdm::parse(const std::string& talker,
 	result->set_talker(talker);
 	vdm& detail = static_cast<vdm&>(*result);
 
-	read(fields[0], detail.n_fragments);
-	read(fields[1], detail.fragment);
-	read(fields[2], detail.seq_msg_id);
-	read(fields[3], detail.radio_channel);
-	read(fields[4], detail.payload);
-	read(fields[5], detail.n_fill_bits);
+	detail.read_fields(fields);
 
 	return result;
 }
