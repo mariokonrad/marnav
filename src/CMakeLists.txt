@@ -32,7 +32,7 @@ add_library(nmea
 	nmea/vdm.cpp
 	nmea/vdo.cpp
 	nmea/optional.hpp
-	nmea/unique.hpp
+	utils/unique.hpp
 	)
 
 # TODO (first of all sentences):
@@ -114,7 +114,6 @@ install(
 		nmea/time.hpp
 		nmea/optional.hpp
 		nmea/sentence.hpp
-		nmea/unique.hpp
 		nmea/nmea.hpp
 		nmea/aam.hpp
 		nmea/bod.hpp
@@ -132,12 +131,15 @@ install(
 		nmea/vwr.hpp
 		nmea/vdm.hpp
 		nmea/vdo.hpp
+		utils/unique.hpp
 	DESTINATION include/nmea
 	)
 
 add_library(ais
 	ais/ais.cpp
 	ais/message_01.cpp
+	utils/unique.hpp
+	utils/bitset.hpp
 	)
 
 set_target_properties(ais
@@ -156,6 +158,8 @@ install(
 		ais/ais.hpp
 		ais/message.hpp
 		ais/message_01.hpp
+		utils/unique.hpp
+		utils/bitset.hpp
 	DESTINATION include/ais
 	)
 

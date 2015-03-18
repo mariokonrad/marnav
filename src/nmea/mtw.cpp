@@ -1,5 +1,5 @@
 #include "mtw.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -17,7 +17,7 @@ mtw::parse(const std::string& talker,
 	if (fields.size() != 2)
 		throw std::invalid_argument{"invalid number of fields in mtw::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<mtw>();
+	std::unique_ptr<sentence> result = utils::make_unique<mtw>();
 	result->set_talker(talker);
 	mtw& detail = static_cast<mtw&>(*result);
 

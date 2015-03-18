@@ -1,5 +1,4 @@
 #include "ais.hpp"
-#include "bitset.hpp"
 #include "message_01.hpp"
 #include <algorithm>
 

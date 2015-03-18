@@ -1,5 +1,5 @@
 #include "vlw.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -29,7 +29,7 @@ vlw::parse(const std::string& talker,
 	if (fields.size() != 4)
 		throw std::invalid_argument{"invalid number of fields in vlw::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<vlw>();
+	std::unique_ptr<sentence> result = utils::make_unique<vlw>();
 	result->set_talker(talker);
 	vlw& detail = static_cast<vlw&>(*result);
 

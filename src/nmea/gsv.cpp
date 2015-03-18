@@ -1,5 +1,5 @@
 #include "gsv.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 #include <iostream>
 
@@ -73,7 +73,7 @@ gsv::parse(const std::string& talker,
 			+ std::to_string(fields.size())};
 	}
 
-	std::unique_ptr<sentence> result = std::make_unique<gsv>();
+	std::unique_ptr<sentence> result = utils::make_unique<gsv>();
 	result->set_talker(talker);
 	gsv& detail = static_cast<gsv&>(*result);
 

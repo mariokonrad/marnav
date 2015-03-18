@@ -1,5 +1,5 @@
 #include "dpt.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -17,7 +17,7 @@ dpt::parse(const std::string& talker,
 	if (fields.size() != 2)
 		throw std::invalid_argument{"invalid number of fields in dpt::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<dpt>();
+	std::unique_ptr<sentence> result = utils::make_unique<dpt>();
 	result->set_talker(talker);
 	dpt& detail = static_cast<dpt&>(*result);
 

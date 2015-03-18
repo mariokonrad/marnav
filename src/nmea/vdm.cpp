@@ -1,5 +1,5 @@
 #include "vdm.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 #include <string>
 
@@ -41,7 +41,7 @@ vdm::parse(const std::string& talker,
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in vdm::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<vdm>();
+	std::unique_ptr<sentence> result = utils::make_unique<vdm>();
 	result->set_talker(talker);
 	vdm& detail = static_cast<vdm&>(*result);
 

@@ -1,5 +1,5 @@
 #include "gsa.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -61,7 +61,7 @@ gsa::parse(const std::string& talker,
 	if (fields.size() != 17)
 		throw std::invalid_argument{"invalid number of fields in gsa::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<gsa>();
+	std::unique_ptr<sentence> result = utils::make_unique<gsa>();
 	result->set_talker(talker);
 	gsa& detail = static_cast<gsa&>(*result);
 

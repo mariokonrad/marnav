@@ -3,7 +3,7 @@
 
 #include <functional>
 #include <memory>
-#include "bitset.hpp"
+#include <utils/bitset.hpp>
 
 namespace ais
 {
@@ -39,7 +39,7 @@ enum class message_id : uint8_t {
 	position_report_for_long_range_applications = 27,
 };
 
-using raw = bitset<uint8_t>;
+using raw = utils::bitset<uint8_t>;
 
 class message
 {

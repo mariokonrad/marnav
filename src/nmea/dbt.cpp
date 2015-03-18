@@ -1,5 +1,5 @@
 #include "dbt.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -35,7 +35,7 @@ dbt::parse(const std::string& talker,
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in dbt::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<dbt>();
+	std::unique_ptr<sentence> result = utils::make_unique<dbt>();
 	result->set_talker(talker);
 	dbt& detail = static_cast<dbt&>(*result);
 

@@ -1,5 +1,5 @@
 #include "bod.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -47,7 +47,7 @@ bod::parse(const std::string& talker,
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in bod::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<bod>();
+	std::unique_ptr<sentence> result = utils::make_unique<bod>();
 	result->set_talker(talker);
 	bod& detail = static_cast<bod&>(*result);
 

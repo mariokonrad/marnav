@@ -1,5 +1,5 @@
 #include "message_01.hpp"
-#include <nmea/unique.hpp> // FIXME: no direct dependency to other libraries, for now
+#include <utils/unique.hpp>
 
 namespace ais
 {
@@ -9,7 +9,7 @@ std::unique_ptr<message> message_01::parse(const raw& bits) throw(std::invalid_a
 	if (bits.size() != 168)
 		throw std::invalid_argument{"invalid number of bits in message_01::parse"};
 
-	std::unique_ptr<message> result = std::make_unique<message_01>();
+	std::unique_ptr<message> result = utils::make_unique<message_01>();
 	message_01& msg = static_cast<message_01&>(*result);
 
 	// TODO: implementation

@@ -1,5 +1,5 @@
 #include "vdo.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 
 namespace nmea
 {
@@ -16,7 +16,7 @@ vdo::parse(const std::string& talker,
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in vdo::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<vdo>();
+	std::unique_ptr<sentence> result = utils::make_unique<vdo>();
 	result->set_talker(talker);
 	vdo& detail = static_cast<vdo&>(*result);
 

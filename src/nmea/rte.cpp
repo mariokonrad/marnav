@@ -1,5 +1,5 @@
 #include "rte.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -36,7 +36,7 @@ rte::parse(const std::string& talker,
 	if ((fields.size() < 3) || (fields.size() > 13))
 		throw std::invalid_argument{"invalid number of fields in rte::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<rte>();
+	std::unique_ptr<sentence> result = utils::make_unique<rte>();
 	result->set_talker(talker);
 	rte& detail = static_cast<rte&>(*result);
 

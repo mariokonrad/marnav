@@ -1,5 +1,5 @@
 #include "vtg.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -41,7 +41,7 @@ vtg::parse(const std::string& talker,
 	if (fields.size() != 8)
 		throw std::invalid_argument{"invalid number of fields in vtg::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<vtg>();
+	std::unique_ptr<sentence> result = utils::make_unique<vtg>();
 	result->set_talker(talker);
 	vtg& detail = static_cast<vtg&>(*result);
 

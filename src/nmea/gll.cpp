@@ -1,5 +1,5 @@
 #include "gll.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -43,7 +43,7 @@ gll::parse(const std::string& talker,
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in gll::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<gll>();
+	std::unique_ptr<sentence> result = utils::make_unique<gll>();
 	result->set_talker(talker);
 	gll& detail = static_cast<gll&>(*result);
 

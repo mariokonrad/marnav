@@ -1,5 +1,5 @@
 #include "hdg.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -37,7 +37,7 @@ hdg::parse(const std::string& talker,
 	if (fields.size() != 5)
 		throw std::invalid_argument{"invalid number of fields in hdg::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<hdg>();
+	std::unique_ptr<sentence> result = utils::make_unique<hdg>();
 	result->set_talker(talker);
 	hdg& detail = static_cast<hdg&>(*result);
 

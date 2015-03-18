@@ -1,5 +1,5 @@
 #include "aam.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -35,7 +35,7 @@ aam::parse(const std::string& talker,
 	if (fields.size() != 5)
 		throw std::invalid_argument{"invalid number of fields in aam::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<aam>();
+	std::unique_ptr<sentence> result = utils::make_unique<aam>();
 	result->set_talker(talker);
 	aam& detail = static_cast<aam&>(*result);
 

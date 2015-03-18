@@ -1,10 +1,10 @@
-#ifndef __AIS__BITSET__HPP__
-#define __AIS__BITSET__HPP__
+#ifndef __UTILS__BITSET__HPP__
+#define __UTILS__BITSET__HPP__
 
 #include <vector>
 #include <istream>
 
-namespace ais
+namespace utils
 {
 
 /// @TODO: support for const_iterator (partially prepared)

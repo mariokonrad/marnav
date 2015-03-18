@@ -1,5 +1,5 @@
 #include "vhw.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -36,7 +36,7 @@ vhw::parse(const std::string& talker,
 	if (fields.size() != 8)
 		throw std::invalid_argument{"invalid number of fields in vhw::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<vhw>();
+	std::unique_ptr<sentence> result = utils::make_unique<vhw>();
 	result->set_talker(talker);
 	vhw& detail = static_cast<vhw&>(*result);
 

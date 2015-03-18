@@ -1,5 +1,5 @@
 #include "mwv.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -29,7 +29,7 @@ mwv::parse(const std::string& talker,
 	if (fields.size() != 5)
 		throw std::invalid_argument{"invalid number of fields in mwv::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<mwv>();
+	std::unique_ptr<sentence> result = utils::make_unique<mwv>();
 	result->set_talker(talker);
 	mwv& detail = static_cast<mwv&>(*result);
 

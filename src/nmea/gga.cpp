@@ -1,5 +1,5 @@
 #include "gga.hpp"
-#include "unique.hpp"
+#include <utils/unique.hpp>
 #include "io.hpp"
 
 namespace nmea
@@ -43,7 +43,7 @@ gga::parse(const std::string& talker,
 	if (fields.size() != 14)
 		throw std::invalid_argument{"invalid number of fields in gga::parse"};
 
-	std::unique_ptr<sentence> result = std::make_unique<gga>();
+	std::unique_ptr<sentence> result = utils::make_unique<gga>();
 	result->set_talker(talker);
 	gga& detail = static_cast<gga&>(*result);
 
