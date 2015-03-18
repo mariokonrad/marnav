@@ -1,11 +1,15 @@
-NMEA
-====
+libmarnav
+=========
 
 Copyright (c) 2015, Mario Konrad "mario.konrad@gmx.net"
 
-This is a C++11 library to read and write NMEA-0183 sentences.
+This is a C++11 library for maritime navigation purposes.
 
-Supported sentences:
+It supports:
+- NMEA-0183
+- AIS
+
+Supported sentences for NMEA-0183 (read and write):
 - AAM
 - BOD
 - DBT
@@ -25,10 +29,16 @@ Supported sentences:
 - VTG
 - VWR
 
+Supported messages for AIS (decode and encode):
+- type 1: position report class A
+- type 2: position report class A (assigned schedule)
+- type 3: position report class A (response to interrogation)
+
+
 EXAMPLES
 --------
 
-Parse a sentence:
+Parse a NMEA sentence:
 
 	auto sentence = nmea::make_sentence("$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
 	std::cout << s->tag() << "\n";
@@ -39,7 +49,7 @@ Parse a sentence:
 GOALS
 -----
 
-There are already implementaions for reading and writing NMEA-0183.
+There are already implementaions for reading and writing NMEA-0183 or AIS.
 The goal of this library is
 - to have an implementation in modern C++
 - easy to use API
