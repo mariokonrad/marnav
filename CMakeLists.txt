@@ -34,12 +34,3 @@ endmacro()
 
 add_subdirectory(src_test)
 
-### local binaries
-add_executable(nmea_sentence
-	nmea_sentence.cpp
-	)
-
-target_link_libraries(nmea_sentence
-	nmea
-	)
-
