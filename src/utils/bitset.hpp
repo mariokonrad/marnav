@@ -282,6 +282,16 @@ public:
 	{
 	}
 
+	/// Initializes the bitset with the specified amount of bits.
+	///
+	/// @param[in] bits Number of bits (default initialized to 0) in the bitset.
+	bitset(size_type bits)
+		: pos(0)
+	{
+		extend(bits);
+		pos = bits;
+	}
+
 	/// Initializes the bitset with some content. The data within
 	/// the bitset will be a copy of the specified data.
 	///
@@ -304,6 +314,8 @@ public:
 	size_type size() const { return pos; }
 
 	/// Reserves the number of blocks within this set.
+	///
+	/// @note This method reserves blocks, not bits.
 	void reserve(size_type blocks) { extend(blocks * BITS_PER_BLOCK); }
 
 	/// Clears the bit set.
