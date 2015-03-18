@@ -137,6 +137,7 @@ install(
 
 add_library(ais
 	ais/ais.cpp
+	ais/message.cpp
 	ais/message_01.cpp
 	utils/unique.hpp
 	utils/bitset.hpp

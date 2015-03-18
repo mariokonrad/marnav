@@ -39,12 +39,39 @@ enum class message_id : uint8_t {
 	position_report_for_long_range_applications = 27,
 };
 
+enum class navigation_status : uint8_t {
+	under_way_using_engine = 0,
+	at_anchor = 1,
+	not_under_command = 2,
+	restricted_manoeuverability = 3,
+	constrained_by_her_draught = 4,
+	moored = 5,
+	aground = 6,
+	engaged_in_Fishing = 7,
+	under_way_sailing = 8,
+	reserved_09 = 9,
+	reserved_10 = 10,
+	reserved_11 = 11,
+	reserved_12 = 12,
+	reserved_13 = 13,
+	ais_sart_is_active = 14,
+	not_defined = 15, // default
+};
+
 using raw = utils::bitset<uint8_t>;
 
 class message
 {
 public:
 	using parse_function = std::function<std::unique_ptr<message>(const raw&)>;
+
+	message_id type() const;
+
+protected:
+	message(message_id type);
+
+private:
+	message_id message_type;
 };
 
 }
