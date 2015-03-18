@@ -62,9 +62,22 @@ double message_01::get_latitude() const { return (0.0001 * latitude_minutes) / 6
 
 raw message_01::get_data() const
 {
-	raw bits;
+	raw bits{168};
 
-	// TODO: implementation
+	bits.set(type(), 0, 6);
+	bits.set(repeat_indicator, 6, 2);
+	bits.set(nav_status, 38, 4);
+	bits.set(rot, 42, 8);
+	bits.set(sog, 50, 10);
+	bits.set(position_accuracy, 60, 1);
+	bits.set(longitude_minutes, 61, 28);
+	bits.set(latitude_minutes, 89, 27);
+	bits.set(cog, 116, 12);
+	bits.set(hdg, 128, 9);
+	bits.set(timestamp, 136, 6);
+	bits.set(maneuver_indicator, 143, 2);
+	bits.set(raim, 148, 1);
+	bits.set(radio_status, 149, 19);
 
 	return bits;
 }

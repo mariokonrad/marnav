@@ -13,6 +13,14 @@ static inline uint8_t decode_armoring(char c)
 	return value & 0x3f;
 }
 
+static inline char encode_armoring(uint8_t value)
+{
+	value &= 0x3f;
+	if (value > 32)
+		return value + 8 + '0';
+	return value + '0';
+}
+
 static raw collect(const std::vector<std::pair<std::string, int>>& v)
 {
 	raw result;
@@ -64,5 +72,44 @@ make_message(const std::vector<std::pair<std::string, int>>& v) throw(std::inval
 	return instantiate_message(type)(bits);
 }
 
+std::vector<std::pair<std::string, int>>
+encode_message(const message& msg) throw(std::invalid_argument)
+{
+	auto bits = msg.get_data();
+	if (bits.size() == 0)
+		throw std::invalid_argument{"message not able to encode"};
+
+	std::vector<std::pair<std::string, int>> result;
+
+	std::pair<std::string, int> current{"", 0};
+	for (raw::size_type ofs = 0; ofs < bits.size(); ofs += 6) {
+		if (ofs + 6 < bits.size()) {
+			// normal case
+
+			uint8_t value;
+			bits.get(value, ofs, 6);
+			current.first += encode_armoring(value);
+
+			// append to string, only 51 characters per string (happens to be NMEA restriction)
+			if (current.first.size() == 51) {
+				result.push_back(current);
+				current.first.clear();
+				current.second = 0;
+			}
+		} else {
+			// last, append remainder padded to the string
+
+			auto remainder = bits.size() - ofs;
+			current.second = 6 - remainder;
+			uint8_t value;
+			bits.get(value, ofs, remainder);
+			value <<= current.second;
+			current.first += encode_armoring(value);
+			result.push_back(current);
+		}
+	}
+
+	return result;
 }
 
+}

@@ -22,11 +22,12 @@ public:
 	message_01(const message_01&) = default;
 	message_01& operator=(const message_01&) = default;
 
+	virtual raw get_data() const override;
+
 	static std::unique_ptr<message> parse(const raw& bits) throw(std::invalid_argument);
 
 protected:
 	void read_data(const raw& bits);
-	virtual raw get_data() const override;
 
 private:
 	unsigned int repeat_indicator;

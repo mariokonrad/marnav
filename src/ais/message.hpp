@@ -66,10 +66,10 @@ public:
 	using parse_function = std::function<std::unique_ptr<message>(const raw&)>;
 
 	message_id type() const;
+	virtual raw get_data() const = 0;
 
 protected:
 	message(message_id type);
-	virtual raw get_data() const = 0;
 
 private:
 	message_id message_type;
