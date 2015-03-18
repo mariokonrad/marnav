@@ -10,6 +10,7 @@ class message_01 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::position_report_class_a;
+	constexpr static const int SIZE_BITS = 168;
 
 	constexpr static const uint32_t longitude_not_available = 0x6791AC0;
 	constexpr static const uint32_t latitude_not_available = 0x3412140;

@@ -20,11 +20,11 @@ add_executable(testrunner
 	ais/Test_message_01.cpp
 	ais/Test_message_02.cpp
 	ais/Test_message_03.cpp
+	ais/Test_message_05.cpp
 	)
 
 target_link_libraries(testrunner
-	nmea
-	ais
+	marnav
 	gmock
 	pthread
 	)

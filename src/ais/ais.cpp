@@ -2,6 +2,7 @@
 #include "message_01.hpp"
 #include "message_02.hpp"
 #include "message_03.hpp"
+#include "message_05.hpp"
 #include <algorithm>
 
 namespace ais
@@ -56,6 +57,7 @@ static message::parse_function instantiate_message(message_id type) throw(std::i
 		{message_id::position_report_class_a, message_01::parse},
 		{message_id::position_report_class_a_assigned_schedule, message_02::parse},
 		{message_id::position_report_class_a_response_to_interrogation, message_03::parse},
+		{message_id::static_and_voyage_related_data, message_05::parse},
 	};
 
 	auto const& i = std::find_if(begin(known_messages), end(known_messages),

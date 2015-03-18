@@ -58,6 +58,82 @@ enum class navigation_status : uint8_t {
 	not_defined = 15, // default
 };
 
+enum class ship_type : uint8_t {
+	not_available = 0,
+	// 1..19 reserved for future use
+	wing_in_ground = 20,
+	wing_in_ground_hazardous_cat_a = 21,
+	wing_in_ground_hazardous_cat_b = 22,
+	wing_in_ground_hazardous_cat_c = 23,
+	wing_in_ground_hazardous_cat_d = 24,
+	// 25..29 WIG reserved for future use
+	fishing = 30,
+	towing = 31,
+	towing_large = 32, // exceeds 200m length or 25m breadth
+	dredging_or_underwater_ops = 33,
+	diving_ops = 34,
+	military_ops = 35,
+	sailing = 36,
+	pleasure_craft = 37,
+	// 38..39 reserved
+	high_speed_craft = 40,
+	high_speed_craft_hazardous_cat_a = 41,
+	high_speed_craft_hazardous_cat_b = 42,
+	high_speed_craft_hazardous_cat_c = 43,
+	high_speed_craft_hazardous_cat_d = 44,
+	// 45..48 HSC reserved for future use
+	high_speed_craft_no_info = 49,
+	pilot_vessel = 50,
+	search_and_rescue_vessel = 51,
+	tug = 52,
+	port_tender = 53,
+	anti_pollution_equipment = 54,
+	law_enforcement = 55,
+	// 56..57 spare, local vessel
+	medical_transport = 58,
+	noncombatant = 59,
+	passenger = 60,
+	passenger_hazardous_cat_a = 61,
+	passenger_hazardous_cat_b = 62,
+	passenger_hazardous_cat_c = 63,
+	passenger_hazardous_cat_d = 64,
+	// 65..68 Passenger reserved for future use
+	passenger_no_info = 69,
+	cargo = 70,
+	cargo_hazardous_cat_a = 71,
+	cargo_hazardous_cat_b = 72,
+	cargo_hazardous_cat_c = 73,
+	cargo_hazardous_cat_d = 74,
+	// 75..78 Cargo reserved for future use
+	cargo_no_info = 79,
+	tanker = 80,
+	tanker_hazardous_cat_a = 81,
+	tanker_hazardous_cat_b = 82,
+	tanker_hazardous_cat_c = 83,
+	tanker_hazardous_cat_d = 84,
+	// 85..88 Tanker reserved for future use
+	tanker_no_info = 89,
+	other = 90,
+	other_hazardous_cat_a = 91,
+	other_hazardous_cat_b = 92,
+	other_hazardous_cat_c = 93,
+	other_hazardous_cat_d = 94,
+	// 95..98 Other type reserved for future use
+	other_no_info = 99,
+};
+
+enum class epfd_fix_type : uint8_t {
+	undefined = 0,
+	gps = 1,
+	glonass = 2,
+	combined_gps_glonass = 3,
+	loran_c = 4,
+	chayka = 5,
+	integrated_navigation_system = 6,
+	surveyed = 7,
+	galileo = 8,
+};
+
 using raw = utils::bitset<uint8_t>;
 
 class message
@@ -74,6 +150,9 @@ protected:
 private:
 	message_id message_type;
 };
+
+char decode_sixbit_ascii(uint8_t value);
+uint8_t encode_sixbit_ascii(char c);
 
 template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message>& s)
 {

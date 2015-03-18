@@ -5,7 +5,8 @@ add_executable(nmeasum
 	nmeasum.cpp
 	)
 
-add_library(nmea
+add_library(marnav
+	# NMEA-0183
 	nmea/angle.cpp
 	nmea/date.cpp
 	nmea/time.cpp
@@ -32,16 +33,19 @@ add_library(nmea
 	nmea/vdm.cpp
 	nmea/vdo.cpp
 	nmea/optional.hpp
+	# AIS
+	ais/ais.cpp
+	ais/message.cpp
+	ais/message_01.cpp
+	ais/message_02.cpp
+	ais/message_03.cpp
+	ais/message_05.cpp
+	# common
 	utils/unique.hpp
+	utils/bitset.hpp
 	)
 
-# TODO (first of all sentences):
-# vwt
-# rme
-# rmm
-# rmz
-
-# TODO: sentences (obsolete already exluded)
+# TODO: NMEA sentences (obsolete already exluded)
 # ALM - GPS Almanac Data
 # APB - Autopilot Sentence "B"
 # BWC - Bearing & Distance to Waypoint - Geat Circle
@@ -96,13 +100,16 @@ add_library(nmea
 # AIVDM/AIVDO
 # vendor extensions
 
-set_target_properties(nmea
+# TODO: AIS message types
+# type 5
+
+set_target_properties(marnav
 	PROPERTIES VERSION 0.0.1
 	SOVERSION 0.0.1
 	)
 
 install(
-	TARGETS nmea
+	TARGETS marnav
 	LIBRARY DESTINATION lib
 	ARCHIVE DESTINATION lib
 	)
@@ -131,29 +138,7 @@ install(
 		nmea/vwr.hpp
 		nmea/vdm.hpp
 		nmea/vdo.hpp
-		utils/unique.hpp
-	DESTINATION include/nmea
-	)
-
-add_library(ais
-	ais/ais.cpp
-	ais/message.cpp
-	ais/message_01.cpp
-	ais/message_02.cpp
-	ais/message_03.cpp
-	utils/unique.hpp
-	utils/bitset.hpp
-	)
-
-set_target_properties(ais
-	PROPERTIES VERSION 0.0.1
-	SOVERSION 0.0.1
-	)
-
-install(
-	TARGETS ais
-	LIBRARY DESTINATION lib
-	ARCHIVE DESTINATION lib
+	DESTINATION include/marnav/nmea
 	)
 
 install(
@@ -163,8 +148,14 @@ install(
 		ais/message_01.hpp
 		ais/message_02.hpp
 		ais/message_03.hpp
+		ais/message_05.hpp
+	DESTINATION include/marnav/ais
+	)
+
+install(
+	FILES
 		utils/unique.hpp
 		utils/bitset.hpp
-	DESTINATION include/ais
+	DESTINATION include/marnav/utils
 	)
 

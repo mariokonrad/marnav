@@ -30,7 +30,7 @@ message_01::message_01(message_id id)
 
 std::unique_ptr<message> message_01::parse(const raw& bits) throw(std::invalid_argument)
 {
-	if (bits.size() != 168)
+	if (bits.size() != SIZE_BITS)
 		throw std::invalid_argument{"invalid number of bits in message_01::parse"};
 
 	std::unique_ptr<message> result = utils::make_unique<message_01>();
@@ -65,10 +65,11 @@ double message_01::get_latitude() const { return (0.0001 * latitude_minutes) / 6
 
 raw message_01::get_data() const
 {
-	raw bits{168};
+	raw bits{SIZE_BITS};
 
 	bits.set(type(), 0, 6);
 	bits.set(repeat_indicator, 6, 2);
+	bits.set(mmsi, 8, 30);
 	bits.set(nav_status, 38, 4);
 	bits.set(rot, 42, 8);
 	bits.set(sog, 50, 10);
