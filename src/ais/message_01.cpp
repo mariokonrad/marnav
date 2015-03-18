@@ -1,11 +1,27 @@
 #include "message_01.hpp"
 #include <utils/unique.hpp>
+#include <cstdio>
+#include <cmath>
 
 namespace ais
 {
 
 message_01::message_01()
 	: message(ID)
+	, repeat_indicator(0)
+	, mmsi(0)
+	, nav_status(navigation_status::not_defined)
+	, rot(-128)
+	, sog(0)
+	, position_accuracy(false)
+	, longitude_minutes(longitude_not_available)
+	, latitude_minutes(latitude_not_available)
+	, cog(cog_not_available)
+	, hdg(hdg_not_available)
+	, timestamp(timestamp_not_available)
+	, maneuver_indicator(maneuver_indictor_not_available)
+	, raim(0)
+	, radio_status(0)
 {
 }
 
@@ -24,10 +40,33 @@ std::unique_ptr<message> message_01::parse(const raw& bits) throw(std::invalid_a
 
 void message_01::read_data(const raw& bits)
 {
-	// TODO: implementation
-
 	bits.get(repeat_indicator, 6, 2);
 	bits.get(mmsi, 8, 30);
+	bits.get(nav_status, 38, 4);
+	bits.get(rot, 42, 8);
+	bits.get(sog, 50, 10);
+	bits.get(position_accuracy, 60, 1);
+	bits.get(longitude_minutes, 61, 28);
+	bits.get(latitude_minutes, 89, 27);
+	bits.get(cog, 116, 12);
+	bits.get(hdg, 128, 9);
+	bits.get(timestamp, 136, 6);
+	bits.get(maneuver_indicator, 143, 2);
+	// spare: 145 - 147
+	bits.get(raim, 148, 1);
+	bits.get(radio_status, 149, 19);
+}
+
+double message_01::get_longitude() const { return (0.0001 * longitude_minutes) / 60.0; }
+double message_01::get_latitude() const { return (0.0001 * latitude_minutes) / 60.0; }
+
+raw message_01::get_data() const
+{
+	raw bits;
+
+	// TODO: implementation
+
+	return bits;
 }
 
 }

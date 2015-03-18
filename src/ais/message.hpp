@@ -69,10 +69,21 @@ public:
 
 protected:
 	message(message_id type);
+	virtual raw get_data() const = 0;
 
 private:
 	message_id message_type;
 };
+
+template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message>& s)
+{
+	if (!s)
+		return nullptr;
+	if (s->type() != T::ID)
+		return nullptr;
+
+	return std::unique_ptr<T>{static_cast<T*>(s.release())};
+}
 
 }
 

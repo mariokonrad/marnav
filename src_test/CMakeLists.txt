@@ -17,6 +17,7 @@ add_executable(testrunner
 	nmea/Test_vdm.cpp
 	nmea/Test_vdo.cpp
 	ais/Test_ais.cpp
+	ais/Test_message_01.cpp
 	)
 
 target_link_libraries(testrunner

@@ -429,14 +429,15 @@ public:
 	/// bitset to be read as well as the provided data type to contain the desired
 	/// number of bits.
 	///
-	/// @param[out] v The container to hold the data.
 	/// @param[in] ofs The offset in bits at which position the data is to be read.
 	/// @param[in] bits Number of bits to be read. This must not exceeed the number of
 	///            bits the specified data type can hold.
 	///            If the number of bits is smaller than what the specified data can
 	///            hold, only the least significant bits are being set.
+	/// @return The data read from the bitset.
 	template <class T>
-	void get(T& v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
+	typename std::enable_if<std::is_integral<T>::value, T>::type
+	get(size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
 	{
 		if (bits <= 0)
 			throw exception{};
@@ -445,7 +446,7 @@ public:
 		if (ofs + bits > pos)
 			throw exception{};
 
-		v = T(); // clear result
+		T value = 0;
 
 		// number of bits unused within the current block
 		size_type u_bits = BITS_PER_BLOCK - (ofs % BITS_PER_BLOCK);
@@ -460,30 +461,38 @@ public:
 			} else {
 				bits -= u_bits;
 			}
-			v = +block;
+			value = +block;
 			ofs += u_bits;
 		}
 
 		for (; bits >= BITS_PER_BLOCK; bits -= BITS_PER_BLOCK) {
 			get_block(block, ofs);
-			v <<= BITS_PER_BLOCK;
-			v += block;
+			value <<= BITS_PER_BLOCK;
+			value += block;
 			ofs += BITS_PER_BLOCK;
 		}
 
 		if (bits > 0) {
 			get_block(block, ofs, bits);
-			v <<= bits;
-			v += block;
+			value <<= bits;
+			value += block;
 		}
+
+		return value;
 	}
 
 	template <class T>
-	T get(size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
+	typename std::enable_if<std::is_enum<T>::value, T>::type
+	get(size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
 	{
-		T t;
-		get(t, ofs, bits);
-		return t;
+		return static_cast<T>(get<typename std::underlying_type<T>::type>(ofs, bits));
+	}
+
+	template <class T>
+	void get(T& value, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const
+		throw(exception)
+	{
+		value = get<T>(ofs, bits);
 	}
 };
 
