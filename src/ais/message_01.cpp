@@ -1,13 +1,16 @@
 #include "message_01.hpp"
 #include <utils/unique.hpp>
-#include <cstdio>
-#include <cmath>
 
 namespace ais
 {
 
 message_01::message_01()
-	: message(ID)
+	: message_01(ID)
+{
+}
+
+message_01::message_01(message_id id)
+	: message(id)
 	, repeat_indicator(0)
 	, mmsi(0)
 	, nav_status(navigation_status::not_defined)

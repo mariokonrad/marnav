@@ -139,6 +139,8 @@ add_library(ais
 	ais/ais.cpp
 	ais/message.cpp
 	ais/message_01.cpp
+	ais/message_02.cpp
+	ais/message_03.cpp
 	utils/unique.hpp
 	utils/bitset.hpp
 	)
@@ -159,6 +161,8 @@ install(
 		ais/ais.hpp
 		ais/message.hpp
 		ais/message_01.hpp
+		ais/message_02.hpp
+		ais/message_03.hpp
 		utils/unique.hpp
 		utils/bitset.hpp
 	DESTINATION include/ais

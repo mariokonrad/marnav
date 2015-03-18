@@ -27,6 +27,7 @@ public:
 	static std::unique_ptr<message> parse(const raw& bits) throw(std::invalid_argument);
 
 protected:
+	message_01(message_id id);
 	void read_data(const raw& bits);
 
 private:

@@ -1,5 +1,7 @@
 #include "ais.hpp"
 #include "message_01.hpp"
+#include "message_02.hpp"
+#include "message_03.hpp"
 #include <algorithm>
 
 namespace ais
@@ -52,6 +54,8 @@ static message::parse_function instantiate_message(message_id type) throw(std::i
 	using entry = std::pair<message_id, message::parse_function>;
 	static const std::vector<entry> known_messages = {
 		{message_id::position_report_class_a, message_01::parse},
+		{message_id::position_report_class_a_assigned_schedule, message_02::parse},
+		{message_id::position_report_class_a_response_to_interrogation, message_03::parse},
 	};
 
 	auto const& i = std::find_if(begin(known_messages), end(known_messages),
