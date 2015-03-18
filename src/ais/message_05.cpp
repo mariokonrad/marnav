@@ -125,4 +125,31 @@ raw message_05::get_data() const
 
 	return bits;
 }
+
+void message_05::set_callsign(const std::string& t)
+{
+	if (t.size() > 7) {
+		callsign = t.substr(0, 7);
+	} else {
+		callsign = t;
+	}
+}
+
+void message_05::set_shipname(const std::string& t)
+{
+	if (t.size() > 20) {
+		shipname = t.substr(0, 20);
+	} else {
+		shipname = t;
+	}
+}
+
+void message_05::set_destination(const std::string& t)
+{
+	if (t.size() > 20) {
+		destination = t.substr(0, 20);
+	} else {
+		destination = t;
+	}
+}
 }

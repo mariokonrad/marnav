@@ -49,9 +49,9 @@ TEST_F(Test_message_05, encode_default_values)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(2u, v.size());
-	EXPECT_STREQ("500000000000000000000000000000000000000000000000000", v[0].first.c_str());
+	EXPECT_STREQ("50000000000000000000000000000000000000000000000Hh0000000", v[0].first.c_str());
 	EXPECT_EQ(0, v[0].second);
-	EXPECT_STREQ("00000000000000000000", v[1].first.c_str());
+	EXPECT_STREQ("000000000000008", v[1].first.c_str());
 	EXPECT_EQ(2, v[1].second);
 }
 

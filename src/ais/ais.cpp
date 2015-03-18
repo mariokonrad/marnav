@@ -97,7 +97,7 @@ encode_message(const message& msg) throw(std::invalid_argument)
 			current.first += encode_armoring(value);
 
 			// append to string, only 51 characters per string (happens to be NMEA restriction)
-			if (current.first.size() == 51) {
+			if (current.first.size() == 56) {
 				result.push_back(current);
 				current.first.clear();
 				current.second = 0;

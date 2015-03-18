@@ -32,11 +32,11 @@ protected:
 	void read_data(const raw& bits);
 
 private:
-	unsigned int repeat_indicator;
+	uint32_t repeat_indicator;
 	uint32_t mmsi;
 	navigation_status nav_status;
 	int8_t rot; // rate of turn, raw format
-	unsigned int sog; // speed over ground, in 0.1 knots
+	uint32_t sog; // speed over ground, in 0.1 knots
 	bool position_accuracy;
 	uint32_t longitude_minutes; // in 10000 minutes
 	uint32_t latitude_minutes; // in 10000 minutes
@@ -48,10 +48,10 @@ private:
 	uint32_t radio_status;
 
 public:
-	unsigned int get_repeat_indicator() const { return repeat_indicator; }
+	uint32_t get_repeat_indicator() const { return repeat_indicator; }
 	uint32_t get_mmsi() const { return mmsi; }
 	int8_t get_rot() const { return rot; }
-	unsigned int get_sog() const { return sog; }
+	uint32_t get_sog() const { return sog; }
 	bool get_position_accuracy() const { return position_accuracy; }
 	double get_longitude() const;
 	double get_latitude() const;
@@ -61,6 +61,21 @@ public:
 	uint32_t get_maneuver_indicator() const { return maneuver_indicator; }
 	bool get_raim() const { return raim; }
 	uint32_t get_radio_status() const { return radio_status; }
+
+	void set_repeat_indicator(uint32_t t) { repeat_indicator = t; }
+	void set_mmsi(uint32_t t) { mmsi = t; }
+	void set_nav_status(navigation_status t) { nav_status = t; }
+	void set_rot(int8_t t) { rot = t; }
+	void set_sog(uint32_t t) { sog = t; }
+	void set_position_accuracy(bool t) { position_accuracy = t; }
+	void set_longitude_minutes(uint32_t t) { longitude_minutes = t; }
+	void set_latitude_minutes(uint32_t t) { latitude_minutes = t; }
+	void set_cog(uint32_t t) { cog = t; }
+	void set_hdg(uint32_t t) { hdg = t; }
+	void set_timestamp(uint32_t t) { timestamp = t; }
+	void set_maneuver_indicator(uint32_t t) { maneuver_indicator = t; }
+	void set_raim(bool t) { raim = t; }
+	void set_radio_status(uint32_t t) { radio_status = t; }
 };
 
 }

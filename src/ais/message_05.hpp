@@ -73,6 +73,26 @@ public:
 	uint32_t get_draught() const { return draught; }
 	std::string get_destination() const { return destination; }
 	bool get_dte() const { return dte; }
+
+	void set_repeat_indicator(unsigned int t) { repeat_indicator = t; }
+	void set_mmsi(uint32_t t) { mmsi = t; }
+	void set_ais_version(uint32_t t) { ais_version = t; }
+	void set_imo_number(uint32_t t) { imo_number = t; }
+	void set_callsign(const std::string& t);
+	void set_shipname(const std::string& t);
+	void set_shiptype(ship_type t) { shiptype = t; }
+	void set_to_bow(uint32_t t) { to_bow = t; }
+	void set_to_stern(uint32_t t) { to_stern = t; }
+	void set_to_port(uint32_t t) { to_port = t; }
+	void set_to_starboard(uint32_t t) { to_starboard = t; }
+	void set_epfd_fix(epfd_fix_type t) { epfd_fix = t; }
+	void set_eta_month(uint32_t t) { eta_month = t; }
+	void set_eta_day(uint32_t t) { eta_day = t; }
+	void set_eta_hour(uint32_t t) { eta_hour = t; }
+	void set_eta_minute(uint32_t t) { eta_minute = t; }
+	void set_draught(uint32_t t) { draught = t; }
+	void set_destination(const std::string& t);
+	void set_dte(bool t) { dte = t; }
 };
 }
 
