@@ -33,6 +33,18 @@ if(DOXYGEN_FOUND)
 		)
 endif()
 
+### cppcheck
+find_program(CPPCHECK_PATH cppcheck)
+if(CPPCHECK_PATH)
+	message(STATUS "cppcheck found")
+	add_custom_target(cppcheck
+		COMMAND ${CPPCHECK_PATH} --std=c++11 --platform=unix32 -v -f --enable=all -I ${CMAKE_CURRENT_SOURCE_DIR}/src_extern/lua-5.2.1/include/lua -I ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/src 2> ${CMAKE_CURRENT_BINARY_DIR}/doc/cppcheck.txt
+		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+	)
+else()
+	message(STATUS "cppcheck not found, target not available.")
+endif()
+
 ### unit tests
 add_custom_target(unittest)
 macro(run_unittest unittest_target)
