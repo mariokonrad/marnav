@@ -39,12 +39,27 @@ TEST_F(Test_nmea_aam, empty_to_string)
 	EXPECT_STREQ("$GPAAM,,,,,*76", nmea::to_string(aam).c_str());
 }
 
-TEST_F(Test_nmea_aam, set_arrival_circle_radius_to_string)
+TEST_F(Test_nmea_aam, set_arrival_circle_radius)
 {
 	nmea::aam aam;
 	aam.set_arrival_circle_radius(1.2);
 
 	EXPECT_STREQ("$GPAAM,,,1.2,N,*15", nmea::to_string(aam).c_str());
+}
+
+TEST_F(Test_nmea_aam, set_waypoint_id)
+{
+	nmea::aam aam;
+	aam.set_waypoint_id("wpt1");
+
+	EXPECT_STREQ("$GPAAM,,,,,wpt1*34", nmea::to_string(aam).c_str());
+}
+
+TEST_F(Test_nmea_aam, set_waypoint_id_string_to_large)
+{
+	nmea::aam aam;
+
+	EXPECT_ANY_THROW(aam.set_waypoint_id("123456789"));
 }
 
 }

@@ -43,7 +43,15 @@ TEST_F(Test_nmea_mwv, empty_to_string)
 	EXPECT_STREQ("$IIMWV,,,,,*60", nmea::to_string(mwv).c_str());
 }
 
-TEST_F(Test_nmea_mwv, set_temperature_to_string)
+TEST_F(Test_nmea_mwv, set_angle)
+{
+	nmea::mwv mwv;
+	mwv.set_angle(12.5, nmea::side::RIGHT);
+
+	EXPECT_STREQ("$IIMWV,12.5,R,,,*2A", nmea::to_string(mwv).c_str());
+}
+
+TEST_F(Test_nmea_mwv, set_speed)
 {
 	nmea::mwv mwv;
 	mwv.set_speed(22.5, nmea::unit::KNOT);

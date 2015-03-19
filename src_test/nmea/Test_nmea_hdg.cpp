@@ -39,12 +39,36 @@ TEST_F(Test_nmea_hdg, empty_to_string)
 	EXPECT_STREQ("$HCHDG,,,,,*6C", nmea::to_string(hdg).c_str());
 }
 
-TEST_F(Test_nmea_hdg, set_temperature_to_string)
+TEST_F(Test_nmea_hdg, set_heading)
 {
 	nmea::hdg hdg;
 	hdg.set_heading(45.8);
 
 	EXPECT_STREQ("$HCHDG,45.8,,,,*7B", nmea::to_string(hdg).c_str());
+}
+
+TEST_F(Test_nmea_hdg, set_magn_dev)
+{
+	nmea::hdg hdg;
+	hdg.set_magn_dev(5.8, nmea::direction::WEST);
+
+	EXPECT_STREQ("$HCHDG,,5.8,W,,*18", nmea::to_string(hdg).c_str());
+}
+
+TEST_F(Test_nmea_hdg, set_magn_var)
+{
+	nmea::hdg hdg;
+	hdg.set_magn_var(5.8, nmea::direction::WEST);
+
+	EXPECT_STREQ("$HCHDG,,,,5.8,W*18", nmea::to_string(hdg).c_str());
+}
+
+TEST_F(Test_nmea_hdg, set_magn_dev_wrong_hemisphere)
+{
+	nmea::hdg hdg;
+
+	EXPECT_ANY_THROW(hdg.set_magn_dev(5.8, nmea::direction::NORTH));
+	EXPECT_ANY_THROW(hdg.set_magn_dev(5.8, nmea::direction::SOUTH));
 }
 
 }
