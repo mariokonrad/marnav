@@ -21,6 +21,18 @@ endif()
 include_directories(src)
 add_subdirectory(src)
 
+### documentation
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+	configure_file(
+		${CMAKE_CURRENT_SOURCE_DIR}/doxygen.conf.in
+		${CMAKE_CURRENT_BINARY_DIR}/doxygen.conf
+		)
+	add_custom_target(doc
+		COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/doxygen.conf
+		)
+endif()
+
 ### unit tests
 add_custom_target(unittest)
 macro(run_unittest unittest_target)
