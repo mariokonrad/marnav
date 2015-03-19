@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.12)
 project(nmea)
 
 set(VERSION_MAJOR "0")
@@ -10,10 +10,11 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(ExternalProject)
 include(ExternGmock)
 include(GitInformation)
+include(CodeCoverage)
 
-if(CMAKE_COMPILER_IS_GNUCC)
+if(CMAKE_COMPILER_IS_GNUCXX)
 	set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS}         -std=c++11 -Wall -Wextra -O0 -ggdb")
-	set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG}   -std=c++11 -Wall -Wextra -O0 -ggdb")
+	set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG}   -std=c++11 -Wall -Wextra -O0 -ggdb -fprofile-arcs -ftest-coverage")
 	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -std=c++11 -Wall -Wextra -O3 -ggdb")
 endif()
 
@@ -57,4 +58,10 @@ macro(run_unittest unittest_target)
 endmacro()
 
 add_subdirectory(src_test)
+
+### coverage
+setup_target_for_coverage(coverage
+	testrunner
+	coverage
+	)
 
