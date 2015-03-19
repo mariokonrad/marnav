@@ -5,21 +5,21 @@
 namespace
 {
 
-class Test_aam : public ::testing::Test
+class Test_nmea_aam : public ::testing::Test
 {
 };
 
-TEST_F(Test_aam, contruction)
+TEST_F(Test_nmea_aam, contruction)
 {
 	nmea::aam aam;
 }
 
-TEST_F(Test_aam, size)
+TEST_F(Test_nmea_aam, size)
 {
 	EXPECT_EQ(64u, sizeof(nmea::aam));
 }
 
-TEST_F(Test_aam, parse)
+TEST_F(Test_nmea_aam, parse)
 {
 	auto s = nmea::make_sentence("$GPAAM,A,A,0.5,N,POINT1*6E");
 	ASSERT_NE(nullptr, s);
@@ -32,14 +32,14 @@ TEST_F(Test_aam, parse)
 	EXPECT_EQ(0.5, radius.value());
 }
 
-TEST_F(Test_aam, empty_to_string)
+TEST_F(Test_nmea_aam, empty_to_string)
 {
 	nmea::aam aam;
 
 	EXPECT_STREQ("$GPAAM,,,,,*76", nmea::to_string(aam).c_str());
 }
 
-TEST_F(Test_aam, set_arrival_circle_radius_to_string)
+TEST_F(Test_nmea_aam, set_arrival_circle_radius_to_string)
 {
 	nmea::aam aam;
 	aam.set_arrival_circle_radius(1.2);

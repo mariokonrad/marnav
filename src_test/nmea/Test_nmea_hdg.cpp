@@ -5,21 +5,21 @@
 namespace
 {
 
-class Test_hdg : public ::testing::Test
+class Test_nmea_hdg : public ::testing::Test
 {
 };
 
-TEST_F(Test_hdg, contruction)
+TEST_F(Test_nmea_hdg, contruction)
 {
 	nmea::hdg hdg;
 }
 
-TEST_F(Test_hdg, size)
+TEST_F(Test_nmea_hdg, size)
 {
 	EXPECT_EQ(88u, sizeof(nmea::hdg));
 }
 
-TEST_F(Test_hdg, parse)
+TEST_F(Test_nmea_hdg, parse)
 {
 	auto s = nmea::make_sentence("$HCHDG,45.8,,,0.6,E*16");
 	ASSERT_NE(nullptr, s);
@@ -32,14 +32,14 @@ TEST_F(Test_hdg, parse)
 	EXPECT_EQ(45.8, heading.value());
 }
 
-TEST_F(Test_hdg, empty_to_string)
+TEST_F(Test_nmea_hdg, empty_to_string)
 {
 	nmea::hdg hdg;
 
 	EXPECT_STREQ("$HCHDG,,,,,*6C", nmea::to_string(hdg).c_str());
 }
 
-TEST_F(Test_hdg, set_temperature_to_string)
+TEST_F(Test_nmea_hdg, set_temperature_to_string)
 {
 	nmea::hdg hdg;
 	hdg.set_heading(45.8);

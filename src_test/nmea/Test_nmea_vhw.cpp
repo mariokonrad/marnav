@@ -5,21 +5,21 @@
 namespace
 {
 
-class Test_vhw : public ::testing::Test
+class Test_nmea_vhw : public ::testing::Test
 {
 };
 
-TEST_F(Test_vhw, contruction)
+TEST_F(Test_nmea_vhw, contruction)
 {
 	nmea::vhw vhw;
 }
 
-TEST_F(Test_vhw, size)
+TEST_F(Test_nmea_vhw, size)
 {
 	EXPECT_EQ(96u, sizeof(nmea::vhw));
 }
 
-TEST_F(Test_vhw, parse)
+TEST_F(Test_nmea_vhw, parse)
 {
 	auto s = nmea::make_sentence("$IIVHW,,T,211.0,M,0.00,N,0.00,K*79");
 	ASSERT_NE(nullptr, s);
@@ -32,14 +32,14 @@ TEST_F(Test_vhw, parse)
 	EXPECT_EQ(211.0, heading.value());
 }
 
-TEST_F(Test_vhw, empty_to_string)
+TEST_F(Test_nmea_vhw, empty_to_string)
 {
 	nmea::vhw vhw;
 
 	EXPECT_STREQ("$IIVHW,,T,,,,,,*1D", nmea::to_string(vhw).c_str());
 }
 
-TEST_F(Test_vhw, set_temperature_to_string)
+TEST_F(Test_nmea_vhw, set_temperature_to_string)
 {
 	nmea::vhw vhw;
 	vhw.set_heading(45.8);

@@ -5,21 +5,21 @@
 namespace
 {
 
-class Test_vdm : public ::testing::Test
+class Test_nmea_vdm : public ::testing::Test
 {
 };
 
-TEST_F(Test_vdm, contruction)
+TEST_F(Test_nmea_vdm, contruction)
 {
 	nmea::vdm vdm;
 }
 
-TEST_F(Test_vdm, size)
+TEST_F(Test_nmea_vdm, size)
 {
 	EXPECT_EQ(56u, sizeof(nmea::vdm));
 }
 
-TEST_F(Test_vdm, parse_1)
+TEST_F(Test_nmea_vdm, parse_1)
 {
 	auto s = nmea::make_sentence("!AIVDM,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5C");
 	ASSERT_NE(nullptr, s);
@@ -37,7 +37,7 @@ TEST_F(Test_vdm, parse_1)
 	EXPECT_STREQ("177KQJ5000G?tO`K>RA1wUbN0TKH", payload.c_str());
 }
 
-TEST_F(Test_vdm, parse_2)
+TEST_F(Test_nmea_vdm, parse_2)
 {
 	auto s0 = nmea::make_sentence("!AIVDM,2,1,3,B,55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53,0*3E");
 	ASSERT_NE(nullptr, s0);
@@ -52,14 +52,14 @@ TEST_F(Test_vdm, parse_2)
 	ASSERT_NE(nullptr, vdm1);
 }
 
-TEST_F(Test_vdm, empty_to_string)
+TEST_F(Test_nmea_vdm, empty_to_string)
 {
 	nmea::vdm vdm;
 
 	EXPECT_STREQ("!AIVDM,0,0,,B,,0*25", nmea::to_string(vdm).c_str());
 }
 
-TEST_F(Test_vdm, collect_payload)
+TEST_F(Test_nmea_vdm, collect_payload)
 {
 	std::vector<std::unique_ptr<nmea::sentence>> v;
 

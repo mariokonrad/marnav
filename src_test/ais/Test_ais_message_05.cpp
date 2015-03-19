@@ -5,11 +5,11 @@
 namespace
 {
 
-class Test_message_05 : public ::testing::Test
+class Test_ais_message_05 : public ::testing::Test
 {
 };
 
-TEST_F(Test_message_05, parse)
+TEST_F(Test_ais_message_05, parse)
 {
 	std::vector<std::pair<std::string, int>> v;
 	v.push_back(std::make_pair("55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53", 0));
@@ -42,7 +42,7 @@ TEST_F(Test_message_05, parse)
 	EXPECT_FALSE(m->get_dte());
 }
 
-TEST_F(Test_message_05, encode_default_values)
+TEST_F(Test_ais_message_05, encode_default_values)
 {
 	ais::message_05 m;
 

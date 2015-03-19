@@ -5,21 +5,21 @@
 namespace
 {
 
-class Test_vdo : public ::testing::Test
+class Test_nmea_vdo : public ::testing::Test
 {
 };
 
-TEST_F(Test_vdo, contruction)
+TEST_F(Test_nmea_vdo, contruction)
 {
 	nmea::vdo vdo;
 }
 
-TEST_F(Test_vdo, size)
+TEST_F(Test_nmea_vdo, size)
 {
 	EXPECT_EQ(56u, sizeof(nmea::vdo));
 }
 
-TEST_F(Test_vdo, parse)
+TEST_F(Test_nmea_vdo, parse)
 {
 	auto s = nmea::make_sentence("!AIVDO,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5E");
 	ASSERT_NE(nullptr, s);

@@ -5,21 +5,21 @@
 namespace
 {
 
-class Test_mwv : public ::testing::Test
+class Test_nmea_mwv : public ::testing::Test
 {
 };
 
-TEST_F(Test_mwv, contruction)
+TEST_F(Test_nmea_mwv, contruction)
 {
 	nmea::mwv mwv;
 }
 
-TEST_F(Test_mwv, size)
+TEST_F(Test_nmea_mwv, size)
 {
 	EXPECT_EQ(72u, sizeof(nmea::mwv));
 }
 
-TEST_F(Test_mwv, parse)
+TEST_F(Test_nmea_mwv, parse)
 {
 	auto s = nmea::make_sentence("$IIMWV,084.0,R,10.4,N,A*04");
 	ASSERT_NE(nullptr, s);
@@ -36,14 +36,14 @@ TEST_F(Test_mwv, parse)
 	EXPECT_EQ(10.4, speed.value());
 }
 
-TEST_F(Test_mwv, empty_to_string)
+TEST_F(Test_nmea_mwv, empty_to_string)
 {
 	nmea::mwv mwv;
 
 	EXPECT_STREQ("$IIMWV,,,,,*60", nmea::to_string(mwv).c_str());
 }
 
-TEST_F(Test_mwv, set_temperature_to_string)
+TEST_F(Test_nmea_mwv, set_temperature_to_string)
 {
 	nmea::mwv mwv;
 	mwv.set_speed(22.5, nmea::unit::KNOT);

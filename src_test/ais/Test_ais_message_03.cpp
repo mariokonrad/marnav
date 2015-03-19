@@ -1,23 +1,23 @@
 #include <gtest/gtest.h>
-#include <ais/message_02.hpp>
+#include <ais/message_03.hpp>
 #include <ais/ais.hpp>
 
 namespace
 {
 
-class Test_message_02 : public ::testing::Test
+class Test_ais_message_03 : public ::testing::Test
 {
 };
 
-TEST_F(Test_message_02, parse)
+TEST_F(Test_ais_message_03, parse)
 {
 	std::vector<std::pair<std::string, int>> v;
-	v.push_back(std::make_pair("233m@ogP00PD;88MD5MTDww@2D7k", 0));
+	v.push_back(std::make_pair("333m@ogP00PD;88MD5MTDww@2D7k", 0));
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
 
-	auto m = ais::message_cast<ais::message_02>(result);
+	auto m = ais::message_cast<ais::message_03>(result);
 	ASSERT_TRUE(m != nullptr);
 
 	EXPECT_EQ(0u, m->get_repeat_indicator());
@@ -35,14 +35,14 @@ TEST_F(Test_message_02, parse)
 	EXPECT_EQ(82419u, m->get_radio_status());
 }
 
-TEST_F(Test_message_02, encode_default_values)
+TEST_F(Test_ais_message_03, encode_default_values)
 {
-	ais::message_02 m;
+	ais::message_03 m;
 
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ("200000?P061P3Cj40Y@@4?wh0000", v[0].first.c_str());
+	EXPECT_STREQ("300000?P061P3Cj40Y@@4?wh0000", v[0].first.c_str());
 	EXPECT_EQ(0, v[0].second);
 }
 

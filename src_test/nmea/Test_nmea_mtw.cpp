@@ -5,21 +5,21 @@
 namespace
 {
 
-class Test_mtw : public ::testing::Test
+class Test_nmea_mtw : public ::testing::Test
 {
 };
 
-TEST_F(Test_mtw, contruction)
+TEST_F(Test_nmea_mtw, contruction)
 {
 	nmea::mtw mtw;
 }
 
-TEST_F(Test_mtw, size)
+TEST_F(Test_nmea_mtw, size)
 {
 	EXPECT_EQ(48u, sizeof(nmea::mtw));
 }
 
-TEST_F(Test_mtw, parse)
+TEST_F(Test_nmea_mtw, parse)
 {
 	auto s = nmea::make_sentence("$IIMTW,9.5,C*2F");
 	ASSERT_NE(nullptr, s);
@@ -36,14 +36,14 @@ TEST_F(Test_mtw, parse)
 	EXPECT_EQ(nmea::unit::CELSIUS, unit.value());
 }
 
-TEST_F(Test_mtw, empty_to_string)
+TEST_F(Test_nmea_mtw, empty_to_string)
 {
 	nmea::mtw mtw;
 
 	EXPECT_STREQ("$IIMTW,,*4E", nmea::to_string(mtw).c_str());
 }
 
-TEST_F(Test_mtw, set_temperature_to_string)
+TEST_F(Test_nmea_mtw, set_temperature_to_string)
 {
 	nmea::mtw mtw;
 	mtw.set_temperature(22.5);

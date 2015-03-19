@@ -5,11 +5,11 @@
 namespace
 {
 
-class Test_message_01 : public ::testing::Test
+class Test_ais_message_01 : public ::testing::Test
 {
 };
 
-TEST_F(Test_message_01, parse)
+TEST_F(Test_ais_message_01, parse)
 {
 	std::vector<std::pair<std::string, int>> v;
 	v.push_back(std::make_pair("133m@ogP00PD;88MD5MTDww@2D7k", 0));
@@ -35,7 +35,7 @@ TEST_F(Test_message_01, parse)
 	EXPECT_EQ(82419u, m->get_radio_status());
 }
 
-TEST_F(Test_message_01, encode_default_values)
+TEST_F(Test_ais_message_01, encode_default_values)
 {
 	ais::message_01 m;
 
