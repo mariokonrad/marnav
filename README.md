@@ -124,6 +124,27 @@ to build this library.
 
 Other compilers may work, however untested.
 
+BUILD
+-----
+
+For normal, debug and release builds use the standard cmake CMAKE_BUILD_TYPE variable.
+For example a debug build:
+
+Debug build:
+
+	mkdir build
+	cd build
+	cmake -DCMAKE_BUILD_TYPE=Debug ..
+	make
+
+If you like to perform code coverage using the unit tests, do:
+
+	mkdir build
+	cd build
+	cmake -DCMAKE_BUILD_TYPE=Coverage ..
+	make
+	make coverage
+
 LICENSE
 -------
 
