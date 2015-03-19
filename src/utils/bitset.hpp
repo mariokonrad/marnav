@@ -463,7 +463,7 @@ public:
 		// number of bits unused within the current block
 		size_type u_bits = BITS_PER_BLOCK - (ofs % BITS_PER_BLOCK);
 
-		block_type block;
+		block_type block{};
 
 		if (u_bits > 0) {
 			get_block(block, ofs, u_bits);

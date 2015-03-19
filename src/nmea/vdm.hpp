@@ -52,6 +52,10 @@ public:
 		payload = data;
 		n_fill_bits = fill_bits;
 	}
+	void set_payload(const std::pair<std::string, int>& data)
+	{
+		set_payload(data.first, data.second);
+	}
 };
 
 template <class InputIt>
