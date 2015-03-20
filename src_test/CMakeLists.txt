@@ -6,6 +6,7 @@ include_directories(
 	)
 
 add_executable(testrunner
+	geo/Test_geo_angle.cpp
 	nmea/Test_nmea.cpp
 	nmea/Test_nmea_sentence.cpp
 	nmea/Test_nmea_aam.cpp
