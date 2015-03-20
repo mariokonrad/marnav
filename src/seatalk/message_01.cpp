@@ -1,0 +1,35 @@
+#include "message_01.hpp"
+
+namespace seatalk
+{
+
+message_01::message_01()
+	: message(ID)
+	, equipment_id{0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
+{
+}
+
+std::unique_ptr<message> message_01::parse(const raw& data) throw(std::invalid_argument)
+{
+	if (data.size() != 8)
+		throw std::invalid_argument{"invalid number of bytes in message_01::parse"};
+	if (data[1] != 0x05)
+		throw std::invalid_argument{"invalid size specified in message"};
+
+	std::unique_ptr<message> result = utils::make_unique<message_01>();
+	message_01& msg = static_cast<message_01&>(*result);
+
+	for (auto i = 0; i < 6; ++i) {
+		msg.equipment_id[i] = data[i + 2];
+	}
+
+	return result;
+}
+
+raw message_01::get_data() const
+{
+	return raw{static_cast<uint8_t>(ID), 0x05,			  equipment_id[0], equipment_id[1],
+			   equipment_id[2],			 equipment_id[3], equipment_id[4], equipment_id[5]};
+}
+
+}

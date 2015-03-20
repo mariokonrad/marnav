@@ -30,7 +30,9 @@ add_executable(testrunner
 	ais/Test_ais_message_02.cpp
 	ais/Test_ais_message_03.cpp
 	ais/Test_ais_message_05.cpp
+	seatalk/Test_seatalk_message.cpp
 	seatalk/Test_seatalk_message_00.cpp
+	seatalk/Test_seatalk_message_01.cpp
 	)
 
 target_link_libraries(testrunner
