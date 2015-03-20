@@ -2,6 +2,7 @@
 #define __AIS__MESSAGE_01__HPP__
 
 #include "message.hpp"
+#include <geo/angle.hpp>
 
 namespace ais
 {
@@ -53,8 +54,8 @@ public:
 	int8_t get_rot() const { return rot; }
 	uint32_t get_sog() const { return sog; }
 	bool get_position_accuracy() const { return position_accuracy; }
-	double get_longitude() const;
-	double get_latitude() const;
+	uint32_t get_longitude_minutes() const;
+	uint32_t get_latitude_minutes() const;
 	uint32_t get_cog() const { return cog; }
 	uint32_t get_hdg() const { return hdg; }
 	uint32_t get_timestamp() const { return timestamp; }
@@ -76,6 +77,11 @@ public:
 	void set_maneuver_indicator(uint32_t t) { maneuver_indicator = t; }
 	void set_raim(bool t) { raim = t; }
 	void set_radio_status(uint32_t t) { radio_status = t; }
+
+	geo::longitude get_longitude() const;
+	geo::latitude get_latitude() const;
+	void set_longitude(const geo::longitude& t);
+	void set_latitude(const geo::latitude& t);
 };
 
 }

@@ -1,5 +1,6 @@
 #include "message_01.hpp"
 #include <utils/unique.hpp>
+#include <cmath>
 
 namespace ais
 {
@@ -60,8 +61,25 @@ void message_01::read_data(const raw& bits)
 	bits.get(radio_status, 149, 19);
 }
 
-double message_01::get_longitude() const { return (0.0001 * longitude_minutes) / 60.0; }
-double message_01::get_latitude() const { return (0.0001 * latitude_minutes) / 60.0; }
+geo::longitude message_01::get_longitude() const
+{
+	return geo::longitude{(0.0001 * longitude_minutes) / 60.0};
+}
+
+geo::latitude message_01::get_latitude() const
+{
+	return geo::latitude{(0.0001 * latitude_minutes) / 60.0};
+}
+
+void message_01::set_longitude(const geo::longitude& t)
+{
+	longitude_minutes = floor(60000.0 * t);
+}
+
+void message_01::set_latitude(const geo::latitude& t)
+{
+	latitude_minutes = floor(60000.0 * t);
+}
 
 raw message_01::get_data() const
 {
