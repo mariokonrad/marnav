@@ -26,9 +26,9 @@ protected:
 
 private:
 	optional<nmea::time> time;
-	optional<nmea::latitude> lat;
+	optional<geo::latitude> lat;
 	optional<char> lat_hem; // N:north, S:south
-	optional<nmea::longitude> lon;
+	optional<geo::longitude> lon;
 	optional<char> lon_hem; // E:east, W:west
 	optional<uint32_t> quality;
 	optional<uint32_t> n_satellites;
@@ -60,8 +60,8 @@ public:
 	decltype(dgps_ref) get_dgps_ref() const { return dgps_ref; }
 
 	void set_time(const nmea::time& t) { time = t; }
-	void set_lat(const nmea::latitude& t);
-	void set_lon(const nmea::longitude& t);
+	void set_lat(const geo::latitude& t);
+	void set_lon(const geo::longitude& t);
 	void set_quality(uint32_t t) { quality = t; }
 	void set_n_satellites(uint32_t t) { n_satellites = t; }
 	void set_hor_dilution(double t) { hor_dilution = t; }

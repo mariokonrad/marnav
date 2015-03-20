@@ -50,7 +50,7 @@ TEST_F(Test_nmea_rmc, empty_to_string)
 TEST_F(Test_nmea_rmc, set_lat_north)
 {
 	nmea::rmc rmc;
-	rmc.set_lat(nmea::latitude{12, 34, 56, nmea::latitude::hemisphere::NORTH});
+	rmc.set_lat(geo::latitude{12, 34, 56, geo::latitude::hemisphere::NORTH});
 
 	EXPECT_STREQ("$GPRMC,,,1234.9333,N,,,,,,,,*25", nmea::to_string(rmc).c_str());
 }
@@ -58,7 +58,7 @@ TEST_F(Test_nmea_rmc, set_lat_north)
 TEST_F(Test_nmea_rmc, set_lat_south)
 {
 	nmea::rmc rmc;
-	rmc.set_lat(nmea::latitude{12, 34, 56, nmea::latitude::hemisphere::SOUTH});
+	rmc.set_lat(geo::latitude{12, 34, 56, geo::latitude::hemisphere::SOUTH});
 
 	EXPECT_STREQ("$GPRMC,,,1234.9333,S,,,,,,,,*38", nmea::to_string(rmc).c_str());
 }
@@ -66,7 +66,7 @@ TEST_F(Test_nmea_rmc, set_lat_south)
 TEST_F(Test_nmea_rmc, set_lon_east)
 {
 	nmea::rmc rmc;
-	rmc.set_lon(nmea::longitude{123, 45, 67, nmea::longitude::hemisphere::EAST});
+	rmc.set_lon(geo::longitude{123, 45, 67, geo::longitude::hemisphere::EAST});
 
 	EXPECT_STREQ("$GPRMC,,,,,12346.1166,E,,,,,,*12", nmea::to_string(rmc).c_str());
 }
@@ -74,7 +74,7 @@ TEST_F(Test_nmea_rmc, set_lon_east)
 TEST_F(Test_nmea_rmc, set_lon_west)
 {
 	nmea::rmc rmc;
-	rmc.set_lon(nmea::longitude{123, 45, 67, nmea::longitude::hemisphere::WEST});
+	rmc.set_lon(geo::longitude{123, 45, 67, geo::longitude::hemisphere::WEST});
 
 	EXPECT_STREQ("$GPRMC,,,,,12346.1166,W,,,,,,*00", nmea::to_string(rmc).c_str());
 }

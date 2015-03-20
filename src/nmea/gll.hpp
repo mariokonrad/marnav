@@ -25,9 +25,9 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	optional<nmea::latitude> lat;
+	optional<geo::latitude> lat;
 	optional<char> lat_hem;
-	optional<nmea::longitude> lon;
+	optional<geo::longitude> lon;
 	optional<char> lon_hem;
 	optional<nmea::time> time_utc;
 	optional<char> status;
@@ -40,8 +40,8 @@ public:
 	decltype(time_utc) get_time_utc() const { return time_utc; }
 	decltype(status) get_status() const { return status; }
 
-	void set_lat(const nmea::latitude& t);
-	void set_lon(const nmea::longitude& t);
+	void set_lat(const geo::latitude& t);
+	void set_lon(const geo::longitude& t);
 	void set_time_utc(const nmea::time& t) { time_utc = t; }
 	void set_status(char t) { status = t; }
 };

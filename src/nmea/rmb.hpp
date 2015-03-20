@@ -31,9 +31,9 @@ private:
 	optional<char> steer_dir; // direction to steer, left or right
 	optional<std::string> waypoint_to; // TO waypoint ID
 	optional<std::string> waypoint_from; // FROM waypoint ID
-	optional<nmea::latitude> lat; // destination waypoint latitude
+	optional<geo::latitude> lat; // destination waypoint latitude
 	optional<char> lat_hem; // destination waypoint latitude dir, N:north, S:south
-	optional<nmea::longitude> lon; // destination waypoint longitude
+	optional<geo::longitude> lon; // destination waypoint longitude
 	optional<char> lon_hem; // destination waypoint longitude dir, E:east, W:west
 	optional<double> range; // range to destination in nautical miles
 	optional<double> bearing; // bearing to destination in degrees to true
@@ -60,8 +60,8 @@ public:
 	void set_steer_dir(char t) { steer_dir = t; }
 	void set_waypoint_to(const std::string& id);
 	void set_waypoint_from(const std::string& id);
-	void set_lat(const nmea::latitude& t);
-	void set_lon(const nmea::longitude& t);
+	void set_lat(const geo::latitude& t);
+	void set_lon(const geo::longitude& t);
 	void set_range(double t) { range = t; }
 	void set_bearing(double t) { bearing = t; }
 	void set_dst_velocity(double t) { dst_velocity = t; }

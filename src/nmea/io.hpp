@@ -93,20 +93,20 @@ template <class T> static void read(const std::string& s, T& value)
 	std::istringstream{s} >> value;
 }
 
-inline void read(const std::string& s, latitude& value)
+inline void read(const std::string& s, geo::latitude& value)
 {
 	if (s.empty()) {
-		value = latitude{};
+		value = geo::latitude{};
 		return;
 	}
 
 	value = parse_latitude(s);
 }
 
-inline void read(const std::string& s, longitude& value)
+inline void read(const std::string& s, geo::longitude& value)
 {
 	if (s.empty()) {
-		value = longitude{};
+		value = geo::longitude{};
 		return;
 	}
 
@@ -126,24 +126,24 @@ template <class T> static void read(const std::string& s, optional<T>& value)
 	value = tmp;
 }
 
-inline void read(const std::string& s, optional<latitude>& value)
+inline void read(const std::string& s, optional<geo::latitude>& value)
 {
 	if (s.empty()) {
 		value.reset();
 		return;
 	}
-	latitude tmp;
+	geo::latitude tmp;
 	read(s, tmp);
 	value = tmp;
 }
 
-inline void read(const std::string& s, optional<longitude>& value)
+inline void read(const std::string& s, optional<geo::longitude>& value)
 {
 	if (s.empty()) {
 		value.reset();
 		return;
 	}
-	longitude tmp;
+	geo::longitude tmp;
 	read(s, tmp);
 	value = tmp;
 }

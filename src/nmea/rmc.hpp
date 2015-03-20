@@ -28,9 +28,9 @@ protected:
 private:
 	optional<nmea::time> time_utc;
 	optional<char> status;
-	optional<nmea::latitude> lat;
+	optional<geo::latitude> lat;
 	optional<char> lat_hem;
-	optional<nmea::longitude> lon;
+	optional<geo::longitude> lon;
 	optional<char> lon_hem;
 	optional<double> sog;
 	optional<double> heading;
@@ -55,8 +55,8 @@ public:
 
 	void set_time_utc(const time& t) { time_utc = t; }
 	void set_status(char t) { status = t; }
-	void set_lat(const latitude& t);
-	void set_lon(const longitude& t);
+	void set_lat(const geo::latitude& t);
+	void set_lon(const geo::longitude& t);
 	void set_sog(double t) { sog = t; }
 	void set_heading(double t) { heading = t; }
 	void set_date(const nmea::date& t) { date = t; }

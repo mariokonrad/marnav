@@ -6,6 +6,11 @@ add_executable(nmeasum
 	)
 
 add_library(marnav
+	# common
+	utils/unique.hpp
+	utils/bitset.hpp
+	# geo
+	geo/angle.cpp
 	# NMEA-0183
 	nmea/angle.cpp
 	nmea/date.cpp
@@ -40,9 +45,6 @@ add_library(marnav
 	ais/message_02.cpp
 	ais/message_03.cpp
 	ais/message_05.cpp
-	# common
-	utils/unique.hpp
-	utils/bitset.hpp
 	)
 
 # TODO: NMEA sentences (obsolete already exluded)
@@ -97,11 +99,7 @@ add_library(marnav
 # ZDA - Time & Date - UTC, day, month, year and local time zone
 # ZFO - UTC & Time from origin Waypoint
 # ZTG - UTC & Time to Destination Waypoint
-# AIVDM/AIVDO
 # vendor extensions
-
-# TODO: AIS message types
-# type 5
 
 set_target_properties(marnav
 	PROPERTIES VERSION 0.0.1
@@ -117,6 +115,7 @@ install(
 install(
 	FILES
 		nmea/angle.hpp
+		nmea/io.hpp
 		nmea/date.hpp
 		nmea/time.hpp
 		nmea/optional.hpp
@@ -157,5 +156,11 @@ install(
 		utils/unique.hpp
 		utils/bitset.hpp
 	DESTINATION include/marnav/utils
+	)
+
+install(
+	FILES
+		geo/angle.hpp
+	DESTINATION include/marnav/geo
 	)
 

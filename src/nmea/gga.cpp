@@ -10,27 +10,27 @@ gga::gga()
 {
 }
 
-void gga::set_lat(const latitude& t)
+void gga::set_lat(const geo::latitude& t)
 {
 	lat = t;
 	switch (t.hem()) {
-		case latitude::hemisphere::NORTH:
+		case geo::latitude::hemisphere::NORTH:
 			lat_hem = direction::NORTH;
 			break;
-		case latitude::hemisphere::SOUTH:
+		case geo::latitude::hemisphere::SOUTH:
 			lat_hem = direction::SOUTH;
 			break;
 	}
 }
 
-void gga::set_lon(const longitude& t)
+void gga::set_lon(const geo::longitude& t)
 {
 	lon = t;
 	switch (t.hem()) {
-		case longitude::hemisphere::EAST:
+		case geo::longitude::hemisphere::EAST:
 			lon_hem = direction::EAST;
 			break;
-		case longitude::hemisphere::WEST:
+		case geo::longitude::hemisphere::WEST:
 			lon_hem = direction::WEST;
 			break;
 	}
