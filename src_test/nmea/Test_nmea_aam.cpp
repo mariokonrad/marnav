@@ -34,10 +34,8 @@ TEST_F(Test_nmea_aam, parse)
 
 TEST_F(Test_nmea_aam, parse_invalid_number_of_arguments)
 {
-	std::vector<std::string> args_less{4, "@"};
-	std::vector<std::string> args_more{6, "@"};
-	EXPECT_ANY_THROW(nmea::aam::parse("@@", args_less));
-	EXPECT_ANY_THROW(nmea::aam::parse("@@", args_more));
+	EXPECT_ANY_THROW(nmea::aam::parse("@@", {4, "@"}));
+	EXPECT_ANY_THROW(nmea::aam::parse("@@", {6, "@"}));
 }
 
 TEST_F(Test_nmea_aam, empty_to_string)

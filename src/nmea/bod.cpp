@@ -63,9 +63,7 @@ bod::parse(const std::string& talker,
 
 std::vector<std::string> bod::get_data() const
 {
-	return {
-		to_string(bearing_true), to_string(type_true),   to_string(bearing_magn),
-		to_string(type_magn),	to_string(waypoint_to), to_string(waypoint_from),
-	};
+	return {to_string(bearing_true), to_string(type_true),   to_string(bearing_magn),
+			to_string(type_magn),	to_string(waypoint_to), to_string(waypoint_from)};
 }
 }

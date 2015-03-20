@@ -38,10 +38,8 @@ TEST_F(Test_nmea_mwv, parse)
 
 TEST_F(Test_nmea_mwv, parse_invalid_number_of_arguments)
 {
-	std::vector<std::string> args_less{4, "@"};
-	std::vector<std::string> args_more{6, "@"};
-	EXPECT_ANY_THROW(nmea::mwv::parse("@@", args_less));
-	EXPECT_ANY_THROW(nmea::mwv::parse("@@", args_more));
+	EXPECT_ANY_THROW(nmea::mwv::parse("@@", {4, "@"}));
+	EXPECT_ANY_THROW(nmea::mwv::parse("@@", {6, "@"}));
 }
 
 TEST_F(Test_nmea_mwv, empty_to_string)

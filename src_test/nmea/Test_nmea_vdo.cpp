@@ -34,5 +34,11 @@ TEST_F(Test_nmea_vdo, parse)
 	EXPECT_EQ(1u, fragment);
 }
 
+TEST_F(Test_nmea_vdo, parse_invalid_number_of_arguments)
+{
+	EXPECT_ANY_THROW(nmea::vdo::parse("@@", {5, "@"}));
+	EXPECT_ANY_THROW(nmea::vdo::parse("@@", {7, "@"}));
+}
+
 }
 

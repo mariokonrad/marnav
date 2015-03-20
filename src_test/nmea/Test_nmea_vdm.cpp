@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <nmea/vdm.hpp>
+#include <nmea/mtw.hpp>
 #include <nmea/nmea.hpp>
 
 namespace
@@ -17,6 +18,12 @@ TEST_F(Test_nmea_vdm, contruction)
 TEST_F(Test_nmea_vdm, size)
 {
 	EXPECT_EQ(56u, sizeof(nmea::vdm));
+}
+
+TEST_F(Test_nmea_vdm, parse_invalid_number_of_arguments)
+{
+	EXPECT_ANY_THROW(nmea::vdm::parse("@@", {5, "@"}));
+	EXPECT_ANY_THROW(nmea::vdm::parse("@@", {7, "@"}));
 }
 
 TEST_F(Test_nmea_vdm, parse_1)
@@ -74,6 +81,14 @@ TEST_F(Test_nmea_vdm, collect_payload)
 	EXPECT_STREQ("55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53",
 				 result[0].first.c_str());
 	EXPECT_STREQ("1@0000000000000", result[1].first.c_str());
+}
+
+TEST_F(Test_nmea_vdm, collect_payload_wrong_sentence)
+{
+	std::vector<std::unique_ptr<nmea::sentence>> v;
+	v.push_back(std::unique_ptr<nmea::sentence>(new nmea::mtw));
+
+	EXPECT_ANY_THROW(nmea::collect_payload(v.begin(), v.end()));
 }
 
 }

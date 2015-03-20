@@ -32,6 +32,12 @@ TEST_F(Test_nmea_vlw, parse)
 	EXPECT_EQ(7803.2, distance.value());
 }
 
+TEST_F(Test_nmea_vlw, parse_invalid_number_of_arguments)
+{
+	EXPECT_ANY_THROW(nmea::vlw::parse("@@", {3, "@"}));
+	EXPECT_ANY_THROW(nmea::vlw::parse("@@", {5, "@"}));
+}
+
 TEST_F(Test_nmea_vlw, empty_to_string)
 {
 	nmea::vlw vlw;

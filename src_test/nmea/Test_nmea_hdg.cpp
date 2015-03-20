@@ -34,10 +34,8 @@ TEST_F(Test_nmea_hdg, parse)
 
 TEST_F(Test_nmea_hdg, parse_invalid_number_of_arguments)
 {
-	std::vector<std::string> args_less{4, "@"};
-	std::vector<std::string> args_more{6, "@"};
-	EXPECT_ANY_THROW(nmea::hdg::parse("@@", args_less));
-	EXPECT_ANY_THROW(nmea::hdg::parse("@@", args_more));
+	EXPECT_ANY_THROW(nmea::hdg::parse("@@", {4, "@"}));
+	EXPECT_ANY_THROW(nmea::hdg::parse("@@", {6, "@"}));
 }
 
 TEST_F(Test_nmea_hdg, empty_to_string)

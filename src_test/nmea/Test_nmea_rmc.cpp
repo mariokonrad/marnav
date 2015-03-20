@@ -34,6 +34,12 @@ TEST_F(Test_nmea_rmc, parse)
 	EXPECT_EQ(30u, date.value().day());
 }
 
+TEST_F(Test_nmea_rmc, parse_invalid_number_of_arguments)
+{
+	EXPECT_ANY_THROW(nmea::rmc::parse("@@", {10, "@"}));
+	EXPECT_ANY_THROW(nmea::rmc::parse("@@", {13, "@"}));
+}
+
 TEST_F(Test_nmea_rmc, empty_to_string)
 {
 	nmea::rmc rmc;

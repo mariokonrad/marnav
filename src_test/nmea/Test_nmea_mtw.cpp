@@ -36,6 +36,12 @@ TEST_F(Test_nmea_mtw, parse)
 	EXPECT_EQ(nmea::unit::CELSIUS, unit.value());
 }
 
+TEST_F(Test_nmea_mtw, parse_invalid_number_of_arguments)
+{
+	EXPECT_ANY_THROW(nmea::mtw::parse("@@", {1, "@"}));
+	EXPECT_ANY_THROW(nmea::mtw::parse("@@", {3, "@"}));
+}
+
 TEST_F(Test_nmea_mtw, empty_to_string)
 {
 	nmea::mtw mtw;

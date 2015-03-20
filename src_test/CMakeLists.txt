@@ -6,8 +6,10 @@ include_directories(
 	)
 
 add_executable(testrunner
+	nmea/Test_nmea.cpp
 	nmea/Test_nmea_sentence.cpp
 	nmea/Test_nmea_aam.cpp
+	nmea/Test_nmea_bod.cpp
 	nmea/Test_nmea_hdg.cpp
 	nmea/Test_nmea_mtw.cpp
 	nmea/Test_nmea_mwv.cpp
