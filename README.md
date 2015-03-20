@@ -28,6 +28,8 @@ Supported sentences for NMEA-0183 (read and write):
 - VLW
 - VTG
 - VWR
+- VDM
+- VDO
 
 Supported messages for AIS (decode and encode):
 - type 1: position report class A
