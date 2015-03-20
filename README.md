@@ -127,6 +127,9 @@ Tools needed to build the library:
 - GCC 4.9.2 or newer
 - cmake 2.8.11 or newer
 - clang-format 3.4 or newer
+- lcov / genhtml
+- doxygen
+- cppcheck
 
 There are no other dependencies despite the standard library (C++11)
 to build this library.

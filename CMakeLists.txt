@@ -3,7 +3,7 @@ project(nmea)
 
 set(VERSION_MAJOR "0")
 set(VERSION_MINOR "1")
-set(VERSION_PATH  "0")
+set(VERSION_PATCH "0")
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
