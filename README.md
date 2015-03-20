@@ -42,6 +42,7 @@ Suported messages for SeaTalk (decode and encode):
 - type 00: depth below transducer
 - type 01: equipment id
 - type 10: apparent wind angle
+- type 11: apparent wind speed
 
 
 EXAMPLES

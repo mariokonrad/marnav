@@ -1,5 +1,8 @@
 #include "seatalk.hpp"
 #include "message_00.hpp"
+#include "message_01.hpp"
+#include "message_10.hpp"
+#include "message_11.hpp"
 #include <algorithm>
 
 namespace seatalk
@@ -10,6 +13,9 @@ static message::parse_function instantiate_message(message_id type) throw(std::i
 	using entry = std::pair<message_id, message::parse_function>;
 	static const std::vector<entry> known_messages = {
 		{message_id::depth_below_transducer, message_00::parse},
+		{message_id::equipment_id, message_01::parse},
+		{message_id::apparent_wind_angle, message_10::parse},
+		{message_id::apparent_wind_speed, message_11::parse},
 	};
 
 	auto const& i = std::find_if(begin(known_messages), end(known_messages),
