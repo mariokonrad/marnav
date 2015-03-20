@@ -39,12 +39,20 @@ TEST_F(Test_nmea_vlw, empty_to_string)
 	EXPECT_STREQ("$IIVLW,,,,*4D", nmea::to_string(vlw).c_str());
 }
 
-TEST_F(Test_nmea_vlw, set_temperature_to_string)
+TEST_F(Test_nmea_vlw, set_distance_cum_nm)
 {
 	nmea::vlw vlw;
 	vlw.set_distance_cum_nm(123.4);
 
 	EXPECT_STREQ("$IIVLW,123.4,N,,*29", nmea::to_string(vlw).c_str());
+}
+
+TEST_F(Test_nmea_vlw, set_distance_reset_nm)
+{
+	nmea::vlw vlw;
+	vlw.set_distance_reset_nm(12.4);
+
+	EXPECT_STREQ("$IIVLW,,,12.4,N*1A", nmea::to_string(vlw).c_str());
 }
 
 }

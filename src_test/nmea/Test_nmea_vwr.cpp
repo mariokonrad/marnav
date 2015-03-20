@@ -36,6 +36,14 @@ TEST_F(Test_nmea_vwr, parse)
 	EXPECT_EQ(nmea::side::RIGHT, side.value());
 }
 
+TEST_F(Test_nmea_vwr, parse_invalid_number_of_arguments)
+{
+	std::vector<std::string> args_less{7, "@"};
+	std::vector<std::string> args_more{9, "@"};
+	EXPECT_ANY_THROW(nmea::vwr::parse("@@", args_less));
+	EXPECT_ANY_THROW(nmea::vwr::parse("@@", args_more));
+}
+
 TEST_F(Test_nmea_vwr, empty_to_string)
 {
 	nmea::vwr vwr;
