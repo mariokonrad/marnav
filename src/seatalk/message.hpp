@@ -9,8 +9,9 @@ namespace seatalk
 {
 
 enum class message_id : uint8_t {
-	depth_below_transducer = 0,
-	equipment_id = 1,
+	depth_below_transducer = 0x00,
+	equipment_id = 0x01,
+	apparent_wind_angle = 0x10,
 };
 
 using raw = std::vector<uint8_t>;

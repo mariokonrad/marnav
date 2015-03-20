@@ -33,6 +33,7 @@ add_executable(testrunner
 	seatalk/Test_seatalk_message.cpp
 	seatalk/Test_seatalk_message_00.cpp
 	seatalk/Test_seatalk_message_01.cpp
+	seatalk/Test_seatalk_message_10.cpp
 	)
 
 target_link_libraries(testrunner

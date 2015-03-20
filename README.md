@@ -39,7 +39,9 @@ Supported messages for AIS (decode and encode):
 - type 5: static and voyage related data
 
 Suported messages for SeaTalk (decode and encode):
-- type 0: depth below transducer
+- type 00: depth below transducer
+- type 01: equipment id
+- type 10: apparent wind angle
 
 
 EXAMPLES
