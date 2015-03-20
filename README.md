@@ -8,6 +8,7 @@ This is a C++11 library for maritime navigation purposes.
 It supports (partially):
 - NMEA-0183
 - AIS
+- SeaTalk (Raymarine device communication)
 
 Supported sentences for NMEA-0183 (read and write):
 - AAM
@@ -36,6 +37,9 @@ Supported messages for AIS (decode and encode):
 - type 2: position report class A (assigned schedule)
 - type 3: position report class A (response to interrogation)
 - type 5: static and voyage related data
+
+Suported messages for SeaTalk (decode and encode):
+- type 0: depth below transducer
 
 
 EXAMPLES
@@ -157,4 +161,5 @@ LINKS
 
 - http://www.catb.org/gpsd/NMEA.html
 - http://www.catb.org/gpsd/AIVDM.html
+- http://thomasknauf.de/seatalk.htm
 

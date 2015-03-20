@@ -45,6 +45,10 @@ add_library(marnav
 	ais/message_02.cpp
 	ais/message_03.cpp
 	ais/message_05.cpp
+	# SeaTalk
+	seatalk/seatalk.cpp
+	seatalk/message.cpp
+	seatalk/message_00.cpp
 	)
 
 # TODO: NMEA sentences (obsolete already exluded)
@@ -149,6 +153,14 @@ install(
 		ais/message_03.hpp
 		ais/message_05.hpp
 	DESTINATION include/marnav/ais
+	)
+
+install(
+	FILES
+		seatalk/seatalk.hpp
+		seatalk/message.hpp
+		seatalk/message_00.hpp
+	DESTINATION include/marnav/seatalk
 	)
 
 install(

@@ -1,6 +1,8 @@
 #ifndef __UTILS__UNIQUE__HPP__
 #define __UTILS__UNIQUE__HPP__
 
+#include <memory>
+
 namespace utils
 {
 /// This is part of the C++14 standard, but unfortnunately not C++11.
