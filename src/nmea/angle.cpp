@@ -55,7 +55,7 @@ bool operator==(const angle& a, const angle& b) noexcept
 	return (&a == &b) || (a.value == b.value);
 }
 
-angle angle::parse(const std::string& s) throw(std::invalid_argument)
+angle parse_angle(const std::string& s) throw(std::invalid_argument)
 {
 	if (s.empty())
 		return angle{0.0};
@@ -75,7 +75,7 @@ angle angle::parse(const std::string& s) throw(std::invalid_argument)
 }
 
 latitude::latitude()
-	: angle(0.0)
+	: latitude(0.0)
 {
 }
 
@@ -104,6 +104,11 @@ void latitude::check(double a) throw(std::invalid_argument)
 		throw std::invalid_argument{"invalid value for nmea::latitude"};
 }
 
+latitude parse_latitude(const std::string& s) throw(std::invalid_argument)
+{
+	return latitude{parse_angle(s)};
+}
+
 std::string to_string(const latitude& v)
 {
 	char buf[32];
@@ -112,25 +117,8 @@ std::string to_string(const latitude& v)
 	return buf;
 }
 
-latitude latitude::parse(const std::string& s) throw(std::invalid_argument)
-{
-	auto a = angle::parse(s);
-	check(a);
-	return latitude{a};
-}
-
-std::ostream& operator<<(std::ostream& os, const latitude& p) { return os << to_string(p); }
-
-std::istream& operator>>(std::istream& is, latitude& t)
-{
-	std::string s;
-	is >> s;
-	t = latitude::parse(s);
-	return is;
-}
-
 longitude::longitude()
-	: angle(0.0)
+	: longitude(0.0)
 {
 }
 
@@ -160,11 +148,9 @@ void longitude::check(double a) throw(std::invalid_argument)
 		throw std::invalid_argument{"invalid value for nmea::longitude"};
 }
 
-longitude longitude::parse(const std::string& s) throw(std::invalid_argument)
+longitude parse_longitude(const std::string& s) throw(std::invalid_argument)
 {
-	auto a = angle::parse(s);
-	check(a);
-	return longitude{a};
+	return longitude{parse_angle(s)};
 }
 
 std::string to_string(const longitude& v)
@@ -175,14 +161,4 @@ std::string to_string(const longitude& v)
 	return buf;
 }
 
-std::ostream& operator<<(std::ostream& os, const longitude& p) { return os << to_string(p); }
-
-std::istream& operator>>(std::istream& is, longitude& t)
-{
-	std::string s;
-	is >> s;
-	t = longitude::parse(s);
-	return is;
 }
-}
-

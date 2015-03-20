@@ -45,8 +45,8 @@ Parse a NMEA sentence:
 		"$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
 	std::cout << s->tag() << "\n";
 	auto rmc = nmea::sentence_cast<nmea::rmc>(sentence);
-	std::cout << "latitude : " << rmc->lat() << "\n";
-	std::cout << "longitude: " << rmc->lon() << "\n";
+	std::cout << "latitude : " << nmea::to_string(rmc->lat()) << "\n";
+	std::cout << "longitude: " << nmea::to_string(rmc->lon()) << "\n";
 
 
 Write a NMEA sentence:

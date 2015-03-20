@@ -2,6 +2,7 @@
 #define __NMEA__IO__HPP__
 
 #include "optional.hpp"
+#include "angle.hpp"
 #include <sstream>
 #include <string>
 
@@ -92,6 +93,26 @@ template <class T> static void read(const std::string& s, T& value)
 	std::istringstream{s} >> value;
 }
 
+inline void read(const std::string& s, latitude& value)
+{
+	if (s.empty()) {
+		value = latitude{};
+		return;
+	}
+
+	value = parse_latitude(s);
+}
+
+inline void read(const std::string& s, longitude& value)
+{
+	if (s.empty()) {
+		value = longitude{};
+		return;
+	}
+
+	value = parse_longitude(s);
+}
+
 template <class T> static void read(const std::string& s, optional<T>& value)
 {
 	if (s.empty()) {
@@ -102,6 +123,28 @@ template <class T> static void read(const std::string& s, optional<T>& value)
 	using namespace std;
 	T tmp;
 	std::istringstream{s} >> tmp;
+	value = tmp;
+}
+
+inline void read(const std::string& s, optional<latitude>& value)
+{
+	if (s.empty()) {
+		value.reset();
+		return;
+	}
+	latitude tmp;
+	read(s, tmp);
+	value = tmp;
+}
+
+inline void read(const std::string& s, optional<longitude>& value)
+{
+	if (s.empty()) {
+		value.reset();
+		return;
+	}
+	longitude tmp;
+	read(s, tmp);
 	value = tmp;
 }
 

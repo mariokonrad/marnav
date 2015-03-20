@@ -33,8 +33,6 @@ public:
 
 	angle& operator=(const angle&) = default;
 
-	static angle parse(const std::string& s) throw(std::invalid_argument);
-
 protected:
 	double get() const;
 
@@ -43,6 +41,8 @@ private:
 };
 
 bool operator==(const angle& a, const angle& b) noexcept;
+
+angle parse_angle(const std::string& s) throw(std::invalid_argument);
 
 class latitude : public angle
 {
@@ -56,15 +56,12 @@ public:
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;
 
-	static latitude parse(const std::string& s) throw(std::invalid_argument);
-
 private:
 	static void check(double a) throw(std::invalid_argument);
 };
 
+latitude parse_latitude(const std::string& s) throw(std::invalid_argument);
 std::string to_string(const latitude& v);
-std::ostream& operator<<(std::ostream& os, const latitude& p);
-std::istream& operator>>(std::istream& is, latitude& t);
 
 class longitude : public angle
 {
@@ -78,15 +75,12 @@ public:
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;
 
-	static longitude parse(const std::string& s) throw(std::invalid_argument);
-
 private:
 	static void check(double a) throw(std::invalid_argument);
 };
 
+longitude parse_longitude(const std::string& s) throw(std::invalid_argument);
 std::string to_string(const longitude& v);
-std::ostream& operator<<(std::ostream& os, const longitude& p);
-std::istream& operator>>(std::istream& is, longitude& t);
 
 }
 
