@@ -39,12 +39,28 @@ TEST_F(Test_nmea_vhw, empty_to_string)
 	EXPECT_STREQ("$IIVHW,,T,,,,,,*1D", nmea::to_string(vhw).c_str());
 }
 
-TEST_F(Test_nmea_vhw, set_temperature_to_string)
+TEST_F(Test_nmea_vhw, set_heading)
 {
 	nmea::vhw vhw;
 	vhw.set_heading(45.8);
 
 	EXPECT_STREQ("$IIVHW,,T,45.8,M,,,,*47", nmea::to_string(vhw).c_str());
+}
+
+TEST_F(Test_nmea_vhw, set_speed_knots)
+{
+	nmea::vhw vhw;
+	vhw.set_speed_knots(12.5);
+
+	EXPECT_STREQ("$IIVHW,,T,,,12.5,N,,*4B", nmea::to_string(vhw).c_str());
+}
+
+TEST_F(Test_nmea_vhw, set_speed_kmh)
+{
+	nmea::vhw vhw;
+	vhw.set_speed_kmh(13.5);
+
+	EXPECT_STREQ("$IIVHW,,T,,,,,13.5,K*4F", nmea::to_string(vhw).c_str());
 }
 
 }

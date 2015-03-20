@@ -150,3 +150,9 @@ LICENSE
 
 See file ```LICENSE.md```
 
+LINKS
+-----
+
+- http://www.catb.org/gpsd/NMEA.html
+- http://www.catb.org/gpsd/AIVDM.html
+

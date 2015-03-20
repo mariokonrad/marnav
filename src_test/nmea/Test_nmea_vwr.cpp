@@ -43,12 +43,51 @@ TEST_F(Test_nmea_vwr, empty_to_string)
 	EXPECT_STREQ("$IIVWR,,,,,,,,*53", nmea::to_string(vwr).c_str());
 }
 
-TEST_F(Test_nmea_vwr, set_angle_to_string)
+TEST_F(Test_nmea_vwr, set_angle_left)
 {
 	nmea::vwr vwr;
 	vwr.set_angle(22.5, nmea::side::LEFT);
 
 	EXPECT_STREQ("$IIVWR,22.5,L,,,,,,*04", nmea::to_string(vwr).c_str());
+}
+
+TEST_F(Test_nmea_vwr, set_angle_right)
+{
+	nmea::vwr vwr;
+	vwr.set_angle(22.5, nmea::side::RIGHT);
+
+	EXPECT_STREQ("$IIVWR,22.5,R,,,,,,*1A", nmea::to_string(vwr).c_str());
+}
+
+TEST_F(Test_nmea_vwr, set_angle_invalid_side)
+{
+	nmea::vwr vwr;
+
+	EXPECT_ANY_THROW(vwr.set_angle(22.5, '@'));
+}
+
+TEST_F(Test_nmea_vwr, set_speed_knots)
+{
+	nmea::vwr vwr;
+	vwr.set_speed_knots(12.5);
+
+	EXPECT_STREQ("$IIVWR,,,12.5,N,,,,*05", nmea::to_string(vwr).c_str());
+}
+
+TEST_F(Test_nmea_vwr, set_speed_mps)
+{
+	nmea::vwr vwr;
+	vwr.set_speed_mps(2.5);
+
+	EXPECT_STREQ("$IIVWR,,,,,2.5,M,,*37", nmea::to_string(vwr).c_str());
+}
+
+TEST_F(Test_nmea_vwr, set_speed_kmh)
+{
+	nmea::vwr vwr;
+	vwr.set_speed_kmh(13.5);
+
+	EXPECT_STREQ("$IIVWR,,,,,,,13.5,K*01", nmea::to_string(vwr).c_str());
 }
 
 }
