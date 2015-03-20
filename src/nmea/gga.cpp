@@ -72,8 +72,7 @@ std::vector<std::string> gga::get_data() const
 		to_string(lon),			 to_string(lon_hem),			to_string(quality),
 		to_string(n_satellites), to_string(hor_dilution),		to_string(height_antenna),
 		to_string(unit_antenna), to_string(geodial_separation), to_string(unit_geodial_separation),
-		to_string(dgps_age),	 to_string(dgps_ref),
-	};
+		to_string(dgps_age),	 to_string(dgps_ref)};
 }
 
 }

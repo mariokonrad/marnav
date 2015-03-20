@@ -59,9 +59,8 @@ gll::parse(const std::string& talker,
 
 std::vector<std::string> gll::get_data() const
 {
-	return {to_string(lat),		 to_string(lat_hem), to_string(lon), to_string(lon_hem),
-
-			to_string(time_utc), to_string(status)};
+	return {to_string(lat),		to_string(lat_hem),  to_string(lon),
+			to_string(lon_hem), to_string(time_utc), to_string(status)};
 }
 
 }

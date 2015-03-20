@@ -38,7 +38,8 @@ std::unique_ptr<sentence>
 vtg::parse(const std::string& talker,
 		   const std::vector<std::string>& fields) throw(std::invalid_argument)
 {
-	if (fields.size() != 8)
+	// before and after NMEA 2.3
+	if ((fields.size() < 8) || (fields.size() > 9))
 		throw std::invalid_argument{"invalid number of fields in vtg::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<vtg>();
@@ -54,17 +55,18 @@ vtg::parse(const std::string& talker,
 	read(fields[6], detail.speed_kmh);
 	read(fields[7], detail.unit_speed_kmh);
 
+	// NMEA 2.3 or newer
+	if (fields.size() > 8)
+		read(fields[8], detail.faa_mode_indicator);
+
 	return result;
 }
 
 std::vector<std::string> vtg::get_data() const
 {
-	return {
-		to_string(track_true), to_string(type_true),	  to_string(track_magn),
-		to_string(type_magn),  to_string(speed_kn),		  to_string(unit_speed_kn),
-		to_string(speed_kmh),  to_string(unit_speed_kmh),
-
-	};
+	return {to_string(track_true), to_string(type_true),	  to_string(track_magn),
+			to_string(type_magn),  to_string(speed_kn),		  to_string(unit_speed_kn),
+			to_string(speed_kmh),  to_string(unit_speed_kmh), to_string(faa_mode_indicator)};
 }
 
 }

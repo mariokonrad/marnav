@@ -69,11 +69,10 @@ rmc::parse(const std::string& talker,
 
 std::vector<std::string> rmc::get_data() const
 {
-	return {
-		to_string(time_utc), to_string(status),  to_string(lat),	 to_string(lat_hem),
-		to_string(lon),		 to_string(lon_hem), to_string(sog),	 to_string(heading),
-		to_string(date),	 to_string(mag),	 to_string(mag_hem), to_string(faa_mode_indicator),
-	};
+	return {to_string(time_utc), to_string(status),  to_string(lat),
+			to_string(lat_hem),  to_string(lon),	 to_string(lon_hem),
+			to_string(sog),		 to_string(heading), to_string(date),
+			to_string(mag),		 to_string(mag_hem), to_string(faa_mode_indicator)};
 }
 
 }

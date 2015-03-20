@@ -31,6 +31,7 @@ private:
 	optional<char> unit_speed_kn; // N:knots
 	optional<double> speed_kmh;
 	optional<char> unit_speed_kmh; // K:kilometers per hour
+	optional<char> faa_mode_indicator; // NMEA 2.3 or newer
 
 public:
 	decltype(track_true) get_track_true() const { return track_true; }
@@ -41,11 +42,13 @@ public:
 	decltype(unit_speed_kn) get_unit_speed_kn() const { return unit_speed_kn; }
 	decltype(speed_kmh) get_speed_kmh() const { return speed_kmh; }
 	decltype(unit_speed_kmh) get_unit_speed_kmh() const { return unit_speed_kmh; }
+	decltype(faa_mode_indicator) get_faa_mode_indicator() const { return faa_mode_indicator; }
 
 	void set_track_true(double t);
 	void set_track_magn(double t);
 	void set_speed_kn(double t);
 	void set_speed_kmh(double t);
+	void set_mode_indicator(char t) { faa_mode_indicator = t; }
 };
 
 }

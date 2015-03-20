@@ -51,9 +51,7 @@ dbt::parse(const std::string& talker,
 
 std::vector<std::string> dbt::get_data() const
 {
-	return {
-		to_string(depth_feet),		 to_string(depth_unit_feet), to_string(depth_meter),
-		to_string(depth_unit_meter), to_string(depth_fathom),	to_string(depth_unit_fathom),
-	};
+	return {to_string(depth_feet),		 to_string(depth_unit_feet), to_string(depth_meter),
+			to_string(depth_unit_meter), to_string(depth_fathom),	to_string(depth_unit_fathom)};
 }
 }

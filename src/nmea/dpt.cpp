@@ -29,9 +29,7 @@ dpt::parse(const std::string& talker,
 
 std::vector<std::string> dpt::get_data() const
 {
-	return {
-		to_string(depth_meter), to_string(transducer_offset),
-	};
+	return {to_string(depth_meter), to_string(transducer_offset)};
 }
 
 }
