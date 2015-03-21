@@ -13,6 +13,7 @@ enum class message_id : uint8_t {
 	equipment_id = 0x01,
 	apparent_wind_angle = 0x10,
 	apparent_wind_speed = 0x11,
+	speed_through_water = 0x20,
 };
 
 namespace unit
