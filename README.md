@@ -43,6 +43,8 @@ Suported messages for SeaTalk (decode and encode):
 - type 01: equipment id
 - type 10: apparent wind angle
 - type 11: apparent wind speed
+- type 20: speed through water
+- type 21: trip mileage
 
 
 EXAMPLES

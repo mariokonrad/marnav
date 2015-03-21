@@ -14,6 +14,7 @@ enum class message_id : uint8_t {
 	apparent_wind_angle = 0x10,
 	apparent_wind_speed = 0x11,
 	speed_through_water = 0x20,
+	trip_mileage = 0x21,
 };
 
 namespace unit
