@@ -45,6 +45,7 @@ Suported messages for SeaTalk (decode and encode):
 - type 11: apparent wind speed
 - type 20: speed through water
 - type 21: trip mileage
+- type 22: total mileage
 
 
 EXAMPLES
