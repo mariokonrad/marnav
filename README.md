@@ -46,6 +46,7 @@ Suported messages for SeaTalk (decode and encode):
 - type 20: speed through water
 - type 21: trip mileage
 - type 22: total mileage
+- type 27: water temperature 2
 
 
 EXAMPLES
@@ -130,6 +131,8 @@ Tools needed to build the library:
 - GCC 4.9.2 or newer
 - cmake 2.8.11 or newer
 - clang-format 3.4 or newer
+
+optional (somewhat):
 - lcov / genhtml
 - doxygen
 - cppcheck
