@@ -8,6 +8,17 @@ class Test_ais : public ::testing::Test
 {
 };
 
+class message_zero_bits : public ais::message
+{
+public:
+	message_zero_bits()
+		: message(ais::message_id::NONE)
+	{
+	}
+
+	virtual ais::raw get_data() const override { return ais::raw{}; }
+};
+
 TEST_F(Test_ais, make_message)
 {
 	std::vector<std::pair<std::string, int>> v;
@@ -22,4 +33,9 @@ TEST_F(Test_ais, make_message)
 	auto result = ais::make_message(v);
 }
 
+TEST_F(Test_ais, encode_message_zero_sized_bits)
+{
+	message_zero_bits m;
+	EXPECT_ANY_THROW(ais::encode_message(m));
+}
 }
