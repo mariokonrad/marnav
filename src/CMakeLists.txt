@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 project(nmea)
 
+option(ENABLE_STATIC
+	"Enable static library" ON)
+
 set(SOURCE_UTILS
 	utils/unique.hpp
 	utils/bitset.hpp
@@ -67,7 +70,14 @@ add_executable(nmeasum
 	nmeasum.cpp
 	)
 
-add_library(marnav
+if(${ENABLE_STATIC})
+	set(LIBRARY_TYPE "STATIC")
+else()
+	set(LIBRARY_TYPE "SHARED")
+endif()
+message(STATUS "Build library type: ${LIBRARY_TYPE}")
+
+add_library(marnav ${LIBRARY_TYPE}
 	${SOURCE_UTILS}
 	${SOURCE_GEO}
 	${SOURCE_NMEA_0183}
