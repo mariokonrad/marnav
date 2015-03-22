@@ -8,6 +8,8 @@ include_directories(
 add_executable(testrunner
 	geo/Test_geo_angle.cpp
 	nmea/Test_nmea.cpp
+	nmea/Test_nmea_date.cpp
+	nmea/Test_nmea_time.cpp
 	nmea/Test_nmea_sentence.cpp
 	nmea/Test_nmea_aam.cpp
 	nmea/Test_nmea_bod.cpp
@@ -15,10 +17,14 @@ add_executable(testrunner
 	nmea/Test_nmea_dpt.cpp
 	nmea/Test_nmea_gga.cpp
 	nmea/Test_nmea_gll.cpp
+	nmea/Test_nmea_gsa.cpp
+	nmea/Test_nmea_gsv.cpp
 	nmea/Test_nmea_hdg.cpp
 	nmea/Test_nmea_mtw.cpp
 	nmea/Test_nmea_mwv.cpp
+	nmea/Test_nmea_rmb.cpp
 	nmea/Test_nmea_rmc.cpp
+	nmea/Test_nmea_rte.cpp
 	nmea/Test_nmea_vhw.cpp
 	nmea/Test_nmea_vlw.cpp
 	nmea/Test_nmea_vwr.cpp
