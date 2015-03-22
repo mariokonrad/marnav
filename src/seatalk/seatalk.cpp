@@ -5,6 +5,9 @@
 #include "message_11.hpp"
 #include "message_20.hpp"
 #include "message_21.hpp"
+#include "message_22.hpp"
+#include "message_23.hpp"
+#include "message_27.hpp"
 #include <algorithm>
 
 namespace seatalk
@@ -20,6 +23,9 @@ static message::parse_function instantiate_message(message_id type) throw(std::i
 		{message_id::apparent_wind_speed, message_11::parse},
 		{message_id::speed_through_water, message_20::parse},
 		{message_id::trip_mileage, message_21::parse},
+		{message_id::trip_mileage, message_22::parse},
+		{message_id::total_mileage, message_23::parse},
+		{message_id::water_temperature_2, message_27::parse},
 	};
 
 	auto const& i = std::find_if(begin(known_messages), end(known_messages),

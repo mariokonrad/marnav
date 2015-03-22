@@ -16,7 +16,7 @@ enum class message_id : uint8_t {
 	speed_through_water = 0x20,
 	trip_mileage = 0x21,
 	total_mileage = 0x22,
-//	water_temperature_1 = 0x23,
+	water_temperature_1 = 0x23,
 //	total_and_trip_log = 0x25,
 //	speed_through_water_2 = 0x26,
 	water_temperature_2 = 0x27,

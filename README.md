@@ -46,6 +46,7 @@ Suported messages for SeaTalk (decode and encode):
 - type 20: speed through water
 - type 21: trip mileage
 - type 22: total mileage
+- type 23: water temperature 1
 - type 27: water temperature 2
 
 

@@ -55,6 +55,7 @@ add_library(marnav
 	seatalk/message_20.cpp
 	seatalk/message_21.cpp
 	seatalk/message_22.cpp
+	seatalk/message_23.cpp
 	seatalk/message_27.cpp
 	)
 
@@ -173,6 +174,7 @@ install(
 		seatalk/message_20.hpp
 		seatalk/message_21.hpp
 		seatalk/message_22.hpp
+		seatalk/message_23.hpp
 		seatalk/message_27.hpp
 	DESTINATION include/marnav/seatalk
 	)
