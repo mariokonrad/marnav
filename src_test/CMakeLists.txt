@@ -39,6 +39,7 @@ add_executable(testrunner
 	seatalk/Test_seatalk_message_21.cpp
 	seatalk/Test_seatalk_message_22.cpp
 	seatalk/Test_seatalk_message_23.cpp
+	seatalk/Test_seatalk_message_25.cpp
 	seatalk/Test_seatalk_message_27.cpp
 	)
 
