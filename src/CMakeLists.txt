@@ -1,17 +1,16 @@
 cmake_minimum_required(VERSION 2.8)
 project(nmea)
 
-add_executable(nmeasum
-	nmeasum.cpp
-	)
-
-add_library(marnav
-	# common
+set(SOURCE_UTILS
 	utils/unique.hpp
 	utils/bitset.hpp
-	# geo
+	)
+
+set(SOURCE_GEO
 	geo/angle.cpp
-	# NMEA-0183
+	)
+
+set(SOURCE_NMEA_0183
 	nmea/angle.cpp
 	nmea/date.cpp
 	nmea/time.cpp
@@ -38,14 +37,18 @@ add_library(marnav
 	nmea/vdm.cpp
 	nmea/vdo.cpp
 	nmea/optional.hpp
-	# AIS
+	)
+
+set(SOURCE_AIS
 	ais/ais.cpp
 	ais/message.cpp
 	ais/message_01.cpp
 	ais/message_02.cpp
 	ais/message_03.cpp
 	ais/message_05.cpp
-	# SeaTalk
+	)
+
+set(SOURCE_SEATALK
 	seatalk/seatalk.cpp
 	seatalk/message.cpp
 	seatalk/message_00.cpp
@@ -59,6 +62,24 @@ add_library(marnav
 	seatalk/message_25.cpp
 	seatalk/message_27.cpp
 	)
+
+add_executable(nmeasum
+	nmeasum.cpp
+	)
+
+add_library(marnav
+	${SOURCE_UTILS}
+	${SOURCE_GEO}
+	${SOURCE_NMEA_0183}
+	${SOURCE_AIS}
+	${SOURCE_SEATALK}
+	)
+
+set_target_properties(marnav
+	PROPERTIES VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
+	SOVERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
+	)
+
 
 # TODO: NMEA sentences (obsolete already exluded)
 # ALM - GPS Almanac Data
@@ -113,11 +134,6 @@ add_library(marnav
 # ZFO - UTC & Time from origin Waypoint
 # ZTG - UTC & Time to Destination Waypoint
 # vendor extensions
-
-set_target_properties(marnav
-	PROPERTIES VERSION 0.0.1
-	SOVERSION 0.0.1
-	)
 
 install(
 	TARGETS marnav

@@ -165,6 +165,16 @@ If you like to perform code coverage using the unit tests, do:
 	make
 	make coverage
 
+As packaging system, cpack is used. Do after build:
+
+	make package
+
+or for individual package types:
+
+	cpack -G TGZ
+	cpack -G DEB
+
+
 LICENSE
 -------
 
