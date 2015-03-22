@@ -41,8 +41,10 @@ std::unique_ptr<message> message_25::parse(const raw& data) throw(std::invalid_a
 
 raw message_25::get_data() const
 {
+	uint8_t attr = 0x04;
+	attr |= static_cast<uint8_t>(((total >> 16) & 0x0f) << 4);
 	return raw{
-		static_cast<uint8_t>(ID), 0x04 | static_cast<uint8_t>(((total >> 16) & 0x0f) << 4),
+		static_cast<uint8_t>(ID),				   attr,
 		static_cast<uint8_t>((total >> 8) & 0xff), // YY
 		static_cast<uint8_t>((total >> 0) & 0xff), // XX
 		static_cast<uint8_t>((trip >> 0) & 0xff), // UU
