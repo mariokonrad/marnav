@@ -603,6 +603,7 @@ USE_MDFILE_AS_MAINPAGE = @CMAKE_CURRENT_SOURCE_DIR@/README.md
 INPUT                  = \
                          @CMAKE_CURRENT_SOURCE_DIR@/README.md \
                          @CMAKE_CURRENT_SOURCE_DIR@/LICENSE.md \
+                         @CMAKE_CURRENT_SOURCE_DIR@/TODO.md \
                          @CMAKE_CURRENT_SOURCE_DIR@/src
 
 # This tag can be used to specify the character encoding of the source files
