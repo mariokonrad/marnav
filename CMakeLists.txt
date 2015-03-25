@@ -22,6 +22,9 @@ endif()
 include_directories(src)
 add_subdirectory(src)
 
+### examples
+add_subdirectory(examples)
+
 ### documentation
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
