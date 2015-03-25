@@ -3,7 +3,7 @@
 
 namespace nmea
 {
-geo::angle parse_angle(const std::string& s) throw(std::invalid_argument)
+static geo::angle parse_angle(const std::string& s) throw(std::invalid_argument)
 {
 	if (s.empty())
 		return geo::angle{0.0};
@@ -22,11 +22,27 @@ geo::angle parse_angle(const std::string& s) throw(std::invalid_argument)
 	return geo::angle{deg + min};
 }
 
+/// Returns the latitude, representing the specified string. The provided string is assumed
+/// to be in the form specified by the NMEA standard.
+///
+/// @param[in] s The string containing latitude information.
+/// @return The parsed latitude.
+/// @exception std::invalid_argument The string is malfomred.
+///
+/// Example:
+/// @code
+///   auto lat = nmea::parse_latitude("37.0000");
+/// @encode
 geo::latitude parse_latitude(const std::string& s) throw(std::invalid_argument)
 {
 	return geo::latitude{parse_angle(s)};
 }
 
+/// Returns the string representation of a latitude, in the form specified by the NMEA
+/// standard.
+///
+/// @param[in] v The latitude.
+/// @return A string that represents the latitude.
 std::string to_string(const geo::latitude& v)
 {
 	char buf[32];
@@ -35,11 +51,27 @@ std::string to_string(const geo::latitude& v)
 	return buf;
 }
 
+/// Returns the longitude, representing the specified string. The provided string is assumed
+/// to be in the form specified by the NMEA standard.
+///
+/// @param[in] s The string containing latitude information.
+/// @return The parsed longitude.
+/// @exception std::invalid_argument The string is malfomred.
+///
+/// Example:
+/// @code
+///   auto lon = nmea::parse_longitude("002.3456");
+/// @encode
 geo::longitude parse_longitude(const std::string& s) throw(std::invalid_argument)
 {
 	return geo::longitude{parse_angle(s)};
 }
 
+/// Returns the string representation of a longitude, in the form specified by the NMEA
+/// standard.
+///
+/// @param[in] v The longitude.
+/// @return A string that represents the longitude.
 std::string to_string(const geo::longitude& v)
 {
 	char buf[32];

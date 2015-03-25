@@ -10,95 +10,99 @@
 namespace nmea
 {
 
+/// Enumeration of NMEA-0183 sentence IDs.
+///
+/// @note Not all are currently supported.
 enum class sentence_id : uint32_t {
 	NONE = 0,
 
 	// standard sentences
-	AAM, // Waypoint Arrival Alarm
-	ALM, // GPS Almanac Data
-	APA, // Autopilot Sentence "A"
-	APB, // Autopilot Sentence "B"
-	BOD, // Bearing - Waypoint to Waypoint
-	BWC, // Bearing & Distance to Waypoint - Geat Circle
-	BWR, // Bearing and Distance to Waypoint - Rhumb Line
-	BWW, // Bearing - Waypoint to Waypoint
-	DBK, // Depth Below Keel
-	DBS, // Depth Below Surface
-	DBT, // Depth below transducer (II)
-	DCN, // Decca Position
-	DPT, // Depth of Water
-	DTM, // Datum Reference
-	FSI, // Frequency Set Information
-	GBS, // GPS Satellite Fault Detection
-	GGA, // Global Positioning System Fix Data
-	GLC, // Geographic Position, Loran-C
-	GLL, // Geographic Position - Latitude/Longitude
-	GNS, // Fix data
-	GRS, // GPS Range Residuals
-	GST, // GPS Pseudorange Noise Statistics
-	GSA, // GPS DOP and active satellites
-	GSV, // Satellites in view
-	GTD, // Geographic Location in Time Differences
-	GXA, // TRANSIT Position - Latitude/Longitude
-	HDG, // Heading - Deviation & Variation (vendor extension)
-	HDM, // Heading - Magnetic
-	HDT, // Heading - True
-	HFB, // Trawl Headrope to Footrope and Bottom
-	HSC, // Heading Steering Command
-	ITS, // Trawl Door Spread 2 Distance
-	LCD, // Loran-C Signal Data
-	MSK, // Control for a Beacon Receiver
-	MSS, // Beacon Receiver Status
-	MTW, // Mean Temperature of Water (II)
-	MWV, // Wind Speed and Angle (II)
-	OLN, // Omega Lane Numbers
-	OSD, // Own Ship Data
-	R00, // Waypoints in active route
-	RMA, // Recommended Minimum Navigation Information
-	RMB, // Recommended Minimum Navigation Information
-	RMC, // Recommended Minimum Navigation Information
-	ROT, // Rate Of Turn
-	RPM, // Revolutions
-	RSA, // Rudder Sensor Angle
-	RSD, // RADAR System Data
-	RTE, // Routes
-	SFI, // Scanning Frequency Information
-	STN, // Multiple Data ID
-	TDS, // Trawl Door Spread Distance
-	TFI, // Trawl Filling Indicator
-	TPC, // Trawl Position Cartesian Coordinates
-	TPR, // Trawl Position Relative Vessel
-	TPT, // Trawl Position True
-	TRF, // TRANSIT Fix Data
-	TTM, // Tracked Target Message
-	VBW, // Dual Ground/Water Speed
-	VDR, // Set and Drift
-	VHW, // Water speed and heading (II)
-	VLW, // Distance Traveled through Water (II)
-	VPW, // Speed - Measured Parallel to Wind
-	VTG, // Track made good and Ground speed
-	VWR, // Relative Wind Speed and Angle (II)
-	WCV, // Waypoint Closure Velocity
-	WNC, // Distance - Waypoint to Waypoint
-	WPL, // Waypoint Location
-	XDR, // Transducer Measurement
-	XTE, // Cross-Track Error, Measured
-	XTR, // Cross Track Error - Dead Reckoning
-	ZDA, // Time & Date - UTC, day, month, year and local time zone
-	ZFO, // UTC & Time from origin Waypoint
-	ZTG, // UTC & Time to Destination Waypoint
+
+	AAM, ///< Waypoint Arrival Alarm
+	ALM, ///< GPS Almanac Data
+	APA, ///< Autopilot Sentence "A"
+	APB, ///< Autopilot Sentence "B"
+	BOD, ///< Bearing - Waypoint to Waypoint
+	BWC, ///< Bearing & Distance to Waypoint - Geat Circle
+	BWR, ///< Bearing and Distance to Waypoint - Rhumb Line
+	BWW, ///< Bearing - Waypoint to Waypoint
+	DBK, ///< Depth Below Keel
+	DBS, ///< Depth Below Surface
+	DBT, ///< Depth below transducer (II)
+	DCN, ///< Decca Position
+	DPT, ///< Depth of Water
+	DTM, ///< Datum Reference
+	FSI, ///< Frequency Set Information
+	GBS, ///< GPS Satellite Fault Detection
+	GGA, ///< Global Positioning System Fix Data
+	GLC, ///< Geographic Position, Loran-C
+	GLL, ///< Geographic Position - Latitude/Longitude
+	GNS, ///< Fix data
+	GRS, ///< GPS Range Residuals
+	GST, ///< GPS Pseudorange Noise Statistics
+	GSA, ///< GPS DOP and active satellites
+	GSV, ///< Satellites in view
+	GTD, ///< Geographic Location in Time Differences
+	GXA, ///< TRANSIT Position - Latitude/Longitude
+	HDG, ///< Heading - Deviation & Variation (vendor extension)
+	HDM, ///< Heading - Magnetic
+	HDT, ///< Heading - True
+	HFB, ///< Trawl Headrope to Footrope and Bottom
+	HSC, ///< Heading Steering Command
+	ITS, ///< Trawl Door Spread 2 Distance
+	LCD, ///< Loran-C Signal Data
+	MSK, ///< Control for a Beacon Receiver
+	MSS, ///< Beacon Receiver Status
+	MTW, ///< Mean Temperature of Water (II)
+	MWV, ///< Wind Speed and Angle (II)
+	OLN, ///< Omega Lane Numbers
+	OSD, ///< Own Ship Data
+	R00, ///< Waypoints in active route
+	RMA, ///< Recommended Minimum Navigation Information
+	RMB, ///< Recommended Minimum Navigation Information
+	RMC, ///< Recommended Minimum Navigation Information
+	ROT, ///< Rate Of Turn
+	RPM, ///< Revolutions
+	RSA, ///< Rudder Sensor Angle
+	RSD, ///< RADAR System Data
+	RTE, ///< Routes
+	SFI, ///< Scanning Frequency Information
+	STN, ///< Multiple Data ID
+	TDS, ///< Trawl Door Spread Distance
+	TFI, ///< Trawl Filling Indicator
+	TPC, ///< Trawl Position Cartesian Coordinates
+	TPR, ///< Trawl Position Relative Vessel
+	TPT, ///< Trawl Position True
+	TRF, ///< TRANSIT Fix Data
+	TTM, ///< Tracked Target Message
+	VBW, ///< Dual Ground/Water Speed
+	VDR, ///< Set and Drift
+	VHW, ///< Water speed and heading (II)
+	VLW, ///< Distance Traveled through Water (II)
+	VPW, ///< Speed - Measured Parallel to Wind
+	VTG, ///< Track made good and Ground speed
+	VWR, ///< Relative Wind Speed and Angle (II)
+	WCV, ///< Waypoint Closure Velocity
+	WNC, ///< Distance - Waypoint to Waypoint
+	WPL, ///< Waypoint Location
+	XDR, ///< Transducer Measurement
+	XTE, ///< Cross-Track Error, Measured
+	XTR, ///< Cross Track Error - Dead Reckoning
+	ZDA, ///< Time & Date - UTC, day, month, year and local time zone
+	ZFO, ///< UTC & Time from origin Waypoint
+	ZTG, ///< UTC & Time to Destination Waypoint
 
 	// garmin specific
-	RME,
-	RMM,
-	RMZ,
+	RME, ///< Estimated Error Information (Garmin Extension)
+	RMM, ///< Map Datum (Garmin Extension)
+	RMZ, ///< Altitude (Garmin Extension)
 
 	// integrated instumentation
-	VWT, // wind true
+	VWT, ///< wind true
 
 	// AIS
-	VDM,
-	VDO,
+	VDM, ///< AIS
+	VDO, ///< AIS
 };
 
 namespace talker_id
@@ -247,10 +251,14 @@ namespace ais_channel
 	constexpr const char B = 'B';
 }
 
+/// This is the base class for all sentences.
+///
 /// @note This class behaves like a POD, no complex data with memory operations.
 class sentence
 {
 public:
+	/// This signature is used in all subclasses to parse data fields
+	/// of a particular sentence.
 	using parse_function = std::function<std::unique_ptr<sentence>(
 		const std::string&, const std::vector<std::string>&)>;
 
@@ -260,10 +268,20 @@ public:
 	constexpr static char START_TOKEN_AIS = '!';
 	constexpr static char END_TOKEN = '*';
 
+	/// Returns the ID of the sentence.
 	sentence_id id() const;
+
+	/// Returns the tag.
 	const char* tag() const;
+
+	/// Returns the talker.
 	const char* talker() const;
 
+	/// Sets the talker of the sentence.
+	///
+	/// @note All subclasses specify a default talker at construction.
+	///   This method is used to override the default or to set the
+	///   talker ID explicitly.
 	void set_talker(const std::string& talker);
 
 	friend std::string to_string(const sentence&);
@@ -280,8 +298,31 @@ private:
 	char talker_[3];
 };
 
+/// Renders the specified sentence into a string.
+///
+/// If the sentence is invalid, the returning string will be empty.
 std::string to_string(const sentence& s);
 
+/// Casts the specified sentence to the sentence given by the template parameter.
+/// If the cast is performed successfully, the original object is invalidated.
+/// The object converted only if it is valid and of the correct type. It is not
+/// possible to cast a sentence into a completley different one.
+///
+/// @param[inout] s The sentence object to convert.
+/// @retval nullptr The specified sentence is either invalid or a type mismatch.
+///   The specified sentence remains untouched.
+/// @return The converted sentence. The specified sentence is now invalid.
+///
+/// Examples:
+/// @code
+///   auto s = nmea::make_sentence("$IIMTW,9.5,C*2F");
+///   auto mtw = nmea::sentence_cast<nmea::mtw>(s); // OK, but 's' now invalid
+/// @endcode
+///
+/// @code
+///   auto s = nmea::make_sentence("$IIMTW,9.5,C*2F");
+///   auto rmc = nmea::sentence_cast<nmea::rmc>(s); // Error, result is nullptr
+/// @endcode
 template <class T> std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence>& s)
 {
 	if (!s)

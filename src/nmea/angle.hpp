@@ -5,8 +5,6 @@
 
 namespace nmea
 {
-geo::angle parse_angle(const std::string& s) throw(std::invalid_argument);
-
 geo::latitude parse_latitude(const std::string& s) throw(std::invalid_argument);
 std::string to_string(const geo::latitude& v);
 

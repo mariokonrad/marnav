@@ -27,9 +27,22 @@
 #include <algorithm>
 #include <regex>
 
+/// @example parse_nmea.cpp
+/// This is an example on how to parse and handle NMEA sentences from a string.
+/// Please note: once the sentence is casted using nmea::sentence_cast, the original
+/// object (sentence in this case) is no more. Only the object 'rmc' is valid.
+
 namespace nmea
 {
 
+/// Returns the parse function of a particular sentence.
+///
+/// If an unknown sentence tag is specified, an exception is thrown.
+///
+/// @param[in] tag The tag of the sentence to get the parse function for.
+/// @return The parse function of the specified sentence.
+/// @exception std::invalid_argument The specified tag could not be found,
+///   the argument cannot be processed.
 static sentence::parse_function
 instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 {
@@ -68,6 +81,18 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 	return i->second;
 }
 
+/// Parses the string and returns the corresponding sentence.
+///
+/// @param[in] s The sentence to parse.
+/// @return The object of the corresponding type.
+/// @exception checksum_error Will be thrown if the checksum is wrong.
+/// @exception std::invalid_argument Will be thrown if the specified string
+///   is not a NMEA sentence (malformed) or the sentence is not known.
+///
+/// Example:
+/// @code
+///   auto s = nmea::make_sentence("$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
+/// @endcode
 std::unique_ptr<sentence> make_sentence(const std::string& s) throw(std::invalid_argument,
 																	checksum_error)
 {
