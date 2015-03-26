@@ -1,7 +1,7 @@
-#ifndef __NMEA__OPTIONAL__HPP__
-#define __NMEA__OPTIONAL__HPP__
+#ifndef __UTILS__OPTIONAL__HPP__
+#define __UTILS__OPTIONAL__HPP__
 
-namespace nmea
+namespace utils
 {
 
 /// This is a somewhat compatible implementation of std::experimental::optional (as by 2015).

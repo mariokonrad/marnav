@@ -2,6 +2,7 @@
 #define __NMEA__BOD__HPP__
 
 #include "sentence.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -25,12 +26,12 @@ protected:
 private:
 	void check_waypoint_id(const std::string& id) const throw(std::invalid_argument);
 
-	optional<double> bearing_true;
-	optional<char> type_true; // T:true
-	optional<double> bearing_magn;
-	optional<char> type_magn; // M:magnetic
-	optional<std::string> waypoint_to; // TO waypoint ID
-	optional<std::string> waypoint_from; // FROM waypoint ID
+	utils::optional<double> bearing_true;
+	utils::optional<char> type_true; // T:true
+	utils::optional<double> bearing_magn;
+	utils::optional<char> type_magn; // M:magnetic
+	utils::optional<std::string> waypoint_to; // TO waypoint ID
+	utils::optional<std::string> waypoint_from; // FROM waypoint ID
 
 public:
 	decltype(bearing_true) get_bearing_true() const { return bearing_true; }

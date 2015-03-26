@@ -4,6 +4,7 @@
 #include "sentence.hpp"
 #include "angle.hpp"
 #include "time.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -25,20 +26,20 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	optional<nmea::time> time;
-	optional<geo::latitude> lat;
-	optional<char> lat_hem; // N:north, S:south
-	optional<geo::longitude> lon;
-	optional<char> lon_hem; // E:east, W:west
-	optional<uint32_t> quality;
-	optional<uint32_t> n_satellites;
-	optional<double> hor_dilution; // horizontal dilution of precision
-	optional<double> height_antenna; // height of antenna over geoid
-	optional<char> unit_antenna; // M:meter
-	optional<double> geodial_separation; // geodial separation, sea level below the ellipsoid
-	optional<char> unit_geodial_separation; // M:meter
-	optional<double> dgps_age; // age of dgps data
-	optional<uint32_t> dgps_ref; // dgps reference station 0000..1023
+	utils::optional<nmea::time> time;
+	utils::optional<geo::latitude> lat;
+	utils::optional<char> lat_hem; // N:north, S:south
+	utils::optional<geo::longitude> lon;
+	utils::optional<char> lon_hem; // E:east, W:west
+	utils::optional<uint32_t> quality;
+	utils::optional<uint32_t> n_satellites;
+	utils::optional<double> hor_dilution; // horizontal dilution of precision
+	utils::optional<double> height_antenna; // height of antenna over geoid
+	utils::optional<char> unit_antenna; // M:meter
+	utils::optional<double> geodial_separation; // geodial separation, sea level below the ellipsoid
+	utils::optional<char> unit_geodial_separation; // M:meter
+	utils::optional<double> dgps_age; // age of dgps data
+	utils::optional<uint32_t> dgps_ref; // dgps reference station 0000..1023
 
 public:
 	decltype(time) get_time() const { return time; }

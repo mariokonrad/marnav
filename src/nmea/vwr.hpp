@@ -2,6 +2,7 @@
 #define __NMEA__VWR__HPP__
 
 #include "sentence.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -22,14 +23,14 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	optional<double> angle; // wind angle, 0..180
-	optional<char> side; // side of vessel, R:right, L:left
-	optional<double> speed_knots; // wind speed in knots
-	optional<char> speed_knots_unit; // N:knots
-	optional<double> speed_mps; // wind speed in miles per second
-	optional<char> speed_mps_unit; // M:mps
-	optional<double> speed_kmh; // wind speed in kilometers per hour
-	optional<char> speed_kmh_unit; // K:kmh
+	utils::optional<double> angle; // wind angle, 0..180
+	utils::optional<char> side; // side of vessel, R:right, L:left
+	utils::optional<double> speed_knots; // wind speed in knots
+	utils::optional<char> speed_knots_unit; // N:knots
+	utils::optional<double> speed_mps; // wind speed in miles per second
+	utils::optional<char> speed_mps_unit; // M:mps
+	utils::optional<double> speed_kmh; // wind speed in kilometers per hour
+	utils::optional<char> speed_kmh_unit; // K:kmh
 
 public:
 	decltype(angle) get_angle() const { return angle; }

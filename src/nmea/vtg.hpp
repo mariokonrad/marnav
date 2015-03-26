@@ -2,6 +2,7 @@
 #define __NMEA__VTG__HPP__
 
 #include "sentence.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -23,15 +24,15 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	optional<double> track_true;
-	optional<char> type_true; // T:true
-	optional<double> track_magn;
-	optional<char> type_magn; // M:magnetic
-	optional<double> speed_kn;
-	optional<char> unit_speed_kn; // N:knots
-	optional<double> speed_kmh;
-	optional<char> unit_speed_kmh; // K:kilometers per hour
-	optional<char> faa_mode_indicator; // NMEA 2.3 or newer
+	utils::optional<double> track_true;
+	utils::optional<char> type_true; // T:true
+	utils::optional<double> track_magn;
+	utils::optional<char> type_magn; // M:magnetic
+	utils::optional<double> speed_kn;
+	utils::optional<char> unit_speed_kn; // N:knots
+	utils::optional<double> speed_kmh;
+	utils::optional<char> unit_speed_kmh; // K:kilometers per hour
+	utils::optional<char> faa_mode_indicator; // NMEA 2.3 or newer
 
 public:
 	decltype(track_true) get_track_true() const { return track_true; }

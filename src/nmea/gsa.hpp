@@ -2,6 +2,7 @@
 #define __NMEA__GSA__HPP__
 
 #include "sentence.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -22,23 +23,23 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	optional<char> selection_mode; // A:automatic 2D/3D, M:manual
-	optional<uint32_t> mode; // 1 = no fix, 2 = 2D fix, 3 = 3D fix
-	optional<uint32_t> satellite_id_01;
-	optional<uint32_t> satellite_id_02;
-	optional<uint32_t> satellite_id_03;
-	optional<uint32_t> satellite_id_04;
-	optional<uint32_t> satellite_id_05;
-	optional<uint32_t> satellite_id_06;
-	optional<uint32_t> satellite_id_07;
-	optional<uint32_t> satellite_id_08;
-	optional<uint32_t> satellite_id_09;
-	optional<uint32_t> satellite_id_10;
-	optional<uint32_t> satellite_id_11;
-	optional<uint32_t> satellite_id_12;
-	optional<double> pdop;
-	optional<double> hdop;
-	optional<double> vdop;
+	utils::optional<char> selection_mode; // A:automatic 2D/3D, M:manual
+	utils::optional<uint32_t> mode; // 1 = no fix, 2 = 2D fix, 3 = 3D fix
+	utils::optional<uint32_t> satellite_id_01;
+	utils::optional<uint32_t> satellite_id_02;
+	utils::optional<uint32_t> satellite_id_03;
+	utils::optional<uint32_t> satellite_id_04;
+	utils::optional<uint32_t> satellite_id_05;
+	utils::optional<uint32_t> satellite_id_06;
+	utils::optional<uint32_t> satellite_id_07;
+	utils::optional<uint32_t> satellite_id_08;
+	utils::optional<uint32_t> satellite_id_09;
+	utils::optional<uint32_t> satellite_id_10;
+	utils::optional<uint32_t> satellite_id_11;
+	utils::optional<uint32_t> satellite_id_12;
+	utils::optional<double> pdop;
+	utils::optional<double> hdop;
+	utils::optional<double> vdop;
 
 public:
 	decltype(selection_mode) get_selection_mode() const { return selection_mode; }

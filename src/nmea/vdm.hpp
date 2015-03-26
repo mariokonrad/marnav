@@ -2,6 +2,7 @@
 #define __NMEA__VDM__HPP__
 
 #include "sentence.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -30,7 +31,7 @@ protected:
 private:
 	uint32_t n_fragments;
 	uint32_t fragment;
-	optional<uint32_t> seq_msg_id;
+	utils::optional<uint32_t> seq_msg_id;
 	char radio_channel; // A = 161.975MHz (87B), B = 162.025MHz (88B)
 	std::string payload; // 6bit encoded content
 	uint32_t n_fill_bits; // 0..5

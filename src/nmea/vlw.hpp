@@ -2,6 +2,7 @@
 #define __NMEA__VLW__HPP__
 
 #include "sentence.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -23,10 +24,10 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	optional<double> distance_cum; // total cumulative distance
-	optional<char> distance_cum_unit; // N:nautical miles
-	optional<double> distance_reset; // distance since reset
-	optional<char> distance_reset_unit; // N:nautical miles
+	utils::optional<double> distance_cum; // total cumulative distance
+	utils::optional<char> distance_cum_unit; // N:nautical miles
+	utils::optional<double> distance_reset; // distance since reset
+	utils::optional<char> distance_reset_unit; // N:nautical miles
 
 public:
 	decltype(distance_cum) get_distance_cum() const { return distance_cum; }

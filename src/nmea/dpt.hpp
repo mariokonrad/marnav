@@ -2,6 +2,7 @@
 #define __NMEA__DPT__HPP__
 
 #include "sentence.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -23,8 +24,8 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	optional<double> depth_meter;
-	optional<double> transducer_offset;
+	utils::optional<double> depth_meter;
+	utils::optional<double> transducer_offset;
 
 public:
 	decltype(depth_meter) get_depth_meter() const { return depth_meter; }

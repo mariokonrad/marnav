@@ -2,6 +2,7 @@
 #define __NMEA__DBT__HPP__
 
 #include "sentence.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -23,12 +24,12 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	optional<double> depth_feet; // water depth in feet
-	optional<char> depth_unit_feet; // f:feet
-	optional<double> depth_meter; // water depth in meter
-	optional<char> depth_unit_meter; // M:meter
-	optional<double> depth_fathom; // water depth in fathom
-	optional<char> depth_unit_fathom; // F:fathom
+	utils::optional<double> depth_feet; // water depth in feet
+	utils::optional<char> depth_unit_feet; // f:feet
+	utils::optional<double> depth_meter; // water depth in meter
+	utils::optional<char> depth_unit_meter; // M:meter
+	utils::optional<double> depth_fathom; // water depth in fathom
+	utils::optional<char> depth_unit_fathom; // F:fathom
 
 public:
 	decltype(depth_feet) get_depth_feet() const { return depth_feet; }

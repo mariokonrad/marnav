@@ -5,7 +5,6 @@
 #include <memory>
 #include <vector>
 #include <string>
-#include "optional.hpp"
 
 namespace nmea
 {

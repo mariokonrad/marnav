@@ -4,6 +4,7 @@
 #include "sentence.hpp"
 #include "angle.hpp"
 #include "time.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -25,12 +26,12 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	optional<geo::latitude> lat;
-	optional<char> lat_hem;
-	optional<geo::longitude> lon;
-	optional<char> lon_hem;
-	optional<nmea::time> time_utc;
-	optional<char> status;
+	utils::optional<geo::latitude> lat;
+	utils::optional<char> lat_hem;
+	utils::optional<geo::longitude> lon;
+	utils::optional<char> lon_hem;
+	utils::optional<nmea::time> time_utc;
+	utils::optional<char> status;
 
 public:
 	decltype(lat) get_lat() const { return lat; }

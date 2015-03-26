@@ -10,7 +10,7 @@ rte::rte()
 {
 }
 
-optional<std::string> rte::get_waypoint_id(int index) const
+utils::optional<std::string> rte::get_waypoint_id(int index) const
 {
 	if ((index < 0) || (index >= static_cast<int>((sizeof(waypoint_id) / sizeof(waypoint_id[0])))))
 		throw std::out_of_range{"get_waypoint_id"};

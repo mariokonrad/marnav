@@ -3,6 +3,7 @@
 
 #include "sentence.hpp"
 #include "angle.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -26,19 +27,19 @@ protected:
 private:
 	void check_waypoint_id(const std::string& id) const throw(std::invalid_argument);
 
-	optional<char> status; // V:warning
-	optional<double> cross_track_error; // cross track error in nautical miles
-	optional<char> steer_dir; // direction to steer, left or right
-	optional<std::string> waypoint_to; // TO waypoint ID
-	optional<std::string> waypoint_from; // FROM waypoint ID
-	optional<geo::latitude> lat; // destination waypoint latitude
-	optional<char> lat_hem; // destination waypoint latitude dir, N:north, S:south
-	optional<geo::longitude> lon; // destination waypoint longitude
-	optional<char> lon_hem; // destination waypoint longitude dir, E:east, W:west
-	optional<double> range; // range to destination in nautical miles
-	optional<double> bearing; // bearing to destination in degrees to true
-	optional<double> dst_velocity; // destination closing velocity in knots
-	optional<char> arrival_status; // arrival status, A:arrival circle entered
+	utils::optional<char> status; // V:warning
+	utils::optional<double> cross_track_error; // cross track error in nautical miles
+	utils::optional<char> steer_dir; // direction to steer, left or right
+	utils::optional<std::string> waypoint_to; // TO waypoint ID
+	utils::optional<std::string> waypoint_from; // FROM waypoint ID
+	utils::optional<geo::latitude> lat; // destination waypoint latitude
+	utils::optional<char> lat_hem; // destination waypoint latitude dir, N:north, S:south
+	utils::optional<geo::longitude> lon; // destination waypoint longitude
+	utils::optional<char> lon_hem; // destination waypoint longitude dir, E:east, W:west
+	utils::optional<double> range; // range to destination in nautical miles
+	utils::optional<double> bearing; // bearing to destination in degrees to true
+	utils::optional<double> dst_velocity; // destination closing velocity in knots
+	utils::optional<char> arrival_status; // arrival status, A:arrival circle entered
 
 public:
 	decltype(status) get_status() const { return status; }

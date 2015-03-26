@@ -7,6 +7,7 @@ option(ENABLE_STATIC
 set(SOURCE_UTILS
 	utils/unique.hpp
 	utils/bitset.hpp
+	utils/optional.hpp
 	)
 
 set(SOURCE_GEO
@@ -39,7 +40,6 @@ set(SOURCE_NMEA_0183
 	nmea/vwr.cpp
 	nmea/vdm.cpp
 	nmea/vdo.cpp
-	nmea/optional.hpp
 	)
 
 set(SOURCE_AIS
@@ -102,7 +102,6 @@ install(
 		nmea/io.hpp
 		nmea/date.hpp
 		nmea/time.hpp
-		nmea/optional.hpp
 		nmea/sentence.hpp
 		nmea/nmea.hpp
 		nmea/aam.hpp
@@ -156,6 +155,7 @@ install(
 	FILES
 		utils/unique.hpp
 		utils/bitset.hpp
+		utils/optional.hpp
 	DESTINATION include/marnav/utils
 	)
 

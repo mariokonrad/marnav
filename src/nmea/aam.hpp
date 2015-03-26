@@ -2,6 +2,7 @@
 #define __NMEA__AAM__HPP__
 
 #include "sentence.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -25,11 +26,11 @@ protected:
 private:
 	void check_waypoint_id(const std::string& id) const throw(std::invalid_argument);
 
-	optional<char> arrival_circle_entered;
-	optional<char> perpendicualar_passed;
-	optional<double> arrival_circle_radius;
-	optional<char> arrival_circle_radius_unit;
-	optional<std::string> waypoint_id;
+	utils::optional<char> arrival_circle_entered;
+	utils::optional<char> perpendicualar_passed;
+	utils::optional<double> arrival_circle_radius;
+	utils::optional<char> arrival_circle_radius_unit;
+	utils::optional<std::string> waypoint_id;
 
 public:
 	decltype(arrival_circle_entered) get_arrival_circle_entered() const

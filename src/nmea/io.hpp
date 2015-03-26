@@ -1,15 +1,15 @@
 #ifndef __NMEA__IO__HPP__
 #define __NMEA__IO__HPP__
 
-#include "optional.hpp"
 #include "angle.hpp"
+#include <utils/optional.hpp>
 #include <sstream>
 #include <string>
 
 namespace nmea
 {
 
-template <class T> inline std::string to_string(const optional<T>& data)
+template <class T> inline std::string to_string(const utils::optional<T>& data)
 {
 	if (!data)
 		return std::string{};
@@ -18,7 +18,7 @@ template <class T> inline std::string to_string(const optional<T>& data)
 	return to_string(data.value());
 }
 
-template <> inline std::string to_string(const optional<std::string>& data)
+template <> inline std::string to_string(const utils::optional<std::string>& data)
 {
 	if (!data)
 		return std::string{};
@@ -43,7 +43,7 @@ inline std::string to_string(const std::string& data)
 	return data;
 }
 
-template <> inline std::string to_string(const optional<uint32_t>& data)
+template <> inline std::string to_string(const utils::optional<uint32_t>& data)
 {
 	if (!data)
 		return std::string{};
@@ -51,7 +51,7 @@ template <> inline std::string to_string(const optional<uint32_t>& data)
 	return std::to_string(data.value());
 }
 
-template <> inline std::string to_string(const optional<double>& data)
+template <> inline std::string to_string(const utils::optional<double>& data)
 {
 	if (!data)
 		return std::string{};
@@ -61,7 +61,7 @@ template <> inline std::string to_string(const optional<double>& data)
 	return buf;
 }
 
-template <> inline std::string to_string(const optional<char>& data)
+template <> inline std::string to_string(const utils::optional<char>& data)
 {
 	if (!data)
 		return std::string{};
@@ -71,7 +71,7 @@ template <> inline std::string to_string(const optional<char>& data)
 	return buf;
 }
 
-inline std::string format(const optional<uint32_t>& data, unsigned int width)
+inline std::string format(const utils::optional<uint32_t>& data, unsigned int width)
 {
 	if (!data)
 		return std::string{};
@@ -113,7 +113,7 @@ inline void read(const std::string& s, geo::longitude& value)
 	value = parse_longitude(s);
 }
 
-template <class T> static void read(const std::string& s, optional<T>& value)
+template <class T> static void read(const std::string& s, utils::optional<T>& value)
 {
 	if (s.empty()) {
 		value.reset();
@@ -126,7 +126,7 @@ template <class T> static void read(const std::string& s, optional<T>& value)
 	value = tmp;
 }
 
-inline void read(const std::string& s, optional<geo::latitude>& value)
+inline void read(const std::string& s, utils::optional<geo::latitude>& value)
 {
 	if (s.empty()) {
 		value.reset();
@@ -137,7 +137,7 @@ inline void read(const std::string& s, optional<geo::latitude>& value)
 	value = tmp;
 }
 
-inline void read(const std::string& s, optional<geo::longitude>& value)
+inline void read(const std::string& s, utils::optional<geo::longitude>& value)
 {
 	if (s.empty()) {
 		value.reset();

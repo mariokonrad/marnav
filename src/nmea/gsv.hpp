@@ -2,6 +2,7 @@
 #define __NMEA__GSV__HPP__
 
 #include "sentence.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -22,25 +23,25 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	optional<uint32_t> n_messages;
-	optional<uint32_t> message_number;
-	optional<uint32_t> n_satellites_in_view;
-	optional<uint32_t> sat_0_id;
-	optional<uint32_t> sat_0_elevation;
-	optional<uint32_t> sat_0_azimuth; // azimuth against true
-	optional<uint32_t> sat_0_snr;
-	optional<uint32_t> sat_1_id;
-	optional<uint32_t> sat_1_elevation;
-	optional<uint32_t> sat_1_azimuth; // azimuth against true
-	optional<uint32_t> sat_1_snr;
-	optional<uint32_t> sat_2_id;
-	optional<uint32_t> sat_2_elevation;
-	optional<uint32_t> sat_2_azimuth; // azimuth against true
-	optional<uint32_t> sat_2_snr;
-	optional<uint32_t> sat_3_id;
-	optional<uint32_t> sat_3_elevation;
-	optional<uint32_t> sat_3_azimuth; // azimuth against true
-	optional<uint32_t> sat_3_snr;
+	utils::optional<uint32_t> n_messages;
+	utils::optional<uint32_t> message_number;
+	utils::optional<uint32_t> n_satellites_in_view;
+	utils::optional<uint32_t> sat_0_id;
+	utils::optional<uint32_t> sat_0_elevation;
+	utils::optional<uint32_t> sat_0_azimuth; // azimuth against true
+	utils::optional<uint32_t> sat_0_snr;
+	utils::optional<uint32_t> sat_1_id;
+	utils::optional<uint32_t> sat_1_elevation;
+	utils::optional<uint32_t> sat_1_azimuth; // azimuth against true
+	utils::optional<uint32_t> sat_1_snr;
+	utils::optional<uint32_t> sat_2_id;
+	utils::optional<uint32_t> sat_2_elevation;
+	utils::optional<uint32_t> sat_2_azimuth; // azimuth against true
+	utils::optional<uint32_t> sat_2_snr;
+	utils::optional<uint32_t> sat_3_id;
+	utils::optional<uint32_t> sat_3_elevation;
+	utils::optional<uint32_t> sat_3_azimuth; // azimuth against true
+	utils::optional<uint32_t> sat_3_snr;
 
 public:
 	decltype(n_messages) get_n_messages() const { return n_messages; }

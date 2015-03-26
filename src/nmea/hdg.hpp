@@ -2,6 +2,7 @@
 #define __NMEA__HDG__HPP__
 
 #include "sentence.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -25,11 +26,11 @@ protected:
 private:
 	void check_hem(char hem) throw(std::invalid_argument);
 
-	optional<double> heading; // magnetic sensor heading in deg
-	optional<double> magn_dev; // magnetic deviation in deg
-	optional<char> magn_dev_hem; // E:east, W:west
-	optional<double> magn_var; // magnetic variation in deg
-	optional<char> magn_var_hem; // E:east, W:west
+	utils::optional<double> heading; // magnetic sensor heading in deg
+	utils::optional<double> magn_dev; // magnetic deviation in deg
+	utils::optional<char> magn_dev_hem; // E:east, W:west
+	utils::optional<double> magn_var; // magnetic variation in deg
+	utils::optional<char> magn_var_hem; // E:east, W:west
 
 public:
 	decltype(heading) get_heading() const { return heading; }

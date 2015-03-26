@@ -5,6 +5,7 @@
 #include "date.hpp"
 #include "time.hpp"
 #include "angle.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -26,18 +27,18 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	optional<nmea::time> time_utc;
-	optional<char> status;
-	optional<geo::latitude> lat;
-	optional<char> lat_hem;
-	optional<geo::longitude> lon;
-	optional<char> lon_hem;
-	optional<double> sog;
-	optional<double> heading;
-	optional<nmea::date> date;
-	optional<double> mag;
-	optional<char> mag_hem;
-	optional<char> faa_mode_indicator;
+	utils::optional<nmea::time> time_utc;
+	utils::optional<char> status;
+	utils::optional<geo::latitude> lat;
+	utils::optional<char> lat_hem;
+	utils::optional<geo::longitude> lon;
+	utils::optional<char> lon_hem;
+	utils::optional<double> sog;
+	utils::optional<double> heading;
+	utils::optional<nmea::date> date;
+	utils::optional<double> mag;
+	utils::optional<char> mag_hem;
+	utils::optional<char> faa_mode_indicator;
 
 public:
 	decltype(time_utc) get_time_utc() const { return time_utc; }

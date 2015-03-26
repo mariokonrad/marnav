@@ -2,6 +2,7 @@
 #define __NMEA__MTW__HPP__
 
 #include "sentence.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -22,8 +23,8 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	optional<double> temperature; // water temperature
-	optional<char> unit; // unit degrees, C:celcius
+	utils::optional<double> temperature; // water temperature
+	utils::optional<char> unit; // unit degrees, C:celcius
 
 public:
 	decltype(temperature) get_temperature() const { return temperature; }

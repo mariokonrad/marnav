@@ -2,6 +2,7 @@
 #define __NMEA__VHW__HPP__
 
 #include "sentence.hpp"
+#include <utils/optional.hpp>
 
 namespace nmea
 {
@@ -23,14 +24,14 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	optional<char> heading_empty; // heading (empty)
-	optional<char> degrees_true; // T:true
-	optional<double> heading; // heading in degrees, 0..359
-	optional<char> degrees_mag; // M:magnetic
-	optional<double> speed_knots; // speed in knots
-	optional<char> speed_knots_unit; // N:knots
-	optional<double> speed_kmh; // speed in kilometers per hour
-	optional<char> speed_kmh_unit; // K:kmh
+	utils::optional<char> heading_empty; // heading (empty)
+	utils::optional<char> degrees_true; // T:true
+	utils::optional<double> heading; // heading in degrees, 0..359
+	utils::optional<char> degrees_mag; // M:magnetic
+	utils::optional<double> speed_knots; // speed in knots
+	utils::optional<char> speed_knots_unit; // N:knots
+	utils::optional<double> speed_kmh; // speed in kilometers per hour
+	utils::optional<char> speed_kmh_unit; // K:kmh
 
 public:
 	decltype(heading_empty) get_heading_empty() const { return heading_empty; }
