@@ -79,5 +79,4 @@ std::string to_string(const geo::longitude& v)
 			 static_cast<uint32_t>(10000 * v.seconds() / 60));
 	return buf;
 }
-
 }

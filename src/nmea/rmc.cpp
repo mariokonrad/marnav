@@ -13,27 +13,13 @@ rmc::rmc()
 void rmc::set_lat(const geo::latitude& t)
 {
 	lat = t;
-	switch (t.hem()) {
-		case geo::latitude::hemisphere::NORTH:
-			lat_hem = direction::NORTH;
-			break;
-		case geo::latitude::hemisphere::SOUTH:
-			lat_hem = direction::SOUTH;
-			break;
-	}
+	lat_hem = convert_hemisphere(t);
 }
 
 void rmc::set_lon(const geo::longitude& t)
 {
 	lon = t;
-	switch (t.hem()) {
-		case geo::longitude::hemisphere::EAST:
-			lon_hem = direction::EAST;
-			break;
-		case geo::longitude::hemisphere::WEST:
-			lon_hem = direction::WEST;
-			break;
-	}
+	lon_hem = convert_hemisphere(t);
 }
 
 std::unique_ptr<sentence>

@@ -15,6 +15,7 @@ set(SOURCE_GEO
 	)
 
 set(SOURCE_NMEA_0183
+	nmea/constants.cpp
 	nmea/angle.cpp
 	nmea/date.cpp
 	nmea/time.cpp
@@ -98,6 +99,7 @@ install(
 
 install(
 	FILES
+		nmea/constants.hpp
 		nmea/angle.hpp
 		nmea/io.hpp
 		nmea/date.hpp
