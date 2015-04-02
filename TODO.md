@@ -77,6 +77,6 @@ SeaTalk
 -------
 
 - Implement more messages
-- Implement reader for serial devices
+- Implement writer for serial devices
 
 

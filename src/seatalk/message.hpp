@@ -8,6 +8,8 @@
 namespace seatalk
 {
 
+constexpr const int MAX_MESSAGE_SIZE = 32;
+
 enum class message_id : uint8_t {
 	depth_below_transducer = 0x00,
 	equipment_id = 0x01,

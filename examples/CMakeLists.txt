@@ -5,3 +5,11 @@ add_executable(parse_nmea
 target_link_libraries(parse_nmea
 	marnav
 	)
+
+add_executable(read_seatalk
+	read_seatalk.cpp
+	)
+
+target_link_libraries(read_seatalk
+	marnav
+	)

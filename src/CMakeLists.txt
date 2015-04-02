@@ -67,6 +67,11 @@ set(SOURCE_SEATALK
 	seatalk/message_27.cpp
 	)
 
+set(SOURCE_IO
+	io/serial.cpp
+	io/seatalk_serial.cpp
+	)
+
 add_executable(nmeasum
 	nmeasum.cpp
 	)
@@ -84,6 +89,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	${SOURCE_NMEA_0183}
 	${SOURCE_AIS}
 	${SOURCE_SEATALK}
+	${SOURCE_IO}
 	)
 
 set_target_properties(marnav
@@ -165,5 +171,13 @@ install(
 	FILES
 		geo/angle.hpp
 	DESTINATION include/marnav/geo
+	)
+
+install(
+	FILES
+		io/device.hpp
+		io/serial.hpp
+		io/seatalk_serial.hpp
+	DESTINATION include/marnav/io
 	)
 
