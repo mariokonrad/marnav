@@ -25,6 +25,7 @@ void seatalk_serial::close()
 {
 	if (dev)
 		dev->close();
+	dev.reset();
 }
 
 uint8_t seatalk_serial::parity(uint8_t a) const
