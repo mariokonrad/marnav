@@ -9,3 +9,5 @@ MaxEmptyLinesToKeep: 1
 AlignEscapedNewlinesLeft: true
 Cpp11BracedListStyle: true
 Standard: Cpp11
+DerivePointerAlignment: false
+PointerAlignment: Middle

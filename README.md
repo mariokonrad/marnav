@@ -132,7 +132,7 @@ REQUIREMENTS
 Tools needed to build the library:
 - GCC 4.9.2 or newer
 - cmake 2.8.11 or newer
-- clang-format 3.4 or newer
+- clang-format 3.7 or newer
 
 optional (somewhat):
 - lcov / genhtml
