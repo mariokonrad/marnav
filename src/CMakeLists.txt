@@ -70,6 +70,7 @@ set(SOURCE_SEATALK
 set(SOURCE_IO
 	io/serial.cpp
 	io/seatalk_serial.cpp
+	io/nmea_serial.cpp
 	)
 
 add_executable(nmeasum
@@ -178,6 +179,7 @@ install(
 		io/device.hpp
 		io/serial.hpp
 		io/seatalk_serial.hpp
+		io/nmea_serial.hpp
 	DESTINATION include/marnav/io
 	)
 

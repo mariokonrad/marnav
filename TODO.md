@@ -66,6 +66,8 @@ NMEA
 	- ZTG - UTC & Time to Destination Waypoint
 	- vendor extensions
 
+- Implement writer for serial devices
+
 
 AIS
 ---

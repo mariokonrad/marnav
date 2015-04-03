@@ -129,8 +129,6 @@ void seatalk_serial::process_seatalk() throw(std::runtime_error)
 
 /// Reads data from the device.
 ///
-/// @param[in] device Device to operate on
-/// @param[out] data Working context.
 /// @exception std::runtime_error The device was invalid or read error.
 void seatalk_serial::read_data() throw(std::runtime_error)
 {
