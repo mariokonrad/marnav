@@ -4,6 +4,8 @@
 #include <string>
 #include <stdexcept>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -12,7 +14,7 @@ class time
 public:
 	time();
 
-	time(const time&) = default;
+	time(const time &) = default;
 
 	explicit time(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(std::invalid_argument);
 
@@ -28,7 +30,7 @@ public:
 	/// Returns the milliseconds component.
 	uint32_t milliseconds() const;
 
-	friend bool operator==(const time& a, const time& b) noexcept;
+	friend bool operator==(const time & a, const time & b) noexcept;
 
 	/// Parses the time information within the specified string (start and end of string).
 	/// If the string is empty, the result will be initialized to zero.
@@ -42,7 +44,7 @@ public:
 	/// @param[in] e end of string to parse (exclusive)
 	/// @param[out] endptr Points the end of the parsed string.
 	/// @return The parsed time
-	static time parse(const std::string& str) throw(std::invalid_argument);
+	static time parse(const std::string & str) throw(std::invalid_argument);
 
 private:
 	uint32_t h; // hour: 0..23
@@ -51,11 +53,11 @@ private:
 	uint32_t ms; // millisecond: 0..999
 };
 
-bool operator==(const time& a, const time& b) noexcept;
-std::string to_string(const time& d);
-std::ostream& operator<<(std::ostream& os, const time& t);
-std::istream& operator>>(std::istream& is, time& t);
-
+bool operator==(const time & a, const time & b) noexcept;
+std::string to_string(const time & d);
+std::ostream & operator<<(std::ostream & os, const time & t);
+std::istream & operator>>(std::istream & is, time & t);
+}
 }
 
 #endif

@@ -5,19 +5,15 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_nmea_rmc : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_rmc, contruction)
-{
-	nmea::rmc rmc;
-}
+TEST_F(Test_nmea_rmc, contruction) { nmea::rmc rmc; }
 
-TEST_F(Test_nmea_rmc, size)
-{
-	EXPECT_EQ(168u, sizeof(nmea::rmc));
-}
+TEST_F(Test_nmea_rmc, size) { EXPECT_EQ(168u, sizeof(nmea::rmc)); }
 
 TEST_F(Test_nmea_rmc, parse)
 {
@@ -78,7 +74,5 @@ TEST_F(Test_nmea_rmc, set_lon_west)
 
 	EXPECT_STREQ("$GPRMC,,,,,12346.1166,W,,,,,,*00", nmea::to_string(rmc).c_str());
 }
-
 }
-
 

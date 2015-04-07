@@ -5,19 +5,15 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_nmea_gll : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_gll, contruction)
-{
-	nmea::gll gll;
-}
+TEST_F(Test_nmea_gll, contruction) { nmea::gll gll; }
 
-TEST_F(Test_nmea_gll, size)
-{
-	EXPECT_EQ(96u, sizeof(nmea::gll));
-}
+TEST_F(Test_nmea_gll, size) { EXPECT_EQ(96u, sizeof(nmea::gll)); }
 
 TEST_F(Test_nmea_gll, parse)
 {
@@ -72,6 +68,5 @@ TEST_F(Test_nmea_gll, set_lon_east)
 
 	EXPECT_STREQ("$GPGLL,,,12327.0000,E,,*0E", nmea::to_string(gll).c_str());
 }
-
 }
 

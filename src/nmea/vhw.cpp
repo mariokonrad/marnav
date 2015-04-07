@@ -2,6 +2,8 @@
 #include <utils/unique.hpp>
 #include "io.hpp"
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -29,16 +31,15 @@ void vhw::set_speed_kmh(double t)
 	speed_kmh_unit = unit::KMH;
 }
 
-std::unique_ptr<sentence>
-vhw::parse(const std::string& talker,
-		   const std::vector<std::string>& fields) throw(std::invalid_argument)
+std::unique_ptr<sentence> vhw::parse(const std::string & talker,
+	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
 	if (fields.size() != 8)
 		throw std::invalid_argument{"invalid number of fields in vhw::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<vhw>();
 	result->set_talker(talker);
-	vhw& detail = static_cast<vhw&>(*result);
+	vhw & detail = static_cast<vhw &>(*result);
 
 	read(fields[0], detail.heading_empty);
 	read(fields[1], detail.degrees_true);
@@ -54,9 +55,9 @@ vhw::parse(const std::string& talker,
 
 std::vector<std::string> vhw::get_data() const
 {
-	return {to_string(heading_empty), to_string(degrees_true),  to_string(heading),
-			to_string(degrees_mag),   to_string(speed_knots),   to_string(speed_knots_unit),
-			to_string(speed_kmh),	 to_string(speed_kmh_unit)};
+	return {to_string(heading_empty), to_string(degrees_true), to_string(heading),
+		to_string(degrees_mag), to_string(speed_knots), to_string(speed_knots_unit),
+		to_string(speed_kmh), to_string(speed_kmh_unit)};
 }
-
+}
 }

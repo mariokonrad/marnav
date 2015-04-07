@@ -1,5 +1,7 @@
 #include "message_21.hpp"
 
+namespace marnav
+{
 namespace seatalk
 {
 
@@ -9,7 +11,7 @@ message_21::message_21()
 {
 }
 
-std::unique_ptr<message> message_21::parse(const raw& data) throw(std::invalid_argument)
+std::unique_ptr<message> message_21::parse(const raw & data) throw(std::invalid_argument)
 {
 	if (data.size() != 5)
 		throw std::invalid_argument{"invalid number of bytes in message_21::parse"};
@@ -17,7 +19,7 @@ std::unique_ptr<message> message_21::parse(const raw& data) throw(std::invalid_a
 		throw std::invalid_argument{"invalid size specified in message"};
 
 	std::unique_ptr<message> result = utils::make_unique<message_21>();
-	message_21& msg = static_cast<message_21&>(*result);
+	message_21 & msg = static_cast<message_21 &>(*result);
 
 	msg.distance = 0;
 	msg.distance += data[2];
@@ -32,8 +34,8 @@ std::unique_ptr<message> message_21::parse(const raw& data) throw(std::invalid_a
 raw message_21::get_data() const
 {
 	return raw{static_cast<uint8_t>(ID), 0x02, static_cast<uint8_t>((distance >> 12) & 0xff),
-			   static_cast<uint8_t>((distance >> 4) & 0xff),
-			   static_cast<uint8_t>((distance >> 0) & 0x0f)};
+		static_cast<uint8_t>((distance >> 4) & 0xff),
+		static_cast<uint8_t>((distance >> 0) & 0x0f)};
 }
-
+}
 }

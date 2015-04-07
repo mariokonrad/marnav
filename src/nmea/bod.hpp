@@ -4,6 +4,8 @@
 #include "sentence.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -13,18 +15,17 @@ public:
 	constexpr static const sentence_id ID = sentence_id::BOD;
 
 	bod();
-	bod(const bod&) = default;
-	bod& operator=(const bod&) = default;
+	bod(const bod &) = default;
+	bod & operator=(const bod &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	void check_waypoint_id(const std::string& id) const throw(std::invalid_argument);
+	void check_waypoint_id(const std::string & id) const throw(std::invalid_argument);
 
 	utils::optional<double> bearing_true;
 	utils::optional<char> type_true; // T:true
@@ -43,10 +44,10 @@ public:
 
 	void set_bearing_true(double t);
 	void set_bearing_magn(double t);
-	void set_waypoint_to(const std::string& id);
-	void set_waypoint_from(const std::string& id);
+	void set_waypoint_to(const std::string & id);
+	void set_waypoint_from(const std::string & id);
 };
-
+}
 }
 
 #endif

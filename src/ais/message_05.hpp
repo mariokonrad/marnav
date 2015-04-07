@@ -3,8 +3,11 @@
 
 #include "message.hpp"
 
+namespace marnav
+{
 namespace ais
 {
+
 class message_05 : public message
 {
 public:
@@ -17,20 +20,20 @@ public:
 	constexpr static const uint32_t eta_minute_not_available = 60;
 
 	message_05();
-	message_05(const message_05&) = default;
-	message_05& operator=(const message_05&) = default;
+	message_05(const message_05 &) = default;
+	message_05 & operator=(const message_05 &) = default;
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw& bits) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & bits) throw(std::invalid_argument);
 
 protected:
-	void read_data(const raw& bits);
+	void read_data(const raw & bits);
 
-	std::string read_string(const raw& bits, raw::size_type ofs,
-							raw::size_type count_sixbits) const;
-	void write_string(raw& bits, raw::size_type ofs, raw::size_type count_sixbits,
-					  const std::string& s) const;
+	std::string read_string(
+		const raw & bits, raw::size_type ofs, raw::size_type count_sixbits) const;
+	void write_string(raw & bits, raw::size_type ofs, raw::size_type count_sixbits,
+		const std::string & s) const;
 
 private:
 	unsigned int repeat_indicator;
@@ -78,8 +81,8 @@ public:
 	void set_mmsi(uint32_t t) { mmsi = t; }
 	void set_ais_version(uint32_t t) { ais_version = t; }
 	void set_imo_number(uint32_t t) { imo_number = t; }
-	void set_callsign(const std::string& t);
-	void set_shipname(const std::string& t);
+	void set_callsign(const std::string & t);
+	void set_shipname(const std::string & t);
 	void set_shiptype(ship_type t) { shiptype = t; }
 	void set_to_bow(uint32_t t) { to_bow = t; }
 	void set_to_stern(uint32_t t) { to_stern = t; }
@@ -91,9 +94,10 @@ public:
 	void set_eta_hour(uint32_t t) { eta_hour = t; }
 	void set_eta_minute(uint32_t t) { eta_minute = t; }
 	void set_draught(uint32_t t) { draught = t; }
-	void set_destination(const std::string& t);
+	void set_destination(const std::string & t);
 	void set_dte(bool t) { dte = t; }
 };
+}
 }
 
 #endif

@@ -1,8 +1,10 @@
 #include "gsv.hpp"
-#include <utils/unique.hpp>
 #include "io.hpp"
+#include <utils/unique.hpp>
 #include <iostream>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -63,9 +65,8 @@ void gsv::set_sat_3(uint32_t id, uint32_t elevation, uint32_t azimuth, uint32_t 
 	sat_3_snr = snr;
 }
 
-std::unique_ptr<sentence>
-gsv::parse(const std::string& talker,
-		   const std::vector<std::string>& fields) throw(std::invalid_argument)
+std::unique_ptr<sentence> gsv::parse(const std::string & talker,
+	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
 	if (fields.size() != 19) {
 		throw std::invalid_argument{
@@ -75,18 +76,18 @@ gsv::parse(const std::string& talker,
 
 	std::unique_ptr<sentence> result = utils::make_unique<gsv>();
 	result->set_talker(talker);
-	gsv& detail = static_cast<gsv&>(*result);
+	gsv & detail = static_cast<gsv &>(*result);
 
-	read(fields[ 0], detail.n_messages);
-	read(fields[ 1], detail.message_number);
-	read(fields[ 2], detail.n_satellites_in_view);
-	read(fields[ 3], detail.sat_0_id);
-	read(fields[ 4], detail.sat_0_elevation);
-	read(fields[ 5], detail.sat_0_azimuth);
-	read(fields[ 6], detail.sat_0_snr);
-	read(fields[ 7], detail.sat_1_id);
-	read(fields[ 8], detail.sat_1_elevation);
-	read(fields[ 9], detail.sat_1_azimuth);
+	read(fields[0], detail.n_messages);
+	read(fields[1], detail.message_number);
+	read(fields[2], detail.n_satellites_in_view);
+	read(fields[3], detail.sat_0_id);
+	read(fields[4], detail.sat_0_elevation);
+	read(fields[5], detail.sat_0_azimuth);
+	read(fields[6], detail.sat_0_snr);
+	read(fields[7], detail.sat_1_id);
+	read(fields[8], detail.sat_1_elevation);
+	read(fields[9], detail.sat_1_azimuth);
 	read(fields[10], detail.sat_1_snr);
 	read(fields[11], detail.sat_2_id);
 	read(fields[12], detail.sat_2_elevation);
@@ -102,13 +103,14 @@ gsv::parse(const std::string& talker,
 
 std::vector<std::string> gsv::get_data() const
 {
-	return {to_string(n_messages),		to_string(message_number),  to_string(n_satellites_in_view),
-			format(sat_0_id, 2),		format(sat_0_elevation, 2), format(sat_0_azimuth, 3),
-			format(sat_0_snr, 2),		format(sat_1_id, 2),		format(sat_1_elevation, 2),
-			format(sat_1_azimuth, 3),   format(sat_1_snr, 2),		format(sat_2_id, 2),
-			format(sat_2_elevation, 2), format(sat_2_azimuth, 3),   format(sat_2_snr, 2),
-			format(sat_3_id, 2),		format(sat_3_elevation, 2), format(sat_3_azimuth, 3),
-			format(sat_3_snr, 2)};
+	return {to_string(n_messages), to_string(message_number), to_string(n_satellites_in_view),
+		format(sat_0_id, 2), format(sat_0_elevation, 2), format(sat_0_azimuth, 3),
+		format(sat_0_snr, 2), format(sat_1_id, 2), format(sat_1_elevation, 2),
+		format(sat_1_azimuth, 3), format(sat_1_snr, 2), format(sat_2_id, 2),
+		format(sat_2_elevation, 2), format(sat_2_azimuth, 3), format(sat_2_snr, 2),
+		format(sat_3_id, 2), format(sat_3_elevation, 2), format(sat_3_azimuth, 3),
+		format(sat_3_snr, 2)};
+}
 }
 }
 

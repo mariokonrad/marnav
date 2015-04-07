@@ -1,6 +1,8 @@
 #include "angle.hpp"
 #include <cmath>
 
+namespace marnav
+{
 namespace geo
 {
 angle::angle()
@@ -49,7 +51,7 @@ angle::operator double() const { return value; }
 
 double angle::get() const { return value; }
 
-bool operator==(const angle& a, const angle& b) noexcept
+bool operator==(const angle & a, const angle & b) noexcept
 {
 	return (&a == &b) || (a.value == b.value);
 }
@@ -65,9 +67,10 @@ latitude::latitude(double value) throw(std::invalid_argument)
 	check(get());
 }
 
-latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(std::invalid_argument)
+latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(
+	std::invalid_argument)
 	: angle((static_cast<double>(d) + static_cast<double>(m) / 60.0
-			 + static_cast<double>(s) / 3600.0) * ((hem == hemisphere::SOUTH) ? -1.0 : 1.0))
+				+ static_cast<double>(s) / 3600.0) * ((hem == hemisphere::SOUTH) ? -1.0 : 1.0))
 {
 	check(get());
 }
@@ -95,10 +98,10 @@ longitude::longitude(double value) throw(std::invalid_argument)
 	check(get());
 }
 
-longitude::longitude(uint32_t d, uint32_t m, uint32_t s,
-					 hemisphere hem) throw(std::invalid_argument)
+longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(
+	std::invalid_argument)
 	: angle((static_cast<double>(d) + static_cast<double>(m) / 60.0
-			 + static_cast<double>(s) / 3600.0) * ((hem == hemisphere::EAST) ? -1.0 : 1.0))
+				+ static_cast<double>(s) / 3600.0) * ((hem == hemisphere::EAST) ? -1.0 : 1.0))
 {
 	check(get());
 }
@@ -114,5 +117,5 @@ void longitude::check(double a) throw(std::invalid_argument)
 	if ((a < -180.0) || (a > 180.0))
 		throw std::invalid_argument{"invalid value for nmea::longitude"};
 }
-
+}
 }

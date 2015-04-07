@@ -1,10 +1,12 @@
 #include "sentence.hpp"
 #include <algorithm>
 
+namespace marnav
+{
 namespace nmea
 {
 
-sentence::sentence(sentence_id id, const std::string& tag, const std::string& talker)
+sentence::sentence(sentence_id id, const std::string & tag, const std::string & talker)
 	: id_(id)
 {
 	std::copy_n(tag.c_str(), 3, this->tag_);
@@ -15,7 +17,7 @@ sentence::sentence(sentence_id id, const std::string& tag, const std::string& ta
 }
 
 /// Overwrites the default talker for a sentence.
-void sentence::set_talker(const std::string& talker)
+void sentence::set_talker(const std::string & talker)
 {
 	if (talker.size() != 2)
 		return;
@@ -26,17 +28,17 @@ void sentence::set_talker(const std::string& talker)
 
 sentence_id sentence::id() const { return id_; }
 
-const char* sentence::tag() const { return tag_; }
+const char * sentence::tag() const { return tag_; }
 
-const char* sentence::talker() const { return talker_; }
+const char * sentence::talker() const { return talker_; }
 
-std::string to_string(const sentence& s)
+std::string to_string(const sentence & s)
 {
 	std::string result;
 	result += s.get_start_token();
 	result += s.talker();
 	result += s.tag();
-	for (auto const& data : s.get_data()) {
+	for (auto const & data : s.get_data()) {
 		result += ",";
 		result += data;
 	}
@@ -49,6 +51,5 @@ std::string to_string(const sentence& s)
 
 	return result + buf;
 }
-
 }
-
+}

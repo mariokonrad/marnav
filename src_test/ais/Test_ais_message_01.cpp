@@ -5,6 +5,8 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_ais_message_01 : public ::testing::Test
 {
 };
@@ -45,5 +47,4 @@ TEST_F(Test_ais_message_01, encode_default_values)
 	EXPECT_STREQ("100000?P061P3Cj40Y@@4?wh0000", v[0].first.c_str());
 	EXPECT_EQ(0, v[0].second);
 }
-
 }

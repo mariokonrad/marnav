@@ -5,6 +5,9 @@
 
 namespace
 {
+
+using namespace marnav;
+
 class Test_nmea_sentence : public ::testing::Test
 {
 };
@@ -24,5 +27,4 @@ TEST_F(Test_nmea_sentence, sentence_wrong_id)
 
 	EXPECT_EQ(nullptr, rc);
 }
-
 }

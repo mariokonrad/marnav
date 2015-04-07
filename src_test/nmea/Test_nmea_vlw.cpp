@@ -5,19 +5,15 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_nmea_vlw : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_vlw, contruction)
-{
-	nmea::vlw vlw;
-}
+TEST_F(Test_nmea_vlw, contruction) { nmea::vlw vlw; }
 
-TEST_F(Test_nmea_vlw, size)
-{
-	EXPECT_EQ(72u, sizeof(nmea::vlw));
-}
+TEST_F(Test_nmea_vlw, size) { EXPECT_EQ(72u, sizeof(nmea::vlw)); }
 
 TEST_F(Test_nmea_vlw, parse)
 {
@@ -60,6 +56,5 @@ TEST_F(Test_nmea_vlw, set_distance_reset_nm)
 
 	EXPECT_STREQ("$IIVLW,,,12.4,N*1A", nmea::to_string(vlw).c_str());
 }
-
 }
 

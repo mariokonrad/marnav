@@ -6,6 +6,8 @@
 #include "time.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -15,12 +17,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GLL;
 
 	gll();
-	gll(const gll&) = default;
-	gll& operator=(const gll&) = default;
+	gll(const gll &) = default;
+	gll & operator=(const gll &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -41,12 +42,12 @@ public:
 	decltype(time_utc) get_time_utc() const { return time_utc; }
 	decltype(status) get_status() const { return status; }
 
-	void set_lat(const geo::latitude& t);
-	void set_lon(const geo::longitude& t);
-	void set_time_utc(const nmea::time& t) { time_utc = t; }
+	void set_lat(const geo::latitude & t);
+	void set_lon(const geo::longitude & t);
+	void set_time_utc(const nmea::time & t) { time_utc = t; }
 	void set_status(char t) { status = t; }
 };
-
+}
 }
 
 #endif

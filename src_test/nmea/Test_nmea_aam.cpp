@@ -5,19 +5,15 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_nmea_aam : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_aam, contruction)
-{
-	nmea::aam aam;
-}
+TEST_F(Test_nmea_aam, contruction) { nmea::aam aam; }
 
-TEST_F(Test_nmea_aam, size)
-{
-	EXPECT_EQ(64u, sizeof(nmea::aam));
-}
+TEST_F(Test_nmea_aam, size) { EXPECT_EQ(64u, sizeof(nmea::aam)); }
 
 TEST_F(Test_nmea_aam, parse)
 {
@@ -67,6 +63,5 @@ TEST_F(Test_nmea_aam, set_waypoint_id_string_to_large)
 
 	EXPECT_ANY_THROW(aam.set_waypoint_id("123456789"));
 }
-
 }
 

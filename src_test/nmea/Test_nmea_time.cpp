@@ -3,6 +3,9 @@
 
 namespace
 {
+
+using namespace marnav;
+
 class Test_nmea_time : public ::testing::Test
 {
 };

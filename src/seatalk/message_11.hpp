@@ -3,6 +3,8 @@
 
 #include "message.hpp"
 
+namespace marnav
+{
 namespace seatalk
 {
 
@@ -12,12 +14,12 @@ public:
 	constexpr static const message_id ID = message_id::apparent_wind_speed;
 
 	message_11();
-	message_11(const message_11&) = default;
-	message_11& operator=(const message_11&) = default;
+	message_11(const message_11 &) = default;
+	message_11 & operator=(const message_11 &) = default;
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw& data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
 
 private:
 	uint8_t unit; // unit of value
@@ -30,7 +32,7 @@ public:
 	void set_unit(uint8_t t) { unit = t; }
 	void set_speed(uint16_t t) { speed = t; }
 };
-
+}
 }
 
 #endif

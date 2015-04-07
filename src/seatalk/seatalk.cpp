@@ -11,6 +11,8 @@
 #include "message_27.hpp"
 #include <algorithm>
 
+namespace marnav
+{
 namespace seatalk
 {
 
@@ -30,17 +32,17 @@ static message::parse_function instantiate_message(message_id type) throw(std::i
 		{message_id::water_temperature_2, message_27::parse},
 	};
 
-	auto const& i = std::find_if(begin(known_messages), end(known_messages),
-								 [type](const entry& e) { return e.first == type; });
+	auto const & i = std::find_if(begin(known_messages), end(known_messages),
+		[type](const entry & e) { return e.first == type; });
 
 	if (i == end(known_messages))
 		throw std::invalid_argument{"unknown message in instantiate_message: "
-									+ std::to_string(static_cast<uint8_t>(type))};
+			+ std::to_string(static_cast<uint8_t>(type))};
 
 	return i->second;
 }
 
-std::unique_ptr<message> make_message(const raw& data) throw(std::invalid_argument)
+std::unique_ptr<message> make_message(const raw & data) throw(std::invalid_argument)
 {
 	if (data.size() < 1)
 		throw std::invalid_argument{"raw data of insufficient size"};
@@ -48,8 +50,6 @@ std::unique_ptr<message> make_message(const raw& data) throw(std::invalid_argume
 	return instantiate_message(type)(data);
 }
 
-raw encode_message(const message& msg) throw(std::invalid_argument)
-{
-	return msg.get_data();
+raw encode_message(const message & msg) throw(std::invalid_argument) { return msg.get_data(); }
 }
 }

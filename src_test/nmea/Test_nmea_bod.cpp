@@ -5,6 +5,8 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_nmea_bod : public ::testing::Test
 {
 };

@@ -4,20 +4,22 @@
 #include "sentence.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
+
 class vwr : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::VWR;
 
 	vwr();
-	vwr(const vwr&) = default;
-	vwr& operator=(const vwr&) = default;
+	vwr(const vwr &) = default;
+	vwr & operator=(const vwr &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -47,7 +49,7 @@ public:
 	void set_speed_mps(double t);
 	void set_speed_kmh(double t);
 };
-
+}
 }
 
 #endif

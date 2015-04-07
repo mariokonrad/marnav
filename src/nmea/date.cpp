@@ -1,5 +1,7 @@
 #include "date.hpp"
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -59,19 +61,19 @@ uint32_t date::month() const noexcept { return m; }
 /// Returns the day component.
 uint32_t date::day() const noexcept { return d; }
 
-bool operator==(const date& a, const date& b) noexcept
+bool operator==(const date & a, const date & b) noexcept
 {
 	return (&a == &b) || ((a.y == b.y) && (a.m == b.m) && (a.d == b.d));
 }
 
-std::string to_string(const date& d)
+std::string to_string(const date & d)
 {
 	char buf[7];
 	snprintf(buf, sizeof(buf), "%02u%02u%02u", d.day(), d.month(), d.year());
 	return buf;
 }
 
-date date::parse(const std::string& str) throw(std::invalid_argument)
+date date::parse(const std::string & str) throw(std::invalid_argument)
 {
 	try {
 		std::size_t pos = 0;
@@ -84,18 +86,14 @@ date date::parse(const std::string& str) throw(std::invalid_argument)
 	}
 }
 
-std::ostream& operator<<(std::ostream& os, const date& d)
-{
-	return os << to_string(d);
-}
+std::ostream & operator<<(std::ostream & os, const date & d) { return os << to_string(d); }
 
-std::istream& operator>>(std::istream& is, date& d)
+std::istream & operator>>(std::istream & is, date & d)
 {
 	std::string s;
 	is >> s;
 	d = date::parse(s);
 	return is;
 }
-
 }
-
+}

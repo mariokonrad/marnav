@@ -5,19 +5,15 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_nmea_dbt : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_dbt, contruction)
-{
-	nmea::dbt dbt;
-}
+TEST_F(Test_nmea_dbt, contruction) { nmea::dbt dbt; }
 
-TEST_F(Test_nmea_dbt, size)
-{
-	EXPECT_EQ(96u, sizeof(nmea::dbt));
-}
+TEST_F(Test_nmea_dbt, size) { EXPECT_EQ(96u, sizeof(nmea::dbt)); }
 
 TEST_F(Test_nmea_dbt, parse)
 {
@@ -64,6 +60,5 @@ TEST_F(Test_nmea_dbt, set_depth_fathom)
 
 	EXPECT_STREQ("$IIDBT,,,,,12.5,F*0C", nmea::to_string(dbt).c_str());
 }
-
 }
 

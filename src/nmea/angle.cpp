@@ -1,9 +1,12 @@
 #include "angle.hpp"
 #include <cmath>
 
+namespace marnav
+{
 namespace nmea
 {
-static geo::angle parse_angle(const std::string& s) throw(std::invalid_argument)
+
+static geo::angle parse_angle(const std::string & s) throw(std::invalid_argument)
 {
 	if (s.empty())
 		return geo::angle{0.0};
@@ -33,7 +36,7 @@ static geo::angle parse_angle(const std::string& s) throw(std::invalid_argument)
 /// @code
 ///   auto lat = nmea::parse_latitude("37.0000");
 /// @encode
-geo::latitude parse_latitude(const std::string& s) throw(std::invalid_argument)
+geo::latitude parse_latitude(const std::string & s) throw(std::invalid_argument)
 {
 	return geo::latitude{parse_angle(s)};
 }
@@ -43,11 +46,11 @@ geo::latitude parse_latitude(const std::string& s) throw(std::invalid_argument)
 ///
 /// @param[in] v The latitude.
 /// @return A string that represents the latitude.
-std::string to_string(const geo::latitude& v)
+std::string to_string(const geo::latitude & v)
 {
 	char buf[32];
 	snprintf(buf, sizeof(buf), "%02u%02u.%04u", v.degrees(), v.minutes(),
-			 static_cast<uint32_t>((v.seconds() / 60) * 10000));
+		static_cast<uint32_t>((v.seconds() / 60) * 10000));
 	return buf;
 }
 
@@ -62,7 +65,7 @@ std::string to_string(const geo::latitude& v)
 /// @code
 ///   auto lon = nmea::parse_longitude("002.3456");
 /// @encode
-geo::longitude parse_longitude(const std::string& s) throw(std::invalid_argument)
+geo::longitude parse_longitude(const std::string & s) throw(std::invalid_argument)
 {
 	return geo::longitude{parse_angle(s)};
 }
@@ -72,11 +75,12 @@ geo::longitude parse_longitude(const std::string& s) throw(std::invalid_argument
 ///
 /// @param[in] v The longitude.
 /// @return A string that represents the longitude.
-std::string to_string(const geo::longitude& v)
+std::string to_string(const geo::longitude & v)
 {
 	char buf[32];
 	snprintf(buf, sizeof(buf), "%03u%02u.%04u", v.degrees(), v.minutes(),
-			 static_cast<uint32_t>(10000 * v.seconds() / 60));
+		static_cast<uint32_t>(10000 * v.seconds() / 60));
 	return buf;
+}
 }
 }

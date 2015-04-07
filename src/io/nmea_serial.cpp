@@ -3,16 +3,18 @@
 #include <utils/unique.hpp>
 #include <algorithm>
 
+namespace marnav
+{
 namespace io
 {
-nmea_serial::nmea_serial(std::unique_ptr<device>&& dev)
+nmea_serial::nmea_serial(std::unique_ptr<device> && dev)
 	: dev(std::move(dev))
 {
 }
 
-nmea_serial::nmea_serial(const std::string& name)
-	: nmea_serial(utils::make_unique<serial>(name, serial::baud::BAUD_4800, serial::databits::BIT_8,
-											 serial::stopbits::BIT_1, serial::parity::NONE))
+nmea_serial::nmea_serial(const std::string & name)
+	: nmea_serial(utils::make_unique<serial>(name, serial::baud::BAUD_4800,
+		  serial::databits::BIT_8, serial::stopbits::BIT_1, serial::parity::NONE))
 {
 }
 
@@ -30,7 +32,7 @@ void nmea_serial::read_data() throw(std::runtime_error)
 {
 	if (!dev)
 		throw std::runtime_error{"device invalid"};
-	int rc = dev->read(reinterpret_cast<char*>(&raw), sizeof(raw));
+	int rc = dev->read(reinterpret_cast<char *>(&raw), sizeof(raw));
 	if (rc < 0)
 		throw std::runtime_error{"read error"};
 	if (rc != sizeof(raw))
@@ -70,5 +72,6 @@ void nmea_serial::read() throw(std::runtime_error)
 {
 	read_data();
 	process_nmea();
+}
 }
 }

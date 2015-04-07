@@ -4,20 +4,22 @@
 #include "sentence.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
+
 class mtw : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::MTW;
 
 	mtw();
-	mtw(const mtw&) = default;
-	mtw& operator=(const mtw&) = default;
+	mtw(const mtw &) = default;
+	mtw & operator=(const mtw &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -30,9 +32,13 @@ public:
 	decltype(temperature) get_temperature() const { return temperature; }
 	decltype(unit) get_unit() const { return unit; }
 
-	void set_temperature(double t) { temperature = t; unit = unit::CELSIUS; }
+	void set_temperature(double t)
+	{
+		temperature = t;
+		unit = unit::CELSIUS;
+	}
 };
-
+}
 }
 
 #endif

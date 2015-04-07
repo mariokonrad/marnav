@@ -2,6 +2,8 @@
 #include <utils/unique.hpp>
 #include "io.hpp"
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -37,16 +39,15 @@ void vwr::set_speed_kmh(double t)
 	speed_kmh_unit = unit::KMH;
 }
 
-std::unique_ptr<sentence>
-vwr::parse(const std::string& talker,
-		   const std::vector<std::string>& fields) throw(std::invalid_argument)
+std::unique_ptr<sentence> vwr::parse(const std::string & talker,
+	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
 	if (fields.size() != 8)
 		throw std::invalid_argument{"invalid number of fields in vwr::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<vwr>();
 	result->set_talker(talker);
-	vwr& detail = static_cast<vwr&>(*result);
+	vwr & detail = static_cast<vwr &>(*result);
 
 	read(fields[0], detail.angle);
 	read(fields[1], detail.side);
@@ -62,9 +63,9 @@ vwr::parse(const std::string& talker,
 
 std::vector<std::string> vwr::get_data() const
 {
-	return {to_string(angle),			 to_string(side),		   to_string(speed_knots),
-			to_string(speed_knots_unit), to_string(speed_mps),	 to_string(speed_mps_unit),
-			to_string(speed_kmh),		 to_string(speed_kmh_unit)};
+	return {to_string(angle), to_string(side), to_string(speed_knots),
+		to_string(speed_knots_unit), to_string(speed_mps), to_string(speed_mps_unit),
+		to_string(speed_kmh), to_string(speed_kmh_unit)};
 }
-
+}
 }

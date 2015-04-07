@@ -3,6 +3,8 @@
 
 #include "message.hpp"
 
+namespace marnav
+{
 namespace seatalk
 {
 
@@ -12,12 +14,12 @@ public:
 	constexpr static const message_id ID = message_id::depth_below_transducer;
 
 	message_00();
-	message_00(const message_00&) = default;
-	message_00& operator=(const message_00&) = default;
+	message_00(const message_00 &) = default;
+	message_00 & operator=(const message_00 &) = default;
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw& data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
 
 private:
 	bool anchor_alarm_active;
@@ -42,7 +44,7 @@ public:
 	void set_shallow_depth_alarm_active(bool t) { shallow_depth_alarm_active = t; }
 	void set_depth(uint16_t t) { depth = t; }
 };
-
+}
 }
 
 #endif

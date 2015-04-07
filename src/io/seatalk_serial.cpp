@@ -2,22 +2,23 @@
 #include <io/serial.hpp>
 #include <algorithm>
 
+namespace marnav
+{
 namespace io
 {
-seatalk_serial::seatalk_serial(std::unique_ptr<device>&& dev)
+seatalk_serial::seatalk_serial(std::unique_ptr<device> && dev)
 	: dev(std::move(dev))
 {
-	std::fill_n(reinterpret_cast<uint8_t*>(&ctx), sizeof(ctx), 0);
+	std::fill_n(reinterpret_cast<uint8_t *>(&ctx), sizeof(ctx), 0);
 
 	ctx.state = State::READ;
 	ctx.remaining = 255;
 	ctx.index = 0;
 }
 
-seatalk_serial::seatalk_serial(const std::string& name)
+seatalk_serial::seatalk_serial(const std::string & name)
 	: seatalk_serial(utils::make_unique<serial>(name, serial::baud::BAUD_4800,
-												serial::databits::BIT_8, serial::stopbits::BIT_1,
-												serial::parity::MARK))
+		  serial::databits::BIT_8, serial::stopbits::BIT_1, serial::parity::MARK))
 {
 }
 
@@ -134,7 +135,7 @@ void seatalk_serial::read_data() throw(std::runtime_error)
 {
 	if (!dev)
 		throw std::runtime_error{"device invalid"};
-	int rc = dev->read(reinterpret_cast<char*>(&ctx.raw), sizeof(ctx.raw));
+	int rc = dev->read(reinterpret_cast<char *>(&ctx.raw), sizeof(ctx.raw));
 	if (rc < 0)
 		throw std::runtime_error{"read error"};
 	if (rc != sizeof(ctx.raw))
@@ -159,5 +160,6 @@ void seatalk_serial::read() throw(std::runtime_error)
 void seatalk_serial::emit_message()
 {
 	process_message(std::vector<uint8_t>{ctx.data, ctx.data + ctx.index});
+}
 }
 }

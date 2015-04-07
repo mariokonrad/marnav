@@ -3,6 +3,8 @@
 
 #include "message.hpp"
 
+namespace marnav
+{
 namespace seatalk
 {
 
@@ -12,12 +14,12 @@ public:
 	constexpr static const message_id ID = message_id::speed_through_water;
 
 	message_20();
-	message_20(const message_20&) = default;
-	message_20& operator=(const message_20&) = default;
+	message_20(const message_20 &) = default;
+	message_20 & operator=(const message_20 &) = default;
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw& data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
 
 private:
 	uint16_t speed; // speed in 1/10th of knots
@@ -27,7 +29,7 @@ public:
 
 	void set_speed(uint16_t t) { speed = t; }
 };
-
+}
 }
 
 #endif

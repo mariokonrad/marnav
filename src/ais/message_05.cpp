@@ -2,8 +2,11 @@
 #include <utils/unique.hpp>
 #include <cstdio>
 
+namespace marnav
+{
 namespace ais
 {
+
 message_05::message_05()
 	: message(ID)
 	, repeat_indicator(0)
@@ -27,7 +30,7 @@ message_05::message_05()
 {
 }
 
-std::unique_ptr<message> message_05::parse(const raw& bits) throw(std::invalid_argument)
+std::unique_ptr<message> message_05::parse(const raw & bits) throw(std::invalid_argument)
 {
 	// TODO: also handle message with length of 420 and 422 bits
 
@@ -35,15 +38,15 @@ std::unique_ptr<message> message_05::parse(const raw& bits) throw(std::invalid_a
 		throw std::invalid_argument{"invalid number of bits in message_05::parse"};
 
 	std::unique_ptr<message> result = utils::make_unique<message_05>();
-	message_05& msg = static_cast<message_05&>(*result);
+	message_05 & msg = static_cast<message_05 &>(*result);
 
 	msg.read_data(bits);
 
 	return result;
 }
 
-std::string message_05::read_string(const raw& bits, raw::size_type ofs,
-									raw::size_type count_sixbits) const
+std::string message_05::read_string(
+	const raw & bits, raw::size_type ofs, raw::size_type count_sixbits) const
 {
 	std::string s;
 	s.reserve(count_sixbits);
@@ -59,8 +62,8 @@ std::string message_05::read_string(const raw& bits, raw::size_type ofs,
 	return s;
 }
 
-void message_05::write_string(raw& bits, raw::size_type ofs, raw::size_type count_sixbits,
-					  const std::string& s) const
+void message_05::write_string(
+	raw & bits, raw::size_type ofs, raw::size_type count_sixbits, const std::string & s) const
 {
 	for (raw::size_type i = 0; i < count_sixbits; ++i) {
 		uint8_t value;
@@ -73,7 +76,7 @@ void message_05::write_string(raw& bits, raw::size_type ofs, raw::size_type coun
 	}
 }
 
-void message_05::read_data(const raw& bits)
+void message_05::read_data(const raw & bits)
 {
 	bits.get(repeat_indicator, 6, 2);
 	bits.get(mmsi, 8, 30);
@@ -126,7 +129,7 @@ raw message_05::get_data() const
 	return bits;
 }
 
-void message_05::set_callsign(const std::string& t)
+void message_05::set_callsign(const std::string & t)
 {
 	if (t.size() > 7) {
 		callsign = t.substr(0, 7);
@@ -135,7 +138,7 @@ void message_05::set_callsign(const std::string& t)
 	}
 }
 
-void message_05::set_shipname(const std::string& t)
+void message_05::set_shipname(const std::string & t)
 {
 	if (t.size() > 20) {
 		shipname = t.substr(0, 20);
@@ -144,12 +147,13 @@ void message_05::set_shipname(const std::string& t)
 	}
 }
 
-void message_05::set_destination(const std::string& t)
+void message_05::set_destination(const std::string & t)
 {
 	if (t.size() > 20) {
 		destination = t.substr(0, 20);
 	} else {
 		destination = t;
 	}
+}
 }
 }

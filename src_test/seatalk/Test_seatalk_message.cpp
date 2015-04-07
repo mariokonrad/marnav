@@ -5,6 +5,9 @@
 
 namespace
 {
+
+using namespace marnav;
+
 class Test_seatalk_message : public ::testing::Test
 {
 };

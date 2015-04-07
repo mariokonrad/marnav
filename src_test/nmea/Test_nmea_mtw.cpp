@@ -5,19 +5,15 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_nmea_mtw : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_mtw, contruction)
-{
-	nmea::mtw mtw;
-}
+TEST_F(Test_nmea_mtw, contruction) { nmea::mtw mtw; }
 
-TEST_F(Test_nmea_mtw, size)
-{
-	EXPECT_EQ(48u, sizeof(nmea::mtw));
-}
+TEST_F(Test_nmea_mtw, size) { EXPECT_EQ(48u, sizeof(nmea::mtw)); }
 
 TEST_F(Test_nmea_mtw, parse)
 {
@@ -56,6 +52,5 @@ TEST_F(Test_nmea_mtw, set_temperature_to_string)
 
 	EXPECT_STREQ("$IIMTW,22.5,C*16", nmea::to_string(mtw).c_str());
 }
-
 }
 

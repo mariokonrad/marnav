@@ -1,7 +1,9 @@
 #include "vtg.hpp"
-#include <utils/unique.hpp>
 #include "io.hpp"
+#include <utils/unique.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -34,9 +36,8 @@ void vtg::set_track_true(double t)
 	type_true = reference::TRUE;
 }
 
-std::unique_ptr<sentence>
-vtg::parse(const std::string& talker,
-		   const std::vector<std::string>& fields) throw(std::invalid_argument)
+std::unique_ptr<sentence> vtg::parse(const std::string & talker,
+	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
 	// before and after NMEA 2.3
 	if ((fields.size() < 8) || (fields.size() > 9))
@@ -44,7 +45,7 @@ vtg::parse(const std::string& talker,
 
 	std::unique_ptr<sentence> result = utils::make_unique<vtg>();
 	result->set_talker(talker);
-	vtg& detail = static_cast<vtg&>(*result);
+	vtg & detail = static_cast<vtg &>(*result);
 
 	read(fields[0], detail.track_true);
 	read(fields[1], detail.type_true);
@@ -64,10 +65,9 @@ vtg::parse(const std::string& talker,
 
 std::vector<std::string> vtg::get_data() const
 {
-	return {to_string(track_true), to_string(type_true),	  to_string(track_magn),
-			to_string(type_magn),  to_string(speed_kn),		  to_string(unit_speed_kn),
-			to_string(speed_kmh),  to_string(unit_speed_kmh), to_string(faa_mode_indicator)};
+	return {to_string(track_true), to_string(type_true), to_string(track_magn),
+		to_string(type_magn), to_string(speed_kn), to_string(unit_speed_kn),
+		to_string(speed_kmh), to_string(unit_speed_kmh), to_string(faa_mode_indicator)};
 }
-
 }
-
+}

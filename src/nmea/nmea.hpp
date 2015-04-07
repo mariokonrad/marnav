@@ -4,6 +4,8 @@
 #include <stdexcept>
 #include "sentence.hpp"
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -16,16 +18,16 @@ public:
 	{
 	}
 
-	virtual const char* what() const noexcept override { return "checksum error"; }
+	virtual const char * what() const noexcept override { return "checksum error"; }
 
 public:
 	const uint8_t expected;
 	const uint8_t actual;
 };
 
-std::unique_ptr<sentence> make_sentence(const std::string& s) throw(std::invalid_argument,
-																	checksum_error);
-
+std::unique_ptr<sentence> make_sentence(const std::string & s) throw(
+	std::invalid_argument, checksum_error);
+}
 }
 
 #endif

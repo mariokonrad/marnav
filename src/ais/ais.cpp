@@ -5,6 +5,8 @@
 #include "message_05.hpp"
 #include <algorithm>
 
+namespace marnav
+{
 namespace ais
 {
 
@@ -24,13 +26,13 @@ static inline char encode_armoring(uint8_t value)
 	return value + '0';
 }
 
-static raw collect(const std::vector<std::pair<std::string, int>>& v)
+static raw collect(const std::vector<std::pair<std::string, int>> & v)
 {
 	raw result;
 	result.reserve(64); // 64 bytes (512) are enough for AIS messages
 
-	for (auto const& item : v) {
-		const std::string& payload = item.first;
+	for (auto const & item : v) {
+		const std::string & payload = item.first;
 		const uint32_t pad = item.second;
 
 		auto end = payload.cend();
@@ -60,26 +62,26 @@ static message::parse_function instantiate_message(message_id type) throw(std::i
 		{message_id::static_and_voyage_related_data, message_05::parse},
 	};
 
-	auto const& i = std::find_if(begin(known_messages), end(known_messages),
-								 [type](const entry& e) { return e.first == type; });
+	auto const & i = std::find_if(begin(known_messages), end(known_messages),
+		[type](const entry & e) { return e.first == type; });
 
 	if (i == end(known_messages))
 		throw std::invalid_argument{"unknown message in instantiate_message: "
-									+ std::to_string(static_cast<uint8_t>(type))};
+			+ std::to_string(static_cast<uint8_t>(type))};
 
 	return i->second;
 }
 
-std::unique_ptr<message>
-make_message(const std::vector<std::pair<std::string, int>>& v) throw(std::invalid_argument)
+std::unique_ptr<message> make_message(const std::vector<std::pair<std::string, int>> & v) throw(
+	std::invalid_argument)
 {
 	auto bits = collect(v);
 	message_id type = static_cast<message_id>(bits.get<uint8_t>(0, 6));
 	return instantiate_message(type)(bits);
 }
 
-std::vector<std::pair<std::string, int>>
-encode_message(const message& msg) throw(std::invalid_argument)
+std::vector<std::pair<std::string, int>> encode_message(const message & msg) throw(
+	std::invalid_argument)
 {
 	auto bits = msg.get_data();
 	if (bits.size() == 0)
@@ -117,5 +119,5 @@ encode_message(const message& msg) throw(std::invalid_argument)
 
 	return result;
 }
-
+}
 }

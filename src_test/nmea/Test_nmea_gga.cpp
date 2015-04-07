@@ -5,23 +5,20 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_nmea_gga : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_gga, contruction)
-{
-	nmea::gga gga;
-}
+TEST_F(Test_nmea_gga, contruction) { nmea::gga gga; }
 
-TEST_F(Test_nmea_gga, size)
-{
-	EXPECT_EQ(192u, sizeof(nmea::gga));
-}
+TEST_F(Test_nmea_gga, size) { EXPECT_EQ(192u, sizeof(nmea::gga)); }
 
 TEST_F(Test_nmea_gga, parse)
 {
-	auto s = nmea::make_sentence("$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47");
+	auto s = nmea::make_sentence(
+		"$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47");
 	ASSERT_NE(nullptr, s);
 
 	auto gga = nmea::sentence_cast<nmea::gga>(s);
@@ -80,6 +77,5 @@ TEST_F(Test_nmea_gga, set_lon_east)
 
 	EXPECT_STREQ("$GPGGA,,,,12327.0000,E,,,,,,,,,*08", nmea::to_string(gga).c_str());
 }
-
 }
 

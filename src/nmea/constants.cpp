@@ -1,9 +1,12 @@
 #include "constants.hpp"
 #include <geo/angle.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
-char convert_hemisphere(const geo::latitude& p)
+
+char convert_hemisphere(const geo::latitude & p)
 {
 	switch (p.hem()) {
 		case geo::latitude::hemisphere::NORTH:
@@ -14,7 +17,7 @@ char convert_hemisphere(const geo::latitude& p)
 	return '\0';
 }
 
-char convert_hemisphere(const geo::longitude& p)
+char convert_hemisphere(const geo::longitude & p)
 {
 	switch (p.hem()) {
 		case geo::longitude::hemisphere::EAST:
@@ -23,5 +26,6 @@ char convert_hemisphere(const geo::longitude& p)
 			return direction::WEST;
 	}
 	return '\0';
+}
 }
 }

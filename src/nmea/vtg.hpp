@@ -4,6 +4,8 @@
 #include "sentence.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -13,12 +15,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VTG;
 
 	vtg();
-	vtg(const vtg&) = default;
-	vtg& operator=(const vtg&) = default;
+	vtg(const vtg &) = default;
+	vtg & operator=(const vtg &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -51,7 +52,7 @@ public:
 	void set_speed_kmh(double t);
 	void set_mode_indicator(char t) { faa_mode_indicator = t; }
 };
-
+}
 }
 
 #endif

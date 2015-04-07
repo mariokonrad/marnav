@@ -4,6 +4,9 @@
 
 namespace
 {
+
+using namespace marnav;
+
 static const uint8_t DATA[] =
 {
 	// preliminary garbage
@@ -86,14 +89,15 @@ class dummy_device : public ::io::device
 public:
 	dummy_device()
 		: index(0)
-	{}
+	{
+	}
 
 	void open() throw(std::runtime_error) override {}
 	void close() override {}
 
 	/// Just go through the data once.
-	virtual int read(char* buffer, uint32_t size) throw(std::invalid_argument,
-														std::runtime_error) override
+	virtual int read(char * buffer, uint32_t size) throw(
+		std::invalid_argument, std::runtime_error) override
 	{
 		if (size != sizeof(*buffer))
 			throw std::invalid_argument{"buffer type not supported"};
@@ -120,10 +124,7 @@ public:
 	int get_num_messages() const { return num_messages; }
 
 protected:
-	virtual void process_message(const seatalk::raw&) override
-	{
-		++num_messages;
-	}
+	virtual void process_message(const seatalk::raw &) override { ++num_messages; }
 
 private:
 	int num_messages;
@@ -136,7 +137,8 @@ public:
 	message_reader()
 		: seatalk_serial(utils::make_unique<dummy_device>())
 		, message_received(false)
-	{}
+	{
+	}
 
 	seatalk::raw read_message()
 	{
@@ -150,7 +152,7 @@ public:
 	}
 
 protected:
-	virtual void process_message(const seatalk::raw& msg) override
+	virtual void process_message(const seatalk::raw & msg) override
 	{
 		message = msg;
 		message_received = true;

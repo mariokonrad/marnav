@@ -4,20 +4,22 @@
 #include "sentence.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
+
 class gsv : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::GSV;
 
 	gsv();
-	gsv(const gsv&) = default;
-	gsv& operator=(const gsv&) = default;
+	gsv(const gsv &) = default;
+	gsv & operator=(const gsv &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -46,7 +48,10 @@ private:
 public:
 	decltype(n_messages) get_n_messages() const { return n_messages; }
 	decltype(message_number) get_message_number() const { return message_number; }
-	decltype(n_satellites_in_view) get_n_satellites_in_view() const { return n_satellites_in_view; }
+	decltype(n_satellites_in_view) get_n_satellites_in_view() const
+	{
+		return n_satellites_in_view;
+	}
 	decltype(sat_0_id) get_sat_0_id() const { return sat_0_id; }
 	decltype(sat_0_elevation) get_sat_0_elevation() const { return sat_0_elevation; }
 	decltype(sat_0_azimuth) get_sat_0_azimuth() const { return sat_0_azimuth; }
@@ -73,6 +78,7 @@ public:
 	void set_sat_2(uint32_t id, uint32_t elevation, uint32_t azimuth, uint32_t snr);
 	void set_sat_3(uint32_t id, uint32_t elevation, uint32_t azimuth, uint32_t snr);
 };
+}
 }
 
 #endif

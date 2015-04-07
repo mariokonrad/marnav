@@ -4,20 +4,22 @@
 #include "sentence.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
+
 class gsa : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::GSA;
 
 	gsa();
-	gsa(const gsa&) = default;
-	gsa& operator=(const gsa&) = default;
+	gsa(const gsa &) = default;
+	gsa & operator=(const gsa &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -80,7 +82,7 @@ public:
 
 	void set_satellite_id(int index, uint32_t t);
 };
-
+}
 }
 
 #endif

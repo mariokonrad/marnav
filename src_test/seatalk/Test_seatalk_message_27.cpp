@@ -3,14 +3,14 @@
 
 namespace
 {
+
+using namespace marnav;
+
 class Test_seatalk_message_27 : public ::testing::Test
 {
 };
 
-TEST_F(Test_seatalk_message_27, construction)
-{
-	seatalk::message_27 m;
-}
+TEST_F(Test_seatalk_message_27, construction) { seatalk::message_27 m; }
 
 TEST_F(Test_seatalk_message_27, parse_invalid_data_size)
 {
@@ -26,8 +26,7 @@ TEST_F(Test_seatalk_message_27, parse_invalid_length)
 
 TEST_F(Test_seatalk_message_27, parse)
 {
-	struct test_case
-	{
+	struct test_case {
 		seatalk::raw data;
 		int32_t temperature;
 	};
@@ -42,7 +41,7 @@ TEST_F(Test_seatalk_message_27, parse)
 		{{0x27, 0x01, 0x00, 0x63}, -1}, //  -1.0 degree celsius
 	};
 
-	for (auto const& t : cases) {
+	for (auto const & t : cases) {
 		auto generic_message = seatalk::message_27::parse(t.data);
 		ASSERT_TRUE(generic_message != nullptr);
 		auto m = seatalk::message_cast<seatalk::message_27>(generic_message);
@@ -68,5 +67,4 @@ TEST_F(Test_seatalk_message_27, write_distance)
 
 	EXPECT_EQ(expected, m.get_data());
 }
-
 }

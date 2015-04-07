@@ -5,19 +5,15 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_nmea_vtg : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_vtg, contruction)
-{
-	nmea::vtg vtg;
-}
+TEST_F(Test_nmea_vtg, contruction) { nmea::vtg vtg; }
 
-TEST_F(Test_nmea_vtg, size)
-{
-	EXPECT_EQ(120u, sizeof(nmea::vtg));
-}
+TEST_F(Test_nmea_vtg, size) { EXPECT_EQ(120u, sizeof(nmea::vtg)); }
 
 TEST_F(Test_nmea_vtg, parse)
 {
@@ -72,6 +68,5 @@ TEST_F(Test_nmea_vtg, set_track_true)
 
 	EXPECT_STREQ("$GPVTG,12.5,T,,,,,,,*32", nmea::to_string(vtg).c_str());
 }
-
 }
 

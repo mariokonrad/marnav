@@ -4,6 +4,8 @@
 #include "sentence.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -13,12 +15,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::MWV;
 
 	mwv();
-	mwv(const mwv&) = default;
-	mwv& operator=(const mwv&) = default;
+	mwv(const mwv &) = default;
+	mwv & operator=(const mwv &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -41,7 +42,7 @@ public:
 	void set_speed(double speed, char unit);
 	void set_status(char t) { status = t; }
 };
-
+}
 }
 
 #endif

@@ -4,6 +4,8 @@
 #include <string>
 #include <stdexcept>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -22,11 +24,11 @@ public:
 	/// Returns the day component.
 	uint32_t day() const noexcept;
 
-	friend bool operator==(const date& a, const date& b) noexcept;
+	friend bool operator==(const date & a, const date & b) noexcept;
 
 	/// Parses the date within the specified string.
 	/// The date to be parsed must be in the form: "DDMMYY"
-	static date parse(const std::string& str) throw(std::invalid_argument);
+	static date parse(const std::string & str) throw(std::invalid_argument);
 
 	/// Returns true if the specified year is a leap year. This function
 	/// does not work for dates before 17?? (only for julian calendar).
@@ -46,11 +48,11 @@ private:
 	uint32_t d; // day: 1..31
 };
 
-bool operator==(const date& a, const date& b) noexcept;
-std::string to_string(const date& d);
-std::ostream& operator<<(std::ostream& os, const date& d);
-std::istream& operator>>(std::istream& is, date& d);
-
+bool operator==(const date & a, const date & b) noexcept;
+std::string to_string(const date & d);
+std::ostream & operator<<(std::ostream & os, const date & d);
+std::istream & operator>>(std::istream & is, date & d);
+}
 }
 
 #endif

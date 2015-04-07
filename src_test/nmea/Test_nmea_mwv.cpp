@@ -5,19 +5,15 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_nmea_mwv : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_mwv, contruction)
-{
-	nmea::mwv mwv;
-}
+TEST_F(Test_nmea_mwv, contruction) { nmea::mwv mwv; }
 
-TEST_F(Test_nmea_mwv, size)
-{
-	EXPECT_EQ(72u, sizeof(nmea::mwv));
-}
+TEST_F(Test_nmea_mwv, size) { EXPECT_EQ(72u, sizeof(nmea::mwv)); }
 
 TEST_F(Test_nmea_mwv, parse)
 {
@@ -64,6 +60,5 @@ TEST_F(Test_nmea_mwv, set_speed)
 
 	EXPECT_STREQ("$IIMWV,,,22.5,N,*35", nmea::to_string(mwv).c_str());
 }
-
 }
 

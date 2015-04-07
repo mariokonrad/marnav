@@ -2,6 +2,8 @@
 #include <utils/unique.hpp>
 #include "io.hpp"
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -22,34 +24,33 @@ void bod::set_bearing_magn(double t)
 	type_magn = reference::MAGNETIC;
 }
 
-void bod::set_waypoint_to(const std::string& id)
+void bod::set_waypoint_to(const std::string & id)
 {
 	check_waypoint_id(id);
 	waypoint_to = id;
 }
 
-void bod::set_waypoint_from(const std::string& id)
+void bod::set_waypoint_from(const std::string & id)
 {
 	check_waypoint_id(id);
 	waypoint_from = id;
 }
 
-void bod::check_waypoint_id(const std::string& id) const throw(std::invalid_argument)
+void bod::check_waypoint_id(const std::string & id) const throw(std::invalid_argument)
 {
 	if (id.size() > 8)
 		throw std::invalid_argument{"string size to large, only 8 characters allowed for id"};
 }
 
-std::unique_ptr<sentence>
-bod::parse(const std::string& talker,
-		   const std::vector<std::string>& fields) throw(std::invalid_argument)
+std::unique_ptr<sentence> bod::parse(const std::string & talker,
+	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in bod::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<bod>();
 	result->set_talker(talker);
-	bod& detail = static_cast<bod&>(*result);
+	bod & detail = static_cast<bod &>(*result);
 
 	read(fields[0], detail.bearing_true);
 	read(fields[1], detail.type_true);
@@ -63,7 +64,8 @@ bod::parse(const std::string& talker,
 
 std::vector<std::string> bod::get_data() const
 {
-	return {to_string(bearing_true), to_string(type_true),   to_string(bearing_magn),
-			to_string(type_magn),	to_string(waypoint_to), to_string(waypoint_from)};
+	return {to_string(bearing_true), to_string(type_true), to_string(bearing_magn),
+		to_string(type_magn), to_string(waypoint_to), to_string(waypoint_from)};
+}
 }
 }

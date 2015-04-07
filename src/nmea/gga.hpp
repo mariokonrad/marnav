@@ -6,6 +6,8 @@
 #include "time.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -15,12 +17,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GGA;
 
 	gga();
-	gga(const gga&) = default;
-	gga& operator=(const gga&) = default;
+	gga(const gga &) = default;
+	gga & operator=(const gga &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -36,7 +37,8 @@ private:
 	utils::optional<double> hor_dilution; // horizontal dilution of precision
 	utils::optional<double> height_antenna; // height of antenna over geoid
 	utils::optional<char> unit_antenna; // M:meter
-	utils::optional<double> geodial_separation; // geodial separation, sea level below the ellipsoid
+	utils::optional<double>
+		geodial_separation; // geodial separation, sea level below the ellipsoid
 	utils::optional<char> unit_geodial_separation; // M:meter
 	utils::optional<double> dgps_age; // age of dgps data
 	utils::optional<uint32_t> dgps_ref; // dgps reference station 0000..1023
@@ -60,9 +62,9 @@ public:
 	decltype(dgps_age) get_dgps_age() const { return dgps_age; }
 	decltype(dgps_ref) get_dgps_ref() const { return dgps_ref; }
 
-	void set_time(const nmea::time& t) { time = t; }
-	void set_lat(const geo::latitude& t);
-	void set_lon(const geo::longitude& t);
+	void set_time(const nmea::time & t) { time = t; }
+	void set_lat(const geo::latitude & t);
+	void set_lon(const geo::longitude & t);
 	void set_quality(uint32_t t) { quality = t; }
 	void set_n_satellites(uint32_t t) { n_satellites = t; }
 	void set_hor_dilution(double t) { hor_dilution = t; }
@@ -73,7 +75,7 @@ public:
 	void set_dgps_age(double t) { dgps_age = t; }
 	void set_dgps_ref(uint32_t t) { dgps_ref = t; }
 };
-
+}
 }
 
 #endif

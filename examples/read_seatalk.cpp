@@ -3,13 +3,15 @@
 #include <seatalk/message_00.hpp>
 #include <iostream>
 
+using namespace marnav;
+
 /// Works only in a single threaded context (true for serial and seatalk_serial).
 ///
 /// This class is implemented inline, for easier handling within this example.
 class message_reader : public io::seatalk_serial
 {
 public:
-	message_reader(const std::string& device_name)
+	message_reader(const std::string & device_name)
 		: seatalk_serial(device_name)
 		, message_received(false)
 	{
@@ -43,7 +45,7 @@ protected:
 	/// as poor-mans semaphore to signal the receipt.
 	///
 	/// After the reception, the message will be stored temporarily.
-	virtual void process_message(const seatalk::raw& msg) override
+	virtual void process_message(const seatalk::raw & msg) override
 	{
 		message = msg;
 		message_received = true;
@@ -54,7 +56,7 @@ private:
 	seatalk::raw message;
 };
 
-int main(int, char**)
+int main(int, char **)
 {
 	// create and open the device for reading.
 	message_reader reader{"/dev/ttyUSB0"};

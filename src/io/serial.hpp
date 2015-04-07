@@ -4,6 +4,8 @@
 #include "device.hpp"
 #include <string>
 
+namespace marnav
+{
 namespace io
 {
 
@@ -34,18 +36,18 @@ public:
 
 	enum class parity { NONE, EVEN, ODD, MARK };
 
-	serial(const std::string& dev, baud b, databits d, stopbits s, parity p);
-	serial(const serial&) = delete;
-	serial(serial&&) = default;
+	serial(const std::string & dev, baud b, databits d, stopbits s, parity p);
+	serial(const serial &) = delete;
+	serial(serial &&) = default;
 	virtual ~serial();
-	serial& operator=(const serial&) = delete;
+	serial & operator=(const serial &) = delete;
 
 	virtual void open() throw(std::runtime_error) override;
 	virtual void close() override;
-	virtual int read(char* buffer, uint32_t size) throw(std::invalid_argument,
-														std::runtime_error) override;
-	virtual int write(const char* buffer, uint32_t size) throw(std::invalid_argument,
-															   std::runtime_error);
+	virtual int read(char * buffer, uint32_t size) throw(
+		std::invalid_argument, std::runtime_error) override;
+	virtual int write(const char * buffer, uint32_t size) throw(
+		std::invalid_argument, std::runtime_error);
 
 private:
 	int fd;
@@ -55,6 +57,7 @@ private:
 	stopbits stop_bits;
 	parity par;
 };
+}
 }
 
 #endif

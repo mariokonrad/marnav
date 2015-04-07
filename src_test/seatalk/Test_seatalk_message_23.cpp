@@ -3,14 +3,14 @@
 
 namespace
 {
+
+using namespace marnav;
+
 class Test_seatalk_message_23 : public ::testing::Test
 {
 };
 
-TEST_F(Test_seatalk_message_23, construction)
-{
-	seatalk::message_23 m;
-}
+TEST_F(Test_seatalk_message_23, construction) { seatalk::message_23 m; }
 
 TEST_F(Test_seatalk_message_23, parse_invalid_data_size)
 {
@@ -26,8 +26,7 @@ TEST_F(Test_seatalk_message_23, parse_invalid_length)
 
 TEST_F(Test_seatalk_message_23, parse)
 {
-	struct test_case
-	{
+	struct test_case {
 		seatalk::raw data;
 		bool sensor_defective;
 		uint8_t temperature_celsius;
@@ -35,15 +34,12 @@ TEST_F(Test_seatalk_message_23, parse)
 	};
 
 	std::vector<test_case> cases{
-		{{0x23, 0x01, 0x00, 0x00}, false, 0, 0},
-		{{0x23, 0x41, 0x00, 0x00}, true, 0, 0},
-		{{0x23, 0x01, 0x01, 0x00}, false, 1, 0},
-		{{0x23, 0x01, 0x00, 0x01}, false, 0, 1},
-		{{0x23, 0x01, 0x64, 0x00}, false, 100, 0},
-		{{0x23, 0x01, 0x00, 0x64}, false, 0, 100},
+		{{0x23, 0x01, 0x00, 0x00}, false, 0, 0}, {{0x23, 0x41, 0x00, 0x00}, true, 0, 0},
+		{{0x23, 0x01, 0x01, 0x00}, false, 1, 0}, {{0x23, 0x01, 0x00, 0x01}, false, 0, 1},
+		{{0x23, 0x01, 0x64, 0x00}, false, 100, 0}, {{0x23, 0x01, 0x00, 0x64}, false, 0, 100},
 	};
 
-	for (auto const& t : cases) {
+	for (auto const & t : cases) {
 		auto generic_message = seatalk::message_23::parse(t.data);
 		ASSERT_TRUE(generic_message != nullptr);
 		auto m = seatalk::message_cast<seatalk::message_23>(generic_message);
@@ -88,5 +84,4 @@ TEST_F(Test_seatalk_message_23, write_fahrenheit)
 
 	EXPECT_EQ(expected, m.get_data());
 }
-
 }

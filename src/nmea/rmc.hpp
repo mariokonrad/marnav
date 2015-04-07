@@ -7,6 +7,8 @@
 #include "angle.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -16,12 +18,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::RMC;
 
 	rmc();
-	rmc(const rmc&) = default;
-	rmc& operator=(const rmc&) = default;
+	rmc(const rmc &) = default;
+	rmc & operator=(const rmc &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -54,17 +55,21 @@ public:
 	decltype(mag_hem) get_mag_hem() const { return mag_hem; }
 	decltype(faa_mode_indicator) get_faa_mode_indicator() const { return faa_mode_indicator; }
 
-	void set_time_utc(const time& t) { time_utc = t; }
+	void set_time_utc(const time & t) { time_utc = t; }
 	void set_status(char t) { status = t; }
-	void set_lat(const geo::latitude& t);
-	void set_lon(const geo::longitude& t);
+	void set_lat(const geo::latitude & t);
+	void set_lon(const geo::longitude & t);
 	void set_sog(double t) { sog = t; }
 	void set_heading(double t) { heading = t; }
-	void set_date(const nmea::date& t) { date = t; }
-	void set_mag(double t, char h) { mag = t; mag_hem = h; }
+	void set_date(const nmea::date & t) { date = t; }
+	void set_mag(double t, char h)
+	{
+		mag = t;
+		mag_hem = h;
+	}
 	void set_mode_indicator(char t) { faa_mode_indicator = t; }
 };
-
+}
 }
 
 #endif

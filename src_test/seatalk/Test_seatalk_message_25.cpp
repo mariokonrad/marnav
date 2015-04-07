@@ -3,14 +3,14 @@
 
 namespace
 {
+
+using namespace marnav;
+
 class Test_seatalk_message_25 : public ::testing::Test
 {
 };
 
-TEST_F(Test_seatalk_message_25, construction)
-{
-	seatalk::message_25 m;
-}
+TEST_F(Test_seatalk_message_25, construction) { seatalk::message_25 m; }
 
 TEST_F(Test_seatalk_message_25, parse_invalid_data_size)
 {
@@ -26,8 +26,7 @@ TEST_F(Test_seatalk_message_25, parse_invalid_length)
 
 TEST_F(Test_seatalk_message_25, parse)
 {
-	struct test_case
-	{
+	struct test_case {
 		seatalk::raw data;
 		uint32_t total;
 		uint32_t trip;
@@ -48,7 +47,7 @@ TEST_F(Test_seatalk_message_25, parse)
 		{{0x25, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00}, 65536, 0}, // total
 	};
 
-	for (auto const& t : cases) {
+	for (auto const & t : cases) {
 		auto generic_message = seatalk::message_25::parse(t.data);
 		ASSERT_TRUE(generic_message != nullptr);
 		auto m = seatalk::message_cast<seatalk::message_25>(generic_message);
@@ -84,5 +83,4 @@ TEST_F(Test_seatalk_message_25, write_trip)
 
 	EXPECT_EQ(expected, m.get_data());
 }
-
 }

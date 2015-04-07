@@ -4,6 +4,8 @@
 #include "sentence.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -13,18 +15,17 @@ public:
 	constexpr static const sentence_id ID = sentence_id::AAM;
 
 	aam();
-	aam(const aam&) = default;
-	aam& operator=(const aam&) = default;
+	aam(const aam &) = default;
+	aam & operator=(const aam &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	void check_waypoint_id(const std::string& id) const throw(std::invalid_argument);
+	void check_waypoint_id(const std::string & id) const throw(std::invalid_argument);
 
 	utils::optional<char> arrival_circle_entered;
 	utils::optional<char> perpendicualar_passed;
@@ -54,10 +55,9 @@ public:
 	void set_arrival_circle_entered() { arrival_circle_entered = status::OK; }
 	void set_perpendicular_passed() { perpendicualar_passed = status::OK; }
 	void set_arrival_circle_radius(double t);
-	void set_waypoint_id(const std::string& id);
-
+	void set_waypoint_id(const std::string & id);
 };
-
+}
 }
 
 #endif

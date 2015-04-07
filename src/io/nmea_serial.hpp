@@ -4,6 +4,8 @@
 #include <io/device.hpp>
 #include <nmea/sentence.hpp>
 
+namespace marnav
+{
 namespace io
 {
 
@@ -16,14 +18,14 @@ namespace io
 class nmea_serial
 {
 public:
-	nmea_serial(std::unique_ptr<device>&& dev);
-	nmea_serial(const std::string& name);
+	nmea_serial(std::unique_ptr<device> && dev);
+	nmea_serial(const std::string & name);
 
 	void close();
 	void read() throw(std::runtime_error);
 
 protected:
-	virtual void process_sentence(const std::string&) = 0;
+	virtual void process_sentence(const std::string &) = 0;
 
 private:
 	void process_nmea() throw(std::runtime_error);
@@ -33,6 +35,7 @@ private:
 	std::string sentence;
 	std::unique_ptr<device> dev; ///< Device to read data from.
 };
+}
 }
 
 #endif

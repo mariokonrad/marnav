@@ -1,5 +1,7 @@
 #include "time.hpp"
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -37,19 +39,19 @@ uint32_t time::seconds() const { return s; }
 /// Returns the milliseconds component.
 uint32_t time::milliseconds() const { return ms; }
 
-std::string to_string(const time& d)
+std::string to_string(const time & d)
 {
 	char buf[7];
 	snprintf(buf, sizeof(buf), "%02u%02u%02u", d.hour(), d.minutes(), d.seconds());
 	return buf;
 }
 
-bool operator==(const time& a, const time& b) noexcept
+bool operator==(const time & a, const time & b) noexcept
 {
 	return (&a == &b) || ((a.h == b.h) && (a.m == b.m) && (a.s == b.s) && (a.ms == b.ms));
 }
 
-time time::parse(const std::string& str) throw(std::invalid_argument)
+time time::parse(const std::string & str) throw(std::invalid_argument)
 {
 	try {
 		std::size_t pos = 0;
@@ -67,14 +69,14 @@ time time::parse(const std::string& str) throw(std::invalid_argument)
 	}
 }
 
-std::ostream& operator<<(std::ostream& os, const time& t) { return os << to_string(t); }
+std::ostream & operator<<(std::ostream & os, const time & t) { return os << to_string(t); }
 
-std::istream& operator>>(std::istream& is, time& t)
+std::istream & operator>>(std::istream & is, time & t)
 {
 	std::string s;
 	is >> s;
 	t = time::parse(s);
 	return is;
 }
-
+}
 }

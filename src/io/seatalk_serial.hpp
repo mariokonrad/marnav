@@ -4,6 +4,8 @@
 #include <io/device.hpp>
 #include <seatalk/message.hpp>
 
+namespace marnav
+{
 namespace io
 {
 
@@ -16,21 +18,20 @@ namespace io
 class seatalk_serial
 {
 public:
-	seatalk_serial(std::unique_ptr<device>&& dev);
-	seatalk_serial(const std::string& name);
+	seatalk_serial(std::unique_ptr<device> && dev);
+	seatalk_serial(const std::string & name);
 
 	void close();
 	void read() throw(std::runtime_error);
 	uint32_t get_collisions() const { return ctx.collisions; }
 
 protected:
-	virtual void process_message(const seatalk::raw&) = 0;
+	virtual void process_message(const seatalk::raw &) = 0;
 
 private:
 	enum class State { READ, ESCAPE, PARITY };
 
-	struct context
-	{
+	struct context {
 		State state;
 		uint8_t index;
 		uint8_t remaining;
@@ -51,6 +52,7 @@ private:
 	context ctx;
 	std::unique_ptr<device> dev; ///< Device to read data from.
 };
+}
 }
 
 #endif

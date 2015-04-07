@@ -3,14 +3,14 @@
 
 namespace
 {
+
+using namespace marnav;
+
 class Test_seatalk_message_11 : public ::testing::Test
 {
 };
 
-TEST_F(Test_seatalk_message_11, construction)
-{
-	seatalk::message_11 m;
-}
+TEST_F(Test_seatalk_message_11, construction) { seatalk::message_11 m; }
 
 TEST_F(Test_seatalk_message_11, parse_invalid_data_size)
 {
@@ -26,8 +26,7 @@ TEST_F(Test_seatalk_message_11, parse_invalid_length)
 
 TEST_F(Test_seatalk_message_11, parse)
 {
-	struct test_case
-	{
+	struct test_case {
 		seatalk::raw data;
 		uint16_t speed;
 		char unit;
@@ -47,7 +46,7 @@ TEST_F(Test_seatalk_message_11, parse)
 		{{0x11, 0x01, 0x88, 0x08}, 88, seatalk::unit::MPS}, //  8.8 m/s
 	};
 
-	for (auto const& t : cases) {
+	for (auto const & t : cases) {
 		auto generic_message = seatalk::message_11::parse(t.data);
 		ASSERT_TRUE(generic_message != nullptr);
 		auto m = seatalk::message_cast<seatalk::message_11>(generic_message);
@@ -83,5 +82,4 @@ TEST_F(Test_seatalk_message_11, write_speed)
 
 	EXPECT_EQ(expected, m.get_data());
 }
-
 }

@@ -5,6 +5,8 @@
 #include <functional>
 #include <utils/unique.hpp>
 
+namespace marnav
+{
 namespace seatalk
 {
 
@@ -25,8 +27,8 @@ enum class message_id : uint8_t {
 
 namespace unit
 {
-	constexpr const char KNOT = 'N';
-	constexpr const char MPS = 'M'; // meters per second
+constexpr const char KNOT = 'N';
+constexpr const char MPS = 'M'; // meters per second
 }
 
 using raw = std::vector<uint8_t>;
@@ -34,7 +36,7 @@ using raw = std::vector<uint8_t>;
 class message
 {
 public:
-	using parse_function = std::function<std::unique_ptr<message>(const raw&)>;
+	using parse_function = std::function<std::unique_ptr<message>(const raw &)>;
 
 	message_id type() const;
 	virtual raw get_data() const = 0;
@@ -46,16 +48,16 @@ private:
 	message_id message_type;
 };
 
-template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message>& s)
+template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message> & s)
 {
 	if (!s)
 		return nullptr;
 	if (s->type() != T::ID)
 		return nullptr;
 
-	return std::unique_ptr<T>{static_cast<T*>(s.release())};
+	return std::unique_ptr<T>{static_cast<T *>(s.release())};
 }
-
+}
 }
 
 #endif

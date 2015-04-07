@@ -5,6 +5,8 @@
 #include "angle.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -14,18 +16,17 @@ public:
 	constexpr static const sentence_id ID = sentence_id::RMB;
 
 	rmb();
-	rmb(const rmb&) = default;
-	rmb& operator=(const rmb&) = default;
+	rmb(const rmb &) = default;
+	rmb & operator=(const rmb &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	void check_waypoint_id(const std::string& id) const throw(std::invalid_argument);
+	void check_waypoint_id(const std::string & id) const throw(std::invalid_argument);
 
 	utils::optional<char> status; // V:warning
 	utils::optional<double> cross_track_error; // cross track error in nautical miles
@@ -59,16 +60,16 @@ public:
 	void set_status(char t) { status = t; }
 	void set_cross_track_error(double t) { cross_track_error = t; }
 	void set_steer_dir(char t) { steer_dir = t; }
-	void set_waypoint_to(const std::string& id);
-	void set_waypoint_from(const std::string& id);
-	void set_lat(const geo::latitude& t);
-	void set_lon(const geo::longitude& t);
+	void set_waypoint_to(const std::string & id);
+	void set_waypoint_from(const std::string & id);
+	void set_lat(const geo::latitude & t);
+	void set_lon(const geo::longitude & t);
 	void set_range(double t) { range = t; }
 	void set_bearing(double t) { bearing = t; }
 	void set_dst_velocity(double t) { dst_velocity = t; }
 	void set_arrival_status(char t) { arrival_status = t; }
 };
-
+}
 }
 
 #endif

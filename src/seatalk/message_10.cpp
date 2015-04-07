@@ -1,5 +1,7 @@
 #include "message_10.hpp"
 
+namespace marnav
+{
 namespace seatalk
 {
 
@@ -9,7 +11,7 @@ message_10::message_10()
 {
 }
 
-std::unique_ptr<message> message_10::parse(const raw& data) throw(std::invalid_argument)
+std::unique_ptr<message> message_10::parse(const raw & data) throw(std::invalid_argument)
 {
 	if (data.size() != 4)
 		throw std::invalid_argument{"invalid number of bytes in message_10::parse"};
@@ -17,7 +19,7 @@ std::unique_ptr<message> message_10::parse(const raw& data) throw(std::invalid_a
 		throw std::invalid_argument{"invalid size specified in message"};
 
 	std::unique_ptr<message> result = utils::make_unique<message_10>();
-	message_10& msg = static_cast<message_10&>(*result);
+	message_10 & msg = static_cast<message_10 &>(*result);
 
 	msg.angle = 0;
 	msg.angle += data[2];
@@ -33,7 +35,7 @@ std::unique_ptr<message> message_10::parse(const raw& data) throw(std::invalid_a
 raw message_10::get_data() const
 {
 	return raw{static_cast<uint8_t>(ID), 0x01, static_cast<uint8_t>((angle >> 0) & 0xff),
-			   static_cast<uint8_t>((angle >> 8) & 0xff)};
+		static_cast<uint8_t>((angle >> 8) & 0xff)};
 }
-
+}
 }

@@ -4,6 +4,8 @@
 #include <vector>
 #include <istream>
 
+namespace marnav
+{
 namespace utils
 {
 
@@ -34,11 +36,11 @@ public:
 		friend class bitset;
 
 	private:
-		const bitset* bs;
+		const bitset * bs;
 		size_type pos;
 
 	private:
-		const_iterator(const bitset* const bs, size_type pos)
+		const_iterator(const bitset * const bs, size_type pos)
 			: bs(bs)
 			, pos(pos)
 		{
@@ -51,38 +53,38 @@ public:
 		{
 		}
 
-		const_iterator(const const_iterator& other) = default;
+		const_iterator(const const_iterator & other) = default;
 
 		size_type get_pos() const { return pos; }
 
-		const_iterator& operator=(const const_iterator& other) = default;
+		const_iterator & operator=(const const_iterator & other) = default;
 
-		bool operator==(const const_iterator& other) const
+		bool operator==(const const_iterator & other) const
 		{
 			return bs == other.bs && pos == other.pos;
 		}
 
-		bool operator!=(const const_iterator& other) const
+		bool operator!=(const const_iterator & other) const
 		{
 			return bs != other.bs || pos != other.pos;
 		}
 
-		bool operator<(const const_iterator& other) const
+		bool operator<(const const_iterator & other) const
 		{
 			return bs == other.bs && pos < other.pos;
 		}
 
-		bool operator>(const const_iterator& other) const
+		bool operator>(const const_iterator & other) const
 		{
 			return bs == other.bs && pos > other.pos;
 		}
 
-		bool operator<=(const const_iterator& other) const
+		bool operator<=(const const_iterator & other) const
 		{
 			return bs == other.bs && pos <= other.pos;
 		}
 
-		bool operator>=(const const_iterator& other) const
+		bool operator>=(const const_iterator & other) const
 		{
 			return bs == other.bs && pos >= other.pos;
 		}
@@ -92,7 +94,7 @@ public:
 			return bs != nullptr && pos < bs->size() && bs->get_bit(pos) == true;
 		}
 
-		const_iterator& operator+=(size_type ofs)
+		const_iterator & operator+=(size_type ofs)
 		{
 			if (bs != nullptr && pos < bs->size()) {
 				pos += ofs;
@@ -102,7 +104,7 @@ public:
 			return *this;
 		}
 
-		const_iterator& operator-=(size_type ofs)
+		const_iterator & operator-=(size_type ofs)
 		{
 			if (bs != nullptr) {
 				pos = (ofs > pos) ? 0 : pos - ofs;
@@ -110,7 +112,7 @@ public:
 			return *this;
 		}
 
-		const_iterator& operator++() // ++const_iterator
+		const_iterator & operator++() // ++const_iterator
 		{
 			if (bs != nullptr && pos < bs->size()) {
 				++pos;
@@ -118,7 +120,7 @@ public:
 			return *this;
 		}
 
-		const_iterator& operator--() // --const_iterator
+		const_iterator & operator--() // --const_iterator
 		{
 			if (bs != nullptr && pos > 0) {
 				--pos;
@@ -145,7 +147,7 @@ public:
 		}
 
 		template <typename T>
-		void peek(T& v, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
+		void peek(T & v, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
 		{
 			if (bs == nullptr)
 				return;
@@ -155,7 +157,7 @@ public:
 		}
 
 		template <typename T>
-		void read(T& v, size_type bits = sizeof(T) * BITS_PER_BYTE) throw(exception)
+		void read(T & v, size_type bits = sizeof(T) * BITS_PER_BYTE) throw(exception)
 		{
 			peek(v, bits);
 			*this += bits;
@@ -252,7 +254,7 @@ private:
 	/// @param[in] bits Number of bits to be read.
 	///            If the number of bits is smaller than what the specified data can
 	///            hold, only the least significant bits are being set.
-	void get_block(block_type& v, size_type ofs, size_type bits = BITS_PER_BLOCK) const
+	void get_block(block_type & v, size_type ofs, size_type bits = BITS_PER_BLOCK) const
 	{
 		if (bits <= 0)
 			return;
@@ -270,9 +272,10 @@ private:
 		} else {
 			// desired value is part from current block and part from next
 			block_type mask0 = (1 << u_bits) - 1;
-			block_type mask1 = ((1 << (BITS_PER_BLOCK - (bits - u_bits))) - 1) << (bits - u_bits);
-			v = (data[i + 0] & mask0)
-				<< (bits - u_bits) | (data[i + 1] & mask1) >> (BITS_PER_BLOCK - (bits - u_bits));
+			block_type mask1 = ((1 << (BITS_PER_BLOCK - (bits - u_bits))) - 1)
+				<< (bits - u_bits);
+			v = (data[i + 0] & mask0) << (bits - u_bits)
+				| (data[i + 1] & mask1) >> (BITS_PER_BLOCK - (bits - u_bits));
 		}
 	}
 
@@ -355,7 +358,7 @@ public:
 	/// Appends another bitset to this one.
 	///
 	/// @param[in] bs The bitset to be appended to this one.
-	void append(const bitset& bs)
+	void append(const bitset & bs)
 	{
 		// TODO
 	}
@@ -365,18 +368,18 @@ public:
 	/// @param[in] bs The bitset to copy.
 	/// @param[in] ofs The offset within the bitset to copy the bitset
 	///            to. The entire specified bitset will be set.
-	void set(const bitset& bs, size_type ofs)
+	void set(const bitset & bs, size_type ofs)
 	{
 		// TODO
 	}
 
 	/// @TODO: documentation
-	size_type append(std::istream& is, size_type blocks)
+	size_type append(std::istream & is, size_type blocks)
 	{
 		size_type i = 0;
 		block_type block;
 		while (is.good() && !is.eof() && i < blocks) {
-			is.read(reinterpret_cast<char*>(&block), sizeof(block));
+			is.read(reinterpret_cast<char *>(&block), sizeof(block));
 			append_block(block);
 			++i;
 		}
@@ -399,7 +402,7 @@ public:
 			return;
 		if (bits > sizeof(v) * BITS_PER_BYTE)
 			return; // TODO: no padding supported
-		block_type* p = reinterpret_cast<block_type*>(&v);
+		block_type * p = reinterpret_cast<block_type *>(&v);
 		size_type n_bits = bits % BITS_PER_BLOCK; // incomplete blocks
 		if (n_bits != 0) {
 			append_block(*p, n_bits);
@@ -416,7 +419,8 @@ public:
 	/// @param[in] ofs The offset (in bits) at which position the value has to be written.
 	/// @paran[in] bits The number of bits to write. This must not exceed the number of bits
 	///            provided by the specified data, padding is not supported.
-	template <typename T> void set(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE)
+	template <typename T>
+	void set(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE)
 	{
 		if (bits <= 0)
 			return;
@@ -424,7 +428,7 @@ public:
 			return; // TODO: no padding supported
 		if (ofs + bits > capacity())
 			extend(ofs + bits - capacity());
-		block_type* p = reinterpret_cast<block_type*>(&v);
+		block_type * p = reinterpret_cast<block_type *>(&v);
 		size_type n_bits = bits % BITS_PER_BLOCK; // incomplete block
 		if (n_bits != 0) {
 			set_block(*p, ofs, n_bits);
@@ -448,13 +452,14 @@ public:
 	///            hold, only the least significant bits are being set.
 	/// @return The data read from the bitset.
 	template <class T>
-	typename std::enable_if<std::is_integral<T>::value, T>::type
-	get(size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
+	typename std::enable_if<std::is_integral<T>::value, T>::type get(
+		size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
 	{
 		if (bits <= 0)
 			throw exception{};
 		if (bits > sizeof(T) * BITS_PER_BYTE)
-			throw exception{}; // impossible to read more bits than the specified container can hold
+			throw exception{}; // impossible to read more bits than the specified container can
+							   // hold
 		if (ofs + bits > pos)
 			throw exception{};
 
@@ -494,20 +499,20 @@ public:
 	}
 
 	template <class T>
-	typename std::enable_if<std::is_enum<T>::value, T>::type
-	get(size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
+	typename std::enable_if<std::is_enum<T>::value, T>::type get(
+		size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
 	{
 		return static_cast<T>(get<typename std::underlying_type<T>::type>(ofs, bits));
 	}
 
 	template <class T>
-	void get(T& value, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const
+	void get(T & value, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const
 		throw(exception)
 	{
 		value = get<T>(ofs, bits);
 	}
 };
-
+}
 }
 
 #endif

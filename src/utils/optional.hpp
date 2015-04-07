@@ -1,6 +1,8 @@
 #ifndef __UTILS__OPTIONAL__HPP__
 #define __UTILS__OPTIONAL__HPP__
 
+namespace marnav
+{
 namespace utils
 {
 
@@ -20,20 +22,20 @@ public:
 	{
 	}
 
-	constexpr optional(const T& data)
+	constexpr optional(const T & data)
 		: flag(true)
 		, data(data)
 	{
 	}
 
-	constexpr optional(T&& data)
+	constexpr optional(T && data)
 		: flag(true)
 		, data(std::move(data))
 	{
 	}
 
-	optional(optional&&) = default;
-	optional(const optional&) = default;
+	optional(optional &&) = default;
+	optional(const optional &) = default;
 
 	void reset()
 	{
@@ -44,40 +46,40 @@ public:
 	bool available() const { return flag; }
 	explicit operator bool() const { return flag; }
 
-	constexpr const T& value() const { return data; }
-	T& value() { return data; }
+	constexpr const T & value() const { return data; }
+	T & value() { return data; }
 
-	optional& operator=(const optional& other)
+	optional & operator=(const optional & other)
 	{
 		this->data = other.data;
 		this->flag = other.flag;
 		return *this;
 	}
 
-	optional& operator=(optional&& other)
+	optional & operator=(optional && other)
 	{
 		this->data = std::move(other.data);
 		this->flag = std::move(other.flag);
 		return *this;
 	}
 
-	template <class U> optional& operator=(U&& data)
+	template <class U> optional & operator=(U && data)
 	{
 		this->data = std::move(data);
 		flag = true;
 		return *this;
 	}
 
-	constexpr const T* operator->() const { return &data; }
-	T* operator->() { return &data; }
-	constexpr const T& operator*() const { return data; }
-	T& operator*() { return data; }
+	constexpr const T * operator->() const { return &data; }
+	T * operator->() { return &data; }
+	constexpr const T & operator*() const { return data; }
+	T & operator*() { return data; }
 
 private:
 	bool flag;
 	T data;
 };
-
+}
 }
 
 #endif

@@ -4,6 +4,8 @@
 #include "message.hpp"
 #include <array>
 
+namespace marnav
+{
 namespace seatalk
 {
 
@@ -21,12 +23,12 @@ public:
 	constexpr static const message_id ID = message_id::equipment_id;
 
 	message_01();
-	message_01(const message_01&) = default;
-	message_01& operator=(const message_01&) = default;
+	message_01(const message_01 &) = default;
+	message_01 & operator=(const message_01 &) = default;
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw& data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
 
 private:
 	equipment_id_t equipment_id;
@@ -34,9 +36,9 @@ private:
 public:
 	equipment_id_t get_equipment_id() const { return equipment_id; }
 
-	void set_equipment_id(const equipment_id_t& t) { equipment_id = t; }
+	void set_equipment_id(const equipment_id_t & t) { equipment_id = t; }
 };
-
+}
 }
 
 #endif

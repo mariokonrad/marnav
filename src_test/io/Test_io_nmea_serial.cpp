@@ -5,26 +5,28 @@
 
 namespace
 {
-static const char DATA[] =
-{
-	"$GPRMC,202451,A,4702.3966,N,00818.3287,E,0.0,312.3,260711,0.6,E,A*19\r\n"
-	"$GPRMC,202452,A,4702.3966,N,00818.3287,E,0.0,312.3,260711,0.6,E,A*1a\r\n"
-	"$GPRMC,202453,A,4702.3966,N,00818.3287,E,0.0,312.3,260711,0.6,E,A*1b\r\n"
-};
+
+using namespace marnav;
+
+static const char DATA[]
+	= {"$GPRMC,202451,A,4702.3966,N,00818.3287,E,0.0,312.3,260711,0.6,E,A*19\r\n"
+	   "$GPRMC,202452,A,4702.3966,N,00818.3287,E,0.0,312.3,260711,0.6,E,A*1a\r\n"
+	   "$GPRMC,202453,A,4702.3966,N,00818.3287,E,0.0,312.3,260711,0.6,E,A*1b\r\n"};
 
 class dummy_device : public ::io::device
 {
 public:
 	dummy_device()
 		: index(0)
-	{}
+	{
+	}
 
 	void open() throw(std::runtime_error) override {}
 	void close() override {}
 
 	/// Just go through the data once.
-	virtual int read(char* buffer, uint32_t size) throw(std::invalid_argument,
-														std::runtime_error) override
+	virtual int read(char * buffer, uint32_t size) throw(
+		std::invalid_argument, std::runtime_error) override
 	{
 		if (size != sizeof(*buffer))
 			throw std::invalid_argument{"buffer type not supported"};
@@ -51,10 +53,7 @@ public:
 	int get_num_sentences() const { return num_sentences; }
 
 protected:
-	virtual void process_sentence(const std::string&) override
-	{
-		++num_sentences;
-	}
+	virtual void process_sentence(const std::string &) override { ++num_sentences; }
 
 private:
 	int num_sentences;
@@ -67,7 +66,8 @@ public:
 	message_reader()
 		: nmea_serial(utils::make_unique<dummy_device>())
 		, sentence_received(false)
-	{}
+	{
+	}
 
 	std::string read_sentence()
 	{
@@ -81,7 +81,7 @@ public:
 	}
 
 protected:
-	virtual void process_sentence(const std::string& s) override
+	virtual void process_sentence(const std::string & s) override
 	{
 		sentence = s;
 		sentence_received = true;

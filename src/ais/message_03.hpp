@@ -3,6 +3,8 @@
 
 #include "message_01.hpp"
 
+namespace marnav
+{
 namespace ais
 {
 
@@ -13,12 +15,12 @@ public:
 		= message_id::position_report_class_a_response_to_interrogation;
 
 	message_03();
-	message_03(const message_03&) = default;
-	message_03& operator=(const message_03&) = default;
+	message_03(const message_03 &) = default;
+	message_03 & operator=(const message_03 &) = default;
 
-	static std::unique_ptr<message> parse(const raw& bits) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & bits) throw(std::invalid_argument);
 };
-
+}
 }
 
 #endif

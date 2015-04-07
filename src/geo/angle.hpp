@@ -4,6 +4,8 @@
 #include <string>
 #include <stdexcept>
 
+namespace marnav
+{
 namespace geo
 {
 class angle
@@ -11,7 +13,7 @@ class angle
 public:
 	static constexpr double EPSILON = 1.0e-8;
 
-	angle(const angle&) = default;
+	angle(const angle &) = default;
 
 	angle();
 	explicit angle(double value);
@@ -29,9 +31,9 @@ public:
 	/// Converts an angle to double, units: degrees.
 	operator double() const;
 
-	friend bool operator==(const angle& a, const angle& b) noexcept;
+	friend bool operator==(const angle & a, const angle & b) noexcept;
 
-	angle& operator=(const angle&) = default;
+	angle & operator=(const angle &) = default;
 
 protected:
 	double get() const;
@@ -40,7 +42,7 @@ private:
 	double value; // angle in degrees
 };
 
-bool operator==(const angle& a, const angle& b) noexcept;
+bool operator==(const angle & a, const angle & b) noexcept;
 
 class latitude : public angle
 {
@@ -73,7 +75,7 @@ public:
 private:
 	static void check(double a) throw(std::invalid_argument);
 };
-
+}
 }
 
 #endif

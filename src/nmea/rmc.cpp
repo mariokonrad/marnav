@@ -2,6 +2,8 @@
 #include <utils/unique.hpp>
 #include "io.hpp"
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -10,21 +12,20 @@ rmc::rmc()
 {
 }
 
-void rmc::set_lat(const geo::latitude& t)
+void rmc::set_lat(const geo::latitude & t)
 {
 	lat = t;
 	lat_hem = convert_hemisphere(t);
 }
 
-void rmc::set_lon(const geo::longitude& t)
+void rmc::set_lon(const geo::longitude & t)
 {
 	lon = t;
 	lon_hem = convert_hemisphere(t);
 }
 
-std::unique_ptr<sentence>
-rmc::parse(const std::string& talker,
-		   const std::vector<std::string>& fields) throw(std::invalid_argument)
+std::unique_ptr<sentence> rmc::parse(const std::string & talker,
+	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
 	// before and after NMEA 2.3
 	if ((fields.size() < 11) || (fields.size() > 12))
@@ -32,7 +33,7 @@ rmc::parse(const std::string& talker,
 
 	std::unique_ptr<sentence> result = utils::make_unique<rmc>();
 	result->set_talker(talker);
-	rmc& detail = static_cast<rmc&>(*result);
+	rmc & detail = static_cast<rmc &>(*result);
 
 	read(fields[0], detail.time_utc);
 	read(fields[1], detail.status);
@@ -55,11 +56,9 @@ rmc::parse(const std::string& talker,
 
 std::vector<std::string> rmc::get_data() const
 {
-	return {to_string(time_utc), to_string(status),  to_string(lat),
-			to_string(lat_hem),  to_string(lon),	 to_string(lon_hem),
-			to_string(sog),		 to_string(heading), to_string(date),
-			to_string(mag),		 to_string(mag_hem), to_string(faa_mode_indicator)};
+	return {to_string(time_utc), to_string(status), to_string(lat), to_string(lat_hem),
+		to_string(lon), to_string(lon_hem), to_string(sog), to_string(heading), to_string(date),
+		to_string(mag), to_string(mag_hem), to_string(faa_mode_indicator)};
 }
-
 }
-
+}

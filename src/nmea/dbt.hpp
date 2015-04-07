@@ -4,6 +4,8 @@
 #include "sentence.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -13,12 +15,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::DBT;
 
 	dbt();
-	dbt(const dbt&) = default;
-	dbt& operator=(const dbt&) = default;
+	dbt(const dbt &) = default;
+	dbt & operator=(const dbt &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -43,7 +44,7 @@ public:
 	void set_depth_meter(double t);
 	void set_depth_fathom(double t);
 };
-
+}
 }
 
 #endif

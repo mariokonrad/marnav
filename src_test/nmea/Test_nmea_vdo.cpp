@@ -5,19 +5,15 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_nmea_vdo : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_vdo, contruction)
-{
-	nmea::vdo vdo;
-}
+TEST_F(Test_nmea_vdo, contruction) { nmea::vdo vdo; }
 
-TEST_F(Test_nmea_vdo, size)
-{
-	EXPECT_EQ(56u, sizeof(nmea::vdo));
-}
+TEST_F(Test_nmea_vdo, size) { EXPECT_EQ(56u, sizeof(nmea::vdo)); }
 
 TEST_F(Test_nmea_vdo, parse)
 {
@@ -39,6 +35,4 @@ TEST_F(Test_nmea_vdo, parse_invalid_number_of_arguments)
 	EXPECT_ANY_THROW(nmea::vdo::parse("@@", {5, "@"}));
 	EXPECT_ANY_THROW(nmea::vdo::parse("@@", {7, "@"}));
 }
-
 }
-

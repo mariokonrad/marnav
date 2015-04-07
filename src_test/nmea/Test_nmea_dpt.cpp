@@ -5,19 +5,15 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_nmea_dpt : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_dpt, contruction)
-{
-	nmea::dpt dpt;
-}
+TEST_F(Test_nmea_dpt, contruction) { nmea::dpt dpt; }
 
-TEST_F(Test_nmea_dpt, size)
-{
-	EXPECT_EQ(56u, sizeof(nmea::dpt));
-}
+TEST_F(Test_nmea_dpt, size) { EXPECT_EQ(56u, sizeof(nmea::dpt)); }
 
 TEST_F(Test_nmea_dpt, parse)
 {
@@ -56,6 +52,5 @@ TEST_F(Test_nmea_dpt, set_transducer_offset)
 
 	EXPECT_STREQ("$IIDPT,,12.5*58", nmea::to_string(dpt).c_str());
 }
-
 }
 

@@ -1,7 +1,9 @@
 #include "hdg.hpp"
-#include <utils/unique.hpp>
 #include "io.hpp"
+#include <utils/unique.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -30,16 +32,15 @@ void hdg::check_hem(char hem) throw(std::invalid_argument)
 		throw std::invalid_argument{"invalid hemisphere"};
 }
 
-std::unique_ptr<sentence>
-hdg::parse(const std::string& talker,
-		   const std::vector<std::string>& fields) throw(std::invalid_argument)
+std::unique_ptr<sentence> hdg::parse(const std::string & talker,
+	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
 	if (fields.size() != 5)
 		throw std::invalid_argument{"invalid number of fields in hdg::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<hdg>();
 	result->set_talker(talker);
-	hdg& detail = static_cast<hdg&>(*result);
+	hdg & detail = static_cast<hdg &>(*result);
 
 	read(fields[0], detail.heading);
 	read(fields[1], detail.magn_dev);
@@ -52,7 +53,8 @@ hdg::parse(const std::string& talker,
 
 std::vector<std::string> hdg::get_data() const
 {
-	return {to_string(heading), to_string(magn_dev), to_string(magn_dev_hem), to_string(magn_var),
-			to_string(magn_var_hem)};
+	return {to_string(heading), to_string(magn_dev), to_string(magn_dev_hem),
+		to_string(magn_var), to_string(magn_var_hem)};
+}
 }
 }

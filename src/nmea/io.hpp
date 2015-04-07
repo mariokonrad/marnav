@@ -6,10 +6,12 @@
 #include <sstream>
 #include <string>
 
+namespace marnav
+{
 namespace nmea
 {
 
-template <class T> inline std::string to_string(const utils::optional<T>& data)
+template <class T> inline std::string to_string(const utils::optional<T> & data)
 {
 	if (!data)
 		return std::string{};
@@ -18,7 +20,7 @@ template <class T> inline std::string to_string(const utils::optional<T>& data)
 	return to_string(data.value());
 }
 
-template <> inline std::string to_string(const utils::optional<std::string>& data)
+template <> inline std::string to_string(const utils::optional<std::string> & data)
 {
 	if (!data)
 		return std::string{};
@@ -33,17 +35,11 @@ inline std::string to_string(char data)
 	return buf;
 }
 
-inline std::string to_string(uint32_t data)
-{
-	return std::to_string(data);
-}
+inline std::string to_string(uint32_t data) { return std::to_string(data); }
 
-inline std::string to_string(const std::string& data)
-{
-	return data;
-}
+inline std::string to_string(const std::string & data) { return data; }
 
-template <> inline std::string to_string(const utils::optional<uint32_t>& data)
+template <> inline std::string to_string(const utils::optional<uint32_t> & data)
 {
 	if (!data)
 		return std::string{};
@@ -51,7 +47,7 @@ template <> inline std::string to_string(const utils::optional<uint32_t>& data)
 	return std::to_string(data.value());
 }
 
-template <> inline std::string to_string(const utils::optional<double>& data)
+template <> inline std::string to_string(const utils::optional<double> & data)
 {
 	if (!data)
 		return std::string{};
@@ -61,7 +57,7 @@ template <> inline std::string to_string(const utils::optional<double>& data)
 	return buf;
 }
 
-template <> inline std::string to_string(const utils::optional<char>& data)
+template <> inline std::string to_string(const utils::optional<char> & data)
 {
 	if (!data)
 		return std::string{};
@@ -71,7 +67,7 @@ template <> inline std::string to_string(const utils::optional<char>& data)
 	return buf;
 }
 
-inline std::string format(const utils::optional<uint32_t>& data, unsigned int width)
+inline std::string format(const utils::optional<uint32_t> & data, unsigned int width)
 {
 	if (!data)
 		return std::string{};
@@ -82,7 +78,7 @@ inline std::string format(const utils::optional<uint32_t>& data, unsigned int wi
 	return buf;
 }
 
-template <class T> static void read(const std::string& s, T& value)
+template <class T> static void read(const std::string & s, T & value)
 {
 	if (s.empty()) {
 		value = T{};
@@ -93,7 +89,7 @@ template <class T> static void read(const std::string& s, T& value)
 	std::istringstream{s} >> value;
 }
 
-inline void read(const std::string& s, geo::latitude& value)
+inline void read(const std::string & s, geo::latitude & value)
 {
 	if (s.empty()) {
 		value = geo::latitude{};
@@ -103,7 +99,7 @@ inline void read(const std::string& s, geo::latitude& value)
 	value = parse_latitude(s);
 }
 
-inline void read(const std::string& s, geo::longitude& value)
+inline void read(const std::string & s, geo::longitude & value)
 {
 	if (s.empty()) {
 		value = geo::longitude{};
@@ -113,7 +109,7 @@ inline void read(const std::string& s, geo::longitude& value)
 	value = parse_longitude(s);
 }
 
-template <class T> static void read(const std::string& s, utils::optional<T>& value)
+template <class T> static void read(const std::string & s, utils::optional<T> & value)
 {
 	if (s.empty()) {
 		value.reset();
@@ -126,7 +122,7 @@ template <class T> static void read(const std::string& s, utils::optional<T>& va
 	value = tmp;
 }
 
-inline void read(const std::string& s, utils::optional<geo::latitude>& value)
+inline void read(const std::string & s, utils::optional<geo::latitude> & value)
 {
 	if (s.empty()) {
 		value.reset();
@@ -137,7 +133,7 @@ inline void read(const std::string& s, utils::optional<geo::latitude>& value)
 	value = tmp;
 }
 
-inline void read(const std::string& s, utils::optional<geo::longitude>& value)
+inline void read(const std::string & s, utils::optional<geo::longitude> & value)
 {
 	if (s.empty()) {
 		value.reset();
@@ -147,7 +143,7 @@ inline void read(const std::string& s, utils::optional<geo::longitude>& value)
 	read(s, tmp);
 	value = tmp;
 }
-
+}
 }
 
 #endif

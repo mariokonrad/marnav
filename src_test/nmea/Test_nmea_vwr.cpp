@@ -5,19 +5,15 @@
 namespace
 {
 
+using namespace marnav;
+
 class Test_nmea_vwr : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_vwr, contruction)
-{
-	nmea::vwr vwr;
-}
+TEST_F(Test_nmea_vwr, contruction) { nmea::vwr vwr; }
 
-TEST_F(Test_nmea_vwr, size)
-{
-	EXPECT_EQ(120u, sizeof(nmea::vwr));
-}
+TEST_F(Test_nmea_vwr, size) { EXPECT_EQ(120u, sizeof(nmea::vwr)); }
 
 TEST_F(Test_nmea_vwr, parse)
 {
@@ -95,6 +91,5 @@ TEST_F(Test_nmea_vwr, set_speed_kmh)
 
 	EXPECT_STREQ("$IIVWR,,,,,,,13.5,K*01", nmea::to_string(vwr).c_str());
 }
-
 }
 

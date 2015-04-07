@@ -4,6 +4,8 @@
 #include "message.hpp"
 #include <geo/angle.hpp>
 
+namespace marnav
+{
 namespace ais
 {
 
@@ -21,16 +23,16 @@ public:
 	constexpr static const uint8_t maneuver_indictor_not_available = 0;
 
 	message_01();
-	message_01(const message_01&) = default;
-	message_01& operator=(const message_01&) = default;
+	message_01(const message_01 &) = default;
+	message_01 & operator=(const message_01 &) = default;
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw& bits) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & bits) throw(std::invalid_argument);
 
 protected:
 	message_01(message_id id);
-	void read_data(const raw& bits);
+	void read_data(const raw & bits);
 
 private:
 	uint32_t repeat_indicator;
@@ -80,10 +82,10 @@ public:
 
 	geo::longitude get_longitude() const;
 	geo::latitude get_latitude() const;
-	void set_longitude(const geo::longitude& t);
-	void set_latitude(const geo::latitude& t);
+	void set_longitude(const geo::longitude & t);
+	void set_latitude(const geo::latitude & t);
 };
-
+}
 }
 
 #endif

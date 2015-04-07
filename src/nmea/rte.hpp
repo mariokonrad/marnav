@@ -4,20 +4,22 @@
 #include "sentence.hpp"
 #include <utils/optional.hpp>
 
+namespace marnav
+{
 namespace nmea
 {
+
 class rte : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::RTE;
 
 	rte();
-	rte(const rte&) = default;
-	rte& operator=(const rte&) = default;
+	rte(const rte &) = default;
+	rte & operator=(const rte &) = default;
 
-	static std::unique_ptr<sentence>
-	parse(const std::string& talker,
-		  const std::vector<std::string>& fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(const std::string & talker,
+		const std::vector<std::string> & fields) throw(std::invalid_argument);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -37,9 +39,9 @@ public:
 	void set_n_messages(uint32_t t) { n_messages = t; }
 	void set_message_number(uint32_t t) { message_number = t; }
 	void set_message_mode(char t) { message_mode = t; }
-	void set_waypoint_id(int index, const std::string& id);
+	void set_waypoint_id(int index, const std::string & id);
 };
-
+}
 }
 
 #endif

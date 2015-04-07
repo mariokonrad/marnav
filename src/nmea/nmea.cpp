@@ -32,6 +32,8 @@
 /// Please note: once the sentence is casted using nmea::sentence_cast, the original
 /// object (sentence in this case) is no more. Only the object 'rmc' is valid.
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -43,37 +45,22 @@ namespace nmea
 /// @return The parse function of the specified sentence.
 /// @exception std::invalid_argument The specified tag could not be found,
 ///   the argument cannot be processed.
-static sentence::parse_function
-instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
+static sentence::parse_function instantiate_sentence(const std::string & tag) throw(
+	std::invalid_argument)
 {
 	using namespace std;
 
 	using entry = std::pair<std::string, sentence::parse_function>;
 	static const std::vector<entry> known_sentences = {
-		{"AAM", aam::parse},
-		{"BOD", bod::parse},
-		{"DBT", dbt::parse},
-		{"DPT", dpt::parse},
-		{"GGA", gga::parse},
-		{"GLL", gll::parse},
-		{"GSA", gsa::parse},
-		{"GSV", gsv::parse},
-		{"HDG", hdg::parse},
-		{"MTW", mtw::parse},
-		{"MWV", mwv::parse},
-		{"RMB", rmb::parse},
-		{"RMC", rmc::parse},
-		{"RTE", rte::parse},
-		{"VHW", vhw::parse},
-		{"VLW", vlw::parse},
-		{"VTG", vtg::parse},
-		{"VWR", vwr::parse},
-		{"VDM", vdm::parse},
-		{"VDO", vdo::parse},
+		{"AAM", aam::parse}, {"BOD", bod::parse}, {"DBT", dbt::parse}, {"DPT", dpt::parse},
+		{"GGA", gga::parse}, {"GLL", gll::parse}, {"GSA", gsa::parse}, {"GSV", gsv::parse},
+		{"HDG", hdg::parse}, {"MTW", mtw::parse}, {"MWV", mwv::parse}, {"RMB", rmb::parse},
+		{"RMC", rmc::parse}, {"RTE", rte::parse}, {"VHW", vhw::parse}, {"VLW", vlw::parse},
+		{"VTG", vtg::parse}, {"VWR", vwr::parse}, {"VDM", vdm::parse}, {"VDO", vdo::parse},
 	};
 
-	auto const& i = std::find_if(begin(known_sentences), end(known_sentences),
-								 [tag](const entry& e) { return e.first == tag; });
+	auto const & i = std::find_if(begin(known_sentences), end(known_sentences),
+		[tag](const entry & e) { return e.first == tag; });
 
 	if (i == end(known_sentences))
 		throw std::invalid_argument{"unknown sentence in instantiate_sentence: " + tag};
@@ -91,10 +78,11 @@ instantiate_sentence(const std::string& tag) throw(std::invalid_argument)
 ///
 /// Example:
 /// @code
-///   auto s = nmea::make_sentence("$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
+///   auto s =
+///   nmea::make_sentence("$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
 /// @endcode
-std::unique_ptr<sentence> make_sentence(const std::string& s) throw(std::invalid_argument,
-																	checksum_error)
+std::unique_ptr<sentence> make_sentence(const std::string & s) throw(
+	std::invalid_argument, checksum_error)
 {
 	using namespace std;
 
@@ -139,5 +127,6 @@ std::unique_ptr<sentence> make_sentence(const std::string& s) throw(std::invalid
 	std::vector<std::string> fields{fields_begin, fields_end};
 
 	return instantiate_sentence(tag)(talker, fields);
+}
 }
 }

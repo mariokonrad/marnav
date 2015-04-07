@@ -5,6 +5,8 @@
 #include <memory>
 #include <utils/bitset.hpp>
 
+namespace marnav
+{
 namespace ais
 {
 
@@ -139,7 +141,7 @@ using raw = utils::bitset<uint8_t>;
 class message
 {
 public:
-	using parse_function = std::function<std::unique_ptr<message>(const raw&)>;
+	using parse_function = std::function<std::unique_ptr<message>(const raw &)>;
 
 	message_id type() const;
 	virtual raw get_data() const = 0;
@@ -154,16 +156,16 @@ private:
 char decode_sixbit_ascii(uint8_t value);
 uint8_t encode_sixbit_ascii(char c);
 
-template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message>& s)
+template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message> & s)
 {
 	if (!s)
 		return nullptr;
 	if (s->type() != T::ID)
 		return nullptr;
 
-	return std::unique_ptr<T>{static_cast<T*>(s.release())};
+	return std::unique_ptr<T>{static_cast<T *>(s.release())};
 }
-
+}
 }
 
 #endif

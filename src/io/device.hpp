@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <stdexcept>
 
+namespace marnav
+{
 namespace io
 {
 
@@ -21,9 +23,10 @@ public:
 	/// Reads data from the opened device into the buffer of the specified size.
 	///
 	/// @retval The number of bytes read into the buffer.
-	virtual int read(char* buffer, uint32_t size) throw(std::invalid_argument, std::runtime_error)
-		= 0;
+	virtual int read(char * buffer, uint32_t size) throw(
+		std::invalid_argument, std::runtime_error) = 0;
 };
+}
 }
 
 #endif

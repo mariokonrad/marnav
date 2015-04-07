@@ -1,8 +1,10 @@
 #include "vdm.hpp"
-#include <utils/unique.hpp>
 #include "io.hpp"
+#include <utils/unique.hpp>
 #include <string>
 
+namespace marnav
+{
 namespace nmea
 {
 
@@ -15,7 +17,7 @@ vdm::vdm()
 {
 }
 
-vdm::vdm(sentence_id id, const std::string& tag, const std::string& talker)
+vdm::vdm(sentence_id id, const std::string & tag, const std::string & talker)
 	: sentence(id, tag, talker)
 	, n_fragments(0)
 	, fragment(0)
@@ -24,7 +26,7 @@ vdm::vdm(sentence_id id, const std::string& tag, const std::string& talker)
 {
 }
 
-void vdm::read_fields(const std::vector<std::string>& fields)
+void vdm::read_fields(const std::vector<std::string> & fields)
 {
 	read(fields[0], n_fragments);
 	read(fields[1], fragment);
@@ -34,16 +36,15 @@ void vdm::read_fields(const std::vector<std::string>& fields)
 	read(fields[5], n_fill_bits);
 }
 
-std::unique_ptr<sentence>
-vdm::parse(const std::string& talker,
-		   const std::vector<std::string>& fields) throw(std::invalid_argument)
+std::unique_ptr<sentence> vdm::parse(const std::string & talker,
+	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in vdm::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<vdm>();
 	result->set_talker(talker);
-	vdm& detail = static_cast<vdm&>(*result);
+	vdm & detail = static_cast<vdm &>(*result);
 
 	detail.read_fields(fields);
 
@@ -52,8 +53,8 @@ vdm::parse(const std::string& talker,
 
 std::vector<std::string> vdm::get_data() const
 {
-	return {to_string(n_fragments),   to_string(fragment), to_string(seq_msg_id),
-			to_string(radio_channel), to_string(payload),  to_string(n_fill_bits)};
+	return {to_string(n_fragments), to_string(fragment), to_string(seq_msg_id),
+		to_string(radio_channel), to_string(payload), to_string(n_fill_bits)};
 }
-
+}
 }

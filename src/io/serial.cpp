@@ -5,6 +5,8 @@
 #include <termios.h>
 #include <unistd.h>
 
+namespace marnav
+{
 namespace io
 {
 
@@ -99,14 +101,15 @@ static tcflag_t get_parity_iflag(serial::parity par)
 	return 0;
 }
 
-serial::serial(const std::string& dev, baud b, databits d, stopbits s, parity p)
+serial::serial(const std::string & dev, baud b, databits d, stopbits s, parity p)
 	: fd(-1)
 	, dev(dev)
 	, baud_rate(b)
 	, data_bits(d)
 	, stop_bits(s)
 	, par(p)
-{}
+{
+}
 
 serial::~serial() { close(); }
 
@@ -126,8 +129,8 @@ void serial::open() throw(std::runtime_error)
 	tcgetattr(fd, &old_tio);
 	memset(&new_tio, 0, sizeof(new_tio));
 	new_tio.c_cflag = get_baud(baud_rate) | get_data_bits(data_bits) | get_stop_bits(stop_bits)
-					  | get_parity_cflag(par) | CLOCAL // ignore modem control lines
-					  | CREAD // enable receiver
+		| get_parity_cflag(par) | CLOCAL // ignore modem control lines
+		| CREAD // enable receiver
 		;
 	new_tio.c_iflag = 0 | get_parity_iflag(par);
 	new_tio.c_oflag = 0;
@@ -157,7 +160,7 @@ void serial::close()
 /// @return Number of read bytes (might be 0).
 /// @exception std::invalid_argument
 /// @exception std::runtime_error
-int serial::read(char* buffer, uint32_t size) throw(std::invalid_argument, std::runtime_error)
+int serial::read(char * buffer, uint32_t size) throw(std::invalid_argument, std::runtime_error)
 {
 	if ((buffer == nullptr) || (size == 0))
 		throw std::invalid_argument{"invalid buffer or size"};
@@ -173,8 +176,8 @@ int serial::read(char* buffer, uint32_t size) throw(std::invalid_argument, std::
 /// @return Number of written bytes.
 /// @exception std::invalid_argument
 /// @exception std::runtime_error
-int serial::write(const char* buffer, uint32_t size) throw(std::invalid_argument,
-														   std::runtime_error)
+int serial::write(const char * buffer, uint32_t size) throw(
+	std::invalid_argument, std::runtime_error)
 {
 	if ((buffer == nullptr) || (size == 0))
 		throw std::invalid_argument{"invalid buffer or size"};
@@ -182,6 +185,5 @@ int serial::write(const char* buffer, uint32_t size) throw(std::invalid_argument
 		throw std::runtime_error{"device not open"};
 	return ::write(fd, buffer, size);
 }
-
-
+}
 }

@@ -4,13 +4,15 @@
 #include <nmea/io.hpp>
 #include <iostream>
 
+using namespace marnav;
+
 /// Works only in a single threaded context (true for serial and nmea_serial).
 ///
 /// This class is implemented inline, for easier handling within this example.
 class sentence_reader : public io::nmea_serial
 {
 public:
-	sentence_reader(const std::string& device_name)
+	sentence_reader(const std::string & device_name)
 		: nmea_serial(device_name)
 		, sentence_received(false)
 	{
@@ -44,7 +46,7 @@ protected:
 	/// as poor-mans semaphore to signal the receipt.
 	///
 	/// After the reception, the message will be stored temporarily.
-	virtual void process_sentence(const std::string& s) override
+	virtual void process_sentence(const std::string & s) override
 	{
 		sentence = s;
 		sentence_received = true;
@@ -55,7 +57,7 @@ private:
 	std::string sentence;
 };
 
-int main(int, char**)
+int main(int, char **)
 {
 	// create and open the device for reading.
 	sentence_reader reader{"/dev/ttyUSB0"};
