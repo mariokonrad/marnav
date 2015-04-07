@@ -158,24 +158,63 @@ char decode_sixbit_ascii(uint8_t value);
 uint8_t encode_sixbit_ascii(char c);
 
 /// Casts the specified message to the message given by the template parameter.
-/// If the cast is performed successfully, the original object is invalidated.
 /// The object converted only if it is valid and of the correct type. It is not
 /// possible to cast a message into a completley different one.
 ///
 /// @param[in] s The message object to convert.
 /// @retval nullptr The specified message is invalid.
-/// @return The converted message . The specified message is now invalid.
+/// @return The converted message.
 /// @exception std::bad_cast The specified message has the wrong ID.
-template <class T>
-std::unique_ptr<T> message_cast(std::unique_ptr<message> & s) throw(std::bad_cast)
+template <class T> T * message_cast(message * s) throw(std::bad_cast)
 {
 	if (!s)
 		return nullptr;
 	if (s->type() != T::ID)
 		throw std::bad_cast{};
 
-	return std::unique_ptr<T>{static_cast<T *>(s.release())};
+	return static_cast<T *>(s);
 }
+
+/// const variant.
+///
+/// @see message_cast(message * s)
+template <class T> const T * message_cast(const message * s) throw(std::bad_cast)
+{
+	if (!s)
+		return nullptr;
+	if (s->type() != T::ID)
+		throw std::bad_cast{};
+
+	return static_cast<const T *>(s);
+}
+
+/// std::unique_ptr variant.
+///
+/// @see message_cast(message * s)
+template <class T> T * message_cast(std::unique_ptr<message> & s) throw(std::bad_cast)
+{
+	if (!s)
+		return nullptr;
+	if (s->type() != T::ID)
+		throw std::bad_cast{};
+
+	return static_cast<T *>(s.get());
+}
+
+/// const std::unique_ptr variant.
+///
+/// @see message_cast(message * s)
+template <class T>
+const T * message_cast(const std::unique_ptr<message> & s) throw(std::bad_cast)
+{
+	if (!s)
+		return nullptr;
+	if (s->type() != T::ID)
+		throw std::bad_cast{};
+
+	return static_cast<T *>(s.get());
+}
+
 }
 }
 

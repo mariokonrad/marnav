@@ -267,6 +267,9 @@ template <class T> T * sentence_cast(sentence * s) throw(std::bad_cast)
 	return static_cast<T *>(s);
 }
 
+/// const variant.
+///
+/// @see sentence_cast(sentence * s)
 template <class T> const T * sentence_cast(const sentence * s) throw(std::bad_cast)
 {
 	if (!s)
@@ -277,6 +280,9 @@ template <class T> const T * sentence_cast(const sentence * s) throw(std::bad_ca
 	return static_cast<const T *>(s);
 }
 
+/// std::unique_ptr variant.
+///
+/// @see sentence_cast(sentence * s)
 template <class T> T * sentence_cast(std::unique_ptr<sentence> & s) throw(std::bad_cast)
 {
 	if (!s)
@@ -287,6 +293,9 @@ template <class T> T * sentence_cast(std::unique_ptr<sentence> & s) throw(std::b
 	return static_cast<T *>(s.get());
 }
 
+/// const std::unique_ptr variant.
+///
+/// @see sentence_cast(sentence * s)
 template <class T>
 const T * sentence_cast(const std::unique_ptr<sentence> & s) throw(std::bad_cast)
 {
