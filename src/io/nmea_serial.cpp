@@ -27,16 +27,21 @@ void nmea_serial::close()
 
 /// Reads data from the device.
 ///
+/// @retval true  Success.
+/// @retval false End of file.
 /// @exception std::runtime_error The device was invalid or read error.
-void nmea_serial::read_data() throw(std::runtime_error)
+bool nmea_serial::read_data() throw(std::runtime_error)
 {
 	if (!dev)
 		throw std::runtime_error{"device invalid"};
 	int rc = dev->read(reinterpret_cast<char *>(&raw), sizeof(raw));
+	if (rc == 0)
+		return false;
 	if (rc < 0)
 		throw std::runtime_error{"read error"};
 	if (rc != sizeof(raw))
 		throw std::runtime_error{"read error"};
+	return true;
 }
 
 /// Processes the data read from the device.
@@ -63,15 +68,15 @@ void nmea_serial::process_nmea() throw(std::runtime_error)
 /// sentence was received the method process_message will be executed.
 /// This method automatcially synchronizes with NMEA data.
 ///
-/// @exception std::runtime_error Device or processing error. Since the
-///   NMEA 'bus' basically does never stop sending any data, it is
-///   considered an exception if it does. This means the bus is disconnected,
-///   no device sends any data anymore or receiving data is not possible.
-///   Either way, it is not considered 'normal'.
-void nmea_serial::read() throw(std::runtime_error)
+/// @retval true  Success.
+/// @retval false End of file.
+/// @exception std::runtime_error Device or processing error.
+bool nmea_serial::read() throw(std::runtime_error)
 {
-	read_data();
+	if (!read_data())
+		return false;
 	process_nmea();
+	return true;
 }
 }
 }

@@ -22,14 +22,14 @@ public:
 	nmea_serial(const std::string & name);
 
 	void close();
-	void read() throw(std::runtime_error);
+	bool read() throw(std::runtime_error);
 
 protected:
 	virtual void process_sentence(const std::string &) = 0;
 
 private:
 	void process_nmea() throw(std::runtime_error);
-	void read_data() throw(std::runtime_error);
+	bool read_data() throw(std::runtime_error);
 
 	char raw;
 	std::string sentence;

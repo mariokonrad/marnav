@@ -140,15 +140,16 @@ public:
 	{
 	}
 
-	seatalk::raw read_message()
+	bool read_message(seatalk::raw & data)
 	{
-		while (true) {
+		while (read()) {
 			if (message_received) {
+				data = message;
 				message_received = false;
-				return message;
+				return true;
 			}
-			read();
 		}
+		return false;
 	}
 
 protected:
@@ -171,11 +172,7 @@ TEST_F(Test_io_seatalk_serial, read_count_messages_and_collisions)
 {
 	dummy_reader device;
 
-	try {
-		while (true)
-			device.read();
-	} catch (...) {
-	}
+	while (device.read());
 
 	EXPECT_EQ(9, device.get_num_messages());
 	EXPECT_EQ(1u, device.get_collisions());
@@ -187,14 +184,10 @@ TEST_F(Test_io_seatalk_serial, read_message)
 	seatalk::raw msg;
 
 	int num_messages = 0;
+	seatalk::raw data;
 
-	try {
-		while (true) {
-			auto data = dev.read_message();
-			++num_messages;
-		}
-	} catch (...) {
-	}
+	while (dev.read_message(data))
+		++num_messages;
 
 	EXPECT_EQ(9, num_messages);
 }
@@ -204,7 +197,7 @@ TEST_F(Test_io_seatalk_serial, read_first_message__depth)
 	message_reader dev;
 	seatalk::raw msg;
 
-	ASSERT_NO_THROW(msg = dev.read_message());
+	ASSERT_NO_THROW(dev.read_message(msg));
 	EXPECT_EQ(5u, msg.size());
 	EXPECT_EQ(0x00u, msg[0]);
 	EXPECT_EQ(0x02u, msg[1]);
@@ -218,9 +211,9 @@ TEST_F(Test_io_seatalk_serial, read_third_message__water_temperature)
 	message_reader dev;
 	seatalk::raw msg;
 
-	ASSERT_NO_THROW(msg = dev.read_message());
-	ASSERT_NO_THROW(msg = dev.read_message());
-	ASSERT_NO_THROW(msg = dev.read_message());
+	ASSERT_NO_THROW(dev.read_message(msg));
+	ASSERT_NO_THROW(dev.read_message(msg));
+	ASSERT_NO_THROW(dev.read_message(msg));
 	EXPECT_EQ(4u, msg.size());
 	EXPECT_EQ(0x27u, msg[0]);
 	EXPECT_EQ(0x01u, msg[1]);

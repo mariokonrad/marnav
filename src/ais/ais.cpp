@@ -5,6 +5,10 @@
 #include "message_05.hpp"
 #include <algorithm>
 
+/// @example read_ais.cpp
+/// This is an example on how to parse and handle AIS messages while
+/// receiving NMEA sentences.
+
 namespace marnav
 {
 namespace ais

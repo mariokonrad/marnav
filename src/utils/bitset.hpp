@@ -9,11 +9,11 @@ namespace marnav
 namespace utils
 {
 
-/// @TODO: support for const_iterator (partially prepared)
-/// @TODO: test also for big-endian
-/// @TODO: padding for 'append' and 'set'
-/// @TODO: really ignoring the failure of 'set', 'append' and 'get'?
-/// @TODO: documentation
+/// @todo support for const_iterator (partially prepared)
+/// @todo test also for big-endian
+/// @todo padding for 'append' and 'set'
+/// @todo really ignoring the failure of 'set', 'append' and 'get'?
+/// @todo documentation
 template <class Block, class Container = std::vector<Block>> class bitset
 {
 public:
@@ -29,8 +29,8 @@ public:
 	{
 	};
 
-	/// @todo: TEST
-	/// @todo: documentation
+	/// @todo TEST
+	/// @todo documentation
 	class const_iterator
 	{
 		friend class bitset;
@@ -358,9 +358,10 @@ public:
 	/// Appends another bitset to this one.
 	///
 	/// @param[in] bs The bitset to be appended to this one.
+	///
+	/// @todo Implementation
 	void append(const bitset & bs)
 	{
-		// TODO
 	}
 
 	/// Sets the specified bitset at the offset within this bitset.
@@ -368,12 +369,13 @@ public:
 	/// @param[in] bs The bitset to copy.
 	/// @param[in] ofs The offset within the bitset to copy the bitset
 	///            to. The entire specified bitset will be set.
+	///
+	/// @todo Implementation
 	void set(const bitset & bs, size_type ofs)
 	{
-		// TODO
 	}
 
-	/// @TODO: documentation
+	/// @todo documentation
 	size_type append(std::istream & is, size_type blocks)
 	{
 		size_type i = 0;

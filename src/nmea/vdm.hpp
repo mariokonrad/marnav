@@ -60,6 +60,18 @@ public:
 	}
 };
 
+/// Collects payload from proper NMEA sentences.
+///
+/// @note This function assumes, that all sentences in the specified range are
+///   VDM or descendents, providing payload.
+/// @note This function assumes, that all sentences in the range are pointers to sentences.
+///
+/// @param[in] begin Iterator pointing to the beginning of the messges to process.
+/// @param[in] end   Iterator pointing after the messages to process (will not be
+///   processed).
+/// @return The container with all payload and padding bit information.
+///
+/// @todo Exetend/overload this function to accept containers of objects.
 template <class InputIt>
 std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt end)
 {
@@ -67,10 +79,8 @@ std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt 
 	v.reserve(distance(begin, end));
 
 	for (; begin != end; ++begin) {
-		const auto & vdm = nmea::sentence_cast<nmea::vdm>(*begin);
-		if (!vdm)
-			throw std::invalid_argument{"invalid sentence discovered"};
-		v.push_back(make_pair(vdm->get_payload(), vdm->get_n_fill_bits()));
+		const auto & s = sentence_cast<nmea::vdm>(*begin);
+		v.push_back(make_pair(s->get_payload(), s->get_n_fill_bits()));
 	}
 
 	return v;

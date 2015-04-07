@@ -20,25 +20,25 @@ public:
 
 	/// Reads synchronously messages from the device.
 	///
-	/// @return The received sentence.
+	/// @param[out] s The received sentence.
+	/// @retval true  Success.
+	/// @retval false End of file.
 	/// @exception std::runtime_error
-	std::string read_sentence()
+	bool read_sentence(std::string & s)
 	{
 		// reads as long as the sentence is not complete.
-		while (true) {
+		while (read()) {
 
 			// the sentence was received, return it and reset the 'semaphore'.
 			// please note: this works only in single threaded environment,
 			// since the 'semaphore' isn't really one.
 			if (sentence_received) {
+				s = sentence;
 				sentence_received = false;
-				return sentence;
+				return true;
 			}
-
-			// read data from the device. if this fails, there is not much
-			// else to do, than to give up.
-			read();
 		}
+		return false;
 	}
 
 protected:
@@ -62,12 +62,10 @@ int main(int, char **)
 	// create and open the device for reading.
 	sentence_reader reader{"/dev/ttyUSB0"};
 
-	// read and process NMEA sentences forever, this is ok for this demo.
-	while (true) {
-		// read data from the NMEA bus and return it. bus synchronization is done
-		// automatically.
-		auto data = reader.read_sentence();
+	std::string data;
 
+	// read and process NMEA sentences, bus synchronization is done automatically.
+	while (reader.read_sentence(data)) {
 		// data was successfully read from the NMEA bus, inclusive synchronization
 		// of NMEA sentences. This means it is possible to begin to listen on the
 		// bus at any time.

@@ -30,10 +30,9 @@ message_05::message_05()
 {
 }
 
+/// @todo also handle message with length of 420 and 422 bits
 std::unique_ptr<message> message_05::parse(const raw & bits) throw(std::invalid_argument)
 {
-	// TODO: also handle message with length of 420 and 422 bits
-
 	if (bits.size() != SIZE_BITS)
 		throw std::invalid_argument{"invalid number of bits in message_05::parse"};
 
@@ -45,13 +44,12 @@ std::unique_ptr<message> message_05::parse(const raw & bits) throw(std::invalid_
 	return result;
 }
 
+/// @todo consider to hide characters after '@'
 std::string message_05::read_string(
 	const raw & bits, raw::size_type ofs, raw::size_type count_sixbits) const
 {
 	std::string s;
 	s.reserve(count_sixbits);
-
-	// TODO: consider to hide characters after '@'
 
 	for (raw::size_type i = 0; i < count_sixbits; ++i) {
 		uint8_t sixbit = 0;

@@ -29,8 +29,6 @@
 
 /// @example parse_nmea.cpp
 /// This is an example on how to parse and handle NMEA sentences from a string.
-/// Please note: once the sentence is casted using nmea::sentence_cast, the original
-/// object (sentence in this case) is no more. Only the object 'rmc' is valid.
 
 namespace marnav
 {

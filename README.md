@@ -74,10 +74,8 @@ Write a NMEA sentence:
 Process AIS related NMEA messages:
 
 	// collect NMEA data of all fragments, from whatever source
-	std::vector<nmea::vdm> v;
-	v.push_back(
-		nmea::sentence_cast<nmea::vdm>(
-			nmea::make_sentence("!AIVDM,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5C")));
+	std::vector<std::unique_ptr<nmea::sentence>> v;
+	v.push_back(nmea::make_sentence("!AIVDM,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5C"));
 
 	// collect payload from all fragments
 	auto payload = nmea::collect_payload(v.begin(), v.end());

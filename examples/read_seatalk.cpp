@@ -19,25 +19,24 @@ public:
 
 	/// Reads synchronously messages from the device.
 	///
-	/// @return The received message.
+	/// @param[out] data The received message.
+	/// @retval true  Success.
+	/// @retval false End of file.
 	/// @exception std::runtime_error
-	seatalk::raw read_message()
+	bool read_message(seatalk::raw & data)
 	{
 		// reads as long as the message is not complete.
-		while (true) {
-
+		while (read()) {
 			// the message was received, return it and reset the 'semaphore'.
 			// please note: this works only in single threaded environment,
 			// since the 'semaphore' isn't really one.
 			if (message_received) {
+				data = message;
 				message_received = false;
-				return message;
+				return true;
 			}
-
-			// read data from the device. if this fails, there is not much
-			// else to do, than to give up.
-			read();
 		}
+		return false;
 	}
 
 protected:
@@ -61,12 +60,10 @@ int main(int, char **)
 	// create and open the device for reading.
 	message_reader reader{"/dev/ttyUSB0"};
 
-	// read and process SeaTalk messages forever, this is ok for this demo.
-	while (true) {
-		// read data from the SeaTalk bus and return it. bus synchronization is done
-		// automatically.
-		auto data = reader.read_message();
+	seatalk::raw data;
 
+	// read and process SeaTalk messages, bus synchronization is done automatically.
+	while (reader.read_message(data)) {
 		// data was successfully read from the SeaTalk bus, inclusive synchronization
 		// of SeaTalk messages. This means it is possible to begin to listen on the
 		// bus at any time.

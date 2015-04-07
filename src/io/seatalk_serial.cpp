@@ -130,31 +130,36 @@ void seatalk_serial::process_seatalk() throw(std::runtime_error)
 
 /// Reads data from the device.
 ///
+/// @retval true  Success.
+/// @retval false End of file.
 /// @exception std::runtime_error The device was invalid or read error.
-void seatalk_serial::read_data() throw(std::runtime_error)
+bool seatalk_serial::read_data() throw(std::runtime_error)
 {
 	if (!dev)
 		throw std::runtime_error{"device invalid"};
 	int rc = dev->read(reinterpret_cast<char *>(&ctx.raw), sizeof(ctx.raw));
+	if (rc == 0)
+		return false;
 	if (rc < 0)
 		throw std::runtime_error{"read error"};
 	if (rc != sizeof(ctx.raw))
 		throw std::runtime_error{"read error"};
+	return true;
 }
 
 /// Reads data from the device and processes it. If a complete SeaTalk
 /// message was received the method process_message will be executed.
 /// This method automatcially synchronizes with the SeaTalk bus.
 ///
-/// @exception std::runtime_error Device or processing error. Since the
-///   SeaTalk bus basically does never stop sending any data, it is
-///   considered an exception if it does. This means the bus is disconnected,
-///   no device sends any data anymore or receiving data is not possible.
-///   Either way, it is not considered 'normal'.
-void seatalk_serial::read() throw(std::runtime_error)
+/// @retval true  Success.
+/// @retval false End of file.
+/// @exception std::runtime_error Device or processing error.
+bool seatalk_serial::read() throw(std::runtime_error)
 {
-	read_data();
+	if (!read_data())
+		return false;
 	process_seatalk();
+	return true;
 }
 
 void seatalk_serial::emit_message()

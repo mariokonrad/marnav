@@ -69,15 +69,16 @@ public:
 	{
 	}
 
-	std::string read_sentence()
+	bool read_sentence(std::string & s)
 	{
-		while (true) {
+		while (read()) {
 			if (sentence_received) {
+				s = sentence;
 				sentence_received = false;
-				return sentence;
+				return true;
 			}
-			read();
 		}
+		return false;
 	}
 
 protected:
@@ -100,11 +101,7 @@ TEST_F(Test_io_nmea_serial, read_count_sentences)
 {
 	dummy_reader device;
 
-	try {
-		while (true)
-			device.read();
-	} catch (...) {
-	}
+	while (device.read());
 
 	EXPECT_EQ(3, device.get_num_sentences());
 }
@@ -115,14 +112,9 @@ TEST_F(Test_io_nmea_serial, read_sentence)
 	std::string sentence;
 
 	int num_sentences = 0;
-
-	try {
-		while (true) {
-			auto data = dev.read_sentence();
-			++num_sentences;
-		}
-	} catch (...) {
-	}
+	std::string data;
+	while (dev.read_sentence(data))
+		++num_sentences;
 
 	EXPECT_EQ(3, num_sentences);
 }
@@ -131,8 +123,10 @@ TEST_F(Test_io_nmea_serial, read_first_sentence)
 {
 	message_reader dev;
 	std::string sentence;
+	bool rc;
 
-	ASSERT_NO_THROW(sentence = dev.read_sentence());
+	ASSERT_NO_THROW(rc = dev.read_sentence(sentence));
+	ASSERT_TRUE(rc);
 	EXPECT_EQ(68u, sentence.size());
 }
 }

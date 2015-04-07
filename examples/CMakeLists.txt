@@ -21,3 +21,11 @@ add_executable(read_nmea
 target_link_libraries(read_nmea
 	marnav
 	)
+
+add_executable(read_ais
+	read_ais.cpp
+	)
+
+target_link_libraries(read_ais
+	marnav
+	)

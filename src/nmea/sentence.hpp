@@ -234,34 +234,68 @@ private:
 std::string to_string(const sentence & s);
 
 /// Casts the specified sentence to the sentence given by the template parameter.
-/// If the cast is performed successfully, the original object is invalidated.
 /// The object converted only if it is valid and of the correct type. It is not
 /// possible to cast a sentence into a completley different one.
 ///
+/// @note This function does not use 'dynamic_cast', therefore it does not
+///   cast subclasses automatically. You will have to do checks and casts
+///   explicitly.
+///   This is considered a feature.
+///
 /// @param[in] s The sentence object to convert.
 /// @retval nullptr The specified sentence is invalid.
-/// @return The converted sentence. The specified sentence is now invalid.
+/// @return The converted sentence.
 /// @exception std::bad_cast The specified sentence has the wrong ID.
 ///
 /// Examples:
 /// @code
 ///   auto s = nmea::make_sentence("$IIMTW,9.5,C*2F");
-///   auto mtw = nmea::sentence_cast<nmea::mtw>(s); // OK, but 's' now invalid
+///   auto mtw = nmea::sentence_cast<nmea::mtw>(s); // OK
 /// @endcode
 ///
 /// @code
 ///   auto s = nmea::make_sentence("$IIMTW,9.5,C*2F");
 ///   auto rmc = nmea::sentence_cast<nmea::rmc>(s); // Error, throws std::bad_cast
 /// @endcode
-template <class T>
-std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence> & s) throw(std::bad_cast)
+template <class T> T * sentence_cast(sentence * s) throw(std::bad_cast)
 {
 	if (!s)
 		return nullptr;
 	if (s->id() != T::ID)
 		throw std::bad_cast{};
 
-	return std::unique_ptr<T>{static_cast<T *>(s.release())};
+	return static_cast<T *>(s);
+}
+
+template <class T> const T * sentence_cast(const sentence * s) throw(std::bad_cast)
+{
+	if (!s)
+		return nullptr;
+	if (s->id() != T::ID)
+		throw std::bad_cast{};
+
+	return static_cast<const T *>(s);
+}
+
+template <class T> T * sentence_cast(std::unique_ptr<sentence> & s) throw(std::bad_cast)
+{
+	if (!s)
+		return nullptr;
+	if (s->id() != T::ID)
+		throw std::bad_cast{};
+
+	return static_cast<T *>(s.get());
+}
+
+template <class T>
+const T * sentence_cast(const std::unique_ptr<sentence> & s) throw(std::bad_cast)
+{
+	if (!s)
+		return nullptr;
+	if (s->id() != T::ID)
+		throw std::bad_cast{};
+
+	return static_cast<const T *>(s.get());
 }
 }
 }
