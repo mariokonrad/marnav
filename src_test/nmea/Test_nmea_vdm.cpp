@@ -88,5 +88,36 @@ TEST_F(Test_nmea_vdm, collect_payload_wrong_sentence)
 
 	EXPECT_ANY_THROW(nmea::collect_payload(v.begin(), v.end()));
 }
+
+TEST_F(Test_nmea_vdm, collect_payload_object_iterators)
+{
+	std::vector<nmea::vdm> v;
+	v.push_back(nmea::vdm{});
+	v.push_back(nmea::vdm{});
+
+	auto result = nmea::collect_payload(v.begin(), v.end());
+
+	ASSERT_EQ(2u, result.size());
+}
+
+TEST_F(Test_nmea_vdm, collect_payload_pointers)
+{
+	nmea::vdm v[3];
+
+	auto result = nmea::collect_payload(v, v + 3);
+
+	ASSERT_EQ(3u, result.size());
+}
+
+TEST_F(Test_nmea_vdm, collect_payload_pointers_begin_end)
+{
+	using namespace std;
+
+	nmea::vdm v[3];
+
+	auto result = nmea::collect_payload(begin(v), end(v));
+
+	ASSERT_EQ(3u, result.size());
+}
 }
 

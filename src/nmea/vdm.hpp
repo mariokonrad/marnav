@@ -63,20 +63,28 @@ public:
 /// Collects payload from proper NMEA sentences.
 ///
 /// @note This function assumes, that all sentences in the specified range are
-///   VDM or descendents, providing payload.
-/// @note This function assumes, that all sentences in the range are pointers to sentences.
+///   providing payload (VDM or descendents).
 ///
 /// @param[in] begin Iterator pointing to the beginning of the messges to process.
 /// @param[in] end   Iterator pointing after the messages to process (will not be
 ///   processed).
 /// @return The container with all payload and padding bit information.
 ///
-/// @todo Exetend/overload this function to accept containers of objects.
-template <class InputIt>
+/// std::unique_ptr<nmea::sentence> variant. Example:
+/// @code
+///   std::vector<std::unique_ptr<nmea::sentence>> v;
+///   v.push_back(nmea::make_sentence("..."));
+///   v.push_back(nmea::make_sentence("..."));
+///   auto data = nmea::collect_payload(v.begin(), v.end());
+/// @endcode
+template <class InputIt, typename std::enable_if<std::is_class<InputIt>::value
+								 && std::is_convertible<typename InputIt::value_type,
+													 std::unique_ptr<sentence>>::value,
+							 int>::type = 0>
 std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt end)
 {
 	std::vector<std::pair<std::string, int>> v;
-	v.reserve(distance(begin, end));
+	v.reserve(std::distance(begin, end));
 
 	for (; begin != end; ++begin) {
 		const auto & s = sentence_cast<nmea::vdm>(*begin);
@@ -85,6 +93,55 @@ std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt 
 
 	return v;
 }
+
+/// Object iterator variant. Example:
+/// @code
+///    std::vector<nmea::vdm> v; // collect data, for example:
+///    v.push_back(nmea::vdm{});
+///    v.push_back(nmea::vdm{});
+///    auto data = nmea::collect_payload(v.begin(), v.end());
+/// @endcode
+template <class InputIt, typename std::enable_if<std::is_class<InputIt>::value
+								 && !std::is_convertible<typename InputIt::value_type,
+										std::unique_ptr<sentence>>::value,
+							 int>::type = 0>
+std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt end)
+{
+	std::vector<std::pair<std::string, int>> v;
+	v.reserve(std::distance(begin, end));
+	for (; begin != end; ++begin) {
+		v.push_back(make_pair(begin->get_payload(), begin->get_n_fill_bits()));
+	}
+	return v;
+}
+
+/// Pointer variant. Example:
+/// @code
+///   nmea::vdm v[3]; // initialize them in any way...
+///   auto data = nmea::collect_payload(v, v + 3);
+/// @endcode
+/// or more modern:
+/// @code
+///   nmea::vdm v[3]; // initialize them in any way...
+///   auto data = nmea::collect_payload(std::begin(v), std::end(v));
+/// @endcode
+/// this will not compile, because MTW does not provide payload:
+/// @code
+///   nmea::mtw v[3];
+///   auto data = nmea::collect_payload(std::begin(v), std::end(v));
+/// @endcode
+template <class InputIt,
+	typename std::enable_if<std::is_pointer<InputIt>::value, int>::type = 0>
+std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt end)
+{
+	std::vector<std::pair<std::string, int>> v;
+	v.reserve(std::distance(begin, end));
+	for (; begin != end; ++begin) {
+		v.push_back(make_pair(begin->get_payload(), begin->get_n_fill_bits()));
+	}
+	return v;
+}
+
 }
 }
 
