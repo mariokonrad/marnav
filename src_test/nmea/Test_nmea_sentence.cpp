@@ -23,8 +23,7 @@ TEST_F(Test_nmea_sentence, sentence_is_null)
 TEST_F(Test_nmea_sentence, sentence_wrong_id)
 {
 	std::unique_ptr<nmea::sentence> p(new nmea::rmc);
-	auto rc = nmea::sentence_cast<nmea::mtw>(p);
 
-	EXPECT_EQ(nullptr, rc);
+	EXPECT_ANY_THROW(nmea::sentence_cast<nmea::mtw>(p));
 }
 }

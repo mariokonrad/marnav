@@ -22,7 +22,6 @@ TEST_F(Test_ais_message, message_cast_nullptr)
 TEST_F(Test_ais_message, message_cast_wrong_id)
 {
 	std::unique_ptr<ais::message> m(new ais::message_01);
-	auto rc = ais::message_cast<ais::message_05>(m);
-	EXPECT_EQ(nullptr, rc);
+	EXPECT_ANY_THROW(ais::message_cast<ais::message_05>(m));
 }
 }

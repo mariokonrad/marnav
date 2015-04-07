@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <typeinfo>
 #include "constants.hpp"
 
 namespace marnav
@@ -237,10 +238,10 @@ std::string to_string(const sentence & s);
 /// The object converted only if it is valid and of the correct type. It is not
 /// possible to cast a sentence into a completley different one.
 ///
-/// @param[inout] s The sentence object to convert.
-/// @retval nullptr The specified sentence is either invalid or a type mismatch.
-///   The specified sentence remains untouched.
+/// @param[in] s The sentence object to convert.
+/// @retval nullptr The specified sentence is invalid.
 /// @return The converted sentence. The specified sentence is now invalid.
+/// @exception std::bad_cast The specified sentence has the wrong ID.
 ///
 /// Examples:
 /// @code
@@ -250,14 +251,15 @@ std::string to_string(const sentence & s);
 ///
 /// @code
 ///   auto s = nmea::make_sentence("$IIMTW,9.5,C*2F");
-///   auto rmc = nmea::sentence_cast<nmea::rmc>(s); // Error, result is nullptr
+///   auto rmc = nmea::sentence_cast<nmea::rmc>(s); // Error, throws std::bad_cast
 /// @endcode
-template <class T> std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence> & s)
+template <class T>
+std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence> & s) throw(std::bad_cast)
 {
 	if (!s)
 		return nullptr;
 	if (s->id() != T::ID)
-		return nullptr;
+		throw std::bad_cast{};
 
 	return std::unique_ptr<T>{static_cast<T *>(s.release())};
 }

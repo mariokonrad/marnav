@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <functional>
+#include <typeinfo>
 #include <utils/unique.hpp>
 
 namespace marnav
@@ -48,12 +49,22 @@ private:
 	message_id message_type;
 };
 
-template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message> & s)
+/// Casts the specified message to the message given by the template parameter.
+/// If the cast is performed successfully, the original object is invalidated.
+/// The object converted only if it is valid and of the correct type. It is not
+/// possible to cast a message into a completley different one.
+///
+/// @param[in] s The message object to convert.
+/// @retval nullptr The specified message is invalid.
+/// @return The converted message . The specified message is now invalid.
+/// @exception std::bad_cast The specified message has the wrong ID.
+template <class T>
+std::unique_ptr<T> message_cast(std::unique_ptr<message> & s) throw(std::bad_cast)
 {
 	if (!s)
 		return nullptr;
 	if (s->type() != T::ID)
-		return nullptr;
+		throw std::bad_cast{};
 
 	return std::unique_ptr<T>{static_cast<T *>(s.release())};
 }

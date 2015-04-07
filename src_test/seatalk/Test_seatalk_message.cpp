@@ -23,8 +23,6 @@ TEST_F(Test_seatalk_message, message_is_null)
 TEST_F(Test_seatalk_message, message_wrong_id)
 {
 	std::unique_ptr<seatalk::message> p(new seatalk::message_00);
-	auto rc = seatalk::message_cast<seatalk::message_01>(p);
-
-	EXPECT_EQ(nullptr, rc);
+	EXPECT_ANY_THROW(seatalk::message_cast<seatalk::message_01>(p));
 }
 }
