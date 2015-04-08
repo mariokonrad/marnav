@@ -2,14 +2,14 @@
 // It does not read directly from a specific device, it provides data
 // as a demonstration.
 
-#include <nmea/nmea.hpp>
-#include <nmea/vdm.hpp>
-#include <ais/ais.hpp>
-#include <ais/message_01.hpp>
-#include <ais/message_05.hpp>
-#include <io/device.hpp>
-#include <io/nmea_serial.hpp>
-#include <utils/unique.hpp>
+#include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/vdm.hpp>
+#include <marnav/ais/ais.hpp>
+#include <marnav/ais/message_01.hpp>
+#include <marnav/ais/message_05.hpp>
+#include <marnav/io/device.hpp>
+#include <marnav/io/nmea_serial.hpp>
+#include <marnav/utils/unique.hpp>
 #include <iostream>
 
 namespace marnav_example

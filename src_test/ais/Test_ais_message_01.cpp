@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <ais/message_01.hpp>
-#include <ais/ais.hpp>
+#include <marnav/ais/message_01.hpp>
+#include <marnav/ais/ais.hpp>
 
 namespace
 {

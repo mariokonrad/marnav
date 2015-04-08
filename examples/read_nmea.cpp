@@ -1,7 +1,7 @@
-#include <io/nmea_serial.hpp>
-#include <nmea/nmea.hpp>
-#include <nmea/rmc.hpp>
-#include <nmea/io.hpp>
+#include <marnav/io/nmea_serial.hpp>
+#include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/rmc.hpp>
+#include <marnav/nmea/io.hpp>
 #include <iostream>
 
 using namespace marnav;

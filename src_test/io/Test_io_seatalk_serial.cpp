@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <io/seatalk_serial.hpp>
-#include <io/device.hpp>
+#include <marnav/io/seatalk_serial.hpp>
+#include <marnav/io/device.hpp>
 
 namespace
 {

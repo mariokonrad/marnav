@@ -1,6 +1,6 @@
-#include <io/seatalk_serial.hpp>
-#include <seatalk/seatalk.hpp>
-#include <seatalk/message_00.hpp>
+#include <marnav/io/seatalk_serial.hpp>
+#include <marnav/seatalk/seatalk.hpp>
+#include <marnav/seatalk/message_00.hpp>
 #include <iostream>
 
 using namespace marnav;

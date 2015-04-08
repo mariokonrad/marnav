@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <nmea/vwr.hpp>
-#include <nmea/nmea.hpp>
+#include <marnav/nmea/vwr.hpp>
+#include <marnav/nmea/nmea.hpp>
 
 namespace
 {

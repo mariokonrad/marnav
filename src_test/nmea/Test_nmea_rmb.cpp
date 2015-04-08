@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <nmea/rmb.hpp>
+#include <marnav/nmea/rmb.hpp>
 
 namespace
 {

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include <nmea/sentence.hpp>
-#include <nmea/mtw.hpp>
-#include <nmea/rmc.hpp>
+#include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/mtw.hpp>
+#include <marnav/nmea/rmc.hpp>
 
 namespace
 {

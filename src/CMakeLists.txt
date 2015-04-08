@@ -5,72 +5,72 @@ option(ENABLE_STATIC
 	"Enable static library" ON)
 
 set(SOURCE_UTILS
-	utils/unique.hpp
-	utils/bitset.hpp
-	utils/optional.hpp
+	marnav/utils/unique.hpp
+	marnav/utils/bitset.hpp
+	marnav/utils/optional.hpp
 	)
 
 set(SOURCE_GEO
-	geo/angle.cpp
+	marnav/geo/angle.cpp
 	)
 
 set(SOURCE_NMEA_0183
-	nmea/constants.cpp
-	nmea/angle.cpp
-	nmea/date.cpp
-	nmea/time.cpp
-	nmea/sentence.cpp
-	nmea/nmea.cpp
-	nmea/aam.cpp
-	nmea/bod.cpp
-	nmea/dbt.cpp
-	nmea/dpt.cpp
-	nmea/gga.cpp
-	nmea/gll.cpp
-	nmea/gsa.cpp
-	nmea/gsv.cpp
-	nmea/hdg.cpp
-	nmea/mtw.cpp
-	nmea/mwv.cpp
-	nmea/rmb.cpp
-	nmea/rmc.cpp
-	nmea/rte.cpp
-	nmea/vhw.cpp
-	nmea/vlw.cpp
-	nmea/vtg.cpp
-	nmea/vwr.cpp
-	nmea/vdm.cpp
-	nmea/vdo.cpp
+	marnav/nmea/constants.cpp
+	marnav/nmea/angle.cpp
+	marnav/nmea/date.cpp
+	marnav/nmea/time.cpp
+	marnav/nmea/sentence.cpp
+	marnav/nmea/nmea.cpp
+	marnav/nmea/aam.cpp
+	marnav/nmea/bod.cpp
+	marnav/nmea/dbt.cpp
+	marnav/nmea/dpt.cpp
+	marnav/nmea/gga.cpp
+	marnav/nmea/gll.cpp
+	marnav/nmea/gsa.cpp
+	marnav/nmea/gsv.cpp
+	marnav/nmea/hdg.cpp
+	marnav/nmea/mtw.cpp
+	marnav/nmea/mwv.cpp
+	marnav/nmea/rmb.cpp
+	marnav/nmea/rmc.cpp
+	marnav/nmea/rte.cpp
+	marnav/nmea/vhw.cpp
+	marnav/nmea/vlw.cpp
+	marnav/nmea/vtg.cpp
+	marnav/nmea/vwr.cpp
+	marnav/nmea/vdm.cpp
+	marnav/nmea/vdo.cpp
 	)
 
 set(SOURCE_AIS
-	ais/ais.cpp
-	ais/message.cpp
-	ais/message_01.cpp
-	ais/message_02.cpp
-	ais/message_03.cpp
-	ais/message_05.cpp
+	marnav/ais/ais.cpp
+	marnav/ais/message.cpp
+	marnav/ais/message_01.cpp
+	marnav/ais/message_02.cpp
+	marnav/ais/message_03.cpp
+	marnav/ais/message_05.cpp
 	)
 
 set(SOURCE_SEATALK
-	seatalk/seatalk.cpp
-	seatalk/message.cpp
-	seatalk/message_00.cpp
-	seatalk/message_01.cpp
-	seatalk/message_10.cpp
-	seatalk/message_11.cpp
-	seatalk/message_20.cpp
-	seatalk/message_21.cpp
-	seatalk/message_22.cpp
-	seatalk/message_23.cpp
-	seatalk/message_25.cpp
-	seatalk/message_27.cpp
+	marnav/seatalk/seatalk.cpp
+	marnav/seatalk/message.cpp
+	marnav/seatalk/message_00.cpp
+	marnav/seatalk/message_01.cpp
+	marnav/seatalk/message_10.cpp
+	marnav/seatalk/message_11.cpp
+	marnav/seatalk/message_20.cpp
+	marnav/seatalk/message_21.cpp
+	marnav/seatalk/message_22.cpp
+	marnav/seatalk/message_23.cpp
+	marnav/seatalk/message_25.cpp
+	marnav/seatalk/message_27.cpp
 	)
 
 set(SOURCE_IO
-	io/serial.cpp
-	io/seatalk_serial.cpp
-	io/nmea_serial.cpp
+	marnav/io/serial.cpp
+	marnav/io/seatalk_serial.cpp
+	marnav/io/nmea_serial.cpp
 	)
 
 add_executable(nmeasum
@@ -106,80 +106,80 @@ install(
 
 install(
 	FILES
-		nmea/constants.hpp
-		nmea/angle.hpp
-		nmea/io.hpp
-		nmea/date.hpp
-		nmea/time.hpp
-		nmea/sentence.hpp
-		nmea/nmea.hpp
-		nmea/aam.hpp
-		nmea/bod.hpp
-		nmea/dbt.hpp
-		nmea/dpt.hpp
-		nmea/gga.hpp
-		nmea/gll.hpp
-		nmea/gsa.hpp
-		nmea/gsv.hpp
-		nmea/mtw.hpp
-		nmea/rmb.hpp
-		nmea/rmc.hpp
-		nmea/rte.hpp
-		nmea/vtg.hpp
-		nmea/vwr.hpp
-		nmea/vdm.hpp
-		nmea/vdo.hpp
+		marnav/nmea/constants.hpp
+		marnav/nmea/angle.hpp
+		marnav/nmea/io.hpp
+		marnav/nmea/date.hpp
+		marnav/nmea/time.hpp
+		marnav/nmea/sentence.hpp
+		marnav/nmea/nmea.hpp
+		marnav/nmea/aam.hpp
+		marnav/nmea/bod.hpp
+		marnav/nmea/dbt.hpp
+		marnav/nmea/dpt.hpp
+		marnav/nmea/gga.hpp
+		marnav/nmea/gll.hpp
+		marnav/nmea/gsa.hpp
+		marnav/nmea/gsv.hpp
+		marnav/nmea/mtw.hpp
+		marnav/nmea/rmb.hpp
+		marnav/nmea/rmc.hpp
+		marnav/nmea/rte.hpp
+		marnav/nmea/vtg.hpp
+		marnav/nmea/vwr.hpp
+		marnav/nmea/vdm.hpp
+		marnav/nmea/vdo.hpp
 	DESTINATION include/marnav/nmea
 	)
 
 install(
 	FILES
-		ais/ais.hpp
-		ais/message.hpp
-		ais/message_01.hpp
-		ais/message_02.hpp
-		ais/message_03.hpp
-		ais/message_05.hpp
+		marnav/ais/ais.hpp
+		marnav/ais/message.hpp
+		marnav/ais/message_01.hpp
+		marnav/ais/message_02.hpp
+		marnav/ais/message_03.hpp
+		marnav/ais/message_05.hpp
 	DESTINATION include/marnav/ais
 	)
 
 install(
 	FILES
-		seatalk/seatalk.hpp
-		seatalk/message.hpp
-		seatalk/message_00.hpp
-		seatalk/message_01.hpp
-		seatalk/message_10.hpp
-		seatalk/message_11.hpp
-		seatalk/message_20.hpp
-		seatalk/message_21.hpp
-		seatalk/message_22.hpp
-		seatalk/message_23.hpp
-		seatalk/message_25.hpp
-		seatalk/message_27.hpp
+		marnav/seatalk/seatalk.hpp
+		marnav/seatalk/message.hpp
+		marnav/seatalk/message_00.hpp
+		marnav/seatalk/message_01.hpp
+		marnav/seatalk/message_10.hpp
+		marnav/seatalk/message_11.hpp
+		marnav/seatalk/message_20.hpp
+		marnav/seatalk/message_21.hpp
+		marnav/seatalk/message_22.hpp
+		marnav/seatalk/message_23.hpp
+		marnav/seatalk/message_25.hpp
+		marnav/seatalk/message_27.hpp
 	DESTINATION include/marnav/seatalk
 	)
 
 install(
 	FILES
-		utils/unique.hpp
-		utils/bitset.hpp
-		utils/optional.hpp
+		marnav/utils/unique.hpp
+		marnav/utils/bitset.hpp
+		marnav/utils/optional.hpp
 	DESTINATION include/marnav/utils
 	)
 
 install(
 	FILES
-		geo/angle.hpp
+		marnav/geo/angle.hpp
 	DESTINATION include/marnav/geo
 	)
 
 install(
 	FILES
-		io/device.hpp
-		io/serial.hpp
-		io/seatalk_serial.hpp
-		io/nmea_serial.hpp
+		marnav/io/device.hpp
+		marnav/io/serial.hpp
+		marnav/io/seatalk_serial.hpp
+		marnav/io/nmea_serial.hpp
 	DESTINATION include/marnav/io
 	)
 

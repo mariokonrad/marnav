@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <seatalk/message_00.hpp>
+#include <marnav/seatalk/message_00.hpp>
 
 namespace
 {

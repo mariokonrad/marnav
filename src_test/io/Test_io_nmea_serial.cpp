@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include <io/nmea_serial.hpp>
-#include <io/device.hpp>
-#include <utils/unique.hpp>
+#include <marnav/io/nmea_serial.hpp>
+#include <marnav/io/device.hpp>
+#include <marnav/utils/unique.hpp>
 
 namespace
 {

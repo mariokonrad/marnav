@@ -1,8 +1,8 @@
 #include <iostream>
-#include <nmea/nmea.hpp>
-#include <nmea/rmc.hpp>
-#include <nmea/angle.hpp>
-#include <nmea/io.hpp>
+#include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/rmc.hpp>
+#include <marnav/nmea/angle.hpp>
+#include <marnav/nmea/io.hpp>
 
 int main(int, char **)
 {

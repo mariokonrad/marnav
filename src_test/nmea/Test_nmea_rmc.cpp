@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <nmea/rmc.hpp>
-#include <nmea/nmea.hpp>
+#include <marnav/nmea/rmc.hpp>
+#include <marnav/nmea/nmea.hpp>
 
 namespace
 {

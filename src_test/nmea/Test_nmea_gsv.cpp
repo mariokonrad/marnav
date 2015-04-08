@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <nmea/gsv.hpp>
+#include <marnav/nmea/gsv.hpp>
 
 namespace
 {

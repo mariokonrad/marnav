@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include <nmea/vdm.hpp>
-#include <nmea/mtw.hpp>
-#include <nmea/nmea.hpp>
+#include <marnav/nmea/vdm.hpp>
+#include <marnav/nmea/mtw.hpp>
+#include <marnav/nmea/nmea.hpp>
 
 namespace
 {
