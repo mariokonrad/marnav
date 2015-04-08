@@ -9,6 +9,7 @@ It supports (partially):
 - NMEA-0183
 - AIS
 - SeaTalk (Raymarine device communication)
+- reading data from serial ports (NMEA, SeaTalk)
 
 Supported sentences for NMEA-0183 (read and write):
 - AAM
@@ -132,10 +133,13 @@ Tools needed to build the library:
 - cmake 2.8.11 or newer
 - clang-format 3.7 or newer
 
-optional (somewhat):
+optional (used for development only):
 - lcov / genhtml
 - doxygen
 - cppcheck
+
+optional (no core dependency):
+- Boost.ASIO (used only for some examples)
 
 There are no other dependencies despite the standard library (C++11)
 to build this library.
