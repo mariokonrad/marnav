@@ -8,7 +8,7 @@
 #include <marnav/ais/message_01.hpp>
 #include <marnav/ais/message_05.hpp>
 #include <marnav/io/device.hpp>
-#include <marnav/io/nmea_serial.hpp>
+#include <marnav/io/default_nmea_reader.hpp>
 #include <marnav/utils/unique.hpp>
 #include <iostream>
 
@@ -53,37 +53,13 @@ private:
 };
 
 // NMEA sentence reader which uses the dummy device.
-class sentence_reader : public marnav::io::nmea_serial
+class sentence_reader : public marnav::io::default_nmea_reader
 {
 public:
 	sentence_reader()
-		: nmea_serial(marnav::utils::make_unique<dummy_device>())
-		, sentence_received(false)
+		: default_nmea_reader(marnav::utils::make_unique<dummy_device>())
 	{
 	}
-
-	bool read_sentence(std::string & s)
-	{
-		while (read()) {
-			if (sentence_received) {
-				s = sentence;
-				sentence_received = false;
-				return true;
-			}
-		}
-		return false;
-	}
-
-protected:
-	virtual void process_sentence(const std::string & s) override
-	{
-		sentence = s;
-		sentence_received = true;
-	}
-
-private:
-	bool sentence_received;
-	std::string sentence;
 };
 
 // This function finally processes the AIS data... for this demo it does not

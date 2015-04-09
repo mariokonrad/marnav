@@ -71,6 +71,7 @@ set(SOURCE_IO
 	marnav/io/serial.cpp
 	marnav/io/seatalk_serial.cpp
 	marnav/io/nmea_serial.cpp
+	marnav/io/default_nmea_reader.cpp
 	)
 
 add_executable(nmeasum
@@ -180,6 +181,7 @@ install(
 		marnav/io/serial.hpp
 		marnav/io/seatalk_serial.hpp
 		marnav/io/nmea_serial.hpp
+		marnav/io/default_nmea_reader.hpp
 	DESTINATION include/marnav/io
 	)
 
