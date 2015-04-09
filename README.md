@@ -1,5 +1,5 @@
-libmarnav
-=========
+marnav
+======
 
 Copyright (c) 2015, Mario Konrad "mario.konrad@gmx.net"
 
