@@ -35,6 +35,14 @@ target_link_libraries(read_ais
 	marnav
 	)
 
+add_executable(nmea_multiplexer
+	nmea_multiplexer.cpp
+	)
+
+target_link_libraries(nmea_multiplexer
+	marnav
+	)
+
 if(Boost_FOUND)
 	include_directories(${Boost_INCLUDE_DIRS})
 

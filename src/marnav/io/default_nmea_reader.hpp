@@ -10,6 +10,8 @@ namespace io
 
 /// This is a very simple NMEA sentence reader, meant for synchronous
 /// and single threaded reading from a serial port or a device.
+///
+/// @example nmea_multiplexer.cpp
 class default_nmea_reader : public nmea_serial
 {
 public:
