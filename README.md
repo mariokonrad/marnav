@@ -10,6 +10,7 @@ It supports (partially):
 - AIS
 - SeaTalk (Raymarine device communication)
 - reading data from serial ports (NMEA, SeaTalk)
+- Great circle navigation
 
 Supported sentences for NMEA-0183 (read and write):
 - AAM

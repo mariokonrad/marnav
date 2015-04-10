@@ -11,6 +11,8 @@ set(SOURCE_UTILS
 
 set(SOURCE_GEO
 	marnav/geo/angle.cpp
+	marnav/geo/position.hpp
+	marnav/geo/greatcircle.cpp
 	)
 
 set(SOURCE_NMEA_0183
@@ -177,6 +179,8 @@ install(
 install(
 	FILES
 		marnav/geo/angle.hpp
+		marnav/geo/position.hpp
+		marnav/geo/greatcircle.hpp
 	DESTINATION include/marnav/geo
 	)
 
