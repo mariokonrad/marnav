@@ -84,6 +84,12 @@ else()
 endif()
 message(STATUS "Build library type: ${LIBRARY_TYPE}")
 
+configure_file(
+	${CMAKE_CURRENT_SOURCE_DIR}/marnav/version.hpp.in
+	${CMAKE_CURRENT_BINARY_DIR}/marnav/version.hpp
+	)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
 add_library(marnav ${LIBRARY_TYPE}
 	${SOURCE_UTILS}
 	${SOURCE_GEO}

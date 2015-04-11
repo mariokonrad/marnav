@@ -1,0 +1,12 @@
+#ifndef __VERISION__HPP__
+#define __VERISION__HPP__
+
+namespace marnav{
+
+constexpr auto version_major = "@VERSION_MAJOR@";
+constexpr auto version_minor = "@VERSION_MINOR@";
+constexpr auto version_patch = "@VERSION_PATCH@";
+
+}
+
+#endif
