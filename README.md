@@ -58,23 +58,28 @@ EXAMPLES
 
 Parse a NMEA sentence:
 
+~~~~~~~~~~~~~{.cpp}
 	auto sentence = nmea::make_sentence(
 		"$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
 	std::cout << sentence->tag() << "\n";
 	auto rmc = nmea::sentence_cast<nmea::rmc>(sentence);
 	std::cout << "latitude : " << nmea::to_string(rmc->get_lat()) << "\n";
 	std::cout << "longitude: " << nmea::to_string(rmc->get_lon()) << "\n";
+~~~~~~~~~~~~~
 
 
 Write a NMEA sentence:
 
+~~~~~~~~~~~~~{.cpp}
 	nmea::mtw mtw;
 	mtw.set_temperature(22.5);
 	std::string data = nmea::to_string(mtw);
+~~~~~~~~~~~~~
 
 
 Process AIS related NMEA messages:
 
+~~~~~~~~~~~~~{.cpp}
 	// collect NMEA data of all fragments, from whatever source
 	std::vector<std::unique_ptr<nmea::sentence>> v;
 	v.push_back(nmea::make_sentence("!AIVDM,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5C"));
@@ -88,10 +93,12 @@ Process AIS related NMEA messages:
 	// process concrete AIS message
 	auto pos_report = ais::message_cast<ais::message_01>(msg);
 	auto mmsi = pos_report->get_mmsi();
+~~~~~~~~~~~~~
 
 
 Create NMEA sentences from AIS data:
 
+~~~~~~~~~~~~~{.cpp}
 	// prepare AIS data
 	ais::message_01 pos_report;
 	pos_report.set_sog(82);
@@ -114,6 +121,7 @@ Create NMEA sentences from AIS data:
 		std::string s = nmea::to_string(vdm);
 		// ...
 	}
+~~~~~~~~~~~~~
 
 
 GOALS
@@ -155,33 +163,41 @@ For example a debug build:
 
 Debug build:
 
+~~~~~~~~~~~~~{.sh}
 	mkdir build
 	cd build
 	cmake -DCMAKE_BUILD_TYPE=Debug ..
 	make
+~~~~~~~~~~~~~
 
 If you like to perform code coverage using the unit tests, do:
 
+~~~~~~~~~~~~~{.sh}
 	mkdir build
 	cd build
 	cmake -DCMAKE_BUILD_TYPE=Coverage ..
 	make
 	make coverage
+~~~~~~~~~~~~~
 
 As packaging system, cpack is used. Do after build:
 
+~~~~~~~~~~~~~{.sh}
 	make package
+~~~~~~~~~~~~~
 
 or for individual package types:
 
+~~~~~~~~~~~~~{.sh}
 	cpack -G TGZ
 	cpack -G DEB
+~~~~~~~~~~~~~
 
 
 LICENSE
 -------
 
-See file ```LICENSE.md```
+See file LICENSE.md
 
 LINKS
 -----

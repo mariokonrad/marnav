@@ -18,6 +18,12 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 	set(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_DEBUG}   -std=c++11 -Wall -Wextra -O0 -ggdb -fprofile-arcs -ftest-coverage")
 endif()
 
+### common
+file(MAKE_DIRECTORY
+	${CMAKE_CURRENT_BINARY_DIR}/doc
+	${CMAKE_CURRENT_BINARY_DIR}/doc/coverage
+	)
+
 ### library
 include_directories(src)
 add_subdirectory(src)
@@ -79,7 +85,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
 	include(CodeCoverage)
 	setup_target_for_coverage(coverage
 		testrunner
-		coverage
+		doc/coverage
 		)
 endif()
 
