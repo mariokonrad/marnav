@@ -1,4 +1,4 @@
-#include "greatcircle.hpp"
+#include "geodesic.hpp"
 #include <cmath>
 
 namespace marnav

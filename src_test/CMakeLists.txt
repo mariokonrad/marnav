@@ -7,7 +7,7 @@ include_directories(
 
 add_executable(testrunner
 	geo/Test_geo_angle.cpp
-	geo/Test_geo_greatcircle.cpp
+	geo/Test_geo_geodesic.cpp
 	nmea/Test_nmea.cpp
 	nmea/Test_nmea_date.cpp
 	nmea/Test_nmea_time.cpp

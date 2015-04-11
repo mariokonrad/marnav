@@ -1,16 +1,16 @@
 #include <gtest/gtest.h>
-#include <marnav/geo/greatcircle.hpp>
+#include <marnav/geo/geodesic.hpp>
 #include <cmath>
 
 namespace
 {
 using namespace marnav;
 
-class Test_geo_greatcircle : public ::testing::Test
+class Test_geo_geodesic : public ::testing::Test
 {
 };
 
-TEST_F(Test_geo_greatcircle, central_spherical_angle_default_constructed)
+TEST_F(Test_geo_geodesic, central_spherical_angle_default_constructed)
 {
 	geo::position p0;
 	geo::position p1;
@@ -20,7 +20,7 @@ TEST_F(Test_geo_greatcircle, central_spherical_angle_default_constructed)
 	EXPECT_NEAR(d, 0.0, 1e-6);
 }
 
-TEST_F(Test_geo_greatcircle, central_spherical_angle)
+TEST_F(Test_geo_geodesic, central_spherical_angle)
 {
 	struct test_data {
 		geo::position p0;
@@ -42,7 +42,7 @@ TEST_F(Test_geo_greatcircle, central_spherical_angle)
 	}
 }
 
-TEST_F(Test_geo_greatcircle, distance_sphere)
+TEST_F(Test_geo_geodesic, distance_sphere)
 {
 	const geo::position BNA = {36.12, -86.67};
 	const geo::position LAX = {33.94, -118.40};
@@ -55,7 +55,7 @@ TEST_F(Test_geo_greatcircle, distance_sphere)
 	EXPECT_NEAR(expected, d, 1e-3);
 }
 
-TEST_F(Test_geo_greatcircle, distance_ellipsoid_vincenty)
+TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty)
 {
 	const geo::position BNA = {36.12, -86.67};
 	const geo::position LAX = {33.94, -118.40};
@@ -71,7 +71,7 @@ TEST_F(Test_geo_greatcircle, distance_ellipsoid_vincenty)
 	EXPECT_NEAR(expected, d, 1e-3);
 }
 
-TEST_F(Test_geo_greatcircle, distance_ellipsoid_lambert)
+TEST_F(Test_geo_geodesic, distance_ellipsoid_lambert)
 {
 	const geo::position BNA = {36.12, -86.67};
 	const geo::position LAX = {33.94, -118.40};
