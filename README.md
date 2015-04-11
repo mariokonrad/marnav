@@ -9,8 +9,8 @@ It supports (partially):
 - NMEA-0183
 - AIS
 - SeaTalk (Raymarine device communication)
-- reading data from serial ports (NMEA, SeaTalk)
-- Great circle navigation
+- Reading data from serial ports (NMEA, SeaTalk)
+- Basic geodesic functions, suitable for martime navigation.
 
 Supported sentences for NMEA-0183 (read and write):
 - AAM

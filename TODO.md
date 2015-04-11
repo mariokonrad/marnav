@@ -7,6 +7,9 @@ GENERAL
 - Better test coverage.
 - Provide examples.
 - Documentation.
+- More geodesic stuff?
+- Memory leak checker
+- Profiling
 
 
 NMEA
@@ -80,5 +83,4 @@ SeaTalk
 
 - Implement more messages
 - Implement writer for serial devices
-
 
