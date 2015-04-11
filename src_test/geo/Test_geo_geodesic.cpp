@@ -84,5 +84,26 @@ TEST_F(Test_geo_geodesic, distance_ellipsoid_lambert)
 	EXPECT_NEAR(expected, d, 1e-3);
 }
 
-// TODO: more tests
+TEST_F(Test_geo_geodesic, point_ellipsoid_vincenty)
+{
+	struct test_data {
+		geo::position start;
+		double azimuth;
+		double distance;
+		geo::position expected;
+	};
+
+	static const test_data DATA[] = {
+		{{0.0, 0.0}, 0.0 * M_PI / 180.0, 60 * 1852.0, {1.0049343, 0.0}},
+		{{0.0, 0.0}, 90.0 * M_PI / 180.0, 60 * 1852.0, {0.0, 0.99820794}},
+	};
+
+	for (auto const & item : DATA) {
+		double alpha2 = 0.0;
+		auto destination
+			= geo::point_ellipsoid_vincenty(item.start, item.distance, item.azimuth, alpha2);
+		EXPECT_NEAR(item.expected.lat, destination.lat, 1e-4);
+		EXPECT_NEAR(item.expected.lon, destination.lon, 1e-4);
+	}
+}
 }

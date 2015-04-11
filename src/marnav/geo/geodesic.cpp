@@ -6,6 +6,10 @@ namespace marnav
 namespace geo
 {
 
+/// This geodesic functions may not be the best possible, but they are
+/// sufficient for their purpose.
+
+
 /// mean radius
 static constexpr const double EARTH_RADIUS = 6378000.0; // [m]
 
@@ -61,12 +65,14 @@ double distance_sphere(const position & start, const position & destination)
 
 /// Calculates the distance on an ellipsoid between start and destination points.
 ///
+/// (indirect problem)
+///
 /// This uses the method of Vincenty (see inverse.pdf, inverse formulae,
 /// http://en.wikipedia.org/wiki/Vincenty%27s_formulae)
 ///
 /// @param[in] start Start point.
 /// @param[in] destination Destination point.
-/// @param[out] alpha1
+/// @param[out] alpha1 Azimuth
 /// @param[out] alpha2
 /// @return Distance in meters.
 double distance_ellipsoid_vincenty(
@@ -152,13 +158,24 @@ double distance_ellipsoid_vincenty(
 	return s;
 }
 
-position point_ellipsoid_vincenty(const position & p0, double s, double alpha1, double & alpha2)
+/// Calculates a position from a starting point in a direction and of a certain distance.
+///
+/// (direct problem)
+///
+/// This uses the method of Vincenty (see inverse.pdf, direct formulae,
+/// http://en.wikipedia.org/wiki/Vincenty%27s_formulae)
+///
+/// @param[in] start Starting point.
+/// @param[in] s Distance in meters.
+/// @param[in] alpha1 Azimuth in rad.
+/// @param[out] alpha2
+/// @return The point at the specified distance.
+position point_ellipsoid_vincenty(const position & start, double s, double alpha1, double & alpha2)
 {
-	// see inverse.pdf, direct formulae
-	// http://en.wikipedia.org/wiki/Vincenty%27s_formulae
+	if (fabs(s) < 1.0e-4)
+		return start;
 
-	if (fabs(s) < 1.0e-10)
-		return p0;
+	const position p0 = deg2rad(start);
 
 	const double f = EARTH_FLATTENING;
 	const double a = EARTH_SEMI_MAJOR_AXIS;
@@ -237,7 +254,7 @@ position point_ellipsoid_vincenty(const position & p0, double s, double alpha1, 
 	p1.lon = p0.lon + L;
 	alpha2 = atan(sin_alpha / (-sin_U1 * sin_sigma + cos_U1 * cos_sigma * cos_alpha1));
 
-	return p1;
+	return rad2deg(p1);
 }
 
 /// Calculates the distance on an ellipsoid between start and destination points.
