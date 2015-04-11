@@ -6,42 +6,77 @@ namespace marnav
 namespace geo
 {
 
-static const double EARTH_RADIUS = 6378000.0; // [m] mean radius
-static const double EARTH_SEMI_MAJOR_AXIS = 6378137.0; // [m] semi-major axis according to WGS84
-static const double EARTH_FLATTENING = 1.0 / 298.257223563; // flattening according to WGS84
+/// mean radius
+static constexpr const double EARTH_RADIUS = 6378000.0; // [m]
+
+/// semi-major axis according to WGS84
+static constexpr const double EARTH_SEMI_MAJOR_AXIS = 6378137.0; // [m]
+
+/// flattening according to WGS84
+static constexpr const double EARTH_FLATTENING = 1.0 / 298.257223563;
 
 template <typename T> static T sqr(const T & a) { return a * a; }
 
-double central_spherical_angle(const position & p0, const position & p1)
+/// Returns the spherical angle between the two specified position in rad.
+///
+/// @param[in] p0_lat Latitude in rad of start point.
+/// @param[in] p0_lon Longitude in rad of start point.
+/// @param[in] p1_lat Latitude in rad of destination point.
+/// @param[in] p1_lon Longitude in rad of destination point.
+/// @return Spherical angle inbetweenn in rad.
+static double central_spherical_angle_rad(
+	double p0_lat, double p0_lon, double p1_lat, double p1_lon)
 {
 	// not used because of potential numerical problems:
-	// return acos(sin(p1.lat) * sin(p0.lat) + cos(p1.lat) * cos(p0.lat) * cos(p1.lon -
-	// p0.lon));
+	// return acos(sin(p1_lat) * sin(p0_lat) + cos(p1_lat) * cos(p0_lat) * cos(p1_lon -
+	// p0_lon));
 
 	return atan(
-		sqrt(sqr(cos(p1.lat) * sin(p1.lon - p0.lon))
-			+ sqr(cos(p0.lat) * sin(p1.lat) - sin(p0.lat) * cos(p1.lat) * cos(p1.lon - p0.lon)))
-		/ (sin(p0.lat) * sin(p1.lat) + cos(p0.lat) * cos(p1.lat) * cos(p1.lon - p0.lon)));
+		sqrt(sqr(cos(p1_lat) * sin(p1_lon - p0_lon))
+			+ sqr(cos(p0_lat) * sin(p1_lat) - sin(p0_lat) * cos(p1_lat) * cos(p1_lon - p0_lon)))
+		/ (sin(p0_lat) * sin(p1_lat) + cos(p0_lat) * cos(p1_lat) * cos(p1_lon - p0_lon)));
+}
+
+/// Returns the spherical angle between the two specified position in rad.
+///
+/// @param[in] start Start point.
+/// @param[in] destination Destination point.
+/// @return Spherical angle inbetweenn in rad.
+double central_spherical_angle(const position & start, const position & destination)
+{
+	const auto p0 = deg2rad(start);
+	const auto p1 = deg2rad(destination);
+	return central_spherical_angle_rad(p0.lat, p0.lon, p1.lat, p1.lon);
 }
 
 /// Calculates distance of two points on earth, approximated as sphere.
 ///
-/// @param[in] p0 Start point.
-/// @param[in] p1 Destination point.
+/// @param[in] start Start point.
+/// @param[in] destination Destination point.
 /// @return The distance in meters.
-double distance_sphere(const position & p0, const position & p1)
+double distance_sphere(const position & start, const position & destination)
 {
-	return EARTH_RADIUS * central_spherical_angle(p0, p1);
+	return EARTH_RADIUS * central_spherical_angle(start, destination);
 }
 
+/// Calculates the distance on an ellipsoid between start and destination points.
+///
+/// This uses the method of Vincenty (see inverse.pdf, inverse formulae,
+/// http://en.wikipedia.org/wiki/Vincenty%27s_formulae)
+///
+/// @param[in] start Start point.
+/// @param[in] destination Destination point.
+/// @param[out] alpha1
+/// @param[out] alpha2
+/// @return Distance in meters.
 double distance_ellipsoid_vincenty(
-	const position & p0, const position & p1, double & alpha1, double & alpha2)
+	const position & start, const position & destination, double & alpha1, double & alpha2)
 {
-	// see inverse.pdf, inverse formulae
-	// http://en.wikipedia.org/wiki/Vincenty%27s_formulae
-
-	if (p0.lat == p1.lat && p0.lon == p1.lon)
+	if (start == destination)
 		return 0.0;
+
+	const position p0 = deg2rad(start);
+	const position p1 = deg2rad(destination);
 
 	const double f = EARTH_FLATTENING;
 	const double a = EARTH_SEMI_MAJOR_AXIS;
@@ -205,21 +240,29 @@ position point_ellipsoid_vincenty(const position & p0, double s, double alpha1, 
 	return p1;
 }
 
-double distance_ellipsoid_lambert(const position & p0, const position & p1)
+/// Calculates the distance on an ellipsoid between start and destination points.
+///
+/// This uses the method of Lambert.
+///
+/// @param[in] start Start point.
+/// @param[in] destination Destination point.
+/// @return Distance in meters.
+double distance_ellipsoid_lambert(const position & start, const position & destination)
 {
+	const position p0 = deg2rad(start);
+	const position p1 = deg2rad(destination);
+
 	const double r = 1.0 / EARTH_FLATTENING;
 
-	position t1 = {atan((r - 1.0) / r) * tan(p0.lat), p0.lon};
-	position t2 = {atan((r - 1.0) / r) * tan(p1.lat), p1.lon};
+	const double t1_lat = atan((r - 1.0) / r) * tan(p0.lat);
+	const double t1_lon = p0.lon;
+	const double t2_lat = atan((r - 1.0) / r) * tan(p1.lat);
+	const double t2_lon = p1.lon;
 
-	const double sigma = central_spherical_angle(t1, t2);
-
-	const double P = (t1.lat + t2.lat) / 2.0;
-
-	const double Q = (t2.lat - t1.lat) / 2.0;
-
+	const double sigma = central_spherical_angle_rad(t1_lat, t1_lon, t2_lat, t2_lon);
+	const double P = (t1_lat + t2_lat) / 2.0;
+	const double Q = (t2_lat - t1_lat) / 2.0;
 	const double X = (sigma - sin(sigma)) * (sqr(sin(P)) * sqr(cos(Q))) / sqr(cos(sigma / 2.0));
-
 	const double Y = (sigma + sin(sigma)) * (sqr(cos(P)) * sqr(sin(Q))) / sqr(sin(sigma / 2.0));
 
 	return EARTH_RADIUS * (sigma - (X + Y) / (2.0 * r));

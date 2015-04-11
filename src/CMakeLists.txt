@@ -11,7 +11,7 @@ set(SOURCE_UTILS
 
 set(SOURCE_GEO
 	marnav/geo/angle.cpp
-	marnav/geo/position.hpp
+	marnav/geo/position.cpp
 	marnav/geo/greatcircle.cpp
 	)
 
