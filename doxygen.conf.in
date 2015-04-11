@@ -31,11 +31,11 @@ PROJECT_NAME           = @CMAKE_PROJECT_NAME@
 # This could be handy for archiving the generated documentation or
 # if some version control system is used.
 
-PROJECT_NUMBER         = "@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@ (@GIT_BRANCH@ / @GIT_COMMIT_HASH@)"
+PROJECT_NUMBER         = "@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@"
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description for a project that appears at the top of each page and should give viewer a quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          = "Library for MARitime NAVigation"
+PROJECT_BRIEF          =
 
 # With the PROJECT_LOGO tag one can specify an logo or icon that is
 # included in the documentation. The maximum height of the logo should not
@@ -598,13 +598,13 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories
 # with spaces.
 
-USE_MDFILE_AS_MAINPAGE = @CMAKE_CURRENT_SOURCE_DIR@/README.md
+#USE_MDFILE_AS_MAINPAGE = @CMAKE_CURRENT_SOURCE_DIR@/README.md
 
 INPUT                  = \
-                         @CMAKE_CURRENT_SOURCE_DIR@/README.md \
-                         @CMAKE_CURRENT_SOURCE_DIR@/LICENSE.md \
+                         @CMAKE_CURRENT_SOURCE_DIR@/src \
+                         @CMAKE_CURRENT_SOURCE_DIR@/doc \
                          @CMAKE_CURRENT_SOURCE_DIR@/TODO.md \
-                         @CMAKE_CURRENT_SOURCE_DIR@/src
+                         @CMAKE_CURRENT_BINARY_DIR@/doc/main.dox
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is
@@ -622,7 +622,7 @@ INPUT_ENCODING         = UTF-8
 # *.hxx *.hpp *.h++ *.idl *.odl *.cs *.php *.php3 *.inc *.m *.mm *.dox *.py
 # *.f90 *.f *.for *.vhd *.vhdl
 
-FILE_PATTERNS          = *.cpp *.hpp *.c *.h
+FILE_PATTERNS          = *.cpp *.hpp *.c *.h *.dox *.md
 
 # The RECURSIVE tag can be used to turn specify whether or not subdirectories
 # should be searched for input files as well. Possible values are YES and NO.
@@ -824,13 +824,13 @@ HTML_FILE_EXTENSION    = .html
 # each generated HTML page. If it is left blank doxygen will generate a
 # standard header.
 
-HTML_HEADER            = doc/header.html
+HTML_HEADER            =
 
 # The HTML_FOOTER tag can be used to specify a personal HTML footer for
 # each generated HTML page. If it is left blank doxygen will generate a
 # standard footer.
 
-HTML_FOOTER            = doc/footer.html
+HTML_FOOTER            =
 
 # The HTML_STYLESHEET tag can be used to specify a user-defined cascading
 # style sheet that is used by each HTML page. It can be used to
@@ -839,7 +839,7 @@ HTML_FOOTER            = doc/footer.html
 # the style sheet file to the HTML output directory, so don't put your own
 # stylesheet in the HTML output directory as well, or it will be erased!
 
-HTML_STYLESHEET        = doc/stylesheet.css
+HTML_STYLESHEET        =
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output.
 # Doxygen will adjust the colors in the stylesheet and background images

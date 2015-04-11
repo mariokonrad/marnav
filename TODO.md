@@ -4,18 +4,23 @@ TODO
 GENERAL
 -------
 
-- Better test coverage.
-- Provide examples.
-- Documentation.
-- More geodesic stuff?
-- Memory leak checker
-- Profiling
+@todo Better test coverage.
+
+@todo Provide examples.
+
+@todo Documentation.
+
+@todo More geodesic stuff?
+
+@todo Memory leak checker
+
+@todo Profiling
 
 
 NMEA
 ----
 
-- Implement more sentences:
+@todo Implement more sentences:
 	- ALM - GPS Almanac Data
 	- APB - Autopilot Sentence "B"
 	- BWC - Bearing & Distance to Waypoint - Geat Circle
@@ -69,18 +74,19 @@ NMEA
 	- ZTG - UTC & Time to Destination Waypoint
 	- vendor extensions
 
-- Implement writer for serial devices
+@todo Implement writer for serial devices
 
 
 AIS
 ---
 
-- Implement more messages
+@todo Implement more messages
 
 
 SeaTalk
 -------
 
-- Implement more messages
-- Implement writer for serial devices
+@todo Implement more messages
+
+@todo Implement writer for serial devices
 

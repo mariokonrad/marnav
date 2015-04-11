@@ -35,20 +35,12 @@ add_subdirectory(examples)
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
 	configure_file(
+		${CMAKE_CURRENT_SOURCE_DIR}/doc/main.dox.in
+		${CMAKE_CURRENT_BINARY_DIR}/doc/main.dox
+		)
+	configure_file(
 		${CMAKE_CURRENT_SOURCE_DIR}/doxygen.conf.in
 		${CMAKE_CURRENT_BINARY_DIR}/doxygen.conf
-		)
-	configure_file(
-		${CMAKE_CURRENT_SOURCE_DIR}/doc/header.html
-		${CMAKE_CURRENT_BINARY_DIR}/doc/header.html
-		)
-	configure_file(
-		${CMAKE_CURRENT_SOURCE_DIR}/doc/footer.html
-		${CMAKE_CURRENT_BINARY_DIR}/doc/footer.html
-		)
-	configure_file(
-		${CMAKE_CURRENT_SOURCE_DIR}/doc/stylesheet.css
-		${CMAKE_CURRENT_BINARY_DIR}/doc/stylesheet.css
 		)
 	add_custom_target(doc
 		COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/doxygen.conf
