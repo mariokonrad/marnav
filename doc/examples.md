@@ -79,6 +79,13 @@ Create NMEA sentences from AIS data {#sec_ais_create}
 	}
 ~~~~~~~~~~~~~
 
+Utils {#sec_utils}
+=====
+
+Iterate through a bitset {#sec_utils_bitset_iterate}
+------------------------
+\includelineno examples/bitset_iterate.cpp
+
 Complete examples {#sec_complete}
 =================
 

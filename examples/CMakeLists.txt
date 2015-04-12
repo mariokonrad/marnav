@@ -43,6 +43,10 @@ target_link_libraries(nmea_multiplexer
 	marnav
 	)
 
+add_executable(bitset_iterate
+	bitset_iterate.cpp
+	)
+
 if(Boost_FOUND)
 	include_directories(${Boost_INCLUDE_DIRS})
 

@@ -9,6 +9,42 @@ namespace marnav
 namespace utils
 {
 
+/// This is a dynamically growing bitset (theoretically of arbitrary size).
+///
+/// Bits are stored in blocks, whose data type is configurable.
+///
+/// This may not be the most performant implementation, but a very flexible one.
+///
+/// @tparam Block The data type of the underlying block type.
+/// @tparam Container The container type to store blocks.
+///
+/// **Example:** appending individual bits
+/// @code
+/// bitset<uint32_t> bits;
+/// bits.append(0xff, 8); // append 8 bits
+/// bits.append(0xff, 6); // append 6 bits
+/// bits.append(1, 1);    // append 1 bit
+/// bits.append(1, 1);    // append 1 bit
+/// auto result = bits.get<uint16_t>(0); // since all bits were 1, this will be 0xffff
+/// @endcode
+///
+/// **Example:** random access to bits
+/// @code
+/// bitset<uint32_t> bits;
+/// bits.append(0);
+/// auto bit = bits[7]; // indexed access (note: read only, unchecked)
+/// bits.set(0xff, 3, 2); // set 2 bits (11) at offset 3
+/// @endcode
+///
+/// **Example:** bitset with initial number of bits
+/// @code
+/// bitset<uint8_t> bits{1024};
+/// bits.set(1, 512, 1); // set one bit to 1 at offset 512
+/// @endcode
+///
+/// **Example:** iterate through bits (see examples/bitset_iterate.cpp)
+/// @includelineno examples/bitset_iterate.cpp
+///
 /// @todo support for const_iterator (partially prepared)
 /// @todo test also for big-endian
 /// @todo padding for 'append' and 'set'
@@ -18,7 +54,11 @@ template <class Block, class Container = std::vector<Block>> class bitset
 {
 public:
 	using block_type = Block;
-	enum { BITS_PER_BYTE = 8 };
+	enum {
+		/// It is assumed, that a byte has 8 bits. This template will
+		/// not work on other architectures.
+		BITS_PER_BYTE = 8
+	};
 	enum { BITS_PER_BLOCK = sizeof(block_type) * BITS_PER_BYTE };
 
 public:
