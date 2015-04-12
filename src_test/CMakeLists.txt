@@ -9,6 +9,7 @@ add_executable(testrunner
 	geo/Test_geo_angle.cpp
 	geo/Test_geo_geodesic.cpp
 	nmea/Test_nmea.cpp
+	nmea/Test_nmea_angle.cpp
 	nmea/Test_nmea_date.cpp
 	nmea/Test_nmea_time.cpp
 	nmea/Test_nmea_sentence.cpp
