@@ -114,6 +114,12 @@ install(
 
 install(
 	FILES
+		${CMAKE_CURRENT_BINARY_DIR}/marnav/version.hpp
+	DESTINATION include/marnav
+	)
+
+install(
+	FILES
 		marnav/nmea/constants.hpp
 		marnav/nmea/angle.hpp
 		marnav/nmea/io.hpp
