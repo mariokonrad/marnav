@@ -109,14 +109,11 @@ double distance_ellipsoid_vincenty(
 	double cos_sqr_alpha = 0.0;
 	double cos_2_sigma_m = 0.0;
 	double cos_sqr_2_sigma_m = 0.0;
-	double sin_alpha = 0.0;
-	double C = 0.0;
 	double u_sqr = 0.0;
 	double A = 0.0;
 	double B = 0.0;
 	double d_sigma = 0.0;
 	double s = 0.0;
-	double old_lambda = 0.0;
 
 	for (int iteration = 0; (iteration < 200) && (d_lambda > 1.0e-12); ++iteration) {
 		sin_lambda = sin(lambda);
@@ -127,12 +124,12 @@ double distance_ellipsoid_vincenty(
 		sin_sigma = sqrt(sin_sqr_sigma); // aquire sin(sigma)
 		cos_sigma = sin_U1 * sin_U2 + cos_U1 * cos_U2 * cos_lambda; // eq 15
 		sigma = atan(sin_sigma / cos_sigma); // aquire sigma
-		sin_alpha = cos_U1 * cos_U2 * sin_lambda / sin_sigma; // eq 17
+		double sin_alpha = cos_U1 * cos_U2 * sin_lambda / sin_sigma; // eq 17
 		cos_sqr_alpha = 1.0 - sqr(sin_alpha); // aquire cos^2(alpha), prevent numerical problems
 		cos_2_sigma_m = cos_sigma - (2.0 * sin_U1 * sin_U2) / cos_sqr_alpha; // eq 18
 		cos_sqr_2_sigma_m = sqr(cos_2_sigma_m);
-		C = f / 16.0 * cos_sqr_alpha * (4.0 + f * (4.0 - 3.0 * cos_sqr_alpha)); // eq 10
-		old_lambda = lambda; // save current lambda to calc d_lambda
+		double C = f / 16.0 * cos_sqr_alpha * (4.0 + f * (4.0 - 3.0 * cos_sqr_alpha)); // eq 10
+		double old_lambda = lambda; // save current lambda to calc d_lambda
 		lambda = L
 			+ (1.0 - C) * f * sin_alpha
 				* (sigma
@@ -215,8 +212,6 @@ position point_ellipsoid_vincenty(const position & start, double s, double alpha
 	double cos_sigma = 0.0;
 	double cos_2_sigma_m = 0.0;
 	double cos_sqr_2_sigma_m = 0.0;
-	double old_sigma = 0.0;
-	double delta_sigma = 0.0;
 	double lambda = 0.0;
 	double C = 0.0;
 	double L = 0.0;
@@ -226,14 +221,14 @@ position point_ellipsoid_vincenty(const position & start, double s, double alpha
 		cos_sqr_2_sigma_m = sqr(cos_2_sigma_m);
 		cos_sigma = cos(sigma);
 		sin_sigma = sin(sigma);
-		delta_sigma
+		double delta_sigma
 			= B * sin_sigma
 			* (cos_2_sigma_m
 				  + B / 4.0 * (cos_sigma * (-1.0 + 2.0 * cos_sqr_2_sigma_m)
 								  - B / 6.0 * cos_2_sigma_m * (-3.0 + 4.0 * sqr(sin_sigma))
 									  * (-3.0 + 4.0 * cos_sqr_2_sigma_m)));
 
-		old_sigma = sigma;
+		double old_sigma = sigma;
 		sigma = sigma_0 + delta_sigma;
 		d_sigma = fabs(old_sigma - sigma);
 	}

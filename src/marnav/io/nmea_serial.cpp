@@ -8,7 +8,8 @@ namespace marnav
 namespace io
 {
 nmea_serial::nmea_serial(std::unique_ptr<device> && dev)
-	: dev(std::move(dev))
+	: raw(0)
+	, dev(std::move(dev))
 {
 }
 

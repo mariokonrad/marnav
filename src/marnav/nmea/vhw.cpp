@@ -9,8 +9,8 @@ namespace nmea
 
 vhw::vhw()
 	: sentence(ID, "VHW", talker_id::integrated_instrumentation)
+	, degrees_true(reference::TRUE)
 {
-	degrees_true = reference::TRUE;
 }
 
 void vhw::set_heading(double t)
