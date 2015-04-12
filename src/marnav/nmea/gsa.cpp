@@ -89,11 +89,11 @@ std::unique_ptr<sentence> gsa::parse(const std::string & talker,
 
 std::vector<std::string> gsa::get_data() const
 {
-	return {to_string(selection_mode), to_string(mode), to_string(satellite_id_01),
-		to_string(satellite_id_02), to_string(satellite_id_03), to_string(satellite_id_04),
-		to_string(satellite_id_05), to_string(satellite_id_06), to_string(satellite_id_07),
-		to_string(satellite_id_08), to_string(satellite_id_09), to_string(satellite_id_10),
-		to_string(satellite_id_11), to_string(satellite_id_12), to_string(pdop),
+	return {to_string(selection_mode), to_string(mode), format(satellite_id_01, 2),
+		format(satellite_id_02, 2), format(satellite_id_03, 2), format(satellite_id_04, 2),
+		format(satellite_id_05, 2), format(satellite_id_06, 2), format(satellite_id_07, 2),
+		format(satellite_id_08, 2), format(satellite_id_09, 2), format(satellite_id_10, 2),
+		format(satellite_id_11, 2), format(satellite_id_12, 2), to_string(pdop),
 		to_string(hdop), to_string(vdop)};
 }
 }
