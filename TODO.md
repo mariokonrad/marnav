@@ -34,7 +34,6 @@ NMEA
 	- GNS - Fix data
 	- GRS - GPS Range Residuals
 	- GST - GPS Pseudorange Noise Statistics
-	- GSV - Satellites in view
 	- GTD - Geographic Location in Time Differences
 	- HFB - Trawl Headrope to Footrope and Bottom
 	- HSC - Heading Steering Command
