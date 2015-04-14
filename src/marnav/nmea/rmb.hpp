@@ -41,6 +41,7 @@ private:
 	utils::optional<double> bearing; // bearing to destination in degrees to true
 	utils::optional<double> dst_velocity; // destination closing velocity in knots
 	utils::optional<char> arrival_status; // arrival status, A:arrival circle entered
+	utils::optional<char> faa_mode_indicator;
 
 public:
 	decltype(status) get_status() const { return status; }
@@ -56,6 +57,7 @@ public:
 	decltype(bearing) get_bearing() const { return bearing; }
 	decltype(dst_velocity) get_dst_velocity() const { return dst_velocity; }
 	decltype(arrival_status) get_arrival_status() const { return arrival_status; }
+	decltype(faa_mode_indicator) get_faa_mode_indicator() const { return faa_mode_indicator; }
 
 	void set_status(char t) { status = t; }
 	void set_cross_track_error(double t) { cross_track_error = t; }
@@ -68,6 +70,7 @@ public:
 	void set_bearing(double t) { bearing = t; }
 	void set_dst_velocity(double t) { dst_velocity = t; }
 	void set_arrival_status(char t) { arrival_status = t; }
+	void set_mode_indicator(char t) { faa_mode_indicator = t; }
 };
 }
 }

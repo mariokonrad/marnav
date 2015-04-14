@@ -45,7 +45,8 @@ void rmb::check_waypoint_id(const std::string & id) const throw(std::invalid_arg
 std::unique_ptr<sentence> rmb::parse(const std::string & talker,
 	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
-	if (fields.size() != 13)
+	// before and after NMEA 2.3
+	if ((fields.size() < 13) || (fields.size() > 14))
 		throw std::invalid_argument{"invalid number of fields in rmb::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<rmb>();
@@ -66,17 +67,19 @@ std::unique_ptr<sentence> rmb::parse(const std::string & talker,
 	read(fields[11], detail.dst_velocity);
 	read(fields[12], detail.arrival_status);
 
+	// NMEA 2.3 or newer
+	if (fields.size() > 13)
+		read(fields[12], detail.faa_mode_indicator);
+
 	return result;
 }
 
 std::vector<std::string> rmb::get_data() const
 {
-	return {
-		to_string(status), to_string(cross_track_error), to_string(steer_dir),
+	return {to_string(status), to_string(cross_track_error), to_string(steer_dir),
 		to_string(waypoint_to), to_string(waypoint_from), to_string(lat), to_string(lat_hem),
 		to_string(lon), to_string(lon_hem), to_string(range), to_string(bearing),
-		to_string(dst_velocity), to_string(arrival_status),
-	};
+		to_string(dst_velocity), to_string(arrival_status), to_string(faa_mode_indicator)};
 }
 }
 }
