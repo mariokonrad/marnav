@@ -53,31 +53,7 @@ Process AIS related NMEA messages {#sec_ais_read}
 
 Create NMEA sentences from AIS data {#sec_ais_create}
 -----------------------------------
-
-~~~~~~~~~~~~~{.cpp}
-	// prepare AIS data
-	ais::message_01 pos_report;
-	pos_report.set_sog(82);
-	// ... most data not shown here
-
-	// create payload
-	auto payload = ais::encode_message(pos_report);
-
-	// create NMEA sentences
-	uint32_t fragment = 1;
-	for (const auto& p : payload) {
-		nmea::vdm vdm;
-		vdm.set_n_fragments(payload.size());
-		vdm.set_fragment(fragment);
-		vdm.set_radio_channel(nmea::ais_channel::B);
-		vdm.set_payload(p);
-		++fragment;
-
-		// collect, send or do something with the sentence...
-		std::string s = nmea::to_string(vdm);
-		// ...
-	}
-~~~~~~~~~~~~~
+\includelineno examples/create_nmea_from_ais.cpp
 
 Utils {#sec_utils}
 =====
