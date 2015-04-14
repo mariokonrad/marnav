@@ -123,7 +123,7 @@ TEST_F(Test_io_nmea_serial, read_first_sentence)
 {
 	message_reader dev;
 	std::string sentence;
-	bool rc;
+	bool rc = false;
 
 	ASSERT_NO_THROW(rc = dev.read_sentence(sentence));
 	ASSERT_TRUE(rc);
