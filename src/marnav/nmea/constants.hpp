@@ -90,6 +90,12 @@ namespace ais_channel
 constexpr const char A = 'A';
 constexpr const char B = 'B';
 }
+
+namespace message_mode
+{
+constexpr const char complete_route = 'c';
+constexpr const char working_route = 'w';
+}
 }
 }
 

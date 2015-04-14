@@ -61,7 +61,7 @@ std::vector<std::string> rte::get_data() const
 
 	if (n_messages) {
 		const auto n = n_messages.value();
-		for (uint32_t i = 0; i < n; ++i) {
+		for (uint32_t i = 0; i < n && waypoint_id[i]; ++i) {
 			v.push_back(waypoint_id[i].value());
 		}
 	}
