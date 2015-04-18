@@ -83,3 +83,16 @@ Build documentation:
 	make doc
 ~~~~~~~~~~~~~
 
+
+Build Options {#sec_devenv_buildoptions}
+-------------
+
+The following build types (-DCMAKE_BUILD_TYPE=x) are possible:
+- Debug
+- Release
+- Coverage
+
+Build options:
+- ENABLE_STATIC=[ON/OFF] : enables static build by default, if OFF,
+  a shared library is being built
+
