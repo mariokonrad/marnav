@@ -57,4 +57,43 @@ TEST_F(Test_ais_message_05, encode_default_values)
 	EXPECT_STREQ("000000000000008", v[1].first.c_str());
 	EXPECT_EQ(2, v[1].second);
 }
+
+TEST_F(Test_ais_message_05, set_callsign)
+{
+	ais::message_05 m;
+	m.set_callsign("1234567");
+
+	auto v = ais::encode_message(m);
+
+	ASSERT_EQ(2u, v.size());
+	EXPECT_STREQ(
+		"5000000000037;?CGKL0000000000000000000000000000Hh0000000", v[0].first.c_str());
+	EXPECT_EQ(0, v[0].second);
+}
+
+TEST_F(Test_ais_message_05, set_shipname)
+{
+	ais::message_05 m;
+	m.set_shipname("1234567");
+
+	auto v = ais::encode_message(m);
+
+	ASSERT_EQ(2u, v.size());
+	EXPECT_STREQ(
+		"50000000000000000033;?CCKL000000000000000000000Hh0000000", v[0].first.c_str());
+	EXPECT_EQ(0, v[0].second);
+}
+
+TEST_F(Test_ais_message_05, set_destination)
+{
+	ais::message_05 m;
+	m.set_destination("1234567");
+
+	auto v = ais::encode_message(m);
+
+	ASSERT_EQ(2u, v.size());
+	EXPECT_STREQ(
+		"50000000000000000000000000000000000000000000000Hh0<Ldu=M", v[0].first.c_str());
+	EXPECT_EQ(0, v[0].second);
+}
 }
