@@ -32,6 +32,16 @@ Build {#sec_devenv_build}
 For normal, debug and release builds use the standard cmake CMAKE_BUILD_TYPE variable.
 For example a debug build:
 
+Full information developpers build:
+
+~~~~~~~~~~~~~{.sh}
+	mkdir build
+	cd build
+	cmake -DCMAKE_BUILD_TYPE=Coverage ..
+	make
+	make coverage doc cppcheck
+~~~~~~~~~~~~~
+
 Debug build:
 
 ~~~~~~~~~~~~~{.sh}

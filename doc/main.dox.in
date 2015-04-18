@@ -30,6 +30,7 @@ See a more detailed list: \ref page_features
 
 After proper building and execution (see \ref page_devenv):
 - [Code Coverage](../coverage/index.html)
+- [cppcheck](../cppcheck.txt)
 
 \section sec_goals Goals
 
