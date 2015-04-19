@@ -53,9 +53,7 @@ NMEA
 	- TTM - Tracked Target Message
 	- VBW - Dual Ground/Water Speed
 	- VDR - Set and Drift
-	- VLW - Distance Traveled through Water
 	- VPW - Speed - Measured Parallel to Wind
-	- VWR - Relative Wind Speed and Angle
 	- WCV - Waypoint Closure Velocity
 	- WNC - Distance - Waypoint to Waypoint
 	- WPL - Waypoint Location
