@@ -4,13 +4,7 @@ TODO
 GENERAL
 -------
 
-@todo Better test coverage.
-
-@todo Provide examples.
-
-@todo Documentation.
-
-@todo More geodesic stuff?
+todo More geodesic stuff?
 
 @todo Memory leak checker
 
