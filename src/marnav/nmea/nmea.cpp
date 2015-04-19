@@ -5,6 +5,7 @@
 #include "sentence.hpp"
 #include "aam.hpp"
 #include "bod.hpp"
+#include "dbk.hpp"
 #include "dbt.hpp"
 #include "dpt.hpp"
 #include "gga.hpp"
@@ -50,11 +51,12 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 
 	using entry = std::pair<std::string, sentence::parse_function>;
 	static const std::vector<entry> known_sentences = {
-		{"AAM", aam::parse}, {"BOD", bod::parse}, {"DBT", dbt::parse}, {"DPT", dpt::parse},
-		{"GGA", gga::parse}, {"GLL", gll::parse}, {"GSA", gsa::parse}, {"GSV", gsv::parse},
-		{"HDG", hdg::parse}, {"MTW", mtw::parse}, {"MWV", mwv::parse}, {"RMB", rmb::parse},
-		{"RMC", rmc::parse}, {"RTE", rte::parse}, {"VHW", vhw::parse}, {"VLW", vlw::parse},
-		{"VTG", vtg::parse}, {"VWR", vwr::parse}, {"VDM", vdm::parse}, {"VDO", vdo::parse},
+		{"AAM", aam::parse}, {"BOD", bod::parse}, {"DBK", dbk::parse}, {"DBT", dbt::parse},
+		{"DPT", dpt::parse}, {"GGA", gga::parse}, {"GLL", gll::parse}, {"GSA", gsa::parse},
+		{"GSV", gsv::parse}, {"HDG", hdg::parse}, {"MTW", mtw::parse}, {"MWV", mwv::parse},
+		{"RMB", rmb::parse}, {"RMC", rmc::parse}, {"RTE", rte::parse}, {"VHW", vhw::parse},
+		{"VLW", vlw::parse}, {"VTG", vtg::parse}, {"VWR", vwr::parse}, {"VDM", vdm::parse},
+		{"VDO", vdo::parse},
 	};
 
 	auto const & i = std::find_if(begin(known_sentences), end(known_sentences),

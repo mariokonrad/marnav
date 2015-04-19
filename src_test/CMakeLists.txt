@@ -15,6 +15,7 @@ add_executable(testrunner
 	nmea/Test_nmea_sentence.cpp
 	nmea/Test_nmea_aam.cpp
 	nmea/Test_nmea_bod.cpp
+	nmea/Test_nmea_dbk.cpp
 	nmea/Test_nmea_dbt.cpp
 	nmea/Test_nmea_dpt.cpp
 	nmea/Test_nmea_gga.cpp
