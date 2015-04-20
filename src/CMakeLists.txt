@@ -43,6 +43,7 @@ set(SOURCE_NMEA_0183
 	marnav/nmea/vwr.cpp
 	marnav/nmea/vdm.cpp
 	marnav/nmea/vdo.cpp
+	marnav/nmea/wnc.cpp
 	)
 
 set(SOURCE_AIS
@@ -137,14 +138,19 @@ install(
 		marnav/nmea/gll.hpp
 		marnav/nmea/gsa.hpp
 		marnav/nmea/gsv.hpp
+		marnav/nmea/hdg.hpp
 		marnav/nmea/mtw.hpp
+		marnav/nmea/mwv.hpp
 		marnav/nmea/rmb.hpp
 		marnav/nmea/rmc.hpp
 		marnav/nmea/rte.hpp
+		marnav/nmea/vhw.hpp
+		marnav/nmea/vlw.hpp
 		marnav/nmea/vtg.hpp
 		marnav/nmea/vwr.hpp
 		marnav/nmea/vdm.hpp
 		marnav/nmea/vdo.hpp
+		marnav/nmea/wnc.hpp
 	DESTINATION include/marnav/nmea
 	)
 

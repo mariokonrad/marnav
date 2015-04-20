@@ -53,6 +53,7 @@ namespace unit
 constexpr const char METER = 'M';
 constexpr const char FEET = 'f';
 constexpr const char NM = 'N'; // nautical miles
+constexpr const char KM = 'K'; // kilometers
 constexpr const char FATHOM = 'F';
 constexpr const char KNOT = 'N';
 constexpr const char KMH = 'K'; // kilometers per hour

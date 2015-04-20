@@ -55,7 +55,6 @@ NMEA
 	- VDR - Set and Drift
 	- VPW - Speed - Measured Parallel to Wind
 	- WCV - Waypoint Closure Velocity
-	- WNC - Distance - Waypoint to Waypoint
 	- WPL - Waypoint Location
 	- XDR - Transducer Measurement
 	- XTE - Cross-Track Error, Measured
