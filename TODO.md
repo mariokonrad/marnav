@@ -4,7 +4,7 @@ TODO
 GENERAL
 -------
 
-todo More geodesic stuff?
+@todo More geodesic stuff?
 
 @todo Memory leak checker
 
