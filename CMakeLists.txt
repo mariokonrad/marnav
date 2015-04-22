@@ -18,6 +18,8 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 	set(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_DEBUG}   -std=c++11 -Wall -Wextra -O0 -ggdb -fprofile-arcs -ftest-coverage")
 endif()
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 ### common
 file(MAKE_DIRECTORY
 	${CMAKE_CURRENT_BINARY_DIR}/doc
