@@ -26,10 +26,20 @@ public:
 	///
 	/// @param[out] buffer The buffer to contain all read data.
 	/// @param[in] size The size of the buffer.
-	/// @retval The number of bytes read into the buffer.
+	/// @return The number of bytes read into the buffer.
 	/// @exception std::invalid_argument Parameter errors (buffer is nullptr, size is zero, ...)
 	/// @exception std::runtime_error Probably a read error. This does not include EOF.
 	virtual int read(char * buffer, uint32_t size) throw(
+		std::invalid_argument, std::runtime_error) = 0;
+
+	/// Writes to the opened device.
+	///
+	/// @param[in] buffer Data to write.
+	/// @param[in] size Number of bytes to write to the device.
+	/// @return The number of bytes written to the device.
+	/// @exception std::invalid_argument Parameter errors (buffer is nullptr, size is zero, ...)
+	/// @exception std::runtime_error Probably a read error. This does not include EOF.
+	virtual int write(const char * buffer, uint32_t size) throw(
 		std::invalid_argument, std::runtime_error) = 0;
 };
 }

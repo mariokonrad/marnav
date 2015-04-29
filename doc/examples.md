@@ -91,3 +91,6 @@ Run a NMEA multiplexer {#sec_file_nmea_multiplexer}
 ----------------------
 \includelineno examples/nmea_multiplexer.cpp
 
+Using select with marnav::io::device {#sec_file_select}
+------------------------------------
+\includelineno examples/select.cpp

@@ -37,6 +37,12 @@ public:
 		return boost::asio::read(serial, boost::asio::buffer(buffer, size));
 	}
 
+	virtual int write(const char *, uint32_t) throw(
+		std::invalid_argument, std::runtime_error) override
+	{
+		throw std::runtime_error{"operation not supported"};
+	}
+
 private:
 	boost::asio::io_service io;
 	boost::asio::serial_port serial;

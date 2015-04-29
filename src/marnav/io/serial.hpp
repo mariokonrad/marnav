@@ -49,8 +49,10 @@ public:
 	virtual int write(const char * buffer, uint32_t size) throw(
 		std::invalid_argument, std::runtime_error);
 
-private:
+protected:
 	int fd;
+
+private:
 	std::string dev;
 	baud baud_rate;
 	databits data_bits;

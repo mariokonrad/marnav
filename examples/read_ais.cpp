@@ -48,6 +48,12 @@ public:
 		return 1;
 	}
 
+	virtual int write(const char *, uint32_t) throw(
+		std::invalid_argument, std::runtime_error) override
+	{
+		throw std::runtime_error{"operation not supported"};
+	}
+
 private:
 	unsigned int index;
 };
