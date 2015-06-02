@@ -26,7 +26,7 @@ TEST_F(Test_nmea_rmc, parse)
 	auto date = rmc->get_date();
 	EXPECT_TRUE(date.available());
 	EXPECT_EQ(10u, date.value().year());
-	EXPECT_EQ(5u, date.value().month());
+	EXPECT_EQ(nmea::month::may, date.value().mon());
 	EXPECT_EQ(30u, date.value().day());
 }
 

@@ -9,17 +9,20 @@ namespace marnav
 namespace nmea
 {
 
+enum class month : uint32_t {january = 1, february, march, april, may, june, july, august,
+	september, october, november, december};
+
 class date
 {
 public:
 	date();
-	date(uint32_t y, uint32_t m, uint32_t d) throw(std::invalid_argument);
+	date(uint32_t y, month m, uint32_t d) throw(std::invalid_argument);
 
 	/// Returns the year component.
 	uint32_t year() const noexcept;
 
 	/// Returns the month component.
-	uint32_t month() const noexcept;
+	month mon() const noexcept;
 
 	/// Returns the day component.
 	uint32_t day() const noexcept;
@@ -44,7 +47,7 @@ private:
 	bool check() const noexcept;
 
 	uint32_t y; // year
-	uint32_t m; // month: 1..12
+	month m;
 	uint32_t d; // day: 1..31
 };
 

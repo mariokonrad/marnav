@@ -7,12 +7,12 @@ namespace nmea
 
 date::date()
 	: y(0)
-	, m(1)
+	, m(month::january)
 	, d(1)
 {
 }
 
-date::date(uint32_t y, uint32_t m, uint32_t d) throw(std::invalid_argument)
+date::date(uint32_t y, month m, uint32_t d) throw(std::invalid_argument)
 	: y(y)
 	, m(m)
 	, d(d)
@@ -27,22 +27,22 @@ bool date::check() const noexcept
 		return false;
 
 	switch (m) {
-		case 1:
-		case 3:
-		case 5:
-		case 7:
-		case 8:
-		case 10:
-		case 12:
+		case month::january:
+		case month::march:
+		case month::may:
+		case month::july:
+		case month::august:
+		case month::october:
+		case month::december:
 			return d <= 31;
 
-		case 4:
-		case 6:
-		case 9:
-		case 11:
+		case month::april:
+		case month::june:
+		case month::september:
+		case month::november:
 			return d <= 30;
 
-		case 2:
+		case month::february:
 			if (is_leap_year(y))
 				return d <= 29;
 			return d <= 28;
@@ -56,7 +56,7 @@ bool date::check() const noexcept
 uint32_t date::year() const noexcept { return y; }
 
 /// Returns the month component.
-uint32_t date::month() const noexcept { return m; }
+month date::mon() const noexcept { return m; }
 
 /// Returns the day component.
 uint32_t date::day() const noexcept { return d; }
@@ -69,7 +69,7 @@ bool operator==(const date & a, const date & b) noexcept
 std::string to_string(const date & d)
 {
 	char buf[7];
-	snprintf(buf, sizeof(buf), "%02u%02u%02u", d.day(), d.month(), d.year());
+	snprintf(buf, sizeof(buf), "%02u%02u%02u", d.day(), static_cast<int>(d.mon()), d.year());
 	return buf;
 }
 
@@ -80,7 +80,7 @@ date date::parse(const std::string & str) throw(std::invalid_argument)
 		uint32_t t = std::stoul(str, &pos);
 		if (pos != str.size())
 			throw std::invalid_argument{"invalid format for date"};
-		return date{t % 100, (t / 100) % 100, (t / 10000) % 100};
+		return date{t % 100, static_cast<month>((t / 100) % 100), (t / 10000) % 100};
 	} catch (std::invalid_argument) {
 		throw std::invalid_argument{"invalid date format, 'DDMMYY' expected"};
 	}
