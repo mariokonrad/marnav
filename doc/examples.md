@@ -99,3 +99,9 @@ Simple SeaTalk to NMEA converter {#sec_file_seatalk_to_nmea}
 --------------------------------
 \includelineno examples/simple_seatalk_nmea_converter.cpp
 
+Qt5 GUI application reading NMEA {#sec_file_qt5}
+--------------------------------
+\includelineno examples/qtnmeadiag/main.cpp
+\includelineno examples/qtnmeadiag/MainWindow.hpp
+\includelineno examples/qtnmeadiag/MainWindow.cpp
+

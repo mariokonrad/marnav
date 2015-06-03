@@ -20,6 +20,7 @@ optional (used for development only):
 
 optional (no core dependency):
 - Boost.ASIO (used only for some examples)
+- Qt 5 (used only for some examples)
 
 There are no other dependencies despite the standard library (C++11)
 to build this library.
