@@ -11,6 +11,7 @@
 int main(int, char **)
 {
 	using namespace marnav;
+	using namespace marnav::io;
 
 	// prepare destinations
 	std::vector<std::unique_ptr<io::serial>> destinations;
@@ -22,7 +23,9 @@ int main(int, char **)
 		io::serial::parity::NONE));
 
 	// open source device
-	io::default_nmea_reader source{"/dev/ttyUSB0"};
+	io::default_nmea_reader source{
+		utils::make_unique<serial>("/dev/ttyUSB0", serial::baud::BAUD_4800,
+			serial::databits::BIT_8, serial::stopbits::BIT_1, serial::parity::NONE)};
 
 	std::string data;
 	while (source.read_sentence(data)) {

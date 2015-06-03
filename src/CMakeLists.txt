@@ -72,8 +72,8 @@ set(SOURCE_SEATALK
 
 set(SOURCE_IO
 	marnav/io/serial.cpp
-	marnav/io/seatalk_serial.cpp
-	marnav/io/nmea_serial.cpp
+	marnav/io/seatalk_reader.cpp
+	marnav/io/nmea_reader.cpp
 	marnav/io/default_nmea_reader.cpp
 	)
 
@@ -202,9 +202,11 @@ install(
 	FILES
 		marnav/io/device.hpp
 		marnav/io/serial.hpp
-		marnav/io/seatalk_serial.hpp
-		marnav/io/nmea_serial.hpp
+		marnav/io/seatalk_reader.hpp
+		marnav/io/nmea_reader.hpp
 		marnav/io/default_nmea_reader.hpp
+		marnav/io/default_nmea_serial.hpp
+		marnav/io/default_seatalk_serial.hpp
 	DESTINATION include/marnav/io
 	)
 

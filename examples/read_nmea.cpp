@@ -1,15 +1,18 @@
 #include <marnav/io/default_nmea_reader.hpp>
+#include <marnav/io/default_nmea_serial.hpp>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/rmc.hpp>
 #include <marnav/nmea/io.hpp>
+#include <marnav/utils/unique.hpp>
 #include <iostream>
 
 int main(int, char **)
 {
 	using namespace marnav;
+	using namespace marnav::io;
 
 	// create and open the device for reading.
-	io::default_nmea_reader reader{"/dev/ttyUSB0"};
+	default_nmea_reader reader{make_default_nmea_serial("/dev/ttyUSB0")};
 
 	std::string data;
 

@@ -1,5 +1,5 @@
-#ifndef __IO__NMEA_SERIAL__HPP__
-#define __IO__NMEA_SERIAL__HPP__
+#ifndef __IO__NMEA_READER__HPP__
+#define __IO__NMEA_READER__HPP__
 
 #include <marnav/io/device.hpp>
 #include <marnav/nmea/sentence.hpp>
@@ -15,11 +15,10 @@ namespace io
 /// In order to use this NMEA reader, it must be subclassed.
 ///
 /// @example read_nmea.cpp
-class nmea_serial
+class nmea_reader
 {
 public:
-	nmea_serial(std::unique_ptr<device> && dev);
-	nmea_serial(const std::string & name);
+	nmea_reader(std::unique_ptr<device> && dev);
 
 	void close();
 	bool read() throw(std::runtime_error);

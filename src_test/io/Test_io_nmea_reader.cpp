@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <marnav/io/nmea_serial.hpp>
+#include <marnav/io/nmea_reader.hpp>
 #include <marnav/io/device.hpp>
 #include <marnav/utils/unique.hpp>
 
@@ -47,11 +47,11 @@ private:
 	uint32_t index;
 };
 
-class dummy_reader : public ::io::nmea_serial
+class dummy_reader : public ::io::nmea_reader
 {
 public:
 	dummy_reader()
-		: nmea_serial(utils::make_unique<dummy_device>())
+		: nmea_reader(utils::make_unique<dummy_device>())
 		, num_sentences(0)
 	{
 	}
@@ -65,12 +65,12 @@ private:
 	int num_sentences;
 };
 
-/// Works only in a single threaded context (true for dummuy_device and nmea_serial).
-class message_reader : public ::io::nmea_serial
+/// Works only in a single threaded context (true for dummuy_device and nmea_reader).
+class message_reader : public ::io::nmea_reader
 {
 public:
 	message_reader()
-		: nmea_serial(utils::make_unique<dummy_device>())
+		: nmea_reader(utils::make_unique<dummy_device>())
 		, sentence_received(false)
 	{
 	}
@@ -99,11 +99,11 @@ private:
 	std::string sentence;
 };
 
-class Test_io_nmea_serial : public ::testing::Test
+class Test_io_nmea_reader : public ::testing::Test
 {
 };
 
-TEST_F(Test_io_nmea_serial, read_count_sentences)
+TEST_F(Test_io_nmea_reader, read_count_sentences)
 {
 	dummy_reader device;
 
@@ -112,7 +112,7 @@ TEST_F(Test_io_nmea_serial, read_count_sentences)
 	EXPECT_EQ(3, device.get_num_sentences());
 }
 
-TEST_F(Test_io_nmea_serial, read_sentence)
+TEST_F(Test_io_nmea_reader, read_sentence)
 {
 	message_reader dev;
 	std::string sentence;
@@ -125,7 +125,7 @@ TEST_F(Test_io_nmea_serial, read_sentence)
 	EXPECT_EQ(3, num_sentences);
 }
 
-TEST_F(Test_io_nmea_serial, read_first_sentence)
+TEST_F(Test_io_nmea_reader, read_first_sentence)
 {
 	message_reader dev;
 	std::string sentence;

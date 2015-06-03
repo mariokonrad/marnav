@@ -1,18 +1,19 @@
-#include <marnav/io/seatalk_serial.hpp>
+#include <marnav/io/seatalk_reader.hpp>
+#include <marnav/io/default_seatalk_serial.hpp>
 #include <marnav/seatalk/seatalk.hpp>
 #include <marnav/seatalk/message_00.hpp>
 #include <iostream>
 
 using namespace marnav;
 
-/// Works only in a single threaded context (true for serial and seatalk_serial).
+/// Works only in a single threaded context (true for serial and seatalk_reader).
 ///
 /// This class is implemented inline, for easier handling within this example.
-class message_reader : public io::seatalk_serial
+class message_reader : public io::seatalk_reader
 {
 public:
-	message_reader(const std::string & device_name)
-		: seatalk_serial(device_name)
+	message_reader(std::unique_ptr<io::device> && dev)
+		: seatalk_reader(std::move(dev))
 		, message_received(false)
 	{
 	}
@@ -57,8 +58,10 @@ private:
 
 int main(int, char **)
 {
+	using namespace marnav::io;
+
 	// create and open the device for reading.
-	message_reader reader{"/dev/ttyUSB0"};
+	message_reader reader{make_default_seatalk_serial("/dev/ttyUSB0")};
 
 	seatalk::raw data;
 

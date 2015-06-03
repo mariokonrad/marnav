@@ -1,12 +1,11 @@
-#include "seatalk_serial.hpp"
-#include <marnav/io/serial.hpp>
+#include "seatalk_reader.hpp"
 #include <algorithm>
 
 namespace marnav
 {
 namespace io
 {
-seatalk_serial::seatalk_serial(std::unique_ptr<device> && dev)
+seatalk_reader::seatalk_reader(std::unique_ptr<device> && dev)
 	: dev(std::move(dev))
 {
 	std::fill_n(reinterpret_cast<uint8_t *>(&ctx), sizeof(ctx), 0);
@@ -16,20 +15,14 @@ seatalk_serial::seatalk_serial(std::unique_ptr<device> && dev)
 	ctx.index = 0;
 }
 
-seatalk_serial::seatalk_serial(const std::string & name)
-	: seatalk_serial(utils::make_unique<serial>(name, serial::baud::BAUD_4800,
-		  serial::databits::BIT_8, serial::stopbits::BIT_1, serial::parity::MARK))
-{
-}
-
-void seatalk_serial::close()
+void seatalk_reader::close()
 {
 	if (dev)
 		dev->close();
 	dev.reset();
 }
 
-uint8_t seatalk_serial::parity(uint8_t a) const
+uint8_t seatalk_reader::parity(uint8_t a) const
 {
 	int c = 0;
 
@@ -41,7 +34,7 @@ uint8_t seatalk_serial::parity(uint8_t a) const
 	return (c % 2) == 0;
 }
 
-void seatalk_serial::write_cmd(uint8_t c)
+void seatalk_reader::write_cmd(uint8_t c)
 {
 	if (ctx.remaining > 0 && ctx.remaining < 254) {
 		++ctx.collisions;
@@ -53,7 +46,7 @@ void seatalk_serial::write_cmd(uint8_t c)
 }
 
 /// Writes data into the read context buffer.
-void seatalk_serial::write_data(uint8_t c)
+void seatalk_reader::write_data(uint8_t c)
 {
 	if (ctx.index >= sizeof(ctx.data))
 		return;
@@ -85,7 +78,7 @@ void seatalk_serial::write_data(uint8_t c)
 /// detection on this pseudo-bus (SeaTalk) is handled.
 ///
 /// @exception std::runtime_error Bus read error.
-void seatalk_serial::process_seatalk() throw(std::runtime_error)
+void seatalk_reader::process_seatalk() throw(std::runtime_error)
 {
 	switch (ctx.state) {
 		case State::READ:
@@ -133,7 +126,7 @@ void seatalk_serial::process_seatalk() throw(std::runtime_error)
 /// @retval true  Success.
 /// @retval false End of file.
 /// @exception std::runtime_error The device was invalid or read error.
-bool seatalk_serial::read_data() throw(std::runtime_error)
+bool seatalk_reader::read_data() throw(std::runtime_error)
 {
 	if (!dev)
 		throw std::runtime_error{"device invalid"};
@@ -154,7 +147,7 @@ bool seatalk_serial::read_data() throw(std::runtime_error)
 /// @retval true  Success.
 /// @retval false End of file.
 /// @exception std::runtime_error Device or processing error.
-bool seatalk_serial::read() throw(std::runtime_error)
+bool seatalk_reader::read() throw(std::runtime_error)
 {
 	if (!read_data())
 		return false;
@@ -162,7 +155,7 @@ bool seatalk_serial::read() throw(std::runtime_error)
 	return true;
 }
 
-void seatalk_serial::emit_message()
+void seatalk_reader::emit_message()
 {
 	process_message(std::vector<uint8_t>{ctx.data, ctx.data + ctx.index});
 }

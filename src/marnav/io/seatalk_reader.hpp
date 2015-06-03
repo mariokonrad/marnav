@@ -1,5 +1,5 @@
-#ifndef __IO__SEATALK_SERIAL__HPP__
-#define __IO__SEATALK_SERIAL__HPP__
+#ifndef __IO__SEATALK_READER__HPP__
+#define __IO__SEATALK_READER__HPP__
 
 #include <marnav/io/device.hpp>
 #include <marnav/seatalk/message.hpp>
@@ -15,11 +15,10 @@ namespace io
 /// In order to use this SeaTalk reader, it must be subclassed.
 ///
 /// @example read_seatalk.cpp
-class seatalk_serial
+class seatalk_reader
 {
 public:
-	seatalk_serial(std::unique_ptr<device> && dev);
-	seatalk_serial(const std::string & name);
+	seatalk_reader(std::unique_ptr<device> && dev);
 
 	void close();
 	bool read() throw(std::runtime_error);

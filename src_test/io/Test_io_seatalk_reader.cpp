@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <marnav/io/seatalk_serial.hpp>
+#include <marnav/io/seatalk_reader.hpp>
 #include <marnav/io/device.hpp>
 
 namespace
@@ -118,11 +118,11 @@ private:
 	uint32_t index;
 };
 
-class dummy_reader : public ::io::seatalk_serial
+class dummy_reader : public ::io::seatalk_reader
 {
 public:
 	dummy_reader()
-		: seatalk_serial(utils::make_unique<dummy_device>())
+		: seatalk_reader(utils::make_unique<dummy_device>())
 		, num_messages(0)
 	{
 	}
@@ -136,12 +136,12 @@ private:
 	int num_messages;
 };
 
-/// Works only in a single threaded context (true for dummuy_device and seatalk_serial).
-class message_reader : public ::io::seatalk_serial
+/// Works only in a single threaded context (true for dummuy_device and seatalk_reader).
+class message_reader : public ::io::seatalk_reader
 {
 public:
 	message_reader()
-		: seatalk_serial(utils::make_unique<dummy_device>())
+		: seatalk_reader(utils::make_unique<dummy_device>())
 		, message_received(false)
 	{
 	}
@@ -170,11 +170,11 @@ private:
 	seatalk::raw message;
 };
 
-class Test_io_seatalk_serial : public ::testing::Test
+class Test_io_seatalk_reader : public ::testing::Test
 {
 };
 
-TEST_F(Test_io_seatalk_serial, read_count_messages_and_collisions)
+TEST_F(Test_io_seatalk_reader, read_count_messages_and_collisions)
 {
 	dummy_reader device;
 
@@ -184,7 +184,7 @@ TEST_F(Test_io_seatalk_serial, read_count_messages_and_collisions)
 	EXPECT_EQ(1u, device.get_collisions());
 }
 
-TEST_F(Test_io_seatalk_serial, read_message)
+TEST_F(Test_io_seatalk_reader, read_message)
 {
 	message_reader dev;
 	seatalk::raw msg;
@@ -198,7 +198,7 @@ TEST_F(Test_io_seatalk_serial, read_message)
 	EXPECT_EQ(9, num_messages);
 }
 
-TEST_F(Test_io_seatalk_serial, read_first_message__depth)
+TEST_F(Test_io_seatalk_reader, read_first_message__depth)
 {
 	message_reader dev;
 	seatalk::raw msg;
@@ -212,7 +212,7 @@ TEST_F(Test_io_seatalk_serial, read_first_message__depth)
 	EXPECT_EQ(0x00u, msg[4]);
 }
 
-TEST_F(Test_io_seatalk_serial, read_third_message__water_temperature)
+TEST_F(Test_io_seatalk_reader, read_third_message__water_temperature)
 {
 	message_reader dev;
 	seatalk::raw msg;

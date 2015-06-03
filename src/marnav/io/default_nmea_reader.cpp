@@ -5,14 +5,8 @@ namespace marnav
 namespace io
 {
 
-default_nmea_reader::default_nmea_reader(const std::string & port)
-	: nmea_serial(port)
-	, received(false)
-{
-}
-
 default_nmea_reader::default_nmea_reader(std::unique_ptr<device> && dev)
-	: nmea_serial(std::move(dev))
+	: nmea_reader(std::move(dev))
 	, received(false)
 {
 }
