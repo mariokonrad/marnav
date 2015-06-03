@@ -1,9 +1,10 @@
 
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5SerialPort REQUIRED)
+find_package(Qt5Core)
 
 if(${Qt5Core_FOUND})
+	find_package(Qt5Widgets REQUIRED)
+	find_package(Qt5SerialPort REQUIRED)
+
 	message(STATUS "Qt5 found")
 	message(STATUS "  ${Qt5Core_LIBRARIES}")
 	message(STATUS "  ${Qt5Widgets_LIBRARIES}")
