@@ -44,3 +44,5 @@ if(Boost_FOUND)
 		${Boost_LIBRARIES}
 		)
 endif()
+
+add_subdirectory(qtnmeadiag)

@@ -28,6 +28,7 @@ file(MAKE_DIRECTORY
 
 ### library
 include_directories(src)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/src)
 add_subdirectory(src)
 
 ### examples
