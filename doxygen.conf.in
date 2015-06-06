@@ -602,6 +602,7 @@ WARN_LOGFILE           =
 
 INPUT                  = \
                          @CMAKE_CURRENT_SOURCE_DIR@/src \
+                         @CMAKE_CURRENT_SOURCE_DIR@/examples \
                          @CMAKE_CURRENT_SOURCE_DIR@/doc \
                          @CMAKE_CURRENT_SOURCE_DIR@/TODO.md \
                          @CMAKE_CURRENT_BINARY_DIR@/doc/main.dox

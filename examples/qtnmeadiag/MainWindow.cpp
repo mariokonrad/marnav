@@ -11,6 +11,9 @@
 #include <QComboBox>
 #include <marnav/nmea/nmea.hpp>
 
+namespace marnav_example
+{
+
 MainWindow::MainWindow()
 	: menu_file(nullptr)
 	, menu_help(nullptr)
@@ -187,3 +190,4 @@ void MainWindow::on_data_ready()
 	}
 }
 
+}

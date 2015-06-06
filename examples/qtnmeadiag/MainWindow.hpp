@@ -12,6 +12,9 @@ class QPushButton;
 class QSerialPort;
 class QComboBox;
 
+namespace marnav_example
+{
+
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -49,5 +52,7 @@ private:
 
 	std::string received_data;
 };
+
+}
 
 #endif

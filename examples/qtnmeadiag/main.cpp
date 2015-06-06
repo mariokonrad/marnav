@@ -10,7 +10,7 @@ int main(int argc, char ** argv)
 								  .arg(marnav::version_major)
 								  .arg(marnav::version_minor)
 								  .arg(marnav::version_patch));
-	MainWindow win;
+	marnav_example::MainWindow win;
 	win.show();
 	return app.exec();
 }
