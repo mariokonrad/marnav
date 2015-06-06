@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QSerialPort>
+#include <QComboBox>
 #include <marnav/nmea/nmea.hpp>
 
 MainWindow::MainWindow()
@@ -19,6 +20,7 @@ MainWindow::MainWindow()
 	, btn_open(nullptr)
 	, btn_close(nullptr)
 	, port_name(nullptr)
+	, cb_baudrate(nullptr)
 	, text(nullptr)
 	, port(nullptr)
 {
@@ -68,6 +70,9 @@ void MainWindow::setup_ui()
 
 	port_name = new QLineEdit(center);
 	port_name->setText("/dev/ttyUSB0");
+	cb_baudrate = new QComboBox(center);
+	cb_baudrate->setEditable(false);
+	cb_baudrate->addItems({"4800", "38400"});
 	btn_open = new QPushButton(tr("Open"), center);
 	connect(btn_open, SIGNAL(pressed()), this, SLOT(on_open()));
 	btn_close = new QPushButton(tr("Close"), center);
@@ -76,9 +81,10 @@ void MainWindow::setup_ui()
 
 	QGridLayout * layout = new QGridLayout;
 	layout->addWidget(port_name, 0, 0);
-	layout->addWidget(btn_open, 0, 1);
-	layout->addWidget(btn_close, 0, 2);
-	layout->addWidget(text, 1, 0, 1, 3);
+	layout->addWidget(cb_baudrate, 0, 1);
+	layout->addWidget(btn_open, 0, 2);
+	layout->addWidget(btn_close, 0, 3);
+	layout->addWidget(text, 1, 0, 1, 4);
 
 	center->setLayout(layout);
 	setCentralWidget(center);
@@ -102,9 +108,11 @@ void MainWindow::on_open()
 {
 	btn_open->setEnabled(false);
 	btn_close->setEnabled(true);
+	cb_baudrate->setEnabled(false);
+	port_name->setEnabled(false);
 
 	port->setPortName(port_name->text());
-	port->setBaudRate(QSerialPort::Baud4800);
+	port->setBaudRate(cb_baudrate->currentData().toInt());
 	port->setParity(QSerialPort::NoParity);
 	port->setDataBits(QSerialPort::Data8);
 	port->setStopBits(QSerialPort::OneStop);
@@ -121,6 +129,8 @@ void MainWindow::on_close()
 {
 	btn_open->setEnabled(true);
 	btn_close->setEnabled(false);
+	cb_baudrate->setEnabled(true);
+	port_name->setEnabled(true);
 
 	disconnect(port, SIGNAL(readyRead()), this, SLOT(on_data_ready()));
 
@@ -132,10 +142,11 @@ void MainWindow::process_nmea()
 	try {
 		auto sentence = marnav::nmea::make_sentence(received_data);
 
+		// TODO: prevent text from growing too large, remove some lines
+
 		// sentence is ok, for now: just show the received data
 		text->appendPlainText(received_data.c_str());
 
-		// TODO: prevent text from growing too large, remove some lines
 		// TODO: print sentence specific data
 	} catch (...) {
 		// ignore

@@ -10,6 +10,7 @@ class QLineEdit;
 class QPlainTextEdit;
 class QPushButton;
 class QSerialPort;
+class QComboBox;
 
 class MainWindow : public QMainWindow
 {
@@ -41,6 +42,7 @@ private:
 	QPushButton * btn_open;
 	QPushButton * btn_close;
 	QLineEdit * port_name;
+	QComboBox * cb_baudrate;
 	QPlainTextEdit * text;
 
 	QSerialPort * port;
