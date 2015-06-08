@@ -94,3 +94,8 @@ Run a NMEA multiplexer {#sec_file_nmea_multiplexer}
 Using select with marnav::io::device {#sec_file_select}
 ------------------------------------
 \includelineno examples/select.cpp
+
+Simple SeaTalk to NMEA converter {#sec_file_seatalk_to_nmea}
+--------------------------------
+\includelineno examples/simple_seatalk_nmea_converter.cpp
+

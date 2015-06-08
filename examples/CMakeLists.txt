@@ -31,8 +31,15 @@ if(Boost_FOUND)
 	add_executable(read_nmea_boostasio
 		read_nmea_boostasio.cpp
 		)
-
 	target_link_libraries(read_nmea_boostasio
+		marnav
+		${Boost_LIBRARIES}
+		)
+
+	add_executable(seatalk_nmea_converter
+		simple_seatalk_nmea_converter.cpp
+		)
+	target_link_libraries(seatalk_nmea_converter
 		marnav
 		${Boost_LIBRARIES}
 		)

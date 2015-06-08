@@ -43,6 +43,9 @@ public:
 	void set_depth_alarm_active(bool t) { depth_alarm_active = t; }
 	void set_shallow_depth_alarm_active(bool t) { shallow_depth_alarm_active = t; }
 	void set_depth(uint16_t t) { depth = t; }
+
+public:
+	double get_depth_meters() const;
 };
 }
 }

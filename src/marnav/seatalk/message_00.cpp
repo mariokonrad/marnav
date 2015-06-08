@@ -54,5 +54,13 @@ raw message_00::get_data() const
 	return raw{static_cast<uint8_t>(ID), 0x02, flags, static_cast<uint8_t>((depth >> 0) & 0xff),
 		static_cast<uint8_t>((depth >> 8) & 0xff)};
 }
+
+double message_00::get_depth_meters() const
+{
+	if (transducer_defective)
+		return 0.0;
+	return (static_cast<double>(depth) / 10.0) * 3.2808;
+}
+
 }
 }

@@ -177,4 +177,33 @@ TEST_F(Test_seatalk_message_00, write_metric_display_units)
 
 	EXPECT_EQ(expected, m.get_data());
 }
+
+TEST_F(Test_seatalk_message_00, depth_meters)
+{
+	struct test_case {
+		uint16_t depth;
+		double meters;
+	};
+
+	std::vector<test_case> cases{
+		{0, 0.0000}, {1, 0.32808}, {10, 3.2808}, {20, 6.5616}, {100, 32.808},
+	};
+
+	for (auto test : cases) {
+		seatalk::message_00 m;
+		m.set_depth(test.depth);
+		EXPECT_NEAR(test.meters, m.get_depth_meters(), 1e-5);
+	}
+}
+TEST_F(Test_seatalk_message_00, depth_meters_transducer_defective)
+{
+	std::vector<uint16_t> cases{0, 1, 10, 20, 100};
+
+	for (auto test : cases) {
+		seatalk::message_00 m;
+		m.set_depth(test);
+		m.set_transducer_defective(true);
+		EXPECT_NEAR(0.0, m.get_depth_meters(), 1e-5);
+	}
+}
 }
