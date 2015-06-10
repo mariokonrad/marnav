@@ -115,7 +115,7 @@ void MainWindow::on_open()
 	port_name->setEnabled(false);
 
 	port->setPortName(port_name->text());
-	port->setBaudRate(cb_baudrate->currentData().toInt());
+	port->setBaudRate(cb_baudrate->currentText().toInt());
 	port->setParity(QSerialPort::NoParity);
 	port->setDataBits(QSerialPort::Data8);
 	port->setStopBits(QSerialPort::OneStop);
@@ -124,7 +124,7 @@ void MainWindow::on_open()
 
 	if (!port->open(QIODevice::ReadOnly)) {
 		on_close();
-		QMessageBox::critical(this, "Error", "Unable to open port");
+		QMessageBox::critical(this, "Error", "Unable to open port: " + port->portName());
 	}
 }
 
