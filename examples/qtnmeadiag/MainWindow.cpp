@@ -70,6 +70,7 @@ void MainWindow::setup_ui()
 
 	text = new QPlainTextEdit(center);
 	text->setReadOnly(true);
+	text->setMaximumBlockCount(100);
 
 	port_name = new QLineEdit(center);
 	port_name->setText("/dev/ttyUSB0");
@@ -145,12 +146,11 @@ void MainWindow::process_nmea()
 	try {
 		auto sentence = marnav::nmea::make_sentence(received_data);
 
-		// TODO: prevent text from growing too large, remove some lines
-
 		// sentence is ok, for now: just show the received data
 		text->appendPlainText(received_data.c_str());
 
 		// TODO: print sentence specific data
+		//       ... not shown here
 	} catch (...) {
 		// ignore
 	}
