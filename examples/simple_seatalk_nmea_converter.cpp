@@ -11,19 +11,17 @@ using namespace marnav;
 
 namespace marnav_example
 {
-
-static std::string conv_depth_below_transducer(const std::unique_ptr<seatalk::message> & msg)
+static std::string conv_depth_below_transducer(const seatalk::message & msg)
 {
 	using namespace marnav::seatalk;
 
-	const auto m = message_cast<message_00>(msg);
+	const auto & m = message_cast<message_00>(msg);
 
 	nmea::dpt dpt;
-	dpt.set_depth_meter(m->get_depth_meters());
+	dpt.set_depth_meter(m.get_depth_meters());
 	dpt.set_transducer_offset(0.0);
 	return nmea::to_string(dpt);
 }
-
 }
 
 int main(int, char **)
@@ -32,8 +30,8 @@ int main(int, char **)
 	using namespace marnav::io;
 
 	// mapping of conversion functions
-	std::map<seatalk::message_id,
-		std::function<std::string(const std::unique_ptr<seatalk::message> &)>> CONV = {
+	static const std::map<seatalk::message_id,
+		std::function<std::string(const seatalk::message &)>> CONV = {
 		{seatalk::message_id::depth_below_transducer, conv_depth_below_transducer},
 	};
 
@@ -56,10 +54,12 @@ int main(int, char **)
 		std::string nmea;
 		auto func = CONV.find(msg->type());
 		if (func != CONV.end())
-			nmea = func->second(msg);
+			nmea = func->second(*msg);
 
 		// send NMEA sentence
-		if (nmea.size() > 0)
+		if (nmea.size() > 0) {
+			nmea += "\r\n";
 			boost::asio::write(serial, boost::asio::buffer(nmea.c_str(), nmea.size()));
+		}
 	}
 }
