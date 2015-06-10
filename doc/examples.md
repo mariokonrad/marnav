@@ -105,3 +105,7 @@ Qt5 GUI application reading NMEA {#sec_file_qt5}
 \includelineno examples/qtnmeadiag/MainWindow.hpp
 \includelineno examples/qtnmeadiag/MainWindow.cpp
 
+Simple NMEA receiver and forward to a TCP server {#sec_file_tcp_forward}
+------------------------------------------------
+\includelineno examples/serial_to_tcp.cpp
+

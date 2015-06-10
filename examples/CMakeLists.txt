@@ -43,6 +43,15 @@ if(Boost_FOUND)
 		marnav
 		${Boost_LIBRARIES}
 		)
+
+	add_executable(serial_to_tcp
+		serial_to_tcp.cpp
+		)
+	target_link_libraries(serial_to_tcp
+		marnav
+		${Boost_LIBRARIES}
+		pthread
+		)
 endif()
 
 add_subdirectory(qtnmeadiag)

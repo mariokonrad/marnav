@@ -10,6 +10,7 @@ nmea_reader::nmea_reader(std::unique_ptr<device> && dev)
 	: raw(0)
 	, dev(std::move(dev))
 {
+	sentence.reserve(nmea::sentence::MAX_LENGTH + 1);
 }
 
 void nmea_reader::close()
@@ -28,7 +29,7 @@ bool nmea_reader::read_data() throw(std::runtime_error)
 {
 	if (!dev)
 		throw std::runtime_error{"device invalid"};
-	int rc = dev->read(reinterpret_cast<char *>(&raw), sizeof(raw));
+	int rc = dev->read(&raw, sizeof(raw));
 	if (rc == 0)
 		return false;
 	if (rc < 0)
@@ -41,9 +42,13 @@ bool nmea_reader::read_data() throw(std::runtime_error)
 /// Processes the data read from the device.
 ///
 /// @exception std::runtime_error
+///
+/// @todo Synchronize on start characters as well ('$', '!')
 void nmea_reader::process_nmea() throw(std::runtime_error)
 {
 	switch (raw) {
+		case '\0': // invalid character, ignore
+			break;
 		case '\r':
 			break;
 		case '\n': // end of sentence
@@ -51,7 +56,7 @@ void nmea_reader::process_nmea() throw(std::runtime_error)
 			sentence.clear();
 			break;
 		default:
-			if (sentence.size() >= nmea::sentence::MAX_LENGTH)
+			if (sentence.size() > nmea::sentence::MAX_LENGTH)
 				throw std::runtime_error{"sentence size to large. receiving NMEA data?"};
 			sentence += raw;
 			break;
