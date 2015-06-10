@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 2.8.12)
 project(marnav)
 
 set(VERSION_MAJOR "0")
-set(VERSION_MINOR "2")
-set(VERSION_PATCH "1-dev")
+set(VERSION_MINOR "3")
+set(VERSION_PATCH "0")
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
