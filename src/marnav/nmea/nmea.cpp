@@ -25,6 +25,7 @@
 #include "vdm.hpp"
 #include "vdo.hpp"
 #include "wnc.hpp"
+#include "xte.hpp"
 #include <marnav/utils/unique.hpp>
 #include <algorithm>
 #include <regex>
@@ -51,12 +52,13 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 	using namespace std;
 
 	using entry = std::pair<std::string, sentence::parse_function>;
-	static const std::vector<entry> known_sentences = {{"AAM", aam::parse}, {"BOD", bod::parse},
-		{"DBK", dbk::parse}, {"DBT", dbt::parse}, {"DPT", dpt::parse}, {"GGA", gga::parse},
-		{"GLL", gll::parse}, {"GSA", gsa::parse}, {"GSV", gsv::parse}, {"HDG", hdg::parse},
-		{"MTW", mtw::parse}, {"MWV", mwv::parse}, {"RMB", rmb::parse}, {"RMC", rmc::parse},
-		{"RTE", rte::parse}, {"VHW", vhw::parse}, {"VLW", vlw::parse}, {"VTG", vtg::parse},
-		{"VWR", vwr::parse}, {"VDM", vdm::parse}, {"VDO", vdo::parse}, {"WNC", wnc::parse}};
+	static const std::vector<entry> known_sentences
+		= {{"AAM", aam::parse}, {"BOD", bod::parse}, {"DBK", dbk::parse}, {"DBT", dbt::parse},
+			{"DPT", dpt::parse}, {"GGA", gga::parse}, {"GLL", gll::parse}, {"GSA", gsa::parse},
+			{"GSV", gsv::parse}, {"HDG", hdg::parse}, {"MTW", mtw::parse}, {"MWV", mwv::parse},
+			{"RMB", rmb::parse}, {"RMC", rmc::parse}, {"RTE", rte::parse}, {"VHW", vhw::parse},
+			{"VLW", vlw::parse}, {"VTG", vtg::parse}, {"VWR", vwr::parse}, {"VDM", vdm::parse},
+			{"VDO", vdo::parse}, {"WNC", wnc::parse}, {"XTE", xte::parse}};
 
 	auto const & i = std::find_if(begin(known_sentences), end(known_sentences),
 		[tag](const entry & e) { return e.first == tag; });

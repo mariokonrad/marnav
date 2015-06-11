@@ -32,6 +32,7 @@ Supported sentences for NMEA-0183 (read and write):
 - VDM
 - VDO
 - WNC
+- XTE
 
 Supported messages for AIS (decode and encode):
 - type 1: position report class A
