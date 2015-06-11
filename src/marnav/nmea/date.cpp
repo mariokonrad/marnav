@@ -69,7 +69,8 @@ bool operator==(const date & a, const date & b) noexcept
 std::string to_string(const date & d)
 {
 	char buf[7];
-	snprintf(buf, sizeof(buf), "%02u%02u%02u", d.day(), static_cast<int>(d.mon()), d.year());
+	snprintf(buf, sizeof(buf), "%02u%02u%02u", d.day(), static_cast<unsigned int>(d.mon()),
+		d.year());
 	return buf;
 }
 

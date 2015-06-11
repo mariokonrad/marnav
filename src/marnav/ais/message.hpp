@@ -144,6 +144,8 @@ class message
 public:
 	using parse_function = std::function<std::unique_ptr<message>(const raw &)>;
 
+	virtual ~message() {}
+
 	message_id type() const;
 	virtual raw get_data() const = 0;
 

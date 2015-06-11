@@ -198,6 +198,8 @@ public:
 	constexpr static char START_TOKEN_AIS = '!';
 	constexpr static char END_TOKEN = '*';
 
+	virtual ~sentence() {}
+
 	/// Returns the ID of the sentence.
 	sentence_id id() const;
 
