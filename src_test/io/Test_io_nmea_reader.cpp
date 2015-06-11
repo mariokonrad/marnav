@@ -2,22 +2,32 @@
 #include <marnav/io/nmea_reader.hpp>
 #include <marnav/io/device.hpp>
 #include <marnav/utils/unique.hpp>
+#include <vector>
 
 namespace
 {
 
 using namespace marnav;
 
-static const char DATA[]
+static const std::string DATA_COMPLETE
 	= {"$GPRMC,202451,A,4702.3966,N,00818.3287,E,0.0,312.3,260711,0.6,E,A*19\r\n"
 	   "$GPRMC,202452,A,4702.3966,N,00818.3287,E,0.0,312.3,260711,0.6,E,A*1a\r\n"
+	   "$GPRMC,202453,A,4702.3966,N,00818.3287,E,0.0,312.3,260711,0.6,E,A*1b\r\n"};
+
+static const std::string DATA_INCOMPLETE
+	= {".3287,E,0.0,312.3,260711,0.6,E,A*1a\r\n"
+	   "$GPRMC,202453,A,4702.3966,N,00818.3287,E,0.0,312.3,260711,0.6,E,A*1b\r\n"};
+
+static const std::string DATA_MISSING_EOL
+	= {".3287,E,0.0,312.3,260711,0.6,E,A*1a"
 	   "$GPRMC,202453,A,4702.3966,N,00818.3287,E,0.0,312.3,260711,0.6,E,A*1b\r\n"};
 
 class dummy_device : public ::io::device
 {
 public:
-	dummy_device()
+	dummy_device(const std::string & data)
 		: index(0)
+		, data(data)
 	{
 	}
 
@@ -30,9 +40,9 @@ public:
 	{
 		if (size != sizeof(*buffer))
 			throw std::invalid_argument{"buffer type not supported"};
-		if (index >= sizeof(DATA))
+		if (index >= data.size())
 			return 0; // end of data
-		*buffer = static_cast<char>(DATA[index]);
+		*buffer = data[index];
 		++index;
 		return 1;
 	}
@@ -44,14 +54,41 @@ public:
 	}
 
 private:
-	uint32_t index;
+	std::string::size_type index;
+	std::string data;
+};
+
+class test_device : public ::io::device
+{
+public:
+	test_device(int result)
+		: result(result)
+	{
+	}
+
+	void open() throw(std::runtime_error) override {}
+	void close() override {}
+
+	virtual int read(char *, uint32_t) throw(std::invalid_argument, std::runtime_error) override
+	{
+		return result;
+	}
+
+	virtual int write(const char *, uint32_t) throw(
+		std::invalid_argument, std::runtime_error) override
+	{
+		return result;
+	}
+
+private:
+	int result;
 };
 
 class dummy_reader : public ::io::nmea_reader
 {
 public:
-	dummy_reader()
-		: nmea_reader(utils::make_unique<dummy_device>())
+	dummy_reader(const std::string & data)
+		: nmea_reader(utils::make_unique<dummy_device>(data))
 		, num_sentences(0)
 	{
 	}
@@ -65,12 +102,30 @@ private:
 	int num_sentences;
 };
 
+class no_device_reader : public ::io::nmea_reader
+{
+public:
+	no_device_reader()
+		: nmea_reader(nullptr)
+	{
+	}
+
+protected:
+	virtual void process_sentence(const std::string &) override {}
+};
+
 /// Works only in a single threaded context (true for dummuy_device and nmea_reader).
 class message_reader : public ::io::nmea_reader
 {
 public:
-	message_reader()
-		: nmea_reader(utils::make_unique<dummy_device>())
+	message_reader(const std::string & data)
+		: nmea_reader(utils::make_unique<dummy_device>(data))
+		, sentence_received(false)
+	{
+	}
+
+	message_reader(std::unique_ptr<::io::device> && dev)
+		: nmea_reader(std::move(dev))
 		, sentence_received(false)
 	{
 	}
@@ -105,7 +160,7 @@ class Test_io_nmea_reader : public ::testing::Test
 
 TEST_F(Test_io_nmea_reader, read_count_sentences)
 {
-	dummy_reader device;
+	dummy_reader device{DATA_COMPLETE};
 
 	while (device.read());
 
@@ -114,7 +169,7 @@ TEST_F(Test_io_nmea_reader, read_count_sentences)
 
 TEST_F(Test_io_nmea_reader, read_sentence)
 {
-	message_reader dev;
+	message_reader dev{DATA_COMPLETE};
 	std::string sentence;
 
 	int num_sentences = 0;
@@ -127,7 +182,7 @@ TEST_F(Test_io_nmea_reader, read_sentence)
 
 TEST_F(Test_io_nmea_reader, read_first_sentence)
 {
-	message_reader dev;
+	message_reader dev{DATA_COMPLETE};
 	std::string sentence;
 	bool rc = false;
 
@@ -135,4 +190,60 @@ TEST_F(Test_io_nmea_reader, read_first_sentence)
 	ASSERT_TRUE(rc);
 	EXPECT_EQ(68u, sentence.size());
 }
+
+TEST_F(Test_io_nmea_reader, read_synchronization)
+{
+	message_reader dev{DATA_INCOMPLETE};
+	std::string sentence;
+	bool rc = false;
+
+	ASSERT_NO_THROW(rc = dev.read_sentence(sentence));
+	ASSERT_TRUE(rc);
+	EXPECT_EQ(35u, sentence.size());
+
+	ASSERT_NO_THROW(rc = dev.read_sentence(sentence));
+	ASSERT_TRUE(rc);
+	EXPECT_EQ(68u, sentence.size());
+}
+
+TEST_F(Test_io_nmea_reader, sentence_to_large)
+{
+	message_reader dev{DATA_MISSING_EOL};
+	std::string sentence;
+
+	ASSERT_THROW(dev.read_sentence(sentence), std::length_error);
+}
+
+TEST_F(Test_io_nmea_reader, no_device)
+{
+	no_device_reader dev{};
+
+	ASSERT_THROW(dev.read(), std::runtime_error);
+}
+
+TEST_F(Test_io_nmea_reader, read_negative)
+{
+	message_reader dev{std::unique_ptr<::io::device>(new test_device(-1))};
+
+	ASSERT_THROW(dev.read(), std::runtime_error);
+}
+
+TEST_F(Test_io_nmea_reader, read_invalid_size)
+{
+	message_reader dev{std::unique_ptr<::io::device>(new test_device(12345))};
+
+	ASSERT_THROW(dev.read(), std::runtime_error);
+}
+
+TEST_F(Test_io_nmea_reader, read_after_close)
+{
+	message_reader dev{DATA_COMPLETE};
+
+	ASSERT_NO_THROW(dev.read());
+
+	dev.close();
+
+	ASSERT_THROW(dev.read(), std::runtime_error);
+}
+
 }

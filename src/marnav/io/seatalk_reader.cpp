@@ -15,6 +15,8 @@ seatalk_reader::seatalk_reader(std::unique_ptr<device> && dev)
 	ctx.index = 0;
 }
 
+seatalk_reader::~seatalk_reader() {}
+
 void seatalk_reader::close()
 {
 	if (dev)

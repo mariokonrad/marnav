@@ -19,15 +19,16 @@ class nmea_reader
 {
 public:
 	nmea_reader(std::unique_ptr<device> && dev);
+	virtual ~nmea_reader();
 
 	void close();
-	bool read() throw(std::runtime_error);
+	bool read() throw(std::runtime_error, std::length_error);
 
 protected:
 	virtual void process_sentence(const std::string &) = 0;
 
 private:
-	void process_nmea() throw(std::runtime_error);
+	void process_nmea() throw(std::length_error);
 	bool read_data() throw(std::runtime_error);
 
 	char raw;

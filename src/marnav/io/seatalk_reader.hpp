@@ -19,6 +19,7 @@ class seatalk_reader
 {
 public:
 	seatalk_reader(std::unique_ptr<device> && dev);
+	virtual ~seatalk_reader();
 
 	void close();
 	bool read() throw(std::runtime_error);

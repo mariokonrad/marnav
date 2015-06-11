@@ -13,6 +13,8 @@ nmea_reader::nmea_reader(std::unique_ptr<device> && dev)
 	sentence.reserve(nmea::sentence::MAX_LENGTH + 1);
 }
 
+nmea_reader::~nmea_reader() {}
+
 void nmea_reader::close()
 {
 	if (dev)
@@ -41,14 +43,11 @@ bool nmea_reader::read_data() throw(std::runtime_error)
 
 /// Processes the data read from the device.
 ///
-/// @exception std::runtime_error
-///
-/// @todo Synchronize on start characters as well ('$', '!')
-void nmea_reader::process_nmea() throw(std::runtime_error)
+/// @exception std::length_error Too many characters read for the sentence.
+///   Maybe the end of line was missed or left out.
+void nmea_reader::process_nmea() throw(std::length_error)
 {
 	switch (raw) {
-		case '\0': // invalid character, ignore
-			break;
 		case '\r':
 			break;
 		case '\n': // end of sentence
@@ -56,8 +55,14 @@ void nmea_reader::process_nmea() throw(std::runtime_error)
 			sentence.clear();
 			break;
 		default:
+			// ignore invalid characters. if this makes the sentence incomplete,
+			// the sentence would have been invalid anyway. the result will be
+			// an invalid sentence or a std::length_error.
+			if ((raw <= 32) || (raw >= 127))
+				return;
+
 			if (sentence.size() > nmea::sentence::MAX_LENGTH)
-				throw std::runtime_error{"sentence size to large. receiving NMEA data?"};
+				throw std::length_error{"sentence size to large. receiving NMEA data?"};
 			sentence += raw;
 			break;
 	}
@@ -70,7 +75,8 @@ void nmea_reader::process_nmea() throw(std::runtime_error)
 /// @retval true  Success.
 /// @retval false End of file.
 /// @exception std::runtime_error Device or processing error.
-bool nmea_reader::read() throw(std::runtime_error)
+/// @exception std::length_error Synchronization issue.
+bool nmea_reader::read() throw(std::runtime_error, std::length_error)
 {
 	if (!read_data())
 		return false;
