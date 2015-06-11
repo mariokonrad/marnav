@@ -109,3 +109,51 @@ Simple NMEA receiver and forward to a TCP server {#sec_file_tcp_forward}
 ------------------------------------------------
 \includelineno examples/serial_to_tcp.cpp
 
+Library {#sec_lib}
+=======
+
+Using the library in a cmake environment {#sec_lib_cmake}
+----------------------------------------
+If you are using this library within a cmake environment, you might
+want to use ``find_package``.
+
+Build and install the library:
+~~~~~~~~~~~~~
+	mkdir build
+	cd build
+	mkdir local
+	cmake -DCMAKE_INSTALL_PREFIX=`pwd`/local ..
+	make
+	make install
+~~~~~~~~~~~~~
+
+Now the installation of the library is in the directory ``marnav/build/local``.
+
+To build the test program:
+~~~~~~~~~~~~~
+	cd build
+	export marnav_DIR=`pwd`/local
+	mkdir test
+	cd test
+	cmake ../../example/library
+	make
+	./foobar
+~~~~~~~~~~~~~
+
+The ``export`` is necessary because cmake would not find the necessary
+configuration of the library, which is installed in ``.../lib/marnav/cmake``.
+
+The tarball also contains the configuration files:
+~~~~~~~~~~~~~
+	tar -xf marnav-0.3.1-Linux.tar.gz
+	export marnav_DIR=`pwd`/marnav-0.3.1-Linux
+	mkdir test
+	cd test
+	cmake ../../example/library
+	make
+	./foobar
+~~~~~~~~~~~~~
+
+You might want to consider extending the cmake modules path (in your
+``CMakeLists.txt``) accordingly.
+

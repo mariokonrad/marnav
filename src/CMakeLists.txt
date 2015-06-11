@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
 option(ENABLE_STATIC
 	"Enable static library" ON)
@@ -106,8 +106,8 @@ add_library(marnav ${LIBRARY_TYPE}
 	)
 
 set_target_properties(marnav
-	PROPERTIES VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
-	SOVERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
+	PROPERTIES VERSION "${PROJECT_VERSION}"
+	SOVERSION "${PROJECT_VERSION}"
 	)
 
 install(
@@ -213,4 +213,27 @@ install(
 		marnav/io/default_seatalk_serial.hpp
 	DESTINATION include/marnav/io
 	)
+
+# stuff for the config and config-versionn files
+set(INCLUDE_INSTALL_DIR include)
+set(LIB_INSTALL_DIR lib)
+include(CMakePackageConfigHelpers)
+configure_package_config_file(
+	config.cmake.in
+	"${CMAKE_CURRENT_BINARY_DIR}/marnav-config.cmake"
+	INSTALL_DESTINATION "${LIB_INSTALL_DIR}/${PROJECT_NAME}/cmake"
+	PATH_VARS INCLUDE_INSTALL_DIR
+	)
+write_basic_package_version_file(
+	"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
+	VERSION "${PROJECT_VERSION}"
+	COMPATIBILITY SameMajorVersion)
+install(
+	FILES
+		"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
+		"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
+	DESTINATION
+		"${LIB_INSTALL_DIR}/${PROJECT_NAME}/cmake"
+	)
+
 
