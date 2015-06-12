@@ -10,7 +10,7 @@ Requirements {#sec_devenv_requirements}
 
 Tools needed to build the library:
 - GCC 4.9.2 or newer
-- cmake 2.8.11 or newer
+- cmake 3.0 or newer
 - clang-format 3.7 or newer
 - doxygen
 
