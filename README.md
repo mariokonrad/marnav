@@ -32,5 +32,5 @@ Build Documentation
 LICENSE
 -------
 
-See file LICENSE
+See file [LICENSE](LICENSE)
 
