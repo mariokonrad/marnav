@@ -12,11 +12,13 @@ It supports (partially):
 - Reading data from serial ports (NMEA, SeaTalk)
 - Basic geodesic functions, suitable for martime navigation.
 
+More documentation to be found after building it, see (some are
+optimized for doxygen not github):
+
 - [Features](doc/features.md)
 - [Examples](doc/examples.md)
 - [Development Environment](doc/devenv.md)
 
-(more documentation to be found after building it)
 
 
 Build Documentation
