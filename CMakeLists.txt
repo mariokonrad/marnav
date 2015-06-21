@@ -8,10 +8,6 @@ set(PROJECT_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
-include(ExternalProject)
-include(ExternGmock)
-include(GitInformation)
-
 if(CMAKE_COMPILER_IS_GNUCXX)
 	set(CMAKE_CXX_FLAGS          "${CMAKE_CXX_FLAGS}         -std=c++11 -Wall -Wextra -O0 -ggdb")
 	set(CMAKE_CXX_FLAGS_DEBUG    "${CMAKE_CXX_FLAGS_DEBUG}   -std=c++11 -Wall -Wextra -O0 -ggdb")
@@ -20,6 +16,10 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+include(ExternalProject)
+include(ExternGmock)
+include(GitInformation)
 
 ### common
 file(MAKE_DIRECTORY
