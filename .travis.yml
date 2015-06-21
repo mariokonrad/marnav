@@ -1,0 +1,17 @@
+language: cpp
+compiler: gcc
+
+before_install:
+  - sudo add-apt-repository --yes ppa:kalakris/cmake
+  - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt-get install -qq cmake
+  - sudo apt-get install -qq g++-4.9
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 90
+  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 90
+
+script:
+  - sh -c 'mkdir build && cd build && cmake .. && make'
+
