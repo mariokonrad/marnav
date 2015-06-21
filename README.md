@@ -34,3 +34,9 @@ LICENSE
 
 See file [LICENSE](LICENSE)
 
+
+Status
+------
+
+[![Build Status](https://travis-ci.org/mariokonrad/marnav.svg?branch=master)](https://travis-ci.org/mariokonrad/marnav)
+
