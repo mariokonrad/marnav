@@ -12,6 +12,8 @@ install:
   - wget http://www.cmake.org/files/v3.2/cmake-3.2.3-Linux-x86_64.tar.gz
   - tar -xf cmake-3.2.3-Linux-x86_64.tar.gz
   - sudo cp -fR cmake-3.2.3-Linux-x86_64/* /usr
+  - rm -f cmake-3.2.3-Linux-x86_64.tar.gz
+  - rm -rf cmake-3.2.3-Linux-x86_64
 
 before_script:
   - mkdir build
