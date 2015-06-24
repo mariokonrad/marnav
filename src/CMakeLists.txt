@@ -44,6 +44,7 @@ set(SOURCE_NMEA_0183
 	marnav/nmea/vdm.cpp
 	marnav/nmea/vdo.cpp
 	marnav/nmea/wnc.cpp
+	marnav/nmea/xdr.cpp
 	marnav/nmea/xte.cpp
 	)
 
@@ -153,6 +154,7 @@ install(
 		marnav/nmea/vdm.hpp
 		marnav/nmea/vdo.hpp
 		marnav/nmea/wnc.hpp
+		marnav/nmea/xdr.hpp
 		marnav/nmea/xte.hpp
 	DESTINATION include/marnav/nmea
 	)

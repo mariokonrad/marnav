@@ -37,6 +37,13 @@ inline std::string to_string(char data)
 
 inline std::string to_string(uint32_t data) { return std::to_string(data); }
 
+inline std::string to_string(double data)
+{
+	char buf[32];
+	snprintf(buf, sizeof(buf), "%g", data);
+	return buf;
+}
+
 inline std::string to_string(const std::string & data) { return data; }
 
 template <> inline std::string to_string(const utils::optional<uint32_t> & data)
@@ -53,7 +60,7 @@ template <> inline std::string to_string(const utils::optional<double> & data)
 		return std::string{};
 
 	char buf[32];
-	snprintf(buf, sizeof(buf), "%.1f", data.value());
+	snprintf(buf, sizeof(buf), "%g", data.value());
 	return buf;
 }
 

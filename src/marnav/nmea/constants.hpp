@@ -59,6 +59,8 @@ constexpr const char KNOT = 'N';
 constexpr const char KMH = 'K'; // kilometers per hour
 constexpr const char MPS = 'M'; // meters per second
 constexpr const char CELSIUS = 'C';
+constexpr const char BAR = 'B'; // pressure in Bar
+constexpr const char PASCAL = 'P'; // pressure in Pascal
 }
 
 namespace reference

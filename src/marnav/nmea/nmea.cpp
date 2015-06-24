@@ -25,6 +25,7 @@
 #include "vdm.hpp"
 #include "vdo.hpp"
 #include "wnc.hpp"
+#include "xdr.hpp"
 #include "xte.hpp"
 #include <marnav/utils/unique.hpp>
 #include <algorithm>
@@ -58,7 +59,7 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 			{"GSV", gsv::parse}, {"HDG", hdg::parse}, {"MTW", mtw::parse}, {"MWV", mwv::parse},
 			{"RMB", rmb::parse}, {"RMC", rmc::parse}, {"RTE", rte::parse}, {"VHW", vhw::parse},
 			{"VLW", vlw::parse}, {"VTG", vtg::parse}, {"VWR", vwr::parse}, {"VDM", vdm::parse},
-			{"VDO", vdo::parse}, {"WNC", wnc::parse}, {"XTE", xte::parse}};
+			{"VDO", vdo::parse}, {"WNC", wnc::parse}, {"XDR", xdr::parse}, {"XTE", xte::parse}};
 
 	auto const & i = std::find_if(begin(known_sentences), end(known_sentences),
 		[tag](const entry & e) { return e.first == tag; });

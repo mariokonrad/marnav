@@ -32,6 +32,7 @@ Supported sentences for NMEA-0183 (read and write):
 - VDM
 - VDO
 - WNC
+- XDR
 - XTE
 
 Supported messages for AIS (decode and encode):

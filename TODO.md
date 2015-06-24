@@ -56,7 +56,6 @@ NMEA
 	- VPW - Speed - Measured Parallel to Wind
 	- WCV - Waypoint Closure Velocity
 	- WPL - Waypoint Location
-	- XDR - Transducer Measurement
 	- XTR - Cross Track Error - Dead Reckoning
 	- ZDA - Time & Date - UTC, day, month, year and local time zone
 	- ZFO - UTC & Time from origin Waypoint
