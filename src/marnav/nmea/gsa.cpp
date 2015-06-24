@@ -12,48 +12,23 @@ gsa::gsa()
 {
 }
 
-void gsa::set_satellite_id(int index, uint32_t t)
+void gsa::check_index(int index) const throw(std::out_of_range)
 {
-	switch (index) {
-		case 1:
-			satellite_id_01 = t;
-			break;
-		case 2:
-			satellite_id_02 = t;
-			break;
-		case 3:
-			satellite_id_03 = t;
-			break;
-		case 4:
-			satellite_id_04 = t;
-			break;
-		case 5:
-			satellite_id_05 = t;
-			break;
-		case 6:
-			satellite_id_06 = t;
-			break;
-		case 7:
-			satellite_id_07 = t;
-			break;
-		case 8:
-			satellite_id_08 = t;
-			break;
-		case 9:
-			satellite_id_09 = t;
-			break;
-		case 10:
-			satellite_id_10 = t;
-			break;
-		case 11:
-			satellite_id_11 = t;
-			break;
-		case 12:
-			satellite_id_12 = t;
-			break;
-		default:
-			break;
+	if ((index < 1) || (index > 12)) {
+		throw std::out_of_range{"satellite id out of range"};
 	}
+}
+
+void gsa::set_satellite_id(int index, uint32_t t) throw(std::out_of_range)
+{
+	check_index(index);
+	satellite_id[index - 1] = t;
+}
+
+utils::optional<uint32_t> gsa::get_satellite_id(int index) const throw(std::out_of_range)
+{
+	check_index(index);
+	return satellite_id[index - 1];
 }
 
 std::unique_ptr<sentence> gsa::parse(const std::string & talker,
@@ -68,18 +43,13 @@ std::unique_ptr<sentence> gsa::parse(const std::string & talker,
 
 	read(fields[0], detail.selection_mode);
 	read(fields[1], detail.mode);
-	read(fields[2], detail.satellite_id_01);
-	read(fields[3], detail.satellite_id_02);
-	read(fields[4], detail.satellite_id_03);
-	read(fields[5], detail.satellite_id_04);
-	read(fields[6], detail.satellite_id_05);
-	read(fields[7], detail.satellite_id_06);
-	read(fields[8], detail.satellite_id_07);
-	read(fields[9], detail.satellite_id_08);
-	read(fields[10], detail.satellite_id_09);
-	read(fields[11], detail.satellite_id_10);
-	read(fields[12], detail.satellite_id_11);
-	read(fields[13], detail.satellite_id_12);
+
+	int index = 2;
+	for (auto i = 0; i < MAX_SATELLITE_IDS; ++i, ++index) {
+		uint32_t id;
+		read(fields[index], id);
+		detail.set_satellite_id(i + 1, id);
+	}
 	read(fields[14], detail.pdop);
 	read(fields[15], detail.hdop);
 	read(fields[16], detail.vdop);
@@ -89,11 +59,11 @@ std::unique_ptr<sentence> gsa::parse(const std::string & talker,
 
 std::vector<std::string> gsa::get_data() const
 {
-	return {to_string(selection_mode), to_string(mode), format(satellite_id_01, 2),
-		format(satellite_id_02, 2), format(satellite_id_03, 2), format(satellite_id_04, 2),
-		format(satellite_id_05, 2), format(satellite_id_06, 2), format(satellite_id_07, 2),
-		format(satellite_id_08, 2), format(satellite_id_09, 2), format(satellite_id_10, 2),
-		format(satellite_id_11, 2), format(satellite_id_12, 2), to_string(pdop),
+	return {to_string(selection_mode), to_string(mode), format(satellite_id[0], 2),
+		format(satellite_id[1], 2), format(satellite_id[2], 2), format(satellite_id[3], 2),
+		format(satellite_id[4], 2), format(satellite_id[5], 2), format(satellite_id[6], 2),
+		format(satellite_id[7], 2), format(satellite_id[8], 2), format(satellite_id[9], 2),
+		format(satellite_id[10], 2), format(satellite_id[11], 2), to_string(pdop),
 		to_string(hdop), to_string(vdop)};
 }
 }
