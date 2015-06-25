@@ -601,10 +601,10 @@ WARN_LOGFILE           =
 #USE_MDFILE_AS_MAINPAGE = @CMAKE_CURRENT_SOURCE_DIR@/README.md
 
 INPUT                  = \
-                         @CMAKE_CURRENT_SOURCE_DIR@/src \
-                         @CMAKE_CURRENT_SOURCE_DIR@/examples \
                          @CMAKE_CURRENT_SOURCE_DIR@/doc \
                          @CMAKE_CURRENT_SOURCE_DIR@/TODO.md \
+                         @CMAKE_CURRENT_SOURCE_DIR@/src \
+                         @CMAKE_CURRENT_SOURCE_DIR@/examples \
                          @CMAKE_CURRENT_BINARY_DIR@/doc/main.dox
 
 # This tag can be used to specify the character encoding of the source files
