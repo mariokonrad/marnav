@@ -9,6 +9,28 @@ namespace marnav
 namespace nmea
 {
 
+/// @brief XTE - Cross-Track Error, Measured
+///
+/// @code
+///        1 2 3   4 5 6   7
+///        | | |   | | |   |
+/// $--XTE,A,A,x.x,a,N,m,*hh<CR><LF>
+/// @endcode
+///
+/// Field Number:
+///
+/// 1. Status
+///     - V = LORAN-C Blink or SNR warning
+///     - V = general warning flag or other navigation systems when a reliable fix is not available
+/// 2. Status
+///     - V = Loran-C Cycle Lock warning flag
+///     - A = OK or not used
+/// 3. Cross Track Error Magnitude
+/// 4. Direction to steer, L or R
+/// 5. Cross Track Units, N = Nautical Miles
+/// 6. FAA mode indicator (NMEA 2.3 and later, optional)
+/// 7. Checksum
+///
 class xte : public sentence
 {
 public:
@@ -54,4 +76,3 @@ public:
 }
 
 #endif
-

@@ -9,6 +9,23 @@ namespace marnav
 namespace nmea
 {
 
+
+/// @brief VLW - Distance Traveled through Water
+///
+/// @code
+///        1   2 3   4 5
+///        |   | |   | |
+/// $--VLW,x.x,N,x.x,N*hh<CR><LF>
+/// @endcode
+///
+/// Field Number:
+///
+/// 1. Total cumulative distance
+/// 2. N = Nautical Miles
+/// 3. Distance since Reset
+/// 4. N = Nautical Miles
+/// 5. Checksum
+///
 class vlw : public sentence
 {
 public:

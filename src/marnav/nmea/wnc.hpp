@@ -9,6 +9,24 @@ namespace marnav
 namespace nmea
 {
 
+/// @brief WNC - Distance - Waypoint to Waypoint
+///
+/// @code
+///        1   2 3   4 5    6    7
+///        |   | |   | |    |    |
+/// $--WNC,x.x,N,x.x,K,c--c,c--c*hh<CR><LF>
+/// @endcode
+///
+/// Field Number:
+///
+/// 1. Distance, Nautical Miles
+/// 2. N = Nautical Miles
+/// 3. Distance, Kilometers
+/// 4. K = Kilometers
+/// 5. TO Waypoint
+/// 6. FROM Waypoint
+/// 7. Checksum
+///
 class wnc : public sentence
 {
 public:

@@ -9,6 +9,20 @@ namespace marnav
 namespace nmea
 {
 
+/// @brief MTW - Mean Temperature of Water
+///
+/// @code
+///        1   2 3
+///        |   | |
+/// $--MTW,x.x,C*hh<CR><LF>
+/// @endcode
+///
+/// Field Number:
+///
+///  1. Degrees
+///  2. Unit of Measurement, Celcius
+///  3. Checksum
+///
 class mtw : public sentence
 {
 public:

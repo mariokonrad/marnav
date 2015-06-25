@@ -9,6 +9,24 @@ namespace marnav
 namespace nmea
 {
 
+
+/// @brief MWV - Wind Speed and Angle
+///
+/// @code
+///        1   2 3   4 5
+///        |   | |   | |
+/// $--MWV,x.x,a,x.x,a*hh<CR><LF>
+/// @endcode
+///
+/// Field Number:
+///
+///  1. Wind Angle, 0 to 360 degrees
+///  2. Reference, R = Relative, T = True
+///  3. Wind Speed
+///  4. Wind Speed Units, K/M/N
+///  5. Status, A = Data Valid
+///  6. Checksum
+///
 class mwv : public sentence
 {
 public:

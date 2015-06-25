@@ -12,6 +12,36 @@ namespace marnav
 namespace nmea
 {
 
+
+/// @brief RMC - Recommended Minimum Navigation Information
+///
+/// @code
+///                                                          12
+///        1         2 3       4 5        6  7   8   9    10 11|  13
+///        |         | |       | |        |  |   |   |    |  | |   |
+/// $--RMC,hhmmss.ss,A,llll.ll,a,yyyyy.yy,a,x.x,x.x,xxxx,x.x,a,m,*hh<CR><LF>
+/// @endcode
+///
+/// Field Number:
+///
+/// 1.  UTC Time
+/// 2.  Status, V=Navigation receiver warning A=Valid
+/// 3.  Latitude
+/// 4.  N or S
+/// 5.  Longitude
+/// 6.  E or W
+/// 7.  Speed over ground, knots
+/// 8.  Track made good, degrees true
+/// 9.  Date, ddmmyy
+/// 10. Magnetic Variation, degrees
+/// 11. E or W
+/// 12. FAA mode indicator (NMEA 2.3 and later)
+/// 13. Checksum
+///
+/// A status of V means the GPS has a valid fix that is below an internal quality
+/// threshold, e.g. because the dilution of precision is too high or an elevation
+/// mask test failed.
+///
 class rmc : public sentence
 {
 public:

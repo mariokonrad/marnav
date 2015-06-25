@@ -9,6 +9,24 @@ namespace marnav
 namespace nmea
 {
 
+/// @brief XDR - Transducer Measurement
+///
+/// @code
+///        1 2   3 4            n
+///        | |   | |            |
+/// $--XDR,a,x.x,a,c--c, ..... *hh<CR><LF>
+/// @endcode
+///
+/// Field Number:
+///
+/// 1. Transducer Type
+/// 2. Measurement Data
+/// 3. Units of measurement
+/// 4. Name of transducer
+///
+/// There may be any number of quadruplets like this, each describing a sensor.
+/// The last field will be a checksum as usual.
+///
 class xdr : public sentence
 {
 public:

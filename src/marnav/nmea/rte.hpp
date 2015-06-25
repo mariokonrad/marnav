@@ -9,6 +9,27 @@ namespace marnav
 namespace nmea
 {
 
+
+/// @brief RTE - Routes
+///
+/// @code
+///        1   2   3 4    5           x    n
+///        |   |   | |    |           |    |
+/// $--RTE,x.x,x.x,a,c--c,c--c, ..... c--c*hh<CR><LF>
+/// @endcode
+///
+/// Field Number:
+///
+/// 1. Total number of messages being transmitted
+/// 2. Message Number
+/// 3. Message mode c = complete route, all waypoints w = working route, the waypoint
+///    you just left, the waypoint you’re heading to, then all the rest
+/// 4. Waypoint ID
+///
+/// More waypoints follow. Last field is a checksum as usual.
+///
+/// The Garmin 65 and possibly other units report a <tt>$GPR00</tt> in the same format.
+///
 class rte : public sentence
 {
 public:
