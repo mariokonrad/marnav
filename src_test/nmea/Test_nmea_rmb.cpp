@@ -83,5 +83,5 @@ TEST_F(Test_nmea_rmb, set_lon)
 	EXPECT_STREQ("$GPRMB,,,,,,,,00220.4000,W,,,,,*07", nmea::to_string(rmb).c_str());
 }
 
-// TODO: implementation
+// @todo: implementation of RMB unit tests
 }

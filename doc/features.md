@@ -11,29 +11,30 @@ It supports (partially):
 - Basic geodesic functions, suitable for martime navigation.
 
 Supported sentences for NMEA-0183 (read and write):
-- AAM
-- BOD
-- DBT
-- DPT
-- GGA
-- GLL
-- GSA
-- GSV
-- HDG
-- MTW
-- MWV
-- RMB
-- RMC
-- RTE
-- VHW
-- VLW
-- VTG
-- VWR
+- AAM: Waypoint Arrival Alarm
+- BOD: Bearing - Waypoint to Waypoint
+- DBT: Depth Below Transducer
+- DPT: Depth of Water
+- GGA: Global Positioning System Fix Data
+- GLL: Geographic Position - Latitude/Longitude
+- GSA: Geographic Position - Latitude/Longitude
+- GSV: Satellites in view
+- HDG: Heading - Deviation & Variation
+- MTW: Mean Temperature of Water
+- MWV: Wind Speed and Angle
+- RMA: Recommended Minimum Navigation Information
+- RMB: Recommended Minimum Navigation Information
+- RMC: Recommended Minimum Navigation Information
+- RTE: Routes
+- VHW: Water speed and heading
+- VLW: Distance Traveled through Water
+- VTG: Track made good and Ground speed
+- VWR: Relative Wind Speed and Angle.
 - VDM
 - VDO
-- WNC
-- XDR
-- XTE
+- WNC: Distance - Waypoint to Waypoint
+- XDR: Transducer Measurement
+- XTE: Cross-Track Error, Measured
 
 Supported messages for AIS (decode and encode):
 - type 1: position report class A

@@ -9,7 +9,6 @@ namespace marnav
 namespace nmea
 {
 
-
 /// @brief HDG - Heading - Deviation & Variation
 ///
 /// @code

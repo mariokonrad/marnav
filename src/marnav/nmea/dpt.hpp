@@ -20,7 +20,8 @@ namespace nmea
 /// Field Number:
 ///
 ///  1. Depth, meters
-///  2. Offset from transducer, positive means distance from tansducer to water line negative means distance from transducer to keel
+///  2. Offset from transducer, positive means distance from tansducer to water line
+///     negative means distance from transducer to keel
 ///  3. Checksum
 ///
 class dpt : public sentence

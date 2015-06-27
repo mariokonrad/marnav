@@ -9,7 +9,6 @@ namespace marnav
 namespace nmea
 {
 
-
 /// @brief VWR - Relative Wind Speed and Angle.
 ///
 /// @code

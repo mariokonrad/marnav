@@ -9,7 +9,6 @@ namespace marnav
 namespace nmea
 {
 
-
 /// @brief VLW - Distance Traveled through Water
 ///
 /// @code

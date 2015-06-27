@@ -9,7 +9,6 @@ namespace marnav
 namespace nmea
 {
 
-
 /// @brief MWV - Wind Speed and Angle
 ///
 /// @code

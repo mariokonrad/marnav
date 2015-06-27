@@ -11,7 +11,6 @@ namespace marnav
 namespace nmea
 {
 
-
 /// @brief GLL - Geographic Position - Latitude/Longitude
 ///
 /// @code

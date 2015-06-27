@@ -37,7 +37,6 @@ NMEA
 	- MSS - Beacon Receiver Status
 	- OLN - Omega Lane Numbers
 	- OSD - Own Ship Data
-	- RMA - Recommended Minimum Navigation Information
 	- ROT - Rate Of Turn
 	- RPM - Revolutions
 	- RSA - Rudder Sensor Angle
