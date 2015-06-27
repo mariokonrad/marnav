@@ -10,9 +10,12 @@ GENERAL
 
 @todo Profiling
 
+@todo integration tests
 
 NMEA
 ----
+
+@todo Implement writer for serial devices
 
 @todo Implement more sentences:
 	- ALM - GPS Almanac Data
@@ -37,6 +40,7 @@ NMEA
 	- MSS - Beacon Receiver Status
 	- OLN - Omega Lane Numbers
 	- OSD - Own Ship Data
+	- R00 - Waypoints in active route
 	- ROT - Rate Of Turn
 	- RPM - Revolutions
 	- RSA - Rudder Sensor Angle
@@ -60,9 +64,6 @@ NMEA
 	- ZFO - UTC & Time from origin Waypoint
 	- ZTG - UTC & Time to Destination Waypoint
 	- vendor extensions
-
-@todo Implement writer for serial devices
-
 
 AIS
 ---
