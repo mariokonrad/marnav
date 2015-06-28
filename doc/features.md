@@ -20,6 +20,7 @@ Supported sentences for NMEA-0183 (read and write):
 - GSA: Geographic Position - Latitude/Longitude
 - GSV: Satellites in view
 - HDG: Heading - Deviation & Variation
+- HDM: Heading - Magnetic (obsolete as of 2009)
 - MTW: Mean Temperature of Water
 - MWV: Wind Speed and Angle
 - R00: Waypoints in active route
