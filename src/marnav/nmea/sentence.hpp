@@ -55,6 +55,7 @@ enum class sentence_id : uint32_t {
 	LCD, ///< Loran-C Signal Data
 	MSK, ///< Control for a Beacon Receiver
 	MSS, ///< Beacon Receiver Status
+	MWD, ///< Wind Directinon and Speed
 	MTW, ///< Mean Temperature of Water (II)
 	MWV, ///< Wind Speed and Angle (II)
 	OLN, ///< Omega Lane Numbers
