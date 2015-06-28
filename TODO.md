@@ -58,7 +58,6 @@ NMEA
 	- WCV - Waypoint Closure Velocity
 	- WPL - Waypoint Location
 	- XTR - Cross Track Error - Dead Reckoning
-	- ZDA - Time & Date - UTC, day, month, year and local time zone
 	- ZFO - UTC & Time from origin Waypoint
 	- ZTG - UTC & Time to Destination Waypoint
 	- vendor extensions

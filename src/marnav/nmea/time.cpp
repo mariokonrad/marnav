@@ -39,6 +39,7 @@ uint32_t time::seconds() const { return s; }
 /// Returns the milliseconds component.
 uint32_t time::milliseconds() const { return ms; }
 
+/// Returns a string representation in the form 'hhmmss', does not render fractions of seconds.
 std::string to_string(const time & d)
 {
 	char buf[7];

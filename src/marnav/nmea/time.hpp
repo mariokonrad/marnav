@@ -16,7 +16,8 @@ public:
 
 	time(const time &) = default;
 
-	explicit time(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(std::invalid_argument);
+	explicit time(uint32_t h, uint32_t m, uint32_t s, uint32_t ms = 0) throw(
+		std::invalid_argument);
 
 	/// Returns the hour component.
 	uint32_t hour() const;

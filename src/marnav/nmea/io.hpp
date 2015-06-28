@@ -74,6 +74,15 @@ template <> inline std::string to_string(const utils::optional<char> & data)
 	return buf;
 }
 
+inline std::string format(int32_t data, unsigned int width)
+{
+	char fmt[8];
+	snprintf(fmt, sizeof(fmt), "%%0%ud", width);
+	char buf[width + 8];
+	snprintf(buf, sizeof(buf), fmt, data);
+	return buf;
+}
+
 inline std::string format(uint32_t data, unsigned int width)
 {
 	char fmt[8];
@@ -83,26 +92,21 @@ inline std::string format(uint32_t data, unsigned int width)
 	return buf;
 }
 
-inline std::string format(const utils::optional<uint32_t> & data, unsigned int width)
+inline std::string format(double data, unsigned int width)
 {
-	if (!data)
-		return std::string{};
-	char fmt[8];
-	snprintf(fmt, sizeof(fmt), "%%0%uu", width);
-	char buf[width + 8];
-	snprintf(buf, sizeof(buf), fmt, data.value());
-	return buf;
-}
-
-inline std::string format(const utils::optional<double> & data, unsigned int width)
-{
-	if (!data)
-		return std::string{};
 	char fmt[8];
 	snprintf(fmt, sizeof(fmt), "%%.%uf", width);
 	char buf[width + 8];
-	snprintf(buf, sizeof(buf), fmt, data.value());
+	snprintf(buf, sizeof(buf), fmt, data);
 	return buf;
+}
+
+template <typename T>
+inline std::string format(const utils::optional<T> & data, unsigned int width)
+{
+	if (!data)
+		return std::string{};
+	return format(data.value(), width);
 }
 
 template <class T> static void read(const std::string & s, T & value)
