@@ -30,6 +30,7 @@
 #include "vdm.hpp"
 #include "vdo.hpp"
 #include "wnc.hpp"
+#include "wpl.hpp"
 #include "xdr.hpp"
 #include "xte.hpp"
 #include "zda.hpp"
@@ -59,14 +60,15 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 	using namespace std;
 
 	using entry = std::pair<std::string, sentence::parse_function>;
-	static const std::vector<entry> known_sentences = {{"AAM", aam::parse}, {"BOD", bod::parse},
-		{"DBK", dbk::parse}, {"DBT", dbt::parse}, {"DPT", dpt::parse}, {"GGA", gga::parse},
-		{"GLL", gll::parse}, {"GSA", gsa::parse}, {"GSV", gsv::parse}, {"HDG", hdg::parse},
-		{"HDM", hdm::parse}, {"MTW", mtw::parse}, {"MWD", mwd::parse}, {"MWV", mwv::parse},
-		{"R00", r00::parse}, {"RMA", rma::parse}, {"RMB", rmb::parse}, {"RMC", rmc::parse},
-		{"RSA", rsa::parse}, {"RTE", rte::parse}, {"VHW", vhw::parse}, {"VLW", vlw::parse},
-		{"VTG", vtg::parse}, {"VWR", vwr::parse}, {"VDM", vdm::parse}, {"VDO", vdo::parse},
-		{"WNC", wnc::parse}, {"XDR", xdr::parse}, {"XTE", xte::parse}, {"ZDA", zda::parse}};
+	static const std::vector<entry> known_sentences
+		= {{"AAM", aam::parse}, {"BOD", bod::parse}, {"DBK", dbk::parse}, {"DBT", dbt::parse},
+			{"DPT", dpt::parse}, {"GGA", gga::parse}, {"GLL", gll::parse}, {"GSA", gsa::parse},
+			{"GSV", gsv::parse}, {"HDG", hdg::parse}, {"HDM", hdm::parse}, {"MTW", mtw::parse},
+			{"MWD", mwd::parse}, {"MWV", mwv::parse}, {"R00", r00::parse}, {"RMA", rma::parse},
+			{"RMB", rmb::parse}, {"RMC", rmc::parse}, {"RSA", rsa::parse}, {"RTE", rte::parse},
+			{"VHW", vhw::parse}, {"VLW", vlw::parse}, {"VTG", vtg::parse}, {"VWR", vwr::parse},
+			{"VDM", vdm::parse}, {"VDO", vdo::parse}, {"WNC", wnc::parse}, {"WPL", wpl::parse},
+			{"XDR", xdr::parse}, {"XTE", xte::parse}, {"ZDA", zda::parse}};
 
 	auto const & i = std::find_if(begin(known_sentences), end(known_sentences),
 		[tag](const entry & e) { return e.first == tag; });

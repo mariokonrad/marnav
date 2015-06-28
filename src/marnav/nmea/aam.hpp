@@ -49,8 +49,6 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	void check_waypoint_id(const std::string & id) const throw(std::invalid_argument);
-
 	utils::optional<char> arrival_circle_entered;
 	utils::optional<char> perpendicualar_passed;
 	utils::optional<double> arrival_circle_radius;

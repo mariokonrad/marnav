@@ -1,6 +1,9 @@
 #ifndef __NMEA__CONSTANTS__HPP__
 #define __NMEA__CONSTANTS__HPP__
 
+#include <stdexcept>
+#include <string>
+
 namespace marnav
 {
 
@@ -15,6 +18,7 @@ namespace nmea
 {
 char convert_hemisphere(const geo::latitude & p);
 char convert_hemisphere(const geo::longitude & p);
+void check_waypoint_id(const std::string & id) throw(std::invalid_argument);
 
 namespace direction
 {

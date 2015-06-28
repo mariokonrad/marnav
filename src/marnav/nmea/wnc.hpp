@@ -43,8 +43,6 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	void check_waypoint_id(const std::string & id) const throw(std::invalid_argument);
-
 	utils::optional<double> distance_nm;
 	utils::optional<char> distance_nm_unit;
 	utils::optional<double> distance_km;

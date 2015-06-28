@@ -27,5 +27,12 @@ char convert_hemisphere(const geo::longitude & p)
 	}
 	return '\0';
 }
+
+void check_waypoint_id(const std::string & id) throw(std::invalid_argument)
+{
+	if (id.size() > 8)
+		throw std::invalid_argument{"string size to large, only 8 characters allowed for id"};
+}
+
 }
 }

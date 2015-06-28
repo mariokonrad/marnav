@@ -45,8 +45,6 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	void check_waypoint_id(const std::string & id) const throw(std::invalid_argument);
-
 	utils::optional<double> bearing_true;
 	utils::optional<char> type_true; // T:true
 	utils::optional<double> bearing_magn;

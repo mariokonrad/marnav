@@ -61,8 +61,6 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	void check_waypoint_id(const std::string & id) const throw(std::invalid_argument);
-
 	utils::optional<char> status; // V:warning
 	utils::optional<double> cross_track_error; // cross track error in nautical miles
 	utils::optional<char> steer_dir; // direction to steer, left or right

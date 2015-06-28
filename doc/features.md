@@ -37,6 +37,7 @@ Supported sentences for NMEA-0183 (read and write):
 - VDM
 - VDO
 - WNC: Distance - Waypoint to Waypoint
+- WPL: Waypoint Location
 - XDR: Transducer Measurement
 - XTE: Cross-Track Error, Measured
 - ZDA: Time & Date - UTC, day, month, year and local time zone
