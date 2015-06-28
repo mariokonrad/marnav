@@ -22,6 +22,7 @@ Supported sentences for NMEA-0183 (read and write):
 - HDG: Heading - Deviation & Variation
 - MTW: Mean Temperature of Water
 - MWV: Wind Speed and Angle
+- R00: Waypoints in active route
 - RMA: Recommended Minimum Navigation Information
 - RMB: Recommended Minimum Navigation Information
 - RMC: Recommended Minimum Navigation Information

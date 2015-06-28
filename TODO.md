@@ -40,7 +40,6 @@ NMEA
 	- MSS - Beacon Receiver Status
 	- OLN - Omega Lane Numbers
 	- OSD - Own Ship Data
-	- R00 - Waypoints in active route
 	- ROT - Rate Of Turn
 	- RPM - Revolutions
 	- RSA - Rudder Sensor Angle
