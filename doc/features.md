@@ -26,6 +26,7 @@ Supported sentences for NMEA-0183 (read and write):
 - RMA: Recommended Minimum Navigation Information
 - RMB: Recommended Minimum Navigation Information
 - RMC: Recommended Minimum Navigation Information
+- RSA: Rudder Sensor Angle
 - RTE: Routes
 - VHW: Water speed and heading
 - VLW: Distance Traveled through Water

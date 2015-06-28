@@ -42,7 +42,6 @@ NMEA
 	- OSD - Own Ship Data
 	- ROT - Rate Of Turn
 	- RPM - Revolutions
-	- RSA - Rudder Sensor Angle
 	- RSD - RADAR System Data
 	- SFI - Scanning Frequency Information
 	- STN - Multiple Data ID
