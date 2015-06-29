@@ -34,7 +34,7 @@ TEST_F(Test_nmea, make_sentence_invalid_checksum_what)
 	try {
 		nmea::make_sentence("$GPMTW,,*1E");
 	} catch (nmea::checksum_error e) {
-		EXPECT_STREQ("checksum error", e.what());
+		EXPECT_STREQ("checksum error (actual:59, expected:1E)", e.what());
 	}
 }
 }

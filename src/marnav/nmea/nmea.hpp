@@ -12,17 +12,14 @@ namespace nmea
 class checksum_error : public std::exception
 {
 public:
-	checksum_error(uint8_t expected, uint8_t actual)
-		: expected(expected)
-		, actual(actual)
-	{
-	}
+	checksum_error(uint8_t expected, uint8_t actual);
 
-	virtual const char * what() const noexcept override { return "checksum error"; }
+	virtual const char * what() const noexcept override { return text.c_str(); }
 
 public:
 	const uint8_t expected;
 	const uint8_t actual;
+	std::string text;
 };
 
 std::unique_ptr<sentence> make_sentence(const std::string & s) throw(

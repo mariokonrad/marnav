@@ -24,6 +24,7 @@ Supported sentences for NMEA-0183 (read and write):
 - MTW: Mean Temperature of Water
 - MWD: Wind Direction and Speed
 - MWV: Wind Speed and Angle
+- OSD: Own Ship Data
 - R00: Waypoints in active route
 - RMA: Recommended Minimum Navigation Information
 - RMB: Recommended Minimum Navigation Information
