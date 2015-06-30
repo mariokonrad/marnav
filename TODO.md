@@ -39,7 +39,6 @@ NMEA
 	- MSK - Control for a Beacon Receiver
 	- MSS - Beacon Receiver Status
 	- OLN - Omega Lane Numbers
-	- ROT - Rate Of Turn
 	- RPM - Revolutions
 	- RSD - RADAR System Data
 	- SFI - Scanning Frequency Information
