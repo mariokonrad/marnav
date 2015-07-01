@@ -31,6 +31,7 @@
 #include "vwr.hpp"
 #include "vdm.hpp"
 #include "vdo.hpp"
+#include "wcv.hpp"
 #include "wnc.hpp"
 #include "wpl.hpp"
 #include "xdr.hpp"
@@ -78,8 +79,8 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 		{"OSD", osd::parse}, {"R00", r00::parse}, {"RMA", rma::parse}, {"RMB", rmb::parse},
 		{"RMC", rmc::parse}, {"ROT", rot::parse}, {"RSA", rsa::parse}, {"RTE", rte::parse},
 		{"VHW", vhw::parse}, {"VLW", vlw::parse}, {"VTG", vtg::parse}, {"VWR", vwr::parse},
-		{"VDM", vdm::parse}, {"VDO", vdo::parse}, {"WNC", wnc::parse}, {"WPL", wpl::parse},
-		{"XDR", xdr::parse}, {"XTE", xte::parse}, {"ZDA", zda::parse}};
+		{"VDM", vdm::parse}, {"VDO", vdo::parse}, {"WCV", wcv::parse}, {"WNC", wnc::parse},
+		{"WPL", wpl::parse}, {"XDR", xdr::parse}, {"XTE", xte::parse}, {"ZDA", zda::parse}};
 
 	auto const & i = std::find_if(begin(known_sentences), end(known_sentences),
 		[tag](const entry & e) { return e.first == tag; });
