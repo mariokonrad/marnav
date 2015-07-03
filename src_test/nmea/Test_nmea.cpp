@@ -37,4 +37,11 @@ TEST_F(Test_nmea, make_sentence_invalid_checksum_what)
 		EXPECT_STREQ("checksum error (actual:59, expected:1E)", e.what());
 	}
 }
+
+TEST_F(Test_nmea, get_supported_sentences)
+{
+	auto v = nmea::get_supported_sentences();
+
+	EXPECT_EQ(34u, v.size());
+}
 }

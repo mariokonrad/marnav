@@ -24,6 +24,8 @@ public:
 
 std::unique_ptr<sentence> make_sentence(const std::string & s) throw(
 	std::invalid_argument, checksum_error);
+
+std::vector<std::string> get_supported_sentences();
 }
 }
 

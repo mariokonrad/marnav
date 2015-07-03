@@ -49,6 +49,20 @@ namespace marnav
 namespace nmea
 {
 
+namespace
+{
+using entry = std::pair<std::string, sentence::parse_function>;
+static const std::vector<entry> known_sentences = {{"AAM", aam::parse}, {"BOD", bod::parse},
+	{"DBK", dbk::parse}, {"DBT", dbt::parse}, {"DPT", dpt::parse}, {"GGA", gga::parse},
+	{"GLL", gll::parse}, {"GSA", gsa::parse}, {"GSV", gsv::parse}, {"HDG", hdg::parse},
+	{"HDM", hdm::parse}, {"MTW", mtw::parse}, {"MWD", mwd::parse}, {"MWV", mwv::parse},
+	{"OSD", osd::parse}, {"R00", r00::parse}, {"RMA", rma::parse}, {"RMB", rmb::parse},
+	{"RMC", rmc::parse}, {"ROT", rot::parse}, {"RSA", rsa::parse}, {"RTE", rte::parse},
+	{"VHW", vhw::parse}, {"VLW", vlw::parse}, {"VTG", vtg::parse}, {"VWR", vwr::parse},
+	{"VDM", vdm::parse}, {"VDO", vdo::parse}, {"WCV", wcv::parse}, {"WNC", wnc::parse},
+	{"WPL", wpl::parse}, {"XDR", xdr::parse}, {"XTE", xte::parse}, {"ZDA", zda::parse}};
+}
+
 checksum_error::checksum_error(uint8_t expected, uint8_t actual)
 	: expected(expected)
 	, actual(actual)
@@ -56,6 +70,17 @@ checksum_error::checksum_error(uint8_t expected, uint8_t actual)
 	char buf[64];
 	snprintf(buf, sizeof(buf), "checksum error (actual:%02X, expected:%02X)", actual, expected);
 	text = buf;
+}
+
+/// Returns a list of tags of supported sentences.
+std::vector<std::string> get_supported_sentences()
+{
+	std::vector<std::string> v;
+	v.reserve(known_sentences.size());
+	for (auto const & s : known_sentences) {
+		v.push_back(s.first);
+	}
+	return v;
 }
 
 /// Returns the parse function of a particular sentence.
@@ -70,17 +95,6 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 	std::invalid_argument)
 {
 	using namespace std;
-
-	using entry = std::pair<std::string, sentence::parse_function>;
-	static const std::vector<entry> known_sentences = {{"AAM", aam::parse}, {"BOD", bod::parse},
-		{"DBK", dbk::parse}, {"DBT", dbt::parse}, {"DPT", dpt::parse}, {"GGA", gga::parse},
-		{"GLL", gll::parse}, {"GSA", gsa::parse}, {"GSV", gsv::parse}, {"HDG", hdg::parse},
-		{"HDM", hdm::parse}, {"MTW", mtw::parse}, {"MWD", mwd::parse}, {"MWV", mwv::parse},
-		{"OSD", osd::parse}, {"R00", r00::parse}, {"RMA", rma::parse}, {"RMB", rmb::parse},
-		{"RMC", rmc::parse}, {"ROT", rot::parse}, {"RSA", rsa::parse}, {"RTE", rte::parse},
-		{"VHW", vhw::parse}, {"VLW", vlw::parse}, {"VTG", vtg::parse}, {"VWR", vwr::parse},
-		{"VDM", vdm::parse}, {"VDO", vdo::parse}, {"WCV", wcv::parse}, {"WNC", wnc::parse},
-		{"WPL", wpl::parse}, {"XDR", xdr::parse}, {"XTE", xte::parse}, {"ZDA", zda::parse}};
 
 	auto const & i = std::find_if(begin(known_sentences), end(known_sentences),
 		[tag](const entry & e) { return e.first == tag; });
