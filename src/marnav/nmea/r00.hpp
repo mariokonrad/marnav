@@ -27,6 +27,7 @@ class r00 : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::R00;
+	constexpr static const char * TAG = "R00";
 	constexpr static const int MAX_WAYPOINT_IDS = 14;
 
 	r00();

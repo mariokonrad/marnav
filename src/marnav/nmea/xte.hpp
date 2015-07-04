@@ -35,6 +35,7 @@ class xte : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::XTE;
+	constexpr static const char * TAG = "XTE";
 
 	xte();
 	xte(const xte &) = default;

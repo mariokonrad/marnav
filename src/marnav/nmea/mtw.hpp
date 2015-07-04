@@ -27,6 +27,7 @@ class mtw : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::MTW;
+	constexpr static const char * TAG = "MTW";
 
 	mtw();
 	mtw(const mtw &) = default;

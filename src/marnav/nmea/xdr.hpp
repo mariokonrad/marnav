@@ -38,6 +38,7 @@ public:
 	};
 
 	constexpr static const sentence_id ID = sentence_id::XDR;
+	constexpr static const char * TAG = "XDR";
 
 	xdr();
 	xdr(const xdr &) = default;

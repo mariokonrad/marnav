@@ -34,6 +34,7 @@ class dbt : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::DBT;
+	constexpr static const char * TAG = "DBT";
 
 	dbt();
 	dbt(const dbt &) = default;

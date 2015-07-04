@@ -28,6 +28,7 @@ class wcv : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::WCV;
+	constexpr static const char * TAG = "WCV";
 
 	wcv();
 	wcv(const wcv &) = default;

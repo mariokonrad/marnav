@@ -37,6 +37,7 @@ class aam : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::AAM;
+	constexpr static const char * TAG = "AAM";
 
 	aam();
 	aam(const aam &) = default;

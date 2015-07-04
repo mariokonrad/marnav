@@ -7,8 +7,10 @@ namespace marnav
 namespace nmea
 {
 
+constexpr const char * rsa::TAG;
+
 rsa::rsa()
-	: sentence(ID, "RSA", talker_id::integrated_instrumentation)
+	: sentence(ID, TAG, talker_id::integrated_instrumentation)
 {
 }
 

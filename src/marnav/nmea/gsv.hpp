@@ -48,6 +48,7 @@ public:
 	};
 
 	constexpr static const sentence_id ID = sentence_id::GSV;
+	constexpr static const char * TAG = "GSV";
 
 	gsv();
 	gsv(const gsv &) = default;

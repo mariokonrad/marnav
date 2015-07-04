@@ -33,6 +33,7 @@ class vhw : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::VHW;
+	constexpr static const char * TAG = "VHW";
 
 	vhw();
 	vhw(const vhw &) = default;

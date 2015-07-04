@@ -19,8 +19,10 @@ inline std::string to_string(const utils::optional<gsv::satellite_info> & data)
 }
 }
 
+constexpr const char * gsv::TAG;
+
 gsv::gsv()
-	: sentence(ID, "GSV", talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
 }
 

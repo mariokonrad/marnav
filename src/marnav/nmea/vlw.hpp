@@ -29,6 +29,7 @@ class vlw : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::VLW;
+	constexpr static const char * TAG = "VLW";
 
 	vlw();
 	vlw(const vlw &) = default;

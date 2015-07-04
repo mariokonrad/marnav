@@ -7,8 +7,10 @@ namespace marnav
 namespace nmea
 {
 
+constexpr const char * wpl::TAG;
+
 wpl::wpl()
-	: sentence(ID, "WPL", talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
 }
 

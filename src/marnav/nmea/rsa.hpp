@@ -29,6 +29,7 @@ class rsa : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::RSA;
+	constexpr static const char * TAG = "RSA";
 
 	rsa();
 	rsa(const rsa &) = default;

@@ -34,6 +34,7 @@ class vtg : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::VTG;
+	constexpr static const char * TAG = "VTG";
 
 	vtg();
 	vtg(const vtg &) = default;

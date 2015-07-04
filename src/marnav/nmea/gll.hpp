@@ -34,6 +34,7 @@ class gll : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::GLL;
+	constexpr static const char * TAG = "GLL";
 
 	gll();
 	gll(const gll &) = default;

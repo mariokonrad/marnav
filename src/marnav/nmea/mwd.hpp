@@ -34,6 +34,7 @@ class mwd : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::MWD;
+	constexpr static const char * TAG = "MWD";
 
 	mwd();
 	mwd(const mwd &) = default;

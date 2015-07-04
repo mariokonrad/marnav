@@ -30,6 +30,7 @@ class hdg : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::HDG;
+	constexpr static const char * TAG = "HDG";
 
 	hdg();
 	hdg(const hdg &) = default;

@@ -49,6 +49,7 @@ class rmb : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::RMB;
+	constexpr static const char * TAG = "RMB";
 
 	rmb();
 	rmb(const rmb &) = default;

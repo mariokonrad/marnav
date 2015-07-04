@@ -7,8 +7,10 @@ namespace marnav
 namespace nmea
 {
 
+constexpr const char * hdm::TAG;
+
 hdm::hdm()
-	: sentence(ID, "HDM", talker_id::magnetic_compass)
+	: sentence(ID, TAG, talker_id::magnetic_compass)
 {
 }
 

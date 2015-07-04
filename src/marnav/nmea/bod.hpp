@@ -33,6 +33,7 @@ class bod : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::BOD;
+	constexpr static const char * TAG = "BOD";
 
 	bod();
 	bod(const bod &) = default;

@@ -31,6 +31,7 @@ class dbk : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::DBK;
+	constexpr static const char * TAG = "DBK";
 
 	dbk();
 	dbk(const dbk &) = default;

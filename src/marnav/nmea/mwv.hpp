@@ -30,6 +30,7 @@ class mwv : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::MWV;
+	constexpr static const char * TAG = "MWV";
 
 	mwv();
 	mwv(const mwv &) = default;

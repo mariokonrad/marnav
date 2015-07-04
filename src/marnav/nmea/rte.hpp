@@ -33,6 +33,7 @@ class rte : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::RTE;
+	constexpr static const char * TAG = "RTE";
 
 	rte();
 	rte(const rte &) = default;

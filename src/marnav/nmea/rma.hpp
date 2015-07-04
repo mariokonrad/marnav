@@ -39,6 +39,7 @@ class rma : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::RMA;
+	constexpr static const char * TAG = "RMA";
 
 	rma();
 	rma(const rma &) = default;

@@ -8,8 +8,10 @@ namespace marnav
 namespace nmea
 {
 
+constexpr const char * vdm::TAG;
+
 vdm::vdm()
-	: sentence(ID, "VDM", talker_id::ais_mobile_station)
+	: sentence(ID, TAG, talker_id::ais_mobile_station)
 	, n_fragments(0)
 	, fragment(0)
 	, radio_channel(ais_channel::B)

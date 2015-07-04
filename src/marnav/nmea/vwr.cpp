@@ -7,8 +7,10 @@ namespace marnav
 namespace nmea
 {
 
+constexpr const char * vwr::TAG;
+
 vwr::vwr()
-	: sentence(ID, "VWR", talker_id::integrated_instrumentation)
+	: sentence(ID, TAG, talker_id::integrated_instrumentation)
 {
 }
 

@@ -52,15 +52,18 @@ namespace nmea
 namespace
 {
 using entry = std::pair<std::string, sentence::parse_function>;
-static const std::vector<entry> known_sentences = {{"AAM", aam::parse}, {"BOD", bod::parse},
-	{"DBK", dbk::parse}, {"DBT", dbt::parse}, {"DPT", dpt::parse}, {"GGA", gga::parse},
-	{"GLL", gll::parse}, {"GSA", gsa::parse}, {"GSV", gsv::parse}, {"HDG", hdg::parse},
-	{"HDM", hdm::parse}, {"MTW", mtw::parse}, {"MWD", mwd::parse}, {"MWV", mwv::parse},
-	{"OSD", osd::parse}, {"R00", r00::parse}, {"RMA", rma::parse}, {"RMB", rmb::parse},
-	{"RMC", rmc::parse}, {"ROT", rot::parse}, {"RSA", rsa::parse}, {"RTE", rte::parse},
-	{"VHW", vhw::parse}, {"VLW", vlw::parse}, {"VTG", vtg::parse}, {"VWR", vwr::parse},
-	{"VDM", vdm::parse}, {"VDO", vdo::parse}, {"WCV", wcv::parse}, {"WNC", wnc::parse},
-	{"WPL", wpl::parse}, {"XDR", xdr::parse}, {"XTE", xte::parse}, {"ZDA", zda::parse}};
+static const std::vector<entry> known_sentences = {{aam::TAG, aam::parse},
+	{bod::TAG, bod::parse}, {dbk::TAG, dbk::parse}, {dbt::TAG, dbt::parse},
+	{dpt::TAG, dpt::parse}, {gga::TAG, gga::parse}, {gll::TAG, gll::parse},
+	{gsa::TAG, gsa::parse}, {gsv::TAG, gsv::parse}, {hdg::TAG, hdg::parse},
+	{hdm::TAG, hdm::parse}, {mtw::TAG, mtw::parse}, {mwd::TAG, mwd::parse},
+	{mwv::TAG, mwv::parse}, {osd::TAG, osd::parse}, {r00::TAG, r00::parse},
+	{rma::TAG, rma::parse}, {rmb::TAG, rmb::parse}, {rmc::TAG, rmc::parse},
+	{rot::TAG, rot::parse}, {rsa::TAG, rsa::parse}, {rte::TAG, rte::parse},
+	{vhw::TAG, vhw::parse}, {vlw::TAG, vlw::parse}, {vtg::TAG, vtg::parse},
+	{vwr::TAG, vwr::parse}, {vdm::TAG, vdm::parse}, {vdo::TAG, vdo::parse},
+	{wcv::TAG, wcv::parse}, {wnc::TAG, wnc::parse}, {wpl::TAG, wpl::parse},
+	{xdr::TAG, xdr::parse}, {xte::TAG, xte::parse}, {zda::TAG, zda::parse}};
 }
 
 checksum_error::checksum_error(uint8_t expected, uint8_t actual)

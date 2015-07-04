@@ -34,6 +34,7 @@ class osd : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::OSD;
+	constexpr static const char * TAG = "OSD";
 
 	osd();
 	osd(const osd &) = default;

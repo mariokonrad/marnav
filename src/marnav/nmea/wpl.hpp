@@ -31,6 +31,7 @@ class wpl : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::WPL;
+	constexpr static const char * TAG = "WPL";
 
 	wpl();
 	wpl(const wpl &) = default;

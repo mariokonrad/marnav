@@ -35,6 +35,7 @@ class zda : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::ZDA;
+	constexpr static const char * TAG = "ZDA";
 
 	zda();
 	zda(const zda &) = default;

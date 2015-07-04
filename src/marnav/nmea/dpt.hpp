@@ -28,6 +28,7 @@ class dpt : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::DPT;
+	constexpr static const char * TAG = "DPT";
 
 	dpt();
 	dpt(const dpt &) = default;

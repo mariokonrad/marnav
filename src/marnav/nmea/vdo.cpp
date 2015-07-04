@@ -6,8 +6,10 @@ namespace marnav
 namespace nmea
 {
 
+constexpr const char * vdo::TAG;
+
 vdo::vdo()
-	: vdm(ID, "VDO", talker_id::ais_mobile_station)
+	: vdm(ID, TAG, talker_id::ais_mobile_station)
 {
 }
 

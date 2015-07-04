@@ -33,6 +33,7 @@ class vwr : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::VWR;
+	constexpr static const char * TAG = "VWR";
 
 	vwr();
 	vwr(const vwr &) = default;

@@ -13,6 +13,7 @@ class vdm : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::VDM;
+	constexpr static const char * TAG = "VDM";
 
 	vdm();
 	vdm(const vdm &) = default;

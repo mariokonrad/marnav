@@ -46,6 +46,7 @@ class rmc : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::RMC;
+	constexpr static const char * TAG = "RMC";
 
 	rmc();
 	rmc(const rmc &) = default;

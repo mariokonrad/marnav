@@ -43,6 +43,7 @@ class gsa : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::GSA;
+	constexpr static const char * TAG = "GSA";
 
 	gsa();
 	gsa(const gsa &) = default;

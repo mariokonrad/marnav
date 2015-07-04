@@ -22,8 +22,10 @@ inline std::string to_string(const utils::optional<xdr::transducer_info> & data)
 }
 }
 
+constexpr const char * xdr::TAG;
+
 xdr::xdr()
-	: sentence(ID, "XDR", talker_id::transducer)
+	: sentence(ID, TAG, talker_id::transducer)
 {
 }
 

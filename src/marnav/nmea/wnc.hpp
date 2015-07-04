@@ -31,6 +31,7 @@ class wnc : public sentence
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::WNC;
+	constexpr static const char * TAG = "WNC";
 
 	wnc();
 	wnc(const wnc &) = default;

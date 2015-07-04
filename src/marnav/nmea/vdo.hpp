@@ -14,6 +14,7 @@ class vdo : public vdm
 {
 public:
 	constexpr static const sentence_id ID = sentence_id::VDO;
+	constexpr static const char * TAG = "VDO";
 
 	vdo();
 	vdo(const vdo &) = default;
