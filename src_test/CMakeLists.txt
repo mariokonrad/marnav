@@ -13,6 +13,7 @@ add_executable(testrunner
 	nmea/Test_nmea_date.cpp
 	nmea/Test_nmea_time.cpp
 	nmea/Test_nmea_sentence.cpp
+	nmea/Test_nmea_io.cpp
 	nmea/Test_nmea_aam.cpp
 	nmea/Test_nmea_bod.cpp
 	nmea/Test_nmea_dbk.cpp

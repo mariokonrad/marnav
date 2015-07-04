@@ -51,19 +51,29 @@ namespace nmea
 
 namespace
 {
-using entry = std::pair<std::string, sentence::parse_function>;
-static const std::vector<entry> known_sentences = {{aam::TAG, aam::parse},
-	{bod::TAG, bod::parse}, {dbk::TAG, dbk::parse}, {dbt::TAG, dbt::parse},
-	{dpt::TAG, dpt::parse}, {gga::TAG, gga::parse}, {gll::TAG, gll::parse},
-	{gsa::TAG, gsa::parse}, {gsv::TAG, gsv::parse}, {hdg::TAG, hdg::parse},
-	{hdm::TAG, hdm::parse}, {mtw::TAG, mtw::parse}, {mwd::TAG, mwd::parse},
-	{mwv::TAG, mwv::parse}, {osd::TAG, osd::parse}, {r00::TAG, r00::parse},
-	{rma::TAG, rma::parse}, {rmb::TAG, rmb::parse}, {rmc::TAG, rmc::parse},
-	{rot::TAG, rot::parse}, {rsa::TAG, rsa::parse}, {rte::TAG, rte::parse},
-	{vhw::TAG, vhw::parse}, {vlw::TAG, vlw::parse}, {vtg::TAG, vtg::parse},
-	{vwr::TAG, vwr::parse}, {vdm::TAG, vdm::parse}, {vdo::TAG, vdo::parse},
-	{wcv::TAG, wcv::parse}, {wnc::TAG, wnc::parse}, {wpl::TAG, wpl::parse},
-	{xdr::TAG, xdr::parse}, {xte::TAG, xte::parse}, {zda::TAG, zda::parse}};
+// local macro, used for convenience while registering sentences
+#define REGISTER_SENTENCE(s) \
+	{s::TAG, s::ID, s::parse}
+
+struct entry {
+	const char * TAG;
+	const sentence_id ID;
+	const sentence::parse_function parse;
+};
+static const std::vector<entry> known_sentences = {REGISTER_SENTENCE(aam),
+	REGISTER_SENTENCE(bod), REGISTER_SENTENCE(dbk), REGISTER_SENTENCE(dbt),
+	REGISTER_SENTENCE(dpt), REGISTER_SENTENCE(gga), REGISTER_SENTENCE(gll),
+	REGISTER_SENTENCE(gsa), REGISTER_SENTENCE(gsv), REGISTER_SENTENCE(hdg),
+	REGISTER_SENTENCE(hdm), REGISTER_SENTENCE(mtw), REGISTER_SENTENCE(mwd),
+	REGISTER_SENTENCE(mwv), REGISTER_SENTENCE(osd), REGISTER_SENTENCE(r00),
+	REGISTER_SENTENCE(rma), REGISTER_SENTENCE(rmb), REGISTER_SENTENCE(rmc),
+	REGISTER_SENTENCE(rot), REGISTER_SENTENCE(rsa), REGISTER_SENTENCE(rte),
+	REGISTER_SENTENCE(vhw), REGISTER_SENTENCE(vlw), REGISTER_SENTENCE(vtg),
+	REGISTER_SENTENCE(vwr), REGISTER_SENTENCE(vdm), REGISTER_SENTENCE(vdo),
+	REGISTER_SENTENCE(wcv), REGISTER_SENTENCE(wnc), REGISTER_SENTENCE(wpl),
+	REGISTER_SENTENCE(xdr), REGISTER_SENTENCE(xte), REGISTER_SENTENCE(zda)};
+
+#undef REGISTER_SENTENCE
 }
 
 checksum_error::checksum_error(uint8_t expected, uint8_t actual)
@@ -76,14 +86,51 @@ checksum_error::checksum_error(uint8_t expected, uint8_t actual)
 }
 
 /// Returns a list of tags of supported sentences.
-std::vector<std::string> get_supported_sentences()
+std::vector<std::string> get_supported_sentences_str()
 {
 	std::vector<std::string> v;
 	v.reserve(known_sentences.size());
 	for (auto const & s : known_sentences) {
-		v.push_back(s.first);
+		v.push_back(s.TAG);
 	}
 	return v;
+}
+
+/// Returns a list of IDs of supported sentences.
+std::vector<sentence_id> get_supported_sentences_id()
+{
+	std::vector<sentence_id> v;
+	v.reserve(known_sentences.size());
+	for (auto const & s : known_sentences) {
+		v.push_back(s.ID);
+	}
+	return v;
+}
+
+/// Returns the tag of the specified ID. If the sentence is unknown,
+/// an exception is thrown.
+const char * id_to_tag(sentence_id id) throw(std::invalid_argument)
+{
+	using namespace std;
+	auto i = find_if(begin(known_sentences), end(known_sentences),
+		[id](const entry & e) { return e.ID == id; });
+	if (i == end(known_sentences))
+		throw std::invalid_argument{"unknown sentence"};
+
+	return i->TAG;
+}
+
+/// Returns the ID of the specified tag. If the sentence is unknown,
+/// an exceptioni s thrown.
+sentence_id tag_to_id(const std::string & tag) throw(std::invalid_argument)
+{
+	using namespace std;
+	auto i = find_if(begin(known_sentences), end(known_sentences),
+		[tag](const entry & e) { return e.TAG == tag; });
+	if (i == end(known_sentences))
+		throw std::invalid_argument{"unknown sentence: " + tag};
+
+	return i->ID;
 }
 
 /// Returns the parse function of a particular sentence.
@@ -100,12 +147,12 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 	using namespace std;
 
 	auto const & i = std::find_if(begin(known_sentences), end(known_sentences),
-		[tag](const entry & e) { return e.first == tag; });
+		[tag](const entry & e) { return e.TAG == tag; });
 
 	if (i == end(known_sentences))
 		throw std::invalid_argument{"unknown sentence in instantiate_sentence: " + tag};
 
-	return i->second;
+	return i->parse;
 }
 
 /// Parses the string and returns the corresponding sentence.

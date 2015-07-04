@@ -38,10 +38,56 @@ TEST_F(Test_nmea, make_sentence_invalid_checksum_what)
 	}
 }
 
-TEST_F(Test_nmea, get_supported_sentences)
+TEST_F(Test_nmea, make_sentence_malformed_sentence)
 {
-	auto v = nmea::get_supported_sentences();
+	try {
+		nmea::make_sentence("$XX*00");
+	} catch (std::invalid_argument e) {
+		EXPECT_STREQ("malformed sentence in make_sentence", e.what());
+	}
+}
+
+TEST_F(Test_nmea, make_sentence_unknown_sentence)
+{
+	EXPECT_ANY_THROW(nmea::make_sentence("$XX???,1,2,3*23"));
+}
+
+TEST_F(Test_nmea, get_supported_sentences_str)
+{
+	auto v = nmea::get_supported_sentences_str();
 
 	EXPECT_EQ(34u, v.size());
 }
+
+TEST_F(Test_nmea, get_supported_sentences_id)
+{
+	auto v = nmea::get_supported_sentences_id();
+
+	EXPECT_EQ(34u, v.size());
+}
+
+TEST_F(Test_nmea, tag_to_id)
+{
+	auto id = nmea::tag_to_id("BOD");
+
+	EXPECT_EQ(nmea::sentence_id::BOD, id);
+}
+
+TEST_F(Test_nmea, tag_to_id_invalid_tag)
+{
+	EXPECT_ANY_THROW(nmea::tag_to_id("???"));
+}
+
+TEST_F(Test_nmea, id_to_tag)
+{
+	auto tag = nmea::id_to_tag(nmea::sentence_id::BOD);
+
+	EXPECT_STREQ("BOD", tag);
+}
+
+TEST_F(Test_nmea, id_to_tag_invalid_id)
+{
+	EXPECT_ANY_THROW(nmea::id_to_tag(static_cast<nmea::sentence_id>(-1)));
+}
+
 }
