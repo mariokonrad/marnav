@@ -4,6 +4,7 @@
 #include "date.hpp"
 #include "sentence.hpp"
 #include "aam.hpp"
+#include "apb.hpp"
 #include "bod.hpp"
 #include "dbk.hpp"
 #include "dbt.hpp"
@@ -52,26 +53,29 @@ namespace nmea
 namespace
 {
 // local macro, used for convenience while registering sentences
-#define REGISTER_SENTENCE(s) \
-	{s::TAG, s::ID, s::parse}
+#define REGISTER_SENTENCE(s)    \
+	{                           \
+		s::TAG, s::ID, s::parse \
+	}
 
 struct entry {
 	const char * TAG;
 	const sentence_id ID;
 	const sentence::parse_function parse;
 };
-static const std::vector<entry> known_sentences = {REGISTER_SENTENCE(aam),
-	REGISTER_SENTENCE(bod), REGISTER_SENTENCE(dbk), REGISTER_SENTENCE(dbt),
-	REGISTER_SENTENCE(dpt), REGISTER_SENTENCE(gga), REGISTER_SENTENCE(gll),
-	REGISTER_SENTENCE(gsa), REGISTER_SENTENCE(gsv), REGISTER_SENTENCE(hdg),
-	REGISTER_SENTENCE(hdm), REGISTER_SENTENCE(mtw), REGISTER_SENTENCE(mwd),
-	REGISTER_SENTENCE(mwv), REGISTER_SENTENCE(osd), REGISTER_SENTENCE(r00),
-	REGISTER_SENTENCE(rma), REGISTER_SENTENCE(rmb), REGISTER_SENTENCE(rmc),
-	REGISTER_SENTENCE(rot), REGISTER_SENTENCE(rsa), REGISTER_SENTENCE(rte),
-	REGISTER_SENTENCE(vhw), REGISTER_SENTENCE(vlw), REGISTER_SENTENCE(vtg),
-	REGISTER_SENTENCE(vwr), REGISTER_SENTENCE(vdm), REGISTER_SENTENCE(vdo),
-	REGISTER_SENTENCE(wcv), REGISTER_SENTENCE(wnc), REGISTER_SENTENCE(wpl),
-	REGISTER_SENTENCE(xdr), REGISTER_SENTENCE(xte), REGISTER_SENTENCE(zda)};
+static const std::vector<entry> known_sentences
+	= {REGISTER_SENTENCE(aam), REGISTER_SENTENCE(apb), REGISTER_SENTENCE(bod),
+		REGISTER_SENTENCE(dbk), REGISTER_SENTENCE(dbt), REGISTER_SENTENCE(dpt),
+		REGISTER_SENTENCE(gga), REGISTER_SENTENCE(gll), REGISTER_SENTENCE(gsa),
+		REGISTER_SENTENCE(gsv), REGISTER_SENTENCE(hdg), REGISTER_SENTENCE(hdm),
+		REGISTER_SENTENCE(mtw), REGISTER_SENTENCE(mwd), REGISTER_SENTENCE(mwv),
+		REGISTER_SENTENCE(osd), REGISTER_SENTENCE(r00), REGISTER_SENTENCE(rma),
+		REGISTER_SENTENCE(rmb), REGISTER_SENTENCE(rmc), REGISTER_SENTENCE(rot),
+		REGISTER_SENTENCE(rsa), REGISTER_SENTENCE(rte), REGISTER_SENTENCE(vhw),
+		REGISTER_SENTENCE(vlw), REGISTER_SENTENCE(vtg), REGISTER_SENTENCE(vwr),
+		REGISTER_SENTENCE(vdm), REGISTER_SENTENCE(vdo), REGISTER_SENTENCE(wcv),
+		REGISTER_SENTENCE(wnc), REGISTER_SENTENCE(wpl), REGISTER_SENTENCE(xdr),
+		REGISTER_SENTENCE(xte), REGISTER_SENTENCE(zda)};
 
 #undef REGISTER_SENTENCE
 }

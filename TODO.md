@@ -19,7 +19,6 @@ NMEA
 
 @todo Implement more sentences:
 	- ALM - GPS Almanac Data
-	- APB - Autopilot Sentence "B"
 	- BWC - Bearing & Distance to Waypoint - Geat Circle
 	- BWR - Bearing and Distance to Waypoint - Rhumb Line
 	- BWW - Bearing - Waypoint to Waypoint
