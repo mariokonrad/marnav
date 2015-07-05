@@ -85,14 +85,16 @@ public:
 
 	template <class U> constexpr T value_or(U && value) const &
 	{
-		this->data = std::move(value);
-		flag = true;
+		if (available())
+			return data;
+		return value;
 	}
 
 	template <class U> T value_or(U && value) &&
 	{
-		this->data = std::move(value);
-		flag = true;
+		if (available())
+			return data;
+		return value;
 	}
 
 	// other
