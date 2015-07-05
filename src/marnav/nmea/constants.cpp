@@ -14,7 +14,7 @@ char convert_hemisphere(const geo::latitude & p)
 		case geo::latitude::hemisphere::SOUTH:
 			return direction::SOUTH;
 	}
-	return '\0';
+	return '\0'; // never reached, bad for coverage, supresses compiler warning
 }
 
 char convert_hemisphere(const geo::longitude & p)
@@ -25,7 +25,7 @@ char convert_hemisphere(const geo::longitude & p)
 		case geo::longitude::hemisphere::WEST:
 			return direction::WEST;
 	}
-	return '\0';
+	return '\0'; // never reached, bad for coverage, supresses compiler warning
 }
 
 void check_waypoint_id(const std::string & id) throw(std::invalid_argument)

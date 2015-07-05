@@ -43,6 +43,14 @@ TEST_F(Test_nmea_apb, empty_to_string)
 	EXPECT_STREQ("$GPAPB,,,,,,,,,,,,,,*44", nmea::to_string(apb).c_str());
 }
 
+TEST_F(Test_nmea_apb, set_waypoint)
+{
+	nmea::apb apb;
+	apb.set_waypoint_id("ABC");
+
+	EXPECT_STREQ("$GPAPB,,,,,,,,,,ABC,,,,*04", nmea::to_string(apb).c_str());
+}
+
 TEST_F(Test_nmea_apb, set_bearing_pos_to_destination)
 {
 	nmea::apb apb;

@@ -46,10 +46,9 @@ bool date::check() const noexcept
 			if (is_leap_year(y))
 				return d <= 29;
 			return d <= 28;
-
-		default:
-			return false;
 	}
+
+	return false; // never reached, bad for coverage, supresses compiler warning
 }
 
 /// Returns the year component.

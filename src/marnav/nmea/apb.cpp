@@ -14,6 +14,12 @@ apb::apb()
 {
 }
 
+void apb::set_waypoint_id(const std::string & id)
+{
+	check_waypoint_id(id);
+	waypoint_id = id;
+}
+
 std::unique_ptr<sentence> apb::parse(const std::string & talker,
 	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {

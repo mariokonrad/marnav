@@ -130,7 +130,7 @@ public:
 		bearing_origin_to_destination = t;
 		bearing_origin_to_destination_ref = ref;
 	}
-	void set_waypoint_id(std::string t) { waypoint_id = t; }
+	void set_waypoint_id(const std::string & id);
 	void set_bearing_pos_to_destination(uint32_t t, char ref)
 	{
 		bearing_pos_to_destination = t;

@@ -1,6 +1,8 @@
 #ifndef __UTILS__OPTIONAL__HPP__
 #define __UTILS__OPTIONAL__HPP__
 
+#include <utility>
+
 namespace marnav
 {
 namespace utils

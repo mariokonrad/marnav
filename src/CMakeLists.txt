@@ -18,6 +18,7 @@ set(SOURCE_GEO
 set(SOURCE_NMEA_0183
 	marnav/nmea/constants.cpp
 	marnav/nmea/angle.cpp
+	marnav/nmea/io.cpp
 	marnav/nmea/date.cpp
 	marnav/nmea/time.cpp
 	marnav/nmea/sentence.cpp
