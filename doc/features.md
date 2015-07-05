@@ -45,6 +45,7 @@ Supported sentences for NMEA-0183 (read and write):
 - WPL: Waypoint Location
 - XDR: Transducer Measurement
 - XTE: Cross-Track Error, Measured
+- XTR: Cross Track Error - Dead Reckoning
 - ZDA: Time & Date - UTC, day, month, year and local time zone
 - ZFO: UTC & Time from origin Waypoint
 - ZTG: UTC & Time to Destination Waypoint

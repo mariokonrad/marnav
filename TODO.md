@@ -51,7 +51,6 @@ NMEA
 	- VBW - Dual Ground/Water Speed
 	- VDR - Set and Drift
 	- VPW - Speed - Measured Parallel to Wind
-	- XTR - Cross Track Error - Dead Reckoning
 	- vendor extensions
 
 AIS

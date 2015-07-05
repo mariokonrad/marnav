@@ -58,6 +58,7 @@ set(SOURCE_NMEA_0183
 	marnav/nmea/wpl.cpp
 	marnav/nmea/xdr.cpp
 	marnav/nmea/xte.cpp
+	marnav/nmea/xtr.cpp
 	marnav/nmea/zda.cpp
 	marnav/nmea/zfo.cpp
 	marnav/nmea/ztg.cpp
@@ -182,6 +183,7 @@ install(
 		marnav/nmea/wpl.hpp
 		marnav/nmea/xdr.hpp
 		marnav/nmea/xte.hpp
+		marnav/nmea/xtr.hpp
 		marnav/nmea/zda.hpp
 		marnav/nmea/zfo.hpp
 		marnav/nmea/ztg.hpp

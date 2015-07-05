@@ -49,6 +49,7 @@ add_executable(testrunner
 	nmea/Test_nmea_wpl.cpp
 	nmea/Test_nmea_xdr.cpp
 	nmea/Test_nmea_xte.cpp
+	nmea/Test_nmea_xtr.cpp
 	nmea/Test_nmea_zda.cpp
 	nmea/Test_nmea_zfo.cpp
 	nmea/Test_nmea_ztg.cpp
