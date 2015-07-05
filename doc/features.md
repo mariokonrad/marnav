@@ -46,6 +46,7 @@ Supported sentences for NMEA-0183 (read and write):
 - XDR: Transducer Measurement
 - XTE: Cross-Track Error, Measured
 - ZDA: Time & Date - UTC, day, month, year and local time zone
+- ZFO: UTC & Time from origin Waypoint
 
 Supported messages for AIS (decode and encode):
 - type 1: position report class A

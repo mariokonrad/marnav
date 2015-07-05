@@ -59,6 +59,7 @@ set(SOURCE_NMEA_0183
 	marnav/nmea/xdr.cpp
 	marnav/nmea/xte.cpp
 	marnav/nmea/zda.cpp
+	marnav/nmea/zfo.cpp
 	)
 
 set(SOURCE_AIS
@@ -181,6 +182,7 @@ install(
 		marnav/nmea/xdr.hpp
 		marnav/nmea/xte.hpp
 		marnav/nmea/zda.hpp
+		marnav/nmea/zfo.hpp
 	DESTINATION include/marnav/nmea
 	)
 

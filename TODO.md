@@ -52,7 +52,6 @@ NMEA
 	- VDR - Set and Drift
 	- VPW - Speed - Measured Parallel to Wind
 	- XTR - Cross Track Error - Dead Reckoning
-	- ZFO - UTC & Time from origin Waypoint
 	- ZTG - UTC & Time to Destination Waypoint
 	- vendor extensions
 
