@@ -52,7 +52,6 @@ NMEA
 	- VDR - Set and Drift
 	- VPW - Speed - Measured Parallel to Wind
 	- XTR - Cross Track Error - Dead Reckoning
-	- ZTG - UTC & Time to Destination Waypoint
 	- vendor extensions
 
 AIS
