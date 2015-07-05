@@ -83,6 +83,7 @@ public:
 	T & value() & { return data; }
 	T && value() && { return data; }
 
+	/* disabling c++14 extensions for now
 	template <class U> constexpr T value_or(U && value) const &
 	{
 		if (available())
@@ -96,6 +97,7 @@ public:
 			return data;
 		return value;
 	}
+	*/
 
 	// other
 

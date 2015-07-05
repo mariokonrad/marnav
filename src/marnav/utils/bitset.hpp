@@ -402,6 +402,7 @@ public:
 	/// @todo Implementation
 	void append(const bitset & bs)
 	{
+		(void)bs; // unused
 	}
 
 	/// Sets the specified bitset at the offset within this bitset.
@@ -413,6 +414,8 @@ public:
 	/// @todo Implementation
 	void set(const bitset & bs, size_type ofs)
 	{
+		(void)bs; // unused
+		(void)ofs; // unused
 	}
 
 	/// @todo documentation

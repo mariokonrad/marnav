@@ -47,7 +47,7 @@ public:
 	virtual int read(char * buffer, uint32_t size) throw(
 		std::invalid_argument, std::runtime_error) override;
 	virtual int write(const char * buffer, uint32_t size) throw(
-		std::invalid_argument, std::runtime_error);
+		std::invalid_argument, std::runtime_error) override;
 
 protected:
 	int fd;
