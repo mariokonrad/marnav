@@ -1,7 +1,5 @@
-language: cpp
-compiler:
-  - gcc
-  - clang
+language: c++
+compiler: gcc
 sudo: false
 os: linux
 
