@@ -34,12 +34,13 @@ Supported sentences for NMEA-0183 (read and write):
 - ROT: Rate Of Turn
 - RSA: Rudder Sensor Angle
 - RTE: Routes
+- VDM
+- VDO
 - VHW: Water speed and heading
 - VLW: Distance Traveled through Water
 - VTG: Track made good and Ground speed
 - VWR: Relative Wind Speed and Angle.
-- VDM
-- VDO
+- VPW: Speed - Measured Parallel to Wind
 - WCV: Waypoint Closure Velocity
 - WNC: Distance - Waypoint to Waypoint
 - WPL: Waypoint Location

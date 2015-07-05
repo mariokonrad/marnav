@@ -47,12 +47,13 @@ set(SOURCE_NMEA_0183
 	marnav/nmea/rot.cpp
 	marnav/nmea/rsa.cpp
 	marnav/nmea/rte.cpp
-	marnav/nmea/vhw.cpp
-	marnav/nmea/vlw.cpp
-	marnav/nmea/vtg.cpp
-	marnav/nmea/vwr.cpp
 	marnav/nmea/vdm.cpp
 	marnav/nmea/vdo.cpp
+	marnav/nmea/vhw.cpp
+	marnav/nmea/vlw.cpp
+	marnav/nmea/vpw.cpp
+	marnav/nmea/vtg.cpp
+	marnav/nmea/vwr.cpp
 	marnav/nmea/wcv.cpp
 	marnav/nmea/wnc.cpp
 	marnav/nmea/wpl.cpp
@@ -172,12 +173,13 @@ install(
 		marnav/nmea/rot.hpp
 		marnav/nmea/rsa.hpp
 		marnav/nmea/rte.hpp
-		marnav/nmea/vhw.hpp
-		marnav/nmea/vlw.hpp
-		marnav/nmea/vtg.hpp
-		marnav/nmea/vwr.hpp
 		marnav/nmea/vdm.hpp
 		marnav/nmea/vdo.hpp
+		marnav/nmea/vhw.hpp
+		marnav/nmea/vlw.hpp
+		marnav/nmea/vpw.hpp
+		marnav/nmea/vtg.hpp
+		marnav/nmea/vwr.hpp
 		marnav/nmea/wcv.hpp
 		marnav/nmea/wnc.hpp
 		marnav/nmea/wpl.hpp

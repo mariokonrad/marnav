@@ -50,7 +50,6 @@ NMEA
 	- TTM - Tracked Target Message
 	- VBW - Dual Ground/Water Speed
 	- VDR - Set and Drift
-	- VPW - Speed - Measured Parallel to Wind
 	- vendor extensions
 
 AIS
