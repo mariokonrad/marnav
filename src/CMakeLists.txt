@@ -23,6 +23,7 @@ set(SOURCE_NMEA_0183
 	marnav/nmea/sentence.cpp
 	marnav/nmea/nmea.cpp
 	marnav/nmea/aam.cpp
+	marnav/nmea/alm.cpp
 	marnav/nmea/apb.cpp
 	marnav/nmea/bod.cpp
 	marnav/nmea/dbk.cpp
@@ -144,6 +145,7 @@ install(
 		marnav/nmea/sentence.hpp
 		marnav/nmea/nmea.hpp
 		marnav/nmea/aam.hpp
+		marnav/nmea/alm.hpp
 		marnav/nmea/apb.hpp
 		marnav/nmea/bod.hpp
 		marnav/nmea/dbk.hpp

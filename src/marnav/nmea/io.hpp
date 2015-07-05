@@ -11,6 +11,8 @@ namespace marnav
 namespace nmea
 {
 
+enum class data_format { dec, hex };
+
 template <class T> inline std::string to_string(const utils::optional<T> & data)
 {
 	if (!data)
@@ -74,25 +76,39 @@ template <> inline std::string to_string(const utils::optional<char> & data)
 	return buf;
 }
 
-inline std::string format(int32_t data, unsigned int width)
+inline std::string format(int32_t data, unsigned int width, data_format f = data_format::dec)
 {
 	char fmt[8];
-	snprintf(fmt, sizeof(fmt), "%%0%ud", width);
+	switch (f) {
+		case data_format::dec:
+			snprintf(fmt, sizeof(fmt), "%%0%ud", width);
+			break;
+		case data_format::hex:
+			snprintf(fmt, sizeof(fmt), "%%0%ux", width);
+			break;
+	}
 	char buf[width + 8];
 	snprintf(buf, sizeof(buf), fmt, data);
 	return buf;
 }
 
-inline std::string format(uint32_t data, unsigned int width)
+inline std::string format(uint32_t data, unsigned int width, data_format f = data_format::dec)
 {
 	char fmt[8];
-	snprintf(fmt, sizeof(fmt), "%%0%uu", width);
+	switch (f) {
+		case data_format::dec:
+			snprintf(fmt, sizeof(fmt), "%%0%uu", width);
+			break;
+		case data_format::hex:
+			snprintf(fmt, sizeof(fmt), "%%0%ux", width);
+			break;
+	}
 	char buf[width + 8];
 	snprintf(buf, sizeof(buf), fmt, data);
 	return buf;
 }
 
-inline std::string format(double data, unsigned int width)
+inline std::string format(double data, unsigned int width, data_format = data_format::dec)
 {
 	char fmt[8];
 	snprintf(fmt, sizeof(fmt), "%%.%uf", width);
@@ -102,14 +118,16 @@ inline std::string format(double data, unsigned int width)
 }
 
 template <typename T>
-inline std::string format(const utils::optional<T> & data, unsigned int width)
+inline std::string format(
+	const utils::optional<T> & data, unsigned int width, data_format f = data_format::dec)
 {
 	if (!data)
 		return std::string{};
-	return format(data.value(), width);
+	return format(data.value(), width, f);
 }
 
-template <class T> static void read(const std::string & s, T & value)
+template <class T>
+static void read(const std::string & s, T & value, data_format fmt = data_format::dec)
 {
 	if (s.empty()) {
 		value = T{};
@@ -117,7 +135,14 @@ template <class T> static void read(const std::string & s, T & value)
 	}
 
 	using namespace std;
-	std::istringstream{s} >> value;
+	switch (fmt) {
+		case data_format::dec:
+			std::istringstream{s} >> value;
+			break;
+		case data_format::hex:
+			std::istringstream{s} >> std::hex >> value;
+			break;
+	}
 }
 
 inline void read(const std::string & s, geo::latitude & value)
@@ -140,7 +165,9 @@ inline void read(const std::string & s, geo::longitude & value)
 	value = parse_longitude(s);
 }
 
-template <class T> static void read(const std::string & s, utils::optional<T> & value)
+template <class T>
+static void read(
+	const std::string & s, utils::optional<T> & value, data_format fmt = data_format::dec)
 {
 	if (s.empty()) {
 		value.reset();
@@ -149,7 +176,7 @@ template <class T> static void read(const std::string & s, utils::optional<T> & 
 
 	using namespace std;
 	T tmp;
-	std::istringstream{s} >> tmp;
+	read(s, tmp, fmt);
 	value = tmp;
 }
 

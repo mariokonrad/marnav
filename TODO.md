@@ -18,7 +18,6 @@ NMEA
 @todo Implement writer for serial devices
 
 @todo Implement more sentences:
-	- ALM - GPS Almanac Data
 	- BWC - Bearing & Distance to Waypoint - Geat Circle
 	- BWR - Bearing and Distance to Waypoint - Rhumb Line
 	- BWW - Bearing - Waypoint to Waypoint

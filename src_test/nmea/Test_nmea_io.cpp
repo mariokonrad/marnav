@@ -26,4 +26,12 @@ TEST_F(Test_nmea_io, read_empty_longitude_string)
 	EXPECT_EQ(geo::longitude{}, lon);
 }
 
+TEST_F(Test_nmea_io, format_int32_hex)
+{
+	const int32_t val = 0xabcd;
+	auto s = nmea::format(val, 1, nmea::data_format::hex);
+
+	EXPECT_STREQ("abcd", s.c_str());
+}
+
 }

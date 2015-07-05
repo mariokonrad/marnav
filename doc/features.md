@@ -12,6 +12,7 @@ It supports (partially):
 
 Supported sentences for NMEA-0183 (read and write):
 - AAM: Waypoint Arrival Alarm
+- ALM: GPS Almanac Data
 - APB: Autopilot Sentence "B"
 - BOD: Bearing - Waypoint to Waypoint
 - DBT: Depth Below Transducer
