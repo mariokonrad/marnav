@@ -42,6 +42,7 @@ constexpr const char ESTIMATED = 'E';
 constexpr const char MANUALINPUT = 'M';
 constexpr const char SIMULATED = 'S';
 constexpr const char DATANOTVALID = 'N';
+constexpr const char PRECISE = 'P';
 }
 
 namespace quality

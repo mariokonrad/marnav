@@ -15,6 +15,7 @@ Supported sentences for NMEA-0183 (read and write):
 - ALM: GPS Almanac Data
 - APB: Autopilot Sentence "B"
 - BOD: Bearing - Waypoint to Waypoint
+- BWC: Bearing & Distance to Waypoint - Geat Circle
 - DBT: Depth Below Transducer
 - DPT: Depth of Water
 - GGA: Global Positioning System Fix Data
