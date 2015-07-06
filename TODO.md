@@ -18,7 +18,6 @@ NMEA
 @todo Implement writer for serial devices
 
 @todo Implement more sentences:
-	- BWW - Bearing - Waypoint to Waypoint
 	- DCN - Decca Position
 	- DTM - Datum Reference
 	- FSI - Frequency Set Information

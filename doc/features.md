@@ -17,6 +17,7 @@ Supported sentences for NMEA-0183 (read and write):
 - BOD: Bearing - Waypoint to Waypoint
 - BWC: Bearing & Distance to Waypoint - Geat Circle
 - BWR: Bearing and Distance to Waypoint - Rhumb Line
+- BWW: Bearing - Waypoint to Waypoint
 - DBT: Depth Below Transducer
 - DPT: Depth of Water
 - GGA: Global Positioning System Fix Data

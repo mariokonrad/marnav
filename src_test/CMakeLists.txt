@@ -20,6 +20,7 @@ add_executable(testrunner
 	nmea/Test_nmea_bod.cpp
 	nmea/Test_nmea_bwc.cpp
 	nmea/Test_nmea_bwr.cpp
+	nmea/Test_nmea_bww.cpp
 	nmea/Test_nmea_dbk.cpp
 	nmea/Test_nmea_dbt.cpp
 	nmea/Test_nmea_dpt.cpp
