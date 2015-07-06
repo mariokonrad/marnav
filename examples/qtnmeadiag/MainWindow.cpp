@@ -53,15 +53,15 @@ void MainWindow::create_actions()
 	action_exit = new QAction(tr("E&xit"), this);
 	action_exit->setStatusTip(tr("Quits the application"));
 	action_exit->setShortcut(tr("Ctrl+Q"));
-	connect(action_exit, SIGNAL(triggered()), this, SLOT(close()));
+	connect(action_exit, &QAction::triggered, this, &MainWindow::close);
 
 	action_about = new QAction(tr("About ..."), this);
 	action_about->setStatusTip(tr("Shows the About dialog"));
-	connect(action_about, SIGNAL(triggered()), this, SLOT(on_about()));
+	connect(action_about, &QAction::triggered, this, &MainWindow::on_about);
 
 	action_about_qt = new QAction(tr("About Qt ..."), this);
 	action_about_qt->setStatusTip(tr("Shows information about Qt"));
-	connect(action_about_qt, SIGNAL(triggered()), this, SLOT(on_about_qt()));
+	connect(action_about_qt, &QAction::triggered, this, &MainWindow::on_about_qt);
 }
 
 void MainWindow::setup_ui()
@@ -78,9 +78,9 @@ void MainWindow::setup_ui()
 	cb_baudrate->setEditable(false);
 	cb_baudrate->addItems({"4800", "38400"});
 	btn_open = new QPushButton(tr("Open"), center);
-	connect(btn_open, SIGNAL(pressed()), this, SLOT(on_open()));
+	connect(btn_open, &QPushButton::pressed, this, &MainWindow::on_open);
 	btn_close = new QPushButton(tr("Close"), center);
-	connect(btn_close, SIGNAL(pressed()), this, SLOT(on_close()));
+	connect(btn_close, &QPushButton::pressed, this, &MainWindow::on_close);
 	btn_close->setEnabled(false);
 
 	QGridLayout * layout = new QGridLayout;
@@ -121,7 +121,7 @@ void MainWindow::on_open()
 	port->setDataBits(QSerialPort::Data8);
 	port->setStopBits(QSerialPort::OneStop);
 
-	connect(port, SIGNAL(readyRead()), this, SLOT(on_data_ready()));
+	connect(port, &QSerialPort::readyRead, this, &MainWindow::on_data_ready);
 
 	if (!port->open(QIODevice::ReadOnly)) {
 		on_close();
@@ -136,7 +136,7 @@ void MainWindow::on_close()
 	cb_baudrate->setEnabled(true);
 	port_name->setEnabled(true);
 
-	disconnect(port, SIGNAL(readyRead()), this, SLOT(on_data_ready()));
+	disconnect(port, &QSerialPort::readyRead, this, &MainWindow::on_data_ready);
 
 	port->close();
 }
