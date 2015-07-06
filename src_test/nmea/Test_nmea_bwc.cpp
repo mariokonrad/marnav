@@ -35,8 +35,8 @@ TEST_F(Test_nmea_bwc, parse)
 
 TEST_F(Test_nmea_bwc, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::bwc::parse("@@", {5, "@"}));
-	EXPECT_ANY_THROW(nmea::bwc::parse("@@", {7, "@"}));
+	EXPECT_ANY_THROW(nmea::bwc::parse("@@", {11, "@"}));
+	EXPECT_ANY_THROW(nmea::bwc::parse("@@", {14, "@"}));
 }
 
 TEST_F(Test_nmea_bwc, empty_to_string)

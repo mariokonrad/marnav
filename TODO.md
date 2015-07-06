@@ -18,7 +18,6 @@ NMEA
 @todo Implement writer for serial devices
 
 @todo Implement more sentences:
-	- BWR - Bearing and Distance to Waypoint - Rhumb Line
 	- BWW - Bearing - Waypoint to Waypoint
 	- DCN - Decca Position
 	- DTM - Datum Reference
