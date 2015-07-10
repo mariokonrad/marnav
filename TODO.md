@@ -45,7 +45,6 @@ NMEA
 	- TPT - Trawl Position True
 	- TRF - TRANSIT Fix Data
 	- TTM - Tracked Target Message
-	- VBW - Dual Ground/Water Speed
 	- vendor extensions
 
 AIS

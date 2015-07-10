@@ -37,6 +37,7 @@ Supported sentences for NMEA-0183 (read and write):
 - ROT: Rate Of Turn
 - RSA: Rudder Sensor Angle
 - RTE: Routes
+- VBW: Dual Ground/Water Speed
 - VDM
 - VDO
 - VDR: Set and Drift
