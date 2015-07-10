@@ -55,8 +55,8 @@ void message_05::read_data(const raw & bits)
 	bits.get(shiptype, 232, 8);
 	bits.get(to_bow, 240, 9);
 	bits.get(to_stern, 249, 9);
-	bits.get(to_port, 258, 9);
-	bits.get(to_starboard, 264, 9);
+	bits.get(to_port, 258, 6);
+	bits.get(to_starboard, 264, 6);
 	bits.get(epfd_fix, 270, 4);
 	bits.get(eta_month, 274, 4);
 	bits.get(eta_day, 278, 5);
@@ -82,8 +82,8 @@ raw message_05::get_data() const
 	bits.set(shiptype, 232, 8);
 	bits.set(to_bow, 240, 9);
 	bits.set(to_stern, 249, 9);
-	bits.set(to_port, 258, 9);
-	bits.set(to_starboard, 264, 9);
+	bits.set(to_port, 258, 6);
+	bits.set(to_starboard, 264, 6);
 	bits.set(epfd_fix, 270, 4);
 	bits.set(eta_month, 274, 4);
 	bits.set(eta_day, 278, 5);

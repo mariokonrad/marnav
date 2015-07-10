@@ -32,8 +32,8 @@ TEST_F(Test_ais_message_05, parse)
 	EXPECT_EQ(ais::ship_type::other_no_info, m->get_shiptype());
 	EXPECT_EQ(90u, m->get_to_bow());
 	EXPECT_EQ(90u, m->get_to_stern());
-	EXPECT_EQ(81u, m->get_to_port());
-	EXPECT_EQ(80u, m->get_to_starboard());
+	EXPECT_EQ(10u, m->get_to_port());
+	EXPECT_EQ(10u, m->get_to_starboard());
 	EXPECT_EQ(ais::epfd_fix_type::gps, m->get_epfd_fix());
 	EXPECT_EQ(1u, m->get_eta_month());
 	EXPECT_EQ(2u, m->get_eta_day());

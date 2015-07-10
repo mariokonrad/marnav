@@ -66,8 +66,8 @@ void message_19::read_data(const raw & bits)
 	bits.get(shiptype, 263, 8);
 	bits.get(to_bow, 271, 9);
 	bits.get(to_stern, 280, 9);
-	bits.get(to_port, 289, 9);
-	bits.get(to_starboard, 295, 9);
+	bits.get(to_port, 289, 6);
+	bits.get(to_starboard, 295, 6);
 	bits.get(epfd_fix, 301, 4);
 	bits.get(raim, 305, 4);
 	bits.get(dte, 306, 1);
@@ -113,8 +113,8 @@ raw message_19::get_data() const
 	bits.set(shiptype, 263, 8);
 	bits.set(to_bow, 271, 9);
 	bits.set(to_stern, 280, 9);
-	bits.set(to_port, 289, 9);
-	bits.set(to_starboard, 295, 9);
+	bits.set(to_port, 289, 6);
+	bits.set(to_starboard, 295, 6);
 	bits.set(epfd_fix, 301, 4);
 	bits.set(raim, 305, 4);
 	bits.set(dte, 306, 1);
