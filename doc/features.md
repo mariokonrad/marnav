@@ -39,6 +39,7 @@ Supported sentences for NMEA-0183 (read and write):
 - RTE: Routes
 - VDM
 - VDO
+- VDR: Set and Drift
 - VHW: Water speed and heading
 - VLW: Distance Traveled through Water
 - VTG: Track made good and Ground speed
