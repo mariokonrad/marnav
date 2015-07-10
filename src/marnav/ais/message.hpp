@@ -137,6 +137,13 @@ enum class epfd_fix_type : uint8_t {
 	galileo = 8,
 };
 
+constexpr static const uint32_t longitude_not_available = 0x6791AC0;
+constexpr static const uint32_t latitude_not_available = 0x3412140;
+constexpr static const uint32_t cog_not_available = 3600;
+constexpr static const uint32_t hdg_not_available = 511;
+constexpr static const uint8_t timestamp_not_available = 60;
+constexpr static const uint8_t maneuver_indictor_not_available = 0;
+
 using raw = utils::bitset<uint8_t>;
 
 class message

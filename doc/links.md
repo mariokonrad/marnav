@@ -12,3 +12,6 @@ Links {#page_links}
 - [SeaTalk Reference](http://thomasknauf.de/seatalk.htm)
 
   by Thomas Knauf
+
+- [Navigation Center - AIS Standard Class B Equipment Position Report](http://www.navcen.uscg.gov/?pageName=AISMessagesB)
+
