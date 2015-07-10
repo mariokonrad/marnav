@@ -51,8 +51,8 @@ public:
 	decltype(time_elapsed) get_time_elapsed() const { return time_elapsed; }
 	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
 
-	void set_time_utc(const nmea::time t) { time_utc = t; }
-	void set_time_elapsed(const nmea::time t) { time_elapsed = t; }
+	void set_time_utc(const nmea::time & t) { time_utc = t; }
+	void set_time_elapsed(const nmea::time & t) { time_elapsed = t; }
 	void set_waypoint_id(const std::string & id);
 };
 }

@@ -45,6 +45,7 @@ TEST_F(Test_seatalk_message_23, parse)
 		auto m = seatalk::message_cast<seatalk::message_23>(generic_message);
 		ASSERT_TRUE(m != nullptr);
 		EXPECT_EQ(seatalk::message_id::water_temperature_1, m->type());
+		EXPECT_EQ(t.sensor_defective, m->get_sensor_defective());
 		EXPECT_EQ(t.temperature_celsius, m->get_celsius());
 		EXPECT_EQ(t.temperature_fahrenheit, m->get_fahrenheit());
 	}

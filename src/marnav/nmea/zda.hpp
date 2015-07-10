@@ -63,7 +63,7 @@ public:
 	decltype(local_zone_hours) get_local_zone_hours() const { return local_zone_hours; }
 	decltype(local_zone_minutes) get_local_zone_minutes() const { return local_zone_minutes; }
 
-	void set_time_utc(const nmea::time t) { time_utc = t; }
+	void set_time_utc(const nmea::time & t) { time_utc = t; }
 	void set_date(uint32_t y, uint32_t m, uint32_t d)
 	{
 		year = y;

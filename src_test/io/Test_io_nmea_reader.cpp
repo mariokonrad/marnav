@@ -170,7 +170,6 @@ TEST_F(Test_io_nmea_reader, read_count_sentences)
 TEST_F(Test_io_nmea_reader, read_sentence)
 {
 	message_reader dev{DATA_COMPLETE};
-	std::string sentence;
 
 	int num_sentences = 0;
 	std::string data;
