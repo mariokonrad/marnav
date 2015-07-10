@@ -46,7 +46,6 @@ NMEA
 	- TRF - TRANSIT Fix Data
 	- TTM - Tracked Target Message
 	- VBW - Dual Ground/Water Speed
-	- VDR - Set and Drift
 	- vendor extensions
 
 AIS
