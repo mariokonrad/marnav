@@ -166,6 +166,10 @@ private:
 char decode_sixbit_ascii(uint8_t value);
 uint8_t encode_sixbit_ascii(char c);
 
+std::string read_string(const raw & bits, raw::size_type ofs, raw::size_type count_sixbits);
+void write_string(
+	raw & bits, raw::size_type ofs, raw::size_type count_sixbits, const std::string & s);
+
 /// Casts the specified message to the message given by the template parameter.
 /// The object converted only if it is valid and of the correct type. It is not
 /// possible to cast a message into a completley different one.

@@ -30,11 +30,6 @@ public:
 protected:
 	void read_data(const raw & bits);
 
-	std::string read_string(
-		const raw & bits, raw::size_type ofs, raw::size_type count_sixbits) const;
-	void write_string(raw & bits, raw::size_type ofs, raw::size_type count_sixbits,
-		const std::string & s) const;
-
 private:
 	unsigned int repeat_indicator;
 	uint32_t mmsi;

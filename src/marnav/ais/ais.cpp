@@ -4,6 +4,7 @@
 #include "message_03.hpp"
 #include "message_05.hpp"
 #include "message_18.hpp"
+#include "message_19.hpp"
 #include <algorithm>
 
 /// @example read_ais.cpp
@@ -66,6 +67,7 @@ static message::parse_function instantiate_message(message_id type) throw(std::i
 		{message_id::position_report_class_a_response_to_interrogation, message_03::parse},
 		{message_id::static_and_voyage_related_data, message_05::parse},
 		{message_id::standard_class_b_cs_position_report, message_18::parse},
+		{message_id::extended_class_b_equipment_position_report, message_19::parse},
 	};
 
 	auto const & i = std::find_if(begin(known_messages), end(known_messages),

@@ -62,6 +62,7 @@ Supported messages for AIS (decode and encode):
 - type 3: Position Report Class A (Response to Interrogation)
 - type 5: Static and Voyage Related Data
 - type 18: Standard Class B CS Position Report
+- type 19: Extended Class B CS Position Report
 
 Suported messages for SeaTalk (decode and encode):
 - type 00: depth below transducer

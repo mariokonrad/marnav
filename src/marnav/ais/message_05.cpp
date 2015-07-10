@@ -44,36 +44,6 @@ std::unique_ptr<message> message_05::parse(const raw & bits) throw(std::invalid_
 	return result;
 }
 
-/// @todo consider to hide characters after '@'
-std::string message_05::read_string(
-	const raw & bits, raw::size_type ofs, raw::size_type count_sixbits) const
-{
-	std::string s;
-	s.reserve(count_sixbits);
-
-	for (raw::size_type i = 0; i < count_sixbits; ++i) {
-		uint8_t sixbit = 0;
-		bits.get(sixbit, ofs + i * 6, 6);
-		s += decode_sixbit_ascii(sixbit);
-	}
-
-	return s;
-}
-
-void message_05::write_string(
-	raw & bits, raw::size_type ofs, raw::size_type count_sixbits, const std::string & s) const
-{
-	for (raw::size_type i = 0; i < count_sixbits; ++i) {
-		uint8_t value;
-		if (i < s.size()) {
-			value = encode_sixbit_ascii(s[i]);
-		} else {
-			value = encode_sixbit_ascii('@');
-		}
-		bits.set(value, ofs + i * 6, 6);
-	}
-}
-
 void message_05::read_data(const raw & bits)
 {
 	bits.get(repeat_indicator, 6, 2);

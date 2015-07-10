@@ -38,5 +38,34 @@ uint8_t encode_sixbit_ascii(char c)
 		[c](const std::pair<uint8_t, char> & p) { return p.second == c; });
 	return i != SIXBIT_ASCII_TABLE.end() ? i->first : 0xff;
 }
+
+/// @todo consider to hide characters after '@'
+std::string read_string(const raw & bits, raw::size_type ofs, raw::size_type count_sixbits)
+{
+	std::string s;
+	s.reserve(count_sixbits);
+
+	for (raw::size_type i = 0; i < count_sixbits; ++i) {
+		uint8_t sixbit = 0;
+		bits.get(sixbit, ofs + i * 6, 6);
+		s += decode_sixbit_ascii(sixbit);
+	}
+
+	return s;
+}
+
+void write_string(
+	raw & bits, raw::size_type ofs, raw::size_type count_sixbits, const std::string & s)
+{
+	for (raw::size_type i = 0; i < count_sixbits; ++i) {
+		uint8_t value;
+		if (i < s.size()) {
+			value = encode_sixbit_ascii(s[i]);
+		} else {
+			value = encode_sixbit_ascii('@');
+		}
+		bits.set(value, ofs + i * 6, 6);
+	}
+}
 }
 }
