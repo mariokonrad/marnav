@@ -30,7 +30,7 @@ TEST_F(Test_ais_message_19, encode_default_values)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ("C000000000H0htY08D41qwv0000000000000000000000000000@", v[0].first.c_str());
+	EXPECT_STREQ("C000000003?8mP=18D3Y3wv0000000000000000000000000000@", v[0].first.c_str());
 	EXPECT_EQ(0, v[0].second);
 }
 }

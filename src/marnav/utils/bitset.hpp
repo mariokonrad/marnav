@@ -2,7 +2,10 @@
 #define __UTILS__BITSET__HPP__
 
 #include <vector>
+#include <type_traits>
+#include <limits>
 #include <istream>
+#include <stdexcept>
 
 namespace marnav
 {
@@ -42,15 +45,14 @@ namespace utils
 /// bits.set(1, 512, 1); // set one bit to 1 at offset 512
 /// @endcode
 ///
-/// **Example:** iterate through bits (see examples/bitset_iterate.cpp)
-/// @includelineno examples/bitset_iterate.cpp
-///
 /// @todo support for const_iterator (partially prepared)
-/// @todo test also for big-endian
+/// @todo implement also for big-endian
 /// @todo padding for 'append' and 'set'
 /// @todo really ignoring the failure of 'set', 'append' and 'get'?
 /// @todo documentation
-template <class Block, class Container = std::vector<Block>> class bitset
+template <class Block, class Container = std::vector<Block>,
+	class = typename std::enable_if<!std::numeric_limits<Block>::is_signed>::type>
+class bitset
 {
 public:
 	using block_type = Block;
@@ -273,8 +275,14 @@ private:
 
 		if (u_bits >= bits) {
 			// enough room within current block
-			block_type mask = ~((1 << (u_bits - bits)) - 1);
-			data[i] = (data[i] & mask) | v << (u_bits - bits);
+			block_type mask0 = -1;
+			mask0 <<= u_bits;
+			block_type mask1 = -1;
+			mask1 <<= u_bits - bits;
+			mask0 |= ~mask1;
+			v <<= u_bits - bits;
+			v &= ~mask0;
+			data[i] = (data[i] & mask0) | v;
 		} else {
 			// not enough room, split value to current and next block
 			block_type mask0 = ~((1 << (bits - u_bits)) - 1);
@@ -285,6 +293,53 @@ private:
 		}
 		if (ofs + bits > pos)
 			pos = ofs + bits;
+	}
+
+	template <typename T>
+	void set_impl(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE)
+	{
+		if (bits <= 0)
+			return;
+		if (bits > sizeof(v) * BITS_PER_BYTE)
+			throw std::invalid_argument{"padding not implemented"};
+		if (ofs + bits > capacity())
+			extend(ofs + bits - capacity());
+
+		// fraction of the first block
+		size_type u_bits = BITS_PER_BLOCK - (ofs % BITS_PER_BLOCK); // part of the first block
+		if (u_bits > 0) {
+			if (bits < u_bits) {
+				set_block(v, ofs, bits);
+				ofs += bits;
+				bits = 0;
+			} else {
+				set_block(v >> (bits - u_bits), ofs, u_bits);
+				ofs += u_bits;
+				bits -= u_bits;
+			}
+		}
+
+		// all complete blocks
+		for (; bits > BITS_PER_BLOCK; bits -= BITS_PER_BLOCK, ofs += BITS_PER_BLOCK) {
+			set_block(v >> (bits - BITS_PER_BLOCK), ofs);
+		}
+
+		// fraction of the last block
+		if (bits > 0) {
+			set_block(v << (BITS_PER_BLOCK - bits), ofs);
+		}
+	}
+
+	template <typename T>
+	void set_dispatch(T v, size_type ofs, size_type bits, std::true_type)
+	{
+		set_impl(v, ofs, bits);
+	}
+
+	template <typename T>
+	void set_dispatch(T v, size_type ofs, size_type bits, std::false_type)
+	{
+		set_impl(static_cast<typename std::underlying_type<T>::type>(v), ofs, bits);
 	}
 
 	/// Reads a block from the bit set.
@@ -320,6 +375,10 @@ private:
 	}
 
 public:
+	bitset(const bitset & other) = default;
+	bitset(bitset && other) = default;
+	bitset & operator=(const bitset &) = default;
+
 	bitset()
 		: pos(0)
 	{
@@ -446,15 +505,14 @@ public:
 		if (bits <= 0)
 			return;
 		if (bits > sizeof(v) * BITS_PER_BYTE)
-			return; // TODO: no padding supported
-		block_type * p = reinterpret_cast<block_type *>(&v);
+			throw std::invalid_argument{"padding not implemented"};
 		size_type n_bits = bits % BITS_PER_BLOCK; // incomplete blocks
 		if (n_bits != 0) {
-			append_block(*p, n_bits);
+			append_block(v >> (bits - n_bits), n_bits);
 			bits -= n_bits;
 		}
-		for (; bits > 0; bits -= BITS_PER_BLOCK, ++p) {
-			append_block(*p);
+		for (; bits > 0; bits -= BITS_PER_BLOCK) {
+			append_block(v >> (bits - BITS_PER_BLOCK));
 		}
 	}
 
@@ -467,23 +525,7 @@ public:
 	template <typename T>
 	void set(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE)
 	{
-		if (bits <= 0)
-			return;
-		if (bits > sizeof(v) * BITS_PER_BYTE)
-			return; // TODO: no padding supported
-		if (ofs + bits > capacity())
-			extend(ofs + bits - capacity());
-		block_type * p = reinterpret_cast<block_type *>(&v);
-		size_type n_bits = bits % BITS_PER_BLOCK; // incomplete block
-		if (n_bits != 0) {
-			set_block(*p, ofs, n_bits);
-			ofs += n_bits;
-			bits -= n_bits;
-		}
-		for (; bits > 0; bits -= BITS_PER_BLOCK, ++p) {
-			set_block(*p, ofs);
-			ofs += BITS_PER_BLOCK;
-		}
+		set_dispatch(v, ofs, bits, std::is_integral<T>{});
 	}
 
 	/// Reads data from the bit set. There must be enough capacity in either the
@@ -515,6 +557,7 @@ public:
 
 		block_type block{};
 
+		// fraction of the first block
 		if (u_bits > 0) {
 			get_block(block, ofs, u_bits);
 			if (bits < u_bits) {
@@ -527,6 +570,7 @@ public:
 			ofs += u_bits;
 		}
 
+		// all complete blocks inbetween
 		for (; bits >= BITS_PER_BLOCK; bits -= BITS_PER_BLOCK) {
 			get_block(block, ofs);
 			value <<= BITS_PER_BLOCK;
@@ -534,6 +578,7 @@ public:
 			ofs += BITS_PER_BLOCK;
 		}
 
+		// fraction of the last block
 		if (bits > 0) {
 			get_block(block, ofs, bits);
 			value <<= bits;

@@ -6,6 +6,7 @@ include_directories(
 	)
 
 add_executable(testrunner
+	utils/Test_utils_bitset.cpp
 	geo/Test_geo_angle.cpp
 	geo/Test_geo_geodesic.cpp
 	nmea/Test_nmea.cpp
@@ -67,6 +68,7 @@ add_executable(testrunner
 	ais/Test_ais_message_05.cpp
 	ais/Test_ais_message_18.cpp
 	ais/Test_ais_message_19.cpp
+	ais/Test_ais_message_24.cpp
 	seatalk/Test_seatalk_message.cpp
 	seatalk/Test_seatalk_message_00.cpp
 	seatalk/Test_seatalk_message_01.cpp
