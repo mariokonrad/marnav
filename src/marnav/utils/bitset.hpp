@@ -46,9 +46,7 @@ namespace utils
 /// @endcode
 ///
 /// @todo support for const_iterator (partially prepared)
-/// @todo implement also for big-endian
 /// @todo padding for 'append' and 'set'
-/// @todo really ignoring the failure of 'set', 'append' and 'get'?
 /// @todo documentation
 template <class Block, class Container = std::vector<Block>,
 	class = typename std::enable_if<!std::numeric_limits<Block>::is_signed>::type>
@@ -66,10 +64,6 @@ public:
 public:
 	using size_type = typename Container::size_type;
 	using data_const_iterator = typename Container::const_iterator;
-
-	class exception : public std::exception
-	{
-	};
 
 	/// @todo TEST
 	/// @todo documentation
@@ -189,17 +183,19 @@ public:
 		}
 
 		template <typename T>
-		void peek(T & v, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
+		void peek(T & v, size_type bits = sizeof(T) * BITS_PER_BYTE) const
+			throw(std::out_of_range)
 		{
 			if (bs == nullptr)
 				return;
 			if (pos + bits > bs->size())
-				throw exception();
+				throw std::out_of_range{
+					"out of range, not possible to peek beyond available bits"};
 			bs->get(v, pos, bits);
 		}
 
 		template <typename T>
-		void read(T & v, size_type bits = sizeof(T) * BITS_PER_BYTE) throw(exception)
+		void read(T & v, size_type bits = sizeof(T) * BITS_PER_BYTE) throw(std::out_of_range)
 		{
 			peek(v, bits);
 			*this += bits;
@@ -296,7 +292,8 @@ private:
 	}
 
 	template <typename T>
-	void set_impl(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE)
+	void set_impl(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) throw(
+		std::invalid_argument)
 	{
 		if (bits <= 0)
 			return;
@@ -308,7 +305,7 @@ private:
 		// fraction of the first block
 		size_type u_bits = BITS_PER_BLOCK - (ofs % BITS_PER_BLOCK); // part of the first block
 		if (u_bits > 0) {
-			if (bits < u_bits) {
+			if (bits <= u_bits) {
 				set_block(v, ofs, bits);
 				ofs += bits;
 				bits = 0;
@@ -331,13 +328,15 @@ private:
 	}
 
 	template <typename T>
-	void set_dispatch(T v, size_type ofs, size_type bits, std::true_type)
+	void set_dispatch(T v, size_type ofs, size_type bits, std::true_type) throw(
+		std::invalid_argument)
 	{
 		set_impl(v, ofs, bits);
 	}
 
 	template <typename T>
-	void set_dispatch(T v, size_type ofs, size_type bits, std::false_type)
+	void set_dispatch(T v, size_type ofs, size_type bits, std::false_type) throw(
+		std::invalid_argument)
 	{
 		set_impl(static_cast<typename std::underlying_type<T>::type>(v), ofs, bits);
 	}
@@ -349,12 +348,16 @@ private:
 	/// @param[in] bits Number of bits to be read.
 	///            If the number of bits is smaller than what the specified data can
 	///            hold, only the least significant bits are being set.
+	/// @exception std::out_of_range There are not enough bits to read, offset and number
+	///            of bits exceed the total number of available bits. It is not possible
+	///            to read past the end.
 	void get_block(block_type & v, size_type ofs, size_type bits = BITS_PER_BLOCK) const
+		throw(std::out_of_range)
 	{
 		if (bits <= 0)
 			return;
 		if (ofs + bits > size())
-			return;
+			throw std::out_of_range{"offset and requested bits out of range of available bits"};
 		size_type i = ofs / BITS_PER_BLOCK; // index of current block
 
 		// number of bits unused within the current block
@@ -375,8 +378,9 @@ private:
 	}
 
 public:
-	bitset(const bitset & other) = default;
-	bitset(bitset && other) = default;
+	bitset(const bitset &) = default;
+	bitset(bitset &&) = default;
+
 	bitset & operator=(const bitset &) = default;
 
 	bitset()
@@ -427,15 +431,25 @@ public:
 		pos = 0;
 	}
 
+	/// Flips the bit at the specified index.
+	///
+	/// @exception std::out_of_range Specified index is out of range.
+	void flip(size_type i) throw (std::out_of_range)
+	{
+		set(!get_bit(i), i, 1);
+	}
+
 	/// Returns the bit at the specified position.
 	bool operator[](size_type i) const { return get_bit(i); }
 
 	/// Returns the bit at the specified position. If the index is larger
 	/// than the actual number of bits, 'false' will rturn.
-	bool get_bit(size_type i) const
+	///
+	/// @exception std::out_of_range Specified index is out of range.
+	bool get_bit(size_type i) const throw(std::out_of_range)
 	{
-		if (i > size())
-			return false;
+		if (i >= size())
+			throw std::out_of_range{"index out of range in flip"};
 
 		// bit within the block to be read
 		size_type n_bit = BITS_PER_BLOCK - (i % BITS_PER_BLOCK) - 1;
@@ -477,7 +491,11 @@ public:
 		(void)ofs; // unused
 	}
 
-	/// @todo documentation
+	/// Reads blocks from the stream and appends them to the bitset.
+	///
+	/// @param[in] is Stream to read block from.
+	/// @param[in] blocks Number of blocks to read.
+	/// @return Number of blocks read from the stream.
 	size_type append(std::istream & is, size_type blocks)
 	{
 		size_type i = 0;
@@ -500,7 +518,11 @@ public:
 	/// @param[in] bits Number of bits from the specified value. This must not
 	///            exceed the number of bits provided by the specified data,
 	///            padding is not supported.
-	template <typename T> void append(T v, size_type bits = sizeof(T) * BITS_PER_BYTE)
+	/// @exception std::invalid_argument Number of bites exceed the number of
+	///            bit provided by the parameter v. padding is not implemented.
+	///            Example: type of v is uint32_t, bits is 40.
+	template <typename T>
+	void append(T v, size_type bits = sizeof(T) * BITS_PER_BYTE) throw(std::invalid_argument)
 	{
 		if (bits <= 0)
 			return;
@@ -522,8 +544,12 @@ public:
 	/// @param[in] ofs The offset (in bits) at which position the value has to be written.
 	/// @paran[in] bits The number of bits to write. This must not exceed the number of bits
 	///            provided by the specified data, padding is not supported.
+	/// @exception std::invalid_argument Number of bites exceed the number of
+	///            bit provided by the parameter v. padding is not implemented.
+	///            Example: type of v is uint32_t, bits is 40.
 	template <typename T>
-	void set(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE)
+	void set(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) throw(
+		std::invalid_argument)
 	{
 		set_dispatch(v, ofs, bits, std::is_integral<T>{});
 	}
@@ -538,17 +564,22 @@ public:
 	///            If the number of bits is smaller than what the specified data can
 	///            hold, only the least significant bits are being set.
 	/// @return The data read from the bitset.
+	/// @exception std::invalid_argument Number of bites exceed the number of
+	///            bit provided by the return value. padding is not implemented.
+	///            Example: return value is of type uint32_t, bits is 40.
+	/// @exception std::out_of_range Offset and bits exceed the number of available
+	///            bits. It is not possible to read beyond the end.
 	template <class T>
 	typename std::enable_if<std::is_integral<T>::value, T>::type get(
-		size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
+		size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const
+		throw(std::invalid_argument, std::out_of_range)
 	{
 		if (bits <= 0)
-			throw exception{};
+			return T{};
 		if (bits > sizeof(T) * BITS_PER_BYTE)
-			throw exception{}; // impossible to read more bits than the specified container can
-							   // hold
+			throw std::invalid_argument{"padding not implemented"};
 		if (ofs + bits > pos)
-			throw exception{};
+			throw std::out_of_range{"offset and bits exceed available number of bits"};
 
 		T value = 0;
 
@@ -589,15 +620,15 @@ public:
 	}
 
 	template <class T>
-	typename std::enable_if<std::is_enum<T>::value, T>::type get(
-		size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const throw(exception)
+	typename std::enable_if<std::is_enum<T>::value, T>::type get(size_type ofs, size_type bits
+		= sizeof(T) * BITS_PER_BYTE) const throw(std::invalid_argument, std::out_of_range)
 	{
 		return static_cast<T>(get<typename std::underlying_type<T>::type>(ofs, bits));
 	}
 
 	template <class T>
 	void get(T & value, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const
-		throw(exception)
+		throw(std::invalid_argument, std::out_of_range)
 	{
 		value = get<T>(ofs, bits);
 	}
