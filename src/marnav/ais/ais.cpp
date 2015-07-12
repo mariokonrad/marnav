@@ -59,7 +59,7 @@ static raw collect(const std::vector<std::pair<std::string, int>> & v)
 	return result;
 }
 
-static message::parse_function instantiate_message(message_id type) throw(std::invalid_argument)
+static message::parse_function instantiate_message(message_id type) throw(unknown_message)
 {
 	using entry = std::pair<message_id, message::parse_function>;
 	static const std::vector<entry> known_messages = {
@@ -76,14 +76,20 @@ static message::parse_function instantiate_message(message_id type) throw(std::i
 		[type](const entry & e) { return e.first == type; });
 
 	if (i == end(known_messages))
-		throw std::invalid_argument{"unknown message in instantiate_message: "
+		throw unknown_message{"unknown message in ais/instantiate_message: "
 			+ std::to_string(static_cast<uint8_t>(type))};
 
 	return i->second;
 }
 
+/// Parses the specified data and creates corresponding AIS messages.
+///
+/// @param[in] v All NMEA payloads, necessary to build the AIS message.
+///  This may be obtained using nmea::collect_payload.
+/// @return The constructed AIS message.
+/// @exception unknown_message Will be thrown if the AIS message is not supported.
 std::unique_ptr<message> make_message(const std::vector<std::pair<std::string, int>> & v) throw(
-	std::invalid_argument)
+	unknown_message)
 {
 	auto bits = collect(v);
 	message_id type = static_cast<message_id>(bits.get<uint8_t>(0, 6));

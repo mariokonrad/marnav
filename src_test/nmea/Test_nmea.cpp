@@ -48,7 +48,7 @@ TEST_F(Test_nmea, make_sentence_malformed_sentence)
 	try {
 		nmea::make_sentence("$XX*00");
 	} catch (std::invalid_argument & e) {
-		EXPECT_STREQ("malformed sentence in make_sentence", e.what());
+		EXPECT_STREQ("malformed sentence in nmea/make_sentence", e.what());
 	}
 }
 

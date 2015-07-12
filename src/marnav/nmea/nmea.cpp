@@ -126,26 +126,26 @@ std::vector<sentence_id> get_supported_sentences_id()
 
 /// Returns the tag of the specified ID. If the sentence is unknown,
 /// an exception is thrown.
-const char * id_to_tag(sentence_id id) throw(std::invalid_argument)
+const char * id_to_tag(sentence_id id) throw(unknown_sentence)
 {
 	using namespace std;
 	auto i = find_if(begin(known_sentences), end(known_sentences),
 		[id](const entry & e) { return e.ID == id; });
 	if (i == end(known_sentences))
-		throw std::invalid_argument{"unknown sentence"};
+		throw unknown_sentence{"unknown sentence"};
 
 	return i->TAG;
 }
 
 /// Returns the ID of the specified tag. If the sentence is unknown,
 /// an exceptioni s thrown.
-sentence_id tag_to_id(const std::string & tag) throw(std::invalid_argument)
+sentence_id tag_to_id(const std::string & tag) throw(unknown_sentence)
 {
 	using namespace std;
 	auto i = find_if(begin(known_sentences), end(known_sentences),
 		[tag](const entry & e) { return e.TAG == tag; });
 	if (i == end(known_sentences))
-		throw std::invalid_argument{"unknown sentence: " + tag};
+		throw unknown_sentence{"unknown sentence: " + tag};
 
 	return i->ID;
 }
@@ -156,10 +156,10 @@ sentence_id tag_to_id(const std::string & tag) throw(std::invalid_argument)
 ///
 /// @param[in] tag The tag of the sentence to get the parse function for.
 /// @return The parse function of the specified sentence.
-/// @exception std::invalid_argument The specified tag could not be found,
+/// @exception std::unknown_sentence The specified tag could not be found,
 ///   the argument cannot be processed.
 static sentence::parse_function instantiate_sentence(const std::string & tag) throw(
-	std::invalid_argument)
+	unknown_sentence)
 {
 	using namespace std;
 
@@ -167,7 +167,7 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 		[tag](const entry & e) { return e.TAG == tag; });
 
 	if (i == end(known_sentences))
-		throw std::invalid_argument{"unknown sentence in instantiate_sentence: " + tag};
+		throw unknown_sentence{"unknown sentence in nmea/instantiate_sentence: " + tag};
 
 	return i->parse;
 }
@@ -178,7 +178,9 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 /// @return The object of the corresponding type.
 /// @exception checksum_error Will be thrown if the checksum is wrong.
 /// @exception std::invalid_argument Will be thrown if the specified string
-///   is not a NMEA sentence (malformed) or the sentence is not known.
+///   is not a NMEA sentence (malformed).
+/// @exception unknown_sentence Will be thrown if the sentence is
+///   not supported.
 ///
 /// Example:
 /// @code
@@ -186,22 +188,22 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 ///   nmea::make_sentence("$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
 /// @endcode
 std::unique_ptr<sentence> make_sentence(const std::string & s) throw(
-	std::invalid_argument, checksum_error)
+	std::invalid_argument, checksum_error, unknown_sentence)
 {
 	using namespace std;
 
 	// perform various checks
 
 	if (s.empty())
-		throw invalid_argument{"empty string in make_sentence"};
+		throw invalid_argument{"empty string in nmea/make_sentence"};
 
 	if ((s[0] != sentence::START_TOKEN) && (s[0] != sentence::START_TOKEN_AIS))
-		throw invalid_argument{"no start token in make_sentence"};
+		throw invalid_argument{"no start token in nmea/make_sentence"};
 
 	auto const end_pos = s.find_first_of(sentence::END_TOKEN, 1);
 
 	if (s.size() != end_pos + 3)
-		throw invalid_argument{"invalid format in make_sentence"};
+		throw invalid_argument{"invalid format in nmea/make_sentence"};
 
 	const string::const_iterator end = begin(s) + end_pos;
 
@@ -213,7 +215,7 @@ std::unique_ptr<sentence> make_sentence(const std::string & s) throw(
 		throw checksum_error{expected_checksum, checksum};
 
 	if (end_pos < 7) // talker id (2), tag (3), first comma (1)
-		throw invalid_argument{"malformed sentence in make_sentence"};
+		throw invalid_argument{"malformed sentence in nmea/make_sentence"};
 
 	// extract particular data
 	const std::string tag = s.substr(3, 3);
