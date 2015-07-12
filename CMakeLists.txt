@@ -72,6 +72,9 @@ else()
 	message(STATUS "cppcheck not found, target not available.")
 endif()
 
+### testing common stuff
+enable_testing()
+
 ### unit tests
 add_custom_target(unittest)
 macro(run_unittest unittest_target)

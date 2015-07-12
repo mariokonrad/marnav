@@ -50,8 +50,27 @@ NMEA
 AIS
 ---
 
-@todo Implement more messages
-
+@todo Implement more messages:
+	- Type 4: Base Station Report
+	- Type 6: Binary Addressed Message
+	- Type 7: Binary Acknowledge
+	- Type 8: Binary Broadcast Message
+	- Type 9: Standard SAR Aircraft Position Report
+	- Type 10: UTC/Date Inquiry
+	- Type 11: UTC/Date Response
+	- Type 12: Addressed Safety-Related Message
+	- Type 13: Safety-Related Acknowledgement
+	- Type 14: Safety-Related Broadcast Message
+	- Type 15: Interrogation
+	- Type 16: Assignment Mode Command
+	- Type 17: DGNSS Broadcast Binary Message
+	- Type 20: Data Link Management Message
+	- Type 21: Aid-to-Navigation Report
+	- Type 22: Channel Management
+	- Type 23: Group Assignment Command
+	- Type 25: Single Slot Binary Message
+	- Type 26: Multiple Slot Binary Message
+	- Type 27: Long Range AIS Broadcast message
 
 SeaTalk
 -------

@@ -91,5 +91,29 @@ target_link_libraries(testrunner
 	pthread
 	)
 
+add_test(
+	NAME unittest-testrunner
+	COMMAND testrunner
+	WORKING_DIRECTOR "${CMAKE_CURRENT_BINARY_DIR}"
+	)
 run_unittest(testrunner)
+
+execute_process(
+	COMMAND ${CMAKE_COMMAND} -E tar xzf "${CMAKE_CURRENT_SOURCE_DIR}/ais/ais-sample.tar.gz"
+	WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+	)
+
+add_executable(test-ais-sample
+	test-ais-sample.cpp
+	)
+
+target_link_libraries(test-ais-sample
+	marnav
+	)
+
+add_test(
+	NAME integrationtest-test-ais-sample
+	COMMAND test-ais-sample
+	WORKING_DIRECTOR "${CMAKE_CURRENT_BINARY_DIR}"
+	)
 
