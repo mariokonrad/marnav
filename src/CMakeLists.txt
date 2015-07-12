@@ -7,6 +7,7 @@ set(SOURCE_UTILS
 	marnav/utils/unique.hpp
 	marnav/utils/bitset.hpp
 	marnav/utils/optional.hpp
+	marnav/utils/mmsi.hpp
 	)
 
 set(SOURCE_GEO

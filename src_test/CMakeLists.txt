@@ -7,6 +7,7 @@ include_directories(
 
 add_executable(testrunner
 	utils/Test_utils_bitset.cpp
+	utils/Test_utils_mmsi.cpp
 	geo/Test_geo_angle.cpp
 	geo/Test_geo_geodesic.cpp
 	nmea/Test_nmea.cpp

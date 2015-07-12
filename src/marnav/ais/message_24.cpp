@@ -1,5 +1,6 @@
 #include "message_24.hpp"
 #include <marnav/utils/unique.hpp>
+#include <marnav/utils/mmsi.hpp>
 #include <cmath>
 #include <type_traits>
 
@@ -53,14 +54,7 @@ std::unique_ptr<message> message_24::parse(const raw & bits) throw(std::invalid_
 
 bool message_24::is_auxiliary_vessel() const
 {
-	const uint32_t prefix = (mmsi / 10000000) % 1000;
-	const uint32_t mid = (mmsi / 10000) % 1000;
-	const uint32_t id = mmsi % 10000;
-
-	(void)mid; // unused
-	(void)id; // unused
-
-	return prefix == 98;
+	return utils::mmsi{mmsi}.is_auxiliary();
 }
 
 void message_24::read_data(const raw & bits)
