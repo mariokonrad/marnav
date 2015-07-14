@@ -61,6 +61,9 @@ void process_ais_message(const std::vector<std::unique_ptr<marnav::nmea::sentenc
 	std::unique_ptr<ais::message> message;
 	try {
 		message = ais::make_message(nmea::collect_payload(sentences.begin(), sentences.end()));
+	} catch (ais::unknown_message & e) {
+		std::cout << "AIS unknown: " << e.what() << "\n";
+		return;
 	} catch (std::invalid_argument & e) {
 		std::cout << "AIS error: " << e.what() << "\n";
 		return;
@@ -123,6 +126,8 @@ int main(int, char **)
 			} else {
 				std::cout << "NMEA ignored: " << line << "\n";
 			}
+		} catch (nmea::unknown_sentence & e) {
+			std::cout << "NMEA unknown: " << e.what() << "\n";
 		} catch (std::exception & e) {
 			std::cout << "NMEA error: " << e.what() << "\n";
 		}

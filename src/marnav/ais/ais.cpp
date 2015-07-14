@@ -88,8 +88,10 @@ static message::parse_function instantiate_message(message_id type) throw(unknow
 ///  This may be obtained using nmea::collect_payload.
 /// @return The constructed AIS message.
 /// @exception unknown_message Will be thrown if the AIS message is not supported.
+/// @exception std::invalid_argument Error has been occurred during parsing of
+///   the message.
 std::unique_ptr<message> make_message(const std::vector<std::pair<std::string, int>> & v) throw(
-	unknown_message)
+	unknown_message, std::invalid_argument)
 {
 	auto bits = collect(v);
 	message_id type = static_cast<message_id>(bits.get<uint8_t>(0, 6));
