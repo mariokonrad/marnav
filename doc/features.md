@@ -27,6 +27,7 @@ Supported sentences for NMEA-0183 (read and write):
 - GSV: Satellites in view
 - HDG: Heading - Deviation & Variation
 - HDM: Heading - Magnetic (obsolete as of 2009)
+- HSC: Heading Steering Command
 - MTW: Mean Temperature of Water
 - MWD: Wind Direction and Speed
 - MWV: Wind Speed and Angle

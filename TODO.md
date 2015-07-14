@@ -17,6 +17,8 @@ NMEA
 
 @todo Implement writer for serial devices
 
+@todo Implement additional checks in sentences, wheather or not the received data is correct.
+
 @todo Implement more sentences:
 	- DCN - Decca Position
 	- DTM - Datum Reference
@@ -27,7 +29,6 @@ NMEA
 	- GST - GPS Pseudorange Noise Statistics
 	- GTD - Geographic Location in Time Differences
 	- HFB - Trawl Headrope to Footrope and Bottom
-	- HSC - Heading Steering Command
 	- ITS - Trawl Door Spread 2 Distance
 	- LCD - Loran-C Signal Data
 	- MSK - Control for a Beacon Receiver
