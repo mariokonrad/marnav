@@ -20,7 +20,12 @@ NMEA
 @todo Implement additional checks in sentences, wheather or not the received data is correct.
 
 @todo Implement more sentences:
+	- ASD - Autopilot System Data
 	- DCN - Decca Position
+	- DSC - Digital Selective Calling Information
+	- DSE - Extended DSC
+	- DSI - DSC Transponder Initiate
+	- DSR - DSC Transponder Response
 	- DTM - Datum Reference
 	- GBS - GPS Satellite Fault Detection
 	- GLC - Geographic Position, Loran-C
@@ -39,11 +44,13 @@ NMEA
 	- STN - Multiple Data ID
 	- TDS - Trawl Door Spread Distance
 	- TFI - Trawl Filling Indicator
+	- TLL - Target Latitude and Longitude
 	- TPC - Trawl Position Cartesian Coordinates
 	- TPR - Trawl Position Relative Vessel
 	- TPT - Trawl Position True
 	- TRF - TRANSIT Fix Data
 	- TTM - Tracked Target Message
+	- ZDL - Time and Distance to Variable Point
 	- vendor extensions
 
 AIS
