@@ -51,11 +51,10 @@ AIS
 ---
 
 @todo Implement more messages:
-	- Type 4: Base Station Report
-	- Type 6: Binary Addressed Message
-	- Type 7: Binary Acknowledge
-	- Type 8: Binary Broadcast Message
-	- Type 9: Standard SAR Aircraft Position Report
+	- Type 06: Binary Addressed Message
+	- Type 07: Binary Acknowledge
+	- Type 08: Binary Broadcast Message
+	- Type 09: Standard SAR Aircraft Position Report
 	- Type 10: UTC/Date Inquiry
 	- Type 11: UTC/Date Response
 	- Type 12: Addressed Safety-Related Message

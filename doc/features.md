@@ -57,10 +57,11 @@ Supported sentences for NMEA-0183 (read and write):
 - ZTG: UTC & Time to Destination Waypoint
 
 Supported messages for AIS (decode and encode):
-- type 1: Position Report Class A
-- type 2: Position Report Class A (Assigned Schedule)
-- type 3: Position Report Class A (Response to Interrogation)
-- type 5: Static and Voyage Related Data
+- type 01: Position Report Class A
+- type 02: Position Report Class A (Assigned Schedule)
+- type 03: Position Report Class A (Response to Interrogation)
+- type 04: Base Station Report
+- type 05: Static and Voyage Related Data
 - type 18: Standard Class B CS Position Report
 - type 19: Extended Class B CS Position Report
 - type 24: Static Data Report (part A and B, norma and auxiliary vessel)
