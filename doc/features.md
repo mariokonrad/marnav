@@ -38,6 +38,7 @@ Supported sentences for NMEA-0183 (read and write):
 - ROT: Rate Of Turn
 - RSA: Rudder Sensor Angle
 - RTE: Routes
+- SFI: Scanning Frequency Information
 - VBW: Dual Ground/Water Speed
 - VDM
 - VDO

@@ -35,7 +35,6 @@ NMEA
 	- OLN - Omega Lane Numbers
 	- RPM - Revolutions
 	- RSD - RADAR System Data
-	- SFI - Scanning Frequency Information
 	- STN - Multiple Data ID
 	- TDS - Trawl Door Spread Distance
 	- TFI - Trawl Filling Indicator
