@@ -20,7 +20,6 @@ NMEA
 @todo Implement more sentences:
 	- DCN - Decca Position
 	- DTM - Datum Reference
-	- FSI - Frequency Set Information
 	- GBS - GPS Satellite Fault Detection
 	- GLC - Geographic Position, Loran-C
 	- GNS - Fix data
