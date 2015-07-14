@@ -66,6 +66,7 @@ add_executable(testrunner
 	ais/Test_ais_message_01.cpp
 	ais/Test_ais_message_02.cpp
 	ais/Test_ais_message_03.cpp
+	ais/Test_ais_message_04.cpp
 	ais/Test_ais_message_05.cpp
 	ais/Test_ais_message_18.cpp
 	ais/Test_ais_message_19.cpp

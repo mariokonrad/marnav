@@ -125,6 +125,7 @@ enum class ship_type : uint8_t {
 	other_no_info = 99,
 };
 
+/// Electronic Position Fixing Device
 enum class epfd_fix_type : uint8_t {
 	undefined = 0,
 	gps = 1,
@@ -143,6 +144,12 @@ constexpr static const uint32_t cog_not_available = 3600;
 constexpr static const uint32_t hdg_not_available = 511;
 constexpr static const uint8_t timestamp_not_available = 60;
 constexpr static const uint8_t maneuver_indictor_not_available = 0;
+constexpr static const uint32_t year_not_available = 0;
+constexpr static const uint32_t month_not_available = 0;
+constexpr static const uint32_t day_not_available = 0;
+constexpr static const uint32_t hour_not_available = 24;
+constexpr static const uint32_t minute_not_available = 60;
+constexpr static const uint32_t second_not_available = 60;
 
 using raw = utils::bitset<uint8_t>;
 

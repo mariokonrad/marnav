@@ -1,6 +1,7 @@
 #include "message_01.hpp"
 #include <marnav/utils/unique.hpp>
 #include <cmath>
+#include <iostream>
 
 namespace marnav
 {
@@ -34,7 +35,7 @@ message_01::message_01(message_id id)
 std::unique_ptr<message> message_01::parse(const raw & bits) throw(std::invalid_argument)
 {
 	if (bits.size() != SIZE_BITS)
-		throw std::invalid_argument{"invalid number of bits in message_01::parse"};
+		throw std::invalid_argument{"invalid number of bits in ais/message_01::parse"};
 
 	std::unique_ptr<message> result = utils::make_unique<message_01>();
 	message_01 & msg = static_cast<message_01 &>(*result);
