@@ -121,3 +121,22 @@ add_test(
 	WORKING_DIRECTOR "${CMAKE_CURRENT_BINARY_DIR}"
 	)
 
+execute_process(
+	COMMAND ${CMAKE_COMMAND} -E tar xzf "${CMAKE_CURRENT_SOURCE_DIR}/nmea/nmea-sample.tar.gz"
+	WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+	)
+
+add_executable(test-nmea-sample
+	test-nmea-sample.cpp
+	)
+
+target_link_libraries(test-nmea-sample
+	marnav
+	)
+
+add_test(
+	NAME integrationtest-test-nmea-sample
+	COMMAND test-nmea-sample
+	WORKING_DIRECTOR "${CMAKE_CURRENT_BINARY_DIR}"
+	)
+

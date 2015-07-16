@@ -30,7 +30,9 @@ std::unique_ptr<sentence> gll::parse(const std::string & talker,
 	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
 	if (fields.size() != 6)
-		throw std::invalid_argument{"invalid number of fields in gll::parse"};
+		throw std::invalid_argument{
+			std::string{"invalid number of fields in gll::parse: expected 6, got "}
+			+ std::to_string(fields.size())};
 
 	std::unique_ptr<sentence> result = utils::make_unique<gll>();
 	result->set_talker(talker);
