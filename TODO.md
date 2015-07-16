@@ -15,8 +15,6 @@ GENERAL
 NMEA
 ----
 
-@todo Implement checks for sentences.
-
 @todo Implement writer for serial devices
 
 @todo Implement additional checks in sentences, wheather or not the received data is correct.
