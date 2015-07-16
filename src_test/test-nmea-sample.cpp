@@ -279,14 +279,14 @@ void process_nmea_sentence(
 		case nmea::sentence_id::ZTG:
 			cout << "ZTG - UTC & Time to Destination Waypoint";
 			break;
-		case nmea::sentence_id::RME:
-			cout << "RME - Estimated Error Information (Garmin Extension)";
+		case nmea::sentence_id::PGRME:
+			cout << "PGRME - Estimated Error Information (Garmin Extension)";
 			break;
-		case nmea::sentence_id::RMM:
-			cout << "RMM - Map Datum (Garmin Extension)";
+		case nmea::sentence_id::PGRMM:
+			cout << "PGRMM - Map Datum (Garmin Extension)";
 			break;
-		case nmea::sentence_id::RMZ:
-			cout << "RMZ - Altitude (Garmin Extension)";
+		case nmea::sentence_id::PGRMZ:
+			cout << "PGRMZ - Altitude (Garmin Extension)";
 			break;
 		case nmea::sentence_id::VWT:
 			cout << "VWT - wind true";

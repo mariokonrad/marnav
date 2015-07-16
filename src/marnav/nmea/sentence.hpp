@@ -22,14 +22,11 @@ enum class sentence_id : uint32_t {
 	// standard sentences
 	AAM, ///< Waypoint Arrival Alarm
 	ALM, ///< GPS Almanac Data
-	APA, ///< Autopilot Sentence "A"
 	APB, ///< Autopilot Sentence "B"
 	BOD, ///< Bearing - Waypoint to Waypoint
 	BWC, ///< Bearing & Distance to Waypoint - Geat Circle
 	BWR, ///< Bearing and Distance to Waypoint - Rhumb Line
 	BWW, ///< Bearing - Waypoint to Waypoint
-	DBK, ///< Depth Below Keel
-	DBS, ///< Depth Below Surface
 	DBT, ///< Depth below transducer (II)
 	DCN, ///< Decca Position
 	DPT, ///< Depth of Water
@@ -44,11 +41,7 @@ enum class sentence_id : uint32_t {
 	GST, ///< GPS Pseudorange Noise Statistics
 	GSA, ///< GPS DOP and active satellites
 	GSV, ///< Satellites in view
-	GTD, ///< Geographic Location in Time Differences
-	GXA, ///< TRANSIT Position - Latitude/Longitude
 	HDG, ///< Heading - Deviation & Variation (vendor extension)
-	HDM, ///< Heading - Magnetic
-	HDT, ///< Heading - True
 	HFB, ///< Trawl Headrope to Footrope and Bottom
 	HSC, ///< Heading Steering Command
 	ITS, ///< Trawl Door Spread 2 Distance
@@ -60,7 +53,6 @@ enum class sentence_id : uint32_t {
 	MWV, ///< Wind Speed and Angle (II)
 	OLN, ///< Omega Lane Numbers
 	OSD, ///< Own Ship Data
-	R00, ///< Waypoints in active route
 	RMA, ///< Recommended Minimum Navigation Information
 	RMB, ///< Recommended Minimum Navigation Information
 	RMC, ///< Recommended Minimum Navigation Information
@@ -79,6 +71,8 @@ enum class sentence_id : uint32_t {
 	TRF, ///< TRANSIT Fix Data
 	TTM, ///< Tracked Target Message
 	VBW, ///< Dual Ground/Water Speed
+	VDM, ///< AIS
+	VDO, ///< AIS, own ship data
 	VDR, ///< Set and Drift
 	VHW, ///< Water speed and heading (II)
 	VLW, ///< Distance Traveled through Water (II)
@@ -95,17 +89,59 @@ enum class sentence_id : uint32_t {
 	ZFO, ///< UTC & Time from origin Waypoint
 	ZTG, ///< UTC & Time to Destination Waypoint
 
-	// garmin specific
-	RME, ///< Estimated Error Information (Garmin Extension)
-	RMM, ///< Map Datum (Garmin Extension)
-	RMZ, ///< Altitude (Garmin Extension)
+	// obsolete sentences
 
-	// integrated instumentation
-	VWT, ///< wind true
+	APA, ///< Autopilot Sentence "A"
+	BER, ///< Bearing & Distance to Waypoint, Dead Reckoning, Rhumb Line
+	BPI, ///< Bearing & Distance to Point of Interest
+	DBK, ///< Depth Below Keel
+	DBS, ///< Depth Below Surface
+	DRU, ///< Dual Doppler Auxiliary Data
+	GDA, ///< Dead Reckoning Positions
+	GLA, ///< Loran-C Positions
+	GOA, ///< OMEGA Positions
+	GTD, ///< Geographical Position, Loran-C TDs
+	GXA, ///< TRANSIT Position
+	HCC, ///< Compass Heading
+	HCD, ///< Heading and Deviation
+	HDM, ///< Heading, Magnetic
+	HDT, ///< Heading, True
+	HVD, ///< Magnetic Variation, Automatic
+	HVM, ///< Magnetic Variation, Manually Set
+	IMA, ///< Vessel Identification
+	MDA, ///< Meteorological Composite
+	MHU, ///< Humidity
+	MMB, ///< Barometer
+	MTA, ///< Air Temperature
+	MWH, ///< Wave Height
+	MWS, ///< Wind & Sea State
+	R00, ///< (Rnn) Waypoints in active route
+	SBK, ///< Loran-C Blink Status
+	SCY, ///< Loran-C Cycle Lock Status
+	SCD, ///< Loran-C ECDs
+	SDB, ///< Loran-C Signal Strength
+	SGD, ///< Position Accuracy Estimate
+	SGR, ///< Loran-C Chain Identifier
+	SIU, ///< Loran-C Stations in Use
+	SLC, ///< Loran-C Status
+	SNC, ///< Navigation Calculation Basis
+	SNU, ///< Loran-C SNR Status
+	SPS, ///< Loran-C Predicted Signal Strength
+	SSF, ///< Position Correction Offset
+	STC, ///< Time Constant
+	STR, ///< Tracking Reference
+	SYS, ///< Hybrid System Configuration
+	VWT, ///< True Wind Speed and Angle
 
-	// AIS
-	VDM, ///< AIS
-	VDO, ///< AIS
+	// vendor extensions
+
+	PGRME, ///< Estimated Error Information (Garmin Extension)
+	PGRMM, ///< Map Datum (Garmin Extension)
+	PGRMZ, ///< Altitude (Garmin Extension)
+	PMGNST, ///< Magellan Status
+	PRWIZCH, ///< Rockwell Channel Status
+	PUBX, ///< u-blox (misc formats, depending on first field)
+	TMVTD, ///< Transas VTS / SML tracking system report
 };
 
 namespace talker_id
