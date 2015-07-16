@@ -54,6 +54,7 @@
 #include <marnav/utils/unique.hpp>
 #include <algorithm>
 #include <regex>
+#include <iostream>
 
 /// @example parse_nmea.cpp
 /// This is an example on how to parse and handle NMEA sentences from a string.
@@ -176,6 +177,27 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 	return i->parse;
 }
 
+/// Checks if the address field of the specified sentence is a vendor extension or
+/// a regular sentence. It returns the talker ID and tag accordingly.
+///
+/// @param[in] s The address field of a sentence.
+/// @return The tuple contains talker ID and tag. In case of a vendor extension,
+///   the talker ID may be empty.
+static std::tuple<std::string, std::string> parse_address(const std::string & address)
+{
+	auto const & index = std::find_if(begin(known_sentences), end(known_sentences),
+		[address](const entry & e) { return e.TAG == address; });
+	if (index == end(known_sentences)) {
+		// regular
+		if (address.size() < 5) // talker ID:2 + tag:3
+			throw std::invalid_argument{"unknown or malformed address field: " + address};
+		return make_tuple(address.substr(0, 2), address.substr(2, 3));
+	} else {
+		// vendor extension
+		return make_tuple(std::string{}, address);
+	}
+}
+
 /// Parses the string and returns the corresponding sentence.
 ///
 /// @param[in] s The sentence to parse.
@@ -197,46 +219,40 @@ std::unique_ptr<sentence> make_sentence(const std::string & s) throw(
 	using namespace std;
 
 	// perform various checks
-
 	if (s.empty())
 		throw invalid_argument{"empty string in nmea/make_sentence"};
-
 	if ((s[0] != sentence::START_TOKEN) && (s[0] != sentence::START_TOKEN_AIS))
 		throw invalid_argument{"no start token in nmea/make_sentence"};
 
+	// extract all fields, skip start token
+	std::regex field_regex{"(,|\\*)"};
+	auto fields_begin = std::sregex_token_iterator{begin(s) + 1, end(s), field_regex, -1};
+	auto fields_end = std::sregex_token_iterator();
+	std::vector<std::string> fields{fields_begin, fields_end};
+	if (fields.size() < 2) // at least address and checksum must be present
+		throw std::invalid_argument{"malformed sentence in nmea/make_sentence"};
+
+	// compute and check checksum
 	auto const end_pos = s.find_first_of(sentence::END_TOKEN, 1);
-
-	if (s.size() != end_pos + 3)
+	if (end_pos == std::string::npos) // end token not found
 		throw invalid_argument{"invalid format in nmea/make_sentence"};
-
-	const string::const_iterator end = begin(s) + end_pos;
-
+	if (s.size() != end_pos + 3) // short or no checksum
+		throw invalid_argument{"invalid format in nmea/make_sentence"};
 	uint8_t checksum = 0x00;
-	for_each(begin(s) + 1, end, [&checksum](char c) { checksum ^= c; });
-	size_t pos = 0;
-	const uint8_t expected_checksum = stoul(s.substr(end_pos + 1, 2), &pos, 16);
+	for_each(begin(s) + 1, begin(s) + end_pos, [&checksum](char c) { checksum ^= c; });
+	const uint8_t expected_checksum = stoul(fields.back(), 0, 16);
 	if (checksum != expected_checksum)
 		throw checksum_error{expected_checksum, checksum};
 
-	if (end_pos < 7) // talker id (2), tag (3), first comma (1)
-		throw invalid_argument{"malformed sentence in nmea/make_sentence"};
+	// extract address and posibly talker_id and tag.
+	// check for vendor extension is necessary because the address field of this extensions
+	// to not follow the pattern talker_id/tag
+	std::string talker;
+	std::string tag;
+	std::tie(talker, tag) = parse_address(fields.front());
 
-	// extract particular data
-	const std::string tag = s.substr(3, 3);
-	const std::string talker = s.substr(1, 2);
-
-	// the additional separator is needed because the last entry can be empty,
-	// therefore there is no separator for the last entry at the end. this additional
-	// separator makes sure there is a separator for the regex to parse them correctly.
-	const std::string data = s.substr(7, end_pos - 7) + ",";
-
-	// extract fields from data
-	std::regex field_regex{","};
-	auto fields_begin = std::sregex_token_iterator{data.begin(), data.end(), field_regex, -1};
-	auto fields_end = std::sregex_token_iterator();
-	std::vector<std::string> fields{fields_begin, fields_end};
-
-	return instantiate_sentence(tag)(talker, fields);
+	return instantiate_sentence(tag)(
+		talker, std::vector<std::string>{fields.begin() + 1, fields.end() - 1});
 }
 }
 }
