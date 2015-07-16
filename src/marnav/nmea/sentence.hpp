@@ -146,6 +146,7 @@ enum class sentence_id : uint32_t {
 
 namespace talker_id
 {
+constexpr const char * none = ""; // used for vendor extensions
 constexpr const char * autopilot_general = "AG";
 constexpr const char * autopilot_magnetic = "AP";
 constexpr const char * computer_calculator = "CC"; // programmed calculator (obsolete)

@@ -1,7 +1,6 @@
 #include "message_01.hpp"
 #include <marnav/utils/unique.hpp>
 #include <cmath>
-#include <iostream>
 
 namespace marnav
 {

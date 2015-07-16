@@ -26,13 +26,11 @@ Supported sentences for NMEA-0183 (read and write):
 - GSA: Geographic Position - Latitude/Longitude
 - GSV: Satellites in view
 - HDG: Heading - Deviation & Variation
-- HDM: Heading - Magnetic (obsolete as of 2009)
 - HSC: Heading Steering Command
 - MTW: Mean Temperature of Water
 - MWD: Wind Direction and Speed
 - MWV: Wind Speed and Angle
 - OSD: Own Ship Data
-- R00: Waypoints in active route
 - RMA: Recommended Minimum Navigation Information
 - RMB: Recommended Minimum Navigation Information
 - RMC: Recommended Minimum Navigation Information
@@ -58,6 +56,14 @@ Supported sentences for NMEA-0183 (read and write):
 - ZDA: Time & Date - UTC, day, month, year and local time zone
 - ZFO: UTC & Time from origin Waypoint
 - ZTG: UTC & Time to Destination Waypoint
+
+Obsolete (according to the standard) but implemented:
+- DBK: Depth Below Keel
+- HDM: Heading - Magnetic (obsolete as of 2009)
+- R00: Waypoints in active route
+
+Vendor Extensions:
+- PGRME: Garmin Estimated Error
 
 Supported messages for AIS (decode and encode):
 - type 01: Position Report Class A

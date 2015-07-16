@@ -328,7 +328,7 @@ int main(int, char **)
 		} catch (nmea::unknown_sentence & e) {
 			std::cout << "NMEA unknown: " << e.what() << ": " << line << "\n";
 		} catch (std::exception & e) {
-			std::cout << "NMEA error: " << e.what() << "\n";
+			std::cout << "NMEA error: " << e.what() << " in sentence: " << line << "\n";
 		}
 	}
 

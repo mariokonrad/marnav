@@ -1,7 +1,6 @@
 #include "xdr.hpp"
 #include "io.hpp"
 #include <marnav/utils/unique.hpp>
-#include <iostream>
 
 namespace marnav
 {

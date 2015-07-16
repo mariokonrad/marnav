@@ -64,6 +64,7 @@ add_executable(testrunner
 	nmea/Test_nmea_zda.cpp
 	nmea/Test_nmea_zfo.cpp
 	nmea/Test_nmea_ztg.cpp
+	nmea/Test_nmea_pgrme.cpp
 	ais/Test_ais.cpp
 	ais/Test_ais_message.cpp
 	ais/Test_ais_message_01.cpp
