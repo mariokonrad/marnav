@@ -28,7 +28,6 @@ enum class sentence_id : uint32_t {
 	BWR, ///< Bearing and Distance to Waypoint - Rhumb Line
 	BWW, ///< Bearing - Waypoint to Waypoint
 	DBT, ///< Depth below transducer (II)
-	DCN, ///< Decca Position
 	DPT, ///< Depth of Water
 	DTM, ///< Datum Reference
 	FSI, ///< Frequency Set Information
@@ -51,7 +50,6 @@ enum class sentence_id : uint32_t {
 	MWD, ///< Wind Directinon and Speed
 	MTW, ///< Mean Temperature of Water (II)
 	MWV, ///< Wind Speed and Angle (II)
-	OLN, ///< Omega Lane Numbers
 	OSD, ///< Own Ship Data
 	RMA, ///< Recommended Minimum Navigation Information
 	RMB, ///< Recommended Minimum Navigation Information
@@ -96,6 +94,7 @@ enum class sentence_id : uint32_t {
 	BPI, ///< Bearing & Distance to Point of Interest
 	DBK, ///< Depth Below Keel
 	DBS, ///< Depth Below Surface
+	DCN, ///< Decca Position
 	DRU, ///< Dual Doppler Auxiliary Data
 	GDA, ///< Dead Reckoning Positions
 	GLA, ///< Loran-C Positions
@@ -115,6 +114,7 @@ enum class sentence_id : uint32_t {
 	MTA, ///< Air Temperature
 	MWH, ///< Wave Height
 	MWS, ///< Wind & Sea State
+	OLN, ///< Omega Lane Numbers
 	R00, ///< (Rnn) Waypoints in active route
 	SBK, ///< Loran-C Blink Status
 	SCY, ///< Loran-C Cycle Lock Status

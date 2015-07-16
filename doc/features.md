@@ -23,6 +23,7 @@ Supported sentences for NMEA-0183 (read and write):
 - FSI: Frequency Set Information
 - GGA: Global Positioning System Fix Data
 - GLL: Geographic Position - Latitude/Longitude
+- GNS: Fix data
 - GSA: Geographic Position - Latitude/Longitude
 - GSV: Satellites in view
 - HDG: Heading - Deviation & Variation

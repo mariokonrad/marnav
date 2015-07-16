@@ -15,13 +15,14 @@ GENERAL
 NMEA
 ----
 
+@todo Implement checks for sentences.
+
 @todo Implement writer for serial devices
 
 @todo Implement additional checks in sentences, wheather or not the received data is correct.
 
 @todo Implement more sentences:
 	- ASD - Autopilot System Data
-	- DCN - Decca Position
 	- DSC - Digital Selective Calling Information
 	- DSE - Extended DSC
 	- DSI - DSC Transponder Initiate
@@ -29,7 +30,6 @@ NMEA
 	- DTM - Datum Reference
 	- GBS - GPS Satellite Fault Detection
 	- GLC - Geographic Position, Loran-C
-	- GNS - Fix data
 	- GRS - GPS Range Residuals
 	- GST - GPS Pseudorange Noise Statistics
 	- GTD - Geographic Location in Time Differences
@@ -38,7 +38,6 @@ NMEA
 	- LCD - Loran-C Signal Data
 	- MSK - Control for a Beacon Receiver
 	- MSS - Beacon Receiver Status
-	- OLN - Omega Lane Numbers
 	- RPM - Revolutions
 	- RSD - RADAR System Data
 	- STN - Multiple Data ID
