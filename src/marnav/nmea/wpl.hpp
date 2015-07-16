@@ -2,7 +2,7 @@
 #define __NMEA__WPL__HPP__
 
 #include "sentence.hpp"
-#include <marnav/geo/angle.hpp>
+#include "angle.hpp"
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
