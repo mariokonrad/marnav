@@ -317,10 +317,14 @@ int main(int, char **)
 
 	while (stackoverflow::getline(ifs, line)) {
 		try {
-			if (!line.empty()) {
-				auto sentence = nmea::make_sentence(line);
-				marnav_test::process_nmea_sentence(sentence, line);
-			}
+			if (line.empty())
+				continue;
+
+			if (line[0] == '#')
+				continue;
+
+			auto sentence = nmea::make_sentence(line);
+			marnav_test::process_nmea_sentence(sentence, line);
 		} catch (nmea::unknown_sentence & e) {
 			std::cout << "NMEA unknown: " << e.what() << ": " << line << "\n";
 		} catch (std::exception & e) {
