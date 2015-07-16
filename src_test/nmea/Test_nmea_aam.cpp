@@ -13,8 +13,6 @@ class Test_nmea_aam : public ::testing::Test
 
 TEST_F(Test_nmea_aam, contruction) { nmea::aam aam; }
 
-TEST_F(Test_nmea_aam, size) { EXPECT_EQ(64u, sizeof(nmea::aam)); }
-
 TEST_F(Test_nmea_aam, parse)
 {
 	auto s = nmea::make_sentence("$GPAAM,A,A,0.5,N,POINT1*6E");

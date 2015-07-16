@@ -13,8 +13,6 @@ class Test_nmea_rot : public ::testing::Test
 
 TEST_F(Test_nmea_rot, contruction) { nmea::rot rot; }
 
-TEST_F(Test_nmea_rot, size) { EXPECT_EQ(48u, sizeof(nmea::rot)); }
-
 TEST_F(Test_nmea_rot, parse)
 {
 	auto s = nmea::make_sentence("$GPROT,1.0,A*30");

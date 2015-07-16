@@ -13,8 +13,6 @@ class Test_nmea_rsa : public ::testing::Test
 
 TEST_F(Test_nmea_rsa, contruction) { nmea::rsa rsa; }
 
-TEST_F(Test_nmea_rsa, size) { EXPECT_EQ(72u, sizeof(nmea::rsa)); }
-
 TEST_F(Test_nmea_rsa, parse)
 {
 	auto s = nmea::make_sentence("$IIRSA,1.0,A,,*2E");

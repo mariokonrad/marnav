@@ -13,11 +13,10 @@ class Test_nmea_bwc : public ::testing::Test
 
 TEST_F(Test_nmea_bwc, contruction) { nmea::bwc bwc; }
 
-TEST_F(Test_nmea_bwc, size) { EXPECT_EQ(184u, sizeof(nmea::bwc)); }
-
 TEST_F(Test_nmea_bwc, parse_before_v23)
 {
-	auto s = nmea::make_sentence("$GPBWC,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM*21");
+	auto s = nmea::make_sentence(
+		"$GPBWC,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM*21");
 	ASSERT_NE(nullptr, s);
 
 	auto bwc = nmea::sentence_cast<nmea::bwc>(s);
@@ -26,7 +25,8 @@ TEST_F(Test_nmea_bwc, parse_before_v23)
 
 TEST_F(Test_nmea_bwc, parse)
 {
-	auto s = nmea::make_sentence("$GPBWC,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM,A*4C");
+	auto s = nmea::make_sentence(
+		"$GPBWC,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM,A*4C");
 	ASSERT_NE(nullptr, s);
 
 	auto bwc = nmea::sentence_cast<nmea::bwc>(s);

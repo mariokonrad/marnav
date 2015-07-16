@@ -13,8 +13,6 @@ class Test_nmea_hdm : public ::testing::Test
 
 TEST_F(Test_nmea_hdm, contruction) { nmea::hdm hdm; }
 
-TEST_F(Test_nmea_hdm, size) { EXPECT_EQ(48u, sizeof(nmea::hdm)); }
-
 TEST_F(Test_nmea_hdm, parse)
 {
 	auto s = nmea::make_sentence("$HCHDM,45.8,M*10");

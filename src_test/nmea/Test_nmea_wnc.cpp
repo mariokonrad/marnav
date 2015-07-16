@@ -13,8 +13,6 @@ class Test_nmea_wnc : public ::testing::Test
 
 TEST_F(Test_nmea_wnc, contruction) { nmea::wnc wnc; }
 
-TEST_F(Test_nmea_wnc, size) { EXPECT_EQ(104u, sizeof(nmea::wnc)); }
-
 TEST_F(Test_nmea_wnc, parse)
 {
 	auto s = nmea::make_sentence("$GPWNC,12.3,N,5.6,K,POINT1,POINT2*78");

@@ -13,8 +13,6 @@ class Test_nmea_wpl : public ::testing::Test
 
 TEST_F(Test_nmea_wpl, contruction) { nmea::wpl wpl; }
 
-TEST_F(Test_nmea_wpl, size) { EXPECT_EQ(88u, sizeof(nmea::wpl)); }
-
 TEST_F(Test_nmea_wpl, parse)
 {
 	auto s = nmea::make_sentence("$GPWPL,12.3,N,123.4,E,POINT1*32");

@@ -13,8 +13,6 @@ class Test_nmea_alm : public ::testing::Test
 
 TEST_F(Test_nmea_alm, contruction) { nmea::alm alm; }
 
-TEST_F(Test_nmea_alm, size) { EXPECT_EQ(80u, sizeof(nmea::alm)); }
-
 TEST_F(Test_nmea_alm, parse)
 {
 	auto s = nmea::make_sentence(

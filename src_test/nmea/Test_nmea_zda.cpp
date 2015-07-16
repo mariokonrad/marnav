@@ -13,8 +13,6 @@ class Test_nmea_zda : public ::testing::Test
 
 TEST_F(Test_nmea_zda, contruction) { nmea::zda zda; }
 
-TEST_F(Test_nmea_zda, size) { EXPECT_EQ(80u, sizeof(nmea::zda)); }
-
 TEST_F(Test_nmea_zda, parse)
 {
 	auto s = nmea::make_sentence("$GPZDA,160012.71,11,03,2004,-1,00*7D");

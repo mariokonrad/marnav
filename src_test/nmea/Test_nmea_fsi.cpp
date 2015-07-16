@@ -11,15 +11,7 @@ class Test_nmea_fsi : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_fsi, contruction)
-{
-	nmea::fsi fsi;
-}
-
-TEST_F(Test_nmea_fsi, size)
-{
-	EXPECT_EQ(48u, sizeof(nmea::fsi));
-}
+TEST_F(Test_nmea_fsi, contruction) { nmea::fsi fsi; }
 
 TEST_F(Test_nmea_fsi, parse)
 {
@@ -42,6 +34,5 @@ TEST_F(Test_nmea_fsi, empty_to_string)
 
 	EXPECT_STREQ("$GPFSI,,,,*4B", nmea::to_string(fsi).c_str());
 }
-
 }
 

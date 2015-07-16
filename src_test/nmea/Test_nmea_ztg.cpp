@@ -13,8 +13,6 @@ class Test_nmea_ztg : public ::testing::Test
 
 TEST_F(Test_nmea_ztg, contruction) { nmea::ztg ztg; }
 
-TEST_F(Test_nmea_ztg, size) { EXPECT_EQ(80u, sizeof(nmea::ztg)); }
-
 TEST_F(Test_nmea_ztg, parse)
 {
 	auto s = nmea::make_sentence("$GPZTG,123456.1,000010,POINT1*16");

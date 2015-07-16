@@ -13,8 +13,6 @@ class Test_nmea_dbt : public ::testing::Test
 
 TEST_F(Test_nmea_dbt, contruction) { nmea::dbt dbt; }
 
-TEST_F(Test_nmea_dbt, size) { EXPECT_EQ(96u, sizeof(nmea::dbt)); }
-
 TEST_F(Test_nmea_dbt, parse)
 {
 	auto s = nmea::make_sentence("$IIDBT,9.3,f,2.84,M,1.55,F*14");

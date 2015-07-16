@@ -13,8 +13,6 @@ class Test_nmea_bww : public ::testing::Test
 
 TEST_F(Test_nmea_bww, contruction) { nmea::bww bww; }
 
-TEST_F(Test_nmea_bww, size) { EXPECT_EQ(104u, sizeof(nmea::bww)); }
-
 TEST_F(Test_nmea_bww, parse)
 {
 	auto s = nmea::make_sentence("$GPBWW,213.8,T,218.0,M,POINT1,POINT2*4C");

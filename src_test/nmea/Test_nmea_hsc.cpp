@@ -13,8 +13,6 @@ class Test_nmea_hsc : public ::testing::Test
 
 TEST_F(Test_nmea_hsc, contruction) { nmea::hsc hsc; }
 
-TEST_F(Test_nmea_hsc, size) { EXPECT_EQ(72u, sizeof(nmea::hsc)); }
-
 TEST_F(Test_nmea_hsc, parse)
 {
 	auto s = nmea::make_sentence("$GPHSC,45.8,T,,*0C");

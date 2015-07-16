@@ -13,8 +13,6 @@ class Test_nmea_hdg : public ::testing::Test
 
 TEST_F(Test_nmea_hdg, contruction) { nmea::hdg hdg; }
 
-TEST_F(Test_nmea_hdg, size) { EXPECT_EQ(88u, sizeof(nmea::hdg)); }
-
 TEST_F(Test_nmea_hdg, parse)
 {
 	auto s = nmea::make_sentence("$HCHDG,45.8,,,0.6,E*16");

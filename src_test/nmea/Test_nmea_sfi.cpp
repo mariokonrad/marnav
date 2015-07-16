@@ -11,15 +11,7 @@ class Test_nmea_sfi : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_sfi, contruction)
-{
-	nmea::sfi sfi;
-}
-
-TEST_F(Test_nmea_sfi, size)
-{
-	EXPECT_EQ(56u, sizeof(nmea::sfi));
-}
+TEST_F(Test_nmea_sfi, contruction) { nmea::sfi sfi; }
 
 TEST_F(Test_nmea_sfi, parse)
 {
@@ -44,6 +36,5 @@ TEST_F(Test_nmea_sfi, empty_to_string)
 
 	EXPECT_STREQ("$GPSFI,0,0*4B", nmea::to_string(sfi).c_str());
 }
-
 }
 

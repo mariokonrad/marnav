@@ -13,8 +13,6 @@ class Test_nmea_dpt : public ::testing::Test
 
 TEST_F(Test_nmea_dpt, contruction) { nmea::dpt dpt; }
 
-TEST_F(Test_nmea_dpt, size) { EXPECT_EQ(56u, sizeof(nmea::dpt)); }
-
 TEST_F(Test_nmea_dpt, parse)
 {
 	auto s = nmea::make_sentence("$IIDPT,9.3,1.0*4B");

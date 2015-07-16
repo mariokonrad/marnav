@@ -13,8 +13,6 @@ class Test_nmea_mwd : public ::testing::Test
 
 TEST_F(Test_nmea_mwd, contruction) { nmea::mwd mwd; }
 
-TEST_F(Test_nmea_mwd, size) { EXPECT_EQ(120u, sizeof(nmea::mwd)); }
-
 TEST_F(Test_nmea_mwd, parse)
 {
 	auto s = nmea::make_sentence("$WIMWD,12.4,T,,,,,,*0D");

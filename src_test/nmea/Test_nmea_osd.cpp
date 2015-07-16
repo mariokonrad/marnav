@@ -13,8 +13,6 @@ class Test_nmea_osd : public ::testing::Test
 
 TEST_F(Test_nmea_osd, contruction) { nmea::osd osd; }
 
-TEST_F(Test_nmea_osd, size) { EXPECT_EQ(136u, sizeof(nmea::osd)); }
-
 TEST_F(Test_nmea_osd, parse)
 {
 	auto s = nmea::make_sentence("$IIOSD,123.4,A,,,,,,,*1F");

@@ -13,11 +13,10 @@ class Test_nmea_bwr : public ::testing::Test
 
 TEST_F(Test_nmea_bwr, contruction) { nmea::bwr bwr; }
 
-TEST_F(Test_nmea_bwr, size) { EXPECT_EQ(176u, sizeof(nmea::bwr)); }
-
 TEST_F(Test_nmea_bwr, parse)
 {
-	auto s = nmea::make_sentence("$GPBWR,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM*30");
+	auto s = nmea::make_sentence(
+		"$GPBWR,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM*30");
 	ASSERT_NE(nullptr, s);
 
 	auto bwr = nmea::sentence_cast<nmea::bwr>(s);
@@ -92,5 +91,4 @@ TEST_F(Test_nmea_bwr, set_waypoint)
 
 	EXPECT_STREQ("$GPBWR,,,,,,,,,,,,POINT1*2D", nmea::to_string(bwr).c_str());
 }
-
 }

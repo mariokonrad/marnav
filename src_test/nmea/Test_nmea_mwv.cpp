@@ -13,8 +13,6 @@ class Test_nmea_mwv : public ::testing::Test
 
 TEST_F(Test_nmea_mwv, contruction) { nmea::mwv mwv; }
 
-TEST_F(Test_nmea_mwv, size) { EXPECT_EQ(72u, sizeof(nmea::mwv)); }
-
 TEST_F(Test_nmea_mwv, parse)
 {
 	auto s = nmea::make_sentence("$IIMWV,084.0,R,10.4,N,A*04");

@@ -13,8 +13,6 @@ class Test_nmea_r00 : public ::testing::Test
 
 TEST_F(Test_nmea_r00, contruction) { nmea::r00 r00; }
 
-TEST_F(Test_nmea_r00, size) { EXPECT_EQ(248u, sizeof(nmea::r00)); }
-
 TEST_F(Test_nmea_r00, parse)
 {
 	auto s = nmea::make_sentence("$GPR00,EGLL,EGLM,EGTB,EGUB,EGTK,MBOT,EGTB,,,,,,,*58");

@@ -14,8 +14,6 @@ class Test_nmea_vdm : public ::testing::Test
 
 TEST_F(Test_nmea_vdm, contruction) { nmea::vdm vdm; }
 
-TEST_F(Test_nmea_vdm, size) { EXPECT_EQ(56u, sizeof(nmea::vdm)); }
-
 TEST_F(Test_nmea_vdm, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(nmea::vdm::parse("@@", {5, "@"}));

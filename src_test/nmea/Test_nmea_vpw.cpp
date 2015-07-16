@@ -13,8 +13,6 @@ class Test_nmea_vpw : public ::testing::Test
 
 TEST_F(Test_nmea_vpw, contruction) { nmea::vpw vpw; }
 
-TEST_F(Test_nmea_vpw, size) { EXPECT_EQ(72u, sizeof(nmea::vpw)); }
-
 TEST_F(Test_nmea_vpw, parse)
 {
 	auto s = nmea::make_sentence("$IIVPW,4.5,N,6.7,M*52");

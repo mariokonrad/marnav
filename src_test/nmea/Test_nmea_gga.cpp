@@ -13,8 +13,6 @@ class Test_nmea_gga : public ::testing::Test
 
 TEST_F(Test_nmea_gga, contruction) { nmea::gga gga; }
 
-TEST_F(Test_nmea_gga, size) { EXPECT_EQ(192u, sizeof(nmea::gga)); }
-
 TEST_F(Test_nmea_gga, parse)
 {
 	auto s = nmea::make_sentence(

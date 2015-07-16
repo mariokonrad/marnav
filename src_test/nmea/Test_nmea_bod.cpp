@@ -11,15 +11,7 @@ class Test_nmea_bod : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_bod, contruction)
-{
-	nmea::bod bod;
-}
-
-TEST_F(Test_nmea_bod, size)
-{
-	EXPECT_EQ(104u, sizeof(nmea::bod));
-}
+TEST_F(Test_nmea_bod, contruction) { nmea::bod bod; }
 
 TEST_F(Test_nmea_bod, parse)
 {
@@ -88,6 +80,5 @@ TEST_F(Test_nmea_bod, set_waypoint_from_to_large)
 
 	EXPECT_ANY_THROW(bod.set_waypoint_from("1234567890"));
 }
-
 }
 

@@ -13,8 +13,6 @@ class Test_nmea_rma : public ::testing::Test
 
 TEST_F(Test_nmea_rma, contruction) { nmea::rma rma; }
 
-TEST_F(Test_nmea_rma, size) { EXPECT_EQ(160u, sizeof(nmea::rma)); }
-
 TEST_F(Test_nmea_rma, parse)
 {
 	auto s = nmea::make_sentence("$GPRMA,,,,,,,,,,,*65");

@@ -13,8 +13,6 @@ class Test_nmea_xte : public ::testing::Test
 
 TEST_F(Test_nmea_xte, contruction) { nmea::xte xte; }
 
-TEST_F(Test_nmea_xte, size) { EXPECT_EQ(48u, sizeof(nmea::xte)); }
-
 TEST_F(Test_nmea_xte, parse)
 {
 	auto s = nmea::make_sentence("$GPXTE,,,,,,*5E");

@@ -13,8 +13,6 @@ class Test_nmea_wcv : public ::testing::Test
 
 TEST_F(Test_nmea_wcv, contruction) { nmea::wcv wcv; }
 
-TEST_F(Test_nmea_wcv, size) { EXPECT_EQ(64u, sizeof(nmea::wcv)); }
-
 TEST_F(Test_nmea_wcv, parse)
 {
 	auto s = nmea::make_sentence("$GPWCV,12.3,N,POINT1*54");

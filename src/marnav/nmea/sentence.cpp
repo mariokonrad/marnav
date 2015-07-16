@@ -8,12 +8,9 @@ namespace nmea
 
 sentence::sentence(sentence_id id, const std::string & tag, const std::string & talker)
 	: id_(id)
+	, tag_(tag)
+	, talker_(talker)
 {
-	std::copy_n(tag.c_str(), 3, this->tag_);
-	this->tag_[3] = 0;
-
-	std::fill_n(talker_, sizeof(talker_), 0);
-	set_talker(talker);
 }
 
 /// Overwrites the default talker for a sentence.
@@ -21,16 +18,14 @@ void sentence::set_talker(const std::string & talker)
 {
 	if (talker.size() != 2)
 		return;
-
-	std::copy_n(talker.c_str(), 2, this->talker_);
-	this->talker_[2] = 0;
+	talker_ = talker;
 }
 
 sentence_id sentence::id() const { return id_; }
 
-const char * sentence::tag() const { return tag_; }
+std::string sentence::tag() const { return tag_; }
 
-const char * sentence::talker() const { return talker_; }
+std::string sentence::talker() const { return talker_; }
 
 std::string to_string(const sentence & s)
 {

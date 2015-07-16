@@ -13,11 +13,10 @@ class Test_nmea_gsv : public ::testing::Test
 
 TEST_F(Test_nmea_gsv, contruction) { nmea::gsv gsv; }
 
-TEST_F(Test_nmea_gsv, size) { EXPECT_EQ(128u, sizeof(nmea::gsv)); }
-
 TEST_F(Test_nmea_gsv, parse)
 {
-	auto s = nmea::make_sentence("$GPGSV,3,1,11,03,03,111,00,04,15,270,00,06,01,010,00,13,06,292,00*74");
+	auto s = nmea::make_sentence(
+		"$GPGSV,3,1,11,03,03,111,00,04,15,270,00,06,01,010,00,13,06,292,00*74");
 	ASSERT_NE(nullptr, s);
 
 	auto gsv = nmea::sentence_cast<nmea::gsv>(s);
@@ -140,5 +139,4 @@ TEST_F(Test_nmea_gsv, get_sat)
 		EXPECT_EQ(0u, sat.snr);
 	}
 }
-
 }

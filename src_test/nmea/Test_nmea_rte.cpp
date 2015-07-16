@@ -13,8 +13,6 @@ class Test_nmea_rte : public ::testing::Test
 
 TEST_F(Test_nmea_rte, contruction) { nmea::rte rte; }
 
-TEST_F(Test_nmea_rte, size) { EXPECT_EQ(200u, sizeof(nmea::rte)); }
-
 TEST_F(Test_nmea_rte, parse)
 {
 	auto s = nmea::make_sentence("$GPRTE,1,1,c,*37");

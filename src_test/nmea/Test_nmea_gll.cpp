@@ -13,8 +13,6 @@ class Test_nmea_gll : public ::testing::Test
 
 TEST_F(Test_nmea_gll, contruction) { nmea::gll gll; }
 
-TEST_F(Test_nmea_gll, size) { EXPECT_EQ(96u, sizeof(nmea::gll)); }
-
 TEST_F(Test_nmea_gll, parse)
 {
 	auto s = nmea::make_sentence("$GPGLL,,,,,,*50");

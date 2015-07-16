@@ -13,8 +13,6 @@ class Test_nmea_xtr : public ::testing::Test
 
 TEST_F(Test_nmea_xtr, contruction) { nmea::xtr xtr; }
 
-TEST_F(Test_nmea_xtr, size) { EXPECT_EQ(48u, sizeof(nmea::xtr)); }
-
 TEST_F(Test_nmea_xtr, parse)
 {
 	auto s = nmea::make_sentence("$GPXTR,,,*65");

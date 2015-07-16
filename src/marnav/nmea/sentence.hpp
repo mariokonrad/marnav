@@ -183,8 +183,6 @@ constexpr const char * ais_physical_shore_station = "SA"; // NMEA 4.0 Physical S
 };
 
 /// This is the base class for all sentences.
-///
-/// @note This class behaves like a POD, no complex data with memory operations.
 class sentence
 {
 public:
@@ -205,10 +203,10 @@ public:
 	sentence_id id() const;
 
 	/// Returns the tag.
-	const char * tag() const;
+	std::string tag() const;
 
 	/// Returns the talker.
-	const char * talker() const;
+	std::string talker() const;
 
 	/// Sets the talker of the sentence.
 	///
@@ -227,8 +225,8 @@ protected:
 
 private:
 	const sentence_id id_;
-	char tag_[4];
-	char talker_[3];
+	std::string tag_;
+	std::string talker_;
 };
 
 /// Renders the specified sentence into a string.

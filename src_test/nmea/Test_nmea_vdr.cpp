@@ -13,8 +13,6 @@ class Test_nmea_vdr : public ::testing::Test
 
 TEST_F(Test_nmea_vdr, contruction) { nmea::vdr vdr; }
 
-TEST_F(Test_nmea_vdr, size) { EXPECT_EQ(96u, sizeof(nmea::vdr)); }
-
 TEST_F(Test_nmea_vdr, parse)
 {
 	auto s = nmea::make_sentence("$IIVDR,211.0,T,1.00,M,1.25,N*3C");

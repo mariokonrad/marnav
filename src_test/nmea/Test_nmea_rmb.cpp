@@ -13,8 +13,6 @@ class Test_nmea_rmb : public ::testing::Test
 
 TEST_F(Test_nmea_rmb, contruction) { nmea::rmb rmb; }
 
-TEST_F(Test_nmea_rmb, size) { EXPECT_EQ(184u, sizeof(nmea::rmb)); }
-
 TEST_F(Test_nmea_rmb, parse)
 {
 	auto s = nmea::make_sentence("$GPRMB,V,,,,,,,,,,,,V,N*04");

@@ -13,8 +13,6 @@ class Test_nmea_xdr : public ::testing::Test
 
 TEST_F(Test_nmea_xdr, contruction) { nmea::xdr xdr; }
 
-TEST_F(Test_nmea_xdr, size) { EXPECT_EQ(424u, sizeof(nmea::xdr)); }
-
 TEST_F(Test_nmea_xdr, parse)
 {
 	auto s = nmea::make_sentence("$YXXDR,a,16.0,M,abc*1A");

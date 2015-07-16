@@ -317,7 +317,7 @@ int main(int, char **)
 
 	while (stackoverflow::getline(ifs, line)) {
 		try {
-			if (line.size() > 0) {
+			if (!line.empty()) {
 				auto sentence = nmea::make_sentence(line);
 				marnav_test::process_nmea_sentence(sentence, line);
 			}
