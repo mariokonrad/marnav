@@ -8,12 +8,19 @@ set(PROJECT_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
+option(ENABLE_PROFILING "Enable Profiling" OFF)
+
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 	message(STATUS "Compiler settings for GNU")
-	set(CMAKE_CXX_FLAGS          "${CMAKE_CXX_FLAGS}         -std=c++11 -Wall -Wextra -O0 -ggdb")
-	set(CMAKE_CXX_FLAGS_DEBUG    "${CMAKE_CXX_FLAGS_DEBUG}   -std=c++11 -Wall -Wextra -O0 -ggdb")
-	set(CMAKE_CXX_FLAGS_RELEASE  "${CMAKE_CXX_FLAGS_RELEASE} -std=c++11 -Wall -Wextra -O3 -ggdb")
-	set(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_DEBUG}   -fprofile-arcs -ftest-coverage")
+
+	if(ENABLE_PROFILING)
+		set(CXX_PROFILE_FLAGS "-pg")
+	endif()
+
+	set(CMAKE_CXX_FLAGS          "${CMAKE_CXX_FLAGS}         ${CXX_PROFILE_FLAGS} -std=c++11 -Wall -Wextra -O0 -ggdb")
+	set(CMAKE_CXX_FLAGS_DEBUG    "${CMAKE_CXX_FLAGS_DEBUG}   ${CXX_PROFILE_FLAGS} -std=c++11 -Wall -Wextra -O0 -ggdb")
+	set(CMAKE_CXX_FLAGS_RELEASE  "${CMAKE_CXX_FLAGS_RELEASE} ${CXX_PROFILE_FLAGS} -std=c++11 -Wall -Wextra -O3 -ggdb")
+	set(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_DEBUG}   ${CXX_PROFILE_FLAGS} -fprofile-arcs -ftest-coverage")
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 	message(STATUS "Compiler settings for Clang")
 	set(CMAKE_CXX_FLAGS          "${CMAKE_CXX_FLAGS}         -std=c++11 -Wall -Wextra -O0 -g")
