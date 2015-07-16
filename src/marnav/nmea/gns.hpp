@@ -90,7 +90,7 @@ public:
 	void set_time_utc(const nmea::time & t) { time_utc = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_mode_indicator(const std::string & t) { mode_indicator = t; }
+	void set_mode_indicator(const std::string & t);
 	void set_number_of_satellites(uint32_t t) { number_of_satellites = t; }
 	void set_hdrop(double t) { hdrop = t; }
 	void set_antenna_altitude(double t) { antenna_altitude = t; }

@@ -26,6 +26,12 @@ void gns::set_lon(const geo::longitude & t)
 	lon_hem = convert_hemisphere(t);
 }
 
+void gns::set_mode_indicator(const std::string & t)
+{
+	check_waypoint_id(t); // same requirements as waypoint IDs
+	mode_indicator = t;
+}
+
 std::unique_ptr<sentence> gns::parse(const std::string & talker,
 	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
