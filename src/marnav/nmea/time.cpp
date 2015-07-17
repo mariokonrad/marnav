@@ -5,23 +5,9 @@ namespace marnav
 namespace nmea
 {
 
-time::time(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(std::invalid_argument)
-	: h(h)
-	, m(m)
-	, s(s)
-	, ms(ms)
+namespace
 {
-	if (h > 23)
-		throw std::invalid_argument{"invalid hour in nmea::time"};
-	if (m > 59)
-		throw std::invalid_argument{"invalid minute in nmea::time"};
-	if (s > 59)
-		throw std::invalid_argument{"invalid second in nmea::time"};
-	if (ms > 999)
-		throw std::invalid_argument{"invalid milliseconds in nmea::time"};
-}
-
-time time::parse(const std::string & str) throw(std::invalid_argument)
+template <class T> static T parse_time(const std::string & str) throw(std::invalid_argument)
 {
 	try {
 		std::size_t pos = 0;
@@ -33,15 +19,54 @@ time time::parse(const std::string & str) throw(std::invalid_argument)
 		const uint32_t m = static_cast<uint32_t>(t / 100) % 100;
 		const uint32_t s = static_cast<uint32_t>(t) % 100;
 		const uint32_t ms = static_cast<uint32_t>(t * 1000) % 1000;
-		return time{h, m, s, ms};
+		return T{h, m, s, ms};
 	} catch (std::invalid_argument) {
-		throw std::invalid_argument{"invalid time format, 'HHMMSS[.mmm]' expected"};
+		throw std::invalid_argument{"invalid format, 'HHMMSS[.mmm]' expected"};
 	}
 }
+}
 
-bool operator==(const time & a, const time & b) noexcept
+void trait_time::check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(
+	std::invalid_argument)
 {
-	return (&a == &b) || ((a.h == b.h) && (a.m == b.m) && (a.s == b.s) && (a.ms == b.ms));
+	if (h > 23)
+		throw std::invalid_argument{"invalid hour in nmea::time"};
+	if (m > 59)
+		throw std::invalid_argument{"invalid minute in nmea::time"};
+	if (s > 59)
+		throw std::invalid_argument{"invalid second in nmea::time"};
+	if (ms > 999)
+		throw std::invalid_argument{"invalid milliseconds in nmea::time"};
+}
+
+void trait_duration::check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(
+	std::invalid_argument)
+{
+	if (h > 99)
+		throw std::invalid_argument{"invalid hour in nmea::duration"};
+	if (m > 59)
+		throw std::invalid_argument{"invalid minute in nmea::duration"};
+	if (s > 59)
+		throw std::invalid_argument{"invalid second in nmea::duration"};
+	if (ms > 999)
+		throw std::invalid_argument{"invalid milliseconds in nmea::duration"};
+}
+
+/// Parses the time information within the specified string (start and end of string).
+/// If the string is empty, the result will be initialized to zero.
+/// The time to be parsed must  be in the form: "HHMMSS.mmm" (milliseconds are optional).
+///  - HH  : zero leading hour of the day (00..23)
+///  - MM  : zero leading minute of the hour (00..59)
+///  - SS  : zero leading second of the minute (00..59)
+///  - mmm : milliseconds (000..999)
+///
+/// @param[in] s start of string to parse (inclusive)
+/// @param[in] e end of string to parse (exclusive)
+/// @param[out] endptr Points the end of the parsed string.
+/// @return The parsed time
+time time::parse(const std::string & str) throw(std::invalid_argument)
+{
+	return parse_time<time>(str);
 }
 
 /// Returns a string representation in the form 'hhmmss', does not render fractions of seconds.
@@ -62,43 +87,21 @@ std::istream & operator>>(std::istream & is, time & t)
 	return is;
 }
 
-duration::duration(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(std::invalid_argument)
-	: h(h)
-	, m(m)
-	, s(s)
-	, ms(ms)
-{
-	if (h > 99)
-		throw std::invalid_argument{"invalid hour in nmea::duration"};
-	if (m > 59)
-		throw std::invalid_argument{"invalid minute in nmea::duration"};
-	if (s > 59)
-		throw std::invalid_argument{"invalid second in nmea::duration"};
-	if (ms > 999)
-		throw std::invalid_argument{"invalid milliseconds in nmea::duration"};
-}
-
+/// Parses the duration information within the specified string (start and end of string).
+/// If the string is empty, the result will be initialized to zero.
+/// The duration to be parsed must  be in the form: "HHMMSS.mmm" (milliseconds are optional).
+///  - HH  : zero leading hour of the day (00..99)
+///  - MM  : zero leading minute of the hour (00..59)
+///  - SS  : zero leading second of the minute (00..59)
+///  - mmm : milliseconds (000..999)
+///
+/// @param[in] s start of string to parse (inclusive)
+/// @param[in] e end of string to parse (exclusive)
+/// @param[out] endptr Points the end of the parsed string.
+/// @return The parsed duration
 duration duration::parse(const std::string & str) throw(std::invalid_argument)
 {
-	try {
-		std::size_t pos = 0;
-		double t = std::stod(str, &pos);
-		if (pos != str.size())
-			throw std::invalid_argument{"invalid format for 'double'"};
-
-		const uint32_t h = static_cast<uint32_t>(t / 10000) % 100;
-		const uint32_t m = static_cast<uint32_t>(t / 100) % 100;
-		const uint32_t s = static_cast<uint32_t>(t) % 100;
-		const uint32_t ms = static_cast<uint32_t>(t * 1000) % 1000;
-		return duration{h, m, s, ms};
-	} catch (std::invalid_argument) {
-		throw std::invalid_argument{"invalid duration format, 'HHMMSS[.mmm]' expected"};
-	}
-}
-
-bool operator==(const duration & a, const duration & b) noexcept
-{
-	return (&a == &b) || ((a.h == b.h) && (a.m == b.m) && (a.s == b.s) && (a.ms == b.ms));
+	return parse_time<duration>(str);
 }
 
 /// Returns a string representation in the form 'hhmmss', does not render fractions of seconds.
@@ -109,7 +112,7 @@ std::string to_string(const duration & d)
 	return buf;
 }
 
-std::ostream & operator<<(std::ostream & os, const duration& t) { return os << to_string(t); }
+std::ostream & operator<<(std::ostream & os, const duration & t) { return os << to_string(t); }
 
 std::istream & operator>>(std::istream & is, duration & t)
 {
@@ -118,6 +121,5 @@ std::istream & operator>>(std::istream & is, duration & t)
 	t = duration::parse(s);
 	return is;
 }
-
 }
 }
