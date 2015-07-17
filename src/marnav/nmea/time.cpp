@@ -60,10 +60,9 @@ void trait_duration::check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) thro
 ///  - SS  : zero leading second of the minute (00..59)
 ///  - mmm : milliseconds (000..999)
 ///
-/// @param[in] s start of string to parse (inclusive)
-/// @param[in] e end of string to parse (exclusive)
-/// @param[out] endptr Points the end of the parsed string.
-/// @return The parsed time
+/// @param[in] str The string to parse.
+/// @return The parsed time.
+/// @exception std::invalid_argument Thrown if the string is malformed.
 time time::parse(const std::string & str) throw(std::invalid_argument)
 {
 	return parse_time<time>(str);
@@ -95,10 +94,9 @@ std::istream & operator>>(std::istream & is, time & t)
 ///  - SS  : zero leading second of the minute (00..59)
 ///  - mmm : milliseconds (000..999)
 ///
-/// @param[in] s start of string to parse (inclusive)
-/// @param[in] e end of string to parse (exclusive)
-/// @param[out] endptr Points the end of the parsed string.
+/// @param[in] str The string to parse.
 /// @return The parsed duration
+/// @exception std::invalid_argument Thrown if the string is malformed.
 duration duration::parse(const std::string & str) throw(std::invalid_argument)
 {
 	return parse_time<duration>(str);
