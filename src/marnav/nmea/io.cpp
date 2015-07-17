@@ -94,6 +94,8 @@ void read(const std::string & s, date & value, data_format) { std::istringstream
 
 void read(const std::string & s, time & value, data_format) { std::istringstream{s} >> value; }
 
+void read(const std::string & s, duration & value, data_format) { std::istringstream{s} >> value; }
+
 void read(const std::string & s, char & value, data_format) { std::istringstream{s} >> value; }
 
 void read(const std::string & s, uint32_t & value, data_format fmt)

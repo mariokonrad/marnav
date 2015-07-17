@@ -40,8 +40,8 @@ Supported sentences for NMEA-0183 (read and write):
 - RTE: Routes
 - SFI: Scanning Frequency Information
 - VBW: Dual Ground/Water Speed
-- VDM
-- VDO
+- VDM: AIS VHF Data-Link Message
+- VDO: AIS VHF Data-Link Own-Vessel Report
 - VDR: Set and Drift
 - VHW: Water speed and heading
 - VLW: Distance Traveled through Water
@@ -55,6 +55,7 @@ Supported sentences for NMEA-0183 (read and write):
 - XTE: Cross-Track Error, Measured
 - XTR: Cross Track Error - Dead Reckoning
 - ZDA: Time & Date - UTC, day, month, year and local time zone
+- ZDL: Time and Distance to Variable Point
 - ZFO: UTC & Time from origin Waypoint
 - ZTG: UTC & Time to Destination Waypoint
 

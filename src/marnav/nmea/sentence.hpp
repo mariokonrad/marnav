@@ -84,6 +84,7 @@ enum class sentence_id : uint32_t {
 	XTE, ///< Cross-Track Error, Measured
 	XTR, ///< Cross Track Error - Dead Reckoning
 	ZDA, ///< Time & Date - UTC, day, month, year and local time zone
+	ZDL, ///< Time and Distance to Variable Point
 	ZFO, ///< UTC & Time from origin Waypoint
 	ZTG, ///< UTC & Time to Destination Waypoint
 

@@ -50,6 +50,7 @@
 #include "xte.hpp"
 #include "xtr.hpp"
 #include "zda.hpp"
+#include "zdl.hpp"
 #include "zfo.hpp"
 #include "ztg.hpp"
 #include "pgrme.hpp"
@@ -95,8 +96,8 @@ static const std::vector<entry> known_sentences = {
 	REGISTER_SENTENCE(vlw), REGISTER_SENTENCE(vpw), REGISTER_SENTENCE(vtg),
 	REGISTER_SENTENCE(vwr), REGISTER_SENTENCE(wcv), REGISTER_SENTENCE(wnc),
 	REGISTER_SENTENCE(wpl), REGISTER_SENTENCE(xdr), REGISTER_SENTENCE(xte),
-	REGISTER_SENTENCE(xtr), REGISTER_SENTENCE(zda), REGISTER_SENTENCE(zfo),
-	REGISTER_SENTENCE(ztg),
+	REGISTER_SENTENCE(xtr), REGISTER_SENTENCE(zda), REGISTER_SENTENCE(zdl),
+	REGISTER_SENTENCE(zfo), REGISTER_SENTENCE(ztg),
 
 	// vendor extensions
 	REGISTER_SENTENCE(pgrme)};

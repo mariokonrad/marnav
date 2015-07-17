@@ -17,6 +17,7 @@ namespace nmea
 
 class date; // forward declaration
 class time; // forward declaration
+class duration; // forward declaration
 
 enum class data_format { none, dec, hex };
 
@@ -52,6 +53,7 @@ void read(const std::string & s, geo::latitude & value, data_format = data_forma
 void read(const std::string & s, geo::longitude & value, data_format = data_format::none);
 void read(const std::string & s, date & value, data_format = data_format::none);
 void read(const std::string & s, time & value, data_format = data_format::none);
+void read(const std::string & s, duration & value, data_format = data_format::none);
 void read(const std::string & s, char & value, data_format = data_format::none);
 void read(const std::string & s, uint32_t & value, data_format = data_format::dec);
 void read(const std::string & s, int32_t & value, data_format = data_format::dec);

@@ -47,7 +47,6 @@ NMEA
 	- TPT - Trawl Position True
 	- TRF - TRANSIT Fix Data
 	- TTM - Tracked Target Message
-	- ZDL - Time and Distance to Variable Point
 	- vendor extensions
 
 AIS

@@ -104,6 +104,14 @@ namespace message_mode
 constexpr const char complete_route = 'c';
 constexpr const char working_route = 'w';
 }
+
+namespace type_of_point
+{
+constexpr const char collision = 'C';
+constexpr const char turning_point = 'T';
+constexpr const char reference = 'R';
+constexpr const char wheelover = 'W';
+}
 }
 }
 
