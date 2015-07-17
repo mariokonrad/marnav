@@ -34,14 +34,16 @@ constexpr const char OK = 'A';
 constexpr const char WARNING = 'V';
 }
 
-namespace signal_integrity
+/// Positioning System Mode Indicator constants.
+namespace positioning_system_mode_indicator
 {
+constexpr const char INVALID = 'V';
 constexpr const char AUTONOMOUS = 'A';
 constexpr const char DIFFERENTIAL = 'D';
 constexpr const char ESTIMATED = 'E';
-constexpr const char MANUALINPUT = 'M';
+constexpr const char MANUAL_INPUT = 'M';
 constexpr const char SIMULATED = 'S';
-constexpr const char DATANOTVALID = 'N';
+constexpr const char DATA_NOT_VALID = 'N';
 constexpr const char PRECISE = 'P';
 }
 
@@ -68,6 +70,7 @@ constexpr const char BAR = 'B'; // pressure in Bar
 constexpr const char PASCAL = 'P'; // pressure in Pascal
 }
 
+/// Constants for possible references of data.
 namespace reference
 {
 constexpr const char TRUE = 'T';

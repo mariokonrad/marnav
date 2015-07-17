@@ -13,15 +13,13 @@ namespace nmea
 /// @brief R00 - Waypoints in active route
 ///
 /// @code
-///        1                n
-///        |                |
+///        1
+///        |
 /// $--R00,c---c,c---c,....*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
-/// 1. waypoint ID
-/// n. checksum
+/// 1. Waypoint ID
 ///
 class r00 : public sentence
 {

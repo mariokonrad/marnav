@@ -12,8 +12,8 @@ namespace nmea
 /// @brief XTE - Cross-Track Error, Measured
 ///
 /// @code
-///        1 2 3   4 5 6   7
-///        | | |   | | |   |
+///        1 2 3   4 5 6
+///        | | |   | | |
 /// $--XTE,A,A,x.x,a,N,m,*hh<CR><LF>
 /// @endcode
 ///
@@ -29,7 +29,6 @@ namespace nmea
 /// 4. Direction to steer, L or R
 /// 5. Cross Track Units, N = Nautical Miles
 /// 6. FAA mode indicator (NMEA 2.3 and later, optional)
-/// 7. Checksum
 ///
 class xte : public sentence
 {

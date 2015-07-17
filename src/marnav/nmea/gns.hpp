@@ -14,9 +14,9 @@ namespace nmea
 /// @brief GNS - Fix data
 ///
 /// @code
-///        1         2       3 4        5 6    7  8   9   10  11  12  13
-///        |         |       | |        | |    |  |   |   |   |   |   |
-/// $--GNS,hhmmss.ss,llll.ll,a,yyyyy.yy,a,c--c,xx,x.x,x.x,x.x,x.x,x.x*hh
+///        1         2       3 4        5 6    7  8   9   10  11  12
+///        |         |       | |        | |    |  |   |   |   |   |
+/// $--GNS,hhmmss.ss,llll.ll,a,yyyyy.yy,a,c--c,xx,x.x,x.x,x.x,x.x,x.x*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
@@ -32,7 +32,6 @@ namespace nmea
 /// 10. Geoidal separation meters
 /// 11. Age of diferential data
 /// 12. Differential reference station ID
-/// 13. Checksum
 ///
 class gns : public sentence
 {

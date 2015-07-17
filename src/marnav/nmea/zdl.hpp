@@ -13,16 +13,15 @@ namespace nmea
 /// @brief ZDL - Time and Distance to Variable Point
 ///
 /// @code
-///         1         2   3 4
-///         |         |   | |
-///  $--ZDL,hhmmss.ss,x.x,a*hh<CR><LF>
+///        1         2   3
+///        |         |   |
+/// $--ZDL,hhmmss.ss,x.x,a*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
 /// 1. Time to Point, hh=00..99
 /// 2. Distance to Point, nautical miles
 /// 3. Type of Point, see below
-/// x. Checksum
 ///
 /// Type of Point:
 /// - C = Collision

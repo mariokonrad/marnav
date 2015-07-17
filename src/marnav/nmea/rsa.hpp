@@ -12,18 +12,20 @@ namespace nmea
 /// @brief RSA - Rudder Sensor Angle
 ///
 /// @code
-///        1   2 3   4 5
-///        |   | |   | |
+///        1   2 3   4
+///        |   | |   |
 /// $--RSA,x.x,A,x.x,A*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Starboard (or single) rudder sensor, "-" means Turn To Port
 /// 2. Status, A means data is valid
+///    - A = data is valid
+///    - V = invalid
 /// 3. Port rudder sensor
 /// 4. Status, A means data is valid
-/// 5. Checksum
+///    - A = data is valid
+///    - V = invalid
 ///
 class rsa : public sentence
 {

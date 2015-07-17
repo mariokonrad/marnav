@@ -12,13 +12,12 @@ namespace nmea
 /// @brief XDR - Transducer Measurement
 ///
 /// @code
-///        1 2   3 4            n
-///        | |   | |            |
+///        1 2   3 4
+///        | |   | |
 /// $--XDR,a,x.x,a,c--c, ..... *hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Transducer Type
 /// 2. Measurement Data
 /// 3. Units of measurement

@@ -12,17 +12,19 @@ namespace nmea
 /// @brief XTR - Cross Track Error - Dead Reckoning
 ///
 /// @code
-///        1   2 3 4
-///        |   | | |
+///        1   2 3
+///        |   | |
 /// $--XTR,x.x,a,N*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
 ///
 /// 1. Magnitude of cross track error
-/// 2. Direction to steer, L or R
-/// 3. Units, N = Nautical Miles
-/// 4. Checksum
+/// 2. Direction to steer
+///    - L
+///    - R
+/// 3. Unit
+///    - N = Nautical Miles
 ///
 class xtr : public sentence
 {

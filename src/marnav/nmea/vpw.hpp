@@ -12,18 +12,19 @@ namespace nmea
 /// @brief VPW - Speed - Measured Parallel to Wind
 ///
 /// @code
-///        1   2 3   4 5
-///        |   | |   | |
+///        1   2 3   4
+///        |   | |   |
 /// $--VPW,x.x,N,x.x,M*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
 ///
-/// 1. Speed, "-" means downwind
-/// 2. N = Knots
-/// 3. Speed, "-" means downwind
-/// 4. M = Meters per second
-/// 5. Checksum
+/// 1. Speed knots, "-" means downwind
+/// 2. Speed knots unit
+///    - N = Knots
+/// 3. Speed meters per second, "-" means downwind
+/// 4. Speed meters per second unit
+///    - M = Meters per second
 ///
 class vpw : public sentence
 {

@@ -14,26 +14,29 @@ namespace nmea
 /// @brief RMA - Recommended Minimum Navigation Information
 ///
 /// @code
-///                                                    12
-///        1 2       3 4        5 6   7   8   9   10  11|
-///        | |       | |        | |   |   |   |   |   | |
+///        1 2       3 4        5 6   7   8   9   10  11
+///        | |       | |        | |   |   |   |   |   |
 /// $--RMA,A,llll.ll,a,yyyyy.yy,a,x.x,x.x,x.x,x.x,x.x,a*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1.  Blink Warning
 /// 2.  Latitude
-/// 3.  N or S
+/// 3.  Latitude hemisphere
+///     - N = North
+///     - S = South
 /// 4.  Longitude
-/// 5.  E or W
+/// 5.  Longitude hemisphere
+///     - E = East
+///     - W = West
 /// 6.  Time Difference A, uS
 /// 7.  Time Difference B, uS
 /// 8.  Speed Over Ground, Knots
 /// 9.  Track Made Good, degrees true
 /// 10. Magnetic Variation, degrees
-/// 11. E or W
-/// 12. Checksum
+/// 11. Magnetic Variation, degrees, direction
+///     - E = East
+///     - W = West
 ///
 class rma : public sentence
 {

@@ -12,18 +12,18 @@ namespace nmea
 /// @brief VLW - Distance Traveled through Water
 ///
 /// @code
-///        1   2 3   4 5
-///        |   | |   | |
+///        1   2 3   4
+///        |   | |   |
 /// $--VLW,x.x,N,x.x,N*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Total cumulative distance
-/// 2. N = Nautical Miles
+/// 2. Total cumulative distance unit
+///    - N = Nautical Miles
 /// 3. Distance since Reset
-/// 4. N = Nautical Miles
-/// 5. Checksum
+/// 4. Distance since Reset unit
+///    - N = Nautical Miles
 ///
 class vlw : public sentence
 {

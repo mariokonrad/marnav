@@ -17,28 +17,34 @@ namespace nmea
 ///
 /// @code
 ///                                                             14
-///        1 2   3 4    5    6       7 8        9 10  11  12  13|  15
-///        | |   | |    |    |       | |        | |   |   |   | |   |
+///        1 2   3 4    5    6       7 8        9 10  11  12  13|
+///        | |   | |    |    |       | |        | |   |   |   | |
 /// $--RMB,A,x.x,a,c--c,c--c,llll.ll,a,yyyyy.yy,a,x.x,x.x,x.x,A,m,*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
-/// 1.  Status, A= Active, V = Void
+/// 1.  Status
+///     - A= Active
+///     - V = Void
 /// 2.  Cross Track error - nautical miles
 /// 3.  Direction to Steer, Left or Right
 /// 4.  TO Waypoint ID
 /// 5.  FROM Waypoint ID
 /// 6.  Destination Waypoint Latitude
-/// 7.  N or S
+/// 7.  Destination Waypoint Latitude hemisphere
+///     - N = North
+///     - S = South
 /// 8.  Destination Waypoint Longitude
-/// 9.  E or W
+/// 9.  Destination Waypoint Longitude hemisphere
+///     - E = East
+///     - W = West
 /// 10. Range to destination in nautical miles
 /// 11. Bearing to destination in degrees True
 /// 12. Destination closing velocity in knots
-/// 13. Arrival Status, A = Arrival Circle Entered
+/// 13. Arrival Status
+///     - A = Arrival Circle Entered
+///     - V = Not Entered
 /// 14. FAA mode indicator (NMEA 2.3 and later)
-/// 15. Checksum
 ///
 /// Example:
 /// @code

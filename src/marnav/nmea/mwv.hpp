@@ -14,17 +14,22 @@ namespace nmea
 /// @code
 ///        1   2 3   4 5
 ///        |   | |   | |
-/// $--MWV,x.x,a,x.x,a*hh<CR><LF>
+/// $--MWV,x.x,a,x.x,a,a*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 ///  1. Wind Angle, 0 to 360 degrees
-///  2. Reference, R = Relative, T = True
+///  2. Wind Angle Reference
+///     - R = Relative
+///     - T = True
 ///  3. Wind Speed
-///  4. Wind Speed Units, K/M/N
-///  5. Status, A = Data Valid
-///  6. Checksum
+///  4. Wind Speed Unit
+///     - K
+///     - M
+///     - N
+///  5. Status
+///     - A = Data Valid
+//      - V = Invalid
 ///
 class mwv : public sentence
 {

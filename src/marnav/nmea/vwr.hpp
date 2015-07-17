@@ -12,22 +12,23 @@ namespace nmea
 /// @brief VWR - Relative Wind Speed and Angle.
 ///
 /// @code
-///         1  2  3  4  5  6  7  8 9
-///         |  |  |  |  |  |  |  | |
+///         1  2  3  4  5  6  7  8
+///         |  |  |  |  |  |  |  |
 /// $--VWR,x.x,a,x.x,N,x.x,M,x.x,K*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Wind direction magnitude in degrees
 /// 2. Wind direction Left/Right of bow
-/// 3. Speed
-/// 4. N = Knots
-/// 5. Speed
-/// 6. M = Meters Per Second
-/// 7. Speed
-/// 8. K = Kilometers Per Hour
-/// 9. Checksum
+/// 3. Speed knots
+/// 4. Speed knots unit
+///    - N = Knots
+/// 5. Speed meters per second
+/// 6. Speed meters per second unit
+///    - M = Meters Per Second
+/// 7. Speed kilometers per hour
+/// 8. Speed kilometers per hour unit
+///    - K = Kilometers Per Hour
 ///
 class vwr : public sentence
 {

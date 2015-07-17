@@ -12,17 +12,16 @@ namespace nmea
 /// @brief WCV - Waypoint Closure Velocity
 ///
 /// @code
-///        1   2 3    4
-///        |   | |    |
+///        1   2 3
+///        |   | |
 /// $--WCV,x.x,N,c--c*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Velocity
-/// 2. N = knots
+/// 2. Velocity unit
+///    - N = knots
 /// 3. Waypoint ID
-/// 4. Checksum
 ///
 class wcv : public sentence
 {

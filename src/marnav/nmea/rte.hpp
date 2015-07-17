@@ -12,13 +12,12 @@ namespace nmea
 /// @brief RTE - Routes
 ///
 /// @code
-///        1   2   3 4    5           x    n
-///        |   |   | |    |           |    |
+///        1   2   3 4    5           x
+///        |   |   | |    |           |
 /// $--RTE,x.x,x.x,a,c--c,c--c, ..... c--c*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Total number of messages being transmitted
 /// 2. Message Number
 /// 3. Message mode c = complete route, all waypoints w = working route, the waypoint

@@ -11,18 +11,19 @@ namespace nmea
 
 /// @brief DPT - Depth of Water
 ///
+/// Water depth relative to the transducer and offset of the measuring transducer.
+///
 /// @code
-///        1   2   3
-///        |   |   |
+///        1   2
+///        |   |
 /// $--DPT,x.x,x.x*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
-///  1. Depth, meters
-///  2. Offset from transducer, positive means distance from tansducer to water line
-///     negative means distance from transducer to keel
-///  3. Checksum
+///  1. Depth meters
+///  2. Offset from transducer
+///     - positive value means distance from tansducer to water line
+///     - negative value means distance from transducer to keel
 ///
 class dpt : public sentence
 {

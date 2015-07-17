@@ -12,8 +12,8 @@ namespace nmea
 /// @brief SFI - Scanning Frequency Information
 ///
 /// @code
-///        1   2   3      4                     x
-///        |   |   |      |                     |
+///        1   2   3      4
+///        |   |   |      |
 /// $--SFI,x.x,x.x,xxxxxx,c .......... xxxxxx,c*hh<CR><LF>
 /// @endcode
 ///
@@ -22,7 +22,6 @@ namespace nmea
 /// 2. Message Number
 /// 3. Frequency 1
 /// 4. Mode 1
-/// x. Checksum
 ///
 class sfi : public sentence
 {

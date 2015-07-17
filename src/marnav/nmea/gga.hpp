@@ -17,39 +17,43 @@ namespace nmea
 ///
 /// @code
 ///                                                       11
-///         1         2       3 4        5 6 7  8   9  10 |  12 13  14   15
-///         |         |       | |        | | |  |   |   | |   | |   |    |
+///         1         2       3 4        5 6 7  8   9  10 |  12 13  14
+///         |         |       | |        | | |  |   |   | |   | |   |
 ///  $--GGA,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x,xx,x.x,x.x,M,x.x,M,x.x,xxxx*hh<CR><LF>
 /// @endcode
 //
 /// Field Number:
-///
-///  1.  Universal Time Coordinated (UTC)
-///  2.  Latitude
-///  3.  N or S (North or South)
-///  4.  Longitude
-///  5.  E or W (East or West)
-///  6.  GPS Quality Indicator,
-///      - 0 - fix not available,
-///      - 1 - GPS fix,
-///      - 2 - Differential GPS fix (values above 2 are 2.3 features)
-///      - 3 - PPS fix
-///      - 4 - Real Time Kinematic
-///      - 5 - Float RTK
-///      - 6 - estimated (dead reckoning)
-///      - 7 - Manual input mode
-///      - 8 - Simulation mode
-///  7.  Number of satellites in view, 00 - 12
-///  8.  Horizontal Dilution of precision (meters)
-///  9.  Antenna Altitude above/below mean-sea-level (geoid) (in meters)
-///  10. Units of antenna altitude, meters
-///  11. Geoidal separation, the difference between the WGS-84 earth ellipsoid and
-///      mean-sea-level (geoid), "-" means mean-sea-level below ellipsoid
-///  12. Units of geoidal separation, meters
-///  13. Age of differential GPS data, time in seconds since last SC104 type 1 or 9 update,
-///      null field when DGPS is not used
-///  14. Differential reference station ID, 0000-1023
-///  15. Checksum
+/// 1.  Universal Time Coordinated (UTC)
+/// 2.  Latitude
+/// 3.  Latitude hemisphere
+///     - N = North
+///     - S = South
+/// 4.  Longitude
+/// 5.  Longitude hemisphere
+///     - E = East
+///     - W = West
+/// 6.  GPS Quality Indicator,
+///     - 0 - fix not available or invalid
+///     - 1 - GPS SPS Mode, fix
+///     - 2 - Differential GPS, SPS mode fix
+///     - 3 - GPS PPS, fix
+///     - 4 - Real Time Kinematic
+///     - 5 - Float RTK
+///     - 6 - Estimated (dead reckoning)
+///     - 7 - Manual input mode
+///     - 8 - Simulation mode
+/// 7.  Number of satellites in use, 00 - 12
+/// 8.  Horizontal Dilution of precision (meters)
+/// 9.  Altitude above/below mean-sea-level (geoid) (in meters)
+/// 10. Altitude unit
+///     - M = meters
+/// 11. Geoidal separation, the difference between the WGS-84 earth ellipsoid and
+///     mean-sea-level (geoid), "-" means mean-sea-level below ellipsoid
+/// 12. Geodial Separation unit
+///     - M = meters
+/// 13. Age of differential GPS data, time in seconds since last SC104 type 1 or 9 update,
+///     null field when DGPS is not used
+/// 14. Differential reference station ID, 0000-1023
 ///
 class gga : public sentence
 {
@@ -76,11 +80,11 @@ private:
 	utils::optional<uint32_t> quality;
 	utils::optional<uint32_t> n_satellites;
 	utils::optional<double> hor_dilution; // horizontal dilution of precision
-	utils::optional<double> height_antenna; // height of antenna over geoid
-	utils::optional<char> unit_antenna; // M:meter
+	utils::optional<double> altitude;
+	utils::optional<char> altitude_unit; // M:meter
 	utils::optional<double>
 		geodial_separation; // geodial separation, sea level below the ellipsoid
-	utils::optional<char> unit_geodial_separation; // M:meter
+	utils::optional<char> geodial_separation_unit; // M:meter
 	utils::optional<double> dgps_age; // age of dgps data
 	utils::optional<uint32_t> dgps_ref; // dgps reference station 0000..1023
 
@@ -93,12 +97,12 @@ public:
 	decltype(quality) get_quality() const { return quality; }
 	decltype(n_satellites) get_n_satellites() const { return n_satellites; }
 	decltype(hor_dilution) get_hor_dilution() const { return hor_dilution; }
-	decltype(height_antenna) get_height_antenna() const { return height_antenna; }
-	decltype(unit_antenna) get_unit_antenna() const { return unit_antenna; }
+	decltype(altitude) get_altitude() const { return altitude; }
+	decltype(altitude_unit) get_altitude_unit() const { return altitude_unit; }
 	decltype(geodial_separation) get_geodial_separation() const { return geodial_separation; }
-	decltype(unit_geodial_separation) get_unit_geodial_separation() const
+	decltype(geodial_separation_unit) get_geodial_separation_unit() const
 	{
-		return unit_geodial_separation;
+		return geodial_separation_unit;
 	}
 	decltype(dgps_age) get_dgps_age() const { return dgps_age; }
 	decltype(dgps_ref) get_dgps_ref() const { return dgps_ref; }
@@ -109,10 +113,13 @@ public:
 	void set_quality(uint32_t t) { quality = t; }
 	void set_n_satellites(uint32_t t) { n_satellites = t; }
 	void set_hor_dilution(double t) { hor_dilution = t; }
-	void set_height_antenna(double t) { height_antenna = t; }
-	void set_unit_antenna(char t) { unit_antenna = t; }
-	void set_geodial_separation(double t) { geodial_separation = t; }
-	void set_unit_geodial_separation(char t) { unit_geodial_separation = t; }
+	void set_altitude(double t) { altitude = t; }
+	void set_altitude_unit(char t) { altitude_unit = t; }
+	void set_geodial_separation(double t, char u)
+	{
+		geodial_separation = t;
+		geodial_separation_unit = u;
+	}
 	void set_dgps_age(double t) { dgps_age = t; }
 	void set_dgps_ref(uint32_t t) { dgps_ref = t; }
 };

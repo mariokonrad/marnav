@@ -13,19 +13,21 @@ namespace nmea
 /// @brief WPL - Waypoint Location
 ///
 /// @code
-///        1       2 3        4 5    6
-///        |       | |        | |    |
+///        1       2 3        4 5
+///        |       | |        | |
 /// $--WPL,llll.ll,a,yyyyy.yy,a,c--c*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Latitude
-/// 2. N or S (North or South)
+/// 2. Latitude hemisphere
+///    - N = North
+///    - S = South
 /// 3. Longitude
-/// 4. E or W (East or West)
-/// 5. Waypoint name
-/// 6. Checksum
+/// 4. Longitude hemisphere
+///    - E = East
+///    - W = West
+/// 5. Waypoint ID
 ///
 class wpl : public sentence
 {

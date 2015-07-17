@@ -11,30 +11,42 @@ namespace marnav
 namespace nmea
 {
 
-/// @brief BWR - Bearing & Distance to Waypoint - Geat Circle
+/// @brief BWR - Bearing & Distance to Waypoint - Rhumb line
 ///
 /// @code
 ///                                                         12
-///        1         2       3 4        5 6   7 8   9 10  11|    13 14
-///        |         |       | |        | |   | |   | |   | |    |   |
+///        1         2       3 4        5 6   7 8   9 10  11|    13
+///        |         |       | |        | |   | |   | |   | |    |
 /// $--BWR,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x.x,T,x.x,M,x.x,N,c--c,m*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1.  UTCTime
 /// 2.  Waypoint Latitude
-/// 3.  N = North, S = South
+/// 3.  Latitude Hemisphere
+///     - N = North
+///     - S = South
 /// 4.  Waypoint Longitude
-/// 5.  E = East, W = West
-/// 6.  Bearing, True
-/// 7.  T = True
-/// 8.  Bearing, Magnetic
-/// 9.  M = Magnetic
+/// 5.  Longitude Hemisphere
+///     - E = East
+///     - W = West
+/// 6.  Bearing True
+/// 7.  Bearing True reference
+///     - T = True
+/// 8.  Bearing Magnetic
+/// 9.  Bearing Magnetic reference
+///     - M = Magnetic
 /// 10. Nautical Miles
-/// 11. N = Nautical Miles
+/// 11. Nautical Miles unit
+///     - N = Nautical Miles
 /// 12. Waypoint ID
-/// 13. Checksum
+/// 13. Mode Indicator
+///     - A = Autonomous
+///     - D = Differential
+///     - E = Estimated
+///     - M = Manual Input
+///     - S = Simulated
+///     - N = Data not valid
 ///
 class bwr : public sentence
 {

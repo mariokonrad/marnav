@@ -13,17 +13,15 @@ namespace nmea
 /// @brief ZTG - UTC & Time to Destination Waypoint
 ///
 /// @code
-///        1         2         3    4
-///        |         |         |    |
+///        1         2         3
+///        |         |         |
 /// $--ZTG,hhmmss.ss,hhmmss.ss,c--c*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Universal Time Coordinated (UTC)
 /// 2. Time Remaining
 /// 3. Destination Waypoint ID
-/// 4. Checksum
 ///
 class ztg : public sentence
 {

@@ -12,20 +12,21 @@ namespace nmea
 /// @brief VDR - Set and Drift
 ///
 /// @code
-///        1   2 3   4 5   6 7
-///        |   | |   | |   | |
+///        1   2 3   4 5   6
+///        |   | |   | |   |
 /// $--VDR,x.x,T,x.x,M,x.x,N*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Degress True
-/// 2. T = True
+/// 2. Degress True reference
+///    - T = True
 /// 3. Degrees Magnetic
-/// 4. M = Magnetic
-/// 5. Knots (speed of current)
-/// 6. N = Knots
-/// 7. Checksum
+/// 4. Degrees Magnetic reference
+///    - M = Magnetic
+/// 5. Speed of current
+/// 6. Speed of current unit
+///    - N = Knots
 ///
 class vdr : public sentence
 {

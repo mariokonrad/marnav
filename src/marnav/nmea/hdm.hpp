@@ -18,16 +18,15 @@ namespace nmea
 ///   support them, therefore it makes sense to implement it.
 ///
 /// @code
-///        1   2 3
-///        |   | |
+///        1   2
+///        |   |
 /// $--HDM,x.x,M*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
-/// 1. Heading Degrees, magnetic
-/// 2. M = magnetic
-/// 3. Checksum
+/// 1. Heading Degrees magnetic
+/// 2. Heading Degrees magnetic reference
+///    - M = magnetic
 ///
 class hdm : public sentence
 {

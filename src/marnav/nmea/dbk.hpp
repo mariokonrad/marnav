@@ -11,21 +11,24 @@ namespace nmea
 
 /// @brief DBK - Depth Below Keel
 ///
+/// @note This sentence appears to be deprected, use @ref marnav::nmea::dpt "DPT" instead.
+///
 /// @code
-///        1   2 3   4 5   6 7
-///        |   | |   | |   | |
+///        1   2 3   4 5   6
+///        |   | |   | |   |
 /// $--DBK,x.x,f,x.x,M,x.x,F*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
-///  1. Depth, feet
-///  2. f = feet
-///  3. Depth, meters
-///  4. M = meters
-///  5. Depth, Fathoms
-///  6. F = Fathoms
-///  7. Checksum
+/// 1. Depth feet
+/// 2. Depth feet unit
+///    - f = feet
+/// 3. Depth meters
+/// 4. Depth meters unit
+///    - M = meters
+/// 5. Depth Fathoms
+/// 6. Depth Fathoms
+///    - F = Fathoms
 ///
 class dbk : public sentence
 {

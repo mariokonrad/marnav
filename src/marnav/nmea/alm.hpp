@@ -14,29 +14,27 @@ namespace nmea
 /// This sentence expresses orbital data for a specified GPS satellite.
 ///
 /// @code
-///        1   2   3  4   5  6    7  8    9    10     11     12     13     14  15   16
-///        |   |   |  |   |  |    |  |    |    |      |      |      |      |   |    |
+///        1   2   3  4   5  6    7  8    9    10     11     12     13     14  15
+///        |   |   |  |   |  |    |  |    |    |      |      |      |      |   |
 /// $--ALM,x.x,x.x,xx,x.x,hh,hhhh,hh,hhhh,hhhh,hhhhhh,hhhhhh,hhhhhh,hhhhhh,hhh,hhh,*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
-/// 0.  Total number of messages
-/// 1.  Message Number
-/// 2.  Satellite PRN number (01 to 32)
-/// 3.  GPS Week Number
-/// 4.  SV health, bits 17-24 of each almanac page
-/// 5.  Eccentricity
-/// 6.  Almanac Reference Time
-/// 7.  Inclination Angle
-/// 8.  Rate of Right Ascension
-/// 9.  Root of semi-major axis
-/// 10. Argument of perigee
-/// 11. Longitude of ascension node
-/// 12. Mean anomaly
-/// 13. F0 Clock Parameter
-/// 14. F1 Clock Parameter
-/// 15. Checksum
+/// 1.  Total number of messages
+/// 2.  Message Number
+/// 3.  Satellite PRN number (01 to 32)
+/// 4.  GPS Week Number
+/// 5.  SV health, bits 17-24 of each almanac page
+/// 6.  Eccentricity
+/// 7.  Almanac Reference Time
+/// 8.  Inclination Angle
+/// 9.  Rate of Right Ascension
+/// 10. Root of semi-major axis
+/// 11. Argument of perigee
+/// 12. Longitude of ascension node
+/// 13. Mean anomaly
+/// 14. F0 Clock Parameter
+/// 15. F1 Clock Parameter
 ///
 /// Fields 5 through 15 are dumped as raw hex.
 ///

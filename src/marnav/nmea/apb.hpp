@@ -17,27 +17,45 @@ namespace nmea
 ///                                         13    15
 ///        1 2 3   4 5 6 7 8   9 10   11  12|   14|
 ///        | | |   | | | | |   | |    |   | |   | |
-/// $--APB,A,A,x.x,a,N,A,A,x.x,a,c--c,x.x,a,x.x,a*hh<CR><LF>
+/// $--APB,A,A,x.x,a,N,A,A,x.x,a,c--c,x.x,a,x.x,a,a*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
-/// 1.  Status V = LORAN-C Blink or SNR warning V = general warning flag or
-///     other navigation systems when a reliable fix is not available
-/// 2.  Status V = Loran-C Cycle Lock warning flag A = OK or not used
-/// 3.  Cross Track Error Magnitude
-/// 4.  Direction to steer, L or R
-/// 5.  Cross Track Units, N = Nautical Miles
-/// 6.  Status A = Arrival Circle Entered
-/// 7.  Status A = Perpendicular passed at waypoint
+/// 1.  Status
+///     - A = Data valid
+///     - V = LORAN-C Blink or SNR warning
+///     - V = general warning flag or other navigation systems when a reliable fix is not
+///           available
+/// 2.  Status
+///     - A = Data valid or not used
+///     - V = Loran-C Cycle Lock warning flag
+/// 3.  Magnitude of Cross Track Error
+/// 4.  Direction to steer
+///     - L
+///     - R
+/// 5.  Cross Track Units
+///     - N = Nautical Miles
+/// 6.  Status
+///     - A = Arrival Circle Entered
+/// 7.  Status
+///     - A = Perpendicular passed at waypoint
 /// 8.  Bearing origin to destination
-/// 9.  M = Magnetic, T = True
+/// 9.  Bearing origin to destination reference
+///     - M = Magnetic
+///     - T = True
 /// 10. Destination Waypoint ID
-/// 11. Bearing, present position to Destination
-/// 12. M = Magnetic, T = True
+/// 11. Bearing, present position to destination
+/// 12. Bearing, present position to destination reference
+///     - M = Magnetic
+///     - T = True
 /// 13. Heading to steer to destination waypoint
-/// 14. M = Magnetic, T = True
-/// 15. Checksum
+/// 14. Heading to steer to destination waypoint reference
+///     - M = Magnetic
+///     - T = True
+/// 15. Mode indicator
+///     - V = Invalid
+///     - A = Autonomous
+///     - D = Differential
 ///
 class apb : public sentence
 {

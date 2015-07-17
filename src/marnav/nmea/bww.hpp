@@ -12,19 +12,20 @@ namespace nmea
 /// @brief BWW - Bearing - Waypoint to Waypoint
 ///
 /// @code
-///         1   2 3   4 5    6    7
-///         |   | |   | |    |    |
-///  $--BWW,x.x,T,x.x,M,c--c,c--c*hh<CR><LF>
+///        1   2 3   4 5    6
+///        |   | |   | |    |
+/// $--BWW,x.x,T,x.x,M,c--c,c--c*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-/// 1. Bearing Degrees, TRUE
-/// 2. T = True
-/// 3. Bearing Degrees, Magnetic
-/// 4. M = Magnetic
-/// 5. TO Waypoint
-/// 6. FROM Waypoint
-/// 7. Checksum
+/// 1. Bearing Degrees true
+/// 2. Bearing Degrees true reference
+///    - T = True
+/// 3. Bearing Degrees Magnetic
+/// 4. Bearing Degrees Magnetic reference
+///    - M = Magnetic
+/// 5. TO Waypoint ID
+/// 6. FROM Waypoint ID
 ///
 class bww : public sentence
 {

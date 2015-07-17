@@ -12,16 +12,16 @@ namespace nmea
 /// @brief ROT - Rate Of Turn
 ///
 /// @code
-///        1   2 3
-///        |   | |
+///        1   2
+///        |   |
 /// $--ROT,x.x,A*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
-/// 1.   Rate Of Turn, degrees per minute, "-" means bow turns to port
-/// 2.   Status, A means data is valid
-/// 3.   Checksum
+/// 1. Rate Of Turn, degrees per minute, "-" means bow turns to port
+/// 2. Status
+///    - A = data is valid
+///    - V = invalid
 ///
 class rot : public sentence
 {

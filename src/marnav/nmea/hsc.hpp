@@ -12,18 +12,18 @@ namespace nmea
 /// @brief HSC - Heading Steering Command
 ///
 /// @code
-///        1   2 3   4  5
-///        |   | |   |  |
-/// $--HSC,x.x,T,x.x,M,*hh<CR><LF>
+///        1   2 3   4
+///        |   | |   |
+/// $--HSC,x.x,T,x.x,M*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
-/// 1. Heading Degrees, True
-/// 2. T = True
-/// 3. Heading Degrees, Magnetic
-/// 4. M = Magnetic
-/// 5. Checksum
+/// 1. Heading Degrees True
+/// 2. Heading Degrees True reference
+///    - T = True
+/// 3. Heading Degrees Magnetic
+/// 4. Heading Degrees Magnetic reference
+///    - M = Magnetic
 ///
 class hsc : public sentence
 {

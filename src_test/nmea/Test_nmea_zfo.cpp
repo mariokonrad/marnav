@@ -46,7 +46,7 @@ TEST_F(Test_nmea_zfo, set_time_utc)
 TEST_F(Test_nmea_zfo, set_time_elapsed)
 {
 	nmea::zfo zfo;
-	zfo.set_time_elapsed(nmea::time{12, 34, 56});
+	zfo.set_time_elapsed(nmea::duration{12, 34, 56});
 
 	EXPECT_STREQ("$GPZFO,,123456,*6F", nmea::to_string(zfo).c_str());
 }

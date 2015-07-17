@@ -12,23 +12,24 @@ namespace nmea
 /// @brief OSD - Own Ship Data
 ///
 /// @code
-///        1   2 3   4 5   6 7   8   9 10
-///        |   | |   | |   | |   |   | |
+///        1   2 3   4 5   6 7   8   9
+///        |   | |   | |   | |   |   |
 /// $--OSD,x.x,A,x.x,a,x.x,a,x.x,x.x,a*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
-/// 1.  Heading, degrees true
-/// 2.  Status, A = Data Valid
-/// 3.  Vessel Course, degrees True
-/// 4.  Course Reference
-/// 5.  Vessel Speed
-/// 6.  Speed Reference
-/// 7.  Vessel Set, degrees True
-/// 8.  Vessel drift (speed)
-/// 9.  Speed Units
-/// 10. Checksum
+/// 1. Heading, degrees true
+/// 2. Status
+///    - A = Data Valid
+///    - V = Invalid
+/// 3. Vessel Course, degrees True
+/// 4. Course Reference
+///    - T = True
+/// 5. Vessel Speed
+/// 6. Speed Reference
+/// 7. Vessel Set, degrees True
+/// 8. Vessel drift (speed)
+/// 9. Speed Units
 ///
 class osd : public sentence
 {

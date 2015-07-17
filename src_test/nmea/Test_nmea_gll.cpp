@@ -25,14 +25,14 @@ TEST_F(Test_nmea_gll, parse)
 TEST_F(Test_nmea_gll, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(nmea::gll::parse("@@", {5, "@"}));
-	EXPECT_ANY_THROW(nmea::gll::parse("@@", {7, "@"}));
+	EXPECT_ANY_THROW(nmea::gll::parse("@@", {8, "@"}));
 }
 
 TEST_F(Test_nmea_gll, empty_to_string)
 {
 	nmea::gll gll;
 
-	EXPECT_STREQ("$GPGLL,,,,,,*50", nmea::to_string(gll).c_str());
+	EXPECT_STREQ("$GPGLL,,,,,,,V*2A", nmea::to_string(gll).c_str());
 }
 
 TEST_F(Test_nmea_gll, set_lat_north)
@@ -40,7 +40,7 @@ TEST_F(Test_nmea_gll, set_lat_north)
 	nmea::gll gll;
 	gll.set_lat(geo::latitude{12.345});
 
-	EXPECT_STREQ("$GPGLL,1220.7000,N,,,,*36", nmea::to_string(gll).c_str());
+	EXPECT_STREQ("$GPGLL,1220.7000,N,,,,,V*4C", nmea::to_string(gll).c_str());
 }
 
 TEST_F(Test_nmea_gll, set_lat_south)
@@ -48,7 +48,7 @@ TEST_F(Test_nmea_gll, set_lat_south)
 	nmea::gll gll;
 	gll.set_lat(geo::latitude{-12.345});
 
-	EXPECT_STREQ("$GPGLL,1220.7000,S,,,,*2B", nmea::to_string(gll).c_str());
+	EXPECT_STREQ("$GPGLL,1220.7000,S,,,,,V*51", nmea::to_string(gll).c_str());
 }
 
 TEST_F(Test_nmea_gll, set_lon_west)
@@ -56,7 +56,7 @@ TEST_F(Test_nmea_gll, set_lon_west)
 	nmea::gll gll;
 	gll.set_lon(geo::longitude{123.45});
 
-	EXPECT_STREQ("$GPGLL,,,12327.0000,W,,*1C", nmea::to_string(gll).c_str());
+	EXPECT_STREQ("$GPGLL,,,12327.0000,W,,,V*66", nmea::to_string(gll).c_str());
 }
 
 TEST_F(Test_nmea_gll, set_lon_east)
@@ -64,7 +64,7 @@ TEST_F(Test_nmea_gll, set_lon_east)
 	nmea::gll gll;
 	gll.set_lon(geo::longitude{-123.45});
 
-	EXPECT_STREQ("$GPGLL,,,12327.0000,E,,*0E", nmea::to_string(gll).c_str());
+	EXPECT_STREQ("$GPGLL,,,12327.0000,E,,,V*74", nmea::to_string(gll).c_str());
 }
 }
 

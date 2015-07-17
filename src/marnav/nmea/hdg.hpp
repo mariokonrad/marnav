@@ -12,19 +12,21 @@ namespace nmea
 /// @brief HDG - Heading - Deviation & Variation
 ///
 /// @code
-///        1   2   3 4   5 6
-///        |   |   | |   | |
+///        1   2   3 4   5
+///        |   |   | |   |
 /// $--HDG,x.x,x.x,a,x.x,a*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
-///  1. Magnetic Sensor heading in degrees
-///  2. Magnetic Deviation, degrees
-///  3. Magnetic Deviation direction, E = Easterly, W = Westerly
-///  4. Magnetic Variation degrees
-///  5. Magnetic Variation direction, E = Easterly, W = Westerly
-///  6. Checksum
+/// 1. Magnetic Sensor heading in degrees
+/// 2. Magnetic Deviation degrees
+/// 3. Magnetic Deviation direction
+///    - E = Easterly
+///    - W = Westerly
+/// 4. Magnetic Variation degrees
+/// 5. Magnetic Variation direction
+///    - E = Easterly
+///    - W = Westerly
 ///
 class hdg : public sentence
 {

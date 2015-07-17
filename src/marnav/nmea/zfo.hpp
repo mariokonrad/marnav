@@ -13,17 +13,15 @@ namespace nmea
 /// @brief ZFO - UTC & Time from origin Waypoint
 ///
 /// @code
-///        1         2         3    4
-///        |         |         |    |
+///        1         2         3
+///        |         |         |
 /// $--ZFO,hhmmss.ss,hhmmss.ss,c--c*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Universal Time Coordinated (UTC)
 /// 2. Elapsed Time
 /// 3. Origin Waypoint ID
-/// 4. Checksum
 ///
 class zfo : public sentence
 {
@@ -43,7 +41,7 @@ protected:
 
 private:
 	utils::optional<nmea::time> time_utc;
-	utils::optional<nmea::time> time_elapsed;
+	utils::optional<nmea::duration> time_elapsed;
 	utils::optional<std::string> waypoint_id;
 
 public:
@@ -52,7 +50,7 @@ public:
 	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
 
 	void set_time_utc(const nmea::time & t) { time_utc = t; }
-	void set_time_elapsed(const nmea::time & t) { time_elapsed = t; }
+	void set_time_elapsed(const nmea::duration & t) { time_elapsed = t; }
 	void set_waypoint_id(const std::string & id);
 };
 }

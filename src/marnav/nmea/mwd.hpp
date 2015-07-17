@@ -20,15 +20,18 @@ namespace nmea
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Wind direction true in degrees (0.0 .. 359.9), resolution: 0.1 degree
-/// 2. Reference of wind direction, T = True
+/// 2. Reference of wind direction
+///    - T = True
 /// 3. Wind direction magnetic in degrees (0.0 .. 359.9), resolution: 0.1 degree
-/// 4. Reference of wind direction, M = Magnetic
+/// 4. Reference of wind direction
+///    - M = Magnetic
 /// 5. Wind speed in knots (resolution: 0.1 knots)
-/// 6. Wind speed unit, N = Knots
+/// 6. Wind speed unit
+///    - N = Knots
 /// 7. Wind speed in meters per second (resolution: 0.1 m/s)
-/// 8. Wind speed unit, M = Meters per Second
+/// 8. Wind speed unit
+///    - M = Meters per Second
 ///
 class mwd : public sentence
 {

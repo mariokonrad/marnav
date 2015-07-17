@@ -12,22 +12,22 @@ namespace nmea
 /// @brief BOD - Bearing - Waypoint to Waypoint
 ///
 /// @code
-///        1   2 3   4 5    6    7
-///        |   | |   | |    |    |
+///        1   2 3   4 5    6
+///        |   | |   | |    |
 /// $--BOD,x.x,T,x.x,M,c--c,c--c*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
+/// 1. Bearing Degrees True
+/// 2. Bearing Degrees True reference
+///    - T = True
+/// 3. Bearing Degrees Magnetic
+/// 4. Bearing Degrees Magnetic reference
+///    - M = Magnetic
+/// 5. TO Waypoint ID
+/// 6. FROM Waypoint ID
 ///
-///  1. Bearing Degrees, TRUE
-///  2. T = True
-///  3. Bearing Degrees, Magnetic
-///  4. M = Magnetic
-///  5. TO Waypoint
-///  6. FROM Waypoint
-///  7. Checksum
-///
-/// Example 1: <tt>$GPBOD,099.3,T,105.6,M,POINTB,*01</tt>
+/// Example: <tt>$GPBOD,099.3,T,105.6,M,POINTB,*01</tt>
 ///
 class bod : public sentence
 {

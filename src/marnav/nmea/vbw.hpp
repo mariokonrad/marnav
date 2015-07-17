@@ -12,20 +12,22 @@ namespace nmea
 /// @brief VBW - Dual Ground/Water Speed
 ///
 /// @code
-///        1   2   3 4   5   6 7
-///        |   |   | |   |   | |
+///        1   2   3 4   5   6
+///        |   |   | |   |   |
 /// $--VBW,x.x,x.x,A,x.x,x.x,A*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Longitudinal water speed, "-" means astern
 /// 2. Transverse water speed, "-" means port
 /// 3. Status, A = Data Valid
+///    - A = Data Valid
+///    - V = Invalid
 /// 4. Longitudinal ground speed, "-" means astern
 /// 5. Transverse ground speed, "-" means port
-/// 6. Status, A = Data Valid
-/// 7. Checksum
+/// 6. Status
+///    - A = Data Valid
+///    - V = Invalid
 ///
 class vbw : public sentence
 {

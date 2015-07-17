@@ -12,13 +12,12 @@ namespace nmea
 /// @brief VHW - Water speed and heading
 ///
 /// @code
-///        1   2 3   4 5   6 7   8 9
-///        |   | |   | |   | |   | |
+///        1   2 3   4 5   6 7   8
+///        |   | |   | |   | |   |
 /// $--VHW,x.x,T,x.x,M,x.x,N,x.x,K*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Degress True
 /// 2. T = True
 /// 3. Degrees Magnetic
@@ -27,7 +26,6 @@ namespace nmea
 /// 6. N = Knots
 /// 7. Kilometers (speed of vessel relative to the water)
 /// 8. K = Kilometers
-/// 9. Checksum
 ///
 class vhw : public sentence
 {

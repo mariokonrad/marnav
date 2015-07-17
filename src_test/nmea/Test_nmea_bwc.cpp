@@ -105,7 +105,7 @@ TEST_F(Test_nmea_bwc, set_waypoint)
 TEST_F(Test_nmea_bwc, set_faa_mode_indicator)
 {
 	nmea::bwc bwc;
-	bwc.set_faa_mode_indicator(nmea::signal_integrity::DIFFERENTIAL);
+	bwc.set_faa_mode_indicator(nmea::positioning_system_mode_indicator::DIFFERENTIAL);
 
 	EXPECT_STREQ("$GPBWC,,,,,,,,,,,,,D*29", nmea::to_string(bwc).c_str());
 }
