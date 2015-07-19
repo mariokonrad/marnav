@@ -218,7 +218,7 @@ constexpr const char * ais_repeater_ais_station = "AX"; // NMEA 4.0 Repeater AIS
 constexpr const char * ais_base_station_obsolete
 	= "BS"; // Base AIS station (deprecated in NMEA 4.0)
 constexpr const char * ais_physical_shore_station = "SA"; // NMEA 4.0 Physical Shore AIS Station
-};
+}
 
 /// This is the base class for all sentences.
 class sentence

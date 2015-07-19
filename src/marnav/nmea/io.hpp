@@ -3,11 +3,13 @@
 
 #include <marnav/utils/optional.hpp>
 #include <string>
+#include <stdexcept>
 
 namespace marnav
 {
 
-namespace geo {
+namespace geo
+{
 class latitude; // forward declaration
 class longitude; // forward declaration
 }
@@ -20,6 +22,8 @@ class time; // forward declaration
 class duration; // forward declaration
 
 enum class data_format { none, dec, hex };
+
+/// @{
 
 std::string to_string(char data);
 std::string to_string(uint32_t data);
@@ -35,19 +39,64 @@ template <class T> inline std::string to_string(const utils::optional<T> & data)
 	return to_string(data.value());
 }
 
-std::string format(int32_t data, unsigned int width, data_format f = data_format::dec);
-std::string format(uint32_t data, unsigned int width, data_format f = data_format::dec);
-std::string format(double data, unsigned int width, data_format = data_format::none);
+/// @}
 
+/// @{
+
+/// Returns the data as formatted string.
+///
+/// @param[in] data The data to format.
+/// @param[in] width Minimum number of digits.
+/// @param[in] f Base of the data to be rendered in
+/// @exception std::invalid_argument Parameter width is too large for the implementation.
+///   This is necessary to avoid heap operations and VLA.
+std::string format(int32_t data, unsigned int width, data_format f = data_format::dec) throw(
+	std::invalid_argument);
+
+/// Returns the data as formatted string.
+///
+/// @param[in] data The data to format.
+/// @param[in] width Minimum number of digits.
+/// @param[in] f Base of the data to be rendered in
+/// @exception std::invalid_argument Parameter width is too large for the implementation.
+///   This is necessary to avoid heap operations and VLA.
+std::string format(uint32_t data, unsigned int width, data_format f = data_format::dec) throw(
+	std::invalid_argument);
+
+/// Returns the data as formatted string.
+///
+/// @param[in] data The data to format.
+/// @param[in] width Number of decimals.
+/// @param[in] f Base of the data to be rendered in
+/// @exception std::invalid_argument Parameter width is too large for the implementation.
+///   This is necessary to avoid heap operations and VLA.
+std::string format(double data, unsigned int width, data_format = data_format::none) throw(
+	std::invalid_argument);
+
+/// Generic version of the format function, handling the possibility of utils::optional
+/// to be not set and returning an empty string. The rendering of the contained type
+/// is one of the overloaded funtions of 'format'.
+///
+/// @param[in] data Data to be rendered if valid.
+/// @param[in] width Formatting information.
+/// @param[in] f Number base information.
+/// @return The string containing the formatted value, an empty string if the optional
+///   was not set.
+/// @tparam T Inner type of the optional, i.e. the acutal type to format.
+/// @exception std::invalid_argument Parameter width is too large for the implementation.
+///   This is necessary to avoid heap operations and VLA.
 template <typename T>
-inline std::string format(
-	const utils::optional<T> & data, unsigned int width, data_format f = data_format::dec)
+inline std::string format(const utils::optional<T> & data, unsigned int width,
+	data_format f = data_format::dec) throw(std::invalid_argument)
 {
 	if (!data)
 		return std::string{};
 	return format(data.value(), width, f);
 }
 
+/// @}
+
+/// @{
 
 void read(const std::string & s, geo::latitude & value, data_format = data_format::none);
 void read(const std::string & s, geo::longitude & value, data_format = data_format::none);
@@ -73,6 +122,8 @@ static void read(
 	read(s, tmp, fmt);
 	value = tmp;
 }
+
+/// @}
 
 }
 }

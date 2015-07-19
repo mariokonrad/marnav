@@ -27,8 +27,14 @@ std::string to_string(double data)
 
 std::string to_string(const std::string & data) { return data; }
 
-std::string format(int32_t data, unsigned int width, data_format f)
+std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
 {
+	// buffer to hold the resulting string with a static size.
+	// this construct prevents VLA, and should be replaced with C++14 dynarray
+	char buf[32];
+	if (width >= sizeof(buf))
+		throw std::invalid_argument{"width too large in nmea::format"};
+
 	char fmt[8];
 	switch (f) {
 		case data_format::none:
@@ -39,13 +45,19 @@ std::string format(int32_t data, unsigned int width, data_format f)
 			snprintf(fmt, sizeof(fmt), "%%0%ux", width);
 			break;
 	}
-	char buf[width + 8];
 	snprintf(buf, sizeof(buf), fmt, data);
 	return buf;
 }
 
-std::string format(uint32_t data, unsigned int width, data_format f)
+std::string format(uint32_t data, unsigned int width, data_format f) throw(
+	std::invalid_argument)
 {
+	// buffer to hold the resulting string with a static size.
+	// this construct prevents VLA, and should be replaced with C++14 dynarray
+	char buf[32];
+	if (width >= sizeof(buf))
+		throw std::invalid_argument{"width too large in nmea::format"};
+
 	char fmt[8];
 	switch (f) {
 		case data_format::none:
@@ -56,16 +68,20 @@ std::string format(uint32_t data, unsigned int width, data_format f)
 			snprintf(fmt, sizeof(fmt), "%%0%ux", width);
 			break;
 	}
-	char buf[width + 8];
 	snprintf(buf, sizeof(buf), fmt, data);
 	return buf;
 }
 
-std::string format(double data, unsigned int width, data_format)
+std::string format(double data, unsigned int width, data_format) throw(std::invalid_argument)
 {
+	// buffer to hold the resulting string with a static size.
+	// this construct prevents VLA, and should be replaced with C++14 dynarray
+	char buf[32];
+	if (width >= sizeof(buf))
+		throw std::invalid_argument{"width too large in nmea::format"};
+
 	char fmt[8];
 	snprintf(fmt, sizeof(fmt), "%%.%uf", width);
-	char buf[width + 8];
 	snprintf(buf, sizeof(buf), fmt, data);
 	return buf;
 }
@@ -94,7 +110,10 @@ void read(const std::string & s, date & value, data_format) { std::istringstream
 
 void read(const std::string & s, time & value, data_format) { std::istringstream{s} >> value; }
 
-void read(const std::string & s, duration & value, data_format) { std::istringstream{s} >> value; }
+void read(const std::string & s, duration & value, data_format)
+{
+	std::istringstream{s} >> value;
+}
 
 void read(const std::string & s, char & value, data_format) { std::istringstream{s} >> value; }
 
