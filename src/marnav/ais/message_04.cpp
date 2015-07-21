@@ -83,12 +83,12 @@ raw message_04::get_data() const
 
 geo::longitude message_04::get_longitude() const
 {
-	return geo::longitude{(0.0001 * longitude_minutes) / 60.0};
+	return geo::longitude{(0.001 * longitude_minutes) / 60.0};
 }
 
 geo::latitude message_04::get_latitude() const
 {
-	return geo::latitude{(0.0001 * latitude_minutes) / 60.0};
+	return geo::latitude{(0.001 * latitude_minutes) / 60.0};
 }
 
 void message_04::set_longitude(const geo::longitude & t)
