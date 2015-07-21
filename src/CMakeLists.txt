@@ -79,6 +79,7 @@ set(SOURCE_NMEA_0183
 
 set(SOURCE_AIS
 	marnav/ais/ais.cpp
+	marnav/ais/angle.cpp
 	marnav/ais/message.cpp
 	marnav/ais/message_01.cpp
 	marnav/ais/message_02.cpp
@@ -222,6 +223,7 @@ install(
 install(
 	FILES
 		marnav/ais/ais.hpp
+		marnav/ais/angle.hpp
 		marnav/ais/message.hpp
 		marnav/ais/message_01.hpp
 		marnav/ais/message_02.hpp

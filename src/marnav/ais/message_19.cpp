@@ -1,6 +1,6 @@
 #include "message_19.hpp"
+#include "angle.hpp"
 #include <marnav/utils/unique.hpp>
-#include <cmath>
 
 namespace marnav
 {
@@ -77,22 +77,22 @@ void message_19::read_data(const raw & bits)
 
 geo::longitude message_19::get_longitude() const
 {
-	return geo::longitude{(0.001 * longitude_minutes) / 60.0};
+	return to_geo_longitude(longitude_minutes);
 }
 
 geo::latitude message_19::get_latitude() const
 {
-	return geo::latitude{(0.001 * latitude_minutes) / 60.0};
+	return to_geo_latitude(latitude_minutes);
 }
 
 void message_19::set_longitude(const geo::longitude & t)
 {
-	longitude_minutes = floor(60000.0 * t);
+	longitude_minutes = to_longitude_minutes(t);
 }
 
 void message_19::set_latitude(const geo::latitude & t)
 {
-	latitude_minutes = floor(60000.0 * t);
+	latitude_minutes = to_latitude_minutes(t);
 }
 
 raw message_19::get_data() const
