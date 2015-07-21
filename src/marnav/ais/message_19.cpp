@@ -69,7 +69,7 @@ void message_19::read_data(const raw & bits)
 	bits.get(to_port, 289, 6);
 	bits.get(to_starboard, 295, 6);
 	bits.get(epfd_fix, 301, 4);
-	bits.get(raim, 305, 4);
+	bits.get(raim, 305, 1);
 	bits.get(dte, 306, 1);
 	bits.get(assigned, 307, 1);
 	// spare: 308 - 311
@@ -116,7 +116,7 @@ raw message_19::get_data() const
 	bits.set(to_port, 289, 6);
 	bits.set(to_starboard, 295, 6);
 	bits.set(epfd_fix, 301, 4);
-	bits.set(raim, 305, 4);
+	bits.set(raim, 305, 1);
 	bits.set(dte, 306, 1);
 	bits.set(assigned, 307, 1);
 
