@@ -3,6 +3,7 @@
 
 #include "message.hpp"
 #include <marnav/geo/angle.hpp>
+#include <marnav/utils/mmsi.hpp>
 
 namespace marnav
 {
@@ -49,7 +50,7 @@ private:
 
 public:
 	uint32_t get_repeat_indicator() const { return repeat_indicator; }
-	uint32_t get_mmsi() const { return mmsi; }
+	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
 	uint32_t get_sog() const { return sog; }
 	bool get_position_accuracy() const { return position_accuracy; }
 	uint32_t get_cog() const { return cog; }
@@ -65,7 +66,7 @@ public:
 	uint32_t get_radio_status() const { return radio_status; }
 
 	void set_repeat_indicator(uint32_t t) { repeat_indicator = t; }
-	void set_mmsi(uint32_t t) { mmsi = t; }
+	void set_mmsi(const utils::mmsi & t) { mmsi = t; }
 	void set_sog(uint32_t t) { sog = t; }
 	void set_position_accuracy(bool t) { position_accuracy = t; }
 	void set_cog(uint32_t t) { cog = t; }

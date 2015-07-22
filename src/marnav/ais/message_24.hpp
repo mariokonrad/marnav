@@ -3,6 +3,7 @@
 
 #include "message.hpp"
 #include <marnav/geo/angle.hpp>
+#include <marnav/utils/mmsi.hpp>
 
 namespace marnav
 {
@@ -66,7 +67,7 @@ private:
 
 public:
 	uint32_t get_repeat_indicator() const { return repeat_indicator; }
-	uint32_t get_mmsi() const { return mmsi; }
+	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
 	part get_part_number() const { return part_number; }
 
 	// part A specific
@@ -86,10 +87,10 @@ public:
 	uint32_t get_to_starboard() const { return to_starboard; }
 
 	// part B specific (auxiliary)
-	uint32_t get_mothership_mmsi() const { return mothership_mmsi; }
+	utils::mmsi get_mothership_mmsi() const { return utils::mmsi{mothership_mmsi}; }
 
 	void set_repeat_indicator(uint32_t t) { repeat_indicator = t; }
-	void set_mmsi(uint32_t t) { mmsi = t; }
+	void set_mmsi(const utils::mmsi & t) { mmsi = t; }
 	void set_part_number(part t) { part_number = t; }
 
 	// part A specific
@@ -109,7 +110,7 @@ public:
 	void set_to_starboard(uint32_t t) { to_starboard = t; }
 
 	// part B specific (auxiliary)
-	void set_mothership_mmsi(uint32_t t) { mothership_mmsi = t; }
+	void set_mothership_mmsi(const utils::mmsi & t) { mothership_mmsi = t; }
 };
 }
 }

@@ -3,6 +3,7 @@
 
 #include "message.hpp"
 #include <marnav/geo/angle.hpp>
+#include <marnav/utils/mmsi.hpp>
 
 namespace marnav
 {
@@ -45,12 +46,10 @@ private:
 
 public:
 	uint32_t get_repeat_indicator() const { return repeat_indicator; }
-	uint32_t get_mmsi() const { return mmsi; }
+	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
 	int8_t get_rot() const { return rot; }
 	uint32_t get_sog() const { return sog; }
 	bool get_position_accuracy() const { return position_accuracy; }
-	uint32_t get_longitude_minutes() const;
-	uint32_t get_latitude_minutes() const;
 	uint32_t get_cog() const { return cog; }
 	uint32_t get_hdg() const { return hdg; }
 	uint32_t get_timestamp() const { return timestamp; }
@@ -59,13 +58,11 @@ public:
 	uint32_t get_radio_status() const { return radio_status; }
 
 	void set_repeat_indicator(uint32_t t) { repeat_indicator = t; }
-	void set_mmsi(uint32_t t) { mmsi = t; }
+	void set_mmsi(const utils::mmsi & t) { mmsi = t; }
 	void set_nav_status(navigation_status t) { nav_status = t; }
 	void set_rot(int8_t t) { rot = t; }
 	void set_sog(uint32_t t) { sog = t; }
 	void set_position_accuracy(bool t) { position_accuracy = t; }
-	void set_longitude_minutes(uint32_t t) { longitude_minutes = t; }
-	void set_latitude_minutes(uint32_t t) { latitude_minutes = t; }
 	void set_cog(uint32_t t) { cog = t; }
 	void set_hdg(uint32_t t) { hdg = t; }
 	void set_timestamp(uint32_t t) { timestamp = t; }

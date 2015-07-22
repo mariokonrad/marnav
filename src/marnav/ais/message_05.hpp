@@ -2,6 +2,7 @@
 #define __AIS__MESSAGE_05__HPP__
 
 #include "message.hpp"
+#include <marnav/utils/mmsi.hpp>
 
 namespace marnav
 {
@@ -53,7 +54,7 @@ private:
 
 public:
 	unsigned int get_repeat_indicator() const { return repeat_indicator; }
-	uint32_t get_mmsi() const { return mmsi; }
+	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
 	uint32_t get_ais_version() const { return ais_version; }
 	uint32_t get_imo_number() const { return imo_number; }
 	std::string get_callsign() const { return callsign; }
@@ -73,7 +74,7 @@ public:
 	bool get_dte() const { return dte; }
 
 	void set_repeat_indicator(unsigned int t) { repeat_indicator = t; }
-	void set_mmsi(uint32_t t) { mmsi = t; }
+	void set_mmsi(const utils::mmsi & t) { mmsi = t; }
 	void set_ais_version(uint32_t t) { ais_version = t; }
 	void set_imo_number(uint32_t t) { imo_number = t; }
 	void set_callsign(const std::string & t);

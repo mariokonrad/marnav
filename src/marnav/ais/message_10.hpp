@@ -3,6 +3,7 @@
 
 #include "message.hpp"
 #include <marnav/geo/angle.hpp>
+#include <marnav/utils/mmsi.hpp>
 
 namespace marnav
 {
@@ -33,12 +34,12 @@ private:
 
 public:
 	unsigned int get_repeat_indicator() const { return repeat_indicator; }
-	uint32_t get_mmsi() const { return mmsi; }
-	uint32_t get_dest_mmsi() const { return dest_mmsi; }
+	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
+	utils::mmsi get_dest_mmsi() const { return utils::mmsi{dest_mmsi}; }
 
 	void set_repeat_indicator(unsigned int t) { repeat_indicator = t; }
-	void set_mmsi(uint32_t t) { mmsi = t; }
-	void set_dest_mmsi(uint32_t t) { mmsi = t; }
+	void set_mmsi(const utils::mmsi & t) { mmsi = t; }
+	void set_dest_mmsi(const utils::mmsi & t) { mmsi = t; }
 };
 }
 }

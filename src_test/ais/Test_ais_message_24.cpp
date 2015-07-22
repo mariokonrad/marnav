@@ -51,13 +51,13 @@ TEST_F(Test_ais_message_24, is_auxiliary_vessel)
 {
 	{
 		ais::message_24 m;
-		m.set_mmsi(2691119999);
+		m.set_mmsi(utils::mmsi{2691119999});
 		EXPECT_FALSE(m.is_auxiliary_vessel());
 	}
 
 	{
 		ais::message_24 m;
-		m.set_mmsi(981119999);
+		m.set_mmsi(utils::mmsi{981119999});
 		EXPECT_TRUE(m.is_auxiliary_vessel());
 	}
 }
@@ -89,7 +89,7 @@ TEST_F(Test_ais_message_24, encode_default_values_part_b_normal)
 TEST_F(Test_ais_message_24, encode_default_values_part_b_auxiliary)
 {
 	ais::message_24 m;
-	m.set_mmsi(981119999);
+	m.set_mmsi(utils::mmsi{981119999});
 	m.set_part_number(ais::message_24::part::B);
 
 	auto v = ais::encode_message(m);
