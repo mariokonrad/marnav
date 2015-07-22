@@ -50,12 +50,12 @@ private:
 public:
 	unsigned int get_repeat_indicator() const { return repeat_indicator; }
 	uint32_t get_mmsi() const { return mmsi; }
-	uint32_t get_year    () const { return year  ;}        
-	uint32_t get_month   () const { return month ;}          
-	uint32_t get_day     () const { return day   ;}        
-	uint32_t get_hour    () const { return hour  ;}         
-	uint32_t get_minute  () const { return minute;}           
-	uint32_t get_second  () const { return second;}           
+	uint32_t get_year() const { return year; }
+	uint32_t get_month() const { return month; }
+	uint32_t get_day() const { return day; }
+	uint32_t get_hour() const { return hour; }
+	uint32_t get_minute() const { return minute; }
+	uint32_t get_second() const { return second; }
 	bool get_position_accuracy() const { return position_accuracy; }
 	uint32_t get_longitude_minutes() const;
 	uint32_t get_latitude_minutes() const;
@@ -65,12 +65,12 @@ public:
 
 	void set_repeat_indicator(unsigned int t) { repeat_indicator = t; }
 	void set_mmsi(uint32_t t) { mmsi = t; }
-	void set_year    (uint32_t  t) {  year   = t;}        
-	void set_month   (uint32_t  t) {  month  = t;}          
-	void set_day     (uint32_t  t) {  day    = t;}        
-	void set_hour    (uint32_t  t) {  hour   = t;}         
-	void set_minute  (uint32_t  t) {  minute = t;}           
-	void set_second  (uint32_t  t) {  second = t;}           
+	void set_year(uint32_t t) { year = t; }
+	void set_month(uint32_t t) { month = t; }
+	void set_day(uint32_t t) { day = t; }
+	void set_hour(uint32_t t) { hour = t; }
+	void set_minute(uint32_t t) { minute = t; }
+	void set_second(uint32_t t) { second = t; }
 	void set_position_accuracy(bool t) { position_accuracy = t; }
 	void set_longitude_minutes(uint32_t t) { longitude_minutes = t; }
 	void set_latitude_minutes(uint32_t t) { latitude_minutes = t; }

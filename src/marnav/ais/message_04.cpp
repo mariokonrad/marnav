@@ -81,15 +81,9 @@ raw message_04::get_data() const
 	return bits;
 }
 
-geo::longitude message_04::get_longitude() const
-{
-	return to_geo_longitude(longitude_minutes);
-}
+geo::longitude message_04::get_longitude() const { return to_geo_longitude(longitude_minutes); }
 
-geo::latitude message_04::get_latitude() const
-{
-	return to_geo_latitude(latitude_minutes);
-}
+geo::latitude message_04::get_latitude() const { return to_geo_latitude(latitude_minutes); }
 
 void message_04::set_longitude(const geo::longitude & t)
 {
@@ -100,6 +94,5 @@ void message_04::set_latitude(const geo::latitude & t)
 {
 	latitude_minutes = to_latitude_minutes(t);
 }
-
 }
 }
