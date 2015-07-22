@@ -63,14 +63,14 @@ public:
 	void set_repeat_indicator(unsigned int t) { repeat_indicator = t; }
 	void set_mmsi(uint32_t t) { mmsi = t; }
 	void set_altitude(uint32_t t) { altitude = t; }
-	void set_speed(uint32_t t) { speed= t; }
+	void set_speed(uint32_t t) { speed = t; }
 	void set_position_accuracy(bool t) { position_accuracy = t; }
 	void set_longitude_minutes(uint32_t t) { longitude_minutes = t; }
 	void set_latitude_minutes(uint32_t t) { latitude_minutes = t; }
-	void set_course(uint32_t t ) { course = t; }
-	void set_utc_second(uint32_t t) { utc_second =t; }
+	void set_course(uint32_t t) { course = t; }
+	void set_utc_second(uint32_t t) { utc_second = t; }
 	void set_dte(bool t) { dte = t; }
-	void set_assigned(bool t) { assigned =t; }
+	void set_assigned(bool t) { assigned = t; }
 	void set_raim(bool t) { raim = t; }
 	void set_radio_status(uint32_t t) { radio_status = t; }
 
