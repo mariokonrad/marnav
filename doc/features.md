@@ -10,6 +10,9 @@ It supports (partially):
 - Reading data from serial ports (NMEA, SeaTalk)
 - Basic geodesic functions, suitable for martime navigation.
 
+
+NMEA-0183
+---------
 Supported sentences for NMEA-0183 (read and write):
 - AAM: Waypoint Arrival Alarm
 - ALM: GPS Almanac Data
@@ -67,25 +70,32 @@ Obsolete (according to the standard) but implemented:
 Vendor Extensions:
 - PGRME: Garmin Estimated Error
 
-Supported messages for AIS (decode and encode):
-- type 01: Position Report Class A
-- type 02: Position Report Class A (Assigned Schedule)
-- type 03: Position Report Class A (Response to Interrogation)
-- type 04: Base Station Report
-- type 05: Static and Voyage Related Data
-- type 18: Standard Class B CS Position Report
-- type 19: Extended Class B CS Position Report
-- type 24: Static Data Report (part A and B, norma and auxiliary vessel)
 
+AIS
+---
+Supported messages for AIS (decode and encode):
+- Type 01: Position Report Class A
+- Type 02: Position Report Class A (Assigned Schedule)
+- Type 03: Position Report Class A (Response to Interrogation)
+- Type 04: Base Station Report
+- Type 05: Static and Voyage Related Data
+- Type 09: Standard SAR Aircraft Position Report
+- Type 18: Standard Class B CS Position Report
+- Type 19: Extended Class B CS Position Report
+- Type 24: Static Data Report (part A and B, norma and auxiliary vessel)
+
+
+SeaTalk
+-------
 Suported messages for SeaTalk (decode and encode):
-- type 00: depth below transducer
-- type 01: equipment id
-- type 10: apparent wind angle
-- type 11: apparent wind speed
-- type 20: speed through water
-- type 21: trip mileage
-- type 22: total mileage
-- type 23: water temperature 1
-- type 25: total and trip log
-- type 27: water temperature 2
+- Type 00: depth below transducer
+- Type 01: equipment id
+- Type 10: apparent wind angle
+- Type 11: apparent wind speed
+- Type 20: speed through water
+- Type 21: trip mileage
+- Type 22: total mileage
+- Type 23: water temperature 1
+- Type 25: total and trip log
+- Type 27: water temperature 2
 
