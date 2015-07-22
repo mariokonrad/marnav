@@ -89,6 +89,12 @@ void process_ais_message(const std::vector<std::unique_ptr<marnav::nmea::sentenc
 		case ais::message_id::standard_sar_aircraft_position_report:
 			std::cout << "AIS: Standard SAR Aircraft Position Report\n";
 			break;
+		case ais::message_id::utc_and_date_inquiry:
+			std::cout << "AIS: UTC/Date Inquiry\n";
+			break;
+		case ais::message_id::utc_and_date_response:
+			std::cout << "AIS: UTC/Date Response\n";
+			break;
 		case ais::message_id::standard_class_b_cs_position_report:
 			std::cout << "AIS: Standard class B CS position report\n";
 			break;

@@ -88,6 +88,7 @@ set(SOURCE_AIS
 	marnav/ais/message_05.cpp
 	marnav/ais/message_09.cpp
 	marnav/ais/message_10.cpp
+	marnav/ais/message_11.cpp
 	marnav/ais/message_18.cpp
 	marnav/ais/message_19.cpp
 	marnav/ais/message_24.cpp
@@ -234,6 +235,7 @@ install(
 		marnav/ais/message_05.hpp
 		marnav/ais/message_09.hpp
 		marnav/ais/message_10.hpp
+		marnav/ais/message_11.hpp
 		marnav/ais/message_18.hpp
 		marnav/ais/message_19.hpp
 		marnav/ais/message_24.hpp

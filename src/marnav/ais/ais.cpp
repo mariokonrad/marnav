@@ -6,6 +6,7 @@
 #include "message_05.hpp"
 #include "message_09.hpp"
 #include "message_10.hpp"
+#include "message_11.hpp"
 #include "message_18.hpp"
 #include "message_19.hpp"
 #include "message_24.hpp"
@@ -73,6 +74,7 @@ static message::parse_function instantiate_message(message_id type) throw(unknow
 		{message_id::static_and_voyage_related_data, message_05::parse},
 		{message_id::standard_sar_aircraft_position_report, message_09::parse},
 		{message_id::utc_and_date_inquiry, message_10::parse},
+		{message_id::utc_and_date_response, message_11::parse},
 		{message_id::standard_class_b_cs_position_report, message_18::parse},
 		{message_id::extended_class_b_equipment_position_report, message_19::parse},
 		{message_id::static_data_report, message_24::parse},

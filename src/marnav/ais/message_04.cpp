@@ -8,7 +8,12 @@ namespace ais
 {
 
 message_04::message_04()
-	: message(ID)
+	: message_04(ID)
+{
+}
+
+message_04::message_04(message_id id)
+	: message(id)
 	, repeat_indicator(0)
 	, mmsi(0)
 	, year(year_not_available)

@@ -56,7 +56,6 @@ AIS
 	- Type 06: Binary Addressed Message
 	- Type 07: Binary Acknowledge
 	- Type 08: Binary Broadcast Message
-	- Type 11: UTC/Date Response
 	- Type 12: Addressed Safety-Related Message
 	- Type 13: Safety-Related Acknowledgement
 	- Type 14: Safety-Related Broadcast Message
