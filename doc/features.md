@@ -80,6 +80,7 @@ Supported messages for AIS (decode and encode):
 - Type 04: Base Station Report
 - Type 05: Static and Voyage Related Data
 - Type 09: Standard SAR Aircraft Position Report
+- Type 10: UTC/Date Inquiry
 - Type 18: Standard Class B CS Position Report
 - Type 19: Extended Class B CS Position Report
 - Type 24: Static Data Report (part A and B, norma and auxiliary vessel)
