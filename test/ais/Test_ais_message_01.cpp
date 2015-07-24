@@ -37,6 +37,12 @@ TEST_F(Test_ais_message_01, parse)
 	EXPECT_EQ(82419u, m->get_radio_status());
 }
 
+TEST_F(Test_ais_message_01, wrong_number_of_bits)
+{
+	EXPECT_ANY_THROW(ais::message_01::parse(ais::raw{167}));
+	EXPECT_ANY_THROW(ais::message_01::parse(ais::raw{169}));
+}
+
 TEST_F(Test_ais_message_01, encode_default_values)
 {
 	ais::message_01 m;

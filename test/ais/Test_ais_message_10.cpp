@@ -34,4 +34,10 @@ TEST_F(Test_ais_message_10, encode_default_values)
 	EXPECT_EQ(0, v[0].second);
 }
 
+TEST_F(Test_ais_message_10, wrong_number_of_bits)
+{
+	EXPECT_ANY_THROW(ais::message_10::parse(ais::raw{71}));
+	EXPECT_ANY_THROW(ais::message_10::parse(ais::raw{73}));
+}
+
 }

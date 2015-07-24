@@ -98,4 +98,11 @@ TEST_F(Test_ais_message_24, encode_default_values_part_b_auxiliary)
 	EXPECT_STREQ("H>_bkwl000000000000000000000", v[0].first.c_str());
 	EXPECT_EQ(0, v[0].second);
 }
+
+TEST_F(Test_ais_message_24, wrong_number_of_bits)
+{
+	EXPECT_ANY_THROW(ais::message_24::parse(ais::raw{167}));
+	EXPECT_ANY_THROW(ais::message_24::parse(ais::raw{169}));
+}
+
 }

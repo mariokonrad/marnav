@@ -47,4 +47,11 @@ TEST_F(Test_ais_message_02, encode_default_values)
 	EXPECT_STREQ("200000?P00<t[F0l4Y@>4?wh0000", v[0].first.c_str());
 	EXPECT_EQ(0, v[0].second);
 }
+
+TEST_F(Test_ais_message_02, wrong_number_of_bits)
+{
+	EXPECT_ANY_THROW(ais::message_02::parse(ais::raw{167}));
+	EXPECT_ANY_THROW(ais::message_02::parse(ais::raw{169}));
+}
+
 }

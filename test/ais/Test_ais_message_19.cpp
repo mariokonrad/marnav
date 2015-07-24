@@ -23,6 +23,12 @@ TEST_F(Test_ais_message_19, parse)
 	ASSERT_TRUE(m != nullptr);
 }
 
+TEST_F(Test_ais_message_19, wrong_number_of_bits)
+{
+	EXPECT_ANY_THROW(ais::message_19::parse(ais::raw{311}));
+	EXPECT_ANY_THROW(ais::message_19::parse(ais::raw{313}));
+}
+
 TEST_F(Test_ais_message_19, encode_default_values)
 {
 	ais::message_19 m;
