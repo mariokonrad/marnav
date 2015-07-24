@@ -63,7 +63,8 @@ static raw collect(const std::vector<std::pair<std::string, int>> & v)
 	return result;
 }
 
-static message::parse_function instantiate_message(message_id type) throw(unknown_message)
+static message::parse_function instantiate_message(message_id type, size_t size) throw(
+	unknown_message)
 {
 	using entry = std::pair<message_id, message::parse_function>;
 	static const std::vector<entry> known_messages = {
@@ -85,7 +86,8 @@ static message::parse_function instantiate_message(message_id type) throw(unknow
 
 	if (i == end(known_messages))
 		throw unknown_message{"unknown message in ais/instantiate_message: "
-			+ std::to_string(static_cast<uint8_t>(type))};
+			+ std::to_string(static_cast<uint8_t>(type)) + " (" + std::to_string(size)
+			+ " bits)"};
 
 	return i->second;
 }
@@ -103,7 +105,7 @@ std::unique_ptr<message> make_message(const std::vector<std::pair<std::string, i
 {
 	auto bits = collect(v);
 	message_id type = static_cast<message_id>(bits.get<uint8_t>(0, 6));
-	return instantiate_message(type)(bits);
+	return instantiate_message(type, bits.size())(bits);
 }
 
 std::vector<std::pair<std::string, int>> encode_message(const message & msg) throw(
