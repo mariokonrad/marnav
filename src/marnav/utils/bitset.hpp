@@ -1,6 +1,9 @@
 #ifndef __UTILS__BITSET__HPP__
 #define __UTILS__BITSET__HPP__
 
+/// Copyright (c) 2015 Mario Konrad <mario.konrad@gmx.net>
+/// The code is licensed under the BSD License (see file LICENSE)
+
 #include <vector>
 #include <type_traits>
 #include <limits>
@@ -17,6 +20,10 @@ namespace utils
 /// Bits are stored in blocks, whose data type is configurable.
 ///
 /// This may not be the most performant implementation, but a very flexible one.
+///
+/// This class suffers the same problems as std::vector<bool> does. Although is
+/// provides an interator-like facility, it is not std algorithm compatible, nor
+/// claims nor wants to be.
 ///
 /// @tparam Block The data type of the underlying block type.
 /// @tparam Container The container type to store blocks.
@@ -46,8 +53,9 @@ namespace utils
 /// @endcode
 ///
 /// @todo support for const_iterator (partially prepared)
-/// @todo padding for 'append' and 'set'
 /// @todo documentation
+/// @todo improve effiency
+/// @todo improve std algorithm compatibility
 template <class Block, class Container = std::vector<Block>,
 	class = typename std::enable_if<!std::numeric_limits<Block>::is_signed>::type>
 class bitset
@@ -66,10 +74,16 @@ public:
 	using data_const_iterator = typename Container::const_iterator;
 
 	/// @todo TEST
-	/// @todo documentation
+	///
+	/// This is a non-std conform const iterator. The intention is
+	/// to provide a basic iterator functionality without claiming
+	/// to be std compliant.
 	class const_iterator
 	{
 		friend class bitset;
+
+	public:
+		using value_type = bool;
 
 	private:
 		const bitset * bs;
@@ -217,7 +231,7 @@ private:
 		if (n_blocks > data.capacity()) {
 			data.reserve(n_blocks);
 			while (bits > capacity() - pos) {
-				data.push_back(block_type());
+				data.push_back(block_type{});
 			}
 		}
 	}
@@ -258,12 +272,14 @@ private:
 	/// @param[in] bits The number of bits of the data to be written
 	///            If not all bits are being written, only the least significant bits are being
 	///            taken.
+	/// @note This function does not extend the data container. It is assumed, that
+	///       this function runs in the context of another, which takes care of the
+	///       container (e.g. set_impl). This behaviour is intentional, because
+	///       this function runs potentially often, and therefore it is desired to
+	///       avoid additional runtime checks which can easily be done in the calling
+	///       environment.
 	void set_block(block_type v, size_type ofs, size_type bits = BITS_PER_BLOCK)
 	{
-		if (bits <= 0)
-			return;
-		if (ofs + bits > capacity())
-			extend(ofs + bits - capacity());
 		size_type i = ofs / BITS_PER_BLOCK; // index of current block
 
 		// number of bits unused within the current block
@@ -298,7 +314,7 @@ private:
 		if (bits <= 0)
 			return;
 		if (bits > sizeof(v) * BITS_PER_BYTE)
-			throw std::invalid_argument{"padding not implemented"};
+			throw std::invalid_argument{"number of bit exceed number of available bits"};
 		if (ofs + bits > capacity())
 			extend(ofs + bits - capacity());
 
@@ -378,17 +394,28 @@ private:
 	}
 
 public:
+	// ---- constructors
+
+	/// Copy constructor
 	bitset(const bitset &) = default;
+
+	/// Move constructor.
 	bitset(bitset &&) = default;
 
+	/// Copy assignment
 	bitset & operator=(const bitset &) = default;
 
+	/// Move assignment
+	bitset & operator=(bitset &&) = default;
+
+	/// Default construction
 	bitset()
 		: pos(0)
 	{
 	}
 
-	/// Initializes the bitset with the specified amount of bits.
+	/// Construction with number of bits present (and usable) in the bitset.
+	/// All bits are initialized to the default constructed Block type..
 	///
 	/// @param[in] bits Number of bits (default initialized to 0) in the bitset.
 	bitset(size_type bits)
@@ -398,11 +425,7 @@ public:
 		pos = bits;
 	}
 
-	/// Initializes the bitset with some content. The data within
-	/// the bitset will be a copy of the specified data.
-	///
-	/// If a zero-copy container is desired, it may be configured
-	/// as template parameter 'Container'.
+	/// Construction with content from a specified container.
 	///
 	/// @param[in] begin Start position of the data (inclusive)
 	/// @param[in] end End position of the data (exclusive)
@@ -411,6 +434,15 @@ public:
 		, data(begin, end)
 	{
 	}
+
+	/// Construction with move of the container, this does not copy any data.
+	bitset(Container && container)
+		: pos(container.size() * BITS_PER_BLOCK)
+		, data(std::move(container))
+	{
+	}
+
+	// ---- container operations
 
 	/// Returns the capacity of this bit set. Note: not all bits must have
 	/// been occupied.
@@ -431,30 +463,7 @@ public:
 		pos = 0;
 	}
 
-	/// Flips the bit at the specified index.
-	///
-	/// @exception std::out_of_range Specified index is out of range.
-	void flip(size_type i) throw (std::out_of_range)
-	{
-		set(!get_bit(i), i, 1);
-	}
-
-	/// Returns the bit at the specified position.
-	bool operator[](size_type i) const { return get_bit(i); }
-
-	/// Returns the bit at the specified position. If the index is larger
-	/// than the actual number of bits, 'false' will rturn.
-	///
-	/// @exception std::out_of_range Specified index is out of range.
-	bool get_bit(size_type i) const throw(std::out_of_range)
-	{
-		if (i >= size())
-			throw std::out_of_range{"index out of range in flip"};
-
-		// bit within the block to be read
-		size_type n_bit = BITS_PER_BLOCK - (i % BITS_PER_BLOCK) - 1;
-		return (data[i / BITS_PER_BLOCK] >> n_bit) & 1 ? true : false;
-	}
+	// ---- iterators
 
 	/// Returns a const iterator to the beginning of the data itself.
 	/// Note: this iterator accesses the data up to capacity(), some bits
@@ -468,27 +477,20 @@ public:
 
 	const_iterator end() const { return const_iterator(this, size()); }
 
+	// ---- append
+
 	/// Appends another bitset to this one.
 	///
 	/// @param[in] bs The bitset to be appended to this one.
 	///
-	/// @todo Implementation
-	void append(const bitset & bs)
+	/// @note It is not allowed to append a bitself to itself.
+	/// @note This algorithm is not efficient.
+	template <class U> void append(const bitset<U> & bs)
 	{
-		(void)bs; // unused
-	}
-
-	/// Sets the specified bitset at the offset within this bitset.
-	///
-	/// @param[in] bs The bitset to copy.
-	/// @param[in] ofs The offset within the bitset to copy the bitset
-	///            to. The entire specified bitset will be set.
-	///
-	/// @todo Implementation
-	void set(const bitset & bs, size_type ofs)
-	{
-		(void)bs; // unused
-		(void)ofs; // unused
+		if (reinterpret_cast<const void *>(this) == reinterpret_cast<const void *>(&bs))
+			return;
+		for (const auto & bit : bs)
+			append(bit, 1);
 	}
 
 	/// Reads blocks from the stream and appends them to the bitset.
@@ -527,7 +529,7 @@ public:
 		if (bits <= 0)
 			return;
 		if (bits > sizeof(v) * BITS_PER_BYTE)
-			throw std::invalid_argument{"padding not implemented"};
+			throw std::invalid_argument{"number of bits exceed number of available bits"};
 		size_type n_bits = bits % BITS_PER_BLOCK; // incomplete blocks
 		if (n_bits != 0) {
 			append_block(v >> (bits - n_bits), n_bits);
@@ -535,6 +537,26 @@ public:
 		}
 		for (; bits > 0; bits -= BITS_PER_BLOCK) {
 			append_block(v >> (bits - BITS_PER_BLOCK));
+		}
+	}
+
+	// ---- set
+
+	/// Sets the specified bitset at the offset within this bitset.
+	///
+	/// @param[in] bs The bitset to copy.
+	/// @param[in] ofs The offset within the bitset to copy the bitset
+	///            to. The entire specified bitset will be set.
+	///
+	/// @note It is not allowed to set a bitself to itself.
+	/// @note This algorithm is not efficient.
+	template <class U> void set(const bitset<U> & bs, size_type ofs)
+	{
+		if (reinterpret_cast<const void *>(this) == reinterpret_cast<const void *>(&bs))
+			return;
+		for (const auto & bit : bs) {
+			set(bit, ofs, 1);
+			++ofs;
 		}
 	}
 
@@ -553,6 +575,59 @@ public:
 	{
 		set_dispatch(v, ofs, bits, std::is_integral<T>{});
 	}
+
+	/// Resets the bit at the speficied index.
+	void reset(size_type index) throw(std::out_of_range)
+	{
+		if (index >= size())
+			throw std::out_of_range{"index out of range in reset(index)"};
+		set(0, index, 1);
+	}
+
+	/// Sets all bits within the bitset to 0.
+	void reset() noexcept
+	{
+		for (auto & block : data)
+			block = 0;
+	}
+
+	/// Sets a single bit at a specified position to the specified value.
+	/// This method accesses the bitset as direct as possible and therefore does not
+	/// extend the set if the index is out of range.
+	///
+	/// @exception std::out_of_range Specified index is out of range.
+	void set_bit(size_type i, bool value) throw(std::out_of_range)
+	{
+		if (i >= size())
+			throw std::out_of_range{"index out of range"};
+
+		// bit within the block to be read
+		size_type n_bit = BITS_PER_BLOCK - (i % BITS_PER_BLOCK) - 1;
+		if (value) {
+			data[i / BITS_PER_BLOCK] |= (1u << n_bit);
+		} else {
+			data[i / BITS_PER_BLOCK] &= ~(1u << n_bit);
+		}
+	}
+
+	// ---- get
+
+	/// Returns the bit at the specified position. If the index is larger
+	/// than the actual number of bits, 'false' will rturn.
+	///
+	/// @exception std::out_of_range Specified index is out of range.
+	bool get_bit(size_type i) const throw(std::out_of_range)
+	{
+		if (i >= size())
+			throw std::out_of_range{"index out of range"};
+
+		// bit within the block to be read
+		size_type n_bit = BITS_PER_BLOCK - (i % BITS_PER_BLOCK) - 1;
+		return (data[i / BITS_PER_BLOCK] >> n_bit) & 1 ? true : false;
+	}
+
+	/// Simply an other name for get_bit.
+	bool test(size_type i) const throw(std::out_of_range) { return get_bit(i); }
 
 	/// Reads data from the bit set. There must be enough capacity in either the
 	/// bitset to be read as well as the provided data type to contain the desired
@@ -577,7 +652,7 @@ public:
 		if (bits <= 0)
 			return T{};
 		if (bits > sizeof(T) * BITS_PER_BYTE)
-			throw std::invalid_argument{"padding not implemented"};
+			throw std::invalid_argument{"number of bits exceed number of available bits"};
 		if (ofs + bits > pos)
 			throw std::out_of_range{"offset and bits exceed available number of bits"};
 
@@ -601,12 +676,17 @@ public:
 			ofs += u_bits;
 		}
 
-		// all complete blocks inbetween
-		for (; bits >= BITS_PER_BLOCK; bits -= BITS_PER_BLOCK) {
-			get_block(block, ofs);
-			value <<= BITS_PER_BLOCK;
-			value += block;
-			ofs += BITS_PER_BLOCK;
+		// all complete blocks inbetween, only possible if sizeof(T) exceeds
+		// the block size (mupltiple blocks in one T).
+		// since this check is possible at compile time, modern compilers
+		// probably will eliminated it completely.
+		if (sizeof(T) * BITS_PER_BYTE > BITS_PER_BLOCK) {
+			for (; bits >= BITS_PER_BLOCK; bits -= BITS_PER_BLOCK) {
+				get_block(block, ofs);
+				value <<= BITS_PER_BLOCK;
+				value += block;
+				ofs += BITS_PER_BLOCK;
+			}
 		}
 
 		// fraction of the last block
@@ -631,6 +711,71 @@ public:
 		throw(std::invalid_argument, std::out_of_range)
 	{
 		value = get<T>(ofs, bits);
+	}
+
+	bool get(size_type index) const throw(std::out_of_range) { return get<bool>(index, 1); }
+
+	// ---- operators
+
+	/// Returns the bit at the specified position.
+	bool operator[](size_type i) const throw(std::out_of_range) { return get_bit(i); }
+
+	/// Comparison operator for the same bitset type.
+	bool operator==(const bitset & other) const { return this == &other || data == other.data; }
+
+	/// Comparison operator for the same bitset type.
+	bool operator!=(const bitset & other) const { return !(*this == other); }
+
+	// ---- other
+
+	/// Flips the bit at the specified index.
+	///
+	/// @exception std::out_of_range Specified index is out of range.
+	void flip(size_type i) throw(std::out_of_range) { set(!get_bit(i), i, 1); }
+
+	/// Returns true if all bits are true.
+	///
+	/// @note This is implemented for readablility, not max performance.
+	bool all() const noexcept
+	{
+		for (auto i = begin(); i != end(); ++i)
+			if (*i == false)
+				return false;
+		return true;
+	}
+
+	/// Returns true if any of the bits are true.
+	///
+	/// @note This is implemented for readablility, not max performance.
+	bool any() const noexcept
+	{
+		for (auto i = begin(); i != end(); ++i)
+			if (*i == true)
+				return true;
+		return false;
+	}
+
+	/// Returns true if none of the bits are true.
+	///
+	/// @note This is implemented for readablility, not max performance.
+	bool none() const noexcept
+	{
+		for (auto i = begin(); i != end(); ++i)
+			if (*i == true)
+				return false;
+		return true;
+	}
+
+	/// Returns the number of bits set to true.
+	///
+	/// @note This is implemented for readablility, not max performance.
+	size_type count() const noexcept
+	{
+		size_type n = 0;
+		for (auto i = begin(); i != end(); ++i)
+			if (*i == true)
+				++n;
+		return n;
 	}
 };
 }

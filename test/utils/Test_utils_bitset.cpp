@@ -19,6 +19,36 @@ public:
 	}
 };
 
+TEST_F(Test_utils_bitset, uint8__construction_bit_size)
+{
+	bitset<uint8_t> b{16};
+
+	//            0       8       16      24      32      40      48      56
+	//            +-------+-------+-------+-------+-------+-------+-------+-------
+	EXPECT_STREQ("0000000000000000", to_string(b).c_str());
+}
+
+TEST_F(Test_utils_bitset, uint8__construction_container_iterator)
+{
+	using namespace std;
+
+	vector<uint8_t> v{0xaa, 0x55};
+	bitset<uint8_t> b(begin(v), end(v));
+
+	//            0       8       16      24      32      40      48      56
+	//            +-------+-------+-------+-------+-------+-------+-------+-------
+	EXPECT_STREQ("1010101001010101", to_string(b).c_str());
+}
+
+TEST_F(Test_utils_bitset, uint8__construction_container_move)
+{
+	bitset<uint8_t> b(std::vector<uint8_t>{0xaa, 0x55});
+
+	//            0       8       16      24      32      40      48      56
+	//            +-------+-------+-------+-------+-------+-------+-------+-------
+	EXPECT_STREQ("1010101001010101", to_string(b).c_str());
+}
+
 TEST_F(Test_utils_bitset, uint8__append_single_bits)
 {
 	{
@@ -207,7 +237,7 @@ TEST_F(Test_utils_bitset, uint8__set_multiple_bits)
 	}
 }
 
-TEST_F(Test_utils_bitset, uint8__get_multiple_bits)
+TEST_F(Test_utils_bitset, uint8__get_multiple_bits_ending_on_block_boundary)
 {
 	bitset<uint8_t> bits{64};
 	bits.set(0x7, 5, 3);
@@ -439,6 +469,255 @@ TEST_F(Test_utils_bitset, uint8__flip)
 	EXPECT_STREQ("1000000000100000000000000000000010000000000000000000000000000000",
 		to_string(bits).c_str());
 
+}
+
+TEST_F(Test_utils_bitset, uint8__append_bitset_to_empty_bitset)
+{
+	bitset<uint8_t> b0;
+	bitset<uint8_t> b1;
+
+	b0.append(0x55, 8);
+	b1.append(b0);
+
+	//            0       8       16      24      32      40      48      56
+	//            +-------+
+	EXPECT_STREQ("01010101", to_string(b0).c_str());
+	EXPECT_STREQ("01010101", to_string(b1).c_str());
+}
+
+TEST_F(Test_utils_bitset, uint8__append_bitset_to_nonempty_bitset)
+{
+	bitset<uint8_t> b0;
+	bitset<uint8_t> b1;
+
+	b0.append(0x55, 8);
+	b1.append(0xaa, 8);
+	b1.append(b0);
+
+	//            0       8       16      24      32      40      48      56
+	//            +-------+
+	EXPECT_STREQ("01010101", to_string(b0).c_str());
+	EXPECT_STREQ("1010101001010101", to_string(b1).c_str());
+}
+
+TEST_F(Test_utils_bitset, uint8__set_bitset_to_empty_bitset)
+{
+	bitset<uint8_t> b0;
+	bitset<uint8_t> b1;
+
+	b0.append(0x55, 8);
+	b1.set(b0, 0);
+
+	//            0       8       16      24      32      40      48      56
+	//            +-------+
+	EXPECT_STREQ("01010101", to_string(b0).c_str());
+	EXPECT_STREQ("01010101", to_string(b1).c_str());
+}
+
+TEST_F(Test_utils_bitset, uint8__set_bitset_to_empty_bitset_mixed_type_bitsets_8_to_16)
+{
+	bitset<uint8_t> b0;
+	bitset<uint16_t> b1;
+
+	b0.append(0x55, 8);
+	b1.set(b0, 0);
+
+	//            0       8       16      24      32      40      48      56
+	//            +-------+
+	EXPECT_STREQ("01010101", to_string(b0).c_str());
+	EXPECT_STREQ("01010101", to_string(b1).c_str());
+}
+
+TEST_F(Test_utils_bitset, uint8__set_bitset_to_empty_bitset_mixed_type_bitsets_16_to_8)
+{
+	bitset<uint16_t> b0;
+	bitset<uint8_t> b1;
+
+	b0.append(0x55, 8);
+	b1.set(b0, 0);
+
+	//            0       8       16      24      32      40      48      56
+	//            +-------+
+	EXPECT_STREQ("01010101", to_string(b0).c_str());
+	EXPECT_STREQ("01010101", to_string(b1).c_str());
+}
+
+TEST_F(Test_utils_bitset, uint8__set_bitset_to_nonempty_bitset)
+{
+	bitset<uint8_t> b0;
+	bitset<uint8_t> b1;
+
+	b0.append(0x55, 8);
+	b1.append(0xaa, 8);
+	b1.set(b0, 0);
+
+	//            0       8       16      24      32      40      48      56
+	//            +-------+
+	EXPECT_STREQ("01010101", to_string(b0).c_str());
+	EXPECT_STREQ("01010101", to_string(b1).c_str());
+}
+
+TEST_F(Test_utils_bitset, uint8__set_bit)
+{
+	bitset<uint8_t> b{8};
+
+	EXPECT_STREQ("00000000", to_string(b).c_str());
+	b.set_bit(0, true);
+	EXPECT_STREQ("10000000", to_string(b).c_str());
+	b.set_bit(7, true);
+	EXPECT_STREQ("10000001", to_string(b).c_str());
+	b.set_bit(0, false);
+	EXPECT_STREQ("00000001", to_string(b).c_str());
+	b.set_bit(7, false);
+	EXPECT_STREQ("00000000", to_string(b).c_str());
+}
+
+TEST_F(Test_utils_bitset, uint8__reset_all)
+{
+	bitset<uint8_t> b{8};
+	b.set(0xaa, 0, 8);
+
+	EXPECT_STREQ("10101010", to_string(b).c_str());
+	b.reset();
+	EXPECT_STREQ("00000000", to_string(b).c_str());
+}
+
+TEST_F(Test_utils_bitset, uint8__all)
+{
+	{
+		bitset<uint8_t> b{8};
+		EXPECT_FALSE(b.all());
+	}
+	{
+		bitset<uint8_t> b{8};
+		b.set(0xaa, 0, 8);
+		EXPECT_FALSE(b.all());
+	}
+	{
+		bitset<uint8_t> b{8};
+		b.set(1, 0, 8);
+		EXPECT_FALSE(b.all());
+	}
+	{
+		bitset<uint8_t> b{8};
+		b.set(0xff, 0, 8);
+		EXPECT_TRUE(b.all());
+	}
+}
+
+TEST_F(Test_utils_bitset, uint8__any)
+{
+	{
+		bitset<uint8_t> b{8};
+		EXPECT_FALSE(b.any());
+	}
+	{
+		bitset<uint8_t> b{8};
+		b.set(0xaa, 0, 8);
+		EXPECT_TRUE(b.any());
+	}
+	{
+		bitset<uint8_t> b{8};
+		b.set(1, 0, 8);
+		EXPECT_TRUE(b.any());
+	}
+	{
+		bitset<uint8_t> b{8};
+		b.set(0xff, 0, 8);
+		EXPECT_TRUE(b.any());
+	}
+}
+
+TEST_F(Test_utils_bitset, uint8__none)
+{
+	{
+		bitset<uint8_t> b{8};
+		EXPECT_TRUE(b.none());
+	}
+	{
+		bitset<uint8_t> b{8};
+		b.set(0xaa, 0, 8);
+		EXPECT_FALSE(b.none());
+	}
+	{
+		bitset<uint8_t> b{8};
+		b.set(1, 0, 8);
+		EXPECT_FALSE(b.none());
+	}
+	{
+		bitset<uint8_t> b{8};
+		b.set(0xff, 0, 8);
+		EXPECT_FALSE(b.none());
+	}
+}
+
+TEST_F(Test_utils_bitset, uint8__count)
+{
+	{
+		bitset<uint8_t> b{8};
+		EXPECT_EQ(0u, b.count());
+	}
+	{
+		bitset<uint8_t> b{8};
+		b.set(0xaa, 0, 8);
+		EXPECT_EQ(4u, b.count());
+	}
+	{
+		bitset<uint8_t> b{8};
+		b.set(1, 0, 8);
+		EXPECT_EQ(1u, b.count());
+	}
+	{
+		bitset<uint8_t> b{8};
+		b.set(0xff, 0, 8);
+		EXPECT_EQ(8u, b.count());
+	}
+}
+
+TEST_F(Test_utils_bitset, uint8__comparison_equal)
+{
+	bitset<uint8_t> a;
+	bitset<uint8_t> b;
+	bitset<uint8_t> c;
+
+	a.append(0xaa, 8);
+	b.append(0xaa, 8);
+	c.append(0x55, 8);
+
+	EXPECT_TRUE(a == a);
+	EXPECT_TRUE(b == b);
+	EXPECT_TRUE(c == c);
+
+	EXPECT_TRUE(a == b);
+	EXPECT_TRUE(b == a);
+
+	EXPECT_FALSE(a == c);
+	EXPECT_FALSE(c == a);
+	EXPECT_FALSE(b == c);
+	EXPECT_FALSE(c == b);
+}
+
+TEST_F(Test_utils_bitset, uint8__comparison_not_equal)
+{
+	bitset<uint8_t> a;
+	bitset<uint8_t> b;
+	bitset<uint8_t> c;
+
+	a.append(0xaa, 8);
+	b.append(0xaa, 8);
+	c.append(0x55, 8);
+
+	EXPECT_FALSE(a != a);
+	EXPECT_FALSE(b != b);
+	EXPECT_FALSE(c != c);
+
+	EXPECT_FALSE(a != b);
+	EXPECT_FALSE(b != a);
+
+	EXPECT_TRUE(a != c);
+	EXPECT_TRUE(c != a);
+	EXPECT_TRUE(b != c);
+	EXPECT_TRUE(c != b);
 }
 
 }
