@@ -72,7 +72,7 @@ find_program(CPPCHECK_PATH cppcheck)
 if(CPPCHECK_PATH)
 	message(STATUS "cppcheck found")
 	add_custom_target(cppcheck
-		COMMAND ${CPPCHECK_PATH} --std=c++11 --platform=unix32 -v -f --enable=all -I ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/src_test 2> ${CMAKE_CURRENT_BINARY_DIR}/doc/cppcheck.txt
+		COMMAND ${CPPCHECK_PATH} --std=c++11 --platform=unix32 -v -f --enable=all -I ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/test 2> ${CMAKE_CURRENT_BINARY_DIR}/doc/cppcheck.txt
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 	)
 else()
@@ -93,7 +93,7 @@ macro(run_unittest unittest_target)
 	add_dependencies(unittest ${unittest_target}_runtest)
 endmacro()
 
-add_subdirectory(src_test)
+add_subdirectory(test)
 
 ### coverage
 if (CMAKE_BUILD_TYPE STREQUAL "Coverage")

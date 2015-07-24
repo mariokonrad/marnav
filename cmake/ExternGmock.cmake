@@ -6,7 +6,7 @@ set(gmock_LIBRARY_DIR "${gmock_INSTALL_DIR}/lib")
 
 ExternalProject_Add(extern_gmock
 	PREFIX "${CMAKE_CURRENT_BINARY_DIR}/gmock"
-	SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src_extern/gmock-1.7.0"
+	SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/extern/gmock-1.7.0"
 	# configure
 	CMAKE_ARGS
 		-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
