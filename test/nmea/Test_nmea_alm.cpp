@@ -23,6 +23,12 @@ TEST_F(Test_nmea_alm, parse)
 	ASSERT_NE(nullptr, alm);
 }
 
+TEST_F(Test_nmea_alm, parse_invalid_satellite_prn)
+{
+	EXPECT_ANY_THROW(nmea::make_sentence(
+		"$GPALM,1,1,33,1159,00,441d,4e,16be,fd5e,a10c9f,4a2da4,686e81,58cbe1,0a4,001*73"));
+}
+
 TEST_F(Test_nmea_alm, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(nmea::alm::parse("@@", {14, "@"}));

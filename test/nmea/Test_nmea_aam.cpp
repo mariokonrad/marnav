@@ -26,6 +26,16 @@ TEST_F(Test_nmea_aam, parse)
 	EXPECT_EQ(0.5, radius.value());
 }
 
+TEST_F(Test_nmea_aam, parse_wrong_distance_unit)
+{
+	EXPECT_ANY_THROW(nmea::make_sentence("$GPAAM,,,0.5,M,POINT1*6D"));
+}
+
+TEST_F(Test_nmea_aam, parse_missing_distance_unit)
+{
+	EXPECT_ANY_THROW(nmea::make_sentence("$GPAAM,,,0.5,,POINT1*20"));
+}
+
 TEST_F(Test_nmea_aam, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(nmea::aam::parse("@@", {4, "@"}));

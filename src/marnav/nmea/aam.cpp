@@ -26,6 +26,18 @@ void aam::set_waypoint_id(const std::string & id)
 	waypoint_id = id;
 }
 
+void aam::check() const throw(std::invalid_argument)
+{
+	if (arrival_circle_entered)
+		check_status(arrival_circle_entered.value());
+	if (perpendicualar_passed)
+		check_status(perpendicualar_passed.value());
+	if (arrival_circle_radius && !arrival_circle_radius_unit)
+		throw std::invalid_argument{"unit missing in sentence"};
+	if (arrival_circle_radius_unit && arrival_circle_radius_unit.value() != unit::NM)
+		throw std::invalid_argument{"invalid unit in sentence"};
+}
+
 std::unique_ptr<sentence> aam::parse(const std::string & talker,
 	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
@@ -41,6 +53,8 @@ std::unique_ptr<sentence> aam::parse(const std::string & talker,
 	read(fields[2], detail.arrival_circle_radius);
 	read(fields[3], detail.arrival_circle_radius_unit);
 	read(fields[4], detail.waypoint_id);
+
+	detail.check();
 
 	return result;
 }

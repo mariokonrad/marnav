@@ -60,6 +60,8 @@ private:
 	utils::optional<char> arrival_circle_radius_unit;
 	utils::optional<std::string> waypoint_id;
 
+	void check() const throw(std::invalid_argument);
+
 public:
 	decltype(arrival_circle_entered) get_arrival_circle_entered() const
 	{

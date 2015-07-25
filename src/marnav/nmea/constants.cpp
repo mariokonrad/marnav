@@ -1,5 +1,6 @@
 #include "constants.hpp"
 #include <marnav/geo/angle.hpp>
+#include <algorithm>
 
 namespace marnav
 {
@@ -32,6 +33,19 @@ void check_waypoint_id(const std::string & id) throw(std::invalid_argument)
 {
 	if (id.size() > 8)
 		throw std::invalid_argument{"string size to large, only 8 characters allowed for id"};
+}
+
+void check(char value, std::initializer_list<char> options) throw(std::invalid_argument)
+{
+	using namespace std;
+	if (find_if(begin(options), end(options), [value](char opt) { return value == opt; })
+		== end(options))
+		throw std::invalid_argument{"invalid argument, value not in options"};
+}
+
+void check_status(char value) throw(std::invalid_argument)
+{
+	check(value, {status::OK, status::WARNING});
 }
 
 }

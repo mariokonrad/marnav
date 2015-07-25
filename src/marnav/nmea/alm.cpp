@@ -29,6 +29,12 @@ alm::alm()
 {
 }
 
+void alm::check() const throw(std::invalid_argument)
+{
+	if ((satellite_prn < 1) || (satellite_prn > 32))
+		throw std::invalid_argument{"invalid satellite PRN"};
+}
+
 std::unique_ptr<sentence> alm::parse(const std::string & talker,
 	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
@@ -54,6 +60,8 @@ std::unique_ptr<sentence> alm::parse(const std::string & talker,
 	read(fields[12], detail.mean_anomaly, data_format::hex);
 	read(fields[13], detail.f0_clock_parameter, data_format::hex);
 	read(fields[14], detail.f1_clock_parameter, data_format::hex);
+
+	detail.check();
 
 	return result;
 }

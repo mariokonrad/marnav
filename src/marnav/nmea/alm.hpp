@@ -74,6 +74,8 @@ private:
 	uint32_t f0_clock_parameter;
 	uint32_t f1_clock_parameter;
 
+	void check() const throw(std::invalid_argument);
+
 public:
 	decltype(number_of_messages) get_number_of_messages() const { return number_of_messages; }
 	decltype(message_number) get_message_number() const { return message_number; }
