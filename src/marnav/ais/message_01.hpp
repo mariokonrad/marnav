@@ -10,6 +10,7 @@ namespace marnav
 namespace ais
 {
 
+/// @brief Position Report Class A
 class message_01 : public message
 {
 public:

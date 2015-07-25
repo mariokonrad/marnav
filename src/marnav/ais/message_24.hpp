@@ -10,7 +10,7 @@ namespace marnav
 namespace ais
 {
 
-/// @todo TESTING
+/// @brief Static Data Report
 ///
 /// @note This class combines both possible parts of message 24 (A and B).
 ///       It also contains all necessary stuff to have a normal and auxiliary

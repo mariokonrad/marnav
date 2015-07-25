@@ -9,6 +9,7 @@ namespace marnav
 namespace ais
 {
 
+/// @brief Static and Voyage related Data
 class message_05 : public message
 {
 public:

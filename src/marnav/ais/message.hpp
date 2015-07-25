@@ -11,6 +11,7 @@ namespace marnav
 namespace ais
 {
 
+/// All known AIS message IDs.
 enum class message_id : uint8_t {
 	NONE = 0,
 	position_report_class_a = 1,
@@ -151,8 +152,10 @@ constexpr static const uint32_t hour_not_available = 24;
 constexpr static const uint32_t minute_not_available = 60;
 constexpr static const uint32_t second_not_available = 60;
 
+/// Type for raw AIS data.
 using raw = utils::bitset<uint8_t>;
 
+/// @brief Base class for all AIS messages.
 class message
 {
 public:

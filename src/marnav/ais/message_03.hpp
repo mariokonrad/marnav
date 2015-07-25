@@ -8,6 +8,7 @@ namespace marnav
 namespace ais
 {
 
+/// @brief Position Report Class A (response to interrogation)
 class message_03 : public message_01
 {
 public:

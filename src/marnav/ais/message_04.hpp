@@ -10,6 +10,7 @@ namespace marnav
 namespace ais
 {
 
+/// @brief Base Station Report
 class message_04 : public message
 {
 public:

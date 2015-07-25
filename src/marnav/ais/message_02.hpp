@@ -8,6 +8,7 @@ namespace marnav
 namespace ais
 {
 
+/// @brief Position Report Class A (assigned schedule)
 class message_02 : public message_01
 {
 public:

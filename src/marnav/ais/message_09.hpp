@@ -10,6 +10,7 @@ namespace marnav
 namespace ais
 {
 
+/// @brief Standard SAR Aircraft Position Report.
 class message_09 : public message
 {
 public:

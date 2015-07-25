@@ -77,6 +77,14 @@ TEST_F(Test_ais_message_05, set_callsign)
 	EXPECT_EQ(0, v[0].second);
 }
 
+TEST_F(Test_ais_message_05, set_callsign_too_large)
+{
+	ais::message_05 m;
+	m.set_callsign("123456789012345678901234567890");
+
+	EXPECT_STREQ("1234567", m.get_callsign().c_str());
+}
+
 TEST_F(Test_ais_message_05, set_shipname)
 {
 	ais::message_05 m;
@@ -88,6 +96,14 @@ TEST_F(Test_ais_message_05, set_shipname)
 	EXPECT_STREQ(
 		"50000000000000000037;?CGKL000000000000000000000Ht0000000", v[0].first.c_str());
 	EXPECT_EQ(0, v[0].second);
+}
+
+TEST_F(Test_ais_message_05, set_shipname_too_large)
+{
+	ais::message_05 m;
+	m.set_shipname("123456789012345678901234567890");
+
+	EXPECT_STREQ("12345678901234567890", m.get_shipname().c_str());
 }
 
 TEST_F(Test_ais_message_05, set_destination)
@@ -102,4 +118,13 @@ TEST_F(Test_ais_message_05, set_destination)
 		"50000000000000000000000000000000000000000000000Ht0<Ldu=M", v[0].first.c_str());
 	EXPECT_EQ(0, v[0].second);
 }
+
+TEST_F(Test_ais_message_05, set_destination_too_large)
+{
+	ais::message_05 m;
+	m.set_destination("123456789012345678901234567890");
+
+	EXPECT_STREQ("12345678901234567890", m.get_destination().c_str());
+}
+
 }

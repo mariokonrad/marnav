@@ -10,6 +10,7 @@ namespace marnav
 namespace ais
 {
 
+/// @brief UTC/Date Inquiry
 class message_10 : public message
 {
 public:

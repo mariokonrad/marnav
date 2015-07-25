@@ -10,7 +10,7 @@ namespace marnav
 namespace ais
 {
 
-/// @todo TESTING
+/// @brief Standard Class B CS Position Report
 class message_18 : public message
 {
 public:
