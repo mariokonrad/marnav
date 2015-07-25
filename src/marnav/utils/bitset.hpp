@@ -52,10 +52,6 @@ namespace utils
 /// bits.set(1, 512, 1); // set one bit to 1 at offset 512
 /// @endcode
 ///
-/// @todo support for const_iterator (partially prepared)
-/// @todo documentation
-/// @todo improve effiency
-/// @todo improve std algorithm compatibility
 template <class Block, class Container = std::vector<Block>,
 	class = typename std::enable_if<!std::numeric_limits<Block>::is_signed>::type>
 class bitset
@@ -73,8 +69,6 @@ public:
 	using size_type = typename Container::size_type;
 	using data_const_iterator = typename Container::const_iterator;
 
-	/// @todo TEST
-	///
 	/// This is a non-std conform const iterator. The intention is
 	/// to provide a basic iterator functionality without claiming
 	/// to be std compliant.

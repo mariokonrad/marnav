@@ -49,6 +49,32 @@ TEST_F(Test_utils_bitset, uint8__construction_container_move)
 	EXPECT_STREQ("1010101001010101", to_string(b).c_str());
 }
 
+TEST_F(Test_utils_bitset, const_iterator_comparison_less)
+{
+	bitset<uint8_t> b{16};
+
+	auto i = b.begin();
+	auto j = b.begin();
+	auto k = b.begin();
+	++k;
+
+	EXPECT_FALSE(i < j);
+	EXPECT_TRUE(i < k);
+}
+
+TEST_F(Test_utils_bitset, const_iterator_comparison_greater)
+{
+	bitset<uint8_t> b{16};
+
+	auto i = b.begin();
+	auto j = b.begin();
+	auto k = b.begin();
+	++k;
+
+	EXPECT_FALSE(i > j);
+	EXPECT_TRUE(k > i);
+}
+
 TEST_F(Test_utils_bitset, uint8__append_single_bits)
 {
 	{
@@ -718,6 +744,54 @@ TEST_F(Test_utils_bitset, uint8__comparison_not_equal)
 	EXPECT_TRUE(c != a);
 	EXPECT_TRUE(b != c);
 	EXPECT_TRUE(c != b);
+}
+
+TEST_F(Test_utils_bitset, uint8__append_bits_exceeds_type)
+{
+	bitset<uint8_t> b{32};
+	const uint8_t data = 0xff;
+	EXPECT_ANY_THROW(b.append(data, 16));
+}
+
+TEST_F(Test_utils_bitset, uint8__set_bits_exceeds_type)
+{
+	bitset<uint8_t> b{32};
+	const uint8_t data = 0xff;
+	EXPECT_ANY_THROW(b.set(data, 0, 16));
+}
+
+TEST_F(Test_utils_bitset, uint8__get_bits_out_of_range)
+{
+	bitset<uint8_t> b{32};
+	uint8_t data;
+	EXPECT_ANY_THROW(b.get(data, 0, 16));
+	EXPECT_ANY_THROW(b.get(data, 28, 8));
+	EXPECT_NO_THROW(b.get(data, 0, 0));
+}
+
+TEST_F(Test_utils_bitset, uint8__get_uint32)
+{
+	bitset<uint8_t> b{64};
+	b.set(0xaaaaaaaa, 0, 32);
+	b.set(0xaaaaaaaa, 32, 32);
+	const uint32_t expected = 0xaaaaaaaa;
+	uint32_t data = 0;
+	b.get(data, 4);
+	EXPECT_EQ(expected, data);
+}
+
+TEST_F(Test_utils_bitset, uint8__get_bit_out_of_range)
+{
+	bitset<uint8_t> b{32};
+
+	EXPECT_ANY_THROW(b.get_bit(64));
+}
+
+TEST_F(Test_utils_bitset, uint8__set_bit_out_of_range)
+{
+	bitset<uint8_t> b{32};
+
+	EXPECT_ANY_THROW(b.set_bit(64, 1));
 }
 
 }
