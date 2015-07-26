@@ -88,6 +88,9 @@ private:
 	utils::optional<char> bearing_pos_to_destination_ref;
 	utils::optional<uint32_t> heading_to_steer_to_destination;
 	utils::optional<char> heading_to_steer_to_destination_ref;
+	utils::optional<char> mode_indicator;
+
+	void check() const throw(std::invalid_argument);
 
 public:
 	decltype(loran_c_blink_warning) get_loran_c_blink_warning() const

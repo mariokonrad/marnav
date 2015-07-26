@@ -18,9 +18,6 @@ namespace nmea
 {
 char convert_hemisphere(const geo::latitude & p);
 char convert_hemisphere(const geo::longitude & p);
-void check_waypoint_id(const std::string & id) throw(std::invalid_argument);
-void check(char value, std::initializer_list<char> options) throw(std::invalid_argument);
-void check_status(char value) throw(std::invalid_argument);
 
 namespace direction
 {

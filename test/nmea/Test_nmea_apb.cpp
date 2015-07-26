@@ -25,14 +25,14 @@ TEST_F(Test_nmea_apb, parse)
 TEST_F(Test_nmea_apb, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(nmea::apb::parse("@@", {13, "@"}));
-	EXPECT_ANY_THROW(nmea::apb::parse("@@", {15, "@"}));
+	EXPECT_ANY_THROW(nmea::apb::parse("@@", {16, "@"}));
 }
 
 TEST_F(Test_nmea_apb, empty_to_string)
 {
 	nmea::apb apb;
 
-	EXPECT_STREQ("$GPAPB,,,,,,,,,,,,,,*44", nmea::to_string(apb).c_str());
+	EXPECT_STREQ("$GPAPB,,,,,,,,,,,,,,,*68", nmea::to_string(apb).c_str());
 }
 
 TEST_F(Test_nmea_apb, set_waypoint)
@@ -40,7 +40,7 @@ TEST_F(Test_nmea_apb, set_waypoint)
 	nmea::apb apb;
 	apb.set_waypoint_id("ABC");
 
-	EXPECT_STREQ("$GPAPB,,,,,,,,,,ABC,,,,*04", nmea::to_string(apb).c_str());
+	EXPECT_STREQ("$GPAPB,,,,,,,,,,ABC,,,,,*28", nmea::to_string(apb).c_str());
 }
 
 TEST_F(Test_nmea_apb, set_bearing_pos_to_destination)
@@ -66,7 +66,7 @@ TEST_F(Test_nmea_apb, set_heading_to_steer_to_destination)
 	nmea::apb apb;
 	apb.set_heading_to_steer_to_destination(11, nmea::reference::MAGNETIC);
 
-	EXPECT_STREQ("$GPAPB,,,,,,,,,,,,,011,M*39", nmea::to_string(apb).c_str());
+	EXPECT_STREQ("$GPAPB,,,,,,,,,,,,,011,M,*15", nmea::to_string(apb).c_str());
 }
 
 TEST_F(Test_nmea_apb, get_heading_to_steer)

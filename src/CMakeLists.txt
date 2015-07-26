@@ -18,6 +18,7 @@ set(SOURCE_GEO
 
 set(SOURCE_NMEA_0183
 	marnav/nmea/constants.cpp
+	marnav/nmea/checks.cpp
 	marnav/nmea/angle.cpp
 	marnav/nmea/io.cpp
 	marnav/nmea/date.cpp
@@ -163,6 +164,7 @@ install(
 install(
 	FILES
 		marnav/nmea/constants.hpp
+		marnav/nmea/checks.hpp
 		marnav/nmea/angle.hpp
 		marnav/nmea/io.hpp
 		marnav/nmea/date.hpp

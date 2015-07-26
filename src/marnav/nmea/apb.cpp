@@ -1,5 +1,6 @@
 #include "apb.hpp"
 #include "io.hpp"
+#include "checks.hpp"
 #include <marnav/utils/unique.hpp>
 
 namespace marnav
@@ -20,10 +21,41 @@ void apb::set_waypoint_id(const std::string & id)
 	waypoint_id = id;
 }
 
+void apb::check() const throw(std::invalid_argument)
+{
+	check_status(loran_c_blink_warning, "loran_c_blink_warning");
+	check_status(loran_c_cycle_lock_warning, "loran_c_cycle_lock_warning");
+
+	check_value(direction_to_steer, {side::LEFT, side::RIGHT}, "direction_to_steer");
+	check_value(cross_track_unit, {unit::NM}, "cross_talk_unit");
+	check_status(status_arrival, "status_arrival");
+	check_status(status_perpendicular_passing, "status_perpendicular_passing");
+
+	if (bearing_origin_to_destination && !bearing_origin_to_destination_ref)
+		throw std::invalid_argument{"missing bearing_origin_to_destination_ref"};
+	check_value(bearing_origin_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
+		"bearing_origin_to_destination_ref");
+
+	if (bearing_pos_to_destination && !bearing_pos_to_destination_ref)
+		throw std::invalid_argument{"missing bearing_pos_to_destination_ref"};
+	check_value(bearing_pos_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
+		"bearing_pos_to_destination_ref");
+
+	if (heading_to_steer_to_destination && !heading_to_steer_to_destination_ref)
+		throw std::invalid_argument{"missing heading_to_steer_to_destination_ref"};
+	check_value(heading_to_steer_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
+		"heading_to_steer_to_destination_ref");
+
+	check_value(mode_indicator, {positioning_system_mode_indicator::INVALID,
+									positioning_system_mode_indicator::AUTONOMOUS,
+									positioning_system_mode_indicator::DIFFERENTIAL},
+		"mode_indicator");
+}
+
 std::unique_ptr<sentence> apb::parse(const std::string & talker,
 	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
-	if (fields.size() != 14)
+	if ((fields.size() < 14) || (fields.size() > 15))
 		throw std::invalid_argument{"invalid number of fields in apb::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<apb>();
@@ -45,6 +77,11 @@ std::unique_ptr<sentence> apb::parse(const std::string & talker,
 	read(fields[12], detail.heading_to_steer_to_destination);
 	read(fields[13], detail.heading_to_steer_to_destination_ref);
 
+	if (fields.size() > 14)
+		read(fields[14], detail.mode_indicator);
+
+	detail.check();
+
 	return result;
 }
 
@@ -57,7 +94,7 @@ std::vector<std::string> apb::get_data() const
 		to_string(bearing_origin_to_destination_ref), to_string(waypoint_id),
 		format(bearing_pos_to_destination, 3), to_string(bearing_pos_to_destination_ref),
 		format(heading_to_steer_to_destination, 3),
-		to_string(heading_to_steer_to_destination_ref)};
+		to_string(heading_to_steer_to_destination_ref), to_string(mode_indicator)};
 }
 }
 }

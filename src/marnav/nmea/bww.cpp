@@ -1,4 +1,5 @@
 #include "bww.hpp"
+#include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 #include <marnav/utils/unique.hpp>
 

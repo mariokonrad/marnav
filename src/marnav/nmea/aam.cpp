@@ -1,5 +1,6 @@
 #include "aam.hpp"
 #include "io.hpp"
+#include "checks.hpp"
 #include <marnav/utils/unique.hpp>
 
 namespace marnav
@@ -28,14 +29,11 @@ void aam::set_waypoint_id(const std::string & id)
 
 void aam::check() const throw(std::invalid_argument)
 {
-	if (arrival_circle_entered)
-		check_status(arrival_circle_entered.value());
-	if (perpendicualar_passed)
-		check_status(perpendicualar_passed.value());
+	check_status(arrival_circle_entered, "arrival_circle_entered");
+	check_status(perpendicualar_passed, "perpendicualar_passed");
 	if (arrival_circle_radius && !arrival_circle_radius_unit)
 		throw std::invalid_argument{"unit missing in sentence"};
-	if (arrival_circle_radius_unit && arrival_circle_radius_unit.value() != unit::NM)
-		throw std::invalid_argument{"invalid unit in sentence"};
+	check_value(arrival_circle_radius_unit, {unit::NM}, "arrival_circle_radius_unit");
 }
 
 std::unique_ptr<sentence> aam::parse(const std::string & talker,
