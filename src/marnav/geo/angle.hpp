@@ -37,6 +37,7 @@ public:
 
 protected:
 	double get() const;
+	void set(double);
 
 private:
 	double value; // angle in degrees
@@ -56,6 +57,8 @@ public:
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;
 
+	void correct_hemisphere(hemisphere h);
+
 private:
 	static void check(double a) throw(std::invalid_argument);
 };
@@ -71,6 +74,8 @@ public:
 
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;
+
+	void correct_hemisphere(hemisphere h);
 
 private:
 	static void check(double a) throw(std::invalid_argument);

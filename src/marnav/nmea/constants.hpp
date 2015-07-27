@@ -1,31 +1,21 @@
 #ifndef __NMEA__CONSTANTS__HPP__
 #define __NMEA__CONSTANTS__HPP__
 
+#include <marnav/geo/angle.hpp>
 #include <stdexcept>
 #include <string>
 
 namespace marnav
 {
 
-// forward declaration
-namespace geo
-{
-class latitude;
-class longitude;
-}
-
 namespace nmea
 {
-char convert_hemisphere(const geo::latitude & p);
-char convert_hemisphere(const geo::longitude & p);
-
-namespace direction
-{
-constexpr const char EAST = 'E';
-constexpr const char WEST = 'W';
-constexpr const char NORTH = 'N';
-constexpr const char SOUTH = 'S';
-}
+enum class direction : char {
+	EAST, ///< NMEA representation: 'E'
+	WEST, ///< NMEA representation: 'W'
+	NORTH, ///< NMEA representation: 'N'
+	SOUTH ///< NMEA representation: ' S'
+};
 
 namespace status
 {
@@ -103,6 +93,11 @@ enum class type_of_point : char {
 	reference, ///< NMEA representation: 'R'
 	wheelover, ///< NMEA representation: 'W'
 };
+
+direction convert_hemisphere(const geo::latitude & p);
+direction convert_hemisphere(const geo::longitude & p);
+geo::latitude::hemisphere convert_hemisphere_lat(direction t) throw(std::invalid_argument);
+geo::longitude::hemisphere convert_hemisphere_lon(direction t) throw(std::invalid_argument);
 }
 }
 

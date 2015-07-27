@@ -1,5 +1,6 @@
 #include "hdg.hpp"
-#include "io.hpp"
+#include <marnav/nmea/checks.hpp>
+#include <marnav/nmea/io.hpp>
 #include <marnav/utils/unique.hpp>
 
 namespace marnav
@@ -14,24 +15,18 @@ hdg::hdg()
 {
 }
 
-void hdg::set_magn_dev(double deg, char hem)
+void hdg::set_magn_dev(double deg, direction hem)
 {
-	check_hem(hem);
+	check_value(hem, {direction::EAST, direction::WEST}, "magn_dev hemisphere");
 	magn_dev = deg;
 	magn_dev_hem = hem;
 }
 
-void hdg::set_magn_var(double deg, char hem)
+void hdg::set_magn_var(double deg, direction hem)
 {
-	check_hem(hem);
+	check_value(hem, {direction::EAST, direction::WEST}, "magn_var hemisphere");
 	magn_var = deg;
 	magn_var_hem = hem;
-}
-
-void hdg::check_hem(char hem) throw(std::invalid_argument)
-{
-	if ((hem != direction::EAST) && (hem != direction::WEST))
-		throw std::invalid_argument{"invalid hemisphere"};
 }
 
 std::unique_ptr<sentence> hdg::parse(const std::string & talker,

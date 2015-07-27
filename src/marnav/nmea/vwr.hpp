@@ -19,7 +19,9 @@ namespace nmea
 ///
 /// Field Number:
 /// 1. Wind direction magnitude in degrees
-/// 2. Wind direction Left/Right of bow
+/// 2. Wind direction regarding to bow
+///    - L = Left
+///    - R = Right
 /// 3. Speed knots
 /// 4. Speed knots unit
 ///    - N = Knots

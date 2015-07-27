@@ -47,17 +47,17 @@ protected:
 
 private:
 	utils::optional<geo::latitude> lat;
-	utils::optional<char> lat_hem; // latitude hemisphere (N or S)
+	utils::optional<direction> lat_hem; // latitude hemisphere (N or S)
 	utils::optional<geo::longitude> lon;
-	utils::optional<char> lon_hem; // longitude hemisphere (E or W)
+	utils::optional<direction> lon_hem; // longitude hemisphere (E or W)
 	utils::optional<std::string> waypoint_id;
 
 public:
-	decltype(lat) get_lat() const { return lat; }
-	decltype(lat_hem) get_lat_hem() const { return lat_hem; }
-	decltype(lon) get_lon() const { return lon; }
-	decltype(lon_hem) get_lon_hem() const { return lon_hem; }
-	decltype(waypoint_id) get_waypoint() const { return waypoint_id; }
+	NMEA_GETTER(lat)
+	NMEA_GETTER(lat_hem)
+	NMEA_GETTER(lon)
+	NMEA_GETTER(lon_hem)
+	NMEA_GETTER(waypoint_id)
 
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);

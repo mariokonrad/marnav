@@ -51,6 +51,8 @@ angle::operator double() const { return value; }
 
 double angle::get() const { return value; }
 
+void angle::set(double t) { value = t; }
+
 bool operator==(const angle & a, const angle & b) noexcept
 {
 	return (&a == &b) || (a.value == b.value);
@@ -79,6 +81,23 @@ latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(
 latitude::hemisphere latitude::hem() const
 {
 	return get() >= 0.0 ? hemisphere::NORTH : hemisphere::SOUTH;
+}
+
+/// Corrects the stored value according to the specified hemisphere.
+/// This is useful if the stored value was set preliminary, and the
+/// hemisphere was nown later.
+void latitude::correct_hemisphere(hemisphere h)
+{
+	switch (h) {
+		case hemisphere::NORTH:
+			if (hem() == hemisphere::SOUTH)
+				set(-get());
+			break;
+		case hemisphere::SOUTH:
+			if (hem() == hemisphere::NORTH)
+				set(-get());
+			break;
+	}
 }
 
 void latitude::check(double a) throw(std::invalid_argument)
@@ -110,6 +129,23 @@ longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(
 longitude::hemisphere longitude::hem() const
 {
 	return get() >= 0.0 ? hemisphere::WEST : hemisphere::EAST;
+}
+
+/// Corrects the stored value according to the specified hemisphere.
+/// This is useful if the stored value was set preliminary, and the
+/// hemisphere was nown later.
+void longitude::correct_hemisphere(hemisphere h)
+{
+	switch (h) {
+		case hemisphere::EAST:
+			if (hem() == hemisphere::WEST)
+				set(-get());
+			break;
+		case hemisphere::WEST:
+			if (hem() == hemisphere::EAST)
+				set(-get());
+			break;
+	}
 }
 
 void longitude::check(double a) throw(std::invalid_argument)

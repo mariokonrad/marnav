@@ -74,9 +74,9 @@ protected:
 private:
 	utils::optional<nmea::time> time;
 	utils::optional<geo::latitude> lat;
-	utils::optional<char> lat_hem; // N:north, S:south
+	utils::optional<direction> lat_hem; // N:north, S:south
 	utils::optional<geo::longitude> lon;
-	utils::optional<char> lon_hem; // E:east, W:west
+	utils::optional<direction> lon_hem; // E:east, W:west
 	utils::optional<uint32_t> quality;
 	utils::optional<uint32_t> n_satellites;
 	utils::optional<double> hor_dilution; // horizontal dilution of precision
@@ -89,23 +89,20 @@ private:
 	utils::optional<uint32_t> dgps_ref; // dgps reference station 0000..1023
 
 public:
-	decltype(time) get_time() const { return time; }
-	decltype(lat) get_lat() const { return lat; }
-	decltype(lat_hem) get_lat_hem() const { return lat_hem; }
-	decltype(lon) get_lon() const { return lon; }
-	decltype(lon_hem) get_lon_hem() const { return lon_hem; }
-	decltype(quality) get_quality() const { return quality; }
-	decltype(n_satellites) get_n_satellites() const { return n_satellites; }
-	decltype(hor_dilution) get_hor_dilution() const { return hor_dilution; }
-	decltype(altitude) get_altitude() const { return altitude; }
-	decltype(altitude_unit) get_altitude_unit() const { return altitude_unit; }
-	decltype(geodial_separation) get_geodial_separation() const { return geodial_separation; }
-	decltype(geodial_separation_unit) get_geodial_separation_unit() const
-	{
-		return geodial_separation_unit;
-	}
-	decltype(dgps_age) get_dgps_age() const { return dgps_age; }
-	decltype(dgps_ref) get_dgps_ref() const { return dgps_ref; }
+	NMEA_GETTER(time)
+	NMEA_GETTER(lat)
+	NMEA_GETTER(lat_hem)
+	NMEA_GETTER(lon)
+	NMEA_GETTER(lon_hem)
+	NMEA_GETTER(quality)
+	NMEA_GETTER(n_satellites)
+	NMEA_GETTER(hor_dilution)
+	NMEA_GETTER(altitude)
+	NMEA_GETTER(altitude_unit)
+	NMEA_GETTER(geodial_separation)
+	NMEA_GETTER(geodial_separation_unit)
+	NMEA_GETTER(dgps_age)
+	NMEA_GETTER(dgps_ref)
 
 	void set_time(const nmea::time & t) { time = t; }
 	void set_lat(const geo::latitude & t);

@@ -35,6 +35,7 @@ std::string to_string(route t);
 std::string to_string(selection_mode t);
 std::string to_string(ais_channel t);
 std::string to_string(type_of_point t);
+std::string to_string(direction t);
 
 template <class T> inline std::string to_string(const utils::optional<T> & data)
 {
@@ -119,6 +120,7 @@ void read(const std::string & s, route & value, data_format = data_format::none)
 void read(const std::string & s, selection_mode & value, data_format = data_format::none);
 void read(const std::string & s, ais_channel & value, data_format = data_format::none);
 void read(const std::string & s, type_of_point & value, data_format = data_format::none);
+void read(const std::string & s, direction & value, data_format = data_format::none);
 
 template <class T>
 static void read(

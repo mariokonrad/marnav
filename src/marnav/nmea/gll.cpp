@@ -1,5 +1,6 @@
 #include "gll.hpp"
-#include "io.hpp"
+#include <marnav/nmea/checks.hpp>
+#include <marnav/nmea/io.hpp>
 #include <marnav/utils/unique.hpp>
 
 namespace marnav
@@ -49,6 +50,12 @@ std::unique_ptr<sentence> gll::parse(const std::string & talker,
 
 	if (fields.size() > 6)
 		read(fields[6], detail.mode_indicator);
+
+	// instead of reading data into temporary lat/lon, let's correct values afterwards
+	if (detail.lat && detail.lat_hem)
+		detail.lat->correct_hemisphere(convert_hemisphere_lat(detail.lat_hem.value()));
+	if (detail.lon && detail.lon_hem)
+		detail.lon->correct_hemisphere(convert_hemisphere_lon(detail.lon_hem.value()));
 
 	return result;
 }

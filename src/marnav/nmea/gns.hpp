@@ -22,9 +22,13 @@ namespace nmea
 /// Field Number:
 /// 1.  UTC
 /// 2.  Latitude
-/// 3.  N or S (North or South)
+/// 3.  Latitude hemisphere
+///     - N = North
+///     - S = South
 /// 4.  Longitude
-/// 5.  E or W (East or West)
+/// 5.  Longitude hemisphere
+///     - E = East
+///     - W = West
 /// 6.  Mode indicator
 /// 7.  Total number of satelites in use,00-99
 /// 8.  HDROP
@@ -52,9 +56,9 @@ protected:
 private:
 	utils::optional<nmea::time> time_utc;
 	utils::optional<geo::latitude> lat;
-	utils::optional<char> lat_hem;
+	utils::optional<direction> lat_hem;
 	utils::optional<geo::longitude> lon;
-	utils::optional<char> lon_hem;
+	utils::optional<direction> lon_hem;
 	utils::optional<std::string> mode_indicator;
 	utils::optional<uint32_t> number_of_satellites;
 	utils::optional<double> hdrop;
@@ -64,27 +68,18 @@ private:
 	utils::optional<double> differential_ref_station_id;
 
 public:
-	decltype(time_utc) get_time_utc() const { return time_utc; }
-	decltype(lat) get_lat() const { return lat; }
-	decltype(lat_hem) get_lat_hem() const { return lat_hem; }
-	decltype(lon) get_lon() const { return lon; }
-	decltype(lon_hem) get_lon_hem() const { return lon_hem; }
-	decltype(mode_indicator) get_mode_indicator() const { return mode_indicator; }
-	decltype(number_of_satellites) get_number_of_satellites() const
-	{
-		return number_of_satellites;
-	}
-	decltype(hdrop) get_hdrop() const { return hdrop; }
-	decltype(antenna_altitude) get_antenna_altitude() const { return antenna_altitude; }
-	decltype(geodial_sepration) get_geodial_sepration() const { return geodial_sepration; }
-	decltype(age_of_differential_data) get_age_of_differential_data() const
-	{
-		return age_of_differential_data;
-	}
-	decltype(differential_ref_station_id) get_differential_ref_station_id() const
-	{
-		return differential_ref_station_id;
-	}
+	NMEA_GETTER(time_utc)
+	NMEA_GETTER(lat)
+	NMEA_GETTER(lat_hem)
+	NMEA_GETTER(lon)
+	NMEA_GETTER(lon_hem)
+	NMEA_GETTER(mode_indicator)
+	NMEA_GETTER(number_of_satellites)
+	NMEA_GETTER(hdrop)
+	NMEA_GETTER(antenna_altitude)
+	NMEA_GETTER(geodial_sepration)
+	NMEA_GETTER(age_of_differential_data)
+	NMEA_GETTER(differential_ref_station_id)
 
 	void set_time_utc(const nmea::time & t) { time_utc = t; }
 	void set_lat(const geo::latitude & t);

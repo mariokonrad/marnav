@@ -1,5 +1,6 @@
 #include "rmc.hpp"
-#include "io.hpp"
+#include <marnav/nmea/checks.hpp>
+#include <marnav/nmea/io.hpp>
 #include <marnav/utils/unique.hpp>
 
 namespace marnav
@@ -24,6 +25,13 @@ void rmc::set_lon(const geo::longitude & t)
 {
 	lon = t;
 	lon_hem = convert_hemisphere(t);
+}
+
+void rmc::set_mag(double t, direction h) throw(std::invalid_argument)
+{
+	check_value(h, {direction::EAST, direction::WEST}, "mag var hemisphere");
+	mag = t;
+	mag_hem = h;
 }
 
 std::unique_ptr<sentence> rmc::parse(const std::string & talker,
@@ -52,6 +60,12 @@ std::unique_ptr<sentence> rmc::parse(const std::string & talker,
 	// NMEA 2.3 or newer
 	if (fields.size() > 11)
 		read(fields[11], detail.faa_mode_indicator);
+
+	// instead of reading data into temporary lat/lon, let's correct values afterwards
+	if (detail.lat && detail.lat_hem)
+		detail.lat->correct_hemisphere(convert_hemisphere_lat(detail.lat_hem.value()));
+	if (detail.lon && detail.lon_hem)
+		detail.lon->correct_hemisphere(convert_hemisphere_lon(detail.lon_hem.value()));
 
 	return result;
 }

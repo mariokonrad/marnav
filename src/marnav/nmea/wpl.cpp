@@ -49,6 +49,12 @@ std::unique_ptr<sentence> wpl::parse(const std::string & talker,
 	read(fields[3], detail.lon_hem);
 	read(fields[4], detail.waypoint_id);
 
+	// instead of reading data into temporary lat/lon, let's correct values afterwards
+	if (detail.lat && detail.lat_hem)
+		detail.lat->correct_hemisphere(convert_hemisphere_lat(detail.lat_hem.value()));
+	if (detail.lon && detail.lon_hem)
+		detail.lon->correct_hemisphere(convert_hemisphere_lon(detail.lon_hem.value()));
+
 	return result;
 }
 

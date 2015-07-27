@@ -55,21 +55,21 @@ protected:
 
 private:
 	utils::optional<geo::latitude> lat;
-	utils::optional<char> lat_hem;
+	utils::optional<direction> lat_hem;
 	utils::optional<geo::longitude> lon;
-	utils::optional<char> lon_hem;
+	utils::optional<direction> lon_hem;
 	utils::optional<nmea::time> time_utc;
 	utils::optional<char> status;
 	utils::optional<char> mode_indicator;
 
 public:
-	decltype(lat) get_lat() const { return lat; }
-	decltype(lat_hem) get_lat_hem() const { return lat_hem; }
-	decltype(lon) get_lon() const { return lon; }
-	decltype(lon_hem) get_lon_hem() const { return lon_hem; }
-	decltype(time_utc) get_time_utc() const { return time_utc; }
-	decltype(status) get_status() const { return status; }
-	decltype(mode_indicator) get_mode_indicator() const { return mode_indicator; }
+	NMEA_GETTER(lat)
+	NMEA_GETTER(lat_hem)
+	NMEA_GETTER(lon)
+	NMEA_GETTER(lon_hem)
+	NMEA_GETTER(time_utc)
+	NMEA_GETTER(status)
+	NMEA_GETTER(mode_indicator)
 
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);

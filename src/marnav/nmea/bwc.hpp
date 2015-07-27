@@ -71,9 +71,9 @@ protected:
 private:
 	utils::optional<nmea::time> time_utc;
 	utils::optional<geo::latitude> lat;
-	utils::optional<char> lat_hem;
+	utils::optional<direction> lat_hem;
 	utils::optional<geo::longitude> lon;
-	utils::optional<char> lon_hem;
+	utils::optional<direction> lon_hem;
 	utils::optional<double> bearing_true;
 	utils::optional<char> bearing_true_ref;
 	utils::optional<double> bearing_mag;
@@ -84,19 +84,19 @@ private:
 	utils::optional<char> faa_mode_indicator; // NMEA 2.3 and later
 
 public:
-	decltype(time_utc) get_time_utc() const { return time_utc; }
-	decltype(lat) get_lat() const { return lat; }
-	decltype(lat_hem) get_lat_hem() const { return lat_hem; }
-	decltype(lon) get_lon() const { return lon; }
-	decltype(lon_hem) get_lon_hem() const { return lon_hem; }
-	decltype(bearing_true) get_bearing_true() const { return bearing_true; }
-	decltype(bearing_true_ref) get_bearing_true_ref() const { return bearing_true_ref; }
-	decltype(bearing_mag) get_bearing_mag() const { return bearing_mag; }
-	decltype(bearing_mag_ref) get_bearing_mag_ref() const { return bearing_mag_ref; }
-	decltype(distance) get_distance() const { return distance; }
-	decltype(distance_unit) get_distance_unit() const { return distance_unit; }
-	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
-	decltype(faa_mode_indicator) get_faa_mode_indicator() const { return faa_mode_indicator; }
+	NMEA_GETTER(time_utc)
+	NMEA_GETTER(lat)
+	NMEA_GETTER(lat_hem)
+	NMEA_GETTER(lon)
+	NMEA_GETTER(lon_hem)
+	NMEA_GETTER(bearing_true)
+	NMEA_GETTER(bearing_true_ref)
+	NMEA_GETTER(bearing_mag)
+	NMEA_GETTER(bearing_mag_ref)
+	NMEA_GETTER(distance)
+	NMEA_GETTER(distance_unit)
+	NMEA_GETTER(waypoint_id)
+	NMEA_GETTER(faa_mode_indicator)
 
 	void set_time_utc(const nmea::time & t) { time_utc = t; }
 	void set_lat(const geo::latitude & t);

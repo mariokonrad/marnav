@@ -91,6 +91,22 @@ std::string to_string(type_of_point t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(direction t)
+{
+	switch (t) {
+		case direction::NORTH:
+			return "N";
+		case direction::SOUTH:
+			return "S";
+		case direction::EAST:
+			return "E";
+		case direction::WEST:
+			return "W";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
 std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
 {
 	// buffer to hold the resulting string with a static size.
@@ -303,6 +319,29 @@ void read(const std::string & s, type_of_point & value, data_format fmt)
 			break;
 		default:
 			value = static_cast<type_of_point>(-1); // invalid value on purpose
+			break;
+	}
+}
+
+void read(const std::string & s, direction & value, data_format fmt)
+{
+	typename std::underlying_type<direction>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'N':
+			value = direction::NORTH;
+			break;
+		case 'S':
+			value = direction::SOUTH;
+			break;
+		case 'E':
+			value = direction::EAST;
+			break;
+		case 'W':
+			value = direction::WEST;
+			break;
+		default:
+			value = static_cast<direction>(-1); // invalid value on purpose
 			break;
 	}
 }

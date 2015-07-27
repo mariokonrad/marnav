@@ -1,5 +1,6 @@
 #include "gga.hpp"
-#include "io.hpp"
+#include <marnav/nmea/checks.hpp>
+#include <marnav/nmea/io.hpp>
 #include <marnav/utils/unique.hpp>
 
 namespace marnav
@@ -50,6 +51,12 @@ std::unique_ptr<sentence> gga::parse(const std::string & talker,
 	read(fields[11], detail.geodial_separation_unit);
 	read(fields[12], detail.dgps_age);
 	read(fields[13], detail.dgps_ref);
+
+	// instead of reading data into temporary lat/lon, let's correct values afterwards
+	if (detail.lat && detail.lat_hem)
+		detail.lat->correct_hemisphere(convert_hemisphere_lat(detail.lat_hem.value()));
+	if (detail.lon && detail.lon_hem)
+		detail.lon->correct_hemisphere(convert_hemisphere_lon(detail.lon_hem.value()));
 
 	return result;
 }

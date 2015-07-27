@@ -10,7 +10,6 @@ namespace marnav
 namespace nmea
 {
 
-
 /// @brief RMA - Recommended Minimum Navigation Information
 ///
 /// @code
@@ -57,31 +56,29 @@ protected:
 private:
 	utils::optional<char> blink_warning;
 	utils::optional<geo::latitude> lat;
-	utils::optional<char> lat_hem; // latitude dir, N:north, S:south
+	utils::optional<direction> lat_hem; // latitude dir, N:north, S:south
 	utils::optional<geo::longitude> lon;
-	utils::optional<char> lon_hem; // longitude dir, E:east, W:west
+	utils::optional<direction> lon_hem; // longitude dir, E:east, W:west
 	utils::optional<double> time_diff_a; // time difference A in microseconds
 	utils::optional<double> time_diff_b; // time difference B in microseconds
 	utils::optional<double> sog; // speed over ground in knots
 	utils::optional<double> track; // track made good, degrees
-	utils::optional<double> magnetic_variation; // magnetic variation in degrees
-	utils::optional<char> magnetic_variation_hem; // magnetic variation hemisphere, E:east, W:west
+	utils::optional<double> magnetic_var; // magnetic variation in degrees
+	utils::optional<direction>
+		magnetic_var_hem; // magnetic variation hemisphere, E:east, W:west
 
 public:
-	decltype(blink_warning) get_blink_warning() const { return blink_warning; }
-	decltype(lat) get_lat() const { return lat; }
-	decltype(lat_hem) get_lat_hem() const { return lat_hem; }
-	decltype(lon) get_lon() const { return lon; }
-	decltype(lon_hem) get_lon_hem() const { return lon_hem; }
-	decltype(time_diff_a) get_time_diff_a() const { return time_diff_a; }
-	decltype(time_diff_b) get_time_diff_b() const { return time_diff_b; }
-	decltype(sog) get_sog() const { return sog; }
-	decltype(track) get_track() const { return track; }
-	decltype(magnetic_variation) get_magnetic_variation() const { return magnetic_variation; }
-	decltype(magnetic_variation_hem) get_magnetic_variation_hem() const
-	{
-		return magnetic_variation_hem;
-	}
+	NMEA_GETTER(blink_warning)
+	NMEA_GETTER(lat)
+	NMEA_GETTER(lat_hem)
+	NMEA_GETTER(lon)
+	NMEA_GETTER(lon_hem)
+	NMEA_GETTER(time_diff_a)
+	NMEA_GETTER(time_diff_b)
+	NMEA_GETTER(sog)
+	NMEA_GETTER(track)
+	NMEA_GETTER(magnetic_var)
+	NMEA_GETTER(magnetic_var_hem)
 
 	void set_blink_warning(char t) { blink_warning = t; }
 	void set_lat(const geo::latitude & t);
@@ -90,11 +87,7 @@ public:
 	void set_time_diff_b(double t) { time_diff_b = t; }
 	void set_sog(double t) { sog = t; }
 	void set_track(double t) { track = t; }
-	void set_magnetic_variation(double t, char h)
-	{
-		magnetic_variation = t;
-		magnetic_variation_hem = h;
-	}
+	void set_magnetic_var(double t, direction h) throw(std::invalid_argument);
 };
 }
 }

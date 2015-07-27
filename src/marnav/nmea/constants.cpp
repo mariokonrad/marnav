@@ -5,7 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
-char convert_hemisphere(const geo::latitude & p)
+direction convert_hemisphere(const geo::latitude & p)
 {
 	switch (p.hem()) {
 		case geo::latitude::hemisphere::NORTH:
@@ -13,10 +13,12 @@ char convert_hemisphere(const geo::latitude & p)
 		case geo::latitude::hemisphere::SOUTH:
 			return direction::SOUTH;
 	}
-	return '\0'; // never reached, bad for coverage, supresses compiler warning
+
+	// never reached, bad for coverage, supresses compiler warning
+	return static_cast<direction>(-1);
 }
 
-char convert_hemisphere(const geo::longitude & p)
+direction convert_hemisphere(const geo::longitude & p)
 {
 	switch (p.hem()) {
 		case geo::longitude::hemisphere::EAST:
@@ -24,8 +26,33 @@ char convert_hemisphere(const geo::longitude & p)
 		case geo::longitude::hemisphere::WEST:
 			return direction::WEST;
 	}
-	return '\0'; // never reached, bad for coverage, supresses compiler warning
+
+	// never reached, bad for coverage, supresses compiler warning
+	return static_cast<direction>(-1);
 }
 
+geo::latitude::hemisphere convert_hemisphere_lat(direction t) throw(std::invalid_argument)
+{
+	switch (t) {
+		case direction::NORTH:
+			return geo::latitude::hemisphere::NORTH;
+		case direction::SOUTH:
+			return geo::latitude::hemisphere::SOUTH;
+		default:
+			throw std::invalid_argument{"invalid hemisphere for latitude"};
+	}
+}
+
+geo::longitude::hemisphere convert_hemisphere_lon(direction t) throw(std::invalid_argument)
+{
+	switch (t) {
+		case direction::EAST:
+			return geo::longitude::hemisphere::EAST;
+		case direction::WEST:
+			return geo::longitude::hemisphere::WEST;
+		default:
+			throw std::invalid_argument{"invalid hemisphere for longitude"};
+	}
+}
 }
 }

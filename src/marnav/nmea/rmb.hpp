@@ -27,7 +27,9 @@ namespace nmea
 ///     - A= Active
 ///     - V = Void
 /// 2.  Cross Track error - nautical miles
-/// 3.  Direction to Steer, Left or Right
+/// 3.  Direction to Steer
+///     - L = Left
+///     - R = Right
 /// 4.  TO Waypoint ID
 /// 5.  FROM Waypoint ID
 /// 6.  Destination Waypoint Latitude
@@ -70,13 +72,13 @@ protected:
 private:
 	utils::optional<char> status; // V:warning
 	utils::optional<double> cross_track_error; // cross track error in nautical miles
-	utils::optional<char> steer_dir; // direction to steer, left or right
+	utils::optional<side> steer_dir; // direction to steer, left or right
 	utils::optional<std::string> waypoint_to; // TO waypoint ID
 	utils::optional<std::string> waypoint_from; // FROM waypoint ID
 	utils::optional<geo::latitude> lat; // destination waypoint latitude
-	utils::optional<char> lat_hem; // destination waypoint latitude dir, N:north, S:south
+	utils::optional<direction> lat_hem; // destination waypoint latitude dir, N:north, S:south
 	utils::optional<geo::longitude> lon; // destination waypoint longitude
-	utils::optional<char> lon_hem; // destination waypoint longitude dir, E:east, W:west
+	utils::optional<direction> lon_hem; // destination waypoint longitude dir, E:east, W:west
 	utils::optional<double> range; // range to destination in nautical miles
 	utils::optional<double> bearing; // bearing to destination in degrees to true
 	utils::optional<double> dst_velocity; // destination closing velocity in knots
@@ -84,24 +86,24 @@ private:
 	utils::optional<char> faa_mode_indicator;
 
 public:
-	decltype(status) get_status() const { return status; }
-	decltype(cross_track_error) get_cross_track_error() const { return cross_track_error; }
-	decltype(steer_dir) get_steer_dir() const { return steer_dir; }
-	decltype(waypoint_to) get_waypoint_to() const { return waypoint_to; }
-	decltype(waypoint_from) get_waypoint_from() const { return waypoint_from; }
-	decltype(lat) get_lat() const { return lat; }
-	decltype(lat_hem) get_lat_hem() const { return lat_hem; }
-	decltype(lon) get_lon() const { return lon; }
-	decltype(lon_hem) get_lon_hem() const { return lon_hem; }
-	decltype(range) get_range() const { return range; }
-	decltype(bearing) get_bearing() const { return bearing; }
-	decltype(dst_velocity) get_dst_velocity() const { return dst_velocity; }
-	decltype(arrival_status) get_arrival_status() const { return arrival_status; }
-	decltype(faa_mode_indicator) get_faa_mode_indicator() const { return faa_mode_indicator; }
+	NMEA_GETTER(status)
+	NMEA_GETTER(cross_track_error)
+	NMEA_GETTER(steer_dir)
+	NMEA_GETTER(waypoint_to)
+	NMEA_GETTER(waypoint_from)
+	NMEA_GETTER(lat)
+	NMEA_GETTER(lat_hem)
+	NMEA_GETTER(lon)
+	NMEA_GETTER(lon_hem)
+	NMEA_GETTER(range)
+	NMEA_GETTER(bearing)
+	NMEA_GETTER(dst_velocity)
+	NMEA_GETTER(arrival_status)
+	NMEA_GETTER(faa_mode_indicator)
 
 	void set_status(char t) { status = t; }
 	void set_cross_track_error(double t) { cross_track_error = t; }
-	void set_steer_dir(char t) { steer_dir = t; }
+	void set_steer_dir(side t) { steer_dir = t; }
 	void set_waypoint_to(const std::string & id);
 	void set_waypoint_from(const std::string & id);
 	void set_lat(const geo::latitude & t);
