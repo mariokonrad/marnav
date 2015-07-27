@@ -35,10 +35,10 @@ TEST_F(Test_nmea_gsa, empty_to_string)
 	EXPECT_STREQ("$GPGSA,,,,,,,,,,,,,,,,,*6E", nmea::to_string(gsa).c_str());
 }
 
-TEST_F(Test_nmea_gsa, set_selection_mode)
+TEST_F(Test_nmea_gsa, set_sel_mode)
 {
 	nmea::gsa gsa;
-	gsa.set_selection_mode(marnav::nmea::selectionmode::AUTOMATIC);
+	gsa.set_sel_mode(marnav::nmea::selection_mode::AUTOMATIC);
 
 	EXPECT_STREQ("$GPGSA,A,,,,,,,,,,,,,,,,*2F", nmea::to_string(gsa).c_str());
 }

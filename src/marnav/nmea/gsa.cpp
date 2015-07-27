@@ -43,7 +43,7 @@ std::unique_ptr<sentence> gsa::parse(const std::string & talker,
 	result->set_talker(talker);
 	gsa & detail = static_cast<gsa &>(*result);
 
-	read(fields[0], detail.selection_mode);
+	read(fields[0], detail.sel_mode);
 	read(fields[1], detail.mode);
 
 	int index = 2;
@@ -61,7 +61,7 @@ std::unique_ptr<sentence> gsa::parse(const std::string & talker,
 
 std::vector<std::string> gsa::get_data() const
 {
-	return {to_string(selection_mode), to_string(mode), format(satellite_id[0], 2),
+	return {to_string(sel_mode), to_string(mode), format(satellite_id[0], 2),
 		format(satellite_id[1], 2), format(satellite_id[2], 2), format(satellite_id[3], 2),
 		format(satellite_id[4], 2), format(satellite_id[5], 2), format(satellite_id[6], 2),
 		format(satellite_id[7], 2), format(satellite_id[8], 2), format(satellite_id[9], 2),

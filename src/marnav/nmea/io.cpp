@@ -51,6 +51,18 @@ std::string to_string(route t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(selection_mode t)
+{
+	switch (t) {
+		case selection_mode::MANUAL:
+			return "M";
+		case selection_mode::AUTOMATIC:
+			return "A";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
 std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
 {
 	// buffer to hold the resulting string with a static size.
@@ -206,6 +218,23 @@ void read(const std::string & s, route & value, data_format fmt)
 			break;
 		default:
 			value = static_cast<route>(-1); // invalid value on purpose
+			break;
+	}
+}
+
+void read(const std::string & s, selection_mode & value, data_format fmt)
+{
+	typename std::underlying_type<selection_mode>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'M':
+			value = selection_mode::MANUAL;
+			break;
+		case 'A':
+			value = selection_mode::AUTOMATIC;
+			break;
+		default:
+			value = static_cast<selection_mode>(-1); // invalid value on purpose
 			break;
 	}
 }

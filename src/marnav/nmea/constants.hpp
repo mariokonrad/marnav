@@ -81,11 +81,7 @@ enum class side : char { LEFT, RIGHT };
 
 enum class route : char { COMPLETE, WORKING };
 
-namespace selectionmode
-{
-constexpr const char MANUAL = 'M';
-constexpr const char AUTOMATIC = 'A';
-}
+enum class selection_mode : char { MANUAL, AUTOMATIC };
 
 namespace ais_channel
 {

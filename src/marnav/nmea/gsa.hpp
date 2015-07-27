@@ -56,7 +56,7 @@ protected:
 private:
 	constexpr static const int MAX_SATELLITE_IDS = 12;
 
-	utils::optional<char> selection_mode; // A:automatic 2D/3D, M:manual
+	utils::optional<selection_mode> sel_mode; // A:automatic 2D/3D, M:manual
 	utils::optional<uint32_t> mode; // 1 = no fix, 2 = 2D fix, 3 = 3D fix
 	std::array<utils::optional<uint32_t>, MAX_SATELLITE_IDS> satellite_id;
 	utils::optional<double> pdop;
@@ -66,14 +66,14 @@ private:
 	void check_index(int index) const throw(std::out_of_range);
 
 public:
-	decltype(selection_mode) get_selection_mode() const { return selection_mode; }
-	decltype(mode) get_mode() const { return mode; }
+	NMEA_GETTER(sel_mode)
+	NMEA_GETTER(mode)
 	utils::optional<uint32_t> get_satellite_id(int index) const throw(std::out_of_range);
-	decltype(pdop) get_pdop() const { return pdop; }
-	decltype(hdop) get_hdop() const { return hdop; }
-	decltype(vdop) get_vdop() const { return vdop; }
+	NMEA_GETTER(pdop)
+	NMEA_GETTER(hdop)
+	NMEA_GETTER(vdop)
 
-	void set_selection_mode(char t) { selection_mode = t; }
+	void set_sel_mode(selection_mode t) { sel_mode = t; }
 	void set_mode(uint32_t t) { mode = t; }
 	void set_satellite_id(int index, uint32_t t) throw(std::out_of_range);
 	void set_pdop(double t) { pdop = t; }
