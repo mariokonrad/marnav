@@ -38,7 +38,7 @@ std::unique_ptr<sentence> make_sentence(const std::string & s) throw(
 
 std::vector<std::string> get_supported_sentences_str();
 std::vector<sentence_id> get_supported_sentences_id();
-const char * id_to_tag(sentence_id id) throw(unknown_sentence);
+std::string to_string(sentence_id id) throw(unknown_sentence);
 sentence_id tag_to_id(const std::string & tag) throw(unknown_sentence);
 }
 }

@@ -138,7 +138,7 @@ std::vector<sentence_id> get_supported_sentences_id()
 
 /// Returns the tag of the specified ID. If the sentence is unknown,
 /// an exception is thrown.
-const char * id_to_tag(sentence_id id) throw(unknown_sentence)
+std::string to_string(sentence_id id) throw(unknown_sentence)
 {
 	using namespace std;
 	auto i = find_if(begin(known_sentences), end(known_sentences),

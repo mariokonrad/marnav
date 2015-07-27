@@ -83,16 +83,16 @@ TEST_F(Test_nmea, tag_to_id_invalid_tag)
 	EXPECT_ANY_THROW(nmea::tag_to_id("???"));
 }
 
-TEST_F(Test_nmea, id_to_tag)
+TEST_F(Test_nmea, to_string_sentence_id)
 {
-	auto tag = nmea::id_to_tag(nmea::sentence_id::BOD);
+	auto tag = nmea::to_string(nmea::sentence_id::BOD);
 
-	EXPECT_STREQ("BOD", tag);
+	EXPECT_STREQ("BOD", tag.c_str());
 }
 
-TEST_F(Test_nmea, id_to_tag_invalid_id)
+TEST_F(Test_nmea, to_string_sentence_id_invalid_id)
 {
-	EXPECT_ANY_THROW(nmea::id_to_tag(static_cast<nmea::sentence_id>(-1)));
+	EXPECT_ANY_THROW(nmea::to_string(static_cast<nmea::sentence_id>(-1)));
 }
 
 }

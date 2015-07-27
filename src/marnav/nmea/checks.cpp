@@ -8,6 +8,25 @@ namespace marnav
 namespace nmea
 {
 
+namespace
+{
+template <typename T>
+static void throw_elaborated_invalid_argument(T value, std::initializer_list<T> options,
+	const char * name = nullptr) throw(std::invalid_argument)
+{
+	using namespace std;
+
+	ostringstream os;
+	os << "invalid argument, value '" << value << "' not in options:{";
+	for (auto const & opt : options)
+		os << " " << to_string(opt);
+	os << " }";
+	if (name)
+		os << " for '" << name << "'";
+	throw invalid_argument{os.str()};
+}
+}
+
 /// Checks the validity of the specified waypoint ID.
 ///
 /// @param[in] id The waypoint ID to check.
@@ -32,16 +51,10 @@ void check_value(char value, std::initializer_list<char> options, const char * n
 {
 	using namespace std;
 	if (find_if(begin(options), end(options), [value](char opt) { return value == opt; })
-		== end(options)) {
-		ostringstream os;
-		os << "invalid argument, value '" << value << "' not in options:{";
-		for (auto const & opt : options)
-			os << " " << opt;
-		os << " }";
-		if (name)
-			os << " for '" << name << "'";
-		throw invalid_argument{os.str()};
-	}
+		!= end(options))
+		return;
+
+	throw_elaborated_invalid_argument(value, options, name);
 }
 
 void check_status(char value, const char * name) throw(std::invalid_argument)
