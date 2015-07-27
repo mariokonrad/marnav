@@ -63,26 +63,17 @@ private:
 	void check() const throw(std::invalid_argument);
 
 public:
-	decltype(arrival_circle_entered) get_arrival_circle_entered() const
-	{
-		return arrival_circle_entered;
-	}
-	decltype(perpendicualar_passed) get_perpendicualar_passed() const
-	{
-		return perpendicualar_passed;
-	}
-	decltype(arrival_circle_radius) get_arrival_circle_radius() const
-	{
-		return arrival_circle_radius;
-	}
-	decltype(arrival_circle_radius_unit) get_arrival_circle_radius_unit() const
-	{
-		return arrival_circle_radius_unit;
-	}
-	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
+	/// @{
+	/// Getter
+	NMEA_GETTER(arrival_circle_entered)
+	NMEA_GETTER(perpendicualar_passed)
+	NMEA_GETTER(arrival_circle_radius)
+	NMEA_GETTER(arrival_circle_radius_unit)
+	NMEA_GETTER(waypoint_id)
+	/// @}
 
-	void set_arrival_circle_entered() { arrival_circle_entered = status::OK; }
-	void set_perpendicular_passed() { perpendicualar_passed = status::OK; }
+	void set_arrival_circle_entered(char status);
+	void set_perpendicular_passed(char status);
 	void set_arrival_circle_radius(double t);
 	void set_waypoint_id(const std::string & id);
 };

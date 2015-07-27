@@ -1,6 +1,6 @@
 #include "aam.hpp"
-#include "io.hpp"
-#include "checks.hpp"
+#include <marnav/nmea/checks.hpp>
+#include <marnav/nmea/io.hpp>
 #include <marnav/utils/unique.hpp>
 
 namespace marnav
@@ -15,8 +15,22 @@ aam::aam()
 {
 }
 
+void aam::set_arrival_circle_entered(char status)
+{
+	check_status(status, "arrival_circle_entered");
+	arrival_circle_entered = status;
+}
+
+void aam::set_perpendicular_passed(char status)
+{
+	check_status(status, "perpendicualar_passed");
+	perpendicualar_passed = status;
+}
+
 void aam::set_arrival_circle_radius(double t)
 {
+	if (t < 0.0)
+		throw std::invalid_argument{"invalid argument, arrival radius below zero"};
 	arrival_circle_radius = t;
 	arrival_circle_radius_unit = unit::NM;
 }

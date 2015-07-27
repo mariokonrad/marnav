@@ -49,12 +49,63 @@ TEST_F(Test_nmea_aam, empty_to_string)
 	EXPECT_STREQ("$GPAAM,,,,,*76", nmea::to_string(aam).c_str());
 }
 
+TEST_F(Test_nmea_aam, set_arrival_circle_entered_ok)
+{
+	nmea::aam aam;
+	aam.set_arrival_circle_entered(nmea::status::OK);
+
+	EXPECT_STREQ("$GPAAM,A,,,,*37", nmea::to_string(aam).c_str());
+}
+
+TEST_F(Test_nmea_aam, set_arrival_circle_entered_warning)
+{
+	nmea::aam aam;
+	aam.set_arrival_circle_entered(nmea::status::WARNING);
+
+	EXPECT_STREQ("$GPAAM,V,,,,*20", nmea::to_string(aam).c_str());
+}
+
+TEST_F(Test_nmea_aam, set_arrival_circle_entered_invalid_status)
+{
+	nmea::aam aam;
+	EXPECT_THROW(aam.set_arrival_circle_entered('?'), std::invalid_argument);
+}
+
+TEST_F(Test_nmea_aam, set_perpendicular_passed_ok)
+{
+	nmea::aam aam;
+	aam.set_perpendicular_passed(nmea::status::OK);
+
+	EXPECT_STREQ("$GPAAM,,A,,,*37", nmea::to_string(aam).c_str());
+}
+
+TEST_F(Test_nmea_aam, set_perpendicular_passed_warning)
+{
+	nmea::aam aam;
+	aam.set_perpendicular_passed(nmea::status::WARNING);
+
+	EXPECT_STREQ("$GPAAM,,V,,,*20", nmea::to_string(aam).c_str());
+}
+
+TEST_F(Test_nmea_aam, set_perpendicular_passed_invalid_status)
+{
+	nmea::aam aam;
+	EXPECT_THROW(aam.set_perpendicular_passed('?'), std::invalid_argument);
+}
+
 TEST_F(Test_nmea_aam, set_arrival_circle_radius)
 {
 	nmea::aam aam;
 	aam.set_arrival_circle_radius(1.2);
 
 	EXPECT_STREQ("$GPAAM,,,1.2,N,*15", nmea::to_string(aam).c_str());
+}
+
+TEST_F(Test_nmea_aam, set_arrival_circle_radius_negative)
+{
+	nmea::aam aam;
+
+	EXPECT_THROW(aam.set_arrival_circle_radius(-1.2), std::invalid_argument);
 }
 
 TEST_F(Test_nmea_aam, set_waypoint_id)

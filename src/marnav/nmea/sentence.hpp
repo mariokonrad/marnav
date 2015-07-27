@@ -220,6 +220,14 @@ constexpr const char * ais_base_station_obsolete
 constexpr const char * ais_physical_shore_station = "SA"; // NMEA 4.0 Physical Shore AIS Station
 }
 
+/// @brief This macro defines a getter method for NMEA sentence data.
+///
+/// Macros are avoided as far as possible, this one however improves readability.
+/// All it does is declare and implement inline a getter method. Handy for
+/// NMEA sentence member data.
+#define NMEA_GETTER(attribute) \
+	inline decltype(attribute) get_##attribute() const { return attribute; }
+
 /// This is the base class for all sentences.
 class sentence
 {
