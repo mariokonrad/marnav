@@ -9,6 +9,7 @@ namespace marnav
 namespace nmea
 {
 
+/// @todo Documentation
 class vdm : public sentence
 {
 public:
@@ -34,22 +35,22 @@ private:
 	uint32_t n_fragments;
 	uint32_t fragment;
 	utils::optional<uint32_t> seq_msg_id;
-	char radio_channel; // A = 161.975MHz (87B), B = 162.025MHz (88B)
+	ais_channel radio_channel; // A = 161.975MHz (87B), B = 162.025MHz (88B)
 	std::string payload; // 6bit encoded content
 	uint32_t n_fill_bits; // 0..5
 
 public:
-	decltype(n_fragments) get_n_fragments() const { return n_fragments; }
-	decltype(fragment) get_fragment() const { return fragment; }
-	decltype(seq_msg_id) get_seq_msg_id() const { return seq_msg_id; }
-	decltype(radio_channel) get_radio_channel() const { return radio_channel; }
-	decltype(payload) get_payload() const { return payload; }
-	decltype(n_fill_bits) get_n_fill_bits() const { return n_fill_bits; }
+	NMEA_GETTER(n_fragments)
+	NMEA_GETTER(fragment)
+	NMEA_GETTER(seq_msg_id)
+	NMEA_GETTER(radio_channel)
+	NMEA_GETTER(payload)
+	NMEA_GETTER(n_fill_bits)
 
 	void set_n_fragments(uint32_t t) { n_fragments = t; }
 	void set_fragment(uint32_t t) { fragment = t; }
 	void set_seq_msg_id(uint32_t t) { seq_msg_id = t; }
-	void set_radio_channel(char channel) { radio_channel = channel; }
+	void set_radio_channel(ais_channel channel) { radio_channel = channel; }
 	void set_payload(const std::string & data, uint32_t fill_bits)
 	{
 		payload = data;

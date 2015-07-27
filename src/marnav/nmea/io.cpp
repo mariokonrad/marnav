@@ -63,6 +63,18 @@ std::string to_string(selection_mode t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(ais_channel t)
+{
+	switch (t) {
+		case ais_channel::A:
+			return "A";
+		case ais_channel::B:
+			return "B";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
 std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
 {
 	// buffer to hold the resulting string with a static size.
@@ -235,6 +247,23 @@ void read(const std::string & s, selection_mode & value, data_format fmt)
 			break;
 		default:
 			value = static_cast<selection_mode>(-1); // invalid value on purpose
+			break;
+	}
+}
+
+void read(const std::string & s, ais_channel & value, data_format fmt)
+{
+	typename std::underlying_type<ais_channel>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'A':
+			value = ais_channel::A;
+			break;
+		case 'B':
+			value = ais_channel::B;
+			break;
+		default:
+			value = static_cast<ais_channel>(-1); // invalid value on purpose
 			break;
 	}
 }

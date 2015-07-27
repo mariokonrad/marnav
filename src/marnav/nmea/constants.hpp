@@ -83,11 +83,7 @@ enum class route : char { COMPLETE, WORKING };
 
 enum class selection_mode : char { MANUAL, AUTOMATIC };
 
-namespace ais_channel
-{
-constexpr const char A = 'A';
-constexpr const char B = 'B';
-}
+enum class ais_channel : char { A, B };
 
 namespace type_of_point
 {
