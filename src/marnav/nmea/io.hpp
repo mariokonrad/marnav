@@ -30,7 +30,8 @@ std::string to_string(char data);
 std::string to_string(uint32_t data);
 std::string to_string(double data);
 std::string to_string(const std::string & data);
-std::string to_string(side s) noexcept;
+std::string to_string(side t);
+std::string to_string(route t);
 
 template <class T> inline std::string to_string(const utils::optional<T> & data)
 {
@@ -111,6 +112,7 @@ void read(const std::string & s, int32_t & value, data_format = data_format::dec
 void read(const std::string & s, double & value, data_format = data_format::none);
 void read(const std::string & s, std::string & value, data_format = data_format::none);
 void read(const std::string & s, side & value, data_format = data_format::none);
+void read(const std::string & s, route & value, data_format = data_format::none);
 
 template <class T>
 static void read(

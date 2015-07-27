@@ -28,9 +28,9 @@ std::string to_string(double data)
 std::string to_string(const std::string & data) { return data; }
 
 /// @todo Replace the switch with variable templates as soon as C++14 happens
-std::string to_string(side s) noexcept
+std::string to_string(side t)
 {
-	switch (s) {
+	switch (t) {
 		case side::LEFT:
 			return "L";
 		case side::RIGHT:
@@ -38,6 +38,19 @@ std::string to_string(side s) noexcept
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
+
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(route t)
+{
+	switch (t) {
+		case route::COMPLETE:
+			return "c";
+		case route::WORKING:
+			return "w";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
 std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
 {
 	// buffer to hold the resulting string with a static size.
@@ -176,6 +189,23 @@ void read(const std::string & s, side & value, data_format fmt)
 			break;
 		default:
 			value = static_cast<side>(-1); // invalid value on purpose
+			break;
+	}
+}
+
+void read(const std::string & s, route & value, data_format fmt)
+{
+	typename std::underlying_type<route>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'c':
+			value = route::COMPLETE;
+			break;
+		case 'w':
+			value = route::WORKING;
+			break;
+		default:
+			value = static_cast<route>(-1); // invalid value on purpose
 			break;
 	}
 }

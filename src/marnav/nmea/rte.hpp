@@ -47,18 +47,18 @@ protected:
 private:
 	utils::optional<uint32_t> n_messages;
 	utils::optional<uint32_t> message_number;
-	utils::optional<char> message_mode; // C:complete route, W:working route
+	utils::optional<route> message_mode; // C:complete route, W:working route
 	utils::optional<std::string> waypoint_id[10]; // names or numbers of the active route
 
 public:
-	decltype(n_messages) get_n_messages() const { return n_messages; }
-	decltype(message_number) get_message_number() const { return message_number; }
-	decltype(message_mode) get_message_mode() const { return message_mode; }
+	NMEA_GETTER(n_messages)
+	NMEA_GETTER(message_number)
+	NMEA_GETTER(message_mode)
 	utils::optional<std::string> get_waypoint_id(int index) const;
 
 	void set_n_messages(uint32_t t) { n_messages = t; }
 	void set_message_number(uint32_t t) { message_number = t; }
-	void set_message_mode(char t) { message_mode = t; }
+	void set_message_mode(route t) { message_mode = t; }
 	void set_waypoint_id(int index, const std::string & id);
 };
 }

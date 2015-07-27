@@ -79,11 +79,7 @@ constexpr const char RELATIVE = 'R';
 
 enum class side : char { LEFT, RIGHT };
 
-namespace route
-{
-constexpr const char COMPLETE = 'C';
-constexpr const char WORKING = 'W';
-}
+enum class route : char { COMPLETE, WORKING };
 
 namespace selectionmode
 {
@@ -95,12 +91,6 @@ namespace ais_channel
 {
 constexpr const char A = 'A';
 constexpr const char B = 'B';
-}
-
-namespace message_mode
-{
-constexpr const char complete_route = 'c';
-constexpr const char working_route = 'w';
 }
 
 namespace type_of_point

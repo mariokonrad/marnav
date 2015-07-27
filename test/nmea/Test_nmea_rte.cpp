@@ -51,12 +51,20 @@ TEST_F(Test_nmea_rte, set_message_number)
 	EXPECT_STREQ("$GPRTE,,66,*78", nmea::to_string(rte).c_str());
 }
 
-TEST_F(Test_nmea_rte, set_message_mode)
+TEST_F(Test_nmea_rte, set_message_mode_complete)
 {
 	nmea::rte rte;
-	rte.set_message_mode(marnav::nmea::message_mode::complete_route);
+	rte.set_message_mode(marnav::nmea::route::COMPLETE);
 
 	EXPECT_STREQ("$GPRTE,,,c*1B", nmea::to_string(rte).c_str());
+}
+
+TEST_F(Test_nmea_rte, set_message_mode_working)
+{
+	nmea::rte rte;
+	rte.set_message_mode(marnav::nmea::route::WORKING);
+
+	EXPECT_STREQ("$GPRTE,,,w*0F", nmea::to_string(rte).c_str());
 }
 
 TEST_F(Test_nmea_rte, set_waypoint_id)
