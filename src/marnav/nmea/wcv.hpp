@@ -45,9 +45,9 @@ private:
 	utils::optional<std::string> waypoint_id;
 
 public:
-	decltype(speed) get_speed() const { return speed; }
-	decltype(speed_unit) get_speed_unit() const { return speed_unit; }
-	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
+	NMEA_GETTER(speed)
+	NMEA_GETTER(speed_unit)
+	NMEA_GETTER(waypoint_id)
 
 	void set_speed(double t);
 	void set_waypoint(const std::string & id);

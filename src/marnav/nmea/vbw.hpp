@@ -48,39 +48,21 @@ protected:
 private:
 	utils::optional<double> water_speed_longitudinal;
 	utils::optional<double> water_speed_transveral;
-	utils::optional<char> water_speed_status;
+	utils::optional<status> water_speed_status;
 	utils::optional<double> ground_speed_longitudinal;
 	utils::optional<double> ground_speed_transveral;
-	utils::optional<char> ground_speed_status;
+	utils::optional<status> ground_speed_status;
 
 public:
-	decltype(water_speed_longitudinal) get_water_speed_longitudinal() const
-	{
-		return water_speed_longitudinal;
-	}
-	decltype(water_speed_transveral) get_water_speed_transveral() const
-	{
-		return water_speed_transveral;
-	}
-	decltype(water_speed_status) get_water_speed_status() const
-	{
-		return water_speed_status;
-	}
-	decltype(ground_speed_longitudinal) get_ground_speed_longitudinal() const
-	{
-		return ground_speed_longitudinal;
-	}
-	decltype(ground_speed_transveral) get_ground_speed_transveral() const
-	{
-		return ground_speed_transveral;
-	}
-	decltype(ground_speed_status) get_ground_speed_status() const
-	{
-		return water_speed_status;
-	}
+	NMEA_GETTER(water_speed_longitudinal)
+	NMEA_GETTER(water_speed_transveral)
+	NMEA_GETTER(water_speed_status)
+	NMEA_GETTER(ground_speed_longitudinal)
+	NMEA_GETTER(ground_speed_transveral)
+	NMEA_GETTER(ground_speed_status)
 
-	void set_water_speed(double l, double t, char s);
-	void set_ground_speed(double l, double t, char s);
+	void set_water_speed(double l, double t, status s);
+	void set_ground_speed(double l, double t, status s);
 };
 }
 }

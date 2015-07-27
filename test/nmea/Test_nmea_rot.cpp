@@ -43,10 +43,10 @@ TEST_F(Test_nmea_rot, set_deg_per_minute)
 	EXPECT_STREQ("$GPROT,1.0,*71", nmea::to_string(rot).c_str());
 }
 
-TEST_F(Test_nmea_rot, set_status)
+TEST_F(Test_nmea_rot, set_data_valid)
 {
 	nmea::rot rot;
-	rot.set_status(nmea::status::OK);
+	rot.set_data_valid(nmea::status::OK);
 
 	EXPECT_STREQ("$GPROT,,A*1F", nmea::to_string(rot).c_str());
 }

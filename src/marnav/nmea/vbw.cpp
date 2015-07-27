@@ -14,14 +14,14 @@ vbw::vbw()
 {
 }
 
-void vbw::set_water_speed(double l, double t, char s)
+void vbw::set_water_speed(double l, double t, status s)
 {
 	water_speed_longitudinal = l;
 	water_speed_transveral = t;
 	water_speed_status = s;
 }
 
-void vbw::set_ground_speed(double l, double t, char s)
+void vbw::set_ground_speed(double l, double t, status s)
 {
 	ground_speed_longitudinal = l;
 	ground_speed_transveral = t;

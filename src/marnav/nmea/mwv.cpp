@@ -42,7 +42,7 @@ std::unique_ptr<sentence> mwv::parse(const std::string & talker,
 	read(fields[1], detail.angle_ref);
 	read(fields[2], detail.speed);
 	read(fields[3], detail.speed_unit);
-	read(fields[4], detail.status);
+	read(fields[4], detail.data_valid);
 
 	return result;
 }
@@ -50,7 +50,7 @@ std::unique_ptr<sentence> mwv::parse(const std::string & talker,
 std::vector<std::string> mwv::get_data() const
 {
 	return {to_string(angle), to_string(angle_ref), to_string(speed), to_string(speed_unit),
-		to_string(status)};
+		to_string(data_valid)};
 }
 }
 }

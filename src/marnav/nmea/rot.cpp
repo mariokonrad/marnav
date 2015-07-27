@@ -25,14 +25,14 @@ std::unique_ptr<sentence> rot::parse(const std::string & talker,
 	rot & detail = static_cast<rot &>(*result);
 
 	read(fields[0], detail.deg_per_minute);
-	read(fields[1], detail.status);
+	read(fields[1], detail.data_valid);
 
 	return result;
 }
 
 std::vector<std::string> rot::get_data() const
 {
-	return {format(deg_per_minute, 1), to_string(status)};
+	return {format(deg_per_minute, 1), to_string(data_valid)};
 }
 }
 }

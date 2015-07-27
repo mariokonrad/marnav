@@ -68,7 +68,8 @@ TEST_F(Test_nmea_aam, set_arrival_circle_entered_warning)
 TEST_F(Test_nmea_aam, set_arrival_circle_entered_invalid_status)
 {
 	nmea::aam aam;
-	EXPECT_THROW(aam.set_arrival_circle_entered('?'), std::invalid_argument);
+	EXPECT_THROW(
+		aam.set_arrival_circle_entered(static_cast<nmea::status>('?')), std::invalid_argument);
 }
 
 TEST_F(Test_nmea_aam, set_perpendicular_passed_ok)
@@ -90,7 +91,8 @@ TEST_F(Test_nmea_aam, set_perpendicular_passed_warning)
 TEST_F(Test_nmea_aam, set_perpendicular_passed_invalid_status)
 {
 	nmea::aam aam;
-	EXPECT_THROW(aam.set_perpendicular_passed('?'), std::invalid_argument);
+	EXPECT_THROW(
+		aam.set_perpendicular_passed(static_cast<nmea::status>('?')), std::invalid_argument);
 }
 
 TEST_F(Test_nmea_aam, set_arrival_circle_radius)

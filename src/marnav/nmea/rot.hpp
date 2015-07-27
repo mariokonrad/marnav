@@ -41,14 +41,14 @@ protected:
 
 private:
 	utils::optional<double> deg_per_minute;
-	utils::optional<char> status;
+	utils::optional<status> data_valid;
 
 public:
-	decltype(deg_per_minute) get_deg_per_minute() const { return deg_per_minute; }
-	decltype(status) get_status() const { return status; }
+	NMEA_GETTER(deg_per_minute)
+	NMEA_GETTER(data_valid)
 
 	void set_deg_per_minute(double t) { deg_per_minute = t; }
-	void set_status(char t) { status = t; }
+	void set_data_valid(status t) { data_valid = t; }
 };
 }
 }

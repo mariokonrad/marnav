@@ -59,7 +59,7 @@ private:
 	utils::optional<geo::longitude> lon;
 	utils::optional<direction> lon_hem;
 	utils::optional<nmea::time> time_utc;
-	utils::optional<char> status;
+	utils::optional<status> data_valid;
 	utils::optional<positioning_system_mode_indicator> mode_indicator;
 
 public:
@@ -68,13 +68,13 @@ public:
 	NMEA_GETTER(lon)
 	NMEA_GETTER(lon_hem)
 	NMEA_GETTER(time_utc)
-	NMEA_GETTER(status)
+	NMEA_GETTER(data_valid)
 	NMEA_GETTER(mode_indicator)
 
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
 	void set_time_utc(const nmea::time & t) { time_utc = t; }
-	void set_status(char t) { status = t; }
+	void set_data_valid(status t) { data_valid = t; }
 	void set_mode_indicator(positioning_system_mode_indicator t) { mode_indicator = t; }
 };
 }

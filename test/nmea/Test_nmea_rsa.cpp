@@ -59,7 +59,7 @@ TEST_F(Test_nmea_rsa, get_rudder_and_status_1)
 	ASSERT_NE(nullptr, rsa);
 
 	EXPECT_NEAR(1.0, *rsa->get_rudder1(), 1e-5);
-	EXPECT_EQ(nmea::status::OK, *rsa->get_status1());
+	EXPECT_EQ(nmea::status::OK, *rsa->get_rudder1_valid());
 }
 
 TEST_F(Test_nmea_rsa, get_rudder_and_status_2)
@@ -70,7 +70,7 @@ TEST_F(Test_nmea_rsa, get_rudder_and_status_2)
 	ASSERT_NE(nullptr, rsa);
 
 	EXPECT_NEAR(2.0, *rsa->get_rudder2(), 1e-5);
-	EXPECT_EQ(nmea::status::OK, *rsa->get_status2());
+	EXPECT_EQ(nmea::status::OK, *rsa->get_rudder2_valid());
 }
 
 }

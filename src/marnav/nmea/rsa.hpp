@@ -45,15 +45,15 @@ protected:
 
 private:
 	utils::optional<double> rudder1;
-	utils::optional<char> status1;
+	utils::optional<status> rudder1_valid;
 	utils::optional<double> rudder2;
-	utils::optional<char> status2;
+	utils::optional<status> rudder2_valid;
 
 public:
-	decltype(rudder1) get_rudder1() const { return rudder1; }
-	decltype(status1) get_status1() const { return status1; }
-	decltype(rudder2) get_rudder2() const { return rudder2; }
-	decltype(status2) get_status2() const { return status2; }
+	NMEA_GETTER(rudder1)
+	NMEA_GETTER(rudder1_valid)
+	NMEA_GETTER(rudder2)
+	NMEA_GETTER(rudder2_valid)
 
 	void set_rudder1(double t);
 	void set_rudder2(double t);

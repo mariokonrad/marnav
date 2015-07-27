@@ -43,7 +43,7 @@ std::unique_ptr<sentence> osd::parse(const std::string & talker,
 	osd & detail = static_cast<osd &>(*result);
 
 	read(fields[0], detail.heading);
-	read(fields[1], detail.status);
+	read(fields[1], detail.data_valid);
 	read(fields[2], detail.course);
 	read(fields[3], detail.course_ref);
 	read(fields[4], detail.speed);
@@ -57,7 +57,7 @@ std::unique_ptr<sentence> osd::parse(const std::string & talker,
 
 std::vector<std::string> osd::get_data() const
 {
-	return {to_string(heading), to_string(status), to_string(course), to_string(course_ref),
+	return {to_string(heading), to_string(data_valid), to_string(course), to_string(course_ref),
 		to_string(speed), to_string(speed_unit), to_string(vessel_set), to_string(vessel_drift),
 		to_string(vessel_drift_unit)};
 }

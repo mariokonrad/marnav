@@ -74,13 +74,13 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	utils::optional<char> loran_c_blink_warning;
-	utils::optional<char> loran_c_cycle_lock_warning;
+	utils::optional<status> loran_c_blink_warning;
+	utils::optional<status> loran_c_cycle_lock_warning;
 	utils::optional<double> cross_track_error_magnitude;
 	utils::optional<side> direction_to_steer; // L or R
 	utils::optional<char> cross_track_unit; // N = nautical miles
-	utils::optional<char> status_arrival;
-	utils::optional<char> status_perpendicular_passing;
+	utils::optional<status> status_arrival;
+	utils::optional<status> status_perpendicular_passing;
 	utils::optional<uint32_t> bearing_origin_to_destination;
 	utils::optional<reference> bearing_origin_to_destination_ref;
 	utils::optional<std::string> waypoint_id;
@@ -109,13 +109,13 @@ public:
 	NMEA_GETTER(heading_to_steer_to_destination_ref)
 	NMEA_GETTER(mode_indicator)
 
-	void set_loran_c_blink_warning(char t) { loran_c_blink_warning = t; }
-	void set_loran_c_cycle_lock_warning(char t) { loran_c_cycle_lock_warning = t; }
+	void set_loran_c_blink_warning(status t) { loran_c_blink_warning = t; }
+	void set_loran_c_cycle_lock_warning(status t) { loran_c_cycle_lock_warning = t; }
 	void set_cross_track_error_magnitude(double t) { cross_track_error_magnitude = t; }
 	void set_direction_to_steer(side t) { direction_to_steer = t; }
 	void set_cross_track_unit(char t) { cross_track_unit = t; }
-	void set_status_arrival(char t) { status_arrival = t; }
-	void set_status_perpendicular_passing(char t) { status_perpendicular_passing = t; }
+	void set_status_arrival(status t) { status_arrival = t; }
+	void set_status_perpendicular_passing(status t) { status_perpendicular_passing = t; }
 	void set_bearing_origin_to_destination(uint32_t t, reference ref) throw(
 		std::invalid_argument);
 	void set_waypoint_id(const std::string & id);

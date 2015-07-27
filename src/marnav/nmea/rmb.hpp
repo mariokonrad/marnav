@@ -24,7 +24,7 @@ namespace nmea
 ///
 /// Field Number:
 /// 1.  Status
-///     - A= Active
+///     - A = Active
 ///     - V = Void
 /// 2.  Cross Track error - nautical miles
 /// 3.  Direction to Steer
@@ -70,7 +70,7 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	utils::optional<char> status; // V:warning
+	utils::optional<status> active; // V:warning
 	utils::optional<double> cross_track_error; // cross track error in nautical miles
 	utils::optional<side> steer_dir; // direction to steer, left or right
 	utils::optional<std::string> waypoint_to; // TO waypoint ID
@@ -82,11 +82,11 @@ private:
 	utils::optional<double> range; // range to destination in nautical miles
 	utils::optional<double> bearing; // bearing to destination in degrees to true
 	utils::optional<double> dst_velocity; // destination closing velocity in knots
-	utils::optional<char> arrival_status; // arrival status, A:arrival circle entered
+	utils::optional<status> arrival_status; // arrival status, A:arrival circle entered
 	utils::optional<positioning_system_mode_indicator> mode_indicator;
 
 public:
-	NMEA_GETTER(status)
+	NMEA_GETTER(active)
 	NMEA_GETTER(cross_track_error)
 	NMEA_GETTER(steer_dir)
 	NMEA_GETTER(waypoint_to)
@@ -101,7 +101,7 @@ public:
 	NMEA_GETTER(arrival_status)
 	NMEA_GETTER(mode_indicator)
 
-	void set_status(char t) { status = t; }
+	void set_active(status t) { active = t; }
 	void set_cross_track_error(double t) { cross_track_error = t; }
 	void set_steer_dir(side t) { steer_dir = t; }
 	void set_waypoint_to(const std::string & id);
@@ -111,7 +111,7 @@ public:
 	void set_range(double t) { range = t; }
 	void set_bearing(double t) { bearing = t; }
 	void set_dst_velocity(double t) { dst_velocity = t; }
-	void set_arrival_status(char t) { arrival_status = t; }
+	void set_arrival_status(status t) { arrival_status = t; }
 	void set_mode_indicator(positioning_system_mode_indicator t) { mode_indicator = t; }
 };
 }

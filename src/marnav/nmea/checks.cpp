@@ -16,12 +16,12 @@ void check_waypoint_id(const std::string & id) throw(std::invalid_argument)
 		throw std::invalid_argument{"string size to large, only 8 characters allowed for id"};
 }
 
-void check_status(char value, const char * name) throw(std::invalid_argument)
+void check_status(status value, const char * name) throw(std::invalid_argument)
 {
 	check_value(value, {status::OK, status::WARNING}, name);
 }
 
-void check_status(const utils::optional<char> & value, const char * name) throw(
+void check_status(const utils::optional<status> & value, const char * name) throw(
 	std::invalid_argument)
 {
 	if (value)

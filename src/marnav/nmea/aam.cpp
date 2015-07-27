@@ -15,16 +15,16 @@ aam::aam()
 {
 }
 
-void aam::set_arrival_circle_entered(char status)
+void aam::set_arrival_circle_entered(status s)
 {
-	check_status(status, "arrival_circle_entered");
-	arrival_circle_entered = status;
+	check_status(s, "arrival_circle_entered");
+	arrival_circle_entered = s;
 }
 
-void aam::set_perpendicular_passed(char status)
+void aam::set_perpendicular_passed(status s)
 {
-	check_status(status, "perpendicualar_passed");
-	perpendicualar_passed = status;
+	check_status(s, "perpendicualar_passed");
+	perpendicualar_passed = s;
 }
 
 void aam::set_arrival_circle_radius(double t)

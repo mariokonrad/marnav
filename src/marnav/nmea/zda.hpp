@@ -53,12 +53,12 @@ private:
 	utils::optional<int32_t> local_zone_minutes;
 
 public:
-	decltype(time_utc) get_time_utc() const { return time_utc; }
-	decltype(day) get_day() const { return day; }
-	decltype(month) get_month() const { return month; }
-	decltype(year) get_year() const { return year; }
-	decltype(local_zone_hours) get_local_zone_hours() const { return local_zone_hours; }
-	decltype(local_zone_minutes) get_local_zone_minutes() const { return local_zone_minutes; }
+	NMEA_GETTER(time_utc)
+	NMEA_GETTER(day)
+	NMEA_GETTER(month)
+	NMEA_GETTER(year)
+	NMEA_GETTER(local_zone_hours)
+	NMEA_GETTER(local_zone_minutes)
 
 	void set_time_utc(const nmea::time & t) { time_utc = t; }
 	void set_date(uint32_t y, uint32_t m, uint32_t d)

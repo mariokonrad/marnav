@@ -17,13 +17,13 @@ rsa::rsa()
 void rsa::set_rudder1(double t)
 {
 	rudder1 = t;
-	status1 = status::OK;
+	rudder1_valid = status::OK;
 }
 
 void rsa::set_rudder2(double t)
 {
 	rudder2 = t;
-	status2 = status::OK;
+	rudder2_valid = status::OK;
 }
 
 std::unique_ptr<sentence> rsa::parse(const std::string & talker,
@@ -37,18 +37,18 @@ std::unique_ptr<sentence> rsa::parse(const std::string & talker,
 	rsa & detail = static_cast<rsa &>(*result);
 
 	read(fields[0], detail.rudder1);
-	read(fields[1], detail.status1);
+	read(fields[1], detail.rudder1_valid);
 	read(fields[2], detail.rudder2);
-	read(fields[3], detail.status2);
+	read(fields[3], detail.rudder2_valid);
 
 	return result;
 }
 
 std::vector<std::string> rsa::get_data() const
 {
-	return {format(rudder1, 1), to_string(status1), format(rudder2, 1), to_string(status2)};
+	return {format(rudder1, 1), to_string(rudder1_valid), format(rudder2, 1),
+		to_string(rudder2_valid)};
 }
-
 }
 }
 

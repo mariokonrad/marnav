@@ -54,8 +54,8 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	utils::optional<char> arrival_circle_entered;
-	utils::optional<char> perpendicualar_passed;
+	utils::optional<status> arrival_circle_entered;
+	utils::optional<status> perpendicualar_passed;
 	utils::optional<double> arrival_circle_radius;
 	utils::optional<char> arrival_circle_radius_unit;
 	utils::optional<std::string> waypoint_id;
@@ -63,17 +63,14 @@ private:
 	void check() const throw(std::invalid_argument);
 
 public:
-	/// @{
-	/// Getter
 	NMEA_GETTER(arrival_circle_entered)
 	NMEA_GETTER(perpendicualar_passed)
 	NMEA_GETTER(arrival_circle_radius)
 	NMEA_GETTER(arrival_circle_radius_unit)
 	NMEA_GETTER(waypoint_id)
-	/// @}
 
-	void set_arrival_circle_entered(char status);
-	void set_perpendicular_passed(char status);
+	void set_arrival_circle_entered(status s);
+	void set_perpendicular_passed(status s);
 	void set_arrival_circle_radius(double t);
 	void set_waypoint_id(const std::string & id);
 };

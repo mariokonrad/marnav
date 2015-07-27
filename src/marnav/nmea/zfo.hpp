@@ -45,9 +45,9 @@ private:
 	utils::optional<std::string> waypoint_id;
 
 public:
-	decltype(time_utc) get_time_utc() const { return time_utc; }
-	decltype(time_elapsed) get_time_elapsed() const { return time_elapsed; }
-	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
+	NMEA_GETTER(time_utc)
+	NMEA_GETTER(time_elapsed)
+	NMEA_GETTER(waypoint_id)
 
 	void set_time_utc(const nmea::time & t) { time_utc = t; }
 	void set_time_elapsed(const nmea::duration & t) { time_elapsed = t; }

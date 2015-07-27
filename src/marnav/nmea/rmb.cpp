@@ -50,7 +50,7 @@ std::unique_ptr<sentence> rmb::parse(const std::string & talker,
 	result->set_talker(talker);
 	rmb & detail = static_cast<rmb &>(*result);
 
-	read(fields[0], detail.status);
+	read(fields[0], detail.active);
 	read(fields[1], detail.cross_track_error);
 	read(fields[2], detail.steer_dir);
 	read(fields[3], detail.waypoint_to);
@@ -79,7 +79,7 @@ std::unique_ptr<sentence> rmb::parse(const std::string & talker,
 
 std::vector<std::string> rmb::get_data() const
 {
-	return {to_string(status), to_string(cross_track_error), to_string(steer_dir),
+	return {to_string(active), to_string(cross_track_error), to_string(steer_dir),
 		to_string(waypoint_to), to_string(waypoint_from), to_string(lat), to_string(lat_hem),
 		to_string(lon), to_string(lon_hem), to_string(range), to_string(bearing),
 		to_string(dst_velocity), to_string(arrival_status), to_string(mode_indicator)};

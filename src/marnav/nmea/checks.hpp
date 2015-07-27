@@ -59,9 +59,9 @@ void check_value(const utils::optional<T> & value, std::initializer_list<T> opti
 
 void check_waypoint_id(const std::string & id) throw(std::invalid_argument);
 
-void check_status(char value, const char * name = nullptr) throw(std::invalid_argument);
+void check_status(status value, const char * name = nullptr) throw(std::invalid_argument);
 
-void check_status(const utils::optional<char> & value, const char * name = nullptr) throw(
+void check_status(const utils::optional<status> & value, const char * name = nullptr) throw(
 	std::invalid_argument);
 }
 }

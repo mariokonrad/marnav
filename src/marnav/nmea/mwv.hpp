@@ -52,18 +52,18 @@ private:
 	utils::optional<reference> angle_ref; // R:relative, T:true
 	utils::optional<double> speed; // wind speed
 	utils::optional<char> speed_unit; // wind speed unit, K:knots, M:mph
-	utils::optional<char> status; // status, A:valid
+	utils::optional<status> data_valid; // status, A:valid
 
 public:
 	NMEA_GETTER(angle)
 	NMEA_GETTER(angle_ref)
 	NMEA_GETTER(speed)
 	NMEA_GETTER(speed_unit)
-	NMEA_GETTER(status)
+	NMEA_GETTER(data_valid)
 
 	void set_angle(double deg, reference ref);
 	void set_speed(double speed, char unit);
-	void set_status(char t) { status = t; }
+	void set_data_valid(status t) { data_valid = t; }
 };
 }
 }

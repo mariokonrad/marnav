@@ -17,11 +17,10 @@ enum class direction : char {
 	SOUTH ///< NMEA representation: ' S'
 };
 
-namespace status
-{
-constexpr const char OK = 'A';
-constexpr const char WARNING = 'V';
-}
+enum class status : char {
+	OK, ///< NMEA representation: 'A'
+	WARNING ///< NMEA representation: 'V'
+};
 
 /// Positioning System Mode Indicator constants.
 enum class positioning_system_mode_indicator : char {

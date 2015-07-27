@@ -51,9 +51,9 @@ private:
 	std::vector<scanning_frequency> frequencies;
 
 public:
-	decltype(number_of_messages) get_number_of_messages() const { return number_of_messages; }
-	decltype(message_number) get_message_number() const { return message_number; }
-	decltype(frequencies) get_frequencies() const { return frequencies; }
+	NMEA_GETTER(number_of_messages)
+	NMEA_GETTER(message_number)
+	NMEA_GETTER(frequencies)
 
 	void set_number_of_messages(uint32_t t) { number_of_messages = t; }
 	void set_message_number(uint32_t t) { message_number = t; }

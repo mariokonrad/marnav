@@ -43,10 +43,10 @@ TEST_F(Test_nmea_osd, set_heading)
 	EXPECT_STREQ("$IIOSD,123.4,,,,,,,,*5E", nmea::to_string(osd).c_str());
 }
 
-TEST_F(Test_nmea_osd, set_status)
+TEST_F(Test_nmea_osd, set_data_valid)
 {
 	nmea::osd osd;
-	osd.set_status(nmea::status::OK);
+	osd.set_data_valid(nmea::status::OK);
 
 	EXPECT_STREQ("$IIOSD,,A,,,,,,,*35", nmea::to_string(osd).c_str());
 }

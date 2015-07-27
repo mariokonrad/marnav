@@ -145,6 +145,18 @@ std::string to_string(positioning_system_mode_indicator t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(status t)
+{
+	switch (t) {
+		case status::OK:
+			return "A";
+		case status::WARNING:
+			return "V";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
 std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
 {
 	// buffer to hold the resulting string with a static size.
@@ -436,6 +448,24 @@ void read(const std::string & s, positioning_system_mode_indicator & value, data
 		default:
 			// invalid value on purpose
 			value = static_cast<positioning_system_mode_indicator>(-1);
+			break;
+	}
+}
+
+void read(const std::string & s, status & value, data_format fmt)
+{
+	typename std::underlying_type<status>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'A':
+			value = status::OK;
+			break;
+		case 'V':
+			value = status::WARNING;
+			break;
+		default:
+			// invalid value on purpose
+			value = static_cast<status>(-1);
 			break;
 	}
 }
