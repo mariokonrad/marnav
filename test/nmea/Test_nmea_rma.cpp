@@ -54,19 +54,17 @@ TEST_F(Test_nmea_rma, set_lat_south)
 TEST_F(Test_nmea_rma, set_lon_east)
 {
 	nmea::rma rma;
-	rma.set_lon(geo::longitude{123, 45, 67, geo::longitude::hemisphere::EAST});
+	rma.set_lon(geo::longitude{123, 45, 56, geo::longitude::hemisphere::EAST});
 
-	EXPECT_STREQ("$GPRMA,,,,12346.1166,E,,,,,,*3C", nmea::to_string(rma).c_str());
+	EXPECT_STREQ("$GPRMA,,,,12345.9333,E,,,,,,*35", nmea::to_string(rma).c_str());
 }
 
 TEST_F(Test_nmea_rma, set_lon_west)
 {
 	nmea::rma rma;
-	rma.set_lon(geo::longitude{123, 45, 67, geo::longitude::hemisphere::WEST});
+	rma.set_lon(geo::longitude{123, 45, 56, geo::longitude::hemisphere::WEST});
 
-	EXPECT_STREQ("$GPRMA,,,,12346.1166,W,,,,,,*2E", nmea::to_string(rma).c_str());
+	EXPECT_STREQ("$GPRMA,,,,12345.9333,W,,,,,,*27", nmea::to_string(rma).c_str());
 }
-
-// @todo: implementation of RMA unit tests
 
 }

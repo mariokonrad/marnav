@@ -35,8 +35,9 @@ public:
 
 	angle & operator=(const angle &) = default;
 
-protected:
 	double get() const;
+
+protected:
 	void set(double);
 
 private:
