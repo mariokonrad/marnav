@@ -75,6 +75,22 @@ std::string to_string(ais_channel t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(type_of_point t)
+{
+	switch (t) {
+		case type_of_point::collision:
+			return "C";
+		case type_of_point::turning_point:
+			return "T";
+		case type_of_point::reference:
+			return "R";
+		case type_of_point::wheelover:
+			return "W";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
 std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
 {
 	// buffer to hold the resulting string with a static size.
@@ -268,5 +284,27 @@ void read(const std::string & s, ais_channel & value, data_format fmt)
 	}
 }
 
+void read(const std::string & s, type_of_point & value, data_format fmt)
+{
+	typename std::underlying_type<type_of_point>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'C':
+			value = type_of_point::collision;
+			break;
+		case 'T':
+			value = type_of_point::turning_point;
+			break;
+		case 'R':
+			value = type_of_point::reference;
+			break;
+		case 'W':
+			value = type_of_point::wheelover;
+			break;
+		default:
+			value = static_cast<type_of_point>(-1); // invalid value on purpose
+			break;
+	}
+}
 }
 }

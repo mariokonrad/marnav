@@ -77,21 +77,32 @@ constexpr const char MAGNETIC = 'M';
 constexpr const char RELATIVE = 'R';
 }
 
-enum class side : char { LEFT, RIGHT };
+enum class side : char {
+	LEFT, ///< NMEA representation: 'L'
+	RIGHT ///< NMEA Representation: 'R'
+};
 
-enum class route : char { COMPLETE, WORKING };
+enum class route : char {
+	COMPLETE, ///< NMEA representation: 'c'
+	WORKING ///< NMEA representation: 'w'
+};
 
-enum class selection_mode : char { MANUAL, AUTOMATIC };
+enum class selection_mode : char {
+	MANUAL, ///< NMEA representation: 'M'
+	AUTOMATIC ///< NMEA representation: 'A'
+};
 
-enum class ais_channel : char { A, B };
+enum class ais_channel : char {
+	A, ///< NMEA representation: 'A'
+	B ///< NMEA representation: 'B'
+};
 
-namespace type_of_point
-{
-constexpr const char collision = 'C';
-constexpr const char turning_point = 'T';
-constexpr const char reference = 'R';
-constexpr const char wheelover = 'W';
-}
+enum class type_of_point : char {
+	collision, ///< NMEA representation: 'C'
+	turning_point, ///< NMEA representation: 'T'
+	reference, ///< NMEA representation: 'R'
+	wheelover, ///< NMEA representation: 'W'
+};
 }
 }
 

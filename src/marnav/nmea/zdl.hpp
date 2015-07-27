@@ -48,16 +48,16 @@ protected:
 private:
 	duration time_to_point;
 	double distance;
-	char type_point;
+	type_of_point type_point;
 
 public:
-	decltype(time_to_point) get_time_to_point() const { return time_to_point; }
-	decltype(distance) get_distance() const { return distance; }
-	decltype(type_point) get_type_point() const { return type_point; }
+	NMEA_GETTER(time_to_point)
+	NMEA_GETTER(distance)
+	NMEA_GETTER(type_point)
 
 	void set_time_to_point(const duration & t) { time_to_point = t; }
 	void set_distance(double t) { distance = t; }
-	void set_type_point(char t) { type_point = t; }
+	void set_type_point(type_of_point t) { type_point = t; }
 };
 }
 }
