@@ -7,7 +7,6 @@
 
 namespace marnav
 {
-
 namespace nmea
 {
 enum class direction : char {
@@ -36,10 +35,10 @@ enum class positioning_system_mode_indicator : char {
 
 namespace quality
 {
-	constexpr const int INVALID = 0;
-	constexpr const int GPS_FIX = 1;
-	constexpr const int DPGS_FIX = 2;
-	constexpr const int GUESS = 6;
+constexpr const int INVALID = 0;
+constexpr const int GPS_FIX = 1;
+constexpr const int DPGS_FIX = 2;
+constexpr const int GUESS = 6;
 }
 
 namespace unit
