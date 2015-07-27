@@ -83,7 +83,7 @@ private:
 	utils::optional<double> bearing; // bearing to destination in degrees to true
 	utils::optional<double> dst_velocity; // destination closing velocity in knots
 	utils::optional<char> arrival_status; // arrival status, A:arrival circle entered
-	utils::optional<char> faa_mode_indicator;
+	utils::optional<positioning_system_mode_indicator> mode_indicator;
 
 public:
 	NMEA_GETTER(status)
@@ -99,7 +99,7 @@ public:
 	NMEA_GETTER(bearing)
 	NMEA_GETTER(dst_velocity)
 	NMEA_GETTER(arrival_status)
-	NMEA_GETTER(faa_mode_indicator)
+	NMEA_GETTER(mode_indicator)
 
 	void set_status(char t) { status = t; }
 	void set_cross_track_error(double t) { cross_track_error = t; }
@@ -112,7 +112,7 @@ public:
 	void set_bearing(double t) { bearing = t; }
 	void set_dst_velocity(double t) { dst_velocity = t; }
 	void set_arrival_status(char t) { arrival_status = t; }
-	void set_mode_indicator(char t) { faa_mode_indicator = t; }
+	void set_mode_indicator(positioning_system_mode_indicator t) { mode_indicator = t; }
 };
 }
 }

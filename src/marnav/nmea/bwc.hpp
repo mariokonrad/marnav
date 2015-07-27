@@ -81,7 +81,7 @@ private:
 	utils::optional<double> distance; // nautical miles
 	utils::optional<char> distance_unit;
 	utils::optional<std::string> waypoint_id;
-	utils::optional<char> faa_mode_indicator; // NMEA 2.3 and later
+	utils::optional<positioning_system_mode_indicator> mode_indicator; // NMEA 2.3 and later
 
 public:
 	NMEA_GETTER(time_utc)
@@ -96,7 +96,7 @@ public:
 	NMEA_GETTER(distance)
 	NMEA_GETTER(distance_unit)
 	NMEA_GETTER(waypoint_id)
-	NMEA_GETTER(faa_mode_indicator)
+	NMEA_GETTER(mode_indicator)
 
 	void set_time_utc(const nmea::time & t) { time_utc = t; }
 	void set_lat(const geo::latitude & t);
@@ -105,7 +105,7 @@ public:
 	void set_bearing_mag(double t);
 	void set_distance(double t);
 	void set_waypoint(const std::string & id);
-	void set_faa_mode_indicator(char t) { faa_mode_indicator = t; }
+	void set_faa_mode_indicator(positioning_system_mode_indicator t) { mode_indicator = t; }
 };
 }
 }

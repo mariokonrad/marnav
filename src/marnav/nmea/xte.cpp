@@ -31,7 +31,7 @@ std::unique_ptr<sentence> xte::parse(const std::string & talker,
 	read(fields[4], detail.cross_track_units);
 
 	if (fields.size() == 6)
-		read(fields[5], detail.faa_mode_indicator);
+		read(fields[5], detail.mode_indicator);
 
 	return result;
 }
@@ -40,7 +40,7 @@ std::vector<std::string> xte::get_data() const
 {
 	return {to_string(status1), to_string(status2), to_string(cross_track_error_magnitude),
 		to_string(direction_to_steer), to_string(cross_track_units),
-		to_string(faa_mode_indicator)};
+		to_string(mode_indicator)};
 }
 }
 }

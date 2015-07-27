@@ -121,6 +121,30 @@ std::string to_string(reference t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(positioning_system_mode_indicator t)
+{
+	switch (t) {
+		case positioning_system_mode_indicator::INVALID:
+			return "V";
+		case positioning_system_mode_indicator::AUTONOMOUS:
+			return "A";
+		case positioning_system_mode_indicator::DIFFERENTIAL:
+			return "D";
+		case positioning_system_mode_indicator::ESTIMATED:
+			return "E";
+		case positioning_system_mode_indicator::MANUAL_INPUT:
+			return "M";
+		case positioning_system_mode_indicator::SIMULATED:
+			return "S";
+		case positioning_system_mode_indicator::DATA_NOT_VALID:
+			return "N";
+		case positioning_system_mode_indicator::PRECISE:
+			return "P";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
 std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
 {
 	// buffer to hold the resulting string with a static size.
@@ -376,6 +400,42 @@ void read(const std::string & s, reference & value, data_format fmt)
 			break;
 		default:
 			value = static_cast<reference>(-1); // invalid value on purpose
+			break;
+	}
+}
+
+void read(const std::string & s, positioning_system_mode_indicator & value, data_format fmt)
+{
+	typename std::underlying_type<positioning_system_mode_indicator>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'V':
+			value = positioning_system_mode_indicator::INVALID;
+			break;
+		case 'A':
+			value = positioning_system_mode_indicator::AUTONOMOUS;
+			break;
+		case 'D':
+			value = positioning_system_mode_indicator::DIFFERENTIAL;
+			break;
+		case 'E':
+			value = positioning_system_mode_indicator::ESTIMATED;
+			break;
+		case 'M':
+			value = positioning_system_mode_indicator::MANUAL_INPUT;
+			break;
+		case 'S':
+			value = positioning_system_mode_indicator::SIMULATED;
+			break;
+		case 'N':
+			value = positioning_system_mode_indicator::DATA_NOT_VALID;
+			break;
+		case 'P':
+			value = positioning_system_mode_indicator::PRECISE;
+			break;
+		default:
+			// invalid value on purpose
+			value = static_cast<positioning_system_mode_indicator>(-1);
 			break;
 	}
 }

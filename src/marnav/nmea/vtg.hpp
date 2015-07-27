@@ -57,7 +57,7 @@ private:
 	utils::optional<char> unit_speed_kn; // N:knots
 	utils::optional<double> speed_kmh;
 	utils::optional<char> unit_speed_kmh; // K:kilometers per hour
-	utils::optional<char> faa_mode_indicator; // NMEA 2.3 or newer
+	utils::optional<positioning_system_mode_indicator> mode_indicator; // NMEA 2.3 or newer
 
 public:
 	NMEA_GETTER(track_true)
@@ -68,13 +68,13 @@ public:
 	NMEA_GETTER(unit_speed_kn)
 	NMEA_GETTER(speed_kmh)
 	NMEA_GETTER(unit_speed_kmh)
-	NMEA_GETTER(faa_mode_indicator)
+	NMEA_GETTER(mode_indicator)
 
 	void set_track_true(double t);
 	void set_track_magn(double t);
 	void set_speed_kn(double t);
 	void set_speed_kmh(double t);
-	void set_mode_indicator(char t) { faa_mode_indicator = t; }
+	void set_mode_indicator(positioning_system_mode_indicator t) { mode_indicator = t; }
 };
 }
 }

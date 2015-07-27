@@ -59,7 +59,7 @@ std::unique_ptr<sentence> rmc::parse(const std::string & talker,
 
 	// NMEA 2.3 or newer
 	if (fields.size() > 11)
-		read(fields[11], detail.faa_mode_indicator);
+		read(fields[11], detail.mode_indicator);
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
 	if (detail.lat && detail.lat_hem)
@@ -74,7 +74,7 @@ std::vector<std::string> rmc::get_data() const
 {
 	return {to_string(time_utc), to_string(status), to_string(lat), to_string(lat_hem),
 		to_string(lon), to_string(lon_hem), to_string(sog), to_string(heading), to_string(date),
-		to_string(mag), to_string(mag_hem), to_string(faa_mode_indicator)};
+		to_string(mag), to_string(mag_hem), to_string(mode_indicator)};
 }
 }
 }

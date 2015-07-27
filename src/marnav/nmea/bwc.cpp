@@ -75,7 +75,7 @@ std::unique_ptr<sentence> bwc::parse(const std::string & talker,
 	read(fields[11], detail.waypoint_id);
 
 	if (fields.size() == 13)
-		read(fields[12], detail.faa_mode_indicator);
+		read(fields[12], detail.mode_indicator);
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
 	if (detail.lat && detail.lat_hem)
@@ -91,7 +91,7 @@ std::vector<std::string> bwc::get_data() const
 	return {to_string(time_utc), to_string(lat), to_string(lat_hem), to_string(lon),
 		to_string(lon_hem), to_string(bearing_true), to_string(bearing_true_ref),
 		to_string(bearing_mag), to_string(bearing_mag_ref), to_string(distance),
-		to_string(distance_unit), to_string(waypoint_id), to_string(faa_mode_indicator)};
+		to_string(distance_unit), to_string(waypoint_id), to_string(mode_indicator)};
 }
 }
 }

@@ -24,24 +24,23 @@ constexpr const char WARNING = 'V';
 }
 
 /// Positioning System Mode Indicator constants.
-namespace positioning_system_mode_indicator
-{
-constexpr const char INVALID = 'V';
-constexpr const char AUTONOMOUS = 'A';
-constexpr const char DIFFERENTIAL = 'D';
-constexpr const char ESTIMATED = 'E';
-constexpr const char MANUAL_INPUT = 'M';
-constexpr const char SIMULATED = 'S';
-constexpr const char DATA_NOT_VALID = 'N';
-constexpr const char PRECISE = 'P';
-}
+enum class positioning_system_mode_indicator : char {
+	INVALID, ///< NMEA representation: 'V'
+	AUTONOMOUS, ///< NMEA representation: 'A'
+	DIFFERENTIAL, ///< NMEA representation: 'D'
+	ESTIMATED, ///< NMEA representation: 'E'
+	MANUAL_INPUT, ///< NMEA representation: 'M'
+	SIMULATED, ///< NMEA representation: 'S'
+	DATA_NOT_VALID, ///< NMEA representation: 'N'
+	PRECISE ///< NMEA representation: 'P'
+};
 
 namespace quality
 {
-constexpr const int INVALID = 0;
-constexpr const int GPS_FIX = 1;
-constexpr const int DPGS_FIX = 2;
-constexpr const int GUESS = 6;
+	constexpr const int INVALID = 0;
+	constexpr const int GPS_FIX = 1;
+	constexpr const int DPGS_FIX = 2;
+	constexpr const int GUESS = 6;
 }
 
 namespace unit

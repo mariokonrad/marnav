@@ -88,7 +88,7 @@ private:
 	utils::optional<reference> bearing_pos_to_destination_ref;
 	utils::optional<uint32_t> heading_to_steer_to_destination;
 	utils::optional<reference> heading_to_steer_to_destination_ref;
-	utils::optional<char> mode_indicator;
+	utils::optional<positioning_system_mode_indicator> mode_indicator;
 
 	void check() const throw(std::invalid_argument);
 
@@ -122,6 +122,7 @@ public:
 	void set_bearing_pos_to_destination(uint32_t t, reference ref) throw(std::invalid_argument);
 	void set_heading_to_steer_to_destination(uint32_t t, reference ref) throw(
 		std::invalid_argument);
+	void set_mode_indicator(positioning_system_mode_indicator t) throw(std::invalid_argument);
 };
 }
 }

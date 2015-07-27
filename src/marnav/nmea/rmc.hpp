@@ -73,7 +73,7 @@ private:
 	utils::optional<nmea::date> date;
 	utils::optional<double> mag;
 	utils::optional<direction> mag_hem;
-	utils::optional<char> faa_mode_indicator;
+	utils::optional<positioning_system_mode_indicator> mode_indicator;
 
 public:
 	NMEA_GETTER(time_utc)
@@ -87,7 +87,7 @@ public:
 	NMEA_GETTER(date)
 	NMEA_GETTER(mag)
 	NMEA_GETTER(mag_hem)
-	NMEA_GETTER(faa_mode_indicator)
+	NMEA_GETTER(mode_indicator)
 
 	void set_time_utc(const time & t) { time_utc = t; }
 	void set_status(char t) { status = t; }
@@ -97,7 +97,7 @@ public:
 	void set_heading(double t) { heading = t; }
 	void set_date(const nmea::date & t) { date = t; }
 	void set_mag(double t, direction h) throw(std::invalid_argument);
-	void set_mode_indicator(char t) { faa_mode_indicator = t; }
+	void set_mode_indicator(positioning_system_mode_indicator t) { mode_indicator = t; }
 };
 }
 }

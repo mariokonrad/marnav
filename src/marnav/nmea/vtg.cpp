@@ -60,7 +60,7 @@ std::unique_ptr<sentence> vtg::parse(const std::string & talker,
 
 	// NMEA 2.3 or newer
 	if (fields.size() > 8)
-		read(fields[8], detail.faa_mode_indicator);
+		read(fields[8], detail.mode_indicator);
 
 	return result;
 }
@@ -69,7 +69,7 @@ std::vector<std::string> vtg::get_data() const
 {
 	return {to_string(track_true), to_string(type_true), to_string(track_magn),
 		to_string(type_magn), to_string(speed_kn), to_string(unit_speed_kn),
-		to_string(speed_kmh), to_string(unit_speed_kmh), to_string(faa_mode_indicator)};
+		to_string(speed_kmh), to_string(unit_speed_kmh), to_string(mode_indicator)};
 }
 }
 }

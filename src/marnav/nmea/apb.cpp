@@ -47,6 +47,15 @@ void apb::set_heading_to_steer_to_destination(uint32_t t, reference ref) throw(
 	heading_to_steer_to_destination_ref = ref;
 }
 
+void apb::set_mode_indicator(positioning_system_mode_indicator t) throw(std::invalid_argument)
+{
+	check_value(t, {positioning_system_mode_indicator::INVALID,
+					   positioning_system_mode_indicator::AUTONOMOUS,
+					   positioning_system_mode_indicator::DIFFERENTIAL},
+		"mode_indicator");
+	mode_indicator = t;
+}
+
 void apb::check() const throw(std::invalid_argument)
 {
 	check_status(loran_c_blink_warning, "loran_c_blink_warning");
