@@ -46,19 +46,19 @@ protected:
 
 private:
 	utils::optional<double> degrees_true;
-	utils::optional<char> degrees_true_ref; // T:true
+	utils::optional<reference> degrees_true_ref; // T:true
 	utils::optional<double> degrees_mag;
-	utils::optional<char> degrees_mag_ref; // M:magnetic
+	utils::optional<reference> degrees_mag_ref; // M:magnetic
 	utils::optional<double> speed;
 	utils::optional<char> speed_unit; // N:knots
 
 public:
-	decltype(degrees_true) get_degrees_true() const { return degrees_true; }
-	decltype(degrees_true_ref) get_degrees_true_ref() const { return degrees_true_ref; }
-	decltype(degrees_mag) get_degrees_mag() const { return degrees_mag; }
-	decltype(degrees_mag_ref) get_degrees_mag_ref() const { return degrees_mag_ref; }
-	decltype(speed) get_speed() const { return speed; }
-	decltype(speed_unit) get_speed_unit() const { return speed_unit; }
+	NMEA_GETTER(degrees_true)
+	NMEA_GETTER(degrees_true_ref)
+	NMEA_GETTER(degrees_mag)
+	NMEA_GETTER(degrees_mag_ref)
+	NMEA_GETTER(speed)
+	NMEA_GETTER(speed_unit)
 
 	void set_degrees_true(double t);
 	void set_degrees_mag(double t);

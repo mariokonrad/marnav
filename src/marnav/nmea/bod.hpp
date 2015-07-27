@@ -47,9 +47,9 @@ protected:
 
 private:
 	utils::optional<double> bearing_true;
-	utils::optional<char> type_true; // T:true
+	utils::optional<reference> type_true; // T:true
 	utils::optional<double> bearing_magn;
-	utils::optional<char> type_magn; // M:magnetic
+	utils::optional<reference> type_magn; // M:magnetic
 	utils::optional<std::string> waypoint_to; // TO waypoint ID
 	utils::optional<std::string> waypoint_from; // FROM waypoint ID
 

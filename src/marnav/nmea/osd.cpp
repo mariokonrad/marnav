@@ -14,16 +14,16 @@ osd::osd()
 {
 }
 
-void osd::set_course(double t, char ref)
+void osd::set_course(double t)
 {
 	course = t;
-	course_ref = ref;
+	course_ref = reference::TRUE;
 }
 
-void osd::set_speed(double t, char ref)
+void osd::set_speed(double t, char unit)
 {
 	speed = t;
-	speed_ref = ref;
+	speed_unit = unit;
 }
 
 void osd::set_drift(double t, char unit)
@@ -47,7 +47,7 @@ std::unique_ptr<sentence> osd::parse(const std::string & talker,
 	read(fields[2], detail.course);
 	read(fields[3], detail.course_ref);
 	read(fields[4], detail.speed);
-	read(fields[5], detail.speed_ref);
+	read(fields[5], detail.speed_unit);
 	read(fields[6], detail.vessel_set);
 	read(fields[7], detail.vessel_drift);
 	read(fields[8], detail.vessel_drift_unit);
@@ -58,7 +58,7 @@ std::unique_ptr<sentence> osd::parse(const std::string & talker,
 std::vector<std::string> osd::get_data() const
 {
 	return {to_string(heading), to_string(status), to_string(course), to_string(course_ref),
-		to_string(speed), to_string(speed_ref), to_string(vessel_set), to_string(vessel_drift),
+		to_string(speed), to_string(speed_unit), to_string(vessel_set), to_string(vessel_drift),
 		to_string(vessel_drift_unit)};
 }
 }

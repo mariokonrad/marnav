@@ -14,6 +14,30 @@ mwd::mwd()
 {
 }
 
+void mwd::set_direction_true(double t)
+{
+	direction_true = t;
+	direction_true_ref = reference::TRUE;
+}
+
+void mwd::set_direction_mag(double t)
+{
+	direction_mag = t;
+	direction_mag_ref = reference::MAGNETIC;
+}
+
+void mwd::set_speed_knots(double t)
+{
+	speed_kn = t;
+	speed_kn_unit = unit::KNOT;
+}
+
+void mwd::set_speed_mps(double t)
+{
+	speed_ms = t;
+	speed_ms_unit = unit::MPS;
+}
+
 std::unique_ptr<sentence> mwd::parse(const std::string & talker,
 	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {

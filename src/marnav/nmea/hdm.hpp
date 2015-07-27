@@ -46,11 +46,11 @@ protected:
 
 private:
 	utils::optional<double> heading; // magnetic sensor heading in deg
-	utils::optional<char> heading_mag;
+	utils::optional<reference> heading_mag;
 
 public:
-	decltype(heading) get_heading() const { return heading; }
-	decltype(heading_mag) get_magn_dev() const { return heading_mag; }
+	NMEA_GETTER(heading)
+	NMEA_GETTER(heading_mag)
 
 	void set_heading(double t);
 };

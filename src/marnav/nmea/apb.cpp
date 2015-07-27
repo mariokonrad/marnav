@@ -21,6 +21,32 @@ void apb::set_waypoint_id(const std::string & id)
 	waypoint_id = id;
 }
 
+void apb::set_bearing_origin_to_destination(uint32_t t, reference ref) throw(
+	std::invalid_argument)
+{
+	check_value(bearing_origin_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
+		"bearing_origin_to_destination_ref");
+	bearing_origin_to_destination = t;
+	bearing_origin_to_destination_ref = ref;
+}
+
+void apb::set_bearing_pos_to_destination(uint32_t t, reference ref) throw(std::invalid_argument)
+{
+	check_value(bearing_pos_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
+		"bearing_pos_to_destination_ref");
+	bearing_pos_to_destination = t;
+	bearing_pos_to_destination_ref = ref;
+}
+
+void apb::set_heading_to_steer_to_destination(uint32_t t, reference ref) throw(
+	std::invalid_argument)
+{
+	check_value(heading_to_steer_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
+		"heading_to_steer_to_destination_ref");
+	heading_to_steer_to_destination = t;
+	heading_to_steer_to_destination_ref = ref;
+}
+
 void apb::check() const throw(std::invalid_argument)
 {
 	check_status(loran_c_blink_warning, "loran_c_blink_warning");

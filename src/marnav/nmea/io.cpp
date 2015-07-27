@@ -107,6 +107,20 @@ std::string to_string(direction t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(reference t)
+{
+	switch (t) {
+		case reference::TRUE:
+			return "T";
+		case reference::MAGNETIC:
+			return "M";
+		case reference::RELATIVE:
+			return "R";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
 std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
 {
 	// buffer to hold the resulting string with a static size.
@@ -342,6 +356,26 @@ void read(const std::string & s, direction & value, data_format fmt)
 			break;
 		default:
 			value = static_cast<direction>(-1); // invalid value on purpose
+			break;
+	}
+}
+
+void read(const std::string & s, reference & value, data_format fmt)
+{
+	typename std::underlying_type<reference>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'T':
+			value = reference::TRUE;
+			break;
+		case 'M':
+			value = reference::MAGNETIC;
+			break;
+		case 'R':
+			value = reference::RELATIVE;
+			break;
+		default:
+			value = static_cast<reference>(-1); // invalid value on purpose
 			break;
 	}
 }

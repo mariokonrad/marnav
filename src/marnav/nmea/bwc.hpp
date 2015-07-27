@@ -75,9 +75,9 @@ private:
 	utils::optional<geo::longitude> lon;
 	utils::optional<direction> lon_hem;
 	utils::optional<double> bearing_true;
-	utils::optional<char> bearing_true_ref;
+	utils::optional<reference> bearing_true_ref;
 	utils::optional<double> bearing_mag;
-	utils::optional<char> bearing_mag_ref;
+	utils::optional<reference> bearing_mag_ref;
 	utils::optional<double> distance; // nautical miles
 	utils::optional<char> distance_unit;
 	utils::optional<std::string> waypoint_id;

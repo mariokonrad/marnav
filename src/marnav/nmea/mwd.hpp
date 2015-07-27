@@ -51,47 +51,28 @@ protected:
 
 private:
 	utils::optional<double> direction_true;
-	utils::optional<char> direction_true_ref;
+	utils::optional<reference> direction_true_ref;
 	utils::optional<double> direction_mag;
-	utils::optional<char> direction_mag_ref;
+	utils::optional<reference> direction_mag_ref;
 	utils::optional<double> speed_kn;
 	utils::optional<char> speed_kn_unit;
 	utils::optional<double> speed_ms;
 	utils::optional<char> speed_ms_unit;
 
 public:
-	decltype(direction_true) get_direction_true() const { return direction_true; }
-	decltype(direction_true_ref) get_direction_true_ref() const { return direction_true_ref; }
-	decltype(direction_mag) get_direction_mag() const { return direction_mag; }
-	decltype(direction_mag_ref) get_direction_mag_ref() const { return direction_mag_ref; }
-	decltype(speed_kn) get_speed_kn() const { return speed_kn; }
-	decltype(speed_kn_unit) get_speed_kn_unit() const { return speed_kn_unit; }
-	decltype(speed_ms) get_speed_ms() const { return speed_ms; }
-	decltype(speed_ms_unit) get_speed_ms_unit() const { return speed_ms_unit; }
+	NMEA_GETTER(direction_true)
+	NMEA_GETTER(direction_true_ref)
+	NMEA_GETTER(direction_mag)
+	NMEA_GETTER(direction_mag_ref)
+	NMEA_GETTER(speed_kn)
+	NMEA_GETTER(speed_kn_unit)
+	NMEA_GETTER(speed_ms)
+	NMEA_GETTER(speed_ms_unit)
 
-	void set_direction_true(double t)
-	{
-		direction_true = t;
-		direction_true_ref = reference::TRUE;
-	}
-
-	void set_direction_mag(double t)
-	{
-		direction_mag = t;
-		direction_mag_ref = reference::MAGNETIC;
-	}
-
-	void set_speed_knots(double t)
-	{
-		speed_kn = t;
-		speed_kn_unit = unit::KNOT;
-	}
-
-	void set_speed_mps(double t)
-	{
-		speed_ms = t;
-		speed_ms_unit = unit::MPS;
-	}
+	void set_direction_true(double t);
+	void set_direction_mag(double t);
+	void set_speed_knots(double t);
+	void set_speed_mps(double t);
 };
 }
 }

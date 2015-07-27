@@ -82,12 +82,12 @@ private:
 	utils::optional<char> status_arrival;
 	utils::optional<char> status_perpendicular_passing;
 	utils::optional<uint32_t> bearing_origin_to_destination;
-	utils::optional<char> bearing_origin_to_destination_ref;
+	utils::optional<reference> bearing_origin_to_destination_ref;
 	utils::optional<std::string> waypoint_id;
 	utils::optional<uint32_t> bearing_pos_to_destination;
-	utils::optional<char> bearing_pos_to_destination_ref;
+	utils::optional<reference> bearing_pos_to_destination_ref;
 	utils::optional<uint32_t> heading_to_steer_to_destination;
-	utils::optional<char> heading_to_steer_to_destination_ref;
+	utils::optional<reference> heading_to_steer_to_destination_ref;
 	utils::optional<char> mode_indicator;
 
 	void check() const throw(std::invalid_argument);
@@ -116,22 +116,12 @@ public:
 	void set_cross_track_unit(char t) { cross_track_unit = t; }
 	void set_status_arrival(char t) { status_arrival = t; }
 	void set_status_perpendicular_passing(char t) { status_perpendicular_passing = t; }
-	void set_bearing_origin_to_destination(uint32_t t, char ref)
-	{
-		bearing_origin_to_destination = t;
-		bearing_origin_to_destination_ref = ref;
-	}
+	void set_bearing_origin_to_destination(uint32_t t, reference ref) throw(
+		std::invalid_argument);
 	void set_waypoint_id(const std::string & id);
-	void set_bearing_pos_to_destination(uint32_t t, char ref)
-	{
-		bearing_pos_to_destination = t;
-		bearing_pos_to_destination_ref = ref;
-	}
-	void set_heading_to_steer_to_destination(uint32_t t, char ref)
-	{
-		heading_to_steer_to_destination = t;
-		heading_to_steer_to_destination_ref = ref;
-	}
+	void set_bearing_pos_to_destination(uint32_t t, reference ref) throw(std::invalid_argument);
+	void set_heading_to_steer_to_destination(uint32_t t, reference ref) throw(
+		std::invalid_argument);
 };
 }
 }

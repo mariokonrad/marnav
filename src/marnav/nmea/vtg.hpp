@@ -50,9 +50,9 @@ protected:
 
 private:
 	utils::optional<double> track_true;
-	utils::optional<char> type_true; // T:true
+	utils::optional<reference> type_true; // T:true
 	utils::optional<double> track_magn;
-	utils::optional<char> type_magn; // M:magnetic
+	utils::optional<reference> type_magn; // M:magnetic
 	utils::optional<double> speed_kn;
 	utils::optional<char> unit_speed_kn; // N:knots
 	utils::optional<double> speed_kmh;
@@ -60,15 +60,15 @@ private:
 	utils::optional<char> faa_mode_indicator; // NMEA 2.3 or newer
 
 public:
-	decltype(track_true) get_track_true() const { return track_true; }
-	decltype(type_true) get_type_true() const { return type_true; }
-	decltype(track_magn) get_track_magn() const { return track_magn; }
-	decltype(type_magn) get_type_magn() const { return type_magn; }
-	decltype(speed_kn) get_speed_kn() const { return speed_kn; }
-	decltype(unit_speed_kn) get_unit_speed_kn() const { return unit_speed_kn; }
-	decltype(speed_kmh) get_speed_kmh() const { return speed_kmh; }
-	decltype(unit_speed_kmh) get_unit_speed_kmh() const { return unit_speed_kmh; }
-	decltype(faa_mode_indicator) get_faa_mode_indicator() const { return faa_mode_indicator; }
+	NMEA_GETTER(track_true)
+	NMEA_GETTER(type_true)
+	NMEA_GETTER(track_magn)
+	NMEA_GETTER(type_magn)
+	NMEA_GETTER(speed_kn)
+	NMEA_GETTER(unit_speed_kn)
+	NMEA_GETTER(speed_kmh)
+	NMEA_GETTER(unit_speed_kmh)
+	NMEA_GETTER(faa_mode_indicator)
 
 	void set_track_true(double t);
 	void set_track_magn(double t);

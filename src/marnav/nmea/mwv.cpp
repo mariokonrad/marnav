@@ -1,5 +1,6 @@
 #include "mwv.hpp"
-#include "io.hpp"
+#include <marnav/nmea/checks.hpp>
+#include <marnav/nmea/io.hpp>
 #include <marnav/utils/unique.hpp>
 
 namespace marnav
@@ -14,10 +15,11 @@ mwv::mwv()
 {
 }
 
-void mwv::set_angle(double deg, char type)
+void mwv::set_angle(double deg, reference ref)
 {
+	check_value(ref, {reference::TRUE, reference::RELATIVE}, "angle_ref");
 	angle = deg;
-	this->type = type;
+	angle_ref = ref;
 }
 
 void mwv::set_speed(double speed, char unit)
@@ -37,7 +39,7 @@ std::unique_ptr<sentence> mwv::parse(const std::string & talker,
 	mwv & detail = static_cast<mwv &>(*result);
 
 	read(fields[0], detail.angle);
-	read(fields[1], detail.type);
+	read(fields[1], detail.angle_ref);
 	read(fields[2], detail.speed);
 	read(fields[3], detail.speed_unit);
 	read(fields[4], detail.status);
@@ -47,7 +49,7 @@ std::unique_ptr<sentence> mwv::parse(const std::string & talker,
 
 std::vector<std::string> mwv::get_data() const
 {
-	return {to_string(angle), to_string(type), to_string(speed), to_string(speed_unit),
+	return {to_string(angle), to_string(angle_ref), to_string(speed), to_string(speed_unit),
 		to_string(status)};
 }
 }

@@ -59,13 +59,12 @@ constexpr const char BAR = 'B'; // pressure in Bar
 constexpr const char PASCAL = 'P'; // pressure in Pascal
 }
 
-/// Constants for possible references of data.
-namespace reference
-{
-constexpr const char TRUE = 'T';
-constexpr const char MAGNETIC = 'M';
-constexpr const char RELATIVE = 'R';
-}
+/// Enumeration of all possible references of data.
+enum class reference : char {
+	TRUE, ///< NMEA representation: 'T'
+	MAGNETIC, ///< NMEA representation: 'M'
+	RELATIVE ///< NMEA representation: 'R'
+};
 
 enum class side : char {
 	LEFT, ///< NMEA representation: 'L'

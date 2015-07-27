@@ -45,19 +45,19 @@ protected:
 
 private:
 	utils::optional<double> bearing_true;
-	utils::optional<char> bearing_true_ref;
+	utils::optional<reference> bearing_true_ref;
 	utils::optional<double> bearing_mag;
-	utils::optional<char> bearing_mag_ref;
+	utils::optional<reference> bearing_mag_ref;
 	utils::optional<std::string> waypoint_to;
 	utils::optional<std::string> waypoint_from;
 
 public:
-	decltype(bearing_true) get_bearing_true() const { return bearing_true; }
-	decltype(bearing_true_ref) get_bearing_true_ref() const { return bearing_true_ref; }
-	decltype(bearing_mag) get_bearing_mag() const { return bearing_mag; }
-	decltype(bearing_mag_ref) get_bearing_mag_ref() const { return bearing_mag_ref; }
-	decltype(waypoint_to) get_waypoint_to() const { return waypoint_to; }
-	decltype(waypoint_from) get_waypoint_from() const { return waypoint_from; }
+	NMEA_GETTER(bearing_true)
+	NMEA_GETTER(bearing_true_ref)
+	NMEA_GETTER(bearing_mag)
+	NMEA_GETTER(bearing_mag_ref)
+	NMEA_GETTER(waypoint_to)
+	NMEA_GETTER(waypoint_from)
 
 	void set_bearing_true(double t);
 	void set_bearing_mag(double t);

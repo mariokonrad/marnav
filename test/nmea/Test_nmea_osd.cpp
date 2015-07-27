@@ -54,7 +54,7 @@ TEST_F(Test_nmea_osd, set_status)
 TEST_F(Test_nmea_osd, set_course)
 {
 	nmea::osd osd;
-	osd.set_course(123.4, nmea::reference::TRUE);
+	osd.set_course(123.4);
 
 	EXPECT_STREQ("$IIOSD,,,123.4,T,,,,,*0A", nmea::to_string(osd).c_str());
 }
@@ -62,9 +62,9 @@ TEST_F(Test_nmea_osd, set_course)
 TEST_F(Test_nmea_osd, set_speed)
 {
 	nmea::osd osd;
-	osd.set_speed(5.4, nmea::reference::TRUE);
+	osd.set_speed(5.4, nmea::unit::KNOT);
 
-	EXPECT_STREQ("$IIOSD,,,,,5.4,T,,,*0F", nmea::to_string(osd).c_str());
+	EXPECT_STREQ("$IIOSD,,,,,5.4,N,,,*15", nmea::to_string(osd).c_str());
 }
 
 TEST_F(Test_nmea_osd, set_drift)

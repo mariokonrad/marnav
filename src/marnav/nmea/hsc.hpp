@@ -43,15 +43,15 @@ protected:
 
 private:
 	utils::optional<double> heading_true;
-	utils::optional<char> heading_true_ref;
+	utils::optional<reference> heading_true_ref;
 	utils::optional<double> heading_mag;
-	utils::optional<char> heading_mag_ref;
+	utils::optional<reference> heading_mag_ref;
 
 public:
-	decltype(heading_true) get_heading_true() const { return heading_true; }
-	decltype(heading_true_ref) get_heading_true_ref() const { return heading_true_ref; }
-	decltype(heading_mag) get_heading_mag() const { return heading_mag; }
-	decltype(heading_mag_ref) get_heading_mag_ref() const { return heading_mag_ref; }
+	NMEA_GETTER(heading_true)
+	NMEA_GETTER(heading_true_ref)
+	NMEA_GETTER(heading_mag)
+	NMEA_GETTER(heading_mag_ref)
 
 	void set_heading_true(double t);
 	void set_heading_mag(double t);

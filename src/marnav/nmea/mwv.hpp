@@ -49,19 +49,19 @@ protected:
 
 private:
 	utils::optional<double> angle; // wind angle, 0..359 right of bow
-	utils::optional<char> type; // R:relative, T:true
+	utils::optional<reference> angle_ref; // R:relative, T:true
 	utils::optional<double> speed; // wind speed
 	utils::optional<char> speed_unit; // wind speed unit, K:knots, M:mph
 	utils::optional<char> status; // status, A:valid
 
 public:
 	NMEA_GETTER(angle)
-	NMEA_GETTER(type)
+	NMEA_GETTER(angle_ref)
 	NMEA_GETTER(speed)
 	NMEA_GETTER(speed_unit)
 	NMEA_GETTER(status)
 
-	void set_angle(double deg, char type);
+	void set_angle(double deg, reference ref);
 	void set_speed(double speed, char unit);
 	void set_status(char t) { status = t; }
 };
