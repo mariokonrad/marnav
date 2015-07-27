@@ -61,7 +61,9 @@ public:
 	}
 };
 
-/// Collects payload from proper NMEA sentences.
+/// @{
+
+/// @brief Collects payload from proper NMEA sentences.
 ///
 /// @note This function assumes, that all sentences in the specified range are
 ///   providing payload (VDM or descendents).
@@ -142,6 +144,8 @@ std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt 
 	}
 	return v;
 }
+
+/// @}
 
 }
 }

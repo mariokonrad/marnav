@@ -272,6 +272,8 @@ private:
 /// If the sentence is invalid, the returning string will be empty.
 std::string to_string(const sentence & s);
 
+/// @{
+
 /// Casts the specified sentence to the sentence given by the template parameter.
 /// The object converted only if it is valid and of the correct type. It is not
 /// possible to cast a sentence into a completley different one.
@@ -345,6 +347,9 @@ const T * sentence_cast(const std::unique_ptr<sentence> & s) throw(std::bad_cast
 
 	return static_cast<const T *>(s.get());
 }
+
+/// @}
+
 }
 }
 
