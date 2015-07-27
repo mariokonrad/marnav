@@ -18,11 +18,10 @@ namespace nmea
 /// @endcode
 ///
 /// Field Number:
-///
 /// 1. Magnitude of cross track error
 /// 2. Direction to steer
-///    - L
-///    - R
+///    - L = left
+///    - R = right
 /// 3. Unit
 ///    - N = Nautical Miles
 ///
@@ -44,19 +43,16 @@ protected:
 
 private:
 	utils::optional<double> cross_track_error_magnitude;
-	utils::optional<char> direction_to_steer;
+	utils::optional<side> direction_to_steer;
 	utils::optional<char> cross_track_units;
 
 public:
-	decltype(cross_track_error_magnitude) get_cross_track_error_magnitude() const
-	{
-		return cross_track_error_magnitude;
-	}
-	decltype(direction_to_steer) get_direction_to_steer() const { return direction_to_steer; }
-	decltype(cross_track_units) get_cross_track_units() const { return cross_track_units; }
+	NMEA_GETTER(cross_track_error_magnitude)
+	NMEA_GETTER(direction_to_steer)
+	NMEA_GETTER(cross_track_units)
 
 	void set_cross_track_error_magnitude(double t) { cross_track_error_magnitude = t; }
-	void set_direction_to_steer(char t) { direction_to_steer = t; }
+	void set_direction_to_steer(side t) { direction_to_steer = t; }
 	void set_cross_track_units(char t) { cross_track_units = t; }
 };
 }

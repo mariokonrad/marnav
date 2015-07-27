@@ -77,11 +77,7 @@ constexpr const char MAGNETIC = 'M';
 constexpr const char RELATIVE = 'R';
 }
 
-namespace side
-{
-constexpr const char LEFT = 'L';
-constexpr const char RIGHT = 'R';
-}
+enum class side : char { LEFT, RIGHT };
 
 namespace route
 {

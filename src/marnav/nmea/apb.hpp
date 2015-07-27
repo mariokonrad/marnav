@@ -77,7 +77,7 @@ private:
 	utils::optional<char> loran_c_blink_warning;
 	utils::optional<char> loran_c_cycle_lock_warning;
 	utils::optional<double> cross_track_error_magnitude;
-	utils::optional<char> direction_to_steer; // L or R
+	utils::optional<side> direction_to_steer; // L or R
 	utils::optional<char> cross_track_unit; // N = nautical miles
 	utils::optional<char> status_arrival;
 	utils::optional<char> status_perpendicular_passing;
@@ -112,7 +112,7 @@ public:
 	void set_loran_c_blink_warning(char t) { loran_c_blink_warning = t; }
 	void set_loran_c_cycle_lock_warning(char t) { loran_c_cycle_lock_warning = t; }
 	void set_cross_track_error_magnitude(double t) { cross_track_error_magnitude = t; }
-	void set_direction_to_steer(char t) { direction_to_steer = t; }
+	void set_direction_to_steer(side t) { direction_to_steer = t; }
 	void set_cross_track_unit(char t) { cross_track_unit = t; }
 	void set_status_arrival(char t) { status_arrival = t; }
 	void set_status_perpendicular_passing(char t) { status_perpendicular_passing = t; }

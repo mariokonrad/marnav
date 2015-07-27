@@ -14,13 +14,13 @@ vwr::vwr()
 {
 }
 
-void vwr::set_angle(double angle, char side)
+void vwr::set_angle(double angle, side s)
 {
-	if ((side != side::LEFT) && (side != side::RIGHT))
+	if ((s != side::LEFT) && (s != side::RIGHT))
 		throw std::invalid_argument{"wrong side specified in vwr::set_angle"};
 
 	this->angle = angle;
-	this->side = side;
+	this->angle_side = s;
 }
 
 void vwr::set_speed_knots(double t)
@@ -52,7 +52,7 @@ std::unique_ptr<sentence> vwr::parse(const std::string & talker,
 	vwr & detail = static_cast<vwr &>(*result);
 
 	read(fields[0], detail.angle);
-	read(fields[1], detail.side);
+	read(fields[1], detail.angle_side);
 	read(fields[2], detail.speed_knots);
 	read(fields[3], detail.speed_knots_unit);
 	read(fields[4], detail.speed_mps);
@@ -65,7 +65,7 @@ std::unique_ptr<sentence> vwr::parse(const std::string & talker,
 
 std::vector<std::string> vwr::get_data() const
 {
-	return {to_string(angle), to_string(side), to_string(speed_knots),
+	return {to_string(angle), to_string(angle_side), to_string(speed_knots),
 		to_string(speed_knots_unit), to_string(speed_mps), to_string(speed_mps_unit),
 		to_string(speed_kmh), to_string(speed_kmh_unit)};
 }

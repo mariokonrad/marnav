@@ -48,7 +48,7 @@ protected:
 
 private:
 	utils::optional<double> angle; // wind angle, 0..180
-	utils::optional<char> side; // side of vessel, R:right, L:left
+	utils::optional<side> angle_side; // side of vessel, R:right, L:left
 	utils::optional<double> speed_knots; // wind speed in knots
 	utils::optional<char> speed_knots_unit; // N:knots
 	utils::optional<double> speed_mps; // wind speed in miles per second
@@ -57,16 +57,16 @@ private:
 	utils::optional<char> speed_kmh_unit; // K:kmh
 
 public:
-	decltype(angle) get_angle() const { return angle; }
-	decltype(side) get_side() const { return side; }
-	decltype(speed_knots) get_speed_knots() const { return speed_knots; }
-	decltype(speed_knots_unit) get_speed_knots_unit() const { return speed_knots_unit; }
-	decltype(speed_mps) get_speed_mps() const { return speed_mps; }
-	decltype(speed_mps_unit) get_speed_mps_unit() const { return speed_mps_unit; }
-	decltype(speed_kmh) get_speed_kmh() const { return speed_kmh; }
-	decltype(speed_kmh_unit) get_speed_kmh_unit() const { return speed_kmh_unit; }
+	NMEA_GETTER(angle)
+	NMEA_GETTER(angle_side)
+	NMEA_GETTER(speed_knots)
+	NMEA_GETTER(speed_knots_unit)
+	NMEA_GETTER(speed_mps)
+	NMEA_GETTER(speed_mps_unit)
+	NMEA_GETTER(speed_kmh)
+	NMEA_GETTER(speed_kmh_unit)
 
-	void set_angle(double angle, char side);
+	void set_angle(double angle, side s);
 	void set_speed_knots(double t);
 	void set_speed_mps(double t);
 	void set_speed_kmh(double t);

@@ -26,5 +26,6 @@ char convert_hemisphere(const geo::longitude & p)
 	}
 	return '\0'; // never reached, bad for coverage, supresses compiler warning
 }
+
 }
 }

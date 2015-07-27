@@ -25,7 +25,7 @@ TEST_F(Test_nmea_vwr, parse)
 	EXPECT_TRUE(angle.available());
 	EXPECT_EQ(84.0, angle.value());
 
-	auto side = vwr->get_side();
+	auto side = vwr->get_angle_side();
 	EXPECT_TRUE(side.available());
 	EXPECT_EQ(nmea::side::RIGHT, side.value());
 }
@@ -63,7 +63,7 @@ TEST_F(Test_nmea_vwr, set_angle_invalid_side)
 {
 	nmea::vwr vwr;
 
-	EXPECT_ANY_THROW(vwr.set_angle(22.5, '@'));
+	EXPECT_ANY_THROW(vwr.set_angle(22.5, static_cast<nmea::side>('@')));
 }
 
 TEST_F(Test_nmea_vwr, set_speed_knots)

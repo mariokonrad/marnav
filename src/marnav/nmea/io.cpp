@@ -27,6 +27,17 @@ std::string to_string(double data)
 
 std::string to_string(const std::string & data) { return data; }
 
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(side s) noexcept
+{
+	switch (s) {
+		case side::LEFT:
+			return "L";
+		case side::RIGHT:
+			return "R";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
 std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
 {
 	// buffer to hold the resulting string with a static size.
@@ -151,5 +162,23 @@ void read(const std::string & s, double & value, data_format)
 }
 
 void read(const std::string & s, std::string & value, data_format) { value = s; }
+
+void read(const std::string & s, side & value, data_format fmt)
+{
+	typename std::underlying_type<side>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'L':
+			value = side::LEFT;
+			break;
+		case 'R':
+			value = side::RIGHT;
+			break;
+		default:
+			value = static_cast<side>(-1); // invalid value on purpose
+			break;
+	}
+}
+
 }
 }

@@ -55,11 +55,11 @@ private:
 	utils::optional<char> status; // status, A:valid
 
 public:
-	decltype(angle) get_angle() const { return angle; }
-	decltype(type) get_type() const { return type; }
-	decltype(speed) get_speed() const { return speed; }
-	decltype(speed_unit) get_speed_unit() const { return speed_unit; }
-	decltype(status) get_status() const { return status; }
+	NMEA_GETTER(angle)
+	NMEA_GETTER(type)
+	NMEA_GETTER(speed)
+	NMEA_GETTER(speed_unit)
+	NMEA_GETTER(status)
 
 	void set_angle(double deg, char type);
 	void set_speed(double speed, char unit);
