@@ -73,7 +73,40 @@ AIS
 SeaTalk
 -------
 
-@todo Implement more messages
-
 @todo Implement writer for serial devices
+
+@todo Implement more messages:
+	- Type 05: Engine RPM and PITCH
+	- Type 24: Display unit for Mileage and Speed
+	- Type 26: Speed through Water
+	- Type 30: Set lamp Intensity
+	- Type 36: Cancel MOB condition
+	- Type 38: Codelock data
+	- Type 50: LAT Postion
+	- Type 51: LON Postion
+	- Type 52: Speed over Ground
+	- Type 53: Magnetic Course in Degrees
+	- Type 54: GMT Time
+	- Type 55: TRACK keystroke on GPS unit
+	- Type 56: Date
+	- Type 57: Sat Info
+	- Type 58: LAT/LON
+	- Type 59: Set Count Down Timer (sent by ST60)
+	- Type 61: (issued by E-80 multifunction display at init)
+	- Type 65: Select Fathom display unit for depth display (see message 00)
+	- Type 66: Wind Alarm
+	- Type 68: Alarm ackknowledgement keystroke (ST80 Masterview, ST40 Wind Instrument)
+	- Type 6C: Second equipment-ID
+	- Type 6E: MOB
+	- Type 70: Keystroke on Raymarine A25006 ST60 Maxiview Remote Control
+	- Type 80: Set Lamp Intensity
+	- Type 81: Setup of user calibration
+	- Type 82: Target waypoint name
+	- Type 83: sent by course computer
+	- Type 84: Compass heading Autopilot course and rudder position
+	- Type 85: navigation to waypoint information
+	- Type 86: Keystroke
+	- Type 87: Response Level
+	- Type 88: Autopilot Parameter
+	- Type 89: Compass heading (sent by ST40 compass instrument)
 
