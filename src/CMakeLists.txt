@@ -35,6 +35,7 @@ set(SOURCE_NMEA_0183
 	marnav/nmea/dbk.cpp
 	marnav/nmea/dbt.cpp
 	marnav/nmea/dpt.cpp
+	marnav/nmea/dsc.cpp
 	marnav/nmea/fsi.cpp
 	marnav/nmea/gga.cpp
 	marnav/nmea/gll.cpp
@@ -181,6 +182,7 @@ install(
 		marnav/nmea/dbk.hpp
 		marnav/nmea/dbt.hpp
 		marnav/nmea/dpt.hpp
+		marnav/nmea/dsc.hpp
 		marnav/nmea/fsi.hpp
 		marnav/nmea/gga.hpp
 		marnav/nmea/gll.hpp
