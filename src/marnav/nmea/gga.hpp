@@ -55,6 +55,9 @@ namespace nmea
 ///     null field when DGPS is not used
 /// 14. Differential reference station ID, 0000-1023
 ///
+/// @note Raytheon RN300 sends an additional value, which is invalid and not supported
+///       by the sentence
+///
 class gga : public sentence
 {
 public:

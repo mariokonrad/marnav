@@ -15,12 +15,30 @@ TEST_F(Test_nmea_gga, contruction) { nmea::gga gga; }
 
 TEST_F(Test_nmea_gga, parse)
 {
-	auto s = nmea::make_sentence(
-		"$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47");
-	ASSERT_NE(nullptr, s);
 
-	auto gga = nmea::sentence_cast<nmea::gga>(s);
-	ASSERT_NE(nullptr, gga);
+	static const std::vector<std::string> TESTS
+		= {"$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47"};
+
+	for (const auto & test : TESTS) {
+		auto s = nmea::make_sentence(test);
+		EXPECT_NE(nullptr, s);
+		if (s) {
+			auto gga = nmea::sentence_cast<nmea::gga>(s);
+			EXPECT_NE(nullptr, gga);
+		}
+	}
+}
+
+TEST_F(Test_nmea_gga, parse_failure)
+{
+	static const std::vector<std::string> TESTS = {
+		"$GPGGA,171537,3350.975,N,11823.991,W,2,07,1.1,-25.8,M,,M,1.8,,D*17", // Raytheon RN300
+		"$GPGGA,171538,3350.974,N,11823.991,W,2,07,1.1,-25.8,M,,M,1.8,,D*19" // Raytheon RN300
+	};
+
+	for (const auto & test : TESTS) {
+		EXPECT_ANY_THROW(nmea::make_sentence(test));
+	}
 }
 
 TEST_F(Test_nmea_gga, parse_invalid_number_of_arguments)
@@ -75,5 +93,6 @@ TEST_F(Test_nmea_gga, set_lon_east)
 
 	EXPECT_STREQ("$GPGGA,,,,12327.0000,E,,,,,,,,,*08", nmea::to_string(gga).c_str());
 }
+
 }
 
