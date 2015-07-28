@@ -10,7 +10,7 @@ Requirements {#sec_devenv_requirements}
 
 Compiler supported (older/others may work, but not tested):
 - GCC 4.9.2 or newer
-- Clang 3.7 or newer
+- Clang 3.6 or newer
 
 Tools needed to build the library:
 - cmake 3.0 or newer
