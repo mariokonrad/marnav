@@ -37,6 +37,8 @@ namespace nmea
 /// $GPGSV,3,3,11,22,42,067,42,24,14,311,43,27,05,244,00,,,,*4D
 /// @endcode
 ///
+/// @note Although null fields for unused satellite info are not required,
+///       this class will write them in any case.
 class gsv : public sentence
 {
 public:
@@ -61,9 +63,9 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	utils::optional<uint32_t> n_messages;
-	utils::optional<uint32_t> message_number;
-	utils::optional<uint32_t> n_satellites_in_view;
+	uint32_t n_messages;
+	uint32_t message_number;
+	uint32_t n_satellites_in_view;
 	std::array<utils::optional<satellite_info>, 4> sat;
 
 	void check_index(int index) const throw(std::out_of_range);
@@ -74,8 +76,8 @@ public:
 	NMEA_GETTER(n_satellites_in_view)
 	utils::optional<satellite_info> get_sat(int index) const throw(std::out_of_range);
 
-	void set_n_messages(uint32_t t) { n_messages = t; }
-	void set_message_number(uint32_t t) { message_number = t; }
+	void set_n_messages(uint32_t t) throw(std::invalid_argument);
+	void set_message_number(uint32_t t) throw(std::invalid_argument);
 	void set_n_satellites_in_view(uint32_t t) { n_satellites_in_view = t; }
 	void set_sat(int index, const satellite_info & info) throw(std::out_of_range);
 };

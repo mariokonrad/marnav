@@ -1,6 +1,7 @@
 #include "gsv.hpp"
-#include "io.hpp"
+#include <marnav/nmea/io.hpp>
 #include <marnav/utils/unique.hpp>
+#include <algorithm>
 
 namespace marnav
 {
@@ -23,7 +24,24 @@ constexpr const char * gsv::TAG;
 
 gsv::gsv()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
+	, n_messages(1)
+	, message_number(1)
+	, n_satellites_in_view(0)
 {
+}
+
+void gsv::set_n_messages(uint32_t t) throw(std::invalid_argument)
+{
+	if (t < 1)
+		throw std::invalid_argument{"minimum of 1 for n_messages mandatory"};
+	n_messages = t;
+}
+
+void gsv::set_message_number(uint32_t t) throw(std::invalid_argument)
+{
+	if (t < 1)
+		throw std::invalid_argument{"minimum of 1 for message_number mandatory"};
+	message_number = t;
 }
 
 void gsv::check_index(int index) const throw(std::out_of_range)
@@ -48,7 +66,11 @@ utils::optional<gsv::satellite_info> gsv::get_sat(int index) const throw(std::ou
 std::unique_ptr<sentence> gsv::parse(const std::string & talker,
 	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
-	if (fields.size() != 19) {
+	// empty fields for satellite information are not necessary, therefore
+	// there are a variable number of fields. however, the first 3 are
+	// mandatory and the rest must be a multiple of 4 (the four parts
+	// of satellite information).
+	if ((fields.size() < 3) || ((fields.size() - 3) % 4 != 0)) {
 		throw std::invalid_argument{
 			std::string{"invalid number of fields in gsv::parse: expected 19, got "}
 			+ std::to_string(fields.size())};
@@ -62,8 +84,9 @@ std::unique_ptr<sentence> gsv::parse(const std::string & talker,
 	read(fields[1], detail.message_number);
 	read(fields[2], detail.n_satellites_in_view);
 
+	const int num_satellite_info = std::min(4, static_cast<int>((fields.size() - 3) / 4));
 	int index = 3;
-	for (int id = 0; id < 4; ++id, index += 4) {
+	for (int id = 0; id < num_satellite_info; ++id, index += 4) {
 		satellite_info info;
 		read(fields[index + 0], info.id);
 		read(fields[index + 1], info.elevation);

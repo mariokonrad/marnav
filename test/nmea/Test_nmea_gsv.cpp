@@ -33,7 +33,7 @@ TEST_F(Test_nmea_gsv, empty_to_string)
 {
 	nmea::gsv gsv;
 
-	EXPECT_STREQ("$GPGSV,,,,,,,,,,,,,,,,,,,*79", nmea::to_string(gsv).c_str());
+	EXPECT_STREQ("$GPGSV,1,1,0,,,,,,,,,,,,,,,,*49", nmea::to_string(gsv).c_str());
 }
 
 TEST_F(Test_nmea_gsv, set_message)
@@ -42,7 +42,7 @@ TEST_F(Test_nmea_gsv, set_message)
 	gsv.set_n_messages(2);
 	gsv.set_message_number(1);
 
-	EXPECT_STREQ("$GPGSV,2,1,,,,,,,,,,,,,,,,,*7A", nmea::to_string(gsv).c_str());
+	EXPECT_STREQ("$GPGSV,2,1,0,,,,,,,,,,,,,,,,*4A", nmea::to_string(gsv).c_str());
 }
 
 TEST_F(Test_nmea_gsv, set_n_satellites_in_view)
@@ -50,7 +50,7 @@ TEST_F(Test_nmea_gsv, set_n_satellites_in_view)
 	nmea::gsv gsv;
 	gsv.set_n_satellites_in_view(1);
 
-	EXPECT_STREQ("$GPGSV,,,1,,,,,,,,,,,,,,,,*48", nmea::to_string(gsv).c_str());
+	EXPECT_STREQ("$GPGSV,1,1,1,,,,,,,,,,,,,,,,*48", nmea::to_string(gsv).c_str());
 }
 
 TEST_F(Test_nmea_gsv, set_sat_0)
@@ -58,7 +58,7 @@ TEST_F(Test_nmea_gsv, set_sat_0)
 	nmea::gsv gsv;
 	gsv.set_sat(0, {1, 2, 3, 4});
 
-	EXPECT_STREQ("$GPGSV,,,,01,02,003,04,,,,,,,,,,,,*4D", nmea::to_string(gsv).c_str());
+	EXPECT_STREQ("$GPGSV,1,1,0,01,02,003,04,,,,,,,,,,,,*7D", nmea::to_string(gsv).c_str());
 }
 
 TEST_F(Test_nmea_gsv, set_sat_1)
@@ -66,7 +66,7 @@ TEST_F(Test_nmea_gsv, set_sat_1)
 	nmea::gsv gsv;
 	gsv.set_sat(1, {1, 2, 3, 4});
 
-	EXPECT_STREQ("$GPGSV,,,,,,,,01,02,003,04,,,,,,,,*4D", nmea::to_string(gsv).c_str());
+	EXPECT_STREQ("$GPGSV,1,1,0,,,,,01,02,003,04,,,,,,,,*7D", nmea::to_string(gsv).c_str());
 }
 
 TEST_F(Test_nmea_gsv, set_sat_2)
@@ -74,7 +74,7 @@ TEST_F(Test_nmea_gsv, set_sat_2)
 	nmea::gsv gsv;
 	gsv.set_sat(2, {1, 2, 3, 4});
 
-	EXPECT_STREQ("$GPGSV,,,,,,,,,,,,01,02,003,04,,,,*4D", nmea::to_string(gsv).c_str());
+	EXPECT_STREQ("$GPGSV,1,1,0,,,,,,,,,01,02,003,04,,,,*7D", nmea::to_string(gsv).c_str());
 }
 
 TEST_F(Test_nmea_gsv, set_sat_3)
@@ -82,7 +82,7 @@ TEST_F(Test_nmea_gsv, set_sat_3)
 	nmea::gsv gsv;
 	gsv.set_sat(3, {1, 2, 3, 4});
 
-	EXPECT_STREQ("$GPGSV,,,,,,,,,,,,,,,,01,02,003,04*4D", nmea::to_string(gsv).c_str());
+	EXPECT_STREQ("$GPGSV,1,1,0,,,,,,,,,,,,,01,02,003,04*7D", nmea::to_string(gsv).c_str());
 }
 
 TEST_F(Test_nmea_gsv, set_sat_invalid_index)
