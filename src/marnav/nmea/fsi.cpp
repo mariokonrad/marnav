@@ -17,7 +17,7 @@ fsi::fsi()
 
 void fsi::set_power_level(uint32_t t) throw(std::invalid_argument)
 {
-	if (t > 10)
+	if (t > 9)
 		throw std::invalid_argument{"invalid value for power_level (0..9)"};
 	power_level = t;
 }
