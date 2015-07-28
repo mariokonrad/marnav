@@ -20,16 +20,16 @@ void osd::set_course(double t)
 	course_ref = reference::TRUE;
 }
 
-void osd::set_speed(double t, char unit)
+void osd::set_speed(double t, unit::velocity u)
 {
 	speed = t;
-	speed_unit = unit;
+	speed_unit = u;
 }
 
-void osd::set_drift(double t, char unit)
+void osd::set_drift(double t, unit::velocity u)
 {
 	vessel_drift = t;
-	vessel_drift_unit = unit;
+	vessel_drift_unit = u;
 }
 
 std::unique_ptr<sentence> osd::parse(const std::string & talker,

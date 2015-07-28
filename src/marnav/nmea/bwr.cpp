@@ -42,7 +42,7 @@ void bwr::set_bearing_mag(double t)
 void bwr::set_distance(double t)
 {
 	distance = t;
-	distance_unit = unit::NM;
+	distance_unit = unit::distance::NM;
 }
 
 void bwr::set_waypoint(const std::string & id)

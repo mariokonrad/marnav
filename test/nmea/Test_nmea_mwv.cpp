@@ -22,11 +22,11 @@ TEST_F(Test_nmea_mwv, parse)
 	ASSERT_NE(nullptr, mwv);
 
 	auto angle = mwv->get_angle();
-	EXPECT_TRUE(angle.available());
+	ASSERT_TRUE(angle.available());
 	EXPECT_EQ(84.0, angle.value());
 
 	auto speed = mwv->get_speed();
-	EXPECT_TRUE(speed.available());
+	ASSERT_TRUE(speed.available());
 	EXPECT_EQ(10.4, speed.value());
 }
 
@@ -54,7 +54,7 @@ TEST_F(Test_nmea_mwv, set_angle)
 TEST_F(Test_nmea_mwv, set_speed)
 {
 	nmea::mwv mwv;
-	mwv.set_speed(22.5, nmea::unit::KNOT);
+	mwv.set_speed(22.5, nmea::unit::velocity::KNOT);
 
 	EXPECT_STREQ("$IIMWV,,,22.5,N,*35", nmea::to_string(mwv).c_str());
 }

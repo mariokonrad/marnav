@@ -17,19 +17,19 @@ dbt::dbt()
 void dbt::set_depth_feet(double t)
 {
 	depth_feet = t;
-	depth_unit_feet = unit::FEET;
+	depth_feet_unit = unit::distance::FEET;
 }
 
 void dbt::set_depth_meter(double t)
 {
 	depth_meter = t;
-	depth_unit_meter = unit::METER;
+	depth_meter_unit = unit::distance::METER;
 }
 
 void dbt::set_depth_fathom(double t)
 {
 	depth_fathom = t;
-	depth_unit_fathom = unit::FATHOM;
+	depth_fathom_unit = unit::distance::FATHOM;
 }
 
 std::unique_ptr<sentence> dbt::parse(const std::string & talker,
@@ -43,19 +43,19 @@ std::unique_ptr<sentence> dbt::parse(const std::string & talker,
 	dbt & detail = static_cast<dbt &>(*result);
 
 	read(fields[0], detail.depth_feet);
-	read(fields[1], detail.depth_unit_feet);
+	read(fields[1], detail.depth_feet_unit);
 	read(fields[2], detail.depth_meter);
-	read(fields[3], detail.depth_unit_meter);
+	read(fields[3], detail.depth_meter_unit);
 	read(fields[4], detail.depth_fathom);
-	read(fields[5], detail.depth_unit_fathom);
+	read(fields[5], detail.depth_fathom_unit);
 
 	return result;
 }
 
 std::vector<std::string> dbt::get_data() const
 {
-	return {to_string(depth_feet), to_string(depth_unit_feet), to_string(depth_meter),
-		to_string(depth_unit_meter), to_string(depth_fathom), to_string(depth_unit_fathom)};
+	return {to_string(depth_feet), to_string(depth_feet_unit), to_string(depth_meter),
+		to_string(depth_meter_unit), to_string(depth_fathom), to_string(depth_fathom_unit)};
 }
 }
 }

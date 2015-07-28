@@ -11,9 +11,9 @@ constexpr const char * pgrme::TAG;
 
 pgrme::pgrme()
 	: sentence(ID, TAG, talker_id::none)
-	, horizontal_position_error_unit(unit::METER)
-	, vertical_position_error_unit(unit::METER)
-	, overall_spherical_equiv_position_error_unit(unit::METER)
+	, horizontal_position_error_unit(unit::distance::METER)
+	, vertical_position_error_unit(unit::distance::METER)
+	, overall_spherical_equiv_position_error_unit(unit::distance::METER)
 {
 }
 

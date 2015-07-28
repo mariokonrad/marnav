@@ -29,13 +29,13 @@ void mwd::set_direction_mag(double t)
 void mwd::set_speed_knots(double t)
 {
 	speed_kn = t;
-	speed_kn_unit = unit::KNOT;
+	speed_kn_unit = unit::velocity::KNOT;
 }
 
 void mwd::set_speed_mps(double t)
 {
 	speed_ms = t;
-	speed_ms_unit = unit::MPS;
+	speed_ms_unit = unit::velocity::MPS;
 }
 
 std::unique_ptr<sentence> mwd::parse(const std::string & talker,

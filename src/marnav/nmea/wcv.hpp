@@ -41,7 +41,7 @@ protected:
 
 private:
 	utils::optional<double> speed;
-	utils::optional<char> speed_unit;
+	utils::optional<unit::velocity> speed_unit;
 	utils::optional<std::string> waypoint_id;
 
 public:

@@ -45,9 +45,9 @@ protected:
 
 private:
 	utils::optional<double> distance_nm;
-	utils::optional<char> distance_nm_unit;
+	utils::optional<unit::distance> distance_nm_unit;
 	utils::optional<double> distance_km;
-	utils::optional<char> distance_km_unit;
+	utils::optional<unit::distance> distance_km_unit;
 	utils::optional<std::string> waypoint_to;
 	utils::optional<std::string> waypoint_from;
 

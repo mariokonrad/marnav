@@ -18,18 +18,18 @@ namespace nmea
 /// @endcode
 ///
 /// Field Number:
-///  1. Wind Angle, 0 to 360 degrees
-///  2. Wind Angle Reference
-///     - R = Relative
-///     - T = True
-///  3. Wind Speed
-///  4. Wind Speed Unit
-///     - K
-///     - M
-///     - N
-///  5. Status
-///     - A = Data Valid
-//      - V = Invalid
+/// 1. Wind Angle, 0 to 360 degrees
+/// 2. Wind Angle Reference
+///    - R = Relative
+///    - T = True
+/// 3. Wind Speed
+/// 4. Wind Speed Unit
+///    - K
+///    - M
+///    - N
+/// 5. Status
+///    - A = Data Valid
+//     - V = Invalid
 ///
 class mwv : public sentence
 {
@@ -51,7 +51,7 @@ private:
 	utils::optional<double> angle; // wind angle, 0..359 right of bow
 	utils::optional<reference> angle_ref; // R:relative, T:true
 	utils::optional<double> speed; // wind speed
-	utils::optional<char> speed_unit; // wind speed unit, K:knots, M:mph
+	utils::optional<unit::velocity> speed_unit; // wind speed unit, K:knots, M:mph
 	utils::optional<status> data_valid; // status, A:valid
 
 public:
@@ -62,7 +62,7 @@ public:
 	NMEA_GETTER(data_valid)
 
 	void set_angle(double deg, reference ref);
-	void set_speed(double speed, char unit);
+	void set_speed(double speed, unit::velocity u);
 	void set_data_valid(status t) { data_valid = t; }
 };
 }

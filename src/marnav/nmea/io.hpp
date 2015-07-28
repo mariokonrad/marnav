@@ -40,6 +40,10 @@ std::string to_string(reference t);
 std::string to_string(positioning_system_mode_indicator t);
 std::string to_string(status t);
 std::string to_string(quality t);
+std::string to_string(unit::distance t);
+std::string to_string(unit::velocity t);
+std::string to_string(unit::temperature t);
+std::string to_string(unit::pressure t);
 
 template <class T> inline std::string to_string(const utils::optional<T> & data)
 {
@@ -130,6 +134,10 @@ void read(const std::string & s, positioning_system_mode_indicator & value,
 	data_format = data_format::none);
 void read(const std::string & s, status & value, data_format = data_format::none);
 void read(const std::string & s, quality & value, data_format = data_format::none);
+void read(const std::string & s, unit::distance & value, data_format = data_format::none);
+void read(const std::string & s, unit::velocity & value, data_format = data_format::none);
+void read(const std::string & s, unit::temperature & value, data_format = data_format::none);
+void read(const std::string & s, unit::pressure & value, data_format = data_format::none);
 
 template <class T>
 static void read(

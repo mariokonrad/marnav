@@ -53,10 +53,10 @@ private:
 	utils::optional<double> course; // degrees true
 	utils::optional<reference> course_ref;
 	utils::optional<double> speed;
-	utils::optional<char> speed_unit;
+	utils::optional<unit::velocity> speed_unit;
 	utils::optional<double> vessel_set; // degrees true
 	utils::optional<double> vessel_drift; // (speed)
-	utils::optional<char> vessel_drift_unit;
+	utils::optional<unit::velocity> vessel_drift_unit;
 
 public:
 	NMEA_GETTER(heading)
@@ -72,9 +72,9 @@ public:
 	void set_heading(double t) { heading = t; }
 	void set_data_valid(status t) { data_valid = t; }
 	void set_course(double t);
-	void set_speed(double t, char unit);
+	void set_speed(double t, unit::velocity u);
 	void set_vessel_set(double t) { vessel_set = t; }
-	void set_drift(double t, char unit);
+	void set_drift(double t, unit::velocity u);
 };
 }
 }

@@ -44,9 +44,9 @@ protected:
 
 private:
 	utils::optional<double> speed_knots; // negative means downwind
-	utils::optional<char> speed_knots_unit;
+	utils::optional<unit::velocity> speed_knots_unit;
 	utils::optional<double> speed_meters_per_second; // negative means downwind
-	utils::optional<char> speed_meters_per_second_unit;
+	utils::optional<unit::velocity> speed_meters_per_second_unit;
 
 public:
 	NMEA_GETTER(speed_knots)

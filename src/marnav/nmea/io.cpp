@@ -173,6 +173,60 @@ std::string to_string(quality t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(unit::distance t)
+{
+	switch (t) {
+		case unit::distance::METER:
+			return "M";
+		case unit::distance::FEET:
+			return "f";
+		case unit::distance::NM:
+			return "N";
+		case unit::distance::KM:
+			return "K";
+		case unit::distance::FATHOM:
+			return "F";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(unit::velocity t)
+{
+	switch (t) {
+		case unit::velocity::KNOT:
+			return "N";
+		case unit::velocity::KMH:
+			return "K";
+		case unit::velocity::MPS:
+			return "M";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(unit::temperature t)
+{
+	switch (t) {
+		case unit::temperature::CELSIUS:
+			return "C";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(unit::pressure t)
+{
+	switch (t) {
+		case unit::pressure::BAR:
+			return "B";
+		case unit::pressure::PASCAL:
+			return "P";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
 std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
 {
 	// buffer to hold the resulting string with a static size.
@@ -506,6 +560,87 @@ void read(const std::string & s, quality & value, data_format fmt)
 		default:
 			// invalid value on purpose
 			value = static_cast<quality>(-1);
+			break;
+	}
+}
+
+void read(const std::string & s, unit::distance & value, data_format fmt)
+{
+	typename std::underlying_type<unit::distance>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'M':
+			value = unit::distance::METER;
+			break;
+		case 'f':
+			value = unit::distance::FEET;
+			break;
+		case 'N':
+			value = unit::distance::NM;
+			break;
+		case 'K':
+			value = unit::distance::KM;
+			break;
+		case 'F':
+			value = unit::distance::FATHOM;
+			break;
+		default:
+			// invalid value on purpose
+			value = static_cast<unit::distance>(-1);
+			break;
+	}
+}
+
+void read(const std::string & s, unit::velocity & value, data_format fmt)
+{
+	typename std::underlying_type<unit::velocity>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'N':
+			value = unit::velocity::KNOT;
+			break;
+		case 'K':
+			value = unit::velocity::KMH;
+			break;
+		case 'M':
+			value = unit::velocity::MPS;
+			break;
+		default:
+			// invalid value on purpose
+			value = static_cast<unit::velocity>(-1);
+			break;
+	}
+}
+
+void read(const std::string & s, unit::temperature & value, data_format fmt)
+{
+	typename std::underlying_type<unit::temperature>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'C':
+			value = unit::temperature::CELSIUS;
+			break;
+		default:
+			// invalid value on purpose
+			value = static_cast<unit::temperature>(-1);
+			break;
+	}
+}
+
+void read(const std::string & s, unit::pressure & value, data_format fmt)
+{
+	typename std::underlying_type<unit::pressure>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'B':
+			value = unit::pressure::BAR;
+			break;
+		case 'P':
+			value = unit::pressure::PASCAL;
+			break;
+		default:
+			// invalid value on purpose
+			value = static_cast<unit::pressure>(-1);
 			break;
 	}
 }

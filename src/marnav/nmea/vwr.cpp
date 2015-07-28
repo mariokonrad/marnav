@@ -16,9 +16,6 @@ vwr::vwr()
 
 void vwr::set_angle(double angle, side s)
 {
-	if ((s != side::LEFT) && (s != side::RIGHT))
-		throw std::invalid_argument{"wrong side specified in vwr::set_angle"};
-
 	this->angle = angle;
 	this->angle_side = s;
 }
@@ -26,19 +23,19 @@ void vwr::set_angle(double angle, side s)
 void vwr::set_speed_knots(double t)
 {
 	speed_knots = t;
-	speed_knots_unit = unit::KNOT;
+	speed_knots_unit = unit::velocity::KNOT;
 }
 
 void vwr::set_speed_mps(double t)
 {
 	speed_mps = t;
-	speed_mps_unit = unit::MPS;
+	speed_mps_unit = unit::velocity::MPS;
 }
 
 void vwr::set_speed_kmh(double t)
 {
 	speed_kmh = t;
-	speed_kmh_unit = unit::KMH;
+	speed_kmh_unit = unit::velocity::KMH;
 }
 
 std::unique_ptr<sentence> vwr::parse(const std::string & talker,

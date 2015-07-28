@@ -44,16 +44,19 @@ protected:
 private:
 	utils::optional<double> cross_track_error_magnitude;
 	utils::optional<side> direction_to_steer;
-	utils::optional<char> cross_track_units;
+	utils::optional<unit::distance> cross_track_unit;
 
 public:
 	NMEA_GETTER(cross_track_error_magnitude)
 	NMEA_GETTER(direction_to_steer)
-	NMEA_GETTER(cross_track_units)
+	NMEA_GETTER(cross_track_unit)
 
-	void set_cross_track_error_magnitude(double t) { cross_track_error_magnitude = t; }
+	void set_cross_track_error_magnitude(double t)
+	{
+		cross_track_error_magnitude = t;
+		cross_track_unit = unit::distance::NM;
+	}
 	void set_direction_to_steer(side t) { direction_to_steer = t; }
-	void set_cross_track_units(char t) { cross_track_units = t; }
 };
 }
 }

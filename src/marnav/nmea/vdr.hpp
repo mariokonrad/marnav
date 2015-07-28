@@ -50,7 +50,7 @@ private:
 	utils::optional<double> degrees_mag;
 	utils::optional<reference> degrees_mag_ref; // M:magnetic
 	utils::optional<double> speed;
-	utils::optional<char> speed_unit; // N:knots
+	utils::optional<unit::velocity> speed_unit; // N:knots
 
 public:
 	NMEA_GETTER(degrees_true)

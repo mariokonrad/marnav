@@ -57,7 +57,7 @@ private:
 	utils::optional<status> arrival_circle_entered;
 	utils::optional<status> perpendicualar_passed;
 	utils::optional<double> arrival_circle_radius;
-	utils::optional<char> arrival_circle_radius_unit;
+	utils::optional<unit::distance> arrival_circle_radius_unit;
 	utils::optional<std::string> waypoint_id;
 
 	void check() const throw(std::invalid_argument);

@@ -79,7 +79,7 @@ private:
 	utils::optional<double> bearing_mag;
 	utils::optional<reference> bearing_mag_ref;
 	utils::optional<double> distance; // nautical miles
-	utils::optional<char> distance_unit;
+	utils::optional<unit::distance> distance_unit;
 	utils::optional<std::string> waypoint_id;
 	utils::optional<positioning_system_mode_indicator> mode_indicator; // NMEA 2.3 and later
 

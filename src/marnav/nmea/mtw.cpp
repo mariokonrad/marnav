@@ -14,6 +14,12 @@ mtw::mtw()
 {
 }
 
+void mtw::set_temperature(double t)
+{
+	temperature = t;
+	temperature_unit = unit::temperature::CELSIUS;
+}
+
 std::unique_ptr<sentence> mtw::parse(const std::string & talker,
 	const std::vector<std::string> & fields) throw(std::invalid_argument)
 {
@@ -25,14 +31,14 @@ std::unique_ptr<sentence> mtw::parse(const std::string & talker,
 	mtw & detail = static_cast<mtw &>(*result);
 
 	read(fields[0], detail.temperature);
-	read(fields[1], detail.unit);
+	read(fields[1], detail.temperature_unit);
 
 	return result;
 }
 
 std::vector<std::string> mtw::get_data() const
 {
-	return {to_string(temperature), to_string(unit)};
+	return {to_string(temperature), to_string(temperature_unit)};
 }
 }
 }

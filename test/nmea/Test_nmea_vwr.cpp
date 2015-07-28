@@ -59,13 +59,6 @@ TEST_F(Test_nmea_vwr, set_angle_right)
 	EXPECT_STREQ("$IIVWR,22.5,R,,,,,,*1A", nmea::to_string(vwr).c_str());
 }
 
-TEST_F(Test_nmea_vwr, set_angle_invalid_side)
-{
-	nmea::vwr vwr;
-
-	EXPECT_ANY_THROW(vwr.set_angle(22.5, static_cast<nmea::side>('@')));
-}
-
 TEST_F(Test_nmea_vwr, set_speed_knots)
 {
 	nmea::vwr vwr;

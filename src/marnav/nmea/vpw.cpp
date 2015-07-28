@@ -17,13 +17,13 @@ vpw::vpw()
 void vpw::set_speed_knots(double t)
 {
 	speed_knots = t;
-	speed_knots_unit = unit::KNOT;
+	speed_knots_unit = unit::velocity::KNOT;
 }
 
 void vpw::set_speed_mps(double t)
 {
 	speed_meters_per_second = t;
-	speed_meters_per_second_unit = unit::MPS;
+	speed_meters_per_second_unit = unit::velocity::MPS;
 }
 
 std::unique_ptr<sentence> vpw::parse(const std::string & talker,

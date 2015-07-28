@@ -62,7 +62,7 @@ void apb::check() const throw(std::invalid_argument)
 	check_status(loran_c_cycle_lock_warning, "loran_c_cycle_lock_warning");
 
 	check_value(direction_to_steer, {side::LEFT, side::RIGHT}, "direction_to_steer");
-	check_value(cross_track_unit, {unit::NM}, "cross_talk_unit");
+	check_value(cross_track_unit, {unit::distance::NM}, "cross_talk_unit");
 	check_status(status_arrival, "status_arrival");
 	check_status(status_perpendicular_passing, "status_perpendicular_passing");
 

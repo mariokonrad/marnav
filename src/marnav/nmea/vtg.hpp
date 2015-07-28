@@ -54,9 +54,9 @@ private:
 	utils::optional<double> track_magn;
 	utils::optional<reference> type_magn; // M:magnetic
 	utils::optional<double> speed_kn;
-	utils::optional<char> unit_speed_kn; // N:knots
+	utils::optional<unit::velocity> speed_kn_unit; // N:knots
 	utils::optional<double> speed_kmh;
-	utils::optional<char> unit_speed_kmh; // K:kilometers per hour
+	utils::optional<unit::velocity> speed_kmh_unit; // K:kilometers per hour
 	utils::optional<positioning_system_mode_indicator> mode_indicator; // NMEA 2.3 or newer
 
 public:
@@ -65,9 +65,9 @@ public:
 	NMEA_GETTER(track_magn)
 	NMEA_GETTER(type_magn)
 	NMEA_GETTER(speed_kn)
-	NMEA_GETTER(unit_speed_kn)
+	NMEA_GETTER(speed_kn_unit)
 	NMEA_GETTER(speed_kmh)
-	NMEA_GETTER(unit_speed_kmh)
+	NMEA_GETTER(speed_kmh_unit)
 	NMEA_GETTER(mode_indicator)
 
 	void set_track_true(double t);

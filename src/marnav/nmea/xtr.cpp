@@ -26,7 +26,7 @@ std::unique_ptr<sentence> xtr::parse(const std::string & talker,
 
 	read(fields[0], detail.cross_track_error_magnitude);
 	read(fields[1], detail.direction_to_steer);
-	read(fields[2], detail.cross_track_units);
+	read(fields[2], detail.cross_track_unit);
 
 	return result;
 }
@@ -34,7 +34,7 @@ std::unique_ptr<sentence> xtr::parse(const std::string & talker,
 std::vector<std::string> xtr::get_data() const
 {
 	return {to_string(cross_track_error_magnitude), to_string(direction_to_steer),
-		to_string(cross_track_units)};
+		to_string(cross_track_unit)};
 }
 }
 }

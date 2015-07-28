@@ -81,10 +81,10 @@ private:
 	utils::optional<uint32_t> n_satellites;
 	utils::optional<double> hor_dilution; // horizontal dilution of precision
 	utils::optional<double> altitude;
-	utils::optional<char> altitude_unit; // M:meter
+	utils::optional<unit::distance> altitude_unit; // M:meter
 	utils::optional<double>
 		geodial_separation; // geodial separation, sea level below the ellipsoid
-	utils::optional<char> geodial_separation_unit; // M:meter
+	utils::optional<unit::distance> geodial_separation_unit; // M:meter
 	utils::optional<double> dgps_age; // age of dgps data
 	utils::optional<uint32_t> dgps_ref; // dgps reference station 0000..1023
 
@@ -110,12 +110,15 @@ public:
 	void set_quality(quality t) { quality_indicator = t; }
 	void set_n_satellites(uint32_t t) { n_satellites = t; }
 	void set_hor_dilution(double t) { hor_dilution = t; }
-	void set_altitude(double t) { altitude = t; }
-	void set_altitude_unit(char t) { altitude_unit = t; }
-	void set_geodial_separation(double t, char u)
+	void set_altitude(double t)
+	{
+		altitude = t;
+		altitude_unit = unit::distance::METER;
+	}
+	void set_geodial_separation(double t)
 	{
 		geodial_separation = t;
-		geodial_separation_unit = u;
+		geodial_separation_unit = unit::distance::METER;
 	}
 	void set_dgps_age(double t) { dgps_age = t; }
 	void set_dgps_ref(uint32_t t) { dgps_ref = t; }

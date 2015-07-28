@@ -22,10 +22,10 @@ void mwv::set_angle(double deg, reference ref)
 	angle_ref = ref;
 }
 
-void mwv::set_speed(double speed, char unit)
+void mwv::set_speed(double speed, unit::velocity u)
 {
 	this->speed = speed;
-	speed_unit = unit;
+	speed_unit = u;
 }
 
 std::unique_ptr<sentence> mwv::parse(const std::string & talker,

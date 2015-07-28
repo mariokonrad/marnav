@@ -40,7 +40,7 @@ TEST_F(Test_nmea_xtr, set_cross_track_error_magnitude)
 	nmea::xtr xtr;
 	xtr.set_cross_track_error_magnitude(1.2);
 
-	EXPECT_STREQ("$GPXTR,1.2,,*48", nmea::to_string(xtr).c_str());
+	EXPECT_STREQ("$GPXTR,1.2,,N*06", nmea::to_string(xtr).c_str());
 }
 
 TEST_F(Test_nmea_xtr, set_direction_to_steer)
@@ -51,13 +51,4 @@ TEST_F(Test_nmea_xtr, set_direction_to_steer)
 	EXPECT_STREQ("$GPXTR,,L,*29", nmea::to_string(xtr).c_str());
 }
 
-TEST_F(Test_nmea_xtr, set_cross_track_units)
-{
-	nmea::xtr xtr;
-	xtr.set_cross_track_units(nmea::unit::NM);
-
-	EXPECT_STREQ("$GPXTR,,,N*2B", nmea::to_string(xtr).c_str());
 }
-
-}
-

@@ -49,19 +49,19 @@ protected:
 
 private:
 	utils::optional<double> depth_feet; // water depth in feet
-	utils::optional<char> depth_unit_feet; // f:feet
+	utils::optional<unit::distance> depth_feet_unit; // f:feet
 	utils::optional<double> depth_meter; // water depth in meter
-	utils::optional<char> depth_unit_meter; // M:meter
+	utils::optional<unit::distance> depth_meter_unit; // M:meter
 	utils::optional<double> depth_fathom; // water depth in fathom
-	utils::optional<char> depth_unit_fathom; // F:fathom
+	utils::optional<unit::distance> depth_fathom_unit; // F:fathom
 
 public:
-	decltype(depth_feet) get_depth_feet() const { return depth_feet; }
-	decltype(depth_unit_feet) get_depth_unit_feet() const { return depth_unit_feet; }
-	decltype(depth_meter) get_depth_meter() const { return depth_meter; }
-	decltype(depth_unit_meter) get_depth_unit_meter() const { return depth_unit_meter; }
-	decltype(depth_fathom) get_depth_fathom() const { return depth_fathom; }
-	decltype(depth_unit_fathom) get_depth_unit_fathom() const { return depth_unit_fathom; }
+	NMEA_GETTER(depth_feet)
+	NMEA_GETTER(depth_feet_unit)
+	NMEA_GETTER(depth_meter)
+	NMEA_GETTER(depth_meter_unit)
+	NMEA_GETTER(depth_fathom)
+	NMEA_GETTER(depth_fathom_unit)
 
 	void set_depth_feet(double t);
 	void set_depth_meter(double t);

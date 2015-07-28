@@ -22,12 +22,12 @@ TEST_F(Test_nmea_mtw, parse)
 	ASSERT_NE(nullptr, mtw);
 
 	auto temperature = mtw->get_temperature();
-	EXPECT_TRUE(temperature.available());
+	ASSERT_TRUE(temperature.available());
 	EXPECT_EQ(9.5, temperature.value());
 
-	auto unit = mtw->get_unit();
-	EXPECT_TRUE(unit.available());
-	EXPECT_EQ(nmea::unit::CELSIUS, unit.value());
+	auto unit = mtw->get_temperature_unit();
+	ASSERT_TRUE(unit.available());
+	EXPECT_EQ(nmea::unit::temperature::CELSIUS, unit.value());
 }
 
 TEST_F(Test_nmea_mtw, parse_invalid_number_of_arguments)

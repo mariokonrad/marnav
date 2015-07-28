@@ -17,13 +17,13 @@ vtg::vtg()
 void vtg::set_speed_kn(double t)
 {
 	speed_kn = t;
-	unit_speed_kn = unit::KNOT;
+	speed_kn_unit = unit::velocity::KNOT;
 }
 
 void vtg::set_speed_kmh(double t)
 {
 	speed_kmh = t;
-	unit_speed_kmh = unit::KMH;
+	speed_kmh_unit = unit::velocity::KMH;
 }
 
 void vtg::set_track_magn(double t)
@@ -54,9 +54,9 @@ std::unique_ptr<sentence> vtg::parse(const std::string & talker,
 	read(fields[2], detail.track_magn);
 	read(fields[3], detail.type_magn);
 	read(fields[4], detail.speed_kn);
-	read(fields[5], detail.unit_speed_kn);
+	read(fields[5], detail.speed_kn_unit);
 	read(fields[6], detail.speed_kmh);
-	read(fields[7], detail.unit_speed_kmh);
+	read(fields[7], detail.speed_kmh_unit);
 
 	// NMEA 2.3 or newer
 	if (fields.size() > 8)
@@ -68,8 +68,8 @@ std::unique_ptr<sentence> vtg::parse(const std::string & talker,
 std::vector<std::string> vtg::get_data() const
 {
 	return {to_string(track_true), to_string(type_true), to_string(track_magn),
-		to_string(type_magn), to_string(speed_kn), to_string(unit_speed_kn),
-		to_string(speed_kmh), to_string(unit_speed_kmh), to_string(mode_indicator)};
+		to_string(type_magn), to_string(speed_kn), to_string(speed_kn_unit),
+		to_string(speed_kmh), to_string(speed_kmh_unit), to_string(mode_indicator)};
 }
 }
 }

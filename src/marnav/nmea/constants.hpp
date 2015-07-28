@@ -42,17 +42,28 @@ enum class quality : uint32_t {
 
 namespace unit
 {
-constexpr const char METER = 'M';
-constexpr const char FEET = 'f';
-constexpr const char NM = 'N'; // nautical miles
-constexpr const char KM = 'K'; // kilometers
-constexpr const char FATHOM = 'F';
-constexpr const char KNOT = 'N';
-constexpr const char KMH = 'K'; // kilometers per hour
-constexpr const char MPS = 'M'; // meters per second
-constexpr const char CELSIUS = 'C';
-constexpr const char BAR = 'B'; // pressure in Bar
-constexpr const char PASCAL = 'P'; // pressure in Pascal
+enum class distance : char {
+	METER, ///< NMEA representation: 'M'
+	FEET, ///< NMEA representation: 'f'
+	NM, ///< NMEA representation: 'N' / nautical miles
+	KM, ///< NMEA representation: 'K' / kilometers
+	FATHOM ///< NMEA representation: 'F'
+};
+
+enum class velocity : char {
+	KNOT, ///< NMEA representation: 'N'
+	KMH, ///< NMEA representation: 'K' / kilometers per hour
+	MPS ///< NMEA representation: 'M' / meters per second
+};
+
+enum class temperature : char {
+	CELSIUS ///< NMEA representation: 'C'
+};
+
+enum class pressure : char {
+	BAR, ///< NMEA representation: 'B'
+	PASCAL ///< NMEA representation: 'P'
+};
 }
 
 /// Enumeration of all possible references of data.

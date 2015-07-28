@@ -24,13 +24,13 @@ void vhw::set_heading(double t)
 void vhw::set_speed_knots(double t)
 {
 	speed_knots = t;
-	speed_knots_unit = unit::KNOT;
+	speed_knots_unit = unit::velocity::KNOT;
 }
 
 void vhw::set_speed_kmh(double t)
 {
 	speed_kmh = t;
-	speed_kmh_unit = unit::KMH;
+	speed_kmh_unit = unit::velocity::KMH;
 }
 
 std::unique_ptr<sentence> vhw::parse(const std::string & talker,

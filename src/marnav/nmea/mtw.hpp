@@ -40,17 +40,13 @@ protected:
 
 private:
 	utils::optional<double> temperature; // water temperature
-	utils::optional<char> unit; // unit degrees, C:celcius
+	utils::optional<unit::temperature> temperature_unit; // unit degrees, C:celcius
 
 public:
-	decltype(temperature) get_temperature() const { return temperature; }
-	decltype(unit) get_unit() const { return unit; }
+	NMEA_GETTER(temperature)
+	NMEA_GETTER(temperature_unit)
 
-	void set_temperature(double t)
-	{
-		temperature = t;
-		unit = unit::CELSIUS;
-	}
+	void set_temperature(double t);
 };
 }
 }

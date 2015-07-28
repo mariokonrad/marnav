@@ -32,7 +32,7 @@ void aam::set_arrival_circle_radius(double t)
 	if (t < 0.0)
 		throw std::invalid_argument{"invalid argument, arrival radius below zero"};
 	arrival_circle_radius = t;
-	arrival_circle_radius_unit = unit::NM;
+	arrival_circle_radius_unit = unit::distance::NM;
 }
 
 void aam::set_waypoint_id(const std::string & id)
@@ -47,7 +47,7 @@ void aam::check() const throw(std::invalid_argument)
 	check_status(perpendicualar_passed, "perpendicualar_passed");
 	if (arrival_circle_radius && !arrival_circle_radius_unit)
 		throw std::invalid_argument{"unit missing in sentence"};
-	check_value(arrival_circle_radius_unit, {unit::NM}, "arrival_circle_radius_unit");
+	check_value(arrival_circle_radius_unit, {unit::distance::NM}, "arrival_circle_radius_unit");
 }
 
 std::unique_ptr<sentence> aam::parse(const std::string & talker,

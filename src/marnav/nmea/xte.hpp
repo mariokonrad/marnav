@@ -21,7 +21,8 @@ namespace nmea
 ///
 /// 1. Status
 ///    - V = LORAN-C Blink or SNR warning
-///    - V = general warning flag or other navigation systems when a reliable fix is not available
+///    - V = general warning flag or other navigation systems when a reliable fix is not
+///    available
 /// 2. Status
 ///    - V = Loran-C Cycle Lock warning flag
 ///    - A = OK or not used
@@ -29,7 +30,8 @@ namespace nmea
 /// 4. Direction to steer
 ///    - L = Left
 ///    - R = Right
-/// 5. Cross Track Units, N = Nautical Miles
+/// 5. Cross Track Units
+///    - N = Nautical Miles
 /// 6. FAA mode indicator (NMEA 2.3 and later, optional)
 ///
 class xte : public sentence
@@ -53,7 +55,7 @@ private:
 	utils::optional<status> status2;
 	utils::optional<double> cross_track_error_magnitude;
 	utils::optional<side> direction_to_steer;
-	utils::optional<char> cross_track_units;
+	utils::optional<unit::distance> cross_track_unit;
 	utils::optional<positioning_system_mode_indicator> mode_indicator;
 
 public:
@@ -61,14 +63,17 @@ public:
 	NMEA_GETTER(status2)
 	NMEA_GETTER(cross_track_error_magnitude)
 	NMEA_GETTER(direction_to_steer)
-	NMEA_GETTER(cross_track_units)
+	NMEA_GETTER(cross_track_unit)
 	NMEA_GETTER(mode_indicator)
 
 	void set_status1(status t) { status1 = t; }
 	void set_status2(status t) { status2 = t; }
-	void set_cross_track_error_magnitude(double t) { cross_track_error_magnitude = t; }
+	void set_cross_track_error_magnitude(double t)
+	{
+		cross_track_error_magnitude = t;
+		cross_track_unit = unit::distance::NM;
+	}
 	void set_direction_to_steer(side t) { direction_to_steer = t; }
-	void set_cross_track_units(char t) { cross_track_units = t; }
 	void set_faa_mode_indicato(positioning_system_mode_indicator t) { mode_indicator = t; }
 };
 }

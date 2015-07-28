@@ -40,7 +40,7 @@ TEST_F(Test_nmea_xte, set_cross_track_error_magnitude)
 	nmea::xte xte;
 	xte.set_cross_track_error_magnitude(1.2);
 
-	EXPECT_STREQ("$GPXTE,,,1.2,,,*73", nmea::to_string(xte).c_str());
+	EXPECT_STREQ("$GPXTE,,,1.2,,N,*3D", nmea::to_string(xte).c_str());
 }
 
 }

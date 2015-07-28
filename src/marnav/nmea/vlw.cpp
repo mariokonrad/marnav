@@ -17,13 +17,13 @@ vlw::vlw()
 void vlw::set_distance_cum_nm(double t)
 {
 	distance_cum = t;
-	distance_cum_unit = unit::NM;
+	distance_cum_unit = unit::distance::NM;
 }
 
 void vlw::set_distance_reset_nm(double t)
 {
 	distance_reset = t;
-	distance_reset_unit = unit::NM;
+	distance_reset_unit = unit::distance::NM;
 }
 
 std::unique_ptr<sentence> vlw::parse(const std::string & talker,

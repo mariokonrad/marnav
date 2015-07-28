@@ -55,9 +55,9 @@ private:
 	utils::optional<double> direction_mag;
 	utils::optional<reference> direction_mag_ref;
 	utils::optional<double> speed_kn;
-	utils::optional<char> speed_kn_unit;
+	utils::optional<unit::velocity> speed_kn_unit;
 	utils::optional<double> speed_ms;
-	utils::optional<char> speed_ms_unit;
+	utils::optional<unit::velocity> speed_ms_unit;
 
 public:
 	NMEA_GETTER(direction_true)

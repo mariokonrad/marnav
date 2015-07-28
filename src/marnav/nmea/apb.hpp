@@ -77,8 +77,8 @@ private:
 	utils::optional<status> loran_c_blink_warning;
 	utils::optional<status> loran_c_cycle_lock_warning;
 	utils::optional<double> cross_track_error_magnitude;
-	utils::optional<side> direction_to_steer; // L or R
-	utils::optional<char> cross_track_unit; // N = nautical miles
+	utils::optional<side> direction_to_steer;
+	utils::optional<unit::distance> cross_track_unit;
 	utils::optional<status> status_arrival;
 	utils::optional<status> status_perpendicular_passing;
 	utils::optional<uint32_t> bearing_origin_to_destination;
@@ -111,9 +111,12 @@ public:
 
 	void set_loran_c_blink_warning(status t) { loran_c_blink_warning = t; }
 	void set_loran_c_cycle_lock_warning(status t) { loran_c_cycle_lock_warning = t; }
-	void set_cross_track_error_magnitude(double t) { cross_track_error_magnitude = t; }
+	void set_cross_track_error_magnitude(double t)
+	{
+		cross_track_error_magnitude = t;
+		cross_track_unit = unit::distance::NM;
+	}
 	void set_direction_to_steer(side t) { direction_to_steer = t; }
-	void set_cross_track_unit(char t) { cross_track_unit = t; }
 	void set_status_arrival(status t) { status_arrival = t; }
 	void set_status_perpendicular_passing(status t) { status_perpendicular_passing = t; }
 	void set_bearing_origin_to_destination(uint32_t t, reference ref) throw(

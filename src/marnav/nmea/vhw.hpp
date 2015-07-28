@@ -51,9 +51,9 @@ private:
 	utils::optional<double> heading; // heading in degrees, 0..359
 	utils::optional<reference> degrees_mag; // M:magnetic
 	utils::optional<double> speed_knots; // speed in knots
-	utils::optional<char> speed_knots_unit; // N:knots
+	utils::optional<unit::velocity> speed_knots_unit; // N:knots
 	utils::optional<double> speed_kmh; // speed in kilometers per hour
-	utils::optional<char> speed_kmh_unit; // K:kmh
+	utils::optional<unit::velocity> speed_kmh_unit; // K:kmh
 
 public:
 	NMEA_GETTER(heading_empty)
