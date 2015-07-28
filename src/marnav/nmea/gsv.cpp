@@ -72,7 +72,7 @@ std::unique_ptr<sentence> gsv::parse(const std::string & talker,
 	// of satellite information).
 	if ((fields.size() < 3) || ((fields.size() - 3) % 4 != 0)) {
 		throw std::invalid_argument{
-			std::string{"invalid number of fields in gsv::parse: expected 19, got "}
+			std::string{"invalid number of fields in gsv::parse: expected 3+n*4, got "}
 			+ std::to_string(fields.size())};
 	}
 
