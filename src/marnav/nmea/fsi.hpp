@@ -52,14 +52,11 @@ private:
 	utils::optional<char> sentence_status;
 
 public:
-	decltype(tx_frequency) get_tx_frequency() const { return tx_frequency; }
-	decltype(rx_frequency) get_rx_frequency() const { return rx_frequency; }
-	decltype(communications_mode) get_communications_mode() const
-	{
-		return communications_mode;
-	}
-	decltype(power_level) get_power_level() const { return power_level; }
-	decltype(sentence_status) get_sentence_status() const { return sentence_status; }
+	NMEA_GETTER(tx_frequency)
+	NMEA_GETTER(rx_frequency)
+	NMEA_GETTER(communications_mode)
+	NMEA_GETTER(power_level)
+	NMEA_GETTER(sentence_status)
 
 	void set_tx_frequency(uint32_t t) { tx_frequency = t; }
 	void set_rx_frequency(uint32_t t) { rx_frequency = t; }

@@ -46,8 +46,8 @@ private:
 	utils::optional<double> transducer_offset;
 
 public:
-	decltype(depth_meter) get_depth_meter() const { return depth_meter; }
-	decltype(transducer_offset) get_transducer_offset() const { return transducer_offset; }
+	NMEA_GETTER(depth_meter)
+	NMEA_GETTER(transducer_offset)
 
 	void set_depth_meter(double t) { depth_meter = t; }
 	void set_transducer_offset(double t) { transducer_offset = t; }

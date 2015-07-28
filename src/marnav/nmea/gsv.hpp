@@ -69,12 +69,9 @@ private:
 	void check_index(int index) const throw(std::out_of_range);
 
 public:
-	decltype(n_messages) get_n_messages() const { return n_messages; }
-	decltype(message_number) get_message_number() const { return message_number; }
-	decltype(n_satellites_in_view) get_n_satellites_in_view() const
-	{
-		return n_satellites_in_view;
-	}
+	NMEA_GETTER(n_messages)
+	NMEA_GETTER(message_number)
+	NMEA_GETTER(n_satellites_in_view)
 	utils::optional<satellite_info> get_sat(int index) const throw(std::out_of_range);
 
 	void set_n_messages(uint32_t t) { n_messages = t; }
