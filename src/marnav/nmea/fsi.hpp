@@ -61,8 +61,8 @@ public:
 	void set_tx_frequency(uint32_t t) { tx_frequency = t; }
 	void set_rx_frequency(uint32_t t) { rx_frequency = t; }
 	void set_communications_mode(char t) { communications_mode = t; }
-	void set_power_level(uint32_t t) { power_level = t; }
-	void set_sentence_status(char t) { sentence_status = t; }
+	void set_power_level(uint32_t t) throw(std::invalid_argument);
+	void set_sentence_status(char t) throw(std::invalid_argument);
 };
 }
 }

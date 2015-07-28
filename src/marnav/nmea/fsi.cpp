@@ -1,5 +1,6 @@
 #include "fsi.hpp"
-#include "io.hpp"
+#include <marnav/nmea/checks.hpp>
+#include <marnav/nmea/io.hpp>
 #include <marnav/utils/unique.hpp>
 
 namespace marnav
@@ -12,6 +13,19 @@ constexpr const char * fsi::TAG;
 fsi::fsi()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
+}
+
+void fsi::set_power_level(uint32_t t) throw(std::invalid_argument)
+{
+	if (t > 10)
+		throw std::invalid_argument{"invalid value for power_level (0..9)"};
+	power_level = t;
+}
+
+void fsi::set_sentence_status(char t) throw(std::invalid_argument)
+{
+	check_value(t, {'R', 'C'}, "sentence_status");
+	sentence_status = t;
 }
 
 std::unique_ptr<sentence> fsi::parse(const std::string & talker,
