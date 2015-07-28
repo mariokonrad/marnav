@@ -77,7 +77,7 @@ private:
 	utils::optional<direction> lat_hem; // N:north, S:south
 	utils::optional<geo::longitude> lon;
 	utils::optional<direction> lon_hem; // E:east, W:west
-	utils::optional<uint32_t> quality;
+	utils::optional<quality> quality_indicator;
 	utils::optional<uint32_t> n_satellites;
 	utils::optional<double> hor_dilution; // horizontal dilution of precision
 	utils::optional<double> altitude;
@@ -94,7 +94,7 @@ public:
 	NMEA_GETTER(lat_hem)
 	NMEA_GETTER(lon)
 	NMEA_GETTER(lon_hem)
-	NMEA_GETTER(quality)
+	NMEA_GETTER(quality_indicator)
 	NMEA_GETTER(n_satellites)
 	NMEA_GETTER(hor_dilution)
 	NMEA_GETTER(altitude)
@@ -107,7 +107,7 @@ public:
 	void set_time(const nmea::time & t) { time = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_quality(uint32_t t) { quality = t; }
+	void set_quality(quality t) { quality_indicator = t; }
 	void set_n_satellites(uint32_t t) { n_satellites = t; }
 	void set_hor_dilution(double t) { hor_dilution = t; }
 	void set_altitude(double t) { altitude = t; }

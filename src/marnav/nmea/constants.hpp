@@ -33,13 +33,12 @@ enum class positioning_system_mode_indicator : char {
 	PRECISE ///< NMEA representation: 'P'
 };
 
-namespace quality
-{
-constexpr const int INVALID = 0;
-constexpr const int GPS_FIX = 1;
-constexpr const int DPGS_FIX = 2;
-constexpr const int GUESS = 6;
-}
+enum class quality : uint32_t {
+	INVALID = 0, ///< NMEA representation: 0
+	GPS_FIX = 1, ///< NMEA representation: 1
+	DPGS_FIX = 2, ///< NMEA representation: 2
+	GUESS = 6 ///< NMEA representation: 6
+};
 
 namespace unit
 {

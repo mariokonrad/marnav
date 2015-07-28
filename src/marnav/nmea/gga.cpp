@@ -42,7 +42,7 @@ std::unique_ptr<sentence> gga::parse(const std::string & talker,
 	read(fields[2], detail.lat_hem);
 	read(fields[3], detail.lon);
 	read(fields[4], detail.lon_hem);
-	read(fields[5], detail.quality);
+	read(fields[5], detail.quality_indicator);
 	read(fields[6], detail.n_satellites);
 	read(fields[7], detail.hor_dilution);
 	read(fields[8], detail.altitude);
@@ -64,7 +64,7 @@ std::unique_ptr<sentence> gga::parse(const std::string & talker,
 std::vector<std::string> gga::get_data() const
 {
 	return {to_string(time), to_string(lat), to_string(lat_hem), to_string(lon),
-		to_string(lon_hem), to_string(quality), to_string(n_satellites),
+		to_string(lon_hem), to_string(quality_indicator), to_string(n_satellites),
 		to_string(hor_dilution), to_string(altitude), to_string(altitude_unit),
 		to_string(geodial_separation), to_string(geodial_separation_unit), to_string(dgps_age),
 		to_string(dgps_ref)};

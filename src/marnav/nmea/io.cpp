@@ -157,6 +157,22 @@ std::string to_string(status t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
+/// @todo Replace the switch with variable templates as soon as C++14 happens
+std::string to_string(quality t)
+{
+	switch (t) {
+		case quality::INVALID:
+			return "0";
+		case quality::GPS_FIX:
+			return "1";
+		case quality::DPGS_FIX:
+			return "2";
+		case quality::GUESS:
+			return "6";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
 std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
 {
 	// buffer to hold the resulting string with a static size.
@@ -466,6 +482,30 @@ void read(const std::string & s, status & value, data_format fmt)
 		default:
 			// invalid value on purpose
 			value = static_cast<status>(-1);
+			break;
+	}
+}
+
+void read(const std::string & s, quality & value, data_format fmt)
+{
+	typename std::underlying_type<quality>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 0:
+			value = quality::INVALID;
+			break;
+		case 1:
+			value = quality::GPS_FIX;
+			break;
+		case 2:
+			value = quality::DPGS_FIX;
+			break;
+		case 6:
+			value = quality::GUESS;
+			break;
+		default:
+			// invalid value on purpose
+			value = static_cast<quality>(-1);
 			break;
 	}
 }
