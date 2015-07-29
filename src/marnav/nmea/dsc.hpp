@@ -20,16 +20,18 @@ namespace nmea
 ///
 /// Field Number:
 /// 1.  Format Specifier
-/// 2.  Address / MMSI
+/// 2.  Address (MMSI or geographical area), 10 digits
 /// 3.  Category
 /// 4.  ?
 /// 5.  ?
-/// 6.  ?
+/// 6.  Position or Channel/Frequency
 /// 7.  Time (HHMM)
 /// 8.  ?
 /// 9.  ?
-/// 10. ?
-/// 11. Extension, E = an extension sentence (DSE) will follow, if not the field is null
+/// 10. Acknowledgment
+///     - B
+/// 11. Extension Indicator
+///     - E = extension sentence (DSE) will follow, if not the field is null
 ///
 /// @todo IMPLEMENTATION
 ///
