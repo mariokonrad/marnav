@@ -20,6 +20,7 @@ Tools needed to build the library:
 optional (used for development only):
 - lcov / genhtml
 - cppcheck
+- clang-analyze (3.7 or newer)
 
 optional (no core dependency):
 - Boost.ASIO (used only for some examples)
@@ -99,4 +100,20 @@ The following build types (-DCMAKE_BUILD_TYPE=x) are possible:
 Build options:
 - ENABLE_STATIC=[ON/OFF] : enables static build by default, if OFF,
   a shared library is being built
+
+
+Static Analysis with Clang {#sec_devenv_clang_static_analysis}
+==========================
+
+~~~~~~~~~~~~~{.sh}
+	mkdir build
+	cd build
+	cmake -DCMAKE_CXX_COMPILER=/usr/share/clang/scan-build-3.7/c++-analyzer ..
+	scan-build-3.7 --use-analyzer=/usr/bin/clang++-3.7 make
+~~~~~~~~~~~~~
+
+After the build, ```scan-build``` will tell you what to do in order to inspect
+the findings.
+
+
 
