@@ -19,9 +19,9 @@ namespace nmea
 /// @endcode
 ///
 /// Field Number:
-/// 1.  Format Specifier (see ITU-R M493-13, table 3)
+/// 1.  Format Specifier
 /// 2.  Address / MMSI
-/// 3.  Category (see ITU-R M493-13, table 3)
+/// 3.  Category
 /// 4.  ?
 /// 5.  ?
 /// 6.  ?
@@ -39,7 +39,7 @@ public:
 	constexpr static const sentence_id ID = sentence_id::DSC;
 	constexpr static const char * TAG = "DSC";
 
-	/// Format Specifier (see ITU-R M493-13, table 3)
+	/// Format Specifier
 	enum class format_specifier : uint32_t {
 		geographical_are = 102, ///< Geographical, specifies an area
 		distress = 112, ///< Distress
@@ -47,7 +47,7 @@ public:
 		individual_station = 120, ///< Individual Station
 	};
 
-	/// Category (see ITU-R M493-13, table 3)
+	/// Category
 	enum class category : uint32_t {
 		routine = 100, ///< Routine Call
 		safety = 108, ///< Safety Call
@@ -55,7 +55,7 @@ public:
 		distress = 112 ///< Distress
 	};
 
-	/// Nature of distress (see ITU-R M493-13, table 3)
+	/// Nature of distress
 	enum class distress_designation : uint32_t {
 		fire = 100, ///< Fire/explosion
 		flooding = 101, ///< Flooding
@@ -71,7 +71,7 @@ public:
 		epirb = 112, ///< EPIRB emission
 	};
 
-	/// First Telecommand (see ITU-R M493-13, table 3)
+	/// First Telecommand
 	enum class first_telecommand : uint32_t {
 		polling = 103, ///< Polling
 		unable_to_comply = 104, ///< Unable to comply
@@ -83,7 +83,7 @@ public:
 		no_information = 126, ///< No Information
 	};
 
-	/// Second Telecommand (see ITU-R M493-13, table 3)
+	/// Second Telecommand
 	enum class second_telecommand : uint32_t {
 		no_information = 126, ///< No Information
 	};
