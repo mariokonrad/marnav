@@ -3,6 +3,7 @@
 
 #include "sentence.hpp"
 #include <marnav/utils/optional.hpp>
+#include <marnav/utils/mmsi.hpp>
 
 namespace marnav
 {
@@ -43,18 +44,18 @@ public:
 
 	/// Format Specifier
 	enum class format_specifier : uint32_t {
-		geographical_area = 102, ///< Geographical, specifies an area
-		distress = 112, ///< Distress
-		all_ships = 116, ///< All Ships
-		individual_station = 120, ///< Individual Station
+		geographical_area, ///< 102: Geographical, specifies an area
+		distress, ///< 112: Distress
+		all_ships, ///< 116: All Ships
+		individual_station, ///< 120: Individual Station
 	};
 
 	/// Category
 	enum class category : uint32_t {
-		routine = 100, ///< Routine Call
-		safety = 108, ///< Safety Call
-		urgency = 110, ///< Urgency Call
-		distress = 112 ///< Distress
+		routine, ///< 100: Routine Call
+		safety, ///< 108: Safety Call
+		urgency, ///< 110: Urgency Call
+		distress ///< 112: Distress
 	};
 
 	/// Nature of distress
@@ -87,7 +88,7 @@ public:
 
 	/// Second Telecommand
 	enum class second_telecommand : uint32_t {
-		no_information = 126, ///< No Information
+		no_information, ///< 126: No Information
 	};
 
 	dsc();
@@ -102,11 +103,13 @@ protected:
 
 private:
 	format_specifier fmt_spec;
-
-	static format_specifier format_specifier_maping(
-		typename std::underlying_type<format_specifier>::type value);
+	uint64_t address; // space for 10 decimal digits
+	category cat;
 
 public:
+	NMEA_GETTER(fmt_spec);
+	NMEA_GETTER(cat);
+	utils::mmsi get_mmsi() const;
 };
 }
 }

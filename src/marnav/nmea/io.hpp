@@ -28,6 +28,7 @@ enum class data_format { none, dec, hex };
 /// @{
 
 std::string to_string(char data);
+std::string to_string(uint64_t data);
 std::string to_string(uint32_t data);
 std::string to_string(double data);
 std::string to_string(const std::string & data);
@@ -67,6 +68,16 @@ template <class T> inline std::string to_string(const utils::optional<T> & data)
 /// @exception std::invalid_argument Parameter width is too large for the implementation.
 ///   This is necessary to avoid heap operations and VLA.
 std::string format(int32_t data, unsigned int width, data_format f = data_format::dec) throw(
+	std::invalid_argument);
+
+/// Returns the data as formatted string.
+///
+/// @param[in] data The data to format.
+/// @param[in] width Minimum number of digits.
+/// @param[in] f Base of the data to be rendered in
+/// @exception std::invalid_argument Parameter width is too large for the implementation.
+///   This is necessary to avoid heap operations and VLA.
+std::string format(uint64_t data, unsigned int width, data_format f = data_format::dec) throw(
 	std::invalid_argument);
 
 /// Returns the data as formatted string.
@@ -120,6 +131,7 @@ void read(const std::string & s, date & value, data_format = data_format::none);
 void read(const std::string & s, time & value, data_format = data_format::none);
 void read(const std::string & s, duration & value, data_format = data_format::none);
 void read(const std::string & s, char & value, data_format = data_format::none);
+void read(const std::string & s, uint64_t & value, data_format = data_format::dec);
 void read(const std::string & s, uint32_t & value, data_format = data_format::dec);
 void read(const std::string & s, int32_t & value, data_format = data_format::dec);
 void read(const std::string & s, double & value, data_format = data_format::none);
