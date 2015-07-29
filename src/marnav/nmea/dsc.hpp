@@ -22,8 +22,8 @@ namespace nmea
 /// 1.  Format Specifier
 /// 2.  Address (MMSI or geographical area), 10 digits
 /// 3.  Category
-/// 4.  ?
-/// 5.  ?
+/// 4.  Nature of distress or Telecommand 1
+/// 5.  Telecommand 2
 /// 6.  Position or Channel/Frequency
 /// 7.  Time (HHMM)
 /// 8.  ?
@@ -43,7 +43,7 @@ public:
 
 	/// Format Specifier
 	enum class format_specifier : uint32_t {
-		geographical_are = 102, ///< Geographical, specifies an area
+		geographical_area = 102, ///< Geographical, specifies an area
 		distress = 112, ///< Distress
 		all_ships = 116, ///< All Ships
 		individual_station = 120, ///< Individual Station
@@ -101,6 +101,10 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
+	format_specifier fmt_spec;
+
+	static format_specifier format_specifier_maping(
+		typename std::underlying_type<format_specifier>::type value);
 
 public:
 };

@@ -4,6 +4,7 @@
 #include <marnav/nmea/constants.hpp>
 #include <marnav/utils/optional.hpp>
 #include <string>
+#include <functional>
 #include <stdexcept>
 
 namespace marnav
@@ -140,7 +141,7 @@ void read(const std::string & s, unit::temperature & value, data_format = data_f
 void read(const std::string & s, unit::pressure & value, data_format = data_format::none);
 
 template <class T>
-static void read(
+inline void read(
 	const std::string & s, utils::optional<T> & value, data_format fmt = data_format::dec)
 {
 	if (s.empty()) {
@@ -151,6 +152,31 @@ static void read(
 	T tmp;
 	read(s, tmp, fmt);
 	value = tmp;
+}
+
+/// This variant read enums from the string, but only if the enums themselfes have
+/// The same value as the converted string representation. This function is not able
+/// to perform a type specific mapping.
+///
+/// @tparam T Enumeration to be read
+/// @tparam Map Mapping function to map from enumeatiors underlying type to the enumeration.
+///
+/// @param[in] s The string to read from.
+/// @param[out] value The place where the read data will be stored
+/// @param[in] mapping_func The mapping function for the enumerator.
+/// @param[in] fmt Format specifier
+template <class T, typename Map,
+	typename = typename std::enable_if<std::is_enum<T>::value, T>::type>
+inline void read(
+	const std::string & s, T & value, Map mapping_func, data_format fmt = data_format::dec)
+{
+	typename std::underlying_type<T>::type t;
+	read(s, t, fmt);
+	if (mapping_func) {
+		value = mapping_func(t);
+	} else {
+		value = static_cast<T>(t);
+	}
 }
 
 /// @}
