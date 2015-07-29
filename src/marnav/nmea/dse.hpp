@@ -12,9 +12,20 @@ namespace nmea
 /// @brief DSE - Mean Temperature of Water
 ///
 /// @code
+///        1 2 3 4         5  6
+///        | | | |         |  |
+/// $--DSE,x,x,a,xxxxxxxxx,xx,c--c,...,xx,c--c*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
+/// 1. Total number of messages
+/// 2. Sentence number
+/// 3. Query/Reply Flag
+/// 4. MMSI
+/// 5. Data set, code
+/// 6. Data set, data
+///
+/// There may be a variable number of data sets (code, data)
 ///
 /// @todo IMPLEMENTATION
 ///
