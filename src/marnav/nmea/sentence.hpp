@@ -29,8 +29,10 @@ enum class sentence_id : uint32_t {
 	BWW, ///< Bearing - Waypoint to Waypoint
 	DBT, ///< Depth below transducer (II)
 	DPT, ///< Depth of Water
-	DSC, ///< Digital Selective Calling
-	DSE, ///< Expanded Digital Selective Calling
+	DSC, ///< Digital Selective Calling Information
+	DSE, ///< Extended DSC
+	DSI, ///< DSC Transponder Initiate
+	DSR, ///< DSC Transponder Response
 	DTM, ///< Datum Reference
 	FSI, ///< Frequency Set Information
 	GBS, ///< GPS Satellite Fault Detection

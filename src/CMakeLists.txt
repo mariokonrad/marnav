@@ -36,6 +36,7 @@ set(SOURCE_NMEA_0183
 	marnav/nmea/dbt.cpp
 	marnav/nmea/dpt.cpp
 	marnav/nmea/dsc.cpp
+	marnav/nmea/dse.cpp
 	marnav/nmea/fsi.cpp
 	marnav/nmea/gga.cpp
 	marnav/nmea/gll.cpp
@@ -165,6 +166,7 @@ install(
 install(
 	FILES
 		marnav/nmea/constants.hpp
+		marnav/nmea/manufacturer.hpp
 		marnav/nmea/checks.hpp
 		marnav/nmea/angle.hpp
 		marnav/nmea/io.hpp
@@ -183,6 +185,7 @@ install(
 		marnav/nmea/dbt.hpp
 		marnav/nmea/dpt.hpp
 		marnav/nmea/dsc.hpp
+		marnav/nmea/dse.hpp
 		marnav/nmea/fsi.hpp
 		marnav/nmea/gga.hpp
 		marnav/nmea/gll.hpp
