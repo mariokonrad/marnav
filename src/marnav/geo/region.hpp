@@ -11,10 +11,56 @@ namespace geo
 /// This class represents a geographical region, defined
 /// by two coordinates top/left and bottom/right. The
 /// coordinates are a pair of lat/lon.
+///
+/// This geographical region is not of arbitrary size, nor
+/// is it rectangluar. The size and shape of a region is
+/// variable, depending on the location and boundaries,
+/// specified by latitude and longitude. Towards poles
+/// the shape will be more triangluar than in the vincinity
+/// of the equator.
+///
+/// This is not a special handling, it results from the fact
+/// that, that the region is defined by two points (p0, p1).
+///
+/// Example:
+/// @code
+///       on equator                     near north pole
+///
+///   p0 (lon=55W)                           p0 (lon=55W)
+///    +------------+  (lat=5N)               +--+       (lat=85N)
+///    |            |                        :    :
+///    |            |                       :      :
+///  ================== (eq.)              :        :
+///    |            |                     :          :
+///    |            |                    :            :
+///    +------------+  (lat=5S)         +--------------+ (lat=75N)
+///                 p1 (lon=20W)                       p1 (lon=20W)
+///
+/// @endcode
+///
+/// It is perfectly possible for a region to overlap the datum
+/// barrier, as shown here:
+/// @code
+///
+///           date barrier (180W == 180E)
+///  p0       I
+///   +-------I------+
+///   |       I      |
+///   |       I      |
+///   |       I      |
+///   |       I      |
+///   |       I      |
+///   +-------I------+
+///           I      p1
+///
+/// @endcode
+///
 class region
 {
 public:
-	region(const position & a0, const position & a1);
+	region() = delete;
+	region(const position & a0, const position & a1) throw(std::invalid_argument);
+	region(const position & a, double d_lat, double d_lon);
 
 	region(const region &) = default;
 	region(region &&) = default;
@@ -22,10 +68,10 @@ public:
 	region & operator=(const region &) = default;
 	region & operator=(region &&) = default;
 
-	latitude left() const;
-	latitude right() const;
-	longitude top() const;
-	longitude bottom() const;
+	longitude left() const;
+	longitude right() const;
+	latitude top() const;
+	latitude bottom() const;
 
 	bool inside(const position & p) const;
 

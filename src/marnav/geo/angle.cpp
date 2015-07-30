@@ -83,6 +83,11 @@ latitude::hemisphere latitude::hem() const
 	return get() >= 0.0 ? hemisphere::NORTH : hemisphere::SOUTH;
 }
 
+bool operator==(const latitude & a, const latitude & b) noexcept
+{
+	return (&a == &b) || (a.get() == b.get());
+}
+
 /// Corrects the stored value according to the specified hemisphere.
 /// This is useful if the stored value was set preliminary, and the
 /// hemisphere was nown later.
@@ -129,6 +134,11 @@ longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(
 longitude::hemisphere longitude::hem() const
 {
 	return get() >= 0.0 ? hemisphere::WEST : hemisphere::EAST;
+}
+
+bool operator==(const longitude & a, const longitude & b) noexcept
+{
+	return (&a == &b) || (a.get() == b.get());
 }
 
 /// Corrects the stored value according to the specified hemisphere.

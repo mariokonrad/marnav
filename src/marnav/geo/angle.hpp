@@ -46,10 +46,15 @@ private:
 
 bool operator==(const angle & a, const angle & b) noexcept;
 
+/// Latitude.
+///
+/// Value ranges between +90.0 (north) to -90.0 (south).
 class latitude : public angle
 {
 public:
 	enum class hemisphere { NORTH, SOUTH };
+	constexpr static const double min = -90.0;
+	constexpr static const double max = +90.0;
 
 	latitude();
 	latitude(double value) throw(std::invalid_argument);
@@ -61,6 +66,11 @@ public:
 	latitude & operator=(const latitude &) = default;
 	latitude & operator=(latitude &&) = default;
 
+	friend bool operator==(const latitude & a, const latitude & b) noexcept;
+
+	/// Deletion of this operator prevents comparison of apples and oranges.
+	bool operator==(const angle &) const = delete;
+
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;
 
@@ -70,10 +80,15 @@ private:
 	static void check(double a) throw(std::invalid_argument);
 };
 
+/// Longitude.
+///
+/// Value ranges between +180.0 (west) to -180.0 (east).
 class longitude : public angle
 {
 public:
 	enum class hemisphere { EAST, WEST };
+	constexpr static const double min = -180.0;
+	constexpr static const double max = +180.0;
 
 	longitude();
 	longitude(double value) throw(std::invalid_argument);
@@ -84,6 +99,11 @@ public:
 
 	longitude & operator=(const longitude &) = default;
 	longitude & operator=(longitude &&) = default;
+
+	friend bool operator==(const longitude & a, const longitude & b) noexcept;
+
+	/// Deletion of this operator prevents comparison of apples and oranges.
+	bool operator==(const angle &) const = delete;
 
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;
