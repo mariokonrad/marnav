@@ -9,6 +9,11 @@ namespace geo
 {
 struct position {
 	position() = default;
+	position(const position &) = default;
+	position(position &&) = default;
+
+	position & operator=(const position &) = default;
+	position & operator=(position &&) = default;
 
 	bool operator==(const position & other) const;
 

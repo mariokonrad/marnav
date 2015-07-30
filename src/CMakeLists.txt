@@ -13,6 +13,7 @@ set(SOURCE_UTILS
 set(SOURCE_GEO
 	marnav/geo/angle.cpp
 	marnav/geo/position.cpp
+	marnav/geo/region.cpp
 	marnav/geo/geodesic.cpp
 	)
 
@@ -278,6 +279,7 @@ install(
 	FILES
 		marnav/geo/angle.hpp
 		marnav/geo/position.hpp
+		marnav/geo/region.hpp
 		marnav/geo/geodesic.hpp
 	DESTINATION include/marnav/geo
 	)

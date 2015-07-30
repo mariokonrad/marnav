@@ -14,6 +14,39 @@ TEST_F(Test_geo_angle, construction_default) { geo::angle{}; }
 
 TEST_F(Test_geo_angle, construction_value) { geo::angle{1.0}; }
 
+TEST_F(Test_geo_angle, angle_type_check)
+{
+	EXPECT_TRUE(std::is_move_constructible<geo::angle>::value);
+	EXPECT_TRUE(std::is_nothrow_move_constructible<geo::angle>::value);
+	EXPECT_TRUE(std::is_move_assignable<geo::angle>::value);
+	EXPECT_TRUE(std::is_nothrow_move_assignable<geo::angle>::value);
+	EXPECT_TRUE(std::is_copy_constructible<geo::angle>::value);
+	EXPECT_TRUE(std::is_copy_assignable<geo::angle>::value);
+	EXPECT_TRUE(std::is_nothrow_copy_assignable<geo::angle>::value);
+}
+
+TEST_F(Test_geo_angle, latitude_type_check)
+{
+	EXPECT_TRUE(std::is_move_constructible<geo::latitude>::value);
+	EXPECT_TRUE(std::is_nothrow_move_constructible<geo::latitude>::value);
+	EXPECT_TRUE(std::is_move_assignable<geo::latitude>::value);
+	EXPECT_TRUE(std::is_nothrow_move_assignable<geo::latitude>::value);
+	EXPECT_TRUE(std::is_copy_constructible<geo::latitude>::value);
+	EXPECT_TRUE(std::is_copy_assignable<geo::latitude>::value);
+	EXPECT_TRUE(std::is_nothrow_copy_assignable<geo::latitude>::value);
+}
+
+TEST_F(Test_geo_angle, longitude_type_check)
+{
+	EXPECT_TRUE(std::is_move_constructible<geo::longitude>::value);
+	EXPECT_TRUE(std::is_nothrow_move_constructible<geo::longitude>::value);
+	EXPECT_TRUE(std::is_move_assignable<geo::longitude>::value);
+	EXPECT_TRUE(std::is_nothrow_move_assignable<geo::longitude>::value);
+	EXPECT_TRUE(std::is_copy_constructible<geo::longitude>::value);
+	EXPECT_TRUE(std::is_copy_assignable<geo::longitude>::value);
+	EXPECT_TRUE(std::is_nothrow_copy_assignable<geo::longitude>::value);
+}
+
 TEST_F(Test_geo_angle, comparison)
 {
 	geo::angle a{1.0};

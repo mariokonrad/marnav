@@ -14,28 +14,28 @@ public:
 	static constexpr double EPSILON = 1.0e-8;
 
 	angle(const angle &) = default;
+	angle(angle &&) = default;
 
 	angle();
 	explicit angle(double value);
 
-	/// Returns the degrees of this angle. This value is always positive.
 	uint32_t degrees() const;
-
-	/// Returns the minutes of this angle. This value is always positive
-	/// and is between 0 and 59.
 	uint32_t minutes() const;
-
-	/// Returns the seconds of this angle.
 	double seconds() const;
 
-	/// Converts an angle to double, units: degrees.
 	operator double() const;
+	double get() const;
 
 	friend bool operator==(const angle & a, const angle & b) noexcept;
 
 	angle & operator=(const angle &) = default;
+	angle & operator=(angle &&) = default;
 
-	double get() const;
+	friend void swap(angle & a, angle & b)
+	{
+		using namespace std;
+		swap(a.value, b.value);
+	}
 
 protected:
 	void set(double);
@@ -55,6 +55,12 @@ public:
 	latitude(double value) throw(std::invalid_argument);
 	latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(std::invalid_argument);
 
+	latitude(const latitude &) = default;
+	latitude(latitude &&) = default;
+
+	latitude & operator=(const latitude &) = default;
+	latitude & operator=(latitude &&) = default;
+
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;
 
@@ -72,6 +78,12 @@ public:
 	longitude();
 	longitude(double value) throw(std::invalid_argument);
 	longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(std::invalid_argument);
+
+	longitude(const longitude &) = default;
+	longitude(longitude &&) = default;
+
+	longitude & operator=(const longitude &) = default;
+	longitude & operator=(longitude &&) = default;
 
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;
