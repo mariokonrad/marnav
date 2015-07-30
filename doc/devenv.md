@@ -18,7 +18,7 @@ Tools needed to build the library:
 - doxygen
 
 optional (used for development only):
-- lcov / genhtml
+- lcov / genhtml, c++filt
 - cppcheck
 - clang-analyze (3.7 or newer)
 
