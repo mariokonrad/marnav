@@ -4,6 +4,7 @@
 #include "sentence.hpp"
 #include <marnav/utils/optional.hpp>
 #include <marnav/utils/mmsi.hpp>
+#include <marnav/geo/region.hpp>
 
 namespace marnav
 {
@@ -110,6 +111,7 @@ public:
 	NMEA_GETTER(fmt_spec);
 	NMEA_GETTER(cat);
 	utils::mmsi get_mmsi() const;
+	geo::region get_geographical_area() const throw(std::invalid_argument);
 };
 }
 }

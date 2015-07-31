@@ -47,6 +47,14 @@ TEST_F(Test_geo_angle, longitude_type_check)
 	EXPECT_TRUE(std::is_nothrow_copy_assignable<geo::longitude>::value);
 }
 
+TEST_F(Test_geo_angle, hemisphere)
+{
+	EXPECT_EQ(30,  (geo::latitude{30, 0, 0, geo::latitude::hemisphere::NORTH}.get()));
+	EXPECT_EQ(-30, (geo::latitude{30, 0, 0, geo::latitude::hemisphere::SOUTH}.get()));
+	EXPECT_EQ(-30, (geo::longitude{30, 0, 0, geo::longitude::hemisphere::EAST}.get()));
+	EXPECT_EQ(30,  (geo::longitude{30, 0, 0, geo::longitude::hemisphere::WEST}.get()));
+}
+
 TEST_F(Test_geo_angle, comparison)
 {
 	geo::angle a{1.0};
