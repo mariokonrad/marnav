@@ -23,6 +23,8 @@ Supported sentences for NMEA-0183 (read and write):
 - BWW: Bearing - Waypoint to Waypoint
 - DBT: Depth Below Transducer
 - DPT: Depth of Water
+- DSC: Digital Selective Calling Information
+- DSE: Extended DSC
 - FSI: Frequency Set Information
 - GGA: Global Positioning System Fix Data
 - GLL: Geographic Position - Latitude/Longitude

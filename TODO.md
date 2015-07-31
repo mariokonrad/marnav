@@ -25,33 +25,31 @@ NMEA
 @todo Implement additional checks in sentences, wheather or not the received data is correct.
 
 @todo Implement more sentences:
-	- ASD - Autopilot System Data
-	- DSC - Digital Selective Calling Information
-	- DSE - Extended DSC
-	- DSI - DSC Transponder Initiate
-	- DSR - DSC Transponder Response
-	- DTM - Datum Reference
-	- GBS - GPS Satellite Fault Detection
-	- GLC - Geographic Position, Loran-C
-	- GRS - GPS Range Residuals
-	- GST - GPS Pseudorange Noise Statistics
-	- GTD - Geographic Location in Time Differences
-	- HFB - Trawl Headrope to Footrope and Bottom
-	- ITS - Trawl Door Spread 2 Distance
-	- LCD - Loran-C Signal Data
-	- MSK - Control for a Beacon Receiver
-	- MSS - Beacon Receiver Status
-	- RPM - Revolutions
-	- RSD - RADAR System Data
-	- STN - Multiple Data ID
-	- TDS - Trawl Door Spread Distance
-	- TFI - Trawl Filling Indicator
-	- TLL - Target Latitude and Longitude
-	- TPC - Trawl Position Cartesian Coordinates
-	- TPR - Trawl Position Relative Vessel
-	- TPT - Trawl Position True
-	- TRF - TRANSIT Fix Data
-	- TTM - Tracked Target Message
+	- ASD: Autopilot System Data
+	- DSI: DSC Transponder Initiate
+	- DSR: DSC Transponder Response
+	- DTM: Datum Reference
+	- GBS: GPS Satellite Fault Detection
+	- GLC: Geographic Position, Loran-C
+	- GRS: GPS Range Residuals
+	- GST: GPS Pseudorange Noise Statistics
+	- GTD: Geographic Location in Time Differences
+	- HFB: Trawl Headrope to Footrope and Bottom
+	- ITS: Trawl Door Spread 2 Distance
+	- LCD: Loran-C Signal Data
+	- MSK: Control for a Beacon Receiver
+	- MSS: Beacon Receiver Status
+	- RPM: Revolutions
+	- RSD: RADAR System Data
+	- STN: Multiple Data ID
+	- TDS: Trawl Door Spread Distance
+	- TFI: Trawl Filling Indicator
+	- TLL: Target Latitude and Longitude
+	- TPC: Trawl Position Cartesian Coordinates
+	- TPR: Trawl Position Relative Vessel
+	- TPT: Trawl Position True
+	- TRF: TRANSIT Fix Data
+	- TTM: Tracked Target Message
 	- vendor extensions
 
 AIS

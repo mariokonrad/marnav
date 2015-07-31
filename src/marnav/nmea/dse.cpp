@@ -25,6 +25,19 @@ static dse::query_flag flag_mapping(
 }
 }
 
+std::string to_string(dse::query_flag value) throw(std::invalid_argument)
+{
+	switch (value) {
+		case dse::query_flag::query:
+			return "Q";
+		case dse::query_flag::reply:
+			return "R";
+		case dse::query_flag::a:
+			return "A";
+	}
+	throw std::invalid_argument{"invaild value for conversion of dse::query_flag"};
+}
+
 constexpr const char * dse::TAG;
 
 dse::dse()
@@ -69,7 +82,8 @@ std::unique_ptr<sentence> dse::parse(const std::string & talker,
 
 std::vector<std::string> dse::get_data() const
 {
-	return {}; // TODO: stringify fields
+	return {to_string(number_of_messages), to_string(sentence_number), to_string(flag),
+		format(address, 10), "", ""};
 }
 }
 }

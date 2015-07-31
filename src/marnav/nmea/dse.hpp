@@ -68,6 +68,8 @@ public:
 	void set_flag(query_flag t) { flag = t; }
 	void set_mmsi(const utils::mmsi & t);
 };
+
+std::string to_string(dse::query_flag value) throw(std::invalid_argument);
 }
 }
 
