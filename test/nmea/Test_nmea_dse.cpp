@@ -81,4 +81,11 @@ TEST_F(Test_nmea_dse, get_mmsi)
 		nmea::make_sentence("$CDDSE,1,1,A,3664251410,00,47800350*1D"));
 	EXPECT_EQ(utils::mmsi{366425141}, s->get_mmsi());
 }
+
+TEST_F(Test_nmea_dse, empty_to_string)
+{
+	nmea::dse dse;
+	EXPECT_STREQ("$CDDSE,1,1,Q,0000000000,,*04", nmea::to_string(dse).c_str());
+}
+
 }

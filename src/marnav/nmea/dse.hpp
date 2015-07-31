@@ -10,7 +10,7 @@ namespace marnav
 namespace nmea
 {
 
-/// @brief DSE - Mean Temperature of Water
+/// @brief DSE - Extended DSC
 ///
 /// @code
 ///        1 2 3 4         5  6

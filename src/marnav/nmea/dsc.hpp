@@ -11,7 +11,7 @@ namespace marnav
 namespace nmea
 {
 
-/// @brief DSC - Mean Temperature of Water
+/// @brief DSC - Digital Selective Calling Information
 ///
 /// @code
 ///                                                     11
