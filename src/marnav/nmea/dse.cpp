@@ -8,6 +8,23 @@ namespace marnav
 namespace nmea
 {
 
+namespace
+{
+static dse::query_flag flag_mapping(
+	typename std::underlying_type<dse::query_flag>::type value) throw(std::invalid_argument)
+{
+	switch (value) {
+		case 'Q':
+			return dse::query_flag::query;
+		case 'R':
+			return dse::query_flag::reply;
+		case 'A':
+			return dse::query_flag::a;
+	}
+	throw std::invalid_argument{"invaild value for conversion to dse::query_flag"};
+}
+}
+
 constexpr const char * dse::TAG;
 
 dse::dse()
@@ -25,7 +42,12 @@ std::unique_ptr<sentence> dse::parse(const std::string & talker,
 	result->set_talker(talker);
 	dse & detail = static_cast<dse &>(*result);
 
-	// TODO: read fields
+	read(fields[0], detail.number_of_messages);
+	read(fields[1], detail.sentence_number);
+	read(fields[2], detail.flag, flag_mapping);
+	read(fields[3], detail.mmsi);
+
+	// TODO: read data set fields
 
 	return result;
 }
