@@ -189,7 +189,8 @@ template <class T, typename Map,
 inline void read(
 	const std::string & s, T & value, Map mapping_func, data_format fmt = data_format::dec)
 {
-	typename std::underlying_type<T>::type t;
+	using uT = typename std::underlying_type<T>::type;
+	uT t = uT{};
 	read(s, t, fmt);
 	if (mapping_func) {
 		value = mapping_func(t);

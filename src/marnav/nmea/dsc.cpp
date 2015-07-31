@@ -99,7 +99,7 @@ static dsc::extension_indicator extension_indicator_mapping(
 		value) throw(std::invalid_argument)
 {
 	switch (value) {
-		case 0:
+		case 0: // works beause 'value' is default initialized in the calling 'read' function
 			return dsc::extension_indicator::none;
 		case 'E':
 			return dsc::extension_indicator::extension_follows;
