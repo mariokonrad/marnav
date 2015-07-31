@@ -12,6 +12,8 @@ namespace nmea
 
 /// @brief DSE - Extended DSC
 ///
+/// @note This class is @b EXPERIMENTAL
+///
 /// @code
 ///        1 2 3 4         5  6
 ///        | | | |         |  |
