@@ -32,6 +32,8 @@ namespace nmea
 /// 9.  ?
 /// 10. Acknowledgment
 ///     - B
+///     - R
+///     - S = End of Sequence
 /// 11. Extension Indicator
 ///     - E = extension sentence (DSE) will follow, if not the field is null
 ///
@@ -92,6 +94,17 @@ public:
 		no_information, ///< 126: No Information
 	};
 
+	enum class acknowledgement : char {
+		B, ///< ?
+		R, ///< ?
+		end_of_sequence ///< NMEA representation: 'S'
+	};
+
+	enum class extension_indicator : char {
+		none, ///< no NMEA representation
+		extension_follows ///< NMEA representation: 'E'
+	};
+
 	dsc();
 	dsc(const dsc &) = default;
 	dsc & operator=(const dsc &) = default;
@@ -106,13 +119,23 @@ private:
 	format_specifier fmt_spec;
 	uint64_t address; // space for 10 decimal digits
 	category cat;
+	// @todo Implement other 6 data members
+	acknowledgement ack;
+	extension_indicator extension;
 
 public:
 	NMEA_GETTER(fmt_spec);
 	NMEA_GETTER(cat);
 	utils::mmsi get_mmsi() const;
 	geo::region get_geographical_area() const throw(std::invalid_argument);
+	NMEA_GETTER(ack);
+	NMEA_GETTER(extension);
 };
+
+std::string to_string(dsc::format_specifier value) throw(std::invalid_argument);
+std::string to_string(dsc::category value) throw(std::invalid_argument);
+std::string to_string(dsc::acknowledgement value) throw(std::invalid_argument);
+std::string to_string(dsc::extension_indicator value) throw(std::invalid_argument);
 }
 }
 

@@ -60,6 +60,106 @@ static dsc::category category_mapping(
 	}
 	throw std::invalid_argument{"invaild value for conversion to dsc::category"};
 }
+
+/// Converts data read from the NMEA string to the corresponding
+/// enumerator.
+/// @note This function already takes care about the two lowest digit
+///       representation of the values in the string.
+///
+/// @param[in] value The numerical value to convert.
+/// @return The corresponding enumerator.
+/// @exception std::invalid_argument The specified value to convert is unknown.
+///
+static dsc::acknowledgement
+acknowledgement_mapping(typename std::underlying_type<dsc::acknowledgement>::type value) throw(
+	std::invalid_argument)
+{
+	switch (value) {
+		case 'B':
+			return dsc::acknowledgement::B;
+		case 'R':
+			return dsc::acknowledgement::R;
+		case 'S':
+			return dsc::acknowledgement::end_of_sequence;
+	}
+	throw std::invalid_argument{"invaild value for conversion to dsc::acknowledgement"};
+}
+
+/// Converts data read from the NMEA string to the corresponding
+/// enumerator.
+/// @note This function already takes care about the two lowest digit
+///       representation of the values in the string.
+///
+/// @param[in] value The numerical value to convert.
+/// @return The corresponding enumerator.
+/// @exception std::invalid_argument The specified value to convert is unknown.
+///
+static dsc::extension_indicator extension_indicator_mapping(
+	typename std::underlying_type<dsc::extension_indicator>::type
+		value) throw(std::invalid_argument)
+{
+	switch (value) {
+		case 0:
+			return dsc::extension_indicator::none;
+		case 'E':
+			return dsc::extension_indicator::extension_follows;
+	}
+	throw std::invalid_argument{"invaild value for conversion to dsc::extension_indicator"};
+}
+}
+
+std::string to_string(dsc::format_specifier value) throw(std::invalid_argument)
+{
+	switch (value) {
+		case dsc::format_specifier::geographical_area:
+			return "00";
+		case dsc::format_specifier::distress:
+			return "12";
+		case dsc::format_specifier::all_ships:
+			return "16";
+		case dsc::format_specifier::individual_station:
+			return "20";
+	}
+	throw std::invalid_argument{"invaild value for conversion of dsc::format_specifier"};
+}
+
+std::string to_string(dsc::category value) throw(std::invalid_argument)
+{
+	switch (value) {
+		case dsc::category::routine:
+			return "00";
+		case dsc::category::safety:
+			return "08";
+		case dsc::category::urgency:
+			return "10";
+		case dsc::category::distress:
+			return "12";
+	}
+	throw std::invalid_argument{"invaild value for conversion of dsc::category"};
+}
+
+std::string to_string(dsc::acknowledgement value) throw(std::invalid_argument)
+{
+	switch (value) {
+		case dsc::acknowledgement::B:
+			return "B";
+		case dsc::acknowledgement::R:
+			return "R";
+		case dsc::acknowledgement::end_of_sequence:
+			return "S";
+	}
+	throw std::invalid_argument{"invaild value for conversion of dsc::acknowledgement"};
+}
+
+std::string to_string(dsc::extension_indicator value) throw(std::invalid_argument)
+{
+	switch (value) {
+		case dsc::extension_indicator::none:
+			return "";
+		case dsc::extension_indicator::extension_follows:
+			return "E";
+	}
+	throw std::invalid_argument{"invaild value for conversion of dsc::extension_indicator"};
 }
 
 constexpr const char * dsc::TAG;
@@ -69,6 +169,8 @@ dsc::dsc()
 	, fmt_spec(format_specifier::distress)
 	, address(0)
 	, cat(category::distress)
+	, ack(acknowledgement::end_of_sequence)
+	, extension(extension_indicator::none)
 {
 }
 
@@ -150,6 +252,9 @@ std::unique_ptr<sentence> dsc::parse(const std::string & talker,
 	read(fields[0], detail.fmt_spec, format_specifier_mapping);
 	read(fields[1], detail.address);
 	read(fields[2], detail.cat, category_mapping);
+	// @todo read other 6 data members
+	read(fields[9], detail.ack, acknowledgement_mapping);
+	read(fields[10], detail.extension, extension_indicator_mapping);
 
 	return result;
 }
@@ -158,7 +263,10 @@ std::unique_ptr<sentence> dsc::parse(const std::string & talker,
 ///
 std::vector<std::string> dsc::get_data() const
 {
-	return {};
+	return {
+		to_string(fmt_spec), format(address, 10), to_string(cat), "", "", "", "", "", "",
+		to_string(ack), to_string(extension),
+	};
 }
 }
 }
