@@ -1,0 +1,52 @@
+/**
+
+\page page_overview Technical Overview
+\tableofcontents
+
+\section sec_overview_directory Directory Overview
+This section explains the directory structure.
+
+\verbatim
+root
++- cmake
++- doc
++- examples
++- extern
++- src
+|  +- marnav
+|     + ais
+|     + geo
+|     + io
+|     + nmea
+|     + seatalk
+|     + utils
++- test
+\endverbatim
+
+- \c cmake    : Cmake Modules
+- \c doc      : Documentation
+- \c examples : Examples included in the documentation and build as well.
+                This examples use the library to demonstrate its usage.
+- \c extern   : External projects and resources used by the library.
+- \c src      : Complete source of the library, source and header files.
+                Packages are grouped in their own subdirectory, named
+                accordingly (e.g. \c marnav/nmea).
+- \c test     : All tests
+
+\section sec_overview_package_dependencies Package dependencies
+\dot
+	digraph G {
+		node [shape=record, fonthame=Helvetica, fontsize=10];
+		ais -> { nmea geo utils };
+		nmea -> { geo utils };
+		seatalk -> { utils };
+		io -> { nmea seatalk utils };
+	}
+\enddot
+
+Not shown in the picture:
+- The standard library
+- Unittests (using GoogleTest/GoogleMock)
+- Examples (some of them use boost.asio or Qt5)
+
+*/

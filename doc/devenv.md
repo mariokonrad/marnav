@@ -16,6 +16,7 @@ Tools needed to build the library:
 - cmake 3.0 or newer
 - clang-format 3.7 or newer
 - doxygen
+- graphviz
 
 optional (used for development only):
 - lcov / genhtml, c++filt
