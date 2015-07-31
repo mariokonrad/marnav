@@ -4,9 +4,6 @@
 \version @VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@ (@GIT_BRANCH@ / @GIT_COMMIT_HASH@)
 \copyright 2015 (c) Mario Konrad (<mario.konrad@gmx.net>)
 
-\author Mario Konrad (<mario.konrad@gmx.net>)
-
-
 \tableofcontents
 
 \section sec_abstract Abstract
@@ -44,6 +41,13 @@ The goal of this library is
 - trivial integration into projects (liberal license, as few dependencies as
   possible)
 - (more or less) well documented
+
+
+\section sec_authors Authors
+
+- Mario Konrad
+- Pavel Kalian
+
 
 \section sec_license License
 
