@@ -29,7 +29,22 @@ constexpr const char * dse::TAG;
 
 dse::dse()
 	: sentence(ID, TAG, talker_id::communications_dsc)
+	, number_of_messages(1)
+	, sentence_number(1)
+	, flag(query_flag::query)
+	, address(0)
 {
+}
+
+utils::mmsi dse::get_mmsi() const
+{
+	return utils::mmsi{static_cast<utils::mmsi::value_type>(address / 10)};
+}
+
+void dse::set_mmsi(const utils::mmsi & t)
+{
+	address = t;
+	address *= 10;
 }
 
 std::unique_ptr<sentence> dse::parse(const std::string & talker,
@@ -45,7 +60,7 @@ std::unique_ptr<sentence> dse::parse(const std::string & talker,
 	read(fields[0], detail.number_of_messages);
 	read(fields[1], detail.sentence_number);
 	read(fields[2], detail.flag, flag_mapping);
-	read(fields[3], detail.mmsi);
+	read(fields[3], detail.address);
 
 	// TODO: read data set fields
 

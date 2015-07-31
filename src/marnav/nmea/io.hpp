@@ -10,6 +10,11 @@
 namespace marnav
 {
 
+namespace utils
+{
+class mmsi; // forward declaration
+}
+
 namespace geo
 {
 class latitude; // forward declaration
@@ -46,6 +51,7 @@ std::string to_string(unit::distance t);
 std::string to_string(unit::velocity t);
 std::string to_string(unit::temperature t);
 std::string to_string(unit::pressure t);
+std::string to_string(const utils::mmsi & t);
 
 template <class T> inline std::string to_string(const utils::optional<T> & data)
 {
@@ -151,6 +157,7 @@ void read(const std::string & s, unit::distance & value, data_format = data_form
 void read(const std::string & s, unit::velocity & value, data_format = data_format::none);
 void read(const std::string & s, unit::temperature & value, data_format = data_format::none);
 void read(const std::string & s, unit::pressure & value, data_format = data_format::none);
+void read(const std::string & s, utils::mmsi & value, data_format = data_format::none);
 
 template <class T>
 inline void read(

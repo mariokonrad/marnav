@@ -28,4 +28,57 @@ TEST_F(Test_nmea_dse, parse)
 	}
 }
 
+TEST_F(Test_nmea_dse, get_number_of_messages)
+{
+	{
+		auto s = nmea::sentence_cast<nmea::dse>(
+			nmea::make_sentence("$CDDSE,1,1,A,3664251410,00,47800350*1D"));
+		EXPECT_EQ(1u, s->get_number_of_messages());
+	}
+	{
+		auto s = nmea::sentence_cast<nmea::dse>(
+			nmea::make_sentence("$CDDSE,2,1,A,3664251410,00,47800350*1E"));
+		EXPECT_EQ(2u, s->get_number_of_messages());
+	}
+}
+
+TEST_F(Test_nmea_dse, get_sentence_number)
+{
+	{
+		auto s = nmea::sentence_cast<nmea::dse>(
+			nmea::make_sentence("$CDDSE,1,1,A,3664251410,00,47800350*1D"));
+		EXPECT_EQ(1u, s->get_sentence_number());
+	}
+	{
+		auto s = nmea::sentence_cast<nmea::dse>(
+			nmea::make_sentence("$CDDSE,1,2,A,3664251410,00,47800350*1E"));
+		EXPECT_EQ(2u, s->get_sentence_number());
+	}
+}
+
+TEST_F(Test_nmea_dse, get_flag)
+{
+	{
+		auto s = nmea::sentence_cast<nmea::dse>(
+			nmea::make_sentence("$CDDSE,1,1,A,3664251410,00,47800350*1D"));
+		EXPECT_EQ(nmea::dse::query_flag::a, s->get_flag());
+	}
+	{
+		auto s = nmea::sentence_cast<nmea::dse>(
+			nmea::make_sentence("$CDDSE,1,1,Q,3664251410,00,47800350*0D"));
+		EXPECT_EQ(nmea::dse::query_flag::query, s->get_flag());
+	}
+	{
+		auto s = nmea::sentence_cast<nmea::dse>(
+			nmea::make_sentence("$CDDSE,1,1,R,3664251410,00,47800350*0E"));
+		EXPECT_EQ(nmea::dse::query_flag::reply, s->get_flag());
+	}
+}
+
+TEST_F(Test_nmea_dse, get_mmsi)
+{
+	auto s = nmea::sentence_cast<nmea::dse>(
+		nmea::make_sentence("$CDDSE,1,1,A,3664251410,00,47800350*1D"));
+	EXPECT_EQ(utils::mmsi{366425141}, s->get_mmsi());
+}
 }

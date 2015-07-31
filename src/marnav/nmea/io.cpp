@@ -2,6 +2,7 @@
 #include "angle.hpp"
 #include "date.hpp"
 #include "time.hpp"
+#include <marnav/utils/mmsi.hpp>
 #include <sstream>
 
 namespace marnav
@@ -227,6 +228,13 @@ std::string to_string(unit::pressure t)
 			return "P";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
+std::string to_string(const utils::mmsi & t)
+{
+	char buf[10];
+	snprintf(buf, sizeof(buf), "%09u", static_cast<uint32_t>(t));
+	return buf;
 }
 
 std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
@@ -683,5 +691,13 @@ void read(const std::string & s, unit::pressure & value, data_format fmt)
 			break;
 	}
 }
+
+void read(const std::string & s, utils::mmsi & value, data_format fmt)
+{
+	typename utils::mmsi::value_type t;
+	read(s, t, fmt);
+	value = utils::mmsi{t};
+}
+
 }
 }

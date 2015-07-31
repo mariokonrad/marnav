@@ -77,7 +77,7 @@ dsc::dsc()
 /// simply wrong if taken with an invalid format specifier.
 utils::mmsi dsc::get_mmsi() const
 {
-	return utils::mmsi{static_cast<uint32_t>(address / 10)};
+	return utils::mmsi{static_cast<utils::mmsi::value_type>(address / 10)};
 }
 
 /// Valid only for format specifier geographical_area.

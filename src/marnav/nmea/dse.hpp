@@ -25,7 +25,7 @@ namespace nmea
 ///    - Q = Query
 ///    - R = Reply
 ///    - A = ?
-/// 4. MMSI
+/// 4. Address (identical to DSC)
 /// 5. Data set, code
 /// 6. Data set, data
 ///
@@ -55,18 +55,18 @@ private:
 	uint32_t number_of_messages;
 	uint32_t sentence_number;
 	query_flag flag;
-	uint32_t mmsi;
+	uint64_t address;
 
 public:
 	NMEA_GETTER(number_of_messages)
 	NMEA_GETTER(sentence_number)
 	NMEA_GETTER(flag)
-	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
+	utils::mmsi get_mmsi() const;
 
 	void set_number_of_messages(uint32_t t) { number_of_messages = t; }
 	void set_sentence_number(uint32_t t) { sentence_number = t; }
 	void set_flag(query_flag t) { flag = t; }
-	void set_mmsi(const utils::mmsi & t) { mmsi = t; }
+	void set_mmsi(const utils::mmsi & t);
 };
 }
 }
