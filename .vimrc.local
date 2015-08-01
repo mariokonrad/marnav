@@ -1,3 +1,14 @@
+" This local vim configuration assumes the build directory be in the root
+" of the source tree named 'build'
+"
+" This just my personal preference for normal day-to-day development of this project.
 
+" grepping
 map <F4> :grep -Ernw --include=*.c* --include=*.h* <cword> src <Bar> cw<CR>
+
+" tags
+set tags+=tags,build/tags
+
+" cctree command
+command! CTL silent CCTreeLoadDB build/cscope.out
 

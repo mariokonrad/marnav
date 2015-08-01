@@ -22,6 +22,7 @@ optional (used for development only):
 - lcov / genhtml, c++filt
 - cppcheck
 - clang-analyze (3.7 or newer)
+- ctags, cscope
 
 optional (no core dependency):
 - Boost.ASIO (used only for some examples)
