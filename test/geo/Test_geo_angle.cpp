@@ -110,4 +110,25 @@ TEST_F(Test_geo_angle, longitude_hemisphere)
 	EXPECT_EQ(geo::longitude::hemisphere::WEST, geo::longitude{+1.0}.hem());
 	EXPECT_EQ(geo::longitude::hemisphere::EAST, geo::longitude{-1.0}.hem());
 }
+
+TEST_F(Test_geo_angle, latitude_literal)
+{
+	using namespace marnav::geo;
+
+	const latitude expected{12.34};
+	const auto t = 12.34_lat;
+
+	EXPECT_EQ(expected, t);
+}
+
+TEST_F(Test_geo_angle, longitude_literal)
+{
+	using namespace marnav::geo;
+
+	const longitude expected{123.45};
+	const auto t = 123.45_lon;
+
+	EXPECT_EQ(expected, t);
+}
+
 }

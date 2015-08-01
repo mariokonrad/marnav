@@ -80,6 +80,12 @@ private:
 	static void check(double a) throw(std::invalid_argument);
 };
 
+/// User defined literal to construct latitudes.
+inline latitude operator "" _lat(long double value)
+{
+	return latitude{static_cast<double>(value)};
+}
+
 /// Longitude.
 ///
 /// Value ranges between +180.0 (west) to -180.0 (east).
@@ -113,6 +119,13 @@ public:
 private:
 	static void check(double a) throw(std::invalid_argument);
 };
+
+/// User defined literal to construct latitudes.
+inline longitude operator "" _lon(long double value)
+{
+	return longitude{static_cast<double>(value)};
+}
+
 }
 }
 

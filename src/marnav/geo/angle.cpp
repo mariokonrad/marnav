@@ -163,5 +163,6 @@ void longitude::check(double a) throw(std::invalid_argument)
 	if ((a < -180.0) || (a > 180.0))
 		throw std::invalid_argument{"invalid value for nmea::longitude"};
 }
+
 }
 }
