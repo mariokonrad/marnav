@@ -9,7 +9,24 @@ namespace marnav
 namespace nmea
 {
 
-/// @todo Documentation
+/// @brief VDM - AIS VHF Data-Link Message
+///
+/// @code
+///        1 2 3 4 5    6
+///        | | | | |    |
+/// $--VDM,x,x,x,a,s--s,x*hh<CR><LF>
+/// @endcode
+///
+/// Field Number:
+/// 1. Number of fragments
+/// 2. Fragment number
+/// 3. Sequence Message ID
+/// 4. Radio Channel
+///    - A
+///    - B
+/// 5. Payload, 6-bit encoded content, max. 63 characters
+/// 6. Number of fill bits (0..5)
+///
 class vdm : public sentence
 {
 public:

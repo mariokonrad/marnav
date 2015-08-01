@@ -35,7 +35,7 @@ static geo::angle parse_angle(const std::string & s) throw(std::invalid_argument
 /// Example:
 /// @code
 ///   auto lat = nmea::parse_latitude("37.0000");
-/// @encode
+/// @endcode
 geo::latitude parse_latitude(const std::string & s) throw(std::invalid_argument)
 {
 	return geo::latitude{parse_angle(s)};
@@ -64,7 +64,7 @@ std::string to_string(const geo::latitude & v)
 /// Example:
 /// @code
 ///   auto lon = nmea::parse_longitude("002.3456");
-/// @encode
+/// @endcode
 geo::longitude parse_longitude(const std::string & s) throw(std::invalid_argument)
 {
 	return geo::longitude{parse_angle(s)};

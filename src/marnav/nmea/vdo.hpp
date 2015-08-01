@@ -8,8 +8,11 @@ namespace marnav
 namespace nmea
 {
 
-/// This sentence is basically the same as VDM, it just indicates the source
+/// @brief VDO - AIS VHF Data-Link Own-Vessel Report
+///
+/// This sentence is basically the same as marnav::nmea::vdm, it just indicates the source
 /// of the information, not the information itself.
+///
 class vdo : public vdm
 {
 public:

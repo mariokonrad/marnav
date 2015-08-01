@@ -190,7 +190,7 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 /// Checks if the address field of the specified sentence is a vendor extension or
 /// a regular sentence. It returns the talker ID and tag accordingly.
 ///
-/// @param[in] s The address field of a sentence.
+/// @param[in] address The address field of a sentence.
 /// @return The tuple contains talker ID and tag. In case of a vendor extension,
 ///   the talker ID may be empty.
 static std::tuple<std::string, std::string> parse_address(const std::string & address)

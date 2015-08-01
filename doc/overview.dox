@@ -37,7 +37,7 @@ root
 \dot
 	digraph G {
 		node [shape=record, fonthame=Helvetica, fontsize=10];
-		ais -> { nmea geo utils };
+		ais -> { geo utils };
 		nmea -> { geo utils };
 		seatalk -> { utils };
 		io -> { nmea seatalk utils };

@@ -103,7 +103,7 @@ std::string format(uint32_t data, unsigned int width, data_format f = data_forma
 /// @param[in] f Base of the data to be rendered in
 /// @exception std::invalid_argument Parameter width is too large for the implementation.
 ///   This is necessary to avoid heap operations and VLA.
-std::string format(double data, unsigned int width, data_format = data_format::none) throw(
+std::string format(double data, unsigned int width, data_format f = data_format::none) throw(
 	std::invalid_argument);
 
 /// Generic version of the format function, handling the possibility of utils::optional
