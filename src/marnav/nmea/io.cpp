@@ -30,7 +30,6 @@ std::string to_string(double data)
 
 std::string to_string(const std::string & data) { return data; }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(side t)
 {
 	switch (t) {
@@ -42,7 +41,6 @@ std::string to_string(side t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(route t)
 {
 	switch (t) {
@@ -54,7 +52,6 @@ std::string to_string(route t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(selection_mode t)
 {
 	switch (t) {
@@ -66,7 +63,6 @@ std::string to_string(selection_mode t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(ais_channel t)
 {
 	switch (t) {
@@ -78,7 +74,6 @@ std::string to_string(ais_channel t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(type_of_point t)
 {
 	switch (t) {
@@ -94,7 +89,6 @@ std::string to_string(type_of_point t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(direction t)
 {
 	switch (t) {
@@ -110,7 +104,6 @@ std::string to_string(direction t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(reference t)
 {
 	switch (t) {
@@ -124,7 +117,6 @@ std::string to_string(reference t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(positioning_system_mode_indicator t)
 {
 	switch (t) {
@@ -148,7 +140,6 @@ std::string to_string(positioning_system_mode_indicator t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(status t)
 {
 	switch (t) {
@@ -160,7 +151,6 @@ std::string to_string(status t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(quality t)
 {
 	switch (t) {
@@ -176,7 +166,6 @@ std::string to_string(quality t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(unit::distance t)
 {
 	switch (t) {
@@ -194,7 +183,6 @@ std::string to_string(unit::distance t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(unit::velocity t)
 {
 	switch (t) {
@@ -208,7 +196,6 @@ std::string to_string(unit::velocity t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(unit::temperature t)
 {
 	switch (t) {
@@ -218,7 +205,6 @@ std::string to_string(unit::temperature t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-/// @todo Replace the switch with variable templates as soon as C++14 happens
 std::string to_string(unit::pressure t)
 {
 	switch (t) {
