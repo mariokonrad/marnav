@@ -13,6 +13,7 @@ add_executable(testrunner
 	math/Test_math_quaternion.cpp
 	geo/Test_geo_angle.cpp
 	geo/Test_geo_region.cpp
+	geo/Test_geo_cpa.cpp
 	geo/Test_geo_geodesic.cpp
 	nmea/Test_nmea.cpp
 	nmea/Test_nmea_angle.cpp
