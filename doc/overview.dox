@@ -17,6 +17,7 @@ root
 |     + ais
 |     + geo
 |     + io
+|     + math
 |     + nmea
 |     + seatalk
 |     + utils

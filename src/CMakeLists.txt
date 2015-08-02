@@ -10,6 +10,12 @@ set(SOURCE_UTILS
 	marnav/utils/mmsi.hpp
 	)
 
+set(SOURCE_MATH
+	marnav/math/vector.hpp
+	marnav/math/matrix.hpp
+	marnav/math/quaternion.hpp
+	)
+
 set(SOURCE_GEO
 	marnav/geo/angle.cpp
 	marnav/geo/position.cpp
@@ -140,6 +146,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_library(marnav ${LIBRARY_TYPE}
 	${SOURCE_UTILS}
+	${SOURCE_MATH}
 	${SOURCE_GEO}
 	${SOURCE_NMEA_0183}
 	${SOURCE_AIS}
@@ -273,6 +280,14 @@ install(
 		marnav/utils/bitset.hpp
 		marnav/utils/optional.hpp
 	DESTINATION include/marnav/utils
+	)
+
+install(
+	FILES
+		marnav/math/vector.hpp
+		marnav/math/matrix.hpp
+		marnav/math/quaternion.hpp
+	DESTINATION include/marnav/math
 	)
 
 install(
