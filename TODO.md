@@ -4,10 +4,6 @@ TODO
 GENERAL
 -------
 
-@todo Memory leak checker
-
-@todo Profiling
-
 @todo integration tests
 
 
