@@ -15,8 +15,11 @@ Compiler supported (older/others may work, but not tested):
 Tools needed to build the library:
 - cmake 3.0 or newer
 - clang-format 3.7 or newer
+
+Tools needed to build the documentation:
 - doxygen
 - graphviz
+- latex (there are formulas!)
 
 optional (used for development only):
 - lcov / genhtml, c++filt

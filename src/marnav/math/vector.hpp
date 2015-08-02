@@ -34,19 +34,24 @@ public:
 		x[1] = v[1];
 	}
 
-	inline vector2 & set(value_type a, value_type b)
-	{
-		x[0] = a;
-		x[1] = b;
-		return *this;
-	}
-
-	inline vector2 & set_circle(value_type r, value_type phi_deg)
+	static inline vector2 make_from_circle(value_type radius, value_type phi_deg)
 	{
 		phi_deg *= (M_PI / 180.0);
-		x[0] = r * cos(phi_deg);
-		x[1] = r * sin(phi_deg);
-		return *this;
+		return vector2{radius * cos(phi_deg), radius * sin(phi_deg)};
+	}
+
+	inline value_type phi_deg() const
+	{
+		if ((x[0] > 0) && (x[1] > 0))
+			return atan(x[1] / x[0]) * 180.0 / M_PI;
+		if ((x[0] < 0) && (x[1] > 0))
+			return 90.0 + atan(x[0] / x[1]) * 180.0 / M_PI;
+		if ((x[0] < 0) && (x[1] < 0))
+			return 180.0 + atan(x[1] / x[0]) * 180.0 / M_PI;
+		if ((x[0] > 0) && (x[1] < 0))
+			return 270.0 + atan(x[0] / x[1]) * 180.0 / M_PI;
+
+		return 0;
 	}
 
 	inline value_type dot(const vector2 & v) const { return x[0] * v.x[0] + x[1] * v.x[1]; }

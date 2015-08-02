@@ -19,7 +19,7 @@ struct vessel
 	double cog; ///< Course over ground in degrees.
 };
 
-std::tuple<position, position, std::chrono::seconds> cpa(
+std::tuple<position, position, std::chrono::seconds, bool> cpa(
 	const vessel & vessel1, const vessel & vessel2);
 }
 }
