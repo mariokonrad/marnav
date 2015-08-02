@@ -3,6 +3,18 @@
 
 using namespace marnav::math;
 
+namespace marnav
+{
+namespace math
+{
+// instantiate all of them to achieve the right coverage information.
+template class matrix2<double>;
+template class matrix3<double>;
+template class matrix4<double>;
+template class matrix_n<8, double>;
+}
+}
+
 namespace
 {
 

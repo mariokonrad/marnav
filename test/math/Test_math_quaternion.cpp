@@ -3,6 +3,15 @@
 
 using namespace marnav::math;
 
+namespace marnav
+{
+namespace math
+{
+// instantiate all of them to achieve the right coverage information.
+template class quaternion<double>;
+}
+}
+
 namespace
 {
 
@@ -12,7 +21,7 @@ class Test_math_quaternion : public ::testing::Test
 
 TEST_F(Test_math_quaternion, construction_default)
 {
-	quaternion q;
+	quat q;
 
 	const auto v = q.getvec4();
 

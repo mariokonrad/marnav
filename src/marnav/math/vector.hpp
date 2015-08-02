@@ -9,38 +9,39 @@ namespace marnav
 namespace math
 {
 
-class vec2
+template <typename T> class vector2
 {
 public:
-	using value_type = double;
+	using value_type = T;
 
 	enum class axis { x, y };
 	enum class angle { phi };
 
 public:
-	vec2(value_type x = 0.0, value_type y = 0.0)
+	vector2(value_type x = 0.0, value_type y = 0.0)
 	{
 		this->x[0] = x;
 		this->x[1] = y;
 	}
 
-	vec2(const vec2 &) = default;
-	vec2(vec2 &&) = default;
+	vector2(const vector2 &) = default;
 
-	vec2(value_type * v)
+	vector2(vector2 &&) = default;
+
+	vector2(value_type * v)
 	{
 		x[0] = v[0];
 		x[1] = v[1];
 	}
 
-	inline vec2 & set(value_type a, value_type b)
+	inline vector2 & set(value_type a, value_type b)
 	{
 		x[0] = a;
 		x[1] = b;
 		return *this;
 	}
 
-	inline vec2 & set_circle(value_type r, value_type phi_deg)
+	inline vector2 & set_circle(value_type r, value_type phi_deg)
 	{
 		phi_deg *= (M_PI / 180.0);
 		x[0] = r * cos(phi_deg);
@@ -48,80 +49,85 @@ public:
 		return *this;
 	}
 
-	inline value_type dot(const vec2 & v) const { return x[0] * v.x[0] + x[1] * v.x[1]; }
+	inline value_type dot(const vector2 & v) const { return x[0] * v.x[0] + x[1] * v.x[1]; }
 
 	inline value_type length() const { return sqrt(length2()); }
 
 	inline value_type length2() const { return x[0] * x[0] + x[1] * x[1]; }
 
-	inline vec2 & normalize(value_type len = 1.0)
+	inline vector2 & normalize(value_type len = 1.0)
 	{
 		const value_type l = length();
 		return (l != 0.0) ? (*this *= (len / l)) : (*this);
 	}
 
-	inline vec2 normalize(value_type len = 1.0f) const
+	inline vector2 normalize(value_type len = 1.0f) const
 	{
 		const value_type l = length();
-		return (l != 0.0) ? (vec2(*this) *= (len / l)) : vec2();
+		return (l != 0.0) ? (vector2(*this) *= (len / l)) : vector2();
 	}
 
-	inline vec2 & rot(value_type angle_deg)
+	inline vector2 & rot(value_type angle_deg)
 	{
 		angle_deg *= M_PI / 180.0;
 		value_type c = cos(angle_deg);
 		value_type s = sin(angle_deg);
-		return * this = vec2(x[0] * c - x[1] * s, x[0] * s + x[1] * c);
+		return * this = vector2(x[0] * c - x[1] * s, x[0] * s + x[1] * c);
 	}
 
-	inline vec2 project_to(const vec2 & v) const
+	inline vector2 project_to(const vector2 & v) const
 	{
 		value_type len = v.length2();
 		if (len == 0.0)
-			return vec2(); // TODO: exception?
+			return vector2(); // TODO: exception?
 		return (this->dot(v) / len) * v;
 	}
 
 	inline value_type operator[](int idx) const { return x[idx]; }
 
-	inline vec2 & operator=(const vec2 &) = default;
-	inline vec2 & operator=(vec2 &&) = default;
+	inline vector2 & operator=(const vector2 &) = default;
 
-	inline bool operator==(const vec2 & v) const
+	inline vector2 & operator=(vector2 &&) = default;
+
+	inline bool operator==(const vector2 & v) const
 	{
 		return ((x[0] == v.x[0]) && (x[1] == v.x[1]));
 	}
 
-	inline vec2 & operator+=(const vec2 & v)
+	inline vector2 & operator+=(const vector2 & v)
 	{
 		x[0] += v.x[0];
 		x[1] += v.x[1];
 		return *this;
 	}
 
-	inline vec2 & operator-=(const vec2 & v)
+	inline vector2 & operator-=(const vector2 & v)
 	{
 		x[0] -= v.x[0];
 		x[1] -= v.x[1];
 		return *this;
 	}
 
-	inline vec2 & operator*=(value_type f)
+	inline vector2 & operator*=(value_type f)
 	{
 		x[0] *= f;
 		x[1] *= f;
 		return *this;
 	}
 
-	friend vec2 operator+(const vec2 & w, const vec2 & v) { return vec2(w) += v; }
-	friend vec2 operator-(const vec2 & w, const vec2 & v) { return vec2(w) -= v; }
-	friend vec2 operator*(const vec2 & v, value_type f) { return vec2(v) *= f; }
-	friend vec2 operator*(value_type f, const vec2 & v) { return vec2(v) *= f; }
-	friend value_type operator*(const vec2 & a, const vec2 & b) { return a.dot(b); }
+	friend vector2 operator+(const vector2 & w, const vector2 & v) { return vector2(w) += v; }
 
-	value_type angle_between(const vec2 & p) const { return angle_between(*this, p); }
+	friend vector2 operator-(const vector2 & w, const vector2 & v) { return vector2(w) -= v; }
 
-	static value_type angle_between(const vec2 & p0, const vec2 & p1)
+	friend vector2 operator*(const vector2 & v, value_type f) { return vector2(v) *= f; }
+
+	friend vector2 operator*(value_type f, const vector2 & v) { return vector2(v) *= f; }
+
+	friend value_type operator*(const vector2 & a, const vector2 & b) { return a.dot(b); }
+
+	value_type angle_between(const vector2 & p) const { return angle_between(*this, p); }
+
+	static value_type angle_between(const vector2 & p0, const vector2 & p1)
 	{
 		return acos(p0.dot(p1) / (p0.length() * p1.length()));
 	}
@@ -130,33 +136,36 @@ private:
 	value_type x[2];
 };
 
-class vec3
+using vec2 = vector2<double>;
+
+template <typename T> class vector3
 {
 public:
-	using value_type = double;
+	using value_type = T;
 
 	enum class axis { x, y, z };
 	enum class angle { phi, rho };
 
 public:
-	vec3(value_type x = 0.0, value_type y = 0.0, value_type z = 0.0)
+	vector3(value_type x = 0.0, value_type y = 0.0, value_type z = 0.0)
 	{
 		this->x[0] = x;
 		this->x[1] = y;
 		this->x[2] = z;
 	}
 
-	vec3(const vec3 &) = default;
-	vec3(vec3 &&) = default;
+	vector3(const vector3 &) = default;
 
-	vec3(value_type * v)
+	vector3(vector3 &&) = default;
+
+	vector3(value_type * v)
 	{
 		x[0] = v[0];
 		x[1] = v[1];
 		x[2] = v[2];
 	}
 
-	inline vec3 & set(value_type a, value_type b, value_type c)
+	inline vector3 & set(value_type a, value_type b, value_type c)
 	{
 		x[0] = a;
 		x[1] = b;
@@ -164,7 +173,7 @@ public:
 		return *this;
 	}
 
-	inline vec3 & set_sphere(value_type r, value_type phi_deg, value_type rho_deg)
+	inline vector3 & set_sphere(value_type r, value_type phi_deg, value_type rho_deg)
 	{
 		phi_deg *= (M_PI / 180.0);
 		rho_deg *= (M_PI / 180.0);
@@ -174,18 +183,18 @@ public:
 		return *this;
 	}
 
-	inline value_type dot(const vec3 & v) const
+	inline value_type dot(const vector3 & v) const
 	{
 		return x[0] * v.x[0] + x[1] * v.x[1] + x[2] * v.x[2];
 	}
 
-	inline vec3 cross(const vec3 & v) const
+	inline vector3 cross(const vector3 & v) const
 	{
-		return vec3(x[1] * v.x[2] - x[2] * v.x[1], x[2] * v.x[0] - x[0] * v.x[2],
+		return vector3(x[1] * v.x[2] - x[2] * v.x[1], x[2] * v.x[0] - x[0] * v.x[2],
 			x[0] * v.x[1] - x[1] * v.x[0]);
 	}
 
-	inline vec3 & nullify(void)
+	inline vector3 & nullify(void)
 	{
 		const value_type EPSILON = std::numeric_limits<value_type>::epsilon();
 		x[0] = ((x[0] <= EPSILON) && (x[0] >= -EPSILON)) ? 0.0 : x[0];
@@ -198,7 +207,7 @@ public:
 
 	inline value_type length2() const { return x[0] * x[0] + x[1] * x[1] + x[2] * x[2]; }
 
-	inline vec3 & normalize(value_type len = 1.0)
+	inline vector3 & normalize(value_type len = 1.0)
 	{
 		const value_type EPSILON = std::numeric_limits<value_type>::epsilon();
 		value_type l = length();
@@ -211,13 +220,13 @@ public:
 		return *this;
 	}
 
-	inline vec3 normalize(value_type len = 1.0) const
+	inline vector3 normalize(value_type len = 1.0) const
 	{
 		const value_type EPSILON = std::numeric_limits<value_type>::epsilon();
 		value_type l = length();
 		if ((l < EPSILON) && (l > -EPSILON))
 			return *this;
-		return vec3(*this) * (len / l);
+		return vector3(*this) * (len / l);
 	}
 
 	inline value_type get_sphere_r() const { return length(); }
@@ -247,7 +256,7 @@ public:
 		}
 	}
 
-	inline vec3 & rot(axis a, value_type angle_deg)
+	inline vector3 & rot(axis a, value_type angle_deg)
 	{
 		switch (a) {
 			case axis::x:
@@ -260,31 +269,31 @@ public:
 		return *this;
 	}
 
-	inline vec3 & rot_x(value_type angle_deg)
+	inline vector3 & rot_x(value_type angle_deg)
 	{
 		angle_deg *= M_PI / 180.0;
 		value_type c = cos(angle_deg);
 		value_type s = sin(angle_deg);
-		return * this = vec3(x[0], x[1] * c - x[2] * s, x[1] * s + x[2] * c);
+		return * this = vector3(x[0], x[1] * c - x[2] * s, x[1] * s + x[2] * c);
 	}
 
-	inline vec3 & rot_y(value_type angle_deg)
+	inline vector3 & rot_y(value_type angle_deg)
 	{
 		angle_deg *= M_PI / 180.0;
 		value_type c = cos(angle_deg);
 		value_type s = sin(angle_deg);
-		return * this = vec3(x[0] * c - x[2] * s, x[1], x[0] * s + x[2] * c);
+		return * this = vector3(x[0] * c - x[2] * s, x[1], x[0] * s + x[2] * c);
 	}
 
-	inline vec3 & rot_z(value_type angle_deg)
+	inline vector3 & rot_z(value_type angle_deg)
 	{
 		angle_deg *= M_PI / 180.0;
 		value_type c = cos(angle_deg);
 		value_type s = sin(angle_deg);
-		return * this = vec3(x[0] * c - x[1] * s, x[0] * s + x[1] * c, x[2]);
+		return * this = vector3(x[0] * c - x[1] * s, x[0] * s + x[1] * c, x[2]);
 	}
 
-	inline vec3 & rot_sphere(angle a, value_type angle_deg)
+	inline vector3 & rot_sphere(angle a, value_type angle_deg)
 	{
 		switch (a) {
 			case angle::phi:
@@ -295,21 +304,21 @@ public:
 		return *this;
 	}
 
-	inline vec3 & rot_phi(value_type angle_deg)
+	inline vector3 & rot_phi(value_type angle_deg)
 	{
 		return set_sphere(get_sphere_r(), get_sphere_phi() + angle_deg, get_sphere_rho());
 	}
 
-	inline vec3 & rot_rho(value_type angle_deg)
+	inline vector3 & rot_rho(value_type angle_deg)
 	{
 		return set_sphere(get_sphere_r(), get_sphere_phi(), get_sphere_rho() + angle_deg);
 	}
 
-	inline vec3 project_to(const vec3 & v) const
+	inline vector3 project_to(const vector3 & v) const
 	{
 		value_type len = v.length2();
 		if (len == 0.0)
-			return vec3(); // TODO: exception?
+			return vector3(); // TODO: exception?
 		return (this->dot(v) / len) * v;
 	}
 
@@ -319,15 +328,16 @@ public:
 
 	inline operator const value_type *(void) const { return x; }
 
-	inline vec3 & operator=(const vec3 &) = default;
-	inline vec3 & operator=(vec3 &&) = default;
+	inline vector3 & operator=(const vector3 &) = default;
 
-	inline bool operator==(const vec3 & v) const
+	inline vector3 & operator=(vector3 &&) = default;
+
+	inline bool operator==(const vector3 & v) const
 	{
 		return ((x[0] == v.x[0]) && (x[1] == v.x[1]) && (x[2] == v.x[2]));
 	}
 
-	inline vec3 & operator+=(const vec3 & v)
+	inline vector3 & operator+=(const vector3 & v)
 	{
 		x[0] += v.x[0];
 		x[1] += v.x[1];
@@ -335,7 +345,7 @@ public:
 		return *this;
 	}
 
-	inline vec3 & operator-=(const vec3 & v)
+	inline vector3 & operator-=(const vector3 & v)
 	{
 		x[0] -= v.x[0];
 		x[1] -= v.x[1];
@@ -343,7 +353,7 @@ public:
 		return *this;
 	}
 
-	inline vec3 & operator*=(value_type f)
+	inline vector3 & operator*=(value_type f)
 	{
 		x[0] *= f;
 		x[1] *= f;
@@ -351,15 +361,19 @@ public:
 		return *this;
 	}
 
-	friend vec3 operator+(const vec3 & w, const vec3 & v) { return vec3(w) += v; }
-	friend vec3 operator-(const vec3 & w, const vec3 & v) { return vec3(w) -= v; }
-	friend vec3 operator*(const vec3 & v, value_type f) { return vec3(v) *= f; }
-	friend vec3 operator*(value_type f, const vec3 & v) { return vec3(v) *= f; }
-	friend value_type operator*(const vec3 & a, const vec3 & b) { return a.dot(b); }
+	friend vector3 operator+(const vector3 & w, const vector3 & v) { return vector3(w) += v; }
 
-	value_type angle_between(const vec3 & p) const { return angle_between(*this, p); }
+	friend vector3 operator-(const vector3 & w, const vector3 & v) { return vector3(w) -= v; }
 
-	static value_type angle_between(const vec3 & p0, const vec3 & p1)
+	friend vector3 operator*(const vector3 & v, value_type f) { return vector3(v) *= f; }
+
+	friend vector3 operator*(value_type f, const vector3 & v) { return vector3(v) *= f; }
+
+	friend value_type operator*(const vector3 & a, const vector3 & b) { return a.dot(b); }
+
+	value_type angle_between(const vector3 & p) const { return angle_between(*this, p); }
+
+	static value_type angle_between(const vector3 & p0, const vector3 & p1)
 	{
 		return acos(p0.dot(p1) / (p0.length() * p1.length()));
 	}
@@ -368,16 +382,18 @@ private:
 	value_type x[3];
 };
 
-class vec4
+using vec3 = vector3<double>;
+
+template <typename T> class vector4
 {
 public:
-	using value_type = double;
+	using value_type = T;
 
 	enum class axis { x, y, z, w };
 	enum class angle { phi, rho };
 
 public:
-	vec4(value_type x = 0.0, value_type y = 0.0, value_type z = 0.0, value_type w = 0.0)
+	vector4(value_type x = 0.0, value_type y = 0.0, value_type z = 0.0, value_type w = 0.0)
 	{
 		this->x[0] = x;
 		this->x[1] = y;
@@ -385,10 +401,11 @@ public:
 		this->x[3] = w;
 	}
 
-	vec4(const vec4 &) = default;
-	vec4(vec4 &&) = default;
+	vector4(const vector4 &) = default;
 
-	vec4(value_type * v)
+	vector4(vector4 &&) = default;
+
+	vector4(value_type * v)
 	{
 		x[0] = v[0];
 		x[1] = v[1];
@@ -396,7 +413,7 @@ public:
 		x[3] = v[3];
 	}
 
-	inline vec4 & set(value_type a, value_type b, value_type c, value_type d)
+	inline vector4 & set(value_type a, value_type b, value_type c, value_type d)
 	{
 		x[0] = a;
 		x[1] = b;
@@ -405,7 +422,7 @@ public:
 		return *this;
 	}
 
-	inline value_type dot(const vec4 & v) const
+	inline value_type dot(const vector4 & v) const
 	{
 		return x[0] * v.x[0] + x[1] * v.x[1] + x[2] * v.x[2] + x[3] * v.x[3];
 	}
@@ -417,7 +434,7 @@ public:
 		return x[0] * x[0] + x[1] * x[1] + x[2] * x[2] + x[3] * x[3];
 	}
 
-	inline vec4 & normalize(value_type len = 1.0)
+	inline vector4 & normalize(value_type len = 1.0)
 	{
 		value_type l = length();
 		return (l != 0.0) ? (*this *= (len / l)) : (*this);
@@ -427,15 +444,16 @@ public:
 
 	inline operator const value_type *(void) const { return x; }
 
-	inline vec4 & operator=(const vec4 &) = default;
-	inline vec4 & operator=(vec4 &&) = default;
+	inline vector4 & operator=(const vector4 &) = default;
 
-	inline bool operator==(const vec4 & v) const
+	inline vector4 & operator=(vector4 &&) = default;
+
+	inline bool operator==(const vector4 & v) const
 	{
 		return ((x[0] == v.x[0]) && (x[1] == v.x[1]) && (x[2] == v.x[2]) && (x[3] == v.x[3]));
 	}
 
-	inline vec4 & operator+=(const vec4 & v)
+	inline vector4 & operator+=(const vector4 & v)
 	{
 		x[0] += v.x[0];
 		x[1] += v.x[1];
@@ -444,7 +462,7 @@ public:
 		return *this;
 	}
 
-	inline vec4 & operator-=(const vec4 & v)
+	inline vector4 & operator-=(const vector4 & v)
 	{
 		x[0] -= v.x[0];
 		x[1] -= v.x[1];
@@ -453,7 +471,7 @@ public:
 		return *this;
 	}
 
-	inline vec4 & operator*=(value_type f)
+	inline vector4 & operator*=(value_type f)
 	{
 		x[0] *= f;
 		x[1] *= f;
@@ -462,36 +480,44 @@ public:
 		return *this;
 	}
 
-	friend vec4 operator+(const vec4 & w, const vec4 & v) { return vec4(w) += v; }
-	friend vec4 operator-(const vec4 & w, const vec4 & v) { return vec4(w) -= v; }
-	friend vec4 operator*(const vec4 & v, value_type f) { return vec4(v) *= f; }
-	friend vec4 operator*(value_type f, const vec4 & v) { return vec4(v) *= f; }
-	friend value_type operator*(const vec4 & a, const vec4 & b) { return a.dot(b); }
+	friend vector4 operator+(const vector4 & w, const vector4 & v) { return vector4(w) += v; }
+
+	friend vector4 operator-(const vector4 & w, const vector4 & v) { return vector4(w) -= v; }
+
+	friend vector4 operator*(const vector4 & v, value_type f) { return vector4(v) *= f; }
+
+	friend vector4 operator*(value_type f, const vector4 & v) { return vector4(v) *= f; }
+
+	friend value_type operator*(const vector4 & a, const vector4 & b) { return a.dot(b); }
+
 private:
 	value_type x[4];
 };
 
-template <unsigned int N> class vecn // N >= 1
+using vec4 = vector4<double>;
+
+template <unsigned int N, typename T = double> class vector_n // N >= 1
 {
 public:
-	using value_type = double;
+	using value_type = T;
 
-	vecn()
+	vector_n()
 	{
 		for (unsigned int i = 0; i < N; ++i)
 			x[i] = 0.0;
 	}
 
-	vecn(const vecn<N> &) = default;
-	vecn(vecn<N> &&) = default;
+	vector_n(const vector_n &) = default;
 
-	vecn(value_type * v)
+	vector_n(vector_n &&) = default;
+
+	vector_n(value_type * v)
 	{
 		for (unsigned int i = 0; i < N; ++i)
 			x[i] = v[i];
 	}
 
-	inline value_type dot(const vecn<N> & v) const
+	inline value_type dot(const vector_n & v) const
 	{
 		value_type r = 0.0;
 		for (unsigned int i = 0; i < N; ++i)
@@ -509,7 +535,7 @@ public:
 		return r;
 	}
 
-	inline vecn<N> & normalize(value_type len = 1.0)
+	inline vector_n & normalize(value_type len = 1.0)
 	{
 		const value_type EPSILON = std::numeric_limits<value_type>::epsilon();
 		value_type l = length();
@@ -518,10 +544,13 @@ public:
 
 	inline value_type operator[](int idx) const { return x[idx]; }
 
-	inline vecn<N> & operator=(const vecn<N> &) = default;
-	inline vecn<N> & operator=(vecn<N> &&) = default;
+	inline value_type & operator[](int idx) { return x[idx]; }
 
-	inline bool operator==(const vecn<N> & v) const
+	inline vector_n & operator=(const vector_n &) = default;
+
+	inline vector_n & operator=(vector_n &&) = default;
+
+	inline bool operator==(const vector_n & v) const
 	{
 		for (unsigned int i = 0; i < N; ++i)
 			if (x[i] != v.x[i])
@@ -529,32 +558,42 @@ public:
 		return true;
 	}
 
-	inline vecn<N> & operator+=(const vecn<N> & v)
+	inline vector_n & operator+=(const vector_n & v)
 	{
 		for (unsigned int i = 0; i < N; ++i)
 			x[i] += v.x[i];
 		return *this;
 	}
 
-	inline vecn<N> & operator-=(const vecn<N> & v)
+	inline vector_n & operator-=(const vector_n & v)
 	{
 		for (unsigned int i = 0; i < N; ++i)
 			x[i] -= v.x[i];
 		return *this;
 	}
 
-	inline vecn<N> & operator*=(value_type f)
+	inline vector_n & operator*=(value_type f)
 	{
 		for (unsigned int i = 0; i < N; ++i)
 			x[i] *= f;
 		return *this;
 	}
 
-	friend vecn<N> operator+(const vecn<N> & w, const vecn<N> & v) { return vecn<N>(w) += v; }
-	friend vecn<N> operator-(const vecn<N> & w, const vecn<N> & v) { return vecn<N>(w) -= v; }
-	friend vecn<N> operator*(const vecn<N> & v, value_type f) { return vecn<N>(v) *= f; }
-	friend vecn<N> operator*(value_type f, const vecn<N> & v) { return vecn<N>(v) *= f; }
-	friend value_type operator*(const vecn<N> & a, const vecn<N> & b) { return a.dot(b); }
+	friend vector_n operator+(const vector_n & w, const vector_n & v)
+	{
+		return vector_n(w) += v;
+	}
+
+	friend vector_n operator-(const vector_n & w, const vector_n & v)
+	{
+		return vector_n(w) -= v;
+	}
+
+	friend vector_n operator*(const vector_n & v, value_type f) { return vector_n(v) *= f; }
+
+	friend vector_n operator*(value_type f, const vector_n & v) { return vector_n(v) *= f; }
+
+	friend value_type operator*(const vector_n & a, const vector_n & b) { return a.dot(b); }
 
 private:
 	value_type x[N];
