@@ -45,9 +45,9 @@ The goal of this library is
 
 
 \section sec_authors Authors
+(extracted from git repository, sorted alphabetically)
 
-- Mario Konrad
-- Pavel Kalian
+@AUTHORS_LIST@
 
 
 \section sec_license License
