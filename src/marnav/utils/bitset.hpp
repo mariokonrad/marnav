@@ -558,7 +558,7 @@ public:
 	///
 	/// @param[in] v The value to set.
 	/// @param[in] ofs The offset (in bits) at which position the value has to be written.
-	/// @paran[in] bits The number of bits to write. This must not exceed the number of bits
+	/// @param[in] bits The number of bits to write. This must not exceed the number of bits
 	///            provided by the specified data, padding is not supported.
 	/// @exception std::invalid_argument Number of bites exceed the number of
 	///            bit provided by the parameter v. padding is not implemented.
