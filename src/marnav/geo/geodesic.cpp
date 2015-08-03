@@ -9,7 +9,8 @@ namespace geo
 /// This geodesic functions may not be the best possible, but they are
 /// sufficient for their purpose.
 
-
+namespace
+{
 /// mean radius
 static constexpr const double EARTH_RADIUS = 6378000.0; // [m]
 
@@ -19,6 +20,7 @@ static constexpr const double EARTH_SEMI_MAJOR_AXIS = 6378137.0; // [m]
 /// flattening according to WGS84
 static constexpr const double EARTH_FLATTENING = 1.0 / 298.257223563;
 
+/// Computes the square of the specified value.
 template <typename T> static T sqr(const T & a) { return a * a; }
 
 /// Returns the spherical angle between the two specified position in rad.
@@ -39,6 +41,7 @@ static double central_spherical_angle_rad(
 		sqrt(sqr(cos(p1_lat) * sin(p1_lon - p0_lon))
 			+ sqr(cos(p0_lat) * sin(p1_lat) - sin(p0_lat) * cos(p1_lat) * cos(p1_lon - p0_lon)))
 		/ (sin(p0_lat) * sin(p1_lat) + cos(p0_lat) * cos(p1_lat) * cos(p1_lon - p0_lon)));
+}
 }
 
 /// Returns the spherical angle between the two specified position in rad.
@@ -167,7 +170,8 @@ double distance_ellipsoid_vincenty(
 /// @param[in] alpha1 Azimuth in rad.
 /// @param[out] alpha2
 /// @return The point at the specified distance.
-position point_ellipsoid_vincenty(const position & start, double s, double alpha1, double & alpha2)
+position point_ellipsoid_vincenty(
+	const position & start, double s, double alpha1, double & alpha2)
 {
 	if (fabs(s) < 1.0e-4)
 		return start;
@@ -200,8 +204,8 @@ position point_ellipsoid_vincenty(const position & start, double s, double alpha
 		+ u_sqr / 16384.0
 			* (4096.0 + u_sqr * (-768.0 + u_sqr * (320.0 - 175.0 * u_sqr))); // eq 3
 
-	const double B = u_sqr / 1024.0
-		* (256.0 + u_sqr * (-128.0 + u_sqr * (74.0 - 47.0 * u_sqr))); // eq 4
+	const double B
+		= u_sqr / 1024.0 * (256.0 + u_sqr * (-128.0 + u_sqr * (74.0 - 47.0 * u_sqr))); // eq 4
 
 	double sigma_0 = s / (b * A);
 	double sigma = sigma_0;
