@@ -197,8 +197,8 @@ public:
 
 	static quaternion rot_to(const vector3<T> & from, const vector3<T> & to)
 	{
-		vector3<T> f = from.normalize();
-		vector3<T> t = to.normalize();
+		vector3<T> f = normalize_vec(from);
+		vector3<T> t = normalize_vec(to);
 		value_type d = f.dot(t);
 		if (d >= 1.0)
 			return quaternion(1.0, 0.0, 0.0, 0.0); // identiy quaternion
