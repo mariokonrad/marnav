@@ -1,5 +1,5 @@
-#ifndef __MATH__MATRIX_HPP__
-#define __MATH__MATRIX_HPP__
+#ifndef __MATH__MATRIX__HPP__
+#define __MATH__MATRIX__HPP__
 
 #include <marnav/math/vector.hpp>
 
@@ -35,15 +35,19 @@ public:
 
 	inline bool operator==(const matrix2 & m) const
 	{
-		return (this == &m)
-			|| ((x[0] == m.x[0]) && (x[1] == m.x[1]) && (x[2] == m.x[2]) && (x[3] == m.x[3]));
+		if (this == &m)
+			return true;
+		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+			if (abs(abs(x[i]) - abs(m.x[i])) > std::numeric_limits<value_type>::epsilon())
+				return false;
+		return true;
 	}
+
+	inline bool operator!=(const matrix2 & m) const { return !(*this == m); }
 
 	inline value_type & operator[](size_type i) { return x[i]; }
 
 	inline value_type operator[](size_type i) const { return x[i]; }
-
-	inline bool operator!=(const matrix2 & m) const { return !(*this == m); }
 
 	inline matrix2 & operator=(const matrix2 &) = default;
 
@@ -170,7 +174,7 @@ public:
 		if (this == &m)
 			return true;
 		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
-			if (x[i] != m.x[i])
+			if (abs(abs(x[i]) - abs(m.x[i])) > std::numeric_limits<value_type>::epsilon())
 				return false;
 		return true;
 	}
@@ -372,7 +376,7 @@ public:
 		if (this == &m)
 			return true;
 		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
-			if (x[i] != m.x[i])
+			if (abs(abs(x[i]) - abs(m.x[i])) > std::numeric_limits<value_type>::epsilon())
 				return false;
 		return true;
 	}
@@ -570,7 +574,7 @@ public:
 		if (this == &m)
 			return true;
 		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
-			if (x[i] != m.x[i])
+			if (abs(abs(x[i]) - abs(m.x[i])) > std::numeric_limits<value_type>::epsilon())
 				return false;
 		return true;
 	}

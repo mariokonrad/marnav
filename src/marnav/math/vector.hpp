@@ -1,5 +1,5 @@
-#ifndef __MATH__VECTOR_HPP__
-#define __MATH__VECTOR_HPP__
+#ifndef __MATH__VECTOR__HPP__
+#define __MATH__VECTOR__HPP__
 
 #include <cmath>
 #include <limits>
@@ -19,6 +19,9 @@ class vector2
 {
 public:
 	using value_type = T;
+	using size_type = unsigned int;
+
+	constexpr static const size_type dimension = 2;
 
 public:
 	vector2(value_type x = 0.0, value_type y = 0.0)
@@ -77,9 +80,8 @@ public:
 	/// Set all components of the vector that are below epsilon to exact zero.
 	inline vector2 & nullify(void)
 	{
-		constexpr const value_type EPSILON = std::numeric_limits<value_type>::epsilon();
-		a[0] = abs(a[0]) <= EPSILON ? 0.0 : a[0];
-		a[1] = abs(a[1]) <= EPSILON ? 0.0 : a[1];
+		for (size_type i = 0; i < dimension; ++i)
+			a[i] = abs(a[i]) <= std::numeric_limits<value_type>::epsilon() ? 0.0 : a[i];
 		return *this;
 	}
 
@@ -95,29 +97,35 @@ public:
 
 	inline bool operator==(const vector2 & v) const
 	{
-		return (this == &v) || ((a[0] == v.a[0]) && (a[1] == v.a[1]));
+		if (this == &v)
+			return true;
+
+		for (size_type i = 0; i < dimension; ++i)
+			if (abs(abs(a[i]) - abs(v.a[i])) > std::numeric_limits<value_type>::epsilon())
+				return false;
+		return true;
 	}
 
 	inline bool operator!=(const vector2 & v) const { return !(*this == v); }
 
 	inline vector2 & operator+=(const vector2 & v)
 	{
-		a[0] += v.a[0];
-		a[1] += v.a[1];
+		for (size_type i = 0; i < dimension; ++i)
+			a[i] += v.a[i];
 		return *this;
 	}
 
 	inline vector2 & operator-=(const vector2 & v)
 	{
-		a[0] -= v.a[0];
-		a[1] -= v.a[1];
+		for (size_type i = 0; i < dimension; ++i)
+			a[i] -= v.a[i];
 		return *this;
 	}
 
 	inline vector2 & operator*=(value_type f)
 	{
-		a[0] *= f;
-		a[1] *= f;
+		for (size_type i = 0; i < dimension; ++i)
+			a[i] *= f;
 		return *this;
 	}
 
@@ -132,7 +140,7 @@ public:
 	friend value_type operator*(const vector2 & a, const vector2 & b) { return a.dot(b); }
 
 private:
-	value_type a[2];
+	value_type a[dimension];
 };
 
 template <typename T,
@@ -141,6 +149,9 @@ class vector3
 {
 public:
 	using value_type = T;
+	using size_type = unsigned int;
+
+	constexpr static const size_type dimension = 3;
 
 public:
 	vector3(value_type x = 0.0, value_type y = 0.0, value_type z = 0.0)
@@ -178,10 +189,8 @@ public:
 	/// Set all components of the vector that are below epsilon to exact zero.
 	inline vector3 & nullify(void)
 	{
-		constexpr const value_type EPSILON = std::numeric_limits<value_type>::epsilon();
-		a[0] = abs(a[0]) <= EPSILON ? 0.0 : a[0];
-		a[1] = abs(a[1]) <= EPSILON ? 0.0 : a[1];
-		a[2] = abs(a[2]) <= EPSILON ? 0.0 : a[2];
+		for (size_type i = 0; i < dimension; ++i)
+			a[i] = abs(a[i]) <= std::numeric_limits<value_type>::epsilon() ? 0.0 : a[i];
 		return *this;
 	}
 
@@ -219,11 +228,11 @@ public:
 
 	inline value_type z() const { return a[2]; }
 
-	inline value_type operator[](int idx) const { return a[idx]; }
+	inline value_type operator[](size_type idx) const { return a[idx]; }
 
-	inline value_type & operator[](int idx) { return a[idx]; }
+	inline value_type & operator[](size_type idx) { return a[idx]; }
 
-	inline operator const value_type *(void) const { return a; }
+	inline operator const value_type *() const { return a; }
 
 	inline vector3 & operator=(const vector3 &) = default;
 
@@ -231,32 +240,35 @@ public:
 
 	inline bool operator==(const vector3 & v) const
 	{
-		return (this == &v) || ((a[0] == v.a[0]) && (a[1] == v.a[1]) && (a[2] == v.a[2]));
+		if (this == &v)
+			return true;
+
+		for (size_type i = 0; i < dimension; ++i)
+			if (abs(abs(a[i]) - abs(v.a[i])) > std::numeric_limits<value_type>::epsilon())
+				return false;
+		return true;
 	}
 
 	inline bool operator!=(const vector3 & v) const { return !(*this == v); }
 
 	inline vector3 & operator+=(const vector3 & v)
 	{
-		a[0] += v.a[0];
-		a[1] += v.a[1];
-		a[2] += v.a[2];
+		for (size_type i = 0; i < dimension; ++i)
+			a[i] += v.a[i];
 		return *this;
 	}
 
 	inline vector3 & operator-=(const vector3 & v)
 	{
-		a[0] -= v.a[0];
-		a[1] -= v.a[1];
-		a[2] -= v.a[2];
+		for (size_type i = 0; i < dimension; ++i)
+			a[i] -= v.a[i];
 		return *this;
 	}
 
 	inline vector3 & operator*=(value_type f)
 	{
-		a[0] *= f;
-		a[1] *= f;
-		a[2] *= f;
+		for (size_type i = 0; i < dimension; ++i)
+			a[i] *= f;
 		return *this;
 	}
 
@@ -271,7 +283,7 @@ public:
 	friend value_type operator*(const vector3 & a, const vector3 & b) { return a.dot(b); }
 
 private:
-	value_type a[3];
+	value_type a[dimension];
 };
 
 template <typename T,
@@ -280,6 +292,9 @@ class vector4
 {
 public:
 	using value_type = T;
+	using size_type = unsigned int;
+
+	constexpr static const size_type dimension = 4;
 
 public:
 	vector4(value_type x = 0.0, value_type y = 0.0, value_type z = 0.0, value_type w = 0.0)
@@ -315,17 +330,14 @@ public:
 	}
 
 	/// Set all components of the vector that are below epsilon to exact zero.
-	inline vector4 & nullify(void)
+	inline vector4 & nullify()
 	{
-		constexpr const value_type EPSILON = std::numeric_limits<value_type>::epsilon();
-		a[0] = abs(a[0]) <= EPSILON ? 0.0 : a[0];
-		a[1] = abs(a[1]) <= EPSILON ? 0.0 : a[1];
-		a[2] = abs(a[2]) <= EPSILON ? 0.0 : a[2];
-		a[3] = abs(a[3]) <= EPSILON ? 0.0 : a[3];
+		for (size_type i = 0; i < dimension; ++i)
+			a[i] = abs(a[i]) <= std::numeric_limits<value_type>::epsilon() ? 0.0 : a[i];
 		return *this;
 	}
 
-	inline value_type operator[](int idx) const { return a[idx]; }
+	inline value_type operator[](size_type idx) const { return a[idx]; }
 
 	inline vector4 & operator=(const vector4 &) = default;
 
@@ -333,51 +345,50 @@ public:
 
 	inline bool operator==(const vector4 & v) const
 	{
-		return (this == &v)
-			|| ((a[0] == v.a[0]) && (a[1] == v.a[1]) && (a[2] == v.a[2]) && (a[3] == v.a[3]));
+		if (this == &v)
+			return true;
+
+		for (size_type i = 0; i < dimension; ++i)
+			if (abs(abs(a[i]) - abs(v.a[i])) > std::numeric_limits<value_type>::epsilon())
+				return false;
+		return true;
 	}
 
 	inline bool operator!=(const vector4 & v) const { return !(*this == v); }
 
 	inline vector4 & operator+=(const vector4 & v)
 	{
-		a[0] += v.a[0];
-		a[1] += v.a[1];
-		a[2] += v.a[2];
-		a[3] += v.a[3];
+		for (size_type i = 0; i < dimension; ++i)
+			a[i] += v.a[i];
 		return *this;
 	}
 
 	inline vector4 & operator-=(const vector4 & v)
 	{
-		a[0] -= v.a[0];
-		a[1] -= v.a[1];
-		a[2] -= v.a[2];
-		a[3] -= v.a[3];
+		for (size_type i = 0; i < dimension; ++i)
+			a[i] -= v.a[i];
 		return *this;
 	}
 
 	inline vector4 & operator*=(value_type f)
 	{
-		a[0] *= f;
-		a[1] *= f;
-		a[2] *= f;
-		a[3] *= f;
+		for (size_type i = 0; i < dimension; ++i)
+			a[i] *= f;
 		return *this;
 	}
 
-	friend vector4 operator+(const vector4 & w, const vector4 & v) { return vector4(w) += v; }
+	friend vector4 operator+(const vector4 & w, const vector4 & v) { return vector4{w} += v; }
 
-	friend vector4 operator-(const vector4 & w, const vector4 & v) { return vector4(w) -= v; }
+	friend vector4 operator-(const vector4 & w, const vector4 & v) { return vector4{w} -= v; }
 
-	friend vector4 operator*(const vector4 & v, value_type f) { return vector4(v) *= f; }
+	friend vector4 operator*(const vector4 & v, value_type f) { return vector4{v} *= f; }
 
-	friend vector4 operator*(value_type f, const vector4 & v) { return vector4(v) *= f; }
+	friend vector4 operator*(value_type f, const vector4 & v) { return vector4{v} *= f; }
 
 	friend value_type operator*(const vector4 & a, const vector4 & b) { return a.dot(b); }
 
 private:
-	value_type a[4];
+	value_type a[dimension];
 };
 
 template <unsigned int N, typename T = double,
@@ -386,12 +397,15 @@ class vector_n
 {
 public:
 	using value_type = T;
+	using size_type = decltype(N);
+
+	constexpr static const size_type dimension = N;
 
 	vector_n()
 	{
 		static_assert(N >= 1, "invalid dimension of vector_n, constraint: N>=1");
 
-		for (unsigned int i = 0; i < N; ++i)
+		for (size_type i = 0; i < dimension; ++i)
 			a[i] = 0.0;
 	}
 
@@ -402,7 +416,7 @@ public:
 	vector_n(std::initializer_list<T> v)
 	{
 		assert(v.size() == N);
-		unsigned int i = 0;
+		size_type i = 0;
 		for (auto j = begin(v); j != end(v); ++i, ++j)
 			a[i] = *j;
 	}
@@ -410,7 +424,7 @@ public:
 	inline value_type dot(const vector_n & v) const
 	{
 		value_type r = 0.0;
-		for (unsigned int i = 0; i < N; ++i)
+		for (size_type i = 0; i < dimension; ++i)
 			r += (a[i] * v.a[i]);
 		return r;
 	}
@@ -420,7 +434,7 @@ public:
 	inline value_type length2() const
 	{
 		value_type r = 0.0;
-		for (unsigned int i = 0; i < N; ++i)
+		for (size_type i = 0; i < dimension; ++i)
 			r += (a[i] * a[i]);
 		return r;
 	}
@@ -445,8 +459,9 @@ public:
 	{
 		if (this == &v)
 			return true;
-		for (unsigned int i = 0; i < N; ++i)
-			if (a[i] != v.a[i])
+
+		for (size_type i = 0; i < dimension; ++i)
+			if (abs(abs(a[i]) - abs(v.a[i])) > std::numeric_limits<value_type>::epsilon())
 				return false;
 		return true;
 	}
@@ -455,21 +470,21 @@ public:
 
 	inline vector_n & operator+=(const vector_n & v)
 	{
-		for (unsigned int i = 0; i < N; ++i)
+		for (size_type i = 0; i < dimension; ++i)
 			a[i] += v.a[i];
 		return *this;
 	}
 
 	inline vector_n & operator-=(const vector_n & v)
 	{
-		for (unsigned int i = 0; i < N; ++i)
+		for (size_type i = 0; i < dimension; ++i)
 			a[i] -= v.a[i];
 		return *this;
 	}
 
 	inline vector_n & operator*=(value_type f)
 	{
-		for (unsigned int i = 0; i < N; ++i)
+		for (size_type i = 0; i < dimension; ++i)
 			a[i] *= f;
 		return *this;
 	}
@@ -491,7 +506,7 @@ public:
 	friend value_type operator*(const vector_n & a, const vector_n & b) { return a.dot(b); }
 
 private:
-	value_type a[N];
+	value_type a[dimension];
 };
 
 using vec2 = vector2<double>;
