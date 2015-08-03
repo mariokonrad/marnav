@@ -26,12 +26,10 @@ TEST_F(Test_math_matrix, mat2_construction_default)
 {
 	mat2 m;
 
-	const mat2::value_type * v = m.get();
-
-	EXPECT_EQ(1.0, v[0]);
-	EXPECT_EQ(0.0, v[1]);
-	EXPECT_EQ(0.0, v[2]);
-	EXPECT_EQ(1.0, v[3]);
+	EXPECT_EQ(1.0, m[0]);
+	EXPECT_EQ(0.0, m[1]);
+	EXPECT_EQ(0.0, m[2]);
+	EXPECT_EQ(1.0, m[3]);
 }
 
 }
