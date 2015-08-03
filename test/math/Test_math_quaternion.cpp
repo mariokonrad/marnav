@@ -24,12 +24,15 @@ TEST_F(Test_math_quaternion, construction_default)
 {
 	quat q;
 
-	const auto v = q.get_vector4();
+	EXPECT_EQ(1.0, q[0]);
+	EXPECT_EQ(0.0, q[1]);
+	EXPECT_EQ(0.0, q[2]);
+	EXPECT_EQ(0.0, q[3]);
 
-	EXPECT_EQ(1.0, v[0]);
-	EXPECT_EQ(0.0, v[1]);
-	EXPECT_EQ(0.0, v[2]);
-	EXPECT_EQ(0.0, v[3]);
+	EXPECT_EQ(1.0, q.w());
+	EXPECT_EQ(0.0, q.x());
+	EXPECT_EQ(0.0, q.y());
+	EXPECT_EQ(0.0, q.z());
 }
 
 TEST_F(Test_math_quaternion, construction_rotation)

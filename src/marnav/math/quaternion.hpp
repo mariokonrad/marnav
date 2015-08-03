@@ -16,15 +16,14 @@ class quaternion
 {
 public:
 	using value_type = T;
-
-	enum class part { w, x, y, z };
+	using size_type = unsigned int;
 
 	quaternion(value_type w = 1.0, value_type x = 0.0, value_type y = 0.0, value_type z = 0.0)
-		: w(w)
-		, x(x)
-		, y(y)
-		, z(z)
 	{
+		a[0] = w;
+		a[1] = x;
+		a[2] = y;
+		a[3] = z;
 	}
 
 	quaternion(const quaternion &) = default;
@@ -33,10 +32,10 @@ public:
 
 	quaternion(const vector3<T> & v)
 	{
-		w = 0.0;
-		x = v[0];
-		y = v[1];
-		z = v[2];
+		a[0] = 0.0;
+		a[1] = v[0];
+		a[2] = v[1];
+		a[3] = v[2];
 	}
 
 	/// Creates a quaternion for 3D rotation.
@@ -54,11 +53,16 @@ public:
 		// sin(phi / 2) with normalization
 		value_type s = sin(angle * 0.5) / d;
 
-		w = cos(angle * 0.5);
-		x = axis[0] * s;
-		y = axis[1] * s;
-		z = axis[2] * s;
+		a[0] = cos(angle * 0.5);
+		a[1] = axis[0] * s;
+		a[2] = axis[1] * s;
+		a[3] = axis[2] * s;
 	}
+
+	inline value_type w() const { return a[0]; }
+	inline value_type x() const { return a[1]; }
+	inline value_type y() const { return a[2]; }
+	inline value_type z() const { return a[3]; }
 
 	static quaternion make_from_euler(value_type yaw, value_type pitch, value_type roll)
 	{
@@ -79,17 +83,17 @@ public:
 		const value_type c_roll = cos(roll);
 		const value_type s_roll = sin(roll);
 
-		w = c_roll * c_pitch * c_yaw + s_roll * s_pitch * s_yaw;
-		x = c_roll * s_pitch * c_yaw + s_roll * c_pitch * s_yaw;
-		y = c_roll * c_pitch * s_yaw - s_roll * s_pitch * c_yaw;
-		z = s_roll * c_pitch * c_yaw - c_roll * s_pitch * s_yaw;
+		a[0] = c_roll * c_pitch * c_yaw + s_roll * s_pitch * s_yaw;
+		a[1] = c_roll * s_pitch * c_yaw + s_roll * c_pitch * s_yaw;
+		a[2] = c_roll * c_pitch * s_yaw - s_roll * s_pitch * c_yaw;
+		a[3] = s_roll * c_pitch * c_yaw - c_roll * s_pitch * s_yaw;
 
 		return *this;
 	}
 
 	inline value_type dot(const quaternion & q)
 	{
-		return w * q.w + x * q.x + y * q.y + z * q.z;
+		return w() * q.w() + x() * q.x() + y() * q.y() + z() * q.z();
 	}
 
 	inline quaternion & normalize(value_type len = 1.0)
@@ -102,26 +106,13 @@ public:
 
 	inline value_type length() const { return sqrt(length2()); }
 
-	inline value_type length2() const { return w * w + x * x + y * y + z * z; }
+	inline value_type length2() const { return a[0] * a[0] + a[1] * a[1] + a[2] * a[2] + a[3] * a[3]; }
 
-	inline vector3<T> get_vector3() const { return vector3<T>{x, y, z}; }
+	inline vector3<T> get_vector3() const { return vector3<T>{x(), y(), z()}; }
 
-	inline vector4<T> get_vector4() const { return vector4<T>{w, x, y, z}; }
+	inline vector4<T> get_vector4() const { return vector4<T>{w(), x(), y(), z()}; }
 
-	inline value_type operator[](part p) const
-	{
-		switch (p) {
-			case part::w:
-				return w;
-			case part::x:
-				return x;
-			case part::y:
-				return y;
-			case part::z:
-				return z;
-		}
-		return 0.0;
-	}
+	inline value_type operator[](size_type index) const { return a[index]; }
 
 	inline quaternion & operator=(const quaternion &) = default;
 
@@ -132,15 +123,9 @@ public:
 		if (this == &q)
 			return true;
 
-		if (abs(abs(w) - abs(q.w)) > std::numeric_limits<value_type>::epsilon())
-			return false;
-		if (abs(abs(x) - abs(q.x)) > std::numeric_limits<value_type>::epsilon())
-			return false;
-		if (abs(abs(y) - abs(q.y)) > std::numeric_limits<value_type>::epsilon())
-			return false;
-		if (abs(abs(z) - abs(q.z)) > std::numeric_limits<value_type>::epsilon())
-			return false;
-
+		for (size_type i = 0; i < 4; ++i)
+			if (abs(abs(a[i]) - abs(q.a[i])) > std::numeric_limits<value_type>::epsilon())
+				return false;
 		return true;
 	}
 
@@ -154,47 +139,42 @@ public:
 
 	inline quaternion & operator*=(value_type s)
 	{
-		w *= s;
-		x *= s;
-		y *= s;
-		z *= s;
+		for (size_type i = 0; i < 4; ++i)
+			a[i] *= s;
 		return *this;
 	}
 
 	inline quaternion & operator+=(const quaternion & q)
 	{
-		w += q.w;
-		x += q.x;
-		y += q.y;
-		z += q.z;
+		for (size_type i = 0; i < 4; ++i)
+			a[i] += q.a[i];
 		return *this;
 	}
 
 	inline quaternion & operator-=(const quaternion & q)
 	{
-		w -= q.w;
-		x -= q.x;
-		y -= q.y;
-		z -= q.z;
+		for (size_type i = 0; i < 4; ++i)
+			a[i] -= q.a[i];
 		return *this;
 	}
 
-	friend quaternion operator+(const quaternion & a, const quaternion & b)
+	friend quaternion operator+(const quaternion & q1, const quaternion & q2)
 	{
-		return quaternion{a} += b;
+		return quaternion{q1} += q2;
 	}
 
-	friend quaternion operator-(const quaternion & a, const quaternion & b)
+	friend quaternion operator-(const quaternion & q1, const quaternion & q2)
 	{
-		return quaternion{a} -= b;
+		return quaternion{q1} -= q2;
 	}
 
-	friend quaternion operator*(const quaternion & a, const quaternion & b)
+	friend quaternion operator*(const quaternion & q1, const quaternion & q2)
 	{
-		return quaternion{a.w * b.w - a.x * b.x - a.y * b.y - a.z * b.z,
-			a.w * b.x + a.x * b.w + a.y * b.z - a.z * b.y,
-			a.w * b.y + a.y * b.w + a.z * b.x - a.x * b.z,
-			a.w * b.z + a.z * b.w + a.x * b.y - a.y * b.x};
+		return quaternion{
+			q1.w() * q2.w() - q1.x() * q2.x() - q1.y() * q2.y() - q1.z() * q2.z(),
+			q1.w() * q2.x() + q1.x() * q2.w() + q1.y() * q2.z() - q1.z() * q2.y(),
+			q1.w() * q2.y() + q1.y() * q2.w() + q1.z() * q2.x() - q1.x() * q2.z(),
+			q1.w() * q2.z() + q1.z() * q2.w() + q1.x() * q2.y() - q1.y() * q2.x()};
 	}
 
 	friend quaternion operator*(const quaternion & q, value_type s)
@@ -249,11 +229,13 @@ public:
 	/// created vector.
 	inline vector3<T> rot(const vector3<T> & v) const
 	{
-		return ((*this * quaternion(v)) * quaternion(w, -x, -y, -z)).get_vector3().normalize();
+		return ((*this * quaternion(v)) * quaternion(w(), -x(), -y(), -z()))
+			.get_vector3()
+			.normalize();
 	}
 
 private:
-	value_type w, x, y, z;
+	value_type a[4];
 };
 
 using quat = quaternion<double>;
