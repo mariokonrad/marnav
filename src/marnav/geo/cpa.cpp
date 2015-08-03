@@ -33,8 +33,8 @@ namespace geo
 /// V_2(t) &=& V_2(0) + t \cdot \vec{v}
 /// @f}
 /// with @f{eqnarray*}{
-/// \vec{u} = (cog_1, sog_1) \\
-/// \vec{v} = (cog_2, sog_2)
+/// \vec{u} = (sog_1, \phi cog_1) \\
+/// \vec{v} = (sog_2, \phi cog_2)
 /// @f}
 /// The distance between the two vessels as function of time: @f[
 /// \vec{d}_t = V_1(t) - V_2(t)
