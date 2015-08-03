@@ -96,6 +96,11 @@ public:
 		return w() * q.w() + x() * q.x() + y() * q.y() + z() * q.z();
 	}
 
+	inline quaternion conjugate() const
+	{
+		return quaternion{w(), -x(), -y(), -z()};
+	}
+
 	inline quaternion & normalize(value_type len = 1.0)
 	{
 		value_type l = length();
@@ -229,9 +234,7 @@ public:
 	/// created vector.
 	inline vector3<T> rot(const vector3<T> & v) const
 	{
-		return ((*this * quaternion(v)) * quaternion(w(), -x(), -y(), -z()))
-			.get_vector3()
-			.normalize();
+		return ((*this * quaternion(v)) * conjugate()).get_vector3().normalize();
 	}
 
 private:
