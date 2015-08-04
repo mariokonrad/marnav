@@ -1,7 +1,7 @@
 #include "io.hpp"
-#include "angle.hpp"
-#include "date.hpp"
-#include "time.hpp"
+#include <marnav/nmea/angle.hpp>
+#include <marnav/nmea/date.hpp>
+#include <marnav/nmea/time.hpp>
 #include <marnav/utils/mmsi.hpp>
 #include <sstream>
 

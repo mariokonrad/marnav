@@ -9,9 +9,12 @@ namespace marnav
 namespace nmea
 {
 
+/// Enumeration of all months of a year.
 enum class month : uint32_t {january = 1, february, march, april, may, june, july, august,
 	september, october, november, december};
 
+/// This class represents a date, suitable to be used in NMEA sentences.
+///
 class date
 {
 public:

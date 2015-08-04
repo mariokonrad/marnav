@@ -1,7 +1,7 @@
 #ifndef __NMEA__FSI__HPP__
 #define __NMEA__FSI__HPP__
 
-#include "sentence.hpp"
+#include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav

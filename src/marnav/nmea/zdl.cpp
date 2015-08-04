@@ -1,5 +1,5 @@
 #include "zdl.hpp"
-#include "io.hpp"
+#include <marnav/nmea/io.hpp>
 #include <marnav/utils/unique.hpp>
 
 namespace marnav

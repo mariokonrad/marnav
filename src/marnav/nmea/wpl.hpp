@@ -1,8 +1,8 @@
 #ifndef __NMEA__WPL__HPP__
 #define __NMEA__WPL__HPP__
 
-#include "sentence.hpp"
-#include "angle.hpp"
+#include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/angle.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav

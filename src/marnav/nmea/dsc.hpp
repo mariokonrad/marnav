@@ -1,7 +1,7 @@
 #ifndef __NMEA__DSC__HPP__
 #define __NMEA__DSC__HPP__
 
-#include "sentence.hpp"
+#include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 #include <marnav/utils/mmsi.hpp>
 #include <marnav/geo/region.hpp>

@@ -1,8 +1,8 @@
 #ifndef __NMEA__ZDL__HPP__
 #define __NMEA__ZDL__HPP__
 
-#include "sentence.hpp"
-#include "time.hpp"
+#include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/time.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav

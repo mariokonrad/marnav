@@ -2,7 +2,7 @@
 #define __NMEA__NMEA__HPP__
 
 #include <stdexcept>
-#include "sentence.hpp"
+#include <marnav/nmea/sentence.hpp>
 
 namespace marnav
 {

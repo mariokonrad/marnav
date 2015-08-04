@@ -1,7 +1,7 @@
 #ifndef __NMEA__GNS__HPP__
 #define __NMEA__GNS__HPP__
 
-#include "sentence.hpp"
+#include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/utils/optional.hpp>
