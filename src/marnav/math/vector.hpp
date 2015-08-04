@@ -1,8 +1,7 @@
 #ifndef __MATH__VECTOR__HPP__
 #define __MATH__VECTOR__HPP__
 
-#include <cmath>
-#include <limits>
+#include <marnav/math/floatingpoint.hpp>
 
 namespace marnav
 {
@@ -72,7 +71,7 @@ public:
 	inline vector2 & normalize(value_type len = 1.0)
 	{
 		const value_type l = length();
-		if (abs(l) > std::numeric_limits<value_type>::epsilon())
+		if (!is_zero(l))
 			*this *= len / l;
 		return *this;
 	}
@@ -81,7 +80,7 @@ public:
 	inline vector2 & nullify(void)
 	{
 		for (size_type i = 0; i < dimension; ++i)
-			a[i] = abs(a[i]) <= std::numeric_limits<value_type>::epsilon() ? 0.0 : a[i];
+			a[i] = is_zero(a[i]) ? 0.0 : a[i];
 		return *this;
 	}
 
@@ -101,7 +100,7 @@ public:
 			return true;
 
 		for (size_type i = 0; i < dimension; ++i)
-			if (abs(abs(a[i]) - abs(v.a[i])) > std::numeric_limits<value_type>::epsilon())
+			if (!is_same(a[i], v.a[i]))
 				return false;
 		return true;
 	}
@@ -190,7 +189,7 @@ public:
 	inline vector3 & nullify(void)
 	{
 		for (size_type i = 0; i < dimension; ++i)
-			a[i] = abs(a[i]) <= std::numeric_limits<value_type>::epsilon() ? 0.0 : a[i];
+			a[i] = is_zero(a[i]) ? 0.0 : a[i];
 		return *this;
 	}
 
@@ -201,7 +200,7 @@ public:
 	inline vector3 & normalize(value_type len = 1.0)
 	{
 		value_type l = length();
-		if (abs(l) > std::numeric_limits<value_type>::epsilon())
+		if (!is_zero(l))
 			*this *= len / l;
 		return *this;
 	}
@@ -244,7 +243,7 @@ public:
 			return true;
 
 		for (size_type i = 0; i < dimension; ++i)
-			if (abs(abs(a[i]) - abs(v.a[i])) > std::numeric_limits<value_type>::epsilon())
+			if (!is_same(a[i], v.a[i]))
 				return false;
 		return true;
 	}
@@ -324,7 +323,7 @@ public:
 	inline vector4 & normalize(value_type len = 1.0)
 	{
 		value_type l = length();
-		if (abs(l) > std::numeric_limits<value_type>::epsilon())
+		if (!is_zero(l))
 			*this *= (len / l);
 		return *this;
 	}
@@ -333,7 +332,7 @@ public:
 	inline vector4 & nullify()
 	{
 		for (size_type i = 0; i < dimension; ++i)
-			a[i] = abs(a[i]) <= std::numeric_limits<value_type>::epsilon() ? 0.0 : a[i];
+			a[i] = is_zero(a[i]) ? 0.0 : a[i];
 		return *this;
 	}
 
@@ -349,7 +348,7 @@ public:
 			return true;
 
 		for (size_type i = 0; i < dimension; ++i)
-			if (abs(abs(a[i]) - abs(v.a[i])) > std::numeric_limits<value_type>::epsilon())
+			if (!is_same(a[i], v.a[i]))
 				return false;
 		return true;
 	}
@@ -442,7 +441,7 @@ public:
 	inline vector_n & normalize(value_type len = 1.0)
 	{
 		value_type l = length();
-		if (abs(l) > std::numeric_limits<value_type>::epsilon())
+		if (!is_zero(l))
 			*this *= len / l;
 		return *this;
 	}
@@ -461,7 +460,7 @@ public:
 			return true;
 
 		for (size_type i = 0; i < dimension; ++i)
-			if (abs(abs(a[i]) - abs(v.a[i])) > std::numeric_limits<value_type>::epsilon())
+			if (!is_same(a[i], v.a[i]))
 				return false;
 		return true;
 	}
@@ -560,7 +559,7 @@ template <typename T> T angle_between(const vector3<T> & p0, const vector3<T> & 
 template <typename T> vector2<T> project_onto(const vector2<T> & v0, const vector2<T> & v1)
 {
 	typename vector2<T>::value_type len = v1.length2();
-	if (abs(len) <= std::numeric_limits<typename vector2<T>::value_type>::epsilon())
+	if (is_zero(len))
 		return vector2<T>{};
 	return ((v0 * v1) / len) * v1;
 }
@@ -568,7 +567,7 @@ template <typename T> vector2<T> project_onto(const vector2<T> & v0, const vecto
 template <typename T> vector2<T> project_onto(const vector3<T> & v0, const vector3<T> & v1)
 {
 	typename vector3<T>::value_type len = v1.length2();
-	if (abs(len) <= std::numeric_limits<typename vector3<T>::value_type>::epsilon())
+	if (is_zero(len))
 		return vector3<T>{};
 	return ((v0 * v1) / len) * v1;
 }

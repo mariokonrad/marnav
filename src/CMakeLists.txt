@@ -11,6 +11,7 @@ set(SOURCE_UTILS
 	)
 
 set(SOURCE_MATH
+	marnav/math/floatingpoint.hpp
 	marnav/math/vector.hpp
 	marnav/math/matrix.hpp
 	marnav/math/quaternion.hpp
@@ -285,6 +286,7 @@ install(
 
 install(
 	FILES
+		marnav/math/floatingpoint.hpp
 		marnav/math/vector.hpp
 		marnav/math/matrix.hpp
 		marnav/math/quaternion.hpp

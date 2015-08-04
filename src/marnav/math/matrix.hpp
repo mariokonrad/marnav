@@ -2,6 +2,7 @@
 #define __MATH__MATRIX__HPP__
 
 #include <marnav/math/vector.hpp>
+#include <marnav/math/floatingpoint.hpp>
 
 namespace marnav
 {
@@ -38,7 +39,7 @@ public:
 		if (this == &m)
 			return true;
 		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
-			if (abs(abs(x[i]) - abs(m.x[i])) > std::numeric_limits<value_type>::epsilon())
+			if (!is_same(x[i], m.x[i]))
 				return false;
 		return true;
 	}
@@ -88,7 +89,7 @@ public:
 	inline matrix2 inv() const
 	{
 		const value_type d = det();
-		if (abs(d) <= std::numeric_limits<value_type>::epsilon())
+		if (is_zero(d))
 			return matrix2{};
 		return (1.0 / d) * matrix2{x[3], -x[1], -x[2], x[0]};
 	}
@@ -174,7 +175,7 @@ public:
 		if (this == &m)
 			return true;
 		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
-			if (abs(abs(x[i]) - abs(m.x[i])) > std::numeric_limits<value_type>::epsilon())
+			if (!is_same(x[i], m.x[i]))
 				return false;
 		return true;
 	}
@@ -219,7 +220,7 @@ public:
 				x[6] * m.x[1] + x[7] * m.x[4] + x[8] * m.x[7],
 				x[6] * m.x[2] + x[7] * m.x[5] + x[8] * m.x[8]};
 		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
-			x[i] = abs(c[i]) <= std::numeric_limits<value_type>::epsilon() ? 0.0 : c[i];
+			x[i] = is_zero(c[i]) ? 0.0 : c[i];
 		return *this;
 	}
 
@@ -244,7 +245,7 @@ public:
 	inline matrix3 inv() const
 	{
 		const value_type d = det();
-		if (abs(d) <= std::numeric_limits<value_type>::epsilon())
+		if (is_zero(d))
 			return matrix3{};
 		matrix3 m{*this};
 		matrix3 I;
@@ -376,7 +377,7 @@ public:
 		if (this == &m)
 			return true;
 		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
-			if (abs(abs(x[i]) - abs(m.x[i])) > std::numeric_limits<value_type>::epsilon())
+			if (!is_same(x[i], m.x[i]))
 				return false;
 		return true;
 	}
@@ -427,7 +428,7 @@ public:
 			x[12] * m.x[2] + x[13] * m.x[6] + x[14] * m.x[10] + x[15] * m.x[14],
 			x[12] * m.x[3] + x[13] * m.x[7] + x[14] * m.x[11] + x[15] * m.x[15]};
 		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
-			x[i] = abs(c[i]) <= std::numeric_limits<value_type>::epsilon() ? 0.0 : c[i];
+			x[i] = is_zero(c[i]) ? 0.0 : c[i];
 		return *this;
 	}
 
@@ -457,7 +458,7 @@ public:
 	inline matrix4 inv() const
 	{
 		const value_type d = det();
-		if (abs(d) <= std::numeric_limits<value_type>::epsilon())
+		if (is_zero(d))
 			return matrix4{};
 		matrix4 m{*this};
 		matrix4 I;
@@ -574,7 +575,7 @@ public:
 		if (this == &m)
 			return true;
 		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
-			if (abs(abs(x[i]) - abs(m.x[i])) > std::numeric_limits<value_type>::epsilon())
+			if (!is_same(x[i], m.x[i]))
 				return false;
 		return true;
 	}
@@ -634,7 +635,7 @@ public:
 					c[idx] += x[i * dimension + k] * m.x[k * dimension + j];
 			}
 		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] = abs(c[i]) <= std::numeric_limits<value_type>::epsilon() ? 0.0 : c[i];
+			x[i] = is_zero(c[i]) ? 0.0 : c[i];
 		return *this;
 	}
 
@@ -658,7 +659,7 @@ public:
 	inline matrix_n inv() const
 	{
 		const value_type d = det();
-		if (abs(d) <= std::numeric_limits<value_type>::epsilon())
+		if (is_zero(d))
 			return matrix_n{};
 		matrix_n m{*this};
 		matrix_n I;

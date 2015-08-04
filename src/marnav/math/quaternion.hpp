@@ -1,9 +1,10 @@
 #ifndef __MATH__QUATERNION__HPP__
 #define __MATH__QUATERNION__HPP__
 
-#include <marnav/math/vector.hpp>
 #include <cmath>
 #include <cassert>
+#include <marnav/math/vector.hpp>
+#include <marnav/math/floatingpoint.hpp>
 
 namespace marnav
 {
@@ -45,7 +46,7 @@ public:
 	quaternion(value_type angle, const vector3<T> & axis)
 	{
 		const value_type d = axis.length();
-		assert(abs(d) > std::numeric_limits<value_type>::epsilon());
+		assert(!is_zero(d));
 
 		// conversion deg -> rad
 		angle *= M_PI / 180.0;
@@ -104,7 +105,7 @@ public:
 	inline quaternion & normalize(value_type len = 1.0)
 	{
 		value_type l = length();
-		if (abs(l) <= std::numeric_limits<value_type>::epsilon())
+		if (is_zero(l))
 			*this *= len / l;
 		return *this;
 	}
@@ -129,7 +130,7 @@ public:
 			return true;
 
 		for (size_type i = 0; i < 4; ++i)
-			if (abs(abs(a[i]) - abs(q.a[i])) > std::numeric_limits<value_type>::epsilon())
+			if (!is_same(a[i], q.a[i]))
 				return false;
 		return true;
 	}
