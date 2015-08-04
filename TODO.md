@@ -6,13 +6,6 @@ GENERAL
 
 @todo integration tests
 
-
-Geodesic Stuff
---------------
-
-@todo Provide means to calculate CPA (closest point of approach) and
-      TCPA (time to closest point of approach)
-
 NMEA
 ----
 
