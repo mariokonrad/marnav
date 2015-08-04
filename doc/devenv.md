@@ -19,7 +19,7 @@ Tools needed to build the library:
 Tools needed to build the documentation:
 - doxygen
 - graphviz
-- latex (there are formulas!)
+- LaTeX (there are formulas!)
 
 optional (used for development only):
 - lcov / genhtml, c++filt

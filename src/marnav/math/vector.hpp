@@ -37,7 +37,7 @@ public:
 	/// Returns a vector, initialized by the polar coordinates.
 	///
 	/// @param[in] radius Radius for the vector.
-	/// @param[in] phi Angle Phi in degrees.
+	/// @param[in] phi_deg Angle Phi in degrees.
 	/// @return A 2D vector.
 	static inline vector2 make_from_polar(value_type radius, value_type phi_deg)
 	{
