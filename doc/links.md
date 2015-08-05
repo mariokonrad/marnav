@@ -18,6 +18,7 @@ NOTE: The official NMEA 0183 Standard document is not available for free. It was
   by Eric S. Raymond
 
 - [DSC Position Request](http://www.thehulltruth.com/marine-electronics-forum/43945-dsc-position-request.html)
+- [NMEA-0183 Sentences DSC,DSE](http://www.cruisersforum.com/forums/f13/nmea-0183-sentences-dsc-dse-124887.html)
 
 - [SerialMon - NMEA 0183 Protocol](http://www.serialmon.com/protocols/nmea0183.html)
 
