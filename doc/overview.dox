@@ -42,6 +42,7 @@ root
 		nmea -> { geo utils };
 		seatalk -> { utils };
 		io -> { nmea seatalk utils };
+		geo -> { math };
 	}
 \enddot
 
