@@ -19,7 +19,7 @@ static geo::angle parse_angle(const std::string & s) throw(std::invalid_argument
 	const double deg = (tmp - fmod(tmp, 100.0)) / 100.0;
 	const double min = (tmp - (deg * 100.0)) / 60.0;
 
-	if (fabs(min) >= 1.0)
+	if (std::abs(min) >= 1.0)
 		throw std::invalid_argument{"invalid format for minutes in geo::angle for NMEA"};
 
 	return geo::angle{deg + min};

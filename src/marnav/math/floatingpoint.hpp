@@ -32,7 +32,7 @@ template <typename T,
 	typename = typename std::enable_if<std::is_floating_point<T>::value, T>::type>
 inline bool is_same(T a, T b) noexcept
 {
-	return std::abs(std::abs(a) - std::abs(b)) <= std::numeric_limits<T>::epsilon();
+	return std::abs(a - b) <= std::numeric_limits<T>::epsilon();
 }
 }
 }

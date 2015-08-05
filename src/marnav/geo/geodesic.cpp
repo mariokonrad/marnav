@@ -96,7 +96,7 @@ double distance_ellipsoid_vincenty(
 	const double U2 = atan((1.0 - f) * tan(p1.lat));
 
 	double lambda = L;
-	double d_lambda = fabs(lambda);
+	double d_lambda = std::abs(lambda);
 
 	const double sin_U1 = sin(U1);
 	const double sin_U2 = sin(U2);
@@ -139,7 +139,7 @@ double distance_ellipsoid_vincenty(
 					  + C * sin_sigma
 						  * (cos_2_sigma_m
 								+ C * cos_sigma * (-1.0 + 2.0 * cos_sqr_2_sigma_m))); // eq 11
-		d_lambda = fabs(old_lambda - lambda);
+		d_lambda = std::abs(old_lambda - lambda);
 	}
 
 	u_sqr = cos_sqr_alpha * (sqr(a) - sqr(b)) / sqr(b);
@@ -173,7 +173,7 @@ double distance_ellipsoid_vincenty(
 position point_ellipsoid_vincenty(
 	const position & start, double s, double alpha1, double & alpha2)
 {
-	if (fabs(s) < 1.0e-4)
+	if (std::abs(s) < 1.0e-4)
 		return start;
 
 	const position p0 = deg2rad(start);
@@ -210,7 +210,7 @@ position point_ellipsoid_vincenty(
 	double sigma_0 = s / (b * A);
 	double sigma = sigma_0;
 
-	double d_sigma = fabs(sigma);
+	double d_sigma = std::abs(sigma);
 
 	double sin_sigma = 0.0;
 	double cos_sigma = 0.0;
@@ -234,7 +234,7 @@ position point_ellipsoid_vincenty(
 
 		double old_sigma = sigma;
 		sigma = sigma_0 + delta_sigma;
-		d_sigma = fabs(old_sigma - sigma);
+		d_sigma = std::abs(old_sigma - sigma);
 	}
 
 	position p1;

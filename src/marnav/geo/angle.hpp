@@ -3,6 +3,7 @@
 
 #include <string>
 #include <stdexcept>
+#include <limits>
 
 namespace marnav
 {
@@ -11,7 +12,7 @@ namespace geo
 class angle
 {
 public:
-	static constexpr double EPSILON = 1.0e-8;
+	static constexpr double epsilon = 1.0e-8;
 
 	angle(const angle &) = default;
 	angle(angle &&) = default;
@@ -27,6 +28,7 @@ public:
 	double get() const;
 
 	friend bool operator==(const angle & a, const angle & b) noexcept;
+	friend bool operator!=(const angle & a, const angle & b) noexcept;
 
 	angle & operator=(const angle &) = default;
 	angle & operator=(angle &&) = default;
@@ -45,6 +47,7 @@ private:
 };
 
 bool operator==(const angle & a, const angle & b) noexcept;
+bool operator!=(const angle & a, const angle & b) noexcept;
 
 /// Latitude.
 ///
@@ -67,9 +70,13 @@ public:
 	latitude & operator=(latitude &&) = default;
 
 	friend bool operator==(const latitude & a, const latitude & b) noexcept;
+	friend bool operator!=(const latitude & a, const latitude & b) noexcept;
 
 	/// Deletion of this operator prevents comparison of apples and oranges.
 	bool operator==(const angle &) const = delete;
+
+	/// Deletion of this operator prevents comparison of apples and oranges.
+	bool operator!=(const angle &) const = delete;
 
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;
@@ -79,6 +86,9 @@ public:
 private:
 	static void check(double a) throw(std::invalid_argument);
 };
+
+bool operator==(const latitude & a, const latitude & b) noexcept;
+bool operator!=(const latitude & a, const latitude & b) noexcept;
 
 /// User defined literal to construct latitudes.
 inline latitude operator "" _lat(long double value)
@@ -107,9 +117,13 @@ public:
 	longitude & operator=(longitude &&) = default;
 
 	friend bool operator==(const longitude & a, const longitude & b) noexcept;
+	friend bool operator!=(const longitude & a, const longitude & b) noexcept;
 
 	/// Deletion of this operator prevents comparison of apples and oranges.
 	bool operator==(const angle &) const = delete;
+
+	/// Deletion of this operator prevents comparison of apples and oranges.
+	bool operator!=(const angle &) const = delete;
 
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;
@@ -119,6 +133,9 @@ public:
 private:
 	static void check(double a) throw(std::invalid_argument);
 };
+
+bool operator==(const longitude & a, const longitude & b) noexcept;
+bool operator!=(const longitude & a, const longitude & b) noexcept;
 
 /// User defined literal to construct latitudes.
 inline longitude operator "" _lon(long double value)

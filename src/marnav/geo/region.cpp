@@ -57,8 +57,8 @@ region::region(const position & a0, const position & a1) throw(std::invalid_argu
 region::region(const position & a, double d_lat, double d_lon)
 	: p0(a)
 {
-	d_lat = fabs(d_lat);
-	d_lon = fabs(d_lon);
+	d_lat = std::abs(d_lat);
+	d_lon = std::abs(d_lon);
 
 	double t_lat = p0.lat - d_lat;
 	if (t_lat < latitude::min) {

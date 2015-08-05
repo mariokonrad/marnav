@@ -1,5 +1,6 @@
 #include "angle.hpp"
 #include <cmath>
+#include <marnav/math/floatingpoint.hpp>
 
 namespace marnav
 {
@@ -18,7 +19,7 @@ angle::angle(double value)
 /// Returns the degrees of this angle. This value is always positive.
 uint32_t angle::degrees() const
 {
-	auto a = fabs(get());
+	auto a = std::abs(get());
 	a = floor(a);
 	return static_cast<uint32_t>(a);
 }
@@ -27,20 +28,20 @@ uint32_t angle::degrees() const
 /// and is between 0 and 59.
 uint32_t angle::minutes() const
 {
-	auto a = fabs(get());
+	auto a = std::abs(get());
 	a -= floor(a);
 	a *= 60.0;
-	a += EPSILON;
+	a += epsilon;
 	return static_cast<uint32_t>(a);
 }
 
 /// Returns the seconds of this angle.
 double angle::seconds() const
 {
-	auto a = fabs(get());
+	auto a = std::abs(get());
 	a -= floor(a);
 	a *= 60.0;
-	a += EPSILON;
+	a += epsilon;
 	a -= floor(a);
 	a *= 60.0;
 	return a;
@@ -55,7 +56,12 @@ void angle::set(double t) { value = t; }
 
 bool operator==(const angle & a, const angle & b) noexcept
 {
-	return (&a == &b) || (a.value == b.value);
+	return (&a == &b) || math::is_same(a.value, b.value);
+}
+
+bool operator!=(const angle & a, const angle & b) noexcept
+{
+	return !(a == b);
 }
 
 latitude::latitude()
@@ -85,7 +91,12 @@ latitude::hemisphere latitude::hem() const
 
 bool operator==(const latitude & a, const latitude & b) noexcept
 {
-	return (&a == &b) || (a.get() == b.get());
+	return (&a == &b) || math::is_same(a.get(), b.get());
+}
+
+bool operator!=(const latitude & a, const latitude & b) noexcept
+{
+	return !(a == b);
 }
 
 /// Corrects the stored value according to the specified hemisphere.
@@ -138,7 +149,12 @@ longitude::hemisphere longitude::hem() const
 
 bool operator==(const longitude & a, const longitude & b) noexcept
 {
-	return (&a == &b) || (a.get() == b.get());
+	return (&a == &b) || math::is_same(a.get(), b.get());
+}
+
+bool operator!=(const longitude & a, const longitude & b) noexcept
+{
+	return !(a == b);
 }
 
 /// Corrects the stored value according to the specified hemisphere.

@@ -53,4 +53,11 @@ TEST(Test_math_floatingpoint, is_same_zero_one)
 	EXPECT_FALSE(is_same<double>(0.0, 1.0));
 	EXPECT_FALSE(is_same<long double>(0.0, 1.0));
 }
+
+TEST(Test_math_floatingpoint, is_same_pos_neg)
+{
+	EXPECT_FALSE(is_same<float>(-1.0f, 1.0f));
+	EXPECT_FALSE(is_same<double>(-1.0, 1.0));
+	EXPECT_FALSE(is_same<long double>(-1.0, 1.0));
+}
 }
