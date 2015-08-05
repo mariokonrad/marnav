@@ -62,8 +62,7 @@ std::string to_string(dse::query_flag value) throw(std::invalid_argument)
 
 std::string to_string(dse::code_id value) throw(std::invalid_argument)
 {
-	swtich(value)
-	{
+	switch (value) {
 		case dse::code_id::enhanced_position_resolution:
 			return "0";
 		case dse::code_id::source_and_data_of_position:
