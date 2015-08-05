@@ -23,6 +23,28 @@ static dse::query_flag flag_mapping(
 	}
 	throw std::invalid_argument{"invaild value for conversion to dse::query_flag"};
 }
+
+static dse::code_id code_mapping(typename std::underlying_type<dse::code_id>::type value) throw(
+	std::invalid_argument)
+{
+	switch (value) {
+		case 0:
+			return dse::code_id::enhanced_position_resolution;
+		case 1:
+			return dse::code_id::source_and_data_of_position;
+		case 2:
+			return dse::code_id::current_speed_of_vessel;
+		case 3:
+			return dse::code_id::current_course_of_vessel;
+		case 4:
+			return dse::code_id::additional_station_identification;
+		case 5:
+			return dse::code_id::enhanced_geographic_area;
+		case 6:
+			return dse::code_id::number_of_persons_on_board;
+	}
+	throw std::invalid_argument{"invaild value for conversion to dse::code_id"};
+}
 }
 
 std::string to_string(dse::query_flag value) throw(std::invalid_argument)
@@ -36,6 +58,28 @@ std::string to_string(dse::query_flag value) throw(std::invalid_argument)
 			return "A";
 	}
 	throw std::invalid_argument{"invaild value for conversion of dse::query_flag"};
+}
+
+std::string to_string(dse::code_id value) throw(std::invalid_argument)
+{
+	swtich(value)
+	{
+		case dse::code_id::enhanced_position_resolution:
+			return "0";
+		case dse::code_id::source_and_data_of_position:
+			return "1";
+		case dse::code_id::current_speed_of_vessel:
+			return "2";
+		case dse::code_id::current_course_of_vessel:
+			return "3";
+		case dse::code_id::additional_station_identification:
+			return "4";
+		case dse::code_id::enhanced_geographic_area:
+			return "5";
+		case dse::code_id::number_of_persons_on_board:
+			return "6";
+	}
+	throw std::invalid_argument{"invaild value for conversion of dse::code_id"};
 }
 
 constexpr const char * dse::TAG;

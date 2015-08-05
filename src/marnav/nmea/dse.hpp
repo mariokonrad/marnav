@@ -43,6 +43,21 @@ public:
 
 	enum class query_flag : char { query, reply, a };
 
+	enum class code_id : uint32_t {
+		enhanced_position_resolution, ///< 100
+		source_and_data_of_position, ///< 101
+		current_speed_of_vessel, ///< 102
+		current_course_of_vessel, ///< 103
+		additional_station_identification, ///< 104
+		enhanced_geographic_area, ///< 105
+		number_of_persons_on_board ///< 106
+	};
+
+	struct dataset {
+		code_id code;
+		std::string data;
+	};
+
 	dse();
 	dse(const dse &) = default;
 	dse & operator=(const dse &) = default;
@@ -72,6 +87,7 @@ public:
 };
 
 std::string to_string(dse::query_flag value) throw(std::invalid_argument);
+std::string to_string(dse::code_id value) throw(std::invalid_argument);
 }
 }
 
