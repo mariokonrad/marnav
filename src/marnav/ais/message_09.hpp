@@ -24,12 +24,13 @@ public:
 	message_09(const message_09 &) = default;
 	message_09 & operator=(const message_09 &) = default;
 
-	virtual raw get_data() const override;
+	virtual raw get_data() const throw(std::out_of_range) override;
 
-	static std::unique_ptr<message> parse(const raw & bits) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & bits) throw(
+		std::invalid_argument, std::out_of_range);
 
 protected:
-	void read_data(const raw & bits);
+	void read_data(const raw & bits) throw(std::out_of_range);
 
 private:
 	unsigned int repeat_indicator;

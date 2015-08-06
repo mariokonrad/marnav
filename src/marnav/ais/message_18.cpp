@@ -34,7 +34,8 @@ message_18::message_18(message_id id)
 {
 }
 
-std::unique_ptr<message> message_18::parse(const raw & bits) throw(std::invalid_argument)
+std::unique_ptr<message> message_18::parse(const raw & bits) throw(
+	std::invalid_argument, std::out_of_range)
 {
 	if (bits.size() != SIZE_BITS)
 		throw std::invalid_argument{"invalid number of bits in message_18::parse"};
@@ -47,7 +48,7 @@ std::unique_ptr<message> message_18::parse(const raw & bits) throw(std::invalid_
 	return result;
 }
 
-void message_18::read_data(const raw & bits)
+void message_18::read_data(const raw & bits) throw(std::out_of_range)
 {
 	bits.get(repeat_indicator, 6, 2);
 	bits.get(mmsi, 8, 30);
@@ -90,7 +91,7 @@ void message_18::set_latitude(const geo::latitude & t)
 	latitude_minutes = to_latitude_minutes(t);
 }
 
-raw message_18::get_data() const
+raw message_18::get_data() const throw(std::out_of_range) 
 {
 	raw bits{SIZE_BITS};
 

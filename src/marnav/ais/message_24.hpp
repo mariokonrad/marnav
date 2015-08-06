@@ -31,15 +31,16 @@ public:
 	message_24(const message_24 &) = default;
 	message_24 & operator=(const message_24 &) = default;
 
-	virtual raw get_data() const override;
+	virtual raw get_data() const throw(std::out_of_range) override;
 
-	static std::unique_ptr<message> parse(const raw & bits) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & bits) throw(
+		std::invalid_argument, std::out_of_range);
 
 	bool is_auxiliary_vessel() const;
 
 private:
 	message_24(message_id id);
-	void read_data(const raw & bits);
+	void read_data(const raw & bits) throw(std::out_of_range);
 
 private:
 	uint32_t repeat_indicator;

@@ -1,6 +1,7 @@
 #include "message_21.hpp"
 
 #include <algorithm>
+#include <iostream>
 
 #include <marnav/ais/angle.hpp>
 #include <marnav/utils/unique.hpp>
@@ -33,7 +34,8 @@ message_21::message_21()
 {
 }
 
-std::unique_ptr<message> message_21::parse(const raw & bits) throw(std::invalid_argument)
+std::unique_ptr<message> message_21::parse(const raw & bits) throw(
+	std::invalid_argument, std::out_of_range)
 {
 	if ((bits.size() < SIZE_BITS_MIN) || (bits.size() > SIZE_BITS_MAX))
 		throw std::invalid_argument{"invalid number of bits in message_21::parse"};
@@ -46,7 +48,7 @@ std::unique_ptr<message> message_21::parse(const raw & bits) throw(std::invalid_
 	return result;
 }
 
-void message_21::read_data(const raw & bits)
+void message_21::read_data(const raw & bits) throw(std::out_of_range)
 {
 	bits.get(repeat_indicator, 6, 2);
 	bits.get(mmsi, 8, 30);
@@ -71,12 +73,12 @@ void message_21::read_data(const raw & bits)
 	auto rest = static_cast<decltype(SIZE_BITS_MAX)>(bits.size()) - SIZE_BITS_MIN;
 	if (rest > 0) {
 		rest = std::min(rest, SIZE_BITS_MAX - SIZE_BITS_MIN);
-		name_extension = read_string(bits, 272, rest - (rest % 6));
+		name_extension = read_string(bits, 272, rest  / 6);
 	}
 }
 
 /// @todo possible refactoring for name_extension
-raw message_21::get_data() const
+raw message_21::get_data() const throw(std::out_of_range)
 {
 	raw bits{SIZE_BITS_MIN};
 

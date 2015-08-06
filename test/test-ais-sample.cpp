@@ -101,6 +101,9 @@ void process_ais_message(const std::vector<std::unique_ptr<marnav::nmea::sentenc
 		case ais::message_id::extended_class_b_equipment_position_report:
 			std::cout << "AIS: Extended class B equipment position report\n";
 			break;
+		case ais::message_id::aid_to_navigation_report:
+			std::cout << "AIS: Aid-to-Navigation report\n";
+			break;
 		case ais::message_id::static_data_report:
 			std::cout << "AIS: Static Data Report\n";
 			break;
@@ -136,12 +139,14 @@ int main(int, char **)
 					sentences.clear();
 				}
 			} else {
-				std::cout << "NMEA ignored: " << line << "\n";
+				std::cout << "NMEA/AIS ignored: " << line << "\n";
 			}
 		} catch (nmea::unknown_sentence & e) {
 			std::cout << "NMEA unknown: " << e.what() << "\n";
+		} catch (std::out_of_range & e) {
+			std::cout << "NMEA/AIS out_of_range: " << e.what() << " for sentence: [" << line <<"]\n";
 		} catch (std::exception & e) {
-			std::cout << "NMEA error: " << e.what() << "\n";
+			std::cout << "NMEA/AIS error: " << e.what() << " for sentence: [" << line <<"]\n";
 		}
 	}
 

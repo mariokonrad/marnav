@@ -26,13 +26,14 @@ public:
 	message_04(const message_04 &) = default;
 	message_04 & operator=(const message_04 &) = default;
 
-	virtual raw get_data() const override;
+	virtual raw get_data() const throw(std::out_of_range) override;
 
-	static std::unique_ptr<message> parse(const raw & bits) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & bits) throw(
+		std::invalid_argument, std::out_of_range);
 
 protected:
 	message_04(message_id id);
-	void read_data(const raw & bits);
+	void read_data(const raw & bits) throw(std::out_of_range);
 
 private:
 	unsigned int repeat_indicator;

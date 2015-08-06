@@ -12,14 +12,22 @@ class Test_ais_message_21 : public ::testing::Test
 
 TEST_F(Test_ais_message_21, parse)
 {
-	std::vector<std::pair<std::string, int>> v;
-	v.push_back(std::make_pair("E000000000000000000000000000000000000000000000", 0));
+	static const std::vector<std::vector<std::pair<std::string, int>>> TESTS = {
+		{{"E000000000000000000000000000000000000000000000", 0}},
+		{{"E@28isPVa9Qh:0a90SWW0h@@@@@@2kJP;hHP@00003v0100", 2}},
+		{{"E04<o5AaWdPnaGaP00000000000DPmI6:aCVH00000Wh20", 4}},
+		{{"E>j9dhiQ0a2Hh;TW230a6h72P00@=igf?TQA000003vP10", 4}},
+		{{"E04<o60;Rab?Pb7W00000000000DQiF0:ghTP00000`020", 4}},
+	};
 
-	auto result = ais::make_message(v);
-	ASSERT_TRUE(result != nullptr);
-
-	auto m = ais::message_cast<ais::message_21>(result);
-	ASSERT_TRUE(m != nullptr);
+	for (const auto & test : TESTS) {
+		auto result = ais::make_message(test);
+		EXPECT_TRUE(result != nullptr);
+		if (result) {
+			auto m = ais::message_cast<ais::message_21>(result);
+			EXPECT_TRUE(m != nullptr);
+		}
+	}
 }
 
 TEST_F(Test_ais_message_21, encode_default_values)

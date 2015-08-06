@@ -1,5 +1,7 @@
 #include "ais.hpp"
+
 #include <algorithm>
+#include <iostream>
 
 #include "message_01.hpp"
 #include "message_02.hpp"
@@ -104,7 +106,7 @@ static message::parse_function instantiate_message(message_id type, size_t size)
 /// @exception std::invalid_argument Error has been occurred during parsing of
 ///   the message.
 std::unique_ptr<message> make_message(const std::vector<std::pair<std::string, int>> & v) throw(
-	unknown_message, std::invalid_argument)
+	unknown_message, std::invalid_argument, std::out_of_range)
 {
 	auto bits = collect(v);
 	message_id type = static_cast<message_id>(bits.get<uint8_t>(0, 6));

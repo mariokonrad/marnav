@@ -31,7 +31,8 @@ message_01::message_01(message_id id)
 {
 }
 
-std::unique_ptr<message> message_01::parse(const raw & bits) throw(std::invalid_argument)
+std::unique_ptr<message> message_01::parse(const raw & bits) throw(
+	std::invalid_argument, std::out_of_range)
 {
 	if (bits.size() != SIZE_BITS)
 		throw std::invalid_argument{"invalid number of bits in ais/message_01::parse"};
@@ -44,7 +45,7 @@ std::unique_ptr<message> message_01::parse(const raw & bits) throw(std::invalid_
 	return result;
 }
 
-void message_01::read_data(const raw & bits)
+void message_01::read_data(const raw & bits) throw(std::out_of_range)
 {
 	bits.get(repeat_indicator, 6, 2);
 	bits.get(mmsi, 8, 30);
@@ -83,7 +84,7 @@ void message_01::set_latitude(const geo::latitude & t)
 	latitude_minutes = floor(60000.0 * t);
 }
 
-raw message_01::get_data() const
+raw message_01::get_data() const throw(std::out_of_range)
 {
 	raw bits{SIZE_BITS};
 

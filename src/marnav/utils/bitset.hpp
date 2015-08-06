@@ -646,9 +646,13 @@ public:
 		if (bits <= 0)
 			return T{};
 		if (bits > sizeof(T) * BITS_PER_BYTE)
-			throw std::invalid_argument{"number of bits exceed number of available bits"};
+			throw std::invalid_argument{"number of bits (" + std::to_string(bits)
+				+ ") exceed number of available bits ("
+				+ std::to_string(sizeof(T) * BITS_PER_BYTE) + ")"};
 		if (ofs + bits > pos)
-			throw std::out_of_range{"offset and bits exceed available number of bits"};
+			throw std::out_of_range{"offset (" + std::to_string(ofs) + ") and bits ("
+				+ std::to_string(bits) + ") exceed available number of bits ("
+				+ std::to_string(pos) + ")"};
 
 		T value = 0;
 

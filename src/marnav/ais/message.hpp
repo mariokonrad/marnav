@@ -164,7 +164,7 @@ public:
 	virtual ~message() {}
 
 	message_id type() const;
-	virtual raw get_data() const = 0;
+	virtual raw get_data() const throw(std::out_of_range) = 0;
 
 protected:
 	message(message_id type);
