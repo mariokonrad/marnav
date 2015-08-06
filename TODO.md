@@ -55,7 +55,6 @@ AIS
 	- Type 16: Assignment Mode Command
 	- Type 17: DGNSS Broadcast Binary Message
 	- Type 20: Data Link Management Message
-	- Type 21: Aid-to-Navigation Report
 	- Type 22: Channel Management
 	- Type 23: Group Assignment Command
 	- Type 25: Single Slot Binary Message

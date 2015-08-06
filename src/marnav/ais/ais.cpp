@@ -1,4 +1,6 @@
 #include "ais.hpp"
+#include <algorithm>
+
 #include "message_01.hpp"
 #include "message_02.hpp"
 #include "message_03.hpp"
@@ -9,8 +11,8 @@
 #include "message_11.hpp"
 #include "message_18.hpp"
 #include "message_19.hpp"
+#include "message_21.hpp"
 #include "message_24.hpp"
-#include <algorithm>
 
 /// @example read_ais.cpp
 /// This is an example on how to parse and handle AIS messages while
@@ -78,6 +80,7 @@ static message::parse_function instantiate_message(message_id type, size_t size)
 		{message_id::utc_and_date_response, message_11::parse},
 		{message_id::standard_class_b_cs_position_report, message_18::parse},
 		{message_id::extended_class_b_equipment_position_report, message_19::parse},
+		{message_id::aid_to_navigation_report, message_21::parse},
 		{message_id::static_data_report, message_24::parse},
 	};
 
