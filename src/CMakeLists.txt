@@ -68,6 +68,7 @@ set(SOURCE_NMEA_0183
 	marnav/nmea/rsa.cpp
 	marnav/nmea/rte.cpp
 	marnav/nmea/sfi.cpp
+	marnav/nmea/tll.cpp
 	marnav/nmea/ttm.cpp
 	marnav/nmea/vbw.cpp
 	marnav/nmea/vdm.cpp
@@ -221,6 +222,7 @@ install(
 		marnav/nmea/rsa.hpp
 		marnav/nmea/rte.hpp
 		marnav/nmea/sfi.hpp
+		marnav/nmea/tll.hpp
 		marnav/nmea/ttm.hpp
 		marnav/nmea/vbw.hpp
 		marnav/nmea/vdm.hpp

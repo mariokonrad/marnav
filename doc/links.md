@@ -29,3 +29,5 @@ NOTE: The official NMEA 0183 Standard document is not available for free. It was
 - [Navigation Center - AIS Standard Class B Equipment Position Report](http://www.navcen.uscg.gov/?pageName=AISMessagesB)
 
 - [GPS Forums](http://www.gps-forums.net)
+
+- [NMEA Datensaetze](http://www.nmea.de/nmea0183datensaetze.html)

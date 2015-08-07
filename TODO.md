@@ -32,7 +32,6 @@ NMEA
 	- STN: Multiple Data ID
 	- TDS: Trawl Door Spread Distance
 	- TFI: Trawl Filling Indicator
-	- TLL: Target Latitude and Longitude
 	- TPC: Trawl Position Cartesian Coordinates
 	- TPR: Trawl Position Relative Vessel
 	- TPT: Trawl Position True

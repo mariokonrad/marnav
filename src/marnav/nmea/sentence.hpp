@@ -71,6 +71,7 @@ enum class sentence_id : uint32_t {
 	TPR, ///< Trawl Position Relative Vessel
 	TPT, ///< Trawl Position True
 	TRF, ///< TRANSIT Fix Data
+	TLL, ///< Target latitude and longitude
 	TTM, ///< Tracked Target Message
 	VBW, ///< Dual Ground/Water Speed
 	VDM, ///< AIS

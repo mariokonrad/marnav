@@ -1,7 +1,5 @@
 #include "ttm.hpp"
 
-#include <iostream>
-
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 #include <marnav/utils/unique.hpp>
@@ -27,7 +25,6 @@ std::unique_ptr<sentence> ttm::parse(const std::string & talker,
 	std::unique_ptr<sentence> result = utils::make_unique<ttm>();
 	result->set_talker(talker);
 	ttm & detail = static_cast<ttm &>(*result);
-
 
 	read(fields[0], detail.target_number);
 	read(fields[1], detail.target_distance);
