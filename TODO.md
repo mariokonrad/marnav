@@ -17,7 +17,6 @@ NMEA
 	- ASD: Autopilot System Data
 	- DSI: DSC Transponder Initiate
 	- DSR: DSC Transponder Response
-	- DTM: Datum Reference
 	- GBS: GPS Satellite Fault Detection
 	- GLC: Geographic Position, Loran-C
 	- GRS: GPS Range Residuals

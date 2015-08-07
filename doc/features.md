@@ -25,6 +25,7 @@ Supported sentences for NMEA-0183 (read and write):
 - DPT: Depth of Water
 - DSC: Digital Selective Calling Information
 - DSE: Extended DSC
+- DTM: Datum Reference
 - FSI: Frequency Set Information
 - GGA: Global Positioning System Fix Data
 - GLL: Geographic Position - Latitude/Longitude
