@@ -6,6 +6,8 @@ namespace marnav
 namespace nmea
 {
 /// Enumeration of manufacturer IDs.
+///
+/// @todo Conversion function from/to string
 enum class manufacturer_id = {
 	_3SN, ///< 3-S Navigation
 	AAR, ///< Asian American Resources
