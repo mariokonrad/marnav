@@ -38,7 +38,6 @@ NMEA
 	- TPR: Trawl Position Relative Vessel
 	- TPT: Trawl Position True
 	- TRF: TRANSIT Fix Data
-	- TTM: Tracked Target Message
 	- vendor extensions
 
 AIS

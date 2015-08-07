@@ -44,6 +44,7 @@ Supported sentences for NMEA-0183 (read and write):
 - RSA: Rudder Sensor Angle
 - RTE: Routes
 - SFI: Scanning Frequency Information
+- TTM: Tracked Target Message
 - VBW: Dual Ground/Water Speed
 - VDM: AIS VHF Data-Link Message
 - VDO: AIS VHF Data-Link Own-Vessel Report
