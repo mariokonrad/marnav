@@ -14,12 +14,53 @@ dtm::dtm()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 	, ref("W84")
 	, lat_offset(0)
-	, lat_hem('N')
+	, lat_hem(direction::NORTH)
 	, lon_offset(0)
-	, lon_hem('E')
+	, lon_hem(direction::EAST)
 	, altitude(0)
 	, name("W84")
 {
+}
+
+void dtm::set_lat_offset(double t, direction h)
+{
+	check_value(h, {direction::NORTH, direction::SOUTH});
+	lat_offset = t;
+	lat_hem = h;
+}
+
+void dtm::set_lon_offset(double t, direction h)
+{
+	check_value(h, {direction::EAST, direction::WEST});
+	lon_offset = t;
+	lon_hem = h;
+}
+
+void dtm::set_ref(const std::string & t)
+{
+	if (t.size() > 5) {
+		ref = t.substr(0, 5);
+	} else {
+		ref = t;
+	}
+}
+
+void dtm::set_subcode(const std::string & t)
+{
+	if (t.size() > 5) {
+		subcode = t.substr(0, 5);
+	} else {
+		subcode = t;
+	}
+}
+
+void dtm::set_name(const std::string & t)
+{
+	if (t.size() > 5) {
+		name = t.substr(0, 5);
+	} else {
+		name = t;
+	}
 }
 
 std::unique_ptr<sentence> dtm::parse(const std::string & talker,

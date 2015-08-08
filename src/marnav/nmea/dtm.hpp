@@ -33,6 +33,8 @@ namespace nmea
 /// 8. Datum name. What’s usually seen here is "W84", the standard WGS84 datum used by GPS.
 ///    - W84 = WGS84
 ///
+/// @note Datum code, subcode and datum name are truncated to 5 characters.
+///
 class dtm : public sentence
 {
 public:
@@ -53,9 +55,9 @@ private:
 	std::string ref;
 	utils::optional<std::string> subcode;
 	double lat_offset;
-	char lat_hem;
+	direction lat_hem;
 	double lon_offset;
-	char lon_hem;
+	direction lon_hem;
 	double altitude;
 	std::string name;
 
@@ -69,14 +71,12 @@ public:
 	NMEA_GETTER(altitude)
 	NMEA_GETTER(name)
 
-	void set_ref(const std::string & t) { ref = t; }
-	void set_subcode(const std::string & t) { subcode = t; }
-	void set_lat_offset(double t) { lat_offset = t; }
-	void set_lat_hem(char t) { lat_hem = t; }
-	void set_lon_offset(double t) { lon_offset = t; }
-	void set_lon_hem(char t) { lon_hem = t; }
+	void set_ref(const std::string & t);
+	void set_subcode(const std::string & t);
+	void set_lat_offset(double t, direction h);
+	void set_lon_offset(double t, direction h);
 	void set_altitude(double t) { altitude = t; }
-	void set_name(const std::string & t) { name = t; }
+	void set_name(const std::string & t);
 };
 }
 }
