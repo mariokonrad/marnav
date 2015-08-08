@@ -9,6 +9,10 @@ It supports (partially):
 - SeaTalk (Raymarine device communication)
 - Reading data from serial ports (NMEA, SeaTalk)
 - Basic geodesic functions, suitable for martime navigation.
+  - Calculation of CPA and TCPA
+  - Distance of two points on a sphere
+  - Distance of two points on an ellipsoid using formula of Vincenty
+  - Distance of two points on an ellipsoid using formula of Lambert
 
 
 NMEA-0183
@@ -23,8 +27,8 @@ Supported sentences for NMEA-0183 (read and write):
 - BWW: Bearing - Waypoint to Waypoint
 - DBT: Depth Below Transducer
 - DPT: Depth of Water
-- DSC: Digital Selective Calling Information
-- DSE: Extended DSC
+- DSC: Digital Selective Calling Information (**experimental**)
+- DSE: Extended DSC (**experimental**)
 - DTM: Datum Reference
 - FSI: Frequency Set Information
 - GGA: Global Positioning System Fix Data
