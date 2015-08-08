@@ -8,6 +8,17 @@ namespace marnav
 namespace seatalk
 {
 
+/// @brief Apparent Wind Angle
+///
+/// @code
+/// 10  01  XX  YY
+///
+/// Apparent Wind Angle: XXYY/2 degrees right of bow Used for autopilots
+/// Vane Mode (WindTrim)
+/// @endcode
+///
+/// Corresponding NMEA sentence: MWV
+///
 class message_10 : public message
 {
 public:

@@ -8,6 +8,14 @@ namespace marnav
 namespace seatalk
 {
 
+/// @brief Trip Mileage
+///
+/// @code
+/// 21 02 XX XX 0X
+///
+/// Trip Mileage: XXXXX/100 nautical miles
+/// @endcode
+///
 class message_21 : public message
 {
 public:

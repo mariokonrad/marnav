@@ -8,6 +8,23 @@ namespace marnav
 namespace seatalk
 {
 
+/// @brief Depth below transducer
+///
+/// @code
+/// 00  02  YZ  XX XX
+///
+/// Depth below transducer: XXXX/10 feet
+///    Flags in Y: Y&8 = 8: Anchor Alarm is active
+///                Y&4 = 4: Metric display units or
+///                         Fathom display units if followed by command 65
+///                Y&2 = 2: Used, unknown meaning
+///    Flags in Z: Z&4 = 4: Transducer defective
+///                Z&2 = 2: Deep Alarm is active
+///                Z&1 = 1: Shallow Depth Alarm is active
+/// @endcode
+///
+/// Corresponding NMEA sentences: DPT, DBT
+///
 class message_00 : public message
 {
 public:

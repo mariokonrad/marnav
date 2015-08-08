@@ -8,6 +8,14 @@ namespace marnav
 namespace seatalk
 {
 
+/// @brief Total & Trip Log
+///
+/// @code
+/// 25 Z4 XX YY UU VV AW
+///    total= (XX+YY*256+Z* 4096)/ 10 [max=104857.5] nautical miles
+///    trip = (UU+VV*256+W*65536)/100 [max=10485.75] nautical miles
+/// @endcode
+///
 class message_25 : public message
 {
 public:

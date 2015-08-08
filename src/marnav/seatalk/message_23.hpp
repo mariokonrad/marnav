@@ -8,6 +8,17 @@ namespace marnav
 namespace seatalk
 {
 
+/// @brief Water temperature (ST50)
+///
+/// @code
+/// 23 Z1 XX YY
+///
+/// Water temperature (ST50): XX deg Celsius, YY deg Fahrenheit
+///    Flag Z&4: Sensor defective or not connected (Z=4)
+/// @endcode
+///
+/// Corresponding NMEA sentence: MTW
+///
 class message_23 : public message
 {
 public:

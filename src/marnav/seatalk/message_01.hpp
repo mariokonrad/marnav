@@ -9,12 +9,22 @@ namespace marnav
 namespace seatalk
 {
 
-// 00 00 00 60 01 00  Course Computer 400G
-// 04 BA 20 28 01 00  ST60 Tridata
-// 70 99 10 28 01 00  ST60 Log
-// F3 18 00 26 0F 06  ST80 Masterview
-// FA 03 00 30 07 03  ST80 Maxi Display
-// FF FF FF D0 00 00  Smart Controller Remote Control Handset
+/// @brief Equipment ID
+///
+/// @code
+/// 01 05 XX XX XX XX XX XX
+/// @endcode
+///
+/// Known examples:
+/// @code
+/// 01 05 00 00 00 60 01 00 : Course Computer 400G
+/// 01 05 04 BA 20 28 01 00 : ST60 Tridata
+/// 01 05 70 99 10 28 01 00 : ST60 Log
+/// 01 05 F3 18 00 26 0F 06 : ST80 Masterview
+/// 01 05 FA 03 00 30 07 03 : ST80 Maxi Display
+/// 01 05 FF FF FF D0 00 00 : Smart Controller Remote Control Handset
+/// @endcode
+///
 class message_01 : public message
 {
 public:

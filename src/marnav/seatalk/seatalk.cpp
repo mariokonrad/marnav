@@ -1,15 +1,18 @@
 #include "seatalk.hpp"
-#include "message_00.hpp"
-#include "message_01.hpp"
-#include "message_10.hpp"
-#include "message_11.hpp"
-#include "message_20.hpp"
-#include "message_21.hpp"
-#include "message_22.hpp"
-#include "message_23.hpp"
-#include "message_25.hpp"
-#include "message_27.hpp"
+
 #include <algorithm>
+
+#include <marnav/seatalk/message_00.hpp>
+#include <marnav/seatalk/message_01.hpp>
+#include <marnav/seatalk/message_05.hpp>
+#include <marnav/seatalk/message_10.hpp>
+#include <marnav/seatalk/message_11.hpp>
+#include <marnav/seatalk/message_20.hpp>
+#include <marnav/seatalk/message_21.hpp>
+#include <marnav/seatalk/message_22.hpp>
+#include <marnav/seatalk/message_23.hpp>
+#include <marnav/seatalk/message_25.hpp>
+#include <marnav/seatalk/message_27.hpp>
 
 namespace marnav
 {
@@ -22,6 +25,7 @@ static message::parse_function instantiate_message(message_id type) throw(std::i
 	static const std::vector<entry> known_messages = {
 		{message_id::depth_below_transducer, message_00::parse},
 		{message_id::equipment_id, message_01::parse},
+		{message_id::engine_rpm_and_pitch, message_05::parse},
 		{message_id::apparent_wind_angle, message_10::parse},
 		{message_id::apparent_wind_speed, message_11::parse},
 		{message_id::speed_through_water, message_20::parse},

@@ -16,6 +16,7 @@ constexpr const int MAX_MESSAGE_SIZE = 32;
 enum class message_id : uint8_t {
 	depth_below_transducer = 0x00,
 	equipment_id = 0x01,
+	engine_rpm_and_pitch = 0x05,
 	apparent_wind_angle = 0x10,
 	apparent_wind_speed = 0x11,
 	speed_through_water = 0x20,
@@ -34,6 +35,8 @@ constexpr const char MPS = 'M'; // meters per second
 
 using raw = std::vector<uint8_t>;
 
+/// @brief Base class for all SeaTalk messages
+///
 class message
 {
 public:

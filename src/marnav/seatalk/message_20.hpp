@@ -8,6 +8,16 @@ namespace marnav
 namespace seatalk
 {
 
+/// @brief Speed through water
+///
+/// @code
+/// 20 01 XX XX
+///
+/// Speed through water: XXXX/10 Knots
+/// @endcode
+///
+/// Corresponding NMEA sentence: VHW
+///
 class message_20 : public message
 {
 public:

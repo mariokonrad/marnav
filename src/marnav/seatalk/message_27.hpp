@@ -8,6 +8,16 @@ namespace marnav
 namespace seatalk
 {
 
+/// @brief Water temperature
+///
+/// @code
+/// 27 01 XX XX
+///
+/// Water temperature: (XXXX-100)/10 deg Celsius
+/// @endcode
+///
+/// Corresponding NMEA sentence: MTW
+///
 class message_27 : public message
 {
 public:
