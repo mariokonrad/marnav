@@ -64,7 +64,6 @@ SeaTalk
 @todo Implement writer for serial devices
 
 @todo Implement more messages:
-	- Type 05: Engine RPM and PITCH
 	- Type 24: Display unit for Mileage and Speed
 	- Type 26: Speed through Water
 	- Type 30: Set lamp Intensity

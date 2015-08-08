@@ -102,6 +102,7 @@ SeaTalk
 Suported messages for SeaTalk (decode and encode):
 - Type 00: depth below transducer
 - Type 01: equipment id
+- Type 05: Engine RPM and PITCH
 - Type 10: apparent wind angle
 - Type 11: apparent wind speed
 - Type 20: speed through water
