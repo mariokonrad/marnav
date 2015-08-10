@@ -38,11 +38,11 @@ namespace geo
 ///
 /// @endcode
 ///
-/// It is perfectly possible for a region to overlap the datum
-/// barrier, as shown here:
+/// It is perfectly possible for a region to overlap the date line,
+/// as shown here:
 /// @code
 ///
-///           date barrier (180W == 180E)
+///           date line (180W == 180E)
 ///  p0       I
 ///   +-------I------+
 ///   |       I      |

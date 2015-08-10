@@ -19,7 +19,7 @@ namespace geo
 ///
 /// @note There is no sorting of coordinates, the positions a0/a1 must
 ///       already be top/left,bottom/right ordering. There is no automatic
-///       way to sort them because of the date barrier.
+///       way to sort them because of the international date line.
 ///
 /// @param[in] a0 Position top/left
 /// @param[in] a1 Position bottom/right
@@ -90,7 +90,7 @@ latitude region::bottom() const { return p1.lat; }
 ///
 bool region::inside(const position & p) const
 {
-	// testing latitude is easy, there is no date barrier, no
+	// testing latitude is easy, there is no date line, no
 	// wrap-arround
 	if (p.lat > p0.lat)
 		return false;
@@ -99,7 +99,7 @@ bool region::inside(const position & p) const
 
 	// test longitude
 
-	// shifted longitudes, now between 0..360 (date barrier, westwards)
+	// shifted longitudes, now between 0..360 (date line, westwards)
 	const double plon_s = p.lon.get() + 180.0;
 	const double p0lon_s = p0.lon.get() + 180.0;
 	const double p1lon_s = p1.lon.get() + 180.0;

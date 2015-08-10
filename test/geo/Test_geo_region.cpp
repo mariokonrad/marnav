@@ -67,11 +67,11 @@ public:
 		return region{{-33.0, 60.0}, {-35.0, 56.0}};
 	}
 
-	region create_date_barrier_south()
+	region create_date_line_south()
 	{
 		// note: this ascii art does not use correct projection
 
-		// southern hemisphere, arround date barrier, east of New Zealand
+		// southern hemisphere, arround date line, east of New Zealand
 
 		// a0 (-40.0,-178.0)
 		// +--------I--------+
@@ -82,7 +82,7 @@ public:
 		// |        I        |
 		// +--------I--------+
 		//          |        a1 (-45.0,178.0)
-		//          date barrier
+		//          date line
 
 		return region{{-40.0, -178.0}, {-45.0, 178.0}};
 	}
@@ -144,9 +144,9 @@ TEST_F(Test_geo_region, construction_point_delta)
 	EXPECT_EQ(longitude{-5.0}, reg.right());
 }
 
-TEST_F(Test_geo_region, construction_point_delta_date_barrier)
+TEST_F(Test_geo_region, construction_point_delta_date_line)
 {
-	const auto reg = region{{0.0, -178.0}, 10.0, 5.0}; // wrap arround E->W at datum barrier
+	const auto reg = region{{0.0, -178.0}, 10.0, 5.0}; // wrap arround E->W at date line
 
 	EXPECT_EQ(latitude{0.0}, reg.top());
 	EXPECT_EQ(latitude{-10.0}, reg.bottom());
@@ -170,9 +170,9 @@ TEST_F(Test_geo_region, inside_arround_zero)
 	EXPECT_FALSE(reg.inside({-3.0, 0.0}));
 }
 
-TEST_F(Test_geo_region, inside_date_barrier)
+TEST_F(Test_geo_region, inside_date_line)
 {
-	const auto reg = create_date_barrier_south();
+	const auto reg = create_date_line_south();
 
 	// boundaries
 	EXPECT_TRUE(reg.inside({reg.top(), reg.left()}));
