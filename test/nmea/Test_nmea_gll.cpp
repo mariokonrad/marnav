@@ -54,7 +54,7 @@ TEST_F(Test_nmea_gll, set_lat_south)
 TEST_F(Test_nmea_gll, set_lon_west)
 {
 	nmea::gll gll;
-	gll.set_lon(geo::longitude{123.45});
+	gll.set_lon(geo::longitude{-123.45});
 
 	EXPECT_STREQ("$GPGLL,,,12327.0000,W,,,V*66", nmea::to_string(gll).c_str());
 }
@@ -62,7 +62,7 @@ TEST_F(Test_nmea_gll, set_lon_west)
 TEST_F(Test_nmea_gll, set_lon_east)
 {
 	nmea::gll gll;
-	gll.set_lon(geo::longitude{-123.45});
+	gll.set_lon(geo::longitude{123.45});
 
 	EXPECT_STREQ("$GPGLL,,,12327.0000,E,,,V*74", nmea::to_string(gll).c_str());
 }

@@ -67,7 +67,7 @@ TEST_F(Test_nmea_bwc, set_lon)
 	nmea::bwc bwc;
 	bwc.set_lon(geo::longitude{123.45});
 
-	EXPECT_STREQ("$GPBWC,,,,12327.0000,W,,,,,,,,*21", nmea::to_string(bwc).c_str());
+	EXPECT_STREQ("$GPBWC,,,,12327.0000,E,,,,,,,,*33", nmea::to_string(bwc).c_str());
 }
 
 TEST_F(Test_nmea_bwc, set_bearing_true)

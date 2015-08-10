@@ -98,7 +98,7 @@ TEST_F(Test_nmea_rmc, get_lon_east)
 	ASSERT_NE(nullptr, rmc);
 
 	const auto lon = *rmc->get_lon();
-	EXPECT_NEAR(-123.7656, lon.get(), 1e-4);
+	EXPECT_NEAR(123.7656, lon.get(), 1e-4);
 	EXPECT_EQ(123u, lon.degrees());
 	EXPECT_EQ(45u, lon.minutes());
 	EXPECT_NEAR(56.0, lon.seconds(), 1e-2);
@@ -122,7 +122,7 @@ TEST_F(Test_nmea_rmc, get_lon_west)
 	ASSERT_NE(nullptr, rmc);
 
 	const auto lon = *rmc->get_lon();
-	EXPECT_NEAR(123.7656, lon.get(), 1e-4);
+	EXPECT_NEAR(-123.7656, lon.get(), 1e-4);
 	EXPECT_EQ(123u, lon.degrees());
 	EXPECT_EQ(45u, lon.minutes());
 	EXPECT_NEAR(56.0, lon.seconds(), 1e-2);

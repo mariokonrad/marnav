@@ -43,12 +43,20 @@ TEST_F(Test_nmea_wpl, set_lat)
 	EXPECT_STREQ("$GPWPL,1218.0000,N,,,*1A", nmea::to_string(wpl).c_str());
 }
 
-TEST_F(Test_nmea_wpl, set_lon)
+TEST_F(Test_nmea_wpl, set_lon_west)
+{
+	nmea::wpl wpl;
+	wpl.set_lon(geo::longitude{-123.4});
+
+	EXPECT_STREQ("$GPWPL,,,12324.0000,W,*3F", nmea::to_string(wpl).c_str());
+}
+
+TEST_F(Test_nmea_wpl, set_lon_east)
 {
 	nmea::wpl wpl;
 	wpl.set_lon(geo::longitude{123.4});
 
-	EXPECT_STREQ("$GPWPL,,,12324.0000,W,*3F", nmea::to_string(wpl).c_str());
+	EXPECT_STREQ("$GPWPL,,,12324.0000,E,*2D", nmea::to_string(wpl).c_str());
 }
 
 TEST_F(Test_nmea_wpl, set_waypoint)

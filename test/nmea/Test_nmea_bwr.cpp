@@ -57,7 +57,7 @@ TEST_F(Test_nmea_bwr, set_lon)
 	nmea::bwr bwr;
 	bwr.set_lon(geo::longitude{123.45});
 
-	EXPECT_STREQ("$GPBWR,,,,12327.0000,W,,,,,,,*1C", nmea::to_string(bwr).c_str());
+	EXPECT_STREQ("$GPBWR,,,,12327.0000,E,,,,,,,*0E", nmea::to_string(bwr).c_str());
 }
 
 TEST_F(Test_nmea_bwr, set_bearing_true)

@@ -73,13 +73,20 @@ TEST_F(Test_nmea_rmb, set_lat)
 	EXPECT_STREQ("$GPRMB,,,,,,0220.4000,N,,,,,,,*2E", nmea::to_string(rmb).c_str());
 }
 
-TEST_F(Test_nmea_rmb, set_lon)
+TEST_F(Test_nmea_rmb, set_lon_west)
 {
 	nmea::rmb rmb;
-	rmb.set_lon(marnav::geo::longitude{2.34});
+	rmb.set_lon(marnav::geo::longitude{-2.34});
 
 	EXPECT_STREQ("$GPRMB,,,,,,,,00220.4000,W,,,,,*07", nmea::to_string(rmb).c_str());
 }
 
-// @todo: implementation of RMB unit tests
+TEST_F(Test_nmea_rmb, set_lon_east)
+{
+	nmea::rmb rmb;
+	rmb.set_lon(marnav::geo::longitude{2.34});
+
+	EXPECT_STREQ("$GPRMB,,,,,,,,00220.4000,E,,,,,*15", nmea::to_string(rmb).c_str());
+}
+
 }

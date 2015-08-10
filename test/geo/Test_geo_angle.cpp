@@ -51,8 +51,8 @@ TEST_F(Test_geo_angle, hemisphere)
 {
 	EXPECT_EQ(30,  (geo::latitude{30, 0, 0, geo::latitude::hemisphere::NORTH}.get()));
 	EXPECT_EQ(-30, (geo::latitude{30, 0, 0, geo::latitude::hemisphere::SOUTH}.get()));
-	EXPECT_EQ(-30, (geo::longitude{30, 0, 0, geo::longitude::hemisphere::EAST}.get()));
-	EXPECT_EQ(30,  (geo::longitude{30, 0, 0, geo::longitude::hemisphere::WEST}.get()));
+	EXPECT_EQ(30, (geo::longitude{30, 0, 0, geo::longitude::hemisphere::EAST}.get()));
+	EXPECT_EQ(-30,  (geo::longitude{30, 0, 0, geo::longitude::hemisphere::WEST}.get()));
 }
 
 TEST_F(Test_geo_angle, comparison)
@@ -107,28 +107,52 @@ TEST_F(Test_geo_angle, latitude_hemisphere)
 
 TEST_F(Test_geo_angle, longitude_hemisphere)
 {
-	EXPECT_EQ(geo::longitude::hemisphere::WEST, geo::longitude{+1.0}.hem());
-	EXPECT_EQ(geo::longitude::hemisphere::EAST, geo::longitude{-1.0}.hem());
+	EXPECT_EQ(geo::longitude::hemisphere::WEST, geo::longitude{-1.0}.hem());
+	EXPECT_EQ(geo::longitude::hemisphere::EAST, geo::longitude{+1.0}.hem());
 }
 
-TEST_F(Test_geo_angle, latitude_literal)
+TEST_F(Test_geo_angle, latitude_literal_north)
 {
 	using namespace marnav::geo;
 
 	const latitude expected{12.34};
-	const auto t = 12.34_lat;
+	const latitude t = 12.34_lat;
 
 	EXPECT_EQ(expected, t);
+	EXPECT_EQ(geo::latitude::hemisphere::NORTH, t.hem());
 }
 
-TEST_F(Test_geo_angle, longitude_literal)
+TEST_F(Test_geo_angle, latitude_literal_south)
+{
+	using namespace marnav::geo;
+
+	const latitude expected{-12.34};
+	const latitude t = -12.34_lat;
+
+	EXPECT_EQ(expected, t);
+	EXPECT_EQ(geo::latitude::hemisphere::SOUTH, t.hem());
+}
+
+TEST_F(Test_geo_angle, longitude_literal_east)
 {
 	using namespace marnav::geo;
 
 	const longitude expected{123.45};
-	const auto t = 123.45_lon;
+	const longitude t = 123.45_lon;
 
 	EXPECT_EQ(expected, t);
+	EXPECT_EQ(geo::longitude::hemisphere::EAST, t.hem());
+}
+
+TEST_F(Test_geo_angle, longitude_literal_west)
+{
+	using namespace marnav::geo;
+
+	const longitude expected{-123.45};
+	const longitude t = -123.45_lon;
+
+	EXPECT_EQ(expected, t);
+	EXPECT_EQ(geo::longitude::hemisphere::WEST, t.hem());
 }
 
 }

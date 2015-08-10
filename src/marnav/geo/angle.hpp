@@ -98,7 +98,7 @@ inline latitude operator "" _lat(long double value)
 
 /// Longitude.
 ///
-/// Value ranges between +180.0 (west) to -180.0 (east).
+/// Value ranges between -180.0 (west) to +180.0 (east).
 class longitude : public angle
 {
 public:

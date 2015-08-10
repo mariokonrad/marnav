@@ -13,9 +13,9 @@ public:
 	{
 		// note: this ascii art does not use correct projection
 
-		// atlantic ocean, knee of africa, west of Congo
+		return region{ // atlantic ocean, knee of africa, west of Congo
 
-		// a0 (1.0,1.0)
+		{1.0, -1.0}, // a0
 		// +-----------------+
 		// |    I            |
 		// |    I            |
@@ -23,19 +23,19 @@ public:
 		// |    I            |
 		// |    I            |
 		// +-----------------+
-		//      |            a1 (-2.0,-3.0)
-		//      zero meridian
-
-		return region{{1.0, 1.0}, {-2.0, -3.0}};
+		//    prime meridian |
+		//                   |
+		                     {-2.0,3.0} // a1
+		};
 	}
 
 	region create_somewhere_north_west()
 	{
 		// note: this ascii art does not use correct projection
 
-		// arround Vancouver/Canada
+		return region{ // arround Vancouver/Canada
 
-		// a0 (49.0,124.0)
+		{49.0, -124.0}, // a0
 		// +-----------------+
 		// |                 |
 		// |                 |
@@ -43,18 +43,17 @@ public:
 		// |                 |
 		// |                 |
 		// +-----------------+
-		//                   a1 (48.0,122.0)
-
-		return region{{49.0, 124.0}, {48.0, 124.0}};
+		             {48.0, -122.0} // a1
+		};
 	}
 
 	region create_somewhere_south_west()
 	{
 		// note: this ascii art does not use correct projection
 
-		// arround Buenos Airs/Argentina
+		return region{ // arround Buenos Airs/Argentina
 
-		// a0 (-33.0,60.0)
+		{-33.0, -60.0}, // a0
 		// +-----------------+
 		// |                 |
 		// |                 |
@@ -62,18 +61,17 @@ public:
 		// |                 |
 		// |                 |
 		// +-----------------+
-		//                   a1 (-35.0,56.0)
-
-		return region{{-33.0, 60.0}, {-35.0, 56.0}};
+		              {-35.0, -56.0} // a1
+		};
 	}
 
 	region create_date_line_south()
 	{
 		// note: this ascii art does not use correct projection
 
-		// southern hemisphere, arround date line, east of New Zealand
+		return region{ // southern hemisphere, arround date line, east of New Zealand
 
-		// a0 (-40.0,-178.0)
+		{-40.0, 178.0}, // a0
 		// +--------I--------+
 		// |        I        |
 		// |        I        |
@@ -81,17 +79,19 @@ public:
 		// |        I        |
 		// |        I        |
 		// +--------I--------+
-		//          |        a1 (-45.0,178.0)
-		//          date line
-
-		return region{{-40.0, -178.0}, {-45.0, 178.0}};
+		//       date line   |
+		//                   |
+		              {-45.0, -178.0} // a1
+		};
 	}
 
 	region create_north_pole()
 	{
 		// note: this ascii art does not use correct projection
 
-		// a0 (90.0,120.0)
+		return region{ // north pole
+
+		{80.0, -120.0}, // a0
 		// +---*-------------+
 		// |   I             |
 		// |   I             |
@@ -99,10 +99,10 @@ public:
 		// |   I             |
 		// |   I             |
 		// +-----------------+
-		//     |             a1 (80.0, -35.0)
-		//     zero meridian
-
-		return region{{80.0, 120.0}, {80.0, -35.0}};
+		//   prime meridian  |
+		//                   |
+		               {80.0, 35.0} // a1
+		};
 	}
 };
 
@@ -112,7 +112,7 @@ TEST_F(Test_geo_region, construction_two_points)
 
 	const auto w = reg.left();
 	const auto e = reg.right();
-	EXPECT_TRUE(w > e) << "westerly:" << w << ", easterly: " << e;
+	EXPECT_TRUE(w < e) << "westerly:" << w << ", easterly: " << e;
 
 	const auto n = reg.top();
 	const auto s = reg.bottom();
@@ -136,22 +136,30 @@ TEST_F(Test_geo_region, construction_two_points_upside_down)
 
 TEST_F(Test_geo_region, construction_point_delta)
 {
-	const auto reg = region{{0.0, 0.0}, 10.0, 5.0};
-
-	EXPECT_EQ(latitude{0.0}, reg.top());
-	EXPECT_EQ(latitude{-10.0}, reg.bottom());
-	EXPECT_EQ(longitude{0.0}, reg.left());
-	EXPECT_EQ(longitude{-5.0}, reg.right());
+	{
+		const auto reg = region{{0.0, 0.0}, 10.0, 5.0};
+		EXPECT_EQ(latitude{0.0}, reg.top());
+		EXPECT_EQ(latitude{-10.0}, reg.bottom());
+		EXPECT_EQ(longitude{0.0}, reg.left());
+		EXPECT_EQ(longitude{5.0}, reg.right());
+	}
+	{
+		const auto reg = region{{38.0, 21.0}, 1.0, 2.0};
+		EXPECT_EQ(latitude{38.0}, reg.top());
+		EXPECT_EQ(latitude{37.0}, reg.bottom());
+		EXPECT_EQ(longitude{21.0}, reg.left());
+		EXPECT_EQ(longitude{23.0}, reg.right());
+	}
 }
 
 TEST_F(Test_geo_region, construction_point_delta_date_line)
 {
-	const auto reg = region{{0.0, -178.0}, 10.0, 5.0}; // wrap arround E->W at date line
+	const auto reg = region{{0.0, 178.0}, 10.0, 5.0}; // wrap arround E->W at date line
 
 	EXPECT_EQ(latitude{0.0}, reg.top());
 	EXPECT_EQ(latitude{-10.0}, reg.bottom());
-	EXPECT_EQ(longitude{-178.0}, reg.left());
-	EXPECT_EQ(longitude{177.0}, reg.right());
+	EXPECT_EQ(longitude{178.0}, reg.left());
+	EXPECT_EQ(longitude{-177.0}, reg.right());
 }
 
 TEST_F(Test_geo_region, inside_arround_zero)
@@ -165,9 +173,9 @@ TEST_F(Test_geo_region, inside_arround_zero)
 	EXPECT_TRUE(reg.inside({reg.bottom(), reg.right()}));
 
 	// random position
-	EXPECT_TRUE(reg.inside({0.5, 0.5})); // north west
-	EXPECT_TRUE(reg.inside({-1.0, -1.0})); // south east
-	EXPECT_FALSE(reg.inside({-3.0, 0.0}));
+	EXPECT_TRUE(reg.inside({0.5, -0.5})); // north, west
+	EXPECT_TRUE(reg.inside({-1.0, 1.0})); // south, east
+	EXPECT_FALSE(reg.inside({-3.0, 0.0})); // north, prime meridian
 }
 
 TEST_F(Test_geo_region, inside_date_line)

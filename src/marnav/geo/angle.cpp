@@ -136,7 +136,8 @@ longitude::longitude(double value) throw(std::invalid_argument)
 longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(
 	std::invalid_argument)
 	: angle((static_cast<double>(d) + static_cast<double>(m) / 60.0
-				+ static_cast<double>(s) / 3600.0) * ((hem == hemisphere::EAST) ? -1.0 : 1.0))
+				+ static_cast<double>(s) / 3600.0)
+		  * ((hem == hemisphere::EAST) ? +1.0 : -1.0))
 {
 	check(get());
 }
@@ -144,7 +145,7 @@ longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(
 /// Returns the corresponding hemisphere.
 longitude::hemisphere longitude::hem() const
 {
-	return get() >= 0.0 ? hemisphere::WEST : hemisphere::EAST;
+	return get() < 0.0 ? hemisphere::WEST : hemisphere::EAST;
 }
 
 bool operator==(const longitude & a, const longitude & b) noexcept

@@ -64,10 +64,16 @@ region::region(const position & a, double d_lat, double d_lon)
 	if (t_lat < latitude::min) {
 		t_lat += (latitude::max - latitude::min);
 	}
+	if (t_lat > latitude::max) {
+		t_lat -= (latitude::max - latitude::min);
+	}
 
-	double t_lon = p0.lon - d_lon;
+	double t_lon = p0.lon + d_lon;
 	if (t_lon < longitude::min) {
 		t_lon += (longitude::max - longitude::min);
+	}
+	if (t_lon > longitude::max) {
+		t_lon -= (longitude::max - longitude::min);
 	}
 
 	p1 = position{t_lat, t_lon};
@@ -90,22 +96,21 @@ latitude region::bottom() const { return p1.lat; }
 ///
 bool region::inside(const position & p) const
 {
-	// testing latitude is easy, there is no date line, no
-	// wrap-arround
+	// testing latitude is easy, there is no date line, no wrap-arround
 	if (p.lat > p0.lat)
 		return false;
 	if (p.lat < p1.lat)
 		return false;
 
-	// test longitude
+	// testint longitude
 
-	// shifted longitudes, now between 0..360 (date line, westwards)
+	// shifted longitudes, now between 0..360 (date line, eastwards)
 	const double plon_s = p.lon.get() + 180.0;
 	const double p0lon_s = p0.lon.get() + 180.0;
 	const double p1lon_s = p1.lon.get() + 180.0;
 
 	// p is west of p0, but not west enough to reach p1
-	if ((plon_s > p0lon_s) && (plon_s < p1lon_s))
+	if ((plon_s < p0lon_s) && (plon_s > p1lon_s))
 		return false;
 
 	return true;

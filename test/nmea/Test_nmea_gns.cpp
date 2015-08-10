@@ -44,12 +44,20 @@ TEST_F(Test_nmea_gns, set_lat)
 	EXPECT_STREQ("$GPGNS,,1220.4000,N,,,,,,,,,*28", nmea::to_string(gns).c_str());
 }
 
-TEST_F(Test_nmea_gns, set_lon)
+TEST_F(Test_nmea_gns, set_lon_west)
+{
+	nmea::gns gns;
+	gns.set_lon(geo::longitude{-123.45});
+
+	EXPECT_STREQ("$GPGNS,,,,12327.0000,W,,,,,,,*01", nmea::to_string(gns).c_str());
+}
+
+TEST_F(Test_nmea_gns, set_lon_east)
 {
 	nmea::gns gns;
 	gns.set_lon(geo::longitude{123.45});
 
-	EXPECT_STREQ("$GPGNS,,,,12327.0000,W,,,,,,,*01", nmea::to_string(gns).c_str());
+	EXPECT_STREQ("$GPGNS,,,,12327.0000,E,,,,,,,*13", nmea::to_string(gns).c_str());
 }
 
 TEST_F(Test_nmea_gns, set_mode_indicator)
