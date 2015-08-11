@@ -64,7 +64,6 @@ SeaTalk
 @todo Implement writer for serial devices
 
 @todo Implement more messages:
-	- Type 26: Speed through Water
 	- Type 30: Set lamp Intensity
 	- Type 36: Cancel MOB condition
 	- Type 38: Codelock data
