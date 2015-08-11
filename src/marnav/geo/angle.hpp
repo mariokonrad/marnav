@@ -90,11 +90,25 @@ private:
 bool operator==(const latitude & a, const latitude & b) noexcept;
 bool operator!=(const latitude & a, const latitude & b) noexcept;
 
+/// @{
 /// User defined literal to construct latitudes.
+
 inline latitude operator "" _lat(long double value)
 {
 	return latitude{static_cast<double>(value)};
 }
+
+inline latitude operator "" _north(long double value)
+{
+	return latitude{static_cast<double>(value)};
+}
+
+inline latitude operator "" _south(long double value)
+{
+	return latitude{static_cast<double>(-value)};
+}
+
+///@}
 
 /// Longitude.
 ///
@@ -137,11 +151,25 @@ private:
 bool operator==(const longitude & a, const longitude & b) noexcept;
 bool operator!=(const longitude & a, const longitude & b) noexcept;
 
+/// @{
 /// User defined literal to construct latitudes.
+
 inline longitude operator "" _lon(long double value)
 {
 	return longitude{static_cast<double>(value)};
 }
+
+inline longitude operator "" _east(long double value)
+{
+	return longitude{static_cast<double>(value)};
+}
+
+inline longitude operator "" _west(long double value)
+{
+	return longitude{static_cast<double>(-value)};
+}
+
+/// @}
 
 }
 }

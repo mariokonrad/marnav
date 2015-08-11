@@ -122,12 +122,34 @@ TEST_F(Test_geo_angle, latitude_literal_north)
 	EXPECT_EQ(geo::latitude::hemisphere::NORTH, t.hem());
 }
 
+TEST_F(Test_geo_angle, latitude_literal_explicit_north)
+{
+	using namespace marnav::geo;
+
+	const latitude expected{12.34};
+	const latitude t = 12.34_north;
+
+	EXPECT_EQ(expected, t);
+	EXPECT_EQ(geo::latitude::hemisphere::NORTH, t.hem());
+}
+
 TEST_F(Test_geo_angle, latitude_literal_south)
 {
 	using namespace marnav::geo;
 
 	const latitude expected{-12.34};
 	const latitude t = -12.34_lat;
+
+	EXPECT_EQ(expected, t);
+	EXPECT_EQ(geo::latitude::hemisphere::SOUTH, t.hem());
+}
+
+TEST_F(Test_geo_angle, latitude_literal_explicit_south)
+{
+	using namespace marnav::geo;
+
+	const latitude expected{-12.34};
+	const latitude t = 12.34_south;
 
 	EXPECT_EQ(expected, t);
 	EXPECT_EQ(geo::latitude::hemisphere::SOUTH, t.hem());
@@ -144,12 +166,34 @@ TEST_F(Test_geo_angle, longitude_literal_east)
 	EXPECT_EQ(geo::longitude::hemisphere::EAST, t.hem());
 }
 
+TEST_F(Test_geo_angle, longitude_literal_explicit_east)
+{
+	using namespace marnav::geo;
+
+	const longitude expected{123.45};
+	const longitude t = 123.45_east;
+
+	EXPECT_EQ(expected, t);
+	EXPECT_EQ(geo::longitude::hemisphere::EAST, t.hem());
+}
+
 TEST_F(Test_geo_angle, longitude_literal_west)
 {
 	using namespace marnav::geo;
 
 	const longitude expected{-123.45};
 	const longitude t = -123.45_lon;
+
+	EXPECT_EQ(expected, t);
+	EXPECT_EQ(geo::longitude::hemisphere::WEST, t.hem());
+}
+
+TEST_F(Test_geo_angle, longitude_literal_explicit_west)
+{
+	using namespace marnav::geo;
+
+	const longitude expected{-123.45};
+	const longitude t = 123.45_west;
 
 	EXPECT_EQ(expected, t);
 	EXPECT_EQ(geo::longitude::hemisphere::WEST, t.hem());
