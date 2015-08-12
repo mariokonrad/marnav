@@ -64,7 +64,6 @@ SeaTalk
 @todo Implement writer for serial devices
 
 @todo Implement more messages:
-	- Type 36: Cancel MOB condition
 	- Type 38: Codelock data
 	- Type 50: LAT Postion
 	- Type 51: LON Postion
