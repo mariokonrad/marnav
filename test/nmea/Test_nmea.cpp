@@ -37,9 +37,18 @@ TEST_F(Test_nmea, make_sentence_invalid_checksum)
 TEST_F(Test_nmea, make_sentence_minimal_possible_sentence)
 {
 	try {
-		nmea::make_sentence("$XX*00");
+		nmea::make_sentence("$XXYYY*59");
 	} catch (std::exception & e) {
-		EXPECT_STREQ("unknown or malformed address field: XX", e.what());
+		EXPECT_STREQ("unknown sentence in nmea/instantiate_sentence: YYY", e.what());
+	}
+}
+
+TEST_F(Test_nmea, make_sentence_vendor_extension)
+{
+	try {
+		nmea::make_sentence("$PXXX*08");
+	} catch (std::exception & e) {
+		EXPECT_STREQ("unknown sentence in nmea/instantiate_sentence: PXXX", e.what());
 	}
 }
 

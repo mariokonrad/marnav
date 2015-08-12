@@ -1,4 +1,8 @@
 #include "nmea.hpp"
+
+#include <algorithm>
+#include <regex>
+
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/date.hpp>
@@ -60,8 +64,6 @@
 #include <marnav/nmea/ztg.hpp>
 #include <marnav/nmea/pgrme.hpp>
 #include <marnav/utils/unique.hpp>
-#include <algorithm>
-#include <regex>
 
 /// @example parse_nmea.cpp
 /// This is an example on how to parse and handle NMEA sentences from a string.
@@ -197,19 +199,31 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 /// @param[in] address The address field of a sentence.
 /// @return The tuple contains talker ID and tag. In case of a vendor extension,
 ///   the talker ID may be empty.
-static std::tuple<std::string, std::string> parse_address(const std::string & address)
+/// @exception std::invalid_argument The specified address was probably malformed or
+//    empty.
+static std::tuple<std::string, std::string> parse_address(const std::string & address) throw(
+	std::invalid_argument)
 {
-	auto const & index = std::find_if(begin(known_sentences), end(known_sentences),
-		[address](const entry & e) { return e.TAG == address; });
-	if (index == end(known_sentences)) {
-		// regular
-		if (address.size() < 5) // talker ID:2 + tag:3
-			throw std::invalid_argument{"unknown or malformed address field: " + address};
-		return make_tuple(address.substr(0, 2), address.substr(2, 3));
-	} else {
-		// vendor extension
+	if (address.empty())
+		throw std::invalid_argument{"invalid/malformed address in nmea/parse_address"};
+
+	// check for vendor extensions
+	if (address[0] == 'P') {
+		// properitary extension / vendor extension
 		return make_tuple(std::string{}, address);
 	}
+
+	// search in all known sentences
+	auto const & index = std::find_if(begin(known_sentences), end(known_sentences),
+		[address](const entry & e) { return e.TAG == address; });
+	if (index != end(known_sentences))
+		throw std::invalid_argument{"invalid address (" + address + ") in nmea/parse_address"};
+
+	// found regular sentence
+	if (address.size() != 5) // talker ID:2 + tag:3
+		throw std::invalid_argument{"unknown or malformed address field: [" + address + "]"};
+
+	return make_tuple(address.substr(0, 2), address.substr(2, 3));
 }
 
 /// Parses the string and returns the corresponding sentence.
