@@ -113,4 +113,5 @@ Suported messages for SeaTalk (decode and encode):
 - Type 25: total and trip log
 - Type 26: Speed through Water
 - Type 27: water temperature 2
+- Type 30: Set Lamp Intensity
 

@@ -15,6 +15,7 @@
 #include <marnav/seatalk/message_25.hpp>
 #include <marnav/seatalk/message_26.hpp>
 #include <marnav/seatalk/message_27.hpp>
+#include <marnav/seatalk/message_30.hpp>
 
 namespace marnav
 {
@@ -38,6 +39,7 @@ static message::parse_function instantiate_message(message_id type) throw(std::i
 		{message_id::total_and_trip_log, message_25::parse},
 		{message_id::speed_through_water_2, message_26::parse},
 		{message_id::water_temperature_2, message_27::parse},
+		{message_id::set_lamp_intensity, message_30::parse},
 	};
 
 	auto const & i = std::find_if(begin(known_messages), end(known_messages),

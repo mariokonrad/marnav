@@ -27,6 +27,7 @@ enum class message_id : uint8_t {
 	total_and_trip_log = 0x25,
 	speed_through_water_2 = 0x26,
 	water_temperature_2 = 0x27,
+	set_lamp_intensity = 0x30,
 };
 
 namespace unit
