@@ -9,6 +9,8 @@ namespace marnav
 {
 namespace geo
 {
+
+/// @brief A geographic angle. This is the base class for Latitudes and Longitudes.
 class angle
 {
 public:
@@ -49,7 +51,7 @@ private:
 bool operator==(const angle & a, const angle & b) noexcept;
 bool operator!=(const angle & a, const angle & b) noexcept;
 
-/// Latitude.
+/// @brief Geographic Latitude
 ///
 /// Value ranges between +90.0 (north) to -90.0 (south).
 class latitude : public angle
@@ -81,7 +83,7 @@ public:
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;
 
-	void correct_hemisphere(hemisphere h);
+	void change_hemisphere(hemisphere h);
 
 private:
 	static void check(double a) throw(std::invalid_argument);
@@ -110,7 +112,7 @@ inline latitude operator "" _south(long double value)
 
 ///@}
 
-/// Longitude.
+/// @brief Geographic Longitude
 ///
 /// Value ranges between -180.0 (west) to +180.0 (east).
 class longitude : public angle
@@ -142,7 +144,7 @@ public:
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const;
 
-	void correct_hemisphere(hemisphere h);
+	void change_hemisphere(hemisphere h);
 
 private:
 	static void check(double a) throw(std::invalid_argument);

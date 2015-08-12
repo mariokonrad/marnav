@@ -58,9 +58,9 @@ std::unique_ptr<sentence> rma::parse(const std::string & talker,
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
 	if (detail.lat && detail.lat_hem)
-		detail.lat->correct_hemisphere(convert_hemisphere_lat(detail.lat_hem.value()));
+		detail.lat->change_hemisphere(convert_hemisphere_lat(detail.lat_hem.value()));
 	if (detail.lon && detail.lon_hem)
-		detail.lon->correct_hemisphere(convert_hemisphere_lon(detail.lon_hem.value()));
+		detail.lon->change_hemisphere(convert_hemisphere_lon(detail.lon_hem.value()));
 
 	return result;
 }

@@ -11,6 +11,7 @@ angle::angle()
 {
 }
 
+/// Initializes the angle with the specified angle in degrees.
 angle::angle(double value)
 	: value(value)
 {
@@ -52,6 +53,7 @@ angle::operator double() const { return value; }
 
 double angle::get() const { return value; }
 
+/// Sets the angle in degrees.
 void angle::set(double t) { value = t; }
 
 bool operator==(const angle & a, const angle & b) noexcept
@@ -69,6 +71,7 @@ latitude::latitude()
 {
 }
 
+/// Constructs a latitude with the specified angle in degrees.
 latitude::latitude(double value) throw(std::invalid_argument)
 	: angle(value)
 {
@@ -102,7 +105,7 @@ bool operator!=(const latitude & a, const latitude & b) noexcept
 /// Corrects the stored value according to the specified hemisphere.
 /// This is useful if the stored value was set preliminary, and the
 /// hemisphere was nown later.
-void latitude::correct_hemisphere(hemisphere h)
+void latitude::change_hemisphere(hemisphere h)
 {
 	switch (h) {
 		case hemisphere::NORTH:
@@ -127,6 +130,7 @@ longitude::longitude()
 {
 }
 
+/// Constructs a longitude with the specified angle in degrees.
 longitude::longitude(double value) throw(std::invalid_argument)
 	: angle(value)
 {
@@ -161,7 +165,7 @@ bool operator!=(const longitude & a, const longitude & b) noexcept
 /// Corrects the stored value according to the specified hemisphere.
 /// This is useful if the stored value was set preliminary, and the
 /// hemisphere was nown later.
-void longitude::correct_hemisphere(hemisphere h)
+void longitude::change_hemisphere(hemisphere h)
 {
 	switch (h) {
 		case hemisphere::EAST:
