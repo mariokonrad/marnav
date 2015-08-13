@@ -115,4 +115,5 @@ Suported messages for SeaTalk (decode and encode):
 - Type 27: water temperature 2
 - Type 30: Set Lamp Intensity
 - Type 36: Cancel MOB condition
+- Type 38: Codelock data (**experimental**)
 
