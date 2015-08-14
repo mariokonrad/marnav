@@ -1,7 +1,6 @@
 #include "message_21.hpp"
 
 #include <algorithm>
-#include <iostream>
 
 #include <marnav/ais/angle.hpp>
 #include <marnav/utils/unique.hpp>

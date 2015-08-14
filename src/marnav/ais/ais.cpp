@@ -1,20 +1,19 @@
 #include "ais.hpp"
 
 #include <algorithm>
-#include <iostream>
 
-#include "message_01.hpp"
-#include "message_02.hpp"
-#include "message_03.hpp"
-#include "message_04.hpp"
-#include "message_05.hpp"
-#include "message_09.hpp"
-#include "message_10.hpp"
-#include "message_11.hpp"
-#include "message_18.hpp"
-#include "message_19.hpp"
-#include "message_21.hpp"
-#include "message_24.hpp"
+#include <marnav/ais/message_01.hpp>
+#include <marnav/ais/message_02.hpp>
+#include <marnav/ais/message_03.hpp>
+#include <marnav/ais/message_04.hpp>
+#include <marnav/ais/message_05.hpp>
+#include <marnav/ais/message_09.hpp>
+#include <marnav/ais/message_10.hpp>
+#include <marnav/ais/message_11.hpp>
+#include <marnav/ais/message_18.hpp>
+#include <marnav/ais/message_19.hpp>
+#include <marnav/ais/message_21.hpp>
+#include <marnav/ais/message_24.hpp>
 
 /// @example read_ais.cpp
 /// This is an example on how to parse and handle AIS messages while
