@@ -23,7 +23,7 @@ TEST_F(Test_nmea_hdg, parse)
 
 	auto heading = hdg->get_heading();
 	EXPECT_TRUE(heading.available());
-	EXPECT_EQ(45.8, heading.value());
+	EXPECT_NEAR(45.8, heading.value(), 1e-8);
 }
 
 TEST_F(Test_nmea_hdg, parse_invalid_number_of_arguments)

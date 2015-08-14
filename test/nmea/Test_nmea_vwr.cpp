@@ -23,7 +23,7 @@ TEST_F(Test_nmea_vwr, parse)
 
 	auto angle = vwr->get_angle();
 	EXPECT_TRUE(angle.available());
-	EXPECT_EQ(84.0, angle.value());
+	EXPECT_NEAR(84.0, angle.value(), 1e-8);
 
 	auto side = vwr->get_angle_side();
 	EXPECT_TRUE(side.available());

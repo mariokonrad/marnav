@@ -23,7 +23,7 @@ TEST_F(Test_nmea_mtw, parse)
 
 	auto temperature = mtw->get_temperature();
 	ASSERT_TRUE(temperature.available());
-	EXPECT_EQ(9.5, temperature.value());
+	EXPECT_NEAR(9.5, temperature.value(), 1e-8);
 
 	auto unit = mtw->get_temperature_unit();
 	ASSERT_TRUE(unit.available());

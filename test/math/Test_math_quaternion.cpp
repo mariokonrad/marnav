@@ -24,15 +24,15 @@ TEST_F(Test_math_quaternion, construction_default)
 {
 	quat q;
 
-	EXPECT_EQ(1.0, q[0]);
-	EXPECT_EQ(0.0, q[1]);
-	EXPECT_EQ(0.0, q[2]);
-	EXPECT_EQ(0.0, q[3]);
+	EXPECT_NEAR(1.0, q[0], 1e-8);
+	EXPECT_NEAR(0.0, q[1], 1e-8);
+	EXPECT_NEAR(0.0, q[2], 1e-8);
+	EXPECT_NEAR(0.0, q[3], 1e-8);
 
-	EXPECT_EQ(1.0, q.w());
-	EXPECT_EQ(0.0, q.x());
-	EXPECT_EQ(0.0, q.y());
-	EXPECT_EQ(0.0, q.z());
+	EXPECT_NEAR(1.0, q.w(), 1e-8);
+	EXPECT_NEAR(0.0, q.x(), 1e-8);
+	EXPECT_NEAR(0.0, q.y(), 1e-8);
+	EXPECT_NEAR(0.0, q.z(), 1e-8);
 }
 
 TEST_F(Test_math_quaternion, construction_rotation)

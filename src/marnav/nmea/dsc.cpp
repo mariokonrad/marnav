@@ -203,7 +203,7 @@ utils::mmsi dsc::get_mmsi() const
 ///
 geo::region dsc::get_geographical_area() const throw(std::invalid_argument)
 {
-	uint32_t quadrant = (address / 1000000000) % 10;
+	const auto quadrant = (address / 1000000000) % 10;
 
 	geo::latitude::hemisphere lat_hem = geo::latitude::hemisphere::NORTH;
 	geo::longitude::hemisphere lon_hem = geo::longitude::hemisphere::WEST;
@@ -228,19 +228,18 @@ geo::region dsc::get_geographical_area() const throw(std::invalid_argument)
 			throw std::invalid_argument{"invalid quadrant"};
 	}
 
-	uint32_t lat = (address / 10000000) % 100;
-	uint32_t lon = (address / 10000) % 1000;
-	uint32_t d_lat = (address / 100) % 100;
-	uint32_t d_lon = address % 100;
+	const uint32_t lat = static_cast<uint32_t>((address / 10000000) % 100);
+	const uint32_t lon = static_cast<uint32_t>((address / 10000) % 1000);
+	const double d_lat = static_cast<double>((address / 100) % 100);
+	const double d_lon = static_cast<double>(address % 100);
 
-	return geo::region{{{lat, 0, 0, lat_hem}, {lon, 0, 0, lon_hem}}, static_cast<double>(d_lat),
-		static_cast<double>(d_lon)};
+	return geo::region{{{lat, 0, 0, lat_hem}, {lon, 0, 0, lon_hem}}, d_lat, d_lon};
 }
 
 /// @todo Read and interpret more fields
 ///
 std::unique_ptr<sentence> dsc::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if (fields.size() != 11)
 		throw std::invalid_argument{"invalid number of fields in dsc::parse"};

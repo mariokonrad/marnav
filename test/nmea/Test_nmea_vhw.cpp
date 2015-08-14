@@ -23,7 +23,7 @@ TEST_F(Test_nmea_vhw, parse)
 
 	auto heading = vhw->get_heading();
 	EXPECT_TRUE(heading.available());
-	EXPECT_EQ(211.0, heading.value());
+	EXPECT_NEAR(211.0, heading.value(), 1e-8);
 }
 
 TEST_F(Test_nmea_vhw, parse_invalid_number_of_arguments)

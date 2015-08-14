@@ -64,7 +64,7 @@ utils::optional<gsv::satellite_info> gsv::get_sat(int index) const throw(std::ou
 }
 
 std::unique_ptr<sentence> gsv::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	// empty fields for satellite information are not necessary, therefore
 	// there are a variable number of fields. however, the first 3 are

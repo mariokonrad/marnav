@@ -28,7 +28,7 @@ void gga::set_lon(const geo::longitude & t)
 }
 
 std::unique_ptr<sentence> gga::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if (fields.size() != 14)
 		throw std::invalid_argument{"invalid number of fields in gga::parse"};

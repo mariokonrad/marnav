@@ -23,7 +23,7 @@ TEST_F(Test_nmea_aam, parse)
 
 	auto radius = aam->get_arrival_circle_radius();
 	EXPECT_TRUE(radius.available());
-	EXPECT_EQ(0.5, radius.value());
+	EXPECT_NEAR(0.5, radius.value(), 1e-8);
 }
 
 TEST_F(Test_nmea_aam, parse_wrong_distance_unit)

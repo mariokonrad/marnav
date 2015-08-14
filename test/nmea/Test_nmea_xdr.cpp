@@ -61,7 +61,7 @@ TEST_F(Test_nmea_xdr, one_data_point)
 
 	auto info = *xdr->get_info(0);
 	EXPECT_EQ('a', info.transducer_type);
-	EXPECT_EQ(1.0, info.measurement_data);
+	EXPECT_NEAR(1.0, info.measurement_data, 1e-8);
 	EXPECT_EQ('M', info.units_of_measurement);
 	EXPECT_STREQ("abc", info.name.c_str());
 }
@@ -76,14 +76,14 @@ TEST_F(Test_nmea_xdr, two_data_points)
 	{
 		auto info = *xdr->get_info(0);
 		EXPECT_EQ('a', info.transducer_type);
-		EXPECT_EQ(1.0, info.measurement_data);
+		EXPECT_NEAR(1.0, info.measurement_data, 1e-8);
 		EXPECT_EQ('M', info.units_of_measurement);
 		EXPECT_STREQ("abc", info.name.c_str());
 	}
 	{
 		auto info = *xdr->get_info(1);
 		EXPECT_EQ('b', info.transducer_type);
-		EXPECT_EQ(2.0, info.measurement_data);
+		EXPECT_NEAR(2.0, info.measurement_data, 1e-8);
 		EXPECT_EQ('M', info.units_of_measurement);
 		EXPECT_STREQ("def", info.name.c_str());
 	}

@@ -35,7 +35,7 @@ void rmc::set_mag(double t, direction h) throw(std::invalid_argument)
 }
 
 std::unique_ptr<sentence> rmc::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	// before and after NMEA 2.3
 	if ((fields.size() < 11) || (fields.size() > 12))

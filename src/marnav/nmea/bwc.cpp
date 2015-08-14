@@ -52,7 +52,7 @@ void bwc::set_waypoint(const std::string & id)
 }
 
 std::unique_ptr<sentence> bwc::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if ((fields.size() != 12) && (fields.size() != 13))
 		throw std::invalid_argument{"invalid number of fields in bwc::parse"};

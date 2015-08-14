@@ -63,7 +63,8 @@ public:
 	rmb & operator=(const rmb &) = default;
 
 	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument);
+		const std::vector<std::string> & fields) throw(std::invalid_argument,
+		std::runtime_error);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;

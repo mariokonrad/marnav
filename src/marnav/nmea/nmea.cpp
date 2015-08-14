@@ -267,8 +267,10 @@ std::unique_ptr<sentence> make_sentence(const std::string & s) throw(
 	if (s.size() != end_pos + 3) // short or no checksum
 		throw invalid_argument{"invalid format in nmea/make_sentence"};
 	uint8_t checksum = 0x00;
-	for_each(begin(s) + 1, begin(s) + end_pos, [&checksum](char c) { checksum ^= c; });
-	const uint8_t expected_checksum = stoul(fields.back(), 0, 16);
+	for_each(begin(s) + 1, begin(s) + end_pos,
+		[&checksum](char c) { checksum ^= static_cast<uint8_t>(c); });
+	const uint8_t expected_checksum
+		= static_cast<uint8_t>(std::stoul(fields.back(), nullptr, 16));
 	if (checksum != expected_checksum)
 		throw checksum_error{expected_checksum, checksum};
 

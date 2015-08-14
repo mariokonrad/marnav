@@ -58,7 +58,7 @@ TEST_F(Test_nmea_vdm, empty_to_string)
 {
 	nmea::vdm vdm;
 
-	EXPECT_STREQ("!AIVDM,0,0,,B,,0*25", nmea::to_string(vdm).c_str());
+	EXPECT_STREQ("!AIVDM,0,0,,,,0*67", nmea::to_string(vdm).c_str());
 }
 
 TEST_F(Test_nmea_vdm, collect_payload)

@@ -56,6 +56,7 @@ region::region(const position & a0, const position & a1) throw(std::invalid_argu
 ///
 region::region(const position & a, double d_lat, double d_lon)
 	: p0(a)
+	, p1(a)
 {
 	d_lat = std::abs(d_lat);
 	d_lon = std::abs(d_lon);

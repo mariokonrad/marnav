@@ -37,7 +37,8 @@ enum class quality : uint32_t {
 	INVALID = 0, ///< NMEA representation: 0
 	GPS_FIX = 1, ///< NMEA representation: 1
 	DPGS_FIX = 2, ///< NMEA representation: 2
-	GUESS = 6 ///< NMEA representation: 6
+	GUESS = 6, ///< NMEA representation: 6
+	SIMULATION = 8 ///< NMEA representation: 8
 };
 
 namespace unit

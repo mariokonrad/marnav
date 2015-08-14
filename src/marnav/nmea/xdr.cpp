@@ -48,7 +48,7 @@ utils::optional<xdr::transducer_info> xdr::get_info(int index) const throw(std::
 }
 
 std::unique_ptr<sentence> xdr::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if ((fields.size() < 1) || (fields.size() > 4 * xdr::MAX_TRANSDUCER_INFO))
 		throw std::invalid_argument{"invalid number of fields in xdr::parse"};

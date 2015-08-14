@@ -21,7 +21,7 @@ void mtw::set_temperature(double t)
 }
 
 std::unique_ptr<sentence> mtw::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if (fields.size() != 2)
 		throw std::invalid_argument{"invalid number of fields in mtw::parse"};

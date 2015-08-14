@@ -40,7 +40,7 @@ void tll::set_target_name(const std::string & t)
 }
 
 std::unique_ptr<sentence> tll::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if (fields.size() != 9)
 		throw std::invalid_argument{"invalid number of fields in tll::parse"};

@@ -14,7 +14,6 @@ vdm::vdm()
 	: sentence(ID, TAG, talker_id::ais_mobile_station)
 	, n_fragments(0)
 	, fragment(0)
-	, radio_channel(ais_channel::B)
 	, n_fill_bits(0)
 {
 }
@@ -23,12 +22,11 @@ vdm::vdm(sentence_id id, const std::string & tag, const std::string & talker)
 	: sentence(id, tag, talker)
 	, n_fragments(0)
 	, fragment(0)
-	, radio_channel(ais_channel::B)
 	, n_fill_bits(0)
 {
 }
 
-void vdm::read_fields(const std::vector<std::string> & fields)
+void vdm::read_fields(const std::vector<std::string> & fields) throw(std::runtime_error)
 {
 	read(fields[0], n_fragments);
 	read(fields[1], fragment);
@@ -39,7 +37,7 @@ void vdm::read_fields(const std::vector<std::string> & fields)
 }
 
 std::unique_ptr<sentence> vdm::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in vdm::parse"};

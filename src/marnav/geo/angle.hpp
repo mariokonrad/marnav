@@ -20,7 +20,7 @@ public:
 	angle(angle &&) = default;
 
 	angle();
-	explicit angle(double value);
+	explicit angle(double degrees);
 
 	uint32_t degrees() const;
 	uint32_t minutes() const;
@@ -62,8 +62,8 @@ public:
 	constexpr static const double max = +90.0;
 
 	latitude();
-	latitude(double value) throw(std::invalid_argument);
-	latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(std::invalid_argument);
+	latitude(double degrees) throw(std::invalid_argument);
+	latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h) throw(std::invalid_argument);
 
 	latitude(const latitude &) = default;
 	latitude(latitude &&) = default;
@@ -123,8 +123,8 @@ public:
 	constexpr static const double max = +180.0;
 
 	longitude();
-	longitude(double value) throw(std::invalid_argument);
-	longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(std::invalid_argument);
+	longitude(double degrees) throw(std::invalid_argument);
+	longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h) throw(std::invalid_argument);
 
 	longitude(const longitude &) = default;
 	longitude(longitude &&) = default;

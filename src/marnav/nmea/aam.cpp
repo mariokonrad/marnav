@@ -51,7 +51,7 @@ void aam::check() const throw(std::invalid_argument)
 }
 
 std::unique_ptr<sentence> aam::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if (fields.size() != 5)
 		throw std::invalid_argument{"invalid number of fields in aam::parse"};

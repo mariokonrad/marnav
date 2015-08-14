@@ -39,7 +39,7 @@ void vwr::set_speed_kmh(double t)
 }
 
 std::unique_ptr<sentence> vwr::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if (fields.size() != 8)
 		throw std::invalid_argument{"invalid number of fields in vwr::parse"};

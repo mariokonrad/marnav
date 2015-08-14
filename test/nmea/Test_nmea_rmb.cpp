@@ -25,7 +25,7 @@ TEST_F(Test_nmea_rmb, parse)
 TEST_F(Test_nmea_rmb, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(nmea::rmb::parse("@@", {12, "@"}));
-	EXPECT_ANY_THROW(nmea::rmb::parse("@@", {14, "@"}));
+	EXPECT_ANY_THROW(nmea::rmb::parse("@@", {15, "@"}));
 }
 
 TEST_F(Test_nmea_rmb, empty_to_string)

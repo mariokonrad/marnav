@@ -49,10 +49,10 @@ TEST_F(Test_geo_angle, longitude_type_check)
 
 TEST_F(Test_geo_angle, hemisphere)
 {
-	EXPECT_EQ(30,  (geo::latitude{30, 0, 0, geo::latitude::hemisphere::NORTH}.get()));
-	EXPECT_EQ(-30, (geo::latitude{30, 0, 0, geo::latitude::hemisphere::SOUTH}.get()));
-	EXPECT_EQ(30, (geo::longitude{30, 0, 0, geo::longitude::hemisphere::EAST}.get()));
-	EXPECT_EQ(-30,  (geo::longitude{30, 0, 0, geo::longitude::hemisphere::WEST}.get()));
+	EXPECT_NEAR(30,  (geo::latitude{30, 0, 0, geo::latitude::hemisphere::NORTH}.get()), 1e-5);
+	EXPECT_NEAR(-30, (geo::latitude{30, 0, 0, geo::latitude::hemisphere::SOUTH}.get()), 1e-5);
+	EXPECT_NEAR(30, (geo::longitude{30, 0, 0, geo::longitude::hemisphere::EAST}.get()), 1e-5);
+	EXPECT_NEAR(-30,  (geo::longitude{30, 0, 0, geo::longitude::hemisphere::WEST}.get()), 1e-5);
 }
 
 TEST_F(Test_geo_angle, comparison)

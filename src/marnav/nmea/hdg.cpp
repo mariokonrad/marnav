@@ -30,7 +30,7 @@ void hdg::set_magn_var(double deg, direction hem)
 }
 
 std::unique_ptr<sentence> hdg::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if (fields.size() != 5)
 		throw std::invalid_argument{"invalid number of fields in hdg::parse"};

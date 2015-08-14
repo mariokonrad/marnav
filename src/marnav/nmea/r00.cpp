@@ -15,7 +15,7 @@ r00::r00()
 }
 
 std::unique_ptr<sentence> r00::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if (fields.size() != r00::MAX_WAYPOINT_IDS)
 		throw std::invalid_argument{"invalid number of fields in r00::parse"};

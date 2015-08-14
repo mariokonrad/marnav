@@ -23,7 +23,7 @@ TEST_F(Test_nmea_vlw, parse)
 
 	auto distance = vlw->get_distance_cum();
 	EXPECT_TRUE(distance.available());
-	EXPECT_EQ(7803.2, distance.value());
+	EXPECT_NEAR(7803.2, distance.value(), 1e-8);
 }
 
 TEST_F(Test_nmea_vlw, parse_invalid_number_of_arguments)

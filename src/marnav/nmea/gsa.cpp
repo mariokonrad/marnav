@@ -34,7 +34,7 @@ utils::optional<uint32_t> gsa::get_satellite_id(int index) const throw(std::out_
 }
 
 std::unique_ptr<sentence> gsa::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if (fields.size() != 17)
 		throw std::invalid_argument{"invalid number of fields in gsa::parse"};

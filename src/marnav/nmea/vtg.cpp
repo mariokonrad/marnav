@@ -39,7 +39,7 @@ void vtg::set_track_true(double t)
 }
 
 std::unique_ptr<sentence> vtg::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	// before and after NMEA 2.3
 	if ((fields.size() < 8) || (fields.size() > 9))

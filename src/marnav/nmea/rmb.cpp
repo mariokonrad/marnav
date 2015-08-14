@@ -40,7 +40,7 @@ void rmb::set_waypoint_from(const std::string & id)
 }
 
 std::unique_ptr<sentence> rmb::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	// before and after NMEA 2.3
 	if ((fields.size() < 13) || (fields.size() > 14))

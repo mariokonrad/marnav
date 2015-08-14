@@ -253,11 +253,11 @@ public:
 		for (size_type j = 0; j < 3; ++j) {
 			// Diagonalfeld normalisieren
 			q = m.x[j * 3 + j];
-			if (q == 0.0) {
+			if (is_zero(q)) {
 				// Es darf keine 0 mehr in der Diagonalen stehen
 				for (size_type i = j + 1; i < 3; ++i) {
 					// Suche Reihe mit einem Feld != 0.0 und addiere
-					if (m.x[i * 3 + j] != 0.0) {
+					if (!is_zero(m.x[i * 3 + j])) {
 						for (size_type k = 0; k < 3; ++k) {
 							const size_type i0 = j * 3 + k;
 							const size_type i1 = i * 3 + k;
@@ -292,7 +292,7 @@ public:
 		// Test auf Einheitsmatrix, falls nicht => Berechnung nicht gelungen
 		for (size_type i = 0; i < 3; ++i)
 			for (size_type j = 0; j < 3; ++j)
-				if (m.x[i * 3 + j] != ((i == j) ? 1 : 0))
+				if (!is_same(m.x[i * 3 + j], ((i == j) ? 1.0 : 0.0)))
 					return matrix3{};
 		return I;
 	}
@@ -465,11 +465,11 @@ public:
 		for (size_type j = 0; j < 4; ++j) {
 			// Diagonalfeld normalisieren
 			value_type q = m.x[j * 4 + j];
-			if (q == 0.0) {
+			if (is_zero(q)) {
 				// Es darf keine 0 mehr in der Diagonalen stehen
 				for (size_type i = j + 1; i < 4; ++i) {
 					// Suche Reihe mit einem Feld != 0.0 und addiere
-					if (m.x[i * 4 + j] != 0.0) {
+					if (!is_zero(m.x[i * 4 + j])) {
 						for (size_type k = 0; k < 4; ++k) {
 							const size_type i0 = j * 4 + k;
 							const size_type i1 = i * 4 + k;
@@ -504,7 +504,7 @@ public:
 		// Test auf Einheitsmatrix, falls nicht => Berechnung nicht gelungen
 		for (size_type i = 0; i < 4; ++i)
 			for (size_type j = 0; j < 4; ++j)
-				if (m.x[i * 4 + j] != ((i == j) ? 1 : 0))
+				if (!is_same(m.x[i * 4 + j], ((i == j) ? 1.0 : 0.0)))
 					return matrix4{};
 		return I;
 	}
@@ -667,11 +667,11 @@ public:
 		for (size_type j = 0; j < dimension; ++j) {
 			// Diagonalfeld normalisieren
 			q = m.x[j * dimension + j];
-			if (q == 0.0) {
+			if (is_zero(q)) {
 				// Es darf keine 0 mehr in der Diagonalen stehen
 				for (size_type i = j + 1; i < dimension; ++i) {
 					// Suche Reihe mit einem Feld != 0.0 und addiere
-					if (m.x[i * dimension + j] != 0.0) {
+					if (!is_zero(m.x[i * dimension + j])) {
 						for (size_type k = 0; k < dimension; ++k) {
 							const size_type i0 = j * dimension + k;
 							const size_type i1 = i * dimension + k;
@@ -705,7 +705,7 @@ public:
 		// Test auf Einheitsmatrix, falls nicht => Berechnung nicht gelungen
 		for (size_type i = 0; i < dimension; ++i)
 			for (size_type j = 0; j < dimension; ++j)
-				if (m.x[i * dimension + j] != ((i == j) ? 1 : 0))
+				if (!is_same(m.x[i * dimension + j], ((i == j) ? 1.0 : 0.0)))
 					return matrix_n{};
 		return I;
 	}

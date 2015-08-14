@@ -27,7 +27,7 @@ namespace ais
 
 static inline uint8_t decode_armoring(char c)
 {
-	uint8_t value = c - '0';
+	auto value = c - '0';
 	if (value > 40)
 		value -= 8;
 	return value & 0x3f;
@@ -127,7 +127,7 @@ std::vector<std::pair<std::string, int>> encode_message(const message & msg) thr
 		if (ofs + 6 < bits.size()) {
 			// normal case
 
-			uint8_t value;
+			uint8_t value = 0;
 			bits.get(value, ofs, 6);
 			current.first += encode_armoring(value);
 
@@ -141,8 +141,8 @@ std::vector<std::pair<std::string, int>> encode_message(const message & msg) thr
 			// last, append remainder padded to the string
 
 			auto remainder = bits.size() - ofs;
-			current.second = 6 - remainder;
-			uint8_t value;
+			current.second = 6 - static_cast<int>(remainder);
+			uint8_t value = 0;
 			bits.get(value, ofs, remainder);
 			value <<= current.second;
 			current.first += encode_armoring(value);

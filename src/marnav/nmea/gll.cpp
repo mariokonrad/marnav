@@ -29,7 +29,7 @@ void gll::set_lon(const geo::longitude & t)
 }
 
 std::unique_ptr<sentence> gll::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	// older version has no 'mode_indicator'
 	if ((fields.size() < 6) || (fields.size() > 7))

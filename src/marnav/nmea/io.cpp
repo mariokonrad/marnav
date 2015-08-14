@@ -12,7 +12,7 @@ namespace nmea
 
 std::string to_string(char data)
 {
-	char buf[3];
+	char buf[sizeof(int)]; // sizeof(int) is for stack anlignment and protection
 	snprintf(buf, sizeof(buf), "%c", data);
 	return buf;
 }
@@ -162,6 +162,8 @@ std::string to_string(quality t)
 			return "2";
 		case quality::GUESS:
 			return "6";
+		case quality::SIMULATION:
+			return "8";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
@@ -385,7 +387,7 @@ void read(const std::string & s, double & value, data_format)
 
 void read(const std::string & s, std::string & value, data_format) { value = s; }
 
-void read(const std::string & s, side & value, data_format fmt)
+void read(const std::string & s, side & value, data_format fmt) throw(std::runtime_error)
 {
 	typename std::underlying_type<side>::type t;
 	read(s, t, fmt);
@@ -397,12 +399,11 @@ void read(const std::string & s, side & value, data_format fmt)
 			value = side::RIGHT;
 			break;
 		default:
-			value = static_cast<side>(-1); // invalid value on purpose
-			break;
+			throw std::runtime_error{"invalid data for nmea/side"};
 	}
 }
 
-void read(const std::string & s, route & value, data_format fmt)
+void read(const std::string & s, route & value, data_format fmt) throw(std::runtime_error)
 {
 	typename std::underlying_type<route>::type t;
 	read(s, t, fmt);
@@ -414,12 +415,12 @@ void read(const std::string & s, route & value, data_format fmt)
 			value = route::WORKING;
 			break;
 		default:
-			value = static_cast<route>(-1); // invalid value on purpose
-			break;
+			throw std::runtime_error{"invalid data for nmea/route"};
 	}
 }
 
-void read(const std::string & s, selection_mode & value, data_format fmt)
+void read(const std::string & s, selection_mode & value, data_format fmt) throw(
+	std::runtime_error)
 {
 	typename std::underlying_type<selection_mode>::type t;
 	read(s, t, fmt);
@@ -431,29 +432,30 @@ void read(const std::string & s, selection_mode & value, data_format fmt)
 			value = selection_mode::AUTOMATIC;
 			break;
 		default:
-			value = static_cast<selection_mode>(-1); // invalid value on purpose
-			break;
+			throw std::runtime_error{"invalid data for nmea/selection_mode"};
 	}
 }
 
-void read(const std::string & s, ais_channel & value, data_format fmt)
+void read(const std::string & s, ais_channel & value, data_format fmt) throw(std::runtime_error)
 {
 	typename std::underlying_type<ais_channel>::type t;
 	read(s, t, fmt);
 	switch (t) {
+		case '1':
 		case 'A':
 			value = ais_channel::A;
 			break;
+		case '2':
 		case 'B':
 			value = ais_channel::B;
 			break;
 		default:
-			value = static_cast<ais_channel>(-1); // invalid value on purpose
-			break;
+			throw std::runtime_error{"invalid data for nmea/ais_channel"};
 	}
 }
 
-void read(const std::string & s, type_of_point & value, data_format fmt)
+void read(const std::string & s, type_of_point & value, data_format fmt) throw(
+	std::runtime_error)
 {
 	typename std::underlying_type<type_of_point>::type t;
 	read(s, t, fmt);
@@ -471,12 +473,11 @@ void read(const std::string & s, type_of_point & value, data_format fmt)
 			value = type_of_point::wheelover;
 			break;
 		default:
-			value = static_cast<type_of_point>(-1); // invalid value on purpose
-			break;
+			throw std::runtime_error{"invalid data for nmea/type_of_point"};
 	}
 }
 
-void read(const std::string & s, direction & value, data_format fmt)
+void read(const std::string & s, direction & value, data_format fmt) throw(std::runtime_error)
 {
 	typename std::underlying_type<direction>::type t;
 	read(s, t, fmt);
@@ -494,12 +495,11 @@ void read(const std::string & s, direction & value, data_format fmt)
 			value = direction::WEST;
 			break;
 		default:
-			value = static_cast<direction>(-1); // invalid value on purpose
-			break;
+			throw std::runtime_error{"invalid data for nmea/direction"};
 	}
 }
 
-void read(const std::string & s, reference & value, data_format fmt)
+void read(const std::string & s, reference & value, data_format fmt) throw(std::runtime_error)
 {
 	typename std::underlying_type<reference>::type t;
 	read(s, t, fmt);
@@ -514,12 +514,12 @@ void read(const std::string & s, reference & value, data_format fmt)
 			value = reference::RELATIVE;
 			break;
 		default:
-			value = static_cast<reference>(-1); // invalid value on purpose
-			break;
+			throw std::runtime_error{"invalid data for nmea/reference"};
 	}
 }
 
-void read(const std::string & s, positioning_system_mode_indicator & value, data_format fmt)
+void read(const std::string & s, positioning_system_mode_indicator & value,
+	data_format fmt) throw(std::runtime_error)
 {
 	typename std::underlying_type<positioning_system_mode_indicator>::type t;
 	read(s, t, fmt);
@@ -549,13 +549,11 @@ void read(const std::string & s, positioning_system_mode_indicator & value, data
 			value = positioning_system_mode_indicator::PRECISE;
 			break;
 		default:
-			// invalid value on purpose
-			value = static_cast<positioning_system_mode_indicator>(-1);
-			break;
+			throw std::runtime_error{"invalid data for nmea/positioning_system_mode_indicator"};
 	}
 }
 
-void read(const std::string & s, status & value, data_format fmt)
+void read(const std::string & s, status & value, data_format fmt) throw(std::runtime_error)
 {
 	typename std::underlying_type<status>::type t;
 	read(s, t, fmt);
@@ -567,13 +565,11 @@ void read(const std::string & s, status & value, data_format fmt)
 			value = status::WARNING;
 			break;
 		default:
-			// invalid value on purpose
-			value = static_cast<status>(-1);
-			break;
+			throw std::runtime_error{"invalid data for nmea/status"};
 	}
 }
 
-void read(const std::string & s, quality & value, data_format fmt)
+void read(const std::string & s, quality & value, data_format fmt) throw(std::runtime_error)
 {
 	typename std::underlying_type<quality>::type t;
 	read(s, t, fmt);
@@ -590,14 +586,15 @@ void read(const std::string & s, quality & value, data_format fmt)
 		case 6:
 			value = quality::GUESS;
 			break;
-		default:
-			// invalid value on purpose
-			value = static_cast<quality>(-1);
+		case 8:
+			value = quality::SIMULATION;
 			break;
+		default:
+			throw std::runtime_error{"invalid data for nmea/quality"};
 	}
 }
 
-void read(const std::string & s, unit::distance & value, data_format fmt)
+void read(const std::string & s, unit::distance & value, data_format fmt) throw(std::runtime_error)
 {
 	typename std::underlying_type<unit::distance>::type t;
 	read(s, t, fmt);
@@ -618,13 +615,11 @@ void read(const std::string & s, unit::distance & value, data_format fmt)
 			value = unit::distance::FATHOM;
 			break;
 		default:
-			// invalid value on purpose
-			value = static_cast<unit::distance>(-1);
-			break;
+			throw std::runtime_error{"invalid data for nmea/unit/distance"};
 	}
 }
 
-void read(const std::string & s, unit::velocity & value, data_format fmt)
+void read(const std::string & s, unit::velocity & value, data_format fmt) throw(std::runtime_error)
 {
 	typename std::underlying_type<unit::velocity>::type t;
 	read(s, t, fmt);
@@ -639,13 +634,12 @@ void read(const std::string & s, unit::velocity & value, data_format fmt)
 			value = unit::velocity::MPS;
 			break;
 		default:
-			// invalid value on purpose
-			value = static_cast<unit::velocity>(-1);
-			break;
+			throw std::runtime_error{"invalid data for nmea/unit/velocity"};
 	}
 }
 
-void read(const std::string & s, unit::temperature & value, data_format fmt)
+void read(const std::string & s, unit::temperature & value, data_format fmt) throw(
+	std::runtime_error)
 {
 	typename std::underlying_type<unit::temperature>::type t;
 	read(s, t, fmt);
@@ -654,13 +648,12 @@ void read(const std::string & s, unit::temperature & value, data_format fmt)
 			value = unit::temperature::CELSIUS;
 			break;
 		default:
-			// invalid value on purpose
-			value = static_cast<unit::temperature>(-1);
-			break;
+			throw std::runtime_error{"invalid data for nmea/unit/temperature"};
 	}
 }
 
-void read(const std::string & s, unit::pressure & value, data_format fmt)
+void read(const std::string & s, unit::pressure & value, data_format fmt) throw(
+	std::runtime_error)
 {
 	typename std::underlying_type<unit::pressure>::type t;
 	read(s, t, fmt);
@@ -672,9 +665,7 @@ void read(const std::string & s, unit::pressure & value, data_format fmt)
 			value = unit::pressure::PASCAL;
 			break;
 		default:
-			// invalid value on purpose
-			value = static_cast<unit::pressure>(-1);
-			break;
+			throw std::runtime_error{"invalid data for nmea/unit/pressure"};
 	}
 }
 

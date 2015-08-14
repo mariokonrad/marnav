@@ -33,7 +33,7 @@ void dbt::set_depth_fathom(double t)
 }
 
 std::unique_ptr<sentence> dbt::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in dbt::parse"};

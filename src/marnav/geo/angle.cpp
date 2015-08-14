@@ -12,8 +12,8 @@ angle::angle()
 }
 
 /// Initializes the angle with the specified angle in degrees.
-angle::angle(double value)
-	: value(value)
+angle::angle(double deg)
+	: value(deg)
 {
 }
 
@@ -72,16 +72,16 @@ latitude::latitude()
 }
 
 /// Constructs a latitude with the specified angle in degrees.
-latitude::latitude(double value) throw(std::invalid_argument)
-	: angle(value)
+latitude::latitude(double deg) throw(std::invalid_argument)
+	: angle(deg)
 {
 	check(get());
 }
 
-latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(
+latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h) throw(
 	std::invalid_argument)
 	: angle((static_cast<double>(d) + static_cast<double>(m) / 60.0
-				+ static_cast<double>(s) / 3600.0) * ((hem == hemisphere::SOUTH) ? -1.0 : 1.0))
+				+ static_cast<double>(s) / 3600.0) * ((h == hemisphere::SOUTH) ? -1.0 : 1.0))
 {
 	check(get());
 }
@@ -131,17 +131,17 @@ longitude::longitude()
 }
 
 /// Constructs a longitude with the specified angle in degrees.
-longitude::longitude(double value) throw(std::invalid_argument)
-	: angle(value)
+longitude::longitude(double deg) throw(std::invalid_argument)
+	: angle(deg)
 {
 	check(get());
 }
 
-longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere hem) throw(
+longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h) throw(
 	std::invalid_argument)
 	: angle((static_cast<double>(d) + static_cast<double>(m) / 60.0
 				+ static_cast<double>(s) / 3600.0)
-		  * ((hem == hemisphere::EAST) ? +1.0 : -1.0))
+		  * ((h == hemisphere::EAST) ? +1.0 : -1.0))
 {
 	check(get());
 }

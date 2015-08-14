@@ -210,7 +210,7 @@ public:
 	inline value_type get_sphere_rho() const
 	{
 		value_type b = sqrt(a[0] * a[0] + a[1] * a[1]);
-		return (b != 0.0) ? (atan(a[2] / b) * 180.0 / M_PI) : 0.0;
+		return (!is_zero(b)) ? (atan(a[2] / b) * 180.0 / M_PI) : 0.0;
 	}
 
 	inline value_type get_sphere_phi() const

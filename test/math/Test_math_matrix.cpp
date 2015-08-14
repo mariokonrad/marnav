@@ -26,10 +26,10 @@ TEST_F(Test_math_matrix, mat2_construction_default)
 {
 	mat2 m;
 
-	EXPECT_EQ(1.0, m[0]);
-	EXPECT_EQ(0.0, m[1]);
-	EXPECT_EQ(0.0, m[2]);
-	EXPECT_EQ(1.0, m[3]);
+	EXPECT_NEAR(1.0, m[0], 1e-8);
+	EXPECT_NEAR(0.0, m[1], 1e-8);
+	EXPECT_NEAR(0.0, m[2], 1e-8);
+	EXPECT_NEAR(1.0, m[3], 1e-8);
 }
 
 }

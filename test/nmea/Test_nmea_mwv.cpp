@@ -23,11 +23,11 @@ TEST_F(Test_nmea_mwv, parse)
 
 	auto angle = mwv->get_angle();
 	ASSERT_TRUE(angle.available());
-	EXPECT_EQ(84.0, angle.value());
+	EXPECT_NEAR(84.0, angle.value(), 1e-8);
 
 	auto speed = mwv->get_speed();
 	ASSERT_TRUE(speed.available());
-	EXPECT_EQ(10.4, speed.value());
+	EXPECT_NEAR(10.4, speed.value(), 1e-8);
 }
 
 TEST_F(Test_nmea_mwv, parse_invalid_number_of_arguments)

@@ -38,7 +38,8 @@ public:
 	vdm & operator=(const vdm &) = default;
 
 	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument);
+		const std::vector<std::string> & fields) throw(std::invalid_argument,
+		std::runtime_error);
 
 protected:
 	vdm(sentence_id id, const std::string & tag, const std::string & talker);
@@ -46,13 +47,13 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 	virtual char get_start_token() const override { return START_TOKEN_AIS; }
 
-	void read_fields(const std::vector<std::string> & fields);
+	void read_fields(const std::vector<std::string> & fields) throw(std::runtime_error);
 
 private:
 	uint32_t n_fragments;
 	uint32_t fragment;
 	utils::optional<uint32_t> seq_msg_id;
-	ais_channel radio_channel; // A = 161.975MHz (87B), B = 162.025MHz (88B)
+	utils::optional<ais_channel> radio_channel; // A = 161.975MHz (87B), B = 162.025MHz (88B)
 	std::string payload; // 6bit encoded content
 	uint32_t n_fill_bits; // 0..5
 

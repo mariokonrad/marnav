@@ -26,16 +26,16 @@ TEST_F(Test_math_vector, vec2_construction_default)
 {
 	vec2 v;
 
-	EXPECT_EQ(0.0, v[0]);
-	EXPECT_EQ(0.0, v[1]);
+	EXPECT_NEAR(0.0, v[0], 1e-8);
+	EXPECT_NEAR(0.0, v[1], 1e-8);
 }
 
 TEST_F(Test_math_vector, vec2_construction_uniform)
 {
 	vec2 v{1.0, 2.0};
 
-	EXPECT_EQ(1.0, v[0]);
-	EXPECT_EQ(2.0, v[1]);
+	EXPECT_NEAR(1.0, v[0], 1e-8);
+	EXPECT_NEAR(2.0, v[1], 1e-8);
 }
 
 TEST_F(Test_math_vector, vec2_construction_comparison_equal)
@@ -86,8 +86,8 @@ TEST_F(Test_math_vector, vec2_components)
 {
 	vec2 v{1.0, 2.0};
 
-	EXPECT_EQ(1.0, v.x());
-	EXPECT_EQ(2.0, v.y());
+	EXPECT_NEAR(1.0, v.x(), 1e-8);
+	EXPECT_NEAR(2.0, v.y(), 1e-8);
 }
 
 TEST_F(Test_math_vector, vec2_make_from_polar)
@@ -151,11 +151,11 @@ TEST_F(Test_math_vector, vecn_initializer_list)
 {
 	{
 		vector_n<5, double> v{1, 2, 3, 4, 5};
-		EXPECT_EQ(1.0, v[0]);
-		EXPECT_EQ(2.0, v[1]);
-		EXPECT_EQ(3.0, v[2]);
-		EXPECT_EQ(4.0, v[3]);
-		EXPECT_EQ(5.0, v[4]);
+		EXPECT_NEAR(1.0, v[0], 1e-8);
+		EXPECT_NEAR(2.0, v[1], 1e-8);
+		EXPECT_NEAR(3.0, v[2], 1e-8);
+		EXPECT_NEAR(4.0, v[3], 1e-8);
+		EXPECT_NEAR(5.0, v[4], 1e-8);
 	}
 	{
 		EXPECT_DEATH((vector_n<5, double>{1, 2, 3, 4}), ".*");

@@ -22,7 +22,7 @@ void zfo::set_waypoint_id(const std::string & id)
 }
 
 std::unique_ptr<sentence> zfo::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument)
+	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
 {
 	if (fields.size() != 3)
 		throw std::invalid_argument{"invalid number of fields in zfo::parse"};

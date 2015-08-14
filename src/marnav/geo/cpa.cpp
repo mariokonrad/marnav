@@ -108,7 +108,7 @@ std::tuple<position, position, std::chrono::seconds, bool> cpa(
 	const vec2 d0 = v1_0 - v2_0;
 	const vec2 t = u - v;
 	const double den = t * t;
-	if (abs(den) < 1e-7)
+	if (std::abs(den) < 1e-7)
 		return std::make_tuple<position, position, std::chrono::seconds>(
 			position{0.0, 0.0}, position{0.0, 0.0}, std::chrono::seconds{0}, false);
 
