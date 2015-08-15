@@ -25,12 +25,12 @@ TEST_F(Test_geo_cpa, collision_on_equator_eastwards_westwards)
 	bool cpa_exists;
 	std::tie(p1, p2, tcpa, cpa_exists) = cpa(vessel1, vessel2);
 
-	EXPECT_NEAR(expected_vessels_pos.lat, p1.lat, 1e-5);
-	EXPECT_NEAR(expected_vessels_pos.lon, p1.lon, 1e-5);
-	EXPECT_NEAR(expected_vessels_pos.lat, p2.lat, 1e-5);
-	EXPECT_NEAR(expected_vessels_pos.lon, p2.lon, 1e-5);
-	EXPECT_NEAR(p1.lat, p2.lat, 1e-5);
-	EXPECT_NEAR(p1.lon, p2.lon, 1e-5);
+	EXPECT_NEAR(expected_vessels_pos.lat(), p1.lat(), 1e-5);
+	EXPECT_NEAR(expected_vessels_pos.lon(), p1.lon(), 1e-5);
+	EXPECT_NEAR(expected_vessels_pos.lat(), p2.lat(), 1e-5);
+	EXPECT_NEAR(expected_vessels_pos.lon(), p2.lon(), 1e-5);
+	EXPECT_NEAR(p1.lat(), p2.lat(), 1e-5);
+	EXPECT_NEAR(p1.lon(), p2.lon(), 1e-5);
 	EXPECT_EQ(expected_time, tcpa);
 	EXPECT_TRUE(cpa_exists);
 }
@@ -50,12 +50,12 @@ TEST_F(Test_geo_cpa, collision_on_equator_eastwards_northwards)
 	bool cpa_exists;
 	std::tie(p1, p2, tcpa, cpa_exists) = cpa(vessel1, vessel2);
 
-	EXPECT_NEAR(expected_vessels_pos.lat, p1.lat, 1e-5);
-	EXPECT_NEAR(expected_vessels_pos.lon, p1.lon, 1e-5);
-	EXPECT_NEAR(expected_vessels_pos.lat, p2.lat, 1e-5);
-	EXPECT_NEAR(expected_vessels_pos.lon, p2.lon, 1e-5);
-	EXPECT_NEAR(p1.lat, p2.lat, 1e-5);
-	EXPECT_NEAR(p1.lon, p2.lon, 1e-5);
+	EXPECT_NEAR(expected_vessels_pos.lat(), p1.lat(), 1e-5);
+	EXPECT_NEAR(expected_vessels_pos.lon(), p1.lon(), 1e-5);
+	EXPECT_NEAR(expected_vessels_pos.lat(), p2.lat(), 1e-5);
+	EXPECT_NEAR(expected_vessels_pos.lon(), p2.lon(), 1e-5);
+	EXPECT_NEAR(p1.lat(), p2.lat(), 1e-5);
+	EXPECT_NEAR(p1.lon(), p2.lon(), 1e-5);
 	EXPECT_EQ(expected_time, tcpa);
 	EXPECT_EQ(std::chrono::minutes(60 * 60), tcpa);
 	EXPECT_EQ(std::chrono::hours(60), tcpa);

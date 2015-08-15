@@ -7,18 +7,30 @@ namespace marnav
 {
 namespace geo
 {
-struct position {
+
+/// @brief Represents a position, consisting of latitude and longitude.
+///
+/// Immutable.
+///
+class position
+{
+public:
 	position() = default;
 	position(const position &) = default;
 	position(position &&) = default;
+	position(const latitude & la, const longitude & lo);
 
 	position & operator=(const position &) = default;
 	position & operator=(position &&) = default;
 
 	bool operator==(const position & other) const;
 
-	latitude lat;
-	longitude lon;
+	inline const latitude & lat() const { return lat_; }
+	inline const longitude & lon() const { return lon_; }
+
+private:
+	latitude lat_;
+	longitude lon_;
 };
 
 position deg2rad(const position & p);

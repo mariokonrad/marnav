@@ -99,8 +99,8 @@ std::tuple<position, position, std::chrono::seconds, bool> cpa(
 {
 	using math::vec2;
 
-	const vec2 v1_0{-vessel1.pos.lon, vessel1.pos.lat};
-	const vec2 v2_0{-vessel2.pos.lon, vessel2.pos.lat};
+	const vec2 v1_0{-vessel1.pos.lon(), vessel1.pos.lat()};
+	const vec2 v2_0{-vessel2.pos.lon(), vessel2.pos.lat()};
 
 	const vec2 u = vec2::make_from_polar(vessel1.sog, 90.0 - vessel1.cog);
 	const vec2 v = vec2::make_from_polar(vessel2.sog, 90.0 - vessel2.cog);

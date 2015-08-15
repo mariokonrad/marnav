@@ -53,7 +53,7 @@ double central_spherical_angle(const position & start, const position & destinat
 {
 	const auto p0 = deg2rad(start);
 	const auto p1 = deg2rad(destination);
-	return central_spherical_angle_rad(p0.lat, p0.lon, p1.lat, p1.lon);
+	return central_spherical_angle_rad(p0.lat(), p0.lon(), p1.lat(), p1.lon());
 }
 
 /// Calculates distance of two points on earth, approximated as sphere.
@@ -91,9 +91,9 @@ double distance_ellipsoid_vincenty(
 	const double a = EARTH_SEMI_MAJOR_AXIS;
 	const double b = (1.0 - f) * a;
 
-	const double L = p1.lon - p0.lon;
-	const double U1 = atan((1.0 - f) * tan(p0.lat));
-	const double U2 = atan((1.0 - f) * tan(p1.lat));
+	const double L = p1.lon() - p0.lon();
+	const double U1 = atan((1.0 - f) * tan(p0.lat()));
+	const double U2 = atan((1.0 - f) * tan(p1.lat()));
 
 	double lambda = L;
 	double d_lambda = std::abs(lambda);
@@ -185,7 +185,7 @@ position point_ellipsoid_vincenty(
 	const double sin_alpha1 = sin(alpha1);
 	const double cos_alpha1 = cos(alpha1);
 
-	const double tan_U1 = (1.0 - f) * tan(p0.lat);
+	const double tan_U1 = (1.0 - f) * tan(p0.lat());
 	const double U1 = atan(tan_U1);
 
 	const double sin_U1 = sin(U1);
@@ -237,9 +237,7 @@ position point_ellipsoid_vincenty(
 		d_sigma = std::abs(old_sigma - sigma);
 	}
 
-	position p1;
-
-	p1.lat = atan((sin_U1 * cos_sigma + cos_U1 * sin_sigma * cos_alpha1)
+	latitude lat = atan((sin_U1 * cos_sigma + cos_U1 * sin_sigma * cos_alpha1)
 		/ ((1.0 - f) * sqrt(sin_sqr_alpha
 						   + sqr(sin_U1 * sin_sigma - cos_U1 * cos_sigma * cos_alpha1))));
 	C = (f / 16.0) * cos_sqr_alpha * (4.0 + f * (4.0 - 3.0 * cos_sqr_alpha));
@@ -250,10 +248,10 @@ position point_ellipsoid_vincenty(
 			* (sigma
 				  + C * sin_sigma
 					  * (cos_2_sigma_m + C * cos_sigma * (-1.0 + 2.0 * cos_sqr_2_sigma_m)));
-	p1.lon = p0.lon + L;
+	longitude lon = p0.lon() + L;
 	alpha2 = atan(sin_alpha / (-sin_U1 * sin_sigma + cos_U1 * cos_sigma * cos_alpha1));
 
-	return rad2deg(p1);
+	return rad2deg(position{lat, lon});
 }
 
 /// Calculates the distance on an ellipsoid between start and destination points.
@@ -270,10 +268,10 @@ double distance_ellipsoid_lambert(const position & start, const position & desti
 
 	const double r = 1.0 / EARTH_FLATTENING;
 
-	const double t1_lat = atan((r - 1.0) / r) * tan(p0.lat);
-	const double t1_lon = p0.lon;
-	const double t2_lat = atan((r - 1.0) / r) * tan(p1.lat);
-	const double t2_lon = p1.lon;
+	const double t1_lat = atan((r - 1.0) / r) * tan(p0.lat());
+	const double t1_lon = p0.lon();
+	const double t2_lat = atan((r - 1.0) / r) * tan(p1.lat());
+	const double t2_lon = p1.lon();
 
 	const double sigma = central_spherical_angle_rad(t1_lat, t1_lon, t2_lat, t2_lon);
 	const double P = (t1_lat + t2_lat) / 2.0;

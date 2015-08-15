@@ -102,8 +102,8 @@ TEST_F(Test_geo_geodesic, point_ellipsoid_vincenty)
 		double alpha2 = 0.0;
 		auto destination
 			= geo::point_ellipsoid_vincenty(item.start, item.distance, item.azimuth, alpha2);
-		EXPECT_NEAR(item.expected.lat, destination.lat, 1e-4);
-		EXPECT_NEAR(item.expected.lon, destination.lon, 1e-4);
+		EXPECT_NEAR(item.expected.lat(), destination.lat(), 1e-4);
+		EXPECT_NEAR(item.expected.lon(), destination.lon(), 1e-4);
 	}
 }
 }
