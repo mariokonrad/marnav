@@ -32,6 +32,9 @@ root
 - \c src      : Complete source of the library, source and header files.
                 Packages are grouped in their own subdirectory, named
                 accordingly (e.g. \c marnav/nmea).
+
+                \b Note: both, private and public headers of the library are
+                located here.
 - \c test     : All tests
 
 \section sec_overview_package_dependencies Package dependencies
