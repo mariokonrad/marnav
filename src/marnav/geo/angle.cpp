@@ -6,7 +6,7 @@ namespace marnav
 {
 namespace geo
 {
-angle::angle()
+angle::angle() noexcept
 	: value(0.0)
 {
 }
@@ -66,7 +66,7 @@ bool operator!=(const angle & a, const angle & b) noexcept
 	return !(a == b);
 }
 
-latitude::latitude()
+latitude::latitude() noexcept
 	: latitude(0.0)
 {
 }
@@ -125,7 +125,7 @@ void latitude::check(double a) throw(std::invalid_argument)
 		throw std::invalid_argument{"invalid value for nmea::latitude"};
 }
 
-longitude::longitude()
+longitude::longitude() noexcept
 	: longitude(0.0)
 {
 }

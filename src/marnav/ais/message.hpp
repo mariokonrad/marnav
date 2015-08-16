@@ -167,7 +167,7 @@ public:
 	virtual raw get_data() const throw(std::out_of_range) = 0;
 
 protected:
-	message(message_id type);
+	explicit message(message_id type);
 
 private:
 	message_id message_type;
