@@ -25,16 +25,16 @@ public:
 	}
 
 	/// Returns the hour component.
-	inline uint32_t hour() const { return h; }
+	uint32_t hour() const { return h; }
 
 	/// Returns the minutes component.
-	inline uint32_t minutes() const { return m; }
+	uint32_t minutes() const { return m; }
 
 	/// Returns the seconds component.
-	inline uint32_t seconds() const { return s; }
+	uint32_t seconds() const { return s; }
 
 	/// Returns the milliseconds component.
-	inline uint32_t milliseconds() const { return ms; }
+	uint32_t milliseconds() const { return ms; }
 
 	template <class T> bool operator==(const time_base<T> & other) noexcept
 	{

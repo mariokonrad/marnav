@@ -4,10 +4,7 @@ option(ENABLE_STATIC
 	"Enable static library" ON)
 
 set(SOURCE_UTILS
-	marnav/utils/unique.hpp
-	marnav/utils/bitset.hpp
-	marnav/utils/optional.hpp
-	marnav/utils/mmsi.hpp
+	marnav/utils/mmsi.cpp
 	)
 
 set(SOURCE_MATH
@@ -157,8 +154,8 @@ configure_file(
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_library(marnav ${LIBRARY_TYPE}
-	${SOURCE_UTILS}
 	${SOURCE_MATH}
+	${SOURCE_UTILS}
 	${SOURCE_GEO}
 	${SOURCE_NMEA_0183}
 	${SOURCE_AIS}
@@ -301,6 +298,7 @@ install(
 		marnav/utils/unique.hpp
 		marnav/utils/bitset.hpp
 		marnav/utils/optional.hpp
+		marnav/utils/mmsi.hpp
 	DESTINATION include/marnav/utils
 	)
 
