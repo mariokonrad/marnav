@@ -8,20 +8,23 @@ namespace marnav
 namespace utils
 {
 
-/// Represents an MMSI (Maritime Mobile Service Identiy).
+/// @brief Represents a MMSI (Maritime Mobile Service Identiy).
 ///
 /// @see http://www.navcen.uscg.gov/?pageName=mtMmsi
+///
+/// @note Not all variations and criterias are implemented.
+///
 class mmsi
 {
 public:
 	using value_type = uint32_t;
 
-	mmsi()
+	mmsi() noexcept
 		: value(0)
 	{
 	}
 
-	explicit mmsi(value_type t)
+	explicit mmsi(value_type t) noexcept
 		: value(t)
 	{
 	}
@@ -29,6 +32,10 @@ public:
 	mmsi(const mmsi &) = default;
 	mmsi(mmsi &&) = default;
 	mmsi & operator=(const mmsi &) = default;
+	mmsi & operator=(mmsi &&) = default;
+
+	bool operator==(const mmsi & other) const;
+	bool operator!=(const mmsi & other) const;
 
 	operator value_type() const { return value; }
 

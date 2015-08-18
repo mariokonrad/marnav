@@ -5,6 +5,15 @@ namespace marnav
 namespace utils
 {
 
+bool mmsi::operator==(const mmsi & other) const
+{
+	// not comparing (this == &other) because the comparison
+	// of the value is trivial.
+	return value == other.value;
+}
+
+bool mmsi::operator!=(const mmsi & other) const { return !(*this == other); }
+
 mmsi::value_type mmsi::regular_mid() const
 {
 	if (!is_regular())
