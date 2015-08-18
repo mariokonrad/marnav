@@ -430,7 +430,7 @@ public:
 	}
 
 	/// Construction with move of the container, this does not copy any data.
-	bitset(Container && container)
+	explicit bitset(Container && container)
 		: pos(container.size() * BITS_PER_BLOCK)
 		, data(std::move(container))
 	{
