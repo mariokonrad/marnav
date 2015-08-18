@@ -10,7 +10,7 @@ namespace marnav
 namespace geo
 {
 
-/// This struct contains data about a vessel, needed to
+/// @brief This struct contains data about a vessel, needed to
 /// compute CPA and TCPA.
 struct vessel
 {

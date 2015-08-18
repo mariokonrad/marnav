@@ -8,7 +8,7 @@ namespace marnav
 namespace geo
 {
 
-/// This class represents a geographical region, defined
+/// @brief This class represents a geographical region, defined
 /// by two coordinates top/left and bottom/right. The
 /// coordinates are a pair of lat/lon.
 ///
