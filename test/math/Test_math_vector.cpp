@@ -162,4 +162,31 @@ TEST_F(Test_math_vector, vecn_initializer_list)
 	}
 }
 
+TEST_F(Test_math_vector, vec2_normalize)
+{
+	{
+		const vector2<double> expected{1.0 / std::sqrt(2.0), 1.0 / std::sqrt(2.0)};
+		vector2<double> v{2.0, 2.0};
+		v.normalize();
+		EXPECT_NEAR(expected.x(), v.x(), 1e-5);
+		EXPECT_NEAR(expected.y(), v.y(), 1e-5);
+	}
+}
+
+TEST_F(Test_math_vector, vec2_nullify)
+{
+	{
+		vector2<double> v{2.0, 2.0};
+		v.nullify();
+		EXPECT_NEAR(2.0, v.x(), 1e-5);
+		EXPECT_NEAR(2.0, v.y(), 1e-5);
+	}
+	{
+		vector2<double> v{
+			std::numeric_limits<double>::epsilon(), std::numeric_limits<double>::epsilon()};
+		v.nullify();
+		EXPECT_NEAR(0.0, v.x(), 1e-5);
+		EXPECT_NEAR(0.0, v.y(), 1e-5);
+	}
+}
 }
