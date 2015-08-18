@@ -76,19 +76,19 @@ public:
 		return *this;
 	}
 
-	/// Set all components of the vector that are below epsilon to exact zero.
-	inline vector2 & nullify(void)
+	/// Normalizes the vector to a specific length.
+	inline vector2 normalize(value_type len = 1.0) const
 	{
-		for (size_type i = 0; i < dimension; ++i)
-			a[i] = is_zero(a[i]) ? 0.0 : a[i];
-		return *this;
+		return vector2{*this}.normalize(len);
 	}
 
 	inline value_type x() const { return a[0]; }
 
 	inline value_type y() const { return a[1]; }
 
-	inline value_type operator[](int idx) const { return a[idx]; }
+	inline value_type operator[](size_type idx) const { return a[idx]; }
+
+	inline value_type & operator[](size_type idx) { return a[idx]; }
 
 	inline vector2 & operator=(const vector2 &) = default;
 
@@ -142,6 +142,10 @@ private:
 	value_type a[dimension];
 };
 
+/// A 3D vector.
+///
+/// @tparam T Basic data type, must be a floating point type.
+///
 template <typename T,
 	typename = typename std::enable_if<std::is_floating_point<T>::value, T>::type>
 class vector3
@@ -185,14 +189,6 @@ public:
 			a[0] * v.a[1] - a[1] * v.a[0]);
 	}
 
-	/// Set all components of the vector that are below epsilon to exact zero.
-	inline vector3 & nullify(void)
-	{
-		for (size_type i = 0; i < dimension; ++i)
-			a[i] = is_zero(a[i]) ? 0.0 : a[i];
-		return *this;
-	}
-
 	inline value_type length() const { return sqrt(length2()); }
 
 	inline value_type length2() const { return a[0] * a[0] + a[1] * a[1] + a[2] * a[2]; }
@@ -203,6 +199,12 @@ public:
 		if (!is_zero(l))
 			*this *= len / l;
 		return *this;
+	}
+
+	/// Normalizes the vector to a specific length.
+	inline vector3 normalize(value_type len = 1.0) const
+	{
+		return vector3{*this}.normalize(len);
 	}
 
 	inline value_type get_sphere_r() const { return length(); }
@@ -285,6 +287,10 @@ private:
 	value_type a[dimension];
 };
 
+/// A 4D vector.
+///
+/// @tparam T Basic data type, must be a floating point type.
+///
 template <typename T,
 	typename = typename std::enable_if<std::is_floating_point<T>::value, T>::type>
 class vector4
@@ -328,15 +334,15 @@ public:
 		return *this;
 	}
 
-	/// Set all components of the vector that are below epsilon to exact zero.
-	inline vector4 & nullify()
+	/// Normalizes the vector to a specific length.
+	inline vector4 normalize(value_type len = 1.0) const
 	{
-		for (size_type i = 0; i < dimension; ++i)
-			a[i] = is_zero(a[i]) ? 0.0 : a[i];
-		return *this;
+		return vector4{*this}.normalize(len);
 	}
 
 	inline value_type operator[](size_type idx) const { return a[idx]; }
+
+	inline value_type & operator[](size_type idx) { return a[idx]; }
 
 	inline vector4 & operator=(const vector4 &) = default;
 
@@ -390,6 +396,11 @@ private:
 	value_type a[dimension];
 };
 
+/// A n-dimensional vector.
+///
+/// @tparam N Dimension of the vector
+/// @tparam T Basic data type, must be a floating point type.
+///
 template <unsigned int N, typename T = double,
 	typename = typename std::enable_if<std::is_floating_point<T>::value, T>::type>
 class vector_n
@@ -446,9 +457,15 @@ public:
 		return *this;
 	}
 
-	inline value_type operator[](int idx) const { return a[idx]; }
+	/// Normalizes the vector to a specific length.
+	inline vector_n normalize(value_type len = 1.0) const
+	{
+		return vector_n{*this}.normalize(len);
+	}
 
-	inline value_type & operator[](int idx) { return a[idx]; }
+	inline value_type operator[](size_type idx) const { return a[idx]; }
+
+	inline value_type & operator[](size_type idx) { return a[idx]; }
 
 	inline vector_n & operator=(const vector_n &) = default;
 
@@ -513,32 +530,6 @@ using vec3 = vector3<double>;
 using vec4 = vector4<double>;
 
 /// @{
-/// Returns a new constructed, normalized vector of the specified one.
-
-template <typename T> vector2<T> normalize_vec(const vector2<T> & v)
-{
-	vector2<T> t{v};
-	t.normalize();
-	return t;
-}
-
-template <typename T> vector3<T> normalize_vec(const vector3<T> & v)
-{
-	vector3<T> t{v};
-	t.normalize();
-	return t;
-}
-
-template <typename T> vector3<T> normalize_vec(const vector4<T> & v)
-{
-	vector4<T> t{v};
-	t.normalize();
-	return t;
-}
-
-/// @}
-
-/// @{
 /// Returns the angle between the two specified vectors in degrees.
 
 template <typename T> T angle_between(const vector2<T> & v0, const vector2<T> & v1)
@@ -564,12 +555,44 @@ template <typename T> vector2<T> project_onto(const vector2<T> & v0, const vecto
 	return ((v0 * v1) / len) * v1;
 }
 
-template <typename T> vector2<T> project_onto(const vector3<T> & v0, const vector3<T> & v1)
+template <typename T> vector3<T> project_onto(const vector3<T> & v0, const vector3<T> & v1)
 {
 	typename vector3<T>::value_type len = v1.length2();
 	if (is_zero(len))
 		return vector3<T>{};
 	return ((v0 * v1) / len) * v1;
+}
+
+/// @}
+
+/// @{
+
+/// Set all components of the vector that are below epsilon to exact zero.
+///
+/// @param[inout] v The vector to nullify
+/// @return The nullified vector
+///
+template <typename T, typename
+	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
+T & nullify(T & v)
+{
+	using iterator = decltype(T::dimension);
+
+	for (typename std::remove_cv<iterator>::type i = 0; i < T::dimension; ++i)
+		v[i] = is_zero(v[i]) ? 0.0 : v[i];
+	return v;
+}
+
+/// Set all components of the vector that are below epsilon to exact zero.
+///
+/// @param[in] v The vector to nullify, will not be modified
+/// @return A nullified vector
+///
+template <typename T, typename
+	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
+T nullify(const T & v)
+{
+	return nullify(T{v});
 }
 
 /// @}

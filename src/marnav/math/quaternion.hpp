@@ -225,8 +225,8 @@ public:
 	/// @endcode
 	static quaternion rot_to(const vector3<T> & from, const vector3<T> & to)
 	{
-		const vector3<T> f = normalize_vec(from);
-		const vector3<T> t = normalize_vec(to);
+		const vector3<T> f = from.normalize();
+		const vector3<T> t = to.normalize();
 		const value_type angle = acos(f.dot(t)) * 180.0 / M_PI;
 		return quaternion{angle, f.cross(t)}.normalize();
 	}

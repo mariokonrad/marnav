@@ -173,20 +173,110 @@ TEST_F(Test_math_vector, vec2_normalize)
 	}
 }
 
-TEST_F(Test_math_vector, vec2_nullify)
+TEST_F(Test_math_vector, nullify)
 {
 	{
+		vector2<double> v{
+			std::numeric_limits<double>::epsilon(), std::numeric_limits<double>::epsilon()};
+		nullify(v);
+		EXPECT_NEAR(0.0, v.x(), 1e-5);
+		EXPECT_NEAR(0.0, v.y(), 1e-5);
+	}
+	{
 		vector2<double> v{2.0, 2.0};
-		v.nullify();
+		nullify(v);
 		EXPECT_NEAR(2.0, v.x(), 1e-5);
 		EXPECT_NEAR(2.0, v.y(), 1e-5);
 	}
 	{
-		vector2<double> v{
-			std::numeric_limits<double>::epsilon(), std::numeric_limits<double>::epsilon()};
-		v.nullify();
+		vector3<double> v{
+			std::numeric_limits<double>::epsilon(),
+			std::numeric_limits<double>::epsilon(),
+			std::numeric_limits<double>::epsilon()};
+		nullify(v);
 		EXPECT_NEAR(0.0, v.x(), 1e-5);
 		EXPECT_NEAR(0.0, v.y(), 1e-5);
+		EXPECT_NEAR(0.0, v.z(), 1e-5);
+	}
+	{
+		vector3<double> v{2.0, 2.0, 2.0};
+		nullify(v);
+		EXPECT_NEAR(2.0, v.x(), 1e-5);
+		EXPECT_NEAR(2.0, v.y(), 1e-5);
+		EXPECT_NEAR(2.0, v.z(), 1e-5);
+	}
+	{
+		vector4<double> v{
+			std::numeric_limits<double>::epsilon(),
+			std::numeric_limits<double>::epsilon(),
+			std::numeric_limits<double>::epsilon(),
+			std::numeric_limits<double>::epsilon()};
+		nullify(v);
+		EXPECT_NEAR(0.0, v[0], 1e-5);
+		EXPECT_NEAR(0.0, v[1], 1e-5);
+		EXPECT_NEAR(0.0, v[2], 1e-5);
+		EXPECT_NEAR(0.0, v[3], 1e-5);
+	}
+	{
+		vector4<double> v{2.0, 2.0, 2.0, 2.0};
+		nullify(v);
+		EXPECT_NEAR(2.0, v[0], 1e-5);
+		EXPECT_NEAR(2.0, v[1], 1e-5);
+		EXPECT_NEAR(2.0, v[2], 1e-5);
+		EXPECT_NEAR(2.0, v[3], 1e-5);
+	}
+	{
+		vector_n<5, double> v{
+			std::numeric_limits<double>::epsilon(),
+			std::numeric_limits<double>::epsilon(),
+			std::numeric_limits<double>::epsilon(),
+			std::numeric_limits<double>::epsilon(),
+			std::numeric_limits<double>::epsilon()};
+		nullify(v);
+		EXPECT_NEAR(0.0, v[0], 1e-5);
+		EXPECT_NEAR(0.0, v[1], 1e-5);
+		EXPECT_NEAR(0.0, v[2], 1e-5);
+		EXPECT_NEAR(0.0, v[3], 1e-5);
+		EXPECT_NEAR(0.0, v[4], 1e-5);
+	}
+	{
+		vector_n<5, double> v{2.0, 2.0, 2.0, 2.0, 2.0};
+		nullify(v);
+		EXPECT_NEAR(2.0, v[0], 1e-5);
+		EXPECT_NEAR(2.0, v[1], 1e-5);
+		EXPECT_NEAR(2.0, v[2], 1e-5);
+		EXPECT_NEAR(2.0, v[3], 1e-5);
+		EXPECT_NEAR(2.0, v[4], 1e-5);
 	}
 }
+
+TEST_F(Test_math_vector, vec2__normalize)
+{
+	{
+		const vector2<double> expected{1.0 / std::sqrt(2.0), 1.0 / std::sqrt(2.0)};
+		vector2<double> v{2.0, 2.0};
+		v.normalize();
+		EXPECT_EQ(expected, v);
+	}
+	{
+		const vector2<double> expected{2.0 / std::sqrt(2.0), 2.0 / std::sqrt(2.0)};
+		vector2<double> v{2.0, 2.0};
+		v.normalize(2.0);
+		EXPECT_EQ(expected, v);
+	}
+
+	{
+		const vector2<double> expected{1.0 / std::sqrt(2.0), 1.0 / std::sqrt(2.0)};
+		const vector2<double> v{2.0, 2.0};
+		vector2<double> v1 = v.normalize();
+		EXPECT_EQ(expected, v1);
+	}
+	{
+		const vector2<double> expected{2.0 / std::sqrt(2.0), 2.0 / std::sqrt(2.0)};
+		const vector2<double> v{2.0, 2.0};
+		vector2<double> v1 = v.normalize(2.0);
+		EXPECT_EQ(expected, v1);
+	}
+}
+
 }
