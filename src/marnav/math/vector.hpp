@@ -14,7 +14,7 @@ namespace detail
 /// Returns true if both vectors are the same.
 template <typename T, typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
-bool equal(const T & a, const T & b)
+bool equal_vector(const T & a, const T & b)
 {
 	if (&a == &b)
 		return true;
@@ -30,7 +30,7 @@ bool equal(const T & a, const T & b)
 /// Normalizes the specified vector the desired length.
 template <typename T, typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
-void normalize(T & a, typename T::value_type len)
+void normalize_vector(T & a, typename T::value_type len)
 {
 	const typename T::value_type l = a.length();
 	if (!is_zero(l))
@@ -100,7 +100,7 @@ public:
 	/// Normalizes the vector to a specific length.
 	inline vector2 & normalize(value_type len = 1.0)
 	{
-		detail::normalize(*this, len);
+		detail::normalize_vector(*this, len);
 		return *this;
 	}
 
@@ -124,7 +124,7 @@ public:
 
 	inline bool operator==(const vector2 & v) const
 	{
-		return detail::equal(*this, v);
+		return detail::equal_vector(*this, v);
 	}
 
 	inline bool operator!=(const vector2 & v) const { return !(*this == v); }
@@ -217,7 +217,7 @@ public:
 
 	inline vector3 & normalize(value_type len = 1.0)
 	{
-		detail::normalize(*this, len);
+		detail::normalize_vector(*this, len);
 		return *this;
 	}
 
@@ -261,7 +261,7 @@ public:
 
 	inline bool operator==(const vector3 & v) const
 	{
-		return detail::equal(*this, v);
+		return detail::equal_vector(*this, v);
 	}
 
 	inline bool operator!=(const vector3 & v) const { return !(*this == v); }
@@ -342,7 +342,7 @@ public:
 
 	inline vector4 & normalize(value_type len = 1.0)
 	{
-		detail::normalize(*this, len);
+		detail::normalize_vector(*this, len);
 		return *this;
 	}
 
@@ -362,7 +362,7 @@ public:
 
 	inline bool operator==(const vector4 & v) const
 	{
-		return detail::equal(*this, v);
+		return detail::equal_vector(*this, v);
 	}
 
 	inline bool operator!=(const vector4 & v) const { return !(*this == v); }
@@ -457,7 +457,7 @@ public:
 
 	inline vector_n & normalize(value_type len = 1.0)
 	{
-		detail::normalize(*this, len);
+		detail::normalize_vector(*this, len);
 		return *this;
 	}
 
@@ -477,7 +477,7 @@ public:
 
 	inline bool operator==(const vector_n & v) const
 	{
-		return detail::equal(*this, v);
+		return detail::equal_vector(*this, v);
 	}
 
 	inline bool operator!=(const vector_n & v) const { return !(*this == v); }

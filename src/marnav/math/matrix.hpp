@@ -9,6 +9,32 @@ namespace marnav
 namespace math
 {
 
+namespace detail
+{
+
+/// Returns true if both matrices are the same.
+template <typename T, typename
+	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
+bool equal_matrix_nxn(const T & a, const T & b)
+{
+	if (&a == &b)
+		return true;
+
+	using iterator = decltype(T::dimension);
+
+	for (typename std::remove_cv<iterator>::type i = 0; i < T::dimension * T::dimension; ++i)
+		if (!is_same(a[i], b[i]))
+			return false;
+	return true;
+}
+}
+
+/// @brief A 2x2 Matrix.
+///
+/// Highly non-optimal implementation.
+///
+/// @tparam T Underlying type, must be a floating point type.
+///
 template <typename T,
 	typename = typename std::enable_if<std::is_floating_point<T>::value, T>::type>
 class matrix2
@@ -23,6 +49,7 @@ public:
 
 	matrix2(matrix2 &&) = default;
 
+	/// Initializes the matrix with the identiy matrix.
 	matrix2(
 		value_type x11 = 1.0, value_type x12 = 0.0, value_type x21 = 0.0, value_type x22 = 1.0)
 	{
@@ -36,12 +63,7 @@ public:
 
 	inline bool operator==(const matrix2 & m) const
 	{
-		if (this == &m)
-			return true;
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
-			if (!is_same(x[i], m.x[i]))
-				return false;
-		return true;
+		return detail::equal_matrix_nxn(*this, m);
 	}
 
 	inline bool operator!=(const matrix2 & m) const { return !(*this == m); }
@@ -56,21 +78,21 @@ public:
 
 	inline matrix2 & operator*=(value_type f)
 	{
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] *= f;
 		return *this;
 	}
 
 	inline matrix2 & operator+=(const matrix2 & m)
 	{
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] += m.x[i];
 		return *this;
 	}
 
 	inline matrix2 & operator-=(const matrix2 & m)
 	{
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] -= m.x[i];
 		return *this;
 	}
@@ -79,12 +101,12 @@ public:
 	{
 		value_type c[4] = {x[0] * m.x[0] + x[1] * m.x[2], x[0] * m.x[1] + x[1] * m.x[3],
 			x[2] * m.x[0] + x[3] * m.x[2], x[2] * m.x[1] + x[3] * m.x[3]};
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] = c[i];
 		return *this;
 	}
 
-	inline value_type spur() const { return x[0] + x[3]; }
+	inline value_type trace() const { return x[0] + x[3]; }
 
 	inline matrix2 inv() const
 	{
@@ -128,9 +150,15 @@ public:
 	}
 
 private:
-	value_type x[4];
+	value_type x[dimension * dimension];
 };
 
+/// @brief A 3x3 Matrix.
+///
+/// Highly non-optimal implementation.
+///
+/// @tparam T Underlying type, must be a floating point type.
+///
 template <typename T,
 	typename = typename std::enable_if<std::is_floating_point<T>::value, T>::type>
 class matrix3
@@ -145,6 +173,7 @@ public:
 
 	matrix3(matrix3 &&) = default;
 
+	/// Initializes the matrix with the identiy matrix.
 	matrix3(value_type x11 = 1.0, value_type x12 = 0.0, value_type x13 = 0.0,
 		value_type x21 = 0.0, value_type x22 = 1.0, value_type x23 = 0.0, value_type x31 = 0.0,
 		value_type x32 = 0.0, value_type x33 = 1.0)
@@ -166,18 +195,13 @@ public:
 			+ x[2] * (x[3] * x[7] - x[6] * x[4]);
 	}
 
-	inline value_type & operator[](size_t i) { return x[i]; }
+	inline value_type & operator[](size_type i) { return x[i]; }
 
-	inline value_type operator[](size_t i) const { return x[i]; }
+	inline value_type operator[](size_type i) const { return x[i]; }
 
 	inline bool operator==(const matrix3 & m) const
 	{
-		if (this == &m)
-			return true;
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
-			if (!is_same(x[i], m.x[i]))
-				return false;
-		return true;
+		return detail::equal_matrix_nxn(*this, m);
 	}
 
 	inline bool operator!=(const matrix3 & m) const { return !(*this == m); }
@@ -188,21 +212,21 @@ public:
 
 	inline matrix3 & operator*=(value_type f)
 	{
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] *= f;
 		return *this;
 	}
 
 	inline matrix3 & operator+=(const matrix3 & m)
 	{
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] += m.x[i];
 		return *this;
 	}
 
 	inline matrix3 & operator-=(const matrix3 & m)
 	{
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] -= m.x[i];
 		return *this;
 	}
@@ -219,12 +243,12 @@ public:
 				x[6] * m.x[0] + x[7] * m.x[3] + x[8] * m.x[6],
 				x[6] * m.x[1] + x[7] * m.x[4] + x[8] * m.x[7],
 				x[6] * m.x[2] + x[7] * m.x[5] + x[8] * m.x[8]};
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] = is_zero(c[i]) ? 0.0 : c[i];
 		return *this;
 	}
 
-	inline value_type spur() const { return x[0] + x[4] + x[8]; }
+	inline value_type trace() const { return x[0] + x[4] + x[8]; }
 
 	inline matrix3 transpose() const
 	{
@@ -322,9 +346,15 @@ public:
 	}
 
 private:
-	value_type x[9];
+	value_type x[dimension * dimension];
 };
 
+/// @brief A 4x4 Matrix.
+///
+/// Highly non-optimal implementation.
+///
+/// @tparam T Underlying type, must be a floating point type.
+///
 template <typename T,
 	typename = typename std::enable_if<std::is_floating_point<T>::value, T>::type>
 class matrix4
@@ -339,6 +369,7 @@ public:
 
 	matrix4(matrix4 &&) = default;
 
+	/// Initializes the matrix with the identiy matrix.
 	matrix4(value_type x11 = 1.0, value_type x12 = 0.0, value_type x13 = 0.0,
 		value_type x14 = 0.0, value_type x21 = 0.0, value_type x22 = 1.0, value_type x23 = 0.0,
 		value_type x24 = 0.0, value_type x31 = 0.0, value_type x32 = 0.0, value_type x33 = 1.0,
@@ -374,12 +405,7 @@ public:
 
 	inline bool operator==(const matrix4 & m) const
 	{
-		if (this == &m)
-			return true;
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
-			if (!is_same(x[i], m.x[i]))
-				return false;
-		return true;
+		return detail::equal_matrix_nxn(*this, m);
 	}
 
 	inline bool operator!=(const matrix4 & m) const { return !(*this == m); }
@@ -390,21 +416,21 @@ public:
 
 	inline matrix4 & operator*=(value_type f)
 	{
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] *= f;
 		return *this;
 	}
 
 	inline matrix4 & operator+=(const matrix4 & m)
 	{
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] += m.x[i];
 		return *this;
 	}
 
 	inline matrix4 & operator-=(const matrix4 & m)
 	{
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] -= m.x[i];
 		return *this;
 	}
@@ -427,16 +453,16 @@ public:
 			x[12] * m.x[1] + x[13] * m.x[5] + x[14] * m.x[9] + x[15] * m.x[13],
 			x[12] * m.x[2] + x[13] * m.x[6] + x[14] * m.x[10] + x[15] * m.x[14],
 			x[12] * m.x[3] + x[13] * m.x[7] + x[14] * m.x[11] + x[15] * m.x[15]};
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] = is_zero(c[i]) ? 0.0 : c[i];
 		return *this;
 	}
 
-	inline value_type & operator[](size_t i) { return x[i]; }
+	inline value_type & operator[](size_type i) { return x[i]; }
 
-	inline value_type operator[](size_t i) const { return x[i]; }
+	inline value_type operator[](size_type i) const { return x[i]; }
 
-	inline value_type spur() const { return x[0] + x[5] + x[10] + x[15]; }
+	inline value_type trace() const { return x[0] + x[5] + x[10] + x[15]; }
 
 	inline matrix4 transpose() const
 	{
@@ -537,9 +563,17 @@ public:
 	}
 
 private:
-	value_type x[16];
+	value_type x[dimension * dimension];
 };
 
+/// @brief A nxn Matrix.
+///
+/// Highly non-optimal implementation.
+///
+/// @tparam N The dimension of the matrix. For values of 2, 3 and 4, it is advised
+///   to use the specific classes. Dimension of 1 is allowed, but what's the point?
+/// @tparam T Underlying type, must be a floating point type.
+///
 template <unsigned int N, typename T,
 	typename = typename std::enable_if<std::is_floating_point<T>::value, T>::type>
 class matrix_n
@@ -550,11 +584,12 @@ public:
 
 	constexpr static const size_type dimension = N;
 
+	/// Initializes the matrix with the identiy matrix.
 	matrix_n()
 	{
 		static_assert(N >= 1, "invalid dimension of matrix_n, constraint: N>=1");
 
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] = (i % (dimension + 1)) ? 0.0 : 1.0;
 	}
 
@@ -565,19 +600,16 @@ public:
 	matrix_n(std::initializer_list<T> v)
 	{
 		assert(v.size() == N);
-		unsigned int i = 0;
+		size_type i = 0;
 		for (auto j = begin(v); j != end(v); ++i, ++j)
 			x[i] = *j;
 	}
 
+	inline value_type operator[](size_type i) const { return x[i]; }
+
 	inline bool operator==(const matrix_n & m) const
 	{
-		if (this == &m)
-			return true;
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
-			if (!is_same(x[i], m.x[i]))
-				return false;
-		return true;
+		return detail::equal_matrix_nxn(*this, m);
 	}
 
 	inline bool operator!=(const matrix_n & m) const { return !(*this == m); }
@@ -588,26 +620,26 @@ public:
 
 	inline matrix_n & operator*=(value_type f)
 	{
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] *= f;
 		return *this;
 	}
 
 	inline matrix_n & operator+=(const matrix_n & m)
 	{
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] += m.x[i];
 		return *this;
 	}
 
 	inline matrix_n & operator-=(const matrix_n & m)
 	{
-		for (size_t i = 0; i < sizeof(x) / sizeof(value_type); ++i)
+		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] -= m.x[i];
 		return *this;
 	}
 
-	inline value_type spur() const
+	inline value_type trace() const
 	{
 		value_type s = 0.0;
 		for (size_type i = 0; i < dimension; ++i)
@@ -767,7 +799,7 @@ public:
 	}
 
 private:
-	value_type x[N * N];
+	value_type x[dimension * dimension];
 };
 
 using mat2 = matrix2<double>;

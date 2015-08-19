@@ -32,4 +32,20 @@ TEST_F(Test_math_matrix, mat2_construction_default)
 	EXPECT_NEAR(1.0, m[3], 1e-8);
 }
 
+TEST_F(Test_math_matrix, mat2_comparison_equal)
+{
+	mat2 m1;
+	mat2 m2;
+	mat2 m3{1.0, 2.0, 3.0, 4.0};
+
+	EXPECT_TRUE(m1 == m1);
+	EXPECT_TRUE(m2 == m2);
+	EXPECT_TRUE(m3 == m3);
+
+	EXPECT_TRUE(m1 == m2);
+	EXPECT_TRUE(m2 == m1);
+	EXPECT_FALSE(m1 == m3);
+	EXPECT_FALSE(m2 == m3);
+}
+
 }
