@@ -8,6 +8,36 @@ namespace marnav
 namespace math
 {
 
+namespace detail
+{
+
+/// Returns true if both vectors are the same.
+template <typename T, typename
+	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
+bool equal(const T & a, const T & b)
+{
+	if (&a == &b)
+		return true;
+
+	using iterator = decltype(T::dimension);
+
+	for (typename std::remove_cv<iterator>::type i = 0; i < T::dimension; ++i)
+		if (!is_same(a[i], b[i]))
+			return false;
+	return true;
+}
+
+/// Normalizes the specified vector the desired length.
+template <typename T, typename
+	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
+void normalize(T & a, typename T::value_type len)
+{
+	const typename T::value_type l = a.length();
+	if (!is_zero(l))
+		a *= len / l;
+}
+}
+
 /// A 2D vector.
 ///
 /// @tparam T Basic data type, must be a floating point type.
@@ -70,9 +100,7 @@ public:
 	/// Normalizes the vector to a specific length.
 	inline vector2 & normalize(value_type len = 1.0)
 	{
-		const value_type l = length();
-		if (!is_zero(l))
-			*this *= len / l;
+		detail::normalize(*this, len);
 		return *this;
 	}
 
@@ -96,13 +124,7 @@ public:
 
 	inline bool operator==(const vector2 & v) const
 	{
-		if (this == &v)
-			return true;
-
-		for (size_type i = 0; i < dimension; ++i)
-			if (!is_same(a[i], v.a[i]))
-				return false;
-		return true;
+		return detail::equal(*this, v);
 	}
 
 	inline bool operator!=(const vector2 & v) const { return !(*this == v); }
@@ -195,9 +217,7 @@ public:
 
 	inline vector3 & normalize(value_type len = 1.0)
 	{
-		value_type l = length();
-		if (!is_zero(l))
-			*this *= len / l;
+		detail::normalize(*this, len);
 		return *this;
 	}
 
@@ -241,13 +261,7 @@ public:
 
 	inline bool operator==(const vector3 & v) const
 	{
-		if (this == &v)
-			return true;
-
-		for (size_type i = 0; i < dimension; ++i)
-			if (!is_same(a[i], v.a[i]))
-				return false;
-		return true;
+		return detail::equal(*this, v);
 	}
 
 	inline bool operator!=(const vector3 & v) const { return !(*this == v); }
@@ -328,9 +342,7 @@ public:
 
 	inline vector4 & normalize(value_type len = 1.0)
 	{
-		value_type l = length();
-		if (!is_zero(l))
-			*this *= (len / l);
+		detail::normalize(*this, len);
 		return *this;
 	}
 
@@ -350,13 +362,7 @@ public:
 
 	inline bool operator==(const vector4 & v) const
 	{
-		if (this == &v)
-			return true;
-
-		for (size_type i = 0; i < dimension; ++i)
-			if (!is_same(a[i], v.a[i]))
-				return false;
-		return true;
+		return detail::equal(*this, v);
 	}
 
 	inline bool operator!=(const vector4 & v) const { return !(*this == v); }
@@ -451,9 +457,7 @@ public:
 
 	inline vector_n & normalize(value_type len = 1.0)
 	{
-		value_type l = length();
-		if (!is_zero(l))
-			*this *= len / l;
+		detail::normalize(*this, len);
 		return *this;
 	}
 
@@ -473,13 +477,7 @@ public:
 
 	inline bool operator==(const vector_n & v) const
 	{
-		if (this == &v)
-			return true;
-
-		for (size_type i = 0; i < dimension; ++i)
-			if (!is_same(a[i], v.a[i]))
-				return false;
-		return true;
+		return detail::equal(*this, v);
 	}
 
 	inline bool operator!=(const vector_n & v) const { return !(*this == v); }
