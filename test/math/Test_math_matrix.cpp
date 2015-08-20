@@ -1,4 +1,6 @@
 #include <gtest/gtest.h>
+#include <iostream>
+#include <cmath>
 #include <marnav/math/matrix.hpp>
 
 using namespace marnav::math;
@@ -17,6 +19,37 @@ template class matrix_n<8, double>;
 
 namespace
 {
+
+template <class T>
+std::ostream & dump(std::ostream & os, const std::string & title, const T & m)
+{
+	os << "\n" << title << "\n";
+
+	for (typename T::size_type i = 0; i < T::dimension; ++i) {
+		for (typename T::size_type j = 0; j < T::dimension; ++j) {
+			os << m[i * T::dimension + j] << " ";
+		}
+		os << "\n";
+	}
+
+	os << "\n";
+	return os;
+}
+
+// This comparison uses a user definable threshold than epsilon to compare values.
+template <class T>
+bool equals(const T & a, const T & b,
+	typename T::value_type threshold = std::numeric_limits<typename T::value_type>::epsilon())
+{
+	assert(threshold >= 0);
+
+	using iterator = decltype(T::dimension);
+
+	for (typename std::remove_cv<iterator>::type i = 0; i < T::dimension * T::dimension; ++i)
+	if (std::abs(a[i] - b[i]) > threshold)
+			return false;
+	return true;
+}
 
 class Test_math_matrix : public ::testing::Test
 {
@@ -46,6 +79,64 @@ TEST_F(Test_math_matrix, mat2_comparison_equal)
 	EXPECT_TRUE(m2 == m1);
 	EXPECT_FALSE(m1 == m3);
 	EXPECT_FALSE(m2 == m3);
+}
+
+TEST_F(Test_math_matrix, mat2_inverse_of_identity)
+{
+	const mat2 m1;
+	const mat2 m2 = m1.inv();
+
+	EXPECT_EQ(m1, m2);
+}
+
+TEST_F(Test_math_matrix, mat2_inverse)
+{
+	const mat2 m1{1.0, 2.0, 3.0, 4.0};
+	const mat2 m2 = m1.inv();
+	const mat2 expected{-2, 1, 3.0 / 2.0, -0.5};
+
+	EXPECT_EQ(expected, m2);
+}
+
+TEST_F(Test_math_matrix, mat2_inverse_multiply)
+{
+	const mat2 m1{1.0, 2.0, 3.0, 4.0};
+	const mat2 m2 = m1.inv();
+	const mat2 expected; // identity
+
+	EXPECT_TRUE((expected == (m1 * m2)));
+	EXPECT_TRUE((expected == (m2 * m1)));
+}
+
+TEST_F(Test_math_matrix, mat3_inverse_of_identity)
+{
+	const mat3 m1;
+	const mat3 m2 = m1.inv();
+
+	EXPECT_EQ(m1, m2);
+}
+
+TEST_F(Test_math_matrix, mat3_inverse)
+{
+	const mat3 m1{1.0, 2.0, 3.0, 1.5, 0.5, 0.0, -0.5, 2.0, 1.5};
+	const mat3 m2 = m1.inv();
+	const mat3 expected{1.0 / 8.0, 1.0 / 2.0, -1.0 / 4.0, -3.0 / 8.0, 1.0 / 2.0, 3.0 / 4.0,
+		13.0 / 24.0, -1.0 / 2.0, -5.0 / 12.0};
+
+	EXPECT_EQ(expected, m2);
+}
+
+TEST_F(Test_math_matrix, mat3_inverse_multiply)
+{
+	const mat3 m1{1.0, 2.0, 3.0, 1.5, 0.5, 0.0, -0.5, 2.0, 1.5};
+	const mat3 m2 = m1.inv();
+	const mat3 expected; // identity
+
+	const mat3 result1 = m1 * m2;
+	const mat3 result2 = m2 * m1;
+
+	EXPECT_TRUE(equals(expected, result1, 1e-9));
+	EXPECT_TRUE(equals(expected, result2, 1e-9));
 }
 
 }

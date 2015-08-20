@@ -27,6 +27,70 @@ bool equal_matrix_nxn(const T & a, const T & b)
 			return false;
 	return true;
 }
+
+/// Returns the inverse matrix of the specified one, if not possible, the identiy matrix
+/// is returned.
+///
+/// @param[in] a The matrix to compute the inverse from.
+template <typename T, typename
+	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
+T inverse_matrix_nxn(const T & a)
+{
+	using value_type = typename T::value_type;
+	using size_type = typename T::size_type;
+	constexpr size_type dimension = T::dimension;
+
+	const value_type d = a.det();
+	if (is_zero(d))
+		return T{};
+	T m{a};
+	T I;
+	for (size_type j = 0; j < dimension; ++j) {
+		// Diagonalfeld normalisieren
+		value_type q = m[j * dimension + j];
+		if (is_zero(q)) {
+			// Es darf keine 0 mehr in der Diagonalen stehen
+			for (size_type i = j + 1; i < dimension; ++i) {
+				// Suche Reihe mit einem Feld != 0.0 und addiere
+				if (!is_zero(m[i * dimension + j])) {
+					for (size_type k = 0; k < dimension; ++k) {
+						const size_type i0 = j * dimension + k;
+						const size_type i1 = i * dimension + k;
+						m[i0] += m[i1];
+						I[i0] += I[i1];
+					}
+					q = m[j * dimension + j];
+					break;
+				}
+			}
+		} else { // Diagonalen auf 1 bringen
+			for (size_type k = 0; k < dimension; ++k) {
+				const size_type i0 = j * dimension + k;
+				m[i0] /= q;
+				I[i0] /= q;
+			}
+		}
+		// Spalten ausserhalb der Diagonalen auf 0 bringen
+		for (size_type i = 0; i < dimension; ++i) {
+			if (i != j) {
+				q = m[i * dimension + j];
+				for (size_type k = 0; k < dimension; ++k) {
+					const size_type i0 = i * dimension + k;
+					const size_type i1 = j * dimension + k;
+					m[i0] -= q * m[i1];
+					I[i0] -= q * I[i1];
+				}
+			}
+		}
+	}
+	// Test auf Einheitsmatrix, falls nicht => Berechnung nicht gelungen
+	for (size_type i = 0; i < dimension; ++i)
+		for (size_type j = 0; j < dimension; ++j)
+			if (!is_same(m[i * dimension + j], ((i == j) ? 1.0 : 0.0)))
+				return T{};
+	return I;
+}
+
 }
 
 /// @brief A 2x2 Matrix.
@@ -99,8 +163,9 @@ public:
 
 	inline matrix2 & operator*=(const matrix2 & m)
 	{
-		value_type c[4] = {x[0] * m.x[0] + x[1] * m.x[2], x[0] * m.x[1] + x[1] * m.x[3],
-			x[2] * m.x[0] + x[3] * m.x[2], x[2] * m.x[1] + x[3] * m.x[3]};
+		const value_type c[dimension * dimension]
+			= {x[0] * m.x[0] + x[1] * m.x[2], x[0] * m.x[1] + x[1] * m.x[3],
+				x[2] * m.x[0] + x[3] * m.x[2], x[2] * m.x[1] + x[3] * m.x[3]};
 		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] = c[i];
 		return *this;
@@ -233,7 +298,7 @@ public:
 
 	inline matrix3 & operator*=(const matrix3 & m)
 	{
-		value_type c[sizeof(x) / sizeof(value_type)]
+		const value_type c[dimension * dimension]
 			= {x[0] * m.x[0] + x[1] * m.x[3] + x[2] * m.x[6],
 				x[0] * m.x[1] + x[1] * m.x[4] + x[2] * m.x[7],
 				x[0] * m.x[2] + x[1] * m.x[5] + x[2] * m.x[8],
@@ -266,60 +331,7 @@ public:
 		return vector3<T>{x[col], x[col + 3], x[col + 6]};
 	}
 
-	inline matrix3 inv() const
-	{
-		const value_type d = det();
-		if (is_zero(d))
-			return matrix3{};
-		matrix3 m{*this};
-		matrix3 I;
-		value_type q;
-		for (size_type j = 0; j < 3; ++j) {
-			// Diagonalfeld normalisieren
-			q = m.x[j * 3 + j];
-			if (is_zero(q)) {
-				// Es darf keine 0 mehr in der Diagonalen stehen
-				for (size_type i = j + 1; i < 3; ++i) {
-					// Suche Reihe mit einem Feld != 0.0 und addiere
-					if (!is_zero(m.x[i * 3 + j])) {
-						for (size_type k = 0; k < 3; ++k) {
-							const size_type i0 = j * 3 + k;
-							const size_type i1 = i * 3 + k;
-							m.x[i0] += m.x[i1];
-							I.x[i0] += I.x[i1];
-						}
-						q = m.x[j * 3 + j];
-						break;
-					}
-				}
-			} else {
-				// Diagonalen auf 1 bringen
-				for (size_type k = 0; k < 3; ++k) {
-					const size_type i0 = j * 3 + k;
-					m.x[i0] /= q;
-					I.x[i0] /= q;
-				}
-			}
-			// Spalten ausserhalb der Diagonalen auf 0 bringen
-			for (size_type i = 0; i < 3; ++i) {
-				if (i != j) {
-					q = m.x[i * 3 + j];
-					for (size_type k = 0; k < 3; ++k) {
-						const size_type i0 = i * 3 + k;
-						const size_type i1 = j * 3 + k;
-						m.x[i0] -= q * m.x[i1];
-						I.x[i0] -= q * I.x[i1];
-					}
-				}
-			}
-		}
-		// Test auf Einheitsmatrix, falls nicht => Berechnung nicht gelungen
-		for (size_type i = 0; i < 3; ++i)
-			for (size_type j = 0; j < 3; ++j)
-				if (!is_same(m.x[i * 3 + j], ((i == j) ? 1.0 : 0.0)))
-					return matrix3{};
-		return I;
-	}
+	inline matrix3 inv() const { return detail::inverse_matrix_nxn(*this); }
 
 	friend matrix3 operator*(value_type f, const matrix3 & m) { return matrix3{m} *= f; }
 
@@ -370,33 +382,23 @@ public:
 	matrix4(matrix4 &&) = default;
 
 	/// Initializes the matrix with the identiy matrix.
-	matrix4(value_type x11 = 1.0, value_type x12 = 0.0, value_type x13 = 0.0,
-		value_type x14 = 0.0, value_type x21 = 0.0, value_type x22 = 1.0, value_type x23 = 0.0,
-		value_type x24 = 0.0, value_type x31 = 0.0, value_type x32 = 0.0, value_type x33 = 1.0,
-		value_type x34 = 0.0, value_type x41 = 0.0, value_type x42 = 0.0, value_type x43 = 0.0,
-		value_type x44 = 1.0)
+	matrix4()
 	{
-		x[0] = x11;
-		x[1] = x12;
-		x[2] = x13;
-		x[3] = x14;
-		x[4] = x21;
-		x[5] = x22;
-		x[6] = x23;
-		x[7] = x24;
-		x[8] = x31;
-		x[9] = x32;
-		x[10] = x33;
-		x[11] = x34;
-		x[12] = x41;
-		x[13] = x42;
-		x[14] = x43;
-		x[15] = x44;
+		for (size_type i = 0; i < dimension * dimension; ++i)
+			x[i] = (i % (dimension + 1)) ? 0.0 : 1.0;
+	}
+
+	matrix4(std::initializer_list<T> v)
+	{
+		assert(v.size() == dimension * dimension);
+		size_type i = 0;
+		for (auto j = begin(v); j != end(v); ++i, ++j)
+			x[i] = *j;
 	}
 
 	inline value_type det() const
 	{
-		// Regel von Sarrus
+		// rule of Sarrus
 		return x[0] * x[5] * x[10] * x[15] - x[12] * x[9] * x[6] * x[3]
 			+ x[1] * x[6] * x[11] * x[12] - x[13] * x[10] * x[7] * x[0]
 			+ x[2] * x[7] * x[8] * x[13] - x[14] * x[11] * x[4] * x[1]
@@ -437,22 +439,23 @@ public:
 
 	inline matrix4 & operator*=(const matrix4 & m)
 	{
-		value_type c[16] = {x[0] * m.x[0] + x[1] * m.x[4] + x[2] * m.x[8] + x[3] * m.x[12],
-			x[0] * m.x[1] + x[1] * m.x[5] + x[2] * m.x[9] + x[3] * m.x[13],
-			x[0] * m.x[2] + x[1] * m.x[6] + x[2] * m.x[10] + x[3] * m.x[14],
-			x[0] * m.x[3] + x[1] * m.x[7] + x[2] * m.x[11] + x[3] * m.x[15],
-			x[4] * m.x[0] + x[5] * m.x[4] + x[6] * m.x[8] + x[7] * m.x[12],
-			x[4] * m.x[1] + x[5] * m.x[5] + x[6] * m.x[9] + x[7] * m.x[13],
-			x[4] * m.x[2] + x[5] * m.x[6] + x[6] * m.x[10] + x[7] * m.x[14],
-			x[4] * m.x[3] + x[5] * m.x[7] + x[6] * m.x[11] + x[7] * m.x[15],
-			x[8] * m.x[0] + x[9] * m.x[4] + x[10] * m.x[8] + x[11] * m.x[12],
-			x[8] * m.x[1] + x[9] * m.x[5] + x[10] * m.x[9] + x[11] * m.x[13],
-			x[8] * m.x[2] + x[9] * m.x[6] + x[10] * m.x[10] + x[11] * m.x[14],
-			x[8] * m.x[3] + x[9] * m.x[7] + x[10] * m.x[11] + x[11] * m.x[15],
-			x[12] * m.x[0] + x[13] * m.x[4] + x[14] * m.x[8] + x[15] * m.x[12],
-			x[12] * m.x[1] + x[13] * m.x[5] + x[14] * m.x[9] + x[15] * m.x[13],
-			x[12] * m.x[2] + x[13] * m.x[6] + x[14] * m.x[10] + x[15] * m.x[14],
-			x[12] * m.x[3] + x[13] * m.x[7] + x[14] * m.x[11] + x[15] * m.x[15]};
+		const value_type c[dimension * dimension]
+			= {x[0] * m.x[0] + x[1] * m.x[4] + x[2] * m.x[8] + x[3] * m.x[12],
+				x[0] * m.x[1] + x[1] * m.x[5] + x[2] * m.x[9] + x[3] * m.x[13],
+				x[0] * m.x[2] + x[1] * m.x[6] + x[2] * m.x[10] + x[3] * m.x[14],
+				x[0] * m.x[3] + x[1] * m.x[7] + x[2] * m.x[11] + x[3] * m.x[15],
+				x[4] * m.x[0] + x[5] * m.x[4] + x[6] * m.x[8] + x[7] * m.x[12],
+				x[4] * m.x[1] + x[5] * m.x[5] + x[6] * m.x[9] + x[7] * m.x[13],
+				x[4] * m.x[2] + x[5] * m.x[6] + x[6] * m.x[10] + x[7] * m.x[14],
+				x[4] * m.x[3] + x[5] * m.x[7] + x[6] * m.x[11] + x[7] * m.x[15],
+				x[8] * m.x[0] + x[9] * m.x[4] + x[10] * m.x[8] + x[11] * m.x[12],
+				x[8] * m.x[1] + x[9] * m.x[5] + x[10] * m.x[9] + x[11] * m.x[13],
+				x[8] * m.x[2] + x[9] * m.x[6] + x[10] * m.x[10] + x[11] * m.x[14],
+				x[8] * m.x[3] + x[9] * m.x[7] + x[10] * m.x[11] + x[11] * m.x[15],
+				x[12] * m.x[0] + x[13] * m.x[4] + x[14] * m.x[8] + x[15] * m.x[12],
+				x[12] * m.x[1] + x[13] * m.x[5] + x[14] * m.x[9] + x[15] * m.x[13],
+				x[12] * m.x[2] + x[13] * m.x[6] + x[14] * m.x[10] + x[15] * m.x[14],
+				x[12] * m.x[3] + x[13] * m.x[7] + x[14] * m.x[11] + x[15] * m.x[15]};
 		for (size_type i = 0; i < dimension * dimension; ++i)
 			x[i] = is_zero(c[i]) ? 0.0 : c[i];
 		return *this;
@@ -481,59 +484,7 @@ public:
 		return vector4<T>{x[col], x[col + 4], x[col + 8], x[col + 12]};
 	}
 
-	inline matrix4 inv() const
-	{
-		const value_type d = det();
-		if (is_zero(d))
-			return matrix4{};
-		matrix4 m{*this};
-		matrix4 I;
-		for (size_type j = 0; j < 4; ++j) {
-			// Diagonalfeld normalisieren
-			value_type q = m.x[j * 4 + j];
-			if (is_zero(q)) {
-				// Es darf keine 0 mehr in der Diagonalen stehen
-				for (size_type i = j + 1; i < 4; ++i) {
-					// Suche Reihe mit einem Feld != 0.0 und addiere
-					if (!is_zero(m.x[i * 4 + j])) {
-						for (size_type k = 0; k < 4; ++k) {
-							const size_type i0 = j * 4 + k;
-							const size_type i1 = i * 4 + k;
-							m.x[i0] += m.x[i1];
-							I.x[i0] += I.x[i1];
-						}
-						q = m.x[j * 4 + j];
-						break;
-					}
-				}
-			} else {
-				// Diagonalen auf 1 bringen
-				for (size_type k = 0; k < 4; ++k) {
-					const size_type i0 = j * 4 + k;
-					m.x[i0] /= q;
-					I.x[i0] /= q;
-				}
-			}
-			// Spalten ausserhalb der Diagonalen auf 0 bringen
-			for (size_type i = 0; i < 4; ++i) {
-				if (i != j) {
-					q = m.x[i * 4 + j];
-					for (size_type k = 0; k < 4; ++k) {
-						const size_type i0 = i * 4 + k;
-						const size_type i1 = j * 4 + k;
-						m.x[i0] -= q * m.x[i1];
-						I.x[i0] -= q * I.x[i1];
-					}
-				}
-			}
-		}
-		// Test auf Einheitsmatrix, falls nicht => Berechnung nicht gelungen
-		for (size_type i = 0; i < 4; ++i)
-			for (size_type j = 0; j < 4; ++j)
-				if (!is_same(m.x[i * 4 + j], ((i == j) ? 1.0 : 0.0)))
-					return matrix4{};
-		return I;
-	}
+	inline matrix4 inv() const { return detail::inverse_matrix_nxn(*this); }
 
 	friend matrix4 operator*(value_type f, const matrix4 & m) { return matrix4{m} *= f; }
 
@@ -545,10 +496,10 @@ public:
 
 	friend matrix4 operator*(const vector4<T> & v, const matrix4 & m)
 	{
-		value_type c1 = m.x[0] + m.x[4] + m.x[8] + m.x[12];
-		value_type c2 = m.x[1] + m.x[5] + m.x[9] + m.x[13];
-		value_type c3 = m.x[2] + m.x[6] + m.x[10] + m.x[14];
-		value_type c4 = m.x[3] + m.x[7] + m.x[11] + m.x[15];
+		const value_type c1 = m.x[0] + m.x[4] + m.x[8] + m.x[12];
+		const value_type c2 = m.x[1] + m.x[5] + m.x[9] + m.x[13];
+		const value_type c3 = m.x[2] + m.x[6] + m.x[10] + m.x[14];
+		const value_type c4 = m.x[3] + m.x[7] + m.x[11] + m.x[15];
 		return matrix4(v[0] * c1, v[0] * c2, v[0] * c3, v[0] * c4, v[1] * c1, v[1] * c2,
 			v[1] * c3, v[1] * c4, v[2] * c1, v[2] * c2, v[2] * c3, v[2] * c4, v[3] * c1,
 			v[3] * c2, v[3] * c3, v[3] * c4);
@@ -599,11 +550,13 @@ public:
 
 	matrix_n(std::initializer_list<T> v)
 	{
-		assert(v.size() == N);
+		assert(v.size() == dimension * dimension);
 		size_type i = 0;
 		for (auto j = begin(v); j != end(v); ++i, ++j)
 			x[i] = *j;
 	}
+
+	inline value_type & operator[](size_type i) { return x[i]; }
 
 	inline value_type operator[](size_type i) const { return x[i]; }
 
@@ -688,59 +641,7 @@ public:
 		return r;
 	}
 
-	inline matrix_n inv() const
-	{
-		const value_type d = det();
-		if (is_zero(d))
-			return matrix_n{};
-		matrix_n m{*this};
-		matrix_n I;
-		value_type q;
-		for (size_type j = 0; j < dimension; ++j) {
-			// Diagonalfeld normalisieren
-			q = m.x[j * dimension + j];
-			if (is_zero(q)) {
-				// Es darf keine 0 mehr in der Diagonalen stehen
-				for (size_type i = j + 1; i < dimension; ++i) {
-					// Suche Reihe mit einem Feld != 0.0 und addiere
-					if (!is_zero(m.x[i * dimension + j])) {
-						for (size_type k = 0; k < dimension; ++k) {
-							const size_type i0 = j * dimension + k;
-							const size_type i1 = i * dimension + k;
-							m.x[i0] += m.x[i1];
-							I.x[i0] += I.x[i1];
-						}
-						q = m.x[j * dimension + j];
-						break;
-					}
-				}
-			} else { // Diagonalen auf 1 bringen
-				for (size_type k = 0; k < dimension; ++k) {
-					const size_type i0 = j * dimension + k;
-					m.x[i0] /= q;
-					I.x[i0] /= q;
-				}
-			}
-			// Spalten ausserhalb der Diagonalen auf 0 bringen
-			for (size_type i = 0; i < dimension; ++i) {
-				if (i != j) {
-					q = m.x[i * dimension + j];
-					for (size_type k = 0; k < dimension; ++k) {
-						const size_type i0 = i * dimension + k;
-						const size_type i1 = j * dimension + k;
-						m.x[i0] -= q * m.x[i1];
-						I.x[i0] -= q * I.x[i1];
-					}
-				}
-			}
-		}
-		// Test auf Einheitsmatrix, falls nicht => Berechnung nicht gelungen
-		for (size_type i = 0; i < dimension; ++i)
-			for (size_type j = 0; j < dimension; ++j)
-				if (!is_same(m.x[i * dimension + j], ((i == j) ? 1.0 : 0.0)))
-					return matrix_n{};
-		return I;
-	}
+	inline matrix_n inv() const { return detail::inverse_matrix_nxn(*this); }
 
 	inline vector_n<N, T> rowvec(size_type row) const // row in [0..dimension-1]
 	{
