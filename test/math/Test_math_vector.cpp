@@ -178,10 +178,8 @@ TEST_F(Test_math_vector, nullify)
 		EXPECT_NEAR(2.0, v.y(), 1e-5);
 	}
 	{
-		vector3<double> v{
-			std::numeric_limits<double>::epsilon(),
-			std::numeric_limits<double>::epsilon(),
-			std::numeric_limits<double>::epsilon()};
+		vector3<double> v{std::numeric_limits<double>::epsilon(),
+			std::numeric_limits<double>::epsilon(), std::numeric_limits<double>::epsilon()};
 		nullify(v);
 		EXPECT_NEAR(0.0, v.x(), 1e-5);
 		EXPECT_NEAR(0.0, v.y(), 1e-5);
@@ -195,10 +193,8 @@ TEST_F(Test_math_vector, nullify)
 		EXPECT_NEAR(2.0, v.z(), 1e-5);
 	}
 	{
-		vector4<double> v{
-			std::numeric_limits<double>::epsilon(),
-			std::numeric_limits<double>::epsilon(),
-			std::numeric_limits<double>::epsilon(),
+		vector4<double> v{std::numeric_limits<double>::epsilon(),
+			std::numeric_limits<double>::epsilon(), std::numeric_limits<double>::epsilon(),
 			std::numeric_limits<double>::epsilon()};
 		nullify(v);
 		EXPECT_NEAR(0.0, v[0], 1e-5);
@@ -215,12 +211,9 @@ TEST_F(Test_math_vector, nullify)
 		EXPECT_NEAR(2.0, v[3], 1e-5);
 	}
 	{
-		vector_n<5, double> v{
-			std::numeric_limits<double>::epsilon(),
-			std::numeric_limits<double>::epsilon(),
-			std::numeric_limits<double>::epsilon(),
-			std::numeric_limits<double>::epsilon(),
-			std::numeric_limits<double>::epsilon()};
+		vector_n<5, double> v{std::numeric_limits<double>::epsilon(),
+			std::numeric_limits<double>::epsilon(), std::numeric_limits<double>::epsilon(),
+			std::numeric_limits<double>::epsilon(), std::numeric_limits<double>::epsilon()};
 		nullify(v);
 		EXPECT_NEAR(0.0, v[0], 1e-5);
 		EXPECT_NEAR(0.0, v[1], 1e-5);
@@ -271,29 +264,181 @@ TEST_F(Test_math_vector, vec2_normalize)
 TEST_F(Test_math_vector, vec3_normalize)
 {
 	{
-		const vector3<double> expected{1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0)};
+		const vector3<double> expected{
+			1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0)};
 		vector3<double> v{2.0, 2.0, 2.0};
 		v.normalize();
 		EXPECT_EQ(expected, v);
 	}
 	{
-		const vector3<double> expected{2.0 / std::sqrt(3.0), 2.0 / std::sqrt(3.0), 2.0 / std::sqrt(3.0)};
+		const vector3<double> expected{
+			2.0 / std::sqrt(3.0), 2.0 / std::sqrt(3.0), 2.0 / std::sqrt(3.0)};
 		vector3<double> v{2.0, 2.0, 2.0};
 		v.normalize(2.0);
 		EXPECT_EQ(expected, v);
 	}
 
 	{
-		const vector3<double> expected{1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0)};
+		const vector3<double> expected{
+			1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0)};
 		const vector3<double> v{2.0, 2.0, 2.0};
 		vector3<double> v1 = v.normalize();
 		EXPECT_EQ(expected, v1);
 	}
 	{
-		const vector3<double> expected{2.0 / std::sqrt(3.0), 2.0 / std::sqrt(3.0), 2.0 / std::sqrt(3.0)};
+		const vector3<double> expected{
+			2.0 / std::sqrt(3.0), 2.0 / std::sqrt(3.0), 2.0 / std::sqrt(3.0)};
 		const vector3<double> v{2.0, 2.0, 2.0};
 		vector3<double> v1 = v.normalize(2.0);
 		EXPECT_EQ(expected, v1);
+	}
+}
+
+TEST_F(Test_math_vector, vec3_make_from_sphere)
+{
+	{
+		const auto v = vec3::make_from_sphere(1.0, 0.0, 0.0);
+		EXPECT_NEAR(0.0, v[0], 1e-7);
+		EXPECT_NEAR(0.0, v[1], 1e-7);
+		EXPECT_NEAR(1.0, v[2], 1e-7);
+	}
+	{
+		const auto v = vec3::make_from_sphere(1.0, 90.0, 0.0);
+		EXPECT_NEAR(1.0, v[0], 1e-7);
+		EXPECT_NEAR(0.0, v[1], 1e-7);
+		EXPECT_NEAR(0.0, v[2], 1e-7);
+	}
+	{
+		const auto v = vec3::make_from_sphere(1.0, 0.0, 90.0);
+		EXPECT_NEAR(0.0, v[0], 1e-7);
+		EXPECT_NEAR(0.0, v[1], 1e-7);
+		EXPECT_NEAR(1.0, v[2], 1e-7);
+	}
+	{
+		const auto v = vec3::make_from_sphere(1.0, 45.0, 45.0);
+		EXPECT_NEAR(0.5, v[0], 1e-7);
+		EXPECT_NEAR(0.5, v[1], 1e-7);
+		EXPECT_NEAR(1.0 / std::sqrt(2.0), v[2], 1e-7);
+	}
+}
+
+TEST_F(Test_math_vector, vec3_get_sphere_r)
+{
+	{
+		const auto v = vec3::make_from_sphere(1.0, 0.0, 0.0);
+		EXPECT_NEAR(1.0, v.get_sphere_r(), 1e-7);
+	}
+	{
+		const auto v = vec3::make_from_sphere(0.5, 90.0, 0.0);
+		EXPECT_NEAR(0.5, v.get_sphere_r(), 1e-7);
+	}
+	{
+		const auto v = vec3::make_from_sphere(1.0, 0.0, 90.0);
+		EXPECT_NEAR(1.0, v.get_sphere_r(), 1e-7);
+	}
+	{
+		const auto v = vec3::make_from_sphere(2.0, 45.0, 45.0);
+		EXPECT_NEAR(2.0, v.get_sphere_r(), 1e-7);
+	}
+	{
+		const vec3 v{0.5, 0.5, 1.0 / std::sqrt(2.0)};
+		EXPECT_NEAR(1.0, v.get_sphere_r(), 1e-7);
+	}
+}
+
+TEST_F(Test_math_vector, vec3_get_sphere_theta)
+{
+	{
+		const auto v = vec3::make_from_sphere(1.0, 0.0, 0.0);
+		EXPECT_NEAR(0.0, v.get_sphere_theta(), 1e-7);
+	}
+	{
+		const auto v = vec3::make_from_sphere(1.0, 90.0, 0.0);
+		EXPECT_NEAR(90.0, v.get_sphere_theta(), 1e-7);
+	}
+	{
+		const auto v = vec3::make_from_sphere(1.0, 0.0, 90.0);
+		EXPECT_NEAR(0.0, v.get_sphere_theta(), 1e-7);
+	}
+	{
+		const auto v = vec3::make_from_sphere(1.0, 45.0, 45.0);
+		EXPECT_NEAR(45.0, v.get_sphere_theta(), 1e-7);
+	}
+	{
+		const vec3 v{0.5, 0.5, 1.0 / std::sqrt(2.0)};
+		EXPECT_NEAR(45.0, v.get_sphere_theta(), 1e-7);
+	}
+}
+
+TEST_F(Test_math_vector, vec3_get_sphere_phi)
+{
+	{
+		const auto v = vec3::make_from_sphere(1.0, 0.0, 0.0);
+		EXPECT_NEAR(0.0, v.get_sphere_phi(), 1e-7);
+	}
+	{
+		const auto v = vec3::make_from_sphere(1.0, 90.0, 0.0);
+		EXPECT_NEAR(00.0, v.get_sphere_phi(), 1e-7);
+	}
+	{
+		const auto v = vec3::make_from_sphere(1.0, 90.0, 90.0);
+		EXPECT_NEAR(90.0, v.get_sphere_phi(), 1e-7);
+	}
+	{
+		const auto v = vec3::make_from_sphere(1.0, 45.0, 45.0);
+		EXPECT_NEAR(45.0, v.get_sphere_phi(), 1e-7);
+	}
+	{
+		const vec3 v{1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0)};
+		EXPECT_NEAR(45.0, v.get_sphere_phi(), 1e-7);
+	}
+}
+
+TEST_F(Test_math_vector, vec3_operator_plus)
+{
+	{
+		const vec3 a{0.0, 0.0, 0.0};
+		const vec3 b{1.0, 2.0, 3.0};
+
+		const auto result = a + b;
+
+		EXPECT_NEAR(1.0, result[0], 1e-9);
+		EXPECT_NEAR(2.0, result[1], 1e-9);
+		EXPECT_NEAR(3.0, result[2], 1e-9);
+	}
+	{
+		const vec3 a{0.0, 0.0, 0.0};
+		const vec3 b{-1.0, -2.0, -3.0};
+
+		const auto result = a + b;
+
+		EXPECT_NEAR(-1.0, result[0], 1e-9);
+		EXPECT_NEAR(-2.0, result[1], 1e-9);
+		EXPECT_NEAR(-3.0, result[2], 1e-9);
+	}
+}
+
+TEST_F(Test_math_vector, vec3_operator_minus)
+{
+	{
+		const vec3 a{0.0, 0.0, 0.0};
+		const vec3 b{1.0, 2.0, 3.0};
+
+		const auto result = a - b;
+
+		EXPECT_NEAR(-1.0, result[0], 1e-9);
+		EXPECT_NEAR(-2.0, result[1], 1e-9);
+		EXPECT_NEAR(-3.0, result[2], 1e-9);
+	}
+	{
+		const vec3 a{0.0, 0.0, 0.0};
+		const vec3 b{-1.0, -2.0, -3.0};
+
+		const auto result = a - b;
+
+		EXPECT_NEAR(1.0, result[0], 1e-9);
+		EXPECT_NEAR(2.0, result[1], 1e-9);
+		EXPECT_NEAR(3.0, result[2], 1e-9);
 	}
 }
 

@@ -11,6 +11,19 @@ namespace math
 namespace detail
 {
 
+/// Returns the dot product for the specified vector.
+template <typename T, typename
+	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
+typename T::value_type dot_vector(const T & a, const T & b)
+{
+	using iterator = typename std::remove_cv<decltype(T::dimension)>::type;
+
+	typename T::value_type result = 0.0;
+	for (iterator i = 0; i < T::dimension; ++i)
+		result += a[i] * b[i];
+	return result;
+}
+
 /// Returns true if both vectors are the same.
 template <typename T, typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
@@ -19,9 +32,9 @@ bool equal_vector(const T & a, const T & b)
 	if (&a == &b)
 		return true;
 
-	using iterator = decltype(T::dimension);
+	using iterator = typename std::remove_cv<decltype(T::dimension)>::type;
 
-	for (typename std::remove_cv<iterator>::type i = 0; i < T::dimension; ++i)
+	for (iterator i = 0; i < T::dimension; ++i)
 		if (!is_same(a[i], b[i]))
 			return false;
 	return true;
@@ -87,15 +100,15 @@ public:
 	inline value_type phi_deg() const { return phi() * 180.0 / M_PI; }
 
 	/// Calculates the dot product.
-	inline value_type dot(const vector2 & v) const { return a[0] * v.a[0] + a[1] * v.a[1]; }
+	inline value_type dot(const vector2 & v) const { return detail::dot_vector(*this, v); }
 
 	/// Returns the length of the vector.
-	inline value_type length() const { return sqrt(length2()); }
+	inline value_type length() const { return std::sqrt(length2()); }
 
 	/// Returns the square of the length of the vector. This is useful if the
 	/// extra calculation of square root, done by the function 'length' is
 	/// not necessary or not desired.
-	inline value_type length2() const { return a[0] * a[0] + a[1] * a[1]; }
+	inline value_type length2() const { return detail::dot_vector(*this, *this); }
 
 	/// Normalizes the vector to a specific length.
 	inline vector2 & normalize(value_type len = 1.0)
@@ -122,10 +135,7 @@ public:
 
 	inline vector2 & operator=(vector2 &&) = default;
 
-	inline bool operator==(const vector2 & v) const
-	{
-		return detail::equal_vector(*this, v);
-	}
+	inline bool operator==(const vector2 & v) const { return detail::equal_vector(*this, v); }
 
 	inline bool operator!=(const vector2 & v) const { return !(*this == v); }
 
@@ -190,20 +200,21 @@ public:
 
 	vector3(vector3 &&) = default;
 
-	/// Returns a vector, initialized by the sphere coordinates.
+	/// Returns a vector, initialized by the sphere coordinates (mathematical conventions).
+	///
+	/// @param[in] radius The radius component.
+	/// @param[in] theta_deg The angle theta, lying on the xy-plane
+	/// @param[in] phi_deg The angle phi, from the z-axis
 	static inline vector3 make_from_sphere(
-		value_type radius, value_type phi_deg, value_type rho_deg)
+		value_type radius, value_type theta_deg, value_type phi_deg)
 	{
 		const value_type phi = phi_deg * M_PI / 180.0;
-		const value_type rho = rho_deg * M_PI / 180.0;
-		return vector3{
-			radius * cos(phi) * sin(rho), radius * sin(phi) * sin(rho), radius * cos(rho)};
+		const value_type theta = theta_deg * M_PI / 180.0;
+		return vector3{radius * std::sin(theta) * std::cos(phi),
+			radius * std::sin(theta) * std::sin(phi), radius * std::cos(theta)};
 	}
 
-	inline value_type dot(const vector3 & v) const
-	{
-		return a[0] * v.a[0] + a[1] * v.a[1] + a[2] * v.a[2];
-	}
+	inline value_type dot(const vector3 & v) const { return detail::dot_vector(*this, v); }
 
 	inline vector3 cross(const vector3 & v) const
 	{
@@ -211,9 +222,9 @@ public:
 			a[0] * v.a[1] - a[1] * v.a[0]);
 	}
 
-	inline value_type length() const { return sqrt(length2()); }
+	inline value_type length() const { return std::sqrt(length2()); }
 
-	inline value_type length2() const { return a[0] * a[0] + a[1] * a[1] + a[2] * a[2]; }
+	inline value_type length2() const { return detail::dot_vector(*this, *this); }
 
 	inline vector3 & normalize(value_type len = 1.0)
 	{
@@ -229,18 +240,20 @@ public:
 
 	inline value_type get_sphere_r() const { return length(); }
 
-	inline value_type get_sphere_rho() const
+	inline value_type get_sphere_theta() const
 	{
-		value_type b = sqrt(a[0] * a[0] + a[1] * a[1]);
-		return (!is_zero(b)) ? (atan(a[2] / b) * 180.0 / M_PI) : 0.0;
+		const value_type len = length();
+		if (is_zero(len))
+			return 0.0;
+		return std::acos(a[2] / len) * 180.0 / M_PI;
 	}
 
 	inline value_type get_sphere_phi() const
 	{
-		value_type b = atan2(a[1], a[0]);
-		if (b < 0)
+		value_type b = std::atan2(a[1], a[0]);
+		if (b < 0.0)
 			b += 2.0 * M_PI;
-		return b;
+		return b * 180.0 / M_PI;
 	}
 
 	inline value_type x() const { return a[0]; }
@@ -259,10 +272,7 @@ public:
 
 	inline vector3 & operator=(vector3 &&) = default;
 
-	inline bool operator==(const vector3 & v) const
-	{
-		return detail::equal_vector(*this, v);
-	}
+	inline bool operator==(const vector3 & v) const { return detail::equal_vector(*this, v); }
 
 	inline bool operator!=(const vector3 & v) const { return !(*this == v); }
 
@@ -328,17 +338,11 @@ public:
 
 	vector4(vector4 &&) = default;
 
-	inline value_type dot(const vector4 & v) const
-	{
-		return a[0] * v.a[0] + a[1] * v.a[1] + a[2] * v.a[2] + a[3] * v.a[3];
-	}
+	inline value_type dot(const vector4 & v) const { return detail::dot_vector(*this, v); }
 
-	inline value_type length() const { return sqrt(length2()); }
+	inline value_type length() const { return std::sqrt(length2()); }
 
-	inline value_type length2() const
-	{
-		return a[0] * a[0] + a[1] * a[1] + a[2] * a[2] + a[3] * a[3];
-	}
+	inline value_type length2() const { return detail::dot_vector(*this, *this); }
 
 	inline vector4 & normalize(value_type len = 1.0)
 	{
@@ -360,10 +364,7 @@ public:
 
 	inline vector4 & operator=(vector4 &&) = default;
 
-	inline bool operator==(const vector4 & v) const
-	{
-		return detail::equal_vector(*this, v);
-	}
+	inline bool operator==(const vector4 & v) const { return detail::equal_vector(*this, v); }
 
 	inline bool operator!=(const vector4 & v) const { return !(*this == v); }
 
@@ -437,23 +438,11 @@ public:
 			a[i] = *j;
 	}
 
-	inline value_type dot(const vector_n & v) const
-	{
-		value_type r = 0.0;
-		for (size_type i = 0; i < dimension; ++i)
-			r += (a[i] * v.a[i]);
-		return r;
-	}
+	inline value_type dot(const vector_n & v) const { return detail::dot_vector(*this, v); }
 
-	inline value_type length() const { return sqrt(length2()); }
+	inline value_type length() const { return std::sqrt(length2()); }
 
-	inline value_type length2() const
-	{
-		value_type r = 0.0;
-		for (size_type i = 0; i < dimension; ++i)
-			r += (a[i] * a[i]);
-		return r;
-	}
+	inline value_type length2() const { return detail::dot_vector(*this, *this); }
 
 	inline vector_n & normalize(value_type len = 1.0)
 	{
@@ -475,10 +464,7 @@ public:
 
 	inline vector_n & operator=(vector_n &&) = default;
 
-	inline bool operator==(const vector_n & v) const
-	{
-		return detail::equal_vector(*this, v);
-	}
+	inline bool operator==(const vector_n & v) const { return detail::equal_vector(*this, v); }
 
 	inline bool operator!=(const vector_n & v) const { return !(*this == v); }
 
@@ -574,9 +560,9 @@ template <typename T, typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
 T & nullify(T & v)
 {
-	using iterator = decltype(T::dimension);
+	using iterator = typename std::remove_cv<decltype(T::dimension)>::type;
 
-	for (typename std::remove_cv<iterator>::type i = 0; i < T::dimension; ++i)
+	for (iterator i = 0; i < T::dimension; ++i)
 		v[i] = is_zero(v[i]) ? 0.0 : v[i];
 	return v;
 }
@@ -594,7 +580,6 @@ T nullify(const T & v)
 }
 
 /// @}
-
 }
 }
 
