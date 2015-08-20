@@ -20,9 +20,9 @@ bool equal_matrix_nxn(const T & a, const T & b)
 	if (&a == &b)
 		return true;
 
-	using iterator = decltype(T::dimension);
+	using iterator = typename std::remove_cv<decltype(T::dimension)>::type;
 
-	for (typename std::remove_cv<iterator>::type i = 0; i < T::dimension * T::dimension; ++i)
+	for (iterator i = 0; i < T::dimension * T::dimension; ++i)
 		if (!is_same(a[i], b[i]))
 			return false;
 	return true;
