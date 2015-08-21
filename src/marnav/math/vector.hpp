@@ -16,10 +16,10 @@ template <typename T, typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
 typename T::value_type dot_vector(const T & a, const T & b)
 {
-	using iterator = typename std::remove_cv<decltype(T::dimension)>::type;
+	using index = typename std::remove_cv<decltype(T::dimension)>::type;
 
 	typename T::value_type result = 0.0;
-	for (iterator i = 0; i < T::dimension; ++i)
+	for (index i = 0; i < T::dimension; ++i)
 		result += a[i] * b[i];
 	return result;
 }
@@ -32,9 +32,9 @@ bool equal_vector(const T & a, const T & b)
 	if (&a == &b)
 		return true;
 
-	using iterator = typename std::remove_cv<decltype(T::dimension)>::type;
+	using index = typename std::remove_cv<decltype(T::dimension)>::type;
 
-	for (iterator i = 0; i < T::dimension; ++i)
+	for (index i = 0; i < T::dimension; ++i)
 		if (!is_same(a[i], b[i]))
 			return false;
 	return true;
@@ -560,9 +560,9 @@ template <typename T, typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
 T & nullify(T & v)
 {
-	using iterator = typename std::remove_cv<decltype(T::dimension)>::type;
+	using index = typename std::remove_cv<decltype(T::dimension)>::type;
 
-	for (iterator i = 0; i < T::dimension; ++i)
+	for (index i = 0; i < T::dimension; ++i)
 		v[i] = is_zero(v[i]) ? 0.0 : v[i];
 	return v;
 }

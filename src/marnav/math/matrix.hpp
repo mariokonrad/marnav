@@ -20,12 +20,51 @@ bool equal_matrix_nxn(const T & a, const T & b)
 	if (&a == &b)
 		return true;
 
-	using iterator = typename std::remove_cv<decltype(T::dimension)>::type;
+	using index = typename std::remove_cv<decltype(T::dimension)>::type;
 
-	for (iterator i = 0; i < T::dimension * T::dimension; ++i)
+	for (index i = 0; i < T::dimension * T::dimension; ++i)
 		if (!is_same(a[i], b[i]))
 			return false;
 	return true;
+}
+
+/// Multiplication of a matrix with a scalar
+template <typename T, typename
+	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
+T & scale_matrix_nxn(T & a, typename T::value_type s)
+{
+	using index = typename std::remove_cv<decltype(T::dimension)>::type;
+
+	for (index i = 0; i < T::dimension * T::dimension; ++i)
+		a[i] *= s;
+
+	return a;
+}
+
+/// Adds the second matrix to the first one.
+template <typename T, typename
+	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
+T & add_matrix_nxn(T & a, const T & b)
+{
+	using index = typename std::remove_cv<decltype(T::dimension)>::type;
+
+	for (index i = 0; i < T::dimension * T::dimension; ++i)
+		a[i] += b[i];
+
+	return a;
+}
+
+/// Adds the second matrix to the first one.
+template <typename T, typename
+	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
+T & sub_matrix_nxn(T & a, const T & b)
+{
+	using index = typename std::remove_cv<decltype(T::dimension)>::type;
+
+	for (index i = 0; i < T::dimension * T::dimension; ++i)
+		a[i] -= b[i];
+
+	return a;
 }
 
 /// Returns the inverse matrix of the specified one, if not possible, the identiy matrix
@@ -37,25 +76,25 @@ template <typename T, typename
 T inverse_matrix_nxn(const T & a)
 {
 	using value_type = typename T::value_type;
-	using size_type = typename T::size_type;
-	constexpr size_type dimension = T::dimension;
+	using index = typename std::remove_cv<decltype(T::dimension)>::type;
+	constexpr index dimension = T::dimension;
 
 	const value_type d = a.det();
 	if (is_zero(d))
 		return T{};
 	T m{a};
 	T I;
-	for (size_type j = 0; j < dimension; ++j) {
+	for (index j = 0; j < dimension; ++j) {
 		// Diagonalfeld normalisieren
 		value_type q = m[j * dimension + j];
 		if (is_zero(q)) {
 			// Es darf keine 0 mehr in der Diagonalen stehen
-			for (size_type i = j + 1; i < dimension; ++i) {
+			for (index i = j + 1; i < dimension; ++i) {
 				// Suche Reihe mit einem Feld != 0.0 und addiere
 				if (!is_zero(m[i * dimension + j])) {
-					for (size_type k = 0; k < dimension; ++k) {
-						const size_type i0 = j * dimension + k;
-						const size_type i1 = i * dimension + k;
+					for (index k = 0; k < dimension; ++k) {
+						const index i0 = j * dimension + k;
+						const index i1 = i * dimension + k;
 						m[i0] += m[i1];
 						I[i0] += I[i1];
 					}
@@ -64,19 +103,19 @@ T inverse_matrix_nxn(const T & a)
 				}
 			}
 		} else { // Diagonalen auf 1 bringen
-			for (size_type k = 0; k < dimension; ++k) {
-				const size_type i0 = j * dimension + k;
+			for (index k = 0; k < dimension; ++k) {
+				const index i0 = j * dimension + k;
 				m[i0] /= q;
 				I[i0] /= q;
 			}
 		}
 		// Spalten ausserhalb der Diagonalen auf 0 bringen
-		for (size_type i = 0; i < dimension; ++i) {
+		for (index i = 0; i < dimension; ++i) {
 			if (i != j) {
 				q = m[i * dimension + j];
-				for (size_type k = 0; k < dimension; ++k) {
-					const size_type i0 = i * dimension + k;
-					const size_type i1 = j * dimension + k;
+				for (index k = 0; k < dimension; ++k) {
+					const index i0 = i * dimension + k;
+					const index i1 = j * dimension + k;
 					m[i0] -= q * m[i1];
 					I[i0] -= q * I[i1];
 				}
@@ -84,8 +123,8 @@ T inverse_matrix_nxn(const T & a)
 		}
 	}
 	// Test auf Einheitsmatrix, falls nicht => Berechnung nicht gelungen
-	for (size_type i = 0; i < dimension; ++i)
-		for (size_type j = 0; j < dimension; ++j)
+	for (index i = 0; i < dimension; ++i)
+		for (index j = 0; j < dimension; ++j)
 			if (!is_same(m[i * dimension + j], ((i == j) ? 1.0 : 0.0)))
 				return T{};
 	return I;
@@ -140,26 +179,11 @@ public:
 
 	inline matrix2 & operator=(matrix2 &&) = default;
 
-	inline matrix2 & operator*=(value_type f)
-	{
-		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] *= f;
-		return *this;
-	}
+	inline matrix2 & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
 
-	inline matrix2 & operator+=(const matrix2 & m)
-	{
-		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] += m.x[i];
-		return *this;
-	}
+	inline matrix2 & operator+=(const matrix2 & m) { return detail::add_matrix_nxn(*this, m); }
 
-	inline matrix2 & operator-=(const matrix2 & m)
-	{
-		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] -= m.x[i];
-		return *this;
-	}
+	inline matrix2 & operator-=(const matrix2 & m) { return detail::sub_matrix_nxn(*this, m); }
 
 	inline matrix2 & operator*=(const matrix2 & m)
 	{
@@ -275,26 +299,11 @@ public:
 
 	inline matrix3 & operator=(matrix3 &&) = default;
 
-	inline matrix3 & operator*=(value_type f)
-	{
-		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] *= f;
-		return *this;
-	}
+	inline matrix3 & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
 
-	inline matrix3 & operator+=(const matrix3 & m)
-	{
-		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] += m.x[i];
-		return *this;
-	}
+	inline matrix3 & operator+=(const matrix3 & m) { return detail::add_matrix_nxn(*this, m); }
 
-	inline matrix3 & operator-=(const matrix3 & m)
-	{
-		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] -= m.x[i];
-		return *this;
-	}
+	inline matrix3 & operator-=(const matrix3 & m) { return detail::sub_matrix_nxn(*this, m); }
 
 	inline matrix3 & operator*=(const matrix3 & m)
 	{
@@ -416,26 +425,11 @@ public:
 
 	inline matrix4 & operator=(matrix4 &&) = default;
 
-	inline matrix4 & operator*=(value_type f)
-	{
-		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] *= f;
-		return *this;
-	}
+	inline matrix4 & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
 
-	inline matrix4 & operator+=(const matrix4 & m)
-	{
-		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] += m.x[i];
-		return *this;
-	}
+	inline matrix4 & operator+=(const matrix4 & m) { return detail::add_matrix_nxn(*this, m); }
 
-	inline matrix4 & operator-=(const matrix4 & m)
-	{
-		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] -= m.x[i];
-		return *this;
-	}
+	inline matrix4 & operator-=(const matrix4 & m) { return detail::sub_matrix_nxn(*this, m); }
 
 	inline matrix4 & operator*=(const matrix4 & m)
 	{
@@ -571,26 +565,11 @@ public:
 
 	inline matrix_n & operator=(matrix_n &&) = default;
 
-	inline matrix_n & operator*=(value_type f)
-	{
-		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] *= f;
-		return *this;
-	}
+	inline matrix_n & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
 
-	inline matrix_n & operator+=(const matrix_n & m)
-	{
-		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] += m.x[i];
-		return *this;
-	}
+	inline matrix_n & operator+=(const matrix_n & m) { return detail::add_matrix_nxn(*this, m); }
 
-	inline matrix_n & operator-=(const matrix_n & m)
-	{
-		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] -= m.x[i];
-		return *this;
-	}
+	inline matrix_n & operator-=(const matrix_n & m) { return detail::sub_matrix_nxn(*this, m); }
 
 	inline value_type trace() const
 	{

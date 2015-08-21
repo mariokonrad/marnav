@@ -46,7 +46,7 @@ bool equals(const T & a, const T & b,
 	using iterator = decltype(T::dimension);
 
 	for (typename std::remove_cv<iterator>::type i = 0; i < T::dimension * T::dimension; ++i)
-	if (std::abs(a[i] - b[i]) > threshold)
+		if (std::abs(a[i] - b[i]) > threshold)
 			return false;
 	return true;
 }
@@ -137,6 +137,40 @@ TEST_F(Test_math_matrix, mat3_inverse_multiply)
 
 	EXPECT_TRUE(equals(expected, result1, 1e-9));
 	EXPECT_TRUE(equals(expected, result2, 1e-9));
+}
+
+TEST_F(Test_math_matrix, mat2_add)
+{
+	const mat2 m1{1.0, 2.0, 3.0, 4.0};
+	const mat2 m2{10.0, 20.0, 30.0, 40.0};
+	const mat2 expected{11.0, 22.0, 33.0, 44.0};
+
+	EXPECT_TRUE((expected == m1 + m2));
+	EXPECT_TRUE((expected == m2 + m1));
+}
+
+TEST_F(Test_math_matrix, mat2_sub)
+{
+	const mat2 m1{1.0, 2.0, 3.0, 4.0};
+	const mat2 m2{10.0, 20.0, 30.0, 40.0};
+	const mat2 expected{-9.0, -18.0, -27.0, -36.0};
+
+	EXPECT_TRUE((expected == m1 - m2));
+}
+
+TEST_F(Test_math_matrix, mat2_transpose)
+{
+	const mat2 m1{1.0, 2.0, 3.0, 4.0};
+	const mat2 expected{1.0, 3.0, 2.0, 4.0};
+
+	EXPECT_TRUE((expected == m1.transpose()));
+}
+
+TEST_F(Test_math_matrix, mat2_trace)
+{
+	EXPECT_NEAR(5.0, (mat2{1.0, 2.0, 3.0, 4.0}.trace()), 1e-8);
+	EXPECT_NEAR(6.0, (mat2{1.5, 2.5, 3.5, 4.5}.trace()), 1e-8);
+	EXPECT_NEAR(2.0, (mat2{}.trace()), 1e-8);
 }
 
 }
