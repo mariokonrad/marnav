@@ -1,8 +1,8 @@
 #ifndef __IO__SERIAL__HPP__
 #define __IO__SERIAL__HPP__
 
-#include "device.hpp"
 #include <string>
+#include <marnav/io/device.hpp>
 
 namespace marnav
 {

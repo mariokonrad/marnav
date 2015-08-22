@@ -1,7 +1,7 @@
 #ifndef __AIS__MESSAGE_02__HPP__
 #define __AIS__MESSAGE_02__HPP__
 
-#include "message_01.hpp"
+#include <marnav/ais/message_01.hpp>
 
 namespace marnav
 {

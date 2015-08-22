@@ -1,9 +1,9 @@
 #ifndef __NMEA__GSV__HPP__
 #define __NMEA__GSV__HPP__
 
+#include <array>
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
-#include <array>
 
 namespace marnav
 {

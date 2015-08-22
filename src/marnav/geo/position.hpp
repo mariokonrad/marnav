@@ -1,7 +1,7 @@
 #ifndef __GEO__POSITION__HPP__
 #define __GEO__POSITION__HPP__
 
-#include "angle.hpp"
+#include <marnav/geo/angle.hpp>
 
 namespace marnav
 {

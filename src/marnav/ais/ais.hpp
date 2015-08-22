@@ -1,9 +1,9 @@
 #ifndef __AIS__DECODE__HPP__
 #define __AIS__DECODE__HPP__
 
-#include "message.hpp"
 #include <vector>
 #include <stdexcept>
+#include <marnav/ais/message.hpp>
 
 namespace marnav
 {

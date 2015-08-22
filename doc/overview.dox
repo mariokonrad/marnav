@@ -88,4 +88,24 @@ Reason:
 Code formatting is done using \c clang-format, using the provided
 configuration file (\c .clang-format)
 
+
+\section sec_overview_header_inclusion Order of Header inclusion
+
+In general the order is from system headers to project headers. The
+more private, the later the inclusion.
+
+For header files:
+- system headers
+- thrid party library headers
+- marnav headers
+
+For translation units:
+- its own header
+- system headers
+- thrid party library headers
+- marnav headers
+
+With the exception of the translation unit's own header file, are all
+header included with full qualified path.
+
 */

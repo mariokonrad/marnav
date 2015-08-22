@@ -1,8 +1,8 @@
 #include "message_24.hpp"
-#include <marnav/utils/unique.hpp>
-#include <marnav/utils/mmsi.hpp>
 #include <cmath>
 #include <type_traits>
+#include <marnav/utils/unique.hpp>
+#include <marnav/utils/mmsi.hpp>
 
 namespace marnav
 {

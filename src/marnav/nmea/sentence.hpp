@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 #include <typeinfo>
-#include "constants.hpp"
+#include <marnav/nmea/constants.hpp>
 
 namespace marnav
 {

@@ -1,9 +1,9 @@
 #include "io.hpp"
+#include <sstream>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/date.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/utils/mmsi.hpp>
-#include <sstream>
 
 namespace marnav
 {

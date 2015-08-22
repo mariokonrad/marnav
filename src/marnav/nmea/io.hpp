@@ -1,11 +1,11 @@
 #ifndef __NMEA__IO__HPP__
 #define __NMEA__IO__HPP__
 
-#include <marnav/nmea/constants.hpp>
-#include <marnav/utils/optional.hpp>
 #include <string>
 #include <functional>
 #include <stdexcept>
+#include <marnav/nmea/constants.hpp>
+#include <marnav/utils/optional.hpp>
 
 namespace marnav
 {

@@ -1,7 +1,7 @@
 #ifndef __AIS__MESSAGE_01__HPP__
 #define __AIS__MESSAGE_01__HPP__
 
-#include "message.hpp"
+#include <marnav/ais/message.hpp>
 #include <marnav/geo/angle.hpp>
 #include <marnav/utils/mmsi.hpp>
 

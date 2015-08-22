@@ -1,9 +1,9 @@
 #ifndef __NMEA__CONSTANTS__HPP__
 #define __NMEA__CONSTANTS__HPP__
 
-#include <marnav/geo/angle.hpp>
 #include <stdexcept>
 #include <string>
+#include <marnav/geo/angle.hpp>
 
 namespace marnav
 {

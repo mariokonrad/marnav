@@ -1,7 +1,7 @@
 #ifndef __GEO__GREATCIRCLE__HPP__
 #define __GEO__GREATCIRCLE__HPP__
 
-#include "position.hpp"
+#include <marnav/geo/position.hpp>
 
 namespace marnav
 {

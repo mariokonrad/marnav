@@ -1,6 +1,6 @@
 #include "message_05.hpp"
-#include <marnav/utils/unique.hpp>
 #include <cstdio>
+#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {

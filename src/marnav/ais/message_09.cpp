@@ -1,5 +1,5 @@
 #include "message_09.hpp"
-#include "angle.hpp"
+#include <marnav/ais/angle.hpp>
 #include <marnav/utils/unique.hpp>
 
 namespace marnav
