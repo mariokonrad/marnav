@@ -142,7 +142,7 @@ find_program(CPPCHECK_PATH cppcheck)
 if(CPPCHECK_PATH)
 	message(STATUS "cppcheck found")
 	add_custom_target(cppcheck
-		COMMAND ${CPPCHECK_PATH} --std=c++11 --platform=unix32 -v -f --enable=all -I ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/test 2> ${CMAKE_CURRENT_BINARY_DIR}/doc/cppcheck.txt
+		COMMAND ${CPPCHECK_PATH} --std=c++11 --platform=unix32 -v -f --enable=all --template='{file}:{line},{severity},{id},{message}' -I ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/test 2> ${CMAKE_CURRENT_BINARY_DIR}/doc/cppcheck.txt
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 	)
 else()
