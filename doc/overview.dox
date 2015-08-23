@@ -70,6 +70,13 @@ Not shown in the picture:
 - Examples (some of them use boost.asio or Qt5)
 
 
+\section sec_overview_general General Stuff
+
+The code of the library is quite defensive. This should usually not
+be a problem, because the (usual) environment of a library as this
+is not high performance. Some additional checks will not hurt too much.
+
+
 \section sec_overview_naming Naming Conventions
 
 Everything is in small case (types, classes, structs, member functions,
