@@ -46,6 +46,7 @@ Supported sentences for NMEA-0183 (read and write):
 - RMB: Recommended Minimum Navigation Information
 - RMC: Recommended Minimum Navigation Information
 - ROT: Rate Of Turn
+- RPM: Revolutions
 - RSA: Rudder Sensor Angle
 - RTE: Routes
 - SFI: Scanning Frequency Information

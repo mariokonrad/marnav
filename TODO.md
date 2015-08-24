@@ -27,7 +27,6 @@ NMEA
 	- LCD: Loran-C Signal Data
 	- MSK: Control for a Beacon Receiver
 	- MSS: Beacon Receiver Status
-	- RPM: Revolutions
 	- RSD: RADAR System Data
 	- STN: Multiple Data ID
 	- TDS: Trawl Door Spread Distance

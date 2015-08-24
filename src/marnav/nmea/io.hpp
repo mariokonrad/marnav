@@ -186,9 +186,7 @@ inline void read(const std::string & s, utils::optional<T> & value,
 	value = tmp;
 }
 
-/// This variant read enums from the string, but only if the enums themselfes have
-/// The same value as the converted string representation. This function is not able
-/// to perform a type specific mapping.
+/// This variant of read enums from the string using a mapping function.
 ///
 /// @tparam T Enumeration to be read
 /// @tparam Map Mapping function to map from enumeatiors underlying type to the enumeration.
@@ -210,6 +208,32 @@ inline void read(
 	} else {
 		value = static_cast<T>(t);
 	}
+}
+
+/// This variant of read enums from the string using a mapping function. This function
+/// applies if the specified value is wrapped in a utils::optional.
+///
+/// @tparam T Enumeration to be read
+/// @tparam Map Mapping function to map from enumeatiors underlying type to the enumeration.
+///
+/// @param[in] s The string to read from.
+/// @param[out] value The place where the read data will be stored
+/// @param[in] mapping_func The mapping function for the enumerator.
+/// @param[in] fmt Format specifier
+template <class T, typename Map,
+	typename = typename std::enable_if<std::is_class<utils::optional<T>>::value, T>::type,
+	typename = typename std::enable_if<std::is_enum<T>::value, T>::type>
+inline void read(const std::string & s, utils::optional<T> & value, Map mapping_func,
+	data_format fmt = data_format::dec) throw(std::runtime_error)
+{
+	if (s.empty()) {
+		value.reset();
+		return;
+	}
+
+	T tmp;
+	read(s, tmp, mapping_func, fmt);
+	value = tmp;
 }
 
 /// @}
