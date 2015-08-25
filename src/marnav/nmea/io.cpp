@@ -21,6 +21,8 @@ std::string to_string(uint64_t data) { return std::to_string(data); }
 
 std::string to_string(uint32_t data) { return std::to_string(data); }
 
+std::string to_string(int32_t data) { return std::to_string(data); }
+
 std::string to_string(double data)
 {
 	char buf[32];

@@ -10,9 +10,9 @@ This is a C++11 library for MARitime NAVigation purposes.
 
 It supports (partially):
 - NMEA-0183 (sentences: AAM, ALM, APB, BOD, BWC, BWR, BWW, DBT, DPT, DSC, DSE, DTM, FSI,
-  GGA, GLL, GNS, GSA, GSV, GTD, HDG, HSC, MTW, MWD, MWV, OSD, RMA, RMB, RMC, ROT, RPM, RSA,
-  RTE, SFI, TLL, TTM, VBW, VDM, VDO, VDR, VHW, VLW, VTG, VWR, VPW, WCV, WNC, WPL, XDR, XTE,
-  XTR, ZDA, ZDL, ZFO, ZTG, DBK, HDM, R00, PGRME)
+  GGA, GLL, GNS, GSA, GSV, GTD, HDG, HSC, MSK, MSS, MTW, MWD, MWV, OSD, RMA, RMB, RMC, ROT,
+  RPM, RSA, RTE, SFI, TLL, TTM, VBW, VDM, VDO, VDR, VHW, VLW, VTG, VWR, VPW, WCV, WNC, WPL,
+  XDR, XTE, XTR, ZDA, ZDL, ZFO, ZTG, DBK, HDM, R00, PGRME)
 - AIS (messages: 01, 02, 03, 04, 05, 09, 10, 11, 18, 19, 21, 24)
 - SeaTalk (Raymarine device communication, aka SeaTalk1) (supported messages:
   00, 01, 05, 10, 11, 20, 21, 22, 23, 24, 25, 26, 27, 30, 36, 38)

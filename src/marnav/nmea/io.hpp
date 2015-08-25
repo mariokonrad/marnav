@@ -35,6 +35,7 @@ enum class data_format { none, dec, hex };
 std::string to_string(char data);
 std::string to_string(uint64_t data);
 std::string to_string(uint32_t data);
+std::string to_string(int32_t data);
 std::string to_string(double data);
 std::string to_string(const std::string & data);
 std::string to_string(side t);
