@@ -18,7 +18,6 @@ NMEA
 	- DSI: DSC Transponder Initiate
 	- DSR: DSC Transponder Response
 	- GBS: GPS Satellite Fault Detection
-	- GLC: Geographic Position, Loran-C
 	- GRS: GPS Range Residuals
 	- GST: GPS Pseudorange Noise Statistics
 	- HFB: Trawl Headrope to Footrope and Bottom

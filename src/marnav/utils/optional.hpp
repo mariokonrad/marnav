@@ -111,6 +111,19 @@ private:
 	bool flag;
 	T data;
 };
+
+/// Creates and returns an optioal of type T, initialized with the specified
+/// arguments.
+///
+/// @tparam T The optional type
+/// @tparam Args Types of arguments to initialize the value
+/// @param[in] args The arguments to initialize the value
+/// @return the optional of type T
+template <class T, class... Args> optional<T> make_optional(Args &&... args)
+{
+	return optional<T>(T{std::forward<Args>(args)...});
+}
+
 }
 }
 

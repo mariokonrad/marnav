@@ -32,6 +32,7 @@ Supported sentences for NMEA-0183 (read and write):
 - DTM: Datum Reference
 - FSI: Frequency Set Information
 - GGA: Global Positioning System Fix Data
+- GLC: Geographic Position, Loran-C
 - GLL: Geographic Position - Latitude/Longitude
 - GNS: Fix data
 - GSA: Geographic Position - Latitude/Longitude
