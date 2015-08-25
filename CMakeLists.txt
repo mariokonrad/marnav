@@ -20,6 +20,8 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 
 	set(GNU_CXX_WARNING_FLAGS "-Wall -Wextra -pedantic-errors")
 	if(ENABLE_WARNING_HELL)
+		message(STATUS "Behold: entering the hell of extended warnings")
+
 		# some are not enabled on purpose
 		#set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Weffc++")
 		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wcast-align")
