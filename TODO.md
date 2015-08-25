@@ -21,7 +21,6 @@ NMEA
 	- GLC: Geographic Position, Loran-C
 	- GRS: GPS Range Residuals
 	- GST: GPS Pseudorange Noise Statistics
-	- GTD: Geographic Location in Time Differences
 	- HFB: Trawl Headrope to Footrope and Bottom
 	- ITS: Trawl Door Spread 2 Distance
 	- LCD: Loran-C Signal Data

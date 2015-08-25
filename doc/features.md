@@ -36,6 +36,7 @@ Supported sentences for NMEA-0183 (read and write):
 - GNS: Fix data
 - GSA: Geographic Position - Latitude/Longitude
 - GSV: Satellites in view
+- GTD: Geographic Location in Time Differences
 - HDG: Heading - Deviation & Variation
 - HSC: Heading Steering Command
 - MTW: Mean Temperature of Water

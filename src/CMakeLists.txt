@@ -50,6 +50,7 @@ set(SOURCE_NMEA_0183
 	marnav/nmea/gns.cpp
 	marnav/nmea/gsa.cpp
 	marnav/nmea/gsv.cpp
+	marnav/nmea/gtd.cpp
 	marnav/nmea/hdg.cpp
 	marnav/nmea/hdm.cpp
 	marnav/nmea/hsc.cpp
@@ -211,6 +212,7 @@ install(
 		marnav/nmea/gns.hpp
 		marnav/nmea/gsa.hpp
 		marnav/nmea/gsv.hpp
+		marnav/nmea/gtd.hpp
 		marnav/nmea/hdg.hpp
 		marnav/nmea/hdm.hpp
 		marnav/nmea/hsc.hpp
