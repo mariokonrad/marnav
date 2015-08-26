@@ -52,6 +52,7 @@ Supported sentences for NMEA-0183 (read and write):
 - ROT: Rate Of Turn
 - RPM: Revolutions
 - RSA: Rudder Sensor Angle
+- RSD: RADAR System Data (**experimental**)
 - RTE: Routes
 - SFI: Scanning Frequency Information
 - TLL: Target Latitude and Longitude

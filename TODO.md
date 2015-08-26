@@ -23,7 +23,6 @@ NMEA
 	- HFB: Trawl Headrope to Footrope and Bottom
 	- ITS: Trawl Door Spread 2 Distance
 	- LCD: Loran-C Signal Data
-	- RSD: RADAR System Data
 	- STN: Multiple Data ID
 	- TDS: Trawl Door Spread Distance
 	- TFI: Trawl Filling Indicator
