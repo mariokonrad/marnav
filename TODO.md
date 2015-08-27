@@ -17,7 +17,6 @@ NMEA
 	- ASD: Autopilot System Data
 	- DSI: DSC Transponder Initiate
 	- DSR: DSC Transponder Response
-	- GBS: GPS Satellite Fault Detection
 	- GRS: GPS Range Residuals
 	- GST: GPS Pseudorange Noise Statistics
 	- HFB: Trawl Headrope to Footrope and Bottom

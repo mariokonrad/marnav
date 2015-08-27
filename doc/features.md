@@ -31,6 +31,7 @@ Supported sentences for NMEA-0183 (read and write):
 - DSE: Extended DSC (**experimental**)
 - DTM: Datum Reference
 - FSI: Frequency Set Information
+- GBS: GPS Satellite Fault Detection
 - GGA: Global Positioning System Fix Data
 - GLC: Geographic Position, Loran-C
 - GLL: Geographic Position - Latitude/Longitude

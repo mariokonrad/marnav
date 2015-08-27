@@ -9,7 +9,7 @@ Copyright (c) 2015, Mario Konrad "mario.konrad@gmx.net"
 This is a C++11 library for MARitime NAVigation purposes.
 
 It supports (partially):
-- NMEA-0183 (sentences: AAM, ALM, APB, BOD, BWC, BWR, BWW, DBT, DPT, DSC, DSE, DTM, FSI,
+- NMEA-0183 (sentences: AAM, ALM, APB, BOD, BWC, BWR, BWW, DBT, DPT, DSC, DSE, DTM, FSI, GBS,
   GGA, GLC, GLL, GNS, GSA, GSV, GTD, HDG, HSC, MSK, MSS, MTW, MWD, MWV, OSD, RMA, RMB, RMC,
   ROT, RPM, RSA, RSD, RTE, SFI, TLL, TTM, VBW, VDM, VDO, VDR, VHW, VLW, VTG, VWR, VPW, WCV,
   WNC, WPL, XDR, XTE, XTR, ZDA, ZDL, ZFO, ZTG, DBK, HDM, R00, PGRME)

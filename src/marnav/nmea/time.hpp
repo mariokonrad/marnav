@@ -87,7 +87,8 @@ public:
 	static time parse(const std::string & str) throw(std::invalid_argument);
 };
 
-std::string to_string(const time & d);
+std::string to_string(const time & t);
+std::string format(const nmea::time & t, unsigned int width);
 std::ostream & operator<<(std::ostream & os, const time & t);
 std::istream & operator>>(std::istream & is, time & t);
 

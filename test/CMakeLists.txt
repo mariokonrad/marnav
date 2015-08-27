@@ -37,6 +37,7 @@ add_executable(testrunner
 	nmea/Test_nmea_dse.cpp
 	nmea/Test_nmea_dtm.cpp
 	nmea/Test_nmea_fsi.cpp
+	nmea/Test_nmea_gbs.cpp
 	nmea/Test_nmea_gga.cpp
 	nmea/Test_nmea_glc.cpp
 	nmea/Test_nmea_gll.cpp

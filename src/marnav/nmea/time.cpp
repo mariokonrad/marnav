@@ -69,10 +69,34 @@ time time::parse(const std::string & str) throw(std::invalid_argument)
 }
 
 /// Returns a string representation in the form 'hhmmss', does not render fractions of seconds.
-std::string to_string(const time & d)
+std::string to_string(const time & t)
 {
 	char buf[7];
-	snprintf(buf, sizeof(buf), "%02u%02u%02u", d.hour(), d.minutes(), d.seconds());
+	snprintf(buf, sizeof(buf), "%02u%02u%02u", t.hour(), t.minutes(), t.seconds());
+	return buf;
+}
+
+/// Returns the data as formatted string.
+///
+/// @param[in] t The data to format.
+/// @param[in] width Number of digits for sub-seconds. Since sub-seconds
+///   are represented as milliseconds in nmea::time, this value can be between 1 and 3.
+///   If the value is \c 0, the function \c to_string will be used. Values greater
+///   than 3 are equivalent to 3.
+std::string format(const nmea::time & t, unsigned int width)
+{
+	if (width == 0)
+		return to_string(t);
+	if (width > 3)
+		width = 3;
+
+	char fmt[32];
+	snprintf(fmt, sizeof(fmt), "%%02u%%02u%%02u.%%0%uu", width);
+	uint32_t div = 1;
+	for (unsigned int i = 0; i < width; ++i)
+		div *= 10;
+	char buf[64];
+	snprintf(buf, sizeof(buf), fmt, t.hour(), t.minutes(), t.seconds(), t.milliseconds() / div);
 	return buf;
 }
 
