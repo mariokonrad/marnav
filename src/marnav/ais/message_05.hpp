@@ -59,8 +59,8 @@ public:
 	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
 	uint32_t get_ais_version() const { return ais_version; }
 	uint32_t get_imo_number() const { return imo_number; }
-	std::string get_callsign() const { return callsign; }
-	std::string get_shipname() const { return shipname; }
+	std::string get_callsign() const;
+	std::string get_shipname() const;
 	ship_type get_shiptype() const { return shiptype; }
 	uint32_t get_to_bow() const { return to_bow; }
 	uint32_t get_to_stern() const { return to_stern; }
@@ -72,7 +72,7 @@ public:
 	uint32_t get_eta_hour() const { return eta_hour; }
 	uint32_t get_eta_minute() const { return eta_minute; }
 	uint32_t get_draught() const { return draught; }
-	std::string get_destination() const { return destination; }
+	std::string get_destination() const;
 	bool get_dte() const { return dte; }
 
 	void set_repeat_indicator(unsigned int t) { repeat_indicator = t; }

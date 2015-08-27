@@ -28,7 +28,7 @@ TEST_F(Test_ais_message_05, parse)
 	EXPECT_EQ(0u, m->get_ais_version());
 	EXPECT_EQ(6710932u, m->get_imo_number());
 	EXPECT_STREQ("WDA9674", m->get_callsign().c_str());
-	EXPECT_STREQ("MT.MITCHELL@@@@@@@@@", m->get_shipname().c_str());
+	EXPECT_STREQ("MT.MITCHELL", m->get_shipname().c_str());
 	EXPECT_EQ(ais::ship_type::other_no_info, m->get_shiptype());
 	EXPECT_EQ(90u, m->get_to_bow());
 	EXPECT_EQ(90u, m->get_to_stern());
@@ -40,7 +40,7 @@ TEST_F(Test_ais_message_05, parse)
 	EXPECT_EQ(8u, m->get_eta_hour());
 	EXPECT_EQ(0u, m->get_eta_minute());
 	EXPECT_EQ(60u, m->get_draught());
-	EXPECT_STREQ("SEATTLE@@@@@@@@@@@@@", m->get_destination().c_str());
+	EXPECT_STREQ("SEATTLE", m->get_destination().c_str());
 	EXPECT_FALSE(m->get_dte());
 }
 

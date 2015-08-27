@@ -1,11 +1,18 @@
 #include "message_05.hpp"
-#include <cstdio>
 #include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
 namespace ais
 {
+
+namespace
+{
+std::string trim_ais_string(const std::string & s)
+{
+	return s.substr(0, s.find_first_of("@"));
+}
+}
 
 message_05::message_05()
 	: message(ID)
@@ -70,7 +77,7 @@ void message_05::read_data(const raw & bits) throw(std::out_of_range)
 	// 423 spare
 }
 
-raw message_05::get_data() const throw(std::out_of_range) 
+raw message_05::get_data() const throw(std::out_of_range)
 {
 	raw bits{SIZE_BITS};
 
@@ -98,6 +105,12 @@ raw message_05::get_data() const throw(std::out_of_range)
 
 	return bits;
 }
+
+std::string message_05::get_callsign() const { return trim_ais_string(callsign); }
+
+std::string message_05::get_shipname() const { return trim_ais_string(shipname); }
+
+std::string message_05::get_destination() const { return trim_ais_string(destination); }
 
 void message_05::set_callsign(const std::string & t)
 {

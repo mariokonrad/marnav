@@ -25,6 +25,9 @@ target_link_libraries(create_nmea_from_ais marnav)
 add_executable(select select.cpp)
 target_link_libraries(select marnav)
 
+add_executable(parse_ais parse_ais.cpp)
+target_link_libraries(parse_ais marnav)
+
 if(Boost_FOUND)
 	include_directories(${Boost_INCLUDE_DIRS})
 
