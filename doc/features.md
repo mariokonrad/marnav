@@ -43,6 +43,7 @@ Supported sentences for NMEA-0183 (read and write):
 - GTD: Geographic Location in Time Differences
 - HDG: Heading - Deviation & Variation
 - HSC: Heading Steering Command
+- LCD: Loran-C Signal Data
 - MSK: Control for a Beacon Receiver
 - MSS: Beacon Receiver Status
 - MTW: Mean Temperature of Water
