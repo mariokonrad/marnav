@@ -36,7 +36,9 @@ Supported sentences for NMEA-0183 (read and write):
 - GLC: Geographic Position, Loran-C
 - GLL: Geographic Position - Latitude/Longitude
 - GNS: Fix data
+- GRS: GPS Range Residuals
 - GSA: Geographic Position - Latitude/Longitude
+- GST: GPS Pseudorange Noise Statistics
 - GSV: Satellites in view
 - GTD: Geographic Location in Time Differences
 - HDG: Heading - Deviation & Variation
