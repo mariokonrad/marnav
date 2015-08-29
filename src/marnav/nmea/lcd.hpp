@@ -40,8 +40,8 @@ public:
 	constexpr static const char * TAG = "LCD";
 
 	struct time_difference {
-		double diff;
-		nmea::status status;
+		int32_t snr;
+		int32_t ecd;
 	};
 
 	lcd();
@@ -59,21 +59,18 @@ private:
 	static constexpr const int NUM_DIFFERENCES = 5;
 
 	uint32_t gri; ///< unit: 0.1 microseconds
-	double master_snr;
-	double master_ecd;
+	time_difference master;
 	std::array<utils::optional<time_difference>, NUM_DIFFERENCES> time_diffs;
 
 	void check_index(int index) const throw(std::out_of_range);
 
 public:
 	NMEA_GETTER(gri)
-	NMEA_GETTER(master_snr)
-	NMEA_GETTER(master_ecd)
+	NMEA_GETTER(master)
 	utils::optional<time_difference> get_time_diff(int index) const throw(std::out_of_range);
 
 	void set_gri(uint32_t t) { gri = t; }
-	void set_master_snr(double t) { master_snr = t; }
-	void set_master_ecd(double t) { master_ecd = t; }
+	void set_master(const time_difference & t) { master = t; }
 	void set_time_diff(int index, time_difference t) throw(std::out_of_range);
 };
 }
