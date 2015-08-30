@@ -63,6 +63,7 @@ Supported sentences for NMEA-0183 (read and write):
 - TFI: Trawl Filling Indicator
 - TLL: Target Latitude and Longitude
 - TPC: Trawl Position Cartesian Coordinates
+- TPR: Trawl Position Relative Vessel
 - TTM: Tracked Target Message
 - VBW: Dual Ground/Water Speed
 - VDM: AIS VHF Data-Link Message
