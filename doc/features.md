@@ -62,6 +62,7 @@ Supported sentences for NMEA-0183 (read and write):
 - TDS: Trawl Door Spread Distance
 - TFI: Trawl Filling Indicator
 - TLL: Target Latitude and Longitude
+- TPC: Trawl Position Cartesian Coordinates
 - TTM: Tracked Target Message
 - VBW: Dual Ground/Water Speed
 - VDM: AIS VHF Data-Link Message
