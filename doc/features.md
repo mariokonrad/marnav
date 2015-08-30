@@ -44,6 +44,7 @@ Supported sentences for NMEA-0183 (read and write):
 - HDG: Heading - Deviation & Variation
 - HFB: Trawl Headrope to Footrope and Bottom
 - HSC: Heading Steering Command
+- ITS: Trawl Door Spread 2 Distance
 - LCD: Loran-C Signal Data
 - MSK: Control for a Beacon Receiver
 - MSS: Beacon Receiver Status

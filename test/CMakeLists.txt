@@ -51,6 +51,7 @@ add_executable(testrunner
 	nmea/Test_nmea_hfb.cpp
 	nmea/Test_nmea_hdm.cpp
 	nmea/Test_nmea_hsc.cpp
+	nmea/Test_nmea_its.cpp
 	nmea/Test_nmea_lcd.cpp
 	nmea/Test_nmea_msk.cpp
 	nmea/Test_nmea_mss.cpp
