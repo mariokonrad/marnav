@@ -21,7 +21,6 @@ NMEA
 	- ITS: Trawl Door Spread 2 Distance
 	- STN: Multiple Data ID
 	- TDS: Trawl Door Spread Distance
-	- TFI: Trawl Filling Indicator
 	- TPC: Trawl Position Cartesian Coordinates
 	- TPR: Trawl Position Relative Vessel
 	- TPT: Trawl Position True
