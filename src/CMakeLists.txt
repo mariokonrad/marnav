@@ -80,6 +80,7 @@ set(SOURCE_NMEA_0183
 	marnav/nmea/tll.cpp
 	marnav/nmea/tpc.cpp
 	marnav/nmea/tpr.cpp
+	marnav/nmea/tpt.cpp
 	marnav/nmea/ttm.cpp
 	marnav/nmea/vbw.cpp
 	marnav/nmea/vdm.cpp
@@ -254,6 +255,7 @@ install(
 		marnav/nmea/tll.hpp
 		marnav/nmea/tpc.hpp
 		marnav/nmea/tpr.hpp
+		marnav/nmea/tpt.hpp
 		marnav/nmea/ttm.hpp
 		marnav/nmea/vbw.hpp
 		marnav/nmea/vdm.hpp

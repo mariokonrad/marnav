@@ -20,7 +20,6 @@ NMEA
 	- HFB: Trawl Headrope to Footrope and Bottom
 	- ITS: Trawl Door Spread 2 Distance
 	- STN: Multiple Data ID
-	- TPT: Trawl Position True
 	- TRF: TRANSIT Fix Data
 	- vendor extensions
 
