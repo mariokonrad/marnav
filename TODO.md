@@ -20,7 +20,6 @@ NMEA
 	- HFB: Trawl Headrope to Footrope and Bottom
 	- ITS: Trawl Door Spread 2 Distance
 	- STN: Multiple Data ID
-	- TDS: Trawl Door Spread Distance
 	- TPC: Trawl Position Cartesian Coordinates
 	- TPR: Trawl Position Relative Vessel
 	- TPT: Trawl Position True

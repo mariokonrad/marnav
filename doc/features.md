@@ -59,6 +59,7 @@ Supported sentences for NMEA-0183 (read and write):
 - RSD: RADAR System Data (**experimental**)
 - RTE: Routes
 - SFI: Scanning Frequency Information
+- TDS: Trawl Door Spread Distance
 - TFI: Trawl Filling Indicator
 - TLL: Target Latitude and Longitude
 - TTM: Tracked Target Message
