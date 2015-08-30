@@ -17,7 +17,6 @@ NMEA
 	- ASD: Autopilot System Data
 	- DSI: DSC Transponder Initiate
 	- DSR: DSC Transponder Response
-	- HFB: Trawl Headrope to Footrope and Bottom
 	- ITS: Trawl Door Spread 2 Distance
 	- STN: Multiple Data ID
 	- TRF: TRANSIT Fix Data

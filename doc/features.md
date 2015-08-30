@@ -42,6 +42,7 @@ Supported sentences for NMEA-0183 (read and write):
 - GSV: Satellites in view
 - GTD: Geographic Location in Time Differences
 - HDG: Heading - Deviation & Variation
+- HFB: Trawl Headrope to Footrope and Bottom
 - HSC: Heading Steering Command
 - LCD: Loran-C Signal Data
 - MSK: Control for a Beacon Receiver
