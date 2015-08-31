@@ -14,16 +14,17 @@ namespace nmea
 /// Water depth relative to the transducer and offset of the measuring transducer.
 ///
 /// @code
-///        1   2
-///        |   |
-/// $--DPT,x.x,x.x*hh<CR><LF>
+///        1   2   3
+///        |   |   |
+/// $--DPT,x.x,x.x,x.x*hh<CR><LF>
 /// @endcode
 ///
 /// Field Number:
-///  1. Depth meters
-///  2. Offset from transducer
-///     - positive value means distance from tansducer to water line
-///     - negative value means distance from transducer to keel
+/// 1. Depth meters
+/// 2. Offset from transducer
+///    - positive value means distance from tansducer to water line
+///    - negative value means distance from transducer to keel
+/// 3. Max depth in meters, might be empty. This field exists allegedly since NMEA 3.0
 ///
 class dpt : public sentence
 {
@@ -32,6 +33,7 @@ public:
 	constexpr static const char * TAG = "DPT";
 
 	dpt();
+	dpt(const std::string & talker);
 	dpt(const dpt &) = default;
 	dpt & operator=(const dpt &) = default;
 
@@ -43,15 +45,18 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	utils::optional<double> depth_meter;
-	utils::optional<double> transducer_offset;
+	double depth_meter;
+	double transducer_offset;
+	utils::optional<double> max_depth;
 
 public:
 	NMEA_GETTER(depth_meter)
 	NMEA_GETTER(transducer_offset)
+	NMEA_GETTER(max_depth)
 
 	void set_depth_meter(double t) { depth_meter = t; }
 	void set_transducer_offset(double t) { transducer_offset = t; }
+	void set_max_depth(double t) { max_depth = t; }
 };
 }
 }

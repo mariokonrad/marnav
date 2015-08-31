@@ -30,6 +30,7 @@ std::string sentence::talker() const { return talker_; }
 std::string to_string(const sentence & s)
 {
 	std::string result;
+	result.reserve(sentence::MAX_LENGTH);
 	result += s.get_start_token();
 	result += s.talker();
 	result += s.tag();
