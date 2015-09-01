@@ -13,13 +13,14 @@ NMEA
 
 @todo Implement additional checks in sentences, wheather or not the received data is correct.
 
-@todo Implement more sentences:
-	- ASD: Autopilot System Data
-	- DSI: DSC Transponder Initiate
-	- DSR: DSC Transponder Response
-	- STN: Multiple Data ID
-	- TRF: TRANSIT Fix Data
-	- vendor extensions
+@todo Implement sentence: ASD: Autopilot System Data
+
+@todo Implement sentence: DSI: DSC Transponder Initiate
+
+@todo Implement sentence: DSR: DSC Transponder Response
+
+@todo Implement sentence: STN: Multiple Data ID
+
 
 AIS
 ---
