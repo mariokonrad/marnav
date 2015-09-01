@@ -11,7 +11,7 @@ class Test_nmea_rot : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_rot, contruction) { nmea::rot rot; }
+TEST_F(Test_nmea_rot, contruction) { EXPECT_NO_THROW(nmea::rot rot); }
 
 TEST_F(Test_nmea_rot, parse)
 {

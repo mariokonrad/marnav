@@ -11,7 +11,7 @@ class Test_nmea_rpm : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_rpm, contruction) { nmea::rpm rpm; }
+TEST_F(Test_nmea_rpm, contruction) { EXPECT_NO_THROW(nmea::rpm rpm); }
 
 TEST_F(Test_nmea_rpm, parse)
 {

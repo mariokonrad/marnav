@@ -11,7 +11,7 @@ class Test_nmea_osd : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_osd, contruction) { nmea::osd osd; }
+TEST_F(Test_nmea_osd, contruction) { EXPECT_NO_THROW(nmea::osd osd); }
 
 TEST_F(Test_nmea_osd, parse)
 {

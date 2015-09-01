@@ -11,7 +11,7 @@ class Test_nmea_mwv : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_mwv, contruction) { nmea::mwv mwv; }
+TEST_F(Test_nmea_mwv, contruction) { EXPECT_NO_THROW(nmea::mwv mwv); }
 
 TEST_F(Test_nmea_mwv, parse)
 {

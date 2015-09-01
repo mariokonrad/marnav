@@ -11,7 +11,7 @@ class Test_nmea_dbk : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_dbk, contruction) { nmea::dbk dbk; }
+TEST_F(Test_nmea_dbk, contruction) { EXPECT_NO_THROW(nmea::dbk dbk); }
 
 TEST_F(Test_nmea_dbk, parse)
 {

@@ -11,7 +11,7 @@ class Test_nmea_mss : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_mss, contruction) { nmea::mss mss; }
+TEST_F(Test_nmea_mss, contruction) { EXPECT_NO_THROW(nmea::mss mss); }
 
 TEST_F(Test_nmea_mss, parse)
 {

@@ -11,7 +11,7 @@ class Test_nmea_vhw : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_vhw, contruction) { nmea::vhw vhw; }
+TEST_F(Test_nmea_vhw, contruction) { EXPECT_NO_THROW(nmea::vhw vhw); }
 
 TEST_F(Test_nmea_vhw, parse)
 {

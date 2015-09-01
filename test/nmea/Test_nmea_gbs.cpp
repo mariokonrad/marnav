@@ -11,7 +11,7 @@ class Test_nmea_gbs : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_gbs, contruction) { nmea::gbs gbs; }
+TEST_F(Test_nmea_gbs, contruction) { EXPECT_NO_THROW(nmea::gbs gbs); }
 
 TEST_F(Test_nmea_gbs, parse)
 {

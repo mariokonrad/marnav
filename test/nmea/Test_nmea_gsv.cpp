@@ -11,7 +11,7 @@ class Test_nmea_gsv : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_gsv, contruction) { nmea::gsv gsv; }
+TEST_F(Test_nmea_gsv, contruction) { EXPECT_NO_THROW(nmea::gsv gsv); }
 
 TEST_F(Test_nmea_gsv, parse)
 {

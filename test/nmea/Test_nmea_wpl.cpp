@@ -11,7 +11,7 @@ class Test_nmea_wpl : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_wpl, contruction) { nmea::wpl wpl; }
+TEST_F(Test_nmea_wpl, contruction) { EXPECT_NO_THROW(nmea::wpl wpl); }
 
 TEST_F(Test_nmea_wpl, parse)
 {

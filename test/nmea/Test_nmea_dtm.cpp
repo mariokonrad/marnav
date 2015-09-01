@@ -11,7 +11,7 @@ class Test_nmea_dtm : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_dtm, contruction) { nmea::dtm dtm; }
+TEST_F(Test_nmea_dtm, contruction) { EXPECT_NO_THROW(nmea::dtm dtm); }
 
 TEST_F(Test_nmea_dtm, parse)
 {

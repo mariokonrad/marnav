@@ -11,7 +11,7 @@ class Test_nmea_hsc : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_hsc, contruction) { nmea::hsc hsc; }
+TEST_F(Test_nmea_hsc, contruction) { EXPECT_NO_THROW(nmea::hsc hsc); }
 
 TEST_F(Test_nmea_hsc, parse)
 {

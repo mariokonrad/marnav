@@ -11,7 +11,7 @@ class Test_nmea_zdl : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_zdl, contruction) { nmea::zdl zdl; }
+TEST_F(Test_nmea_zdl, contruction) { EXPECT_NO_THROW(nmea::zdl zdl); }
 
 TEST_F(Test_nmea_zdl, parse)
 {

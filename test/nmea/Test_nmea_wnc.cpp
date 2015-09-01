@@ -11,7 +11,7 @@ class Test_nmea_wnc : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_wnc, contruction) { nmea::wnc wnc; }
+TEST_F(Test_nmea_wnc, contruction) { EXPECT_NO_THROW(nmea::wnc wnc); }
 
 TEST_F(Test_nmea_wnc, parse)
 {

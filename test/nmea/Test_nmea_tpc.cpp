@@ -11,7 +11,7 @@ class Test_nmea_tpc : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_tpc, contruction) { nmea::tpc tpc; }
+TEST_F(Test_nmea_tpc, contruction) { EXPECT_NO_THROW(nmea::tpc tpc); }
 
 TEST_F(Test_nmea_tpc, parse)
 {

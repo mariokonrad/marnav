@@ -12,7 +12,7 @@ class Test_nmea_vdm : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_vdm, contruction) { nmea::vdm vdm; }
+TEST_F(Test_nmea_vdm, contruction) { EXPECT_NO_THROW(nmea::vdm vdm); }
 
 TEST_F(Test_nmea_vdm, parse_invalid_number_of_arguments)
 {

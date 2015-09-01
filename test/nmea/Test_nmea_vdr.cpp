@@ -11,7 +11,7 @@ class Test_nmea_vdr : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_vdr, contruction) { nmea::vdr vdr; }
+TEST_F(Test_nmea_vdr, contruction) { EXPECT_NO_THROW(nmea::vdr vdr); }
 
 TEST_F(Test_nmea_vdr, parse)
 {

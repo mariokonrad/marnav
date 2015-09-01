@@ -11,7 +11,7 @@ class Test_nmea_tfi : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_tfi, contruction) { nmea::tfi tfi; }
+TEST_F(Test_nmea_tfi, contruction) { EXPECT_NO_THROW(nmea::tfi tfi); }
 
 TEST_F(Test_nmea_tfi, parse)
 {

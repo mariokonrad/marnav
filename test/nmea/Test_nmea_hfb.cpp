@@ -11,7 +11,7 @@ class Test_nmea_hfb : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_hfb, contruction) { nmea::hfb hfb; }
+TEST_F(Test_nmea_hfb, contruction) { EXPECT_NO_THROW(nmea::hfb hfb); }
 
 TEST_F(Test_nmea_hfb, parse)
 {

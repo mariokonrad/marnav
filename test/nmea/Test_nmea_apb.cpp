@@ -11,7 +11,7 @@ class Test_nmea_apb : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_apb, contruction) { nmea::apb apb; }
+TEST_F(Test_nmea_apb, contruction) { EXPECT_NO_THROW(nmea::apb apb); }
 
 TEST_F(Test_nmea_apb, parse)
 {

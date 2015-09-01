@@ -11,7 +11,7 @@ class Test_nmea_bwr : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_bwr, contruction) { nmea::bwr bwr; }
+TEST_F(Test_nmea_bwr, contruction) { EXPECT_NO_THROW(nmea::bwr bwr); }
 
 TEST_F(Test_nmea_bwr, parse)
 {

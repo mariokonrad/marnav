@@ -11,7 +11,7 @@ class Test_nmea_gst : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_gst, contruction) { nmea::gst gst; }
+TEST_F(Test_nmea_gst, contruction) { EXPECT_NO_THROW(nmea::gst gst); }
 
 TEST_F(Test_nmea_gst, parse)
 {

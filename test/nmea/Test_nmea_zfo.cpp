@@ -11,7 +11,7 @@ class Test_nmea_zfo : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_zfo, contruction) { nmea::zfo zfo; }
+TEST_F(Test_nmea_zfo, contruction) { EXPECT_NO_THROW(nmea::zfo zfo); }
 
 TEST_F(Test_nmea_zfo, parse)
 {

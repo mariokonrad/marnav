@@ -11,7 +11,7 @@ class Test_nmea_zda : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_zda, contruction) { nmea::zda zda; }
+TEST_F(Test_nmea_zda, contruction) { EXPECT_NO_THROW(nmea::zda zda); }
 
 TEST_F(Test_nmea_zda, parse)
 {

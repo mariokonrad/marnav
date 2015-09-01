@@ -11,7 +11,7 @@ class Test_nmea_rmb : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_rmb, contruction) { nmea::rmb rmb; }
+TEST_F(Test_nmea_rmb, contruction) { EXPECT_NO_THROW(nmea::rmb rmb); }
 
 TEST_F(Test_nmea_rmb, parse)
 {

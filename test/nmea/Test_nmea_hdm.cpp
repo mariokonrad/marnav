@@ -11,7 +11,7 @@ class Test_nmea_hdm : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_hdm, contruction) { nmea::hdm hdm; }
+TEST_F(Test_nmea_hdm, contruction) { EXPECT_NO_THROW(nmea::hdm hdm); }
 
 TEST_F(Test_nmea_hdm, parse)
 {
