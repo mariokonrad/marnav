@@ -16,7 +16,7 @@ It supports (partially):
   HDM, R00, PGRME)
 - AIS (messages: 01, 02, 03, 04, 05, 09, 10, 11, 18, 19, 21, 24)
 - SeaTalk (Raymarine device communication, aka SeaTalk1) (supported messages:
-  00, 01, 05, 10, 11, 20, 21, 22, 23, 24, 25, 26, 27, 30, 36, 38, 50)
+  00, 01, 05, 10, 11, 20, 21, 22, 23, 24, 25, 26, 27, 30, 36, 38, 50, 51)
 - Reading data from serial ports (NMEA, SeaTalk)
 - Basic geodesic functions, suitable for martime navigation.
   - Calculation of CPA and TCPA

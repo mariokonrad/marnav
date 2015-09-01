@@ -48,7 +48,6 @@ SeaTalk
 @todo Implement writer for serial devices
 
 @todo Implement more messages:
-	- Type 51: LON Postion
 	- Type 52: Speed over Ground
 	- Type 53: Magnetic Course in Degrees
 	- Type 54: GMT Time
