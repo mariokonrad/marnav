@@ -19,7 +19,8 @@ It supports (partially):
   00, 01, 05, 10, 11, 20, 21, 22, 23, 24, 25, 26, 27, 30, 36, 38, 50, 51)
 - Reading data from serial ports (NMEA, SeaTalk)
 - Basic geodesic functions, suitable for martime navigation.
-  - Calculation of CPA and TCPA
+  - Calculation of CPA (closest point of approach)
+    and TCPA (time to closest point of approach)
   - Distance of two points on a sphere
   - Distance of two points on an ellipsoid using formula of Vincenty
   - Distance of two points on an ellipsoid using formula of Lambert

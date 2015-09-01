@@ -1,15 +1,14 @@
 Features {#page_features}
 ========
 
-[TOC]
-
 It supports (partially):
 - NMEA-0183
 - AIS
 - SeaTalk (Raymarine device communication)
 - Reading data from serial ports (NMEA, SeaTalk)
 - Basic geodesic functions, suitable for martime navigation.
-  - Calculation of CPA and TCPA
+  - Calculation of CPA (closest point of approach)
+    and TCPA (time to closest point of approach)
   - Distance of two points on a sphere
   - Distance of two points on an ellipsoid using formula of Vincenty
   - Distance of two points on an ellipsoid using formula of Lambert

@@ -13,6 +13,10 @@ namespace seatalk
 
 constexpr const int MAX_MESSAGE_SIZE = 32;
 
+/// Enumeration of all known SeaTalk message types.
+///
+/// Omitted: 0x81
+///
 enum class message_id : uint8_t {
 	depth_below_transducer = 0x00,
 	equipment_id = 0x01,
@@ -32,6 +36,30 @@ enum class message_id : uint8_t {
 	codelock_data = 0x38,
 	position_latitude = 0x50,
 	position_longitude = 0x51,
+	speed_over_ground = 0x52,
+	magnetic_course = 0x53,
+	gmt_time = 0x54,
+	track_keystroke_on_gps = 0x55,
+	date = 0x56,
+	sat_info = 0x57,
+	lat_lon = 0x58,
+	countdown_timer = 0x59,
+	e80_initialization = 0x61,
+	display_unit_select_fathom = 0x65,
+	wind_alarm = 0x66,
+	alarm_ack = 0x68,
+	equipment_id_2 = 0x6c,
+	mob = 0x6e,
+	st60_keystroke = 0x70,
+	lamp_intensity_2 = 0x80, ///< @todo What is the difference to 0x30, seems the same
+	target_waypoint_name = 0x82,
+	course_computer = 0x83,
+	heading_course_rudder = 0x84,
+	navigation_waypoint_info = 0x85,
+	keystroke = 0x86,
+	response_level = 0x87,
+	autopilot_parameter = 0x88,
+	st40_compass_heading = 0x89
 };
 
 namespace unit
