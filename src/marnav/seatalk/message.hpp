@@ -30,6 +30,8 @@ enum class message_id : uint8_t {
 	set_lamp_intensity = 0x30,
 	cancel_mob_condition = 0x36,
 	codelock_data = 0x38,
+	position_latitude = 0x50,
+	position_longitude = 0x51,
 };
 
 namespace unit

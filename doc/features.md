@@ -133,4 +133,5 @@ Suported messages for SeaTalk (decode and encode):
 - Type 30: Set Lamp Intensity
 - Type 36: Cancel MOB condition
 - Type 38: Codelock data (**experimental**)
+- Type 50: LAT Postion
 
