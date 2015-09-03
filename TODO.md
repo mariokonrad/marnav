@@ -1,6 +1,7 @@
 TODO
 ====
 
+@todo General: clean up documentation
 @todo General: integration tests
 @todo Implement NMEA writer for serial devices
 @todo Implement additional checks in NMEA sentences, wheather or not the
