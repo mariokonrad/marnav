@@ -1,6 +1,6 @@
-	#include "nmea.hpp"
+#include "nmea.hpp"
 
-	#include <algorithm>
+#include <algorithm>
 #include <regex>
 
 #include <marnav/nmea/angle.hpp>
