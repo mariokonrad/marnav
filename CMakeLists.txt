@@ -89,6 +89,7 @@ include(GitInformation)
 file(MAKE_DIRECTORY
 	${CMAKE_CURRENT_BINARY_DIR}/doc
 	${CMAKE_CURRENT_BINARY_DIR}/doc/coverage
+	${CMAKE_CURRENT_BINARY_DIR}/local/include
 	)
 
 ### library
