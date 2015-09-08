@@ -7,7 +7,7 @@ namespace nmea
 
 namespace
 {
-template <class T> static T parse_time(const std::string & str) throw(std::invalid_argument)
+template <class T> static T parse_time(const std::string & str)
 {
 	try {
 		std::size_t pos = 0;
@@ -26,8 +26,7 @@ template <class T> static T parse_time(const std::string & str) throw(std::inval
 }
 }
 
-void trait_time::check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(
-	std::invalid_argument)
+void trait_time::check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms)
 {
 	if (h > 23)
 		throw std::invalid_argument{"invalid hour in nmea::time"};
@@ -39,8 +38,7 @@ void trait_time::check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(
 		throw std::invalid_argument{"invalid milliseconds in nmea::time"};
 }
 
-void trait_duration::check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(
-	std::invalid_argument)
+void trait_duration::check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms)
 {
 	if (h > 99)
 		throw std::invalid_argument{"invalid hour in nmea::duration"};
@@ -63,7 +61,7 @@ void trait_duration::check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) thro
 /// @param[in] str The string to parse.
 /// @return The parsed time.
 /// @exception std::invalid_argument Thrown if the string is malformed.
-time time::parse(const std::string & str) throw(std::invalid_argument)
+time time::parse(const std::string & str)
 {
 	return parse_time<time>(str);
 }
@@ -121,7 +119,7 @@ std::istream & operator>>(std::istream & is, time & t)
 /// @param[in] str The string to parse.
 /// @return The parsed duration
 /// @exception std::invalid_argument Thrown if the string is malformed.
-duration duration::parse(const std::string & str) throw(std::invalid_argument)
+duration duration::parse(const std::string & str)
 {
 	return parse_time<duration>(str);
 }

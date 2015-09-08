@@ -26,14 +26,13 @@ public:
 	message_04(const message_04 &) = default;
 	message_04 & operator=(const message_04 &) = default;
 
-	virtual raw get_data() const throw(std::out_of_range) override;
+	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & bits) throw(
-		std::invalid_argument, std::out_of_range);
+	static std::unique_ptr<message> parse(const raw & bits);
 
 protected:
 	message_04(message_id id);
-	void read_data(const raw & bits) throw(std::out_of_range);
+	void read_data(const raw & bits);
 
 private:
 	unsigned int repeat_indicator;
@@ -52,31 +51,31 @@ private:
 	uint32_t radio_status;
 
 public:
-	unsigned int get_repeat_indicator() const { return repeat_indicator; }
-	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
-	uint32_t get_year() const { return year; }
-	uint32_t get_month() const { return month; }
-	uint32_t get_day() const { return day; }
-	uint32_t get_hour() const { return hour; }
-	uint32_t get_minute() const { return minute; }
-	uint32_t get_second() const { return second; }
-	bool get_position_accuracy() const { return position_accuracy; }
-	epfd_fix_type get_epfd_fix() const { return epfd_fix; }
-	bool get_raim() const { return raim; }
-	uint32_t get_radio_status() const { return radio_status; }
+	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }
+	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
+	uint32_t get_year() const noexcept { return year; }
+	uint32_t get_month() const noexcept { return month; }
+	uint32_t get_day() const noexcept { return day; }
+	uint32_t get_hour() const noexcept { return hour; }
+	uint32_t get_minute() const noexcept { return minute; }
+	uint32_t get_second() const noexcept { return second; }
+	bool get_position_accuracy() const noexcept { return position_accuracy; }
+	epfd_fix_type get_epfd_fix() const noexcept { return epfd_fix; }
+	bool get_raim() const noexcept { return raim; }
+	uint32_t get_radio_status() const noexcept { return radio_status; }
 
-	void set_repeat_indicator(unsigned int t) { repeat_indicator = t; }
-	void set_mmsi(const utils::mmsi & t) { mmsi = t; }
-	void set_year(uint32_t t) { year = t; }
-	void set_month(uint32_t t) { month = t; }
-	void set_day(uint32_t t) { day = t; }
-	void set_hour(uint32_t t) { hour = t; }
-	void set_minute(uint32_t t) { minute = t; }
-	void set_second(uint32_t t) { second = t; }
-	void set_position_accuracy(bool t) { position_accuracy = t; }
-	void set_epfd_fix(epfd_fix_type t) { epfd_fix = t; }
-	void set_raim(bool t) { raim = t; }
-	void set_radio_status(uint32_t t) { radio_status = t; }
+	void set_repeat_indicator(unsigned int t) noexcept { repeat_indicator = t; }
+	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
+	void set_year(uint32_t t) noexcept { year = t; }
+	void set_month(uint32_t t) noexcept { month = t; }
+	void set_day(uint32_t t) noexcept { day = t; }
+	void set_hour(uint32_t t) noexcept { hour = t; }
+	void set_minute(uint32_t t) noexcept { minute = t; }
+	void set_second(uint32_t t) noexcept { second = t; }
+	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
+	void set_epfd_fix(epfd_fix_type t) noexcept { epfd_fix = t; }
+	void set_raim(bool t) noexcept { raim = t; }
+	void set_radio_status(uint32_t t) noexcept { radio_status = t; }
 
 	geo::longitude get_longitude() const;
 	geo::latitude get_latitude() const;

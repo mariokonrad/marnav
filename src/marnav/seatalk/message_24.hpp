@@ -39,15 +39,15 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data);
 
 private:
 	unit_type unit;
 
 public:
-	unit_type get_unit() const { return unit; }
+	unit_type get_unit() const noexcept { return unit; }
 
-	void set_unit(unit_type t) { unit = t; }
+	void set_unit(unit_type t) noexcept { unit = t; }
 };
 }
 }

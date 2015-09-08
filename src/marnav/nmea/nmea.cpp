@@ -169,7 +169,7 @@ std::vector<sentence_id> get_supported_sentences_id()
 
 /// Returns the tag of the specified ID. If the sentence is unknown,
 /// an exception is thrown.
-std::string to_string(sentence_id id) throw(unknown_sentence)
+std::string to_string(sentence_id id)
 {
 	using namespace std;
 	auto i = find_if(begin(known_sentences), end(known_sentences),
@@ -182,7 +182,7 @@ std::string to_string(sentence_id id) throw(unknown_sentence)
 
 /// Returns the ID of the specified tag. If the sentence is unknown,
 /// an exceptioni s thrown.
-sentence_id tag_to_id(const std::string & tag) throw(unknown_sentence)
+sentence_id tag_to_id(const std::string & tag)
 {
 	using namespace std;
 	auto i = find_if(begin(known_sentences), end(known_sentences),
@@ -201,8 +201,7 @@ sentence_id tag_to_id(const std::string & tag) throw(unknown_sentence)
 /// @return The parse function of the specified sentence.
 /// @exception std::unknown_sentence The specified tag could not be found,
 ///   the argument cannot be processed.
-static sentence::parse_function instantiate_sentence(const std::string & tag) throw(
-	unknown_sentence)
+static sentence::parse_function instantiate_sentence(const std::string & tag)
 {
 	using namespace std;
 
@@ -223,8 +222,7 @@ static sentence::parse_function instantiate_sentence(const std::string & tag) th
 ///   the talker ID may be empty.
 /// @exception std::invalid_argument The specified address was probably malformed or
 //    empty.
-static std::tuple<std::string, std::string> parse_address(const std::string & address) throw(
-	std::invalid_argument)
+static std::tuple<std::string, std::string> parse_address(const std::string & address)
 {
 	if (address.empty())
 		throw std::invalid_argument{"invalid/malformed address in nmea/parse_address"};
@@ -263,8 +261,7 @@ static std::tuple<std::string, std::string> parse_address(const std::string & ad
 ///   auto s =
 ///   nmea::make_sentence("$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
 /// @endcode
-std::unique_ptr<sentence> make_sentence(const std::string & s) throw(
-	std::invalid_argument, checksum_error, unknown_sentence)
+std::unique_ptr<sentence> make_sentence(const std::string & s)
 {
 	using namespace std;
 

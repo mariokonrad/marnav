@@ -62,9 +62,8 @@ public:
 	dse(const dse &) = default;
 	dse & operator=(const dse &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -81,14 +80,14 @@ public:
 	NMEA_GETTER(flag)
 	utils::mmsi get_mmsi() const;
 
-	void set_number_of_messages(uint32_t t) { number_of_messages = t; }
-	void set_sentence_number(uint32_t t) { sentence_number = t; }
-	void set_flag(query_flag t) { flag = t; }
-	void set_mmsi(const utils::mmsi & t);
+	void set_number_of_messages(uint32_t t) noexcept { number_of_messages = t; }
+	void set_sentence_number(uint32_t t) noexcept { sentence_number = t; }
+	void set_flag(query_flag t) noexcept { flag = t; }
+	void set_mmsi(const utils::mmsi & t) noexcept;
 };
 
-std::string to_string(dse::query_flag value) throw(std::invalid_argument);
-std::string to_string(dse::code_id value) throw(std::invalid_argument);
+std::string to_string(dse::query_flag value);
+std::string to_string(dse::code_id value);
 }
 }
 

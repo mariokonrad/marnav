@@ -36,7 +36,7 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data);
 
 private:
 	bool anchor_alarm_active;
@@ -47,22 +47,22 @@ private:
 	uint16_t depth; // in 1/10th of feet, 1 m = 3.2808 feet
 
 public:
-	bool get_anchor_alarm_active() const { return anchor_alarm_active; }
-	bool get_metric_display_units() const { return metric_display_units; }
-	bool get_transducer_defective() const { return transducer_defective; }
-	bool get_depth_alarm_active() const { return depth_alarm_active; }
-	bool get_shallow_depth_alarm_active() const { return shallow_depth_alarm_active; }
-	uint16_t get_depth() const { return depth; }
+	bool get_anchor_alarm_active() const noexcept { return anchor_alarm_active; }
+	bool get_metric_display_units() const noexcept { return metric_display_units; }
+	bool get_transducer_defective() const noexcept { return transducer_defective; }
+	bool get_depth_alarm_active() const noexcept { return depth_alarm_active; }
+	bool get_shallow_depth_alarm_active() const noexcept { return shallow_depth_alarm_active; }
+	uint16_t get_depth() const noexcept { return depth; }
 
-	void set_anchor_alarm_active(bool t) { anchor_alarm_active = t; }
-	void set_metric_display_units(bool t) { metric_display_units = t; }
-	void set_transducer_defective(bool t) { transducer_defective = t; }
-	void set_depth_alarm_active(bool t) { depth_alarm_active = t; }
-	void set_shallow_depth_alarm_active(bool t) { shallow_depth_alarm_active = t; }
-	void set_depth(uint16_t t) { depth = t; }
+	void set_anchor_alarm_active(bool t) noexcept { anchor_alarm_active = t; }
+	void set_metric_display_units(bool t) noexcept { metric_display_units = t; }
+	void set_transducer_defective(bool t) noexcept { transducer_defective = t; }
+	void set_depth_alarm_active(bool t) noexcept { depth_alarm_active = t; }
+	void set_shallow_depth_alarm_active(bool t) noexcept { shallow_depth_alarm_active = t; }
+	void set_depth(uint16_t t) noexcept { depth = t; }
 
 public:
-	double get_depth_meters() const;
+	double get_depth_meters() const noexcept;
 };
 }
 }

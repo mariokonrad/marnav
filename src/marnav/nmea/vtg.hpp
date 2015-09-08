@@ -42,9 +42,8 @@ public:
 	vtg(const vtg &) = default;
 	vtg & operator=(const vtg &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -71,11 +70,14 @@ public:
 	NMEA_GETTER(speed_kmh_unit)
 	NMEA_GETTER(mode_indicator)
 
-	void set_track_true(double t);
-	void set_track_magn(double t);
-	void set_speed_kn(double t);
-	void set_speed_kmh(double t);
-	void set_mode_indicator(positioning_system_mode_indicator t) { mode_indicator = t; }
+	void set_track_true(double t) noexcept;
+	void set_track_magn(double t) noexcept;
+	void set_speed_kn(double t) noexcept;
+	void set_speed_kmh(double t) noexcept;
+	void set_mode_indicator(positioning_system_mode_indicator t) noexcept
+	{
+		mode_indicator = t;
+	}
 };
 }
 }

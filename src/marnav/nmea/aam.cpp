@@ -41,7 +41,7 @@ void aam::set_waypoint_id(const std::string & id)
 	waypoint_id = id;
 }
 
-void aam::check() const throw(std::invalid_argument)
+void aam::check() const
 {
 	check_status(arrival_circle_entered, "arrival_circle_entered");
 	check_status(perpendicualar_passed, "perpendicualar_passed");
@@ -50,8 +50,8 @@ void aam::check() const throw(std::invalid_argument)
 	check_value(arrival_circle_radius_unit, {unit::distance::NM}, "arrival_circle_radius_unit");
 }
 
-std::unique_ptr<sentence> aam::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> aam::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 5)
 		throw std::invalid_argument{"invalid number of fields in aam::parse"};

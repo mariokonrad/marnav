@@ -14,22 +14,22 @@ vbw::vbw()
 {
 }
 
-void vbw::set_water_speed(double l, double t, status s)
+void vbw::set_water_speed(double l, double t, status s) noexcept
 {
 	water_speed_longitudinal = l;
 	water_speed_transveral = t;
 	water_speed_status = s;
 }
 
-void vbw::set_ground_speed(double l, double t, status s)
+void vbw::set_ground_speed(double l, double t, status s) noexcept
 {
 	ground_speed_longitudinal = l;
 	ground_speed_transveral = t;
 	ground_speed_status = s;
 }
 
-std::unique_ptr<sentence> vbw::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> vbw::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in vbw::parse"};

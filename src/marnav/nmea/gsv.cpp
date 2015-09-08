@@ -30,41 +30,41 @@ gsv::gsv()
 {
 }
 
-void gsv::set_n_messages(uint32_t t) throw(std::invalid_argument)
+void gsv::set_n_messages(uint32_t t)
 {
 	if (t < 1)
 		throw std::invalid_argument{"minimum of 1 for n_messages mandatory"};
 	n_messages = t;
 }
 
-void gsv::set_message_number(uint32_t t) throw(std::invalid_argument)
+void gsv::set_message_number(uint32_t t)
 {
 	if (t < 1)
 		throw std::invalid_argument{"minimum of 1 for message_number mandatory"};
 	message_number = t;
 }
 
-void gsv::check_index(int index) const throw(std::out_of_range)
+void gsv::check_index(int index) const
 {
 	if ((index < 0) || (index > 3)) {
 		throw std::out_of_range{"satellite id out of range"};
 	}
 }
 
-void gsv::set_sat(int index, const satellite_info & info) throw(std::out_of_range)
+void gsv::set_sat(int index, const satellite_info & info)
 {
 	check_index(index);
 	sat[index] = info;
 }
 
-utils::optional<gsv::satellite_info> gsv::get_sat(int index) const throw(std::out_of_range)
+utils::optional<gsv::satellite_info> gsv::get_sat(int index) const
 {
 	check_index(index);
 	return sat[index];
 }
 
-std::unique_ptr<sentence> gsv::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> gsv::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	// empty fields for satellite information are not necessary, therefore
 	// there are a variable number of fields. however, the first 3 are

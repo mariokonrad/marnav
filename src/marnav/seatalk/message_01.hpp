@@ -38,15 +38,15 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data);
 
 private:
 	equipment_id_t equipment_id;
 
 public:
-	equipment_id_t get_equipment_id() const { return equipment_id; }
+	equipment_id_t get_equipment_id() const noexcept { return equipment_id; }
 
-	void set_equipment_id(const equipment_id_t & t) { equipment_id = t; }
+	void set_equipment_id(const equipment_id_t & t) noexcept { equipment_id = t; }
 };
 }
 }

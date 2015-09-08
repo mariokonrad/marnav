@@ -31,16 +31,15 @@ public:
 	message_24(const message_24 &) = default;
 	message_24 & operator=(const message_24 &) = default;
 
-	virtual raw get_data() const throw(std::out_of_range) override;
+	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & bits) throw(
-		std::invalid_argument, std::out_of_range);
+	static std::unique_ptr<message> parse(const raw & bits);
 
 	bool is_auxiliary_vessel() const;
 
 private:
 	message_24(message_id id);
-	void read_data(const raw & bits) throw(std::out_of_range);
+	void read_data(const raw & bits);
 
 private:
 	uint32_t repeat_indicator;
@@ -67,51 +66,51 @@ private:
 	uint32_t mothership_mmsi;
 
 public:
-	uint32_t get_repeat_indicator() const { return repeat_indicator; }
-	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
-	part get_part_number() const { return part_number; }
+	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
+	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
+	part get_part_number() const noexcept { return part_number; }
 
 	// part A specific
 	std::string get_shipname() const { return shipname; }
 
 	// part B specific (normal)
-	ship_type get_shiptype() const { return shiptype; }
+	ship_type get_shiptype() const noexcept { return shiptype; }
 	std::string get_vendor_id() const { return vendor_id; }
-	uint32_t get_model() const { return model; }
-	uint32_t get_serial() const { return serial; }
+	uint32_t get_model() const noexcept { return model; }
+	uint32_t get_serial() const noexcept { return serial; }
 	std::string get_callsign() const { return callsign; }
 
 	// part B specific (normal)
-	uint32_t get_to_bow() const { return to_bow; }
-	uint32_t get_to_stern() const { return to_stern; }
-	uint32_t get_to_port() const { return to_port; }
-	uint32_t get_to_starboard() const { return to_starboard; }
+	uint32_t get_to_bow() const noexcept { return to_bow; }
+	uint32_t get_to_stern() const noexcept { return to_stern; }
+	uint32_t get_to_port() const noexcept { return to_port; }
+	uint32_t get_to_starboard() const noexcept { return to_starboard; }
 
 	// part B specific (auxiliary)
-	utils::mmsi get_mothership_mmsi() const { return utils::mmsi{mothership_mmsi}; }
+	utils::mmsi get_mothership_mmsi() const noexcept { return utils::mmsi{mothership_mmsi}; }
 
-	void set_repeat_indicator(uint32_t t) { repeat_indicator = t; }
-	void set_mmsi(const utils::mmsi & t) { mmsi = t; }
-	void set_part_number(part t) { part_number = t; }
+	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
+	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
+	void set_part_number(part t) noexcept { part_number = t; }
 
 	// part A specific
 	void set_shipname(const std::string & t) { shipname = t; }
 
 	// part B specific
-	void set_shiptype(ship_type t) { shiptype = t; }
+	void set_shiptype(ship_type t) noexcept { shiptype = t; }
 	void set_vendor_id(const std::string & t) { vendor_id = t; }
-	void set_model(uint32_t t) { model = t; }
-	void set_serial(uint32_t t) { serial = t; }
+	void set_model(uint32_t t) noexcept { model = t; }
+	void set_serial(uint32_t t) noexcept { serial = t; }
 	void set_callsign(const std::string & t) { callsign = t; }
 
 	// part B specific (normal)
-	void set_to_bow(uint32_t t) { to_bow = t; }
-	void set_to_stern(uint32_t t) { to_stern = t; }
-	void set_to_port(uint32_t t) { to_port = t; }
-	void set_to_starboard(uint32_t t) { to_starboard = t; }
+	void set_to_bow(uint32_t t) noexcept { to_bow = t; }
+	void set_to_stern(uint32_t t) noexcept { to_stern = t; }
+	void set_to_port(uint32_t t) noexcept { to_port = t; }
+	void set_to_starboard(uint32_t t) noexcept { to_starboard = t; }
 
 	// part B specific (auxiliary)
-	void set_mothership_mmsi(const utils::mmsi & t) { mothership_mmsi = t; }
+	void set_mothership_mmsi(const utils::mmsi & t) noexcept { mothership_mmsi = t; }
 };
 }
 }

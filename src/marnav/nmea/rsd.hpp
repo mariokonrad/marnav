@@ -45,9 +45,8 @@ public:
 	rsd(const rsd &) = default;
 	rsd & operator=(const rsd &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -67,10 +66,10 @@ public:
 	NMEA_GETTER(range_unit)
 	NMEA_GETTER(unknown)
 
-	void set_unknowns(std::array<double, 8> t) { unknowns = t; }
-	void set_cursor(double range, double bearing);
-	void set_range(double scale, char unit);
-	void set_unknown(char t) { unknown = t; }
+	void set_unknowns(std::array<double, 8> t) noexcept { unknowns = t; }
+	void set_cursor(double range, double bearing) noexcept;
+	void set_range(double scale, char unit) noexcept;
+	void set_unknown(char t) noexcept { unknown = t; }
 };
 }
 }

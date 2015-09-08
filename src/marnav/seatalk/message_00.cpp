@@ -16,7 +16,7 @@ message_00::message_00()
 {
 }
 
-std::unique_ptr<message> message_00::parse(const raw & data) throw(std::invalid_argument)
+std::unique_ptr<message> message_00::parse(const raw & data)
 {
 	if (data.size() != 5)
 		throw std::invalid_argument{"invalid number of bytes in message_00::parse"};
@@ -55,7 +55,7 @@ raw message_00::get_data() const
 		static_cast<uint8_t>((depth >> 8) & 0xff)};
 }
 
-double message_00::get_depth_meters() const
+double message_00::get_depth_meters() const noexcept
 {
 	if (transducer_defective)
 		return 0.0;

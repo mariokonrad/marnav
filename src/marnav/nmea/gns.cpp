@@ -33,8 +33,8 @@ void gns::set_mode_indicator(const std::string & t)
 	mode_indicator = t;
 }
 
-std::unique_ptr<sentence> gns::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> gns::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 12)
 		throw std::invalid_argument{"invalid number of fields in gns::parse"};

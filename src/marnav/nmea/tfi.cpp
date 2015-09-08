@@ -16,8 +16,7 @@ namespace
 /// @return The corresponding enumerator.
 /// @exception std::invalid_argument The specified value to convert is unknown.
 ///
-static tfi::state state_mapping(typename std::underlying_type<tfi::state>::type value) throw(
-	std::invalid_argument)
+static tfi::state state_mapping(typename std::underlying_type<tfi::state>::type value)
 {
 	switch (value) {
 		case 0:
@@ -31,7 +30,7 @@ static tfi::state state_mapping(typename std::underlying_type<tfi::state>::type 
 }
 }
 
-std::string to_string(tfi::state value) throw(std::invalid_argument)
+std::string to_string(tfi::state value)
 {
 	switch (value) {
 		case tfi::state::off:
@@ -53,27 +52,27 @@ tfi::tfi()
 		t = state::no_answer;
 }
 
-void tfi::check_index(int index) const throw(std::out_of_range)
+void tfi::check_index(int index) const
 {
 	if ((index < 0) || (index >= NUM_SENSORS)) {
 		throw std::out_of_range{"sensor index out of range"};
 	}
 }
 
-tfi::state tfi::get_sensor(int index) const throw(std::out_of_range)
+tfi::state tfi::get_sensor(int index) const
 {
 	check_index(index);
 	return sensors[index];
 }
 
-void tfi::set_sensor(int index, state t) throw(std::out_of_range)
+void tfi::set_sensor(int index, state t)
 {
 	check_index(index);
 	sensors[index] = t;
 }
 
-std::unique_ptr<sentence> tfi::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> tfi::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 3)
 		throw std::invalid_argument{"invalid number of fields in tfi::parse"};

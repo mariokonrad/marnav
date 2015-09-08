@@ -45,9 +45,8 @@ public:
 	dtm(const dtm &) = default;
 	dtm & operator=(const dtm &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -72,12 +71,12 @@ public:
 	NMEA_GETTER(altitude)
 	NMEA_GETTER(name)
 
-	void set_ref(const std::string & t);
-	void set_subcode(const std::string & t);
+	void set_ref(const std::string & t) noexcept;
+	void set_subcode(const std::string & t) noexcept;
 	void set_lat_offset(double t, direction h);
 	void set_lon_offset(double t, direction h);
 	void set_altitude(double t) { altitude = t; }
-	void set_name(const std::string & t);
+	void set_name(const std::string & t) noexcept;
 };
 }
 }

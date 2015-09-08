@@ -33,8 +33,7 @@ message_24::message_24(message_id id)
 {
 }
 
-std::unique_ptr<message> message_24::parse(const raw & bits) throw(
-	std::invalid_argument, std::out_of_range)
+std::unique_ptr<message> message_24::parse(const raw & bits)
 {
 	if ((bits.size() != SIZE_BITS) && (bits.size() != SIZE_BITS_IGNORED_SPARES_OF_TYPE_A))
 		throw std::invalid_argument{"invalid number of bits in message_24::parse"};
@@ -58,7 +57,7 @@ bool message_24::is_auxiliary_vessel() const
 	return utils::mmsi{mmsi}.is_auxiliary();
 }
 
-void message_24::read_data(const raw & bits) throw(std::out_of_range)
+void message_24::read_data(const raw & bits)
 {
 	bits.get(repeat_indicator, 6, 2);
 	bits.get(mmsi, 8, 30);
@@ -88,7 +87,7 @@ void message_24::read_data(const raw & bits) throw(std::out_of_range)
 	}
 }
 
-raw message_24::get_data() const throw(std::out_of_range) 
+raw message_24::get_data() const
 {
 	raw bits{SIZE_BITS};
 

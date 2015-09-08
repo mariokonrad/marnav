@@ -68,9 +68,8 @@ public:
 	gga(const gga &) = default;
 	gga & operator=(const gga &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -108,24 +107,24 @@ public:
 	NMEA_GETTER(dgps_age)
 	NMEA_GETTER(dgps_ref)
 
-	void set_time(const nmea::time & t) { time = t; }
+	void set_time(const nmea::time & t) noexcept { time = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_quality(quality t) { quality_indicator = t; }
-	void set_n_satellites(uint32_t t) { n_satellites = t; }
-	void set_hor_dilution(double t) { hor_dilution = t; }
-	void set_altitude(double t)
+	void set_quality(quality t) noexcept { quality_indicator = t; }
+	void set_n_satellites(uint32_t t) noexcept { n_satellites = t; }
+	void set_hor_dilution(double t) noexcept { hor_dilution = t; }
+	void set_altitude(double t) noexcept
 	{
 		altitude = t;
 		altitude_unit = unit::distance::METER;
 	}
-	void set_geodial_separation(double t)
+	void set_geodial_separation(double t) noexcept
 	{
 		geodial_separation = t;
 		geodial_separation_unit = unit::distance::METER;
 	}
-	void set_dgps_age(double t) { dgps_age = t; }
-	void set_dgps_ref(uint32_t t) { dgps_ref = t; }
+	void set_dgps_age(double t) noexcept { dgps_age = t; }
+	void set_dgps_ref(uint32_t t) noexcept { dgps_ref = t; }
 };
 }
 }

@@ -49,9 +49,8 @@ public:
 	tll(const tll &) = default;
 	tll & operator=(const tll &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -78,13 +77,13 @@ public:
 	NMEA_GETTER(target_status)
 	NMEA_GETTER(reference_target)
 
-	void set_target_number(uint32_t t) { target_number = t; }
+	void set_target_number(uint32_t t) noexcept { target_number = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
 	void set_target_name(const std::string & t);
-	void set_time_utc(const nmea::time & t) { time_utc = t; }
-	void set_target_status(char t) { target_status = t; }
-	void set_reference_target(char t) { reference_target = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
+	void set_target_status(char t) noexcept { target_status = t; }
+	void set_reference_target(char t) noexcept { reference_target = t; }
 };
 }
 }

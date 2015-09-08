@@ -33,9 +33,8 @@ public:
 	ztg(const ztg &) = default;
 	ztg & operator=(const ztg &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -50,8 +49,8 @@ public:
 	NMEA_GETTER(time_remaining)
 	NMEA_GETTER(waypoint_id)
 
-	void set_time_utc(const nmea::time & t) { time_utc = t; }
-	void set_time_remaining(const nmea::time & t) { time_remaining = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
+	void set_time_remaining(const nmea::time & t) noexcept { time_remaining = t; }
 	void set_waypoint_id(const std::string & id);
 };
 }

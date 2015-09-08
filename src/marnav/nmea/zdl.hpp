@@ -39,9 +39,8 @@ public:
 	zdl(const zdl &) = default;
 	zdl & operator=(const zdl &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -56,9 +55,9 @@ public:
 	NMEA_GETTER(distance)
 	NMEA_GETTER(type_point)
 
-	void set_time_to_point(const duration & t) { time_to_point = t; }
-	void set_distance(double t) { distance = t; }
-	void set_type_point(type_of_point t) { type_point = t; }
+	void set_time_to_point(const duration & t) noexcept { time_to_point = t; }
+	void set_distance(double t) noexcept { distance = t; }
+	void set_type_point(type_of_point t) noexcept { type_point = t; }
 };
 }
 }

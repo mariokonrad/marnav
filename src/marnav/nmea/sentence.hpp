@@ -311,7 +311,7 @@ std::string to_string(const sentence & s);
 ///   auto s = nmea::make_sentence("$IIMTW,9.5,C*2F");
 ///   auto rmc = nmea::sentence_cast<nmea::rmc>(s); // Error, throws std::bad_cast
 /// @endcode
-template <class T> T * sentence_cast(sentence * s) throw(std::bad_cast)
+template <class T> T * sentence_cast(sentence * s)
 {
 	if (!s)
 		return nullptr;
@@ -324,7 +324,7 @@ template <class T> T * sentence_cast(sentence * s) throw(std::bad_cast)
 /// const variant.
 ///
 /// @see sentence_cast(sentence * s)
-template <class T> const T * sentence_cast(const sentence * s) throw(std::bad_cast)
+template <class T> const T * sentence_cast(const sentence * s)
 {
 	if (!s)
 		return nullptr;
@@ -337,7 +337,7 @@ template <class T> const T * sentence_cast(const sentence * s) throw(std::bad_ca
 /// std::unique_ptr variant.
 ///
 /// @see sentence_cast(sentence * s)
-template <class T> T * sentence_cast(std::unique_ptr<sentence> & s) throw(std::bad_cast)
+template <class T> T * sentence_cast(std::unique_ptr<sentence> & s)
 {
 	if (!s)
 		return nullptr;
@@ -351,7 +351,7 @@ template <class T> T * sentence_cast(std::unique_ptr<sentence> & s) throw(std::b
 ///
 /// @see sentence_cast(sentence * s)
 template <class T>
-const T * sentence_cast(const std::unique_ptr<sentence> & s) throw(std::bad_cast)
+const T * sentence_cast(const std::unique_ptr<sentence> & s)
 {
 	if (!s)
 		return nullptr;

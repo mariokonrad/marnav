@@ -31,18 +31,18 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data);
 
 private:
 	uint8_t unit; // unit of value
 	uint16_t speed; // wind speed in 1/10th of unit
 
 public:
-	uint8_t get_unit() const { return unit; }
-	uint16_t get_speed() const { return speed; }
+	uint8_t get_unit() const noexcept { return unit; }
+	uint16_t get_speed() const noexcept { return speed; }
 
-	void set_unit(uint8_t t) { unit = t; }
-	void set_speed(uint16_t t) { speed = t; }
+	void set_unit(uint8_t t) noexcept { unit = t; }
+	void set_speed(uint16_t t) noexcept { speed = t; }
 };
 }
 }

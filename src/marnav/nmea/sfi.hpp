@@ -39,9 +39,8 @@ public:
 	sfi(const sfi &) = default;
 	sfi & operator=(const sfi &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -56,10 +55,9 @@ public:
 	NMEA_GETTER(message_number)
 	NMEA_GETTER(frequencies)
 
-	void set_number_of_messages(uint32_t t) { number_of_messages = t; }
-	void set_message_number(uint32_t t) { message_number = t; }
-	void set_frequencies(const std::vector<scanning_frequency> & v) throw(
-		std::invalid_argument);
+	void set_number_of_messages(uint32_t t) noexcept { number_of_messages = t; }
+	void set_message_number(uint32_t t) noexcept { message_number = t; }
+	void set_frequencies(const std::vector<scanning_frequency> & v);
 };
 }
 }

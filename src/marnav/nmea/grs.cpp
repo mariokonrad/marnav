@@ -18,7 +18,7 @@ namespace
 /// @exception std::invalid_argument The specified value to convert is unknown.
 ///
 static grs::residual_usage residual_usage_mapping(
-	typename std::underlying_type<grs::residual_usage>::type value) throw(std::invalid_argument)
+	typename std::underlying_type<grs::residual_usage>::type value)
 {
 	switch (value) {
 		case 0:
@@ -30,7 +30,7 @@ static grs::residual_usage residual_usage_mapping(
 }
 }
 
-std::string to_string(grs::residual_usage value) throw(std::invalid_argument)
+std::string to_string(grs::residual_usage value)
 {
 	switch (value) {
 		case grs::residual_usage::used_in_gga:
@@ -53,27 +53,27 @@ grs::grs()
 	sat_residual[2] = 0.0;
 }
 
-void grs::check_index(int index) const throw(std::out_of_range)
+void grs::check_index(int index) const
 {
 	if ((index < 1) || (index > 12)) {
 		throw std::out_of_range{"satellite id out of range"};
 	}
 }
 
-utils::optional<double> grs::get_sat_residual(int index) const throw(std::out_of_range)
+utils::optional<double> grs::get_sat_residual(int index) const
 {
 	check_index(index);
 	return sat_residual[index];
 }
 
-void grs::set_sat_residual(int index, double value) throw(std::out_of_range)
+void grs::set_sat_residual(int index, double value)
 {
 	check_index(index);
 	sat_residual[index] = value;
 }
 
-std::unique_ptr<sentence> grs::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> grs::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 14)
 		throw std::invalid_argument{"invalid number of fields in grs::parse"};

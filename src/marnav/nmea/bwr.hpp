@@ -58,9 +58,8 @@ public:
 	bwr(const bwr &) = default;
 	bwr & operator=(const bwr &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -93,12 +92,12 @@ public:
 	NMEA_GETTER(distance_unit)
 	NMEA_GETTER(waypoint_id)
 
-	void set_time_utc(const nmea::time & t) { time_utc = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_bearing_true(double t);
-	void set_bearing_mag(double t);
-	void set_distance(double t);
+	void set_bearing_true(double t) noexcept;
+	void set_bearing_mag(double t) noexcept;
+	void set_distance(double t) noexcept;
 	void set_waypoint(const std::string & id);
 };
 }

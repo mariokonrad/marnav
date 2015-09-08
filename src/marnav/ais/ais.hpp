@@ -16,11 +16,8 @@ public:
 	using logic_error::logic_error;
 };
 
-std::unique_ptr<message> make_message(const std::vector<std::pair<std::string, int>> & v) throw(
-	unknown_message, std::invalid_argument, std::out_of_range);
-
-std::vector<std::pair<std::string, int>> encode_message(const message & msg) throw(
-	std::invalid_argument);
+std::unique_ptr<message> make_message(const std::vector<std::pair<std::string, int>> & v);
+std::vector<std::pair<std::string, int>> encode_message(const message & msg);
 }
 }
 

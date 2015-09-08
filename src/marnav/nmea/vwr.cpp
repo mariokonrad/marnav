@@ -14,32 +14,32 @@ vwr::vwr()
 {
 }
 
-void vwr::set_angle(double angle, side s)
+void vwr::set_angle(double angle, side s) noexcept
 {
 	this->angle = angle;
 	this->angle_side = s;
 }
 
-void vwr::set_speed_knots(double t)
+void vwr::set_speed_knots(double t) noexcept
 {
 	speed_knots = t;
 	speed_knots_unit = unit::velocity::KNOT;
 }
 
-void vwr::set_speed_mps(double t)
+void vwr::set_speed_mps(double t) noexcept
 {
 	speed_mps = t;
 	speed_mps_unit = unit::velocity::MPS;
 }
 
-void vwr::set_speed_kmh(double t)
+void vwr::set_speed_kmh(double t) noexcept
 {
 	speed_kmh = t;
 	speed_kmh_unit = unit::velocity::KMH;
 }
 
-std::unique_ptr<sentence> vwr::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> vwr::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 8)
 		throw std::invalid_argument{"invalid number of fields in vwr::parse"};

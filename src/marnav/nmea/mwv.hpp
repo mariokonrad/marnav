@@ -41,9 +41,8 @@ public:
 	mwv(const mwv &) = default;
 	mwv & operator=(const mwv &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -63,8 +62,8 @@ public:
 	NMEA_GETTER(data_valid)
 
 	void set_angle(double deg, reference ref);
-	void set_speed(double speed, unit::velocity u);
-	void set_data_valid(status t) { data_valid = t; }
+	void set_speed(double speed, unit::velocity u) noexcept;
+	void set_data_valid(status t) noexcept { data_valid = t; }
 };
 }
 }

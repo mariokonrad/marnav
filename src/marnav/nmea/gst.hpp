@@ -38,9 +38,8 @@ public:
 	gst(const gst &) = default;
 	gst & operator=(const gst &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -65,14 +64,14 @@ public:
 	NMEA_GETTER(dev_lon)
 	NMEA_GETTER(dev_alt)
 
-	void set_time_utc(const nmea::time & t) { time_utc = t; }
-	void set_total_rms(double t) { total_rms = t; }
-	void set_dev_semi_major(double t) { dev_semi_major = t; }
-	void set_dev_semi_minor(double t) { dev_semi_minor = t; }
-	void set_orientation(double t) { orientation = t; }
-	void set_dev_lat(double t) { dev_lat = t; }
-	void set_dev_lon(double t) { dev_lon = t; }
-	void set_dev_alt(double t) { dev_alt = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
+	void set_total_rms(double t) noexcept { total_rms = t; }
+	void set_dev_semi_major(double t) noexcept { dev_semi_major = t; }
+	void set_dev_semi_minor(double t) noexcept { dev_semi_minor = t; }
+	void set_orientation(double t) noexcept { orientation = t; }
+	void set_dev_lat(double t) noexcept { dev_lat = t; }
+	void set_dev_lon(double t) noexcept { dev_lon = t; }
+	void set_dev_alt(double t) noexcept { dev_alt = t; }
 };
 }
 }

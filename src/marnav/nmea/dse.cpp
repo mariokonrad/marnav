@@ -10,8 +10,7 @@ namespace nmea
 
 namespace
 {
-static dse::query_flag flag_mapping(
-	typename std::underlying_type<dse::query_flag>::type value) throw(std::invalid_argument)
+static dse::query_flag flag_mapping(typename std::underlying_type<dse::query_flag>::type value)
 {
 	switch (value) {
 		case 'Q':
@@ -24,8 +23,7 @@ static dse::query_flag flag_mapping(
 	throw std::invalid_argument{"invaild value for conversion to dse::query_flag"};
 }
 
-static dse::code_id code_mapping(typename std::underlying_type<dse::code_id>::type value) throw(
-	std::invalid_argument)
+static dse::code_id code_mapping(typename std::underlying_type<dse::code_id>::type value)
 {
 	switch (value) {
 		case 0:
@@ -47,7 +45,7 @@ static dse::code_id code_mapping(typename std::underlying_type<dse::code_id>::ty
 }
 }
 
-std::string to_string(dse::query_flag value) throw(std::invalid_argument)
+std::string to_string(dse::query_flag value)
 {
 	switch (value) {
 		case dse::query_flag::query:
@@ -60,7 +58,7 @@ std::string to_string(dse::query_flag value) throw(std::invalid_argument)
 	throw std::invalid_argument{"invaild value for conversion of dse::query_flag"};
 }
 
-std::string to_string(dse::code_id value) throw(std::invalid_argument)
+std::string to_string(dse::code_id value)
 {
 	switch (value) {
 		case dse::code_id::enhanced_position_resolution:
@@ -97,14 +95,14 @@ utils::mmsi dse::get_mmsi() const
 	return utils::mmsi{static_cast<utils::mmsi::value_type>(address / 10)};
 }
 
-void dse::set_mmsi(const utils::mmsi & t)
+void dse::set_mmsi(const utils::mmsi & t) noexcept
 {
 	address = t;
 	address *= 10;
 }
 
-std::unique_ptr<sentence> dse::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> dse::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in dse::parse"};

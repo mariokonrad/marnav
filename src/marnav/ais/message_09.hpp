@@ -24,13 +24,12 @@ public:
 	message_09(const message_09 &) = default;
 	message_09 & operator=(const message_09 &) = default;
 
-	virtual raw get_data() const throw(std::out_of_range) override;
+	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & bits) throw(
-		std::invalid_argument, std::out_of_range);
+	static std::unique_ptr<message> parse(const raw & bits);
 
 protected:
-	void read_data(const raw & bits) throw(std::out_of_range);
+	void read_data(const raw & bits);
 
 private:
 	unsigned int repeat_indicator;
@@ -49,29 +48,29 @@ private:
 	uint32_t radio_status;
 
 public:
-	unsigned int get_repeat_indicator() const { return repeat_indicator; }
-	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
-	uint32_t get_altitude() const { return altitude; }
-	uint32_t get_speed() const { return speed; }
-	bool get_position_accuracy() const { return position_accuracy; }
-	uint32_t get_course() const { return course; }
-	uint32_t get_utc_second() const { return utc_second; }
-	bool get_dte() const { return dte; }
-	bool get_assigned() const { return assigned; }
-	bool get_raim() const { return raim; }
-	uint32_t get_radio_status() const { return radio_status; }
+	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }
+	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
+	uint32_t get_altitude() const noexcept { return altitude; }
+	uint32_t get_speed() const noexcept { return speed; }
+	bool get_position_accuracy() const noexcept { return position_accuracy; }
+	uint32_t get_course() const noexcept { return course; }
+	uint32_t get_utc_second() const noexcept { return utc_second; }
+	bool get_dte() const noexcept { return dte; }
+	bool get_assigned() const noexcept { return assigned; }
+	bool get_raim() const noexcept { return raim; }
+	uint32_t get_radio_status() const noexcept { return radio_status; }
 
-	void set_repeat_indicator(unsigned int t) { repeat_indicator = t; }
-	void set_mmsi(const utils::mmsi & t) { mmsi = t; }
-	void set_altitude(uint32_t t) { altitude = t; }
-	void set_speed(uint32_t t) { speed = t; }
-	void set_position_accuracy(bool t) { position_accuracy = t; }
-	void set_course(uint32_t t) { course = t; }
-	void set_utc_second(uint32_t t) { utc_second = t; }
-	void set_dte(bool t) { dte = t; }
-	void set_assigned(bool t) { assigned = t; }
-	void set_raim(bool t) { raim = t; }
-	void set_radio_status(uint32_t t) { radio_status = t; }
+	void set_repeat_indicator(unsigned int t) noexcept { repeat_indicator = t; }
+	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
+	void set_altitude(uint32_t t) noexcept { altitude = t; }
+	void set_speed(uint32_t t) noexcept { speed = t; }
+	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
+	void set_course(uint32_t t) noexcept { course = t; }
+	void set_utc_second(uint32_t t) noexcept { utc_second = t; }
+	void set_dte(bool t) noexcept { dte = t; }
+	void set_assigned(bool t) noexcept { assigned = t; }
+	void set_raim(bool t) noexcept { raim = t; }
+	void set_radio_status(uint32_t t) noexcept { radio_status = t; }
 
 	geo::longitude get_longitude() const;
 	geo::latitude get_latitude() const;

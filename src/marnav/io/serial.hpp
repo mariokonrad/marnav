@@ -42,12 +42,10 @@ public:
 	virtual ~serial();
 	serial & operator=(const serial &) = delete;
 
-	virtual void open() throw(std::runtime_error) override;
+	virtual void open() override;
 	virtual void close() override;
-	virtual int read(char * buffer, uint32_t size) throw(
-		std::invalid_argument, std::runtime_error) override;
-	virtual int write(const char * buffer, uint32_t size) throw(
-		std::invalid_argument, std::runtime_error) override;
+	virtual int read(char * buffer, uint32_t size) override;
+	virtual int write(const char * buffer, uint32_t size) override;
 
 protected:
 	int fd;

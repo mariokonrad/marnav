@@ -190,9 +190,7 @@ public:
 			return res;
 		}
 
-		template <typename T>
-		void peek(T & v, size_type bits = sizeof(T) * BITS_PER_BYTE) const
-			throw(std::out_of_range)
+		template <typename T> void peek(T & v, size_type bits = sizeof(T) * BITS_PER_BYTE) const
 		{
 			if (bs == nullptr)
 				return;
@@ -202,8 +200,7 @@ public:
 			bs->get(v, pos, bits);
 		}
 
-		template <typename T>
-		void read(T & v, size_type bits = sizeof(T) * BITS_PER_BYTE) throw(std::out_of_range)
+		template <typename T> void read(T & v, size_type bits = sizeof(T) * BITS_PER_BYTE)
 		{
 			peek(v, bits);
 			*this += bits;
@@ -302,8 +299,7 @@ private:
 	}
 
 	template <typename T>
-	void set_impl(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) throw(
-		std::invalid_argument)
+	void set_impl(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE)
 	{
 		if (bits <= 0)
 			return;
@@ -337,16 +333,12 @@ private:
 		}
 	}
 
-	template <typename T>
-	void set_dispatch(T v, size_type ofs, size_type bits, std::true_type) throw(
-		std::invalid_argument)
+	template <typename T> void set_dispatch(T v, size_type ofs, size_type bits, std::true_type)
 	{
 		set_impl(v, ofs, bits);
 	}
 
-	template <typename T>
-	void set_dispatch(T v, size_type ofs, size_type bits, std::false_type) throw(
-		std::invalid_argument)
+	template <typename T> void set_dispatch(T v, size_type ofs, size_type bits, std::false_type)
 	{
 		set_impl(static_cast<typename std::underlying_type<T>::type>(v), ofs, bits);
 	}
@@ -362,7 +354,6 @@ private:
 	///            of bits exceed the total number of available bits. It is not possible
 	///            to read past the end.
 	void get_block(block_type & v, size_type ofs, size_type bits = BITS_PER_BLOCK) const
-		throw(std::out_of_range)
 	{
 		if (bits <= 0)
 			return;
@@ -517,8 +508,7 @@ public:
 	/// @exception std::invalid_argument Number of bites exceed the number of
 	///            bit provided by the parameter v. padding is not implemented.
 	///            Example: type of v is uint32_t, bits is 40.
-	template <typename T>
-	void append(T v, size_type bits = sizeof(T) * BITS_PER_BYTE) throw(std::invalid_argument)
+	template <typename T> void append(T v, size_type bits = sizeof(T) * BITS_PER_BYTE)
 	{
 		if (bits <= 0)
 			return;
@@ -564,14 +554,13 @@ public:
 	///            bit provided by the parameter v. padding is not implemented.
 	///            Example: type of v is uint32_t, bits is 40.
 	template <typename T>
-	void set(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) throw(
-		std::invalid_argument)
+	void set(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE)
 	{
 		set_dispatch(v, ofs, bits, std::is_integral<T>{});
 	}
 
 	/// Resets the bit at the speficied index.
-	void reset(size_type index) throw(std::out_of_range)
+	void reset(size_type index)
 	{
 		if (index >= size())
 			throw std::out_of_range{"index out of range in reset(index)"};
@@ -590,7 +579,7 @@ public:
 	/// extend the set if the index is out of range.
 	///
 	/// @exception std::out_of_range Specified index is out of range.
-	void set_bit(size_type i, bool value) throw(std::out_of_range)
+	void set_bit(size_type i, bool value)
 	{
 		if (i >= size())
 			throw std::out_of_range{"index out of range"};
@@ -610,7 +599,7 @@ public:
 	/// than the actual number of bits, 'false' will rturn.
 	///
 	/// @exception std::out_of_range Specified index is out of range.
-	bool get_bit(size_type i) const throw(std::out_of_range)
+	bool get_bit(size_type i) const
 	{
 		if (i >= size())
 			throw std::out_of_range{"index out of range"};
@@ -621,7 +610,7 @@ public:
 	}
 
 	/// Simply an other name for get_bit.
-	bool test(size_type i) const throw(std::out_of_range) { return get_bit(i); }
+	bool test(size_type i) const { return get_bit(i); }
 
 	/// Reads data from the bit set. There must be enough capacity in either the
 	/// bitset to be read as well as the provided data type to contain the desired
@@ -641,7 +630,6 @@ public:
 	template <class T>
 	typename std::enable_if<std::is_integral<T>::value, T>::type get(
 		size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const
-		throw(std::invalid_argument, std::out_of_range)
 	{
 		if (bits <= 0)
 			return T{};
@@ -698,25 +686,24 @@ public:
 	}
 
 	template <class T>
-	typename std::enable_if<std::is_enum<T>::value, T>::type get(size_type ofs, size_type bits
-		= sizeof(T) * BITS_PER_BYTE) const throw(std::invalid_argument, std::out_of_range)
+	typename std::enable_if<std::is_enum<T>::value, T>::type get(
+		size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const
 	{
 		return static_cast<T>(get<typename std::underlying_type<T>::type>(ofs, bits));
 	}
 
 	template <class T>
 	void get(T & value, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const
-		throw(std::invalid_argument, std::out_of_range)
 	{
 		value = get<T>(ofs, bits);
 	}
 
-	bool get(size_type index) const throw(std::out_of_range) { return get<bool>(index, 1); }
+	bool get(size_type index) const { return get<bool>(index, 1); }
 
 	// ---- operators
 
 	/// Returns the bit at the specified position.
-	bool operator[](size_type i) const throw(std::out_of_range) { return get_bit(i); }
+	bool operator[](size_type i) const { return get_bit(i); }
 
 	/// Comparison operator for the same bitset type.
 	bool operator==(const bitset & other) const { return this == &other || data == other.data; }
@@ -729,7 +716,7 @@ public:
 	/// Flips the bit at the specified index.
 	///
 	/// @exception std::out_of_range Specified index is out of range.
-	void flip(size_type i) throw(std::out_of_range) { set(!get_bit(i), i, 1); }
+	void flip(size_type i) { set(!get_bit(i), i, 1); }
 
 	/// Returns true if all bits are true.
 	///

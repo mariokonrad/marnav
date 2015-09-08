@@ -80,7 +80,7 @@ void seatalk_reader::write_data(uint8_t c)
 /// detection on this pseudo-bus (SeaTalk) is handled.
 ///
 /// @exception std::runtime_error Bus read error.
-void seatalk_reader::process_seatalk() throw(std::runtime_error)
+void seatalk_reader::process_seatalk()
 {
 	switch (ctx.state) {
 		case State::READ:
@@ -128,7 +128,7 @@ void seatalk_reader::process_seatalk() throw(std::runtime_error)
 /// @retval true  Success.
 /// @retval false End of file.
 /// @exception std::runtime_error The device was invalid or read error.
-bool seatalk_reader::read_data() throw(std::runtime_error)
+bool seatalk_reader::read_data()
 {
 	if (!dev)
 		throw std::runtime_error{"device invalid"};
@@ -149,7 +149,7 @@ bool seatalk_reader::read_data() throw(std::runtime_error)
 /// @retval true  Success.
 /// @retval false End of file.
 /// @exception std::runtime_error Device or processing error.
-bool seatalk_reader::read() throw(std::runtime_error)
+bool seatalk_reader::read()
 {
 	if (!read_data())
 		return false;

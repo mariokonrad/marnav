@@ -111,9 +111,8 @@ public:
 	dsc(const dsc &) = default;
 	dsc & operator=(const dsc &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -130,15 +129,15 @@ public:
 	NMEA_GETTER(fmt_spec);
 	NMEA_GETTER(cat);
 	utils::mmsi get_mmsi() const;
-	geo::region get_geographical_area() const throw(std::invalid_argument);
+	geo::region get_geographical_area() const;
 	NMEA_GETTER(ack);
 	NMEA_GETTER(extension);
 };
 
-std::string to_string(dsc::format_specifier value) throw(std::invalid_argument);
-std::string to_string(dsc::category value) throw(std::invalid_argument);
-std::string to_string(dsc::acknowledgement value) throw(std::invalid_argument);
-std::string to_string(dsc::extension_indicator value) throw(std::invalid_argument);
+std::string to_string(dsc::format_specifier value);
+std::string to_string(dsc::category value);
+std::string to_string(dsc::acknowledgement value);
+std::string to_string(dsc::extension_indicator value);
 }
 }
 

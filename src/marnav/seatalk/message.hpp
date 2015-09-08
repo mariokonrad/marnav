@@ -97,7 +97,7 @@ private:
 /// @retval nullptr The specified message is invalid.
 /// @return The converted message . The specified message is now invalid.
 /// @exception std::bad_cast The specified message has the wrong ID.
-template <class T> T * message_cast(message * s) throw(std::bad_cast)
+template <class T> T * message_cast(message * s)
 {
 	if (!s)
 		return nullptr;
@@ -110,7 +110,7 @@ template <class T> T * message_cast(message * s) throw(std::bad_cast)
 /// const variant.
 ///
 /// @see message_cast(message * s)
-template <class T> const T * message_cast(const message * s) throw(std::bad_cast)
+template <class T> const T * message_cast(const message * s)
 {
 	if (!s)
 		return nullptr;
@@ -126,7 +126,7 @@ template <class T> const T * message_cast(const message * s) throw(std::bad_cast
 ///  The return value is a naked pointer.
 ///
 /// @see message_cast(message * s)
-template <class T> T * message_cast(std::unique_ptr<message> & s) throw(std::bad_cast)
+template <class T> T * message_cast(std::unique_ptr<message> & s)
 {
 	if (!s)
 		return nullptr;
@@ -143,7 +143,7 @@ template <class T> T * message_cast(std::unique_ptr<message> & s) throw(std::bad
 ///
 /// @see message_cast(message * s)
 template <class T>
-const T * message_cast(const std::unique_ptr<message> & s) throw(std::bad_cast)
+const T * message_cast(const std::unique_ptr<message> & s)
 {
 	if (!s)
 		return nullptr;
@@ -156,7 +156,7 @@ const T * message_cast(const std::unique_ptr<message> & s) throw(std::bad_cast)
 /// reference variant
 ///
 /// @see message_cast(message * s)
-template <class T> T & message_cast(message & s) throw(std::bad_cast)
+template <class T> T & message_cast(message & s)
 {
 	if (s.type() != T::ID)
 		throw std::bad_cast{};
@@ -166,7 +166,7 @@ template <class T> T & message_cast(message & s) throw(std::bad_cast)
 /// const reference variant
 ///
 /// @see message_cast(message * s)
-template <class T> const T & message_cast(const message & s) throw(std::bad_cast)
+template <class T> const T & message_cast(const message & s)
 {
 	if (s.type() != T::ID)
 		throw std::bad_cast{};

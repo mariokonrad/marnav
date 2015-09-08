@@ -17,7 +17,7 @@ public:
 	/// Opens the device.
 	///
 	/// @exception std::runtime_error Error on opening the device.
-	virtual void open() throw(std::runtime_error) = 0;
+	virtual void open() = 0;
 
 	/// Closes the device.
 	virtual void close() = 0;
@@ -29,8 +29,7 @@ public:
 	/// @return The number of bytes read into the buffer.
 	/// @exception std::invalid_argument Parameter errors (buffer is nullptr, size is zero, ...)
 	/// @exception std::runtime_error Probably a read error. This does not include EOF.
-	virtual int read(char * buffer, uint32_t size) throw(
-		std::invalid_argument, std::runtime_error) = 0;
+	virtual int read(char * buffer, uint32_t size) = 0;
 
 	/// Writes to the opened device.
 	///
@@ -39,8 +38,7 @@ public:
 	/// @return The number of bytes written to the device.
 	/// @exception std::invalid_argument Parameter errors (buffer is nullptr, size is zero, ...)
 	/// @exception std::runtime_error Probably a read error. This does not include EOF.
-	virtual int write(const char * buffer, uint32_t size) throw(
-		std::invalid_argument, std::runtime_error) = 0;
+	virtual int write(const char * buffer, uint32_t size) = 0;
 };
 }
 }

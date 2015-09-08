@@ -18,20 +18,20 @@ msk::msk()
 {
 }
 
-void msk::set_frequency(uint32_t f, selection_mode mode)
+void msk::set_frequency(uint32_t f, selection_mode mode) noexcept
 {
 	frequency = f;
 	frequency_mode = mode;
 }
 
-void msk::set_bitrate(uint32_t rate, selection_mode mode)
+void msk::set_bitrate(uint32_t rate, selection_mode mode) noexcept
 {
 	bitrate = rate;
 	bitrate_mode = mode;
 }
 
-std::unique_ptr<sentence> msk::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> msk::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 5)
 		throw std::invalid_argument{"invalid number of fields in msk::parse"};

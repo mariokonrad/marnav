@@ -32,9 +32,8 @@ public:
 	mtw(const mtw &) = default;
 	mtw & operator=(const mtw &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -47,7 +46,7 @@ public:
 	NMEA_GETTER(temperature)
 	NMEA_GETTER(temperature_unit)
 
-	void set_temperature(double t);
+	void set_temperature(double t) noexcept;
 };
 }
 }

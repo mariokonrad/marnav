@@ -51,9 +51,8 @@ public:
 	alm(const alm &) = default;
 	alm & operator=(const alm &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -75,7 +74,7 @@ private:
 	uint32_t f0_clock_parameter;
 	uint32_t f1_clock_parameter;
 
-	void check() const throw(std::invalid_argument);
+	void check() const;
 
 public:
 	NMEA_GETTER(number_of_messages)
@@ -94,21 +93,24 @@ public:
 	NMEA_GETTER(f0_clock_parameter)
 	NMEA_GETTER(f1_clock_parameter)
 
-	void set_number_of_messages(uint32_t t) { number_of_messages = t; }
-	void set_message_number(uint32_t t) { message_number = t; }
-	void set_satellite_prn(uint32_t t) { satellite_prn = t; }
-	void set_gps_week_number(uint32_t t) { gps_week_number = t; }
-	void set_sv_health(uint32_t t) { sv_health = t; }
-	void set_eccentricity(uint32_t t) { eccentricity = t; }
-	void set_almanac_reference_time(uint32_t t) { almanac_reference_time = t; }
-	void set_inclination_angle(uint32_t t) { inclination_angle = t; }
-	void set_rate_of_right_ascension(uint32_t t) { rate_of_right_ascension = t; }
-	void set_root_of_semimajor_axis(uint32_t t) { root_of_semimajor_axis = t; }
-	void set_argument_of_perigee(uint32_t t) { argument_of_perigee = t; }
-	void set_longitude_of_ascension_node(uint32_t t) { longitude_of_ascension_node = t; }
-	void set_mean_anomaly(uint32_t t) { mean_anomaly = t; }
-	void set_f0_clock_parameter(uint32_t t) { f0_clock_parameter = t; }
-	void set_f1_clock_parameter(uint32_t t) { f1_clock_parameter = t; }
+	void set_number_of_messages(uint32_t t) noexcept { number_of_messages = t; }
+	void set_message_number(uint32_t t) noexcept { message_number = t; }
+	void set_satellite_prn(uint32_t t) noexcept { satellite_prn = t; }
+	void set_gps_week_number(uint32_t t) noexcept { gps_week_number = t; }
+	void set_sv_health(uint32_t t) noexcept { sv_health = t; }
+	void set_eccentricity(uint32_t t) noexcept { eccentricity = t; }
+	void set_almanac_reference_time(uint32_t t) noexcept { almanac_reference_time = t; }
+	void set_inclination_angle(uint32_t t) noexcept { inclination_angle = t; }
+	void set_rate_of_right_ascension(uint32_t t) noexcept { rate_of_right_ascension = t; }
+	void set_root_of_semimajor_axis(uint32_t t) noexcept { root_of_semimajor_axis = t; }
+	void set_argument_of_perigee(uint32_t t) noexcept { argument_of_perigee = t; }
+	void set_longitude_of_ascension_node(uint32_t t) noexcept
+	{
+		longitude_of_ascension_node = t;
+	}
+	void set_mean_anomaly(uint32_t t) noexcept { mean_anomaly = t; }
+	void set_f0_clock_parameter(uint32_t t) noexcept { f0_clock_parameter = t; }
+	void set_f1_clock_parameter(uint32_t t) noexcept { f1_clock_parameter = t; }
 };
 }
 }

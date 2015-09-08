@@ -52,9 +52,8 @@ public:
 	grs(const grs &) = default;
 	grs & operator=(const grs &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -64,19 +63,19 @@ private:
 	residual_usage usage;
 	std::array<utils::optional<double>, 12> sat_residual;
 
-	void check_index(int index) const throw(std::out_of_range);
+	void check_index(int index) const;
 
 public:
 	NMEA_GETTER(time_utc)
 	NMEA_GETTER(usage)
-	utils::optional<double> get_sat_residual(int index) const throw(std::out_of_range);
+	utils::optional<double> get_sat_residual(int index) const;
 
-	void set_time_utc(const nmea::time & t) { time_utc = t; }
-	void set_usage(residual_usage t) { usage = t; }
-	void set_sat_residual(int index, double value) throw(std::out_of_range);
+	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
+	void set_usage(residual_usage t) noexcept { usage = t; }
+	void set_sat_residual(int index, double value);
 };
 
-std::string to_string(grs::residual_usage value) throw(std::invalid_argument);
+std::string to_string(grs::residual_usage value);
 }
 }
 

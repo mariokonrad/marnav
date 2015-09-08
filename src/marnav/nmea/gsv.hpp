@@ -28,7 +28,8 @@ namespace nmea
 /// 4. satellite PRN number (leading zeros sent)
 /// 5. elevation in degrees (00-90) (leading zeros sent)
 /// 6. azimuth in degrees to true north (000-359) (leading zeros sent)
-/// 7. SNR in dB (00-99) (leading zeros sent) more satellite info quadruples like 4-7 n) checksum
+/// 7. SNR in dB (00-99) (leading zeros sent) more satellite info quadruples like 4-7 n)
+/// checksum
 ///
 /// Example:
 /// @code
@@ -56,9 +57,8 @@ public:
 	gsv(const gsv &) = default;
 	gsv & operator=(const gsv &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -69,18 +69,18 @@ private:
 	uint32_t n_satellites_in_view;
 	std::array<utils::optional<satellite_info>, 4> sat;
 
-	void check_index(int index) const throw(std::out_of_range);
+	void check_index(int index) const;
 
 public:
 	NMEA_GETTER(n_messages)
 	NMEA_GETTER(message_number)
 	NMEA_GETTER(n_satellites_in_view)
-	utils::optional<satellite_info> get_sat(int index) const throw(std::out_of_range);
+	utils::optional<satellite_info> get_sat(int index) const;
 
-	void set_n_messages(uint32_t t) throw(std::invalid_argument);
-	void set_message_number(uint32_t t) throw(std::invalid_argument);
-	void set_n_satellites_in_view(uint32_t t) { n_satellites_in_view = t; }
-	void set_sat(int index, const satellite_info & info) throw(std::out_of_range);
+	void set_n_messages(uint32_t t);
+	void set_message_number(uint32_t t);
+	void set_n_satellites_in_view(uint32_t t) noexcept { n_satellites_in_view = t; }
+	void set_sat(int index, const satellite_info & info);
 };
 }
 }

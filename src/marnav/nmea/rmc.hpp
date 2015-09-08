@@ -55,9 +55,8 @@ public:
 	rmc(const rmc &) = default;
 	rmc & operator=(const rmc &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -90,15 +89,18 @@ public:
 	NMEA_GETTER(mag_hem)
 	NMEA_GETTER(mode_indicator)
 
-	void set_time_utc(const time & t) { time_utc = t; }
-	void set_status(char t) { status = t; }
+	void set_time_utc(const time & t) noexcept { time_utc = t; }
+	void set_status(char t) noexcept { status = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_sog(double t) { sog = t; }
-	void set_heading(double t) { heading = t; }
-	void set_date(const nmea::date & t) { date = t; }
-	void set_mag(double t, direction h) throw(std::invalid_argument);
-	void set_mode_indicator(positioning_system_mode_indicator t) { mode_indicator = t; }
+	void set_sog(double t) noexcept { sog = t; }
+	void set_heading(double t) noexcept { heading = t; }
+	void set_date(const nmea::date & t) noexcept { date = t; }
+	void set_mag(double t, direction h);
+	void set_mode_indicator(positioning_system_mode_indicator t) noexcept
+	{
+		mode_indicator = t;
+	}
 };
 }
 }

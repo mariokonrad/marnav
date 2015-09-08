@@ -15,13 +15,13 @@ wnc::wnc()
 {
 }
 
-void wnc::set_distance_nm(double t)
+void wnc::set_distance_nm(double t) noexcept
 {
 	distance_nm = t;
 	distance_nm_unit = unit::distance::NM;
 }
 
-void wnc::set_distance_km(double t)
+void wnc::set_distance_km(double t) noexcept
 {
 	distance_km = t;
 	distance_km_unit = unit::distance::KM;
@@ -39,8 +39,8 @@ void wnc::set_waypoint_from(const std::string & id)
 	waypoint_from = id;
 }
 
-std::unique_ptr<sentence> wnc::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> wnc::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in wnc::parse"};

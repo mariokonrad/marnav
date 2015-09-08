@@ -7,10 +7,10 @@ namespace marnav
 {
 namespace nmea
 {
-geo::latitude parse_latitude(const std::string & s) throw(std::invalid_argument);
+geo::latitude parse_latitude(const std::string & s);
 std::string to_string(const geo::latitude & v);
 
-geo::longitude parse_longitude(const std::string & s) throw(std::invalid_argument);
+geo::longitude parse_longitude(const std::string & s);
 std::string to_string(const geo::longitude & v);
 }
 }

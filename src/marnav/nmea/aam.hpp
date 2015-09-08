@@ -47,9 +47,8 @@ public:
 	aam(const aam &) = default;
 	aam & operator=(const aam &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -61,7 +60,7 @@ private:
 	utils::optional<unit::distance> arrival_circle_radius_unit;
 	utils::optional<std::string> waypoint_id;
 
-	void check() const throw(std::invalid_argument);
+	void check() const;
 
 public:
 	NMEA_GETTER(arrival_circle_entered)

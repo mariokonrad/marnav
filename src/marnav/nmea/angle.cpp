@@ -6,7 +6,7 @@ namespace marnav
 namespace nmea
 {
 
-static geo::angle parse_angle(const std::string & s) throw(std::invalid_argument)
+static geo::angle parse_angle(const std::string & s)
 {
 	if (s.empty())
 		return geo::angle{0.0};
@@ -36,7 +36,7 @@ static geo::angle parse_angle(const std::string & s) throw(std::invalid_argument
 /// @code
 ///   auto lat = nmea::parse_latitude("37.0000");
 /// @endcode
-geo::latitude parse_latitude(const std::string & s) throw(std::invalid_argument)
+geo::latitude parse_latitude(const std::string & s)
 {
 	return geo::latitude{parse_angle(s)};
 }
@@ -65,7 +65,7 @@ std::string to_string(const geo::latitude & v)
 /// @code
 ///   auto lon = nmea::parse_longitude("002.3456");
 /// @endcode
-geo::longitude parse_longitude(const std::string & s) throw(std::invalid_argument)
+geo::longitude parse_longitude(const std::string & s)
 {
 	return geo::longitude{parse_angle(s)};
 }

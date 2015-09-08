@@ -22,7 +22,7 @@ public:
 	virtual ~seatalk_reader();
 
 	void close();
-	bool read() throw(std::runtime_error);
+	bool read();
 	uint32_t get_collisions() const { return ctx.collisions; }
 
 protected:
@@ -46,8 +46,8 @@ private:
 	uint8_t parity(uint8_t a) const;
 	void write_cmd(uint8_t c);
 	void write_data(uint8_t c);
-	void process_seatalk() throw(std::runtime_error);
-	bool read_data() throw(std::runtime_error);
+	void process_seatalk();
+	bool read_data();
 
 	context ctx;
 	std::unique_ptr<device> dev; ///< Device to read data from.

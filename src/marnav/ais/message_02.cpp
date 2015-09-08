@@ -11,8 +11,7 @@ message_02::message_02()
 {
 }
 
-std::unique_ptr<message> message_02::parse(const raw & bits) throw(
-	std::invalid_argument, std::out_of_range)
+std::unique_ptr<message> message_02::parse(const raw & bits)
 {
 	if (bits.size() != SIZE_BITS)
 		throw std::invalid_argument{"invalid number of bits in message_02::parse"};

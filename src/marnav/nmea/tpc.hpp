@@ -40,9 +40,8 @@ public:
 	tpc(const tpc &) = default;
 	tpc & operator=(const tpc &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -63,17 +62,17 @@ public:
 	NMEA_GETTER(depth)
 	NMEA_GETTER(depth_unit)
 
-	void set_distance_centerline(double t)
+	void set_distance_centerline(double t) noexcept
 	{
 		distance_centerline = t;
 		distance_centerline_unit = unit::distance::METER;
 	}
-	void set_distance_transducer(double t)
+	void set_distance_transducer(double t) noexcept
 	{
 		distance_transducer = t;
 		distance_centerline_unit = unit::distance::METER;
 	}
-	void set_depth(double t)
+	void set_depth(double t) noexcept
 	{
 		depth = t;
 		distance_centerline_unit = unit::distance::METER;

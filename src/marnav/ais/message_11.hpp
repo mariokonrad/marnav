@@ -19,8 +19,7 @@ public:
 	message_11(const message_11 &) = default;
 	message_11 & operator=(const message_11 &) = default;
 
-	static std::unique_ptr<message> parse(const raw & bits) throw(
-		std::invalid_argument, std::out_of_range);
+	static std::unique_ptr<message> parse(const raw & bits);
 };
 }
 }

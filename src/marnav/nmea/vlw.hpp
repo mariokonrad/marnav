@@ -35,9 +35,8 @@ public:
 	vlw(const vlw &) = default;
 	vlw & operator=(const vlw &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -54,8 +53,8 @@ public:
 	NMEA_GETTER(distance_reset)
 	NMEA_GETTER(distance_reset_unit)
 
-	void set_distance_cum_nm(double t);
-	void set_distance_reset_nm(double t);
+	void set_distance_cum_nm(double t) noexcept;
+	void set_distance_reset_nm(double t) noexcept;
 };
 }
 }

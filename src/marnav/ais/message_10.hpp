@@ -21,13 +21,12 @@ public:
 	message_10(const message_10 &) = default;
 	message_10 & operator=(const message_10 &) = default;
 
-	virtual raw get_data() const throw(std::out_of_range) override;
+	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & bits) throw(
-		std::invalid_argument, std::out_of_range);
+	static std::unique_ptr<message> parse(const raw & bits);
 
 protected:
-	void read_data(const raw & bits) throw(std::out_of_range);
+	void read_data(const raw & bits);
 
 private:
 	unsigned int repeat_indicator;
@@ -35,13 +34,13 @@ private:
 	uint32_t dest_mmsi;
 
 public:
-	unsigned int get_repeat_indicator() const { return repeat_indicator; }
-	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
-	utils::mmsi get_dest_mmsi() const { return utils::mmsi{dest_mmsi}; }
+	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }
+	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
+	utils::mmsi get_dest_mmsi() const noexcept { return utils::mmsi{dest_mmsi}; }
 
-	void set_repeat_indicator(unsigned int t) { repeat_indicator = t; }
-	void set_mmsi(const utils::mmsi & t) { mmsi = t; }
-	void set_dest_mmsi(const utils::mmsi & t) { mmsi = t; }
+	void set_repeat_indicator(unsigned int t) noexcept { repeat_indicator = t; }
+	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
+	void set_dest_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
 };
 }
 }

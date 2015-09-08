@@ -14,26 +14,26 @@ osd::osd()
 {
 }
 
-void osd::set_course(double t)
+void osd::set_course(double t) noexcept
 {
 	course = t;
 	course_ref = reference::TRUE;
 }
 
-void osd::set_speed(double t, unit::velocity u)
+void osd::set_speed(double t, unit::velocity u) noexcept
 {
 	speed = t;
 	speed_unit = u;
 }
 
-void osd::set_drift(double t, unit::velocity u)
+void osd::set_drift(double t, unit::velocity u) noexcept
 {
 	vessel_drift = t;
 	vessel_drift_unit = u;
 }
 
-std::unique_ptr<sentence> osd::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> osd::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 9)
 		throw std::invalid_argument{"invalid number of fields in osd::parse"};

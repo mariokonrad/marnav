@@ -27,15 +27,15 @@ void rma::set_lon(const geo::longitude & t)
 	lon_hem = convert_hemisphere(t);
 }
 
-void rma::set_magnetic_var(double t, direction h) throw(std::invalid_argument)
+void rma::set_magnetic_var(double t, direction h)
 {
 	check_value(h, {direction::EAST, direction::WEST}, "mag var hemisphere");
 	magnetic_var = t;
 	magnetic_var_hem = h;
 }
 
-std::unique_ptr<sentence> rma::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> rma::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 11)
 		throw std::invalid_argument{"invalid number of fields in rma::parse"};

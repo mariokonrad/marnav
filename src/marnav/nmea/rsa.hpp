@@ -37,9 +37,8 @@ public:
 	rsa(const rsa &) = default;
 	rsa & operator=(const rsa &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -56,8 +55,8 @@ public:
 	NMEA_GETTER(rudder2)
 	NMEA_GETTER(rudder2_valid)
 
-	void set_rudder1(double t);
-	void set_rudder2(double t);
+	void set_rudder1(double t) noexcept;
+	void set_rudder2(double t) noexcept;
 };
 }
 }

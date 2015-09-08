@@ -16,8 +16,8 @@ zdl::zdl()
 {
 }
 
-std::unique_ptr<sentence> zdl::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> zdl::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 3)
 		throw std::invalid_argument{"invalid number of fields in zdl::parse"};

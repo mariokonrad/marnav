@@ -39,9 +39,8 @@ public:
 	vhw(const vhw &) = default;
 	vhw & operator=(const vhw &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -66,9 +65,9 @@ public:
 	NMEA_GETTER(speed_kmh)
 	NMEA_GETTER(speed_kmh_unit)
 
-	void set_heading(double t);
-	void set_speed_knots(double t);
-	void set_speed_kmh(double t);
+	void set_heading(double t) noexcept;
+	void set_speed_knots(double t) noexcept;
+	void set_speed_kmh(double t) noexcept;
 };
 }
 }

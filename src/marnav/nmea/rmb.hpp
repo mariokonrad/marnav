@@ -62,9 +62,8 @@ public:
 	rmb(const rmb &) = default;
 	rmb & operator=(const rmb &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -101,18 +100,21 @@ public:
 	NMEA_GETTER(arrival_status)
 	NMEA_GETTER(mode_indicator)
 
-	void set_active(status t) { active = t; }
-	void set_cross_track_error(double t) { cross_track_error = t; }
-	void set_steer_dir(side t) { steer_dir = t; }
+	void set_active(status t) noexcept { active = t; }
+	void set_cross_track_error(double t) noexcept { cross_track_error = t; }
+	void set_steer_dir(side t) noexcept { steer_dir = t; }
 	void set_waypoint_to(const std::string & id);
 	void set_waypoint_from(const std::string & id);
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_range(double t) { range = t; }
-	void set_bearing(double t) { bearing = t; }
-	void set_dst_velocity(double t) { dst_velocity = t; }
-	void set_arrival_status(status t) { arrival_status = t; }
-	void set_mode_indicator(positioning_system_mode_indicator t) { mode_indicator = t; }
+	void set_range(double t) noexcept { range = t; }
+	void set_bearing(double t) noexcept { bearing = t; }
+	void set_dst_velocity(double t) noexcept { dst_velocity = t; }
+	void set_arrival_status(status t) noexcept { arrival_status = t; }
+	void set_mode_indicator(positioning_system_mode_indicator t) noexcept
+	{
+		mode_indicator = t;
+	}
 };
 }
 }

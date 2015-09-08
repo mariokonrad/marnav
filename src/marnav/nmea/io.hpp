@@ -3,7 +3,6 @@
 
 #include <string>
 #include <functional>
-#include <stdexcept>
 #include <marnav/nmea/constants.hpp>
 #include <marnav/utils/optional.hpp>
 
@@ -74,8 +73,7 @@ template <class T> inline std::string to_string(const utils::optional<T> & data)
 /// @param[in] f Base of the data to be rendered in
 /// @exception std::invalid_argument Parameter width is too large for the implementation.
 ///   This is necessary to avoid heap operations and VLA.
-std::string format(int32_t data, unsigned int width, data_format f = data_format::dec) throw(
-	std::invalid_argument);
+std::string format(int32_t data, unsigned int width, data_format f = data_format::dec);
 
 /// Returns the data as formatted string.
 ///
@@ -84,8 +82,7 @@ std::string format(int32_t data, unsigned int width, data_format f = data_format
 /// @param[in] f Base of the data to be rendered in
 /// @exception std::invalid_argument Parameter width is too large for the implementation.
 ///   This is necessary to avoid heap operations and VLA.
-std::string format(uint64_t data, unsigned int width, data_format f = data_format::dec) throw(
-	std::invalid_argument);
+std::string format(uint64_t data, unsigned int width, data_format f = data_format::dec);
 
 /// Returns the data as formatted string.
 ///
@@ -94,8 +91,7 @@ std::string format(uint64_t data, unsigned int width, data_format f = data_forma
 /// @param[in] f Base of the data to be rendered in
 /// @exception std::invalid_argument Parameter width is too large for the implementation.
 ///   This is necessary to avoid heap operations and VLA.
-std::string format(uint32_t data, unsigned int width, data_format f = data_format::dec) throw(
-	std::invalid_argument);
+std::string format(uint32_t data, unsigned int width, data_format f = data_format::dec);
 
 /// Returns the data as formatted string.
 ///
@@ -104,8 +100,7 @@ std::string format(uint32_t data, unsigned int width, data_format f = data_forma
 /// @param[in] f Base of the data to be rendered in
 /// @exception std::invalid_argument Parameter width is too large for the implementation.
 ///   This is necessary to avoid heap operations and VLA.
-std::string format(double data, unsigned int width, data_format f = data_format::none) throw(
-	std::invalid_argument);
+std::string format(double data, unsigned int width, data_format f = data_format::none);
 
 /// Generic version of the format function, handling the possibility of utils::optional
 /// to be not set and returning an empty string. The rendering of the contained type
@@ -120,8 +115,8 @@ std::string format(double data, unsigned int width, data_format f = data_format:
 /// @exception std::invalid_argument Parameter width is too large for the implementation.
 ///   This is necessary to avoid heap operations and VLA.
 template <typename T>
-inline std::string format(const utils::optional<T> & data, unsigned int width,
-	data_format f = data_format::dec) throw(std::invalid_argument)
+inline std::string format(
+	const utils::optional<T> & data, unsigned int width, data_format f = data_format::dec)
 {
 	if (!data)
 		return std::string{};
@@ -143,39 +138,26 @@ void read(const std::string & s, uint32_t & value, data_format = data_format::de
 void read(const std::string & s, int32_t & value, data_format = data_format::dec);
 void read(const std::string & s, double & value, data_format = data_format::none);
 void read(const std::string & s, std::string & value, data_format = data_format::none);
-void read(const std::string & s, side & value, data_format = data_format::none) throw(
-	std::runtime_error);
-void read(const std::string & s, route & value, data_format = data_format::none) throw(
-	std::runtime_error);
-void read(const std::string & s, selection_mode & value, data_format = data_format::none) throw(
-	std::runtime_error);
-void read(const std::string & s, ais_channel & value, data_format = data_format::none) throw(
-	std::runtime_error);
-void read(const std::string & s, type_of_point & value, data_format = data_format::none) throw(
-	std::runtime_error);
-void read(const std::string & s, direction & value, data_format = data_format::none) throw(
-	std::runtime_error);
-void read(const std::string & s, reference & value, data_format = data_format::none) throw(
-	std::runtime_error);
+void read(const std::string & s, side & value, data_format = data_format::none);
+void read(const std::string & s, route & value, data_format = data_format::none);
+void read(const std::string & s, selection_mode & value, data_format = data_format::none);
+void read(const std::string & s, ais_channel & value, data_format = data_format::none);
+void read(const std::string & s, type_of_point & value, data_format = data_format::none);
+void read(const std::string & s, direction & value, data_format = data_format::none);
+void read(const std::string & s, reference & value, data_format = data_format::none);
 void read(const std::string & s, positioning_system_mode_indicator & value,
-	data_format = data_format::none) throw(std::runtime_error);
-void read(const std::string & s, status & value, data_format = data_format::none) throw(
-	std::runtime_error);
-void read(const std::string & s, quality & value, data_format = data_format::none) throw(
-	std::runtime_error);
-void read(const std::string & s, unit::distance & value, data_format = data_format::none) throw(
-	std::runtime_error);
-void read(const std::string & s, unit::velocity & value, data_format = data_format::none) throw(
-	std::runtime_error);
-void read(const std::string & s, unit::temperature & value,
-	data_format = data_format::none) throw(std::runtime_error);
-void read(const std::string & s, unit::pressure & value, data_format = data_format::none) throw(
-	std::runtime_error);
+	data_format = data_format::none);
+void read(const std::string & s, status & value, data_format = data_format::none);
+void read(const std::string & s, quality & value, data_format = data_format::none);
+void read(const std::string & s, unit::distance & value, data_format = data_format::none);
+void read(const std::string & s, unit::velocity & value, data_format = data_format::none);
+void read(const std::string & s, unit::temperature & value, data_format = data_format::none);
+void read(const std::string & s, unit::pressure & value, data_format = data_format::none);
 void read(const std::string & s, utils::mmsi & value, data_format = data_format::none);
 
 template <class T>
-inline void read(const std::string & s, utils::optional<T> & value,
-	data_format fmt = data_format::dec) throw(std::runtime_error)
+inline void read(
+	const std::string & s, utils::optional<T> & value, data_format fmt = data_format::dec)
 {
 	if (s.empty()) {
 		value.reset();
@@ -225,7 +207,7 @@ template <class T, typename Map,
 	typename = typename std::enable_if<std::is_class<utils::optional<T>>::value, T>::type,
 	typename = typename std::enable_if<std::is_enum<T>::value, T>::type>
 inline void read(const std::string & s, utils::optional<T> & value, Map mapping_func,
-	data_format fmt = data_format::dec) throw(std::runtime_error)
+	data_format fmt = data_format::dec)
 {
 	if (s.empty()) {
 		value.reset();
@@ -238,7 +220,6 @@ inline void read(const std::string & s, utils::optional<T> & value, Map mapping_
 }
 
 /// @}
-
 }
 }
 

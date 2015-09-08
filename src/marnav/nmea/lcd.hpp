@@ -48,9 +48,8 @@ public:
 	lcd(const lcd &) = default;
 	lcd & operator=(const lcd &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -62,16 +61,16 @@ private:
 	time_difference master;
 	std::array<utils::optional<time_difference>, NUM_DIFFERENCES> time_diffs;
 
-	void check_index(int index) const throw(std::out_of_range);
+	void check_index(int index) const;
 
 public:
 	NMEA_GETTER(gri)
 	NMEA_GETTER(master)
-	utils::optional<time_difference> get_time_diff(int index) const throw(std::out_of_range);
+	utils::optional<time_difference> get_time_diff(int index) const;
 
-	void set_gri(uint32_t t) { gri = t; }
-	void set_master(const time_difference & t) { master = t; }
-	void set_time_diff(int index, time_difference t) throw(std::out_of_range);
+	void set_gri(uint32_t t) noexcept { gri = t; }
+	void set_master(const time_difference & t) noexcept { master = t; }
+	void set_time_diff(int index, time_difference t);
 };
 }
 }

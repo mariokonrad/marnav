@@ -38,9 +38,8 @@ public:
 	hdg(const hdg &) = default;
 	hdg & operator=(const hdg &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -59,7 +58,7 @@ public:
 	NMEA_GETTER(magn_var)
 	NMEA_GETTER(magn_var_hem)
 
-	void set_heading(double t) { heading = t; }
+	void set_heading(double t) noexcept { heading = t; }
 	void set_magn_dev(double deg, direction hem);
 	void set_magn_var(double deg, direction hem);
 };

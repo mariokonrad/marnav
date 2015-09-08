@@ -62,9 +62,8 @@ public:
 	bwc(const bwc &) = default;
 	bwc & operator=(const bwc &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -99,14 +98,17 @@ public:
 	NMEA_GETTER(waypoint_id)
 	NMEA_GETTER(mode_indicator)
 
-	void set_time_utc(const nmea::time & t) { time_utc = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_bearing_true(double t);
-	void set_bearing_mag(double t);
-	void set_distance(double t);
+	void set_bearing_true(double t) noexcept;
+	void set_bearing_mag(double t) noexcept;
+	void set_distance(double t) noexcept;
 	void set_waypoint(const std::string & id);
-	void set_faa_mode_indicator(positioning_system_mode_indicator t) { mode_indicator = t; }
+	void set_faa_mode_indicator(positioning_system_mode_indicator t) noexcept
+	{
+		mode_indicator = t;
+	}
 };
 }
 }

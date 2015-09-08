@@ -29,15 +29,15 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data);
 
 private:
 	uint16_t speed; // speed in 1/10th of knots
 
 public:
-	uint16_t get_speed() const { return speed; }
+	uint16_t get_speed() const noexcept { return speed; }
 
-	void set_speed(uint16_t t) { speed = t; }
+	void set_speed(uint16_t t) noexcept { speed = t; }
 };
 }
 }

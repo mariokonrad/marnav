@@ -26,8 +26,7 @@ message_09::message_09()
 {
 }
 
-std::unique_ptr<message> message_09::parse(const raw & bits) throw(
-	std::invalid_argument, std::out_of_range)
+std::unique_ptr<message> message_09::parse(const raw & bits)
 {
 	if (bits.size() != SIZE_BITS)
 		throw std::invalid_argument{"invalid number of bits in message_09::parse"};
@@ -40,7 +39,7 @@ std::unique_ptr<message> message_09::parse(const raw & bits) throw(
 	return result;
 }
 
-void message_09::read_data(const raw & bits) throw(std::out_of_range)
+void message_09::read_data(const raw & bits)
 {
 	bits.get(repeat_indicator, 6, 2);
 	bits.get(mmsi, 8, 30);
@@ -59,7 +58,7 @@ void message_09::read_data(const raw & bits) throw(std::out_of_range)
 	bits.get(radio_status, 148, 20);
 }
 
-raw message_09::get_data() const throw(std::out_of_range) 
+raw message_09::get_data() const
 {
 	raw bits{SIZE_BITS};
 

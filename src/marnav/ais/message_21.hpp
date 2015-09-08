@@ -128,13 +128,12 @@ public:
 	message_21(const message_21 &) = default;
 	message_21 & operator=(const message_21 &) = default;
 
-	virtual raw get_data() const throw(std::out_of_range) override;
+	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & bits) throw(
-		std::invalid_argument, std::out_of_range);
+	static std::unique_ptr<message> parse(const raw & bits);
 
 protected:
-	void read_data(const raw & bits) throw(std::out_of_range);
+	void read_data(const raw & bits);
 
 private:
 	unsigned int repeat_indicator;
@@ -158,40 +157,40 @@ private:
 	std::string name_extension;
 
 public:
-	unsigned int get_repeat_indicator() const { return repeat_indicator; }
-	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
-	aid_type_id get_aid_type() const { return aid_type; }
+	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }
+	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
+	aid_type_id get_aid_type() const noexcept { return aid_type; }
 	std::string get_name() const { return name; }
-	bool get_position_accuracy() const { return position_accuracy; }
-	uint32_t get_to_bow() const { return to_bow; }
-	uint32_t get_to_stern() const { return to_stern; }
-	uint32_t get_to_port() const { return to_port; }
-	uint32_t get_to_starboard() const { return to_starboard; }
-	epfd_fix_type get_epfd_fix() const { return epfd_fix; }
-	uint32_t get_utc_second() const { return utc_second; }
-	off_position_indicator get_off_position() const { return off_position; }
-	uint8_t get_regional() const { return regional; }
-	bool get_raim() const { return raim; }
-	virtual_aid get_virtual_aid_flag() const { return virtual_aid_flag; }
-	bool get_assigned() const { return assigned; }
+	bool get_position_accuracy() const noexcept { return position_accuracy; }
+	uint32_t get_to_bow() const noexcept { return to_bow; }
+	uint32_t get_to_stern() const noexcept { return to_stern; }
+	uint32_t get_to_port() const noexcept { return to_port; }
+	uint32_t get_to_starboard() const noexcept { return to_starboard; }
+	epfd_fix_type get_epfd_fix() const noexcept { return epfd_fix; }
+	uint32_t get_utc_second() const noexcept { return utc_second; }
+	off_position_indicator get_off_position() const noexcept { return off_position; }
+	uint8_t get_regional() const noexcept { return regional; }
+	bool get_raim() const noexcept { return raim; }
+	virtual_aid get_virtual_aid_flag() const noexcept { return virtual_aid_flag; }
+	bool get_assigned() const noexcept { return assigned; }
 	std::string get_name_extension() const { return name_extension; }
 
-	void set_repeat_indicator(unsigned int t) { repeat_indicator = t; }
-	void set_mmsi(const utils::mmsi & t) { mmsi = t; }
-	void set_aid_type(aid_type_id t) { aid_type = t; }
+	void set_repeat_indicator(unsigned int t) noexcept { repeat_indicator = t; }
+	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
+	void set_aid_type(aid_type_id t) noexcept { aid_type = t; }
 	void set_name(const std::string & t);
-	void set_position_accuracy(bool t) { position_accuracy = t; }
-	void set_to_bow(uint32_t t) { to_bow = t; }
-	void set_to_stern(uint32_t t) { to_stern = t; }
-	void set_to_port(uint32_t t) { to_port = t; }
-	void set_to_starboard(uint32_t t) { to_starboard = t; }
-	void set_epfd_fix(epfd_fix_type t) { epfd_fix = t; }
-	void set_utc_second(uint32_t t) { utc_second = t; }
-	void set_off_position(off_position_indicator t) { off_position = t; }
-	void set_regional(uint8_t t) { regional = t; }
-	void set_raim(bool t) { raim = t; }
-	void set_virtual_aid_flag(virtual_aid t) { virtual_aid_flag = t; }
-	void set_assigned(bool t) { assigned = t; }
+	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
+	void set_to_bow(uint32_t t) noexcept { to_bow = t; }
+	void set_to_stern(uint32_t t) noexcept { to_stern = t; }
+	void set_to_port(uint32_t t) noexcept { to_port = t; }
+	void set_to_starboard(uint32_t t) noexcept { to_starboard = t; }
+	void set_epfd_fix(epfd_fix_type t) noexcept { epfd_fix = t; }
+	void set_utc_second(uint32_t t) noexcept { utc_second = t; }
+	void set_off_position(off_position_indicator t) noexcept { off_position = t; }
+	void set_regional(uint8_t t) noexcept { regional = t; }
+	void set_raim(bool t) noexcept { raim = t; }
+	void set_virtual_aid_flag(virtual_aid t) noexcept { virtual_aid_flag = t; }
+	void set_assigned(bool t) noexcept { assigned = t; }
 	void set_name_extension(const std::string & t);
 
 	geo::longitude get_longitude() const;

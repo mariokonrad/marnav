@@ -47,9 +47,8 @@ public:
 	rma(const rma &) = default;
 	rma & operator=(const rma &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -81,14 +80,14 @@ public:
 	NMEA_GETTER(magnetic_var)
 	NMEA_GETTER(magnetic_var_hem)
 
-	void set_blink_warning(char t) { blink_warning = t; }
+	void set_blink_warning(char t) noexcept { blink_warning = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_time_diff_a(double t) { time_diff_a = t; }
-	void set_time_diff_b(double t) { time_diff_b = t; }
-	void set_sog(double t) { sog = t; }
-	void set_track(double t) { track = t; }
-	void set_magnetic_var(double t, direction h) throw(std::invalid_argument);
+	void set_time_diff_a(double t) noexcept { time_diff_a = t; }
+	void set_time_diff_b(double t) noexcept { time_diff_b = t; }
+	void set_sog(double t) noexcept { sog = t; }
+	void set_track(double t) noexcept { track = t; }
+	void set_magnetic_var(double t, direction h);
 };
 }
 }

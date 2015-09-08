@@ -34,15 +34,15 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data);
 
 private:
 	intensity value;
 
 public:
-	intensity get_intensity() const { return value; }
+	intensity get_intensity() const noexcept { return value; }
 
-	void set_intensity(intensity t) { value = t; }
+	void set_intensity(intensity t) noexcept { value = t; }
 };
 }
 }

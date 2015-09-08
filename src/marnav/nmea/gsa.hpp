@@ -47,9 +47,8 @@ public:
 	gsa(const gsa &) = default;
 	gsa & operator=(const gsa &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -64,22 +63,22 @@ private:
 	utils::optional<double> hdop;
 	utils::optional<double> vdop;
 
-	void check_index(int index) const throw(std::out_of_range);
+	void check_index(int index) const;
 
 public:
 	NMEA_GETTER(sel_mode)
 	NMEA_GETTER(mode)
-	utils::optional<uint32_t> get_satellite_id(int index) const throw(std::out_of_range);
+	utils::optional<uint32_t> get_satellite_id(int index) const;
 	NMEA_GETTER(pdop)
 	NMEA_GETTER(hdop)
 	NMEA_GETTER(vdop)
 
-	void set_sel_mode(selection_mode t) { sel_mode = t; }
-	void set_mode(uint32_t t) { mode = t; }
-	void set_satellite_id(int index, uint32_t t) throw(std::out_of_range);
-	void set_pdop(double t) { pdop = t; }
-	void set_hdop(double t) { hdop = t; }
-	void set_vdop(double t) { vdop = t; }
+	void set_sel_mode(selection_mode t) noexcept { sel_mode = t; }
+	void set_mode(uint32_t t) noexcept { mode = t; }
+	void set_satellite_id(int index, uint32_t t);
+	void set_pdop(double t) noexcept { pdop = t; }
+	void set_hdop(double t) noexcept { hdop = t; }
+	void set_vdop(double t) noexcept { vdop = t; }
 };
 }
 }

@@ -27,7 +27,7 @@ void nmea_reader::close()
 /// @retval true  Success.
 /// @retval false End of file.
 /// @exception std::runtime_error The device was invalid or read error.
-bool nmea_reader::read_data() throw(std::runtime_error)
+bool nmea_reader::read_data()
 {
 	if (!dev)
 		throw std::runtime_error{"device invalid"};
@@ -45,7 +45,7 @@ bool nmea_reader::read_data() throw(std::runtime_error)
 ///
 /// @exception std::length_error Too many characters read for the sentence.
 ///   Maybe the end of line was missed or left out.
-void nmea_reader::process_nmea() throw(std::length_error)
+void nmea_reader::process_nmea()
 {
 	switch (raw) {
 		case '\r':
@@ -76,7 +76,7 @@ void nmea_reader::process_nmea() throw(std::length_error)
 /// @retval false End of file.
 /// @exception std::runtime_error Device or processing error.
 /// @exception std::length_error Synchronization issue.
-bool nmea_reader::read() throw(std::runtime_error, std::length_error)
+bool nmea_reader::read()
 {
 	if (!read_data())
 		return false;

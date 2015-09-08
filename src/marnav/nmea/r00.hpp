@@ -32,9 +32,8 @@ public:
 	r00(const r00 &) = default;
 	r00 & operator=(const r00 &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -42,12 +41,12 @@ protected:
 private:
 	std::array<utils::optional<std::string>, MAX_WAYPOINT_IDS> waypoint_id;
 
-	void check_index(int index) const throw(std::out_of_range);
+	void check_index(int index) const;
 
 public:
-	utils::optional<std::string> get_waypoint_id(int index) const throw(std::out_of_range);
+	utils::optional<std::string> get_waypoint_id(int index) const;
 
-	void set_waypoint_id(int index, const std::string & id) throw(std::out_of_range);
+	void set_waypoint_id(int index, const std::string & id);
 };
 }
 }

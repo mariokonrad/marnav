@@ -16,7 +16,7 @@ glc::glc()
 {
 }
 
-void glc::check_index(int index) const throw(std::out_of_range)
+void glc::check_index(int index) const
 {
 	if ((index < 0) || (index >= NUM_DIFFERENCES)) {
 		throw std::out_of_range{"time difference index out of range"};
@@ -24,20 +24,19 @@ void glc::check_index(int index) const throw(std::out_of_range)
 }
 
 utils::optional<glc::time_difference> glc::get_time_diff(int index) const
-	throw(std::out_of_range)
 {
 	check_index(index);
 	return time_diffs[index];
 }
 
-void glc::set_time_diff(int index, time_difference t) throw(std::out_of_range)
+void glc::set_time_diff(int index, time_difference t)
 {
 	check_index(index);
 	time_diffs[index] = t;
 }
 
-std::unique_ptr<sentence> glc::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> glc::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 13)
 		throw std::invalid_argument{"invalid number of fields in glc::parse"};

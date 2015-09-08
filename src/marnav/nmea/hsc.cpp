@@ -14,20 +14,20 @@ hsc::hsc()
 {
 }
 
-void hsc::set_heading_true(double t)
+void hsc::set_heading_true(double t) noexcept
 {
 	heading_true = t;
 	heading_true_ref = reference::TRUE;
 }
 
-void hsc::set_heading_mag(double t)
+void hsc::set_heading_mag(double t) noexcept
 {
 	heading_mag = t;
 	heading_mag_ref = reference::MAGNETIC;
 }
 
-std::unique_ptr<sentence> hsc::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> hsc::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 4)
 		throw std::invalid_argument{"invalid number of fields in hsc::parse"};

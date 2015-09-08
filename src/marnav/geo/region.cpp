@@ -27,7 +27,7 @@ namespace geo
 ///   of the second point <tt>p1</tt> is northerly than <tt>p0</tt>. Or positions
 ///   are party or fully the same.
 ///
-region::region(const position & a0, const position & a1) throw(std::invalid_argument)
+region::region(const position & a0, const position & a1)
 	: p0(a0)
 	, p1(a1)
 {

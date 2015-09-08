@@ -14,8 +14,7 @@ template <class Traits> class time_base
 {
 public:
 	time_base(const time_base &) = default;
-	explicit time_base(uint32_t h = 0, uint32_t m = 0, uint32_t s = 0, uint32_t ms = 0) throw(
-		std::invalid_argument)
+	explicit time_base(uint32_t h = 0, uint32_t m = 0, uint32_t s = 0, uint32_t ms = 0)
 		: h(h)
 		, m(m)
 		, s(s)
@@ -53,16 +52,14 @@ private:
 class trait_time
 {
 public:
-	static void check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(
-		std::invalid_argument);
+	static void check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms);
 };
 
 /// Traits to check for the correctness of duration.
 class trait_duration
 {
 public:
-	static void check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms) throw(
-		std::invalid_argument);
+	static void check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms);
 };
 
 /// Represents a point in time, suitable for NMEA purposes.
@@ -84,7 +81,7 @@ public:
 
 	time(const time &) = default;
 
-	static time parse(const std::string & str) throw(std::invalid_argument);
+	static time parse(const std::string & str);
 };
 
 std::string to_string(const time & t);
@@ -111,7 +108,7 @@ public:
 
 	duration(const duration &) = default;
 
-	static duration parse(const std::string & str) throw(std::invalid_argument);
+	static duration parse(const std::string & str);
 };
 
 std::string to_string(const duration & d);

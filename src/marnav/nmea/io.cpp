@@ -227,7 +227,7 @@ std::string to_string(const utils::mmsi & t)
 	return buf;
 }
 
-std::string format(int32_t data, unsigned int width, data_format f) throw(std::invalid_argument)
+std::string format(int32_t data, unsigned int width, data_format f)
 {
 	// buffer to hold the resulting string with a static size.
 	// this construct prevents VLA, and should be replaced with C++14 dynarray
@@ -249,8 +249,7 @@ std::string format(int32_t data, unsigned int width, data_format f) throw(std::i
 	return buf;
 }
 
-std::string format(uint64_t data, unsigned int width, data_format f) throw(
-	std::invalid_argument)
+std::string format(uint64_t data, unsigned int width, data_format f)
 {
 	// buffer to hold the resulting string with a static size.
 	// this construct prevents VLA, and should be replaced with C++14 dynarray
@@ -272,8 +271,7 @@ std::string format(uint64_t data, unsigned int width, data_format f) throw(
 	return buf;
 }
 
-std::string format(uint32_t data, unsigned int width, data_format f) throw(
-	std::invalid_argument)
+std::string format(uint32_t data, unsigned int width, data_format f)
 {
 	// buffer to hold the resulting string with a static size.
 	// this construct prevents VLA, and should be replaced with C++14 dynarray
@@ -295,7 +293,7 @@ std::string format(uint32_t data, unsigned int width, data_format f) throw(
 	return buf;
 }
 
-std::string format(double data, unsigned int width, data_format) throw(std::invalid_argument)
+std::string format(double data, unsigned int width, data_format)
 {
 	// buffer to hold the resulting string with a static size.
 	// this construct prevents VLA, and should be replaced with C++14 dynarray
@@ -389,7 +387,7 @@ void read(const std::string & s, double & value, data_format)
 
 void read(const std::string & s, std::string & value, data_format) { value = s; }
 
-void read(const std::string & s, side & value, data_format fmt) throw(std::runtime_error)
+void read(const std::string & s, side & value, data_format fmt)
 {
 	typename std::underlying_type<side>::type t;
 	read(s, t, fmt);
@@ -405,7 +403,7 @@ void read(const std::string & s, side & value, data_format fmt) throw(std::runti
 	}
 }
 
-void read(const std::string & s, route & value, data_format fmt) throw(std::runtime_error)
+void read(const std::string & s, route & value, data_format fmt)
 {
 	typename std::underlying_type<route>::type t;
 	read(s, t, fmt);
@@ -421,8 +419,7 @@ void read(const std::string & s, route & value, data_format fmt) throw(std::runt
 	}
 }
 
-void read(const std::string & s, selection_mode & value, data_format fmt) throw(
-	std::runtime_error)
+void read(const std::string & s, selection_mode & value, data_format fmt)
 {
 	typename std::underlying_type<selection_mode>::type t;
 	read(s, t, fmt);
@@ -438,7 +435,7 @@ void read(const std::string & s, selection_mode & value, data_format fmt) throw(
 	}
 }
 
-void read(const std::string & s, ais_channel & value, data_format fmt) throw(std::runtime_error)
+void read(const std::string & s, ais_channel & value, data_format fmt)
 {
 	typename std::underlying_type<ais_channel>::type t;
 	read(s, t, fmt);
@@ -456,8 +453,7 @@ void read(const std::string & s, ais_channel & value, data_format fmt) throw(std
 	}
 }
 
-void read(const std::string & s, type_of_point & value, data_format fmt) throw(
-	std::runtime_error)
+void read(const std::string & s, type_of_point & value, data_format fmt)
 {
 	typename std::underlying_type<type_of_point>::type t;
 	read(s, t, fmt);
@@ -479,7 +475,7 @@ void read(const std::string & s, type_of_point & value, data_format fmt) throw(
 	}
 }
 
-void read(const std::string & s, direction & value, data_format fmt) throw(std::runtime_error)
+void read(const std::string & s, direction & value, data_format fmt)
 {
 	typename std::underlying_type<direction>::type t;
 	read(s, t, fmt);
@@ -501,7 +497,7 @@ void read(const std::string & s, direction & value, data_format fmt) throw(std::
 	}
 }
 
-void read(const std::string & s, reference & value, data_format fmt) throw(std::runtime_error)
+void read(const std::string & s, reference & value, data_format fmt)
 {
 	typename std::underlying_type<reference>::type t;
 	read(s, t, fmt);
@@ -520,8 +516,7 @@ void read(const std::string & s, reference & value, data_format fmt) throw(std::
 	}
 }
 
-void read(const std::string & s, positioning_system_mode_indicator & value,
-	data_format fmt) throw(std::runtime_error)
+void read(const std::string & s, positioning_system_mode_indicator & value, data_format fmt)
 {
 	typename std::underlying_type<positioning_system_mode_indicator>::type t;
 	read(s, t, fmt);
@@ -555,7 +550,7 @@ void read(const std::string & s, positioning_system_mode_indicator & value,
 	}
 }
 
-void read(const std::string & s, status & value, data_format fmt) throw(std::runtime_error)
+void read(const std::string & s, status & value, data_format fmt)
 {
 	typename std::underlying_type<status>::type t;
 	read(s, t, fmt);
@@ -571,7 +566,7 @@ void read(const std::string & s, status & value, data_format fmt) throw(std::run
 	}
 }
 
-void read(const std::string & s, quality & value, data_format fmt) throw(std::runtime_error)
+void read(const std::string & s, quality & value, data_format fmt)
 {
 	typename std::underlying_type<quality>::type t;
 	read(s, t, fmt);
@@ -596,7 +591,7 @@ void read(const std::string & s, quality & value, data_format fmt) throw(std::ru
 	}
 }
 
-void read(const std::string & s, unit::distance & value, data_format fmt) throw(std::runtime_error)
+void read(const std::string & s, unit::distance & value, data_format fmt)
 {
 	typename std::underlying_type<unit::distance>::type t;
 	read(s, t, fmt);
@@ -621,7 +616,7 @@ void read(const std::string & s, unit::distance & value, data_format fmt) throw(
 	}
 }
 
-void read(const std::string & s, unit::velocity & value, data_format fmt) throw(std::runtime_error)
+void read(const std::string & s, unit::velocity & value, data_format fmt)
 {
 	typename std::underlying_type<unit::velocity>::type t;
 	read(s, t, fmt);
@@ -640,8 +635,7 @@ void read(const std::string & s, unit::velocity & value, data_format fmt) throw(
 	}
 }
 
-void read(const std::string & s, unit::temperature & value, data_format fmt) throw(
-	std::runtime_error)
+void read(const std::string & s, unit::temperature & value, data_format fmt)
 {
 	typename std::underlying_type<unit::temperature>::type t;
 	read(s, t, fmt);
@@ -654,8 +648,7 @@ void read(const std::string & s, unit::temperature & value, data_format fmt) thr
 	}
 }
 
-void read(const std::string & s, unit::pressure & value, data_format fmt) throw(
-	std::runtime_error)
+void read(const std::string & s, unit::pressure & value, data_format fmt)
 {
 	typename std::underlying_type<unit::pressure>::type t;
 	read(s, t, fmt);
@@ -677,6 +670,5 @@ void read(const std::string & s, utils::mmsi & value, data_format fmt)
 	read(s, t, fmt);
 	value = utils::mmsi{t};
 }
-
 }
 }

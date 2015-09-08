@@ -39,9 +39,8 @@ public:
 	vbw(const vbw &) = default;
 	vbw & operator=(const vbw &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -62,8 +61,8 @@ public:
 	NMEA_GETTER(ground_speed_transveral)
 	NMEA_GETTER(ground_speed_status)
 
-	void set_water_speed(double l, double t, status s);
-	void set_ground_speed(double l, double t, status s);
+	void set_water_speed(double l, double t, status s) noexcept;
+	void set_ground_speed(double l, double t, status s) noexcept;
 };
 }
 }

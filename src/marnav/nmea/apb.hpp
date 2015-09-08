@@ -67,8 +67,8 @@ public:
 	apb(const apb &) = default;
 	apb & operator=(const apb &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -90,7 +90,7 @@ private:
 	utils::optional<reference> heading_to_steer_to_destination_ref;
 	utils::optional<positioning_system_mode_indicator> mode_indicator;
 
-	void check() const throw(std::invalid_argument);
+	void check() const;
 
 public:
 	NMEA_GETTER(loran_c_blink_warning)
@@ -109,23 +109,24 @@ public:
 	NMEA_GETTER(heading_to_steer_to_destination_ref)
 	NMEA_GETTER(mode_indicator)
 
-	void set_loran_c_blink_warning(status t) { loran_c_blink_warning = t; }
-	void set_loran_c_cycle_lock_warning(status t) { loran_c_cycle_lock_warning = t; }
-	void set_cross_track_error_magnitude(double t)
+	void set_loran_c_blink_warning(status t) noexcept { loran_c_blink_warning = t; }
+	void set_loran_c_cycle_lock_warning(status t) noexcept { loran_c_cycle_lock_warning = t; }
+	void set_cross_track_error_magnitude(double t) noexcept
 	{
 		cross_track_error_magnitude = t;
 		cross_track_unit = unit::distance::NM;
 	}
-	void set_direction_to_steer(side t) { direction_to_steer = t; }
-	void set_status_arrival(status t) { status_arrival = t; }
-	void set_status_perpendicular_passing(status t) { status_perpendicular_passing = t; }
-	void set_bearing_origin_to_destination(uint32_t t, reference ref) throw(
-		std::invalid_argument);
+	void set_direction_to_steer(side t) noexcept { direction_to_steer = t; }
+	void set_status_arrival(status t) noexcept { status_arrival = t; }
+	void set_status_perpendicular_passing(status t) noexcept
+	{
+		status_perpendicular_passing = t;
+	}
+	void set_bearing_origin_to_destination(uint32_t t, reference ref);
 	void set_waypoint_id(const std::string & id);
-	void set_bearing_pos_to_destination(uint32_t t, reference ref) throw(std::invalid_argument);
-	void set_heading_to_steer_to_destination(uint32_t t, reference ref) throw(
-		std::invalid_argument);
-	void set_mode_indicator(positioning_system_mode_indicator t) throw(std::invalid_argument);
+	void set_bearing_pos_to_destination(uint32_t t, reference ref);
+	void set_heading_to_steer_to_destination(uint32_t t, reference ref);
+	void set_mode_indicator(positioning_system_mode_indicator t);
 };
 }
 }

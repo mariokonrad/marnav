@@ -34,15 +34,15 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data);
 
 private:
 	geo::latitude lat;
 
 public:
-	const geo::latitude & get_lat() const { return lat; }
+	const geo::latitude & get_lat() const noexcept { return lat; }
 
-	void set_lat(const geo::latitude & t) { lat = t; }
+	void set_lat(const geo::latitude & t) noexcept { lat = t; }
 };
 }
 }

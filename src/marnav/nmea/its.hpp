@@ -32,9 +32,8 @@ public:
 	its(const its &) = default;
 	its & operator=(const its &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -47,7 +46,7 @@ public:
 	NMEA_GETTER(distance)
 	NMEA_GETTER(distance_unit)
 
-	void set_distance(double t)
+	void set_distance(double t) noexcept
 	{
 		distance = t;
 		distance_unit = unit::distance::METER;

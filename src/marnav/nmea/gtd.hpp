@@ -35,9 +35,8 @@ public:
 	gtd(const gtd &) = default;
 	gtd & operator=(const gtd &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -47,12 +46,12 @@ private:
 
 	std::array<double, NUM_DATA> time_diffs;
 
-	void check_index(int index) const throw(std::out_of_range);
+	void check_index(int index) const;
 
 public:
-	double get_time_diff(int index) const throw(std::out_of_range);
+	double get_time_diff(int index) const;
 
-	void set_time_diff(int index, double value) throw(std::out_of_range);
+	void set_time_diff(int index, double value);
 };
 }
 }

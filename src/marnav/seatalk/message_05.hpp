@@ -34,7 +34,7 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data);
 
 private:
 	side_id side;
@@ -42,13 +42,13 @@ private:
 	int8_t percent_pitch;
 
 public:
-	side_id get_side() const { return side; }
-	int16_t get_rpm() const { return rpm; }
-	int8_t get_percent_pitch() const { return percent_pitch; }
+	side_id get_side() const noexcept { return side; }
+	int16_t get_rpm() const noexcept { return rpm; }
+	int8_t get_percent_pitch() const noexcept { return percent_pitch; }
 
-	void set_side(side_id t) { side = t; }
-	void set_rpm(int16_t t) { rpm = t; }
-	void set_percent_pitch(int8_t t) { percent_pitch = t; }
+	void set_side(side_id t) noexcept { side = t; }
+	void set_rpm(int16_t t) noexcept { rpm = t; }
+	void set_percent_pitch(int8_t t) noexcept { percent_pitch = t; }
 };
 }
 }

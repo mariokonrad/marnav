@@ -44,9 +44,8 @@ public:
 	xte(const xte &) = default;
 	xte & operator=(const xte &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -67,15 +66,18 @@ public:
 	NMEA_GETTER(cross_track_unit)
 	NMEA_GETTER(mode_indicator)
 
-	void set_status1(status t) { status1 = t; }
-	void set_status2(status t) { status2 = t; }
-	void set_cross_track_error_magnitude(double t)
+	void set_status1(status t) noexcept { status1 = t; }
+	void set_status2(status t) noexcept { status2 = t; }
+	void set_cross_track_error_magnitude(double t) noexcept
 	{
 		cross_track_error_magnitude = t;
 		cross_track_unit = unit::distance::NM;
 	}
-	void set_direction_to_steer(side t) { direction_to_steer = t; }
-	void set_faa_mode_indicato(positioning_system_mode_indicator t) { mode_indicator = t; }
+	void set_direction_to_steer(side t) noexcept { direction_to_steer = t; }
+	void set_faa_mode_indicato(positioning_system_mode_indicator t) noexcept
+	{
+		mode_indicator = t;
+	}
 };
 }
 }

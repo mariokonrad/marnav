@@ -14,26 +14,26 @@ dbt::dbt()
 {
 }
 
-void dbt::set_depth_feet(double t)
+void dbt::set_depth_feet(double t) noexcept
 {
 	depth_feet = t;
 	depth_feet_unit = unit::distance::FEET;
 }
 
-void dbt::set_depth_meter(double t)
+void dbt::set_depth_meter(double t) noexcept
 {
 	depth_meter = t;
 	depth_meter_unit = unit::distance::METER;
 }
 
-void dbt::set_depth_fathom(double t)
+void dbt::set_depth_fathom(double t) noexcept
 {
 	depth_fathom = t;
 	depth_fathom_unit = unit::distance::FATHOM;
 }
 
-std::unique_ptr<sentence> dbt::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> dbt::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in dbt::parse"};

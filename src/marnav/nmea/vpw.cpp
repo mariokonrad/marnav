@@ -14,20 +14,20 @@ vpw::vpw()
 {
 }
 
-void vpw::set_speed_knots(double t)
+void vpw::set_speed_knots(double t) noexcept
 {
 	speed_knots = t;
 	speed_knots_unit = unit::velocity::KNOT;
 }
 
-void vpw::set_speed_mps(double t)
+void vpw::set_speed_mps(double t) noexcept
 {
 	speed_meters_per_second = t;
 	speed_meters_per_second_unit = unit::velocity::MPS;
 }
 
-std::unique_ptr<sentence> vpw::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> vpw::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 4)
 		throw std::invalid_argument{"invalid number of fields in vpw::parse"};

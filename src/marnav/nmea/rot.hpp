@@ -33,9 +33,8 @@ public:
 	rot(const rot &) = default;
 	rot & operator=(const rot &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -48,8 +47,8 @@ public:
 	NMEA_GETTER(deg_per_minute)
 	NMEA_GETTER(data_valid)
 
-	void set_deg_per_minute(double t) { deg_per_minute = t; }
-	void set_data_valid(status t) { data_valid = t; }
+	void set_deg_per_minute(double t) noexcept { deg_per_minute = t; }
+	void set_data_valid(status t) noexcept { data_valid = t; }
 };
 }
 }

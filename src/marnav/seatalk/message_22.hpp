@@ -27,15 +27,15 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data);
 
 private:
 	uint32_t distance; // in 1/10th nautical miles
 
 public:
-	uint32_t get_distance() const { return distance; }
+	uint32_t get_distance() const noexcept { return distance; }
 
-	void set_distance(uint32_t t) { distance = t; }
+	void set_distance(uint32_t t) noexcept { distance = t; }
 };
 }
 }

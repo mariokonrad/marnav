@@ -59,7 +59,7 @@ class region
 {
 public:
 	region() = delete;
-	region(const position & a0, const position & a1) throw(std::invalid_argument);
+	region(const position & a0, const position & a1);
 	region(const position & a, double d_lat, double d_lon);
 
 	region(const region &) = default;

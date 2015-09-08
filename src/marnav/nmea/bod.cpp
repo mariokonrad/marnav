@@ -15,13 +15,13 @@ bod::bod()
 {
 }
 
-void bod::set_bearing_true(double t)
+void bod::set_bearing_true(double t) noexcept
 {
 	bearing_true = t;
 	type_true = reference::TRUE;
 }
 
-void bod::set_bearing_magn(double t)
+void bod::set_bearing_magn(double t) noexcept
 {
 	bearing_magn = t;
 	type_magn = reference::MAGNETIC;
@@ -39,8 +39,8 @@ void bod::set_waypoint_from(const std::string & id)
 	waypoint_from = id;
 }
 
-std::unique_ptr<sentence> bod::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> bod::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in bod::parse"};

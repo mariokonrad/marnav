@@ -15,7 +15,7 @@ wcv::wcv()
 {
 }
 
-void wcv::set_speed(double t)
+void wcv::set_speed(double t) noexcept
 {
 	speed = t;
 	speed_unit = unit::velocity::KNOT;
@@ -27,8 +27,8 @@ void wcv::set_waypoint(const std::string & id)
 	waypoint_id = id;
 }
 
-std::unique_ptr<sentence> wcv::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> wcv::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 3)
 		throw std::invalid_argument{"invalid number of fields in wcv::parse"};

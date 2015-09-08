@@ -26,7 +26,7 @@ vdm::vdm(sentence_id id, const std::string & tag, const std::string & talker)
 {
 }
 
-void vdm::read_fields(const std::vector<std::string> & fields) throw(std::runtime_error)
+void vdm::read_fields(const std::vector<std::string> & fields)
 {
 	read(fields[0], n_fragments);
 	read(fields[1], fragment);
@@ -36,8 +36,8 @@ void vdm::read_fields(const std::vector<std::string> & fields) throw(std::runtim
 	read(fields[5], n_fill_bits);
 }
 
-std::unique_ptr<sentence> vdm::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> vdm::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in vdm::parse"};

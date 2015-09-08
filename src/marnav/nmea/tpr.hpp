@@ -37,9 +37,8 @@ public:
 	tpr(const tpr &) = default;
 	tpr & operator=(const tpr &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -58,13 +57,13 @@ public:
 	NMEA_GETTER(depth)
 	NMEA_GETTER(depth_unit)
 
-	void set_range(double t)
+	void set_range(double t) noexcept
 	{
 		range = t;
 		range_unit = unit::distance::METER;
 	}
-	void set_bearing(double t) { bearing = t; }
-	void set_depth(double t)
+	void set_bearing(double t) noexcept { bearing = t; }
+	void set_depth(double t) noexcept
 	{
 		depth = t;
 		range_unit = unit::distance::METER;

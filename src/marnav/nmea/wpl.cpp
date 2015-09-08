@@ -33,8 +33,8 @@ void wpl::set_waypoint(const std::string & id)
 	waypoint_id = id;
 }
 
-std::unique_ptr<sentence> wpl::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> wpl::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 5)
 		throw std::invalid_argument{"invalid number of fields in wpl::parse"};

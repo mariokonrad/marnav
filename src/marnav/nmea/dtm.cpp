@@ -36,7 +36,7 @@ void dtm::set_lon_offset(double t, direction h)
 	lon_hem = h;
 }
 
-void dtm::set_ref(const std::string & t)
+void dtm::set_ref(const std::string & t) noexcept
 {
 	if (t.size() > 5) {
 		ref = t.substr(0, 5);
@@ -45,7 +45,7 @@ void dtm::set_ref(const std::string & t)
 	}
 }
 
-void dtm::set_subcode(const std::string & t)
+void dtm::set_subcode(const std::string & t) noexcept
 {
 	if (t.size() > 5) {
 		subcode = t.substr(0, 5);
@@ -54,7 +54,7 @@ void dtm::set_subcode(const std::string & t)
 	}
 }
 
-void dtm::set_name(const std::string & t)
+void dtm::set_name(const std::string & t) noexcept
 {
 	if (t.size() > 5) {
 		name = t.substr(0, 5);
@@ -63,8 +63,8 @@ void dtm::set_name(const std::string & t)
 	}
 }
 
-std::unique_ptr<sentence> dtm::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> dtm::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 8)
 		throw std::invalid_argument{"invalid number of fields in dtm::parse"};

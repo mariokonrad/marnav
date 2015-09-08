@@ -35,9 +35,8 @@ public:
 	hfb(const hfb &) = default;
 	hfb & operator=(const hfb &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -54,12 +53,12 @@ public:
 	NMEA_GETTER(distance_head_bottom)
 	NMEA_GETTER(distance_head_bottom_unit)
 
-	void set_head_foot(double t)
+	void set_head_foot(double t) noexcept
 	{
 		distance_head_foot = t;
 		distance_head_foot_unit = unit::distance::METER;
 	};
-	void set_head_bottom(double t)
+	void set_head_bottom(double t) noexcept
 	{
 		distance_head_bottom = t;
 		distance_head_bottom_unit = unit::distance::METER;

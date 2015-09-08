@@ -25,13 +25,12 @@ public:
 	message_05(const message_05 &) = default;
 	message_05 & operator=(const message_05 &) = default;
 
-	virtual raw get_data() const throw(std::out_of_range) override;
+	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & bits) throw(
-		std::invalid_argument, std::out_of_range);
+	static std::unique_ptr<message> parse(const raw & bits);
 
 protected:
-	void read_data(const raw & bits) throw(std::out_of_range);
+	void read_data(const raw & bits);
 
 private:
 	unsigned int repeat_indicator;
@@ -55,45 +54,45 @@ private:
 	bool dte;
 
 public:
-	unsigned int get_repeat_indicator() const { return repeat_indicator; }
-	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
-	uint32_t get_ais_version() const { return ais_version; }
-	uint32_t get_imo_number() const { return imo_number; }
+	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }
+	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
+	uint32_t get_ais_version() const noexcept { return ais_version; }
+	uint32_t get_imo_number() const noexcept { return imo_number; }
 	std::string get_callsign() const;
 	std::string get_shipname() const;
-	ship_type get_shiptype() const { return shiptype; }
-	uint32_t get_to_bow() const { return to_bow; }
-	uint32_t get_to_stern() const { return to_stern; }
-	uint32_t get_to_port() const { return to_port; }
-	uint32_t get_to_starboard() const { return to_starboard; }
-	epfd_fix_type get_epfd_fix() const { return epfd_fix; }
-	uint32_t get_eta_month() const { return eta_month; }
-	uint32_t get_eta_day() const { return eta_day; }
-	uint32_t get_eta_hour() const { return eta_hour; }
-	uint32_t get_eta_minute() const { return eta_minute; }
-	uint32_t get_draught() const { return draught; }
+	ship_type get_shiptype() const noexcept { return shiptype; }
+	uint32_t get_to_bow() const noexcept { return to_bow; }
+	uint32_t get_to_stern() const noexcept { return to_stern; }
+	uint32_t get_to_port() const noexcept { return to_port; }
+	uint32_t get_to_starboard() const noexcept { return to_starboard; }
+	epfd_fix_type get_epfd_fix() const noexcept { return epfd_fix; }
+	uint32_t get_eta_month() const noexcept { return eta_month; }
+	uint32_t get_eta_day() const noexcept { return eta_day; }
+	uint32_t get_eta_hour() const noexcept { return eta_hour; }
+	uint32_t get_eta_minute() const noexcept { return eta_minute; }
+	uint32_t get_draught() const noexcept { return draught; }
 	std::string get_destination() const;
-	bool get_dte() const { return dte; }
+	bool get_dte() const noexcept { return dte; }
 
-	void set_repeat_indicator(unsigned int t) { repeat_indicator = t; }
-	void set_mmsi(const utils::mmsi & t) { mmsi = t; }
-	void set_ais_version(uint32_t t) { ais_version = t; }
-	void set_imo_number(uint32_t t) { imo_number = t; }
+	void set_repeat_indicator(unsigned int t) noexcept { repeat_indicator = t; }
+	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
+	void set_ais_version(uint32_t t) noexcept { ais_version = t; }
+	void set_imo_number(uint32_t t) noexcept { imo_number = t; }
 	void set_callsign(const std::string & t);
 	void set_shipname(const std::string & t);
-	void set_shiptype(ship_type t) { shiptype = t; }
-	void set_to_bow(uint32_t t) { to_bow = t; }
-	void set_to_stern(uint32_t t) { to_stern = t; }
-	void set_to_port(uint32_t t) { to_port = t; }
-	void set_to_starboard(uint32_t t) { to_starboard = t; }
-	void set_epfd_fix(epfd_fix_type t) { epfd_fix = t; }
-	void set_eta_month(uint32_t t) { eta_month = t; }
-	void set_eta_day(uint32_t t) { eta_day = t; }
-	void set_eta_hour(uint32_t t) { eta_hour = t; }
-	void set_eta_minute(uint32_t t) { eta_minute = t; }
-	void set_draught(uint32_t t) { draught = t; }
+	void set_shiptype(ship_type t) noexcept { shiptype = t; }
+	void set_to_bow(uint32_t t) noexcept { to_bow = t; }
+	void set_to_stern(uint32_t t) noexcept { to_stern = t; }
+	void set_to_port(uint32_t t) noexcept { to_port = t; }
+	void set_to_starboard(uint32_t t) noexcept { to_starboard = t; }
+	void set_epfd_fix(epfd_fix_type t) noexcept { epfd_fix = t; }
+	void set_eta_month(uint32_t t) noexcept { eta_month = t; }
+	void set_eta_day(uint32_t t) noexcept { eta_day = t; }
+	void set_eta_hour(uint32_t t) noexcept { eta_hour = t; }
+	void set_eta_minute(uint32_t t) noexcept { eta_minute = t; }
+	void set_draught(uint32_t t) noexcept { draught = t; }
 	void set_destination(const std::string & t);
-	void set_dte(bool t) { dte = t; }
+	void set_dte(bool t) noexcept { dte = t; }
 };
 }
 }

@@ -14,27 +14,27 @@ gsa::gsa()
 {
 }
 
-void gsa::check_index(int index) const throw(std::out_of_range)
+void gsa::check_index(int index) const
 {
 	if ((index < 1) || (index > 12)) {
 		throw std::out_of_range{"satellite id out of range"};
 	}
 }
 
-void gsa::set_satellite_id(int index, uint32_t t) throw(std::out_of_range)
+void gsa::set_satellite_id(int index, uint32_t t)
 {
 	check_index(index);
 	satellite_id[index - 1] = t;
 }
 
-utils::optional<uint32_t> gsa::get_satellite_id(int index) const throw(std::out_of_range)
+utils::optional<uint32_t> gsa::get_satellite_id(int index) const
 {
 	check_index(index);
 	return satellite_id[index - 1];
 }
 
-std::unique_ptr<sentence> gsa::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> gsa::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 17)
 		throw std::invalid_argument{"invalid number of fields in gsa::parse"};

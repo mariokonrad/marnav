@@ -39,9 +39,8 @@ public:
 	tfi(const tfi &) = default;
 	tfi & operator=(const tfi &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -51,15 +50,15 @@ private:
 
 	std::array<state, NUM_SENSORS> sensors;
 
-	void check_index(int index) const throw(std::out_of_range);
+	void check_index(int index) const;
 
 public:
-	state get_sensor(int index) const throw(std::out_of_range);
+	state get_sensor(int index) const;
 
-	void set_sensor(int index, state t) throw(std::out_of_range);
+	void set_sensor(int index, state t);
 };
 
-std::string to_string(tfi::state value) throw(std::invalid_argument);
+std::string to_string(tfi::state value);
 }
 }
 

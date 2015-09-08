@@ -14,8 +14,8 @@ namespace marnav
 namespace nmea
 {
 template <typename T>
-static void throw_elaborated_invalid_argument(T value, std::initializer_list<T> options,
-	const char * name = nullptr) throw(std::invalid_argument)
+static void throw_elaborated_invalid_argument(
+	T value, std::initializer_list<T> options, const char * name = nullptr)
 {
 	using namespace std;
 
@@ -38,8 +38,7 @@ static void throw_elaborated_invalid_argument(T value, std::initializer_list<T> 
 ///
 /// @exception std::invalid_argument The value is not listed in the options.
 template <class T>
-void check_value(T value, std::initializer_list<T> options, const char * name = nullptr) throw(
-	std::invalid_argument)
+void check_value(T value, std::initializer_list<T> options, const char * name = nullptr)
 {
 	using namespace std;
 	if (find_if(begin(options), end(options), [value](T opt) { return value == opt; })
@@ -51,18 +50,17 @@ void check_value(T value, std::initializer_list<T> options, const char * name = 
 
 template <class T>
 void check_value(const utils::optional<T> & value, std::initializer_list<T> options,
-	const char * name = nullptr) throw(std::invalid_argument)
+	const char * name = nullptr)
 {
 	if (value)
 		check_value(value.value(), options, name);
 }
 
-void check_waypoint_id(const std::string & id) throw(std::invalid_argument);
+void check_waypoint_id(const std::string & id);
 
-void check_status(status value, const char * name = nullptr) throw(std::invalid_argument);
+void check_status(status value, const char * name = nullptr);
 
-void check_status(const utils::optional<status> & value, const char * name = nullptr) throw(
-	std::invalid_argument);
+void check_status(const utils::optional<status> & value, const char * name = nullptr);
 }
 }
 

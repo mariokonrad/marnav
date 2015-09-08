@@ -11,7 +11,7 @@ message_20::message_20()
 {
 }
 
-std::unique_ptr<message> message_20::parse(const raw & data) throw(std::invalid_argument)
+std::unique_ptr<message> message_20::parse(const raw & data)
 {
 	if (data.size() != 4)
 		throw std::invalid_argument{"invalid number of bytes in message_20::parse"};

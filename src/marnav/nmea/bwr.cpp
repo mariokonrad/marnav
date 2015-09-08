@@ -27,19 +27,19 @@ void bwr::set_lon(const geo::longitude & t)
 	lon_hem = convert_hemisphere(t);
 }
 
-void bwr::set_bearing_true(double t)
+void bwr::set_bearing_true(double t) noexcept
 {
 	bearing_true = t;
 	bearing_true_ref = reference::TRUE;
 }
 
-void bwr::set_bearing_mag(double t)
+void bwr::set_bearing_mag(double t) noexcept
 {
 	bearing_mag = t;
 	bearing_mag_ref = reference::MAGNETIC;
 }
 
-void bwr::set_distance(double t)
+void bwr::set_distance(double t) noexcept
 {
 	distance = t;
 	distance_unit = unit::distance::NM;
@@ -51,8 +51,8 @@ void bwr::set_waypoint(const std::string & id)
 	waypoint_id = id;
 }
 
-std::unique_ptr<sentence> bwr::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> bwr::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 12)
 		throw std::invalid_argument{"invalid number of fields in bwr::parse"};

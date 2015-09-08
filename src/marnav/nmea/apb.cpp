@@ -21,8 +21,7 @@ void apb::set_waypoint_id(const std::string & id)
 	waypoint_id = id;
 }
 
-void apb::set_bearing_origin_to_destination(uint32_t t, reference ref) throw(
-	std::invalid_argument)
+void apb::set_bearing_origin_to_destination(uint32_t t, reference ref)
 {
 	check_value(bearing_origin_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
 		"bearing_origin_to_destination_ref");
@@ -30,7 +29,7 @@ void apb::set_bearing_origin_to_destination(uint32_t t, reference ref) throw(
 	bearing_origin_to_destination_ref = ref;
 }
 
-void apb::set_bearing_pos_to_destination(uint32_t t, reference ref) throw(std::invalid_argument)
+void apb::set_bearing_pos_to_destination(uint32_t t, reference ref)
 {
 	check_value(bearing_pos_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
 		"bearing_pos_to_destination_ref");
@@ -38,8 +37,7 @@ void apb::set_bearing_pos_to_destination(uint32_t t, reference ref) throw(std::i
 	bearing_pos_to_destination_ref = ref;
 }
 
-void apb::set_heading_to_steer_to_destination(uint32_t t, reference ref) throw(
-	std::invalid_argument)
+void apb::set_heading_to_steer_to_destination(uint32_t t, reference ref)
 {
 	check_value(heading_to_steer_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
 		"heading_to_steer_to_destination_ref");
@@ -47,7 +45,7 @@ void apb::set_heading_to_steer_to_destination(uint32_t t, reference ref) throw(
 	heading_to_steer_to_destination_ref = ref;
 }
 
-void apb::set_mode_indicator(positioning_system_mode_indicator t) throw(std::invalid_argument)
+void apb::set_mode_indicator(positioning_system_mode_indicator t)
 {
 	check_value(t, {positioning_system_mode_indicator::INVALID,
 					   positioning_system_mode_indicator::AUTONOMOUS,
@@ -56,7 +54,7 @@ void apb::set_mode_indicator(positioning_system_mode_indicator t) throw(std::inv
 	mode_indicator = t;
 }
 
-void apb::check() const throw(std::invalid_argument)
+void apb::check() const
 {
 	check_status(loran_c_blink_warning, "loran_c_blink_warning");
 	check_status(loran_c_cycle_lock_warning, "loran_c_cycle_lock_warning");
@@ -87,8 +85,8 @@ void apb::check() const throw(std::invalid_argument)
 		"mode_indicator");
 }
 
-std::unique_ptr<sentence> apb::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> apb::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if ((fields.size() < 14) || (fields.size() > 15))
 		throw std::invalid_argument{"invalid number of fields in apb::parse"};

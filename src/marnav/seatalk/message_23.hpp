@@ -30,7 +30,7 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data);
 
 private:
 	bool sensor_defective;
@@ -38,13 +38,13 @@ private:
 	uint8_t temperature_fahrenheit; // degrees fahrenheit
 
 public:
-	bool get_sensor_defective() const { return sensor_defective; }
-	uint8_t get_celsius() const { return temperature_celsius; }
-	uint8_t get_fahrenheit() const { return temperature_fahrenheit; }
+	bool get_sensor_defective() const noexcept { return sensor_defective; }
+	uint8_t get_celsius() const noexcept { return temperature_celsius; }
+	uint8_t get_fahrenheit() const noexcept { return temperature_fahrenheit; }
 
-	void set_sensor_defective(bool t) { sensor_defective = t; }
-	void set_celsius(uint8_t t) { temperature_celsius = t; }
-	void set_fahrenheit(uint8_t t) { temperature_fahrenheit = t; }
+	void set_sensor_defective(bool t) noexcept { sensor_defective = t; }
+	void set_celsius(uint8_t t) noexcept { temperature_celsius = t; }
+	void set_fahrenheit(uint8_t t) noexcept { temperature_fahrenheit = t; }
 };
 }
 }

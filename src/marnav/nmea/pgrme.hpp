@@ -39,8 +39,8 @@ public:
 	pgrme(const pgrme &) = default;
 	pgrme & operator=(const pgrme &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -61,9 +61,9 @@ public:
 	NMEA_GETTER(overall_spherical_equiv_position_error)
 	NMEA_GETTER(overall_spherical_equiv_position_error_unit)
 
-	void set_horizontal_position_error(double t) { horizontal_position_error = t; }
-	void set_vertical_position_error(double t) { vertical_position_error = t; }
-	void set_overall_spherical_equiv_position_error(double t)
+	void set_horizontal_position_error(double t) noexcept { horizontal_position_error = t; }
+	void set_vertical_position_error(double t) noexcept { vertical_position_error = t; }
+	void set_overall_spherical_equiv_position_error(double t) noexcept
 	{
 		overall_spherical_equiv_position_error = t;
 	}

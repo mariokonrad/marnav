@@ -37,9 +37,8 @@ public:
 	dpt(const dpt &) = default;
 	dpt & operator=(const dpt &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -54,9 +53,9 @@ public:
 	NMEA_GETTER(transducer_offset)
 	NMEA_GETTER(max_depth)
 
-	void set_depth_meter(double t) { depth_meter = t; }
-	void set_transducer_offset(double t) { transducer_offset = t; }
-	void set_max_depth(double t) { max_depth = t; }
+	void set_depth_meter(double t) noexcept { depth_meter = t; }
+	void set_transducer_offset(double t) noexcept { transducer_offset = t; }
+	void set_max_depth(double t) noexcept { max_depth = t; }
 };
 }
 }

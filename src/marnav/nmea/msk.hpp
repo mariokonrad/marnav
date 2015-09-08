@@ -38,9 +38,8 @@ public:
 	msk(const msk &) = default;
 	msk & operator=(const msk &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -59,9 +58,9 @@ public:
 	NMEA_GETTER(bitrate_mode)
 	NMEA_GETTER(frequency_mss_status)
 
-	void set_frequency(uint32_t f, selection_mode mode);
-	void set_bitrate(uint32_t rate, selection_mode mode);
-	void set_frequency_mss_status(uint32_t t) { frequency_mss_status = t; }
+	void set_frequency(uint32_t f, selection_mode mode) noexcept;
+	void set_bitrate(uint32_t rate, selection_mode mode) noexcept;
+	void set_frequency_mss_status(uint32_t t)  noexcept { frequency_mss_status = t; }
 };
 }
 }

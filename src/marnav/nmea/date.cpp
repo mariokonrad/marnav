@@ -12,7 +12,7 @@ date::date()
 {
 }
 
-date::date(uint32_t y, month m, uint32_t d) throw(std::invalid_argument)
+date::date(uint32_t y, month m, uint32_t d)
 	: y(y)
 	, m(m)
 	, d(d)
@@ -73,7 +73,7 @@ std::string to_string(const date & d)
 	return buf;
 }
 
-date date::parse(const std::string & str) throw(std::invalid_argument)
+date date::parse(const std::string & str)
 {
 	try {
 		std::size_t pos = 0;

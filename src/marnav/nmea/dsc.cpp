@@ -20,8 +20,7 @@ namespace
 /// @exception std::invalid_argument The specified value to convert is unknown.
 ///
 static dsc::format_specifier format_specifier_mapping(
-	typename std::underlying_type<dsc::format_specifier>::type
-		value) throw(std::invalid_argument)
+	typename std::underlying_type<dsc::format_specifier>::type value)
 {
 	switch (value) {
 		case 2:
@@ -45,8 +44,7 @@ static dsc::format_specifier format_specifier_mapping(
 /// @return The corresponding enumerator.
 /// @exception std::invalid_argument The specified value to convert is unknown.
 ///
-static dsc::category category_mapping(
-	typename std::underlying_type<dsc::category>::type value) throw(std::invalid_argument)
+static dsc::category category_mapping(typename std::underlying_type<dsc::category>::type value)
 {
 	switch (value) {
 		case 0:
@@ -70,9 +68,8 @@ static dsc::category category_mapping(
 /// @return The corresponding enumerator.
 /// @exception std::invalid_argument The specified value to convert is unknown.
 ///
-static dsc::acknowledgement
-acknowledgement_mapping(typename std::underlying_type<dsc::acknowledgement>::type value) throw(
-	std::invalid_argument)
+static dsc::acknowledgement acknowledgement_mapping(
+	typename std::underlying_type<dsc::acknowledgement>::type value)
 {
 	switch (value) {
 		case 'B':
@@ -95,8 +92,7 @@ acknowledgement_mapping(typename std::underlying_type<dsc::acknowledgement>::typ
 /// @exception std::invalid_argument The specified value to convert is unknown.
 ///
 static dsc::extension_indicator extension_indicator_mapping(
-	typename std::underlying_type<dsc::extension_indicator>::type
-		value) throw(std::invalid_argument)
+	typename std::underlying_type<dsc::extension_indicator>::type value)
 {
 	switch (value) {
 		case 0: // works beause 'value' is default initialized in the calling 'read' function
@@ -108,7 +104,7 @@ static dsc::extension_indicator extension_indicator_mapping(
 }
 }
 
-std::string to_string(dsc::format_specifier value) throw(std::invalid_argument)
+std::string to_string(dsc::format_specifier value)
 {
 	switch (value) {
 		case dsc::format_specifier::geographical_area:
@@ -123,7 +119,7 @@ std::string to_string(dsc::format_specifier value) throw(std::invalid_argument)
 	throw std::invalid_argument{"invaild value for conversion of dsc::format_specifier"};
 }
 
-std::string to_string(dsc::category value) throw(std::invalid_argument)
+std::string to_string(dsc::category value)
 {
 	switch (value) {
 		case dsc::category::routine:
@@ -138,7 +134,7 @@ std::string to_string(dsc::category value) throw(std::invalid_argument)
 	throw std::invalid_argument{"invaild value for conversion of dsc::category"};
 }
 
-std::string to_string(dsc::acknowledgement value) throw(std::invalid_argument)
+std::string to_string(dsc::acknowledgement value)
 {
 	switch (value) {
 		case dsc::acknowledgement::B:
@@ -151,7 +147,7 @@ std::string to_string(dsc::acknowledgement value) throw(std::invalid_argument)
 	throw std::invalid_argument{"invaild value for conversion of dsc::acknowledgement"};
 }
 
-std::string to_string(dsc::extension_indicator value) throw(std::invalid_argument)
+std::string to_string(dsc::extension_indicator value)
 {
 	switch (value) {
 		case dsc::extension_indicator::none:
@@ -201,7 +197,7 @@ utils::mmsi dsc::get_mmsi() const
 /// 4. Vertical side of the rectangle (north to south) in degrees, 2 digits
 /// 5. Horizontal side of the rectangle (west to east) in degrees, 2 digits
 ///
-geo::region dsc::get_geographical_area() const throw(std::invalid_argument)
+geo::region dsc::get_geographical_area() const
 {
 	const auto quadrant = (address / 1000000000) % 10;
 
@@ -238,8 +234,8 @@ geo::region dsc::get_geographical_area() const throw(std::invalid_argument)
 
 /// @todo Read and interpret more fields
 ///
-std::unique_ptr<sentence> dsc::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> dsc::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 11)
 		throw std::invalid_argument{"invalid number of fields in dsc::parse"};

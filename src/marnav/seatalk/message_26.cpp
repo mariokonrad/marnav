@@ -14,7 +14,7 @@ message_26::message_26()
 {
 }
 
-std::unique_ptr<message> message_26::parse(const raw & data) throw(std::invalid_argument)
+std::unique_ptr<message> message_26::parse(const raw & data)
 {
 	if (data.size() != 7)
 		throw std::invalid_argument{"invalid number of bytes in message_26::parse"};
@@ -47,16 +47,16 @@ raw message_26::get_data() const
 }
 
 /// @return Value in knots.
-double message_26::get_speed1() const { return 0.01 * speed1; }
+double message_26::get_speed1() const noexcept { return 0.01 * speed1; }
 
 /// @return Value in knots.
-double message_26::get_speed2() const { return 0.01 * speed2; }
+double message_26::get_speed2() const noexcept { return 0.01 * speed2; }
 
-void message_26::set_speed1(double t) { speed1 = std::round(std::abs(t) * 100); }
+void message_26::set_speed1(double t) noexcept { speed1 = std::round(std::abs(t) * 100); }
 
-void message_26::set_speed2(double t) { speed2 = std::round(std::abs(t) * 100); }
+void message_26::set_speed2(double t) noexcept { speed2 = std::round(std::abs(t) * 100); }
 
-void message_26::set_display_in_mph(bool t)
+void message_26::set_display_in_mph(bool t) noexcept
 {
 	if (t) {
 		status |= 0x02;
@@ -65,7 +65,7 @@ void message_26::set_display_in_mph(bool t)
 	}
 }
 
-void message_26::set_avg_speed_calc_stopped(bool t)
+void message_26::set_avg_speed_calc_stopped(bool t) noexcept
 {
 	if (t) {
 		status |= 0x01;
@@ -74,7 +74,7 @@ void message_26::set_avg_speed_calc_stopped(bool t)
 	}
 }
 
-void message_26::set_sensor1_valid(bool t)
+void message_26::set_sensor1_valid(bool t) noexcept
 {
 	if (t) {
 		status |= 0x40;

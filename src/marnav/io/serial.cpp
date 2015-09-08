@@ -114,7 +114,7 @@ serial::serial(const std::string & dev, baud b, databits d, stopbits s, parity p
 serial::~serial() { close(); }
 
 /// Opens a serial device.
-void serial::open() throw(std::runtime_error)
+void serial::open()
 {
 	termios old_tio;
 	termios new_tio;
@@ -160,7 +160,7 @@ void serial::close()
 /// @return Number of read bytes (might be 0).
 /// @exception std::invalid_argument
 /// @exception std::runtime_error
-int serial::read(char * buffer, uint32_t size) throw(std::invalid_argument, std::runtime_error)
+int serial::read(char * buffer, uint32_t size)
 {
 	if ((buffer == nullptr) || (size == 0))
 		throw std::invalid_argument{"invalid buffer or size"};
@@ -176,8 +176,7 @@ int serial::read(char * buffer, uint32_t size) throw(std::invalid_argument, std:
 /// @return Number of written bytes.
 /// @exception std::invalid_argument
 /// @exception std::runtime_error
-int serial::write(const char * buffer, uint32_t size) throw(
-	std::invalid_argument, std::runtime_error)
+int serial::write(const char * buffer, uint32_t size)
 {
 	if ((buffer == nullptr) || (size == 0))
 		throw std::invalid_argument{"invalid buffer or size"};

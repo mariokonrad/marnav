@@ -21,14 +21,13 @@ public:
 	message_01(const message_01 &) = default;
 	message_01 & operator=(const message_01 &) = default;
 
-	virtual raw get_data() const throw(std::out_of_range) override;
+	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & bits) throw(
-		std::invalid_argument, std::out_of_range);
+	static std::unique_ptr<message> parse(const raw & bits);
 
 protected:
 	message_01(message_id id);
-	void read_data(const raw & bits) throw(std::out_of_range);
+	void read_data(const raw & bits);
 
 private:
 	uint32_t repeat_indicator;
@@ -47,30 +46,30 @@ private:
 	uint32_t radio_status;
 
 public:
-	uint32_t get_repeat_indicator() const { return repeat_indicator; }
-	utils::mmsi get_mmsi() const { return utils::mmsi{mmsi}; }
-	int8_t get_rot() const { return rot; }
-	uint32_t get_sog() const { return sog; }
-	bool get_position_accuracy() const { return position_accuracy; }
-	uint32_t get_cog() const { return cog; }
-	uint32_t get_hdg() const { return hdg; }
-	uint32_t get_timestamp() const { return timestamp; }
-	uint32_t get_maneuver_indicator() const { return maneuver_indicator; }
-	bool get_raim() const { return raim; }
-	uint32_t get_radio_status() const { return radio_status; }
+	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
+	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
+	int8_t get_rot() const noexcept { return rot; }
+	uint32_t get_sog() const noexcept { return sog; }
+	bool get_position_accuracy() const noexcept { return position_accuracy; }
+	uint32_t get_cog() const noexcept { return cog; }
+	uint32_t get_hdg() const noexcept { return hdg; }
+	uint32_t get_timestamp() const noexcept { return timestamp; }
+	uint32_t get_maneuver_indicator() const noexcept { return maneuver_indicator; }
+	bool get_raim() const noexcept { return raim; }
+	uint32_t get_radio_status() const noexcept { return radio_status; }
 
-	void set_repeat_indicator(uint32_t t) { repeat_indicator = t; }
-	void set_mmsi(const utils::mmsi & t) { mmsi = t; }
-	void set_nav_status(navigation_status t) { nav_status = t; }
-	void set_rot(int8_t t) { rot = t; }
-	void set_sog(uint32_t t) { sog = t; }
-	void set_position_accuracy(bool t) { position_accuracy = t; }
-	void set_cog(uint32_t t) { cog = t; }
-	void set_hdg(uint32_t t) { hdg = t; }
-	void set_timestamp(uint32_t t) { timestamp = t; }
-	void set_maneuver_indicator(uint32_t t) { maneuver_indicator = t; }
-	void set_raim(bool t) { raim = t; }
-	void set_radio_status(uint32_t t) { radio_status = t; }
+	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
+	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
+	void set_nav_status(navigation_status t) noexcept { nav_status = t; }
+	void set_rot(int8_t t) noexcept { rot = t; }
+	void set_sog(uint32_t t) noexcept { sog = t; }
+	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
+	void set_cog(uint32_t t) noexcept { cog = t; }
+	void set_hdg(uint32_t t) noexcept { hdg = t; }
+	void set_timestamp(uint32_t t) noexcept { timestamp = t; }
+	void set_maneuver_indicator(uint32_t t) noexcept { maneuver_indicator = t; }
+	void set_raim(bool t) noexcept { raim = t; }
+	void set_radio_status(uint32_t t) noexcept { radio_status = t; }
 
 	geo::longitude get_longitude() const;
 	geo::latitude get_latitude() const;

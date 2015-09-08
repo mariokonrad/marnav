@@ -29,14 +29,14 @@ alm::alm()
 {
 }
 
-void alm::check() const throw(std::invalid_argument)
+void alm::check() const
 {
 	if ((satellite_prn < 1) || (satellite_prn > 32))
 		throw std::invalid_argument{"invalid satellite PRN"};
 }
 
-std::unique_ptr<sentence> alm::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> alm::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 15)
 		throw std::invalid_argument{"invalid number of fields in alm::parse"};

@@ -49,9 +49,8 @@ public:
 	ttm(const ttm &) = default;
 	ttm & operator=(const ttm &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -86,25 +85,25 @@ public:
 	NMEA_GETTER(target_status)
 	NMEA_GETTER(reference_target)
 
-	void set_target_number(uint32_t t) { target_number = t; }
-	void set_target_distance(double t) { target_distance = t; }
-	void set_bearing_from_ownship(double t, reference r)
+	void set_target_number(uint32_t t) noexcept { target_number = t; }
+	void set_target_distance(double t) noexcept { target_distance = t; }
+	void set_bearing_from_ownship(double t, reference r) noexcept
 	{
 		bearing_from_ownship = t;
 		bearing_from_ownship_ref = r;
 	}
-	void set_target_speed(double t) { target_speed = t; }
-	void set_target_course(double t, reference r)
+	void set_target_speed(double t) noexcept { target_speed = t; }
+	void set_target_course(double t, reference r) noexcept
 	{
 		target_course = t;
 		target_course_ref = r;
 	}
-	void set_distance_cpa(double t) { distance_cpa = t; }
-	void set_tcpa(double t) { tcpa = t; }
-	void set_unknown(char t) { unknown = t; }
+	void set_distance_cpa(double t) noexcept { distance_cpa = t; }
+	void set_tcpa(double t) noexcept { tcpa = t; }
+	void set_unknown(char t) noexcept { unknown = t; }
 	void set_target_name(const std::string & t) { target_name = t; }
-	void set_target_status(char t) { target_status = t; }
-	void set_reference_target(char t) { reference_target = t; }
+	void set_target_status(char t) noexcept { target_status = t; }
+	void set_reference_target(char t) noexcept { reference_target = t; }
 };
 }
 }

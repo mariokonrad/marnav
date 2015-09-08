@@ -14,32 +14,32 @@ mwd::mwd()
 {
 }
 
-void mwd::set_direction_true(double t)
+void mwd::set_direction_true(double t) noexcept
 {
 	direction_true = t;
 	direction_true_ref = reference::TRUE;
 }
 
-void mwd::set_direction_mag(double t)
+void mwd::set_direction_mag(double t) noexcept
 {
 	direction_mag = t;
 	direction_mag_ref = reference::MAGNETIC;
 }
 
-void mwd::set_speed_knots(double t)
+void mwd::set_speed_knots(double t) noexcept
 {
 	speed_kn = t;
 	speed_kn_unit = unit::velocity::KNOT;
 }
 
-void mwd::set_speed_mps(double t)
+void mwd::set_speed_mps(double t) noexcept
 {
 	speed_ms = t;
 	speed_ms_unit = unit::velocity::MPS;
 }
 
-std::unique_ptr<sentence> mwd::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> mwd::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 8)
 		throw std::invalid_argument{"invalid number of fields in mwd::parse"};

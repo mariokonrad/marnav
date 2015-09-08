@@ -5,7 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
-direction convert_hemisphere(const geo::latitude & p)
+direction convert_hemisphere(const geo::latitude & p) noexcept
 {
 	switch (p.hem()) {
 		case geo::latitude::hemisphere::NORTH:
@@ -18,7 +18,7 @@ direction convert_hemisphere(const geo::latitude & p)
 	return static_cast<direction>(-1);
 }
 
-direction convert_hemisphere(const geo::longitude & p)
+direction convert_hemisphere(const geo::longitude & p) noexcept
 {
 	switch (p.hem()) {
 		case geo::longitude::hemisphere::EAST:
@@ -31,7 +31,7 @@ direction convert_hemisphere(const geo::longitude & p)
 	return static_cast<direction>(-1);
 }
 
-geo::latitude::hemisphere convert_hemisphere_lat(direction t) throw(std::invalid_argument)
+geo::latitude::hemisphere convert_hemisphere_lat(direction t)
 {
 	switch (t) {
 		case direction::NORTH:
@@ -43,7 +43,7 @@ geo::latitude::hemisphere convert_hemisphere_lat(direction t) throw(std::invalid
 	}
 }
 
-geo::longitude::hemisphere convert_hemisphere_lon(direction t) throw(std::invalid_argument)
+geo::longitude::hemisphere convert_hemisphere_lon(direction t)
 {
 	switch (t) {
 		case direction::EAST:

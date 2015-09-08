@@ -44,8 +44,7 @@ public:
 	xdr & operator=(const xdr &) = default;
 
 	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+		const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -55,12 +54,12 @@ private:
 
 	std::array<utils::optional<transducer_info>, MAX_TRANSDUCER_INFO> transducer_data;
 
-	void check_index(int index) const throw(std::out_of_range);
+	void check_index(int index) const;
 
 public:
-	utils::optional<transducer_info> get_info(int index) const throw(std::out_of_range);
+	utils::optional<transducer_info> get_info(int index) const;
 
-	void set_info(int index, const transducer_info & info) throw(std::out_of_range);
+	void set_info(int index, const transducer_info & info);
 };
 }
 }

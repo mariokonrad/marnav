@@ -41,9 +41,8 @@ public:
 	osd(const osd &) = default;
 	osd & operator=(const osd &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -70,12 +69,12 @@ public:
 	NMEA_GETTER(vessel_drift)
 	NMEA_GETTER(vessel_drift_unit)
 
-	void set_heading(double t) { heading = t; }
-	void set_data_valid(status t) { data_valid = t; }
-	void set_course(double t);
-	void set_speed(double t, unit::velocity u);
-	void set_vessel_set(double t) { vessel_set = t; }
-	void set_drift(double t, unit::velocity u);
+	void set_heading(double t) noexcept { heading = t; }
+	void set_data_valid(status t) noexcept { data_valid = t; }
+	void set_course(double t) noexcept;
+	void set_speed(double t, unit::velocity u) noexcept;
+	void set_vessel_set(double t) noexcept { vessel_set = t; }
+	void set_drift(double t, unit::velocity u) noexcept;
 };
 }
 }

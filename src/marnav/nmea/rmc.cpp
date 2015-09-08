@@ -27,15 +27,15 @@ void rmc::set_lon(const geo::longitude & t)
 	lon_hem = convert_hemisphere(t);
 }
 
-void rmc::set_mag(double t, direction h) throw(std::invalid_argument)
+void rmc::set_mag(double t, direction h)
 {
 	check_value(h, {direction::EAST, direction::WEST}, "mag var hemisphere");
 	mag = t;
 	mag_hem = h;
 }
 
-std::unique_ptr<sentence> rmc::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> rmc::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	// before and after NMEA 2.3
 	if ((fields.size() < 11) || (fields.size() > 12))

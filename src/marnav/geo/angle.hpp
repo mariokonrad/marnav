@@ -22,12 +22,12 @@ public:
 	angle() noexcept;
 	angle(double degrees);
 
-	uint32_t degrees() const;
-	uint32_t minutes() const;
-	double seconds() const;
+	uint32_t degrees() const noexcept;
+	uint32_t minutes() const noexcept;
+	double seconds() const noexcept;
 
-	operator double() const;
-	double get() const;
+	operator double() const noexcept;
+	double get() const noexcept;
 
 	friend bool operator==(const angle & a, const angle & b) noexcept;
 	friend bool operator!=(const angle & a, const angle & b) noexcept;
@@ -42,7 +42,7 @@ public:
 	}
 
 protected:
-	void set(double);
+	void set(double) noexcept;
 
 private:
 	double value; // angle in degrees
@@ -62,8 +62,8 @@ public:
 	constexpr static const double max = +90.0;
 
 	latitude() noexcept;
-	latitude(double degrees) throw(std::invalid_argument);
-	latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h) throw(std::invalid_argument);
+	latitude(double degrees);
+	latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h);
 
 	latitude(const latitude &) = default;
 	latitude(latitude &&) = default;
@@ -81,12 +81,12 @@ public:
 	bool operator!=(const angle &) const = delete;
 
 	/// Returns the corresponding hemisphere.
-	hemisphere hem() const;
+	hemisphere hem() const noexcept;
 
 	void change_hemisphere(hemisphere h);
 
 private:
-	static void check(double a) throw(std::invalid_argument);
+	static void check(double a);
 };
 
 bool operator==(const latitude & a, const latitude & b) noexcept;
@@ -123,8 +123,8 @@ public:
 	constexpr static const double max = +180.0;
 
 	longitude() noexcept;
-	longitude(double degrees) throw(std::invalid_argument);
-	longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h) throw(std::invalid_argument);
+	longitude(double degrees);
+	longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h);
 
 	longitude(const longitude &) = default;
 	longitude(longitude &&) = default;
@@ -142,12 +142,12 @@ public:
 	bool operator!=(const angle &) const = delete;
 
 	/// Returns the corresponding hemisphere.
-	hemisphere hem() const;
+	hemisphere hem() const noexcept;
 
 	void change_hemisphere(hemisphere h);
 
 private:
-	static void check(double a) throw(std::invalid_argument);
+	static void check(double a);
 };
 
 bool operator==(const longitude & a, const longitude & b) noexcept;

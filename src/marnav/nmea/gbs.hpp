@@ -40,9 +40,8 @@ public:
 	gbs(const gbs &) = default;
 	gbs & operator=(const gbs &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -67,14 +66,14 @@ public:
 	NMEA_GETTER(bias)
 	NMEA_GETTER(bias_dev)
 
-	void set_time_utc(const nmea::time & t) { time_utc = t; }
-	void set_err_lat(double t) { err_lat = t; }
-	void set_err_lon(double t) { err_lon = t; }
-	void set_err_alt(double t) { err_alt = t; }
-	void set_satellite(uint32_t t) { satellite = t; }
-	void set_probability(double t) { probability = t; }
-	void set_bias(double t) { bias = t; }
-	void set_bias_dev(double t) { bias_dev = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
+	void set_err_lat(double t) noexcept { err_lat = t; }
+	void set_err_lon(double t) noexcept { err_lon = t; }
+	void set_err_alt(double t) noexcept { err_alt = t; }
+	void set_satellite(uint32_t t) noexcept { satellite = t; }
+	void set_probability(double t) noexcept { probability = t; }
+	void set_bias(double t) noexcept { bias = t; }
+	void set_bias_dev(double t) noexcept { bias_dev = t; }
 };
 }
 }

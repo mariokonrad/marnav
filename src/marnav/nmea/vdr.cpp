@@ -14,26 +14,26 @@ vdr::vdr()
 {
 }
 
-void vdr::set_degrees_true(double t)
+void vdr::set_degrees_true(double t) noexcept
 {
 	degrees_true = t;
 	degrees_true_ref = reference::TRUE;
 }
 
-void vdr::set_degrees_mag(double t)
+void vdr::set_degrees_mag(double t) noexcept
 {
 	degrees_mag = t;
 	degrees_mag_ref = reference::MAGNETIC;
 }
 
-void vdr::set_speed(double t)
+void vdr::set_speed(double t) noexcept
 {
 	speed = t;
 	speed_unit = unit::velocity::KNOT;
 }
 
 std::unique_ptr<sentence> vdr::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+	const std::vector<std::string> & fields)
 {
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in vdr::parse"};

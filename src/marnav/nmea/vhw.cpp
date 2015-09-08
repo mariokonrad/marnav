@@ -15,26 +15,26 @@ vhw::vhw()
 {
 }
 
-void vhw::set_heading(double t)
+void vhw::set_heading(double t) noexcept
 {
 	heading = t;
 	degrees_mag = reference::MAGNETIC;
 }
 
-void vhw::set_speed_knots(double t)
+void vhw::set_speed_knots(double t) noexcept
 {
 	speed_knots = t;
 	speed_knots_unit = unit::velocity::KNOT;
 }
 
-void vhw::set_speed_kmh(double t)
+void vhw::set_speed_kmh(double t) noexcept
 {
 	speed_kmh = t;
 	speed_kmh_unit = unit::velocity::KMH;
 }
 
-std::unique_ptr<sentence> vhw::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> vhw::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 8)
 		throw std::invalid_argument{"invalid number of fields in vhw::parse"};

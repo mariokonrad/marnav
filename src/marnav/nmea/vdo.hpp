@@ -23,9 +23,8 @@ public:
 	vdo(const vdo &) = default;
 	vdo & operator=(const vdo &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 };
 }
 }

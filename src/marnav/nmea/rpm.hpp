@@ -42,9 +42,8 @@ public:
 	rpm(const rpm &) = default;
 	rpm & operator=(const rpm &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -64,12 +63,12 @@ public:
 	NMEA_GETTER(data_valid)
 
 	void set_source(source_id id, uint32_t num);
-	void set_revolutions(double t) { revolutions = t; }
-	void set_propeller_pitch(double t) { propeller_pitch = t; }
-	void set_data_valid(status t) { data_valid = t; }
+	void set_revolutions(double t) noexcept { revolutions = t; }
+	void set_propeller_pitch(double t) noexcept { propeller_pitch = t; }
+	void set_data_valid(status t) noexcept { data_valid = t; }
 };
 
-std::string to_string(rpm::source_id value) throw(std::invalid_argument);
+std::string to_string(rpm::source_id value);
 }
 }
 

@@ -38,9 +38,8 @@ public:
 	fsi(const fsi &) = default;
 	fsi & operator=(const fsi &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -59,11 +58,11 @@ public:
 	NMEA_GETTER(power_level)
 	NMEA_GETTER(sentence_status)
 
-	void set_tx_frequency(uint32_t t) { tx_frequency = t; }
-	void set_rx_frequency(uint32_t t) { rx_frequency = t; }
-	void set_communications_mode(char t) { communications_mode = t; }
-	void set_power_level(uint32_t t) throw(std::invalid_argument);
-	void set_sentence_status(char t) throw(std::invalid_argument);
+	void set_tx_frequency(uint32_t t) noexcept { tx_frequency = t; }
+	void set_rx_frequency(uint32_t t) noexcept { rx_frequency = t; }
+	void set_communications_mode(char t) noexcept { communications_mode = t; }
+	void set_power_level(uint32_t t);
+	void set_sentence_status(char t);
 };
 }
 }

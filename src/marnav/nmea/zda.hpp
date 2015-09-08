@@ -38,9 +38,8 @@ public:
 	zda(const zda &) = default;
 	zda & operator=(const zda &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -61,14 +60,14 @@ public:
 	NMEA_GETTER(local_zone_hours)
 	NMEA_GETTER(local_zone_minutes)
 
-	void set_time_utc(const nmea::time & t) { time_utc = t; }
-	void set_date(uint32_t y, uint32_t m, uint32_t d)
+	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
+	void set_date(uint32_t y, uint32_t m, uint32_t d) noexcept
 	{
 		year = y;
 		month = m;
 		day = d;
 	}
-	void set_local_zone(int32_t h, int32_t m)
+	void set_local_zone(int32_t h, int32_t m) noexcept
 	{
 		local_zone_hours = h;
 		local_zone_minutes = m;

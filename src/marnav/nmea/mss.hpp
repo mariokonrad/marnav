@@ -34,9 +34,8 @@ public:
 	mss(const mss &) = default;
 	mss & operator=(const mss &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -55,11 +54,11 @@ public:
 	NMEA_GETTER(beacon_datarate)
 	NMEA_GETTER(unknown)
 
-	void set_signal_strength(uint32_t t) { signal_strength = t; }
-	void set_signal_to_noise_ratio(uint32_t t) { signal_to_noise_ratio = t; }
-	void set_beacon_frequency(uint32_t t) { beacon_frequency = t; }
-	void set_beacon_datarate(uint32_t t) { beacon_datarate = t; }
-	void set_unknown(int32_t t) { unknown = t; }
+	void set_signal_strength(uint32_t t) noexcept { signal_strength = t; }
+	void set_signal_to_noise_ratio(uint32_t t) noexcept { signal_to_noise_ratio = t; }
+	void set_beacon_frequency(uint32_t t) noexcept { beacon_frequency = t; }
+	void set_beacon_datarate(uint32_t t) noexcept { beacon_datarate = t; }
+	void set_unknown(int32_t t) noexcept { unknown = t; }
 };
 }
 }

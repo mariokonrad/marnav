@@ -37,9 +37,8 @@ public:
 	vdm(const vdm &) = default;
 	vdm & operator=(const vdm &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	vdm(sentence_id id, const std::string & tag, const std::string & talker);
@@ -47,7 +46,7 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 	virtual char get_start_token() const override { return START_TOKEN_AIS; }
 
-	void read_fields(const std::vector<std::string> & fields) throw(std::runtime_error);
+	void read_fields(const std::vector<std::string> & fields);
 
 private:
 	uint32_t n_fragments;
@@ -65,11 +64,11 @@ public:
 	NMEA_GETTER(payload)
 	NMEA_GETTER(n_fill_bits)
 
-	void set_n_fragments(uint32_t t) { n_fragments = t; }
-	void set_fragment(uint32_t t) { fragment = t; }
+	void set_n_fragments(uint32_t t) noexcept { n_fragments = t; }
+	void set_fragment(uint32_t t) noexcept { fragment = t; }
 	void set_seq_msg_id(uint32_t t) { seq_msg_id = t; }
-	void set_radio_channel(ais_channel channel) { radio_channel = channel; }
-	void set_payload(const std::string & data, uint32_t fill_bits)
+	void set_radio_channel(ais_channel channel) noexcept { radio_channel = channel; }
+	void set_payload(const std::string & data, uint32_t fill_bits) noexcept
 	{
 		payload = data;
 		n_fill_bits = fill_bits;

@@ -38,9 +38,8 @@ public:
 	rte(const rte &) = default;
 	rte & operator=(const rte &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -57,9 +56,9 @@ public:
 	NMEA_GETTER(message_mode)
 	utils::optional<std::string> get_waypoint_id(int index) const;
 
-	void set_n_messages(uint32_t t) { n_messages = t; }
-	void set_message_number(uint32_t t) { message_number = t; }
-	void set_message_mode(route t) { message_mode = t; }
+	void set_n_messages(uint32_t t) noexcept { n_messages = t; }
+	void set_message_number(uint32_t t) noexcept { message_number = t; }
+	void set_message_mode(route t) noexcept { message_mode = t; }
 	void set_waypoint_id(int index, const std::string & id);
 };
 }

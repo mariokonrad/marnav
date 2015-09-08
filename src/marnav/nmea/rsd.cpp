@@ -20,20 +20,20 @@ rsd::rsd()
 {
 }
 
-void rsd::set_cursor(double range, double bearing)
+void rsd::set_cursor(double range, double bearing) noexcept
 {
 	cursor_range = range;
 	cursor_bearing = bearing;
 }
 
-void rsd::set_range(double scale, char unit)
+void rsd::set_range(double scale, char unit) noexcept
 {
 	range_scale = scale;
 	range_unit = unit;
 }
 
-std::unique_ptr<sentence> rsd::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> rsd::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 13)
 		throw std::invalid_argument{"invalid number of fields in rsd::parse"};

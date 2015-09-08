@@ -22,14 +22,14 @@ void mwv::set_angle(double deg, reference ref)
 	angle_ref = ref;
 }
 
-void mwv::set_speed(double speed, unit::velocity u)
+void mwv::set_speed(double speed, unit::velocity u) noexcept
 {
 	this->speed = speed;
 	speed_unit = u;
 }
 
-std::unique_ptr<sentence> mwv::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> mwv::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 5)
 		throw std::invalid_argument{"invalid number of fields in mwv::parse"};

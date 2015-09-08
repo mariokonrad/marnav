@@ -40,9 +40,8 @@ public:
 	dbk(const dbk &) = default;
 	dbk & operator=(const dbk &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -63,9 +62,9 @@ public:
 	NMEA_GETTER(depth_fathom)
 	NMEA_GETTER(depth_fathom_unit)
 
-	void set_depth_feet(double t);
-	void set_depth_meter(double t);
-	void set_depth_fathom(double t);
+	void set_depth_feet(double t) noexcept;
+	void set_depth_meter(double t) noexcept;
+	void set_depth_fathom(double t) noexcept;
 };
 }
 }

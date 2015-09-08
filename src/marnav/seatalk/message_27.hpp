@@ -29,15 +29,15 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & data) throw(std::invalid_argument);
+	static std::unique_ptr<message> parse(const raw & data);
 
 private:
 	int32_t temperature; // temperature in 1/10th degrees celsius
 
 public:
-	int32_t get_temperature() const { return temperature; }
+	int32_t get_temperature() const noexcept { return temperature; }
 
-	void set_temperature(int32_t t) { temperature = t; }
+	void set_temperature(int32_t t) noexcept { temperature = t; }
 };
 }
 }

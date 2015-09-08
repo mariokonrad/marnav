@@ -17,7 +17,7 @@ namespace
 /// @exception std::invalid_argument The specified value to convert is unknown.
 ///
 static rpm::source_id source_id_mapping(
-	typename std::underlying_type<rpm::source_id>::type value) throw(std::invalid_argument)
+	typename std::underlying_type<rpm::source_id>::type value)
 {
 	switch (value) {
 		case 'S':
@@ -29,7 +29,7 @@ static rpm::source_id source_id_mapping(
 }
 }
 
-std::string to_string(rpm::source_id value) throw(std::invalid_argument)
+std::string to_string(rpm::source_id value)
 {
 	switch (value) {
 		case rpm::source_id::shaft:
@@ -53,8 +53,8 @@ void rpm::set_source(source_id id, uint32_t num)
 	source_number = num;
 }
 
-std::unique_ptr<sentence> rpm::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> rpm::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 5)
 		throw std::invalid_argument{"invalid number of fields in rpm::parse"};

@@ -14,32 +14,32 @@ vtg::vtg()
 {
 }
 
-void vtg::set_speed_kn(double t)
+void vtg::set_speed_kn(double t) noexcept
 {
 	speed_kn = t;
 	speed_kn_unit = unit::velocity::KNOT;
 }
 
-void vtg::set_speed_kmh(double t)
+void vtg::set_speed_kmh(double t) noexcept
 {
 	speed_kmh = t;
 	speed_kmh_unit = unit::velocity::KMH;
 }
 
-void vtg::set_track_magn(double t)
+void vtg::set_track_magn(double t) noexcept
 {
 	track_magn = t;
 	type_magn = reference::MAGNETIC;
 }
 
-void vtg::set_track_true(double t)
+void vtg::set_track_true(double t) noexcept
 {
 	track_true = t;
 	type_true = reference::TRUE;
 }
 
-std::unique_ptr<sentence> vtg::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> vtg::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	// before and after NMEA 2.3
 	if ((fields.size() < 8) || (fields.size() > 9))

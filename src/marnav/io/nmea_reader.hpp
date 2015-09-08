@@ -22,14 +22,14 @@ public:
 	virtual ~nmea_reader();
 
 	void close();
-	bool read() throw(std::runtime_error, std::length_error);
+	bool read();
 
 protected:
 	virtual void process_sentence(const std::string &) = 0;
 
 private:
-	void process_nmea() throw(std::length_error);
-	bool read_data() throw(std::runtime_error);
+	void process_nmea();
+	bool read_data();
 
 	char raw;
 	std::string sentence;

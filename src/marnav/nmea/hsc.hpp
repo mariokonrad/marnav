@@ -35,9 +35,8 @@ public:
 	hsc(const hsc &) = default;
 	hsc & operator=(const hsc &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -54,8 +53,8 @@ public:
 	NMEA_GETTER(heading_mag)
 	NMEA_GETTER(heading_mag_ref)
 
-	void set_heading_true(double t);
-	void set_heading_mag(double t);
+	void set_heading_true(double t) noexcept;
+	void set_heading_mag(double t) noexcept;
 };
 }
 }

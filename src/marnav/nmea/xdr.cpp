@@ -28,27 +28,27 @@ xdr::xdr()
 {
 }
 
-void xdr::check_index(int index) const throw(std::out_of_range)
+void xdr::check_index(int index) const
 {
 	if ((index < 0) || (index >= 4 * MAX_TRANSDUCER_INFO)) {
 		throw std::out_of_range{"transducer index out of range"};
 	}
 }
 
-void xdr::set_info(int index, const transducer_info & info) throw(std::out_of_range)
+void xdr::set_info(int index, const transducer_info & info)
 {
 	check_index(index);
 	transducer_data[index] = info;
 }
 
-utils::optional<xdr::transducer_info> xdr::get_info(int index) const throw(std::out_of_range)
+utils::optional<xdr::transducer_info> xdr::get_info(int index) const
 {
 	check_index(index);
 	return transducer_data[index];
 }
 
-std::unique_ptr<sentence> xdr::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> xdr::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if ((fields.size() < 1) || (fields.size() > 4 * xdr::MAX_TRANSDUCER_INFO))
 		throw std::invalid_argument{"invalid number of fields in xdr::parse"};

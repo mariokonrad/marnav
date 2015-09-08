@@ -47,9 +47,8 @@ public:
 	gll(const gll &) = default;
 	gll & operator=(const gll &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -74,9 +73,12 @@ public:
 
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_time_utc(const nmea::time & t) { time_utc = t; }
-	void set_data_valid(status t) { data_valid = t; }
-	void set_mode_indicator(positioning_system_mode_indicator t) { mode_indicator = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
+	void set_data_valid(status t) noexcept { data_valid = t; }
+	void set_mode_indicator(positioning_system_mode_indicator t) noexcept
+	{
+		mode_indicator = t;
+	}
 };
 }
 }

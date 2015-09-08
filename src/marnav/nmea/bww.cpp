@@ -15,13 +15,13 @@ bww::bww()
 {
 }
 
-void bww::set_bearing_true(double t)
+void bww::set_bearing_true(double t) noexcept
 {
 	bearing_true = t;
 	bearing_true_ref = reference::TRUE;
 }
 
-void bww::set_bearing_mag(double t)
+void bww::set_bearing_mag(double t) noexcept
 {
 	bearing_mag = t;
 	bearing_mag_ref = reference::MAGNETIC;
@@ -39,8 +39,8 @@ void bww::set_waypoint_from(const std::string & id)
 	waypoint_from = id;
 }
 
-std::unique_ptr<sentence> bww::parse(const std::string & talker,
-	const std::vector<std::string> & fields) throw(std::invalid_argument, std::runtime_error)
+std::unique_ptr<sentence> bww::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in bww::parse"};

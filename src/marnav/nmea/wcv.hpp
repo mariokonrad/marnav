@@ -33,9 +33,8 @@ public:
 	wcv(const wcv &) = default;
 	wcv & operator=(const wcv &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -50,7 +49,7 @@ public:
 	NMEA_GETTER(speed_unit)
 	NMEA_GETTER(waypoint_id)
 
-	void set_speed(double t);
+	void set_speed(double t) noexcept;
 	void set_waypoint(const std::string & id);
 };
 }

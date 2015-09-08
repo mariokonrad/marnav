@@ -47,9 +47,8 @@ public:
 	gns(const gns &) = default;
 	gns & operator=(const gns &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields) throw(std::invalid_argument,
-		std::runtime_error);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -82,16 +81,16 @@ public:
 	NMEA_GETTER(age_of_differential_data)
 	NMEA_GETTER(differential_ref_station_id)
 
-	void set_time_utc(const nmea::time & t) { time_utc = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
 	void set_mode_indicator(const std::string & t);
-	void set_number_of_satellites(uint32_t t) { number_of_satellites = t; }
-	void set_hdrop(double t) { hdrop = t; }
-	void set_antenna_altitude(double t) { antenna_altitude = t; }
-	void set_geodial_sepration(double t) { geodial_sepration = t; }
-	void set_age_of_differential_data(double t) { age_of_differential_data = t; }
-	void set_differential_ref_station_id(double t) { differential_ref_station_id = t; }
+	void set_number_of_satellites(uint32_t t) noexcept { number_of_satellites = t; }
+	void set_hdrop(double t) noexcept { hdrop = t; }
+	void set_antenna_altitude(double t) noexcept { antenna_altitude = t; }
+	void set_geodial_sepration(double t) noexcept { geodial_sepration = t; }
+	void set_age_of_differential_data(double t) noexcept { age_of_differential_data = t; }
+	void set_differential_ref_station_id(double t) noexcept { differential_ref_station_id = t; }
 };
 }
 }

@@ -33,13 +33,12 @@ public:
 	using logic_error::logic_error;
 };
 
-std::unique_ptr<sentence> make_sentence(const std::string & s) throw(
-	std::invalid_argument, checksum_error, unknown_sentence);
+std::unique_ptr<sentence> make_sentence(const std::string & s);
 
 std::vector<std::string> get_supported_sentences_str();
 std::vector<sentence_id> get_supported_sentences_id();
-std::string to_string(sentence_id id) throw(unknown_sentence);
-sentence_id tag_to_id(const std::string & tag) throw(unknown_sentence);
+std::string to_string(sentence_id id);
+sentence_id tag_to_id(const std::string & tag);
 }
 }
 
