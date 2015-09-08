@@ -139,7 +139,7 @@ public:
 
 	inline quaternion & operator*=(const quaternion & q)
 	{
-		*this = quaternion{*this} *= q;
+		*this = quaternion{*this} * q;
 		return *this;
 	}
 

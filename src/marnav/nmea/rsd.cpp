@@ -11,7 +11,7 @@ constexpr const char * rsd::TAG;
 
 rsd::rsd()
 	: sentence(ID, TAG, talker_id::integrated_instrumentation)
-	, unknowns({0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0})
+	, unknowns({{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}})
 	, cursor_range(0.0)
 	, cursor_bearing(0.0)
 	, range_scale(0.0)

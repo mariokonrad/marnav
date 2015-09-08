@@ -11,7 +11,7 @@ constexpr const char * gtd::TAG;
 
 gtd::gtd()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, time_diffs({0.0, 0.0, 0.0, 0.0, 0.0})
+	, time_diffs({{0.0, 0.0, 0.0, 0.0, 0.0}})
 {
 }
 
