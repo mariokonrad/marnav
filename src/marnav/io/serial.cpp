@@ -1,4 +1,5 @@
 #include "serial.hpp"
+#include <stdexcept>
 #include <cstdio>
 #include <cstring>
 #include <fcntl.h>

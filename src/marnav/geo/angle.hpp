@@ -1,9 +1,7 @@
 #ifndef __GEO__ANGLE__HPP__
 #define __GEO__ANGLE__HPP__
 
-#include <string>
-#include <stdexcept>
-#include <limits>
+#include <cstdint>
 
 namespace marnav
 {
@@ -35,11 +33,7 @@ public:
 	angle & operator=(const angle &) = default;
 	angle & operator=(angle &&) = default;
 
-	friend void swap(angle & a, angle & b)
-	{
-		using namespace std;
-		swap(a.value, b.value);
-	}
+	friend void swap(angle & a, angle & b);
 
 protected:
 	void set(double) noexcept;
@@ -48,6 +42,7 @@ private:
 	double value; // angle in degrees
 };
 
+void swap(angle & a, angle & b);
 bool operator==(const angle & a, const angle & b) noexcept;
 bool operator!=(const angle & a, const angle & b) noexcept;
 

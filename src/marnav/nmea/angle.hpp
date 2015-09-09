@@ -1,6 +1,7 @@
 #ifndef __NMEA__ANGLE__HPP__
 #define __NMEA__ANGLE__HPP__
 
+#include <string>
 #include <marnav/geo/angle.hpp>
 
 namespace marnav

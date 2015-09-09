@@ -2,7 +2,6 @@
 #define __NMEA__DATE__HPP__
 
 #include <string>
-#include <stdexcept>
 
 namespace marnav
 {

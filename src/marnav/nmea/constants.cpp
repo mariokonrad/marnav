@@ -1,4 +1,5 @@
 #include "constants.hpp"
+#include <stdexcept>
 #include <marnav/geo/angle.hpp>
 
 namespace marnav

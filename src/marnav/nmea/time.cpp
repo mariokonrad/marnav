@@ -1,4 +1,5 @@
 #include "time.hpp"
+#include <stdexcept>
 
 namespace marnav
 {

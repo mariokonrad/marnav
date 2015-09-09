@@ -1,4 +1,5 @@
 #include "date.hpp"
+#include <stdexcept>
 
 namespace marnav
 {

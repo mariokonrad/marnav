@@ -1,4 +1,6 @@
 #include "angle.hpp"
+#include <algorithm>
+#include <stdexcept>
 #include <cmath>
 #include <marnav/math/floatingpoint.hpp>
 
@@ -56,6 +58,11 @@ void angle::set(double t) noexcept { value = t; }
 bool operator==(const angle & a, const angle & b) noexcept
 {
 	return (&a == &b) || math::is_same(a.value, b.value);
+}
+
+void swap(angle & a, angle & b)
+{
+	std::swap(a.value, b.value);
 }
 
 bool operator!=(const angle & a, const angle & b) noexcept { return !(a == b); }

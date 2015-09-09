@@ -2,7 +2,6 @@
 #define __IO__DEVICE__HPP__
 
 #include <cstdint>
-#include <stdexcept>
 
 namespace marnav
 {

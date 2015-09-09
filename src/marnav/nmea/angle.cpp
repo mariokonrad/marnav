@@ -1,4 +1,5 @@
 #include "angle.hpp"
+#include <stdexcept>
 #include <cmath>
 
 namespace marnav

@@ -1,9 +1,6 @@
 #ifndef __IO__SELECTABLE__HPP__
 #define __IO__SELECTABLE__HPP__
 
-#include <cstdint>
-#include <stdexcept>
-
 namespace marnav
 {
 namespace io
