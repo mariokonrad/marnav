@@ -60,7 +60,7 @@ bool operator==(const angle & a, const angle & b) noexcept
 	return (&a == &b) || math::is_same(a.value, b.value);
 }
 
-void swap(angle & a, angle & b)
+void swap(angle & a, angle & b) noexcept
 {
 	std::swap(a.value, b.value);
 }

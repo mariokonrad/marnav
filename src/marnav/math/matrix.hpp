@@ -150,7 +150,7 @@ public:
 
 	matrix2(const matrix2 &) = default;
 
-	matrix2(matrix2 &&) = default;
+	matrix2(matrix2 &&) noexcept = default;
 
 	/// Initializes the matrix with the identiy matrix.
 	matrix2(
@@ -177,7 +177,7 @@ public:
 
 	inline matrix2 & operator=(const matrix2 &) = default;
 
-	inline matrix2 & operator=(matrix2 &&) = default;
+	inline matrix2 & operator=(matrix2 &&) noexcept = default;
 
 	inline matrix2 & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
 
@@ -260,7 +260,7 @@ public:
 
 	matrix3(const matrix3 &) = default;
 
-	matrix3(matrix3 &&) = default;
+	matrix3(matrix3 &&) noexcept = default;
 
 	/// Initializes the matrix with the identiy matrix.
 	matrix3(value_type x11 = 1.0, value_type x12 = 0.0, value_type x13 = 0.0,
@@ -297,7 +297,7 @@ public:
 
 	inline matrix3 & operator=(const matrix3 &) = default;
 
-	inline matrix3 & operator=(matrix3 &&) = default;
+	inline matrix3 & operator=(matrix3 &&) noexcept = default;
 
 	inline matrix3 & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
 
@@ -388,7 +388,7 @@ public:
 
 	matrix4(const matrix4 &) = default;
 
-	matrix4(matrix4 &&) = default;
+	matrix4(matrix4 &&) noexcept = default;
 
 	/// Initializes the matrix with the identiy matrix.
 	matrix4()
@@ -423,7 +423,7 @@ public:
 
 	inline matrix4 & operator=(const matrix4 &) = default;
 
-	inline matrix4 & operator=(matrix4 &&) = default;
+	inline matrix4 & operator=(matrix4 &&) noexcept = default;
 
 	inline matrix4 & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
 
@@ -540,7 +540,7 @@ public:
 
 	matrix_n(const matrix_n &) = default;
 
-	matrix_n(matrix_n &&) = default;
+	matrix_n(matrix_n &&) noexcept = default;
 
 	matrix_n(std::initializer_list<T> v)
 	{
@@ -563,7 +563,7 @@ public:
 
 	inline matrix_n & operator=(const matrix_n &) = default;
 
-	inline matrix_n & operator=(matrix_n &&) = default;
+	inline matrix_n & operator=(matrix_n &&) noexcept = default;
 
 	inline matrix_n & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
 

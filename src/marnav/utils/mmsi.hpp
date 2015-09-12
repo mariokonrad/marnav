@@ -30,9 +30,9 @@ public:
 	}
 
 	mmsi(const mmsi &) = default;
-	mmsi(mmsi &&) = default;
+	mmsi(mmsi &&) noexcept = default;
 	mmsi & operator=(const mmsi &) = default;
-	mmsi & operator=(mmsi &&) = default;
+	mmsi & operator=(mmsi &&) noexcept = default;
 
 	bool operator==(const mmsi & other) const;
 	bool operator!=(const mmsi & other) const;

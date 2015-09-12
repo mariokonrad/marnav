@@ -17,11 +17,11 @@ class position
 public:
 	position() = default;
 	position(const position &) = default;
-	position(position &&) = default;
+	position(position &&) noexcept = default;
 	position(const latitude & la, const longitude & lo);
 
 	position & operator=(const position &) = default;
-	position & operator=(position &&) = default;
+	position & operator=(position &&) noexcept = default;
 
 	bool operator==(const position & other) const;
 

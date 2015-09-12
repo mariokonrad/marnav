@@ -15,7 +15,7 @@ public:
 	static constexpr double epsilon = 1.0e-8;
 
 	angle(const angle &) = default;
-	angle(angle &&) = default;
+	angle(angle &&) noexcept = default;
 
 	angle() noexcept;
 	angle(double degrees);
@@ -31,9 +31,9 @@ public:
 	friend bool operator!=(const angle & a, const angle & b) noexcept;
 
 	angle & operator=(const angle &) = default;
-	angle & operator=(angle &&) = default;
+	angle & operator=(angle &&) noexcept = default;
 
-	friend void swap(angle & a, angle & b);
+	friend void swap(angle & a, angle & b) noexcept;
 
 protected:
 	void set(double) noexcept;
@@ -42,7 +42,7 @@ private:
 	double value; // angle in degrees
 };
 
-void swap(angle & a, angle & b);
+void swap(angle & a, angle & b) noexcept;
 bool operator==(const angle & a, const angle & b) noexcept;
 bool operator!=(const angle & a, const angle & b) noexcept;
 
@@ -61,10 +61,10 @@ public:
 	latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h);
 
 	latitude(const latitude &) = default;
-	latitude(latitude &&) = default;
+	latitude(latitude &&) noexcept = default;
 
 	latitude & operator=(const latitude &) = default;
-	latitude & operator=(latitude &&) = default;
+	latitude & operator=(latitude &&) noexcept = default;
 
 	friend bool operator==(const latitude & a, const latitude & b) noexcept;
 	friend bool operator!=(const latitude & a, const latitude & b) noexcept;
@@ -122,10 +122,10 @@ public:
 	longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h);
 
 	longitude(const longitude &) = default;
-	longitude(longitude &&) = default;
+	longitude(longitude &&) noexcept = default;
 
 	longitude & operator=(const longitude &) = default;
-	longitude & operator=(longitude &&) = default;
+	longitude & operator=(longitude &&) noexcept = default;
 
 	friend bool operator==(const longitude & a, const longitude & b) noexcept;
 	friend bool operator!=(const longitude & a, const longitude & b) noexcept;

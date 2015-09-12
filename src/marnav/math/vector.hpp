@@ -74,7 +74,7 @@ public:
 
 	vector2(const vector2 &) = default;
 
-	vector2(vector2 &&) = default;
+	vector2(vector2 &&) noexcept = default;
 
 	/// Returns a vector, initialized by the polar coordinates.
 	///
@@ -133,7 +133,7 @@ public:
 
 	inline vector2 & operator=(const vector2 &) = default;
 
-	inline vector2 & operator=(vector2 &&) = default;
+	inline vector2 & operator=(vector2 &&) noexcept = default;
 
 	inline bool operator==(const vector2 & v) const { return detail::equal_vector(*this, v); }
 
@@ -198,7 +198,7 @@ public:
 
 	vector3(const vector3 &) = default;
 
-	vector3(vector3 &&) = default;
+	vector3(vector3 &&) noexcept = default;
 
 	/// Returns a vector, initialized by the sphere coordinates (mathematical conventions).
 	///
@@ -270,7 +270,7 @@ public:
 
 	inline vector3 & operator=(const vector3 &) = default;
 
-	inline vector3 & operator=(vector3 &&) = default;
+	inline vector3 & operator=(vector3 &&) noexcept = default;
 
 	inline bool operator==(const vector3 & v) const { return detail::equal_vector(*this, v); }
 
@@ -336,7 +336,7 @@ public:
 
 	vector4(const vector4 &) = default;
 
-	vector4(vector4 &&) = default;
+	vector4(vector4 &&) noexcept = default;
 
 	inline value_type dot(const vector4 & v) const { return detail::dot_vector(*this, v); }
 
@@ -362,7 +362,7 @@ public:
 
 	inline vector4 & operator=(const vector4 &) = default;
 
-	inline vector4 & operator=(vector4 &&) = default;
+	inline vector4 & operator=(vector4 &&) noexcept = default;
 
 	inline bool operator==(const vector4 & v) const { return detail::equal_vector(*this, v); }
 
@@ -428,7 +428,7 @@ public:
 
 	vector_n(const vector_n &) = default;
 
-	vector_n(vector_n &&) = default;
+	vector_n(vector_n &&) noexcept = default;
 
 	vector_n(std::initializer_list<T> v)
 	{
@@ -462,7 +462,7 @@ public:
 
 	inline vector_n & operator=(const vector_n &) = default;
 
-	inline vector_n & operator=(vector_n &&) = default;
+	inline vector_n & operator=(vector_n &&) noexcept = default;
 
 	inline bool operator==(const vector_n & v) const { return detail::equal_vector(*this, v); }
 

@@ -29,7 +29,7 @@ public:
 
 	quaternion(const quaternion &) = default;
 
-	quaternion(quaternion &&) = default;
+	quaternion(quaternion &&) noexcept = default;
 
 	quaternion(const vector3<T> & v)
 	{
@@ -122,7 +122,7 @@ public:
 
 	inline quaternion & operator=(const quaternion &) = default;
 
-	inline quaternion & operator=(quaternion &&) = default;
+	inline quaternion & operator=(quaternion &&) noexcept = default;
 
 	inline bool operator==(const quaternion & q)
 	{

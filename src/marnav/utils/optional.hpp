@@ -37,13 +37,13 @@ public:
 	{
 	}
 
-	constexpr optional(T && data)
+	constexpr optional(T && data) noexcept
 		: flag(true)
 		, data(std::move(data))
 	{
 	}
 
-	optional(optional &&) = default;
+	optional(optional &&) noexcept = default;
 	optional(const optional &) = default;
 
 	// assignment

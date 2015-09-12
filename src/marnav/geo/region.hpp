@@ -63,10 +63,10 @@ public:
 	region(const position & a, double d_lat, double d_lon);
 
 	region(const region &) = default;
-	region(region &&) = default;
+	region(region &&) noexcept = default;
 
 	region & operator=(const region &) = default;
-	region & operator=(region &&) = default;
+	region & operator=(region &&) noexcept = default;
 
 	longitude left() const;
 	longitude right() const;

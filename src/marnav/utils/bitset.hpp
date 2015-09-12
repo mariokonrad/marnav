@@ -97,11 +97,13 @@ public:
 		{
 		}
 
-		const_iterator(const const_iterator & other) = default;
+		const_iterator(const const_iterator &) = default;
+		const_iterator(const_iterator &&) noexcept = default;
 
 		size_type get_pos() const { return pos; }
 
-		const_iterator & operator=(const const_iterator & other) = default;
+		const_iterator & operator=(const const_iterator &) = default;
+		const_iterator & operator=(const_iterator &&) noexcept = default;
 
 		bool operator==(const const_iterator & other) const
 		{
