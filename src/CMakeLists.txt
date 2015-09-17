@@ -372,13 +372,13 @@ install(
 	DESTINATION include/marnav/io
 	)
 
-# stuff for the config and config-versionn files
+# stuff for the config and config-version files
 set(INCLUDE_INSTALL_DIR include)
 set(LIB_INSTALL_DIR lib)
 include(CMakePackageConfigHelpers)
 configure_package_config_file(
 	config.cmake.in
-	"${CMAKE_CURRENT_BINARY_DIR}/marnav-config.cmake"
+	"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
 	INSTALL_DESTINATION "${LIB_INSTALL_DIR}/${PROJECT_NAME}/cmake"
 	PATH_VARS INCLUDE_INSTALL_DIR
 	)

@@ -282,7 +282,6 @@ Compiler:
 
 Tools needed to build the library:
 - cmake 3.0
-- GNU make 3.81
 
 Tools needed to develop the library:
 - git
