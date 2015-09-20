@@ -21,7 +21,6 @@ TODO
 @todo Implement AIS message: Type 16: Assignment Mode Command
 @todo Implement AIS message: Type 17: DGNSS Broadcast Binary Message
 @todo Implement AIS message: Type 20: Data Link Management Message
-@todo Implement AIS message: Type 22: Channel Management
 @todo Implement AIS message: Type 23: Group Assignment Command
 @todo Implement AIS message: Type 25: Single Slot Binary Message
 @todo Implement AIS message: Type 26: Multiple Slot Binary Message

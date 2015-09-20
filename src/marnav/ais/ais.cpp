@@ -13,6 +13,7 @@
 #include <marnav/ais/message_18.hpp>
 #include <marnav/ais/message_19.hpp>
 #include <marnav/ais/message_21.hpp>
+#include <marnav/ais/message_22.hpp>
 #include <marnav/ais/message_24.hpp>
 
 /// @example read_ais.cpp
@@ -81,6 +82,7 @@ static message::parse_function instantiate_message(message_id type, size_t size)
 		{message_id::standard_class_b_cs_position_report, message_18::parse},
 		{message_id::extended_class_b_equipment_position_report, message_19::parse},
 		{message_id::aid_to_navigation_report, message_21::parse},
+		{message_id::channel_management, message_22::parse},
 		{message_id::static_data_report, message_24::parse},
 	};
 

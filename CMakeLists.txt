@@ -3,10 +3,17 @@ project(marnav)
 
 set(VERSION_MAJOR "0")
 set(VERSION_MINOR "3")
-set(VERSION_PATCH "6-dev")
-set(PROJECT_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+set(VERSION_PATCH "7")
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+include(ExternalProject)
+include(ExternGmock)
+include(GitInformation)
+
+set(PROJECT_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-${GIT_COMMIT_HASH_SHORT}")
+if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
+	set(PROJECT_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+endif()
 
 option(ENABLE_PROFILING "Enable Profiling" OFF)
 option(ENABLE_WARNING_HELL "Enable Warning Hell" OFF)
@@ -81,10 +88,6 @@ endif()
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-include(ExternalProject)
-include(ExternGmock)
-include(GitInformation)
-
 ### common
 file(MAKE_DIRECTORY
 	${CMAKE_CURRENT_BINARY_DIR}/doc
@@ -143,7 +146,7 @@ endif()
 ### cppcheck
 find_program(CPPCHECK_PATH cppcheck)
 if(CPPCHECK_PATH)
-	message(STATUS "cppcheck found")
+	message(STATUS "cppcheck found: ${CPPCHECK_PATH}")
 	add_custom_target(cppcheck
 		COMMAND ${CPPCHECK_PATH} --std=c++11 --platform=unix32 -v -f --enable=all --template='{file}:{line},{severity},{id},{message}' -I ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/test 2> ${CMAKE_CURRENT_BINARY_DIR}/doc/cppcheck.txt
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}

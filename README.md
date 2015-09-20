@@ -139,6 +139,7 @@ Supported messages for AIS (decode and encode):
 - Type 18: Standard Class B CS Position Report
 - Type 19: Extended Class B CS Position Report
 - Type 21: Aid-to-Navigation Report
+- Type 22: Channel Management
 - Type 24: Static Data Report (part A and B, norma and auxiliary vessel)
 
 
