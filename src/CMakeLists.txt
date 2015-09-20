@@ -122,6 +122,7 @@ set(SOURCE_AIS
 	marnav/ais/message_19.cpp
 	marnav/ais/message_21.cpp
 	marnav/ais/message_22.cpp
+	marnav/ais/message_23.cpp
 	marnav/ais/message_24.cpp
 	)
 
@@ -304,6 +305,7 @@ install(
 		marnav/ais/message_19.hpp
 		marnav/ais/message_21.hpp
 		marnav/ais/message_22.hpp
+		marnav/ais/message_23.hpp
 		marnav/ais/message_24.hpp
 	DESTINATION include/marnav/ais
 	)

@@ -111,6 +111,7 @@ add_executable(testrunner
 	ais/Test_ais_message_19.cpp
 	ais/Test_ais_message_21.cpp
 	ais/Test_ais_message_22.cpp
+	ais/Test_ais_message_23.cpp
 	ais/Test_ais_message_24.cpp
 	seatalk/Test_seatalk_message.cpp
 	seatalk/Test_seatalk_message_00.cpp
