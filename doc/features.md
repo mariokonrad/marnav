@@ -139,4 +139,4 @@ Suported messages for SeaTalk (decode and encode):
 - Type 52: Speed over Ground
 - Type 53: Magnetic Course in Degrees
 - Type 54: GMT Time
-
+- Type 56: Date

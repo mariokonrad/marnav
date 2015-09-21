@@ -27,7 +27,6 @@ TODO
 
 @todo Implement SeaTalk writer for serial devices
 @todo Implement SeaTalk message: Type 55: TRACK keystroke on GPS unit
-@todo Implement SeaTalk message: Type 56: Date
 @todo Implement SeaTalk message: Type 57: Sat Info
 @todo Implement SeaTalk message: Type 58: LAT/LON
 @todo Implement SeaTalk message: Type 59: Set Count Down Timer (sent by ST60)

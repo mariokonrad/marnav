@@ -23,6 +23,7 @@
 #include <marnav/seatalk/message_52.hpp>
 #include <marnav/seatalk/message_53.hpp>
 #include <marnav/seatalk/message_54.hpp>
+#include <marnav/seatalk/message_56.hpp>
 
 namespace marnav
 {
@@ -54,6 +55,7 @@ static message::parse_function instantiate_message(message_id type)
 		{message_id::speed_over_ground, message_52::parse},
 		{message_id::magnetic_course, message_53::parse},
 		{message_id::gmt_time, message_54::parse},
+		{message_id::date, message_56::parse},
 	};
 
 	auto const & i = std::find_if(begin(known_messages), end(known_messages),

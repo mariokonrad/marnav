@@ -2,7 +2,6 @@
 #define __SEATALK__MESSAGE_54__HPP__
 
 #include <marnav/seatalk/message.hpp>
-#include <marnav/geo/angle.hpp>
 
 namespace marnav
 {
