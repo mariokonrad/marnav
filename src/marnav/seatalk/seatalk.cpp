@@ -20,6 +20,8 @@
 #include <marnav/seatalk/message_38.hpp>
 #include <marnav/seatalk/message_50.hpp>
 #include <marnav/seatalk/message_51.hpp>
+#include <marnav/seatalk/message_52.hpp>
+#include <marnav/seatalk/message_53.hpp>
 
 namespace marnav
 {
@@ -48,6 +50,8 @@ static message::parse_function instantiate_message(message_id type)
 		{message_id::codelock_data, message_38::parse},
 		{message_id::position_latitude, message_50::parse},
 		{message_id::position_longitude, message_51::parse},
+		{message_id::speed_over_ground, message_52::parse},
+		{message_id::magnetic_course, message_53::parse},
 	};
 
 	auto const & i = std::find_if(begin(known_messages), end(known_messages),
