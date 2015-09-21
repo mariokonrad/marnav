@@ -26,7 +26,6 @@ TODO
 @todo Implement AIS message: Type 27: Long Range AIS Broadcast message
 
 @todo Implement SeaTalk writer for serial devices
-@todo Implement SeaTalk message: Type 54: GMT Time
 @todo Implement SeaTalk message: Type 55: TRACK keystroke on GPS unit
 @todo Implement SeaTalk message: Type 56: Date
 @todo Implement SeaTalk message: Type 57: Sat Info
