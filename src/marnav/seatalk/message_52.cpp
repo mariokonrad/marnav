@@ -1,0 +1,48 @@
+#include "message_52.hpp"
+#include <cmath>
+
+namespace marnav
+{
+namespace seatalk
+{
+
+message_52::message_52()
+	: message(ID)
+	, sog(0)
+{
+}
+
+std::unique_ptr<message> message_52::parse(const raw & data)
+{
+	if (data.size() != 4)
+		throw std::invalid_argument{"invalid number of bytes in message_52::parse"};
+	if ((data[1] & 0x0f) != 0x01)
+		throw std::invalid_argument{"invalid size specified in message"};
+
+	std::unique_ptr<message> result = utils::make_unique<message_52>();
+	message_52 & msg = static_cast<message_52 &>(*result);
+
+	//  52  01 XX XX
+	// raw   1  2  3
+
+	msg.sog = 0;
+	msg.sog += data[2];
+	msg.sog <<= 8;
+	msg.sog += data[3];
+
+	return result;
+}
+
+raw message_52::get_data() const
+{
+	return raw{static_cast<uint8_t>(ID), 0x01, static_cast<uint8_t>((sog >> 8) & 0xff),
+		static_cast<uint8_t>((sog >> 0) & 0xff)};
+}
+
+/// Returns the speed over ground in knots.
+double message_52::get_sog() const noexcept { return 0.1 * sog; }
+
+/// Sets the speed over ground in knots.
+void message_52::set_sog(double t) noexcept { sog = std::floor(t * 10.0); }
+}
+}

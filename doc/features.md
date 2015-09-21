@@ -136,4 +136,5 @@ Suported messages for SeaTalk (decode and encode):
 - Type 38: Codelock data (**experimental**)
 - Type 50: LAT Postion
 - Type 51: LON Postion
+- Type 52: Speed over Ground
 
