@@ -15,6 +15,17 @@ public:
 		uint8_t m;
 		uint8_t s;
 	};
+
+	const std::vector<test_case> cases{
+		{{0x54, 0x01, 0x00, 0x00}, 0, 0, 0}, {{0x54, 0x01, 0x00, 0x01}, 1, 0, 0},
+		{{0x54, 0x01, 0x00, 0x10}, 16, 0, 0}, {{0x54, 0x01, 0x04, 0x00}, 0, 1, 0},
+		{{0x54, 0x01, 0x08, 0x00}, 0, 2, 0}, {{0x54, 0x01, 0x10, 0x00}, 0, 4, 0},
+		{{0x54, 0x01, 0x20, 0x00}, 0, 8, 0}, {{0x54, 0x01, 0x40, 0x00}, 0, 16, 0},
+		{{0x54, 0x01, 0x80, 0x00}, 0, 32, 0}, {{0x54, 0x11, 0x00, 0x00}, 0, 0, 1},
+		{{0x54, 0x21, 0x00, 0x00}, 0, 0, 2}, {{0x54, 0x41, 0x00, 0x00}, 0, 0, 4},
+		{{0x54, 0x81, 0x00, 0x00}, 0, 0, 8}, {{0x54, 0x01, 0x01, 0x00}, 0, 0, 16},
+		{{0x54, 0x01, 0x02, 0x00}, 0, 0, 32},
+	};
 };
 
 TEST_F(Test_seatalk_message_54, construction) { EXPECT_NO_THROW(message_54 m); }
@@ -33,10 +44,6 @@ TEST_F(Test_seatalk_message_54, parse_invalid_length)
 
 TEST_F(Test_seatalk_message_54, parse)
 {
-	const std::vector<test_case> cases{
-		{{0x54, 0x01, 0x00, 0x00}, 0, 0, 0},
-	};
-
 	for (auto const & t : cases) {
 		auto generic_message = message_54::parse(t.data);
 		EXPECT_TRUE(generic_message != nullptr);
@@ -62,10 +69,6 @@ TEST_F(Test_seatalk_message_54, write_default)
 
 TEST_F(Test_seatalk_message_54, set_time)
 {
-	const std::vector<test_case> cases{
-		{{0x54, 0x01, 0x00, 0x00}, 0, 0, 0},
-	};
-
 	for (auto const & t : cases) {
 		message_54 m;
 		m.set_time(t.h, t.m, t.s);

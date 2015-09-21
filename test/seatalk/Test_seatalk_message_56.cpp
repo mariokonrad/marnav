@@ -15,6 +15,11 @@ public:
 		uint8_t m;
 		uint8_t d;
 	};
+
+	const std::vector<test_case> cases{
+		{{0x56, 0x01, 0x00, 0x00}, 0, 0, 0}, {{0x56, 0x01, 0x00, 0x01}, 1, 0, 0},
+		{{0x56, 0x01, 0x01, 0x00}, 0, 0, 1}, {{0x56, 0x11, 0x00, 0x00}, 0, 1, 0},
+	};
 };
 
 TEST_F(Test_seatalk_message_56, construction) { EXPECT_NO_THROW(message_56 m); }
@@ -33,13 +38,6 @@ TEST_F(Test_seatalk_message_56, parse_invalid_length)
 
 TEST_F(Test_seatalk_message_56, parse)
 {
-	const std::vector<test_case> cases{
-		{{0x56, 0x01, 0x00, 0x00}, 0, 0, 0},
-		{{0x56, 0x01, 0x00, 0x01}, 1, 0, 0},
-		{{0x56, 0x01, 0x01, 0x00}, 0, 0, 1},
-		{{0x56, 0x11, 0x00, 0x00}, 0, 1, 0},
-	};
-
 	for (auto const & t : cases) {
 		auto generic_message = message_56::parse(t.data);
 		EXPECT_TRUE(generic_message != nullptr);
@@ -65,13 +63,6 @@ TEST_F(Test_seatalk_message_56, write_default)
 
 TEST_F(Test_seatalk_message_56, set_date)
 {
-	const std::vector<test_case> cases{
-		{{0x56, 0x01, 0x00, 0x00}, 0, 0, 0},
-		{{0x56, 0x01, 0x00, 0x01}, 1, 0, 0},
-		{{0x56, 0x01, 0x01, 0x00}, 0, 0, 1},
-		{{0x56, 0x11, 0x00, 0x00}, 0, 1, 0},
-	};
-
 	for (auto const & t : cases) {
 		message_56 m;
 		m.set_date(t.y, t.m, t.d);

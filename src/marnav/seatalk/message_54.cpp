@@ -36,9 +36,16 @@ std::unique_ptr<message> message_54::parse(const raw & data)
 
 raw message_54::get_data() const
 {
-	// TODO
+	uint8_t rs = 0;
+	uint8_t t = 0;
 
-	return raw{static_cast<uint8_t>(ID), 0x01, 0x00, hour};
+	rs += (minute * 4) & 0xfc;
+	rs += (second >> 4) & 0x03;
+
+	t += second & 0x0f;
+	t <<= 4;
+
+	return raw{static_cast<uint8_t>(ID), static_cast<uint8_t>(0x01 | t), rs, hour};
 }
 
 /// @todo Test rages of parameters
