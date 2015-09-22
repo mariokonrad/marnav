@@ -76,4 +76,18 @@ TEST_F(Test_seatalk_message_66, set_alarm)
 		EXPECT_EQ(t.data, raw);
 	}
 }
+
+TEST_F(Test_seatalk_message_66, operator_and)
+{
+	const alarm a = static_cast<alarm>(0xff);
+
+	EXPECT_EQ(alarm::apparent_angle_lo, a & alarm::apparent_angle_lo);
+	EXPECT_EQ(alarm::apparent_angle_lo, a & alarm::apparent_angle_lo);
+	EXPECT_EQ(alarm::apparent_angle_hi, a & alarm::apparent_angle_hi);
+	EXPECT_EQ(alarm::apparent_speed_lo, a & alarm::apparent_speed_lo);
+	EXPECT_EQ(alarm::apparent_speed_hi, a & alarm::apparent_speed_hi);
+	EXPECT_EQ(alarm::true_angle_lo    , a & alarm::true_angle_lo    );
+	EXPECT_EQ(alarm::true_angle_hi    , a & alarm::true_angle_hi    );
+	EXPECT_EQ(alarm::true_speed_lo    , a & alarm::true_speed_lo    );
+}
 }
