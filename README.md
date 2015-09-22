@@ -170,6 +170,7 @@ Suported messages for SeaTalk (decode and encode):
 - Type 54: GMT Time
 - Type 56: Date
 - Type 58: LAT/LON
+- Type 66: Wind Alarm
 
 
 ### IO

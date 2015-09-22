@@ -152,6 +152,7 @@ set(SOURCE_SEATALK
 	marnav/seatalk/message_54.cpp
 	marnav/seatalk/message_56.cpp
 	marnav/seatalk/message_58.cpp
+	marnav/seatalk/message_66.cpp
 	)
 
 set(SOURCE_IO
@@ -342,6 +343,7 @@ install(
 		marnav/seatalk/message_54.hpp
 		marnav/seatalk/message_56.hpp
 		marnav/seatalk/message_58.hpp
+		marnav/seatalk/message_66.hpp
 	DESTINATION include/marnav/seatalk
 	)
 

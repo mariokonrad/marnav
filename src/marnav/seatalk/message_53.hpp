@@ -19,6 +19,7 @@ namespace seatalk
 ///     the six lower  bits of VW *  2 +
 ///     the two higher bits of  U /  2 =
 ///     (U & 0x3) * 90 + (VW & 0x3F) * 2 + (U & 0xC) / 8
+/// @endcode
 ///
 /// The Magnetic Course may be offset by the Compass Variation (see datagram 99)
 /// to get the Course Over Ground (COG).

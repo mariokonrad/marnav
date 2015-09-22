@@ -14,6 +14,7 @@ namespace seatalk
 /// 56 M1 DD YY
 ///
 /// YY year, M month, DD day in month
+/// @endcode
 ///
 /// Corresponding NMEA sentence: RMC
 ///

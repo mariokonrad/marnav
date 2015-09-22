@@ -17,6 +17,7 @@ namespace seatalk
 ///     HH hours,
 ///     6 MSBits of RST = minutes = (RS & 0xFC) / 4
 ///     6 LSBits of RST = seconds =  ST & 0x3F
+/// @endcode
 ///
 /// Corresponding NMEA sentences: RMC, GAA, BWR, BWC
 ///

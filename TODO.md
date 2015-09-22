@@ -31,7 +31,6 @@ TODO
 @todo Implement SeaTalk message: Type 59: Set Count Down Timer (sent by ST60)
 @todo Implement SeaTalk message: Type 61: (issued by E-80 multifunction display at init)
 @todo Implement SeaTalk message: Type 65: Select Fathom display unit for depth display (see message 00)
-@todo Implement SeaTalk message: Type 66: Wind Alarm
 @todo Implement SeaTalk message: Type 68: Alarm ackknowledgement keystroke (ST80 Masterview, ST40 Wind Instrument)
 @todo Implement SeaTalk message: Type 6C: Second equipment-ID
 @todo Implement SeaTalk message: Type 6E: MOB
