@@ -28,7 +28,6 @@ TODO
 @todo Implement SeaTalk writer for serial devices
 @todo Implement SeaTalk message: Type 55: TRACK keystroke on GPS unit
 @todo Implement SeaTalk message: Type 57: Sat Info
-@todo Implement SeaTalk message: Type 58: LAT/LON
 @todo Implement SeaTalk message: Type 59: Set Count Down Timer (sent by ST60)
 @todo Implement SeaTalk message: Type 61: (issued by E-80 multifunction display at init)
 @todo Implement SeaTalk message: Type 65: Select Fathom display unit for depth display (see message 00)

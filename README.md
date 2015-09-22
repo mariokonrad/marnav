@@ -169,6 +169,7 @@ Suported messages for SeaTalk (decode and encode):
 - Type 53: Magnetic Course in Degrees
 - Type 54: GMT Time
 - Type 56: Date
+- Type 58: LAT/LON
 
 
 ### IO
