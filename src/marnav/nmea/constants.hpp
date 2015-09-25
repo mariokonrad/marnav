@@ -9,60 +9,60 @@ namespace marnav
 namespace nmea
 {
 enum class direction : char {
-	EAST, ///< NMEA representation: 'E'
-	WEST, ///< NMEA representation: 'W'
-	NORTH, ///< NMEA representation: 'N'
-	SOUTH ///< NMEA representation: ' S'
+	east, ///< NMEA representation: 'E'
+	west, ///< NMEA representation: 'W'
+	north, ///< NMEA representation: 'N'
+	south ///< NMEA representation: ' S'
 };
 
 enum class status : char {
-	OK, ///< NMEA representation: 'A'
-	WARNING ///< NMEA representation: 'V'
+	ok, ///< NMEA representation: 'A'
+	warning ///< NMEA representation: 'V'
 };
 
 /// Positioning System Mode Indicator constants.
 enum class positioning_system_mode_indicator : char {
-	INVALID, ///< NMEA representation: 'V'
-	AUTONOMOUS, ///< NMEA representation: 'A'
-	DIFFERENTIAL, ///< NMEA representation: 'D'
-	ESTIMATED, ///< NMEA representation: 'E'
-	MANUAL_INPUT, ///< NMEA representation: 'M'
-	SIMULATED, ///< NMEA representation: 'S'
-	DATA_NOT_VALID, ///< NMEA representation: 'N'
-	PRECISE ///< NMEA representation: 'P'
+	invalid, ///< NMEA representation: 'V'
+	autonomous, ///< NMEA representation: 'A'
+	differential, ///< NMEA representation: 'D'
+	estimated, ///< NMEA representation: 'E'
+	manual_input, ///< NMEA representation: 'M'
+	simulated, ///< NMEA representation: 'S'
+	data_not_valid, ///< NMEA representation: 'N'
+	precise ///< NMEA representation: 'P'
 };
 
 enum class quality : uint32_t {
-	INVALID = 0, ///< NMEA representation: 0
-	GPS_FIX = 1, ///< NMEA representation: 1
-	DPGS_FIX = 2, ///< NMEA representation: 2
-	GUESS = 6, ///< NMEA representation: 6
-	SIMULATION = 8 ///< NMEA representation: 8
+	invalid = 0, ///< NMEA representation: 0
+	gps_fix = 1, ///< NMEA representation: 1
+	dgps_fix = 2, ///< NMEA representation: 2
+	guess = 6, ///< NMEA representation: 6
+	simulation = 8 ///< NMEA representation: 8
 };
 
 namespace unit
 {
 enum class distance : char {
-	METER, ///< NMEA representation: 'M'
-	FEET, ///< NMEA representation: 'f'
-	NM, ///< NMEA representation: 'N' / nautical miles
-	KM, ///< NMEA representation: 'K' / kilometers
-	FATHOM ///< NMEA representation: 'F'
+	meter, ///< NMEA representation: 'M'
+	feet, ///< NMEA representation: 'f'
+	nm, ///< NMEA representation: 'N' / nautical miles
+	km, ///< NMEA representation: 'K' / kilometers
+	fathom ///< NMEA representation: 'F'
 };
 
 enum class velocity : char {
-	KNOT, ///< NMEA representation: 'N'
-	KMH, ///< NMEA representation: 'K' / kilometers per hour
-	MPS ///< NMEA representation: 'M' / meters per second
+	knot, ///< NMEA representation: 'N'
+	kmh, ///< NMEA representation: 'K' / kilometers per hour
+	mps ///< NMEA representation: 'M' / meters per second
 };
 
 enum class temperature : char {
-	CELSIUS ///< NMEA representation: 'C'
+	celsius ///< NMEA representation: 'C'
 };
 
 enum class pressure : char {
-	BAR, ///< NMEA representation: 'B'
-	PASCAL ///< NMEA representation: 'P'
+	bar, ///< NMEA representation: 'B'
+	pascal ///< NMEA representation: 'P'
 };
 }
 
@@ -74,18 +74,18 @@ enum class reference : char {
 };
 
 enum class side : char {
-	LEFT, ///< NMEA representation: 'L'
-	RIGHT ///< NMEA Representation: 'R'
+	left, ///< NMEA representation: 'L'
+	right ///< NMEA Representation: 'R'
 };
 
 enum class route : char {
-	COMPLETE, ///< NMEA representation: 'c'
-	WORKING ///< NMEA representation: 'w'
+	complete, ///< NMEA representation: 'c'
+	working ///< NMEA representation: 'w'
 };
 
 enum class selection_mode : char {
-	MANUAL, ///< NMEA representation: 'M'
-	AUTOMATIC ///< NMEA representation: 'A'
+	manual, ///< NMEA representation: 'M'
+	automatic ///< NMEA representation: 'A'
 };
 
 enum class ais_channel : char {

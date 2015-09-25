@@ -29,7 +29,7 @@ void vdr::set_degrees_mag(double t) noexcept
 void vdr::set_speed(double t) noexcept
 {
 	speed = t;
-	speed_unit = unit::velocity::KNOT;
+	speed_unit = unit::velocity::knot;
 }
 
 std::unique_ptr<sentence> vdr::parse(const std::string & talker,

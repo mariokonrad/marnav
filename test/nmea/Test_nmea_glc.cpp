@@ -39,8 +39,8 @@ TEST_F(Test_nmea_glc, set_time_diff_invalid_index)
 {
 	nmea::glc glc;
 
-	EXPECT_ANY_THROW(glc.set_time_diff(-1, {0.0, nmea::status::OK}));
-	EXPECT_ANY_THROW(glc.set_time_diff(5, {0.0, nmea::status::OK}));
+	EXPECT_ANY_THROW(glc.set_time_diff(-1, {0.0, nmea::status::ok}));
+	EXPECT_ANY_THROW(glc.set_time_diff(5, {0.0, nmea::status::ok}));
 }
 
 TEST_F(Test_nmea_glc, get_time_diff_invalid_index)
@@ -55,27 +55,27 @@ TEST_F(Test_nmea_glc, set_time_diff)
 {
 	{
 		nmea::glc glc;
-		glc.set_time_diff(0, {1.0, nmea::status::OK});
+		glc.set_time_diff(0, {1.0, nmea::status::ok});
 		EXPECT_STREQ("$GPGLC,0,0,V,1,A,,,,,,,,*55", nmea::to_string(glc).c_str());
 	}
 	{
 		nmea::glc glc;
-		glc.set_time_diff(1, {1.0, nmea::status::OK});
+		glc.set_time_diff(1, {1.0, nmea::status::ok});
 		EXPECT_STREQ("$GPGLC,0,0,V,,,1,A,,,,,,*55", nmea::to_string(glc).c_str());
 	}
 	{
 		nmea::glc glc;
-		glc.set_time_diff(2, {1.0, nmea::status::OK});
+		glc.set_time_diff(2, {1.0, nmea::status::ok});
 		EXPECT_STREQ("$GPGLC,0,0,V,,,,,1,A,,,,*55", nmea::to_string(glc).c_str());
 	}
 	{
 		nmea::glc glc;
-		glc.set_time_diff(3, {1.0, nmea::status::OK});
+		glc.set_time_diff(3, {1.0, nmea::status::ok});
 		EXPECT_STREQ("$GPGLC,0,0,V,,,,,,,1,A,,*55", nmea::to_string(glc).c_str());
 	}
 	{
 		nmea::glc glc;
-		glc.set_time_diff(4, {1.0, nmea::status::OK});
+		glc.set_time_diff(4, {1.0, nmea::status::ok});
 		EXPECT_STREQ("$GPGLC,0,0,V,,,,,,,,,1,A*55", nmea::to_string(glc).c_str());
 	}
 }
@@ -91,7 +91,7 @@ TEST_F(Test_nmea_glc, get_time_diff)
 	auto const t = glc->get_time_diff(0);
 	EXPECT_TRUE(static_cast<bool>(t));
 	EXPECT_NEAR(1.0, t->diff, 1e-8);
-	EXPECT_EQ(nmea::status::OK, t->status);
+	EXPECT_EQ(nmea::status::ok, t->status);
 }
 
 }

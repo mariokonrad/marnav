@@ -179,7 +179,7 @@ void MainWindow::on_data_ready()
 				received_data.clear();
 				break;
 			default:
-				if (received_data.size() > marnav::nmea::sentence::MAX_LENGTH) {
+				if (received_data.size() > marnav::nmea::sentence::max_length) {
 					// error ocurred, discard data
 					received_data.clear();
 				} else {

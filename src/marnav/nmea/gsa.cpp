@@ -47,7 +47,7 @@ std::unique_ptr<sentence> gsa::parse(
 	read(fields[1], detail.mode);
 
 	int index = 2;
-	for (auto i = 0; i < MAX_SATELLITE_IDS; ++i, ++index) {
+	for (auto i = 0; i < max_satellite_ids; ++i, ++index) {
 		uint32_t id;
 		read(fields[index], id);
 		detail.set_satellite_id(i + 1, id);

@@ -116,12 +116,12 @@ public:
 	void set_altitude(double t) noexcept
 	{
 		altitude = t;
-		altitude_unit = unit::distance::METER;
+		altitude_unit = unit::distance::meter;
 	}
 	void set_geodial_separation(double t) noexcept
 	{
 		geodial_separation = t;
-		geodial_separation_unit = unit::distance::METER;
+		geodial_separation_unit = unit::distance::meter;
 	}
 	void set_dgps_age(double t) noexcept { dgps_age = t; }
 	void set_dgps_ref(uint32_t t) noexcept { dgps_ref = t; }

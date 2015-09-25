@@ -18,7 +18,7 @@ void check_waypoint_id(const std::string & id)
 
 void check_status(status value, const char * name)
 {
-	check_value(value, {status::OK, status::WARNING}, name);
+	check_value(value, {status::ok, status::warning}, name);
 }
 
 void check_status(const utils::optional<status> & value, const char * name)

@@ -38,7 +38,7 @@ TEST_F(Test_nmea_vbw, empty_to_string)
 TEST_F(Test_nmea_vbw, set_water_speed)
 {
 	nmea::vbw vbw;
-	vbw.set_water_speed(1.0, 2.0, nmea::status::OK);
+	vbw.set_water_speed(1.0, 2.0, nmea::status::ok);
 
 	EXPECT_STREQ("$IIVBW,1.0,2.0,A,,,*01", nmea::to_string(vbw).c_str());
 }
@@ -46,7 +46,7 @@ TEST_F(Test_nmea_vbw, set_water_speed)
 TEST_F(Test_nmea_vbw, set_water_speed_negative)
 {
 	nmea::vbw vbw;
-	vbw.set_water_speed(-1.0, -2.0, nmea::status::OK);
+	vbw.set_water_speed(-1.0, -2.0, nmea::status::ok);
 
 	EXPECT_STREQ("$IIVBW,-1.0,-2.0,A,,,*01", nmea::to_string(vbw).c_str());
 }
@@ -54,7 +54,7 @@ TEST_F(Test_nmea_vbw, set_water_speed_negative)
 TEST_F(Test_nmea_vbw, set_ground_speed)
 {
 	nmea::vbw vbw;
-	vbw.set_ground_speed(1.0, 2.0, nmea::status::OK);
+	vbw.set_ground_speed(1.0, 2.0, nmea::status::ok);
 
 	EXPECT_STREQ("$IIVBW,,,,1.0,2.0,A*01", nmea::to_string(vbw).c_str());
 }
@@ -62,7 +62,7 @@ TEST_F(Test_nmea_vbw, set_ground_speed)
 TEST_F(Test_nmea_vbw, set_ground_speed_negative)
 {
 	nmea::vbw vbw;
-	vbw.set_ground_speed(-1.0, -2.0, nmea::status::OK);
+	vbw.set_ground_speed(-1.0, -2.0, nmea::status::ok);
 
 	EXPECT_STREQ("$IIVBW,,,,-1.0,-2.0,A*01", nmea::to_string(vbw).c_str());
 }

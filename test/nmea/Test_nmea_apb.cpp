@@ -92,20 +92,20 @@ TEST_F(Test_nmea_apb, get_heading_to_steer)
 TEST_F(Test_nmea_apb, set_mode_indicator)
 {
 	nmea::apb apb;
-	apb.set_mode_indicator(nmea::positioning_system_mode_indicator::AUTONOMOUS);
+	apb.set_mode_indicator(nmea::positioning_system_mode_indicator::autonomous);
 	EXPECT_STREQ("$GPAPB,,,,,,,,,,,,,,,A*29", nmea::to_string(apb).c_str());
 }
 
 TEST_F(Test_nmea_apb, set_mode_indicator_exception)
 {
 	nmea::apb apb;
-	EXPECT_NO_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::INVALID));
-	EXPECT_NO_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::AUTONOMOUS));
-	EXPECT_NO_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::DIFFERENTIAL));
-	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::ESTIMATED));
-	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::MANUAL_INPUT));
-	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::SIMULATED));
-	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::DATA_NOT_VALID));
-	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::PRECISE));
+	EXPECT_NO_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::invalid));
+	EXPECT_NO_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::autonomous));
+	EXPECT_NO_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::differential));
+	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::estimated));
+	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::manual_input));
+	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::simulated));
+	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::data_not_valid));
+	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::precise));
 }
 }

@@ -18,7 +18,7 @@ lcd::lcd()
 
 void lcd::check_index(int index) const
 {
-	if ((index < 0) || (index >= NUM_DIFFERENCES)) {
+	if ((index < 0) || (index >= num_differences)) {
 		throw std::out_of_range{"time difference index out of range"};
 	}
 }
@@ -48,7 +48,7 @@ std::unique_ptr<sentence> lcd::parse(
 	read(fields[0], detail.gri);
 	read(fields[1], detail.master.snr);
 	read(fields[2], detail.master.ecd);
-	for (int i = 0; i < NUM_DIFFERENCES; ++i) {
+	for (int i = 0; i < num_differences; ++i) {
 		utils::optional<decltype(time_difference::snr)> snr;
 		utils::optional<decltype(time_difference::ecd)> ecd;
 		read(fields[(i * 2) + 3], snr);
@@ -68,7 +68,7 @@ std::vector<std::string> lcd::get_data() const
 	result.push_back(to_string(gri));
 	result.push_back(format(master.snr, 3));
 	result.push_back(format(master.ecd, 3));
-	for (int i = 0; i < NUM_DIFFERENCES; ++i) {
+	for (int i = 0; i < num_differences; ++i) {
 		auto const & t = time_diffs[i];
 		if (t) {
 			result.push_back(format(t->snr, 3));

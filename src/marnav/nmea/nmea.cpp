@@ -268,7 +268,7 @@ std::unique_ptr<sentence> make_sentence(const std::string & s)
 	// perform various checks
 	if (s.empty())
 		throw invalid_argument{"empty string in nmea/make_sentence"};
-	if ((s[0] != sentence::START_TOKEN) && (s[0] != sentence::START_TOKEN_AIS))
+	if ((s[0] != sentence::start_token) && (s[0] != sentence::start_token_ais))
 		throw invalid_argument{"no start token in nmea/make_sentence"};
 
 	// extract all fields, skip start token
@@ -280,7 +280,7 @@ std::unique_ptr<sentence> make_sentence(const std::string & s)
 		throw std::invalid_argument{"malformed sentence in nmea/make_sentence"};
 
 	// compute and check checksum
-	auto const end_pos = s.find_first_of(sentence::END_TOKEN, 1);
+	auto const end_pos = s.find_first_of(sentence::end_token, 1);
 	if (end_pos == std::string::npos) // end token not found
 		throw invalid_argument{"invalid format in nmea/make_sentence"};
 	if (s.size() != end_pos + 3) // short or no checksum

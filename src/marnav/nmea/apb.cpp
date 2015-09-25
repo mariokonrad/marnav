@@ -47,9 +47,9 @@ void apb::set_heading_to_steer_to_destination(uint32_t t, reference ref)
 
 void apb::set_mode_indicator(positioning_system_mode_indicator t)
 {
-	check_value(t, {positioning_system_mode_indicator::INVALID,
-					   positioning_system_mode_indicator::AUTONOMOUS,
-					   positioning_system_mode_indicator::DIFFERENTIAL},
+	check_value(t, {positioning_system_mode_indicator::invalid,
+					   positioning_system_mode_indicator::autonomous,
+					   positioning_system_mode_indicator::differential},
 		"mode_indicator");
 	mode_indicator = t;
 }
@@ -59,8 +59,8 @@ void apb::check() const
 	check_status(loran_c_blink_warning, "loran_c_blink_warning");
 	check_status(loran_c_cycle_lock_warning, "loran_c_cycle_lock_warning");
 
-	check_value(direction_to_steer, {side::LEFT, side::RIGHT}, "direction_to_steer");
-	check_value(cross_track_unit, {unit::distance::NM}, "cross_talk_unit");
+	check_value(direction_to_steer, {side::left, side::right}, "direction_to_steer");
+	check_value(cross_track_unit, {unit::distance::nm}, "cross_talk_unit");
 	check_status(status_arrival, "status_arrival");
 	check_status(status_perpendicular_passing, "status_perpendicular_passing");
 
@@ -79,9 +79,9 @@ void apb::check() const
 	check_value(heading_to_steer_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
 		"heading_to_steer_to_destination_ref");
 
-	check_value(mode_indicator, {positioning_system_mode_indicator::INVALID,
-									positioning_system_mode_indicator::AUTONOMOUS,
-									positioning_system_mode_indicator::DIFFERENTIAL},
+	check_value(mode_indicator, {positioning_system_mode_indicator::invalid,
+									positioning_system_mode_indicator::autonomous,
+									positioning_system_mode_indicator::differential},
 		"mode_indicator");
 }
 

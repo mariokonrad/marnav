@@ -18,7 +18,7 @@ wcv::wcv()
 void wcv::set_speed(double t) noexcept
 {
 	speed = t;
-	speed_unit = unit::velocity::KNOT;
+	speed_unit = unit::velocity::knot;
 }
 
 void wcv::set_waypoint(const std::string & id)

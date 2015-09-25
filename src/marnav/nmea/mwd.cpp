@@ -29,13 +29,13 @@ void mwd::set_direction_mag(double t) noexcept
 void mwd::set_speed_knots(double t) noexcept
 {
 	speed_kn = t;
-	speed_kn_unit = unit::velocity::KNOT;
+	speed_kn_unit = unit::velocity::knot;
 }
 
 void mwd::set_speed_mps(double t) noexcept
 {
 	speed_ms = t;
-	speed_ms_unit = unit::velocity::MPS;
+	speed_ms_unit = unit::velocity::mps;
 }
 
 std::unique_ptr<sentence> mwd::parse(

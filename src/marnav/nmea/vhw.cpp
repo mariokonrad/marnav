@@ -24,13 +24,13 @@ void vhw::set_heading(double t) noexcept
 void vhw::set_speed_knots(double t) noexcept
 {
 	speed_knots = t;
-	speed_knots_unit = unit::velocity::KNOT;
+	speed_knots_unit = unit::velocity::knot;
 }
 
 void vhw::set_speed_kmh(double t) noexcept
 {
 	speed_kmh = t;
-	speed_kmh_unit = unit::velocity::KMH;
+	speed_kmh_unit = unit::velocity::kmh;
 }
 
 std::unique_ptr<sentence> vhw::parse(

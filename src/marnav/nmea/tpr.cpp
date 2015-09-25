@@ -12,10 +12,10 @@ constexpr const char * tpr::TAG;
 tpr::tpr()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 	, range(0.0)
-	, range_unit(unit::distance::METER)
+	, range_unit(unit::distance::meter)
 	, bearing(0.0)
 	, depth(0.0)
-	, depth_unit(unit::distance::METER)
+	, depth_unit(unit::distance::meter)
 {
 }
 

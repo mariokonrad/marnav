@@ -10,7 +10,7 @@ nmea_reader::nmea_reader(std::unique_ptr<device> && dev)
 	: raw(0)
 	, dev(std::move(dev))
 {
-	sentence.reserve(nmea::sentence::MAX_LENGTH + 1);
+	sentence.reserve(nmea::sentence::max_length + 1);
 }
 
 nmea_reader::~nmea_reader() {}
@@ -61,7 +61,7 @@ void nmea_reader::process_nmea()
 			if ((raw <= 32) || (raw >= 127))
 				return;
 
-			if (sentence.size() > nmea::sentence::MAX_LENGTH)
+			if (sentence.size() > nmea::sentence::max_length)
 				throw std::length_error{"sentence size to large. receiving NMEA data?"};
 			sentence += raw;
 			break;

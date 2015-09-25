@@ -50,9 +50,9 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	constexpr static const int MAX_TRANSDUCER_INFO = 10;
+	constexpr static const int max_transducer_info = 10;
 
-	std::array<utils::optional<transducer_info>, MAX_TRANSDUCER_INFO> transducer_data;
+	std::array<utils::optional<transducer_info>, max_transducer_info> transducer_data;
 
 	void check_index(int index) const;
 

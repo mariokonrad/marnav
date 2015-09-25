@@ -44,7 +44,7 @@ protected:
 	vdm(sentence_id id, const std::string & tag, const std::string & talker);
 
 	virtual std::vector<std::string> get_data() const override;
-	virtual char get_start_token() const override { return START_TOKEN_AIS; }
+	virtual char get_start_token() const override { return start_token_ais; }
 
 	void read_fields(const std::vector<std::string> & fields);
 

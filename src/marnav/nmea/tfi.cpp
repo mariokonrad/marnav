@@ -54,7 +54,7 @@ tfi::tfi()
 
 void tfi::check_index(int index) const
 {
-	if ((index < 0) || (index >= NUM_SENSORS)) {
+	if ((index < 0) || (index >= num_sensors)) {
 		throw std::out_of_range{"sensor index out of range"};
 	}
 }
@@ -81,7 +81,7 @@ std::unique_ptr<sentence> tfi::parse(
 	result->set_talker(talker);
 	tfi & detail = static_cast<tfi &>(*result);
 
-	for (size_t i = 0; i < NUM_SENSORS; ++i)
+	for (size_t i = 0; i < num_sensors; ++i)
 		read(fields[i], detail.sensors[i], state_mapping);
 
 	return result;
@@ -90,7 +90,7 @@ std::unique_ptr<sentence> tfi::parse(
 std::vector<std::string> tfi::get_data() const
 {
 	std::vector<std::string> result;
-	result.reserve(NUM_SENSORS);
+	result.reserve(num_sensors);
 	for (auto const & t : sensors)
 		result.push_back(to_string(t));
 	return result;

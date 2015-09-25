@@ -17,13 +17,13 @@ vtg::vtg()
 void vtg::set_speed_kn(double t) noexcept
 {
 	speed_kn = t;
-	speed_kn_unit = unit::velocity::KNOT;
+	speed_kn_unit = unit::velocity::knot;
 }
 
 void vtg::set_speed_kmh(double t) noexcept
 {
 	speed_kmh = t;
-	speed_kmh_unit = unit::velocity::KMH;
+	speed_kmh_unit = unit::velocity::kmh;
 }
 
 void vtg::set_track_magn(double t) noexcept

@@ -27,7 +27,7 @@ TEST_F(Test_nmea_vwr, parse)
 
 	auto side = vwr->get_angle_side();
 	EXPECT_TRUE(side.available());
-	EXPECT_EQ(nmea::side::RIGHT, side.value());
+	EXPECT_EQ(nmea::side::right, side.value());
 }
 
 TEST_F(Test_nmea_vwr, parse_invalid_number_of_arguments)
@@ -46,7 +46,7 @@ TEST_F(Test_nmea_vwr, empty_to_string)
 TEST_F(Test_nmea_vwr, set_angle_left)
 {
 	nmea::vwr vwr;
-	vwr.set_angle(22.5, nmea::side::LEFT);
+	vwr.set_angle(22.5, nmea::side::left);
 
 	EXPECT_STREQ("$IIVWR,22.5,L,,,,,,*04", nmea::to_string(vwr).c_str());
 }
@@ -54,7 +54,7 @@ TEST_F(Test_nmea_vwr, set_angle_left)
 TEST_F(Test_nmea_vwr, set_angle_right)
 {
 	nmea::vwr vwr;
-	vwr.set_angle(22.5, nmea::side::RIGHT);
+	vwr.set_angle(22.5, nmea::side::right);
 
 	EXPECT_STREQ("$IIVWR,22.5,R,,,,,,*1A", nmea::to_string(vwr).c_str());
 }

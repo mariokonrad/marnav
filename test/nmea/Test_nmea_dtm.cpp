@@ -39,12 +39,12 @@ TEST_F(Test_nmea_dtm, set_lat_offset)
 {
 	{
 		nmea::dtm dtm;
-		dtm.set_lat_offset(1.0, nmea::direction::NORTH);
+		dtm.set_lat_offset(1.0, nmea::direction::north);
 		EXPECT_STREQ("$GPDTM,W84,,1.0000,N,0.0000,E,0.0,W84*6E", nmea::to_string(dtm).c_str());
 	}
 	{
 		nmea::dtm dtm;
-		dtm.set_lat_offset(1.0, nmea::direction::SOUTH);
+		dtm.set_lat_offset(1.0, nmea::direction::south);
 		EXPECT_STREQ("$GPDTM,W84,,1.0000,S,0.0000,E,0.0,W84*73", nmea::to_string(dtm).c_str());
 	}
 }
@@ -53,22 +53,22 @@ TEST_F(Test_nmea_dtm, set_lat_offset_invalid_direction)
 {
 	nmea::dtm dtm;
 
-	EXPECT_NO_THROW(dtm.set_lat_offset(1.0, nmea::direction::NORTH));
-	EXPECT_NO_THROW(dtm.set_lat_offset(1.0, nmea::direction::SOUTH));
-	EXPECT_ANY_THROW(dtm.set_lat_offset(1.0, nmea::direction::EAST));
-	EXPECT_ANY_THROW(dtm.set_lat_offset(1.0, nmea::direction::WEST));
+	EXPECT_NO_THROW(dtm.set_lat_offset(1.0, nmea::direction::north));
+	EXPECT_NO_THROW(dtm.set_lat_offset(1.0, nmea::direction::south));
+	EXPECT_ANY_THROW(dtm.set_lat_offset(1.0, nmea::direction::east));
+	EXPECT_ANY_THROW(dtm.set_lat_offset(1.0, nmea::direction::west));
 }
 
 TEST_F(Test_nmea_dtm, set_lon_offset)
 {
 	{
 		nmea::dtm dtm;
-		dtm.set_lon_offset(1.0, nmea::direction::EAST);
+		dtm.set_lon_offset(1.0, nmea::direction::east);
 		EXPECT_STREQ("$GPDTM,W84,,0.0000,N,1.0000,E,0.0,W84*6E", nmea::to_string(dtm).c_str());
 	}
 	{
 		nmea::dtm dtm;
-		dtm.set_lon_offset(1.0, nmea::direction::WEST);
+		dtm.set_lon_offset(1.0, nmea::direction::west);
 		EXPECT_STREQ("$GPDTM,W84,,0.0000,N,1.0000,W,0.0,W84*7C", nmea::to_string(dtm).c_str());
 	}
 }
@@ -77,10 +77,10 @@ TEST_F(Test_nmea_dtm, set_lon_offset_invalid_direction)
 {
 	nmea::dtm dtm;
 
-	EXPECT_ANY_THROW(dtm.set_lon_offset(1.0, nmea::direction::NORTH));
-	EXPECT_ANY_THROW(dtm.set_lon_offset(1.0, nmea::direction::SOUTH));
-	EXPECT_NO_THROW(dtm.set_lon_offset(1.0, nmea::direction::EAST));
-	EXPECT_NO_THROW(dtm.set_lon_offset(1.0, nmea::direction::WEST));
+	EXPECT_ANY_THROW(dtm.set_lon_offset(1.0, nmea::direction::north));
+	EXPECT_ANY_THROW(dtm.set_lon_offset(1.0, nmea::direction::south));
+	EXPECT_NO_THROW(dtm.set_lon_offset(1.0, nmea::direction::east));
+	EXPECT_NO_THROW(dtm.set_lon_offset(1.0, nmea::direction::west));
 }
 
 TEST_F(Test_nmea_dtm, set_ref)

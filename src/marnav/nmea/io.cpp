@@ -35,9 +35,9 @@ std::string to_string(const std::string & data) { return data; }
 std::string to_string(side t)
 {
 	switch (t) {
-		case side::LEFT:
+		case side::left:
 			return "L";
-		case side::RIGHT:
+		case side::right:
 			return "R";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
@@ -46,9 +46,9 @@ std::string to_string(side t)
 std::string to_string(route t)
 {
 	switch (t) {
-		case route::COMPLETE:
+		case route::complete:
 			return "c";
-		case route::WORKING:
+		case route::working:
 			return "w";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
@@ -57,9 +57,9 @@ std::string to_string(route t)
 std::string to_string(selection_mode t)
 {
 	switch (t) {
-		case selection_mode::MANUAL:
+		case selection_mode::manual:
 			return "M";
-		case selection_mode::AUTOMATIC:
+		case selection_mode::automatic:
 			return "A";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
@@ -94,13 +94,13 @@ std::string to_string(type_of_point t)
 std::string to_string(direction t)
 {
 	switch (t) {
-		case direction::NORTH:
+		case direction::north:
 			return "N";
-		case direction::SOUTH:
+		case direction::south:
 			return "S";
-		case direction::EAST:
+		case direction::east:
 			return "E";
-		case direction::WEST:
+		case direction::west:
 			return "W";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
@@ -122,21 +122,21 @@ std::string to_string(reference t)
 std::string to_string(positioning_system_mode_indicator t)
 {
 	switch (t) {
-		case positioning_system_mode_indicator::INVALID:
+		case positioning_system_mode_indicator::invalid:
 			return "V";
-		case positioning_system_mode_indicator::AUTONOMOUS:
+		case positioning_system_mode_indicator::autonomous:
 			return "A";
-		case positioning_system_mode_indicator::DIFFERENTIAL:
+		case positioning_system_mode_indicator::differential:
 			return "D";
-		case positioning_system_mode_indicator::ESTIMATED:
+		case positioning_system_mode_indicator::estimated:
 			return "E";
-		case positioning_system_mode_indicator::MANUAL_INPUT:
+		case positioning_system_mode_indicator::manual_input:
 			return "M";
-		case positioning_system_mode_indicator::SIMULATED:
+		case positioning_system_mode_indicator::simulated:
 			return "S";
-		case positioning_system_mode_indicator::DATA_NOT_VALID:
+		case positioning_system_mode_indicator::data_not_valid:
 			return "N";
-		case positioning_system_mode_indicator::PRECISE:
+		case positioning_system_mode_indicator::precise:
 			return "P";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
@@ -145,9 +145,9 @@ std::string to_string(positioning_system_mode_indicator t)
 std::string to_string(status t)
 {
 	switch (t) {
-		case status::OK:
+		case status::ok:
 			return "A";
-		case status::WARNING:
+		case status::warning:
 			return "V";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
@@ -156,15 +156,15 @@ std::string to_string(status t)
 std::string to_string(quality t)
 {
 	switch (t) {
-		case quality::INVALID:
+		case quality::invalid:
 			return "0";
-		case quality::GPS_FIX:
+		case quality::gps_fix:
 			return "1";
-		case quality::DPGS_FIX:
+		case quality::dgps_fix:
 			return "2";
-		case quality::GUESS:
+		case quality::guess:
 			return "6";
-		case quality::SIMULATION:
+		case quality::simulation:
 			return "8";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
@@ -173,15 +173,15 @@ std::string to_string(quality t)
 std::string to_string(unit::distance t)
 {
 	switch (t) {
-		case unit::distance::METER:
+		case unit::distance::meter:
 			return "M";
-		case unit::distance::FEET:
+		case unit::distance::feet:
 			return "f";
-		case unit::distance::NM:
+		case unit::distance::nm:
 			return "N";
-		case unit::distance::KM:
+		case unit::distance::km:
 			return "K";
-		case unit::distance::FATHOM:
+		case unit::distance::fathom:
 			return "F";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
@@ -190,11 +190,11 @@ std::string to_string(unit::distance t)
 std::string to_string(unit::velocity t)
 {
 	switch (t) {
-		case unit::velocity::KNOT:
+		case unit::velocity::knot:
 			return "N";
-		case unit::velocity::KMH:
+		case unit::velocity::kmh:
 			return "K";
-		case unit::velocity::MPS:
+		case unit::velocity::mps:
 			return "M";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
@@ -203,7 +203,7 @@ std::string to_string(unit::velocity t)
 std::string to_string(unit::temperature t)
 {
 	switch (t) {
-		case unit::temperature::CELSIUS:
+		case unit::temperature::celsius:
 			return "C";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
@@ -212,9 +212,9 @@ std::string to_string(unit::temperature t)
 std::string to_string(unit::pressure t)
 {
 	switch (t) {
-		case unit::pressure::BAR:
+		case unit::pressure::bar:
 			return "B";
-		case unit::pressure::PASCAL:
+		case unit::pressure::pascal:
 			return "P";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
@@ -393,10 +393,10 @@ void read(const std::string & s, side & value, data_format fmt)
 	read(s, t, fmt);
 	switch (t) {
 		case 'L':
-			value = side::LEFT;
+			value = side::left;
 			break;
 		case 'R':
-			value = side::RIGHT;
+			value = side::right;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/side"};
@@ -409,10 +409,10 @@ void read(const std::string & s, route & value, data_format fmt)
 	read(s, t, fmt);
 	switch (t) {
 		case 'c':
-			value = route::COMPLETE;
+			value = route::complete;
 			break;
 		case 'w':
-			value = route::WORKING;
+			value = route::working;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/route"};
@@ -425,10 +425,10 @@ void read(const std::string & s, selection_mode & value, data_format fmt)
 	read(s, t, fmt);
 	switch (t) {
 		case 'M':
-			value = selection_mode::MANUAL;
+			value = selection_mode::manual;
 			break;
 		case 'A':
-			value = selection_mode::AUTOMATIC;
+			value = selection_mode::automatic;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/selection_mode"};
@@ -481,16 +481,16 @@ void read(const std::string & s, direction & value, data_format fmt)
 	read(s, t, fmt);
 	switch (t) {
 		case 'N':
-			value = direction::NORTH;
+			value = direction::north;
 			break;
 		case 'S':
-			value = direction::SOUTH;
+			value = direction::south;
 			break;
 		case 'E':
-			value = direction::EAST;
+			value = direction::east;
 			break;
 		case 'W':
-			value = direction::WEST;
+			value = direction::west;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/direction"};
@@ -522,28 +522,28 @@ void read(const std::string & s, positioning_system_mode_indicator & value, data
 	read(s, t, fmt);
 	switch (t) {
 		case 'V':
-			value = positioning_system_mode_indicator::INVALID;
+			value = positioning_system_mode_indicator::invalid;
 			break;
 		case 'A':
-			value = positioning_system_mode_indicator::AUTONOMOUS;
+			value = positioning_system_mode_indicator::autonomous;
 			break;
 		case 'D':
-			value = positioning_system_mode_indicator::DIFFERENTIAL;
+			value = positioning_system_mode_indicator::differential;
 			break;
 		case 'E':
-			value = positioning_system_mode_indicator::ESTIMATED;
+			value = positioning_system_mode_indicator::estimated;
 			break;
 		case 'M':
-			value = positioning_system_mode_indicator::MANUAL_INPUT;
+			value = positioning_system_mode_indicator::manual_input;
 			break;
 		case 'S':
-			value = positioning_system_mode_indicator::SIMULATED;
+			value = positioning_system_mode_indicator::simulated;
 			break;
 		case 'N':
-			value = positioning_system_mode_indicator::DATA_NOT_VALID;
+			value = positioning_system_mode_indicator::data_not_valid;
 			break;
 		case 'P':
-			value = positioning_system_mode_indicator::PRECISE;
+			value = positioning_system_mode_indicator::precise;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/positioning_system_mode_indicator"};
@@ -556,10 +556,10 @@ void read(const std::string & s, status & value, data_format fmt)
 	read(s, t, fmt);
 	switch (t) {
 		case 'A':
-			value = status::OK;
+			value = status::ok;
 			break;
 		case 'V':
-			value = status::WARNING;
+			value = status::warning;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/status"};
@@ -572,19 +572,19 @@ void read(const std::string & s, quality & value, data_format fmt)
 	read(s, t, fmt);
 	switch (t) {
 		case 0:
-			value = quality::INVALID;
+			value = quality::invalid;
 			break;
 		case 1:
-			value = quality::GPS_FIX;
+			value = quality::gps_fix;
 			break;
 		case 2:
-			value = quality::DPGS_FIX;
+			value = quality::dgps_fix;
 			break;
 		case 6:
-			value = quality::GUESS;
+			value = quality::guess;
 			break;
 		case 8:
-			value = quality::SIMULATION;
+			value = quality::simulation;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/quality"};
@@ -597,19 +597,19 @@ void read(const std::string & s, unit::distance & value, data_format fmt)
 	read(s, t, fmt);
 	switch (t) {
 		case 'M':
-			value = unit::distance::METER;
+			value = unit::distance::meter;
 			break;
 		case 'f':
-			value = unit::distance::FEET;
+			value = unit::distance::feet;
 			break;
 		case 'N':
-			value = unit::distance::NM;
+			value = unit::distance::nm;
 			break;
 		case 'K':
-			value = unit::distance::KM;
+			value = unit::distance::km;
 			break;
 		case 'F':
-			value = unit::distance::FATHOM;
+			value = unit::distance::fathom;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/unit/distance"};
@@ -622,13 +622,13 @@ void read(const std::string & s, unit::velocity & value, data_format fmt)
 	read(s, t, fmt);
 	switch (t) {
 		case 'N':
-			value = unit::velocity::KNOT;
+			value = unit::velocity::knot;
 			break;
 		case 'K':
-			value = unit::velocity::KMH;
+			value = unit::velocity::kmh;
 			break;
 		case 'M':
-			value = unit::velocity::MPS;
+			value = unit::velocity::mps;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/unit/velocity"};
@@ -641,7 +641,7 @@ void read(const std::string & s, unit::temperature & value, data_format fmt)
 	read(s, t, fmt);
 	switch (t) {
 		case 'C':
-			value = unit::temperature::CELSIUS;
+			value = unit::temperature::celsius;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/unit/temperature"};
@@ -654,10 +654,10 @@ void read(const std::string & s, unit::pressure & value, data_format fmt)
 	read(s, t, fmt);
 	switch (t) {
 		case 'B':
-			value = unit::pressure::BAR;
+			value = unit::pressure::bar;
 			break;
 		case 'P':
-			value = unit::pressure::PASCAL;
+			value = unit::pressure::pascal;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/unit/pressure"};

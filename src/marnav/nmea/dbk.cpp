@@ -17,19 +17,19 @@ dbk::dbk()
 void dbk::set_depth_feet(double t) noexcept
 {
 	depth_feet = t;
-	depth_feet_unit = unit::distance::FEET;
+	depth_feet_unit = unit::distance::feet;
 }
 
 void dbk::set_depth_meter(double t) noexcept
 {
 	depth_meter = t;
-	depth_meter_unit = unit::distance::METER;
+	depth_meter_unit = unit::distance::meter;
 }
 
 void dbk::set_depth_fathom(double t) noexcept
 {
 	depth_fathom = t;
-	depth_fathom_unit = unit::distance::FATHOM;
+	depth_fathom_unit = unit::distance::fathom;
 }
 
 std::unique_ptr<sentence> dbk::parse(

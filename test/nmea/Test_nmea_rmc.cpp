@@ -54,13 +54,13 @@ TEST_F(Test_nmea_rmc, get_lat_north)
 	EXPECT_EQ(12u, lat.degrees());
 	EXPECT_EQ(34u, lat.minutes());
 	EXPECT_NEAR(56.0, lat.seconds(), 1e-2);
-	EXPECT_EQ(geo::latitude::hemisphere::NORTH, lat.hem());
+	EXPECT_EQ(geo::latitude::hemisphere::north, lat.hem());
 }
 
 TEST_F(Test_nmea_rmc, set_lat_north)
 {
 	nmea::rmc rmc;
-	rmc.set_lat(geo::latitude{12, 34, 56, geo::latitude::hemisphere::NORTH});
+	rmc.set_lat(geo::latitude{12, 34, 56, geo::latitude::hemisphere::north});
 
 	EXPECT_STREQ("$GPRMC,,,1234.9333,N,,,,,,,,*25", nmea::to_string(rmc).c_str());
 }
@@ -78,13 +78,13 @@ TEST_F(Test_nmea_rmc, get_lat_south)
 	EXPECT_EQ(12u, lat.degrees());
 	EXPECT_EQ(34u, lat.minutes());
 	EXPECT_NEAR(56.0, lat.seconds(), 1e-2);
-	EXPECT_EQ(geo::latitude::hemisphere::SOUTH, lat.hem());
+	EXPECT_EQ(geo::latitude::hemisphere::south, lat.hem());
 }
 
 TEST_F(Test_nmea_rmc, set_lat_south)
 {
 	nmea::rmc rmc;
-	rmc.set_lat(geo::latitude{12, 34, 56, geo::latitude::hemisphere::SOUTH});
+	rmc.set_lat(geo::latitude{12, 34, 56, geo::latitude::hemisphere::south});
 
 	EXPECT_STREQ("$GPRMC,,,1234.9333,S,,,,,,,,*38", nmea::to_string(rmc).c_str());
 }
@@ -102,13 +102,13 @@ TEST_F(Test_nmea_rmc, get_lon_east)
 	EXPECT_EQ(123u, lon.degrees());
 	EXPECT_EQ(45u, lon.minutes());
 	EXPECT_NEAR(56.0, lon.seconds(), 1e-2);
-	EXPECT_EQ(geo::longitude::hemisphere::EAST, lon.hem());
+	EXPECT_EQ(geo::longitude::hemisphere::east, lon.hem());
 }
 
 TEST_F(Test_nmea_rmc, set_lon_east)
 {
 	nmea::rmc rmc;
-	rmc.set_lon(geo::longitude{123, 45, 56, geo::longitude::hemisphere::EAST});
+	rmc.set_lon(geo::longitude{123, 45, 56, geo::longitude::hemisphere::east});
 
 	EXPECT_STREQ("$GPRMC,,,,,12345.9333,E,,,,,,*1B", nmea::to_string(rmc).c_str());
 }
@@ -126,13 +126,13 @@ TEST_F(Test_nmea_rmc, get_lon_west)
 	EXPECT_EQ(123u, lon.degrees());
 	EXPECT_EQ(45u, lon.minutes());
 	EXPECT_NEAR(56.0, lon.seconds(), 1e-2);
-	EXPECT_EQ(geo::longitude::hemisphere::WEST, lon.hem());
+	EXPECT_EQ(geo::longitude::hemisphere::west, lon.hem());
 }
 
 TEST_F(Test_nmea_rmc, set_lon_west)
 {
 	nmea::rmc rmc;
-	rmc.set_lon(geo::longitude{123, 45, 56, geo::longitude::hemisphere::WEST});
+	rmc.set_lon(geo::longitude{123, 45, 56, geo::longitude::hemisphere::west});
 
 	EXPECT_STREQ("$GPRMC,,,,,12345.9333,W,,,,,,*09", nmea::to_string(rmc).c_str());
 }

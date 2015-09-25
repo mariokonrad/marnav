@@ -54,7 +54,7 @@ TEST_F(Test_nmea_mwv, set_angle)
 TEST_F(Test_nmea_mwv, set_speed)
 {
 	nmea::mwv mwv;
-	mwv.set_speed(22.5, nmea::unit::velocity::KNOT);
+	mwv.set_speed(22.5, nmea::unit::velocity::knot);
 
 	EXPECT_STREQ("$IIMWV,,,22.5,N,*35", nmea::to_string(mwv).c_str());
 }

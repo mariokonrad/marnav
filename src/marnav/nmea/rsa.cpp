@@ -17,13 +17,13 @@ rsa::rsa()
 void rsa::set_rudder1(double t) noexcept
 {
 	rudder1 = t;
-	rudder1_valid = status::OK;
+	rudder1_valid = status::ok;
 }
 
 void rsa::set_rudder2(double t) noexcept
 {
 	rudder2 = t;
-	rudder2_valid = status::OK;
+	rudder2_valid = status::ok;
 }
 
 std::unique_ptr<sentence> rsa::parse(

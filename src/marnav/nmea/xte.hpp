@@ -71,7 +71,7 @@ public:
 	void set_cross_track_error_magnitude(double t) noexcept
 	{
 		cross_track_error_magnitude = t;
-		cross_track_unit = unit::distance::NM;
+		cross_track_unit = unit::distance::nm;
 	}
 	void set_direction_to_steer(side t) noexcept { direction_to_steer = t; }
 	void set_faa_mode_indicato(positioning_system_mode_indicator t) noexcept

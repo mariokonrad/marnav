@@ -49,10 +49,10 @@ TEST_F(Test_geo_angle, longitude_type_check)
 
 TEST_F(Test_geo_angle, hemisphere)
 {
-	EXPECT_NEAR(30,  (geo::latitude{30, 0, 0, geo::latitude::hemisphere::NORTH}.get()), 1e-5);
-	EXPECT_NEAR(-30, (geo::latitude{30, 0, 0, geo::latitude::hemisphere::SOUTH}.get()), 1e-5);
-	EXPECT_NEAR(30, (geo::longitude{30, 0, 0, geo::longitude::hemisphere::EAST}.get()), 1e-5);
-	EXPECT_NEAR(-30,  (geo::longitude{30, 0, 0, geo::longitude::hemisphere::WEST}.get()), 1e-5);
+	EXPECT_NEAR(30,  (geo::latitude{30, 0, 0, geo::latitude::hemisphere::north}.get()), 1e-5);
+	EXPECT_NEAR(-30, (geo::latitude{30, 0, 0, geo::latitude::hemisphere::south}.get()), 1e-5);
+	EXPECT_NEAR(30, (geo::longitude{30, 0, 0, geo::longitude::hemisphere::east}.get()), 1e-5);
+	EXPECT_NEAR(-30,  (geo::longitude{30, 0, 0, geo::longitude::hemisphere::west}.get()), 1e-5);
 }
 
 TEST_F(Test_geo_angle, comparison)
@@ -101,14 +101,14 @@ TEST_F(Test_geo_angle, longitude_invalid_value) { EXPECT_ANY_THROW(geo::longitud
 
 TEST_F(Test_geo_angle, latitude_hemisphere)
 {
-	EXPECT_EQ(geo::latitude::hemisphere::NORTH, geo::latitude{+1.0}.hem());
-	EXPECT_EQ(geo::latitude::hemisphere::SOUTH, geo::latitude{-1.0}.hem());
+	EXPECT_EQ(geo::latitude::hemisphere::north, geo::latitude{+1.0}.hem());
+	EXPECT_EQ(geo::latitude::hemisphere::south, geo::latitude{-1.0}.hem());
 }
 
 TEST_F(Test_geo_angle, longitude_hemisphere)
 {
-	EXPECT_EQ(geo::longitude::hemisphere::WEST, geo::longitude{-1.0}.hem());
-	EXPECT_EQ(geo::longitude::hemisphere::EAST, geo::longitude{+1.0}.hem());
+	EXPECT_EQ(geo::longitude::hemisphere::west, geo::longitude{-1.0}.hem());
+	EXPECT_EQ(geo::longitude::hemisphere::east, geo::longitude{+1.0}.hem());
 }
 
 TEST_F(Test_geo_angle, latitude_literal_north)
@@ -119,7 +119,7 @@ TEST_F(Test_geo_angle, latitude_literal_north)
 	const latitude t = 12.34_lat;
 
 	EXPECT_EQ(expected, t);
-	EXPECT_EQ(geo::latitude::hemisphere::NORTH, t.hem());
+	EXPECT_EQ(geo::latitude::hemisphere::north, t.hem());
 }
 
 TEST_F(Test_geo_angle, latitude_literal_explicit_north)
@@ -130,7 +130,7 @@ TEST_F(Test_geo_angle, latitude_literal_explicit_north)
 	const latitude t = 12.34_north;
 
 	EXPECT_EQ(expected, t);
-	EXPECT_EQ(geo::latitude::hemisphere::NORTH, t.hem());
+	EXPECT_EQ(geo::latitude::hemisphere::north, t.hem());
 }
 
 TEST_F(Test_geo_angle, latitude_literal_south)
@@ -141,7 +141,7 @@ TEST_F(Test_geo_angle, latitude_literal_south)
 	const latitude t = -12.34_lat;
 
 	EXPECT_EQ(expected, t);
-	EXPECT_EQ(geo::latitude::hemisphere::SOUTH, t.hem());
+	EXPECT_EQ(geo::latitude::hemisphere::south, t.hem());
 }
 
 TEST_F(Test_geo_angle, latitude_literal_explicit_south)
@@ -152,7 +152,7 @@ TEST_F(Test_geo_angle, latitude_literal_explicit_south)
 	const latitude t = 12.34_south;
 
 	EXPECT_EQ(expected, t);
-	EXPECT_EQ(geo::latitude::hemisphere::SOUTH, t.hem());
+	EXPECT_EQ(geo::latitude::hemisphere::south, t.hem());
 }
 
 TEST_F(Test_geo_angle, longitude_literal_east)
@@ -163,7 +163,7 @@ TEST_F(Test_geo_angle, longitude_literal_east)
 	const longitude t = 123.45_lon;
 
 	EXPECT_EQ(expected, t);
-	EXPECT_EQ(geo::longitude::hemisphere::EAST, t.hem());
+	EXPECT_EQ(geo::longitude::hemisphere::east, t.hem());
 }
 
 TEST_F(Test_geo_angle, longitude_literal_explicit_east)
@@ -174,7 +174,7 @@ TEST_F(Test_geo_angle, longitude_literal_explicit_east)
 	const longitude t = 123.45_east;
 
 	EXPECT_EQ(expected, t);
-	EXPECT_EQ(geo::longitude::hemisphere::EAST, t.hem());
+	EXPECT_EQ(geo::longitude::hemisphere::east, t.hem());
 }
 
 TEST_F(Test_geo_angle, longitude_literal_west)
@@ -185,7 +185,7 @@ TEST_F(Test_geo_angle, longitude_literal_west)
 	const longitude t = -123.45_lon;
 
 	EXPECT_EQ(expected, t);
-	EXPECT_EQ(geo::longitude::hemisphere::WEST, t.hem());
+	EXPECT_EQ(geo::longitude::hemisphere::west, t.hem());
 }
 
 TEST_F(Test_geo_angle, longitude_literal_explicit_west)
@@ -196,7 +196,7 @@ TEST_F(Test_geo_angle, longitude_literal_explicit_west)
 	const longitude t = 123.45_west;
 
 	EXPECT_EQ(expected, t);
-	EXPECT_EQ(geo::longitude::hemisphere::WEST, t.hem());
+	EXPECT_EQ(geo::longitude::hemisphere::west, t.hem());
 }
 
 }

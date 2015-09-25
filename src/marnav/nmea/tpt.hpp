@@ -60,13 +60,13 @@ public:
 	void set_range(double t) noexcept
 	{
 		range = t;
-		range_unit = unit::distance::METER;
+		range_unit = unit::distance::meter;
 	}
 	void set_bearing(double t) noexcept { bearing = t; }
 	void set_depth(double t) noexcept
 	{
 		depth = t;
-		range_unit = unit::distance::METER;
+		range_unit = unit::distance::meter;
 	}
 };
 }

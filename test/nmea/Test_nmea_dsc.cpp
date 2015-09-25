@@ -108,10 +108,10 @@ TEST_F(Test_nmea_dsc, get_geographical_area_SE)
 		nmea::make_sentence("$CDDSC,02,2380210102,00,21,26,1394807410,2231,,,B,E*73"));
 	ASSERT_NE(nullptr, s);
 	const geo::region r = s->get_geographical_area();
-	EXPECT_EQ((geo::latitude{38, 0, 0, geo::latitude::hemisphere::SOUTH}), r.top());
-	EXPECT_EQ((geo::longitude{21, 0, 0, geo::longitude::hemisphere::EAST}), r.left());
-	EXPECT_EQ((geo::latitude{39, 0, 0, geo::latitude::hemisphere::SOUTH}), r.bottom());
-	EXPECT_EQ((geo::longitude{23, 0, 0, geo::longitude::hemisphere::EAST}), r.right());
+	EXPECT_EQ((geo::latitude{38, 0, 0, geo::latitude::hemisphere::south}), r.top());
+	EXPECT_EQ((geo::longitude{21, 0, 0, geo::longitude::hemisphere::east}), r.left());
+	EXPECT_EQ((geo::latitude{39, 0, 0, geo::latitude::hemisphere::south}), r.bottom());
+	EXPECT_EQ((geo::longitude{23, 0, 0, geo::longitude::hemisphere::east}), r.right());
 }
 
 TEST_F(Test_nmea_dsc, get_geographical_area_SW)
@@ -120,10 +120,10 @@ TEST_F(Test_nmea_dsc, get_geographical_area_SW)
 		nmea::make_sentence("$CDDSC,02,3380210102,00,21,26,1394807410,2231,,,B,E*72"));
 	ASSERT_NE(nullptr, s);
 	const geo::region r = s->get_geographical_area();
-	EXPECT_EQ((geo::latitude{38, 0, 0, geo::latitude::hemisphere::SOUTH}), r.top());
-	EXPECT_EQ((geo::longitude{21, 0, 0, geo::longitude::hemisphere::WEST}), r.left());
-	EXPECT_EQ((geo::latitude{39, 0, 0, geo::latitude::hemisphere::SOUTH}), r.bottom());
-	EXPECT_EQ((geo::longitude{19, 0, 0, geo::longitude::hemisphere::WEST}), r.right());
+	EXPECT_EQ((geo::latitude{38, 0, 0, geo::latitude::hemisphere::south}), r.top());
+	EXPECT_EQ((geo::longitude{21, 0, 0, geo::longitude::hemisphere::west}), r.left());
+	EXPECT_EQ((geo::latitude{39, 0, 0, geo::latitude::hemisphere::south}), r.bottom());
+	EXPECT_EQ((geo::longitude{19, 0, 0, geo::longitude::hemisphere::west}), r.right());
 }
 
 TEST_F(Test_nmea_dsc, get_ack_B)

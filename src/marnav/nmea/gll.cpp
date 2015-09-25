@@ -12,7 +12,7 @@ constexpr const char * gll::TAG;
 
 gll::gll()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, mode_indicator(positioning_system_mode_indicator::INVALID)
+	, mode_indicator(positioning_system_mode_indicator::invalid)
 {
 }
 

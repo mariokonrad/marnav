@@ -70,7 +70,7 @@ TEST_F(Test_nmea_rpm, set_propeller_pitch_negative)
 TEST_F(Test_nmea_rpm, set_data_valid)
 {
 	nmea::rpm rpm;
-	rpm.set_data_valid(nmea::status::OK);
+	rpm.set_data_valid(nmea::status::ok);
 
 	EXPECT_STREQ("$IIRPM,,,,,A*22", nmea::to_string(rpm).c_str());
 }

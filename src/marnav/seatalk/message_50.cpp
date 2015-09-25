@@ -32,7 +32,7 @@ std::unique_ptr<message> message_50::parse(const raw & data)
 	const uint32_t minutes = (m & 0x7fff) / 100;
 	const uint32_t seconds = (((m & 0x7fff) % 100) * 60) / 100;
 	const geo::latitude::hemisphere hemisphere
-		= (m & 0x8000) ? geo::latitude::hemisphere::SOUTH : geo::latitude::hemisphere::NORTH;
+		= (m & 0x8000) ? geo::latitude::hemisphere::south : geo::latitude::hemisphere::north;
 
 	msg.lat = geo::latitude{degrees, minutes, seconds, hemisphere};
 
@@ -46,7 +46,7 @@ raw message_50::get_data() const
 	uint16_t m = 0;
 	m += lat.minutes() * 100;
 	m += (lat.seconds() * 100) / 60;
-	if (lat.hem() == geo::latitude::hemisphere::SOUTH)
+	if (lat.hem() == geo::latitude::hemisphere::south)
 		m |= 0x8000;
 
 	return raw{static_cast<uint8_t>(ID), 0x02, static_cast<uint8_t>(lat.degrees() & 0xff),

@@ -29,7 +29,7 @@ void rma::set_lon(const geo::longitude & t)
 
 void rma::set_magnetic_var(double t, direction h)
 {
-	check_value(h, {direction::EAST, direction::WEST}, "mag var hemisphere");
+	check_value(h, {direction::east, direction::west}, "mag var hemisphere");
 	magnetic_var = t;
 	magnetic_var_hem = h;
 }

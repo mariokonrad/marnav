@@ -17,7 +17,7 @@ mtw::mtw()
 void mtw::set_temperature(double t) noexcept
 {
 	temperature = t;
-	temperature_unit = unit::temperature::CELSIUS;
+	temperature_unit = unit::temperature::celsius;
 }
 
 std::unique_ptr<sentence> mtw::parse(

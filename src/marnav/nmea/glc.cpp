@@ -12,13 +12,13 @@ constexpr const char * glc::TAG;
 glc::glc()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 	, gri(0)
-	, master({0, nmea::status::WARNING})
+	, master({0, nmea::status::warning})
 {
 }
 
 void glc::check_index(int index) const
 {
-	if ((index < 0) || (index >= NUM_DIFFERENCES)) {
+	if ((index < 0) || (index >= num_differences)) {
 		throw std::out_of_range{"time difference index out of range"};
 	}
 }
@@ -48,7 +48,7 @@ std::unique_ptr<sentence> glc::parse(
 	read(fields[0], detail.gri);
 	read(fields[1], detail.master.diff);
 	read(fields[2], detail.master.status);
-	for (int i = 0; i < NUM_DIFFERENCES; ++i) {
+	for (int i = 0; i < num_differences; ++i) {
 		utils::optional<double> diff;
 		utils::optional<nmea::status> status;
 		read(fields[(i * 2) + 3], diff);
@@ -68,7 +68,7 @@ std::vector<std::string> glc::get_data() const
 	result.push_back(to_string(gri));
 	result.push_back(to_string(master.diff));
 	result.push_back(to_string(master.status));
-	for (int i = 0; i < NUM_DIFFERENCES; ++i) {
+	for (int i = 0; i < num_differences; ++i) {
 		auto const & t = time_diffs[i];
 		if (t) {
 			result.push_back(to_string(t->diff));

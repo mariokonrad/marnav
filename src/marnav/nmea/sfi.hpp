@@ -33,7 +33,7 @@ public:
 
 	constexpr static const sentence_id ID = sentence_id::SFI;
 	constexpr static const char * TAG = "SFI";
-	constexpr static const unsigned int MAX_NUMBER_OF_FREQUENCIES = 10;
+	constexpr static const unsigned int max_number_of_frequencies = 10;
 
 	sfi();
 	sfi(const sfi &) = default;

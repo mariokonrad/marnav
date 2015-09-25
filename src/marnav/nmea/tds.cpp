@@ -12,7 +12,7 @@ constexpr const char * tds::TAG;
 tds::tds()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 	, distance(0.0)
-	, distance_unit(nmea::unit::distance::METER)
+	, distance_unit(nmea::unit::distance::meter)
 {
 }
 

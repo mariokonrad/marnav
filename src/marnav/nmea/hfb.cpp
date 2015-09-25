@@ -12,9 +12,9 @@ constexpr const char * hfb::TAG;
 hfb::hfb()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 	, distance_head_foot(0.0)
-	, distance_head_foot_unit(unit::distance::METER)
+	, distance_head_foot_unit(unit::distance::meter)
 	, distance_head_bottom(0.0)
-	, distance_head_bottom_unit(unit::distance::METER)
+	, distance_head_bottom_unit(unit::distance::meter)
 {
 }
 

@@ -46,7 +46,7 @@ TEST_F(Test_nmea_xtr, set_cross_track_error_magnitude)
 TEST_F(Test_nmea_xtr, set_direction_to_steer)
 {
 	nmea::xtr xtr;
-	xtr.set_direction_to_steer(nmea::side::LEFT);
+	xtr.set_direction_to_steer(nmea::side::left);
 
 	EXPECT_STREQ("$GPXTR,,L,*29", nmea::to_string(xtr).c_str());
 }

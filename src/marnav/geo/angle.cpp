@@ -20,7 +20,7 @@ angle::angle(double deg)
 uint32_t angle::degrees() const noexcept
 {
 	auto a = std::abs(get());
-	a = floor(a);
+	a = std::floor(a);
 	return static_cast<uint32_t>(a);
 }
 
@@ -29,7 +29,7 @@ uint32_t angle::degrees() const noexcept
 uint32_t angle::minutes() const noexcept
 {
 	auto a = std::abs(get());
-	a -= floor(a);
+	a -= std::floor(a);
 	a *= 60.0;
 	a += epsilon;
 	return static_cast<uint32_t>(a);
@@ -39,10 +39,10 @@ uint32_t angle::minutes() const noexcept
 double angle::seconds() const noexcept
 {
 	auto a = std::abs(get());
-	a -= floor(a);
+	a -= std::floor(a);
 	a *= 60.0;
 	a += epsilon;
-	a -= floor(a);
+	a -= std::floor(a);
 	a *= 60.0;
 	return a;
 }
@@ -60,10 +60,7 @@ bool operator==(const angle & a, const angle & b) noexcept
 	return (&a == &b) || math::is_same(a.value, b.value);
 }
 
-void swap(angle & a, angle & b) noexcept
-{
-	std::swap(a.value, b.value);
-}
+void swap(angle & a, angle & b) noexcept { std::swap(a.value, b.value); }
 
 bool operator!=(const angle & a, const angle & b) noexcept { return !(a == b); }
 
@@ -79,7 +76,7 @@ latitude::latitude(double deg)
 latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
 	: angle((static_cast<double>(d) + static_cast<double>(m) / 60.0
 				+ static_cast<double>(s) / 3600.0)
-		  * ((h == hemisphere::SOUTH) ? -1.0 : 1.0))
+		  * ((h == hemisphere::south) ? -1.0 : 1.0))
 {
 	check(get());
 }
@@ -87,7 +84,7 @@ latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
 /// Returns the corresponding hemisphere.
 latitude::hemisphere latitude::hem() const noexcept
 {
-	return get() >= 0.0 ? hemisphere::NORTH : hemisphere::SOUTH;
+	return get() >= 0.0 ? hemisphere::north : hemisphere::south;
 }
 
 bool operator==(const latitude & a, const latitude & b) noexcept
@@ -103,12 +100,12 @@ bool operator!=(const latitude & a, const latitude & b) noexcept { return !(a ==
 void latitude::change_hemisphere(hemisphere h)
 {
 	switch (h) {
-		case hemisphere::NORTH:
-			if (hem() == hemisphere::SOUTH)
+		case hemisphere::north:
+			if (hem() == hemisphere::south)
 				set(-get());
 			break;
-		case hemisphere::SOUTH:
-			if (hem() == hemisphere::NORTH)
+		case hemisphere::south:
+			if (hem() == hemisphere::north)
 				set(-get());
 			break;
 	}
@@ -132,7 +129,7 @@ longitude::longitude(double deg)
 longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
 	: angle((static_cast<double>(d) + static_cast<double>(m) / 60.0
 				+ static_cast<double>(s) / 3600.0)
-		  * ((h == hemisphere::EAST) ? +1.0 : -1.0))
+		  * ((h == hemisphere::east) ? +1.0 : -1.0))
 {
 	check(get());
 }
@@ -140,7 +137,7 @@ longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
 /// Returns the corresponding hemisphere.
 longitude::hemisphere longitude::hem() const noexcept
 {
-	return get() < 0.0 ? hemisphere::WEST : hemisphere::EAST;
+	return get() < 0.0 ? hemisphere::west : hemisphere::east;
 }
 
 bool operator==(const longitude & a, const longitude & b) noexcept
@@ -156,12 +153,12 @@ bool operator!=(const longitude & a, const longitude & b) noexcept { return !(a 
 void longitude::change_hemisphere(hemisphere h)
 {
 	switch (h) {
-		case hemisphere::EAST:
-			if (hem() == hemisphere::WEST)
+		case hemisphere::east:
+			if (hem() == hemisphere::west)
 				set(-get());
 			break;
-		case hemisphere::WEST:
-			if (hem() == hemisphere::EAST)
+		case hemisphere::west:
+			if (hem() == hemisphere::east)
 				set(-get());
 			break;
 	}

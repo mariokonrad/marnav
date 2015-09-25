@@ -23,19 +23,19 @@ void vwr::set_angle(double angle, side s) noexcept
 void vwr::set_speed_knots(double t) noexcept
 {
 	speed_knots = t;
-	speed_knots_unit = unit::velocity::KNOT;
+	speed_knots_unit = unit::velocity::knot;
 }
 
 void vwr::set_speed_mps(double t) noexcept
 {
 	speed_mps = t;
-	speed_mps_unit = unit::velocity::MPS;
+	speed_mps_unit = unit::velocity::mps;
 }
 
 void vwr::set_speed_kmh(double t) noexcept
 {
 	speed_kmh = t;
-	speed_kmh_unit = unit::velocity::KMH;
+	speed_kmh_unit = unit::velocity::kmh;
 }
 
 std::unique_ptr<sentence> vwr::parse(

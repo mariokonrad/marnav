@@ -48,14 +48,14 @@ raw message_58::get_data() const
 	const auto lat = pos.lat();
 	const uint8_t la = lat.degrees();
 	const uint32_t la_min = std::floor(std::fmod(lat.get(), 1.0) * 60.0 / 100.0 * 100 * 1000.0);
-	if (lat.hem() == geo::latitude::hemisphere::SOUTH)
+	if (lat.hem() == geo::latitude::hemisphere::south)
 		z |= 0x10;
 
 	const auto lon = pos.lon();
 	const uint8_t lo = lon.degrees();
 	const uint32_t lo_min
 		= std::floor(std::fmod(lon.get(), 1.0) * 60.0 / 100.0 * 100.0 * 1000.0);
-	if (lon.hem() == geo::longitude::hemisphere::EAST)
+	if (lon.hem() == geo::longitude::hemisphere::east)
 		z |= 0x20;
 
 	return raw{static_cast<uint8_t>(ID), static_cast<uint8_t>(0x05 | z), la,

@@ -230,8 +230,9 @@ constexpr const char * ais_physical_shore_station = "SA"; // NMEA 4.0 Physical S
 /// Macros are avoided as far as possible, this one however improves readability.
 /// All it does is declare and implement inline a getter method. Handy for
 /// NMEA sentence member data.
+///
 #define NMEA_GETTER(attribute) \
-	inline decltype(attribute) get_##attribute() const { return attribute; }
+	decltype(attribute) get_##attribute() const { return attribute; }
 
 /// This is the base class for all sentences.
 class sentence
@@ -242,11 +243,11 @@ public:
 	using parse_function = std::function<std::unique_ptr<sentence>(
 		const std::string &, const std::vector<std::string> &)>;
 
-	constexpr static int MAX_LENGTH = 82;
+	constexpr static int max_length = 82;
 
-	constexpr static char START_TOKEN = '$';
-	constexpr static char START_TOKEN_AIS = '!';
-	constexpr static char END_TOKEN = '*';
+	constexpr static char start_token = '$';
+	constexpr static char start_token_ais = '!';
+	constexpr static char end_token = '*';
 
 	virtual ~sentence() {}
 
@@ -271,8 +272,8 @@ public:
 protected:
 	sentence(sentence_id id, const std::string & tag, const std::string & talker);
 	virtual std::vector<std::string> get_data() const = 0;
-	virtual char get_start_token() const { return START_TOKEN; }
-	virtual char get_end_token() const { return END_TOKEN; }
+	virtual char get_start_token() const { return start_token; }
+	virtual char get_end_token() const { return end_token; }
 
 private:
 	const sentence_id id_;

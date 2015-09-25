@@ -17,13 +17,13 @@ vpw::vpw()
 void vpw::set_speed_knots(double t) noexcept
 {
 	speed_knots = t;
-	speed_knots_unit = unit::velocity::KNOT;
+	speed_knots_unit = unit::velocity::knot;
 }
 
 void vpw::set_speed_mps(double t) noexcept
 {
 	speed_meters_per_second = t;
-	speed_meters_per_second_unit = unit::velocity::MPS;
+	speed_meters_per_second_unit = unit::velocity::mps;
 }
 
 std::unique_ptr<sentence> vpw::parse(

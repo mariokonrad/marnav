@@ -14,9 +14,9 @@ dtm::dtm()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 	, ref("W84")
 	, lat_offset(0)
-	, lat_hem(direction::NORTH)
+	, lat_hem(direction::north)
 	, lon_offset(0)
-	, lon_hem(direction::EAST)
+	, lon_hem(direction::east)
 	, altitude(0)
 	, name("W84")
 {
@@ -24,14 +24,14 @@ dtm::dtm()
 
 void dtm::set_lat_offset(double t, direction h)
 {
-	check_value(h, {direction::NORTH, direction::SOUTH});
+	check_value(h, {direction::north, direction::south});
 	lat_offset = t;
 	lat_hem = h;
 }
 
 void dtm::set_lon_offset(double t, direction h)
 {
-	check_value(h, {direction::EAST, direction::WEST});
+	check_value(h, {direction::east, direction::west});
 	lon_offset = t;
 	lon_hem = h;
 }

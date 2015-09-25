@@ -17,7 +17,7 @@ gtd::gtd()
 
 void gtd::check_index(int index) const
 {
-	if ((index < 0) || (index >= NUM_DATA)) {
+	if ((index < 0) || (index >= num_data)) {
 		throw std::out_of_range{"time difference index out of range"};
 	}
 }
@@ -44,7 +44,7 @@ std::unique_ptr<sentence> gtd::parse(
 	result->set_talker(talker);
 	gtd & detail = static_cast<gtd &>(*result);
 
-	for (int i = 0; i < NUM_DATA; ++i)
+	for (int i = 0; i < num_data; ++i)
 		read(fields[i], detail.time_diffs[i]);
 
 	return result;
@@ -53,7 +53,7 @@ std::unique_ptr<sentence> gtd::parse(
 std::vector<std::string> gtd::get_data() const
 {
 	std::vector<std::string> result;
-	result.reserve(NUM_DATA);
+	result.reserve(time_diffs.size());
 	for (auto const & t : time_diffs)
 		result.push_back(to_string(t));
 	return result;

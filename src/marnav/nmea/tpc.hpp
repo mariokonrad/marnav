@@ -65,17 +65,17 @@ public:
 	void set_distance_centerline(double t) noexcept
 	{
 		distance_centerline = t;
-		distance_centerline_unit = unit::distance::METER;
+		distance_centerline_unit = unit::distance::meter;
 	}
 	void set_distance_transducer(double t) noexcept
 	{
 		distance_transducer = t;
-		distance_centerline_unit = unit::distance::METER;
+		distance_centerline_unit = unit::distance::meter;
 	}
 	void set_depth(double t) noexcept
 	{
 		depth = t;
-		distance_centerline_unit = unit::distance::METER;
+		distance_centerline_unit = unit::distance::meter;
 	}
 };
 }

@@ -42,7 +42,7 @@ void bwc::set_bearing_mag(double t) noexcept
 void bwc::set_distance(double t) noexcept
 {
 	distance = t;
-	distance_unit = unit::distance::NM;
+	distance_unit = unit::distance::nm;
 }
 
 void bwc::set_waypoint(const std::string & id)

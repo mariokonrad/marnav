@@ -27,7 +27,7 @@ TEST_F(Test_nmea_mtw, parse)
 
 	auto unit = mtw->get_temperature_unit();
 	ASSERT_TRUE(unit.available());
-	EXPECT_EQ(nmea::unit::temperature::CELSIUS, unit.value());
+	EXPECT_EQ(nmea::unit::temperature::celsius, unit.value());
 }
 
 TEST_F(Test_nmea_mtw, parse_invalid_number_of_arguments)

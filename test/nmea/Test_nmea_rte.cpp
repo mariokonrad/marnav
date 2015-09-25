@@ -54,7 +54,7 @@ TEST_F(Test_nmea_rte, set_message_number)
 TEST_F(Test_nmea_rte, set_message_mode_complete)
 {
 	nmea::rte rte;
-	rte.set_message_mode(marnav::nmea::route::COMPLETE);
+	rte.set_message_mode(marnav::nmea::route::complete);
 
 	EXPECT_STREQ("$GPRTE,,,c*1B", nmea::to_string(rte).c_str());
 }
@@ -62,7 +62,7 @@ TEST_F(Test_nmea_rte, set_message_mode_complete)
 TEST_F(Test_nmea_rte, set_message_mode_working)
 {
 	nmea::rte rte;
-	rte.set_message_mode(marnav::nmea::route::WORKING);
+	rte.set_message_mode(marnav::nmea::route::working);
 
 	EXPECT_STREQ("$GPRTE,,,w*0F", nmea::to_string(rte).c_str());
 }

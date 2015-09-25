@@ -46,9 +46,9 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	static constexpr const int NUM_SENSORS = 3;
+	static constexpr const int num_sensors = 3;
 
-	std::array<state, NUM_SENSORS> sensors;
+	std::array<state, num_sensors> sensors;
 
 	void check_index(int index) const;
 

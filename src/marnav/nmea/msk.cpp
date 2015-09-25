@@ -12,9 +12,9 @@ constexpr const char * msk::TAG;
 msk::msk()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 	, frequency(0)
-	, frequency_mode(selection_mode::AUTOMATIC)
+	, frequency_mode(selection_mode::automatic)
 	, bitrate(0)
-	, bitrate_mode(selection_mode::AUTOMATIC)
+	, bitrate_mode(selection_mode::automatic)
 {
 }
 

@@ -55,11 +55,11 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	static constexpr const int NUM_DIFFERENCES = 5;
+	static constexpr const int num_differences = 5;
 
 	uint32_t gri; ///< unit: 0.1 microseconds
 	time_difference master;
-	std::array<utils::optional<time_difference>, NUM_DIFFERENCES> time_diffs;
+	std::array<utils::optional<time_difference>, num_differences> time_diffs;
 
 	void check_index(int index) const;
 

@@ -29,7 +29,7 @@ void rmc::set_lon(const geo::longitude & t)
 
 void rmc::set_mag(double t, direction h)
 {
-	check_value(h, {direction::EAST, direction::WEST}, "mag var hemisphere");
+	check_value(h, {direction::east, direction::west}, "mag var hemisphere");
 	mag = t;
 	mag_hem = h;
 }

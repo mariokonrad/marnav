@@ -12,13 +12,13 @@ namespace geo
 namespace
 {
 /// mean radius
-static constexpr const double EARTH_RADIUS = 6378000.0; // [m]
+static constexpr const double earth_radius = 6378000.0; // [m]
 
 /// semi-major axis according to WGS84
-static constexpr const double EARTH_SEMI_MAJOR_AXIS = 6378137.0; // [m]
+static constexpr const double earth_semi_major_axis = 6378137.0; // [m]
 
 /// flattening according to WGS84
-static constexpr const double EARTH_FLATTENING = 1.0 / 298.257223563;
+static constexpr const double earth_flattening = 1.0 / 298.257223563;
 
 /// Computes the square of the specified value.
 template <typename T> static T sqr(const T & a) { return a * a; }
@@ -63,7 +63,7 @@ double central_spherical_angle(const position & start, const position & destinat
 /// @return The distance in meters.
 double distance_sphere(const position & start, const position & destination)
 {
-	return EARTH_RADIUS * central_spherical_angle(start, destination);
+	return earth_radius * central_spherical_angle(start, destination);
 }
 
 /// Calculates the distance on an ellipsoid between start and destination points.
@@ -87,8 +87,8 @@ double distance_ellipsoid_vincenty(
 	const position p0 = deg2rad(start);
 	const position p1 = deg2rad(destination);
 
-	const double f = EARTH_FLATTENING;
-	const double a = EARTH_SEMI_MAJOR_AXIS;
+	const double f = earth_flattening;
+	const double a = earth_semi_major_axis;
 	const double b = (1.0 - f) * a;
 
 	const double L = p1.lon() - p0.lon();
@@ -178,8 +178,8 @@ position point_ellipsoid_vincenty(
 
 	const position p0 = deg2rad(start);
 
-	const double f = EARTH_FLATTENING;
-	const double a = EARTH_SEMI_MAJOR_AXIS;
+	const double f = earth_flattening;
+	const double a = earth_semi_major_axis;
 	const double b = (1.0 - f) * a;
 
 	const double sin_alpha1 = sin(alpha1);
@@ -266,7 +266,7 @@ double distance_ellipsoid_lambert(const position & start, const position & desti
 	const position p0 = deg2rad(start);
 	const position p1 = deg2rad(destination);
 
-	const double r = 1.0 / EARTH_FLATTENING;
+	const double r = 1.0 / earth_flattening;
 
 	const double t1_lat = atan((r - 1.0) / r) * tan(p0.lat());
 	const double t1_lon = p0.lon();
@@ -279,7 +279,7 @@ double distance_ellipsoid_lambert(const position & start, const position & desti
 	const double X = (sigma - sin(sigma)) * (sqr(sin(P)) * sqr(cos(Q))) / sqr(cos(sigma / 2.0));
 	const double Y = (sigma + sin(sigma)) * (sqr(cos(P)) * sqr(sin(Q))) / sqr(sin(sigma / 2.0));
 
-	return EARTH_RADIUS * (sigma - (X + Y) / (2.0 * r));
+	return earth_radius * (sigma - (X + Y) / (2.0 * r));
 }
 }
 }

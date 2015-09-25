@@ -15,8 +15,8 @@ constexpr const char * tll::TAG;
 tll::tll()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 	, target_number(0)
-	, lat_hem(direction::NORTH)
-	, lon_hem(direction::EAST)
+	, lat_hem(direction::north)
+	, lon_hem(direction::east)
 	, target_status('T')
 {
 }

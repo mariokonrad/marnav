@@ -201,24 +201,24 @@ geo::region dsc::get_geographical_area() const
 {
 	const auto quadrant = (address / 1000000000) % 10;
 
-	geo::latitude::hemisphere lat_hem = geo::latitude::hemisphere::NORTH;
-	geo::longitude::hemisphere lon_hem = geo::longitude::hemisphere::WEST;
+	geo::latitude::hemisphere lat_hem = geo::latitude::hemisphere::north;
+	geo::longitude::hemisphere lon_hem = geo::longitude::hemisphere::west;
 	switch (quadrant) {
 		case 0: // NE quadrant
-			lat_hem = geo::latitude::hemisphere::NORTH;
-			lon_hem = geo::longitude::hemisphere::EAST;
+			lat_hem = geo::latitude::hemisphere::north;
+			lon_hem = geo::longitude::hemisphere::east;
 			break;
 		case 1: // NW quadrant
-			lat_hem = geo::latitude::hemisphere::NORTH;
-			lon_hem = geo::longitude::hemisphere::WEST;
+			lat_hem = geo::latitude::hemisphere::north;
+			lon_hem = geo::longitude::hemisphere::west;
 			break;
 		case 2: // SE quadrant
-			lat_hem = geo::latitude::hemisphere::SOUTH;
-			lon_hem = geo::longitude::hemisphere::EAST;
+			lat_hem = geo::latitude::hemisphere::south;
+			lon_hem = geo::longitude::hemisphere::east;
 			break;
 		case 3: // SW quadrant
-			lat_hem = geo::latitude::hemisphere::SOUTH;
-			lon_hem = geo::longitude::hemisphere::WEST;
+			lat_hem = geo::latitude::hemisphere::south;
+			lon_hem = geo::longitude::hemisphere::west;
 			break;
 		default:
 			throw std::invalid_argument{"invalid quadrant"};

@@ -56,12 +56,12 @@ public:
 	void set_head_foot(double t) noexcept
 	{
 		distance_head_foot = t;
-		distance_head_foot_unit = unit::distance::METER;
+		distance_head_foot_unit = unit::distance::meter;
 	};
 	void set_head_bottom(double t) noexcept
 	{
 		distance_head_bottom = t;
-		distance_head_bottom_unit = unit::distance::METER;
+		distance_head_bottom_unit = unit::distance::meter;
 	};
 };
 }

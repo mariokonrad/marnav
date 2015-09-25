@@ -12,11 +12,11 @@ constexpr const char * tpc::TAG;
 tpc::tpc()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 	, distance_centerline(0.0)
-	, distance_centerline_unit(unit::distance::METER)
+	, distance_centerline_unit(unit::distance::meter)
 	, distance_transducer(0.0)
-	, distance_transducer_unit(unit::distance::METER)
+	, distance_transducer_unit(unit::distance::meter)
 	, depth(0.0)
-	, depth_unit(unit::distance::METER)
+	, depth_unit(unit::distance::meter)
 {
 }
 

@@ -52,7 +52,7 @@ bool operator!=(const angle & a, const angle & b) noexcept;
 class latitude : public angle
 {
 public:
-	enum class hemisphere { NORTH, SOUTH };
+	enum class hemisphere { north, south };
 	constexpr static const double min = -90.0;
 	constexpr static const double max = +90.0;
 
@@ -113,7 +113,7 @@ inline latitude operator "" _south(long double value)
 class longitude : public angle
 {
 public:
-	enum class hemisphere { EAST, WEST };
+	enum class hemisphere { east, west };
 	constexpr static const double min = -180.0;
 	constexpr static const double max = +180.0;
 

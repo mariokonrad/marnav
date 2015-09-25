@@ -50,7 +50,7 @@ TEST_F(Test_nmea_hdg, set_heading)
 TEST_F(Test_nmea_hdg, set_magn_dev)
 {
 	nmea::hdg hdg;
-	hdg.set_magn_dev(5.8, nmea::direction::WEST);
+	hdg.set_magn_dev(5.8, nmea::direction::west);
 
 	EXPECT_STREQ("$HCHDG,,5.8,W,,*18", nmea::to_string(hdg).c_str());
 }
@@ -58,7 +58,7 @@ TEST_F(Test_nmea_hdg, set_magn_dev)
 TEST_F(Test_nmea_hdg, set_magn_var)
 {
 	nmea::hdg hdg;
-	hdg.set_magn_var(5.8, nmea::direction::WEST);
+	hdg.set_magn_var(5.8, nmea::direction::west);
 
 	EXPECT_STREQ("$HCHDG,,,,5.8,W*18", nmea::to_string(hdg).c_str());
 }
@@ -67,8 +67,8 @@ TEST_F(Test_nmea_hdg, set_magn_dev_wrong_hemisphere)
 {
 	nmea::hdg hdg;
 
-	EXPECT_ANY_THROW(hdg.set_magn_dev(5.8, nmea::direction::NORTH));
-	EXPECT_ANY_THROW(hdg.set_magn_dev(5.8, nmea::direction::SOUTH));
+	EXPECT_ANY_THROW(hdg.set_magn_dev(5.8, nmea::direction::north));
+	EXPECT_ANY_THROW(hdg.set_magn_dev(5.8, nmea::direction::south));
 }
 }
 

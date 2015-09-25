@@ -18,13 +18,13 @@ wnc::wnc()
 void wnc::set_distance_nm(double t) noexcept
 {
 	distance_nm = t;
-	distance_nm_unit = unit::distance::NM;
+	distance_nm_unit = unit::distance::nm;
 }
 
 void wnc::set_distance_km(double t) noexcept
 {
 	distance_km = t;
-	distance_km_unit = unit::distance::KM;
+	distance_km_unit = unit::distance::km;
 }
 
 void wnc::set_waypoint_to(const std::string & id)

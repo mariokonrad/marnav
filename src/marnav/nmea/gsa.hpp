@@ -54,11 +54,11 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	constexpr static const int MAX_SATELLITE_IDS = 12;
+	constexpr static const int max_satellite_ids = 12;
 
 	utils::optional<selection_mode> sel_mode; // A:automatic 2D/3D, M:manual
 	utils::optional<uint32_t> mode; // 1 = no fix, 2 = 2D fix, 3 = 3D fix
-	std::array<utils::optional<uint32_t>, MAX_SATELLITE_IDS> satellite_id;
+	std::array<utils::optional<uint32_t>, max_satellite_ids> satellite_id;
 	utils::optional<double> pdop;
 	utils::optional<double> hdop;
 	utils::optional<double> vdop;

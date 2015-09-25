@@ -30,7 +30,7 @@ xdr::xdr()
 
 void xdr::check_index(int index) const
 {
-	if ((index < 0) || (index >= 4 * MAX_TRANSDUCER_INFO)) {
+	if ((index < 0) || (index >= 4 * max_transducer_info)) {
 		throw std::out_of_range{"transducer index out of range"};
 	}
 }
@@ -50,7 +50,7 @@ utils::optional<xdr::transducer_info> xdr::get_info(int index) const
 std::unique_ptr<sentence> xdr::parse(
 	const std::string & talker, const std::vector<std::string> & fields)
 {
-	if ((fields.size() < 1) || (fields.size() > 4 * xdr::MAX_TRANSDUCER_INFO))
+	if ((fields.size() < 1) || (fields.size() > 4 * xdr::max_transducer_info))
 		throw std::invalid_argument{"invalid number of fields in xdr::parse"};
 
 	if ((fields.size() % 4) != 0)

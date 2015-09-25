@@ -49,7 +49,7 @@ public:
 	void set_distance(double t) noexcept
 	{
 		distance = t;
-		distance_unit = unit::distance::METER;
+		distance_unit = unit::distance::meter;
 	};
 };
 }

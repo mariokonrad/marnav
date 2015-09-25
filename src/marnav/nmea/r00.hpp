@@ -26,7 +26,7 @@ class r00 : public sentence
 public:
 	constexpr static const sentence_id ID = sentence_id::R00;
 	constexpr static const char * TAG = "R00";
-	constexpr static const int MAX_WAYPOINT_IDS = 14;
+	constexpr static const int max_waypoint_ids = 14;
 
 	r00();
 	r00(const r00 &) = default;
@@ -39,7 +39,7 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	std::array<utils::optional<std::string>, MAX_WAYPOINT_IDS> waypoint_id;
+	std::array<utils::optional<std::string>, max_waypoint_ids> waypoint_id;
 
 	void check_index(int index) const;
 

@@ -17,14 +17,14 @@ r00::r00()
 std::unique_ptr<sentence> r00::parse(
 	const std::string & talker, const std::vector<std::string> & fields)
 {
-	if (fields.size() != r00::MAX_WAYPOINT_IDS)
+	if (fields.size() != r00::max_waypoint_ids)
 		throw std::invalid_argument{"invalid number of fields in r00::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<r00>();
 	result->set_talker(talker);
 	r00 & detail = static_cast<r00 &>(*result);
 
-	for (auto i = 0; i < MAX_WAYPOINT_IDS; ++i) {
+	for (auto i = 0; i < max_waypoint_ids; ++i) {
 		std::string id;
 		read(fields[i], id);
 		detail.set_waypoint_id(i, id);
@@ -36,9 +36,9 @@ std::unique_ptr<sentence> r00::parse(
 std::vector<std::string> r00::get_data() const
 {
 	std::vector<std::string> result;
-	result.reserve(MAX_WAYPOINT_IDS);
+	result.reserve(max_waypoint_ids);
 
-	for (auto i = 0; i < MAX_WAYPOINT_IDS; ++i) {
+	for (auto i = 0; i < max_waypoint_ids; ++i) {
 		if (waypoint_id[i]) {
 			result.push_back(waypoint_id[i].value());
 		} else {
@@ -51,7 +51,7 @@ std::vector<std::string> r00::get_data() const
 
 void r00::check_index(int index) const
 {
-	if ((index < 0) || (index >= MAX_WAYPOINT_IDS))
+	if ((index < 0) || (index >= max_waypoint_ids))
 		throw std::out_of_range{"waypoint ID out of range"};
 }
 

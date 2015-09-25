@@ -38,7 +38,7 @@ TEST_F(Test_nmea_rma, empty_to_string)
 TEST_F(Test_nmea_rma, set_lat_north)
 {
 	nmea::rma rma;
-	rma.set_lat(geo::latitude{12, 34, 56, geo::latitude::hemisphere::NORTH});
+	rma.set_lat(geo::latitude{12, 34, 56, geo::latitude::hemisphere::north});
 
 	EXPECT_STREQ("$GPRMA,,1234.9333,N,,,,,,,,*0B", nmea::to_string(rma).c_str());
 }
@@ -46,7 +46,7 @@ TEST_F(Test_nmea_rma, set_lat_north)
 TEST_F(Test_nmea_rma, set_lat_south)
 {
 	nmea::rma rma;
-	rma.set_lat(geo::latitude{12, 34, 56, geo::latitude::hemisphere::SOUTH});
+	rma.set_lat(geo::latitude{12, 34, 56, geo::latitude::hemisphere::south});
 
 	EXPECT_STREQ("$GPRMA,,1234.9333,S,,,,,,,,*16", nmea::to_string(rma).c_str());
 }
@@ -54,7 +54,7 @@ TEST_F(Test_nmea_rma, set_lat_south)
 TEST_F(Test_nmea_rma, set_lon_east)
 {
 	nmea::rma rma;
-	rma.set_lon(geo::longitude{123, 45, 56, geo::longitude::hemisphere::EAST});
+	rma.set_lon(geo::longitude{123, 45, 56, geo::longitude::hemisphere::east});
 
 	EXPECT_STREQ("$GPRMA,,,,12345.9333,E,,,,,,*35", nmea::to_string(rma).c_str());
 }
@@ -62,7 +62,7 @@ TEST_F(Test_nmea_rma, set_lon_east)
 TEST_F(Test_nmea_rma, set_lon_west)
 {
 	nmea::rma rma;
-	rma.set_lon(geo::longitude{123, 45, 56, geo::longitude::hemisphere::WEST});
+	rma.set_lon(geo::longitude{123, 45, 56, geo::longitude::hemisphere::west});
 
 	EXPECT_STREQ("$GPRMA,,,,12345.9333,W,,,,,,*27", nmea::to_string(rma).c_str());
 }

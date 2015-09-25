@@ -17,14 +17,14 @@ hdg::hdg()
 
 void hdg::set_magn_dev(double deg, direction hem)
 {
-	check_value(hem, {direction::EAST, direction::WEST}, "magn_dev hemisphere");
+	check_value(hem, {direction::east, direction::west}, "magn_dev hemisphere");
 	magn_dev = deg;
 	magn_dev_hem = hem;
 }
 
 void hdg::set_magn_var(double deg, direction hem)
 {
-	check_value(hem, {direction::EAST, direction::WEST}, "magn_var hemisphere");
+	check_value(hem, {direction::east, direction::west}, "magn_var hemisphere");
 	magn_var = deg;
 	magn_var_hem = hem;
 }

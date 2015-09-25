@@ -42,9 +42,9 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	constexpr static const int NUM_DATA = 5;
+	constexpr static const int num_data = 5;
 
-	std::array<double, NUM_DATA> time_diffs;
+	std::array<double, num_data> time_diffs;
 
 	void check_index(int index) const;
 

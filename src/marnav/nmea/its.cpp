@@ -12,7 +12,7 @@ constexpr const char * its::TAG;
 its::its()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 	, distance(0.0)
-	, distance_unit(unit::distance::METER)
+	, distance_unit(unit::distance::meter)
 {
 }
 
