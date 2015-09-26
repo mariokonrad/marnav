@@ -1,0 +1,31 @@
+#!/bin/bash -u
+
+# search for a suitable clang-format version
+CLANG_FORMAT_BIN=
+if [ `which clang-format-3.8` ] ; then
+	CLANG_FORMAT_BIN=`which clang-format-3.8`
+elif [ `which clang-format-3.7` ] ; then
+	CLANG_FORMAT_BIN=`which clang-format-3.7`
+fi
+
+# clang format found, performing checks
+if [ -x ${CLANG_FORMAT_BIN} ] ; then
+	FILES=()
+	for fn in $(find src -name "*.hpp" -o -name "*.cpp") ; do
+		d=$(${CLANG_FORMAT_BIN} $fn | diff $fn -)
+		if [ "x${d}" != "x" ] ; then
+			FILES+=($fn)
+		fi
+	done
+
+	# abort commit and show violating files
+	if [ ${#FILES[@]} -gt 0 ] ; then
+		echo "error: files not formatted correctly:"
+		for fn in ${FILES[@]} ; do
+			echo "  $fn"
+		done
+		exit 1
+	fi
+fi
+
+exit 0
