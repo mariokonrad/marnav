@@ -13,31 +13,31 @@ class Test_nmea_date : public ::testing::Test
 
 TEST_F(Test_nmea_date, invalid_day)
 {
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::january,   32));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::february,  30));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::march,     32));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::april,     31));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::may,       32));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::june,      31));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::july,      32));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::august,    32));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::january, 32));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::february, 30));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::march, 32));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::april, 31));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::may, 32));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::june, 31));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::july, 32));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::august, 32));
 	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::september, 31));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::october,   32));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::november,  31));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::december,  32));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::october, 32));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::november, 31));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::december, 32));
 
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::january,   0));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::february,  0));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::march,     0));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::april,     0));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::may,       0));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::june,      0));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::july,      0));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::august,    0));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::january, 0));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::february, 0));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::march, 0));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::april, 0));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::may, 0));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::june, 0));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::july, 0));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::august, 0));
 	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::september, 0));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::october,   0));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::november,  0));
-	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::december,  0));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::october, 0));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::november, 0));
+	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::december, 0));
 
 	EXPECT_ANY_THROW(nmea::date(2010, nmea::month::february, 29));
 	EXPECT_ANY_THROW(nmea::date(2011, nmea::month::february, 29));
@@ -47,7 +47,7 @@ TEST_F(Test_nmea_date, invalid_day)
 
 TEST_F(Test_nmea_date, invalid_month)
 {
-	EXPECT_ANY_THROW(nmea::date(2012, static_cast<nmea::month>( 0), 0));
+	EXPECT_ANY_THROW(nmea::date(2012, static_cast<nmea::month>(0), 0));
 	EXPECT_ANY_THROW(nmea::date(2012, static_cast<nmea::month>(13), 0));
 }
 

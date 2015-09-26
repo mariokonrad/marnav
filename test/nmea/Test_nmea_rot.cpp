@@ -50,6 +50,4 @@ TEST_F(Test_nmea_rot, set_data_valid)
 
 	EXPECT_STREQ("$GPROT,,A*1F", nmea::to_string(rot).c_str());
 }
-
 }
-

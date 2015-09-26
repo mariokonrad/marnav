@@ -17,15 +17,12 @@ public:
 	};
 
 	const std::vector<test_case> cases{
-		{{0x66, 0x00, 0x00}, alarm::no_alarm},
-		{{0x66, 0x00, 0x80}, alarm::apparent_angle_lo},
+		{{0x66, 0x00, 0x00}, alarm::no_alarm}, {{0x66, 0x00, 0x80}, alarm::apparent_angle_lo},
 		{{0x66, 0x00, 0x40}, alarm::apparent_angle_hi},
 		{{0x66, 0x00, 0x20}, alarm::apparent_speed_lo},
 		{{0x66, 0x00, 0x10}, alarm::apparent_speed_hi},
-		{{0x66, 0x00, 0x08}, alarm::true_angle_lo},
-		{{0x66, 0x00, 0x04}, alarm::true_angle_hi},
-		{{0x66, 0x00, 0x02}, alarm::true_speed_lo},
-		{{0x66, 0x00, 0x01}, alarm::true_speed_hi},
+		{{0x66, 0x00, 0x08}, alarm::true_angle_lo}, {{0x66, 0x00, 0x04}, alarm::true_angle_hi},
+		{{0x66, 0x00, 0x02}, alarm::true_speed_lo}, {{0x66, 0x00, 0x01}, alarm::true_speed_hi},
 		{{0x66, 0x00, 0x05}, alarm::true_angle_hi | alarm::true_speed_hi},
 	};
 };
@@ -86,8 +83,8 @@ TEST_F(Test_seatalk_message_66, operator_and)
 	EXPECT_EQ(alarm::apparent_angle_hi, a & alarm::apparent_angle_hi);
 	EXPECT_EQ(alarm::apparent_speed_lo, a & alarm::apparent_speed_lo);
 	EXPECT_EQ(alarm::apparent_speed_hi, a & alarm::apparent_speed_hi);
-	EXPECT_EQ(alarm::true_angle_lo    , a & alarm::true_angle_lo    );
-	EXPECT_EQ(alarm::true_angle_hi    , a & alarm::true_angle_hi    );
-	EXPECT_EQ(alarm::true_speed_lo    , a & alarm::true_speed_lo    );
+	EXPECT_EQ(alarm::true_angle_lo, a & alarm::true_angle_lo);
+	EXPECT_EQ(alarm::true_angle_hi, a & alarm::true_angle_hi);
+	EXPECT_EQ(alarm::true_speed_lo, a & alarm::true_speed_lo);
 }
 }

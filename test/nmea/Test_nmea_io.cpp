@@ -70,5 +70,4 @@ TEST_F(Test_nmea_io, format_uint32_none)
 
 	EXPECT_STREQ("10", s.c_str());
 }
-
 }

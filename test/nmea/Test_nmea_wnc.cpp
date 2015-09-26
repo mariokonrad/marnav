@@ -81,4 +81,3 @@ TEST_F(Test_nmea_wnc, set_waypoint_from_string_to_large)
 	EXPECT_ANY_THROW(wnc.set_waypoint_from("123456789"));
 }
 }
-

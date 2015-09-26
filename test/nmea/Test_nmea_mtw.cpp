@@ -51,4 +51,3 @@ TEST_F(Test_nmea_mtw, set_temperature_to_string)
 	EXPECT_STREQ("$IIMTW,22.5,C*16", nmea::to_string(mtw).c_str());
 }
 }
-

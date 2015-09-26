@@ -35,4 +35,3 @@ TEST_F(Test_nmea_ttm, empty_to_string)
 	EXPECT_STREQ("$GPTTM,,,,,,,,,,,,,*76", nmea::to_string(ttm).c_str());
 }
 }
-

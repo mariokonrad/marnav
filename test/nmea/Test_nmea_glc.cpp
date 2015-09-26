@@ -93,5 +93,4 @@ TEST_F(Test_nmea_glc, get_time_diff)
 	EXPECT_NEAR(1.0, t->diff, 1e-8);
 	EXPECT_EQ(nmea::status::ok, t->status);
 }
-
 }

@@ -58,5 +58,4 @@ TEST_F(Test_nmea_zfo, set_waypoint_id)
 
 	EXPECT_STREQ("$GPZFO,,,POINT1*15", nmea::to_string(zfo).c_str());
 }
-
 }

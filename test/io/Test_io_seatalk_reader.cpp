@@ -7,27 +7,26 @@ namespace
 
 using namespace marnav;
 
-static const uint8_t DATA[] =
-{
+static const uint8_t DATA[] = {
 	// preliminary garbage
-	0x01,             // bit=0 parity=0 : no error : ?
+	0x01, // bit=0 parity=0 : no error : ?
 	0xff, 0x00, 0x00, // bit=0 parity=1 : error    : ?
-	0x01,             // bit=0 parity=0 : no error : ?
-	0x01,             // bit=0 parity=0 : no error : ?
-	0xff, 0xff,       // bit=0 parity=1 : error    : ?
-	0xff, 0xff,       // bit=0 parity=1 : error    : ?
-	0x01,             // bit=0 parity=0 : no error : ?
+	0x01, // bit=0 parity=0 : no error : ?
+	0x01, // bit=0 parity=0 : no error : ?
+	0xff, 0xff, // bit=0 parity=1 : error    : ?
+	0xff, 0xff, // bit=0 parity=1 : error    : ?
+	0x01, // bit=0 parity=0 : no error : ?
 
 	// depth
-	0x00,             // bit=1 parity=1 : no error : cmd
-	0x02,             // bit=0 parity=0 : no error : data
+	0x00, // bit=1 parity=1 : no error : cmd
+	0x02, // bit=0 parity=0 : no error : data
 	0xff, 0x00, 0x60, // bit=0 parity=1 : error    : data
 	0xff, 0x00, 0x65, // bit=0 parity=1 : error    : data
 	0xff, 0x00, 0x00, // bit=0 parity=1 : error    : data
 
 	// speed through water */
 	0xff, 0x00, 0x26, // bit=1 parity=0 : error    : cmd
-	0x04,             // bit=0 parity=0 : no error : data
+	0x04, // bit=0 parity=0 : no error : data
 	0xff, 0x00, 0x00, // bit=0 parity=1 : error    : data
 	0xff, 0x00, 0x00, // bit=0 parity=1 : error    : data
 	0xff, 0x00, 0x00, // bit=0 parity=1 : error    : data
@@ -35,51 +34,51 @@ static const uint8_t DATA[] =
 	0xff, 0x00, 0x00, // bit=0 parity=1 : error    : data
 
 	// water temperature
-	0x27,             // bit=1 parity=1 : no error : cmd
-	0x01,             // bit=0 parity=0 : no error : data
-	0x64,             // bit=0 parity=0 : no error : data
+	0x27, // bit=1 parity=1 : no error : cmd
+	0x01, // bit=0 parity=0 : no error : data
+	0x64, // bit=0 parity=0 : no error : data
 	0xff, 0x00, 0x00, // bit=0 parity=1 : error    : data
 
 	// apparent wind speed
-	0x11,             // bit=1 parity=1 : no error : cmd
-	0x01,             // bit=0 parity=0 : no error : data
+	0x11, // bit=1 parity=1 : no error : cmd
+	0x01, // bit=0 parity=0 : no error : data
 	0xff, 0x00, 0x06, // bit=0 parity=1 : error    : data
-	0x01,             // bit=0 parity=0 : no error : data
+	0x01, // bit=0 parity=0 : no error : data
 
 	// speed through water
 	0xff, 0x00, 0x20, // bit=1 parity=0 : error    : cmd
-	0x01,             // bit=0 parity=0 : no error : data
+	0x01, // bit=0 parity=0 : no error : data
 	0xff, 0x00, 0x00, // bit=0 parity=1 : error    : data
 	0xff, 0x00, 0x00, // bit=0 parity=1 : error    : data
 
 	// water temperature
 	0xff, 0x00, 0x23, // bit=1 parity=0 : error    : cmd
-	0x01,             // bit=0 parity=0 : no error : data
+	0x01, // bit=0 parity=0 : no error : data
 	0xff, 0x00, 0x33, // bit=0 parity=1 : error    : data
-	0x5b,             // bit=0 parity=0 : no error : data
+	0x5b, // bit=0 parity=0 : no error : data
 
 	// apparent wind angle
 	0xff, 0x00, 0x10, // bit=1 parity=0 : error    : cmd
-	0x01,             // bit=0 parity=0 : no error : data
+	0x01, // bit=0 parity=0 : no error : data
 	0xff, 0x00, 0x00, // bit=0 parity=1 : error    : data
 	0xff, 0x00, 0x14, // bit=0 parity=1 : error    : data
 
 	// depth
-	0x00,             // bit=1 parity=1 : no error : cmd
-	0x02,             // bit=0 parity=0 : no error : data
+	0x00, // bit=1 parity=1 : no error : cmd
+	0x02, // bit=0 parity=0 : no error : data
 	0xff, 0x00, 0x60, // bit=0 parity=1 : error    : data
 	0xff, 0x00, 0x65, // bit=0 parity=1 : error    : data
 	0xff, 0x00, 0x00, // bit=0 parity=1 : error    : data
 
 	// depth, collision
-	0x00,             // bit=1 parity=1 : no error : cmd
-	0x02,             // bit=0 parity=0 : no error : data
+	0x00, // bit=1 parity=1 : no error : cmd
+	0x02, // bit=0 parity=0 : no error : data
 	0xff, 0x00, 0x60, // bit=0 parity=1 : error    : data
 	// collision here, two bytes lost
 
 	// apparent wind angle
 	0xff, 0x00, 0x10, // bit=1 parity=0 : error    : cmd
-	0x01,             // bit=0 parity=0 : no error : data
+	0x01, // bit=0 parity=0 : no error : data
 	0xff, 0x00, 0x00, // bit=0 parity=1 : error    : data
 	0xff, 0x00, 0x14, // bit=0 parity=1 : error    : data
 };
@@ -178,7 +177,8 @@ TEST_F(Test_io_seatalk_reader, read_count_messages_and_collisions)
 {
 	dummy_reader device;
 
-	while (device.read());
+	while (device.read())
+		;
 
 	EXPECT_EQ(9, device.get_num_messages());
 	EXPECT_EQ(1u, device.get_collisions());

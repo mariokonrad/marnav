@@ -74,5 +74,4 @@ TEST_F(Test_nmea_rpm, set_data_valid)
 
 	EXPECT_STREQ("$IIRPM,,,,,A*22", nmea::to_string(rpm).c_str());
 }
-
 }

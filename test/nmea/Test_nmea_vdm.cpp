@@ -118,4 +118,3 @@ TEST_F(Test_nmea_vdm, collect_payload_pointers_begin_end)
 	ASSERT_EQ(3u, result.size());
 }
 }
-

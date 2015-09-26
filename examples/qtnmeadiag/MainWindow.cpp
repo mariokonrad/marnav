@@ -189,5 +189,4 @@ void MainWindow::on_data_ready()
 		}
 	}
 }
-
 }

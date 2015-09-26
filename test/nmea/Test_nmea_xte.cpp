@@ -42,6 +42,4 @@ TEST_F(Test_nmea_xte, set_cross_track_error_magnitude)
 
 	EXPECT_STREQ("$GPXTE,,,1.2,,N,*3D", nmea::to_string(xte).c_str());
 }
-
 }
-

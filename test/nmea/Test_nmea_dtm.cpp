@@ -124,5 +124,4 @@ TEST_F(Test_nmea_dtm, set_name_too_large)
 	dtm.set_name("ABCDEFGHI");
 	EXPECT_STREQ("$GPDTM,W84,,0.0000,N,0.0000,E,0.0,ABCDE*75", nmea::to_string(dtm).c_str());
 }
-
 }

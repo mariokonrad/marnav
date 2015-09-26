@@ -34,5 +34,4 @@ TEST_F(Test_nmea_tds, empty_to_string)
 
 	EXPECT_STREQ("$GPTDS,0,M*29", nmea::to_string(tds).c_str());
 }
-
 }

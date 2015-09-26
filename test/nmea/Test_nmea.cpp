@@ -12,10 +12,7 @@ class Test_nmea : public ::testing::Test
 
 TEST_F(Test_nmea, make_sentence_empty_string) { EXPECT_ANY_THROW(nmea::make_sentence("")); }
 
-TEST_F(Test_nmea, checksum_error_construction)
-{
-	nmea::checksum_error e(0x12, 0x34);
-}
+TEST_F(Test_nmea, checksum_error_construction) { nmea::checksum_error e(0x12, 0x34); }
 
 TEST_F(Test_nmea, make_sentence_no_start_token)
 {
@@ -87,10 +84,7 @@ TEST_F(Test_nmea, tag_to_id)
 	EXPECT_EQ(nmea::sentence_id::BOD, id);
 }
 
-TEST_F(Test_nmea, tag_to_id_invalid_tag)
-{
-	EXPECT_ANY_THROW(nmea::tag_to_id("???"));
-}
+TEST_F(Test_nmea, tag_to_id_invalid_tag) { EXPECT_ANY_THROW(nmea::tag_to_id("???")); }
 
 TEST_F(Test_nmea, to_string_sentence_id)
 {
@@ -103,5 +97,4 @@ TEST_F(Test_nmea, to_string_sentence_id_invalid_id)
 {
 	EXPECT_ANY_THROW(nmea::to_string(static_cast<nmea::sentence_id>(-1)));
 }
-
 }

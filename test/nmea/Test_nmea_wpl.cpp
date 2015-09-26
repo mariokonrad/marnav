@@ -65,6 +65,5 @@ TEST_F(Test_nmea_wpl, set_waypoint)
 	wpl.set_waypoint("POINT1");
 
 	EXPECT_STREQ("$GPWPL,,,,,POINT1*0D", nmea::to_string(wpl).c_str());
-
 }
 }

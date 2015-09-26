@@ -71,4 +71,3 @@ TEST_F(Test_nmea_hdg, set_magn_dev_wrong_hemisphere)
 	EXPECT_ANY_THROW(hdg.set_magn_dev(5.8, nmea::direction::south));
 }
 }
-

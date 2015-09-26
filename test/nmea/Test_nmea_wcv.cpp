@@ -50,6 +50,4 @@ TEST_F(Test_nmea_wcv, set_waypoint)
 
 	EXPECT_STREQ("$GPWCV,,,POINT1*04", nmea::to_string(wcv).c_str());
 }
-
 }
-

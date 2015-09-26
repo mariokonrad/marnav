@@ -92,5 +92,4 @@ TEST_F(Test_nmea_gsa, get_satellite_id)
 		EXPECT_EQ(id, *gsa->get_satellite_id(index));
 	}
 }
-
 }

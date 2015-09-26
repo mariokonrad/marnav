@@ -34,5 +34,4 @@ TEST_F(Test_nmea_hfb, empty_to_string)
 
 	EXPECT_STREQ("$GPHFB,0,M,0,M*5B", nmea::to_string(hfb).c_str());
 }
-
 }

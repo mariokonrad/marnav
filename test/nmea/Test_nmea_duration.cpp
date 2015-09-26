@@ -80,5 +80,4 @@ TEST_F(Test_nmea_duration, stream)
 
 	EXPECT_STREQ("990203", os.str().c_str());
 }
-
 }

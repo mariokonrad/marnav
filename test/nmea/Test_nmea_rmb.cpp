@@ -88,5 +88,4 @@ TEST_F(Test_nmea_rmb, set_lon_east)
 
 	EXPECT_STREQ("$GPRMB,,,,,,,,00220.4000,E,,,,,*15", nmea::to_string(rmb).c_str());
 }
-
 }

@@ -107,5 +107,4 @@ TEST_F(Test_nmea_xdr, recorded)
 		auto s = nmea::make_sentence("$IIXDR,C,19.52,C,TempAir*19"); // replaced checksum
 	}
 }
-
 }

@@ -77,5 +77,4 @@ TEST_F(Test_nmea_gtd, get_time_diff_invalid_index)
 	EXPECT_ANY_THROW(gtd.get_time_diff(-1));
 	EXPECT_ANY_THROW(gtd.get_time_diff(5));
 }
-
 }

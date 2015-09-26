@@ -135,8 +135,8 @@ TEST_F(Test_utils_bitset, uint8__append_multiple_bits)
 		bits.append(0x00000001, 10);
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
-		EXPECT_STREQ("1010010001000010000010000001000000010000000010000000001",
-			to_string(bits).c_str());
+		EXPECT_STREQ(
+			"1010010001000010000010000001000000010000000010000000001", to_string(bits).c_str());
 	}
 	{
 		bitset<uint8_t> bits;
@@ -416,8 +416,7 @@ TEST_F(Test_utils_bitset, uint8__assignment)
 	EXPECT_STREQ("00000100000000000000000000000000", to_string(copy).c_str());
 }
 
-template <class T>
-bitset<uint8_t> get_test_data(unsigned int size)
+template <class T> bitset<uint8_t> get_test_data(unsigned int size)
 {
 	bitset<T> result{size};
 
@@ -441,7 +440,10 @@ TEST_F(Test_utils_bitset, uint8__as_return_value_medium)
 
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+
-	ASSERT_STREQ("000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", to_string(bits).c_str());
+	ASSERT_STREQ("00000100000000000000000000000000000000000000000000000000000000000000000000000"
+				 "00000000000000000000000000000000000000000000000000000000000000000000000000000"
+				 "00000000000000",
+		to_string(bits).c_str());
 }
 
 TEST_F(Test_utils_bitset, uint8__set_multiple_values)
@@ -494,7 +496,6 @@ TEST_F(Test_utils_bitset, uint8__flip)
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
 	EXPECT_STREQ("1000000000100000000000000000000010000000000000000000000000000000",
 		to_string(bits).c_str());
-
 }
 
 TEST_F(Test_utils_bitset, uint8__append_bitset_to_empty_bitset)
@@ -793,6 +794,4 @@ TEST_F(Test_utils_bitset, uint8__set_bit_out_of_range)
 
 	EXPECT_ANY_THROW(b.set_bit(64, 1));
 }
-
 }
-

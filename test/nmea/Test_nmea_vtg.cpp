@@ -67,4 +67,3 @@ TEST_F(Test_nmea_vtg, set_track_true)
 	EXPECT_STREQ("$GPVTG,12.5,T,,,,,,,*32", nmea::to_string(vtg).c_str());
 }
 }
-

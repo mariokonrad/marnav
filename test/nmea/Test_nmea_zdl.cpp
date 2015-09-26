@@ -35,4 +35,3 @@ TEST_F(Test_nmea_zdl, empty_to_string)
 	EXPECT_STREQ("$GPZDL,000000,0.0,R*15", nmea::to_string(zdl).c_str());
 }
 }
-

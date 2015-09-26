@@ -74,6 +74,4 @@ TEST_F(Test_nmea_osd, set_drift)
 
 	EXPECT_STREQ("$IIOSD,,,,,,,,1.2,N*17", nmea::to_string(osd).c_str());
 }
-
 }
-

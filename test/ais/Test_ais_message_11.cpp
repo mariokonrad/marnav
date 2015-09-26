@@ -99,5 +99,4 @@ TEST_F(Test_ais_message_11, get_longitude)
 	EXPECT_EQ(expected, decoded) << "expected value:" << static_cast<double>(expected)
 								 << ", decoded value:" << static_cast<double>(decoded);
 }
-
 }

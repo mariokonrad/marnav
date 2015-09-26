@@ -50,5 +50,4 @@ TEST_F(Test_nmea_xtr, set_direction_to_steer)
 
 	EXPECT_STREQ("$GPXTR,,L,*29", nmea::to_string(xtr).c_str());
 }
-
 }

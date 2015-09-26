@@ -163,5 +163,4 @@ TEST_F(Test_nmea_dsc, empty_to_string)
 	nmea::dsc dsc;
 	EXPECT_STREQ("$CDDSC,12,0000000000,12,,,,,,,S,*2C", nmea::to_string(dsc).c_str());
 }
-
 }

@@ -59,5 +59,3 @@ TEST_F(Test_nmea_dbk, set_depth_fathom)
 	EXPECT_STREQ("$IIDBK,,,,,12.5,F*13", nmea::to_string(dbk).c_str());
 }
 }
-
-

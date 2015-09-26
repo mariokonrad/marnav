@@ -34,5 +34,4 @@ TEST_F(Test_nmea_grs, empty_to_string)
 
 	EXPECT_STREQ("$GPGRS,000000.00,0,0,0,0,,,,,,,,,*7F", nmea::to_string(grs).c_str());
 }
-
 }

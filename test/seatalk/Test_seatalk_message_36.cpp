@@ -54,5 +54,4 @@ TEST_F(Test_seatalk_message_36, write_default)
 
 	EXPECT_EQ(expected, m.get_data());
 }
-
 }

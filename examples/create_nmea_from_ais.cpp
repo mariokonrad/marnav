@@ -28,4 +28,3 @@ int main(int, char **)
 		std::cout << s << "\n";
 	}
 }
-

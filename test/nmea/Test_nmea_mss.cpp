@@ -34,5 +34,4 @@ TEST_F(Test_nmea_mss, empty_to_string)
 
 	EXPECT_STREQ("$GPMSS,00,00,000,000,0*46", nmea::to_string(mss).c_str());
 }
-
 }

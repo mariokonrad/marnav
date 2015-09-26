@@ -34,5 +34,4 @@ TEST_F(Test_nmea_its, empty_to_string)
 
 	EXPECT_STREQ("$GPITS,0,M*24", nmea::to_string(its).c_str());
 }
-
 }

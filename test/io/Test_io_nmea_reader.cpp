@@ -162,7 +162,8 @@ TEST_F(Test_io_nmea_reader, read_count_sentences)
 {
 	dummy_reader device{DATA_COMPLETE};
 
-	while (device.read());
+	while (device.read())
+		;
 
 	EXPECT_EQ(3, device.get_num_sentences());
 }
@@ -244,5 +245,4 @@ TEST_F(Test_io_nmea_reader, read_after_close)
 
 	ASSERT_THROW(dev.read(), std::runtime_error);
 }
-
 }

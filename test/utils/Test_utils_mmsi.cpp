@@ -7,7 +7,8 @@ namespace
 using marnav::utils::mmsi;
 
 class Test_utils_mmsi : public ::testing::Test
-{};
+{
+};
 
 TEST_F(Test_utils_mmsi, construction_and_get)
 {
@@ -299,5 +300,4 @@ TEST_F(Test_utils_mmsi, eprib_ais)
 	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
 }
-
 }

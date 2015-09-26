@@ -87,5 +87,4 @@ TEST_F(Test_nmea_dse, empty_to_string)
 	nmea::dse dse;
 	EXPECT_STREQ("$CDDSE,1,1,Q,0000000000,,*04", nmea::to_string(dse).c_str());
 }
-
 }

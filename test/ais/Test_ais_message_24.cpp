@@ -104,5 +104,4 @@ TEST_F(Test_ais_message_24, wrong_number_of_bits)
 	EXPECT_ANY_THROW(ais::message_24::parse(ais::raw{167}));
 	EXPECT_ANY_THROW(ais::message_24::parse(ais::raw{169}));
 }
-
 }

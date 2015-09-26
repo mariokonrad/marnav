@@ -50,5 +50,4 @@ TEST_F(Test_nmea_lcd, get_time_diff_invalid_index)
 	EXPECT_ANY_THROW(lcd.get_time_diff(-1));
 	EXPECT_ANY_THROW(lcd.get_time_diff(5));
 }
-
 }

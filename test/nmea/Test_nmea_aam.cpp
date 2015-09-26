@@ -125,4 +125,3 @@ TEST_F(Test_nmea_aam, set_waypoint_id_string_to_large)
 	EXPECT_ANY_THROW(aam.set_waypoint_id("123456789"));
 }
 }
-

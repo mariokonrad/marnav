@@ -23,7 +23,7 @@ public:
 		serial.set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
 	}
 
-	virtual void open() throw(std::runtime_error) override {};
+	virtual void open() throw(std::runtime_error) override{};
 
 	virtual void close() override { serial.close(); }
 

@@ -144,11 +144,13 @@ int main(int, char **)
 		} catch (nmea::unknown_sentence & e) {
 			std::cout << "NMEA unknown: " << e.what() << "\n";
 		} catch (std::runtime_error & e) {
-			std::cout << "NMEA/AIS runtime_error: " << e.what() << " for sentence: [" << line <<"]\n";
+			std::cout << "NMEA/AIS runtime_error: " << e.what() << " for sentence: [" << line
+					  << "]\n";
 		} catch (std::out_of_range & e) {
-			std::cout << "NMEA/AIS out_of_range: " << e.what() << " for sentence: [" << line <<"]\n";
+			std::cout << "NMEA/AIS out_of_range: " << e.what() << " for sentence: [" << line
+					  << "]\n";
 		} catch (std::exception & e) {
-			std::cout << "NMEA/AIS error: " << e.what() << " for sentence: [" << line <<"]\n";
+			std::cout << "NMEA/AIS error: " << e.what() << " for sentence: [" << line << "]\n";
 		}
 	}
 

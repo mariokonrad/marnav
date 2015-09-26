@@ -59,4 +59,3 @@ TEST_F(Test_nmea_pgrme, set_overall_spherical_equiv_position_error)
 	EXPECT_STREQ("$PGRME,,M,,M,3.3,M*2E", nmea::to_string(pgrme).c_str());
 }
 }
-

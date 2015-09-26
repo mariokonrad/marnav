@@ -52,7 +52,6 @@ private:
 
 	std::string received_data;
 };
-
 }
 
 #endif

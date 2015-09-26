@@ -68,4 +68,3 @@ TEST_F(Test_nmea_dpt, set_max_depth)
 	EXPECT_STREQ("$IIDPT,0,0,2.5*45", nmea::to_string(dpt).c_str());
 }
 }
-

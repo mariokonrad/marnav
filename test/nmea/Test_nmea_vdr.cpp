@@ -58,6 +58,4 @@ TEST_F(Test_nmea_vdr, set_speed)
 
 	EXPECT_STREQ("$IIVDR,,,,,12.5,N*16", nmea::to_string(vdr).c_str());
 }
-
 }
-

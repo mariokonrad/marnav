@@ -50,6 +50,4 @@ TEST_F(Test_nmea_hsc, set_heading_mag)
 
 	EXPECT_STREQ("$GPHSC,,,45.8,M*15", nmea::to_string(hsc).c_str());
 }
-
 }
-

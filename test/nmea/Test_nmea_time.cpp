@@ -80,5 +80,4 @@ TEST_F(Test_nmea_time, stream)
 
 	EXPECT_STREQ("010203", os.str().c_str());
 }
-
 }

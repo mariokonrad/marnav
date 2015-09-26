@@ -100,12 +100,18 @@ TEST_F(Test_nmea_apb, set_mode_indicator_exception)
 {
 	nmea::apb apb;
 	EXPECT_NO_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::invalid));
-	EXPECT_NO_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::autonomous));
-	EXPECT_NO_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::differential));
-	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::estimated));
-	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::manual_input));
-	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::simulated));
-	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::data_not_valid));
+	EXPECT_NO_THROW(
+		apb.set_mode_indicator(nmea::positioning_system_mode_indicator::autonomous));
+	EXPECT_NO_THROW(
+		apb.set_mode_indicator(nmea::positioning_system_mode_indicator::differential));
+	EXPECT_ANY_THROW(
+		apb.set_mode_indicator(nmea::positioning_system_mode_indicator::estimated));
+	EXPECT_ANY_THROW(
+		apb.set_mode_indicator(nmea::positioning_system_mode_indicator::manual_input));
+	EXPECT_ANY_THROW(
+		apb.set_mode_indicator(nmea::positioning_system_mode_indicator::simulated));
+	EXPECT_ANY_THROW(
+		apb.set_mode_indicator(nmea::positioning_system_mode_indicator::data_not_valid));
 	EXPECT_ANY_THROW(apb.set_mode_indicator(nmea::positioning_system_mode_indicator::precise));
 }
 }

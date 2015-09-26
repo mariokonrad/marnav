@@ -34,5 +34,4 @@ TEST_F(Test_nmea_tpt, empty_to_string)
 
 	EXPECT_STREQ("$GPTPT,0,M,0,P,0,M*27", nmea::to_string(tpt).c_str());
 }
-
 }

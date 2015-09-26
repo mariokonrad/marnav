@@ -67,4 +67,3 @@ TEST_F(Test_nmea_mwd, set_speed_mps)
 	EXPECT_STREQ("$WIMWD,,,,,,,12.3,M*13", nmea::to_string(mwd).c_str());
 }
 }
-

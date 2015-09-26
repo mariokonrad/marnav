@@ -34,5 +34,4 @@ TEST_F(Test_nmea_tpc, empty_to_string)
 
 	EXPECT_STREQ("$GPTPC,0,M,0,M,0,M*2D", nmea::to_string(tpc).c_str());
 }
-
 }

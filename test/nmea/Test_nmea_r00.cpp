@@ -80,9 +80,9 @@ TEST_F(Test_nmea_r00, found_on_internet)
 		EXPECT_NE(nullptr, s);
 	}
 	{
-		auto s = nmea::make_sentence("$GPR00,MINST,CHATN,CHAT1,CHATW,CHATM,CHATE,003,004,005,006,007,,,*05");
+		auto s = nmea::make_sentence(
+			"$GPR00,MINST,CHATN,CHAT1,CHATW,CHATM,CHATE,003,004,005,006,007,,,*05");
 		EXPECT_NE(nullptr, s);
 	}
 }
-
 }

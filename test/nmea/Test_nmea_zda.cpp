@@ -58,6 +58,4 @@ TEST_F(Test_nmea_zda, set_local_zone)
 
 	EXPECT_STREQ("$GPZDA,,,,,10,00*49", nmea::to_string(zda).c_str());
 }
-
 }
-

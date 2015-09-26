@@ -59,4 +59,3 @@ TEST_F(Test_nmea_mwv, set_speed)
 	EXPECT_STREQ("$IIMWV,,,22.5,N,*35", nmea::to_string(mwv).c_str());
 }
 }
-

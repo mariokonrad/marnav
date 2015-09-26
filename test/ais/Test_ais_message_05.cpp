@@ -126,5 +126,4 @@ TEST_F(Test_ais_message_05, set_destination_too_large)
 
 	EXPECT_STREQ("12345678901234567890", m.get_destination().c_str());
 }
-
 }

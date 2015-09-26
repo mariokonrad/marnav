@@ -83,4 +83,3 @@ TEST_F(Test_nmea_vwr, set_speed_kmh)
 	EXPECT_STREQ("$IIVWR,,,,,,,13.5,K*01", nmea::to_string(vwr).c_str());
 }
 }
-

@@ -32,7 +32,8 @@ TEST_F(Test_nmea_tll, empty_to_string)
 {
 	nmea::tll tll;
 
-	EXPECT_STREQ("$GPTLL,00,0000.0000,N,00000.0000,E,,000000,T,*00", nmea::to_string(tll).c_str());
+	EXPECT_STREQ(
+		"$GPTLL,00,0000.0000,N,00000.0000,E,,000000,T,*00", nmea::to_string(tll).c_str());
 }
 
 TEST_F(Test_nmea_tll, set_lat)
@@ -40,7 +41,8 @@ TEST_F(Test_nmea_tll, set_lat)
 	nmea::tll tll;
 	tll.set_lat(geo::latitude{12.34});
 
-	EXPECT_STREQ("$GPTLL,00,1220.4000,N,00000.0000,E,,000000,T,*05", nmea::to_string(tll).c_str());
+	EXPECT_STREQ(
+		"$GPTLL,00,1220.4000,N,00000.0000,E,,000000,T,*05", nmea::to_string(tll).c_str());
 }
 
 TEST_F(Test_nmea_tll, set_lon_west)
@@ -48,7 +50,8 @@ TEST_F(Test_nmea_tll, set_lon_west)
 	nmea::tll tll;
 	tll.set_lon(geo::longitude{-123.45});
 
-	EXPECT_STREQ("$GPTLL,00,0000.0000,N,12327.0000,W,,000000,T,*17", nmea::to_string(tll).c_str());
+	EXPECT_STREQ(
+		"$GPTLL,00,0000.0000,N,12327.0000,W,,000000,T,*17", nmea::to_string(tll).c_str());
 }
 
 TEST_F(Test_nmea_tll, set_lon_east)
@@ -56,7 +59,7 @@ TEST_F(Test_nmea_tll, set_lon_east)
 	nmea::tll tll;
 	tll.set_lon(geo::longitude{123.45});
 
-	EXPECT_STREQ("$GPTLL,00,0000.0000,N,12327.0000,E,,000000,T,*05", nmea::to_string(tll).c_str());
+	EXPECT_STREQ(
+		"$GPTLL,00,0000.0000,N,12327.0000,E,,000000,T,*05", nmea::to_string(tll).c_str());
 }
 }
-

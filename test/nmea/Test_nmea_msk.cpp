@@ -34,5 +34,4 @@ TEST_F(Test_nmea_msk, empty_to_string)
 
 	EXPECT_STREQ("$GPMSK,000,A,000,A,*6E", nmea::to_string(msk).c_str());
 }
-
 }

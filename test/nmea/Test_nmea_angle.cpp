@@ -26,5 +26,4 @@ TEST_F(Test_nmea_angle, parse_invalid_minutes)
 {
 	EXPECT_ANY_THROW(marnav::nmea::parse_latitude("00161.000"));
 }
-
 }

@@ -34,5 +34,4 @@ TEST_F(Test_nmea_tfi, empty_to_string)
 
 	EXPECT_STREQ("$GPTFI,2,2,2*52", nmea::to_string(tfi).c_str());
 }
-
 }

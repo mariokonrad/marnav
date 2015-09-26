@@ -137,4 +137,3 @@ TEST_F(Test_nmea_rmc, set_lon_west)
 	EXPECT_STREQ("$GPRMC,,,,,12345.9333,W,,,,,,*09", nmea::to_string(rmc).c_str());
 }
 }
-

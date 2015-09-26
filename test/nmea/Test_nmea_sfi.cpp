@@ -37,4 +37,3 @@ TEST_F(Test_nmea_sfi, empty_to_string)
 	EXPECT_STREQ("$GPSFI,0,0*4B", nmea::to_string(sfi).c_str());
 }
 }
-

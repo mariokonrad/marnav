@@ -92,6 +92,4 @@ TEST_F(Test_nmea_gga, set_lon_east)
 
 	EXPECT_STREQ("$GPGGA,,,,12327.0000,E,,,,,,,,,*08", nmea::to_string(gga).c_str());
 }
-
 }
-

@@ -67,4 +67,3 @@ TEST_F(Test_nmea_gll, set_lon_east)
 	EXPECT_STREQ("$GPGLL,,,12327.0000,E,,,V*74", nmea::to_string(gll).c_str());
 }
 }
-

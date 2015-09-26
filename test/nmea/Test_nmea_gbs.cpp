@@ -34,5 +34,4 @@ TEST_F(Test_nmea_gbs, empty_to_string)
 
 	EXPECT_STREQ("$GPGBS,000000.00,0,0,0,000,0,0,0*5F", nmea::to_string(gbs).c_str());
 }
-
 }

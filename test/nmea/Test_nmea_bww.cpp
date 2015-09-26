@@ -66,5 +66,4 @@ TEST_F(Test_nmea_bww, set_waypoint_from)
 
 	EXPECT_STREQ("$GPBWW,,,,,,POINT1*28", nmea::to_string(bww).c_str());
 }
-
 }

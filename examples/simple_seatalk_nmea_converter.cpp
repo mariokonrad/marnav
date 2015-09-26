@@ -31,9 +31,10 @@ int main(int, char **)
 
 	// mapping of conversion functions
 	static const std::map<seatalk::message_id,
-		std::function<std::string(const seatalk::message &)>> CONV = {
-		{seatalk::message_id::depth_below_transducer, conv_depth_below_transducer},
-	};
+		std::function<std::string(const seatalk::message &)>> CONV
+		= {
+			{seatalk::message_id::depth_below_transducer, conv_depth_below_transducer},
+		};
 
 	// open output port
 	boost::asio::io_service io;

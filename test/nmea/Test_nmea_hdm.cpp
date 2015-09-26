@@ -46,6 +46,4 @@ TEST_F(Test_nmea_hdm, set_heading)
 
 	EXPECT_STREQ("$HCHDM,45.8,M*10", nmea::to_string(hdm).c_str());
 }
-
 }
-

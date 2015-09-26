@@ -66,6 +66,4 @@ TEST_F(Test_nmea_vbw, set_ground_speed_negative)
 
 	EXPECT_STREQ("$IIVBW,,,,-1.0,-2.0,A*01", nmea::to_string(vbw).c_str());
 }
-
 }
-

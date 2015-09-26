@@ -66,5 +66,4 @@ TEST_F(Test_nmea_rma, set_lon_west)
 
 	EXPECT_STREQ("$GPRMA,,,,12345.9333,W,,,,,,*27", nmea::to_string(rma).c_str());
 }
-
 }

@@ -13,19 +13,20 @@ public:
 	{
 		// note: this ascii art does not use correct projection
 
-		return region{ // atlantic ocean, knee of africa, west of Congo
+		return region{
+			// atlantic ocean, knee of africa, west of Congo
 
-		{1.0, -1.0}, // a0
-		// +-----------------+
-		// |    I            |
-		// |    I            |
-		// |====*============|  (equator)
-		// |    I            |
-		// |    I            |
-		// +-----------------+
-		//    prime meridian |
-		//                   |
-		                     {-2.0,3.0} // a1
+			{1.0, -1.0}, // a0
+			// +-----------------+
+			// |    I            |
+			// |    I            |
+			// |====*============|  (equator)
+			// |    I            |
+			// |    I            |
+			// +-----------------+
+			//    prime meridian |
+			//                   |
+			{-2.0, 3.0} // a1
 		};
 	}
 
@@ -33,17 +34,18 @@ public:
 	{
 		// note: this ascii art does not use correct projection
 
-		return region{ // arround Vancouver/Canada
+		return region{
+			// arround Vancouver/Canada
 
-		{49.0, -124.0}, // a0
-		// +-----------------+
-		// |                 |
-		// |                 |
-		// |                 |
-		// |                 |
-		// |                 |
-		// +-----------------+
-		             {48.0, -122.0} // a1
+			{49.0, -124.0}, // a0
+			// +-----------------+
+			// |                 |
+			// |                 |
+			// |                 |
+			// |                 |
+			// |                 |
+			// +-----------------+
+			{48.0, -122.0} // a1
 		};
 	}
 
@@ -51,17 +53,18 @@ public:
 	{
 		// note: this ascii art does not use correct projection
 
-		return region{ // arround Buenos Airs/Argentina
+		return region{
+			// arround Buenos Airs/Argentina
 
-		{-33.0, -60.0}, // a0
-		// +-----------------+
-		// |                 |
-		// |                 |
-		// |                 |
-		// |                 |
-		// |                 |
-		// +-----------------+
-		              {-35.0, -56.0} // a1
+			{-33.0, -60.0}, // a0
+			// +-----------------+
+			// |                 |
+			// |                 |
+			// |                 |
+			// |                 |
+			// |                 |
+			// +-----------------+
+			{-35.0, -56.0} // a1
 		};
 	}
 
@@ -69,19 +72,20 @@ public:
 	{
 		// note: this ascii art does not use correct projection
 
-		return region{ // southern hemisphere, arround date line, east of New Zealand
+		return region{
+			// southern hemisphere, arround date line, east of New Zealand
 
-		{-40.0, 178.0}, // a0
-		// +--------I--------+
-		// |        I        |
-		// |        I        |
-		// |        I        |
-		// |        I        |
-		// |        I        |
-		// +--------I--------+
-		//       date line   |
-		//                   |
-		              {-45.0, -178.0} // a1
+			{-40.0, 178.0}, // a0
+			// +--------I--------+
+			// |        I        |
+			// |        I        |
+			// |        I        |
+			// |        I        |
+			// |        I        |
+			// +--------I--------+
+			//       date line   |
+			//                   |
+			{-45.0, -178.0} // a1
 		};
 	}
 
@@ -89,19 +93,20 @@ public:
 	{
 		// note: this ascii art does not use correct projection
 
-		return region{ // north pole
+		return region{
+			// north pole
 
-		{80.0, -120.0}, // a0
-		// +---*-------------+
-		// |   I             |
-		// |   I             |
-		// |   I             |
-		// |   I             |
-		// |   I             |
-		// +-----------------+
-		//   prime meridian  |
-		//                   |
-		               {80.0, 35.0} // a1
+			{80.0, -120.0}, // a0
+			// +---*-------------+
+			// |   I             |
+			// |   I             |
+			// |   I             |
+			// |   I             |
+			// |   I             |
+			// +-----------------+
+			//   prime meridian  |
+			//                   |
+			{80.0, 35.0} // a1
 		};
 	}
 };

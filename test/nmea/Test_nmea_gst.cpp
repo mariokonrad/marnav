@@ -34,5 +34,4 @@ TEST_F(Test_nmea_gst, empty_to_string)
 
 	EXPECT_STREQ("$GPGST,000000.00,0,0,0,0,0,0,0*49", nmea::to_string(gst).c_str());
 }
-
 }

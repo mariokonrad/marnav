@@ -34,5 +34,4 @@ TEST_F(Test_nmea_tpr, empty_to_string)
 
 	EXPECT_STREQ("$GPTPR,0,M,0,P,0,M*21", nmea::to_string(tpr).c_str());
 }
-
 }
