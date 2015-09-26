@@ -380,6 +380,24 @@ After the build, ```scan-build``` will tell you what to do in order to inspect
 the findings.
 
 
+### Formatting Test
+
+There is a helper script ```bin/check-format``` which uses ```clang-format``` to
+check the formatting of all files in the directories containing code (```src```,
+```test``` and ```examples```). This script can be used manually:
+
+	bin/check-format
+
+or used as git pre-commit hook:
+
+	cd .git/hooks
+	ln -s ../../bin/check-format pre-commit
+
+which prevents a commit if there are files not complying with the formatting
+rules. Be aware of using the script as pre-commit hook, the checking can take
+several seconds.
+
+
 ---
 
 Authors
