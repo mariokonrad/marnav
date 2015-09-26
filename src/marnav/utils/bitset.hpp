@@ -61,9 +61,9 @@ public:
 	enum {
 		/// It is assumed, that a byte has 8 bits. This template will
 		/// not work on other architectures.
-		BITS_PER_BYTE = 8
+		bits_per_byte = 8
 	};
-	enum { BITS_PER_BLOCK = sizeof(block_type) * BITS_PER_BYTE };
+	enum { bits_per_block = sizeof(block_type) * bits_per_byte };
 
 public:
 	using size_type = typename Container::size_type;
@@ -192,7 +192,7 @@ public:
 			return res;
 		}
 
-		template <typename T> void peek(T & v, size_type bits = sizeof(T) * BITS_PER_BYTE) const
+		template <typename T> void peek(T & v, size_type bits = sizeof(T) * bits_per_byte) const
 		{
 			if (bs == nullptr)
 				return;
@@ -202,7 +202,7 @@ public:
 			bs->get(v, pos, bits);
 		}
 
-		template <typename T> void read(T & v, size_type bits = sizeof(T) * BITS_PER_BYTE)
+		template <typename T> void read(T & v, size_type bits = sizeof(T) * bits_per_byte)
 		{
 			peek(v, bits);
 			*this += bits;
@@ -220,7 +220,7 @@ private:
 	{
 		if (bits <= 0)
 			return;
-		size_type n_blocks = (pos + bits + BITS_PER_BLOCK - 1) / BITS_PER_BLOCK;
+		size_type n_blocks = (pos + bits + bits_per_block - 1) / bits_per_block;
 		if (n_blocks > data.capacity()) {
 			data.reserve(n_blocks);
 			while (bits > capacity() - pos) {
@@ -234,17 +234,17 @@ private:
 	///
 	/// @param[in] v The data to append to the bitset.
 	/// @param[in] bits The number of bits to append. This value must be
-	///            between 0 and BITS_PER_BLOCK. If not all bits are being
+	///            between 0 and bits_per_block. If not all bits are being
 	///            appended, only the least significant bits are being taken.
-	void append_block(block_type v, size_type bits = BITS_PER_BLOCK)
+	void append_block(block_type v, size_type bits = bits_per_block)
 	{
 		if (bits <= 0)
 			return;
 		extend(bits);
-		size_type i = pos / BITS_PER_BLOCK; // index of current block
+		size_type i = pos / bits_per_block; // index of current block
 
 		// number of bits unused within the current block
-		size_type u_bits = BITS_PER_BLOCK - (pos % BITS_PER_BLOCK);
+		size_type u_bits = bits_per_block - (pos % bits_per_block);
 
 		if (u_bits >= bits) {
 			// enough room within current block
@@ -252,7 +252,7 @@ private:
 		} else {
 			// not enough room, split value to current and next block
 			data[i + 0] |= v >> (bits - u_bits);
-			data[i + 1] |= v << (BITS_PER_BLOCK - (bits - u_bits));
+			data[i + 1] |= v << (bits_per_block - (bits - u_bits));
 		}
 		pos += bits;
 	}
@@ -271,12 +271,12 @@ private:
 	///       this function runs potentially often, and therefore it is desired to
 	///       avoid additional runtime checks which can easily be done in the calling
 	///       environment.
-	void set_block(block_type v, size_type ofs, size_type bits = BITS_PER_BLOCK)
+	void set_block(block_type v, size_type ofs, size_type bits = bits_per_block)
 	{
-		size_type i = ofs / BITS_PER_BLOCK; // index of current block
+		size_type i = ofs / bits_per_block; // index of current block
 
 		// number of bits unused within the current block
-		size_type u_bits = BITS_PER_BLOCK - (ofs % BITS_PER_BLOCK);
+		size_type u_bits = bits_per_block - (ofs % bits_per_block);
 
 		if (u_bits >= bits) {
 			// enough room within current block
@@ -291,27 +291,27 @@ private:
 		} else {
 			// not enough room, split value to current and next block
 			block_type mask0 = ~((1 << (bits - u_bits)) - 1);
-			block_type mask1 = (1 << (BITS_PER_BLOCK - (bits - u_bits))) - 1;
+			block_type mask1 = (1 << (bits_per_block - (bits - u_bits))) - 1;
 
 			data[i + 0] = (data[i + 0] & mask0) | v >> (bits - u_bits);
-			data[i + 1] = (data[i + 1] & mask1) | v << (BITS_PER_BLOCK - (bits - u_bits));
+			data[i + 1] = (data[i + 1] & mask1) | v << (bits_per_block - (bits - u_bits));
 		}
 		if (ofs + bits > pos)
 			pos = ofs + bits;
 	}
 
 	template <typename T>
-	void set_impl(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE)
+	void set_impl(T v, size_type ofs, size_type bits = sizeof(T) * bits_per_byte)
 	{
 		if (bits <= 0)
 			return;
-		if (bits > sizeof(v) * BITS_PER_BYTE)
+		if (bits > sizeof(v) * bits_per_byte)
 			throw std::invalid_argument{"number of bit exceed number of available bits"};
 		if (ofs + bits > capacity())
 			extend(ofs + bits - capacity());
 
 		// fraction of the first block
-		size_type u_bits = BITS_PER_BLOCK - (ofs % BITS_PER_BLOCK); // part of the first block
+		size_type u_bits = bits_per_block - (ofs % bits_per_block); // part of the first block
 		if (u_bits > 0) {
 			if (bits <= u_bits) {
 				set_block(v, ofs, bits);
@@ -325,13 +325,13 @@ private:
 		}
 
 		// all complete blocks
-		for (; bits > BITS_PER_BLOCK; bits -= BITS_PER_BLOCK, ofs += BITS_PER_BLOCK) {
-			set_block(v >> (bits - BITS_PER_BLOCK), ofs);
+		for (; bits > bits_per_block; bits -= bits_per_block, ofs += bits_per_block) {
+			set_block(v >> (bits - bits_per_block), ofs);
 		}
 
 		// fraction of the last block
 		if (bits > 0) {
-			set_block(v << (BITS_PER_BLOCK - bits), ofs);
+			set_block(v << (bits_per_block - bits), ofs);
 		}
 	}
 
@@ -355,16 +355,16 @@ private:
 	/// @exception std::out_of_range There are not enough bits to read, offset and number
 	///            of bits exceed the total number of available bits. It is not possible
 	///            to read past the end.
-	void get_block(block_type & v, size_type ofs, size_type bits = BITS_PER_BLOCK) const
+	void get_block(block_type & v, size_type ofs, size_type bits = bits_per_block) const
 	{
 		if (bits <= 0)
 			return;
 		if (ofs + bits > size())
 			throw std::out_of_range{"offset and requested bits out of range of available bits"};
-		size_type i = ofs / BITS_PER_BLOCK; // index of current block
+		size_type i = ofs / bits_per_block; // index of current block
 
 		// number of bits unused within the current block
-		size_type u_bits = BITS_PER_BLOCK - (ofs % BITS_PER_BLOCK);
+		size_type u_bits = bits_per_block - (ofs % bits_per_block);
 
 		if (u_bits >= bits) {
 			// desired data fully within the current block
@@ -373,10 +373,10 @@ private:
 		} else {
 			// desired value is part from current block and part from next
 			block_type mask0 = (1 << u_bits) - 1;
-			block_type mask1 = ((1 << (BITS_PER_BLOCK - (bits - u_bits))) - 1)
+			block_type mask1 = ((1 << (bits_per_block - (bits - u_bits))) - 1)
 				<< (bits - u_bits);
 			v = (data[i + 0] & mask0) << (bits - u_bits)
-				| (data[i + 1] & mask1) >> (BITS_PER_BLOCK - (bits - u_bits));
+				| (data[i + 1] & mask1) >> (bits_per_block - (bits - u_bits));
 		}
 	}
 
@@ -417,14 +417,14 @@ public:
 	/// @param[in] begin Start position of the data (inclusive)
 	/// @param[in] end End position of the data (exclusive)
 	bitset(typename Container::const_iterator begin, typename Container::const_iterator end)
-		: pos((end - begin) * BITS_PER_BLOCK)
+		: pos((end - begin) * bits_per_block)
 		, data(begin, end)
 	{
 	}
 
 	/// Construction with move of the container, this does not copy any data.
 	explicit bitset(Container && container)
-		: pos(container.size() * BITS_PER_BLOCK)
+		: pos(container.size() * bits_per_block)
 		, data(std::move(container))
 	{
 	}
@@ -433,7 +433,7 @@ public:
 
 	/// Returns the capacity of this bit set. Note: not all bits must have
 	/// been occupied.
-	size_type capacity() const { return data.size() * BITS_PER_BLOCK; }
+	size_type capacity() const { return data.size() * bits_per_block; }
 
 	/// Returns the number of used bits.
 	size_type size() const { return pos; }
@@ -441,7 +441,7 @@ public:
 	/// Reserves the number of blocks within this set.
 	///
 	/// @note This method reserves blocks, not bits.
-	void reserve(size_type blocks) { extend(blocks * BITS_PER_BLOCK); }
+	void reserve(size_type blocks) { extend(blocks * bits_per_block); }
 
 	/// Clears the bit set.
 	void clear()
@@ -510,19 +510,19 @@ public:
 	/// @exception std::invalid_argument Number of bites exceed the number of
 	///            bit provided by the parameter v. padding is not implemented.
 	///            Example: type of v is uint32_t, bits is 40.
-	template <typename T> void append(T v, size_type bits = sizeof(T) * BITS_PER_BYTE)
+	template <typename T> void append(T v, size_type bits = sizeof(T) * bits_per_byte)
 	{
 		if (bits <= 0)
 			return;
-		if (bits > sizeof(v) * BITS_PER_BYTE)
+		if (bits > sizeof(v) * bits_per_byte)
 			throw std::invalid_argument{"number of bits exceed number of available bits"};
-		size_type n_bits = bits % BITS_PER_BLOCK; // incomplete blocks
+		size_type n_bits = bits % bits_per_block; // incomplete blocks
 		if (n_bits != 0) {
 			append_block(v >> (bits - n_bits), n_bits);
 			bits -= n_bits;
 		}
-		for (; bits > 0; bits -= BITS_PER_BLOCK) {
-			append_block(v >> (bits - BITS_PER_BLOCK));
+		for (; bits > 0; bits -= bits_per_block) {
+			append_block(v >> (bits - bits_per_block));
 		}
 	}
 
@@ -556,7 +556,7 @@ public:
 	///            bit provided by the parameter v. padding is not implemented.
 	///            Example: type of v is uint32_t, bits is 40.
 	template <typename T>
-	void set(T v, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE)
+	void set(T v, size_type ofs, size_type bits = sizeof(T) * bits_per_byte)
 	{
 		set_dispatch(v, ofs, bits, std::is_integral<T>{});
 	}
@@ -587,11 +587,11 @@ public:
 			throw std::out_of_range{"index out of range"};
 
 		// bit within the block to be read
-		size_type n_bit = BITS_PER_BLOCK - (i % BITS_PER_BLOCK) - 1;
+		size_type n_bit = bits_per_block - (i % bits_per_block) - 1;
 		if (value) {
-			data[i / BITS_PER_BLOCK] |= (1u << n_bit);
+			data[i / bits_per_block] |= (1u << n_bit);
 		} else {
-			data[i / BITS_PER_BLOCK] &= ~(1u << n_bit);
+			data[i / bits_per_block] &= ~(1u << n_bit);
 		}
 	}
 
@@ -607,8 +607,8 @@ public:
 			throw std::out_of_range{"index out of range"};
 
 		// bit within the block to be read
-		size_type n_bit = BITS_PER_BLOCK - (i % BITS_PER_BLOCK) - 1;
-		return ((data[i / BITS_PER_BLOCK] >> n_bit) & 1) ? true : false;
+		size_type n_bit = bits_per_block - (i % bits_per_block) - 1;
+		return ((data[i / bits_per_block] >> n_bit) & 1) ? true : false;
 	}
 
 	/// Simply an other name for get_bit.
@@ -631,14 +631,14 @@ public:
 	///            bits. It is not possible to read beyond the end.
 	template <class T>
 	typename std::enable_if<std::is_integral<T>::value, T>::type get(
-		size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const
+		size_type ofs, size_type bits = sizeof(T) * bits_per_byte) const
 	{
 		if (bits <= 0)
 			return T{};
-		if (bits > sizeof(T) * BITS_PER_BYTE)
+		if (bits > sizeof(T) * bits_per_byte)
 			throw std::invalid_argument{"number of bits (" + std::to_string(bits)
 				+ ") exceed number of available bits ("
-				+ std::to_string(sizeof(T) * BITS_PER_BYTE) + ")"};
+				+ std::to_string(sizeof(T) * bits_per_byte) + ")"};
 		if (ofs + bits > pos)
 			throw std::out_of_range{"offset (" + std::to_string(ofs) + ") and bits ("
 				+ std::to_string(bits) + ") exceed available number of bits ("
@@ -647,7 +647,7 @@ public:
 		T value = 0;
 
 		// number of bits unused within the current block
-		size_type u_bits = BITS_PER_BLOCK - (ofs % BITS_PER_BLOCK);
+		size_type u_bits = bits_per_block - (ofs % bits_per_block);
 
 		block_type block{};
 
@@ -668,12 +668,12 @@ public:
 		// the block size (mupltiple blocks in one T).
 		// since this check is possible at compile time, modern compilers
 		// probably will eliminated it completely.
-		if (sizeof(T) * BITS_PER_BYTE > BITS_PER_BLOCK) {
-			for (; bits >= BITS_PER_BLOCK; bits -= BITS_PER_BLOCK) {
+		if (sizeof(T) * bits_per_byte > bits_per_block) {
+			for (; bits >= bits_per_block; bits -= bits_per_block) {
 				get_block(block, ofs);
-				value <<= BITS_PER_BLOCK;
+				value <<= bits_per_block;
 				value += block;
-				ofs += BITS_PER_BLOCK;
+				ofs += bits_per_block;
 			}
 		}
 
@@ -689,13 +689,13 @@ public:
 
 	template <class T>
 	typename std::enable_if<std::is_enum<T>::value, T>::type get(
-		size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const
+		size_type ofs, size_type bits = sizeof(T) * bits_per_byte) const
 	{
 		return static_cast<T>(get<typename std::underlying_type<T>::type>(ofs, bits));
 	}
 
 	template <class T>
-	void get(T & value, size_type ofs, size_type bits = sizeof(T) * BITS_PER_BYTE) const
+	void get(T & value, size_type ofs, size_type bits = sizeof(T) * bits_per_byte) const
 	{
 		value = get<T>(ofs, bits);
 	}
