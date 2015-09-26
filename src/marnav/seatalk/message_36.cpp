@@ -22,9 +22,6 @@ std::unique_ptr<message> message_36::parse(const raw & data)
 	return utils::make_unique<message_36>();
 }
 
-raw message_36::get_data() const
-{
-	return raw{static_cast<uint8_t>(ID), 0x00, 0x01};
-}
+raw message_36::get_data() const { return raw{static_cast<uint8_t>(ID), 0x00, 0x01}; }
 }
 }

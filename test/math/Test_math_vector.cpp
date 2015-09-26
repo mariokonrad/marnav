@@ -441,5 +441,4 @@ TEST_F(Test_math_vector, vec3_operator_minus)
 		EXPECT_NEAR(3.0, result[2], 1e-9);
 	}
 }
-
 }

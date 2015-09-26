@@ -2,16 +2,14 @@
 
 # search for a suitable clang-format version
 CLANG_FORMAT_BIN=
-if [ `which clang-format-3.8` ] ; then
-	CLANG_FORMAT_BIN=`which clang-format-3.8`
-elif [ `which clang-format-3.7` ] ; then
+if [ `which clang-format-3.7` ] ; then
 	CLANG_FORMAT_BIN=`which clang-format-3.7`
 fi
 
 # clang format found, performing checks
 if [ -x ${CLANG_FORMAT_BIN} ] ; then
 	FILES=()
-	for fn in $(find src -name "*.hpp" -o -name "*.cpp") ; do
+	for fn in $(find src test examples -type f -name "*.[ch]pp") ; do
 		d=$(${CLANG_FORMAT_BIN} $fn | diff $fn -)
 		if [ "x${d}" != "x" ] ; then
 			FILES+=($fn)

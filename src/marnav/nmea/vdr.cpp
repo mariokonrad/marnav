@@ -32,8 +32,8 @@ void vdr::set_speed(double t) noexcept
 	speed_unit = unit::velocity::knot;
 }
 
-std::unique_ptr<sentence> vdr::parse(const std::string & talker,
-	const std::vector<std::string> & fields)
+std::unique_ptr<sentence> vdr::parse(
+	const std::string & talker, const std::vector<std::string> & fields)
 {
 	if (fields.size() != 6)
 		throw std::invalid_argument{"invalid number of fields in vdr::parse"};

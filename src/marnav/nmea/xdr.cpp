@@ -85,4 +85,3 @@ std::vector<std::string> xdr::get_data() const
 }
 }
 }
-

@@ -75,15 +75,9 @@ void message_19::read_data(const raw & bits)
 	// spare: 308 - 311
 }
 
-geo::longitude message_19::get_longitude() const
-{
-	return to_geo_longitude(longitude_minutes);
-}
+geo::longitude message_19::get_longitude() const { return to_geo_longitude(longitude_minutes); }
 
-geo::latitude message_19::get_latitude() const
-{
-	return to_geo_latitude(latitude_minutes);
-}
+geo::latitude message_19::get_latitude() const { return to_geo_latitude(latitude_minutes); }
 
 void message_19::set_longitude(const geo::longitude & t)
 {

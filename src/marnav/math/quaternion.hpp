@@ -97,10 +97,7 @@ public:
 		return w() * q.w() + x() * q.x() + y() * q.y() + z() * q.z();
 	}
 
-	inline quaternion conjugate() const
-	{
-		return quaternion{w(), -x(), -y(), -z()};
-	}
+	inline quaternion conjugate() const { return quaternion{w(), -x(), -y(), -z()}; }
 
 	inline quaternion & normalize(value_type len = 1.0)
 	{
@@ -112,7 +109,10 @@ public:
 
 	inline value_type length() const { return sqrt(length2()); }
 
-	inline value_type length2() const { return a[0] * a[0] + a[1] * a[1] + a[2] * a[2] + a[3] * a[3]; }
+	inline value_type length2() const
+	{
+		return a[0] * a[0] + a[1] * a[1] + a[2] * a[2] + a[3] * a[3];
+	}
 
 	inline vector3<T> get_vector3() const { return vector3<T>{x(), y(), z()}; }
 
@@ -176,8 +176,7 @@ public:
 
 	friend quaternion operator*(const quaternion & q1, const quaternion & q2)
 	{
-		return quaternion{
-			q1.w() * q2.w() - q1.x() * q2.x() - q1.y() * q2.y() - q1.z() * q2.z(),
+		return quaternion{q1.w() * q2.w() - q1.x() * q2.x() - q1.y() * q2.y() - q1.z() * q2.z(),
 			q1.w() * q2.x() + q1.x() * q2.w() + q1.y() * q2.z() - q1.z() * q2.y(),
 			q1.w() * q2.y() + q1.y() * q2.w() + q1.z() * q2.x() - q1.x() * q2.z(),
 			q1.w() * q2.z() + q1.z() * q2.w() + q1.x() * q2.y() - q1.y() * q2.x()};

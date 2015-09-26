@@ -23,15 +23,16 @@ public:
 
 TEST_F(Test_ais, make_message)
 {
-	std::vector<std::pair<std::string, int>> v;
+	using namespace std;
 
-	//	v.push_back(std::make_pair("55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53",
-	//0));
-	//	v.push_back(std::make_pair("1@0000000000000", 2));
+	vector<pair<string, int>> v;
 
-	//	v.push_back(std::make_pair("177KQJ5000G?tO`K>RA1wUbN0TKH", 0));
+	// v.push_back(make_pair("55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53", 0));
+	// v.push_back(make_pair("1@0000000000000", 2));
 
-	v.push_back(std::make_pair("133m@ogP00PD;88MD5MTDww@2D7k", 0));
+	// v.push_back(make_pair("177KQJ5000G?tO`K>RA1wUbN0TKH", 0));
+
+	v.push_back(make_pair("133m@ogP00PD;88MD5MTDww@2D7k", 0));
 
 	auto result = ais::make_message(v);
 }

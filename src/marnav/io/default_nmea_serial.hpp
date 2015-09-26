@@ -4,8 +4,10 @@
 #include <marnav/io/serial.hpp>
 #include <marnav/utils/unique.hpp>
 
-namespace marnav {
-namespace io {
+namespace marnav
+{
+namespace io
+{
 
 /// Returns a serial device with the default configuration for reading NMEA.
 ///

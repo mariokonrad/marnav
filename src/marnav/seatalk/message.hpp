@@ -142,8 +142,7 @@ template <class T> T * message_cast(std::unique_ptr<message> & s)
 ///  The return value is a naked pointer.
 ///
 /// @see message_cast(message * s)
-template <class T>
-const T * message_cast(const std::unique_ptr<message> & s)
+template <class T> const T * message_cast(const std::unique_ptr<message> & s)
 {
 	if (!s)
 		return nullptr;

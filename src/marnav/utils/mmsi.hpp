@@ -19,15 +19,9 @@ class mmsi
 public:
 	using value_type = uint32_t;
 
-	mmsi() noexcept
-		: value(0)
-	{
-	}
+	mmsi() noexcept : value(0) {}
 
-	explicit mmsi(value_type t) noexcept
-		: value(t)
-	{
-	}
+	explicit mmsi(value_type t) noexcept : value(t) {}
 
 	mmsi(const mmsi &) = default;
 	mmsi(mmsi &&) noexcept = default;

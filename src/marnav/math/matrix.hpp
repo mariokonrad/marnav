@@ -129,7 +129,6 @@ T inverse_matrix_nxn(const T & a)
 				return T{};
 	return I;
 }
-
 }
 
 /// @brief A 2x2 Matrix.
@@ -567,9 +566,15 @@ public:
 
 	inline matrix_n & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
 
-	inline matrix_n & operator+=(const matrix_n & m) { return detail::add_matrix_nxn(*this, m); }
+	inline matrix_n & operator+=(const matrix_n & m)
+	{
+		return detail::add_matrix_nxn(*this, m);
+	}
 
-	inline matrix_n & operator-=(const matrix_n & m) { return detail::sub_matrix_nxn(*this, m); }
+	inline matrix_n & operator-=(const matrix_n & m)
+	{
+		return detail::sub_matrix_nxn(*this, m);
+	}
 
 	inline value_type trace() const
 	{

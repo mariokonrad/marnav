@@ -43,8 +43,8 @@ public:
 	xdr(const xdr &) = default;
 	xdr & operator=(const xdr &) = default;
 
-	static std::unique_ptr<sentence> parse(const std::string & talker,
-		const std::vector<std::string> & fields);
+	static std::unique_ptr<sentence> parse(
+		const std::string & talker, const std::vector<std::string> & fields);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;
@@ -65,4 +65,3 @@ public:
 }
 
 #endif
-

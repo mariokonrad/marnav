@@ -56,10 +56,8 @@ static message::parse_function instantiate_message(message_id type)
 		{message_id::position_longitude, message_51::parse},
 		{message_id::speed_over_ground, message_52::parse},
 		{message_id::magnetic_course, message_53::parse},
-		{message_id::gmt_time, message_54::parse},
-		{message_id::date, message_56::parse},
-		{message_id::lat_lon, message_58::parse},
-		{message_id::wind_alarm, message_66::parse},
+		{message_id::gmt_time, message_54::parse}, {message_id::date, message_56::parse},
+		{message_id::lat_lon, message_58::parse}, {message_id::wind_alarm, message_66::parse},
 	};
 
 	auto const & i = std::find_if(begin(known_messages), end(known_messages),

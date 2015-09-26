@@ -73,4 +73,3 @@ std::vector<std::string> rma::get_data() const
 }
 }
 }
-

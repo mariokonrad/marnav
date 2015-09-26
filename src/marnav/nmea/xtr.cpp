@@ -38,4 +38,3 @@ std::vector<std::string> xtr::get_data() const
 }
 }
 }
-

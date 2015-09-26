@@ -68,8 +68,9 @@ std::unique_ptr<message> message_05::parse(const raw & data)
 
 raw message_05::get_data() const
 {
-	return raw{static_cast<uint8_t>(ID), 0x03, conv(side), static_cast<uint8_t>((rpm >> 8) & 0xff),
-		static_cast<uint8_t>(rpm & 0xff), static_cast<uint8_t>(percent_pitch)};
+	return raw{static_cast<uint8_t>(ID), 0x03, conv(side),
+		static_cast<uint8_t>((rpm >> 8) & 0xff), static_cast<uint8_t>(rpm & 0xff),
+		static_cast<uint8_t>(percent_pitch)};
 }
 }
 }

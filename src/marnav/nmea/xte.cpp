@@ -43,4 +43,3 @@ std::vector<std::string> xte::get_data() const
 }
 }
 }
-

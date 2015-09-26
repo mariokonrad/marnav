@@ -79,4 +79,3 @@ std::vector<std::string> rpm::get_data() const
 }
 }
 }
-

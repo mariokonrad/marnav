@@ -51,4 +51,3 @@ std::vector<std::string> rsa::get_data() const
 }
 }
 }
-

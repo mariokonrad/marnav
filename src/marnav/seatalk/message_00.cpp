@@ -61,6 +61,5 @@ double message_00::get_depth_meters() const noexcept
 		return 0.0;
 	return (static_cast<double>(depth) / 10.0) * 3.2808;
 }
-
 }
 }

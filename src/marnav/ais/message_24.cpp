@@ -52,10 +52,7 @@ std::unique_ptr<message> message_24::parse(const raw & bits)
 	return result;
 }
 
-bool message_24::is_auxiliary_vessel() const
-{
-	return utils::mmsi{mmsi}.is_auxiliary();
-}
+bool message_24::is_auxiliary_vessel() const { return utils::mmsi{mmsi}.is_auxiliary(); }
 
 void message_24::read_data(const raw & bits)
 {

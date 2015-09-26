@@ -14,7 +14,8 @@ namespace ais
 class message_19 : public message
 {
 public:
-	constexpr static const message_id ID = message_id::extended_class_b_equipment_position_report;
+	constexpr static const message_id ID
+		= message_id::extended_class_b_equipment_position_report;
 	constexpr static const int SIZE_BITS = 312;
 
 	message_19();

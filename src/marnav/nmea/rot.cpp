@@ -36,4 +36,3 @@ std::vector<std::string> rot::get_data() const
 }
 }
 }
-

@@ -70,15 +70,9 @@ void message_18::read_data(const raw & bits)
 	bits.get(radio_status, 148, 20);
 }
 
-geo::longitude message_18::get_longitude() const
-{
-	return to_geo_longitude(longitude_minutes);
-}
+geo::longitude message_18::get_longitude() const { return to_geo_longitude(longitude_minutes); }
 
-geo::latitude message_18::get_latitude() const
-{
-	return to_geo_latitude(latitude_minutes);
-}
+geo::latitude message_18::get_latitude() const { return to_geo_latitude(latitude_minutes); }
 
 void message_18::set_longitude(const geo::longitude & t)
 {

@@ -63,4 +63,3 @@ std::vector<std::string> osd::get_data() const
 }
 }
 }
-

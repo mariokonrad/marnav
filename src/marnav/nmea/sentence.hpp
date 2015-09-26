@@ -351,8 +351,7 @@ template <class T> T * sentence_cast(std::unique_ptr<sentence> & s)
 /// const std::unique_ptr variant.
 ///
 /// @see sentence_cast(sentence * s)
-template <class T>
-const T * sentence_cast(const std::unique_ptr<sentence> & s)
+template <class T> const T * sentence_cast(const std::unique_ptr<sentence> & s)
 {
 	if (!s)
 		return nullptr;
@@ -363,7 +362,6 @@ const T * sentence_cast(const std::unique_ptr<sentence> & s)
 }
 
 /// @}
-
 }
 }
 

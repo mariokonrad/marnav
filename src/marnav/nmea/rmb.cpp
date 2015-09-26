@@ -86,4 +86,3 @@ std::vector<std::string> rmb::get_data() const
 }
 }
 }
-

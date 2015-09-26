@@ -61,5 +61,4 @@ TEST_F(Test_geo_cpa, collision_on_equator_eastwards_northwards)
 	EXPECT_EQ(std::chrono::hours(60), tcpa);
 	EXPECT_TRUE(cpa_exists);
 }
-
 }

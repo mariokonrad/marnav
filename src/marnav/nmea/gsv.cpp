@@ -105,4 +105,3 @@ std::vector<std::string> gsv::get_data() const
 }
 }
 }
-

@@ -227,8 +227,7 @@ template <class T> T * message_cast(std::unique_ptr<message> & s)
 /// const std::unique_ptr variant.
 ///
 /// @see message_cast(message * s)
-template <class T>
-const T * message_cast(const std::unique_ptr<message> & s)
+template <class T> const T * message_cast(const std::unique_ptr<message> & s)
 {
 	if (!s)
 		return nullptr;
@@ -237,7 +236,6 @@ const T * message_cast(const std::unique_ptr<message> & s)
 
 	return static_cast<T *>(s.get());
 }
-
 }
 }
 

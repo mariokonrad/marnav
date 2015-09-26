@@ -60,7 +60,7 @@ public:
 
 	void set_frequency(uint32_t f, selection_mode mode) noexcept;
 	void set_bitrate(uint32_t rate, selection_mode mode) noexcept;
-	void set_frequency_mss_status(uint32_t t)  noexcept { frequency_mss_status = t; }
+	void set_frequency_mss_status(uint32_t t) noexcept { frequency_mss_status = t; }
 };
 }
 }

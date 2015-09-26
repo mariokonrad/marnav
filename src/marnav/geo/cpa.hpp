@@ -12,8 +12,7 @@ namespace geo
 
 /// @brief This struct contains data about a vessel, needed to
 /// compute CPA and TCPA.
-struct vessel
-{
+struct vessel {
 	position pos; ///< Current position of vessel.
 	double sog; ///< Speed over ground in knots.
 	double cog; ///< Course over ground in degrees.

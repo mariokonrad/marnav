@@ -101,7 +101,8 @@ public:
 template <class InputIt, typename std::enable_if<std::is_class<InputIt>::value
 								 && std::is_convertible<typename InputIt::value_type,
 													 std::unique_ptr<sentence>>::value,
-							 int>::type = 0>
+							 int>::type
+	= 0>
 std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt end)
 {
 	std::vector<std::pair<std::string, int>> v;
@@ -124,8 +125,9 @@ std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt 
 /// @endcode
 template <class InputIt, typename std::enable_if<std::is_class<InputIt>::value
 								 && !std::is_convertible<typename InputIt::value_type,
-										std::unique_ptr<sentence>>::value,
-							 int>::type = 0>
+													 std::unique_ptr<sentence>>::value,
+							 int>::type
+	= 0>
 std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt end)
 {
 	std::vector<std::pair<std::string, int>> v;
@@ -164,7 +166,6 @@ std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt 
 }
 
 /// @}
-
 }
 }
 

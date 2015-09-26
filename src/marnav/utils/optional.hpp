@@ -37,11 +37,7 @@ public:
 	{
 	}
 
-	constexpr optional(T && data) noexcept
-		: flag(true)
-		, data(std::move(data))
-	{
-	}
+	constexpr optional(T && data) noexcept : flag(true), data(std::move(data)) {}
 
 	optional(optional &&) noexcept = default;
 	optional(const optional &) = default;
@@ -72,15 +68,21 @@ public:
 	// observers
 
 	constexpr const T * operator->() const { return &data; }
+
 	T * operator->() { return &data; }
+
 	constexpr const T & operator*() const { return data; }
+
 	T & operator*() { return data; }
 
 	bool available() const { return flag; }
+
 	constexpr explicit operator bool() const { return flag; }
 
 	constexpr const T & value() const & { return data; }
+
 	T & value() & { return data; }
+
 	T && value() && { return data; }
 
 	/* disabling c++14 extensions for now
@@ -123,7 +125,6 @@ template <class T, class... Args> optional<T> make_optional(Args &&... args)
 {
 	return optional<T>(T{std::forward<Args>(args)...});
 }
-
 }
 }
 

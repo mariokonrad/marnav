@@ -172,5 +172,4 @@ TEST_F(Test_math_matrix, mat2_trace)
 	EXPECT_NEAR(6.0, (mat2{1.5, 2.5, 3.5, 4.5}.trace()), 1e-8);
 	EXPECT_NEAR(2.0, (mat2{}.trace()), 1e-8);
 }
-
 }

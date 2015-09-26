@@ -37,10 +37,7 @@ static geo::angle parse_angle(const std::string & s)
 /// @code
 ///   auto lat = nmea::parse_latitude("37.0000");
 /// @endcode
-geo::latitude parse_latitude(const std::string & s)
-{
-	return geo::latitude{parse_angle(s)};
-}
+geo::latitude parse_latitude(const std::string & s) { return geo::latitude{parse_angle(s)}; }
 
 /// Returns the string representation of a latitude, in the form specified by the NMEA
 /// standard.
@@ -66,10 +63,7 @@ std::string to_string(const geo::latitude & v)
 /// @code
 ///   auto lon = nmea::parse_longitude("002.3456");
 /// @endcode
-geo::longitude parse_longitude(const std::string & s)
-{
-	return geo::longitude{parse_angle(s)};
-}
+geo::longitude parse_longitude(const std::string & s) { return geo::longitude{parse_angle(s)}; }
 
 /// Returns the string representation of a longitude, in the form specified by the NMEA
 /// standard.

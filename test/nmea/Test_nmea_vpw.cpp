@@ -50,5 +50,4 @@ TEST_F(Test_nmea_vpw, set_speed_mps)
 
 	EXPECT_STREQ("$IIVPW,,,4.5,M*33", nmea::to_string(vpw).c_str());
 }
-
 }

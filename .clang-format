@@ -12,6 +12,7 @@ TabWidth: 4
 IndentWidth: 4
 IndentCaseLabels: true
 NamespaceIndentation: None
+#AllowShortFunctionsOnASingleLine: None
 
 # pointer alignment
 DerivePointerAlignment: false
