@@ -33,7 +33,7 @@ public:
 	using logic_error::logic_error;
 };
 
-std::unique_ptr<sentence> make_sentence(const std::string & s);
+std::unique_ptr<sentence> make_sentence(const std::string & s, bool ignore_checksum = false);
 
 std::vector<std::string> get_supported_sentences_str();
 std::vector<sentence_id> get_supported_sentences_id();

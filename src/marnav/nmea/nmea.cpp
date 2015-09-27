@@ -136,6 +136,84 @@ static const std::vector<entry> known_sentences = {
 #undef REGISTER_SENTENCE
 }
 
+namespace detail
+{
+/// Returns the parse function of a particular sentence.
+///
+/// If an unknown sentence tag is specified, an exception is thrown.
+///
+/// @param[in] tag The tag of the sentence to get the parse function for.
+/// @return The parse function of the specified sentence.
+/// @exception std::unknown_sentence The specified tag could not be found,
+///   the argument cannot be processed.
+static sentence::parse_function instantiate_sentence(const std::string & tag)
+{
+	using namespace std;
+
+	auto const & i = std::find_if(begin(known_sentences), end(known_sentences),
+		[tag](const entry & e) { return e.TAG == tag; });
+
+	if (i == end(known_sentences))
+		throw unknown_sentence{"unknown sentence in nmea/instantiate_sentence: " + tag};
+
+	return i->parse;
+}
+
+/// Checks if the address field of the specified sentence is a vendor extension or
+/// a regular sentence. It returns the talker ID and tag accordingly.
+///
+/// @param[in] address The address field of a sentence.
+/// @return The tuple contains talker ID and tag. In case of a vendor extension,
+///   the talker ID may be empty.
+/// @exception std::invalid_argument The specified address was probably malformed or
+//    empty.
+static std::tuple<std::string, std::string> parse_address(const std::string & address)
+{
+	if (address.empty())
+		throw std::invalid_argument{"invalid/malformed address in nmea/parse_address"};
+
+	// check for vendor extensions
+	if (address[0] == 'P') {
+		// properitary extension / vendor extension
+		return make_tuple(std::string{}, address);
+	}
+
+	// search in all known sentences
+	auto const & index = std::find_if(begin(known_sentences), end(known_sentences),
+		[address](const entry & e) { return e.TAG == address; });
+	if (index != end(known_sentences))
+		throw std::invalid_argument{"invalid address (" + address + ") in nmea/parse_address"};
+
+	// found regular sentence
+	if (address.size() != 5) // talker ID:2 + tag:3
+		throw std::invalid_argument{"unknown or malformed address field: [" + address + "]"};
+
+	return make_tuple(address.substr(0, 2), address.substr(2, 3));
+}
+
+/// Computes and checks the checksum of the specified sentence against the
+/// expected checksum.
+///
+/// @param[in] s Sentence to check.
+/// @param[in] expected The expected checksum to test against.
+/// @exception checksum_error Thrown if the checksum does not match.
+/// @exception std::invalid_argument Arguments were invalid.
+static void ensure_checksum(const std::string & s, const std::string & expected)
+{
+	auto const end_pos = s.find_first_of(sentence::end_token, 1);
+	if (end_pos == std::string::npos) // end token not found
+		throw std::invalid_argument{"invalid format in nmea/make_sentence"};
+	if (s.size() != end_pos + 3) // short or no checksum
+		throw std::invalid_argument{"invalid format in nmea/make_sentence"};
+	uint8_t checksum = 0x00;
+	for_each(begin(s) + 1, begin(s) + end_pos,
+		[&checksum](char c) { checksum ^= static_cast<uint8_t>(c); });
+	const uint8_t expected_checksum = static_cast<uint8_t>(std::stoul(expected, nullptr, 16));
+	if (checksum != expected_checksum)
+		throw checksum_error{expected_checksum, checksum};
+}
+}
+
 checksum_error::checksum_error(uint8_t expected, uint8_t actual)
 	: expected(expected)
 	, actual(actual)
@@ -193,62 +271,10 @@ sentence_id tag_to_id(const std::string & tag)
 	return i->ID;
 }
 
-/// Returns the parse function of a particular sentence.
-///
-/// If an unknown sentence tag is specified, an exception is thrown.
-///
-/// @param[in] tag The tag of the sentence to get the parse function for.
-/// @return The parse function of the specified sentence.
-/// @exception std::unknown_sentence The specified tag could not be found,
-///   the argument cannot be processed.
-static sentence::parse_function instantiate_sentence(const std::string & tag)
-{
-	using namespace std;
-
-	auto const & i = std::find_if(begin(known_sentences), end(known_sentences),
-		[tag](const entry & e) { return e.TAG == tag; });
-
-	if (i == end(known_sentences))
-		throw unknown_sentence{"unknown sentence in nmea/instantiate_sentence: " + tag};
-
-	return i->parse;
-}
-
-/// Checks if the address field of the specified sentence is a vendor extension or
-/// a regular sentence. It returns the talker ID and tag accordingly.
-///
-/// @param[in] address The address field of a sentence.
-/// @return The tuple contains talker ID and tag. In case of a vendor extension,
-///   the talker ID may be empty.
-/// @exception std::invalid_argument The specified address was probably malformed or
-//    empty.
-static std::tuple<std::string, std::string> parse_address(const std::string & address)
-{
-	if (address.empty())
-		throw std::invalid_argument{"invalid/malformed address in nmea/parse_address"};
-
-	// check for vendor extensions
-	if (address[0] == 'P') {
-		// properitary extension / vendor extension
-		return make_tuple(std::string{}, address);
-	}
-
-	// search in all known sentences
-	auto const & index = std::find_if(begin(known_sentences), end(known_sentences),
-		[address](const entry & e) { return e.TAG == address; });
-	if (index != end(known_sentences))
-		throw std::invalid_argument{"invalid address (" + address + ") in nmea/parse_address"};
-
-	// found regular sentence
-	if (address.size() != 5) // talker ID:2 + tag:3
-		throw std::invalid_argument{"unknown or malformed address field: [" + address + "]"};
-
-	return make_tuple(address.substr(0, 2), address.substr(2, 3));
-}
-
 /// Parses the string and returns the corresponding sentence.
 ///
 /// @param[in] s The sentence to parse.
+/// @param[in] ignore_checksum Option to ignore the checksum.
 /// @return The object of the corresponding type.
 /// @exception checksum_error Will be thrown if the checksum is wrong.
 /// @exception std::invalid_argument Will be thrown if the specified string
@@ -261,7 +287,7 @@ static std::tuple<std::string, std::string> parse_address(const std::string & ad
 ///   auto s =
 ///   nmea::make_sentence("$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
 /// @endcode
-std::unique_ptr<sentence> make_sentence(const std::string & s)
+std::unique_ptr<sentence> make_sentence(const std::string & s, bool ignore_checksum)
 {
 	using namespace std;
 
@@ -279,28 +305,19 @@ std::unique_ptr<sentence> make_sentence(const std::string & s)
 	if (fields.size() < 2) // at least address and checksum must be present
 		throw std::invalid_argument{"malformed sentence in nmea/make_sentence"};
 
-	// compute and check checksum
-	auto const end_pos = s.find_first_of(sentence::end_token, 1);
-	if (end_pos == std::string::npos) // end token not found
-		throw invalid_argument{"invalid format in nmea/make_sentence"};
-	if (s.size() != end_pos + 3) // short or no checksum
-		throw invalid_argument{"invalid format in nmea/make_sentence"};
-	uint8_t checksum = 0x00;
-	for_each(begin(s) + 1, begin(s) + end_pos,
-		[&checksum](char c) { checksum ^= static_cast<uint8_t>(c); });
-	const uint8_t expected_checksum
-		= static_cast<uint8_t>(std::stoul(fields.back(), nullptr, 16));
-	if (checksum != expected_checksum)
-		throw checksum_error{expected_checksum, checksum};
+	// checksum stuff
+	if (!ignore_checksum) {
+		detail::ensure_checksum(s, fields.back());
+	}
 
 	// extract address and posibly talker_id and tag.
 	// check for vendor extension is necessary because the address field of this extensions
 	// to not follow the pattern talker_id/tag
 	std::string talker;
 	std::string tag;
-	std::tie(talker, tag) = parse_address(fields.front());
+	std::tie(talker, tag) = detail::parse_address(fields.front());
 
-	return instantiate_sentence(tag)(
+	return detail::instantiate_sentence(tag)(
 		talker, std::vector<std::string>{fields.begin() + 1, fields.end() - 1});
 }
 }
