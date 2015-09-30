@@ -12,7 +12,8 @@ int main(int argc, char ** argv)
 		return EXIT_FAILURE;
 	}
 
-	printf("%02X : '%s'\n", marnav::nmea::checksum(argv[1], argv[1] + strlen(argv[1])), argv[1]);
+	printf(
+		"%02X : '%s'\n", marnav::nmea::checksum(argv[1], argv[1] + strlen(argv[1])), argv[1]);
 
 	return EXIT_SUCCESS;
 }
