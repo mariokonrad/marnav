@@ -7,6 +7,7 @@
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/date.hpp>
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/checksum.hpp>
 #include <marnav/nmea/aam.hpp>
 #include <marnav/nmea/alm.hpp>
 #include <marnav/nmea/apb.hpp>
@@ -205,22 +206,11 @@ static void ensure_checksum(const std::string & s, const std::string & expected)
 		throw std::invalid_argument{"invalid format in nmea/make_sentence"};
 	if (s.size() != end_pos + 3) // short or no checksum
 		throw std::invalid_argument{"invalid format in nmea/make_sentence"};
-	uint8_t checksum = 0x00;
-	for_each(begin(s) + 1, begin(s) + end_pos,
-		[&checksum](char c) { checksum ^= static_cast<uint8_t>(c); });
 	const uint8_t expected_checksum = static_cast<uint8_t>(std::stoul(expected, nullptr, 16));
-	if (checksum != expected_checksum)
-		throw checksum_error{expected_checksum, checksum};
+	const uint8_t sum = checksum(begin(s) + 1, begin(s) + end_pos);
+	if (expected_checksum != sum)
+		throw checksum_error{expected_checksum, sum};
 }
-}
-
-checksum_error::checksum_error(uint8_t expected, uint8_t actual)
-	: expected(expected)
-	, actual(actual)
-{
-	char buf[64];
-	snprintf(buf, sizeof(buf), "checksum error (actual:%02X, expected:%02X)", actual, expected);
-	text = buf;
 }
 
 /// Returns a list of tags of supported sentences.

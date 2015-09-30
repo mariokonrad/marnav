@@ -2,11 +2,12 @@
 /// It does not implement any error handling and other (normally necessary)
 /// stuff (configurability, error handling, etc.).
 
+#include <vector>
 #include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/checksum.hpp>
 #include <marnav/io/default_nmea_reader.hpp>
 #include <marnav/io/serial.hpp>
 #include <marnav/utils/unique.hpp>
-#include <vector>
 
 int main(int, char **)
 {

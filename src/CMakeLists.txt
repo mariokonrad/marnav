@@ -29,6 +29,7 @@ set(SOURCE_NMEA_0183
 	marnav/nmea/io.cpp
 	marnav/nmea/date.cpp
 	marnav/nmea/time.cpp
+	marnav/nmea/checksum.cpp
 	marnav/nmea/sentence.cpp
 	marnav/nmea/nmea.cpp
 	marnav/nmea/aam.cpp
@@ -216,6 +217,7 @@ install(
 		marnav/nmea/io.hpp
 		marnav/nmea/date.hpp
 		marnav/nmea/time.hpp
+		marnav/nmea/checksum.hpp
 		marnav/nmea/sentence.hpp
 		marnav/nmea/nmea.hpp
 		marnav/nmea/aam.hpp

@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <cstring>
 #include <algorithm>
+#include <marnav/nmea/checksum.hpp>
 
 int main(int argc, char ** argv)
 {
@@ -11,9 +12,7 @@ int main(int argc, char ** argv)
 		return EXIT_FAILURE;
 	}
 
-	uint8_t checksum = 0x00;
-	std::for_each(argv[1], argv[1] + strlen(argv[1]), [&checksum](char c) { checksum ^= c; });
-	printf("%02X : '%s'\n", checksum, argv[1]);
+	printf("%02X : '%s'\n", marnav::nmea::checksum(argv[1], argv[1] + strlen(argv[1])), argv[1]);
 
 	return EXIT_SUCCESS;
 }

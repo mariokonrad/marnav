@@ -1,5 +1,6 @@
 #include "sentence.hpp"
 #include <algorithm>
+#include <marnav/nmea/checksum.hpp>
 
 namespace marnav
 {
@@ -40,11 +41,8 @@ std::string to_string(const sentence & s)
 	}
 	result += s.get_end_token();
 
-	uint8_t checksum = 0x00;
-	for_each(result.begin() + 1, result.end() - 1,
-		[&checksum](char c) { checksum ^= static_cast<uint8_t>(c); });
 	char buf[8];
-	snprintf(buf, sizeof(buf), "%02X", checksum);
+	snprintf(buf, sizeof(buf), "%02X", checksum(result.begin() + 1, result.end() - 1));
 
 	return result + buf;
 }

@@ -16,6 +16,7 @@ add_executable(testrunner
 	geo/Test_geo_region.cpp
 	geo/Test_geo_cpa.cpp
 	geo/Test_geo_geodesic.cpp
+	nmea/Test_nmea_checksum.cpp
 	nmea/Test_nmea.cpp
 	nmea/Test_nmea_angle.cpp
 	nmea/Test_nmea_date.cpp
