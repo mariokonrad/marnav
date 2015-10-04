@@ -150,6 +150,7 @@ enum class sentence_id : uint32_t {
 	TMVTD, ///< Transas VTS / SML tracking system report
 };
 
+/// This namespace contains all talker IDs as strings.
 namespace talker_id
 {
 constexpr const char * none = ""; // used for vendor extensions
@@ -234,7 +235,7 @@ constexpr const char * ais_physical_shore_station = "SA"; // NMEA 4.0 Physical S
 #define NMEA_GETTER(attribute) \
 	decltype(attribute) get_##attribute() const { return attribute; }
 
-/// This is the base class for all sentences.
+/// @brief This is the base class for all sentences.
 class sentence
 {
 public:
@@ -243,12 +244,19 @@ public:
 	using parse_function = std::function<std::unique_ptr<sentence>(
 		const std::string &, const std::vector<std::string> &)>;
 
+	/// Maximum length of a NMEA sentence (raw format as string).
 	constexpr static int max_length = 82;
 
+	/// The start token of normal NMEA sentences.
 	constexpr static char start_token = '$';
+
+	/// The start token of AIS related NMEA sentences.
 	constexpr static char start_token_ais = '!';
+
+	/// The end token (right before the checksum) of all NMEA sentences.
 	constexpr static char end_token = '*';
 
+	sentence() = delete;
 	virtual ~sentence() {}
 
 	/// Returns the ID of the sentence.
@@ -277,7 +285,7 @@ protected:
 
 private:
 	const sentence_id id_;
-	std::string tag_;
+	const std::string tag_;
 	std::string talker_;
 };
 

@@ -9,6 +9,7 @@ namespace marnav
 namespace math
 {
 
+/// @cond DEV
 namespace detail
 {
 
@@ -130,6 +131,7 @@ T inverse_matrix_nxn(const T & a)
 	return I;
 }
 }
+/// @endcond
 
 /// @brief A 2x2 Matrix.
 ///

@@ -8,6 +8,7 @@ namespace marnav
 namespace math
 {
 
+/// @cond DEV
 namespace detail
 {
 
@@ -50,6 +51,7 @@ void normalize_vector(T & a, typename T::value_type len)
 		a *= len / l;
 }
 }
+/// @endcond
 
 /// A 2D vector.
 ///

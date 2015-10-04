@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+/// Enumeration of all possible directions.
 enum class direction : char {
 	east, ///< NMEA representation: 'E'
 	west, ///< NMEA representation: 'W'
@@ -15,6 +16,7 @@ enum class direction : char {
 	south ///< NMEA representation: ' S'
 };
 
+/// Status values used in NMEA.
 enum class status : char {
 	ok, ///< NMEA representation: 'A'
 	warning ///< NMEA representation: 'V'
@@ -32,6 +34,7 @@ enum class positioning_system_mode_indicator : char {
 	precise ///< NMEA representation: 'P'
 };
 
+/// Signal quality.
 enum class quality : uint32_t {
 	invalid = 0, ///< NMEA representation: 0
 	gps_fix = 1, ///< NMEA representation: 1
@@ -73,11 +76,13 @@ enum class reference : char {
 	RELATIVE ///< NMEA representation: 'R'
 };
 
+/// Side of the vessel.
 enum class side : char {
 	left, ///< NMEA representation: 'L'
 	right ///< NMEA Representation: 'R'
 };
 
+/// Status of routes.
 enum class route : char {
 	complete, ///< NMEA representation: 'c'
 	working ///< NMEA representation: 'w'

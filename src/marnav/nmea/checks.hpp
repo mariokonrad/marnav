@@ -13,6 +13,8 @@ namespace marnav
 {
 namespace nmea
 {
+namespace
+{
 template <typename T>
 static void throw_elaborated_invalid_argument(
 	T value, std::initializer_list<T> options, const char * name = nullptr)
@@ -27,6 +29,7 @@ static void throw_elaborated_invalid_argument(
 	if (name)
 		os << " for '" << name << "'";
 	throw invalid_argument{os.str()};
+}
 }
 
 /// Checks the value agains a list of possible values.

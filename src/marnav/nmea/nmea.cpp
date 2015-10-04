@@ -137,6 +137,7 @@ static const std::vector<entry> known_sentences = {
 #undef REGISTER_SENTENCE
 }
 
+/// @cond DEV
 namespace detail
 {
 /// Returns the parse function of a particular sentence.
@@ -212,6 +213,7 @@ static void ensure_checksum(const std::string & s, const std::string & expected)
 		throw checksum_error{expected_checksum, sum};
 }
 }
+/// @endcond
 
 /// Returns a list of tags of supported sentences.
 std::vector<std::string> get_supported_sentences_str()
