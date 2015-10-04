@@ -7,9 +7,12 @@ namespace marnav
 {
 namespace utils
 {
-
+/// @brief Carries an optional value.
+///
 /// This is a somewhat compatible implementation of std::experimental::optional (as by 2015).
 /// The interface differs partially.
+///
+/// @tparam T Data type to be held by the optional.
 ///
 /// @note One of the main differences is: the data of the optional type is stored as member
 ///   data, not as pointer. This means, the disenganged state is the default constructed
@@ -18,6 +21,7 @@ namespace utils
 ///
 /// This is (somewhat) necessary, because optional is not part of the standard and may change
 /// its interface in the future.
+///
 template <class T> class optional
 {
 public:
@@ -114,7 +118,7 @@ private:
 	T data;
 };
 
-/// Creates and returns an optioal of type T, initialized with the specified
+/// @brief Creates and returns an optioal of type T, initialized with the specified
 /// arguments.
 ///
 /// @tparam T The optional type

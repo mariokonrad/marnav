@@ -43,8 +43,10 @@ enum class quality : uint32_t {
 	simulation = 8 ///< NMEA representation: 8
 };
 
+/// Contains enumerations of units.
 namespace unit
 {
+/// Enumeration of unis of distance.
 enum class distance : char {
 	meter, ///< NMEA representation: 'M'
 	feet, ///< NMEA representation: 'f'
@@ -53,16 +55,19 @@ enum class distance : char {
 	fathom ///< NMEA representation: 'F'
 };
 
+/// Enumeration of unis of velocity.
 enum class velocity : char {
 	knot, ///< NMEA representation: 'N'
 	kmh, ///< NMEA representation: 'K' / kilometers per hour
 	mps ///< NMEA representation: 'M' / meters per second
 };
 
+/// Enumeration of unis of temperature.
 enum class temperature : char {
 	celsius ///< NMEA representation: 'C'
 };
 
+/// Enumeration of unis of pressure.
 enum class pressure : char {
 	bar, ///< NMEA representation: 'B'
 	pascal ///< NMEA representation: 'P'

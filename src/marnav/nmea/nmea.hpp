@@ -5,9 +5,45 @@
 
 namespace marnav
 {
+/// @brief Contains everything to encode and decode NMEA sentences.
+///
+/// This is provides all NMEA sentences and supporting functions.
+///
+/// **Example:** list all supported NMEA sentences
+/// @code
+/// using namespace marnav;
+///
+/// for (auto const & s : nmea::get_supported_sentences_str()) {
+///     std::cout << s << "\n";
+/// }
+/// @endcode
+///
+/// **Example:** create a sentence from a given string
+/// @code
+/// using namespace marnav;
+///
+/// auto s = nmea::make_sentence("$GPBOD,099.3,T,105.6,M,POINTB,*01");
+///
+/// if (s->id() == nmea::sentence_id::BOD) {
+///     auto bod = nmea::sentence_cast<nmea::bod>(s);
+///     std::cout << bod->get_waypoint_from() << " -> " << bod->get_waypoint_to() << "\n";
+/// }
+/// @endcode
+///
+/// **Example:** create a sentence and encode it to a string
+/// @code
+/// using namespace marnav;
+///
+/// nmea::bod bod;
+/// bod.set_waypoint_from("POINT1");
+/// bod.set_waypoint_to("POINT2");
+///
+/// std::cout << nmea::to_string(bod) << "\n";
+/// @endcode
+///
 namespace nmea
 {
-/// Exception to be thrown if a NMEA sentence is not known/supported.
+/// @brief Exception to be thrown if a NMEA sentence is not known/supported.
 class unknown_sentence : public std::logic_error
 {
 public:

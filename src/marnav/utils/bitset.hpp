@@ -14,8 +14,7 @@ namespace marnav
 {
 namespace utils
 {
-
-/// This is a dynamically growing bitset (theoretically of arbitrary size).
+/// @brief This is a dynamically growing bitset (theoretically of arbitrary size).
 ///
 /// Bits are stored in blocks, whose data type is configurable.
 ///

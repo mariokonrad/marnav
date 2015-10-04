@@ -150,7 +150,7 @@ enum class sentence_id : uint32_t {
 	TMVTD, ///< Transas VTS / SML tracking system report
 };
 
-/// This namespace contains all talker IDs as strings.
+/// Contains all talker IDs as strings.
 namespace talker_id
 {
 constexpr const char * none = ""; // used for vendor extensions
