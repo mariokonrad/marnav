@@ -25,7 +25,8 @@ namespace marnav
 {
 namespace ais
 {
-
+namespace
+{
 static inline uint8_t decode_armoring(char c)
 {
 	auto value = c - '0';
@@ -97,6 +98,7 @@ static message::parse_function instantiate_message(message_id type, size_t size)
 			+ " bits)"};
 
 	return i->second;
+}
 }
 
 /// Parses the specified data and creates corresponding AIS messages.

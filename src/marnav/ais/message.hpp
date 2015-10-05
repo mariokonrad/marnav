@@ -139,18 +139,47 @@ enum class epfd_fix_type : uint8_t {
 	galileo = 8,
 };
 
+// AIS data is coded in a binary form. This implies a need for special
+// value that mark the invalidity of a certain value.
+/// @{
+
+/// Value for a longitude that is not specified.
 constexpr static const uint32_t longitude_not_available = 0x6791AC0;
+
+/// Value for a latitude that is not specified.
 constexpr static const uint32_t latitude_not_available = 0x3412140;
+
+/// Value for a course over ground that is not specified.
 constexpr static const uint32_t cog_not_available = 3600;
+
+/// Value for a heading that is not specified.
 constexpr static const uint32_t hdg_not_available = 511;
+
+/// Value to indicate the absense of a timestamp.
 constexpr static const uint8_t timestamp_not_available = 60;
+
+/// Value to indicate the absense of a maneuver indicator.
 constexpr static const uint8_t maneuver_indictor_not_available = 0;
+
+/// Value for a year that is not specified.
 constexpr static const uint32_t year_not_available = 0;
+
+/// Value for a month that is not specified.
 constexpr static const uint32_t month_not_available = 0;
+
+/// Value for a day that is not specified.
 constexpr static const uint32_t day_not_available = 0;
+
+/// Value for a hour that is not specified.
 constexpr static const uint32_t hour_not_available = 24;
+
+/// Value for a minute that is not specified.
 constexpr static const uint32_t minute_not_available = 60;
+
+/// Value for a second that is not specified.
 constexpr static const uint32_t second_not_available = 60;
+
+/// @}
 
 /// Type for raw AIS data.
 using raw = utils::bitset<uint8_t>;
@@ -161,6 +190,7 @@ class message
 public:
 	using parse_function = std::function<std::unique_ptr<message>(const raw &)>;
 
+	message() = delete;
 	virtual ~message() {}
 
 	message_id type() const;
@@ -173,12 +203,18 @@ private:
 	message_id message_type;
 };
 
+/// @{
+
 char decode_sixbit_ascii(uint8_t value);
 uint8_t encode_sixbit_ascii(char c);
 
 std::string read_string(const raw & bits, raw::size_type ofs, raw::size_type count_sixbits);
 void write_string(
 	raw & bits, raw::size_type ofs, raw::size_type count_sixbits, const std::string & s);
+
+/// @}
+
+/// @{
 
 /// Casts the specified message to the message given by the template parameter.
 /// The object converted only if it is valid and of the correct type. It is not
@@ -236,6 +272,8 @@ template <class T> const T * message_cast(const std::unique_ptr<message> & s)
 
 	return static_cast<T *>(s.get());
 }
+
+/// @}
 }
 }
 
