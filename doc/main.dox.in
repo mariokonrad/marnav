@@ -2,7 +2,7 @@
 
 \mainpage Library for Maritime Navigation
 \version @VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@ (@GIT_BRANCH@ / @GIT_COMMIT_HASH@)
-\copyright 2015 (c) Mario Konrad (<mario.konrad@gmx.net>)
+\copyright (c) 2015 Mario Konrad \<mario.konrad@gmx.net\>
 
 \tableofcontents
 
@@ -10,26 +10,14 @@
 
 This is a C++11 library for maritime navigation purposes.
 It supports (partially):
-- NMEA-0183
-- AIS
-- SeaTalk (Raymarine device communication)
+- \ref subsec_features_nmea
+- \ref subsec_features_ais
+- \ref subsec_features_seatalk
 - Reading data from serial ports (NMEA, SeaTalk)
 - Basic geodesic functions, suitable for martime navigation.
 
-See a more detailed list: \ref page_features
+See a more detailed list: \ref sec_features
 
-\section sec_contents Contents
-
-- \ref page_features
-- \ref page_examples
-- \ref page_devenv
-- \ref page_overview
-- \ref page_links
-
-After proper building and execution (see \ref page_devenv):
-- [Code Coverage](../coverage/index.html)
-- [cppcheck](../cppcheck.txt)
-- [Doxygen Warnings](../doxygen-warnings.txt)
 
 \section sec_goals Goals
 
@@ -43,11 +31,440 @@ The goal of this library is
   possible)
 - (more or less) well documented
 
+See also: \ref page_overview
+
+
+\section sec_features Features
+
+It supports (partially):
+- \ref subsec_features_nmea
+- \ref subsec_features_ais
+- \ref subsec_features_seatalk
+- Reading data from serial ports (NMEA, SeaTalk)
+- Basic geodesic functions, suitable for martime navigation.
+  - Calculation of CPA (closest point of approach)
+    and TCPA (time to closest point of approach)
+  - Distance of two points on a sphere
+  - Distance of two points on an ellipsoid using formula of Vincenty
+  - Distance of two points on an ellipsoid using formula of Lambert
+
+\subsection subsec_features_nmea NMEA
+
+Supported sentences for NMEA-0183 (read and write):
+- AAM: Waypoint Arrival Alarm
+- ALM: GPS Almanac Data
+- APB: Autopilot Sentence "B"
+- BOD: Bearing - Waypoint to Waypoint
+- BWC: Bearing & Distance to Waypoint - Geat Circle
+- BWR: Bearing and Distance to Waypoint - Rhumb Line
+- BWW: Bearing - Waypoint to Waypoint
+- DBT: Depth Below Transducer
+- DPT: Depth of Water
+- DSC: Digital Selective Calling Information (**experimental**)
+- DSE: Extended DSC (**experimental**)
+- DTM: Datum Reference
+- FSI: Frequency Set Information
+- GBS: GPS Satellite Fault Detection
+- GGA: Global Positioning System Fix Data
+- GLC: Geographic Position, Loran-C
+- GLL: Geographic Position - Latitude/Longitude
+- GNS: Fix data
+- GRS: GPS Range Residuals
+- GSA: Geographic Position - Latitude/Longitude
+- GST: GPS Pseudorange Noise Statistics
+- GSV: Satellites in view
+- GTD: Geographic Location in Time Differences
+- HDG: Heading - Deviation & Variation
+- HFB: Trawl Headrope to Footrope and Bottom
+- HSC: Heading Steering Command
+- ITS: Trawl Door Spread 2 Distance
+- LCD: Loran-C Signal Data
+- MSK: Control for a Beacon Receiver
+- MSS: Beacon Receiver Status
+- MTW: Mean Temperature of Water
+- MWD: Wind Direction and Speed
+- MWV: Wind Speed and Angle
+- OSD: Own Ship Data
+- RMA: Recommended Minimum Navigation Information
+- RMB: Recommended Minimum Navigation Information
+- RMC: Recommended Minimum Navigation Information
+- ROT: Rate Of Turn
+- RPM: Revolutions
+- RSA: Rudder Sensor Angle
+- RSD: RADAR System Data (**experimental**)
+- RTE: Routes
+- SFI: Scanning Frequency Information
+- TDS: Trawl Door Spread Distance
+- TFI: Trawl Filling Indicator
+- TLL: Target Latitude and Longitude
+- TPC: Trawl Position Cartesian Coordinates
+- TPR: Trawl Position Relative Vessel
+- TPT: Trawl Position True
+- TTM: Tracked Target Message
+- VBW: Dual Ground/Water Speed
+- VDM: AIS VHF Data-Link Message
+- VDO: AIS VHF Data-Link Own-Vessel Report
+- VDR: Set and Drift
+- VHW: Water speed and heading
+- VLW: Distance Traveled through Water
+- VTG: Track made good and Ground speed
+- VWR: Relative Wind Speed and Angle.
+- VPW: Speed - Measured Parallel to Wind
+- WCV: Waypoint Closure Velocity
+- WNC: Distance - Waypoint to Waypoint
+- WPL: Waypoint Location
+- XDR: Transducer Measurement
+- XTE: Cross-Track Error, Measured
+- XTR: Cross Track Error - Dead Reckoning
+- ZDA: Time & Date - UTC, day, month, year and local time zone
+- ZDL: Time and Distance to Variable Point
+- ZFO: UTC & Time from origin Waypoint
+- ZTG: UTC & Time to Destination Waypoint
+
+Obsolete (according to the standard) but implemented:
+- DBK: Depth Below Keel
+- HDM: Heading - Magnetic (obsolete as of 2009)
+- R00: Waypoints in active route
+
+Vendor Extensions:
+- PGRME: Garmin Estimated Error
+
+\subsection subsec_features_ais AIS
+
+Supported messages for AIS (decode and encode):
+- Type 01: Position Report Class A
+- Type 02: Position Report Class A (Assigned Schedule)
+- Type 03: Position Report Class A (Response to Interrogation)
+- Type 04: Base Station Report
+- Type 05: Static and Voyage Related Data
+- Type 09: Standard SAR Aircraft Position Report
+- Type 10: UTC/Date Inquiry
+- Type 11: UTC/Date Response
+- Type 18: Standard Class B CS Position Report
+- Type 19: Extended Class B CS Position Report
+- Type 21: Aid-to-Navigation Report
+- Type 22: Channel Management
+- Type 23: Group Assignment Command
+- Type 24: Static Data Report (part A and B, norma and auxiliary vessel)
+
+\subsection subsec_features_seatalk SeaTalk (Raymarine device communication)
+
+Suported messages for SeaTalk (decode and encode):
+- Type 00: depth below transducer
+- Type 01: equipment id
+- Type 05: Engine RPM and PITCH
+- Type 10: apparent wind angle
+- Type 11: apparent wind speed
+- Type 20: speed through water
+- Type 21: trip mileage
+- Type 22: total mileage
+- Type 23: water temperature 1
+- Type 24: Display unit for Mileage and Speed
+- Type 25: total and trip log
+- Type 26: Speed through Water
+- Type 27: water temperature 2
+- Type 30: Set Lamp Intensity
+- Type 36: Cancel MOB condition
+- Type 38: Codelock data (**experimental**)
+- Type 50: LAT Postion
+- Type 51: LON Postion
+- Type 52: Speed over Ground
+- Type 53: Magnetic Course in Degrees
+- Type 54: GMT Time
+- Type 56: Date
+- Type 58: LAT/LON
+- Type 66: Wind Alarm
+
+
+\section sec_devenv Development Environment
+This page describes the requirements in order to build the library.
+
+\subsection subsec_devenv_requirements Requirements
+Compiler supported (older/others may work, but not tested):
+- GCC 4.9.2 or newer
+- Clang 3.6 or newer
+
+Tools needed to build the library:
+- cmake 3.0 or newer
+- clang-format 3.7 or newer
+
+Tools needed to build the documentation:
+- doxygen
+- graphviz
+- LaTeX (there are formulas!)
+
+optional (used for development only):
+- lcov / genhtml, c++filt
+- cppcheck
+- clang-analyze (3.7 or newer)
+- ctags, cscope
+
+optional (no core dependency):
+- Boost.ASIO (used only for some examples)
+- Qt 5 (used only for some examples)
+
+There are no other dependencies despite the standard library (C++11) to build this library.
+
+Other compilers may work, however untested.
+
+\subsection subsec_devenv_build Build
+For normal, debug and release builds use the standard cmake CMAKE_BUILD_TYPE variable.
+For example a debug build:
+
+Full information developpers build:
+\code
+	mkdir build
+	cd build
+	cmake -DCMAKE_BUILD_TYPE=Coverage ..
+	make
+	make coverage doc cppcheck
+\endcode
+
+Debug build:
+\code
+	mkdir build
+	cd build
+	cmake -DCMAKE_BUILD_TYPE=Debug ..
+	make
+\endcode
+
+If you like to perform code coverage using the unit tests, do:
+\code
+	mkdir build
+	cd build
+	cmake -DCMAKE_BUILD_TYPE=Coverage ..
+	make
+	make coverage
+\endcode
+
+As packaging system, cpack is used. Do after build:
+\code
+	make package
+\endcode
+
+or for individual package types:
+
+\code
+	cpack -G TGZ
+	cpack -G DEB
+\endcode
+
+Build documentation:
+\code
+	mkdir build
+	cd build
+	cmake ..
+	make doc
+\endcode
+
+After proper building and execution:
+- [Code Coverage](../coverage/index.html)
+- [cppcheck](../cppcheck.txt)
+- [Doxygen Warnings](../doxygen-warnings.txt)
+
+
+\subsection subsec_devenv_buildoptions Build Options
+The following build types (-DCMAKE_BUILD_TYPE=x) are possible:
+- Debug
+- Release
+- Coverage
+
+Build options:
+- ENABLE_STATIC=[ON/OFF] : enables static build by default, if OFF,
+  a shared library is being built
+
+
+\subsection subsec_devenv_clang_static_analysis Static Analysis with Clang
+\code
+	mkdir build
+	cd build
+	cmake -DCMAKE_CXX_COMPILER=/usr/share/clang/scan-build-3.7/c++-analyzer ..
+	scan-build-3.7 --use-analyzer=/usr/bin/clang++-3.7 make
+\endcode
+
+After the build, ```scan-build``` will tell you what to do in order to inspect
+the findings.
+
+
+\section sec_examples Examples
+
+\subsection subsec_examples_nmea
+
+\subsubsection subsubsec_examples_nmea_parse Parse a NMEA sentence
+\code{.cpp}
+	auto sentence = nmea::make_sentence(
+		"$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
+	std::cout << sentence->tag() << "\n";
+	auto rmc = nmea::sentence_cast<nmea::rmc>(sentence);
+	std::cout << "latitude : " << nmea::to_string(rmc->get_lat()) << "\n";
+	std::cout << "longitude: " << nmea::to_string(rmc->get_lon()) << "\n";
+\endcode
+
+\subsubsection subsubsec_examples_nmea_write Write a NMEA sentence
+\code{.cpp}
+	nmea::mtw mtw;
+	mtw.set_temperature(22.5);
+	std::string data = nmea::to_string(mtw);
+\endcode
+
+\subsection subsec_examples_ais AIS
+
+\subsubsection subsubsec_examples_ais_read Process AIS related NMEA messages
+Example 1:
+\code{.cpp}
+	// collect NMEA data of all fragments, from whatever source
+	std::vector<std::unique_ptr<nmea::sentence>> v;
+	v.push_back(nmea::make_sentence("!AIVDM,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5C"));
+
+	// collect payload from all fragments
+	auto payload = nmea::collect_payload(v.begin(), v.end());
+
+	// make AIS message from payload
+	auto msg = ais::make_message(payload);
+
+	// process concrete AIS message
+	auto pos_report = ais::message_cast<ais::message_01>(msg);
+	auto mmsi = pos_report->get_mmsi();
+\endcode
+
+Example 2:
+\code{.cpp}
+	using namespace marnav;
+
+	// received sentences
+	const std::vector<std::string> received_strings
+		= {"!AIVDM,2,1,3,B,55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53,0*3E",
+			"!AIVDM,2,2,3,B,1@0000000000000,2*55"};
+
+	// parse NMEA sentences
+	std::vector<std::unique_ptr<nmea::sentence>> sentences;
+	for (auto const & txt : received_strings) {
+		auto sentence = nmea::make_sentence(txt);
+		if (sentence->id() == nmea::sentence_id::VDM) {
+			sentences.push_back(std::move(sentence));
+		}
+	}
+
+	// parse and and process AIS messags
+	auto payload = nmea::collect_payload(sentences.begin(), sentences.end());
+	auto message = ais::make_message(payload);
+	if (message->type() == ais::message_id::static_and_voyage_related_data) {
+		auto report = ais::message_cast<ais::message_05>(message);
+		std::cout << "shipname: " << report->get_shipname() << "\n";
+		std::cout << "callsign: " << report->get_callsign() << "\n";
+	}
+\endcode
+
+\subsubsection subsubsec_examples_ais_create Create NMEA sentences from AIS data
+\includelineno examples/create_nmea_from_ais.cpp
+
+\subsection subsec_examples_utils Utils
+
+\subsubsection subsubsec_examples_utils_bitset_iterate Iterate through a bitset
+\includelineno examples/bitset_iterate.cpp
+
+\subsection subsec_examples_complete Complete examples
+All those examples are to be found in the directory `examples`.
+
+\subsubsection subsubsec_examples_file_parse_nmea Parse NMEA from a string
+\includelineno examples/parse_nmea.cpp
+
+\subsubsection subsubsec_examples_file_read_nmea Read NMEA from serial port
+\includelineno examples/read_nmea.cpp
+
+\subsubsection subsubsec_examples_file_read_nmea_boostasio Read NMEA from serial port using Boost.ASIO
+\includelineno examples/read_nmea_boostasio.cpp
+
+\subsubsection subsubsec_examples_file_read_seatalk Read SeaTalk from serial port
+\includelineno examples/read_seatalk.cpp
+
+\subsubsection subsubsec_examples_file_read_ais Read AIS data from string
+\includelineno examples/read_ais.cpp
+
+\subsubsection subsubsec_examples_file_nmea_multiplexer Run a NMEA multiplexer
+\includelineno examples/nmea_multiplexer.cpp
+
+\subsubsection subsubsec_examples_file_select Using select with marnav::io::device
+\includelineno examples/select.cpp
+
+\subsubsection subsubsec_examples_file_seatalk_to_nmea Simple SeaTalk to NMEA converter
+\includelineno examples/simple_seatalk_nmea_converter.cpp
+
+\subsubsection subsubsec_examples_file_qt5 Qt5 GUI application reading NMEA
+\includelineno examples/qtnmeadiag/main.cpp
+\includelineno examples/qtnmeadiag/MainWindow.hpp
+\includelineno examples/qtnmeadiag/MainWindow.cpp
+
+\subsubsection subsubsec_examples_file_tcp_forward Simple NMEA receiver and forward to a TCP server
+\includelineno examples/serial_to_tcp.cpp
+
+\subsection subsec_examples_library Library
+\subsubsection subsubsec_examples_lib_cmake Using the library in a cmake environment
+If you are using this library within a cmake environment, you might
+want to use ``find_package``.
+
+Build and install the library:
+\code
+	mkdir build
+	cd build
+	mkdir local
+	cmake -DCMAKE_INSTALL_PREFIX=`pwd`/local ..
+	make
+	make install
+\endcode
+
+Now the installation of the library is in the directory ``marnav/build/local``.
+
+To build the test program:
+\code
+	cd build
+	export marnav_DIR=`pwd`/local
+	mkdir test
+	cd test
+	cmake ../../example/library
+	make
+	./foobar
+\endcode
+
+The ``export`` is necessary because cmake would not find the necessary
+configuration of the library, which is installed in ``.../lib/marnav/cmake``.
+
+The tarball also contains the configuration files:
+\code
+	tar -xf marnav-0.3.1-Linux.tar.gz
+	export marnav_DIR=`pwd`/marnav-0.3.1-Linux
+	mkdir test
+	cd test
+	cmake ../../example/library
+	make
+	./foobar
+\endcode
+
+You might want to consider extending the cmake modules path (in your ``CMakeLists.txt``) accordingly.
+
+
 
 \section sec_authors Authors
 (extracted from git repository, sorted alphabetically)
 
 @AUTHORS_LIST@
+
+
+\section sec_links Links
+
+A (non-complete) collection of resources from where information was gathered.
+
+- [NMEA Revealed](http://www.catb.org/gpsd/NMEA.html) (by Eric S. Raymond)
+- [NMEA FAQ](http://www.kh-gps.de/nmea.faq)
+- [it-digin's blog](http://www.it-digin.com/blog/?cat=4)
+- [AIVDM/AIVDO Protocol decoding](http://www.catb.org/gpsd/AIVDM.html) (by Eric S. Raymond)
+- [DSC Position Request](http://www.thehulltruth.com/marine-electronics-forum/43945-dsc-position-request.html)
+- [NMEA-0183 Sentences DSC,DSE](http://www.cruisersforum.com/forums/f13/nmea-0183-sentences-dsc-dse-124887.html)
+- [SerialMon - NMEA 0183 Protocol](http://www.serialmon.com/protocols/nmea0183.html)
+- [SeaTalk Reference](http://thomasknauf.de/seatalk.htm) (by Thomas Knauf)
+- [Navigation Center - AIS Standard Class B Equipment Position Report](http://www.navcen.uscg.gov/?pageName=AISMessagesB)
+- [GPS Forums](http://www.gps-forums.net)
+- [NMEA Datensaetze](http://www.nmea.de/nmea0183datensaetze.html)
 
 
 \section sec_license License
