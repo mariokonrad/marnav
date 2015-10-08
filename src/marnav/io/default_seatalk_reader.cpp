@@ -1,10 +1,18 @@
 #include "default_seatalk_reader.hpp"
 
+/// @example simple_seatalk_nmea_converter.cpp
+/// This is a very simplistic conversion from SeaTalk messages to NMEA sentences.
+///
+/// SeaTalk message are being read from a serial port, converted to a corresponding
+/// NMEA message, which is sent on another serial port.
+///
+/// This example uses the marnav::io::default_seatalk_reader to read SeaTalk
+/// messages and \c boost.asio to send NMEA sentences.
+
 namespace marnav
 {
 namespace io
 {
-
 default_seatalk_reader::default_seatalk_reader(std::unique_ptr<device> && dev)
 	: seatalk_reader(std::move(dev))
 	, message_received(false)

@@ -8,13 +8,11 @@ namespace marnav
 {
 namespace io
 {
-
 /// This class reads NMEA sentences from a device. Normally this would
-/// be a serial character device (e.g. /dev/ttyS0 or /dev/ttyUSB0).
+/// be a serial character device (e.g. \c /dev/ttyS0 or \c /dev/ttyUSB0).
 ///
 /// In order to use this NMEA reader, it must be subclassed.
 ///
-/// @example read_nmea.cpp
 class nmea_reader
 {
 public:

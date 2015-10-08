@@ -1,5 +1,20 @@
 #include "default_nmea_reader.hpp"
 
+/// @example read_nmea.cpp
+/// Shows how to use the marnav::io::default_nmea_reader to read NMEA data from
+/// a serial port.
+///
+/// The marnav::io::default_nmea_reader inherits from marnav::io::nmea_reader.
+
+/// @example read_nmea_boostasio.cpp
+/// This example also show how to read NMEA data using the marnav::io::default_nmea_reader,
+/// but utilizes \c boost.asio to read from a serial port instead of marnav::io::serial.
+
+/// @example serial_to_tcp.cpp
+/// Simple demonstration of reading NMEA sentences from a serial port and forward
+/// them to a TCP listener. Only valid NMEA sentences are forwarded, no other filtering
+/// is taking place. This example uses \c boost.asio for both serial and TCP communication.
+
 namespace marnav
 {
 namespace io

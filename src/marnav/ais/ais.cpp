@@ -17,9 +17,15 @@
 #include <marnav/ais/message_23.hpp>
 #include <marnav/ais/message_24.hpp>
 
+/// @example parse_ais.cpp
+/// This example shows how to parse AIS messages from NMEA sentences.
+
 /// @example read_ais.cpp
 /// This is an example on how to parse and handle AIS messages while
 /// receiving NMEA sentences.
+
+/// @example create_nmea_from_ais.cpp
+/// Shows how to create a NMEA sentence or sentences from AIS data.
 
 namespace marnav
 {

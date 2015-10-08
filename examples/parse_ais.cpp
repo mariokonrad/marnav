@@ -9,7 +9,7 @@ int main(int, char **)
 {
 	using namespace marnav;
 
-	// received sentences
+	// received NMEA sentences
 	const std::vector<std::string> received_strings
 		= {"!AIVDM,2,1,3,B,55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53,0*3E",
 			"!AIVDM,2,2,3,B,1@0000000000000,2*55"};
