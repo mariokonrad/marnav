@@ -2,6 +2,7 @@
 // It does not read directly from a specific device, it provides data
 // as a demonstration.
 
+#include <iostream>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/vdm.hpp>
 #include <marnav/ais/ais.hpp>
@@ -10,7 +11,6 @@
 #include <marnav/io/device.hpp>
 #include <marnav/io/default_nmea_reader.hpp>
 #include <marnav/utils/unique.hpp>
-#include <iostream>
 
 namespace marnav_example
 {
@@ -32,12 +32,11 @@ public:
 	{
 	}
 
-	void open() throw(std::runtime_error) override {}
+	void open() override {}
 	void close() override {}
 
 	/// Just go through the data once.
-	virtual int read(char * buffer, uint32_t size) throw(
-		std::invalid_argument, std::runtime_error) override
+	virtual int read(char * buffer, uint32_t size) override
 	{
 		if (size != sizeof(*buffer))
 			throw std::invalid_argument{"buffer type not supported"};
@@ -48,8 +47,7 @@ public:
 		return 1;
 	}
 
-	virtual int write(const char *, uint32_t) throw(
-		std::invalid_argument, std::runtime_error) override
+	virtual int write(const char *, uint32_t) override
 	{
 		throw std::runtime_error{"operation not supported"};
 	}

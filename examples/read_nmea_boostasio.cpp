@@ -1,12 +1,12 @@
 /// This example shows how to use Boost.ASIO in order to read synchronously
 /// NMEA data from a serial port.
 
+#include <iostream>
 #include <boost/asio.hpp>
 #include <marnav/io/default_nmea_reader.hpp>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/rmc.hpp>
 #include <marnav/nmea/io.hpp>
-#include <iostream>
 
 namespace marnav_example
 {
@@ -22,12 +22,11 @@ public:
 		serial.set_option(boost::asio::serial_port_base::baud_rate(4800));
 	}
 
-	virtual void open() throw(std::runtime_error) override {}
+	virtual void open() override {}
 
 	virtual void close() override { serial.close(); }
 
-	virtual int read(char * buffer, uint32_t size) throw(
-		std::invalid_argument, std::runtime_error) override
+	virtual int read(char * buffer, uint32_t size) override
 	{
 		if ((buffer == nullptr) || (size == 0))
 			throw std::invalid_argument{"invalid buffer or size"};
@@ -37,8 +36,7 @@ public:
 		return boost::asio::read(serial, boost::asio::buffer(buffer, size));
 	}
 
-	virtual int write(const char *, uint32_t) throw(
-		std::invalid_argument, std::runtime_error) override
+	virtual int write(const char *, uint32_t) override
 	{
 		throw std::runtime_error{"operation not supported"};
 	}

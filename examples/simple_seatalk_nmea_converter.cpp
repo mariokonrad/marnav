@@ -1,11 +1,11 @@
+#include <map>
+#include <boost/asio.hpp>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/dpt.hpp>
 #include <marnav/seatalk/seatalk.hpp>
 #include <marnav/seatalk/message_00.hpp>
 #include <marnav/io/default_seatalk_reader.hpp>
 #include <marnav/io/default_seatalk_serial.hpp>
-#include <boost/asio.hpp>
-#include <map>
 
 using namespace marnav;
 
@@ -63,4 +63,6 @@ int main(int, char **)
 			boost::asio::write(serial, boost::asio::buffer(nmea.c_str(), nmea.size()));
 		}
 	}
+
+	return 0;
 }

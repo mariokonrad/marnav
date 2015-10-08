@@ -23,12 +23,11 @@ public:
 		serial.set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
 	}
 
-	virtual void open() throw(std::runtime_error) override{};
+	virtual void open() override{};
 
 	virtual void close() override { serial.close(); }
 
-	virtual int read(char * buffer, uint32_t size) throw(
-		std::invalid_argument, std::runtime_error) override
+	virtual int read(char * buffer, uint32_t size) override
 	{
 		if ((buffer == nullptr) || (size == 0))
 			throw std::invalid_argument{"invalid buffer or size"};
@@ -37,8 +36,7 @@ public:
 		return boost::asio::read(serial, boost::asio::buffer(buffer, size));
 	}
 
-	virtual int write(const char * buffer, uint32_t size) throw(
-		std::invalid_argument, std::runtime_error) override
+	virtual int write(const char * buffer, uint32_t size) override
 	{
 		if (buffer == nullptr)
 			throw std::invalid_argument{"invalid buffer"};
@@ -66,8 +64,7 @@ public:
 		boost::asio::connect(socket, resolver.resolve({host, port}));
 	}
 
-	int write(const char * buffer, uint32_t size) throw(
-		std::invalid_argument, std::runtime_error)
+	int write(const char * buffer, uint32_t size)
 	{
 		if (buffer == nullptr)
 			throw std::invalid_argument{"invalid buffer or size"};

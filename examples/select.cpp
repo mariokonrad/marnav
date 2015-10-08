@@ -1,5 +1,3 @@
-#include <marnav/io/device.hpp>
-#include <marnav/io/selectable.hpp>
 #include <memory>
 #include <vector>
 #include <iostream>
@@ -7,6 +5,8 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <marnav/io/device.hpp>
+#include <marnav/io/selectable.hpp>
 
 namespace marnav_example
 {
@@ -57,8 +57,7 @@ public:
 		fd = -1;
 	}
 
-	virtual int read(char * buffer, uint32_t size) throw(
-		std::invalid_argument, std::runtime_error) override
+	virtual int read(char * buffer, uint32_t size) override
 	{
 		if (!buffer)
 			throw std::invalid_argument{"buffer"};
@@ -68,8 +67,7 @@ public:
 		return ::read(fd, buffer, size);
 	}
 
-	virtual int write(const char * buffer, uint32_t size) throw(
-		std::invalid_argument, std::runtime_error) override
+	virtual int write(const char * buffer, uint32_t size) override
 	{
 		if (!buffer)
 			throw std::invalid_argument{"buffer"};
@@ -80,7 +78,7 @@ public:
 	}
 
 protected:
-	virtual void open() throw(std::runtime_error) override {}
+	virtual void open() override {}
 	virtual int get_fd() const override { return fd; }
 
 private:
@@ -91,16 +89,14 @@ private:
 class selector
 {
 public:
-	std::vector<std::shared_ptr<marnav::io::selectable>>
-	operator()(const std::vector<std::shared_ptr<marnav::io::selectable>> & devices) throw(
-		std::runtime_error)
+	std::vector<std::shared_ptr<marnav::io::selectable>> operator()(
+		const std::vector<std::shared_ptr<marnav::io::selectable>> & devices)
 	{
 		return select(devices);
 	}
 
-	static std::vector<std::shared_ptr<marnav::io::selectable>>
-	select(const std::vector<std::shared_ptr<marnav::io::selectable>> & devices) throw(
-		std::runtime_error)
+	static std::vector<std::shared_ptr<marnav::io::selectable>> select(
+		const std::vector<std::shared_ptr<marnav::io::selectable>> & devices)
 	{
 		std::vector<std::shared_ptr<marnav::io::selectable>> result;
 
@@ -153,21 +149,23 @@ int main(int, char **)
 	auto devs = marnav_example::selector::select({dev0});
 	if (devs.size() == 0) {
 		std::cout << "no devices ready for read, probably timeout\n";
-	} else {
-		for (auto & dev : devs) {
-			char buffer[128];
-			int rc = -1;
+		return -1;
+	}
 
-			if (dev0 == dev) {
-				rc = dev0->read(buffer, sizeof(buffer));
-			}
-			if (dev1 == dev) {
-				rc = dev1->read(buffer, sizeof(buffer));
-			}
+	for (auto & dev : devs) {
+		char buffer[128];
+		int rc = -1;
 
-			if (rc > 0) {
-				std::cout << "received: " << buffer << "\n";
-			}
+		if (dev0 == dev) {
+			rc = dev0->read(buffer, sizeof(buffer));
+		}
+		if (dev1 == dev) {
+			rc = dev1->read(buffer, sizeof(buffer));
+		}
+
+		if (rc > 0) {
+			std::cout << "received: " << buffer << "\n";
 		}
 	}
+	return 0;
 }
