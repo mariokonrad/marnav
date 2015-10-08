@@ -13,7 +13,7 @@ It supports (partially):
 - \ref subsec_features_nmea
 - \ref subsec_features_ais
 - \ref subsec_features_seatalk
-- Reading data from serial ports (NMEA, SeaTalk)
+- Reading data from serial ports (NMEA-0183, SeaTalk)
 - Basic geodesic functions, suitable for martime navigation.
 
 See a more detailed list: \ref sec_features
@@ -23,15 +23,11 @@ See a more detailed list: \ref sec_features
 
 There are already implementaions for reading and writing NMEA-0183 or AIS.
 The goal of this library is
-- to have an implementation in modern C++ (C++11 right now, C++14 as soon as compilers
-  catch up)
+- to have an implementation in modern C++ (C++11)
 - easy to use API (std lib like, integrating well)
 - unit tested (high test coverage)
-- trivial integration into projects (liberal license, as few dependencies as
-  possible)
+- trivial integration into projects (liberal license, as few dependencies as possible)
 - (more or less) well documented
-
-See also: \ref page_overview
 
 
 \section sec_features Features
@@ -270,8 +266,11 @@ The following build types (-DCMAKE_BUILD_TYPE=x) are possible:
 - Coverage
 
 Build options:
-- ENABLE_STATIC=[ON/OFF] : enables static build by default, if OFF,
-  a shared library is being built
+- `ENABLE_STATIC` : enables static build, if `OFF`, a shared library is being built.
+  Default: `ON`
+- `ENABLE_WARNING_HELL` : enables _much_ more warnings, used for development purposes.
+  Currently implemented only for GCC.  Default is `OFF`
+- `ENABLE_PROFILING` : enables profiling
 
 
 \subsection subsec_devenv_clang_static_analysis Static Analysis with Clang
@@ -288,7 +287,7 @@ the findings.
 
 \section sec_examples Examples
 
-\subsection subsec_examples_nmea
+\subsection subsec_examples_nmea NMEA-0183
 
 \subsubsection subsubsec_examples_nmea_parse Parse a NMEA sentence
 \code{.cpp}
@@ -441,6 +440,124 @@ The tarball also contains the configuration files:
 \endcode
 
 You might want to consider extending the cmake modules path (in your ``CMakeLists.txt``) accordingly.
+
+
+\section sec_overview Technical Overview
+
+\subsection subsec_overview_directory Directory Overview
+This section explains the directory structure.
+
+\verbatim
+root
++- cmake
++- doc
++- examples
++- extern
++- src
+|  +- marnav
+|     +- ais
+|     +- geo
+|     +- io
+|     +- math
+|     +- nmea
+|     +- seatalk
+|     +- utils
++- test
+\endverbatim
+
+- \c cmake    : Cmake Modules
+- \c doc      : Documentation
+- \c examples : Examples included in the documentation and build as well.
+                This examples use the library to demonstrate its usage.
+- \c extern   : External projects and resources used by the library.
+- \c test     : All tests
+- \c src      : Complete source of the library, source and header files.
+                Packages are grouped in their own subdirectory, named
+                accordingly (e.g. \c marnav/nmea).
+
+                \b Note: both, private and public headers of the library are
+                located here.
+
+   - \c ais     : all AIS related stuff. Note that despite the AIS builds on
+                  the NMEA protocol (VDM, VDO sentences), the package does not
+                  have any dependencies to the \c nmea package.
+   - \c geo     : collection of geographic and geodesic functions
+   - \c io      : input output stuff, mainly for NMEA and SeaTalk. Please note,
+                  that this package is not mandatory. It is perfectly fine
+                  to use the \c nmea package without \c io.
+   - \c math    : generic math stuff
+   - \c nmea    : everything NMEA-0183 related
+   - \c seatalk : everything SeaTalk related, except IO.
+   - \c utils   : common utils
+
+
+\subsection subsec_overview_package_dependencies Package dependencies
+The directory structure underneath \c src reflects the packages.
+Every package has its own namespace.
+
+\dot
+	digraph G {
+		node [shape=record, fonthame=Helvetica, fontsize=10];
+		ais -> { geo utils };
+		nmea -> { geo utils };
+		seatalk -> { utils };
+		io -> { nmea seatalk utils };
+		geo -> { math };
+	}
+\enddot
+
+Not shown in the picture:
+- The standard library
+- Unittests (using GoogleTest/GoogleMock)
+- Examples (some of them use boost.asio or Qt5)
+
+
+\subsection subsec_overview_general General Stuff
+
+The code of the library is quite defensive. This should usually not
+be a problem, because the (usual) environment of a library as this
+is not high performance. Some additional checks will not hurt too much.
+
+
+\subsection subsec_overview_naming Naming Conventions
+
+Everything is in small case (types, classes, structs, member functions,
+member data, etc.) with underscores (snakes).
+
+There are occasional exceptions of constants in all captial letters.
+For the future, this practice is discouraged.
+
+Reason:
+- other libraries do this too (std, boost)
+- I like it this way
+
+
+\subsection subsec_overview_formatting Formatting
+
+Code formatting is done using \c clang-format, using the provided
+configuration file (\c .clang-format)
+
+
+\subsection subsec_overview_header_inclusion Order of Header inclusion
+
+In general the order is from system headers to project headers. The
+more private, the later the inclusion.
+
+For header files:
+- system headers
+- thrid party library headers
+- marnav headers
+
+For translation units:
+- its own header
+- system headers
+- thrid party library headers
+- marnav headers
+
+With the exception of the translation unit's own header file, are all
+header included with full qualified path.
+
+
 
 
 
