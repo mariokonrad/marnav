@@ -60,6 +60,7 @@ static message::parse_function instantiate_message(message_id type)
 		{message_id::lat_lon, message_58::parse}, {message_id::wind_alarm, message_66::parse},
 	};
 
+	using namespace std;
 	auto const & i = std::find_if(begin(known_messages), end(known_messages),
 		[type](const entry & e) { return e.first == type; });
 

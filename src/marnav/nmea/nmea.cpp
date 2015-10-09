@@ -181,7 +181,8 @@ static std::tuple<std::string, std::string> parse_address(const std::string & ad
 	}
 
 	// search in all known sentences
-	auto const & index = std::find_if(begin(known_sentences), end(known_sentences),
+	using namespace std;
+	auto const & index = find_if(begin(known_sentences), end(known_sentences),
 		[address](const entry & e) { return e.TAG == address; });
 	if (index != end(known_sentences))
 		throw std::invalid_argument{"invalid address (" + address + ") in nmea/parse_address"};
@@ -218,8 +219,9 @@ static void ensure_checksum(const std::string & s, const std::string & expected)
 /// Returns a list of tags of supported sentences.
 std::vector<std::string> get_supported_sentences_str()
 {
+	using namespace std;
 	std::vector<std::string> v;
-	v.reserve(known_sentences.size());
+	v.reserve(std::distance(begin(known_sentences), end(known_sentences)));
 	for (auto const & s : known_sentences) {
 		v.push_back(s.TAG);
 	}
@@ -229,8 +231,9 @@ std::vector<std::string> get_supported_sentences_str()
 /// Returns a list of IDs of supported sentences.
 std::vector<sentence_id> get_supported_sentences_id()
 {
+	using namespace std;
 	std::vector<sentence_id> v;
-	v.reserve(known_sentences.size());
+	v.reserve(std::distance(begin(known_sentences), end(known_sentences)));
 	for (auto const & s : known_sentences) {
 		v.push_back(s.ID);
 	}

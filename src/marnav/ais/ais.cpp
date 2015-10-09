@@ -95,6 +95,7 @@ static message::parse_function instantiate_message(message_id type, size_t size)
 		{message_id::static_data_report, message_24::parse},
 	};
 
+	using namespace std;
 	auto const & i = std::find_if(begin(known_messages), end(known_messages),
 		[type](const entry & e) { return e.first == type; });
 
