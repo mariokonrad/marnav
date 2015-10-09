@@ -2,6 +2,7 @@
 #include <marnav/nmea/vdm.hpp>
 #include <marnav/nmea/mtw.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include "type_traits_helper.hpp"
 
 namespace
 {
@@ -13,6 +14,8 @@ class Test_nmea_vdm : public ::testing::Test
 };
 
 TEST_F(Test_nmea_vdm, contruction) { EXPECT_NO_THROW(nmea::vdm vdm); }
+
+TEST_F(Test_nmea_vdm, properties) { nmea_sentence_traits<nmea::vdm>(); }
 
 TEST_F(Test_nmea_vdm, parse_invalid_number_of_arguments)
 {

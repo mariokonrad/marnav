@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <marnav/nmea/gll.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include "type_traits_helper.hpp"
 
 namespace
 {
@@ -12,6 +13,8 @@ class Test_nmea_gll : public ::testing::Test
 };
 
 TEST_F(Test_nmea_gll, contruction) { EXPECT_NO_THROW(nmea::gll gll); }
+
+TEST_F(Test_nmea_gll, properties) { nmea_sentence_traits<nmea::gll>(); }
 
 TEST_F(Test_nmea_gll, parse)
 {

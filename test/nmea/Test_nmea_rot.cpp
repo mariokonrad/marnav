@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <marnav/nmea/rot.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include "type_traits_helper.hpp"
 
 namespace
 {
@@ -12,6 +13,8 @@ class Test_nmea_rot : public ::testing::Test
 };
 
 TEST_F(Test_nmea_rot, contruction) { EXPECT_NO_THROW(nmea::rot rot); }
+
+TEST_F(Test_nmea_rot, properties) { nmea_sentence_traits<nmea::rot>(); }
 
 TEST_F(Test_nmea_rot, parse)
 {

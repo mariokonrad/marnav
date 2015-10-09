@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <marnav/nmea/dbt.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include "type_traits_helper.hpp"
 
 namespace
 {
@@ -12,6 +13,8 @@ class Test_nmea_dbt : public ::testing::Test
 };
 
 TEST_F(Test_nmea_dbt, contruction) { EXPECT_NO_THROW(nmea::dbt dbt); }
+
+TEST_F(Test_nmea_dbt, properties) { nmea_sentence_traits<nmea::dbt>(); }
 
 TEST_F(Test_nmea_dbt, parse)
 {

@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <marnav/nmea/sfi.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include "type_traits_helper.hpp"
 
 namespace
 {
@@ -12,6 +13,8 @@ class Test_nmea_sfi : public ::testing::Test
 };
 
 TEST_F(Test_nmea_sfi, contruction) { EXPECT_NO_THROW(nmea::sfi sfi); }
+
+TEST_F(Test_nmea_sfi, properties) { nmea_sentence_traits<nmea::sfi>(); }
 
 TEST_F(Test_nmea_sfi, parse)
 {

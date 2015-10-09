@@ -1,7 +1,7 @@
-#include <type_traits>
 #include <gtest/gtest.h>
 #include <marnav/nmea/hdg.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include "type_traits_helper.hpp"
 
 namespace
 {
@@ -14,23 +14,7 @@ class Test_nmea_hdg : public ::testing::Test
 
 TEST_F(Test_nmea_hdg, contruction) { EXPECT_NO_THROW(nmea::hdg hdg); }
 
-TEST_F(Test_nmea_hdg, properties)
-{
-	using type = nmea::hdg;
-
-	EXPECT_TRUE(std::is_constructible<type>::value);
-	// EXPECT_TRUE(std::is_trivially_constructible<type>::value);
-	EXPECT_TRUE(std::is_default_constructible<type>::value);
-	EXPECT_FALSE(std::is_nothrow_constructible<type>::value);
-	EXPECT_TRUE(std::is_copy_constructible<type>::value);
-	// EXPECT_TRUE(std::is_trivially_copy_constructible<type>::value);
-	EXPECT_TRUE(std::is_move_constructible<type>::value);
-	EXPECT_FALSE(std::is_copy_assignable<type>::value);
-	EXPECT_FALSE(std::is_nothrow_copy_assignable<type>::value);
-	// EXPECT_TRUE(std::is_trivially_copy_assignable<type>::value);
-	EXPECT_FALSE(std::is_move_assignable<type>::value);
-	EXPECT_TRUE(std::is_destructible<type>::value);
-}
+TEST_F(Test_nmea_hdg, properties) { nmea_sentence_traits<nmea::hdg>(); }
 
 TEST_F(Test_nmea_hdg, parse)
 {

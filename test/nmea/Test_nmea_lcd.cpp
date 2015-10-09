@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <marnav/nmea/lcd.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include "type_traits_helper.hpp"
 
 namespace
 {
@@ -12,6 +13,8 @@ class Test_nmea_lcd : public ::testing::Test
 };
 
 TEST_F(Test_nmea_lcd, contruction) { EXPECT_NO_THROW(nmea::lcd lcd); }
+
+TEST_F(Test_nmea_lcd, properties) { nmea_sentence_traits<nmea::lcd>(); }
 
 TEST_F(Test_nmea_lcd, parse)
 {

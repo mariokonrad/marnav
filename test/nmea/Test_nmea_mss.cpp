@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <marnav/nmea/mss.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include "type_traits_helper.hpp"
 
 namespace
 {
@@ -12,6 +13,8 @@ class Test_nmea_mss : public ::testing::Test
 };
 
 TEST_F(Test_nmea_mss, contruction) { EXPECT_NO_THROW(nmea::mss mss); }
+
+TEST_F(Test_nmea_mss, properties) { nmea_sentence_traits<nmea::mss>(); }
 
 TEST_F(Test_nmea_mss, parse)
 {

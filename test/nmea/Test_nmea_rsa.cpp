@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <marnav/nmea/rsa.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include "type_traits_helper.hpp"
 
 namespace
 {
@@ -12,6 +13,8 @@ class Test_nmea_rsa : public ::testing::Test
 };
 
 TEST_F(Test_nmea_rsa, contruction) { EXPECT_NO_THROW(nmea::rsa rsa); }
+
+TEST_F(Test_nmea_rsa, properties) { nmea_sentence_traits<nmea::rsa>(); }
 
 TEST_F(Test_nmea_rsa, parse)
 {

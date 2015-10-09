@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <marnav/nmea/xtr.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include "type_traits_helper.hpp"
 
 namespace
 {
@@ -12,6 +13,8 @@ class Test_nmea_xtr : public ::testing::Test
 };
 
 TEST_F(Test_nmea_xtr, contruction) { EXPECT_NO_THROW(nmea::xtr xtr); }
+
+TEST_F(Test_nmea_xtr, properties) { nmea_sentence_traits<nmea::xtr>(); }
 
 TEST_F(Test_nmea_xtr, parse)
 {
