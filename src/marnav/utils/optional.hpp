@@ -29,11 +29,8 @@ public:
 
 	// constructors
 
-	constexpr optional()
-		: flag(false)
-		, data()
-	{
-	}
+	/// Initializes the optional with the default constructed data.
+	constexpr optional() noexcept : flag(false), data() {}
 
 	constexpr optional(const T & data)
 		: flag(true)
@@ -43,8 +40,8 @@ public:
 
 	constexpr optional(T && data) noexcept : flag(true), data(std::move(data)) {}
 
-	optional(optional &&) noexcept = default;
 	optional(const optional &) = default;
+	optional(optional &&) noexcept = default;
 
 	// assignment
 
@@ -55,7 +52,7 @@ public:
 		return *this;
 	}
 
-	optional & operator=(optional && other)
+	optional & operator=(optional && other) noexcept
 	{
 		this->data = std::move(other.data);
 		this->flag = std::move(other.flag);
@@ -107,6 +104,8 @@ public:
 
 	// other
 
+	/// Resets the data to the default constructed value and marks
+	/// the optional as 'not set'.
 	void reset()
 	{
 		data = T{};

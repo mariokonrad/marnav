@@ -8,6 +8,7 @@ include_directories(
 add_executable(testrunner
 	utils/Test_utils_bitset.cpp
 	utils/Test_utils_mmsi.cpp
+	utils/Test_utils_optional.cpp
 	math/Test_math_floatingpoint.cpp
 	math/Test_math_vector.cpp
 	math/Test_math_matrix.cpp

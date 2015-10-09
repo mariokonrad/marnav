@@ -257,6 +257,7 @@ public:
 	constexpr static char end_token = '*';
 
 	sentence() = delete;
+
 	virtual ~sentence() {}
 
 	/// Returns the ID of the sentence.
