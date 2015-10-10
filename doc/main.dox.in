@@ -177,8 +177,10 @@ This page describes the requirements in order to build the library.
 
 \subsection subsec_devenv_requirements Requirements
 Compiler supported (older/others may work, but not tested):
-- GCC 4.9.2 or newer
-- Clang 3.6 or newer
+- GCC 4.9
+- GCC 5.1
+- Clang 3.6
+- Clang 3.7
 
 Tools needed to build the library:
 - cmake 3.0 or newer
