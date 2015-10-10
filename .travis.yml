@@ -1,24 +1,46 @@
 language: c++
-compiler:
-  - gcc
-  - clang
 sudo: false
-os: linux
 
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    - llvm-toolchain-precise-3.6
-    packages:
-    - gcc-4.9
-    - g++-4.9
-    - clang-3.6
+git:
+  depth: 10
+  submodules: false
+
+matrix:
+  include:
+    - os: linux
+      env: COMPILER=g++-4.9
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          packages:
+          - gcc-4.9
+          - g++-4.9
+
+    - os: linux
+      env: COMPILER=g++-5
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          packages:
+          - gcc-5
+          - g++-5
+
+    - os: linux
+      env: COMPILER=clang++-3.6
+      compiler: clang
+      addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          - llvm-toolchain-precise-3.6
+          packages:
+          - clang-3.6
 
 install:
-  - if [ "$CXX" = "g++" ] ; then export CXX="g++-4.9" CC="gcc-4.9" ; fi
-  - if [ "$CXX" = "clang++" ] ; then export CXX="clang++-3.6" CC="clang-3.6" ; fi
-
   # install a recent cmake
   - wget http://www.cmake.org/files/v3.2/cmake-3.2.3-Linux-x86_64.tar.gz
   - tar -xf cmake-3.2.3-Linux-x86_64.tar.gz
@@ -28,7 +50,7 @@ install:
 before_script:
   - mkdir build
   - cd build
-  - cmake ..
+  - CXX=${COMPILER} cmake ..
 
 script:
   - ${CXX} --version
