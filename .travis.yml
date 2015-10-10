@@ -61,10 +61,10 @@ install:
 before_script:
   - mkdir build
   - cd build
+  - ${COMPILER} --version
   - CXX=${COMPILER} cmake ..
 
 script:
-  - ${CXX} --version
   - make
   - make unittest
   - make test
