@@ -1,0 +1,39 @@
+#!/bin/bash -u
+
+CLANG_VERSION=3.7
+CLANG_ANALYZER=/usr/share/clang/scan-build-${CLANG_VERSION}/c++-analyzer
+CLANG_SCAN_BUILD=/usr/bin/scan-build-${CLANG_VERSION}
+CLANG_COMPILER=/usr/bin/clang++-${CLANG_VERSION}
+
+if [ ! -x ${CLANG_ANALYZER} ] ; then
+	echo "error: clang analyzer not found: ${CLANG_ANALYZER}"
+	exit 1
+fi
+
+if [ ! -x ${CLANG_SCAN_BUILD} ] ; then
+	echo "error: clang scan build not found: ${CLANG_SCAN_BUILD}"
+	exit 1
+fi
+
+if [ ! -x ${CLANG_COMPILER} ] ; then
+	echo "error: clang compiler not found: ${CLANG_COMPILER}"
+	exit 1
+fi
+
+if [ -d build ] ; then
+	echo ""
+	echo "warning: directory 'build' already exists."
+	echo ""
+else
+	mkdir build
+fi
+
+if [ ! -d build/doc/analysis ] ; then
+	mkdir -p build/doc/analysis
+fi
+
+cd build
+cmake -DCMAKE_CXX_COMPILER=${CLANG_ANALYZER} ..
+${CLANG_SCAN_BUILD} -o doc/analysis --use-analyzer=${CLANG_COMPILER} make -j 4 marnav
+
+exit 0

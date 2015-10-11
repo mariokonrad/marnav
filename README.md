@@ -303,7 +303,7 @@ Tools needed to build the documentation:
 Optional used for development:
 - lcov / genhtml, c++filt
 - cppcheck
-- clang-analyze (3.7 or newer)
+- clang-analyze 3.7
 - ctags, cscope
 
 Optional (no core dependency):
@@ -331,7 +331,7 @@ Build options:
   Default: `ON`
 - `ENABLE_WARNING_HELL` : enables _much_ more warnings, used for development purposes.
   Currently implemented only for GCC.  Default is `OFF`
-- `ENABLE_PROFILING` : enables profiling
+- `ENABLE_PROFILING` : enables profiling for `gprof`
 
 
 ### Library
@@ -371,10 +371,12 @@ or individual package types:
 
 ### Static Analysis with Clang
 
+There is a script ```bin/static-analysis-clang``` for doing this, or do it manually:
+
 	mkdir build
 	cd build
 	cmake -DCMAKE_CXX_COMPILER=/usr/share/clang/scan-build-3.7/c++-analyzer ..
-	scan-build-3.7 --use-analyzer=/usr/bin/clang++-3.7 make
+	scan-build-3.7 -o doc/analysis --use-analyzer=/usr/bin/clang++-3.7 make
 
 After the build, ```scan-build``` will tell you what to do in order to inspect
 the findings.
