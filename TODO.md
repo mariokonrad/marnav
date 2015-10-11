@@ -1,11 +1,7 @@
 TODO
 ====
 
-@todo General: clean up documentation
-@todo General: integration tests
-@todo Implement NMEA writer for serial devices
-@todo Implement additional checks in NMEA sentences, wheather or not the
-      received data is correct.
+@todo Implement additional checks in NMEA sentences, wheather or not the received data is correct.
 @todo Implement NMEA sentence: ASD: Autopilot System Data
 @todo Implement NMEA sentence: DSI: DSC Transponder Initiate
 @todo Implement NMEA sentence: DSR: DSC Transponder Response

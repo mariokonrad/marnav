@@ -8,7 +8,6 @@ namespace marnav
 {
 namespace io
 {
-
 /// This class reads SeaTalk messages from a device. Normally this would
 /// be a serial character device (e.g. /dev/ttyS0 or /dev/ttyUSB0).
 ///
@@ -18,8 +17,15 @@ namespace io
 class seatalk_reader
 {
 public:
-	seatalk_reader(std::unique_ptr<device> && dev);
 	virtual ~seatalk_reader();
+
+	seatalk_reader() = delete;
+	seatalk_reader(std::unique_ptr<device> && dev);
+	seatalk_reader(const seatalk_reader &) = delete;
+	seatalk_reader(seatalk_reader &&) = default;
+
+	seatalk_reader & operator=(const seatalk_reader &) = delete;
+	seatalk_reader & operator=(seatalk_reader &&) = default;
 
 	void close();
 	bool read();

@@ -16,8 +16,14 @@ namespace io
 class nmea_reader
 {
 public:
-	nmea_reader(std::unique_ptr<device> && dev);
 	virtual ~nmea_reader();
+
+	nmea_reader(std::unique_ptr<device> && dev);
+	nmea_reader(const nmea_reader &) = delete;
+	nmea_reader(nmea_reader &&) = default;
+
+	nmea_reader & operator=(const nmea_reader &) = delete;
+	nmea_reader & operator=(nmea_reader &&) = default;
 
 	void close();
 	bool read();

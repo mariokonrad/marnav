@@ -15,18 +15,16 @@ int main(int, char **)
 	using namespace marnav::io;
 
 	// prepare destinations
-	std::vector<std::unique_ptr<io::serial>> destinations;
-	destinations.push_back(utils::make_unique<io::serial>("dev/ttyUSB1",
-		io::serial::baud::BAUD_4800, io::serial::databits::BIT_8, io::serial::stopbits::BIT_1,
-		io::serial::parity::NONE));
-	destinations.push_back(utils::make_unique<io::serial>("dev/ttyUSB2",
-		io::serial::baud::BAUD_4800, io::serial::databits::BIT_8, io::serial::stopbits::BIT_1,
-		io::serial::parity::NONE));
+	std::vector<std::unique_ptr<serial>> destinations;
+	destinations.push_back(utils::make_unique<serial>("dev/ttyUSB1", serial::baud::baud_4800,
+		serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none));
+	destinations.push_back(utils::make_unique<serial>("dev/ttyUSB2", serial::baud::baud_4800,
+		serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none));
 
 	// open source device
-	io::default_nmea_reader source{
-		utils::make_unique<serial>("/dev/ttyUSB0", serial::baud::BAUD_4800,
-			serial::databits::BIT_8, serial::stopbits::BIT_1, serial::parity::NONE)};
+	default_nmea_reader source{
+		utils::make_unique<serial>("/dev/ttyUSB0", serial::baud::baud_4800,
+			serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none)};
 
 	std::string data;
 	while (source.read_sentence(data)) {

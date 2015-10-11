@@ -7,11 +7,18 @@ namespace marnav
 {
 namespace io
 {
-
+/// Default implementation of a SeaTalk reader.
 class default_seatalk_reader : public seatalk_reader
 {
 public:
+	default_seatalk_reader() = delete;
 	default_seatalk_reader(std::unique_ptr<device> && dev);
+	default_seatalk_reader(const default_seatalk_reader &) = delete;
+	default_seatalk_reader(default_seatalk_reader &&) = default;
+
+	default_seatalk_reader & operator=(const default_seatalk_reader &) = delete;
+	default_seatalk_reader & operator=(default_seatalk_reader &&) = default;
+
 	bool read_message(seatalk::raw & data);
 
 protected:

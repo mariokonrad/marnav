@@ -11,30 +11,33 @@ namespace marnav
 namespace io
 {
 
+/// @cond DEV
+namespace detail
+{
 static tcflag_t get_baud(serial::baud baud_rate)
 {
 	switch (baud_rate) {
-		case serial::baud::BAUD_300:
+		case serial::baud::baud_300:
 			return B300;
-		case serial::baud::BAUD_600:
+		case serial::baud::baud_600:
 			return B600;
-		case serial::baud::BAUD_1200:
+		case serial::baud::baud_1200:
 			return B1200;
-		case serial::baud::BAUD_2400:
+		case serial::baud::baud_2400:
 			return B2400;
-		case serial::baud::BAUD_4800:
+		case serial::baud::baud_4800:
 			return B4800;
-		case serial::baud::BAUD_9600:
+		case serial::baud::baud_9600:
 			return B9600;
-		case serial::baud::BAUD_19200:
+		case serial::baud::baud_19200:
 			return B19200;
-		case serial::baud::BAUD_38400:
+		case serial::baud::baud_38400:
 			return B38400;
-		case serial::baud::BAUD_57600:
+		case serial::baud::baud_57600:
 			return B57600;
-		case serial::baud::BAUD_115200:
+		case serial::baud::baud_115200:
 			return B115200;
-		case serial::baud::BAUD_230400:
+		case serial::baud::baud_230400:
 			return B230400;
 		default:
 			break;
@@ -45,13 +48,13 @@ static tcflag_t get_baud(serial::baud baud_rate)
 static tcflag_t get_data_bits(serial::databits data_bits)
 {
 	switch (data_bits) {
-		case serial::databits::BIT_5:
+		case serial::databits::bit_5:
 			return CS5;
-		case serial::databits::BIT_6:
+		case serial::databits::bit_6:
 			return CS6;
-		case serial::databits::BIT_7:
+		case serial::databits::bit_7:
 			return CS7;
-		case serial::databits::BIT_8:
+		case serial::databits::bit_8:
 			return CS8;
 		default:
 			break;
@@ -62,9 +65,9 @@ static tcflag_t get_data_bits(serial::databits data_bits)
 static tcflag_t get_stop_bits(serial::stopbits stop_bits)
 {
 	switch (stop_bits) {
-		case serial::stopbits::BIT_1:
+		case serial::stopbits::bit_1:
 			return 0;
-		case serial::stopbits::BIT_2:
+		case serial::stopbits::bit_2:
 			return CSTOPB;
 		default:
 			break;
@@ -75,13 +78,13 @@ static tcflag_t get_stop_bits(serial::stopbits stop_bits)
 static tcflag_t get_parity_cflag(serial::parity par)
 {
 	switch (par) {
-		case serial::parity::NONE:
+		case serial::parity::none:
 			return 0;
-		case serial::parity::EVEN:
+		case serial::parity::even:
 			return PARENB;
-		case serial::parity::ODD:
+		case serial::parity::odd:
 			return PARENB | PARODD;
-		case serial::parity::MARK:
+		case serial::parity::mark:
 			return 0;
 	}
 	return 0;
@@ -90,17 +93,21 @@ static tcflag_t get_parity_cflag(serial::parity par)
 static tcflag_t get_parity_iflag(serial::parity par)
 {
 	switch (par) {
-		case serial::parity::NONE:
+		case serial::parity::none:
 			return IGNPAR;
-		case serial::parity::EVEN:
+		case serial::parity::even:
 			return INPCK;
-		case serial::parity::ODD:
+		case serial::parity::odd:
 			return INPCK;
-		case serial::parity::MARK:
+		case serial::parity::mark:
 			return PARMRK;
 	}
 	return 0;
 }
+}
+/// @endcond
+
+serial::~serial() { close(); }
 
 serial::serial(const std::string & dev, baud b, databits d, stopbits s, parity p)
 	: fd(-1)
@@ -111,8 +118,6 @@ serial::serial(const std::string & dev, baud b, databits d, stopbits s, parity p
 	, par(p)
 {
 }
-
-serial::~serial() { close(); }
 
 /// Opens a serial device.
 void serial::open()
@@ -129,11 +134,12 @@ void serial::open()
 
 	tcgetattr(fd, &old_tio);
 	memset(&new_tio, 0, sizeof(new_tio));
-	new_tio.c_cflag = get_baud(baud_rate) | get_data_bits(data_bits) | get_stop_bits(stop_bits)
-		| get_parity_cflag(par) | CLOCAL // ignore modem control lines
+	new_tio.c_cflag = detail::get_baud(baud_rate) | detail::get_data_bits(data_bits)
+		| detail::get_stop_bits(stop_bits) | detail::get_parity_cflag(par)
+		| CLOCAL // ignore modem control lines
 		| CREAD // enable receiver
 		;
-	new_tio.c_iflag = 0 | get_parity_iflag(par);
+	new_tio.c_iflag = 0 | detail::get_parity_iflag(par);
 	new_tio.c_oflag = 0;
 	new_tio.c_lflag = 0;
 

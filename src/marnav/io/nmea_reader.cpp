@@ -6,14 +6,14 @@ namespace marnav
 {
 namespace io
 {
+nmea_reader::~nmea_reader() {}
+
 nmea_reader::nmea_reader(std::unique_ptr<device> && dev)
 	: raw(0)
 	, dev(std::move(dev))
 {
 	sentence.reserve(nmea::sentence::max_length + 1);
 }
-
-nmea_reader::~nmea_reader() {}
 
 void nmea_reader::close()
 {

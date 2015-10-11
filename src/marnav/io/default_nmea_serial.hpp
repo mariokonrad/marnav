@@ -8,7 +8,6 @@ namespace marnav
 {
 namespace io
 {
-
 /// Returns a serial device with the default configuration for reading NMEA.
 ///
 /// @note The default parameters are not valid in every case, depending on the device.
@@ -17,8 +16,8 @@ namespace io
 /// @return The serial device object, default configured.
 inline std::unique_ptr<serial> make_default_nmea_serial(const std::string & port)
 {
-	return utils::make_unique<serial>(port, serial::baud::BAUD_4800, serial::databits::BIT_8,
-		serial::stopbits::BIT_1, serial::parity::NONE);
+	return utils::make_unique<serial>(port, serial::baud::baud_4800, serial::databits::bit_8,
+		serial::stopbits::bit_1, serial::parity::none);
 }
 }
 }

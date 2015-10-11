@@ -5,6 +5,8 @@ namespace marnav
 {
 namespace io
 {
+seatalk_reader::~seatalk_reader() {}
+
 seatalk_reader::seatalk_reader(std::unique_ptr<device> && dev)
 	: dev(std::move(dev))
 {
@@ -14,8 +16,6 @@ seatalk_reader::seatalk_reader(std::unique_ptr<device> && dev)
 	ctx.remaining = 255;
 	ctx.index = 0;
 }
-
-seatalk_reader::~seatalk_reader() {}
 
 void seatalk_reader::close()
 {

@@ -8,7 +8,6 @@ namespace marnav
 {
 namespace io
 {
-
 /// This class is an abstraction for termios based serial
 /// communication.
 ///
@@ -17,30 +16,33 @@ class serial : public device
 {
 public:
 	enum class baud {
-		BAUD_300 = 300,
-		BAUD_600 = 600,
-		BAUD_1200 = 1200,
-		BAUD_2400 = 2400,
-		BAUD_4800 = 4800,
-		BAUD_9600 = 9600,
-		BAUD_19200 = 19200,
-		BAUD_38400 = 38400,
-		BAUD_57600 = 57600,
-		BAUD_115200 = 115200,
-		BAUD_230400 = 230400
+		baud_300,
+		baud_600,
+		baud_1200,
+		baud_2400,
+		baud_4800,
+		baud_9600,
+		baud_19200,
+		baud_38400,
+		baud_57600,
+		baud_115200,
+		baud_230400
 	};
 
-	enum class databits { BIT_5 = 5, BIT_6 = 6, BIT_7 = 7, BIT_8 = 8 };
+	enum class databits { bit_5, bit_6, bit_7, bit_8 };
 
-	enum class stopbits { BIT_1 = 1, BIT_2 = 2 };
+	enum class stopbits { bit_1, bit_2 };
 
-	enum class parity { NONE, EVEN, ODD, MARK };
+	enum class parity { none, even, odd, mark };
 
+	virtual ~serial();
+
+	serial() = delete;
 	serial(const std::string & dev, baud b, databits d, stopbits s, parity p);
 	serial(const serial &) = delete;
 	serial(serial &&) noexcept = default;
-	virtual ~serial();
 	serial & operator=(const serial &) noexcept = delete;
+	serial & operator=(serial &&) noexcept = default;
 
 	virtual void open() override;
 	virtual void close() override;
@@ -48,7 +50,7 @@ public:
 	virtual int write(const char * buffer, uint32_t size) override;
 
 protected:
-	int fd;
+	int fd; ///< File descriptor for serial device communication.
 
 private:
 	std::string dev;
