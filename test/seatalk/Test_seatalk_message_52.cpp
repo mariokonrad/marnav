@@ -33,7 +33,7 @@ TEST_F(Test_seatalk_message_52, parse)
 
 	const std::vector<test_case> cases{
 		{{0x52, 0x01, 0x00, 0x01}, 0.1}, {{0x52, 0x01, 0x00, 0x10}, 1.6},
-		{{0x52, 0x01, 0x01, 0x00}, 2.6}, {{0x52, 0x01, 0x10, 0x00}, 0.0},
+		{{0x52, 0x01, 0x01, 0x00}, 25.6}, {{0x52, 0x01, 0x10, 0x00}, 409.6},
 	};
 
 	for (auto const & t : cases) {
@@ -45,6 +45,7 @@ TEST_F(Test_seatalk_message_52, parse)
 		EXPECT_TRUE(m != nullptr);
 		if (!m)
 			continue;
+		EXPECT_NEAR(t.sog, m->get_sog(), 1e-5);
 	}
 }
 

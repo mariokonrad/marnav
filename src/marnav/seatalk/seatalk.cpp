@@ -31,7 +31,9 @@ namespace marnav
 {
 namespace seatalk
 {
-
+/// @cond DEV
+namespace detail
+{
 static message::parse_function instantiate_message(message_id type)
 {
 	using entry = std::pair<message_id, message::parse_function>;
@@ -70,13 +72,15 @@ static message::parse_function instantiate_message(message_id type)
 
 	return i->second;
 }
+}
+/// @endcond
 
 std::unique_ptr<message> make_message(const raw & data)
 {
 	if (data.size() < 1)
 		throw std::invalid_argument{"raw data of insufficient size"};
 	message_id type = static_cast<message_id>(data[0]);
-	return instantiate_message(type)(data);
+	return detail::instantiate_message(type)(data);
 }
 
 raw encode_message(const message & msg) { return msg.get_data(); }

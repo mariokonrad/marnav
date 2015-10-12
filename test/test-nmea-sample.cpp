@@ -311,7 +311,6 @@ int main(int, char **)
 
 	std::ifstream ifs{"nmea-sample.txt"};
 	std::string line;
-	std::vector<std::unique_ptr<nmea::sentence>> sentences;
 
 	// this function implements almost the same as examples/read_ais.cpp
 

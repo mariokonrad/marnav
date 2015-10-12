@@ -1,2 +1,4 @@
 unusedFunction
 missingIncludeSystem
+noExplicitConstructor
+noExplicitCopyMoveConstructor
