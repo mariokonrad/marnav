@@ -40,5 +40,4 @@ TODO
 @todo Implement SeaTalk message: Type 86: Keystroke
 @todo Implement SeaTalk message: Type 87: Response Level
 @todo Implement SeaTalk message: Type 88: Autopilot Parameter
-@todo Implement SeaTalk message: Type 89: Compass heading (sent by ST40 compass instrument)
 

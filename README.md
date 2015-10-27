@@ -171,6 +171,7 @@ Suported messages for SeaTalk (decode and encode):
 - Type 56: Date
 - Type 58: LAT/LON
 - Type 66: Wind Alarm
+- Type 89: Compass heading (sent by ST40 compass instrument)
 
 
 ### IO

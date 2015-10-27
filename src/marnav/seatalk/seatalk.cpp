@@ -26,6 +26,7 @@
 #include <marnav/seatalk/message_56.hpp>
 #include <marnav/seatalk/message_58.hpp>
 #include <marnav/seatalk/message_66.hpp>
+#include <marnav/seatalk/message_89.hpp>
 
 namespace marnav
 {
@@ -60,6 +61,7 @@ static message::parse_function instantiate_message(message_id type)
 		{message_id::magnetic_course, message_53::parse},
 		{message_id::gmt_time, message_54::parse}, {message_id::date, message_56::parse},
 		{message_id::lat_lon, message_58::parse}, {message_id::wind_alarm, message_66::parse},
+		{message_id::st40_compass_heading, message_89::parse},
 	};
 
 	using namespace std;
