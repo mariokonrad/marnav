@@ -18,6 +18,7 @@ class message_36 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::cancel_mob_condition;
+	constexpr static size_t SIZE = 3;
 
 	message_36();
 	message_36(const message_36 &) = default;

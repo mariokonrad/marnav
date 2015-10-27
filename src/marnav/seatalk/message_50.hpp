@@ -27,6 +27,7 @@ class message_50 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::position_latitude;
+	constexpr static size_t SIZE = 5;
 
 	message_50();
 	message_50(const message_50 &) = default;

@@ -23,6 +23,7 @@ class message_23 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::water_temperature_1;
+	constexpr static size_t SIZE = 4;
 
 	message_23();
 	message_23(const message_23 &) = default;

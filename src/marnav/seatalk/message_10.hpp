@@ -23,6 +23,7 @@ class message_10 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::apparent_wind_angle;
+	constexpr static size_t SIZE = 4;
 
 	message_10();
 	message_10(const message_10 &) = default;

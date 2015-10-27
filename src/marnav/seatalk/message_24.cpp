@@ -13,10 +13,7 @@ message_24::message_24()
 
 std::unique_ptr<message> message_24::parse(const raw & data)
 {
-	if (data.size() != 5)
-		throw std::invalid_argument{"invalid number of bytes in message_24::parse"};
-	if (data[1] != 0x02)
-		throw std::invalid_argument{"invalid size specified in message"};
+	check_size(data, SIZE);
 
 	std::unique_ptr<message> result = utils::make_unique<message_24>();
 	message_24 & msg = static_cast<message_24 &>(*result);

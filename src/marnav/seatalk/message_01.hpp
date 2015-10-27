@@ -31,6 +31,7 @@ public:
 	using equipment_id_t = std::array<uint8_t, 6>;
 
 	constexpr static const message_id ID = message_id::equipment_id;
+	constexpr static size_t SIZE = 8;
 
 	message_01();
 	message_01(const message_01 &) = default;

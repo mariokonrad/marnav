@@ -20,6 +20,7 @@ class message_22 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::total_mileage;
+	constexpr static size_t SIZE = 5;
 
 	message_22();
 	message_22(const message_22 &) = default;

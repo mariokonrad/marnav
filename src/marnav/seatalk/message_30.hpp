@@ -25,6 +25,7 @@ class message_30 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::set_lamp_intensity;
+	constexpr static size_t SIZE = 3;
 
 	enum class intensity : uint8_t { L0 = 0x00, L1 = 0x04, L2 = 0x08, L3 = 0x0c };
 

@@ -27,6 +27,7 @@ class message_89 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::st40_compass_heading;
+	constexpr static size_t SIZE = 5;
 
 	message_89();
 	message_89(const message_89 &) = default;

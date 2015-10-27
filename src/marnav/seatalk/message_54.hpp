@@ -25,6 +25,7 @@ class message_54 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::gmt_time;
+	constexpr static size_t SIZE = 4;
 
 	message_54();
 	message_54(const message_54 &) = default;

@@ -30,6 +30,7 @@ class message_53 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::magnetic_course;
+	constexpr static size_t SIZE = 3;
 
 	message_53();
 	message_53(const message_53 &) = default;

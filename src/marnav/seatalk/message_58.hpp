@@ -30,6 +30,7 @@ class message_58 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::lat_lon;
+	constexpr static size_t SIZE = 8;
 
 	message_58();
 	message_58(const message_58 &) = default;

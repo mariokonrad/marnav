@@ -23,6 +23,7 @@ class message_24 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::display_units_mileage_speed;
+	constexpr static size_t SIZE = 5;
 
 	enum unit_type : uint8_t {
 		nautical_miles = 0x00,

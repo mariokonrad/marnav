@@ -20,6 +20,7 @@ class message_25 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::total_and_trip_log;
+	constexpr static size_t SIZE = 7;
 
 	message_25();
 	message_25(const message_25 &) = default;

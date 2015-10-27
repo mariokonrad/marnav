@@ -25,6 +25,7 @@ class message_05 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::engine_rpm_and_pitch;
+	constexpr static size_t SIZE = 6;
 
 	enum class side_id { undefined, starboard, port };
 

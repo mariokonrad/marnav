@@ -22,6 +22,7 @@ class message_56 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::date;
+	constexpr static size_t SIZE = 4;
 
 	message_56();
 	message_56(const message_56 &) = default;

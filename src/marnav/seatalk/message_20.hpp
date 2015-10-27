@@ -22,6 +22,7 @@ class message_20 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::speed_through_water;
+	constexpr static size_t SIZE = 4;
 
 	message_20();
 	message_20(const message_20 &) = default;

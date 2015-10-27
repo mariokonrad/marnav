@@ -24,6 +24,7 @@ class message_11 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::apparent_wind_speed;
+	constexpr static size_t SIZE = 4;
 
 	message_11();
 	message_11(const message_11 &) = default;

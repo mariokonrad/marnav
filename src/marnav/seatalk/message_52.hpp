@@ -23,6 +23,7 @@ class message_52 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::speed_over_ground;
+	constexpr static size_t SIZE = 4;
 
 	message_52();
 	message_52(const message_52 &) = default;

@@ -30,6 +30,7 @@ class message_66 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::wind_alarm;
+	constexpr static size_t SIZE = 3;
 
 	enum alarm : uint8_t {
 		no_alarm = 0x00,

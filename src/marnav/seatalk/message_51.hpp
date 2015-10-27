@@ -27,6 +27,7 @@ class message_51 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::position_longitude;
+	constexpr static size_t SIZE = 5;
 
 	message_51();
 	message_51(const message_51 &) = default;

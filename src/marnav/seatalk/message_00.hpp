@@ -28,7 +28,8 @@ namespace seatalk
 class message_00 : public message
 {
 public:
-	constexpr static const message_id ID = message_id::depth_below_transducer;
+	constexpr static message_id ID = message_id::depth_below_transducer;
+	constexpr static size_t SIZE = 5;
 
 	message_00();
 	message_00(const message_00 &) = default;
