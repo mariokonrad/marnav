@@ -154,6 +154,7 @@ set(SOURCE_SEATALK
 	marnav/seatalk/message_56.cpp
 	marnav/seatalk/message_58.cpp
 	marnav/seatalk/message_66.cpp
+	marnav/seatalk/message_86.cpp
 	marnav/seatalk/message_89.cpp
 	)
 
@@ -321,6 +322,7 @@ install(
 
 install(
 	FILES
+		marnav/seatalk/key.hpp
 		marnav/seatalk/seatalk.hpp
 		marnav/seatalk/message.hpp
 		marnav/seatalk/message_00.hpp
@@ -347,6 +349,7 @@ install(
 		marnav/seatalk/message_56.hpp
 		marnav/seatalk/message_58.hpp
 		marnav/seatalk/message_66.hpp
+		marnav/seatalk/message_86.hpp
 		marnav/seatalk/message_89.hpp
 	DESTINATION include/marnav/seatalk
 	)

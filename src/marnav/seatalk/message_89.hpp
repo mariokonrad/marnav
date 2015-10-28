@@ -2,7 +2,6 @@
 #define __SEATALK__MESSAGE_89__HPP__
 
 #include <marnav/seatalk/message.hpp>
-#include <marnav/geo/position.hpp>
 
 namespace marnav
 {
