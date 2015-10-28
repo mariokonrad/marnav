@@ -213,6 +213,18 @@ static void ensure_checksum(const std::string & s, const std::string & expected)
 	if (expected_checksum != sum)
 		throw checksum_error{expected_checksum, sum};
 }
+
+/// Parses the fields from the specified string. Uses ',' and '*' as delimiter.
+///
+/// @param[in] s The string to parse.
+/// @return Container with separate fields.
+static std::vector<std::string> parse_fields(const std::string & s)
+{
+	std::regex field_regex{"(,|\\*)"};
+	auto fields_begin = std::sregex_token_iterator{begin(s) + 1, end(s), field_regex, -1};
+	auto fields_end = std::sregex_token_iterator();
+	return {fields_begin, fields_end};
+}
 }
 /// @endcond
 
@@ -293,10 +305,7 @@ std::unique_ptr<sentence> make_sentence(const std::string & s, bool ignore_check
 		throw invalid_argument{"no start token in nmea/make_sentence"};
 
 	// extract all fields, skip start token
-	std::regex field_regex{"(,|\\*)"};
-	auto fields_begin = std::sregex_token_iterator{begin(s) + 1, end(s), field_regex, -1};
-	auto fields_end = std::sregex_token_iterator();
-	std::vector<std::string> fields{fields_begin, fields_end};
+	std::vector<std::string> fields = detail::parse_fields(s);
 	if (fields.size() < 2) // at least address and checksum must be present
 		throw std::invalid_argument{"malformed sentence in nmea/make_sentence"};
 
