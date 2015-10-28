@@ -141,6 +141,7 @@ add_executable(testrunner
 	seatalk/Test_seatalk_message_58.cpp
 	seatalk/Test_seatalk_message_66.cpp
 	seatalk/Test_seatalk_message_86.cpp
+	seatalk/Test_seatalk_message_87.cpp
 	seatalk/Test_seatalk_message_89.cpp
 	io/Test_io_seatalk_reader.cpp
 	io/Test_io_nmea_reader.cpp

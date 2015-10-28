@@ -37,7 +37,5 @@ TODO
 @todo Implement SeaTalk message: Type 83: sent by course computer
 @todo Implement SeaTalk message: Type 84: Compass heading Autopilot course and rudder position
 @todo Implement SeaTalk message: Type 85: navigation to waypoint information
-@todo Implement SeaTalk message: Type 86: Keystroke
-@todo Implement SeaTalk message: Type 87: Response Level
 @todo Implement SeaTalk message: Type 88: Autopilot Parameter
 
