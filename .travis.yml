@@ -19,6 +19,17 @@ matrix:
           - g++-4.9
 
     - os: linux
+      env: COMPILER=g++-4.9 CMAKE_BUILD_TYPE=Release
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          packages:
+          - gcc-4.9
+          - g++-4.9
+
+    - os: linux
       env: COMPILER=g++-5
       compiler: gcc
       addons:
