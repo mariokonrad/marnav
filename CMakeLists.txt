@@ -18,6 +18,8 @@ endif()
 option(ENABLE_PROFILING "Enable Profiling" OFF)
 option(ENABLE_WARNING_HELL "Enable Warning Hell" OFF)
 
+message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
+
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 	message(STATUS "Compiler settings for GNU")
 
