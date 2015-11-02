@@ -157,9 +157,11 @@ TEST_F(Test_math_vector, vecn_initializer_list)
 		EXPECT_NEAR(4.0, v[3], 1e-8);
 		EXPECT_NEAR(5.0, v[4], 1e-8);
 	}
+#if !defined(NDEBUG)
 	{
 		EXPECT_DEATH((vector_n<5, double>{1, 2, 3, 4}), ".*");
 	}
+#endif
 }
 
 TEST_F(Test_math_vector, nullify)

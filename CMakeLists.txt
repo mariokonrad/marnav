@@ -158,11 +158,11 @@ endif()
 ### testing common stuff
 enable_testing()
 
-### unit tests
+### unit tests, assumes gtest (because of the program argument)
 add_custom_target(unittest)
 macro(run_unittest unittest_target)
 	add_custom_target(${unittest_target}_runtest
-		COMMAND ${unittest_target}
+		COMMAND ${unittest_target} --gtest_shuffle
 		DEPENDS ${unittest_target}
 		WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
 		)
