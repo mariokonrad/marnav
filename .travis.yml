@@ -8,7 +8,7 @@ git:
 matrix:
   include:
     - os: linux
-      env: COMPILER=g++-4.9
+      env: COMPILER=g++-4.9 CMAKE_BUILD_TYPE=Debug
       compiler: gcc
       addons:
         apt:
@@ -30,7 +30,7 @@ matrix:
           - g++-4.9
 
     - os: linux
-      env: COMPILER=g++-5
+      env: COMPILER=g++-5 CMAKE_BUILD_TYPE=Debug
       compiler: gcc
       addons:
         apt:
@@ -41,7 +41,7 @@ matrix:
           - g++-5
 
     - os: linux
-      env: COMPILER=clang++-3.6
+      env: COMPILER=clang++-3.6 CMAKE_BUILD_TYPE=Debug
       compiler: clang
       addons:
         apt:
@@ -52,7 +52,7 @@ matrix:
           - clang-3.6
 
     - os: linux
-      env: COMPILER=clang++-3.7
+      env: COMPILER=clang++-3.7 CMAKE_BUILD_TYPE=Debug
       compiler: clang
       addons:
         apt:
@@ -73,7 +73,7 @@ before_script:
   - mkdir build
   - cd build
   - ${COMPILER} --version
-  - CXX=${COMPILER} cmake ..
+  - CXX=${COMPILER} cmake -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} ..
 
 script:
   - make
