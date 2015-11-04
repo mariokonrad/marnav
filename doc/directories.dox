@@ -1,0 +1,73 @@
+/**
+
+\dir bin
+\brief Helper scripts.
+
+
+\dir cmake
+\brief Contains CMake modules.
+
+
+\dir doc
+\brief Home of the documentation.
+
+Everything that is not in the README.md or generated from sources.
+
+
+\dir examples
+\brief Location of all examples using the library.
+
+
+\dir extern
+\brief Contains external dependencies, contained as part of the
+repository.
+
+
+\dir src
+\brief Contains the entire source of the library.
+
+
+\dir src/marnav/ais
+\brief All AIS related classes (messages, utilities, etc.).
+
+All AIS related stuff. Note that despite the AIS builds on
+the NMEA protocol (`VDM`, `VDO` sentences), the package does not
+have any dependencies to the `nmea` package.
+
+
+\dir src/marnav/geo
+\brief Collection of geographic and geodesic functions.
+
+
+\dir src/marnav/io
+\brief Input/Output stuff to communicate with the outside world.
+
+Input output stuff, mainly for NMEA and SeaTalk. Please note,
+that this package is not mandatory. It is perfectly fine
+to use the `nmea` package without `io`.
+
+
+\dir src/marnav/math
+\brief Generic math stuff.
+
+
+\dir src/marnav/nmea
+\brief All NMEA-0183 related classes (sentences, utilities, etc.)
+
+
+\dir src/marnav/seatalk
+\brief Everything SeaTalk-1 related.
+
+
+\dir src/marnav/utils
+\brief Common utilities.
+
+
+\dir test
+\brief Contains all tests.
+
+This directory contains all unit tests as well as integration tests,
+which are executed on continuous integration builds. Examples are to
+be found in the directory examples.
+
+*/

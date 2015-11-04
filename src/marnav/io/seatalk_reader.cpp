@@ -79,6 +79,9 @@ void seatalk_reader::write_data(uint8_t c)
 /// distinguish between normal and command bytes. Also, collision
 /// detection on this pseudo-bus (SeaTalk) is handled.
 ///
+/// Read more about parity error marking here:
+///   http://www.gnu.org/software/libc/manual/html_node/Input-Modes.html
+///
 /// @exception std::runtime_error Bus read error.
 void seatalk_reader::process_seatalk()
 {

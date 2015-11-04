@@ -7,6 +7,17 @@ namespace
 
 using namespace marnav;
 
+// The data presented here is not the data you would discover directly
+// on the SeaTalk-1 line. It is necessary to detect parity issues because
+// they are misused as command indicator flags by SeaTalk. To detect
+// them, it is necessary to configure the serial port (using termios)
+// to PARMRK, which will send two bytes as indicators for parity bit issues.
+// The two bytes can have the following values: 0xff 0x00 or 0xff 0xff.
+// In case of a parity error, 0xff 0x00 is sent as mark. In case of
+// a non-error situation where 0xff is received, it will be escaped as 0xff 0xff.
+//
+// Read more about it here: http://www.gnu.org/software/libc/manual/html_node/Input-Modes.html
+//
 static const uint8_t DATA[] = {
 	// preliminary garbage
 	0x01, // bit=0 parity=0 : no error : ?

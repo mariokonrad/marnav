@@ -455,6 +455,7 @@ This section explains the directory structure.
 
 \verbatim
 root
++- bin
 +- cmake
 +- doc
 +- examples
@@ -471,7 +472,8 @@ root
 +- test
 \endverbatim
 
-- \c cmake    : Cmake Modules
+- \c bin      : helper scripts
+- \c cmake    : CMake Modules
 - \c doc      : Documentation
 - \c examples : Examples included in the documentation and build as well.
                 This examples use the library to demonstrate its usage.

@@ -20,8 +20,8 @@ TEST_F(Test_seatalk_message_11, parse_invalid_data_size)
 
 TEST_F(Test_seatalk_message_11, parse_invalid_length)
 {
-	EXPECT_ANY_THROW(seatalk::message_11::parse({0x10, 0x00, 0x00, 0x00}));
-	EXPECT_ANY_THROW(seatalk::message_11::parse({0x10, 0x02, 0x00, 0x00}));
+	EXPECT_ANY_THROW(seatalk::message_11::parse({0x11, 0x00, 0x00, 0x00}));
+	EXPECT_ANY_THROW(seatalk::message_11::parse({0x11, 0x02, 0x00, 0x00}));
 }
 
 TEST_F(Test_seatalk_message_11, parse)
