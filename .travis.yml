@@ -83,6 +83,7 @@ install:
 before_script:
   - mkdir build
   - cd build
+  - cmake --version
   - ${COMPILER} --version
   - CXX=${COMPILER} cmake -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} ..
 
