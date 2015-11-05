@@ -64,6 +64,7 @@ public:
 
 public:
 	double get_depth_meters() const noexcept;
+	void set_depth_meters(double t) noexcept;
 };
 }
 }

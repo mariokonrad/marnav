@@ -1,4 +1,5 @@
 #include "message_00.hpp"
+#include <cmath>
 
 namespace marnav
 {
@@ -56,7 +57,16 @@ double message_00::get_depth_meters() const noexcept
 {
 	if (transducer_defective)
 		return 0.0;
-	return (static_cast<double>(depth) / 10.0) * 3.2808;
+	return (static_cast<double>(depth) / 10.0) / 3.2808;
+}
+
+void message_00::set_depth_meters(double t) noexcept
+{
+	if (t <= 0.0) {
+		depth = 0;
+	} else {
+		depth = static_cast<uint16_t>(std::round(10.0 * (t * 3.2808)));
+	}
 }
 }
 }
