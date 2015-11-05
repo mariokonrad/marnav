@@ -26,57 +26,67 @@
 #include <marnav/seatalk/message_56.hpp>
 #include <marnav/seatalk/message_58.hpp>
 #include <marnav/seatalk/message_66.hpp>
+#include <marnav/seatalk/message_86.hpp>
+#include <marnav/seatalk/message_87.hpp>
 #include <marnav/seatalk/message_89.hpp>
 
 namespace marnav
 {
 namespace seatalk
 {
+
+namespace
+{
+// local macro, used for convenience while registering messges
+#define REGISTER_MESSAGE(m)      \
+	{                            \
+		m::ID, m::SIZE, m::parse \
+	}
+
+struct entry {
+	const message_id id;
+	const size_t size;
+	const message::parse_function parse;
+};
+
+static const std::vector<entry> known_messages = {
+	REGISTER_MESSAGE(message_00), REGISTER_MESSAGE(message_01), REGISTER_MESSAGE(message_05),
+	REGISTER_MESSAGE(message_10), REGISTER_MESSAGE(message_11), REGISTER_MESSAGE(message_20),
+	REGISTER_MESSAGE(message_21), REGISTER_MESSAGE(message_22), REGISTER_MESSAGE(message_23),
+	REGISTER_MESSAGE(message_23), REGISTER_MESSAGE(message_25), REGISTER_MESSAGE(message_26),
+	REGISTER_MESSAGE(message_27), REGISTER_MESSAGE(message_30), REGISTER_MESSAGE(message_36),
+	REGISTER_MESSAGE(message_38), REGISTER_MESSAGE(message_50), REGISTER_MESSAGE(message_51),
+	REGISTER_MESSAGE(message_52), REGISTER_MESSAGE(message_53), REGISTER_MESSAGE(message_54),
+	REGISTER_MESSAGE(message_56), REGISTER_MESSAGE(message_58), REGISTER_MESSAGE(message_66),
+	REGISTER_MESSAGE(message_86), REGISTER_MESSAGE(message_87), REGISTER_MESSAGE(message_89),
+};
+
+#undef REGISTER_MESSAGE
+}
+
 /// @cond DEV
 namespace detail
 {
 static message::parse_function instantiate_message(message_id type)
 {
-	using entry = std::pair<message_id, message::parse_function>;
-	static const std::vector<entry> known_messages = {
-		{message_id::depth_below_transducer, message_00::parse},
-		{message_id::equipment_id, message_01::parse},
-		{message_id::engine_rpm_and_pitch, message_05::parse},
-		{message_id::apparent_wind_angle, message_10::parse},
-		{message_id::apparent_wind_speed, message_11::parse},
-		{message_id::speed_through_water, message_20::parse},
-		{message_id::trip_mileage, message_21::parse},
-		{message_id::trip_mileage, message_22::parse},
-		{message_id::total_mileage, message_23::parse},
-		{message_id::display_units_mileage_speed, message_23::parse},
-		{message_id::total_and_trip_log, message_25::parse},
-		{message_id::speed_through_water_2, message_26::parse},
-		{message_id::water_temperature_2, message_27::parse},
-		{message_id::set_lamp_intensity, message_30::parse},
-		{message_id::cancel_mob_condition, message_36::parse},
-		{message_id::codelock_data, message_38::parse},
-		{message_id::position_latitude, message_50::parse},
-		{message_id::position_longitude, message_51::parse},
-		{message_id::speed_over_ground, message_52::parse},
-		{message_id::magnetic_course, message_53::parse},
-		{message_id::gmt_time, message_54::parse}, {message_id::date, message_56::parse},
-		{message_id::lat_lon, message_58::parse}, {message_id::wind_alarm, message_66::parse},
-		{message_id::st40_compass_heading, message_89::parse},
-	};
-
-	using namespace std;
 	auto const & i = std::find_if(begin(known_messages), end(known_messages),
-		[type](const entry & e) { return e.first == type; });
+		[type](const entry & e) { return e.id == type; });
 
 	if (i == end(known_messages))
 		throw std::invalid_argument{"unknown message in instantiate_message: "
 			+ std::to_string(static_cast<uint8_t>(type))};
 
-	return i->second;
+	return i->parse;
 }
 }
 /// @endcond
 
+/// Creates and returns a SeaTalk message from the specified raw data.
+///
+/// @param[in] data Raw data to parse and interpret.
+/// @return The created message.
+/// @exception std::invalid_argument Specified raw data is invalid or
+///   data cannot be processed.
 std::unique_ptr<message> make_message(const raw & data)
 {
 	if (data.size() < 1)
@@ -85,6 +95,31 @@ std::unique_ptr<message> make_message(const raw & data)
 	return detail::instantiate_message(type)(data);
 }
 
+/// Returns the raw data from a specific SeaTalk message.
+///
+/// @param[in] msg The message to convert to raw data.
+/// @return The raw data, generated from the specified message.
+///
+/// @b Example: getting raw data from message
+/// @snippet seatalk_snippets.cpp Getting raw data from message
+///
 raw encode_message(const message & msg) { return msg.get_data(); }
+
+/// Returns the message size of the specified message id.
+///
+/// @param[in] id ID of the message to get the size for.
+/// @return The size of the specified message.
+/// @exception std::invalid_argument Thrown if the specified message ID is invalid.
+size_t message_size(message_id id)
+{
+	auto const & i = std::find_if(begin(known_messages), end(known_messages),
+		[id](const entry & e) { return e.id == id; });
+
+	if (i == end(known_messages))
+		throw std::invalid_argument{
+			"unknown message in message_size: " + std::to_string(static_cast<uint8_t>(id))};
+
+	return i->size;
+}
 }
 }

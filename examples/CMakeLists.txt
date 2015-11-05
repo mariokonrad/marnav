@@ -28,6 +28,9 @@ target_link_libraries(select marnav)
 add_executable(parse_ais parse_ais.cpp)
 target_link_libraries(parse_ais marnav)
 
+add_executable(seatalk_snippets seatalk_snippets.cpp)
+target_link_libraries(seatalk_snippets marnav)
+
 if(Boost_FOUND)
 	include_directories(${Boost_INCLUDE_DIRS})
 
