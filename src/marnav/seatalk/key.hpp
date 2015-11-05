@@ -7,7 +7,8 @@ namespace marnav
 {
 namespace seatalk
 {
-// clang-fromat off
+// clang-format off
+
 /// Enumeration of all supported keystrokes, regardless of possible
 /// origin for keystrokes (not all origins can send all keystrokes).
 ///
@@ -155,7 +156,8 @@ enum class key : uint8_t {
 	//                      0x85,
 	// ... and all until 0xff ...
 };
-// clang-fromat on
+
+// clang-format on
 }
 }
 
