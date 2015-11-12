@@ -286,8 +286,9 @@ Tools and their versions are listed below, newer/older/other tools
 (i.e. compilers, etc.) may work, but not tested.
 
 Compiler:
-- GCC 4.9.2
-- GCC 5.1.0
+- GCC 4.9
+- GCC 5.1
+- GCC 5.2
 - Clang 3.6
 - Clang 3.7
 

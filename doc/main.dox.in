@@ -182,6 +182,7 @@ This page describes the requirements in order to build the library.
 Compiler supported (older/others may work, but not tested):
 - GCC 4.9
 - GCC 5.1
+- GCC 5.2
 - Clang 3.6
 - Clang 3.7
 
