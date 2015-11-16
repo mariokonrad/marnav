@@ -127,33 +127,34 @@ inline std::string format(
 
 /// @{
 
-void read(const std::string & s, geo::latitude & value, data_format = data_format::none);
-void read(const std::string & s, geo::longitude & value, data_format = data_format::none);
-void read(const std::string & s, date & value, data_format = data_format::none);
-void read(const std::string & s, time & value, data_format = data_format::none);
-void read(const std::string & s, duration & value, data_format = data_format::none);
-void read(const std::string & s, char & value, data_format = data_format::none);
-void read(const std::string & s, uint64_t & value, data_format = data_format::dec);
-void read(const std::string & s, uint32_t & value, data_format = data_format::dec);
-void read(const std::string & s, int32_t & value, data_format = data_format::dec);
-void read(const std::string & s, double & value, data_format = data_format::none);
-void read(const std::string & s, std::string & value, data_format = data_format::none);
-void read(const std::string & s, side & value, data_format = data_format::none);
-void read(const std::string & s, route & value, data_format = data_format::none);
-void read(const std::string & s, selection_mode & value, data_format = data_format::none);
-void read(const std::string & s, ais_channel & value, data_format = data_format::none);
-void read(const std::string & s, type_of_point & value, data_format = data_format::none);
-void read(const std::string & s, direction & value, data_format = data_format::none);
-void read(const std::string & s, reference & value, data_format = data_format::none);
+void read(const std::string & s, geo::latitude & value, data_format fmt = data_format::none);
+void read(const std::string & s, geo::longitude & value, data_format fmt = data_format::none);
+void read(const std::string & s, date & value, data_format fmt = data_format::none);
+void read(const std::string & s, time & value, data_format fmt = data_format::none);
+void read(const std::string & s, duration & value, data_format fmt = data_format::none);
+void read(const std::string & s, char & value, data_format fmt = data_format::none);
+void read(const std::string & s, uint64_t & value, data_format fmt = data_format::dec);
+void read(const std::string & s, uint32_t & value, data_format fmt = data_format::dec);
+void read(const std::string & s, int32_t & value, data_format fmt = data_format::dec);
+void read(const std::string & s, double & value, data_format fmt = data_format::none);
+void read(const std::string & s, std::string & value, data_format fmt = data_format::none);
+void read(const std::string & s, side & value, data_format fmt = data_format::none);
+void read(const std::string & s, route & value, data_format fmt = data_format::none);
+void read(const std::string & s, selection_mode & value, data_format fmt = data_format::none);
+void read(const std::string & s, ais_channel & value, data_format fmt = data_format::none);
+void read(const std::string & s, type_of_point & value, data_format fmt = data_format::none);
+void read(const std::string & s, direction & value, data_format fmt = data_format::none);
+void read(const std::string & s, reference & value, data_format fmt = data_format::none);
 void read(const std::string & s, positioning_system_mode_indicator & value,
-	data_format = data_format::none);
-void read(const std::string & s, status & value, data_format = data_format::none);
-void read(const std::string & s, quality & value, data_format = data_format::none);
-void read(const std::string & s, unit::distance & value, data_format = data_format::none);
-void read(const std::string & s, unit::velocity & value, data_format = data_format::none);
-void read(const std::string & s, unit::temperature & value, data_format = data_format::none);
-void read(const std::string & s, unit::pressure & value, data_format = data_format::none);
-void read(const std::string & s, utils::mmsi & value, data_format = data_format::none);
+	data_format fmt = data_format::none);
+void read(const std::string & s, status & value, data_format fmt = data_format::none);
+void read(const std::string & s, quality & value, data_format fmt = data_format::none);
+void read(const std::string & s, unit::distance & value, data_format fmt = data_format::none);
+void read(const std::string & s, unit::velocity & value, data_format fmt = data_format::none);
+void read(
+	const std::string & s, unit::temperature & value, data_format fmt = data_format::none);
+void read(const std::string & s, unit::pressure & value, data_format fmt = data_format::none);
+void read(const std::string & s, utils::mmsi & value, data_format fmt = data_format::none);
 
 template <class T>
 inline void read(

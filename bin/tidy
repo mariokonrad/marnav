@@ -1,0 +1,44 @@
+#!/bin/bash -eu
+
+export SCRIPT_BASE=$(dirname `readlink -f $0`)
+export BASE=${SCRIPT_BASE}/..
+
+function exec_file()
+{
+	echo -n "--- $1 "
+	printf '%*s\n' $((`tput cols` - 10 - ${#1})) "" | tr ' ' '-'
+	clang-tidy-3.7 $1 \
+		-checks=modernize-*,readability-*,misc-*,clang-analyzer-*,-readability-braces-around-statements \
+		-- -I${BASE}/src -std=c++11
+}
+
+function exec_directory()
+{
+	for fn in $(find $1 -name "*.[ch]pp" | sort) ; do
+		exec_file $fn
+	done
+}
+
+if [ $# -gt 1 ] ; then
+	echo "error: invalid number of parameters: $#"
+	echo ""
+	echo "usage: $0 [directory|filename]"
+	echo ""
+	echo "  if no direcory of filename is specified, the directory 'src' with all files"
+	echo "  matching '*.[ch]pp' is assumed."
+	echo ""
+	exit -1
+fi
+
+if [ $# -eq 0 ] ; then
+	exec_directory ${BASE}/src
+else
+	if [ -d $1 ] ; then
+		exec_directory $1
+	elif [ -r $1 ] ; then
+		exec_file $1
+	else
+		echo "error: argument not existing directory or filename: '$1'"
+		exit -1
+	fi
+fi

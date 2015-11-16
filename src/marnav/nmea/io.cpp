@@ -4,6 +4,7 @@
 #include <marnav/nmea/date.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/utils/mmsi.hpp>
+#include <marnav/utils/unused.hpp>
 
 namespace marnav
 {
@@ -222,7 +223,7 @@ std::string to_string(unit::pressure t)
 
 std::string to_string(const utils::mmsi & t)
 {
-	char buf[10];
+	char buf[16];
 	snprintf(buf, sizeof(buf), "%09u", static_cast<uint32_t>(t));
 	return buf;
 }
@@ -293,8 +294,10 @@ std::string format(uint32_t data, unsigned int width, data_format f)
 	return buf;
 }
 
-std::string format(double data, unsigned int width, data_format)
+std::string format(double data, unsigned int width, data_format f)
 {
+	utils::unused(f);
+
 	// buffer to hold the resulting string with a static size.
 	// this construct prevents VLA, and should be replaced with C++14 dynarray
 	char buf[32];
@@ -307,8 +310,10 @@ std::string format(double data, unsigned int width, data_format)
 	return buf;
 }
 
-void read(const std::string & s, geo::latitude & value, data_format)
+void read(const std::string & s, geo::latitude & value, data_format fmt)
 {
+	utils::unused(fmt);
+
 	if (s.empty()) {
 		value = geo::latitude{};
 		return;
@@ -317,8 +322,10 @@ void read(const std::string & s, geo::latitude & value, data_format)
 	value = parse_latitude(s);
 }
 
-void read(const std::string & s, geo::longitude & value, data_format)
+void read(const std::string & s, geo::longitude & value, data_format fmt)
 {
+	utils::unused(fmt);
+
 	if (s.empty()) {
 		value = geo::longitude{};
 		return;
@@ -327,16 +334,29 @@ void read(const std::string & s, geo::longitude & value, data_format)
 	value = parse_longitude(s);
 }
 
-void read(const std::string & s, date & value, data_format) { std::istringstream{s} >> value; }
-
-void read(const std::string & s, time & value, data_format) { std::istringstream{s} >> value; }
-
-void read(const std::string & s, duration & value, data_format)
+void read(const std::string & s, date & value, data_format fmt)
 {
+	utils::unused(fmt);
 	std::istringstream{s} >> value;
 }
 
-void read(const std::string & s, char & value, data_format) { std::istringstream{s} >> value; }
+void read(const std::string & s, time & value, data_format fmt)
+{
+	utils::unused(fmt);
+	std::istringstream{s} >> value;
+}
+
+void read(const std::string & s, duration & value, data_format fmt)
+{
+	utils::unused(fmt);
+	std::istringstream{s} >> value;
+}
+
+void read(const std::string & s, char & value, data_format fmt)
+{
+	utils::unused(fmt);
+	std::istringstream{s} >> value;
+}
 
 void read(const std::string & s, uint64_t & value, data_format fmt)
 {
@@ -380,12 +400,17 @@ void read(const std::string & s, int32_t & value, data_format fmt)
 	}
 }
 
-void read(const std::string & s, double & value, data_format)
+void read(const std::string & s, double & value, data_format fmt)
 {
+	utils::unused(fmt);
 	std::istringstream{s} >> value;
 }
 
-void read(const std::string & s, std::string & value, data_format) { value = s; }
+void read(const std::string & s, std::string & value, data_format fmt)
+{
+	utils::unused(fmt);
+	value = s;
+}
 
 void read(const std::string & s, side & value, data_format fmt)
 {

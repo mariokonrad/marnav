@@ -358,6 +358,7 @@ install(
 
 install(
 	FILES
+		marnav/utils/unused.hpp
 		marnav/utils/unique.hpp
 		marnav/utils/bitset.hpp
 		marnav/utils/optional.hpp

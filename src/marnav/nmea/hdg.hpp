@@ -8,7 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-
 /// @brief HDG - Heading - Deviation & Variation
 ///
 /// @code
@@ -36,9 +35,9 @@ public:
 
 	hdg();
 	hdg(const hdg &) = default;
-	hdg(hdg &&) = default;
+	hdg(hdg &&) noexcept = default;
 	hdg & operator=(const hdg &) = default;
-	hdg & operator=(hdg &&) = default;
+	hdg & operator=(hdg &&) noexcept = default;
 
 	static std::unique_ptr<sentence> parse(
 		const std::string & talker, const std::vector<std::string> & fields);
