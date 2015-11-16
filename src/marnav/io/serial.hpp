@@ -42,7 +42,7 @@ public:
 	serial(const serial &) = delete;
 	serial(serial &&) noexcept = default;
 	serial & operator=(const serial &) noexcept = delete;
-	serial & operator=(serial &&) noexcept = default;
+	serial & operator=(serial &&) = default;
 
 	virtual void open() override;
 	virtual void close() override;
