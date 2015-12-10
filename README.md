@@ -172,6 +172,7 @@ Suported messages for SeaTalk (decode and encode):
 - Type 58: LAT/LON
 - Type 59: Set Count Down Timer (sent by ST60)
 - Type 66: Wind Alarm
+- Type 6C: Second equipment-ID
 - Type 86: Keystroke
 - Type 87: Response Level
 - Type 89: Compass heading (sent by ST40 compass instrument)
