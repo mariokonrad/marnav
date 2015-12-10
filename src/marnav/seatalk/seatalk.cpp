@@ -25,6 +25,7 @@
 #include <marnav/seatalk/message_54.hpp>
 #include <marnav/seatalk/message_56.hpp>
 #include <marnav/seatalk/message_58.hpp>
+#include <marnav/seatalk/message_59.hpp>
 #include <marnav/seatalk/message_66.hpp>
 #include <marnav/seatalk/message_86.hpp>
 #include <marnav/seatalk/message_87.hpp>
@@ -57,8 +58,9 @@ static const std::vector<entry> known_messages = {
 	REGISTER_MESSAGE(message_27), REGISTER_MESSAGE(message_30), REGISTER_MESSAGE(message_36),
 	REGISTER_MESSAGE(message_38), REGISTER_MESSAGE(message_50), REGISTER_MESSAGE(message_51),
 	REGISTER_MESSAGE(message_52), REGISTER_MESSAGE(message_53), REGISTER_MESSAGE(message_54),
-	REGISTER_MESSAGE(message_56), REGISTER_MESSAGE(message_58), REGISTER_MESSAGE(message_66),
-	REGISTER_MESSAGE(message_86), REGISTER_MESSAGE(message_87), REGISTER_MESSAGE(message_89),
+	REGISTER_MESSAGE(message_56), REGISTER_MESSAGE(message_58), REGISTER_MESSAGE(message_59),
+	REGISTER_MESSAGE(message_66), REGISTER_MESSAGE(message_86), REGISTER_MESSAGE(message_87),
+	REGISTER_MESSAGE(message_89),
 };
 
 #undef REGISTER_MESSAGE
