@@ -326,6 +326,7 @@ install(
 install(
 	FILES
 		marnav/seatalk/key.hpp
+		marnav/seatalk/equipment.hpp
 		marnav/seatalk/seatalk.hpp
 		marnav/seatalk/message.hpp
 		marnav/seatalk/message_00.hpp

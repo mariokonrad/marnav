@@ -1,8 +1,8 @@
 #ifndef __SEATALK__MESSAGE_6C__HPP__
 #define __SEATALK__MESSAGE_6C__HPP__
 
-#include <array>
 #include <marnav/seatalk/message.hpp>
+#include <marnav/seatalk/equipment.hpp>
 
 namespace marnav
 {
@@ -26,10 +26,14 @@ namespace seatalk
 class message_6c : public message
 {
 public:
-	using equipment_id_t = std::array<uint8_t, 6>;
-
 	constexpr static const message_id ID = message_id::equipment_id_2;
 	constexpr static size_t SIZE = 8;
+
+	/// @{
+	constexpr static equipment_id st60_tridata{{0x04, 0xba, 0x20, 0x28, 0x2d, 0x2d}};
+	constexpr static equipment_id st60_log{{0x05, 0x70, 0x99, 0x10, 0x28, 0x2d}};
+	constexpr static equipment_id st80_masterview{{0xf3, 0x18, 0x00, 0x26, 0x2d, 0x2d}};
+	/// @}
 
 	message_6c();
 	message_6c(const message_6c &) = default;
@@ -40,12 +44,12 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	equipment_id_t equipment_id;
+	equipment_id id;
 
 public:
-	equipment_id_t get_equipment_id() const noexcept { return equipment_id; }
+	equipment_id get_equipment_id() const noexcept { return id; }
 
-	void set_equipment_id(const equipment_id_t & t) noexcept { equipment_id = t; }
+	void set_equipment_id(const equipment_id & t) noexcept { id = t; }
 };
 }
 }

@@ -1,14 +1,13 @@
 #ifndef __SEATALK__MESSAGE_01__HPP__
 #define __SEATALK__MESSAGE_01__HPP__
 
-#include <array>
 #include <marnav/seatalk/message.hpp>
+#include <marnav/seatalk/equipment.hpp>
 
 namespace marnav
 {
 namespace seatalk
 {
-
 /// @brief Equipment ID
 ///
 /// @code
@@ -28,10 +27,18 @@ namespace seatalk
 class message_01 : public message
 {
 public:
-	using equipment_id_t = std::array<uint8_t, 6>;
-
 	constexpr static const message_id ID = message_id::equipment_id;
 	constexpr static size_t SIZE = 8;
+
+	/// @{
+	constexpr static equipment_id course_computer_400g{{0x00, 0x00, 0x00, 0x60, 0x01, 0x00}};
+	constexpr static equipment_id st60_tridata{{0x04, 0xba, 0x20, 0x28, 0x01, 0x00}};
+	constexpr static equipment_id st60_log{{0x70, 0x99, 0x10, 0x28, 0x01, 0x00}};
+	constexpr static equipment_id st80_masterview{{0xf3, 0x18, 0x00, 0x26, 0x0f, 0x06}};
+	constexpr static equipment_id st80_maxi_display{{0xfa, 0x03, 0x00, 0x30, 0x07, 0x03}};
+	constexpr static equipment_id smart_controller_remote_control_handset{
+		{0xff, 0xff, 0xff, 0xd0, 0x00, 0x00}};
+	/// @}
 
 	message_01();
 	message_01(const message_01 &) = default;
@@ -42,12 +49,12 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	equipment_id_t equipment_id;
+	equipment_id id;
 
 public:
-	equipment_id_t get_equipment_id() const noexcept { return equipment_id; }
+	equipment_id get_equipment_id() const noexcept { return id; }
 
-	void set_equipment_id(const equipment_id_t & t) noexcept { equipment_id = t; }
+	void set_equipment_id(const equipment_id & t) noexcept { id = t; }
 };
 }
 }
