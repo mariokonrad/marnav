@@ -140,6 +140,7 @@ add_executable(testrunner
 	seatalk/Test_seatalk_message_56.cpp
 	seatalk/Test_seatalk_message_58.cpp
 	seatalk/Test_seatalk_message_59.cpp
+	seatalk/Test_seatalk_message_65.cpp
 	seatalk/Test_seatalk_message_66.cpp
 	seatalk/Test_seatalk_message_6c.cpp
 	seatalk/Test_seatalk_message_86.cpp

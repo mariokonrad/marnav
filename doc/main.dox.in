@@ -170,6 +170,7 @@ Suported messages for SeaTalk (decode and encode):
 - Type 56: Date
 - Type 58: LAT/LON
 - Type 59: Set Count Down Timer (sent by ST60)
+- Type 65: Select Fathom display unit for depth display (see message 00)
 - Type 66: Wind Alarm
 - Type 6C: Second equipment-ID
 - Type 86: Keystroke
