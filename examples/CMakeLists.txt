@@ -2,6 +2,18 @@ find_package(Boost 1.53.0
 	COMPONENTS system
 	)
 
+include_directories(${CMAKE_SOURCE_DIR}/src)
+include_directories(${CMAKE_BINARY_DIR}/src)
+
+add_compile_options(
+	-std=c++11
+	-pipe
+	-ggdb
+	-Wall
+	-Wextra
+	-pedantic-errors
+	)
+
 add_executable(parse_nmea parse_nmea.cpp)
 target_link_libraries(parse_nmea marnav)
 

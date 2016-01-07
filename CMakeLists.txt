@@ -1,94 +1,36 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.2)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(GitInformation)
 
 project(marnav VERSION 0.3.7 LANGUAGES CXX)
 
+### compiler check
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+	message(STATUS "Compiler: GNU")
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+	message(STATUS "Compiler: Clang")
+else()
+	message(FATAL_ERROR "Unsupported compiler detected: ${CMAKE_CXX_COMPILER_ID}")
+endif()
+
+### versin handling
 if(NOT ("${CMAKE_BUILD_TYPE}" STREQUAL "Release"))
 	set(PROJECT_VERSION "${PROJECT_VERSION}-${GIT_COMMIT_HASH_SHORT}")
 endif()
 message(STATUS "Project Vesion: ${PROJECT_VERSION}")
 
+### external projects
 include(ExternalProject)
 include(ExternGmock)
 
+### options
 option(ENABLE_PROFILING "Enable Profiling" OFF)
 option(ENABLE_WARNING_HELL "Enable Warning Hell" OFF)
 
-message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
-
-if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-	message(STATUS "Compiler settings for GNU")
-
-	if(ENABLE_PROFILING)
-		set(CXX_PROFILE_FLAGS "-pg")
-	endif()
-
-	set(GNU_CXX_WARNING_FLAGS "-Wall -Wextra -pedantic-errors")
-	if(ENABLE_WARNING_HELL)
-		message(STATUS "Behold: entering the hell of extended warnings")
-
-		# some are not enabled on purpose
-		#set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Weffc++")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wcast-align")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wcast-qual")
-		#set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wconversion")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Werror")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wdisabled-optimization")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wfloat-equal")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wformat=2")
-		#set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wformat-nonliteral")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wformat-security")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wformat-y2k")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wimport")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Winit-self")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Winline")
-		#set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wlong-long")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wmissing-field-initializers")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wmissing-format-attribute")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wmissing-include-dirs")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wmissing-noreturn")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wold-style-cast")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Woverloaded-virtual")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wpacked")
-		#set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wpadded")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wpointer-arith")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wredundant-decls")
-		#set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wshadow")
-		#set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wstack-protector")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wstrict-aliasing=2")
-		#set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wswitch-enum")
-		#set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wswitch-default")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wunreachable-code")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wunused")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wunused-parameter")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wvariadic-macros")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wwrite-strings")
-
-		# explicitly disabled on purpose
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wno-unused-function")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wno-comment")
-		set(GNU_CXX_WARNING_FLAGS "${GNU_CXX_WARNING_FLAGS} -Wno-format-nonliteral")
-	endif()
-
-	set(CMAKE_CXX_FLAGS          "${CMAKE_CXX_FLAGS}         ${CXX_PROFILE_FLAGS} -std=c++11 ${GNU_CXX_WARNING_FLAGS} -pipe -O0 -ggdb")
-	set(CMAKE_CXX_FLAGS_DEBUG    "${CMAKE_CXX_FLAGS_DEBUG}   ${CXX_PROFILE_FLAGS} -std=c++11 ${GNU_CXX_WARNING_FLAGS} -pipe -O0 -ggdb")
-	set(CMAKE_CXX_FLAGS_RELEASE  "${CMAKE_CXX_FLAGS_RELEASE} ${CXX_PROFILE_FLAGS} -std=c++11 ${GNU_CXX_WARNING_FLAGS} -pipe -O3 -ggdb")
-	set(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_DEBUG}   ${CXX_PROFILE_FLAGS} --coverage -fprofile-arcs -ftest-coverage -fno-inline -fno-inline-small-functions -fno-default-inline")
-elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-	message(STATUS "Compiler settings for Clang")
-	set(CMAKE_CXX_FLAGS          "${CMAKE_CXX_FLAGS}         -std=c++11 -Wall -Wextra -O0 -g")
-	set(CMAKE_CXX_FLAGS_DEBUG    "${CMAKE_CXX_FLAGS_DEBUG}   -std=c++11 -Wall -Wextra -O0 -g")
-	set(CMAKE_CXX_FLAGS_RELEASE  "${CMAKE_CXX_FLAGS_RELEASE} -std=c++11 -Wall -Wextra -O4 -g")
-	set(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_DEBUG}   --coverage -fprofile-arcs -ftest-coverage -fno-inline -fno-inline-small-functions -fno-default-inline")
-else()
-	message(STATUS "Compiler settings for <unknown>")
-endif()
-
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-
 ### common
+message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 file(MAKE_DIRECTORY
 	${CMAKE_CURRENT_BINARY_DIR}/doc
 	${CMAKE_CURRENT_BINARY_DIR}/doc/coverage
@@ -96,8 +38,6 @@ file(MAKE_DIRECTORY
 	)
 
 ### library
-include_directories(src)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/src)
 add_subdirectory(src)
 
 ### examples

@@ -1,28 +1,62 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.2)
 
-option(ENABLE_STATIC
-	"Enable static library" ON)
+option(ENABLE_STATIC "Enable static library" ON)
 
-set(SOURCE_UTILS
-	marnav/utils/mmsi.cpp
+### bin: nmeasum
+
+add_executable(nmeasum
+	nmeasum.cpp
 	)
 
-set(SOURCE_MATH
+target_include_directories(nmeasum PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+	target_compile_options(nmeasum
+		PUBLIC
+			-std=c++11
+			-pipe
+			-ggdb
+			-Wall
+			-Wextra
+			-pedantic-errors
+		)
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+	target_compile_options(nmeasum
+		PUBLIC
+			-std=c++11
+			-pipe
+			-ggdb
+			-Wall
+			-Wextra
+			-pedantic-errors
+		)
+endif()
+
+### lib: marnav
+
+if(${ENABLE_STATIC})
+	set(LIBRARY_TYPE "STATIC")
+else()
+	set(LIBRARY_TYPE "SHARED")
+endif()
+message(STATUS "Build library type: ${LIBRARY_TYPE}")
+
+configure_file(
+	${CMAKE_CURRENT_SOURCE_DIR}/marnav/version.hpp.in
+	${CMAKE_CURRENT_BINARY_DIR}/marnav/version.hpp
+	)
+
+add_library(marnav ${LIBRARY_TYPE}
 	marnav/math/floatingpoint.hpp
 	marnav/math/vector.hpp
 	marnav/math/matrix.hpp
 	marnav/math/quaternion.hpp
-	)
-
-set(SOURCE_GEO
+	marnav/utils/mmsi.cpp
 	marnav/geo/angle.cpp
 	marnav/geo/position.cpp
 	marnav/geo/region.cpp
 	marnav/geo/cpa.cpp
 	marnav/geo/geodesic.cpp
-	)
-
-set(SOURCE_NMEA_0183
 	marnav/nmea/constants.cpp
 	marnav/nmea/checks.cpp
 	marnav/nmea/angle.cpp
@@ -105,9 +139,6 @@ set(SOURCE_NMEA_0183
 	marnav/nmea/zfo.cpp
 	marnav/nmea/ztg.cpp
 	marnav/nmea/pgrme.cpp
-	)
-
-set(SOURCE_AIS
 	marnav/ais/ais.cpp
 	marnav/ais/angle.cpp
 	marnav/ais/message.cpp
@@ -125,9 +156,6 @@ set(SOURCE_AIS
 	marnav/ais/message_22.cpp
 	marnav/ais/message_23.cpp
 	marnav/ais/message_24.cpp
-	)
-
-set(SOURCE_SEATALK
 	marnav/seatalk/seatalk.cpp
 	marnav/seatalk/message.cpp
 	marnav/seatalk/message_00.cpp
@@ -160,9 +188,6 @@ set(SOURCE_SEATALK
 	marnav/seatalk/message_86.cpp
 	marnav/seatalk/message_87.cpp
 	marnav/seatalk/message_89.cpp
-	)
-
-set(SOURCE_IO
 	marnav/io/serial.cpp
 	marnav/io/seatalk_reader.cpp
 	marnav/io/nmea_reader.cpp
@@ -170,32 +195,95 @@ set(SOURCE_IO
 	marnav/io/default_seatalk_reader.cpp
 	)
 
-add_executable(nmeasum
-	nmeasum.cpp
-	)
+target_include_directories(marnav PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(marnav PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
-if(${ENABLE_STATIC})
-	set(LIBRARY_TYPE "STATIC")
-else()
-	set(LIBRARY_TYPE "SHARED")
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+	target_compile_options(marnav
+		PUBLIC
+			-std=c++11
+			-pipe
+			-ggdb
+			-Wall
+			-Wextra
+			-pedantic-errors
+		)
+	if(ENABLE_PROFILING)
+		target_compile_options(marnav
+			PUBLIC
+				-pg
+			)
+	endif()
+	if(ENABLE_WARNING_HELL)
+		message(STATUS "Behold: entering the hell of extended warnings")
+		target_compile_options(marnav
+			PUBLIC
+				# some are not enabled on purpose
+				#-Weffc++
+				-Wcast-align
+				-Wcast-qual
+				#-Wconversion
+				-Werror
+				-Wdisabled-optimization
+				-Wfloat-equal
+				-Wformat=2
+				#-Wformat-nonliteral
+				-Wformat-security
+				-Wformat-y2k
+				-Wimport
+				-Winit-self
+				-Winline
+				#-Wlong-long
+				-Wmissing-field-initializers
+				-Wmissing-format-attribute
+				-Wmissing-include-dirs
+				-Wmissing-noreturn
+				-Wold-style-cast
+				-Woverloaded-virtual
+				-Wpacked
+				#-Wpadded
+				-Wpointer-arith
+				-Wredundant-decls
+				#-Wshadow
+				#-Wstack-protector
+				-Wstrict-aliasing=2
+				#-Wswitch-enum
+				#-Wswitch-default
+				-Wunreachable-code
+				-Wunused
+				-Wunused-parameter
+				-Wvariadic-macros
+				-Wwrite-strings
+				# explicitly disabled on purpose:
+				-Wno-unused-function
+				-Wno-comment
+				-Wno-format-nonliteral
+			)
+	endif()
+	string(TOLOWER "${CMAKE_BUILD_TYPE}" build_type_lower)
+	if(build_type_lower MATCHES coverage)
+		message(STATUS "Coverage: enabled")
+		target_compile_options(marnav
+			PUBLIC
+				--coverage
+				-fprofile-arcs
+				-ftest-coverage
+				-fno-inline
+				-fno-inline-small-functions
+				-fno-default-inline
+			)
+	endif()
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+	target_compile_options(marnav
+		PUBLIC
+			-std=c++11
+			-pipe
+			-ggdb
+			-Wall
+			-Wextra
+			-pedantic-errors
+		)
 endif()
-message(STATUS "Build library type: ${LIBRARY_TYPE}")
-
-configure_file(
-	${CMAKE_CURRENT_SOURCE_DIR}/marnav/version.hpp.in
-	${CMAKE_CURRENT_BINARY_DIR}/marnav/version.hpp
-	)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-
-add_library(marnav ${LIBRARY_TYPE}
-	${SOURCE_MATH}
-	${SOURCE_UTILS}
-	${SOURCE_GEO}
-	${SOURCE_NMEA_0183}
-	${SOURCE_AIS}
-	${SOURCE_SEATALK}
-	${SOURCE_IO}
-	)
 
 set_target_properties(marnav
 	PROPERTIES VERSION "${PROJECT_VERSION}"
@@ -206,6 +294,7 @@ install(
 	TARGETS marnav
 	LIBRARY DESTINATION lib
 	ARCHIVE DESTINATION lib
+	RUNTIME DESTINATION bin
 	)
 
 install(
@@ -426,5 +515,3 @@ install(
 	DESTINATION
 		"${LIB_INSTALL_DIR}/${PROJECT_NAME}/cmake"
 	)
-
-
