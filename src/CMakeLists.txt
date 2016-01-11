@@ -195,8 +195,11 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/io/default_seatalk_reader.cpp
 	)
 
-target_include_directories(marnav PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_include_directories(marnav PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+target_include_directories(marnav
+	PRIVATE
+		${CMAKE_CURRENT_SOURCE_DIR}
+		${CMAKE_CURRENT_BINARY_DIR}
+	)
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 	target_compile_options(marnav
@@ -207,6 +210,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 			-Wall
 			-Wextra
 			-pedantic-errors
+			-Wold-style-cast
 		)
 	if(ENABLE_PROFILING)
 		target_compile_options(marnav
@@ -238,12 +242,12 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 				-Wmissing-format-attribute
 				-Wmissing-include-dirs
 				-Wmissing-noreturn
-				-Wold-style-cast
 				-Woverloaded-virtual
 				-Wpacked
 				#-Wpadded
 				-Wpointer-arith
 				-Wredundant-decls
+				#-Wsign-conversion
 				#-Wshadow
 				#-Wstack-protector
 				-Wstrict-aliasing=2
