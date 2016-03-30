@@ -75,20 +75,6 @@ void message_19::read_data(const raw & bits)
 	// spare: 308 - 311
 }
 
-geo::longitude message_19::get_longitude() const { return to_geo_longitude(longitude_minutes); }
-
-geo::latitude message_19::get_latitude() const { return to_geo_latitude(latitude_minutes); }
-
-void message_19::set_longitude(const geo::longitude & t)
-{
-	longitude_minutes = to_longitude_minutes(t);
-}
-
-void message_19::set_latitude(const geo::latitude & t)
-{
-	latitude_minutes = to_latitude_minutes(t);
-}
-
 raw message_19::get_data() const
 {
 	raw bits{SIZE_BITS};
@@ -115,6 +101,20 @@ raw message_19::get_data() const
 	bits.set(assigned, 307, 1);
 
 	return bits;
+}
+
+geo::longitude message_19::get_longitude() const { return to_geo_longitude(longitude_minutes); }
+
+geo::latitude message_19::get_latitude() const { return to_geo_latitude(latitude_minutes); }
+
+void message_19::set_longitude(const geo::longitude & t)
+{
+	longitude_minutes = to_longitude_minutes(t);
+}
+
+void message_19::set_latitude(const geo::latitude & t)
+{
+	latitude_minutes = to_latitude_minutes(t);
 }
 }
 }

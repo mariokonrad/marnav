@@ -36,7 +36,7 @@ TEST_F(Test_ais_message_11, encode_default_values)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ(";000000000Htt<t[F0l4Y@000000", v[0].first.c_str());
+	EXPECT_STREQ(";000000000Htt<tSF0l4Q@000000", v[0].first.c_str());
 	EXPECT_EQ(0, v[0].second);
 }
 
@@ -48,14 +48,14 @@ TEST_F(Test_ais_message_11, set_latitude)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ(";000000000Htt<t[F00e<<000000", v[0].first.c_str());
+	EXPECT_STREQ(";000000000Htt<tSF073qp000000", v[0].first.c_str());
 	EXPECT_EQ(0, v[0].second);
 }
 
 TEST_F(Test_ais_message_11, get_latitude)
 {
 	std::vector<std::pair<std::string, int>> v;
-	v.push_back(std::make_pair(";000000000Htt<t[F00e<<000000", 0));
+	v.push_back(std::make_pair(";000000000Htt<tSF073qp000000", 0));
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -78,14 +78,14 @@ TEST_F(Test_ais_message_11, set_longitude)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ(";000000000Htt0pPdhl4Y@000000", v[0].first.c_str());
+	EXPECT_STREQ(";000000000Htt8m6wPl4Q@000000", v[0].first.c_str());
 	EXPECT_EQ(0, v[0].second);
 }
 
 TEST_F(Test_ais_message_11, get_longitude)
 {
 	std::vector<std::pair<std::string, int>> v;
-	v.push_back(std::make_pair(";000000000Htt0pPdhl4Y@000000", 0));
+	v.push_back(std::make_pair(";000000000Htt8m6wPl4Q@000000", 0));
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);

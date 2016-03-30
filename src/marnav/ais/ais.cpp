@@ -31,9 +31,7 @@ namespace marnav
 {
 namespace ais
 {
-namespace
-{
-static inline uint8_t decode_armoring(char c)
+uint8_t decode_armoring(char c)
 {
 	auto value = c - '0';
 	if (value > 40)
@@ -41,14 +39,16 @@ static inline uint8_t decode_armoring(char c)
 	return value & 0x3f;
 }
 
-static inline char encode_armoring(uint8_t value)
+char encode_armoring(uint8_t value)
 {
-	value &= 0x3f;
-	if (value > 32)
-		return value + 8 + '0';
+	value &= 0x3f; // ensure 6 bits
+	if (value > 39)
+		value += 8;
 	return value + '0';
 }
 
+namespace
+{
 static raw collect(const std::vector<std::pair<std::string, int>> & v)
 {
 	raw result;

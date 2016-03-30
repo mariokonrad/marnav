@@ -95,7 +95,7 @@ TEST_F(Test_ais_message_24, encode_default_values_part_b_auxiliary)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ("H>_bkwl000000000000000000000", v[0].first.c_str());
+	EXPECT_STREQ("H>Wbkwl000000000000000000000", v[0].first.c_str());
 	EXPECT_EQ(0, v[0].second);
 }
 

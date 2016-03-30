@@ -1,12 +1,11 @@
 #include "message_01.hpp"
-#include <cmath>
+#include <marnav/ais/angle.hpp>
 #include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
 namespace ais
 {
-
 message_01::message_01()
 	: message_01(ID)
 {
@@ -63,24 +62,18 @@ void message_01::read_data(const raw & bits)
 	bits.get(radio_status, 149, 19);
 }
 
-geo::longitude message_01::get_longitude() const
-{
-	return geo::longitude{(0.0001 * longitude_minutes) / 60.0};
-}
+geo::longitude message_01::get_longitude() const { return to_geo_longitude(longitude_minutes); }
 
-geo::latitude message_01::get_latitude() const
-{
-	return geo::latitude{(0.0001 * latitude_minutes) / 60.0};
-}
+geo::latitude message_01::get_latitude() const { return to_geo_latitude(latitude_minutes); }
 
 void message_01::set_longitude(const geo::longitude & t)
 {
-	longitude_minutes = floor(60000.0 * t);
+	longitude_minutes = to_longitude_minutes(t);
 }
 
 void message_01::set_latitude(const geo::latitude & t)
 {
-	latitude_minutes = floor(60000.0 * t);
+	latitude_minutes = to_latitude_minutes(t);
 }
 
 raw message_01::get_data() const

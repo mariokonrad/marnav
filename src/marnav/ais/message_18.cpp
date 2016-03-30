@@ -6,7 +6,6 @@ namespace marnav
 {
 namespace ais
 {
-
 message_18::message_18()
 	: message_18(ID)
 {
@@ -70,20 +69,6 @@ void message_18::read_data(const raw & bits)
 	bits.get(radio_status, 148, 20);
 }
 
-geo::longitude message_18::get_longitude() const { return to_geo_longitude(longitude_minutes); }
-
-geo::latitude message_18::get_latitude() const { return to_geo_latitude(latitude_minutes); }
-
-void message_18::set_longitude(const geo::longitude & t)
-{
-	longitude_minutes = to_longitude_minutes(t);
-}
-
-void message_18::set_latitude(const geo::latitude & t)
-{
-	latitude_minutes = to_latitude_minutes(t);
-}
-
 raw message_18::get_data() const
 {
 	raw bits{SIZE_BITS};
@@ -108,6 +93,20 @@ raw message_18::get_data() const
 	bits.set(radio_status, 148, 20);
 
 	return bits;
+}
+
+geo::longitude message_18::get_longitude() const { return to_geo_longitude(longitude_minutes); }
+
+geo::latitude message_18::get_latitude() const { return to_geo_latitude(latitude_minutes); }
+
+void message_18::set_longitude(const geo::longitude & t)
+{
+	longitude_minutes = to_longitude_minutes(t);
+}
+
+void message_18::set_latitude(const geo::latitude & t)
+{
+	latitude_minutes = to_latitude_minutes(t);
 }
 }
 }

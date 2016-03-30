@@ -44,7 +44,7 @@ TEST_F(Test_ais_message_02, encode_default_values)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ("200000?P00<t[F0l4Y@>4?wh0000", v[0].first.c_str());
+	EXPECT_STREQ("200000?P00<tSF0l4Q@>4?wh0000", v[0].first.c_str());
 	EXPECT_EQ(0, v[0].second);
 }
 

@@ -3,7 +3,7 @@ marnav
 
 [![Build Status](https://travis-ci.org/mariokonrad/marnav.svg?branch=master)](https://travis-ci.org/mariokonrad/marnav)
 
-Copyright (c) 2015 Mario Konrad (mario.konrad@gmx.net)
+Copyright (c) 2016 Mario Konrad (mario.konrad@gmx.net)
 
 ---
 
@@ -436,6 +436,7 @@ A (non-complete) collection of resources from where information was gathered.
 - [Navigation Center - AIS Standard Class B Equipment Position Report](http://www.navcen.uscg.gov/?pageName=AISMessagesB)
 - [GPS Forums](http://www.gps-forums.net)
 - [NMEA Datensaetze](http://www.nmea.de/nmea0183datensaetze.html)
+- [AIS VDM & VDO Message Decoder](http://www.maritec.co.za/tools/aisvdmvdodecoding/)
 
 ---
 
@@ -454,7 +455,7 @@ See also [LICENSE](LICENSE)
 (BSD)
 
 ```
-Copyright (c) 2015, Mario Konrad
+Copyright (c) 2016, Mario Konrad
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

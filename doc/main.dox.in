@@ -2,7 +2,7 @@
 
 \mainpage Library for Maritime Navigation
 \version @VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@ (@GIT_BRANCH@ / @GIT_COMMIT_HASH@)
-\copyright (c) 2015 Mario Konrad \<mario.konrad@gmx.net\>
+\copyright (c) 2016 Mario Konrad \<mario.konrad@gmx.net\>
 
 \tableofcontents
 
@@ -601,7 +601,7 @@ A (non-complete) collection of resources from where information was gathered.
 (BSD)
 
 \verbatim
-Copyright (c) 2015, Mario Konrad
+Copyright (c) 2016, Mario Konrad
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
