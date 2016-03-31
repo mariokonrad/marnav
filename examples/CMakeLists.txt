@@ -34,6 +34,9 @@ add_executable(bitset_iterate bitset_iterate.cpp)
 add_executable(create_nmea_from_ais create_nmea_from_ais.cpp)
 target_link_libraries(create_nmea_from_ais marnav)
 
+add_executable(create_nmea_from_ais_2 create_nmea_from_ais_2.cpp)
+target_link_libraries(create_nmea_from_ais_2 marnav)
+
 add_executable(select select.cpp)
 target_link_libraries(select marnav)
 

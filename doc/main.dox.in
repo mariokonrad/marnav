@@ -1,7 +1,7 @@
 /**
 
 \mainpage Library for Maritime Navigation
-\version @VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@ (@GIT_BRANCH@ / @GIT_COMMIT_HASH@)
+\version @PROJECT_VERSION@ (@GIT_BRANCH@ / @GIT_COMMIT_HASH@)
 \copyright (c) 2016 Mario Konrad \<mario.konrad@gmx.net\>
 
 \tableofcontents
@@ -366,6 +366,9 @@ Example 2:
 
 \subsubsection subsubsec_examples_ais_create Create NMEA sentences from AIS data
 \includelineno examples/create_nmea_from_ais.cpp
+
+\subsubsection subsubsec_examples_ais_create_2 Create NMEA sentences from AIS data using make_vdms
+\includelineno examples/create_nmea_from_ais_2.cpp
 
 \subsection subsec_examples_utils Utils
 

@@ -120,4 +120,43 @@ TEST_F(Test_nmea_vdm, collect_payload_pointers_begin_end)
 
 	ASSERT_EQ(3u, result.size());
 }
+
+TEST_F(Test_nmea_vdm, make_vdms__1)
+{
+	const std::vector<std::pair<std::string, int>> payload = {
+		{"177KQJ5000G?tO`K>RA1wUbN0TKH", 0},
+	};
+
+	const char * expected = "!AIVDM,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5C";
+
+	auto const sentences = nmea::make_vdms(payload);
+
+	ASSERT_EQ(1u, sentences.size());
+	ASSERT_EQ(nmea::sentence_id::VDM, sentences[0]->id());
+
+	auto const result = nmea::to_string(*sentences[0]);
+
+	EXPECT_STREQ(expected, result.c_str());
+}
+
+TEST_F(Test_nmea_vdm, make_vdms__2)
+{
+	const std::vector<std::pair<std::string, int>> payload
+		= {{"55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53", 0},
+			{"1@0000000000000", 2}};
+
+	const char * expected[2]
+		= {"!AIVDM,2,1,3,B,55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53,0*3E",
+			"!AIVDM,2,2,3,B,1@0000000000000,2*55"};
+
+	auto const sentences = nmea::make_vdms(payload, 3);
+
+	ASSERT_EQ(2u, sentences.size());
+
+	for (auto i = 0; i < 2; ++i) {
+		ASSERT_EQ(nmea::sentence_id::VDM, sentences[i]->id());
+		auto const result = nmea::to_string(*sentences[i]);
+		EXPECT_STREQ(expected[i], result.c_str());
+	}
+}
 }
