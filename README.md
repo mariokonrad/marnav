@@ -362,6 +362,9 @@ Build options:
   Currently implemented only for GCC.  Default is `OFF`
 - `ENABLE_PROFILING` : enables profiling for `gprof`
 
+Features:
+- `ENABLE_SEATALK` : enables SeaTalk support. Default: `ON`
+
 
 ### Library
 

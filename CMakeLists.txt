@@ -27,6 +27,7 @@ include(ExternGmock)
 ### options
 option(ENABLE_PROFILING "Enable Profiling" OFF)
 option(ENABLE_WARNING_HELL "Enable Warning Hell" OFF)
+option(ENABLE_SEATALK "Enable SeaTalk support" ON)
 
 ### common
 message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")

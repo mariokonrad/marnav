@@ -5,6 +5,47 @@ include_directories(
 	${CMAKE_CURRENT_BINARY_DIR}/../src
 	)
 
+set(SOURCES
+	# intentionally left blank
+	)
+
+if(ENABLE_SEATALK)
+	set(SOURCES ${SOURCES}
+		seatalk/Test_seatalk_message.cpp
+		seatalk/Test_seatalk_message_00.cpp
+		seatalk/Test_seatalk_message_01.cpp
+		seatalk/Test_seatalk_message_05.cpp
+		seatalk/Test_seatalk_message_10.cpp
+		seatalk/Test_seatalk_message_11.cpp
+		seatalk/Test_seatalk_message_20.cpp
+		seatalk/Test_seatalk_message_21.cpp
+		seatalk/Test_seatalk_message_22.cpp
+		seatalk/Test_seatalk_message_23.cpp
+		seatalk/Test_seatalk_message_24.cpp
+		seatalk/Test_seatalk_message_25.cpp
+		seatalk/Test_seatalk_message_26.cpp
+		seatalk/Test_seatalk_message_27.cpp
+		seatalk/Test_seatalk_message_30.cpp
+		seatalk/Test_seatalk_message_36.cpp
+		seatalk/Test_seatalk_message_38.cpp
+		seatalk/Test_seatalk_message_50.cpp
+		seatalk/Test_seatalk_message_51.cpp
+		seatalk/Test_seatalk_message_52.cpp
+		seatalk/Test_seatalk_message_53.cpp
+		seatalk/Test_seatalk_message_54.cpp
+		seatalk/Test_seatalk_message_56.cpp
+		seatalk/Test_seatalk_message_58.cpp
+		seatalk/Test_seatalk_message_59.cpp
+		seatalk/Test_seatalk_message_65.cpp
+		seatalk/Test_seatalk_message_66.cpp
+		seatalk/Test_seatalk_message_6c.cpp
+		seatalk/Test_seatalk_message_86.cpp
+		seatalk/Test_seatalk_message_87.cpp
+		seatalk/Test_seatalk_message_89.cpp
+		io/Test_io_seatalk_reader.cpp
+		)
+endif()
+
 add_executable(testrunner
 	utils/Test_utils_bitset.cpp
 	utils/Test_utils_mmsi.cpp
@@ -115,38 +156,6 @@ add_executable(testrunner
 	ais/Test_ais_message_22.cpp
 	ais/Test_ais_message_23.cpp
 	ais/Test_ais_message_24.cpp
-	seatalk/Test_seatalk_message.cpp
-	seatalk/Test_seatalk_message_00.cpp
-	seatalk/Test_seatalk_message_01.cpp
-	seatalk/Test_seatalk_message_05.cpp
-	seatalk/Test_seatalk_message_10.cpp
-	seatalk/Test_seatalk_message_11.cpp
-	seatalk/Test_seatalk_message_20.cpp
-	seatalk/Test_seatalk_message_21.cpp
-	seatalk/Test_seatalk_message_22.cpp
-	seatalk/Test_seatalk_message_23.cpp
-	seatalk/Test_seatalk_message_24.cpp
-	seatalk/Test_seatalk_message_25.cpp
-	seatalk/Test_seatalk_message_26.cpp
-	seatalk/Test_seatalk_message_27.cpp
-	seatalk/Test_seatalk_message_30.cpp
-	seatalk/Test_seatalk_message_36.cpp
-	seatalk/Test_seatalk_message_38.cpp
-	seatalk/Test_seatalk_message_50.cpp
-	seatalk/Test_seatalk_message_51.cpp
-	seatalk/Test_seatalk_message_52.cpp
-	seatalk/Test_seatalk_message_53.cpp
-	seatalk/Test_seatalk_message_54.cpp
-	seatalk/Test_seatalk_message_56.cpp
-	seatalk/Test_seatalk_message_58.cpp
-	seatalk/Test_seatalk_message_59.cpp
-	seatalk/Test_seatalk_message_65.cpp
-	seatalk/Test_seatalk_message_66.cpp
-	seatalk/Test_seatalk_message_6c.cpp
-	seatalk/Test_seatalk_message_86.cpp
-	seatalk/Test_seatalk_message_87.cpp
-	seatalk/Test_seatalk_message_89.cpp
-	io/Test_io_seatalk_reader.cpp
 	io/Test_io_nmea_reader.cpp
 	)
 

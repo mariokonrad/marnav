@@ -17,8 +17,13 @@ add_compile_options(
 add_executable(parse_nmea parse_nmea.cpp)
 target_link_libraries(parse_nmea marnav)
 
-add_executable(read_seatalk read_seatalk.cpp)
-target_link_libraries(read_seatalk marnav)
+if(ENABLE_SEATALK)
+	add_executable(read_seatalk read_seatalk.cpp)
+	target_link_libraries(read_seatalk marnav)
+
+	add_executable(seatalk_snippets seatalk_snippets.cpp)
+	target_link_libraries(seatalk_snippets marnav)
+endif()
 
 add_executable(read_nmea read_nmea.cpp)
 target_link_libraries(read_nmea marnav)
@@ -43,9 +48,6 @@ target_link_libraries(select marnav)
 add_executable(parse_ais parse_ais.cpp)
 target_link_libraries(parse_ais marnav)
 
-add_executable(seatalk_snippets seatalk_snippets.cpp)
-target_link_libraries(seatalk_snippets marnav)
-
 if(Boost_FOUND)
 	include_directories(${Boost_INCLUDE_DIRS})
 
@@ -57,13 +59,15 @@ if(Boost_FOUND)
 		${Boost_LIBRARIES}
 		)
 
-	add_executable(seatalk_nmea_converter
-		simple_seatalk_nmea_converter.cpp
-		)
-	target_link_libraries(seatalk_nmea_converter
-		marnav
-		${Boost_LIBRARIES}
-		)
+	if(ENABLE_SEATALK)
+		add_executable(seatalk_nmea_converter
+			simple_seatalk_nmea_converter.cpp
+			)
+		target_link_libraries(seatalk_nmea_converter
+			marnav
+			${Boost_LIBRARIES}
+			)
+	endif()
 
 	add_executable(serial_to_tcp
 		serial_to_tcp.cpp

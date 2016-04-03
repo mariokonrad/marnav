@@ -41,10 +41,55 @@ else()
 endif()
 message(STATUS "Build library type: ${LIBRARY_TYPE}")
 
+message(STATUS "Build SeaTalk support: ${ENABLE_SEATALK}")
+
 configure_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/marnav/version.hpp.in
 	${CMAKE_CURRENT_BINARY_DIR}/marnav/version.hpp
 	)
+
+set(SOURCES
+	# intentionally left blank
+	)
+
+if(ENABLE_SEATALK)
+	set(SOURCES ${SOURCES}
+		marnav/seatalk/seatalk.cpp
+		marnav/seatalk/message.cpp
+		marnav/seatalk/message_00.cpp
+		marnav/seatalk/message_01.cpp
+		marnav/seatalk/message_05.cpp
+		marnav/seatalk/message_10.cpp
+		marnav/seatalk/message_11.cpp
+		marnav/seatalk/message_20.cpp
+		marnav/seatalk/message_21.cpp
+		marnav/seatalk/message_22.cpp
+		marnav/seatalk/message_23.cpp
+		marnav/seatalk/message_24.cpp
+		marnav/seatalk/message_25.cpp
+		marnav/seatalk/message_26.cpp
+		marnav/seatalk/message_27.cpp
+		marnav/seatalk/message_30.cpp
+		marnav/seatalk/message_36.cpp
+		marnav/seatalk/message_38.cpp
+		marnav/seatalk/message_50.cpp
+		marnav/seatalk/message_51.cpp
+		marnav/seatalk/message_52.cpp
+		marnav/seatalk/message_53.cpp
+		marnav/seatalk/message_54.cpp
+		marnav/seatalk/message_56.cpp
+		marnav/seatalk/message_58.cpp
+		marnav/seatalk/message_59.cpp
+		marnav/seatalk/message_65.cpp
+		marnav/seatalk/message_66.cpp
+		marnav/seatalk/message_6c.cpp
+		marnav/seatalk/message_86.cpp
+		marnav/seatalk/message_87.cpp
+		marnav/seatalk/message_89.cpp
+		marnav/io/seatalk_reader.cpp
+		marnav/io/default_seatalk_reader.cpp
+		)
+endif()
 
 add_library(marnav ${LIBRARY_TYPE}
 	marnav/math/floatingpoint.hpp
@@ -156,43 +201,10 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/ais/message_22.cpp
 	marnav/ais/message_23.cpp
 	marnav/ais/message_24.cpp
-	marnav/seatalk/seatalk.cpp
-	marnav/seatalk/message.cpp
-	marnav/seatalk/message_00.cpp
-	marnav/seatalk/message_01.cpp
-	marnav/seatalk/message_05.cpp
-	marnav/seatalk/message_10.cpp
-	marnav/seatalk/message_11.cpp
-	marnav/seatalk/message_20.cpp
-	marnav/seatalk/message_21.cpp
-	marnav/seatalk/message_22.cpp
-	marnav/seatalk/message_23.cpp
-	marnav/seatalk/message_24.cpp
-	marnav/seatalk/message_25.cpp
-	marnav/seatalk/message_26.cpp
-	marnav/seatalk/message_27.cpp
-	marnav/seatalk/message_30.cpp
-	marnav/seatalk/message_36.cpp
-	marnav/seatalk/message_38.cpp
-	marnav/seatalk/message_50.cpp
-	marnav/seatalk/message_51.cpp
-	marnav/seatalk/message_52.cpp
-	marnav/seatalk/message_53.cpp
-	marnav/seatalk/message_54.cpp
-	marnav/seatalk/message_56.cpp
-	marnav/seatalk/message_58.cpp
-	marnav/seatalk/message_59.cpp
-	marnav/seatalk/message_65.cpp
-	marnav/seatalk/message_66.cpp
-	marnav/seatalk/message_6c.cpp
-	marnav/seatalk/message_86.cpp
-	marnav/seatalk/message_87.cpp
-	marnav/seatalk/message_89.cpp
 	marnav/io/serial.cpp
-	marnav/io/seatalk_reader.cpp
 	marnav/io/nmea_reader.cpp
 	marnav/io/default_nmea_reader.cpp
-	marnav/io/default_seatalk_reader.cpp
+	${SOURCES}
 	)
 
 target_include_directories(marnav
@@ -417,44 +429,54 @@ install(
 	DESTINATION include/marnav/ais
 	)
 
-install(
-	FILES
-		marnav/seatalk/key.hpp
-		marnav/seatalk/equipment.hpp
-		marnav/seatalk/seatalk.hpp
-		marnav/seatalk/message.hpp
-		marnav/seatalk/message_00.hpp
-		marnav/seatalk/message_01.hpp
-		marnav/seatalk/message_05.hpp
-		marnav/seatalk/message_10.hpp
-		marnav/seatalk/message_11.hpp
-		marnav/seatalk/message_20.hpp
-		marnav/seatalk/message_21.hpp
-		marnav/seatalk/message_22.hpp
-		marnav/seatalk/message_23.hpp
-		marnav/seatalk/message_24.hpp
-		marnav/seatalk/message_25.hpp
-		marnav/seatalk/message_26.hpp
-		marnav/seatalk/message_27.hpp
-		marnav/seatalk/message_30.hpp
-		marnav/seatalk/message_36.hpp
-		marnav/seatalk/message_38.hpp
-		marnav/seatalk/message_50.hpp
-		marnav/seatalk/message_51.hpp
-		marnav/seatalk/message_52.hpp
-		marnav/seatalk/message_53.hpp
-		marnav/seatalk/message_54.hpp
-		marnav/seatalk/message_56.hpp
-		marnav/seatalk/message_58.hpp
-		marnav/seatalk/message_59.hpp
-		marnav/seatalk/message_65.hpp
-		marnav/seatalk/message_66.hpp
-		marnav/seatalk/message_6c.hpp
-		marnav/seatalk/message_86.hpp
-		marnav/seatalk/message_87.hpp
-		marnav/seatalk/message_89.hpp
-	DESTINATION include/marnav/seatalk
-	)
+if(ENABLE_SEATALK)
+	install(
+		FILES
+			marnav/seatalk/key.hpp
+			marnav/seatalk/equipment.hpp
+			marnav/seatalk/seatalk.hpp
+			marnav/seatalk/message.hpp
+			marnav/seatalk/message_00.hpp
+			marnav/seatalk/message_01.hpp
+			marnav/seatalk/message_05.hpp
+			marnav/seatalk/message_10.hpp
+			marnav/seatalk/message_11.hpp
+			marnav/seatalk/message_20.hpp
+			marnav/seatalk/message_21.hpp
+			marnav/seatalk/message_22.hpp
+			marnav/seatalk/message_23.hpp
+			marnav/seatalk/message_24.hpp
+			marnav/seatalk/message_25.hpp
+			marnav/seatalk/message_26.hpp
+			marnav/seatalk/message_27.hpp
+			marnav/seatalk/message_30.hpp
+			marnav/seatalk/message_36.hpp
+			marnav/seatalk/message_38.hpp
+			marnav/seatalk/message_50.hpp
+			marnav/seatalk/message_51.hpp
+			marnav/seatalk/message_52.hpp
+			marnav/seatalk/message_53.hpp
+			marnav/seatalk/message_54.hpp
+			marnav/seatalk/message_56.hpp
+			marnav/seatalk/message_58.hpp
+			marnav/seatalk/message_59.hpp
+			marnav/seatalk/message_65.hpp
+			marnav/seatalk/message_66.hpp
+			marnav/seatalk/message_6c.hpp
+			marnav/seatalk/message_86.hpp
+			marnav/seatalk/message_87.hpp
+			marnav/seatalk/message_89.hpp
+		DESTINATION include/marnav/seatalk
+		)
+	install(
+		FILES
+			marnav/io/seatalk_reader.hpp
+			marnav/io/default_seatalk_reader.hpp
+			marnav/io/default_seatalk_serial.hpp
+		DESTINATION include/marnav/io
+		)
+
+endif()
 
 install(
 	FILES
@@ -489,12 +511,9 @@ install(
 	FILES
 		marnav/io/device.hpp
 		marnav/io/serial.hpp
-		marnav/io/seatalk_reader.hpp
 		marnav/io/nmea_reader.hpp
 		marnav/io/default_nmea_reader.hpp
 		marnav/io/default_nmea_serial.hpp
-		marnav/io/default_seatalk_reader.hpp
-		marnav/io/default_seatalk_serial.hpp
 	DESTINATION include/marnav/io
 	)
 
