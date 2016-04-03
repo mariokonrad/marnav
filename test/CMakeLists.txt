@@ -9,6 +9,28 @@ set(SOURCES
 	# intentionally left blank
 	)
 
+if(ENABLE_AIS)
+	set(SOURCES ${SOURCES}
+		ais/Test_ais.cpp
+		ais/Test_ais_angle.cpp
+		ais/Test_ais_message.cpp
+		ais/Test_ais_message_01.cpp
+		ais/Test_ais_message_02.cpp
+		ais/Test_ais_message_03.cpp
+		ais/Test_ais_message_04.cpp
+		ais/Test_ais_message_05.cpp
+		ais/Test_ais_message_09.cpp
+		ais/Test_ais_message_10.cpp
+		ais/Test_ais_message_11.cpp
+		ais/Test_ais_message_18.cpp
+		ais/Test_ais_message_19.cpp
+		ais/Test_ais_message_21.cpp
+		ais/Test_ais_message_22.cpp
+		ais/Test_ais_message_23.cpp
+		ais/Test_ais_message_24.cpp
+	)
+endif()
+
 if(ENABLE_SEATALK)
 	set(SOURCES ${SOURCES}
 		seatalk/Test_seatalk_message.cpp
@@ -139,23 +161,6 @@ add_executable(testrunner
 	nmea/Test_nmea_zfo.cpp
 	nmea/Test_nmea_ztg.cpp
 	nmea/Test_nmea_pgrme.cpp
-	ais/Test_ais.cpp
-	ais/Test_ais_angle.cpp
-	ais/Test_ais_message.cpp
-	ais/Test_ais_message_01.cpp
-	ais/Test_ais_message_02.cpp
-	ais/Test_ais_message_03.cpp
-	ais/Test_ais_message_04.cpp
-	ais/Test_ais_message_05.cpp
-	ais/Test_ais_message_09.cpp
-	ais/Test_ais_message_10.cpp
-	ais/Test_ais_message_11.cpp
-	ais/Test_ais_message_18.cpp
-	ais/Test_ais_message_19.cpp
-	ais/Test_ais_message_21.cpp
-	ais/Test_ais_message_22.cpp
-	ais/Test_ais_message_23.cpp
-	ais/Test_ais_message_24.cpp
 	io/Test_io_nmea_reader.cpp
 	)
 
@@ -172,24 +177,26 @@ add_test(
 	)
 run_unittest(testrunner)
 
-execute_process(
-	COMMAND ${CMAKE_COMMAND} -E tar xzf "${CMAKE_CURRENT_SOURCE_DIR}/ais/ais-sample.tar.gz"
-	WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
-	)
+if(ENABLE_AIS)
+	execute_process(
+		COMMAND ${CMAKE_COMMAND} -E tar xzf "${CMAKE_CURRENT_SOURCE_DIR}/ais/ais-sample.tar.gz"
+		WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+		)
 
-add_executable(test-ais-sample
-	test-ais-sample.cpp
-	)
+	add_executable(test-ais-sample
+		test-ais-sample.cpp
+		)
 
-target_link_libraries(test-ais-sample
-	marnav
-	)
+	target_link_libraries(test-ais-sample
+		marnav
+		)
 
-add_test(
-	NAME integrationtest-test-ais-sample
-	COMMAND test-ais-sample
-	WORKING_DIRECTOR "${CMAKE_CURRENT_BINARY_DIR}"
-	)
+	add_test(
+		NAME integrationtest-test-ais-sample
+		COMMAND test-ais-sample
+		WORKING_DIRECTOR "${CMAKE_CURRENT_BINARY_DIR}"
+		)
+endif()
 
 execute_process(
 	COMMAND ${CMAKE_COMMAND} -E tar xzf "${CMAKE_CURRENT_SOURCE_DIR}/nmea/nmea-sample.tar.gz"

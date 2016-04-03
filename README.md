@@ -363,6 +363,7 @@ Build options:
 - `ENABLE_PROFILING` : enables profiling for `gprof`
 
 Features:
+- `ENABLE_AIS ` : enables AIS support. Default: `ON`
 - `ENABLE_SEATALK` : enables SeaTalk support. Default: `ON`
 
 

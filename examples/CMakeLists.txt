@@ -25,28 +25,30 @@ if(ENABLE_SEATALK)
 	target_link_libraries(seatalk_snippets marnav)
 endif()
 
+if(ENABLE_AIS)
+	add_executable(read_ais read_ais.cpp)
+	target_link_libraries(read_ais marnav)
+
+	add_executable(create_nmea_from_ais create_nmea_from_ais.cpp)
+	target_link_libraries(create_nmea_from_ais marnav)
+
+	add_executable(create_nmea_from_ais_2 create_nmea_from_ais_2.cpp)
+	target_link_libraries(create_nmea_from_ais_2 marnav)
+
+	add_executable(parse_ais parse_ais.cpp)
+	target_link_libraries(parse_ais marnav)
+endif()
+
 add_executable(read_nmea read_nmea.cpp)
 target_link_libraries(read_nmea marnav)
-
-add_executable(read_ais read_ais.cpp)
-target_link_libraries(read_ais marnav)
 
 add_executable(nmea_multiplexer nmea_multiplexer.cpp)
 target_link_libraries(nmea_multiplexer marnav)
 
 add_executable(bitset_iterate bitset_iterate.cpp)
 
-add_executable(create_nmea_from_ais create_nmea_from_ais.cpp)
-target_link_libraries(create_nmea_from_ais marnav)
-
-add_executable(create_nmea_from_ais_2 create_nmea_from_ais_2.cpp)
-target_link_libraries(create_nmea_from_ais_2 marnav)
-
 add_executable(select select.cpp)
 target_link_libraries(select marnav)
-
-add_executable(parse_ais parse_ais.cpp)
-target_link_libraries(parse_ais marnav)
 
 if(Boost_FOUND)
 	include_directories(${Boost_INCLUDE_DIRS})

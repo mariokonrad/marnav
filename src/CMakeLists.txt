@@ -41,6 +41,7 @@ else()
 endif()
 message(STATUS "Build library type: ${LIBRARY_TYPE}")
 
+message(STATUS "Build AIS support: ${ENABLE_AIS}")
 message(STATUS "Build SeaTalk support: ${ENABLE_SEATALK}")
 
 configure_file(
@@ -88,6 +89,28 @@ if(ENABLE_SEATALK)
 		marnav/seatalk/message_89.cpp
 		marnav/io/seatalk_reader.cpp
 		marnav/io/default_seatalk_reader.cpp
+		)
+endif()
+
+if(ENABLE_AIS)
+	set(SOURCES ${SOURCES}
+		marnav/ais/ais.cpp
+		marnav/ais/angle.cpp
+		marnav/ais/message.cpp
+		marnav/ais/message_01.cpp
+		marnav/ais/message_02.cpp
+		marnav/ais/message_03.cpp
+		marnav/ais/message_04.cpp
+		marnav/ais/message_05.cpp
+		marnav/ais/message_09.cpp
+		marnav/ais/message_10.cpp
+		marnav/ais/message_11.cpp
+		marnav/ais/message_18.cpp
+		marnav/ais/message_19.cpp
+		marnav/ais/message_21.cpp
+		marnav/ais/message_22.cpp
+		marnav/ais/message_23.cpp
+		marnav/ais/message_24.cpp
 		)
 endif()
 
@@ -184,23 +207,6 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/nmea/zfo.cpp
 	marnav/nmea/ztg.cpp
 	marnav/nmea/pgrme.cpp
-	marnav/ais/ais.cpp
-	marnav/ais/angle.cpp
-	marnav/ais/message.cpp
-	marnav/ais/message_01.cpp
-	marnav/ais/message_02.cpp
-	marnav/ais/message_03.cpp
-	marnav/ais/message_04.cpp
-	marnav/ais/message_05.cpp
-	marnav/ais/message_09.cpp
-	marnav/ais/message_10.cpp
-	marnav/ais/message_11.cpp
-	marnav/ais/message_18.cpp
-	marnav/ais/message_19.cpp
-	marnav/ais/message_21.cpp
-	marnav/ais/message_22.cpp
-	marnav/ais/message_23.cpp
-	marnav/ais/message_24.cpp
 	marnav/io/serial.cpp
 	marnav/io/nmea_reader.cpp
 	marnav/io/default_nmea_reader.cpp
@@ -407,27 +413,29 @@ install(
 	DESTINATION include/marnav/nmea
 	)
 
-install(
-	FILES
-		marnav/ais/ais.hpp
-		marnav/ais/angle.hpp
-		marnav/ais/message.hpp
-		marnav/ais/message_01.hpp
-		marnav/ais/message_02.hpp
-		marnav/ais/message_03.hpp
-		marnav/ais/message_04.hpp
-		marnav/ais/message_05.hpp
-		marnav/ais/message_09.hpp
-		marnav/ais/message_10.hpp
-		marnav/ais/message_11.hpp
-		marnav/ais/message_18.hpp
-		marnav/ais/message_19.hpp
-		marnav/ais/message_21.hpp
-		marnav/ais/message_22.hpp
-		marnav/ais/message_23.hpp
-		marnav/ais/message_24.hpp
-	DESTINATION include/marnav/ais
-	)
+if(ENABLE_AIS)
+	install(
+		FILES
+			marnav/ais/ais.hpp
+			marnav/ais/angle.hpp
+			marnav/ais/message.hpp
+			marnav/ais/message_01.hpp
+			marnav/ais/message_02.hpp
+			marnav/ais/message_03.hpp
+			marnav/ais/message_04.hpp
+			marnav/ais/message_05.hpp
+			marnav/ais/message_09.hpp
+			marnav/ais/message_10.hpp
+			marnav/ais/message_11.hpp
+			marnav/ais/message_18.hpp
+			marnav/ais/message_19.hpp
+			marnav/ais/message_21.hpp
+			marnav/ais/message_22.hpp
+			marnav/ais/message_23.hpp
+			marnav/ais/message_24.hpp
+		DESTINATION include/marnav/ais
+		)
+endif()
 
 if(ENABLE_SEATALK)
 	install(
