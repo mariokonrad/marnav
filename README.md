@@ -314,11 +314,12 @@ Compiler:
 - GCC 4.9
 - GCC 5.1
 - GCC 5.2
+- GCC 5.3
 - Clang 3.6
 - Clang 3.7
 
 Tools needed to build the library:
-- cmake 3.0
+- cmake 3.2
 
 Tools needed to develop the library:
 - git
@@ -413,6 +414,17 @@ There is a script ```bin/static-analysis-clang``` for doing this, or do it manua
 
 After the build, ```scan-build``` will tell you what to do in order to inspect
 the findings.
+
+
+### Perform Benchmarks
+
+Build in `Release` mode, perform individual benchmarks:
+
+	mkdir build
+	cd build
+	cmake -DCMAKE_BUILD_TYPE=Release ..
+	make -j 8
+	test/benchmark_nmea_split
 
 
 ### Formatting Test

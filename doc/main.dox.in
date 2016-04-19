@@ -186,11 +186,12 @@ Compiler supported (older/others may work, but not tested):
 - GCC 4.9
 - GCC 5.1
 - GCC 5.2
+- GCC 5.3
 - Clang 3.6
 - Clang 3.7
 
 Tools needed to build the library:
-- cmake 3.0 or newer
+- cmake 3.2 or newer
 - clang-format 3.7 or newer
 
 Tools needed to build the documentation:
@@ -297,6 +298,17 @@ There is a script ```bin/static-analysis-clang``` for doing this, or do it manua
 
 After the build, ```scan-build``` will tell you what to do in order to inspect
 the findings.
+
+
+\subsection subsec_devenv_benchmarks Perform Benchmarks
+Build in ```Release``` mode, perform individual benchmarks:
+\code
+	mkdir build
+	cd build
+	cmake -DCMAKE_BUILD_TYPE=Release ..
+	make -j 8
+	test/benchmark_nmea_split
+\endcode
 
 
 \section sec_examples Examples
@@ -528,6 +540,7 @@ Every package has its own namespace.
 Not shown in the picture:
 - The standard library
 - Unittests (using GoogleTest/GoogleMock)
+- Benchmarking (using Google's Benchmark)
 - Examples (some of them use boost.asio or Qt5)
 
 
