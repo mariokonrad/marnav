@@ -335,6 +335,7 @@ Optional used for development:
 - cppcheck
 - clang-analyze 3.7
 - ctags, cscope
+- perf
 
 Optional (no core dependency):
 - Boost.ASIO (used only for some examples)
@@ -362,6 +363,7 @@ Build options:
 - `ENABLE_WARNING_HELL` : enables _much_ more warnings, used for development purposes.
   Currently implemented only for GCC.  Default is `OFF`
 - `ENABLE_PROFILING` : enables profiling for `gprof`
+- `ENABLE_BENCHMARK` : enables benchmarking (disables some optimization)
 
 Features:
 - `ENABLE_AIS ` : enables AIS support. Default: `ON`
@@ -425,6 +427,15 @@ Build in `Release` mode, perform individual benchmarks:
 	cmake -DCMAKE_BUILD_TYPE=Release ..
 	make -j 8
 	test/benchmark_nmea_split
+
+Using `perf` to do performance analysis:
+
+	mkdir build
+	cd build
+	cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_BENCHMARK=ON ..
+	make -j 8
+	perf record -g test/benchmark_nmea_split
+	perf report -g 'graph,0.5,caller'
 
 
 ### Formatting Test

@@ -237,6 +237,12 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 				-pg
 			)
 	endif()
+	if(ENABLE_BENCHMARK)
+		target_compile_options(marnav
+			PUBLIC
+				-fno-omit-frame-pointer
+			)
+	endif()
 	if(ENABLE_WARNING_HELL)
 		message(STATUS "Behold: entering the hell of extended warnings")
 		target_compile_options(marnav

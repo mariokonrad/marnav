@@ -27,6 +27,7 @@ include(ExternBenchmark)
 
 ### options
 option(ENABLE_PROFILING "Enable Profiling" OFF)
+option(ENABLE_BENCHMARK "Enable Benchmark" OFF)
 option(ENABLE_WARNING_HELL "Enable Warning Hell" OFF)
 option(ENABLE_AIS "Enable AIS support" ON)
 option(ENABLE_SEATALK "Enable SeaTalk support" ON)
