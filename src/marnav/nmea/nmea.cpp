@@ -1,8 +1,8 @@
 #include "nmea.hpp"
 
 #include <algorithm>
-#include <regex>
 
+#include <marnav/nmea/split.hpp>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/date.hpp>
@@ -212,18 +212,6 @@ static void ensure_checksum(const std::string & s, const std::string & expected)
 	const uint8_t sum = checksum(begin(s) + 1, begin(s) + end_pos);
 	if (expected_checksum != sum)
 		throw checksum_error{expected_checksum, sum};
-}
-
-/// Parses the fields from the specified string. Uses ',' and '*' as delimiter.
-///
-/// @param[in] s The string to parse.
-/// @return Container with separate fields.
-static std::vector<std::string> parse_fields(const std::string & s)
-{
-	std::regex field_regex{"(,|\\*)"};
-	auto fields_begin = std::sregex_token_iterator{begin(s) + 1, end(s), field_regex, -1};
-	auto fields_end = std::sregex_token_iterator();
-	return {fields_begin, fields_end};
 }
 }
 /// @endcond

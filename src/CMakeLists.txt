@@ -127,6 +127,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/geo/geodesic.cpp
 	marnav/nmea/constants.cpp
 	marnav/nmea/checks.cpp
+	marnav/nmea/split.cpp
 	marnav/nmea/angle.cpp
 	marnav/nmea/io.cpp
 	marnav/nmea/date.cpp
@@ -329,7 +330,6 @@ install(
 	FILES
 		marnav/nmea/constants.hpp
 		marnav/nmea/manufacturer.hpp
-		marnav/nmea/checks.hpp
 		marnav/nmea/angle.hpp
 		marnav/nmea/io.hpp
 		marnav/nmea/date.hpp

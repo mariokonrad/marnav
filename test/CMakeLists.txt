@@ -81,6 +81,7 @@ add_executable(testrunner
 	geo/Test_geo_cpa.cpp
 	geo/Test_geo_geodesic.cpp
 	nmea/Test_nmea_checksum.cpp
+	nmea/Test_nmea_split.cpp
 	nmea/Test_nmea.cpp
 	nmea/Test_nmea_angle.cpp
 	nmea/Test_nmea_date.cpp
@@ -162,6 +163,7 @@ add_executable(testrunner
 	nmea/Test_nmea_ztg.cpp
 	nmea/Test_nmea_pgrme.cpp
 	io/Test_io_nmea_reader.cpp
+	${SOURCES}
 	)
 
 target_link_libraries(testrunner
