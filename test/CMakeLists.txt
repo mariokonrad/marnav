@@ -219,3 +219,14 @@ add_test(
 	WORKING_DIRECTOR "${CMAKE_CURRENT_BINARY_DIR}"
 	)
 
+
+add_executable(benchmark_nmea_split
+	nmea/Benchmark_nmea_split.cpp
+	)
+
+target_link_libraries(benchmark_nmea_split
+	marnav
+	benchmark
+	pthread
+	)
+

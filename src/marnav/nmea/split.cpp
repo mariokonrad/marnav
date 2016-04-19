@@ -1,5 +1,4 @@
 #include "split.hpp"
-#include <regex>
 
 namespace marnav
 {
@@ -19,10 +18,19 @@ std::vector<std::string> parse_fields(const std::string & s)
 {
 	if (s.size() < 1)
 		return std::vector<std::string>{};
-	std::regex field_regex{"(,|\\*)"};
-	auto fields_begin = std::sregex_token_iterator{begin(s) + 1, end(s), field_regex, -1};
-	auto fields_end = std::sregex_token_iterator();
-	return {fields_begin, fields_end};
+
+	static const char * DELIMITERS = ",*";
+	std::vector<std::string> result;
+	std::string::size_type last = 1;
+	std::string::size_type p = s.find_first_of(DELIMITERS, last);
+	while (last != std::string::npos) {
+		result.push_back(s.substr(last, p - last));
+		if (p == std::string::npos)
+			break;
+		last = p + 1;
+		p = s.find_first_of(DELIMITERS, last);
+	}
+	return result;
 }
 }
 /// @endcond

@@ -25,3 +25,11 @@ Notess:
   - Supports output in CppUnit (XML) format in addition to the standard
     behaviour (JUnit format).
 
+
+benchmark-1.0.0
+---------------
+
+License: Apache 2.0 (http://www.apache.org/licences)
+
+Homepage: https://github.com/google/benchmark
+
