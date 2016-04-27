@@ -4,6 +4,8 @@
 #include <cmath>
 #include <marnav/math/floatingpoint.hpp>
 
+#include <iostream>
+
 namespace marnav
 {
 namespace geo
@@ -73,6 +75,28 @@ latitude::latitude(double deg)
 	check(get());
 }
 
+/// Initializes the object with the specified angle.
+/// Corrects the stored value according to the specified hemisphere.
+///
+/// \param[in] degrees Angle in degrees.
+/// \param[in] h Hemisphere
+latitude::latitude(double degrees, hemisphere h)
+	: angle(degrees)
+{
+	check(get());
+
+	switch (h) {
+		case hemisphere::north:
+			if (hem() == hemisphere::south)
+				set(-get());
+			break;
+		case hemisphere::south:
+			if (hem() == hemisphere::north)
+				set(-get());
+			break;
+	}
+}
+
 latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
 	: angle((static_cast<double>(d) + static_cast<double>(m) / 60.0
 				+ static_cast<double>(s) / 3600.0)
@@ -94,23 +118,6 @@ bool operator==(const latitude & a, const latitude & b) noexcept
 
 bool operator!=(const latitude & a, const latitude & b) noexcept { return !(a == b); }
 
-/// Corrects the stored value according to the specified hemisphere.
-/// This is useful if the stored value was set preliminary, and the
-/// hemisphere was nown later.
-void latitude::change_hemisphere(hemisphere h)
-{
-	switch (h) {
-		case hemisphere::north:
-			if (hem() == hemisphere::south)
-				set(-get());
-			break;
-		case hemisphere::south:
-			if (hem() == hemisphere::north)
-				set(-get());
-			break;
-	}
-}
-
 void latitude::check(double a)
 {
 	if ((a < -90.0) || (a > 90.0))
@@ -124,6 +131,28 @@ longitude::longitude(double deg)
 	: angle(deg)
 {
 	check(get());
+}
+
+/// Initializes the object with the specified angle.
+/// Corrects the stored value according to the specified hemisphere.
+///
+/// \param[in] degrees Angle in degrees.
+/// \param[in] h Hemisphere
+longitude::longitude(double degrees, hemisphere h)
+	: angle(degrees)
+{
+	check(get());
+
+	switch (h) {
+		case hemisphere::east:
+			if (hem() == hemisphere::west)
+				set(-get());
+			break;
+		case hemisphere::west:
+			if (hem() == hemisphere::east)
+				set(-get());
+			break;
+	}
 }
 
 longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
@@ -146,23 +175,6 @@ bool operator==(const longitude & a, const longitude & b) noexcept
 }
 
 bool operator!=(const longitude & a, const longitude & b) noexcept { return !(a == b); }
-
-/// Corrects the stored value according to the specified hemisphere.
-/// This is useful if the stored value was set preliminary, and the
-/// hemisphere was nown later.
-void longitude::change_hemisphere(hemisphere h)
-{
-	switch (h) {
-		case hemisphere::east:
-			if (hem() == hemisphere::west)
-				set(-get());
-			break;
-		case hemisphere::west:
-			if (hem() == hemisphere::east)
-				set(-get());
-			break;
-	}
-}
 
 void longitude::check(double a)
 {

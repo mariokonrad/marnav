@@ -1,7 +1,6 @@
-#include "constants.hpp"
+#include "convert.hpp"
 #include <stdexcept>
 #include <cassert>
-#include <marnav/geo/angle.hpp>
 
 namespace marnav
 {
@@ -53,6 +52,37 @@ geo::longitude::hemisphere convert_hemisphere_lon(direction t)
 		default:
 			throw std::invalid_argument{"invalid hemisphere for longitude"};
 	}
+}
+
+/// \cond DEV
+namespace detail
+{
+static geo::latitude convert_latitude(const geo::latitude & v, direction d)
+{
+	return {v.get(), convert_hemisphere_lat(d)};
+}
+
+static geo::longitude convert_longitude(const geo::longitude & v, direction d)
+{
+	return {v.get(), convert_hemisphere_lon(d)};
+}
+}
+/// \endcond
+
+utils::optional<geo::latitude> correct_hemisphere(
+	const utils::optional<geo::latitude> & v, const utils::optional<direction> & d)
+{
+	if (v && d)
+		return detail::convert_latitude(v.value(), d.value());
+	return v;
+}
+
+utils::optional<geo::longitude> correct_hemisphere(
+	const utils::optional<geo::longitude> & v, const utils::optional<direction> & d)
+{
+	if (v && d)
+		return detail::convert_longitude(v.value(), d.value());
+	return v;
 }
 }
 }

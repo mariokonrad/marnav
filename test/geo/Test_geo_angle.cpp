@@ -105,10 +105,34 @@ TEST_F(Test_geo_angle, latitude_hemisphere)
 	EXPECT_EQ(geo::latitude::hemisphere::south, geo::latitude{-1.0}.hem());
 }
 
+TEST_F(Test_geo_angle, latitude_forced_hemisphere)
+{
+	EXPECT_EQ(geo::latitude::hemisphere::north,
+		(geo::latitude{+1.0, geo::latitude::hemisphere::north}.hem()));
+	EXPECT_EQ(geo::latitude::hemisphere::south,
+		(geo::latitude{+1.0, geo::latitude::hemisphere::south}.hem()));
+	EXPECT_EQ(geo::latitude::hemisphere::north,
+		(geo::latitude{-1.0, geo::latitude::hemisphere::north}.hem()));
+	EXPECT_EQ(geo::latitude::hemisphere::south,
+		(geo::latitude{-1.0, geo::latitude::hemisphere::south}.hem()));
+}
+
 TEST_F(Test_geo_angle, longitude_hemisphere)
 {
 	EXPECT_EQ(geo::longitude::hemisphere::west, geo::longitude{-1.0}.hem());
 	EXPECT_EQ(geo::longitude::hemisphere::east, geo::longitude{+1.0}.hem());
+}
+
+TEST_F(Test_geo_angle, longitude_forced_hemisphere)
+{
+	EXPECT_EQ(geo::longitude::hemisphere::east,
+		(geo::longitude{+1.0, geo::longitude::hemisphere::east}.hem()));
+	EXPECT_EQ(geo::longitude::hemisphere::west,
+		(geo::longitude{+1.0, geo::longitude::hemisphere::west}.hem()));
+	EXPECT_EQ(geo::longitude::hemisphere::east,
+		(geo::longitude{-1.0, geo::longitude::hemisphere::east}.hem()));
+	EXPECT_EQ(geo::longitude::hemisphere::west,
+		(geo::longitude{-1.0, geo::longitude::hemisphere::west}.hem()));
 }
 
 TEST_F(Test_geo_angle, latitude_literal_north)

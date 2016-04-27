@@ -58,6 +58,7 @@ public:
 
 	latitude() noexcept;
 	latitude(double degrees);
+	latitude(double degrees, hemisphere h);
 	latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h);
 
 	latitude(const latitude &) = default;
@@ -77,8 +78,6 @@ public:
 
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const noexcept;
-
-	void change_hemisphere(hemisphere h);
 
 private:
 	static void check(double a);
@@ -119,6 +118,7 @@ public:
 
 	longitude() noexcept;
 	longitude(double degrees);
+	longitude(double degrees, hemisphere h);
 	longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h);
 
 	longitude(const longitude &) = default;
@@ -138,8 +138,6 @@ public:
 
 	/// Returns the corresponding hemisphere.
 	hemisphere hem() const noexcept;
-
-	void change_hemisphere(hemisphere h);
 
 private:
 	static void check(double a);

@@ -1,8 +1,7 @@
-#ifndef __NMEA__CONSTANTS__HPP__
-#define __NMEA__CONSTANTS__HPP__
+#ifndef __MARNAV__NMEA__CONSTANTS__HPP__
+#define __MARNAV__NMEA__CONSTANTS__HPP__
 
-#include <string>
-#include <marnav/geo/angle.hpp>
+#include <cstdint>
 
 namespace marnav
 {
@@ -109,11 +108,6 @@ enum class type_of_point : char {
 	reference, ///< NMEA representation: 'R'
 	wheelover, ///< NMEA representation: 'W'
 };
-
-direction convert_hemisphere(const geo::latitude & p) noexcept;
-direction convert_hemisphere(const geo::longitude & p) noexcept;
-geo::latitude::hemisphere convert_hemisphere_lat(direction t);
-geo::longitude::hemisphere convert_hemisphere_lon(direction t);
 }
 }
 

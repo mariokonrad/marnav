@@ -3,6 +3,7 @@
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
+#include <marnav/nmea/convert.hpp>
 #include <marnav/utils/unique.hpp>
 
 namespace marnav
