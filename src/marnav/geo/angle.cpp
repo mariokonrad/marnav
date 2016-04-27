@@ -4,20 +4,10 @@
 #include <cmath>
 #include <marnav/math/floatingpoint.hpp>
 
-#include <iostream>
-
 namespace marnav
 {
 namespace geo
 {
-angle::angle() noexcept : value(0.0) {}
-
-/// Initializes the angle with the specified angle in degrees.
-angle::angle(double deg)
-	: value(deg)
-{
-}
-
 /// Returns the degrees of this angle. This value is always positive.
 uint32_t angle::degrees() const noexcept
 {
@@ -49,24 +39,14 @@ double angle::seconds() const noexcept
 	return a;
 }
 
-/// Converts an angle to double, units: degrees.
-angle::operator double() const noexcept { return value; }
-
-double angle::get() const noexcept { return value; }
-
-/// Sets the angle in degrees.
-void angle::set(double t) noexcept { value = t; }
+void swap(angle & a, angle & b) noexcept { std::swap(a.value, b.value); }
 
 bool operator==(const angle & a, const angle & b) noexcept
 {
 	return (&a == &b) || math::is_same(a.value, b.value);
 }
 
-void swap(angle & a, angle & b) noexcept { std::swap(a.value, b.value); }
-
 bool operator!=(const angle & a, const angle & b) noexcept { return !(a == b); }
-
-latitude::latitude() noexcept : latitude(0.0) {}
 
 /// Constructs a latitude with the specified angle in degrees.
 latitude::latitude(double deg)
@@ -78,8 +58,8 @@ latitude::latitude(double deg)
 /// Initializes the object with the specified angle.
 /// Corrects the stored value according to the specified hemisphere.
 ///
-/// \param[in] degrees Angle in degrees.
-/// \param[in] h Hemisphere
+/// @param[in] degrees Angle in degrees.
+/// @param[in] h Hemisphere
 latitude::latitude(double degrees, hemisphere h)
 	: angle(degrees)
 {
@@ -105,12 +85,6 @@ latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
 	check(get());
 }
 
-/// Returns the corresponding hemisphere.
-latitude::hemisphere latitude::hem() const noexcept
-{
-	return get() >= 0.0 ? hemisphere::north : hemisphere::south;
-}
-
 bool operator==(const latitude & a, const latitude & b) noexcept
 {
 	return (&a == &b) || math::is_same(a.get(), b.get());
@@ -120,11 +94,9 @@ bool operator!=(const latitude & a, const latitude & b) noexcept { return !(a ==
 
 void latitude::check(double a)
 {
-	if ((a < -90.0) || (a > 90.0))
+	if ((a < min) || (a > max))
 		throw std::invalid_argument{"invalid value for nmea::latitude"};
 }
-
-longitude::longitude() noexcept : longitude(0.0) {}
 
 /// Constructs a longitude with the specified angle in degrees.
 longitude::longitude(double deg)
@@ -136,8 +108,8 @@ longitude::longitude(double deg)
 /// Initializes the object with the specified angle.
 /// Corrects the stored value according to the specified hemisphere.
 ///
-/// \param[in] degrees Angle in degrees.
-/// \param[in] h Hemisphere
+/// @param[in] degrees Angle in degrees.
+/// @param[in] h Hemisphere
 longitude::longitude(double degrees, hemisphere h)
 	: angle(degrees)
 {
@@ -163,12 +135,6 @@ longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
 	check(get());
 }
 
-/// Returns the corresponding hemisphere.
-longitude::hemisphere longitude::hem() const noexcept
-{
-	return get() < 0.0 ? hemisphere::west : hemisphere::east;
-}
-
 bool operator==(const longitude & a, const longitude & b) noexcept
 {
 	return (&a == &b) || math::is_same(a.get(), b.get());
@@ -178,7 +144,7 @@ bool operator!=(const longitude & a, const longitude & b) noexcept { return !(a 
 
 void longitude::check(double a)
 {
-	if ((a < -180.0) || (a > 180.0))
+	if ((a < min) || (a > max))
 		throw std::invalid_argument{"invalid value for nmea::longitude"};
 }
 }

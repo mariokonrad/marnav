@@ -17,15 +17,21 @@ public:
 	angle(const angle &) = default;
 	angle(angle &&) noexcept = default;
 
-	angle() noexcept;
-	angle(double degrees);
+	constexpr angle() noexcept : value(0.0) {}
+
+	/// Initializes the angle with the specified angle in degrees.
+	///
+	/// @param[in] degrees Angle in degrees.
+	constexpr angle(double degrees) noexcept : value(degrees) {}
 
 	uint32_t degrees() const noexcept;
 	uint32_t minutes() const noexcept;
 	double seconds() const noexcept;
 
-	operator double() const noexcept;
-	double get() const noexcept;
+	/// Converts an angle to double, units: degrees.
+	constexpr operator double() const noexcept { return value; }
+
+	constexpr double get() const noexcept { return value; }
 
 	friend bool operator==(const angle & a, const angle & b) noexcept;
 	friend bool operator!=(const angle & a, const angle & b) noexcept;
@@ -36,7 +42,10 @@ public:
 	friend void swap(angle & a, angle & b) noexcept;
 
 protected:
-	void set(double) noexcept;
+	/// Sets the angle in degrees.
+	///
+	/// Not part of the public interface intentionally.
+	void set(double degrees) noexcept { value = degrees; }
 
 private:
 	double value; // angle in degrees
@@ -56,7 +65,8 @@ public:
 	constexpr static const double min = -90.0;
 	constexpr static const double max = +90.0;
 
-	latitude() noexcept;
+	constexpr latitude() noexcept : angle(0.0) {}
+
 	latitude(double degrees);
 	latitude(double degrees, hemisphere h);
 	latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h);
@@ -77,7 +87,10 @@ public:
 	bool operator!=(const angle &) const = delete;
 
 	/// Returns the corresponding hemisphere.
-	hemisphere hem() const noexcept;
+	constexpr hemisphere hem() const noexcept
+	{
+		return get() >= 0.0 ? hemisphere::north : hemisphere::south;
+	}
 
 private:
 	static void check(double a);
@@ -116,7 +129,8 @@ public:
 	constexpr static const double min = -180.0;
 	constexpr static const double max = +180.0;
 
-	longitude() noexcept;
+	constexpr longitude() noexcept : angle(0.0) {}
+
 	longitude(double degrees);
 	longitude(double degrees, hemisphere h);
 	longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h);
@@ -137,7 +151,10 @@ public:
 	bool operator!=(const angle &) const = delete;
 
 	/// Returns the corresponding hemisphere.
-	hemisphere hem() const noexcept;
+	constexpr hemisphere hem() const noexcept
+	{
+		return get() < 0.0 ? hemisphere::west : hemisphere::east;
+	}
 
 private:
 	static void check(double a);
