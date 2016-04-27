@@ -1,6 +1,30 @@
 #!/bin/sh
 
-tag_from=`git tag | grep -E "[0-9]+\.[0-9]+\.[0-9]+" | tail -n 2 | head -n 1`
-tag_to=`git tag | grep -E "[0-9]+\.[0-9]+\.[0-9]+" | tail -n 1`
+tag_last=`git tag | grep -E "[0-9]+\.[0-9]+\.[0-9]+" | tail -n 1`
 
-git log ${tag_from}..${tag_to} --pretty=format:"%s" | sort
+if [ $# -eq 0 ] ; then
+	echo ""
+	echo "Commits between tags: ${tag_last} .. HEAD"
+	echo ""
+	git log ${tag_last}.. --pretty=format:"%s" | sort
+	exit 0
+fi
+
+TEMP=`getopt -o t -- "$@"`
+eval set -- "${TEMP}"
+while true ; do
+	case "$1" in
+		-t) # commit log between last two tags
+			echo ""
+			echo "Commits between tags: ${tag_second_last} .. ${tag_last}"
+			echo ""
+			tag_second_last=`git tag | grep -E "[0-9]+\.[0-9]+\.[0-9]+" | tail -n 2 | head -n 1`
+			git log ${tag_second_last}..${tag_last} --pretty=format:"%s" | sort
+			shift
+			;;
+
+		*) break
+			;;
+	esac
+done
+
