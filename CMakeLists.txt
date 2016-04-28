@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.2)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(GitInformation)
 
-project(marnav VERSION 0.3.8 LANGUAGES CXX C)
+project(marnav VERSION 0.3.9 LANGUAGES CXX C)
 
 ### compiler check
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
