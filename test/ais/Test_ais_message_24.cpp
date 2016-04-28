@@ -13,7 +13,7 @@ class Test_ais_message_24 : public ::testing::Test
 
 TEST_F(Test_ais_message_24, parse_part_a)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("H000000000000000000000000000", 0));
 
 	auto result = ais::make_message(v);
@@ -25,7 +25,7 @@ TEST_F(Test_ais_message_24, parse_part_a)
 
 TEST_F(Test_ais_message_24, parse_part_b_normal)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("H000004000000000000000000000", 0));
 
 	auto result = ais::make_message(v);
@@ -37,7 +37,7 @@ TEST_F(Test_ais_message_24, parse_part_b_normal)
 
 TEST_F(Test_ais_message_24, parse_part_b_auxiliary)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("H<?2hN\\000000000000000000000", 0));
 
 	auto result = ais::make_message(v);
@@ -71,7 +71,7 @@ TEST_F(Test_ais_message_24, encode_default_values_part_a)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("H000000000000000000000000000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_24, encode_default_values_part_b_normal)
@@ -83,7 +83,7 @@ TEST_F(Test_ais_message_24, encode_default_values_part_b_normal)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("H000004000000000000000000000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_24, encode_default_values_part_b_auxiliary)
@@ -96,7 +96,7 @@ TEST_F(Test_ais_message_24, encode_default_values_part_b_auxiliary)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("H>Wbkwl000000000000000000000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_24, wrong_number_of_bits)

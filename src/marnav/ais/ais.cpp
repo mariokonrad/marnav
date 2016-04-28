@@ -49,7 +49,7 @@ char encode_armoring(uint8_t value)
 
 namespace
 {
-static raw collect(const std::vector<std::pair<std::string, int>> & v)
+static raw collect(const std::vector<std::pair<std::string, uint32_t>> & v)
 {
 	raw result;
 	result.reserve(64); // 64 bytes (512) are enough for AIS messages
@@ -116,22 +116,22 @@ static message::parse_function instantiate_message(message_id type, size_t size)
 /// @exception unknown_message Will be thrown if the AIS message is not supported.
 /// @exception std::invalid_argument Error has been occurred during parsing of
 ///   the message.
-std::unique_ptr<message> make_message(const std::vector<std::pair<std::string, int>> & v)
+std::unique_ptr<message> make_message(const std::vector<std::pair<std::string, uint32_t>> & v)
 {
 	auto bits = collect(v);
 	message_id type = static_cast<message_id>(bits.get<uint8_t>(0, 6));
 	return instantiate_message(type, bits.size())(bits);
 }
 
-std::vector<std::pair<std::string, int>> encode_message(const message & msg)
+std::vector<std::pair<std::string, uint32_t>> encode_message(const message & msg)
 {
 	auto bits = msg.get_data();
 	if (bits.size() == 0)
 		throw std::invalid_argument{"message not able to encode"};
 
-	std::vector<std::pair<std::string, int>> result;
+	std::vector<std::pair<std::string, uint32_t>> result;
 
-	std::pair<std::string, int> current{"", 0};
+	std::pair<std::string, uint32_t> current{"", 0};
 	for (raw::size_type ofs = 0; ofs < bits.size(); ofs += 6) {
 		if (ofs + 6 < bits.size()) {
 			// normal case
@@ -150,7 +150,7 @@ std::vector<std::pair<std::string, int>> encode_message(const message & msg)
 			// last, append remainder padded to the string
 
 			auto remainder = bits.size() - ofs;
-			current.second = 6 - static_cast<int>(remainder);
+			current.second = 6 - remainder;
 			uint8_t value = 0;
 			bits.get(value, ofs, remainder);
 			value <<= current.second;

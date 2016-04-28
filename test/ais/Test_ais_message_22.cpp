@@ -12,7 +12,7 @@ class Test_ais_message_22 : public ::testing::Test
 
 TEST_F(Test_ais_message_22, parse)
 {
-	static const std::vector<std::vector<std::pair<std::string, int>>> TESTS = {
+	static const std::vector<std::vector<std::pair<std::string, uint32_t>>> TESTS = {
 		{{"F000000000000000000000000000", 0}}, {{"F0000000000000000000000@0000", 0}},
 	};
 
@@ -34,7 +34,7 @@ TEST_F(Test_ais_message_22, encode_default_values_broadcast)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("F000000000000000000000000000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_22, encode_default_values_addressed)
@@ -46,6 +46,6 @@ TEST_F(Test_ais_message_22, encode_default_values_addressed)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("F0000000000000000000000@0000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 }

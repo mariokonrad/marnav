@@ -75,7 +75,7 @@ public:
 		payload = data;
 		n_fill_bits = fill_bits;
 	}
-	void set_payload(const std::pair<std::string, int> & data)
+	void set_payload(const std::pair<std::string, uint32_t> & data)
 	{
 		set_payload(data.first, data.second);
 	}
@@ -105,9 +105,9 @@ template <class InputIt, typename std::enable_if<std::is_class<InputIt>::value
 													 std::unique_ptr<sentence>>::value,
 							 int>::type
 	= 0>
-std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt end)
+std::vector<std::pair<std::string, uint32_t>> collect_payload(InputIt begin, InputIt end)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.reserve(std::distance(begin, end));
 
 	for (; begin != end; ++begin) {
@@ -130,9 +130,9 @@ template <class InputIt, typename std::enable_if<std::is_class<InputIt>::value
 													 std::unique_ptr<sentence>>::value,
 							 int>::type
 	= 0>
-std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt end)
+std::vector<std::pair<std::string, uint32_t>> collect_payload(InputIt begin, InputIt end)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.reserve(std::distance(begin, end));
 	for (; begin != end; ++begin) {
 		v.push_back(make_pair(begin->get_payload(), begin->get_n_fill_bits()));
@@ -157,9 +157,9 @@ std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt 
 /// @endcode
 template <class InputIt,
 	typename std::enable_if<std::is_pointer<InputIt>::value, int>::type = 0>
-std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt end)
+std::vector<std::pair<std::string, uint32_t>> collect_payload(InputIt begin, InputIt end)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.reserve(std::distance(begin, end));
 	for (; begin != end; ++begin) {
 		v.push_back(make_pair(begin->get_payload(), begin->get_n_fill_bits()));
@@ -170,7 +170,7 @@ std::vector<std::pair<std::string, int>> collect_payload(InputIt begin, InputIt 
 /// @}
 
 std::vector<std::unique_ptr<nmea::sentence>> make_vdms(
-	const std::vector<std::pair<std::string, int>> & payload,
+	const std::vector<std::pair<std::string, uint32_t>> & payload,
 	utils::optional<uint32_t> seq_msg_id = utils::optional<uint32_t>{},
 	ais_channel radio_channel = ais_channel::B);
 }

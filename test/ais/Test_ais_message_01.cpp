@@ -15,7 +15,7 @@ class Test_ais_message_01 : public ::testing::Test
 
 TEST_F(Test_ais_message_01, parse)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("133m@ogP00PD;88MD5MTDww@2D7k", 0));
 
 	auto result = ais::make_message(v);
@@ -53,7 +53,7 @@ TEST_F(Test_ais_message_01, encode_default_values)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("100000?P00<tSF0l4Q@>4?wh0000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_01, set_latitude)
@@ -65,7 +65,7 @@ TEST_F(Test_ais_message_01, set_latitude)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("100000?P00<tSF073qp>4?wh0000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_01, set_longitude)
@@ -77,12 +77,12 @@ TEST_F(Test_ais_message_01, set_longitude)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("100000?P008m6wPl4Q@>4?wh0000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_01, github_issue_2)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("15RTgt0PAso;90TKcjM8h6g208CQ", 0));
 
 	auto result = ais::make_message(v);

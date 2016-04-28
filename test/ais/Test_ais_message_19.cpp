@@ -13,7 +13,7 @@ class Test_ais_message_19 : public ::testing::Test
 
 TEST_F(Test_ais_message_19, parse)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("C000000000H0htY08D41qwv0000000000000000000000000000@", 0));
 
 	auto result = ais::make_message(v);
@@ -37,7 +37,7 @@ TEST_F(Test_ais_message_19, encode_default_values)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("C000000003?8mP=18D3Q3wv0000000000000000000000000000@", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_19, set_latitude)
@@ -49,12 +49,12 @@ TEST_F(Test_ais_message_19, set_latitude)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("C000000003?8mP1hvN3Q3wv0000000000000000000000000000@", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_19, get_latitude)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("C000000003?8mP1hvN3Q3wv0000000000000000000000000000@", 0));
 
 	auto result = ais::make_message(v);
@@ -79,12 +79,12 @@ TEST_F(Test_ais_message_19, set_longitude)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("C000000002=Agp=18D3Q3wv0000000000000000000000000000@", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_19, get_longitude)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("C000000002=Agp=18D3Q3wv0000000000000000000000000000@", 0));
 
 	auto result = ais::make_message(v);

@@ -13,7 +13,7 @@ class Test_ais_message_02 : public ::testing::Test
 
 TEST_F(Test_ais_message_02, parse)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("233m@ogP00PD;88MD5MTDww@2D7k", 0));
 
 	auto result = ais::make_message(v);
@@ -45,7 +45,7 @@ TEST_F(Test_ais_message_02, encode_default_values)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("200000?P00<tSF0l4Q@>4?wh0000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_02, wrong_number_of_bits)

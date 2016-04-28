@@ -43,7 +43,7 @@ TEST_F(Test_ais, make_message)
 {
 	using namespace std;
 
-	vector<pair<string, int>> v;
+	vector<pair<string, uint32_t>> v;
 
 	// v.push_back(make_pair("55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53", 0));
 	// v.push_back(make_pair("1@0000000000000", 2));

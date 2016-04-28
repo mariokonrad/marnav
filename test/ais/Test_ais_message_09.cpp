@@ -13,7 +13,7 @@ class Test_ais_message_09 : public ::testing::Test
 
 TEST_F(Test_ais_message_09, parse)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("91b55vRAQwOnDE<M05ICOp0208CM", 0));
 
 	auto result = ais::make_message(v);
@@ -37,7 +37,7 @@ TEST_F(Test_ais_message_09, encode_default_values)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("900000?www<tSF0l4Q@00?000000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_09, set_latitude)
@@ -49,12 +49,12 @@ TEST_F(Test_ais_message_09, set_latitude)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("900000?www<tSF073qp00?000000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_09, get_latitude)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("900000?www<tSF073qp00?000000", 0));
 
 	auto result = ais::make_message(v);
@@ -79,12 +79,12 @@ TEST_F(Test_ais_message_09, set_longitude)
 
 	ASSERT_EQ(1u, v.size());
 	EXPECT_STREQ("900000?www8m6wPl4Q@00?000000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_09, get_longitude)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("900000?www8m6wPl4Q@00?000000", 0));
 
 	auto result = ais::make_message(v);

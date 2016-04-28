@@ -13,7 +13,7 @@ class Test_ais_message_05 : public ::testing::Test
 
 TEST_F(Test_ais_message_05, parse)
 {
-	std::vector<std::pair<std::string, int>> v;
+	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53", 0));
 	v.push_back(std::make_pair("1@0000000000000", 2));
 
@@ -59,9 +59,9 @@ TEST_F(Test_ais_message_05, encode_default_values)
 	ASSERT_EQ(2u, v.size());
 	EXPECT_STREQ(
 		"50000000000000000000000000000000000000000000000Ht0000000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 	EXPECT_STREQ("000000000000008", v[1].first.c_str());
-	EXPECT_EQ(2, v[1].second);
+	EXPECT_EQ(2u, v[1].second);
 }
 
 TEST_F(Test_ais_message_05, set_callsign)
@@ -74,7 +74,7 @@ TEST_F(Test_ais_message_05, set_callsign)
 	ASSERT_EQ(2u, v.size());
 	EXPECT_STREQ(
 		"5000000000037;?CGKL0000000000000000000000000000Ht0000000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_05, set_callsign_too_large)
@@ -95,7 +95,7 @@ TEST_F(Test_ais_message_05, set_shipname)
 	ASSERT_EQ(2u, v.size());
 	EXPECT_STREQ(
 		"50000000000000000037;?CGKL000000000000000000000Ht0000000", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_05, set_shipname_too_large)
@@ -116,7 +116,7 @@ TEST_F(Test_ais_message_05, set_destination)
 	ASSERT_EQ(2u, v.size());
 	EXPECT_STREQ(
 		"50000000000000000000000000000000000000000000000Ht0<Ldu=M", v[0].first.c_str());
-	EXPECT_EQ(0, v[0].second);
+	EXPECT_EQ(0u, v[0].second);
 }
 
 TEST_F(Test_ais_message_05, set_destination_too_large)

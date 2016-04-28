@@ -75,8 +75,8 @@ TEST_F(Test_nmea_vdm, collect_payload)
 	auto result = nmea::collect_payload(v.begin(), v.end());
 
 	ASSERT_EQ(2u, result.size());
-	EXPECT_EQ(0, result[0].second);
-	EXPECT_EQ(2, result[1].second);
+	EXPECT_EQ(0u, result[0].second);
+	EXPECT_EQ(2u, result[1].second);
 	EXPECT_STREQ(
 		"55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53", result[0].first.c_str());
 	EXPECT_STREQ("1@0000000000000", result[1].first.c_str());
@@ -123,7 +123,7 @@ TEST_F(Test_nmea_vdm, collect_payload_pointers_begin_end)
 
 TEST_F(Test_nmea_vdm, make_vdms__1)
 {
-	const std::vector<std::pair<std::string, int>> payload = {
+	const std::vector<std::pair<std::string, uint32_t>> payload = {
 		{"177KQJ5000G?tO`K>RA1wUbN0TKH", 0},
 	};
 
@@ -141,7 +141,7 @@ TEST_F(Test_nmea_vdm, make_vdms__1)
 
 TEST_F(Test_nmea_vdm, make_vdms__2)
 {
-	const std::vector<std::pair<std::string, int>> payload
+	const std::vector<std::pair<std::string, uint32_t>> payload
 		= {{"55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53", 0},
 			{"1@0000000000000", 2}};
 
