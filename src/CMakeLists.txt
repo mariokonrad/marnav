@@ -248,10 +248,8 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 		target_compile_options(marnav
 			PUBLIC
 				# some are not enabled on purpose
-				#-Weffc++
 				-Wcast-align
 				-Wcast-qual
-				#-Wconversion
 				-Werror
 				-Wdisabled-optimization
 				-Wfloat-equal
@@ -261,18 +259,14 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 				-Wimport
 				-Winit-self
 				-Winline
-				#-Wlong-long
 				-Wmissing-field-initializers
 				-Wmissing-format-attribute
 				-Wmissing-include-dirs
 				-Wmissing-noreturn
 				-Woverloaded-virtual
 				-Wpacked
-				#-Wpadded
 				-Wpointer-arith
 				-Wredundant-decls
-				#-Wsign-conversion
-				#-Wstack-protector
 				-Wstrict-aliasing=2
 				-Wswitch
 				-Wunreachable-code
@@ -281,6 +275,12 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 				-Wvariadic-macros
 				-Wwrite-strings
 				# explicitly disabled on purpose:
+				#-Wconversion
+				#-Wsign-conversion
+				#-Wstack-protector
+				-Wno-effc++
+				-Wno-padded
+				-Wno-long-long
 				-Wno-unused-function
 				-Wno-comment
 				-Wno-format-nonliteral
