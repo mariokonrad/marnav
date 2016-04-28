@@ -27,8 +27,8 @@ TEST_F(Test_nmea_gsa, parse)
 
 TEST_F(Test_nmea_gsa, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::gsa::parse("@@", {16, "@"}));
-	EXPECT_ANY_THROW(nmea::gsa::parse("@@", {18, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::gsa>("@@", {16, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::gsa>("@@", {18, "@"}));
 }
 
 TEST_F(Test_nmea_gsa, empty_to_string)

@@ -102,19 +102,19 @@ void dse::set_mmsi(const utils::mmsi & t) noexcept
 }
 
 std::unique_ptr<sentence> dse::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 6)
+	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in dse::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<dse>();
 	result->set_talker(talker);
 	dse & detail = static_cast<dse &>(*result);
 
-	read(fields[0], detail.number_of_messages);
-	read(fields[1], detail.sentence_number);
-	read(fields[2], detail.flag, flag_mapping);
-	read(fields[3], detail.address);
+	read(*(first + 0), detail.number_of_messages);
+	read(*(first + 1), detail.sentence_number);
+	read(*(first + 2), detail.flag, flag_mapping);
+	read(*(first + 3), detail.address);
 
 	// TODO: read data set fields
 

@@ -36,21 +36,22 @@ void rte::set_waypoint_id(int index, const std::string & id)
 }
 
 std::unique_ptr<sentence> rte::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if ((fields.size() < 3) || (fields.size() > 13))
+	const auto size = std::distance(first, last);
+	if ((size < 3) || (size > 13))
 		throw std::invalid_argument{"invalid number of fields in rte::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<rte>();
 	result->set_talker(talker);
 	rte & detail = static_cast<rte &>(*result);
 
-	read(fields[0], detail.n_messages);
-	read(fields[1], detail.message_number);
-	read(fields[2], detail.message_mode);
+	read(*(first + 0), detail.n_messages);
+	read(*(first + 1), detail.message_number);
+	read(*(first + 2), detail.message_mode);
 
-	for (size_t i = 3; i < 10 && i < fields.size(); ++i) {
-		read(fields[i], detail.waypoint_id[i - 3]);
+	for (auto i = 3; i < 10 && i < size; ++i) {
+		read(*(first + i), detail.waypoint_id[i - 3]);
 	}
 
 	return result;

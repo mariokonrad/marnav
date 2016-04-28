@@ -53,30 +53,31 @@ void bwc::set_waypoint(const std::string & id)
 }
 
 std::unique_ptr<sentence> bwc::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if ((fields.size() != 12) && (fields.size() != 13))
+	const auto size = std::distance(first, last);
+	if ((size != 12) && (size != 13))
 		throw std::invalid_argument{"invalid number of fields in bwc::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<bwc>();
 	result->set_talker(talker);
 	bwc & detail = static_cast<bwc &>(*result);
 
-	read(fields[0], detail.time_utc);
-	read(fields[1], detail.lat);
-	read(fields[2], detail.lat_hem);
-	read(fields[3], detail.lon);
-	read(fields[4], detail.lon_hem);
-	read(fields[5], detail.bearing_true);
-	read(fields[6], detail.bearing_true_ref);
-	read(fields[7], detail.bearing_mag);
-	read(fields[8], detail.bearing_mag_ref);
-	read(fields[9], detail.distance);
-	read(fields[10], detail.distance_unit);
-	read(fields[11], detail.waypoint_id);
+	read(*(first + 0), detail.time_utc);
+	read(*(first + 1), detail.lat);
+	read(*(first + 2), detail.lat_hem);
+	read(*(first + 3), detail.lon);
+	read(*(first + 4), detail.lon_hem);
+	read(*(first + 5), detail.bearing_true);
+	read(*(first + 6), detail.bearing_true_ref);
+	read(*(first + 7), detail.bearing_mag);
+	read(*(first + 8), detail.bearing_mag_ref);
+	read(*(first + 9), detail.distance);
+	read(*(first + 10), detail.distance_unit);
+	read(*(first + 11), detail.waypoint_id);
 
-	if (fields.size() == 13)
-		read(fields[12], detail.mode_indicator);
+	if (size == 13)
+		read(*(first + 12), detail.mode_indicator);
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
 	detail.lat = correct_hemisphere(detail.lat, detail.lat_hem);

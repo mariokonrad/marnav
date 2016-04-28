@@ -22,18 +22,18 @@ void zfo::set_waypoint_id(const std::string & id)
 }
 
 std::unique_ptr<sentence> zfo::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 3)
+	if (std::distance(first, last) != 3)
 		throw std::invalid_argument{"invalid number of fields in zfo::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<zfo>();
 	result->set_talker(talker);
 	zfo & detail = static_cast<zfo &>(*result);
 
-	read(fields[0], detail.time_utc);
-	read(fields[0], detail.time_elapsed);
-	read(fields[0], detail.waypoint_id);
+	read(*(first + 0), detail.time_utc);
+	read(*(first + 1), detail.time_elapsed);
+	read(*(first + 2), detail.waypoint_id);
 
 	return result;
 }

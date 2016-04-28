@@ -36,31 +36,32 @@ void rmc::set_mag(double t, direction h)
 }
 
 std::unique_ptr<sentence> rmc::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
 	// before and after NMEA 2.3
-	if ((fields.size() < 11) || (fields.size() > 12))
+	const auto size = std::distance(first, last);
+	if ((size < 11) || (size > 12))
 		throw std::invalid_argument{"invalid number of fields in rmc::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<rmc>();
 	result->set_talker(talker);
 	rmc & detail = static_cast<rmc &>(*result);
 
-	read(fields[0], detail.time_utc);
-	read(fields[1], detail.status);
-	read(fields[2], detail.lat);
-	read(fields[3], detail.lat_hem);
-	read(fields[4], detail.lon);
-	read(fields[5], detail.lon_hem);
-	read(fields[6], detail.sog);
-	read(fields[7], detail.heading);
-	read(fields[8], detail.date);
-	read(fields[9], detail.mag);
-	read(fields[10], detail.mag_hem);
+	read(*(first + 0), detail.time_utc);
+	read(*(first + 1), detail.status);
+	read(*(first + 2), detail.lat);
+	read(*(first + 3), detail.lat_hem);
+	read(*(first + 4), detail.lon);
+	read(*(first + 5), detail.lon_hem);
+	read(*(first + 6), detail.sog);
+	read(*(first + 7), detail.heading);
+	read(*(first + 8), detail.date);
+	read(*(first + 9), detail.mag);
+	read(*(first + 10), detail.mag_hem);
 
 	// NMEA 2.3 or newer
-	if (fields.size() > 11)
-		read(fields[11], detail.mode_indicator);
+	if (size > 11)
+		read(*(first + 11), detail.mode_indicator);
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
 	detail.lat = correct_hemisphere(detail.lat, detail.lat_hem);

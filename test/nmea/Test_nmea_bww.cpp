@@ -27,8 +27,8 @@ TEST_F(Test_nmea_bww, parse)
 
 TEST_F(Test_nmea_bww, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::bww::parse("@@", {5, "@"}));
-	EXPECT_ANY_THROW(nmea::bww::parse("@@", {7, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::bww>("@@", {5, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::bww>("@@", {7, "@"}));
 }
 
 TEST_F(Test_nmea_bww, empty_to_string)

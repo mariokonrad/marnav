@@ -36,8 +36,8 @@ TEST_F(Test_nmea_dpt, parse_three_fields)
 
 TEST_F(Test_nmea_dpt, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::dpt::parse("@@", {1, "@"}));
-	EXPECT_ANY_THROW(nmea::dpt::parse("@@", {4, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::dpt>("@@", {1, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::dpt>("@@", {4, "@"}));
 }
 
 TEST_F(Test_nmea_dpt, empty_to_string)

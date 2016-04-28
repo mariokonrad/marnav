@@ -33,24 +33,24 @@ void osd::set_drift(double t, unit::velocity u) noexcept
 }
 
 std::unique_ptr<sentence> osd::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 9)
+	if (std::distance(first, last) != 9)
 		throw std::invalid_argument{"invalid number of fields in osd::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<osd>();
 	result->set_talker(talker);
 	osd & detail = static_cast<osd &>(*result);
 
-	read(fields[0], detail.heading);
-	read(fields[1], detail.data_valid);
-	read(fields[2], detail.course);
-	read(fields[3], detail.course_ref);
-	read(fields[4], detail.speed);
-	read(fields[5], detail.speed_unit);
-	read(fields[6], detail.vessel_set);
-	read(fields[7], detail.vessel_drift);
-	read(fields[8], detail.vessel_drift_unit);
+	read(*(first + 0), detail.heading);
+	read(*(first + 1), detail.data_valid);
+	read(*(first + 2), detail.course);
+	read(*(first + 3), detail.course_ref);
+	read(*(first + 4), detail.speed);
+	read(*(first + 5), detail.speed_unit);
+	read(*(first + 6), detail.vessel_set);
+	read(*(first + 7), detail.vessel_drift);
+	read(*(first + 8), detail.vessel_drift_unit);
 
 	return result;
 }

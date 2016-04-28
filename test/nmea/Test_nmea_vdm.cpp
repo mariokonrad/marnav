@@ -19,8 +19,8 @@ TEST_F(Test_nmea_vdm, properties) { nmea_sentence_traits<nmea::vdm>(); }
 
 TEST_F(Test_nmea_vdm, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::vdm::parse("@@", {5, "@"}));
-	EXPECT_ANY_THROW(nmea::vdm::parse("@@", {7, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vdm>("@@", {5, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vdm>("@@", {7, "@"}));
 }
 
 TEST_F(Test_nmea_vdm, parse_1)

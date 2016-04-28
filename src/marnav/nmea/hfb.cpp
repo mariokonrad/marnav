@@ -19,19 +19,19 @@ hfb::hfb()
 }
 
 std::unique_ptr<sentence> hfb::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 4)
+	if (std::distance(first, last) != 4)
 		throw std::invalid_argument{"invalid number of fields in hfb::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<hfb>();
 	result->set_talker(talker);
 	hfb & detail = static_cast<hfb &>(*result);
 
-	read(fields[0], detail.distance_head_foot);
-	read(fields[1], detail.distance_head_foot_unit);
-	read(fields[2], detail.distance_head_bottom);
-	read(fields[3], detail.distance_head_bottom_unit);
+	read(*(first + 0), detail.distance_head_foot);
+	read(*(first + 1), detail.distance_head_foot_unit);
+	read(*(first + 2), detail.distance_head_bottom);
+	read(*(first + 3), detail.distance_head_bottom_unit);
 
 	return result;
 }

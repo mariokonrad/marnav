@@ -37,8 +37,10 @@ public:
 	vdm(const vdm &) = default;
 	vdm & operator=(const vdm &) = default;
 
+	virtual ~vdm() {}
+
 	static std::unique_ptr<sentence> parse(
-		const std::string & talker, const std::vector<std::string> & fields);
+		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	vdm(sentence_id id, const std::string & tag, const std::string & talker);
@@ -46,7 +48,7 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 	virtual char get_start_token() const override { return start_token_ais; }
 
-	void read_fields(const std::vector<std::string> & fields);
+	void read_fields(fields::const_iterator first);
 
 private:
 	uint32_t n_fragments;

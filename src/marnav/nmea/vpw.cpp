@@ -27,19 +27,19 @@ void vpw::set_speed_mps(double t) noexcept
 }
 
 std::unique_ptr<sentence> vpw::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 4)
+	if (std::distance(first, last) != 4)
 		throw std::invalid_argument{"invalid number of fields in vpw::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<vpw>();
 	result->set_talker(talker);
 	vpw & detail = static_cast<vpw &>(*result);
 
-	read(fields[0], detail.speed_knots);
-	read(fields[1], detail.speed_knots_unit);
-	read(fields[2], detail.speed_meters_per_second);
-	read(fields[3], detail.speed_meters_per_second_unit);
+	read(*(first + 0), detail.speed_knots);
+	read(*(first + 1), detail.speed_knots_unit);
+	read(*(first + 2), detail.speed_meters_per_second);
+	read(*(first + 3), detail.speed_meters_per_second_unit);
 
 	return result;
 }

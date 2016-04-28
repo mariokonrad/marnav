@@ -51,20 +51,20 @@ void aam::check() const
 }
 
 std::unique_ptr<sentence> aam::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 5)
+	if (std::distance(first, last) != 5)
 		throw std::invalid_argument{"invalid number of fields in aam::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<aam>();
 	result->set_talker(talker);
 	aam & detail = static_cast<aam &>(*result);
 
-	read(fields[0], detail.arrival_circle_entered);
-	read(fields[1], detail.perpendicualar_passed);
-	read(fields[2], detail.arrival_circle_radius);
-	read(fields[3], detail.arrival_circle_radius_unit);
-	read(fields[4], detail.waypoint_id);
+	read(*(first + 0), detail.arrival_circle_entered);
+	read(*(first + 1), detail.perpendicualar_passed);
+	read(*(first + 2), detail.arrival_circle_radius);
+	read(*(first + 3), detail.arrival_circle_radius_unit);
+	read(*(first + 4), detail.waypoint_id);
 
 	detail.check();
 

@@ -36,23 +36,23 @@ void glc::set_time_diff(int index, time_difference t)
 }
 
 std::unique_ptr<sentence> glc::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 13)
+	if (std::distance(first, last) != 13)
 		throw std::invalid_argument{"invalid number of fields in glc::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<glc>();
 	result->set_talker(talker);
 	glc & detail = static_cast<glc &>(*result);
 
-	read(fields[0], detail.gri);
-	read(fields[1], detail.master.diff);
-	read(fields[2], detail.master.status);
+	read(*(first + 0), detail.gri);
+	read(*(first + 1), detail.master.diff);
+	read(*(first + 2), detail.master.status);
 	for (int i = 0; i < num_differences; ++i) {
 		utils::optional<double> diff;
 		utils::optional<nmea::status> status;
-		read(fields[(i * 2) + 3], diff);
-		read(fields[(i * 2) + 3 + 1], status);
+		read(*(first + (i * 2) + 3 + 0), diff);
+		read(*(first + (i * 2) + 3 + 1), status);
 		if (diff && status) {
 			detail.time_diffs[i] = utils::make_optional<time_difference>(*diff, *status);
 		}

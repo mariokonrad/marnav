@@ -18,6 +18,8 @@ public:
 	{
 	}
 
+	virtual ~message_reader() {}
+
 	/// Reads synchronously messages from the device.
 	///
 	/// @param[out] data The received message.

@@ -39,23 +39,23 @@ void vwr::set_speed_kmh(double t) noexcept
 }
 
 std::unique_ptr<sentence> vwr::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 8)
+	if (std::distance(first, last) != 8)
 		throw std::invalid_argument{"invalid number of fields in vwr::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<vwr>();
 	result->set_talker(talker);
 	vwr & detail = static_cast<vwr &>(*result);
 
-	read(fields[0], detail.angle);
-	read(fields[1], detail.angle_side);
-	read(fields[2], detail.speed_knots);
-	read(fields[3], detail.speed_knots_unit);
-	read(fields[4], detail.speed_mps);
-	read(fields[5], detail.speed_mps_unit);
-	read(fields[6], detail.speed_kmh);
-	read(fields[7], detail.speed_kmh_unit);
+	read(*(first + 0), detail.angle);
+	read(*(first + 1), detail.angle_side);
+	read(*(first + 2), detail.speed_knots);
+	read(*(first + 3), detail.speed_knots_unit);
+	read(*(first + 4), detail.speed_mps);
+	read(*(first + 5), detail.speed_mps_unit);
+	read(*(first + 6), detail.speed_kmh);
+	read(*(first + 7), detail.speed_kmh_unit);
 
 	return result;
 }

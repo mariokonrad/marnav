@@ -29,21 +29,21 @@ void vbw::set_ground_speed(double l, double t, status s) noexcept
 }
 
 std::unique_ptr<sentence> vbw::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 6)
+	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in vbw::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<vbw>();
 	result->set_talker(talker);
 	vbw & detail = static_cast<vbw &>(*result);
 
-	read(fields[0], detail.water_speed_longitudinal);
-	read(fields[1], detail.water_speed_transveral);
-	read(fields[2], detail.water_speed_status);
-	read(fields[3], detail.ground_speed_longitudinal);
-	read(fields[4], detail.ground_speed_transveral);
-	read(fields[5], detail.water_speed_status);
+	read(*(first + 0), detail.water_speed_longitudinal);
+	read(*(first + 1), detail.water_speed_transveral);
+	read(*(first + 2), detail.water_speed_status);
+	read(*(first + 3), detail.ground_speed_longitudinal);
+	read(*(first + 4), detail.ground_speed_transveral);
+	read(*(first + 5), detail.water_speed_status);
 
 	return result;
 }

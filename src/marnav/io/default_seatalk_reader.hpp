@@ -19,6 +19,8 @@ public:
 	default_seatalk_reader & operator=(const default_seatalk_reader &) = delete;
 	default_seatalk_reader & operator=(default_seatalk_reader &&) = default;
 
+	virtual ~default_seatalk_reader() {}
+
 	bool read_message(seatalk::raw & data);
 
 protected:

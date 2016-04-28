@@ -40,21 +40,21 @@ void bww::set_waypoint_from(const std::string & id)
 }
 
 std::unique_ptr<sentence> bww::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 6)
+	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in bww::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<bww>();
 	result->set_talker(talker);
 	bww & detail = static_cast<bww &>(*result);
 
-	read(fields[0], detail.bearing_true);
-	read(fields[1], detail.bearing_true_ref);
-	read(fields[2], detail.bearing_mag);
-	read(fields[3], detail.bearing_mag_ref);
-	read(fields[4], detail.waypoint_to);
-	read(fields[5], detail.waypoint_from);
+	read(*(first + 0), detail.bearing_true);
+	read(*(first + 1), detail.bearing_true_ref);
+	read(*(first + 2), detail.bearing_mag);
+	read(*(first + 3), detail.bearing_mag_ref);
+	read(*(first + 4), detail.waypoint_to);
+	read(*(first + 5), detail.waypoint_from);
 
 	return result;
 }

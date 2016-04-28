@@ -22,23 +22,23 @@ gbs::gbs()
 }
 
 std::unique_ptr<sentence> gbs::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 8)
+	if (std::distance(first, last) != 8)
 		throw std::invalid_argument{"invalid number of fields in gbs::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<gbs>();
 	result->set_talker(talker);
 	gbs & detail = static_cast<gbs &>(*result);
 
-	read(fields[0], detail.time_utc);
-	read(fields[1], detail.err_lat);
-	read(fields[2], detail.err_lon);
-	read(fields[3], detail.err_alt);
-	read(fields[4], detail.satellite);
-	read(fields[5], detail.probability);
-	read(fields[6], detail.bias);
-	read(fields[7], detail.bias_dev);
+	read(*(first + 0), detail.time_utc);
+	read(*(first + 1), detail.err_lat);
+	read(*(first + 2), detail.err_lon);
+	read(*(first + 3), detail.err_alt);
+	read(*(first + 4), detail.satellite);
+	read(*(first + 5), detail.probability);
+	read(*(first + 6), detail.bias);
+	read(*(first + 7), detail.bias_dev);
 
 	return result;
 }

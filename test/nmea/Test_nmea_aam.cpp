@@ -41,8 +41,8 @@ TEST_F(Test_nmea_aam, parse_missing_distance_unit)
 
 TEST_F(Test_nmea_aam, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::aam::parse("@@", {4, "@"}));
-	EXPECT_ANY_THROW(nmea::aam::parse("@@", {6, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::aam>("@@", {4, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::aam>("@@", {6, "@"}));
 }
 
 TEST_F(Test_nmea_aam, empty_to_string)

@@ -41,33 +41,34 @@ void rmb::set_waypoint_from(const std::string & id)
 }
 
 std::unique_ptr<sentence> rmb::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
 	// before and after NMEA 2.3
-	if ((fields.size() < 13) || (fields.size() > 14))
+	const auto size = std::distance(first, last);
+	if ((size < 13) || (size > 14))
 		throw std::invalid_argument{"invalid number of fields in rmb::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<rmb>();
 	result->set_talker(talker);
 	rmb & detail = static_cast<rmb &>(*result);
 
-	read(fields[0], detail.active);
-	read(fields[1], detail.cross_track_error);
-	read(fields[2], detail.steer_dir);
-	read(fields[3], detail.waypoint_to);
-	read(fields[4], detail.waypoint_from);
-	read(fields[5], detail.lat);
-	read(fields[6], detail.lat_hem);
-	read(fields[7], detail.lon);
-	read(fields[8], detail.lon_hem);
-	read(fields[9], detail.range);
-	read(fields[10], detail.bearing);
-	read(fields[11], detail.dst_velocity);
-	read(fields[12], detail.arrival_status);
+	read(*(first + 0), detail.active);
+	read(*(first + 1), detail.cross_track_error);
+	read(*(first + 2), detail.steer_dir);
+	read(*(first + 3), detail.waypoint_to);
+	read(*(first + 4), detail.waypoint_from);
+	read(*(first + 5), detail.lat);
+	read(*(first + 6), detail.lat_hem);
+	read(*(first + 7), detail.lon);
+	read(*(first + 8), detail.lon_hem);
+	read(*(first + 9), detail.range);
+	read(*(first + 10), detail.bearing);
+	read(*(first + 11), detail.dst_velocity);
+	read(*(first + 12), detail.arrival_status);
 
 	// NMEA 2.3 or newer
-	if (fields.size() > 13)
-		read(fields[12], detail.mode_indicator);
+	if (size > 13)
+		read(*(first + 12), detail.mode_indicator);
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
 	detail.lat = correct_hemisphere(detail.lat, detail.lat_hem);

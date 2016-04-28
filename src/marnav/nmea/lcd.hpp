@@ -49,7 +49,7 @@ public:
 	lcd & operator=(const lcd &) = default;
 
 	static std::unique_ptr<sentence> parse(
-		const std::string & talker, const std::vector<std::string> & fields);
+		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	virtual std::vector<std::string> get_data() const override;

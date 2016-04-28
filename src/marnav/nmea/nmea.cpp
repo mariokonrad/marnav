@@ -309,8 +309,7 @@ std::unique_ptr<sentence> make_sentence(const std::string & s, bool ignore_check
 	std::string tag;
 	std::tie(talker, tag) = detail::parse_address(fields.front());
 
-	return detail::instantiate_sentence(tag)(
-		talker, std::vector<std::string>{fields.begin() + 1, fields.end() - 1});
+	return detail::instantiate_sentence(tag)(talker, fields.begin() + 1, fields.end() - 1);
 }
 }
 }

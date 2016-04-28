@@ -28,18 +28,18 @@ void wcv::set_waypoint(const std::string & id)
 }
 
 std::unique_ptr<sentence> wcv::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 3)
+	if (std::distance(first, last) != 3)
 		throw std::invalid_argument{"invalid number of fields in wcv::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<wcv>();
 	result->set_talker(talker);
 	wcv & detail = static_cast<wcv &>(*result);
 
-	read(fields[0], detail.speed);
-	read(fields[1], detail.speed_unit);
-	read(fields[2], detail.waypoint_id);
+	read(*(first + 0), detail.speed);
+	read(*(first + 1), detail.speed_unit);
+	read(*(first + 2), detail.waypoint_id);
 
 	return result;
 }

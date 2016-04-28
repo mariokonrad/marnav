@@ -17,18 +17,18 @@ zdl::zdl()
 }
 
 std::unique_ptr<sentence> zdl::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 3)
+	if (std::distance(first, last) != 3)
 		throw std::invalid_argument{"invalid number of fields in zdl::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<zdl>();
 	result->set_talker(talker);
 	zdl & detail = static_cast<zdl &>(*result);
 
-	read(fields[0], detail.time_to_point);
-	read(fields[1], detail.distance);
-	read(fields[2], detail.type_point);
+	read(*(first + 0), detail.time_to_point);
+	read(*(first + 1), detail.distance);
+	read(*(first + 2), detail.type_point);
 
 	return result;
 }

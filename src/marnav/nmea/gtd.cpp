@@ -35,9 +35,9 @@ void gtd::set_time_diff(int index, double value)
 }
 
 std::unique_ptr<sentence> gtd::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 5)
+	if (std::distance(first, last) != 5)
 		throw std::invalid_argument{"invalid number of fields in gtd::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<gtd>();
@@ -45,7 +45,7 @@ std::unique_ptr<sentence> gtd::parse(
 	gtd & detail = static_cast<gtd &>(*result);
 
 	for (int i = 0; i < num_data; ++i)
-		read(fields[i], detail.time_diffs[i]);
+		read(*(first + i), detail.time_diffs[i]);
 
 	return result;
 }

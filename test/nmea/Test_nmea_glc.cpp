@@ -27,8 +27,8 @@ TEST_F(Test_nmea_glc, parse)
 
 TEST_F(Test_nmea_glc, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::glc::parse("@@", {12, "@"}));
-	EXPECT_ANY_THROW(nmea::glc::parse("@@", {14, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::glc>("@@", {12, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::glc>("@@", {14, "@"}));
 }
 
 TEST_F(Test_nmea_glc, empty_to_string)

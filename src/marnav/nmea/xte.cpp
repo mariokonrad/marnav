@@ -15,23 +15,24 @@ xte::xte()
 }
 
 std::unique_ptr<sentence> xte::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if ((fields.size() < 5) || (fields.size() > 6))
+	const auto size = std::distance(first, last);
+	if ((size < 5) || (size > 6))
 		throw std::invalid_argument{"invalid number of fields in xte::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<xte>();
 	result->set_talker(talker);
 	xte & detail = static_cast<xte &>(*result);
 
-	read(fields[0], detail.status1);
-	read(fields[1], detail.status2);
-	read(fields[2], detail.cross_track_error_magnitude);
-	read(fields[3], detail.direction_to_steer);
-	read(fields[4], detail.cross_track_unit);
+	read(*(first + 0), detail.status1);
+	read(*(first + 1), detail.status2);
+	read(*(first + 2), detail.cross_track_error_magnitude);
+	read(*(first + 3), detail.direction_to_steer);
+	read(*(first + 4), detail.cross_track_unit);
 
-	if (fields.size() == 6)
-		read(fields[5], detail.mode_indicator);
+	if (size == 6)
+		read(*(first + 5), detail.mode_indicator);
 
 	return result;
 }

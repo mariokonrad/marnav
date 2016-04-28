@@ -21,17 +21,17 @@ void mtw::set_temperature(double t) noexcept
 }
 
 std::unique_ptr<sentence> mtw::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 2)
+	if (std::distance(first, last) != 2)
 		throw std::invalid_argument{"invalid number of fields in mtw::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<mtw>();
 	result->set_talker(talker);
 	mtw & detail = static_cast<mtw &>(*result);
 
-	read(fields[0], detail.temperature);
-	read(fields[1], detail.temperature_unit);
+	read(*(first + 0), detail.temperature);
+	read(*(first + 1), detail.temperature_unit);
 
 	return result;
 }

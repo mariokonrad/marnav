@@ -27,19 +27,19 @@ void vlw::set_distance_reset_nm(double t) noexcept
 }
 
 std::unique_ptr<sentence> vlw::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 4)
+	if (std::distance(first, last) != 4)
 		throw std::invalid_argument{"invalid number of fields in vlw::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<vlw>();
 	result->set_talker(talker);
 	vlw & detail = static_cast<vlw &>(*result);
 
-	read(fields[0], detail.distance_cum);
-	read(fields[1], detail.distance_cum_unit);
-	read(fields[2], detail.distance_reset);
-	read(fields[3], detail.distance_reset_unit);
+	read(*(first + 0), detail.distance_cum);
+	read(*(first + 1), detail.distance_cum_unit);
+	read(*(first + 2), detail.distance_reset);
+	read(*(first + 3), detail.distance_reset_unit);
 
 	return result;
 }

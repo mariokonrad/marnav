@@ -26,27 +26,27 @@ vdm::vdm(sentence_id id, const std::string & tag, const std::string & talker)
 {
 }
 
-void vdm::read_fields(const std::vector<std::string> & fields)
+void vdm::read_fields(fields::const_iterator first)
 {
-	read(fields[0], n_fragments);
-	read(fields[1], fragment);
-	read(fields[2], seq_msg_id);
-	read(fields[3], radio_channel);
-	read(fields[4], payload);
-	read(fields[5], n_fill_bits);
+	read(*(first + 0), n_fragments);
+	read(*(first + 1), fragment);
+	read(*(first + 2), seq_msg_id);
+	read(*(first + 3), radio_channel);
+	read(*(first + 4), payload);
+	read(*(first + 5), n_fill_bits);
 }
 
 std::unique_ptr<sentence> vdm::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 6)
+	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in vdm::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<vdm>();
 	result->set_talker(talker);
 	vdm & detail = static_cast<vdm &>(*result);
 
-	detail.read_fields(fields);
+	detail.read_fields(first);
 
 	return result;
 }

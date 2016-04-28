@@ -31,8 +31,8 @@ TEST_F(Test_nmea_hdg, parse)
 
 TEST_F(Test_nmea_hdg, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::hdg::parse("@@", {4, "@"}));
-	EXPECT_ANY_THROW(nmea::hdg::parse("@@", {6, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::hdg>("@@", {4, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::hdg>("@@", {6, "@"}));
 }
 
 TEST_F(Test_nmea_hdg, empty_to_string)

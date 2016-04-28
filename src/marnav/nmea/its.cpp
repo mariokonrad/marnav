@@ -17,17 +17,17 @@ its::its()
 }
 
 std::unique_ptr<sentence> its::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 2)
+	if (std::distance(first, last) != 2)
 		throw std::invalid_argument{"invalid number of fields in its::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<its>();
 	result->set_talker(talker);
 	its & detail = static_cast<its &>(*result);
 
-	read(fields[0], detail.distance);
-	read(fields[1], detail.distance_unit);
+	read(*(first + 0), detail.distance);
+	read(*(first + 1), detail.distance_unit);
 
 	return result;
 }

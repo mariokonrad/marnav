@@ -29,20 +29,20 @@ void fsi::set_sentence_status(char t)
 }
 
 std::unique_ptr<sentence> fsi::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 5)
+	if (std::distance(first, last) != 5)
 		throw std::invalid_argument{"invalid number of fields in fsi::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<fsi>();
 	result->set_talker(talker);
 	fsi & detail = static_cast<fsi &>(*result);
 
-	read(fields[0], detail.tx_frequency);
-	read(fields[1], detail.rx_frequency);
-	read(fields[2], detail.communications_mode);
-	read(fields[3], detail.power_level);
-	read(fields[4], detail.sentence_status);
+	read(*(first + 0), detail.tx_frequency);
+	read(*(first + 1), detail.rx_frequency);
+	read(*(first + 2), detail.communications_mode);
+	read(*(first + 3), detail.power_level);
+	read(*(first + 4), detail.sentence_status);
 
 	return result;
 }

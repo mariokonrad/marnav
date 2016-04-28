@@ -27,8 +27,8 @@ TEST_F(Test_nmea_tfi, parse)
 
 TEST_F(Test_nmea_tfi, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::tfi::parse("@@", {2, "@"}));
-	EXPECT_ANY_THROW(nmea::tfi::parse("@@", {4, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::tfi>("@@", {2, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::tfi>("@@", {4, "@"}));
 }
 
 TEST_F(Test_nmea_tfi, empty_to_string)

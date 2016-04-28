@@ -39,28 +39,29 @@ void vtg::set_track_true(double t) noexcept
 }
 
 std::unique_ptr<sentence> vtg::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
 	// before and after NMEA 2.3
-	if ((fields.size() < 8) || (fields.size() > 9))
+	const auto size = std::distance(first, last);
+	if ((size < 8) || (size > 9))
 		throw std::invalid_argument{"invalid number of fields in vtg::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<vtg>();
 	result->set_talker(talker);
 	vtg & detail = static_cast<vtg &>(*result);
 
-	read(fields[0], detail.track_true);
-	read(fields[1], detail.type_true);
-	read(fields[2], detail.track_magn);
-	read(fields[3], detail.type_magn);
-	read(fields[4], detail.speed_kn);
-	read(fields[5], detail.speed_kn_unit);
-	read(fields[6], detail.speed_kmh);
-	read(fields[7], detail.speed_kmh_unit);
+	read(*(first + 0), detail.track_true);
+	read(*(first + 1), detail.type_true);
+	read(*(first + 2), detail.track_magn);
+	read(*(first + 3), detail.type_magn);
+	read(*(first + 4), detail.speed_kn);
+	read(*(first + 5), detail.speed_kn_unit);
+	read(*(first + 6), detail.speed_kmh);
+	read(*(first + 7), detail.speed_kmh_unit);
 
 	// NMEA 2.3 or newer
-	if (fields.size() > 8)
-		read(fields[8], detail.mode_indicator);
+	if (size > 8)
+		read(*(first + 8), detail.mode_indicator);
 
 	return result;
 }

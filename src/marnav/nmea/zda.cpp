@@ -15,21 +15,21 @@ zda::zda()
 }
 
 std::unique_ptr<sentence> zda::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 6)
+	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in zda::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<zda>();
 	result->set_talker(talker);
 	zda & detail = static_cast<zda &>(*result);
 
-	read(fields[0], detail.time_utc);
-	read(fields[0], detail.day);
-	read(fields[0], detail.month);
-	read(fields[0], detail.year);
-	read(fields[0], detail.local_zone_hours);
-	read(fields[0], detail.local_zone_minutes);
+	read(*(first + 0), detail.time_utc);
+	read(*(first + 1), detail.day);
+	read(*(first + 2), detail.month);
+	read(*(first + 3), detail.year);
+	read(*(first + 4), detail.local_zone_hours);
+	read(*(first + 5), detail.local_zone_minutes);
 
 	return result;
 }

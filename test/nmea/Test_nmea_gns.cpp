@@ -28,8 +28,8 @@ TEST_F(Test_nmea_gns, parse)
 
 TEST_F(Test_nmea_gns, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::gns::parse("@@", {11, "@"}));
-	EXPECT_ANY_THROW(nmea::gns::parse("@@", {13, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::gns>("@@", {11, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::gns>("@@", {13, "@"}));
 }
 
 TEST_F(Test_nmea_gns, empty_to_string)

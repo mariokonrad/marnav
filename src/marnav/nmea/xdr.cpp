@@ -48,12 +48,13 @@ utils::optional<xdr::transducer_info> xdr::get_info(int index) const
 }
 
 std::unique_ptr<sentence> xdr::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if ((fields.size() < 1) || (fields.size() > 4 * xdr::max_transducer_info))
+	const auto size = std::distance(first, last);
+	if ((size < 1) || (size > 4 * xdr::max_transducer_info))
 		throw std::invalid_argument{"invalid number of fields in xdr::parse"};
 
-	if ((fields.size() % 4) != 0)
+	if ((size % 4) != 0)
 		throw std::invalid_argument{"unexpected number of fields in xdr::parse (quadruples?)"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<xdr>();
@@ -61,12 +62,12 @@ std::unique_ptr<sentence> xdr::parse(
 	xdr & detail = static_cast<xdr &>(*result);
 
 	int index = 0;
-	for (std::vector<std::string>::size_type i = 0; i < fields.size(); i += 4, ++index) {
+	for (auto i = 0; i < size; i += 4, ++index) {
 		xdr::transducer_info info;
-		read(fields[i + 0], info.transducer_type);
-		read(fields[i + 1], info.measurement_data);
-		read(fields[i + 2], info.units_of_measurement);
-		read(fields[i + 3], info.name);
+		read(*(first + i + 0), info.transducer_type);
+		read(*(first + i + 1), info.measurement_data);
+		read(*(first + i + 2), info.units_of_measurement);
+		read(*(first + i + 3), info.name);
 		detail.set_info(index, info);
 	}
 

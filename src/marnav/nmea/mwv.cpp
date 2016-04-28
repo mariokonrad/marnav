@@ -29,20 +29,20 @@ void mwv::set_speed(double speed, unit::velocity u) noexcept
 }
 
 std::unique_ptr<sentence> mwv::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 5)
+	if (std::distance(first, last) != 5)
 		throw std::invalid_argument{"invalid number of fields in mwv::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<mwv>();
 	result->set_talker(talker);
 	mwv & detail = static_cast<mwv &>(*result);
 
-	read(fields[0], detail.angle);
-	read(fields[1], detail.angle_ref);
-	read(fields[2], detail.speed);
-	read(fields[3], detail.speed_unit);
-	read(fields[4], detail.data_valid);
+	read(*(first + 0), detail.angle);
+	read(*(first + 1), detail.angle_ref);
+	read(*(first + 2), detail.speed);
+	read(*(first + 3), detail.speed_unit);
+	read(*(first + 4), detail.data_valid);
 
 	return result;
 }

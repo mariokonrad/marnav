@@ -20,20 +20,20 @@ mss::mss()
 }
 
 std::unique_ptr<sentence> mss::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 5)
+	if (std::distance(first, last) != 5)
 		throw std::invalid_argument{"invalid number of fields in mss::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<mss>();
 	result->set_talker(talker);
 	mss & detail = static_cast<mss &>(*result);
 
-	read(fields[0], detail.signal_strength);
-	read(fields[1], detail.signal_to_noise_ratio);
-	read(fields[2], detail.beacon_frequency);
-	read(fields[3], detail.beacon_datarate);
-	read(fields[4], detail.unknown);
+	read(*(first + 0), detail.signal_strength);
+	read(*(first + 1), detail.signal_to_noise_ratio);
+	read(*(first + 2), detail.beacon_frequency);
+	read(*(first + 3), detail.beacon_datarate);
+	read(*(first + 4), detail.unknown);
 
 	return result;
 }

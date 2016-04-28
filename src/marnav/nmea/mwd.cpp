@@ -39,23 +39,23 @@ void mwd::set_speed_mps(double t) noexcept
 }
 
 std::unique_ptr<sentence> mwd::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 8)
+	if (std::distance(first, last) != 8)
 		throw std::invalid_argument{"invalid number of fields in mwd::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<mwd>();
 	result->set_talker(talker);
 	mwd & detail = static_cast<mwd &>(*result);
 
-	read(fields[0], detail.direction_true);
-	read(fields[1], detail.direction_true_ref);
-	read(fields[2], detail.direction_mag);
-	read(fields[3], detail.direction_mag_ref);
-	read(fields[4], detail.speed_kn);
-	read(fields[5], detail.speed_kn_unit);
-	read(fields[6], detail.speed_ms);
-	read(fields[7], detail.speed_ms_unit);
+	read(*(first + 0), detail.direction_true);
+	read(*(first + 1), detail.direction_true_ref);
+	read(*(first + 2), detail.direction_mag);
+	read(*(first + 3), detail.direction_mag_ref);
+	read(*(first + 4), detail.speed_kn);
+	read(*(first + 5), detail.speed_kn_unit);
+	read(*(first + 6), detail.speed_ms);
+	read(*(first + 7), detail.speed_ms_unit);
 
 	return result;
 }

@@ -36,30 +36,30 @@ void alm::check() const
 }
 
 std::unique_ptr<sentence> alm::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 15)
+	if (std::distance(first, last) != 15)
 		throw std::invalid_argument{"invalid number of fields in alm::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<alm>();
 	result->set_talker(talker);
 	alm & detail = static_cast<alm &>(*result);
 
-	read(fields[0], detail.number_of_messages);
-	read(fields[1], detail.message_number);
-	read(fields[2], detail.satellite_prn);
-	read(fields[3], detail.gps_week_number);
-	read(fields[4], detail.sv_health);
-	read(fields[5], detail.eccentricity, data_format::hex);
-	read(fields[6], detail.almanac_reference_time, data_format::hex);
-	read(fields[7], detail.inclination_angle, data_format::hex);
-	read(fields[8], detail.rate_of_right_ascension, data_format::hex);
-	read(fields[9], detail.root_of_semimajor_axis, data_format::hex);
-	read(fields[10], detail.argument_of_perigee, data_format::hex);
-	read(fields[11], detail.longitude_of_ascension_node, data_format::hex);
-	read(fields[12], detail.mean_anomaly, data_format::hex);
-	read(fields[13], detail.f0_clock_parameter, data_format::hex);
-	read(fields[14], detail.f1_clock_parameter, data_format::hex);
+	read(*(first + 0), detail.number_of_messages);
+	read(*(first + 1), detail.message_number);
+	read(*(first + 2), detail.satellite_prn);
+	read(*(first + 3), detail.gps_week_number);
+	read(*(first + 4), detail.sv_health);
+	read(*(first + 5), detail.eccentricity, data_format::hex);
+	read(*(first + 6), detail.almanac_reference_time, data_format::hex);
+	read(*(first + 7), detail.inclination_angle, data_format::hex);
+	read(*(first + 8), detail.rate_of_right_ascension, data_format::hex);
+	read(*(first + 9), detail.root_of_semimajor_axis, data_format::hex);
+	read(*(first + 10), detail.argument_of_perigee, data_format::hex);
+	read(*(first + 11), detail.longitude_of_ascension_node, data_format::hex);
+	read(*(first + 12), detail.mean_anomaly, data_format::hex);
+	read(*(first + 13), detail.f0_clock_parameter, data_format::hex);
+	read(*(first + 14), detail.f1_clock_parameter, data_format::hex);
 
 	detail.check();
 

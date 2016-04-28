@@ -34,27 +34,27 @@ utils::optional<uint32_t> gsa::get_satellite_id(int index) const
 }
 
 std::unique_ptr<sentence> gsa::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 17)
+	if (std::distance(first, last) != 17)
 		throw std::invalid_argument{"invalid number of fields in gsa::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<gsa>();
 	result->set_talker(talker);
 	gsa & detail = static_cast<gsa &>(*result);
 
-	read(fields[0], detail.sel_mode);
-	read(fields[1], detail.mode);
+	read(*(first + 0), detail.sel_mode);
+	read(*(first + 1), detail.mode);
 
 	int index = 2;
 	for (auto i = 0; i < max_satellite_ids; ++i, ++index) {
 		uint32_t id;
-		read(fields[index], id);
+		read(*(first + index), id);
 		detail.set_satellite_id(i + 1, id);
 	}
-	read(fields[14], detail.pdop);
-	read(fields[15], detail.hdop);
-	read(fields[16], detail.vdop);
+	read(*(first + 14), detail.pdop);
+	read(*(first + 15), detail.hdop);
+	read(*(first + 16), detail.vdop);
 
 	return result;
 }

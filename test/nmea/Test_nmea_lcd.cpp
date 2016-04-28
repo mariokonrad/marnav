@@ -27,8 +27,8 @@ TEST_F(Test_nmea_lcd, parse)
 
 TEST_F(Test_nmea_lcd, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::lcd::parse("@@", {12, "@"}));
-	EXPECT_ANY_THROW(nmea::lcd::parse("@@", {14, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::lcd>("@@", {12, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::lcd>("@@", {14, "@"}));
 }
 
 TEST_F(Test_nmea_lcd, empty_to_string)

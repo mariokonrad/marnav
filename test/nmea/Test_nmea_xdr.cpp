@@ -27,9 +27,9 @@ TEST_F(Test_nmea_xdr, parse)
 
 TEST_F(Test_nmea_xdr, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::xdr::parse("@@", {0, "@"}));
-	EXPECT_ANY_THROW(nmea::xdr::parse("@@", {41, "@"}));
-	EXPECT_ANY_THROW(nmea::xdr::parse("@@", {3, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::xdr>("@@", {0, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::xdr>("@@", {41, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::xdr>("@@", {3, "@"}));
 }
 
 TEST_F(Test_nmea_xdr, empty_to_string)

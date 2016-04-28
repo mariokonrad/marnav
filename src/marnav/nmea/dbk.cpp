@@ -33,21 +33,21 @@ void dbk::set_depth_fathom(double t) noexcept
 }
 
 std::unique_ptr<sentence> dbk::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 6)
+	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in dbk::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<dbk>();
 	result->set_talker(talker);
 	dbk & detail = static_cast<dbk &>(*result);
 
-	read(fields[0], detail.depth_feet);
-	read(fields[1], detail.depth_feet_unit);
-	read(fields[2], detail.depth_meter);
-	read(fields[3], detail.depth_meter_unit);
-	read(fields[4], detail.depth_fathom);
-	read(fields[5], detail.depth_fathom_unit);
+	read(*(first + 0), detail.depth_feet);
+	read(*(first + 1), detail.depth_feet_unit);
+	read(*(first + 2), detail.depth_meter);
+	read(*(first + 3), detail.depth_meter_unit);
+	read(*(first + 4), detail.depth_fathom);
+	read(*(first + 5), detail.depth_fathom_unit);
 
 	return result;
 }

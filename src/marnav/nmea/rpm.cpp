@@ -54,20 +54,20 @@ void rpm::set_source(source_id id, uint32_t num)
 }
 
 std::unique_ptr<sentence> rpm::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 5)
+	if (std::distance(first, last) != 5)
 		throw std::invalid_argument{"invalid number of fields in rpm::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<rpm>();
 	result->set_talker(talker);
 	rpm & detail = static_cast<rpm &>(*result);
 
-	read(fields[0], detail.source, source_id_mapping);
-	read(fields[1], detail.source_number);
-	read(fields[2], detail.revolutions);
-	read(fields[3], detail.propeller_pitch);
-	read(fields[4], detail.data_valid);
+	read(*(first + 0), detail.source, source_id_mapping);
+	read(*(first + 1), detail.source_number);
+	read(*(first + 2), detail.revolutions);
+	read(*(first + 3), detail.propeller_pitch);
+	read(*(first + 4), detail.data_valid);
 
 	return result;
 }

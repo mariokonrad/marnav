@@ -27,19 +27,19 @@ void hsc::set_heading_mag(double t) noexcept
 }
 
 std::unique_ptr<sentence> hsc::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 4)
+	if (std::distance(first, last) != 4)
 		throw std::invalid_argument{"invalid number of fields in hsc::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<hsc>();
 	result->set_talker(talker);
 	hsc & detail = static_cast<hsc &>(*result);
 
-	read(fields[0], detail.heading_true);
-	read(fields[1], detail.heading_true_ref);
-	read(fields[2], detail.heading_mag);
-	read(fields[3], detail.heading_mag_ref);
+	read(*(first + 0), detail.heading_true);
+	read(*(first + 1), detail.heading_true_ref);
+	read(*(first + 2), detail.heading_mag);
+	read(*(first + 3), detail.heading_mag_ref);
 
 	return result;
 }

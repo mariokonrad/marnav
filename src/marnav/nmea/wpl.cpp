@@ -35,20 +35,20 @@ void wpl::set_waypoint(const std::string & id)
 }
 
 std::unique_ptr<sentence> wpl::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 5)
+	if (std::distance(first, last) != 5)
 		throw std::invalid_argument{"invalid number of fields in wpl::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<wpl>();
 	result->set_talker(talker);
 	wpl & detail = static_cast<wpl &>(*result);
 
-	read(fields[0], detail.lat);
-	read(fields[1], detail.lat_hem);
-	read(fields[2], detail.lon);
-	read(fields[3], detail.lon_hem);
-	read(fields[4], detail.waypoint_id);
+	read(*(first + 0), detail.lat);
+	read(*(first + 1), detail.lat_hem);
+	read(*(first + 2), detail.lon);
+	read(*(first + 3), detail.lon_hem);
+	read(*(first + 4), detail.waypoint_id);
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
 	detail.lat = correct_hemisphere(detail.lat, detail.lat_hem);

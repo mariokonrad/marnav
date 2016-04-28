@@ -64,6 +64,8 @@ public:
 		boost::asio::connect(socket, resolver.resolve({host, port}));
 	}
 
+	~boost_asio_tcp_client() {}
+
 	int write(const char * buffer, uint32_t size)
 	{
 		if (buffer == nullptr)

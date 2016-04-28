@@ -21,17 +21,17 @@ void hdm::set_heading(double t) noexcept
 }
 
 std::unique_ptr<sentence> hdm::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 2)
+	if (std::distance(first, last) != 2)
 		throw std::invalid_argument{"invalid number of fields in hdm::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<hdm>();
 	result->set_talker(talker);
 	hdm & detail = static_cast<hdm &>(*result);
 
-	read(fields[0], detail.heading);
-	read(fields[1], detail.heading_mag);
+	read(*(first + 0), detail.heading);
+	read(*(first + 1), detail.heading_mag);
 
 	return result;
 }

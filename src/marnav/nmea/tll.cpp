@@ -41,24 +41,24 @@ void tll::set_target_name(const std::string & t)
 }
 
 std::unique_ptr<sentence> tll::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 9)
+	if (std::distance(first, last) != 9)
 		throw std::invalid_argument{"invalid number of fields in tll::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<tll>();
 	result->set_talker(talker);
 	tll & detail = static_cast<tll &>(*result);
 
-	read(fields[0], detail.target_number);
-	read(fields[1], detail.lat);
-	read(fields[2], detail.lat_hem);
-	read(fields[3], detail.lon);
-	read(fields[4], detail.lon_hem);
-	read(fields[5], detail.target_name);
-	read(fields[6], detail.time_utc);
-	read(fields[7], detail.target_status);
-	read(fields[8], detail.reference_target);
+	read(*(first + 0), detail.target_number);
+	read(*(first + 1), detail.lat);
+	read(*(first + 2), detail.lat_hem);
+	read(*(first + 3), detail.lon);
+	read(*(first + 4), detail.lon_hem);
+	read(*(first + 5), detail.target_name);
+	read(*(first + 6), detail.time_utc);
+	read(*(first + 7), detail.target_status);
+	read(*(first + 8), detail.reference_target);
 
 	return result;
 }

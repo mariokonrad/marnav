@@ -20,21 +20,21 @@ tpt::tpt()
 }
 
 std::unique_ptr<sentence> tpt::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 6)
+	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in tpt::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<tpt>();
 	result->set_talker(talker);
 	tpt & detail = static_cast<tpt &>(*result);
 
-	read(fields[0], detail.range);
-	read(fields[1], detail.range_unit);
-	read(fields[2], detail.bearing);
+	read(*(first + 0), detail.range);
+	read(*(first + 1), detail.range_unit);
+	read(*(first + 2), detail.bearing);
 	// separator omitted intentionally
-	read(fields[4], detail.depth);
-	read(fields[5], detail.depth_unit);
+	read(*(first + 4), detail.depth);
+	read(*(first + 5), detail.depth_unit);
 
 	return result;
 }

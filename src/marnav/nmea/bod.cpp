@@ -40,21 +40,21 @@ void bod::set_waypoint_from(const std::string & id)
 }
 
 std::unique_ptr<sentence> bod::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 6)
+	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in bod::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<bod>();
 	result->set_talker(talker);
 	bod & detail = static_cast<bod &>(*result);
 
-	read(fields[0], detail.bearing_true);
-	read(fields[1], detail.type_true);
-	read(fields[2], detail.bearing_magn);
-	read(fields[3], detail.type_magn);
-	read(fields[4], detail.waypoint_to);
-	read(fields[5], detail.waypoint_from);
+	read(*(first + 0), detail.bearing_true);
+	read(*(first + 1), detail.type_true);
+	read(*(first + 2), detail.bearing_magn);
+	read(*(first + 3), detail.type_magn);
+	read(*(first + 4), detail.waypoint_to);
+	read(*(first + 5), detail.waypoint_from);
 
 	return result;
 }

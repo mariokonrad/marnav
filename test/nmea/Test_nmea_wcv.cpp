@@ -27,8 +27,8 @@ TEST_F(Test_nmea_wcv, parse)
 
 TEST_F(Test_nmea_wcv, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::wcv::parse("@@", {2, "@"}));
-	EXPECT_ANY_THROW(nmea::wcv::parse("@@", {4, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::wcv>("@@", {2, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::wcv>("@@", {4, "@"}));
 }
 
 TEST_F(Test_nmea_wcv, empty_to_string)

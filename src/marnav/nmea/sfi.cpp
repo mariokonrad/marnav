@@ -26,27 +26,28 @@ void sfi::set_frequencies(const std::vector<scanning_frequency> & v)
 }
 
 std::unique_ptr<sentence> sfi::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if ((fields.size() < 2) || (fields.size() > 2 + max_number_of_frequencies * 2))
+	const auto size = std::distance(first, last);
+	if ((size < 2) || (size > 2 + max_number_of_frequencies * 2))
 		throw std::invalid_argument{"invalid number of fields in sfi::parse"};
-	if (fields.size() % 2 != 0)
+	if (size % 2 != 0)
 		throw std::invalid_argument{"invalid number of fields in sfi::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<sfi>();
 	result->set_talker(talker);
 	sfi & detail = static_cast<sfi &>(*result);
 
-	read(fields[0], detail.number_of_messages);
-	read(fields[1], detail.message_number);
+	read(*(first + 0), detail.number_of_messages);
+	read(*(first + 1), detail.message_number);
 
 	detail.frequencies.clear();
-	detail.frequencies.reserve(fields.size() - 2);
-	for (size_t i = 2; i < fields.size(); i += 2) {
+	detail.frequencies.reserve(size - 2);
+	for (auto i = 2; i < size; i += 2) {
 		uint32_t frequency;
 		char mode;
-		read(fields[i], frequency);
-		read(fields[i], mode);
+		read(*(first + i + 0), frequency);
+		read(*(first + i + 1), mode);
 		detail.frequencies.push_back({frequency, mode});
 	}
 

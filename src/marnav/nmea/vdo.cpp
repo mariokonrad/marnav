@@ -14,16 +14,16 @@ vdo::vdo()
 }
 
 std::unique_ptr<sentence> vdo::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 6)
+	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in vdo::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<vdo>();
 	result->set_talker(talker);
 	vdo & detail = static_cast<vdo &>(*result);
 
-	detail.read_fields(fields);
+	detail.read_fields(first);
 
 	return result;
 }

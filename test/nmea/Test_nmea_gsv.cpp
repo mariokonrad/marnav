@@ -28,8 +28,8 @@ TEST_F(Test_nmea_gsv, parse)
 
 TEST_F(Test_nmea_gsv, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::gsv::parse("@@", {18, "@"}));
-	EXPECT_ANY_THROW(nmea::gsv::parse("@@", {20, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::gsv>("@@", {18, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::gsv>("@@", {20, "@"}));
 }
 
 TEST_F(Test_nmea_gsv, empty_to_string)

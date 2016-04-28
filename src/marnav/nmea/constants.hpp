@@ -12,7 +12,8 @@ enum class direction : char {
 	east, ///< NMEA representation: 'E'
 	west, ///< NMEA representation: 'W'
 	north, ///< NMEA representation: 'N'
-	south ///< NMEA representation: ' S'
+	south, ///< NMEA representation: ' S'
+	none ///< To silence the compiler
 };
 
 /// Status values used in NMEA.

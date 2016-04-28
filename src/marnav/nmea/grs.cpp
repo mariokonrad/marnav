@@ -73,19 +73,19 @@ void grs::set_sat_residual(int index, double value)
 }
 
 std::unique_ptr<sentence> grs::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 14)
+	if (std::distance(first, last) != 14)
 		throw std::invalid_argument{"invalid number of fields in grs::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<grs>();
 	result->set_talker(talker);
 	grs & detail = static_cast<grs &>(*result);
 
-	read(fields[0], detail.time_utc);
-	read(fields[1], detail.usage, residual_usage_mapping);
+	read(*(first + 0), detail.time_utc);
+	read(*(first + 1), detail.usage, residual_usage_mapping);
 	for (size_t i = 0; i < detail.sat_residual.size(); ++i)
-		read(fields[i + 2], detail.sat_residual[i]);
+		read(*(first + i + 2), detail.sat_residual[i]);
 
 	return result;
 }

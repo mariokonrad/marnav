@@ -27,8 +27,8 @@ TEST_F(Test_nmea_zdl, parse)
 
 TEST_F(Test_nmea_zdl, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::zdl::parse("@@", {2, "@"}));
-	EXPECT_ANY_THROW(nmea::zdl::parse("@@", {4, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::zdl>("@@", {2, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::zdl>("@@", {4, "@"}));
 }
 
 TEST_F(Test_nmea_zdl, empty_to_string)

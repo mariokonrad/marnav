@@ -15,9 +15,9 @@ r00::r00()
 }
 
 std::unique_ptr<sentence> r00::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != r00::max_waypoint_ids)
+	if (std::distance(first, last) != r00::max_waypoint_ids)
 		throw std::invalid_argument{"invalid number of fields in r00::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<r00>();
@@ -26,7 +26,7 @@ std::unique_ptr<sentence> r00::parse(
 
 	for (auto i = 0; i < max_waypoint_ids; ++i) {
 		std::string id;
-		read(fields[i], id);
+		read(*(first + i), id);
 		detail.set_waypoint_id(i, id);
 	}
 

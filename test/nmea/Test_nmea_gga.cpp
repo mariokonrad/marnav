@@ -45,8 +45,8 @@ TEST_F(Test_nmea_gga, parse_failure)
 
 TEST_F(Test_nmea_gga, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::gga::parse("@@", {13, "@"}));
-	EXPECT_ANY_THROW(nmea::gga::parse("@@", {15, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::gga>("@@", {13, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::gga>("@@", {15, "@"}));
 }
 
 TEST_F(Test_nmea_gga, empty_to_string)

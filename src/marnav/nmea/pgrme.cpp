@@ -18,21 +18,21 @@ pgrme::pgrme()
 }
 
 std::unique_ptr<sentence> pgrme::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 6)
+	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in pgrme::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<pgrme>();
 	result->set_talker(talker);
 	pgrme & detail = static_cast<pgrme &>(*result);
 
-	read(fields[0], detail.horizontal_position_error);
-	read(fields[1], detail.horizontal_position_error_unit);
-	read(fields[2], detail.vertical_position_error);
-	read(fields[3], detail.vertical_position_error_unit);
-	read(fields[4], detail.overall_spherical_equiv_position_error);
-	read(fields[5], detail.overall_spherical_equiv_position_error_unit);
+	read(*(first + 0), detail.horizontal_position_error);
+	read(*(first + 1), detail.horizontal_position_error_unit);
+	read(*(first + 2), detail.vertical_position_error);
+	read(*(first + 3), detail.vertical_position_error_unit);
+	read(*(first + 4), detail.overall_spherical_equiv_position_error);
+	read(*(first + 5), detail.overall_spherical_equiv_position_error_unit);
 
 	return result;
 }

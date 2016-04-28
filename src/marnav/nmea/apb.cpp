@@ -86,32 +86,33 @@ void apb::check() const
 }
 
 std::unique_ptr<sentence> apb::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if ((fields.size() < 14) || (fields.size() > 15))
+	const auto size = std::distance(first, last);
+	if ((size < 14) || (size > 15))
 		throw std::invalid_argument{"invalid number of fields in apb::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<apb>();
 	result->set_talker(talker);
 	apb & detail = static_cast<apb &>(*result);
 
-	read(fields[0], detail.loran_c_blink_warning);
-	read(fields[1], detail.loran_c_cycle_lock_warning);
-	read(fields[2], detail.cross_track_error_magnitude);
-	read(fields[3], detail.direction_to_steer);
-	read(fields[4], detail.cross_track_unit);
-	read(fields[5], detail.status_arrival);
-	read(fields[6], detail.status_perpendicular_passing);
-	read(fields[7], detail.bearing_origin_to_destination);
-	read(fields[8], detail.bearing_origin_to_destination_ref);
-	read(fields[9], detail.waypoint_id);
-	read(fields[10], detail.bearing_pos_to_destination);
-	read(fields[11], detail.bearing_pos_to_destination_ref);
-	read(fields[12], detail.heading_to_steer_to_destination);
-	read(fields[13], detail.heading_to_steer_to_destination_ref);
+	read(*(first + 0), detail.loran_c_blink_warning);
+	read(*(first + 1), detail.loran_c_cycle_lock_warning);
+	read(*(first + 2), detail.cross_track_error_magnitude);
+	read(*(first + 3), detail.direction_to_steer);
+	read(*(first + 4), detail.cross_track_unit);
+	read(*(first + 5), detail.status_arrival);
+	read(*(first + 6), detail.status_perpendicular_passing);
+	read(*(first + 7), detail.bearing_origin_to_destination);
+	read(*(first + 8), detail.bearing_origin_to_destination_ref);
+	read(*(first + 9), detail.waypoint_id);
+	read(*(first + 10), detail.bearing_pos_to_destination);
+	read(*(first + 11), detail.bearing_pos_to_destination_ref);
+	read(*(first + 12), detail.heading_to_steer_to_destination);
+	read(*(first + 13), detail.heading_to_steer_to_destination_ref);
 
-	if (fields.size() > 14)
-		read(fields[14], detail.mode_indicator);
+	if (size > 14)
+		read(*(first + 14), detail.mode_indicator);
 
 	detail.check();
 

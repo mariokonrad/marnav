@@ -17,28 +17,28 @@ ttm::ttm()
 }
 
 std::unique_ptr<sentence> ttm::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 13)
+	if (std::distance(first, last) != 13)
 		throw std::invalid_argument{"invalid number of fields in ttm::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<ttm>();
 	result->set_talker(talker);
 	ttm & detail = static_cast<ttm &>(*result);
 
-	read(fields[0], detail.target_number);
-	read(fields[1], detail.target_distance);
-	read(fields[2], detail.bearing_from_ownship);
-	read(fields[3], detail.bearing_from_ownship_ref);
-	read(fields[4], detail.target_speed);
-	read(fields[5], detail.target_course);
-	read(fields[6], detail.target_course_ref);
-	read(fields[7], detail.distance_cpa);
-	read(fields[8], detail.tcpa);
-	read(fields[9], detail.unknown);
-	read(fields[10], detail.target_name);
-	read(fields[11], detail.target_status);
-	read(fields[12], detail.reference_target);
+	read(*(first + 0), detail.target_number);
+	read(*(first + 1), detail.target_distance);
+	read(*(first + 2), detail.bearing_from_ownship);
+	read(*(first + 3), detail.bearing_from_ownship_ref);
+	read(*(first + 4), detail.target_speed);
+	read(*(first + 5), detail.target_course);
+	read(*(first + 6), detail.target_course_ref);
+	read(*(first + 7), detail.distance_cpa);
+	read(*(first + 8), detail.tcpa);
+	read(*(first + 9), detail.unknown);
+	read(*(first + 10), detail.target_name);
+	read(*(first + 11), detail.target_status);
+	read(*(first + 12), detail.reference_target);
 
 	return result;
 }

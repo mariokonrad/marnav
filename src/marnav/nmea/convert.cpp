@@ -16,6 +16,7 @@ direction convert_hemisphere(const geo::latitude & p) noexcept
 		default:
 			assert(false);
 	}
+	return direction::none;
 }
 
 direction convert_hemisphere(const geo::longitude & p) noexcept
@@ -28,6 +29,7 @@ direction convert_hemisphere(const geo::longitude & p) noexcept
 		default:
 			assert(false);
 	}
+	return direction::none;
 }
 
 geo::latitude::hemisphere convert_hemisphere_lat(direction t)

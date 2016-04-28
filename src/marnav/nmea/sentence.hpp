@@ -239,10 +239,13 @@ constexpr const char * ais_physical_shore_station = "SA"; // NMEA 4.0 Physical S
 class sentence
 {
 public:
+	/// Type for fields to process while reading data from raw sentences.
+	using fields = std::vector<std::string>;
+
 	/// This signature is used in all subclasses to parse data fields
 	/// of a particular sentence.
 	using parse_function = std::function<std::unique_ptr<sentence>(
-		const std::string &, const std::vector<std::string> &)>;
+		const std::string &, fields::const_iterator, fields::const_iterator)>;
 
 	/// Maximum length of a NMEA sentence (raw format as string).
 	constexpr static int max_length = 82;
@@ -289,6 +292,13 @@ private:
 	const std::string tag_;
 	std::string talker_;
 };
+
+/// Helper function to parse a specific sentence.
+template <class T>
+std::unique_ptr<sentence> sentence_parse(const std::string & talker, const sentence::fields & f)
+{
+	return T::parse(talker, f.begin(), f.end());
+}
 
 /// Renders the specified sentence into a string.
 ///

@@ -22,23 +22,23 @@ gst::gst()
 }
 
 std::unique_ptr<sentence> gst::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 8)
+	if (std::distance(first, last) != 8)
 		throw std::invalid_argument{"invalid number of fields in gst::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<gst>();
 	result->set_talker(talker);
 	gst & detail = static_cast<gst &>(*result);
 
-	read(fields[0], detail.time_utc);
-	read(fields[1], detail.total_rms);
-	read(fields[2], detail.dev_semi_major);
-	read(fields[3], detail.dev_semi_minor);
-	read(fields[4], detail.orientation);
-	read(fields[5], detail.dev_lat);
-	read(fields[6], detail.dev_lon);
-	read(fields[7], detail.dev_alt);
+	read(*(first + 0), detail.time_utc);
+	read(*(first + 1), detail.total_rms);
+	read(*(first + 2), detail.dev_semi_major);
+	read(*(first + 3), detail.dev_semi_minor);
+	read(*(first + 4), detail.orientation);
+	read(*(first + 5), detail.dev_lat);
+	read(*(first + 6), detail.dev_lon);
+	read(*(first + 7), detail.dev_alt);
 
 	return result;
 }

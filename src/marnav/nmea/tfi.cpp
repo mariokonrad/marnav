@@ -72,9 +72,9 @@ void tfi::set_sensor(int index, state t)
 }
 
 std::unique_ptr<sentence> tfi::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 3)
+	if (std::distance(first, last) != 3)
 		throw std::invalid_argument{"invalid number of fields in tfi::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<tfi>();
@@ -82,7 +82,7 @@ std::unique_ptr<sentence> tfi::parse(
 	tfi & detail = static_cast<tfi &>(*result);
 
 	for (size_t i = 0; i < num_sensors; ++i)
-		read(fields[i], detail.sensors[i], state_mapping);
+		read(*(first + i), detail.sensors[i], state_mapping);
 
 	return result;
 }

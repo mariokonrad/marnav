@@ -40,21 +40,21 @@ void wnc::set_waypoint_from(const std::string & id)
 }
 
 std::unique_ptr<sentence> wnc::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 6)
+	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in wnc::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<wnc>();
 	result->set_talker(talker);
 	wnc & detail = static_cast<wnc &>(*result);
 
-	read(fields[0], detail.distance_nm);
-	read(fields[1], detail.distance_nm_unit);
-	read(fields[2], detail.distance_km);
-	read(fields[3], detail.distance_km_unit);
-	read(fields[4], detail.waypoint_to);
-	read(fields[5], detail.waypoint_from);
+	read(*(first + 0), detail.distance_nm);
+	read(*(first + 1), detail.distance_nm_unit);
+	read(*(first + 2), detail.distance_km);
+	read(*(first + 3), detail.distance_km_unit);
+	read(*(first + 4), detail.waypoint_to);
+	read(*(first + 5), detail.waypoint_from);
 
 	return result;
 }

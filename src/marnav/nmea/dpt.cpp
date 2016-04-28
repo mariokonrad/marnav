@@ -22,19 +22,20 @@ dpt::dpt(const std::string & talker)
 }
 
 std::unique_ptr<sentence> dpt::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if ((fields.size() < 2) || (fields.size() > 3))
+	const auto size = std::distance(first, last);
+	if ((size < 2) || (size > 3))
 		throw std::invalid_argument{"invalid number of fields in dpt::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<dpt>(talker);
 	dpt & detail = static_cast<dpt &>(*result);
 
-	read(fields[0], detail.depth_meter);
-	read(fields[1], detail.transducer_offset);
+	read(*(first + 0), detail.depth_meter);
+	read(*(first + 1), detail.transducer_offset);
 
-	if (fields.size() > 2)
-		read(fields[2], detail.max_depth);
+	if (size > 2)
+		read(*(first + 2), detail.max_depth);
 
 	return result;
 }

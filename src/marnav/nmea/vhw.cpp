@@ -34,23 +34,23 @@ void vhw::set_speed_kmh(double t) noexcept
 }
 
 std::unique_ptr<sentence> vhw::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 8)
+	if (std::distance(first, last) != 8)
 		throw std::invalid_argument{"invalid number of fields in vhw::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<vhw>();
 	result->set_talker(talker);
 	vhw & detail = static_cast<vhw &>(*result);
 
-	read(fields[0], detail.heading_empty);
-	read(fields[1], detail.degrees_true);
-	read(fields[2], detail.heading);
-	read(fields[3], detail.degrees_mag);
-	read(fields[4], detail.speed_knots);
-	read(fields[5], detail.speed_knots_unit);
-	read(fields[6], detail.speed_kmh);
-	read(fields[7], detail.speed_kmh_unit);
+	read(*(first + 0), detail.heading_empty);
+	read(*(first + 1), detail.degrees_true);
+	read(*(first + 2), detail.heading);
+	read(*(first + 3), detail.degrees_mag);
+	read(*(first + 4), detail.speed_knots);
+	read(*(first + 5), detail.speed_knots_unit);
+	read(*(first + 6), detail.speed_kmh);
+	read(*(first + 7), detail.speed_kmh_unit);
 
 	return result;
 }

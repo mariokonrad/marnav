@@ -31,8 +31,8 @@ TEST_F(Test_nmea_vlw, parse)
 
 TEST_F(Test_nmea_vlw, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::vlw::parse("@@", {3, "@"}));
-	EXPECT_ANY_THROW(nmea::vlw::parse("@@", {5, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vlw>("@@", {3, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vlw>("@@", {5, "@"}));
 }
 
 TEST_F(Test_nmea_vlw, empty_to_string)

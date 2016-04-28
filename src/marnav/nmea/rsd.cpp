@@ -33,9 +33,9 @@ void rsd::set_range(double scale, char unit) noexcept
 }
 
 std::unique_ptr<sentence> rsd::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 13)
+	if (std::distance(first, last) != 13)
 		throw std::invalid_argument{"invalid number of fields in rsd::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<rsd>();
@@ -43,12 +43,12 @@ std::unique_ptr<sentence> rsd::parse(
 	rsd & detail = static_cast<rsd &>(*result);
 
 	for (decltype(detail.unknowns.size()) i = 0; i < detail.unknowns.size(); ++i)
-		read(fields[i], detail.unknowns[i]);
-	read(fields[8], detail.cursor_range);
-	read(fields[9], detail.cursor_bearing);
-	read(fields[10], detail.range_scale);
-	read(fields[11], detail.range_unit);
-	read(fields[12], detail.unknown);
+		read(*(first + i), detail.unknowns[i]);
+	read(*(first + 8), detail.cursor_range);
+	read(*(first + 9), detail.cursor_bearing);
+	read(*(first + 10), detail.range_scale);
+	read(*(first + 11), detail.range_unit);
+	read(*(first + 12), detail.unknown);
 
 	return result;
 }

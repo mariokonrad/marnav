@@ -27,10 +27,10 @@ TEST_F(Test_nmea_sfi, parse)
 
 TEST_F(Test_nmea_sfi, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sfi::parse("@@", {1, "@"}));
-	EXPECT_ANY_THROW(nmea::sfi::parse("@@", {3, "@"}));
-	EXPECT_ANY_THROW(nmea::sfi::parse("@@", {23, "@"}));
-	EXPECT_ANY_THROW(nmea::sfi::parse("@@", {24, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::sfi>("@@", {1, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::sfi>("@@", {3, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::sfi>("@@", {23, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::sfi>("@@", {24, "@"}));
 }
 
 TEST_F(Test_nmea_sfi, empty_to_string)

@@ -30,27 +30,28 @@ void gll::set_lon(const geo::longitude & t)
 }
 
 std::unique_ptr<sentence> gll::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
 	// older version has no 'mode_indicator'
-	if ((fields.size() < 6) || (fields.size() > 7))
+	const auto size = std::distance(first, last);
+	if ((size < 6) || (size > 7))
 		throw std::invalid_argument{
 			std::string{"invalid number of fields in gll::parse: expected 6, got "}
-			+ std::to_string(fields.size())};
+			+ std::to_string(size)};
 
 	std::unique_ptr<sentence> result = utils::make_unique<gll>();
 	result->set_talker(talker);
 	gll & detail = static_cast<gll &>(*result);
 
-	read(fields[0], detail.lat);
-	read(fields[1], detail.lat_hem);
-	read(fields[2], detail.lon);
-	read(fields[3], detail.lon_hem);
-	read(fields[4], detail.time_utc);
-	read(fields[5], detail.data_valid);
+	read(*(first + 0), detail.lat);
+	read(*(first + 1), detail.lat_hem);
+	read(*(first + 2), detail.lon);
+	read(*(first + 3), detail.lon_hem);
+	read(*(first + 4), detail.time_utc);
+	read(*(first + 5), detail.data_valid);
 
-	if (fields.size() > 6)
-		read(fields[6], detail.mode_indicator);
+	if (size > 6)
+		read(*(first + 6), detail.mode_indicator);
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
 	detail.lat = correct_hemisphere(detail.lat, detail.lat_hem);

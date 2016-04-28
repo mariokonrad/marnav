@@ -31,20 +31,20 @@ void msk::set_bitrate(uint32_t rate, selection_mode mode) noexcept
 }
 
 std::unique_ptr<sentence> msk::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 5)
+	if (std::distance(first, last) != 5)
 		throw std::invalid_argument{"invalid number of fields in msk::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<msk>();
 	result->set_talker(talker);
 	msk & detail = static_cast<msk &>(*result);
 
-	read(fields[0], detail.frequency);
-	read(fields[1], detail.frequency_mode);
-	read(fields[2], detail.bitrate);
-	read(fields[3], detail.bitrate_mode);
-	read(fields[4], detail.frequency_mss_status);
+	read(*(first + 0), detail.frequency);
+	read(*(first + 1), detail.frequency_mode);
+	read(*(first + 2), detail.bitrate);
+	read(*(first + 3), detail.bitrate_mode);
+	read(*(first + 4), detail.frequency_mss_status);
 
 	return result;
 }

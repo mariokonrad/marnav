@@ -27,8 +27,8 @@ TEST_F(Test_nmea_xte, parse)
 
 TEST_F(Test_nmea_xte, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::xte::parse("@@", {4, "@"}));
-	EXPECT_ANY_THROW(nmea::xte::parse("@@", {7, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::xte>("@@", {4, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::xte>("@@", {7, "@"}));
 }
 
 TEST_F(Test_nmea_xte, empty_to_string)

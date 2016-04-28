@@ -18,8 +18,8 @@ TEST_F(Test_nmea_dsc, properties) { nmea_sentence_traits<nmea::dsc>(); }
 
 TEST_F(Test_nmea_dsc, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::dsc::parse("@@", {10, "@"}));
-	EXPECT_ANY_THROW(nmea::dsc::parse("@@", {12, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::dsc>("@@", {10, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::dsc>("@@", {12, "@"}));
 }
 
 TEST_F(Test_nmea_dsc, parse)

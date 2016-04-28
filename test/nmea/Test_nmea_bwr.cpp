@@ -28,8 +28,8 @@ TEST_F(Test_nmea_bwr, parse)
 
 TEST_F(Test_nmea_bwr, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::bwr::parse("@@", {11, "@"}));
-	EXPECT_ANY_THROW(nmea::bwr::parse("@@", {13, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::bwr>("@@", {11, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::bwr>("@@", {13, "@"}));
 }
 
 TEST_F(Test_nmea_bwr, empty_to_string)

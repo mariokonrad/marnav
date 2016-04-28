@@ -235,21 +235,21 @@ geo::region dsc::get_geographical_area() const
 /// @todo Read and interpret more fields
 ///
 std::unique_ptr<sentence> dsc::parse(
-	const std::string & talker, const std::vector<std::string> & fields)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (fields.size() != 11)
+	if (std::distance(first, last) != 11)
 		throw std::invalid_argument{"invalid number of fields in dsc::parse"};
 
 	std::unique_ptr<sentence> result = utils::make_unique<dsc>();
 	result->set_talker(talker);
 	dsc & detail = static_cast<dsc &>(*result);
 
-	read(fields[0], detail.fmt_spec, format_specifier_mapping);
-	read(fields[1], detail.address);
-	read(fields[2], detail.cat, category_mapping);
+	read(*(first + 0), detail.fmt_spec, format_specifier_mapping);
+	read(*(first + 1), detail.address);
+	read(*(first + 2), detail.cat, category_mapping);
 	// @todo read other 6 data members
-	read(fields[9], detail.ack, acknowledgement_mapping);
-	read(fields[10], detail.extension, extension_indicator_mapping);
+	read(*(first + 9), detail.ack, acknowledgement_mapping);
+	read(*(first + 10), detail.extension, extension_indicator_mapping);
 
 	return result;
 }
