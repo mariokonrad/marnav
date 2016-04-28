@@ -256,7 +256,6 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 				-Wdisabled-optimization
 				-Wfloat-equal
 				-Wformat=2
-				#-Wformat-nonliteral
 				-Wformat-security
 				-Wformat-y2k
 				-Wimport
@@ -273,11 +272,9 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 				-Wpointer-arith
 				-Wredundant-decls
 				#-Wsign-conversion
-				#-Wshadow
 				#-Wstack-protector
 				-Wstrict-aliasing=2
-				#-Wswitch-enum
-				#-Wswitch-default
+				-Wswitch
 				-Wunreachable-code
 				-Wunused
 				-Wunused-parameter
@@ -287,6 +284,9 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 				-Wno-unused-function
 				-Wno-comment
 				-Wno-format-nonliteral
+				-Wno-shadow
+				-Wno-switch-enum
+				-Wno-switch-default
 			)
 	endif()
 	string(TOLOWER "${CMAKE_BUILD_TYPE}" build_type_lower)

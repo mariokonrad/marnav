@@ -78,7 +78,7 @@ date date::parse(const std::string & str)
 {
 	try {
 		std::size_t pos = 0;
-		uint32_t t = std::stoi(str, &pos);
+		uint32_t t = std::stoul(str, &pos);
 		if (pos != str.size())
 			throw std::invalid_argument{"invalid format for date"};
 		return date{t % 100, static_cast<month>((t / 100) % 100), (t / 10000) % 100};
