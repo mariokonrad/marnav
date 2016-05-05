@@ -46,6 +46,8 @@ template <class Iterator> uint8_t checksum(Iterator a, Iterator b) noexcept
 	std::for_each(a, b, [&sum](char c) { sum ^= static_cast<uint8_t>(c); });
 	return sum;
 }
+
+std::string checksum_to_string(uint8_t sum);
 }
 }
 

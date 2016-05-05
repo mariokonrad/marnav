@@ -230,3 +230,13 @@ target_link_libraries(benchmark_nmea_split
 	pthread
 	)
 
+add_executable(benchmark_nmea_checksum
+	nmea/Benchmark_nmea_checksum.cpp
+	)
+
+target_link_libraries(benchmark_nmea_checksum
+	marnav
+	benchmark
+	pthread
+	)
+

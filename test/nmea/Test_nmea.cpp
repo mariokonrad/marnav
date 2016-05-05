@@ -11,6 +11,22 @@ class Test_nmea : public ::testing::Test
 {
 };
 
+TEST_F(Test_nmea, checksum_to_string)
+{
+	EXPECT_STREQ("00", nmea::checksum_to_string(0x00).c_str());
+	EXPECT_STREQ("01", nmea::checksum_to_string(0x01).c_str());
+	EXPECT_STREQ("02", nmea::checksum_to_string(0x02).c_str());
+	EXPECT_STREQ("04", nmea::checksum_to_string(0x04).c_str());
+	EXPECT_STREQ("08", nmea::checksum_to_string(0x08).c_str());
+	EXPECT_STREQ("10", nmea::checksum_to_string(0x10).c_str());
+	EXPECT_STREQ("20", nmea::checksum_to_string(0x20).c_str());
+	EXPECT_STREQ("40", nmea::checksum_to_string(0x40).c_str());
+	EXPECT_STREQ("80", nmea::checksum_to_string(0x80).c_str());
+	EXPECT_STREQ("5A", nmea::checksum_to_string(0x5a).c_str());
+	EXPECT_STREQ("A5", nmea::checksum_to_string(0xa5).c_str());
+	EXPECT_STREQ("FF", nmea::checksum_to_string(0xff).c_str());
+}
+
 TEST_F(Test_nmea, make_sentence_empty_string) { EXPECT_ANY_THROW(nmea::make_sentence("")); }
 
 TEST_F(Test_nmea, make_sentence_no_start_token)

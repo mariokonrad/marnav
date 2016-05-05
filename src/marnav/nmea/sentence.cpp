@@ -40,11 +40,8 @@ std::string to_string(const sentence & s)
 		result += data;
 	}
 	result += s.get_end_token();
-
-	char buf[8];
-	snprintf(buf, sizeof(buf), "%02X", checksum(result.begin() + 1, result.end() - 1));
-
-	return result + buf;
+	result += checksum_to_string(checksum(result.begin() + 1, result.end() - 1));
+	return result;
 }
 }
 }
