@@ -19,17 +19,15 @@ std::vector<std::string> parse_fields(const std::string & s)
 	if (s.size() < 1)
 		return std::vector<std::string>{};
 
-	static const char * DELIMITERS = ",*";
+	static constexpr const char * DELIMITERS = ",*";
 	std::vector<std::string> result;
-	std::string::size_type last = 1;
-	std::string::size_type p = s.find_first_of(DELIMITERS, last);
-	while (last != std::string::npos) {
-		result.push_back(s.substr(last, p - last));
-		if (p == std::string::npos)
-			break;
-		last = p + 1;
+	result.reserve(14); // number of fields in RMC, fairly common case
+	std::string::size_type p = 0;
+	do {
+		const auto last = p + 1;
 		p = s.find_first_of(DELIMITERS, last);
-	}
+		result.push_back(s.substr(last, p - last));
+	} while (p != std::string::npos);
 	return result;
 }
 }

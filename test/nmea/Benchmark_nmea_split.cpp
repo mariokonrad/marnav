@@ -33,6 +33,48 @@ static std::vector<std::string> parse_fields__v1(const std::string & s)
 	auto fields_end = std::sregex_token_iterator();
 	return {fields_begin, fields_end};
 }
+
+// No regex anymore, simple string handling
+static std::vector<std::string> parse_fields__v2(const std::string & s)
+{
+	if (s.size() < 1)
+		return std::vector<std::string>{};
+
+	static const char * DELIMITERS = ",*";
+	std::vector<std::string> result;
+	std::string::size_type last = 1;
+	std::string::size_type p = s.find_first_of(DELIMITERS, last);
+	while (last != std::string::npos) {
+		result.push_back(s.substr(last, p - last));
+		if (p == std::string::npos)
+			break;
+		last = p + 1;
+		p = s.find_first_of(DELIMITERS, last);
+	}
+	return result;
+}
+
+// No regex anymore, simple string handling, reallocating string vector for
+// 14 elements (number of fields in RMC)
+static std::vector<std::string> parse_fields__v3(const std::string & s)
+{
+	if (s.size() < 1)
+		return std::vector<std::string>{};
+
+	static const char * DELIMITERS = ",*";
+	std::vector<std::string> result;
+	result.reserve(14);
+	std::string::size_type last = 1;
+	std::string::size_type p = s.find_first_of(DELIMITERS, last);
+	while (last != std::string::npos) {
+		result.push_back(s.substr(last, p - last));
+		if (p == std::string::npos)
+			break;
+		last = p + 1;
+		p = s.find_first_of(DELIMITERS, last);
+	}
+	return result;
+}
 }
 
 static void Benchmark_nmea_split_v0(benchmark::State & state)
@@ -58,6 +100,30 @@ static void Benchmark_nmea_split_v1(benchmark::State & state)
 }
 
 BENCHMARK(Benchmark_nmea_split_v1)->Range(0, 2);
+
+static void Benchmark_nmea_split_v2(benchmark::State & state)
+{
+	std::string sentence = SENTENCES[state.range_x()];
+	std::vector<std::string> result;
+	while (state.KeepRunning()) {
+		result = parse_fields__v2(sentence);
+		benchmark::DoNotOptimize(result);
+	}
+}
+
+BENCHMARK(Benchmark_nmea_split_v2)->Range(0, 2);
+
+static void Benchmark_nmea_split_v3(benchmark::State & state)
+{
+	std::string sentence = SENTENCES[state.range_x()];
+	std::vector<std::string> result;
+	while (state.KeepRunning()) {
+		result = parse_fields__v3(sentence);
+		benchmark::DoNotOptimize(result);
+	}
+}
+
+BENCHMARK(Benchmark_nmea_split_v3)->Range(0, 2);
 
 static void Benchmark_nmea_split(benchmark::State & state)
 {
