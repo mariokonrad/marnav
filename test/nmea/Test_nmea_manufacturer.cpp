@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 #include <marnav/nmea/manufacturer.hpp>
+#include <marnav/nmea/rmc.hpp>
+#include <marnav/nmea/pgrme.hpp>
 
 namespace
 {
@@ -21,13 +23,6 @@ TEST_F(Test_nmea_manufacturer, get_manufacturer_id)
 	EXPECT_EQ(nmea::manufacturer_id::GRM, nmea::get_manufacturer_id("PGRME"));
 }
 
-TEST_F(Test_nmea_manufacturer, get_manufacturer_name_from_tag)
-{
-	EXPECT_STREQ("NMEA", nmea::get_manufacturer_name("GPRMC").c_str());
-	EXPECT_STREQ("UNKNOWN", nmea::get_manufacturer_name("Pxxx").c_str());
-	EXPECT_STREQ("GARMIN CORPORATION", nmea::get_manufacturer_name("PGRME").c_str());
-}
-
 TEST_F(Test_nmea_manufacturer, get_manufacturer_tag_from_id)
 {
 	EXPECT_STREQ("", nmea::get_manufacturer_tag(nmea::manufacturer_id::NMEA).c_str());
@@ -40,6 +35,12 @@ TEST_F(Test_nmea_manufacturer, get_manufacturer_name_from_id)
 	EXPECT_STREQ("NMEA", nmea::get_manufacturer_name(nmea::manufacturer_id::NMEA).c_str());
 	EXPECT_STREQ("UNKNOWN", nmea::get_manufacturer_name(nmea::manufacturer_id::UNKNOWN).c_str());
 	EXPECT_STREQ("GARMIN CORPORATION", nmea::get_manufacturer_name(nmea::manufacturer_id::GRM).c_str());
+}
+
+TEST_F(Test_nmea_manufacturer, get_manufacturer_id_from_sentence)
+{
+	EXPECT_EQ(nmea::manufacturer_id::NMEA, nmea::get_manufacturer_id(nmea::rmc{}));
+	EXPECT_EQ(nmea::manufacturer_id::GRM, nmea::get_manufacturer_id(nmea::pgrme{}));
 }
 
 TEST_F(Test_nmea_manufacturer, get_supported_manufacturer_id)

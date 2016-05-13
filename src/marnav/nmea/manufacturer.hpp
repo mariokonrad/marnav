@@ -557,8 +557,10 @@ enum class manufacturer_id {
 	ZNS,
 };
 
+class sentence; // forward declaration
+
 manufacturer_id get_manufacturer_id(const std::string & tag);
-std::string get_manufacturer_name(const std::string & tag);
+manufacturer_id get_manufacturer_id(const sentence & s);
 
 std::string get_manufacturer_tag(manufacturer_id id);
 std::string get_manufacturer_name(manufacturer_id id);

@@ -1,6 +1,7 @@
 #include "manufacturer.hpp"
 #include <algorithm>
 #include <vector>
+#include <marnav/nmea/sentence.hpp>
 
 namespace marnav
 {
@@ -596,7 +597,7 @@ static bool is_unkown(const std::string & tag) { return (tag.size() < 4) || (tag
 /// @param[in] tag The tag, which is provided by the NMEA sentences.
 ///   This includes the prefix 'P' and the manufacturer specific sentence
 ///   identification after the manufacturer identification.
-/// @return The manufacturers name.
+/// @return The manufacturers ID.
 manufacturer_id get_manufacturer_id(const std::string & tag)
 {
 	if (is_nmea(tag))
@@ -609,23 +610,11 @@ manufacturer_id get_manufacturer_id(const std::string & tag)
 	return (it == manufacturers.cend()) ? manufacturer_id::UNKNOWN : it->id;
 }
 
-/// Returns the name of the manufacturer specified by the tag.
+/// Returns the ID of the manufacturer of the specified sentence.
 ///
-/// @param[in] tag The tag, which is provided by the NMEA sentences.
-///   This includes the prefix 'P' and the manufacturer specific sentence
-///   identification after the manufacturer identification.
-/// @return The manufacturers name.
-std::string get_manufacturer_name(const std::string & tag)
-{
-	if (is_nmea(tag))
-		return "NMEA";
-
-	if (is_unkown(tag))
-		return "UNKNOWN";
-
-	const auto it = find_manufacturer(tag.substr(1, 3));
-	return (it == manufacturers.cend()) ? "UNKNOWN" : it->name;
-}
+/// @param[in] s Sentence to get the manufacturer ID from.
+/// @return The manufacturers ID.
+manufacturer_id get_manufacturer_id(const sentence & s) { return get_manufacturer_id(s.tag()); }
 
 /// Returns the tag of the manufacturer specified by the ID.
 std::string get_manufacturer_tag(manufacturer_id id)
