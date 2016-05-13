@@ -175,8 +175,8 @@ static std::tuple<std::string, std::string> parse_address(const std::string & ad
 		throw std::invalid_argument{"invalid/malformed address in nmea/parse_address"};
 
 	// check for vendor extensions
-	if (address[0] == 'P') {
-		// properitary extension / vendor extension
+	if (sentence::is_proprietary(address)) {
+		// proprietary extension / vendor extension
 		return make_tuple(std::string{}, address);
 	}
 

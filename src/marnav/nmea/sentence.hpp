@@ -272,6 +272,8 @@ public:
 	/// Returns the talker.
 	std::string talker() const;
 
+	static bool is_proprietary(const std::string & s);
+
 	/// Sets the talker of the sentence.
 	///
 	/// @note All subclasses specify a default talker at construction.

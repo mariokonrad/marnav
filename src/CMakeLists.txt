@@ -126,6 +126,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/geo/cpa.cpp
 	marnav/geo/geodesic.cpp
 	marnav/nmea/convert.cpp
+	marnav/nmea/manufacturer.cpp
 	marnav/nmea/checks.cpp
 	marnav/nmea/split.cpp
 	marnav/nmea/angle.cpp

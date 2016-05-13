@@ -28,6 +28,14 @@ std::string sentence::tag() const { return tag_; }
 
 std::string sentence::talker() const { return talker_; }
 
+/// Returns true of the speficied address string indicates a proprietary sentence.
+bool sentence::is_proprietary(const std::string & s)
+{
+	if (s.size() < 1)
+		return false;
+	return s[0] == 'P';
+}
+
 std::string to_string(const sentence & s)
 {
 	std::string result;
