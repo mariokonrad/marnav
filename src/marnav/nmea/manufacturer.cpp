@@ -1,4 +1,5 @@
 #include "manufacturer.hpp"
+#include <algorithm>
 #include <map>
 
 namespace marnav
@@ -6,7 +7,7 @@ namespace marnav
 namespace nmea
 {
 /// @cond DEV
-namespace detail
+namespace
 {
 struct entry {
 	manufacturer_id id;
@@ -585,34 +586,84 @@ static bool is_unkown(const std::string & tag) { return (tag.size() < 4) || (tag
 }
 /// @endcond
 
+/// Returns the name of the manufacturer specified by the tag.
+///
+/// @param[in] tag The tag, which is provided by the NMEA sentences.
+///   This includes the prefix 'P' and the manufacturer specific sentence
+///   identification after the manufacturer identification.
+/// @return The manufacturers name.
 manufacturer_id get_manufacturer_id(const std::string & tag)
 {
-	if (detail::is_nmea(tag))
+	if (is_nmea(tag))
 		return manufacturer_id::NMEA;
 
-	if (detail::is_unkown(tag))
+	if (is_unkown(tag))
 		return manufacturer_id::UNKNOWN;
 
-	const auto it = detail::find_manufacturer(tag.substr(1, 3));
-	if (it == detail::manufacturer_table.cend())
+	const auto it = find_manufacturer(tag.substr(1, 3));
+	if (it == manufacturer_table.cend())
 		return manufacturer_id::UNKNOWN;
 
 	return it->second.id;
 }
 
+/// Returns the name of the manufacturer specified by the tag.
+///
+/// @param[in] tag The tag, which is provided by the NMEA sentences.
+///   This includes the prefix 'P' and the manufacturer specific sentence
+///   identification after the manufacturer identification.
+/// @return The manufacturers name.
 std::string get_manufacturer_name(const std::string & tag)
 {
-	if (detail::is_nmea(tag))
+	if (is_nmea(tag))
 		return "NMEA";
 
-	if (detail::is_unkown(tag))
+	if (is_unkown(tag))
 		return "UNKNOWN";
 
-	const auto it = detail::find_manufacturer(tag.substr(1, 3));
-	if (it == detail::manufacturer_table.cend())
+	const auto it = find_manufacturer(tag.substr(1, 3));
+	if (it == manufacturer_table.cend())
 		return "UNKNOWN";
 
 	return it->second.name;
+}
+
+/// Returns the tag of the manufacturer specified by the ID.
+std::string get_manufacturer_tag(manufacturer_id id)
+{
+	const auto it
+		= std::find_if(manufacturer_table.cbegin(), manufacturer_table.cend(),
+			[id](const manufacturer_map::value_type & m) { return m.second.id == id; });
+
+	return (it == manufacturer_table.cend()) ? std::string{} : it->first;
+}
+
+/// Returns the name of the manufacturer specified by the ID.
+std::string get_manufacturer_name(manufacturer_id id)
+{
+	if (id == manufacturer_id::NMEA)
+		return "NMEA";
+	if (id == manufacturer_id::UNKNOWN)
+		return "UNKNOWN";
+
+	const auto it
+		= std::find_if(manufacturer_table.cbegin(), manufacturer_table.cend(),
+			[id](const manufacturer_map::value_type & m) { return m.second.id == id; });
+
+	return (it == manufacturer_table.cend()) ? std::string{} : it->second.name;
+}
+
+/// Returns a container of all supported manufacturer IDs.
+std::vector<manufacturer_id> get_supported_manufacturer_id()
+{
+	std::vector<manufacturer_id> v;
+	v.reserve(manufacturer_table.size());
+
+	for (const auto & m : manufacturer_table) {
+		v.push_back(m.second.id);
+	}
+
+	return v;
 }
 }
 }

@@ -2,6 +2,7 @@
 #define __NMEA__MANUFACTURER__HPP__
 
 #include <string>
+#include <vector>
 
 namespace marnav
 {
@@ -558,6 +559,11 @@ enum class manufacturer_id {
 
 manufacturer_id get_manufacturer_id(const std::string & tag);
 std::string get_manufacturer_name(const std::string & tag);
+
+std::string get_manufacturer_tag(manufacturer_id id);
+std::string get_manufacturer_name(manufacturer_id id);
+
+std::vector<manufacturer_id> get_supported_manufacturer_id();
 }
 }
 

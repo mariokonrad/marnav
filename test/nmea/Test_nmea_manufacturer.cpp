@@ -21,10 +21,45 @@ TEST_F(Test_nmea_manufacturer, get_manufacturer_id)
 	EXPECT_EQ(nmea::manufacturer_id::GRM, nmea::get_manufacturer_id("PGRME"));
 }
 
-TEST_F(Test_nmea_manufacturer, get_manufacturer_name)
+TEST_F(Test_nmea_manufacturer, get_manufacturer_name_from_tag)
 {
 	EXPECT_STREQ("NMEA", nmea::get_manufacturer_name("GPRMC").c_str());
 	EXPECT_STREQ("UNKNOWN", nmea::get_manufacturer_name("Pxxx").c_str());
 	EXPECT_STREQ("GARMIN CORPORATION", nmea::get_manufacturer_name("PGRME").c_str());
+}
+
+TEST_F(Test_nmea_manufacturer, get_manufacturer_tag_from_id)
+{
+	EXPECT_STREQ("", nmea::get_manufacturer_tag(nmea::manufacturer_id::NMEA).c_str());
+	EXPECT_STREQ("", nmea::get_manufacturer_tag(nmea::manufacturer_id::UNKNOWN).c_str());
+	EXPECT_STREQ("GRM", nmea::get_manufacturer_tag(nmea::manufacturer_id::GRM).c_str());
+}
+
+TEST_F(Test_nmea_manufacturer, get_manufacturer_name_from_id)
+{
+	EXPECT_STREQ("NMEA", nmea::get_manufacturer_name(nmea::manufacturer_id::NMEA).c_str());
+	EXPECT_STREQ("UNKNOWN", nmea::get_manufacturer_name(nmea::manufacturer_id::UNKNOWN).c_str());
+	EXPECT_STREQ("GARMIN CORPORATION", nmea::get_manufacturer_name(nmea::manufacturer_id::GRM).c_str());
+}
+
+TEST_F(Test_nmea_manufacturer, get_supported_manufacturer_id)
+{
+	const auto m = nmea::get_supported_manufacturer_id();
+
+	EXPECT_EQ(541u, m.size());
+}
+
+TEST_F(Test_nmea_manufacturer, test_manufacturer_tags)
+{
+	for (const auto id : nmea::get_supported_manufacturer_id()) {
+		EXPECT_FALSE(nmea::get_manufacturer_tag(id).empty());
+	}
+}
+
+TEST_F(Test_nmea_manufacturer, test_manufacturer_names)
+{
+	for (const auto id : nmea::get_supported_manufacturer_id()) {
+		EXPECT_FALSE(nmea::get_manufacturer_name(id).empty());
+	}
 }
 }
