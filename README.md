@@ -315,8 +315,10 @@ Compiler:
 - GCC 5.1
 - GCC 5.2
 - GCC 5.3
+- GCC 6.1
 - Clang 3.6
 - Clang 3.7
+- Clang 3.8
 
 Tools needed to build the library:
 - cmake 3.2
