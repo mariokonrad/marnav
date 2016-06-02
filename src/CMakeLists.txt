@@ -41,8 +41,9 @@ else()
 endif()
 message(STATUS "Build library type: ${LIBRARY_TYPE}")
 
-message(STATUS "Build AIS support: ${ENABLE_AIS}")
+message(STATUS "Build AIS support    : ${ENABLE_AIS}")
 message(STATUS "Build SeaTalk support: ${ENABLE_SEATALK}")
+message(STATUS "Build IO support     : ${ENABLE_IO}")
 
 configure_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/marnav/version.hpp.in
@@ -87,8 +88,6 @@ if(ENABLE_SEATALK)
 		marnav/seatalk/message_86.cpp
 		marnav/seatalk/message_87.cpp
 		marnav/seatalk/message_89.cpp
-		marnav/io/seatalk_reader.cpp
-		marnav/io/default_seatalk_reader.cpp
 		)
 endif()
 
@@ -112,6 +111,21 @@ if(ENABLE_AIS)
 		marnav/ais/message_23.cpp
 		marnav/ais/message_24.cpp
 		)
+endif()
+
+if(ENABLE_IO)
+	set(SOURCES ${SOURCES}
+		marnav/io/serial.cpp
+		marnav/io/nmea_reader.cpp
+		marnav/io/default_nmea_reader.cpp
+		)
+
+	if(ENABLE_SEATALK)
+		set(SOURCES ${SOURCES}
+			marnav/io/seatalk_reader.cpp
+			marnav/io/default_seatalk_reader.cpp
+			)
+	endif()
 endif()
 
 add_library(marnav ${LIBRARY_TYPE}
@@ -209,9 +223,6 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/nmea/zfo.cpp
 	marnav/nmea/ztg.cpp
 	marnav/nmea/pgrme.cpp
-	marnav/io/serial.cpp
-	marnav/io/nmea_reader.cpp
-	marnav/io/default_nmea_reader.cpp
 	${SOURCES}
 	)
 
@@ -484,14 +495,6 @@ if(ENABLE_SEATALK)
 			marnav/seatalk/message_89.hpp
 		DESTINATION include/marnav/seatalk
 		)
-	install(
-		FILES
-			marnav/io/seatalk_reader.hpp
-			marnav/io/default_seatalk_reader.hpp
-			marnav/io/default_seatalk_serial.hpp
-		DESTINATION include/marnav/io
-		)
-
 endif()
 
 install(
@@ -523,15 +526,26 @@ install(
 	DESTINATION include/marnav/geo
 	)
 
-install(
-	FILES
-		marnav/io/device.hpp
-		marnav/io/serial.hpp
-		marnav/io/nmea_reader.hpp
-		marnav/io/default_nmea_reader.hpp
-		marnav/io/default_nmea_serial.hpp
-	DESTINATION include/marnav/io
-	)
+if(ENABLE_IO)
+	install(
+		FILES
+			marnav/io/device.hpp
+			marnav/io/serial.hpp
+			marnav/io/nmea_reader.hpp
+			marnav/io/default_nmea_reader.hpp
+			marnav/io/default_nmea_serial.hpp
+		DESTINATION include/marnav/io
+		)
+	if(ENABLE_SEATALK)
+		install(
+			FILES
+				marnav/io/seatalk_reader.hpp
+				marnav/io/default_seatalk_reader.hpp
+				marnav/io/default_seatalk_serial.hpp
+			DESTINATION include/marnav/io
+			)
+	endif()
+endif()
 
 # stuff for the config and config-version files
 set(INCLUDE_INSTALL_DIR include)

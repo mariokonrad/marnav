@@ -31,6 +31,7 @@ option(ENABLE_BENCHMARK "Enable Benchmark" OFF)
 option(ENABLE_WARNING_HELL "Enable Warning Hell" OFF)
 option(ENABLE_AIS "Enable AIS support" ON)
 option(ENABLE_SEATALK "Enable SeaTalk support" ON)
+option(ENABLE_IO "Enable IO support" ON)
 
 ### common
 message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")

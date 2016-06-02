@@ -289,6 +289,7 @@ Build options:
 Features:
 - `ENABLE_AIS ` : enables AIS support. Default: `ON`
 - `ENABLE_SEATALK` : enables SeaTalk support. Default: `ON`
+- `ENABLE_IO` : enables IO support. Default: `ON`
 
 
 \subsection subsec_devenv_clang_static_analysis Static Analysis with Clang

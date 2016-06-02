@@ -64,8 +64,18 @@ if(ENABLE_SEATALK)
 		seatalk/Test_seatalk_message_86.cpp
 		seatalk/Test_seatalk_message_87.cpp
 		seatalk/Test_seatalk_message_89.cpp
-		io/Test_io_seatalk_reader.cpp
 		)
+endif()
+
+if(ENABLE_IO)
+	set(SOURCES ${SOURCES}
+		io/Test_io_nmea_reader.cpp
+		)
+	if(ENABLE_SEATALK)
+		set(SOURCES ${SOURCES}
+			io/Test_io_seatalk_reader.cpp
+			)
+	endif()
 endif()
 
 add_executable(testrunner
@@ -163,7 +173,6 @@ add_executable(testrunner
 	nmea/Test_nmea_zfo.cpp
 	nmea/Test_nmea_ztg.cpp
 	nmea/Test_nmea_pgrme.cpp
-	io/Test_io_nmea_reader.cpp
 	${SOURCES}
 	)
 
