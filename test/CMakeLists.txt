@@ -260,3 +260,13 @@ target_link_libraries(benchmark_nmea_manufacturer
 	pthread
 	)
 
+add_executable(benchmark_nmea_sentence
+	nmea/Benchmark_nmea_sentence.cpp
+	)
+
+target_link_libraries(benchmark_nmea_sentence
+	marnav
+	benchmark
+	pthread
+	)
+
