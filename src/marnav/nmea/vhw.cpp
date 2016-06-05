@@ -1,6 +1,5 @@
 #include "vhw.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -13,6 +12,22 @@ vhw::vhw()
 	: sentence(ID, TAG, talker_id::integrated_instrumentation)
 	, degrees_true(reference::TRUE)
 {
+}
+
+vhw::vhw(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 8)
+		throw std::invalid_argument{"invalid number of fields in vhw"};
+
+	read(*(first + 0), heading_empty);
+	read(*(first + 1), degrees_true);
+	read(*(first + 2), heading);
+	read(*(first + 3), degrees_mag);
+	read(*(first + 4), speed_knots);
+	read(*(first + 5), speed_knots_unit);
+	read(*(first + 6), speed_kmh);
+	read(*(first + 7), speed_kmh_unit);
 }
 
 void vhw::set_heading(double t) noexcept
@@ -36,23 +51,7 @@ void vhw::set_speed_kmh(double t) noexcept
 std::unique_ptr<sentence> vhw::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 8)
-		throw std::invalid_argument{"invalid number of fields in vhw::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<vhw>();
-	result->set_talker(talker);
-	vhw & detail = static_cast<vhw &>(*result);
-
-	read(*(first + 0), detail.heading_empty);
-	read(*(first + 1), detail.degrees_true);
-	read(*(first + 2), detail.heading);
-	read(*(first + 3), detail.degrees_mag);
-	read(*(first + 4), detail.speed_knots);
-	read(*(first + 5), detail.speed_knots_unit);
-	read(*(first + 6), detail.speed_kmh);
-	read(*(first + 7), detail.speed_kmh_unit);
-
-	return result;
+	return std::unique_ptr<vhw>(new vhw(talker, first, last));
 }
 
 std::vector<std::string> vhw::get_data() const

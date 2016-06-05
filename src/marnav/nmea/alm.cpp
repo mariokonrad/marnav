@@ -1,6 +1,5 @@
 #include "alm.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -11,22 +10,32 @@ constexpr const char * alm::TAG;
 
 alm::alm()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, number_of_messages(0)
-	, message_number(0)
-	, satellite_prn(0)
-	, gps_week_number(0)
-	, sv_health(0)
-	, eccentricity(0)
-	, almanac_reference_time(0)
-	, inclination_angle(0)
-	, rate_of_right_ascension(0)
-	, root_of_semimajor_axis(0)
-	, argument_of_perigee(0)
-	, longitude_of_ascension_node(0)
-	, mean_anomaly(0)
-	, f0_clock_parameter(0)
-	, f1_clock_parameter(0)
 {
+}
+
+alm::alm(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 15)
+		throw std::invalid_argument{"invalid number of fields in alm"};
+
+	read(*(first + 0), number_of_messages);
+	read(*(first + 1), message_number);
+	read(*(first + 2), satellite_prn);
+	read(*(first + 3), gps_week_number);
+	read(*(first + 4), sv_health);
+	read(*(first + 5), eccentricity, data_format::hex);
+	read(*(first + 6), almanac_reference_time, data_format::hex);
+	read(*(first + 7), inclination_angle, data_format::hex);
+	read(*(first + 8), rate_of_right_ascension, data_format::hex);
+	read(*(first + 9), root_of_semimajor_axis, data_format::hex);
+	read(*(first + 10), argument_of_perigee, data_format::hex);
+	read(*(first + 11), longitude_of_ascension_node, data_format::hex);
+	read(*(first + 12), mean_anomaly, data_format::hex);
+	read(*(first + 13), f0_clock_parameter, data_format::hex);
+	read(*(first + 14), f1_clock_parameter, data_format::hex);
+
+	check();
 }
 
 void alm::check() const
@@ -38,32 +47,7 @@ void alm::check() const
 std::unique_ptr<sentence> alm::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 15)
-		throw std::invalid_argument{"invalid number of fields in alm::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<alm>();
-	result->set_talker(talker);
-	alm & detail = static_cast<alm &>(*result);
-
-	read(*(first + 0), detail.number_of_messages);
-	read(*(first + 1), detail.message_number);
-	read(*(first + 2), detail.satellite_prn);
-	read(*(first + 3), detail.gps_week_number);
-	read(*(first + 4), detail.sv_health);
-	read(*(first + 5), detail.eccentricity, data_format::hex);
-	read(*(first + 6), detail.almanac_reference_time, data_format::hex);
-	read(*(first + 7), detail.inclination_angle, data_format::hex);
-	read(*(first + 8), detail.rate_of_right_ascension, data_format::hex);
-	read(*(first + 9), detail.root_of_semimajor_axis, data_format::hex);
-	read(*(first + 10), detail.argument_of_perigee, data_format::hex);
-	read(*(first + 11), detail.longitude_of_ascension_node, data_format::hex);
-	read(*(first + 12), detail.mean_anomaly, data_format::hex);
-	read(*(first + 13), detail.f0_clock_parameter, data_format::hex);
-	read(*(first + 14), detail.f1_clock_parameter, data_format::hex);
-
-	detail.check();
-
-	return result;
+	return std::unique_ptr<alm>(new alm(talker, first, last));
 }
 
 std::vector<std::string> alm::get_data() const

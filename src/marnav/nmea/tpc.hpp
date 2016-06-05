@@ -44,15 +44,16 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	tpc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	double distance_centerline;
-	unit::distance distance_centerline_unit;
-	double distance_transducer;
-	unit::distance distance_transducer_unit;
-	double depth;
-	unit::distance depth_unit;
+	double distance_centerline = 0.0;
+	unit::distance distance_centerline_unit = unit::distance::meter;
+	double distance_transducer = 0.0;
+	unit::distance distance_transducer_unit = unit::distance::meter;
+	double depth = 0.0;
+	unit::distance depth_unit = unit::distance::meter;
 
 public:
 	NMEA_GETTER(distance_centerline)

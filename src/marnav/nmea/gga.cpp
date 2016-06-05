@@ -2,7 +2,6 @@
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 #include <marnav/nmea/convert.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -14,6 +13,32 @@ constexpr const char * gga::TAG;
 gga::gga()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
+}
+
+gga::gga(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 14)
+		throw std::invalid_argument{"invalid number of fields in gga"};
+
+	read(*(first + 0), time);
+	read(*(first + 1), lat);
+	read(*(first + 2), lat_hem);
+	read(*(first + 3), lon);
+	read(*(first + 4), lon_hem);
+	read(*(first + 5), quality_indicator);
+	read(*(first + 6), n_satellites);
+	read(*(first + 7), hor_dilution);
+	read(*(first + 8), altitude);
+	read(*(first + 9), altitude_unit);
+	read(*(first + 10), geodial_separation);
+	read(*(first + 11), geodial_separation_unit);
+	read(*(first + 12), dgps_age);
+	read(*(first + 13), dgps_ref);
+
+	// instead of reading data into temporary lat/lon, let's correct values afterwards
+	lat = correct_hemisphere(lat, lat_hem);
+	lon = correct_hemisphere(lon, lon_hem);
 }
 
 void gga::set_lat(const geo::latitude & t)
@@ -31,33 +56,7 @@ void gga::set_lon(const geo::longitude & t)
 std::unique_ptr<sentence> gga::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 14)
-		throw std::invalid_argument{"invalid number of fields in gga::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<gga>();
-	result->set_talker(talker);
-	gga & detail = static_cast<gga &>(*result);
-
-	read(*(first + 0), detail.time);
-	read(*(first + 1), detail.lat);
-	read(*(first + 2), detail.lat_hem);
-	read(*(first + 3), detail.lon);
-	read(*(first + 4), detail.lon_hem);
-	read(*(first + 5), detail.quality_indicator);
-	read(*(first + 6), detail.n_satellites);
-	read(*(first + 7), detail.hor_dilution);
-	read(*(first + 8), detail.altitude);
-	read(*(first + 9), detail.altitude_unit);
-	read(*(first + 10), detail.geodial_separation);
-	read(*(first + 11), detail.geodial_separation_unit);
-	read(*(first + 12), detail.dgps_age);
-	read(*(first + 13), detail.dgps_ref);
-
-	// instead of reading data into temporary lat/lon, let's correct values afterwards
-	detail.lat = correct_hemisphere(detail.lat, detail.lat_hem);
-	detail.lon = correct_hemisphere(detail.lon, detail.lon_hem);
-
-	return result;
+	return std::unique_ptr<gga>(new gga(talker, first, last));
 }
 
 std::vector<std::string> gga::get_data() const

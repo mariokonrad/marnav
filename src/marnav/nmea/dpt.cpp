@@ -1,6 +1,5 @@
 #include "dpt.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -16,28 +15,27 @@ dpt::dpt()
 
 dpt::dpt(const std::string & talker)
 	: sentence(ID, TAG, talker)
-	, depth_meter(0.0)
-	, transducer_offset(0.0)
 {
+}
+
+dpt::dpt(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	const auto size = std::distance(first, last);
+	if ((size < 2) || (size > 3))
+		throw std::invalid_argument{"invalid number of fields in dpt"};
+
+	read(*(first + 0), depth_meter);
+	read(*(first + 1), transducer_offset);
+
+	if (size > 2)
+		read(*(first + 2), max_depth);
 }
 
 std::unique_ptr<sentence> dpt::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	const auto size = std::distance(first, last);
-	if ((size < 2) || (size > 3))
-		throw std::invalid_argument{"invalid number of fields in dpt::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<dpt>(talker);
-	dpt & detail = static_cast<dpt &>(*result);
-
-	read(*(first + 0), detail.depth_meter);
-	read(*(first + 1), detail.transducer_offset);
-
-	if (size > 2)
-		read(*(first + 2), detail.max_depth);
-
-	return result;
+	return std::unique_ptr<dpt>(new dpt(talker, first, last));
 }
 
 std::vector<std::string> dpt::get_data() const

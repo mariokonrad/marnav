@@ -2,7 +2,6 @@
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 #include <marnav/nmea/convert.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -14,6 +13,29 @@ constexpr const char * rma::TAG;
 rma::rma()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
+}
+
+rma::rma(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 11)
+		throw std::invalid_argument{"invalid number of fields in rma"};
+
+	read(*(first + 0), blink_warning);
+	read(*(first + 1), lat);
+	read(*(first + 2), lat_hem);
+	read(*(first + 3), lon);
+	read(*(first + 4), lon_hem);
+	read(*(first + 5), time_diff_a);
+	read(*(first + 6), time_diff_b);
+	read(*(first + 7), sog);
+	read(*(first + 8), track);
+	read(*(first + 9), magnetic_var);
+	read(*(first + 10), magnetic_var_hem);
+
+	// instead of reading data into temporary lat/lon, let's correct values afterwards
+	lat = correct_hemisphere(lat, lat_hem);
+	lon = correct_hemisphere(lon, lon_hem);
 }
 
 void rma::set_lat(const geo::latitude & t)
@@ -38,30 +60,7 @@ void rma::set_magnetic_var(double t, direction h)
 std::unique_ptr<sentence> rma::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 11)
-		throw std::invalid_argument{"invalid number of fields in rma::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<rma>();
-	result->set_talker(talker);
-	rma & detail = static_cast<rma &>(*result);
-
-	read(*(first + 0), detail.blink_warning);
-	read(*(first + 1), detail.lat);
-	read(*(first + 2), detail.lat_hem);
-	read(*(first + 3), detail.lon);
-	read(*(first + 4), detail.lon_hem);
-	read(*(first + 5), detail.time_diff_a);
-	read(*(first + 6), detail.time_diff_b);
-	read(*(first + 7), detail.sog);
-	read(*(first + 8), detail.track);
-	read(*(first + 9), detail.magnetic_var);
-	read(*(first + 10), detail.magnetic_var_hem);
-
-	// instead of reading data into temporary lat/lon, let's correct values afterwards
-	detail.lat = correct_hemisphere(detail.lat, detail.lat_hem);
-	detail.lon = correct_hemisphere(detail.lon, detail.lon_hem);
-
-	return result;
+	return std::unique_ptr<rma>(new rma(talker, first, last));
 }
 
 std::vector<std::string> rma::get_data() const

@@ -1,7 +1,6 @@
 #include "dse.hpp"
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -83,11 +82,21 @@ constexpr const char * dse::TAG;
 
 dse::dse()
 	: sentence(ID, TAG, talker_id::communications_dsc)
-	, number_of_messages(1)
-	, sentence_number(1)
-	, flag(query_flag::query)
-	, address(0)
 {
+}
+
+dse::dse(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 6)
+		throw std::invalid_argument{"invalid number of fields in dse"};
+
+	read(*(first + 0), number_of_messages);
+	read(*(first + 1), sentence_number);
+	read(*(first + 2), flag, flag_mapping);
+	read(*(first + 3), address);
+
+	// TODO: read data set fields
 }
 
 utils::mmsi dse::get_mmsi() const
@@ -104,21 +113,7 @@ void dse::set_mmsi(const utils::mmsi & t) noexcept
 std::unique_ptr<sentence> dse::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 6)
-		throw std::invalid_argument{"invalid number of fields in dse::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<dse>();
-	result->set_talker(talker);
-	dse & detail = static_cast<dse &>(*result);
-
-	read(*(first + 0), detail.number_of_messages);
-	read(*(first + 1), detail.sentence_number);
-	read(*(first + 2), detail.flag, flag_mapping);
-	read(*(first + 3), detail.address);
-
-	// TODO: read data set fields
-
-	return result;
+	return std::unique_ptr<dse>(new dse(talker, first, last));
 }
 
 std::vector<std::string> dse::get_data() const

@@ -49,17 +49,18 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	dtm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	std::string ref;
+	std::string ref = "W84";
 	utils::optional<std::string> subcode;
-	double lat_offset;
-	direction lat_hem;
-	double lon_offset;
-	direction lon_hem;
-	double altitude;
-	std::string name;
+	double lat_offset = 0.0;
+	direction lat_hem = direction::north;
+	double lon_offset = 0.0;
+	direction lon_hem = direction::east;
+	double altitude = 0.0;
+	std::string name = "W84";
 
 public:
 	NMEA_GETTER(ref)

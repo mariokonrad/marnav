@@ -55,24 +55,25 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	alm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	uint32_t number_of_messages;
-	uint32_t message_number;
-	uint32_t satellite_prn; // 01 .. 32
-	uint32_t gps_week_number;
-	uint32_t sv_health;
-	uint32_t eccentricity;
-	uint32_t almanac_reference_time;
-	uint32_t inclination_angle;
-	uint32_t rate_of_right_ascension;
-	uint32_t root_of_semimajor_axis;
-	uint32_t argument_of_perigee;
-	uint32_t longitude_of_ascension_node;
-	uint32_t mean_anomaly;
-	uint32_t f0_clock_parameter;
-	uint32_t f1_clock_parameter;
+	uint32_t number_of_messages = 0;
+	uint32_t message_number = 0;
+	uint32_t satellite_prn = 0; // 01 .. 32
+	uint32_t gps_week_number = 0;
+	uint32_t sv_health = 0;
+	uint32_t eccentricity = 0;
+	uint32_t almanac_reference_time = 0;
+	uint32_t inclination_angle = 0;
+	uint32_t rate_of_right_ascension = 0;
+	uint32_t root_of_semimajor_axis = 0;
+	uint32_t argument_of_perigee = 0;
+	uint32_t longitude_of_ascension_node = 0;
+	uint32_t mean_anomaly = 0;
+	uint32_t f0_clock_parameter = 0;
+	uint32_t f1_clock_parameter = 0;
 
 	void check() const;
 

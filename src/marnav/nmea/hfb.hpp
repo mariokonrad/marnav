@@ -39,13 +39,14 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	hfb(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	double distance_head_foot;
-	unit::distance distance_head_foot_unit;
-	double distance_head_bottom;
-	unit::distance distance_head_bottom_unit;
+	double distance_head_foot = 0.0;
+	unit::distance distance_head_foot_unit = unit::distance::meter;
+	double distance_head_bottom = 0.0;
+	unit::distance distance_head_bottom_unit = unit::distance::meter;
 
 public:
 	NMEA_GETTER(distance_head_foot)

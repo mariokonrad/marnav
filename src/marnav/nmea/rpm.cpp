@@ -1,6 +1,5 @@
 #include "rpm.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -47,6 +46,19 @@ rpm::rpm()
 {
 }
 
+rpm::rpm(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 5)
+		throw std::invalid_argument{"invalid number of fields in rpm"};
+
+	read(*(first + 0), source, source_id_mapping);
+	read(*(first + 1), source_number);
+	read(*(first + 2), revolutions);
+	read(*(first + 3), propeller_pitch);
+	read(*(first + 4), data_valid);
+}
+
 void rpm::set_source(source_id id, uint32_t num)
 {
 	source = id;
@@ -56,20 +68,7 @@ void rpm::set_source(source_id id, uint32_t num)
 std::unique_ptr<sentence> rpm::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 5)
-		throw std::invalid_argument{"invalid number of fields in rpm::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<rpm>();
-	result->set_talker(talker);
-	rpm & detail = static_cast<rpm &>(*result);
-
-	read(*(first + 0), detail.source, source_id_mapping);
-	read(*(first + 1), detail.source_number);
-	read(*(first + 2), detail.revolutions);
-	read(*(first + 3), detail.propeller_pitch);
-	read(*(first + 4), detail.data_valid);
-
-	return result;
+	return std::unique_ptr<rpm>(new rpm(talker, first, last));
 }
 
 std::vector<std::string> rpm::get_data() const

@@ -1,6 +1,5 @@
 #include "xdr.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -28,6 +27,27 @@ xdr::xdr()
 {
 }
 
+xdr::xdr(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	const auto size = std::distance(first, last);
+	if ((size < 1) || (size > 4 * xdr::max_transducer_info))
+		throw std::invalid_argument{"invalid number of fields in xdr"};
+
+	if ((size % 4) != 0)
+		throw std::invalid_argument{"unexpected number of fields in xdr::parse (quadruples?)"};
+
+	int index = 0;
+	for (auto i = 0; i < size; i += 4, ++index) {
+		xdr::transducer_info info;
+		read(*(first + i + 0), info.transducer_type);
+		read(*(first + i + 1), info.measurement_data);
+		read(*(first + i + 2), info.units_of_measurement);
+		read(*(first + i + 3), info.name);
+		set_info(index, info);
+	}
+}
+
 void xdr::check_index(int index) const
 {
 	if ((index < 0) || (index >= 4 * max_transducer_info)) {
@@ -50,28 +70,7 @@ utils::optional<xdr::transducer_info> xdr::get_info(int index) const
 std::unique_ptr<sentence> xdr::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	const auto size = std::distance(first, last);
-	if ((size < 1) || (size > 4 * xdr::max_transducer_info))
-		throw std::invalid_argument{"invalid number of fields in xdr::parse"};
-
-	if ((size % 4) != 0)
-		throw std::invalid_argument{"unexpected number of fields in xdr::parse (quadruples?)"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<xdr>();
-	result->set_talker(talker);
-	xdr & detail = static_cast<xdr &>(*result);
-
-	int index = 0;
-	for (auto i = 0; i < size; i += 4, ++index) {
-		xdr::transducer_info info;
-		read(*(first + i + 0), info.transducer_type);
-		read(*(first + i + 1), info.measurement_data);
-		read(*(first + i + 2), info.units_of_measurement);
-		read(*(first + i + 3), info.name);
-		detail.set_info(index, info);
-	}
-
-	return result;
+	return std::unique_ptr<xdr>(new xdr(talker, first, last));
 }
 
 std::vector<std::string> xdr::get_data() const

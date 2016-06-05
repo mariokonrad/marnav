@@ -1,6 +1,5 @@
 #include "zda.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -14,24 +13,24 @@ zda::zda()
 {
 }
 
+zda::zda(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 6)
+		throw std::invalid_argument{"invalid number of fields in zda"};
+
+	read(*(first + 0), time_utc);
+	read(*(first + 1), day);
+	read(*(first + 2), month);
+	read(*(first + 3), year);
+	read(*(first + 4), local_zone_hours);
+	read(*(first + 5), local_zone_minutes);
+}
+
 std::unique_ptr<sentence> zda::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 6)
-		throw std::invalid_argument{"invalid number of fields in zda::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<zda>();
-	result->set_talker(talker);
-	zda & detail = static_cast<zda &>(*result);
-
-	read(*(first + 0), detail.time_utc);
-	read(*(first + 1), detail.day);
-	read(*(first + 2), detail.month);
-	read(*(first + 3), detail.year);
-	read(*(first + 4), detail.local_zone_hours);
-	read(*(first + 5), detail.local_zone_minutes);
-
-	return result;
+	return std::unique_ptr<zda>(new zda(talker, first, last));
 }
 
 std::vector<std::string> zda::get_data() const

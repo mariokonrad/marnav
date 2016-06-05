@@ -11,11 +11,20 @@ constexpr const char * msk::TAG;
 
 msk::msk()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, frequency(0)
-	, frequency_mode(selection_mode::automatic)
-	, bitrate(0)
-	, bitrate_mode(selection_mode::automatic)
 {
+}
+
+msk::msk(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 5)
+		throw std::invalid_argument{"invalid number of fields in msk::parse"};
+
+	read(*(first + 0), frequency);
+	read(*(first + 1), frequency_mode);
+	read(*(first + 2), bitrate);
+	read(*(first + 3), bitrate_mode);
+	read(*(first + 4), frequency_mss_status);
 }
 
 void msk::set_frequency(uint32_t f, selection_mode mode) noexcept
@@ -33,20 +42,7 @@ void msk::set_bitrate(uint32_t rate, selection_mode mode) noexcept
 std::unique_ptr<sentence> msk::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 5)
-		throw std::invalid_argument{"invalid number of fields in msk::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<msk>();
-	result->set_talker(talker);
-	msk & detail = static_cast<msk &>(*result);
-
-	read(*(first + 0), detail.frequency);
-	read(*(first + 1), detail.frequency_mode);
-	read(*(first + 2), detail.bitrate);
-	read(*(first + 3), detail.bitrate_mode);
-	read(*(first + 4), detail.frequency_mss_status);
-
-	return result;
+	return std::unique_ptr<msk>(new msk(talker, first, last));
 }
 
 std::vector<std::string> msk::get_data() const

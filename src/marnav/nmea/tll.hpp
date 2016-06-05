@@ -53,17 +53,18 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	tll(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	uint32_t target_number;
+	uint32_t target_number = 0;
 	geo::latitude lat;
-	direction lat_hem;
+	direction lat_hem = direction::north;
 	geo::longitude lon;
-	direction lon_hem;
+	direction lon_hem = direction::east;
 	std::string target_name;
 	nmea::time time_utc;
-	char target_status; // @todo use an enumeration
+	char target_status = 'T'; // @todo use an enumeration
 	utils::optional<char> reference_target;
 
 public:

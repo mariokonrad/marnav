@@ -1,6 +1,5 @@
 #include "glc.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -11,9 +10,28 @@ constexpr const char * glc::TAG;
 
 glc::glc()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, gri(0)
 	, master({0, nmea::status::warning})
 {
+}
+
+glc::glc(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 13)
+		throw std::invalid_argument{"invalid number of fields in glc"};
+
+	read(*(first + 0), gri);
+	read(*(first + 1), master.diff);
+	read(*(first + 2), master.status);
+	for (int i = 0; i < num_differences; ++i) {
+		utils::optional<double> diff;
+		utils::optional<nmea::status> status;
+		read(*(first + (i * 2) + 3 + 0), diff);
+		read(*(first + (i * 2) + 3 + 1), status);
+		if (diff && status) {
+			time_diffs[i] = utils::make_optional<time_difference>(*diff, *status);
+		}
+	}
 }
 
 void glc::check_index(int index) const
@@ -38,27 +56,7 @@ void glc::set_time_diff(int index, time_difference t)
 std::unique_ptr<sentence> glc::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 13)
-		throw std::invalid_argument{"invalid number of fields in glc::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<glc>();
-	result->set_talker(talker);
-	glc & detail = static_cast<glc &>(*result);
-
-	read(*(first + 0), detail.gri);
-	read(*(first + 1), detail.master.diff);
-	read(*(first + 2), detail.master.status);
-	for (int i = 0; i < num_differences; ++i) {
-		utils::optional<double> diff;
-		utils::optional<nmea::status> status;
-		read(*(first + (i * 2) + 3 + 0), diff);
-		read(*(first + (i * 2) + 3 + 1), status);
-		if (diff && status) {
-			detail.time_diffs[i] = utils::make_optional<time_difference>(*diff, *status);
-		}
-	}
-
-	return result;
+	return std::unique_ptr<glc>(new glc(talker, first, last));
 }
 
 std::vector<std::string> glc::get_data() const

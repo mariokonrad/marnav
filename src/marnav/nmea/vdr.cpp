@@ -1,6 +1,5 @@
 #include "vdr.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -12,6 +11,20 @@ constexpr const char * vdr::TAG;
 vdr::vdr()
 	: sentence(ID, TAG, talker_id::integrated_instrumentation)
 {
+}
+
+vdr::vdr(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 6)
+		throw std::invalid_argument{"invalid number of fields in vdr"};
+
+	read(*(first + 0), degrees_true);
+	read(*(first + 1), degrees_true_ref);
+	read(*(first + 2), degrees_mag);
+	read(*(first + 3), degrees_mag_ref);
+	read(*(first + 4), speed);
+	read(*(first + 5), speed_unit);
 }
 
 void vdr::set_degrees_true(double t) noexcept
@@ -35,21 +48,7 @@ void vdr::set_speed(double t) noexcept
 std::unique_ptr<sentence> vdr::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 6)
-		throw std::invalid_argument{"invalid number of fields in vdr::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<vdr>();
-	result->set_talker(talker);
-	vdr & detail = static_cast<vdr &>(*result);
-
-	read(*(first + 0), detail.degrees_true);
-	read(*(first + 1), detail.degrees_true_ref);
-	read(*(first + 2), detail.degrees_mag);
-	read(*(first + 3), detail.degrees_mag_ref);
-	read(*(first + 4), detail.speed);
-	read(*(first + 5), detail.speed_unit);
-
-	return result;
+	return std::unique_ptr<vdr>(new vdr(talker, first, last));
 }
 
 std::vector<std::string> vdr::get_data() const

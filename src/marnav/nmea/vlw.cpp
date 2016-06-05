@@ -1,6 +1,5 @@
 #include "vlw.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -12,6 +11,18 @@ constexpr const char * vlw::TAG;
 vlw::vlw()
 	: sentence(ID, TAG, talker_id::integrated_instrumentation)
 {
+}
+
+vlw::vlw(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 4)
+		throw std::invalid_argument{"invalid number of fields in vlw"};
+
+	read(*(first + 0), distance_cum);
+	read(*(first + 1), distance_cum_unit);
+	read(*(first + 2), distance_reset);
+	read(*(first + 3), distance_reset_unit);
 }
 
 void vlw::set_distance_cum_nm(double t) noexcept
@@ -29,19 +40,7 @@ void vlw::set_distance_reset_nm(double t) noexcept
 std::unique_ptr<sentence> vlw::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 4)
-		throw std::invalid_argument{"invalid number of fields in vlw::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<vlw>();
-	result->set_talker(talker);
-	vlw & detail = static_cast<vlw &>(*result);
-
-	read(*(first + 0), detail.distance_cum);
-	read(*(first + 1), detail.distance_cum_unit);
-	read(*(first + 2), detail.distance_reset);
-	read(*(first + 3), detail.distance_reset_unit);
-
-	return result;
+	return std::unique_ptr<vlw>(new vlw(talker, first, last));
 }
 
 std::vector<std::string> vlw::get_data() const

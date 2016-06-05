@@ -1,7 +1,6 @@
 #include "grs.hpp"
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -53,6 +52,18 @@ grs::grs()
 	sat_residual[2] = 0.0;
 }
 
+grs::grs(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 14)
+		throw std::invalid_argument{"invalid number of fields in grs"};
+
+	read(*(first + 0), time_utc);
+	read(*(first + 1), usage, residual_usage_mapping);
+	for (size_t i = 0; i < sat_residual.size(); ++i)
+		read(*(first + i + 2), sat_residual[i]);
+}
+
 void grs::check_index(int index) const
 {
 	if ((index < 1) || (index > 12)) {
@@ -75,19 +86,7 @@ void grs::set_sat_residual(int index, double value)
 std::unique_ptr<sentence> grs::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 14)
-		throw std::invalid_argument{"invalid number of fields in grs::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<grs>();
-	result->set_talker(talker);
-	grs & detail = static_cast<grs &>(*result);
-
-	read(*(first + 0), detail.time_utc);
-	read(*(first + 1), detail.usage, residual_usage_mapping);
-	for (size_t i = 0; i < detail.sat_residual.size(); ++i)
-		read(*(first + i + 2), detail.sat_residual[i]);
-
-	return result;
+	return std::unique_ptr<grs>(new grs(talker, first, last));
 }
 
 std::vector<std::string> grs::get_data() const

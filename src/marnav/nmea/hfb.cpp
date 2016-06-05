@@ -11,29 +11,25 @@ constexpr const char * hfb::TAG;
 
 hfb::hfb()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, distance_head_foot(0.0)
-	, distance_head_foot_unit(unit::distance::meter)
-	, distance_head_bottom(0.0)
-	, distance_head_bottom_unit(unit::distance::meter)
 {
+}
+
+hfb::hfb(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 4)
+		throw std::invalid_argument{"invalid number of fields in hfb::parse"};
+
+	read(*(first + 0), distance_head_foot);
+	read(*(first + 1), distance_head_foot_unit);
+	read(*(first + 2), distance_head_bottom);
+	read(*(first + 3), distance_head_bottom_unit);
 }
 
 std::unique_ptr<sentence> hfb::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 4)
-		throw std::invalid_argument{"invalid number of fields in hfb::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<hfb>();
-	result->set_talker(talker);
-	hfb & detail = static_cast<hfb &>(*result);
-
-	read(*(first + 0), detail.distance_head_foot);
-	read(*(first + 1), detail.distance_head_foot_unit);
-	read(*(first + 2), detail.distance_head_bottom);
-	read(*(first + 3), detail.distance_head_bottom_unit);
-
-	return result;
+	return std::unique_ptr<hfb>(new hfb(talker, first, last));
 }
 
 std::vector<std::string> hfb::get_data() const

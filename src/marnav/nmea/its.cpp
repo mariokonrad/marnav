@@ -1,6 +1,5 @@
 #include "its.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -11,25 +10,23 @@ constexpr const char * its::TAG;
 
 its::its()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, distance(0.0)
-	, distance_unit(unit::distance::meter)
 {
+}
+
+its::its(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 2)
+		throw std::invalid_argument{"invalid number of fields in its"};
+
+	read(*(first + 0), distance);
+	read(*(first + 1), distance_unit);
 }
 
 std::unique_ptr<sentence> its::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 2)
-		throw std::invalid_argument{"invalid number of fields in its::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<its>();
-	result->set_talker(talker);
-	its & detail = static_cast<its &>(*result);
-
-	read(*(first + 0), detail.distance);
-	read(*(first + 1), detail.distance_unit);
-
-	return result;
+	return std::unique_ptr<its>(new its(talker, first, last));
 }
 
 std::vector<std::string> its::get_data() const

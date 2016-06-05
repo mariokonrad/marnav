@@ -49,15 +49,16 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	rsd(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
 	std::array<double, 8> unknowns;
-	double cursor_range;
-	double cursor_bearing;
-	double range_scale;
-	char range_unit;
-	char unknown;
+	double cursor_range = 0.0;
+	double cursor_bearing = 0.0;
+	double range_scale = 0.0;
+	char range_unit = 'V';
+	char unknown = 'V';
 
 public:
 	NMEA_GETTER(cursor_range)

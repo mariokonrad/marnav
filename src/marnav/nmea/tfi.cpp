@@ -1,6 +1,5 @@
 #include "tfi.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -52,6 +51,16 @@ tfi::tfi()
 		t = state::no_answer;
 }
 
+tfi::tfi(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 3)
+		throw std::invalid_argument{"invalid number of fields in tfi"};
+
+	for (size_t i = 0; i < num_sensors; ++i)
+		read(*(first + i), sensors[i], state_mapping);
+}
+
 void tfi::check_index(int index) const
 {
 	if ((index < 0) || (index >= num_sensors)) {
@@ -74,17 +83,7 @@ void tfi::set_sensor(int index, state t)
 std::unique_ptr<sentence> tfi::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 3)
-		throw std::invalid_argument{"invalid number of fields in tfi::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<tfi>();
-	result->set_talker(talker);
-	tfi & detail = static_cast<tfi &>(*result);
-
-	for (size_t i = 0; i < num_sensors; ++i)
-		read(*(first + i), detail.sensors[i], state_mapping);
-
-	return result;
+	return std::unique_ptr<tfi>(new tfi(talker, first, last));
 }
 
 std::vector<std::string> tfi::get_data() const

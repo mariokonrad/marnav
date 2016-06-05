@@ -2,7 +2,6 @@
 
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -16,31 +15,31 @@ ttm::ttm()
 {
 }
 
+ttm::ttm(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 13)
+		throw std::invalid_argument{"invalid number of fields in ttm"};
+
+	read(*(first + 0), target_number);
+	read(*(first + 1), target_distance);
+	read(*(first + 2), bearing_from_ownship);
+	read(*(first + 3), bearing_from_ownship_ref);
+	read(*(first + 4), target_speed);
+	read(*(first + 5), target_course);
+	read(*(first + 6), target_course_ref);
+	read(*(first + 7), distance_cpa);
+	read(*(first + 8), tcpa);
+	read(*(first + 9), unknown);
+	read(*(first + 10), target_name);
+	read(*(first + 11), target_status);
+	read(*(first + 12), reference_target);
+}
+
 std::unique_ptr<sentence> ttm::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 13)
-		throw std::invalid_argument{"invalid number of fields in ttm::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<ttm>();
-	result->set_talker(talker);
-	ttm & detail = static_cast<ttm &>(*result);
-
-	read(*(first + 0), detail.target_number);
-	read(*(first + 1), detail.target_distance);
-	read(*(first + 2), detail.bearing_from_ownship);
-	read(*(first + 3), detail.bearing_from_ownship_ref);
-	read(*(first + 4), detail.target_speed);
-	read(*(first + 5), detail.target_course);
-	read(*(first + 6), detail.target_course_ref);
-	read(*(first + 7), detail.distance_cpa);
-	read(*(first + 8), detail.tcpa);
-	read(*(first + 9), detail.unknown);
-	read(*(first + 10), detail.target_name);
-	read(*(first + 11), detail.target_status);
-	read(*(first + 12), detail.reference_target);
-
-	return result;
+	return std::unique_ptr<ttm>(new ttm(talker, first, last));
 }
 
 std::vector<std::string> ttm::get_data() const

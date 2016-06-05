@@ -36,11 +36,12 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	tds(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	double distance;
-	nmea::unit::distance distance_unit;
+	double distance = 0.0;
+	nmea::unit::distance distance_unit = nmea::unit::distance::meter;
 
 public:
 	NMEA_GETTER(distance)

@@ -1,6 +1,5 @@
 #include "lcd.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -11,9 +10,28 @@ constexpr const char * lcd::TAG;
 
 lcd::lcd()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, gri(0)
 	, master({0, 0})
 {
+}
+
+lcd::lcd(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 13)
+		throw std::invalid_argument{"invalid number of fields in lcd"};
+
+	read(*(first + 0), gri);
+	read(*(first + 1), master.snr);
+	read(*(first + 2), master.ecd);
+	for (int i = 0; i < num_differences; ++i) {
+		utils::optional<decltype(time_difference::snr)> snr;
+		utils::optional<decltype(time_difference::ecd)> ecd;
+		read(*(first + (i * 2) + 3 + 0), snr);
+		read(*(first + (i * 2) + 3 + 1), ecd);
+		if (snr && ecd) {
+			time_diffs[i] = utils::make_optional<time_difference>(*snr, *ecd);
+		}
+	}
 }
 
 void lcd::check_index(int index) const
@@ -38,27 +56,7 @@ void lcd::set_time_diff(int index, time_difference t)
 std::unique_ptr<sentence> lcd::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 13)
-		throw std::invalid_argument{"invalid number of fields in lcd::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<lcd>();
-	result->set_talker(talker);
-	lcd & detail = static_cast<lcd &>(*result);
-
-	read(*(first + 0), detail.gri);
-	read(*(first + 1), detail.master.snr);
-	read(*(first + 2), detail.master.ecd);
-	for (int i = 0; i < num_differences; ++i) {
-		utils::optional<decltype(time_difference::snr)> snr;
-		utils::optional<decltype(time_difference::ecd)> ecd;
-		read(*(first + (i * 2) + 3 + 0), snr);
-		read(*(first + (i * 2) + 3 + 1), ecd);
-		if (snr && ecd) {
-			detail.time_diffs[i] = utils::make_optional<time_difference>(*snr, *ecd);
-		}
-	}
-
-	return result;
+	return std::unique_ptr<lcd>(new lcd(talker, first, last));
 }
 
 std::vector<std::string> lcd::get_data() const

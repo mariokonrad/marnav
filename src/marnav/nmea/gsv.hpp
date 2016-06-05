@@ -61,12 +61,13 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	gsv(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	uint32_t n_messages;
-	uint32_t message_number;
-	uint32_t n_satellites_in_view;
+	uint32_t n_messages = 1;
+	uint32_t message_number = 1;
+	uint32_t n_satellites_in_view = 0;
 	std::array<utils::optional<satellite_info>, 4> sat;
 
 	void check_index(int index) const;

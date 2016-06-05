@@ -1,6 +1,5 @@
 #include "gtd.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -13,6 +12,16 @@ gtd::gtd()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 	, time_diffs({{0.0, 0.0, 0.0, 0.0, 0.0}})
 {
+}
+
+gtd::gtd(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 5)
+		throw std::invalid_argument{"invalid number of fields in gtd"};
+
+	for (int i = 0; i < num_data; ++i)
+		read(*(first + i), time_diffs[i]);
 }
 
 void gtd::check_index(int index) const
@@ -37,17 +46,7 @@ void gtd::set_time_diff(int index, double value)
 std::unique_ptr<sentence> gtd::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 5)
-		throw std::invalid_argument{"invalid number of fields in gtd::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<gtd>();
-	result->set_talker(talker);
-	gtd & detail = static_cast<gtd &>(*result);
-
-	for (int i = 0; i < num_data; ++i)
-		read(*(first + i), detail.time_diffs[i]);
-
-	return result;
+	return std::unique_ptr<gtd>(new gtd(talker, first, last));
 }
 
 std::vector<std::string> gtd::get_data() const

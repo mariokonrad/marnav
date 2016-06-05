@@ -52,12 +52,13 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	lcd(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
 	static constexpr const int num_differences = 5;
 
-	uint32_t gri; ///< unit: 0.1 microseconds
+	uint32_t gri = 0; ///< unit: 0.1 microseconds
 	time_difference master;
 	std::array<utils::optional<time_difference>, num_differences> time_diffs;
 

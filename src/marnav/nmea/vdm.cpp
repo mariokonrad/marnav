@@ -12,18 +12,21 @@ constexpr const char * vdm::TAG;
 
 vdm::vdm()
 	: sentence(ID, TAG, talker_id::ais_mobile_station)
-	, n_fragments(0)
-	, fragment(0)
-	, n_fill_bits(0)
 {
 }
 
 vdm::vdm(sentence_id id, const std::string & tag, const std::string & talker)
 	: sentence(id, tag, talker)
-	, n_fragments(0)
-	, fragment(0)
-	, n_fill_bits(0)
 {
+}
+
+vdm::vdm(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 6)
+		throw std::invalid_argument{"invalid number of fields in vdm"};
+
+	read_fields(first);
 }
 
 void vdm::read_fields(fields::const_iterator first)
@@ -39,16 +42,7 @@ void vdm::read_fields(fields::const_iterator first)
 std::unique_ptr<sentence> vdm::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 6)
-		throw std::invalid_argument{"invalid number of fields in vdm::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<vdm>();
-	result->set_talker(talker);
-	vdm & detail = static_cast<vdm &>(*result);
-
-	detail.read_fields(first);
-
-	return result;
+	return std::unique_ptr<vdm>(new vdm(talker, first, last));
 }
 
 std::vector<std::string> vdm::get_data() const

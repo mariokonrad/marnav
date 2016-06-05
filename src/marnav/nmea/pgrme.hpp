@@ -43,15 +43,17 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	pgrme(
+		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
 	utils::optional<double> horizontal_position_error;
-	unit::distance horizontal_position_error_unit; // M = meters
+	unit::distance horizontal_position_error_unit = unit::distance::meter;
 	utils::optional<double> vertical_position_error;
-	unit::distance vertical_position_error_unit; // M = meters
+	unit::distance vertical_position_error_unit = unit::distance::meter;
 	utils::optional<double> overall_spherical_equiv_position_error;
-	unit::distance overall_spherical_equiv_position_error_unit; // M = meters
+	unit::distance overall_spherical_equiv_position_error_unit = unit::distance::meter;
 
 public:
 	NMEA_GETTER(horizontal_position_error)

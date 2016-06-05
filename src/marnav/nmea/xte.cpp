@@ -1,6 +1,5 @@
 #include "xte.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -14,27 +13,27 @@ xte::xte()
 {
 }
 
-std::unique_ptr<sentence> xte::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+xte::xte(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
 {
 	const auto size = std::distance(first, last);
 	if ((size < 5) || (size > 6))
-		throw std::invalid_argument{"invalid number of fields in xte::parse"};
+		throw std::invalid_argument{"invalid number of fields in xte"};
 
-	std::unique_ptr<sentence> result = utils::make_unique<xte>();
-	result->set_talker(talker);
-	xte & detail = static_cast<xte &>(*result);
-
-	read(*(first + 0), detail.status1);
-	read(*(first + 1), detail.status2);
-	read(*(first + 2), detail.cross_track_error_magnitude);
-	read(*(first + 3), detail.direction_to_steer);
-	read(*(first + 4), detail.cross_track_unit);
+	read(*(first + 0), status1);
+	read(*(first + 1), status2);
+	read(*(first + 2), cross_track_error_magnitude);
+	read(*(first + 3), direction_to_steer);
+	read(*(first + 4), cross_track_unit);
 
 	if (size == 6)
-		read(*(first + 5), detail.mode_indicator);
+		read(*(first + 5), mode_indicator);
+}
 
-	return result;
+std::unique_ptr<sentence> xte::parse(
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+{
+	return std::unique_ptr<xte>(new xte(talker, first, last));
 }
 
 std::vector<std::string> xte::get_data() const

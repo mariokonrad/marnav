@@ -66,13 +66,14 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	dse(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	uint32_t number_of_messages;
-	uint32_t sentence_number;
-	query_flag flag;
-	uint64_t address;
+	uint32_t number_of_messages = 1;
+	uint32_t sentence_number = 1;
+	query_flag flag = query_flag::query;
+	uint64_t address = 0;
 
 public:
 	NMEA_GETTER(number_of_messages)

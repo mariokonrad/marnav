@@ -41,11 +41,12 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	dpt(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	double depth_meter;
-	double transducer_offset;
+	double depth_meter = 0.0;
+	double transducer_offset = 0.0;
 	utils::optional<double> max_depth;
 
 public:

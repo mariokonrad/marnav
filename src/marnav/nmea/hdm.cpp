@@ -1,6 +1,5 @@
 #include "hdm.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -14,6 +13,16 @@ hdm::hdm()
 {
 }
 
+hdm::hdm(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 2)
+		throw std::invalid_argument{"invalid number of fields in hdm"};
+
+	read(*(first + 0), heading);
+	read(*(first + 1), heading_mag);
+}
+
 void hdm::set_heading(double t) noexcept
 {
 	heading = t;
@@ -23,17 +32,7 @@ void hdm::set_heading(double t) noexcept
 std::unique_ptr<sentence> hdm::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 2)
-		throw std::invalid_argument{"invalid number of fields in hdm::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<hdm>();
-	result->set_talker(talker);
-	hdm & detail = static_cast<hdm &>(*result);
-
-	read(*(first + 0), detail.heading);
-	read(*(first + 1), detail.heading_mag);
-
-	return result;
+	return std::unique_ptr<hdm>(new hdm(talker, first, last));
 }
 
 std::vector<std::string> hdm::get_data() const

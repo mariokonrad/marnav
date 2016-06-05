@@ -1,7 +1,6 @@
 #include "wcv.hpp"
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -13,6 +12,17 @@ constexpr const char * wcv::TAG;
 wcv::wcv()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
+}
+
+wcv::wcv(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 3)
+		throw std::invalid_argument{"invalid number of fields in wcv"};
+
+	read(*(first + 0), speed);
+	read(*(first + 1), speed_unit);
+	read(*(first + 2), waypoint_id);
 }
 
 void wcv::set_speed(double t) noexcept
@@ -30,18 +40,7 @@ void wcv::set_waypoint(const std::string & id)
 std::unique_ptr<sentence> wcv::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 3)
-		throw std::invalid_argument{"invalid number of fields in wcv::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<wcv>();
-	result->set_talker(talker);
-	wcv & detail = static_cast<wcv &>(*result);
-
-	read(*(first + 0), detail.speed);
-	read(*(first + 1), detail.speed_unit);
-	read(*(first + 2), detail.waypoint_id);
-
-	return result;
+	return std::unique_ptr<wcv>(new wcv(talker, first, last));
 }
 
 std::vector<std::string> wcv::get_data() const

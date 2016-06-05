@@ -1,6 +1,5 @@
 #include "rte.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -12,6 +11,22 @@ constexpr const char * rte::TAG;
 rte::rte()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
+}
+
+rte::rte(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	const auto size = std::distance(first, last);
+	if ((size < 3) || (size > 13))
+		throw std::invalid_argument{"invalid number of fields in rte"};
+
+	read(*(first + 0), n_messages);
+	read(*(first + 1), message_number);
+	read(*(first + 2), message_mode);
+
+	for (auto i = 3; i < 10 && i < size; ++i) {
+		read(*(first + i), waypoint_id[i - 3]);
+	}
 }
 
 utils::optional<std::string> rte::get_waypoint_id(int index) const
@@ -38,23 +53,7 @@ void rte::set_waypoint_id(int index, const std::string & id)
 std::unique_ptr<sentence> rte::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	const auto size = std::distance(first, last);
-	if ((size < 3) || (size > 13))
-		throw std::invalid_argument{"invalid number of fields in rte::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<rte>();
-	result->set_talker(talker);
-	rte & detail = static_cast<rte &>(*result);
-
-	read(*(first + 0), detail.n_messages);
-	read(*(first + 1), detail.message_number);
-	read(*(first + 2), detail.message_mode);
-
-	for (auto i = 3; i < 10 && i < size; ++i) {
-		read(*(first + i), detail.waypoint_id[i - 3]);
-	}
-
-	return result;
+	return std::unique_ptr<rte>(new rte(talker, first, last));
 }
 
 std::vector<std::string> rte::get_data() const

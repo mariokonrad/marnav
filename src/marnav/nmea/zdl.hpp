@@ -43,12 +43,13 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	zdl(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
 	duration time_to_point;
-	double distance;
-	type_of_point type_point;
+	double distance = 0.0;
+	type_of_point type_point = type_of_point::reference;
 
 public:
 	NMEA_GETTER(time_to_point)

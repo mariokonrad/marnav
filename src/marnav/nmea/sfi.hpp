@@ -43,11 +43,12 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	sfi(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	uint32_t number_of_messages;
-	uint32_t message_number;
+	uint32_t number_of_messages = 0;
+	uint32_t message_number = 0;
 	std::vector<scanning_frequency> frequencies;
 
 public:

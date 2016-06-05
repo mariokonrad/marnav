@@ -1,6 +1,5 @@
 #include "osd.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -12,6 +11,23 @@ constexpr const char * osd::TAG;
 osd::osd()
 	: sentence(ID, TAG, talker_id::integrated_instrumentation)
 {
+}
+
+osd::osd(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 9)
+		throw std::invalid_argument{"invalid number of fields in osd"};
+
+	read(*(first + 0), heading);
+	read(*(first + 1), data_valid);
+	read(*(first + 2), course);
+	read(*(first + 3), course_ref);
+	read(*(first + 4), speed);
+	read(*(first + 5), speed_unit);
+	read(*(first + 6), vessel_set);
+	read(*(first + 7), vessel_drift);
+	read(*(first + 8), vessel_drift_unit);
 }
 
 void osd::set_course(double t) noexcept
@@ -35,24 +51,7 @@ void osd::set_drift(double t, unit::velocity u) noexcept
 std::unique_ptr<sentence> osd::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 9)
-		throw std::invalid_argument{"invalid number of fields in osd::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<osd>();
-	result->set_talker(talker);
-	osd & detail = static_cast<osd &>(*result);
-
-	read(*(first + 0), detail.heading);
-	read(*(first + 1), detail.data_valid);
-	read(*(first + 2), detail.course);
-	read(*(first + 3), detail.course_ref);
-	read(*(first + 4), detail.speed);
-	read(*(first + 5), detail.speed_unit);
-	read(*(first + 6), detail.vessel_set);
-	read(*(first + 7), detail.vessel_drift);
-	read(*(first + 8), detail.vessel_drift_unit);
-
-	return result;
+	return std::unique_ptr<osd>(new osd(talker, first, last));
 }
 
 std::vector<std::string> osd::get_data() const

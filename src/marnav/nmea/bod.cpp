@@ -1,7 +1,6 @@
 #include "bod.hpp"
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -13,6 +12,20 @@ constexpr const char * bod::TAG;
 bod::bod()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
+}
+
+bod::bod(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 6)
+		throw std::invalid_argument{"invalid number of fields in bod"};
+
+	read(*(first + 0), bearing_true);
+	read(*(first + 1), type_true);
+	read(*(first + 2), bearing_magn);
+	read(*(first + 3), type_magn);
+	read(*(first + 4), waypoint_to);
+	read(*(first + 5), waypoint_from);
 }
 
 void bod::set_bearing_true(double t) noexcept
@@ -42,21 +55,7 @@ void bod::set_waypoint_from(const std::string & id)
 std::unique_ptr<sentence> bod::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 6)
-		throw std::invalid_argument{"invalid number of fields in bod::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<bod>();
-	result->set_talker(talker);
-	bod & detail = static_cast<bod &>(*result);
-
-	read(*(first + 0), detail.bearing_true);
-	read(*(first + 1), detail.type_true);
-	read(*(first + 2), detail.bearing_magn);
-	read(*(first + 3), detail.type_magn);
-	read(*(first + 4), detail.waypoint_to);
-	read(*(first + 5), detail.waypoint_from);
-
-	return result;
+	return std::unique_ptr<bod>(new bod(talker, first, last));
 }
 
 std::vector<std::string> bod::get_data() const

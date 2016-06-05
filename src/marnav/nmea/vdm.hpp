@@ -44,6 +44,7 @@ public:
 
 protected:
 	vdm(sentence_id id, const std::string & tag, const std::string & talker);
+	vdm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 	virtual std::vector<std::string> get_data() const override;
 	virtual char get_start_token() const override { return start_token_ais; }
@@ -51,12 +52,12 @@ protected:
 	void read_fields(fields::const_iterator first);
 
 private:
-	uint32_t n_fragments;
-	uint32_t fragment;
+	uint32_t n_fragments = 0;
+	uint32_t fragment = 0;
 	utils::optional<uint32_t> seq_msg_id;
 	utils::optional<ais_channel> radio_channel; // A = 161.975MHz (87B), B = 162.025MHz (88B)
 	std::string payload; // 6bit encoded content
-	uint32_t n_fill_bits; // 0..5
+	uint32_t n_fill_bits = 0; // 0..5
 
 public:
 	NMEA_GETTER(n_fragments)

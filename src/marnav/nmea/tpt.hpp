@@ -41,14 +41,15 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	tpt(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	double range;
-	unit::distance range_unit;
-	double bearing;
-	double depth;
-	unit::distance depth_unit;
+	double range = 0.0;
+	unit::distance range_unit = unit::distance::meter;
+	double bearing = 0.0;
+	double depth = 0.0;
+	unit::distance depth_unit = unit::distance::meter;
 
 public:
 	NMEA_GETTER(range)

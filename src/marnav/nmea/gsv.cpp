@@ -1,7 +1,6 @@
 #include "gsv.hpp"
 #include <algorithm>
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -24,10 +23,37 @@ constexpr const char * gsv::TAG;
 
 gsv::gsv()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, n_messages(1)
-	, message_number(1)
-	, n_satellites_in_view(0)
 {
+}
+
+gsv::gsv(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	// empty fields for satellite information are not necessary, therefore
+	// there are a variable number of fields. however, the first 3 are
+	// mandatory and the rest must be a multiple of 4 (the four parts
+	// of satellite information).
+	const auto size = std::distance(first, last);
+	if ((size < 3) || ((size - 3) % 4 != 0)) {
+		throw std::invalid_argument{
+			std::string{"invalid number of fields in gsv: expected 3+n*4, got "}
+			+ std::to_string(size)};
+	}
+
+	read(*(first + 0), n_messages);
+	read(*(first + 1), message_number);
+	read(*(first + 2), n_satellites_in_view);
+
+	const int num_satellite_info = std::min(4, static_cast<int>((size - 3) / 4));
+	int index = 3;
+	for (int id = 0; id < num_satellite_info; ++id, index += 4) {
+		satellite_info info;
+		read(*(first + index + 0), info.id);
+		read(*(first + index + 1), info.elevation);
+		read(*(first + index + 2), info.azimuth);
+		read(*(first + index + 3), info.snr);
+		set_sat(id, info);
+	}
 }
 
 void gsv::set_n_messages(uint32_t t)
@@ -66,37 +92,7 @@ utils::optional<gsv::satellite_info> gsv::get_sat(int index) const
 std::unique_ptr<sentence> gsv::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	// empty fields for satellite information are not necessary, therefore
-	// there are a variable number of fields. however, the first 3 are
-	// mandatory and the rest must be a multiple of 4 (the four parts
-	// of satellite information).
-	const auto size = std::distance(first, last);
-	if ((size < 3) || ((size - 3) % 4 != 0)) {
-		throw std::invalid_argument{
-			std::string{"invalid number of fields in gsv::parse: expected 3+n*4, got "}
-			+ std::to_string(size)};
-	}
-
-	std::unique_ptr<sentence> result = utils::make_unique<gsv>();
-	result->set_talker(talker);
-	gsv & detail = static_cast<gsv &>(*result);
-
-	read(*(first + 0), detail.n_messages);
-	read(*(first + 1), detail.message_number);
-	read(*(first + 2), detail.n_satellites_in_view);
-
-	const int num_satellite_info = std::min(4, static_cast<int>((size - 3) / 4));
-	int index = 3;
-	for (int id = 0; id < num_satellite_info; ++id, index += 4) {
-		satellite_info info;
-		read(*(first + index + 0), info.id);
-		read(*(first + index + 1), info.elevation);
-		read(*(first + index + 2), info.azimuth);
-		read(*(first + index + 3), info.snr);
-		detail.set_sat(id, info);
-	}
-
-	return result;
+	return std::unique_ptr<gsv>(new gsv(talker, first, last));
 }
 
 std::vector<std::string> gsv::get_data() const

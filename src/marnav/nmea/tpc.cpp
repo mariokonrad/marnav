@@ -1,6 +1,5 @@
 #include "tpc.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -11,33 +10,27 @@ constexpr const char * tpc::TAG;
 
 tpc::tpc()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, distance_centerline(0.0)
-	, distance_centerline_unit(unit::distance::meter)
-	, distance_transducer(0.0)
-	, distance_transducer_unit(unit::distance::meter)
-	, depth(0.0)
-	, depth_unit(unit::distance::meter)
 {
+}
+
+tpc::tpc(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 6)
+		throw std::invalid_argument{"invalid number of fields in tpc"};
+
+	read(*(first + 0), distance_centerline);
+	read(*(first + 1), distance_centerline_unit);
+	read(*(first + 2), distance_transducer);
+	read(*(first + 3), distance_transducer_unit);
+	read(*(first + 4), depth);
+	read(*(first + 5), depth_unit);
 }
 
 std::unique_ptr<sentence> tpc::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 6)
-		throw std::invalid_argument{"invalid number of fields in tpc::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<tpc>();
-	result->set_talker(talker);
-	tpc & detail = static_cast<tpc &>(*result);
-
-	read(*(first + 0), detail.distance_centerline);
-	read(*(first + 1), detail.distance_centerline_unit);
-	read(*(first + 2), detail.distance_transducer);
-	read(*(first + 3), detail.distance_transducer_unit);
-	read(*(first + 4), detail.depth);
-	read(*(first + 5), detail.depth_unit);
-
-	return result;
+	return std::unique_ptr<tpc>(new tpc(talker, first, last));
 }
 
 std::vector<std::string> tpc::get_data() const

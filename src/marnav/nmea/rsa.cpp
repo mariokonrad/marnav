@@ -1,6 +1,5 @@
 #include "rsa.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -12,6 +11,18 @@ constexpr const char * rsa::TAG;
 rsa::rsa()
 	: sentence(ID, TAG, talker_id::integrated_instrumentation)
 {
+}
+
+rsa::rsa(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 4)
+		throw std::invalid_argument{"invalid number of fields in rsa"};
+
+	read(*(first + 0), rudder1);
+	read(*(first + 1), rudder1_valid);
+	read(*(first + 2), rudder2);
+	read(*(first + 3), rudder2_valid);
 }
 
 void rsa::set_rudder1(double t) noexcept
@@ -29,19 +40,7 @@ void rsa::set_rudder2(double t) noexcept
 std::unique_ptr<sentence> rsa::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 4)
-		throw std::invalid_argument{"invalid number of fields in rsa::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<rsa>();
-	result->set_talker(talker);
-	rsa & detail = static_cast<rsa &>(*result);
-
-	read(*(first + 0), detail.rudder1);
-	read(*(first + 1), detail.rudder1_valid);
-	read(*(first + 2), detail.rudder2);
-	read(*(first + 3), detail.rudder2_valid);
-
-	return result;
+	return std::unique_ptr<rsa>(new rsa(talker, first, last));
 }
 
 std::vector<std::string> rsa::get_data() const

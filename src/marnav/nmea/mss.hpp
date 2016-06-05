@@ -38,14 +38,15 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	mss(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	uint32_t signal_strength;
-	uint32_t signal_to_noise_ratio;
-	uint32_t beacon_frequency;
-	uint32_t beacon_datarate;
-	int32_t unknown;
+	uint32_t signal_strength = 0;
+	uint32_t signal_to_noise_ratio = 0;
+	uint32_t beacon_frequency = 0;
+	uint32_t beacon_datarate = 0;
+	int32_t unknown = 0;
 
 public:
 	NMEA_GETTER(signal_strength)

@@ -1,6 +1,5 @@
 #include "sfi.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -11,9 +10,30 @@ constexpr const char * sfi::TAG;
 
 sfi::sfi()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, number_of_messages(0)
-	, message_number(0)
 {
+}
+
+sfi::sfi(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	const auto size = std::distance(first, last);
+	if ((size < 2) || (size > 2 + max_number_of_frequencies * 2))
+		throw std::invalid_argument{"invalid number of fields in sfi"};
+	if (size % 2 != 0)
+		throw std::invalid_argument{"invalid number of fields in sfi"};
+
+	read(*(first + 0), number_of_messages);
+	read(*(first + 1), message_number);
+
+	frequencies.clear();
+	frequencies.reserve(size - 2);
+	for (auto i = 2; i < size; i += 2) {
+		uint32_t frequency;
+		char mode;
+		read(*(first + i + 0), frequency);
+		read(*(first + i + 1), mode);
+		frequencies.push_back({frequency, mode});
+	}
 }
 
 void sfi::set_frequencies(const std::vector<scanning_frequency> & v)
@@ -28,30 +48,7 @@ void sfi::set_frequencies(const std::vector<scanning_frequency> & v)
 std::unique_ptr<sentence> sfi::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	const auto size = std::distance(first, last);
-	if ((size < 2) || (size > 2 + max_number_of_frequencies * 2))
-		throw std::invalid_argument{"invalid number of fields in sfi::parse"};
-	if (size % 2 != 0)
-		throw std::invalid_argument{"invalid number of fields in sfi::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<sfi>();
-	result->set_talker(talker);
-	sfi & detail = static_cast<sfi &>(*result);
-
-	read(*(first + 0), detail.number_of_messages);
-	read(*(first + 1), detail.message_number);
-
-	detail.frequencies.clear();
-	detail.frequencies.reserve(size - 2);
-	for (auto i = 2; i < size; i += 2) {
-		uint32_t frequency;
-		char mode;
-		read(*(first + i + 0), frequency);
-		read(*(first + i + 1), mode);
-		detail.frequencies.push_back({frequency, mode});
-	}
-
-	return result;
+	return std::unique_ptr<sfi>(new sfi(talker, first, last));
 }
 
 std::vector<std::string> sfi::get_data() const

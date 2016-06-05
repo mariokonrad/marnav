@@ -35,7 +35,7 @@ namespace nmea
 ///
 /// Example: <tt>$GPAAM,A,A,0.10,N,WPTNME*43</tt>
 ///
-/// WPTNME is the waypoint name.
+/// `WPTNME` is the waypoint name.
 ///
 class aam : public sentence
 {
@@ -51,6 +51,7 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	aam(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:

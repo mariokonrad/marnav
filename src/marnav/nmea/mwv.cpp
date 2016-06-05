@@ -1,7 +1,6 @@
 #include "mwv.hpp"
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -13,6 +12,19 @@ constexpr const char * mwv::TAG;
 mwv::mwv()
 	: sentence(ID, TAG, talker_id::integrated_instrumentation)
 {
+}
+
+mwv::mwv(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 5)
+		throw std::invalid_argument{"invalid number of fields in mwv"};
+
+	read(*(first + 0), angle);
+	read(*(first + 1), angle_ref);
+	read(*(first + 2), speed);
+	read(*(first + 3), speed_unit);
+	read(*(first + 4), data_valid);
 }
 
 void mwv::set_angle(double deg, reference ref)
@@ -31,20 +43,7 @@ void mwv::set_speed(double speed, unit::velocity u) noexcept
 std::unique_ptr<sentence> mwv::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 5)
-		throw std::invalid_argument{"invalid number of fields in mwv::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<mwv>();
-	result->set_talker(talker);
-	mwv & detail = static_cast<mwv &>(*result);
-
-	read(*(first + 0), detail.angle);
-	read(*(first + 1), detail.angle_ref);
-	read(*(first + 2), detail.speed);
-	read(*(first + 3), detail.speed_unit);
-	read(*(first + 4), detail.data_valid);
-
-	return result;
+	return std::unique_ptr<mwv>(new mwv(talker, first, last));
 }
 
 std::vector<std::string> mwv::get_data() const

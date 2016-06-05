@@ -1,6 +1,5 @@
 #include "tds.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -11,25 +10,23 @@ constexpr const char * tds::TAG;
 
 tds::tds()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, distance(0.0)
-	, distance_unit(nmea::unit::distance::meter)
 {
+}
+
+tds::tds(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 2)
+		throw std::invalid_argument{"invalid number of fields in tds"};
+
+	read(*(first + 0), distance);
+	read(*(first + 1), distance_unit);
 }
 
 std::unique_ptr<sentence> tds::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 2)
-		throw std::invalid_argument{"invalid number of fields in tds::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<tds>();
-	result->set_talker(talker);
-	tds & detail = static_cast<tds &>(*result);
-
-	read(*(first + 0), detail.distance);
-	read(*(first + 1), detail.distance_unit);
-
-	return result;
+	return std::unique_ptr<tds>(new tds(talker, first, last));
 }
 
 std::vector<std::string> tds::get_data() const

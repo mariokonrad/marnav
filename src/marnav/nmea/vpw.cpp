@@ -1,6 +1,5 @@
 #include "vpw.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -12,6 +11,18 @@ constexpr const char * vpw::TAG;
 vpw::vpw()
 	: sentence(ID, TAG, talker_id::integrated_instrumentation)
 {
+}
+
+vpw::vpw(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 4)
+		throw std::invalid_argument{"invalid number of fields in vpw"};
+
+	read(*(first + 0), speed_knots);
+	read(*(first + 1), speed_knots_unit);
+	read(*(first + 2), speed_meters_per_second);
+	read(*(first + 3), speed_meters_per_second_unit);
 }
 
 void vpw::set_speed_knots(double t) noexcept
@@ -29,19 +40,7 @@ void vpw::set_speed_mps(double t) noexcept
 std::unique_ptr<sentence> vpw::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 4)
-		throw std::invalid_argument{"invalid number of fields in vpw::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<vpw>();
-	result->set_talker(talker);
-	vpw & detail = static_cast<vpw &>(*result);
-
-	read(*(first + 0), detail.speed_knots);
-	read(*(first + 1), detail.speed_knots_unit);
-	read(*(first + 2), detail.speed_meters_per_second);
-	read(*(first + 3), detail.speed_meters_per_second_unit);
-
-	return result;
+	return std::unique_ptr<vpw>(new vpw(talker, first, last));
 }
 
 std::vector<std::string> vpw::get_data() const

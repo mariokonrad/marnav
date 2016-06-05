@@ -1,6 +1,5 @@
 #include "mwd.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -12,6 +11,22 @@ constexpr const char * mwd::TAG;
 mwd::mwd()
 	: sentence(ID, TAG, talker_id::weather_instruments)
 {
+}
+
+mwd::mwd(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 8)
+		throw std::invalid_argument{"invalid number of fields in mwd"};
+
+	read(*(first + 0), direction_true);
+	read(*(first + 1), direction_true_ref);
+	read(*(first + 2), direction_mag);
+	read(*(first + 3), direction_mag_ref);
+	read(*(first + 4), speed_kn);
+	read(*(first + 5), speed_kn_unit);
+	read(*(first + 6), speed_ms);
+	read(*(first + 7), speed_ms_unit);
 }
 
 void mwd::set_direction_true(double t) noexcept
@@ -41,23 +56,7 @@ void mwd::set_speed_mps(double t) noexcept
 std::unique_ptr<sentence> mwd::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 8)
-		throw std::invalid_argument{"invalid number of fields in mwd::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<mwd>();
-	result->set_talker(talker);
-	mwd & detail = static_cast<mwd &>(*result);
-
-	read(*(first + 0), detail.direction_true);
-	read(*(first + 1), detail.direction_true_ref);
-	read(*(first + 2), detail.direction_mag);
-	read(*(first + 3), detail.direction_mag_ref);
-	read(*(first + 4), detail.speed_kn);
-	read(*(first + 5), detail.speed_kn_unit);
-	read(*(first + 6), detail.speed_ms);
-	read(*(first + 7), detail.speed_ms_unit);
-
-	return result;
+	return std::unique_ptr<mwd>(new mwd(talker, first, last));
 }
 
 std::vector<std::string> mwd::get_data() const

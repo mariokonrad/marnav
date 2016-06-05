@@ -1,6 +1,5 @@
 #include "vwr.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -12,6 +11,22 @@ constexpr const char * vwr::TAG;
 vwr::vwr()
 	: sentence(ID, TAG, talker_id::integrated_instrumentation)
 {
+}
+
+vwr::vwr(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 8)
+		throw std::invalid_argument{"invalid number of fields in vwr"};
+
+	read(*(first + 0), angle);
+	read(*(first + 1), angle_side);
+	read(*(first + 2), speed_knots);
+	read(*(first + 3), speed_knots_unit);
+	read(*(first + 4), speed_mps);
+	read(*(first + 5), speed_mps_unit);
+	read(*(first + 6), speed_kmh);
+	read(*(first + 7), speed_kmh_unit);
 }
 
 void vwr::set_angle(double angle, side s) noexcept
@@ -41,23 +56,7 @@ void vwr::set_speed_kmh(double t) noexcept
 std::unique_ptr<sentence> vwr::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 8)
-		throw std::invalid_argument{"invalid number of fields in vwr::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<vwr>();
-	result->set_talker(talker);
-	vwr & detail = static_cast<vwr &>(*result);
-
-	read(*(first + 0), detail.angle);
-	read(*(first + 1), detail.angle_side);
-	read(*(first + 2), detail.speed_knots);
-	read(*(first + 3), detail.speed_knots_unit);
-	read(*(first + 4), detail.speed_mps);
-	read(*(first + 5), detail.speed_mps_unit);
-	read(*(first + 6), detail.speed_kmh);
-	read(*(first + 7), detail.speed_kmh_unit);
-
-	return result;
+	return std::unique_ptr<vwr>(new vwr(talker, first, last));
 }
 
 std::vector<std::string> vwr::get_data() const

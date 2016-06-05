@@ -42,13 +42,14 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	msk(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	uint32_t frequency;
-	selection_mode frequency_mode;
-	uint32_t bitrate;
-	selection_mode bitrate_mode;
+	uint32_t frequency = 0;
+	selection_mode frequency_mode = selection_mode::automatic;
+	uint32_t bitrate = 0;
+	selection_mode bitrate_mode = selection_mode::automatic;
 	utils::optional<uint32_t> frequency_mss_status;
 
 public:

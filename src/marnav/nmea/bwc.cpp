@@ -2,7 +2,6 @@
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 #include <marnav/nmea/convert.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -14,6 +13,34 @@ constexpr const char * bwc::TAG;
 bwc::bwc()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
+}
+
+bwc::bwc(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	const auto size = std::distance(first, last);
+	if ((size != 12) && (size != 13))
+		throw std::invalid_argument{"invalid number of fields in bwc::parse"};
+
+	read(*(first + 0), time_utc);
+	read(*(first + 1), lat);
+	read(*(first + 2), lat_hem);
+	read(*(first + 3), lon);
+	read(*(first + 4), lon_hem);
+	read(*(first + 5), bearing_true);
+	read(*(first + 6), bearing_true_ref);
+	read(*(first + 7), bearing_mag);
+	read(*(first + 8), bearing_mag_ref);
+	read(*(first + 9), distance);
+	read(*(first + 10), distance_unit);
+	read(*(first + 11), waypoint_id);
+
+	if (size == 13)
+		read(*(first + 12), mode_indicator);
+
+	// instead of reading data into temporary lat/lon, let's correct values afterwards
+	lat = correct_hemisphere(lat, lat_hem);
+	lon = correct_hemisphere(lon, lon_hem);
 }
 
 void bwc::set_lat(const geo::latitude & t)
@@ -55,35 +82,7 @@ void bwc::set_waypoint(const std::string & id)
 std::unique_ptr<sentence> bwc::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	const auto size = std::distance(first, last);
-	if ((size != 12) && (size != 13))
-		throw std::invalid_argument{"invalid number of fields in bwc::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<bwc>();
-	result->set_talker(talker);
-	bwc & detail = static_cast<bwc &>(*result);
-
-	read(*(first + 0), detail.time_utc);
-	read(*(first + 1), detail.lat);
-	read(*(first + 2), detail.lat_hem);
-	read(*(first + 3), detail.lon);
-	read(*(first + 4), detail.lon_hem);
-	read(*(first + 5), detail.bearing_true);
-	read(*(first + 6), detail.bearing_true_ref);
-	read(*(first + 7), detail.bearing_mag);
-	read(*(first + 8), detail.bearing_mag_ref);
-	read(*(first + 9), detail.distance);
-	read(*(first + 10), detail.distance_unit);
-	read(*(first + 11), detail.waypoint_id);
-
-	if (size == 13)
-		read(*(first + 12), detail.mode_indicator);
-
-	// instead of reading data into temporary lat/lon, let's correct values afterwards
-	detail.lat = correct_hemisphere(detail.lat, detail.lat_hem);
-	detail.lon = correct_hemisphere(detail.lon, detail.lon_hem);
-
-	return result;
+	return std::unique_ptr<bwc>(new bwc(talker, first, last));
 }
 
 std::vector<std::string> bwc::get_data() const

@@ -42,17 +42,18 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	gst(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
 	nmea::time time_utc;
-	double total_rms;
-	double dev_semi_major;
-	double dev_semi_minor;
-	double orientation;
-	double dev_lat;
-	double dev_lon;
-	double dev_alt;
+	double total_rms = 0.0;
+	double dev_semi_major = 0.0;
+	double dev_semi_minor = 0.0;
+	double orientation = 0.0;
+	double dev_lat = 0.0;
+	double dev_lon = 0.0;
+	double dev_alt = 0.0;
 
 public:
 	NMEA_GETTER(time_utc)

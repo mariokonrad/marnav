@@ -44,17 +44,18 @@ public:
 		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
+	gbs(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
 	nmea::time time_utc;
-	double err_lat;
-	double err_lon;
-	double err_alt;
-	uint32_t satellite;
-	double probability;
-	double bias;
-	double bias_dev;
+	double err_lat = 0.0;
+	double err_lon = 0.0;
+	double err_alt = 0.0;
+	uint32_t satellite = 0;
+	double probability = 0.0;
+	double bias = 0.0;
+	double bias_dev = 0.0;
 
 public:
 	NMEA_GETTER(time_utc)

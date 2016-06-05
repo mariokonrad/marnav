@@ -1,6 +1,5 @@
 #include "zdl.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -11,26 +10,24 @@ constexpr const char * zdl::TAG;
 
 zdl::zdl()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, distance(0.0)
-	, type_point(type_of_point::reference)
 {
+}
+
+zdl::zdl(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 3)
+		throw std::invalid_argument{"invalid number of fields in zdl"};
+
+	read(*(first + 0), time_to_point);
+	read(*(first + 1), distance);
+	read(*(first + 2), type_point);
 }
 
 std::unique_ptr<sentence> zdl::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 3)
-		throw std::invalid_argument{"invalid number of fields in zdl::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<zdl>();
-	result->set_talker(talker);
-	zdl & detail = static_cast<zdl &>(*result);
-
-	read(*(first + 0), detail.time_to_point);
-	read(*(first + 1), detail.distance);
-	read(*(first + 2), detail.type_point);
-
-	return result;
+	return std::unique_ptr<zdl>(new zdl(talker, first, last));
 }
 
 std::vector<std::string> zdl::get_data() const

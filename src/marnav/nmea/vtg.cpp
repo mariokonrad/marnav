@@ -1,6 +1,5 @@
 #include "vtg.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -12,6 +11,28 @@ constexpr const char * vtg::TAG;
 vtg::vtg()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
+}
+
+vtg::vtg(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	// before and after NMEA 2.3
+	const auto size = std::distance(first, last);
+	if ((size < 8) || (size > 9))
+		throw std::invalid_argument{"invalid number of fields in vtg"};
+
+	read(*(first + 0), track_true);
+	read(*(first + 1), type_true);
+	read(*(first + 2), track_magn);
+	read(*(first + 3), type_magn);
+	read(*(first + 4), speed_kn);
+	read(*(first + 5), speed_kn_unit);
+	read(*(first + 6), speed_kmh);
+	read(*(first + 7), speed_kmh_unit);
+
+	// NMEA 2.3 or newer
+	if (size > 8)
+		read(*(first + 8), mode_indicator);
 }
 
 void vtg::set_speed_kn(double t) noexcept
@@ -41,29 +62,7 @@ void vtg::set_track_true(double t) noexcept
 std::unique_ptr<sentence> vtg::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	// before and after NMEA 2.3
-	const auto size = std::distance(first, last);
-	if ((size < 8) || (size > 9))
-		throw std::invalid_argument{"invalid number of fields in vtg::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<vtg>();
-	result->set_talker(talker);
-	vtg & detail = static_cast<vtg &>(*result);
-
-	read(*(first + 0), detail.track_true);
-	read(*(first + 1), detail.type_true);
-	read(*(first + 2), detail.track_magn);
-	read(*(first + 3), detail.type_magn);
-	read(*(first + 4), detail.speed_kn);
-	read(*(first + 5), detail.speed_kn_unit);
-	read(*(first + 6), detail.speed_kmh);
-	read(*(first + 7), detail.speed_kmh_unit);
-
-	// NMEA 2.3 or newer
-	if (size > 8)
-		read(*(first + 8), detail.mode_indicator);
-
-	return result;
+	return std::unique_ptr<vtg>(new vtg(talker, first, last));
 }
 
 std::vector<std::string> vtg::get_data() const

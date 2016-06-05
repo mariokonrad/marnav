@@ -1,6 +1,5 @@
 #include "dbt.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -12,6 +11,20 @@ constexpr const char * dbt::TAG;
 dbt::dbt()
 	: sentence(ID, TAG, talker_id::integrated_instrumentation)
 {
+}
+
+dbt::dbt(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 6)
+		throw std::invalid_argument{"invalid number of fields in dbt"};
+
+	read(*(first + 0), depth_feet);
+	read(*(first + 1), depth_feet_unit);
+	read(*(first + 2), depth_meter);
+	read(*(first + 3), depth_meter_unit);
+	read(*(first + 4), depth_fathom);
+	read(*(first + 5), depth_fathom_unit);
 }
 
 void dbt::set_depth_feet(double t) noexcept
@@ -35,21 +48,7 @@ void dbt::set_depth_fathom(double t) noexcept
 std::unique_ptr<sentence> dbt::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 6)
-		throw std::invalid_argument{"invalid number of fields in dbt::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<dbt>();
-	result->set_talker(talker);
-	dbt & detail = static_cast<dbt &>(*result);
-
-	read(*(first + 0), detail.depth_feet);
-	read(*(first + 1), detail.depth_feet_unit);
-	read(*(first + 2), detail.depth_meter);
-	read(*(first + 3), detail.depth_meter_unit);
-	read(*(first + 4), detail.depth_fathom);
-	read(*(first + 5), detail.depth_fathom_unit);
-
-	return result;
+	return std::unique_ptr<dbt>(new dbt(talker, first, last));
 }
 
 std::vector<std::string> dbt::get_data() const

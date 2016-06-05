@@ -1,6 +1,5 @@
 #include "gbs.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -11,36 +10,29 @@ constexpr const char * gbs::TAG;
 
 gbs::gbs()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, err_lat(0.0)
-	, err_lon(0.0)
-	, err_alt(0.0)
-	, satellite(0)
-	, probability(0.0)
-	, bias(0.0)
-	, bias_dev(0.0)
 {
+}
+
+gbs::gbs(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 8)
+		throw std::invalid_argument{"invalid number of fields in gbs"};
+
+	read(*(first + 0), time_utc);
+	read(*(first + 1), err_lat);
+	read(*(first + 2), err_lon);
+	read(*(first + 3), err_alt);
+	read(*(first + 4), satellite);
+	read(*(first + 5), probability);
+	read(*(first + 6), bias);
+	read(*(first + 7), bias_dev);
 }
 
 std::unique_ptr<sentence> gbs::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 8)
-		throw std::invalid_argument{"invalid number of fields in gbs::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<gbs>();
-	result->set_talker(talker);
-	gbs & detail = static_cast<gbs &>(*result);
-
-	read(*(first + 0), detail.time_utc);
-	read(*(first + 1), detail.err_lat);
-	read(*(first + 2), detail.err_lon);
-	read(*(first + 3), detail.err_alt);
-	read(*(first + 4), detail.satellite);
-	read(*(first + 5), detail.probability);
-	read(*(first + 6), detail.bias);
-	read(*(first + 7), detail.bias_dev);
-
-	return result;
+	return std::unique_ptr<gbs>(new gbs(talker, first, last));
 }
 
 std::vector<std::string> gbs::get_data() const

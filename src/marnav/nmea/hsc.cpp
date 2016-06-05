@@ -1,6 +1,5 @@
 #include "hsc.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -12,6 +11,18 @@ constexpr const char * hsc::TAG;
 hsc::hsc()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
+}
+
+hsc::hsc(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 4)
+		throw std::invalid_argument{"invalid number of fields in hsc"};
+
+	read(*(first + 0), heading_true);
+	read(*(first + 1), heading_true_ref);
+	read(*(first + 2), heading_mag);
+	read(*(first + 3), heading_mag_ref);
 }
 
 void hsc::set_heading_true(double t) noexcept
@@ -29,19 +40,7 @@ void hsc::set_heading_mag(double t) noexcept
 std::unique_ptr<sentence> hsc::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 4)
-		throw std::invalid_argument{"invalid number of fields in hsc::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<hsc>();
-	result->set_talker(talker);
-	hsc & detail = static_cast<hsc &>(*result);
-
-	read(*(first + 0), detail.heading_true);
-	read(*(first + 1), detail.heading_true_ref);
-	read(*(first + 2), detail.heading_mag);
-	read(*(first + 3), detail.heading_mag_ref);
-
-	return result;
+	return std::unique_ptr<hsc>(new hsc(talker, first, last));
 }
 
 std::vector<std::string> hsc::get_data() const

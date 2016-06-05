@@ -1,6 +1,5 @@
 #include "vbw.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -12,6 +11,20 @@ constexpr const char * vbw::TAG;
 vbw::vbw()
 	: sentence(ID, TAG, talker_id::integrated_instrumentation)
 {
+}
+
+vbw::vbw(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 6)
+		throw std::invalid_argument{"invalid number of fields in vbw"};
+
+	read(*(first + 0), water_speed_longitudinal);
+	read(*(first + 1), water_speed_transveral);
+	read(*(first + 2), water_speed_status);
+	read(*(first + 3), ground_speed_longitudinal);
+	read(*(first + 4), ground_speed_transveral);
+	read(*(first + 5), water_speed_status);
 }
 
 void vbw::set_water_speed(double l, double t, status s) noexcept
@@ -31,21 +44,7 @@ void vbw::set_ground_speed(double l, double t, status s) noexcept
 std::unique_ptr<sentence> vbw::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 6)
-		throw std::invalid_argument{"invalid number of fields in vbw::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<vbw>();
-	result->set_talker(talker);
-	vbw & detail = static_cast<vbw &>(*result);
-
-	read(*(first + 0), detail.water_speed_longitudinal);
-	read(*(first + 1), detail.water_speed_transveral);
-	read(*(first + 2), detail.water_speed_status);
-	read(*(first + 3), detail.ground_speed_longitudinal);
-	read(*(first + 4), detail.ground_speed_transveral);
-	read(*(first + 5), detail.water_speed_status);
-
-	return result;
+	return std::unique_ptr<vbw>(new vbw(talker, first, last));
 }
 
 std::vector<std::string> vbw::get_data() const

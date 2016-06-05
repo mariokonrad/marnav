@@ -1,7 +1,6 @@
 #include "bww.hpp"
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -13,6 +12,20 @@ constexpr const char * bww::TAG;
 bww::bww()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
+}
+
+bww::bww(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 6)
+		throw std::invalid_argument{"invalid number of fields in bww"};
+
+	read(*(first + 0), bearing_true);
+	read(*(first + 1), bearing_true_ref);
+	read(*(first + 2), bearing_mag);
+	read(*(first + 3), bearing_mag_ref);
+	read(*(first + 4), waypoint_to);
+	read(*(first + 5), waypoint_from);
 }
 
 void bww::set_bearing_true(double t) noexcept
@@ -42,21 +55,7 @@ void bww::set_waypoint_from(const std::string & id)
 std::unique_ptr<sentence> bww::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 6)
-		throw std::invalid_argument{"invalid number of fields in bww::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<bww>();
-	result->set_talker(talker);
-	bww & detail = static_cast<bww &>(*result);
-
-	read(*(first + 0), detail.bearing_true);
-	read(*(first + 1), detail.bearing_true_ref);
-	read(*(first + 2), detail.bearing_mag);
-	read(*(first + 3), detail.bearing_mag_ref);
-	read(*(first + 4), detail.waypoint_to);
-	read(*(first + 5), detail.waypoint_from);
-
-	return result;
+	return std::unique_ptr<bww>(new bww(talker, first, last));
 }
 
 std::vector<std::string> bww::get_data() const

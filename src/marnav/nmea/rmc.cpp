@@ -2,7 +2,6 @@
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 #include <marnav/nmea/convert.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -14,6 +13,35 @@ constexpr const char * rmc::TAG;
 rmc::rmc()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
+}
+
+rmc::rmc(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	// before and after NMEA 2.3
+	const auto size = std::distance(first, last);
+	if ((size < 11) || (size > 12))
+		throw std::invalid_argument{"invalid number of fields in rmc"};
+
+	read(*(first + 0), time_utc);
+	read(*(first + 1), status);
+	read(*(first + 2), lat);
+	read(*(first + 3), lat_hem);
+	read(*(first + 4), lon);
+	read(*(first + 5), lon_hem);
+	read(*(first + 6), sog);
+	read(*(first + 7), heading);
+	read(*(first + 8), date);
+	read(*(first + 9), mag);
+	read(*(first + 10), mag_hem);
+
+	// NMEA 2.3 or newer
+	if (size > 11)
+		read(*(first + 11), mode_indicator);
+
+	// instead of reading data into temporary lat/lon, let's correct values afterwards
+	lat = correct_hemisphere(lat, lat_hem);
+	lon = correct_hemisphere(lon, lon_hem);
 }
 
 void rmc::set_lat(const geo::latitude & t)
@@ -38,36 +66,7 @@ void rmc::set_mag(double t, direction h)
 std::unique_ptr<sentence> rmc::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	// before and after NMEA 2.3
-	const auto size = std::distance(first, last);
-	if ((size < 11) || (size > 12))
-		throw std::invalid_argument{"invalid number of fields in rmc::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<rmc>();
-	result->set_talker(talker);
-	rmc & detail = static_cast<rmc &>(*result);
-
-	read(*(first + 0), detail.time_utc);
-	read(*(first + 1), detail.status);
-	read(*(first + 2), detail.lat);
-	read(*(first + 3), detail.lat_hem);
-	read(*(first + 4), detail.lon);
-	read(*(first + 5), detail.lon_hem);
-	read(*(first + 6), detail.sog);
-	read(*(first + 7), detail.heading);
-	read(*(first + 8), detail.date);
-	read(*(first + 9), detail.mag);
-	read(*(first + 10), detail.mag_hem);
-
-	// NMEA 2.3 or newer
-	if (size > 11)
-		read(*(first + 11), detail.mode_indicator);
-
-	// instead of reading data into temporary lat/lon, let's correct values afterwards
-	detail.lat = correct_hemisphere(detail.lat, detail.lat_hem);
-	detail.lon = correct_hemisphere(detail.lon, detail.lon_hem);
-
-	return result;
+	return std::unique_ptr<rmc>(new rmc(talker, first, last));
 }
 
 std::vector<std::string> rmc::get_data() const

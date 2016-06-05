@@ -1,7 +1,6 @@
 #include "dsc.hpp"
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -170,6 +169,20 @@ dsc::dsc()
 {
 }
 
+dsc::dsc(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 11)
+		throw std::invalid_argument{"invalid number of fields in dsc"};
+
+	read(*(first + 0), fmt_spec, format_specifier_mapping);
+	read(*(first + 1), address);
+	read(*(first + 2), cat, category_mapping);
+	// @todo read other 6 data members
+	read(*(first + 9), ack, acknowledgement_mapping);
+	read(*(first + 10), extension, extension_indicator_mapping);
+}
+
 /// Valid only for format specifier other than geographical area.
 /// However, there are no checks and special treatment, the MMSI is
 /// simply wrong if taken with an invalid format specifier.
@@ -237,21 +250,7 @@ geo::region dsc::get_geographical_area() const
 std::unique_ptr<sentence> dsc::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 11)
-		throw std::invalid_argument{"invalid number of fields in dsc::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<dsc>();
-	result->set_talker(talker);
-	dsc & detail = static_cast<dsc &>(*result);
-
-	read(*(first + 0), detail.fmt_spec, format_specifier_mapping);
-	read(*(first + 1), detail.address);
-	read(*(first + 2), detail.cat, category_mapping);
-	// @todo read other 6 data members
-	read(*(first + 9), detail.ack, acknowledgement_mapping);
-	read(*(first + 10), detail.extension, extension_indicator_mapping);
-
-	return result;
+	return std::unique_ptr<dsc>(new dsc(talker, first, last));
 }
 
 /// @todo Implementation

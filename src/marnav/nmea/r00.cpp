@@ -1,6 +1,5 @@
 #include "r00.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -14,23 +13,23 @@ r00::r00()
 {
 }
 
-std::unique_ptr<sentence> r00::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+r00::r00(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
 {
 	if (std::distance(first, last) != r00::max_waypoint_ids)
-		throw std::invalid_argument{"invalid number of fields in r00::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<r00>();
-	result->set_talker(talker);
-	r00 & detail = static_cast<r00 &>(*result);
+		throw std::invalid_argument{"invalid number of fields in r00"};
 
 	for (auto i = 0; i < max_waypoint_ids; ++i) {
 		std::string id;
 		read(*(first + i), id);
-		detail.set_waypoint_id(i, id);
+		set_waypoint_id(i, id);
 	}
+}
 
-	return result;
+std::unique_ptr<sentence> r00::parse(
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+{
+	return std::unique_ptr<r00>(new r00(talker, first, last));
 }
 
 std::vector<std::string> r00::get_data() const

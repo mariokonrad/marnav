@@ -1,6 +1,5 @@
 #include "tpt.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -11,32 +10,27 @@ constexpr const char * tpt::TAG;
 
 tpt::tpt()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, range(0.0)
-	, range_unit(unit::distance::meter)
-	, bearing(0.0)
-	, depth(0.0)
-	, depth_unit(unit::distance::meter)
 {
+}
+
+tpt::tpt(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talker)
+{
+	if (std::distance(first, last) != 6)
+		throw std::invalid_argument{"invalid number of fields in tpt"};
+
+	read(*(first + 0), range);
+	read(*(first + 1), range_unit);
+	read(*(first + 2), bearing);
+	// separator omitted intentionally
+	read(*(first + 4), depth);
+	read(*(first + 5), depth_unit);
 }
 
 std::unique_ptr<sentence> tpt::parse(
 	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 {
-	if (std::distance(first, last) != 6)
-		throw std::invalid_argument{"invalid number of fields in tpt::parse"};
-
-	std::unique_ptr<sentence> result = utils::make_unique<tpt>();
-	result->set_talker(talker);
-	tpt & detail = static_cast<tpt &>(*result);
-
-	read(*(first + 0), detail.range);
-	read(*(first + 1), detail.range_unit);
-	read(*(first + 2), detail.bearing);
-	// separator omitted intentionally
-	read(*(first + 4), detail.depth);
-	read(*(first + 5), detail.depth_unit);
-
-	return result;
+	return std::unique_ptr<tpt>(new tpt(talker, first, last));
 }
 
 std::vector<std::string> tpt::get_data() const
