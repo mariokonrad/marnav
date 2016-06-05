@@ -8,10 +8,12 @@ namespace marnav
 {
 namespace nmea
 {
+/// @cond DEV
 namespace detail
 {
 std::vector<std::string> parse_fields(const std::string & s);
 }
+/// @endcond
 }
 }
 
