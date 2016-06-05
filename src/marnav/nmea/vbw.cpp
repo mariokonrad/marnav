@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(vbw)
 
 constexpr const char * vbw::TAG;
 
@@ -39,12 +40,6 @@ void vbw::set_ground_speed(double l, double t, status s) noexcept
 	ground_speed_longitudinal = l;
 	ground_speed_transveral = t;
 	ground_speed_status = s;
-}
-
-std::unique_ptr<sentence> vbw::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<vbw>(new vbw(talker, first, last));
 }
 
 std::vector<std::string> vbw::get_data() const

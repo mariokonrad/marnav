@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(glc)
 
 /// @brief GLC - Geographic Position, Loran-C
 ///
@@ -35,6 +36,8 @@ namespace nmea
 ///
 class glc : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(glc)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::GLC;
 	constexpr static const char * TAG = "GLC";
@@ -47,9 +50,6 @@ public:
 	glc();
 	glc(const glc &) = default;
 	glc & operator=(const glc &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	glc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

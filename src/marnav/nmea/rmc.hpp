@@ -11,6 +11,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(rmc)
 
 /// @brief RMC - Recommended Minimum Navigation Information
 ///
@@ -47,6 +48,8 @@ namespace nmea
 ///
 class rmc : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(rmc)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::RMC;
 	constexpr static const char * TAG = "RMC";
@@ -54,9 +57,6 @@ public:
 	rmc();
 	rmc(const rmc &) = default;
 	rmc & operator=(const rmc &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	rmc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

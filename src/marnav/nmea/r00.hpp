@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(r00)
 
 /// @brief R00 - Waypoints in active route
 ///
@@ -23,6 +24,8 @@ namespace nmea
 ///
 class r00 : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(r00)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::R00;
 	constexpr static const char * TAG = "R00";
@@ -31,9 +34,6 @@ public:
 	r00();
 	r00(const r00 &) = default;
 	r00 & operator=(const r00 &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	r00(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

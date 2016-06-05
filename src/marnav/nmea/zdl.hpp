@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(zdl)
 
 /// @brief ZDL - Time and Distance to Variable Point
 ///
@@ -31,6 +32,8 @@ namespace nmea
 ///
 class zdl : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(zdl)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::ZDL;
 	constexpr static const char * TAG = "ZDL";
@@ -38,9 +41,6 @@ public:
 	zdl();
 	zdl(const zdl &) = default;
 	zdl & operator=(const zdl &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	zdl(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

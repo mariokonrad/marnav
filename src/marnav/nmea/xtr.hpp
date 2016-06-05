@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(xtr)
 
 /// @brief XTR - Cross Track Error - Dead Reckoning
 ///
@@ -27,6 +28,8 @@ namespace nmea
 ///
 class xtr : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(xtr)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::XTR;
 	constexpr static const char * TAG = "XTR";
@@ -34,9 +37,6 @@ public:
 	xtr();
 	xtr(const xtr &) = default;
 	xtr & operator=(const xtr &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	xtr(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

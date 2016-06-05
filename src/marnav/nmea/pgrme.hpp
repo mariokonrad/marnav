@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(pgrme)
 
 /// @brief PGRME - Garmin Estimated Error
 ///
@@ -31,6 +32,8 @@ namespace nmea
 ///
 class pgrme : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(pgrme)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::PGRME;
 	constexpr static const char * TAG = "PGRME";
@@ -38,9 +41,6 @@ public:
 	pgrme();
 	pgrme(const pgrme &) = default;
 	pgrme & operator=(const pgrme &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	pgrme(

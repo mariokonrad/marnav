@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(mtw)
 
 constexpr const char * mtw::TAG;
 
@@ -27,12 +28,6 @@ void mtw::set_temperature(double t) noexcept
 {
 	temperature = t;
 	temperature_unit = unit::temperature::celsius;
-}
-
-std::unique_ptr<sentence> mtw::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<mtw>(new mtw(talker, first, last));
 }
 
 std::vector<std::string> mtw::get_data() const

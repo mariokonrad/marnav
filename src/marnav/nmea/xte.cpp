@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(xte)
 
 constexpr const char * xte::TAG;
 
@@ -28,12 +29,6 @@ xte::xte(const std::string & talker, fields::const_iterator first, fields::const
 
 	if (size == 6)
 		read(*(first + 5), mode_indicator);
-}
-
-std::unique_ptr<sentence> xte::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<xte>(new xte(talker, first, last));
 }
 
 std::vector<std::string> xte::get_data() const

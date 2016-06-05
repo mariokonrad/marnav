@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(vtg)
 
 constexpr const char * vtg::TAG;
 
@@ -57,12 +58,6 @@ void vtg::set_track_true(double t) noexcept
 {
 	track_true = t;
 	type_true = reference::TRUE;
-}
-
-std::unique_ptr<sentence> vtg::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<vtg>(new vtg(talker, first, last));
 }
 
 std::vector<std::string> vtg::get_data() const

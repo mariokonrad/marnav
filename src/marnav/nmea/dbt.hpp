@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(dbt)
 
 /// @brief DBT - Depth Below Transducer
 ///
@@ -33,6 +34,8 @@ namespace nmea
 ///
 class dbt : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(dbt)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::DBT;
 	constexpr static const char * TAG = "DBT";
@@ -40,9 +43,6 @@ public:
 	dbt();
 	dbt(const dbt &) = default;
 	dbt & operator=(const dbt &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	dbt(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

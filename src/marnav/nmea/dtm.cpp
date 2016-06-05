@@ -6,6 +6,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(dtm)
 
 constexpr const char * dtm::TAG;
 
@@ -69,12 +70,6 @@ void dtm::set_name(const std::string & t) noexcept
 	} else {
 		name = t;
 	}
-}
-
-std::unique_ptr<sentence> dtm::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<dtm>(new dtm(talker, first, last));
 }
 
 std::vector<std::string> dtm::get_data() const

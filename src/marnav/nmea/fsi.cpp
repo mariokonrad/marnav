@@ -6,6 +6,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(fsi)
 
 constexpr const char * fsi::TAG;
 
@@ -38,12 +39,6 @@ void fsi::set_sentence_status(char t)
 {
 	check_value(t, {'R', 'C'}, "sentence_status");
 	sentence_status = t;
-}
-
-std::unique_ptr<sentence> fsi::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<fsi>(new fsi(talker, first, last));
 }
 
 std::vector<std::string> fsi::get_data() const

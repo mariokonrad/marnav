@@ -6,6 +6,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(aam)
 
 constexpr const char * aam::TAG;
 
@@ -62,12 +63,6 @@ void aam::check() const
 	if (arrival_circle_radius && !arrival_circle_radius_unit)
 		throw std::invalid_argument{"unit missing in sentence"};
 	check_value(arrival_circle_radius_unit, {unit::distance::nm}, "arrival_circle_radius_unit");
-}
-
-std::unique_ptr<sentence> aam::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<aam>(new aam(talker, first, last));
 }
 
 std::vector<std::string> aam::get_data() const

@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(msk)
 
 /// @brief MSK - Control for a Beacon Receiver
 ///
@@ -30,6 +31,8 @@ namespace nmea
 ///
 class msk : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(msk)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::MSK;
 	constexpr static const char * TAG = "MSK";
@@ -37,9 +40,6 @@ public:
 	msk();
 	msk(const msk &) = default;
 	msk & operator=(const msk &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	msk(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(gsa)
 
 constexpr const char * gsa::TAG;
 
@@ -50,12 +51,6 @@ utils::optional<uint32_t> gsa::get_satellite_id(int index) const
 {
 	check_index(index);
 	return satellite_id[index - 1];
-}
-
-std::unique_ptr<sentence> gsa::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<gsa>(new gsa(talker, first, last));
 }
 
 std::vector<std::string> gsa::get_data() const

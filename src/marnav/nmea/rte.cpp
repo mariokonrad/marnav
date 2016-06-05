@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(rte)
 
 constexpr const char * rte::TAG;
 
@@ -48,12 +49,6 @@ void rte::set_waypoint_id(int index, const std::string & id)
 		throw std::invalid_argument{"string size to large, only 8 characters allowed for id"};
 
 	waypoint_id[index] = id;
-}
-
-std::unique_ptr<sentence> rte::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<rte>(new rte(talker, first, last));
 }
 
 std::vector<std::string> rte::get_data() const

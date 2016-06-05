@@ -6,6 +6,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(gsv)
 
 namespace
 {
@@ -87,12 +88,6 @@ utils::optional<gsv::satellite_info> gsv::get_sat(int index) const
 {
 	check_index(index);
 	return sat[index];
-}
-
-std::unique_ptr<sentence> gsv::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<gsv>(new gsv(talker, first, last));
 }
 
 std::vector<std::string> gsv::get_data() const

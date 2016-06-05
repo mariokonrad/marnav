@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(dbk)
 
 constexpr const char * dbk::TAG;
 
@@ -17,7 +18,7 @@ dbk::dbk(const std::string & talker, fields::const_iterator first, fields::const
 	: sentence(ID, TAG, talker)
 {
 	if (std::distance(first, last) != 6)
-		throw std::invalid_argument{"invalid number of fields in dbk::parse"};
+		throw std::invalid_argument{"invalid number of fields in dbk"};
 
 	read(*(first + 0), depth_feet);
 	read(*(first + 1), depth_feet_unit);
@@ -43,12 +44,6 @@ void dbk::set_depth_fathom(double t) noexcept
 {
 	depth_fathom = t;
 	depth_fathom_unit = unit::distance::fathom;
-}
-
-std::unique_ptr<sentence> dbk::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<dbk>(new dbk(talker, first, last));
 }
 
 std::vector<std::string> dbk::get_data() const

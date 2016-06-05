@@ -6,6 +6,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(grs)
 
 namespace
 {
@@ -81,12 +82,6 @@ void grs::set_sat_residual(int index, double value)
 {
 	check_index(index);
 	sat_residual[index] = value;
-}
-
-std::unique_ptr<sentence> grs::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<grs>(new grs(talker, first, last));
 }
 
 std::vector<std::string> grs::get_data() const

@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(gst)
 
 constexpr const char * gst::TAG;
 
@@ -27,12 +28,6 @@ gst::gst(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 5), dev_lat);
 	read(*(first + 6), dev_lon);
 	read(*(first + 7), dev_alt);
-}
-
-std::unique_ptr<sentence> gst::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<gst>(new gst(talker, first, last));
 }
 
 std::vector<std::string> gst::get_data() const

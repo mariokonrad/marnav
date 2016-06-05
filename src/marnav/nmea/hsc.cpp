@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(hsc)
 
 constexpr const char * hsc::TAG;
 
@@ -35,12 +36,6 @@ void hsc::set_heading_mag(double t) noexcept
 {
 	heading_mag = t;
 	heading_mag_ref = reference::MAGNETIC;
-}
-
-std::unique_ptr<sentence> hsc::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<hsc>(new hsc(talker, first, last));
 }
 
 std::vector<std::string> hsc::get_data() const

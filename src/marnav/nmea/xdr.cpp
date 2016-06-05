@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(xdr)
 
 namespace
 {
@@ -35,7 +36,7 @@ xdr::xdr(const std::string & talker, fields::const_iterator first, fields::const
 		throw std::invalid_argument{"invalid number of fields in xdr"};
 
 	if ((size % 4) != 0)
-		throw std::invalid_argument{"unexpected number of fields in xdr::parse (quadruples?)"};
+		throw std::invalid_argument{"unexpected number of fields in xdr (quadruples?)"};
 
 	int index = 0;
 	for (auto i = 0; i < size; i += 4, ++index) {
@@ -65,12 +66,6 @@ utils::optional<xdr::transducer_info> xdr::get_info(int index) const
 {
 	check_index(index);
 	return transducer_data[index];
-}
-
-std::unique_ptr<sentence> xdr::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<xdr>(new xdr(talker, first, last));
 }
 
 std::vector<std::string> xdr::get_data() const

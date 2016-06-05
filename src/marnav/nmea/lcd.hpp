@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(lcd)
 
 /// @brief LCD - Loran-C Signal Data
 ///
@@ -35,6 +36,8 @@ namespace nmea
 ///
 class lcd : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(lcd)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::LCD;
 	constexpr static const char * TAG = "LCD";
@@ -47,9 +50,6 @@ public:
 	lcd();
 	lcd(const lcd &) = default;
 	lcd & operator=(const lcd &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	lcd(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

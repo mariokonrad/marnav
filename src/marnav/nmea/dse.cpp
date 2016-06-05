@@ -6,6 +6,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(dse)
 
 namespace
 {
@@ -108,12 +109,6 @@ void dse::set_mmsi(const utils::mmsi & t) noexcept
 {
 	address = t;
 	address *= 10;
-}
-
-std::unique_ptr<sentence> dse::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<dse>(new dse(talker, first, last));
 }
 
 std::vector<std::string> dse::get_data() const

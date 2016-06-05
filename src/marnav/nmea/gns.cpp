@@ -7,6 +7,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(gns)
 
 constexpr const char * gns::TAG;
 
@@ -55,12 +56,6 @@ void gns::set_mode_indicator(const std::string & t)
 {
 	check_waypoint_id(t); // same requirements as waypoint IDs
 	mode_indicator = t;
-}
-
-std::unique_ptr<sentence> gns::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<gns>(new gns(talker, first, last));
 }
 
 std::vector<std::string> gns::get_data() const

@@ -7,6 +7,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(bwc)
 
 constexpr const char * bwc::TAG;
 
@@ -20,7 +21,7 @@ bwc::bwc(const std::string & talker, fields::const_iterator first, fields::const
 {
 	const auto size = std::distance(first, last);
 	if ((size != 12) && (size != 13))
-		throw std::invalid_argument{"invalid number of fields in bwc::parse"};
+		throw std::invalid_argument{"invalid number of fields in bwc"};
 
 	read(*(first + 0), time_utc);
 	read(*(first + 1), lat);
@@ -77,12 +78,6 @@ void bwc::set_waypoint(const std::string & id)
 {
 	check_waypoint_id(id);
 	waypoint_id = id;
-}
-
-std::unique_ptr<sentence> bwc::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<bwc>(new bwc(talker, first, last));
 }
 
 std::vector<std::string> bwc::get_data() const

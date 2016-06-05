@@ -6,6 +6,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(zfo)
 
 constexpr const char * zfo::TAG;
 
@@ -29,12 +30,6 @@ void zfo::set_waypoint_id(const std::string & id)
 {
 	check_waypoint_id(id);
 	waypoint_id = id;
-}
-
-std::unique_ptr<sentence> zfo::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<zfo>(new zfo(talker, first, last));
 }
 
 std::vector<std::string> zfo::get_data() const

@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(rpm)
 
 namespace
 {
@@ -63,12 +64,6 @@ void rpm::set_source(source_id id, uint32_t num)
 {
 	source = id;
 	source_number = num;
-}
-
-std::unique_ptr<sentence> rpm::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<rpm>(new rpm(talker, first, last));
 }
 
 std::vector<std::string> rpm::get_data() const

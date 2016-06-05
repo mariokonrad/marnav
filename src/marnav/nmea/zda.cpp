@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(zda)
 
 constexpr const char * zda::TAG;
 
@@ -25,12 +26,6 @@ zda::zda(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 3), year);
 	read(*(first + 4), local_zone_hours);
 	read(*(first + 5), local_zone_minutes);
-}
-
-std::unique_ptr<sentence> zda::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<zda>(new zda(talker, first, last));
 }
 
 std::vector<std::string> zda::get_data() const

@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(dtm)
 
 /// @brief DTM - Datum Reference
 ///
@@ -37,6 +38,8 @@ namespace nmea
 ///
 class dtm : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(dtm)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::DTM;
 	constexpr static const char * TAG = "DTM";
@@ -44,9 +47,6 @@ public:
 	dtm();
 	dtm(const dtm &) = default;
 	dtm & operator=(const dtm &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	dtm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

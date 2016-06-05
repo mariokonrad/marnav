@@ -10,6 +10,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(dsc)
 
 /// @brief DSC - Digital Selective Calling Information
 ///
@@ -43,6 +44,8 @@ namespace nmea
 ///
 class dsc : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(dsc)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::DSC;
 	constexpr static const char * TAG = "DSC";
@@ -111,20 +114,17 @@ public:
 	dsc(const dsc &) = default;
 	dsc & operator=(const dsc &) = default;
 
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
-
 protected:
 	dsc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	format_specifier fmt_spec;
-	uint64_t address; // space for 10 decimal digits
-	category cat;
+	format_specifier fmt_spec = format_specifier::distress;
+	uint64_t address = 0; // space for 10 decimal digits
+	category cat = category::distress;
 	// @todo Implement other 6 data members
-	acknowledgement ack;
-	extension_indicator extension;
+	acknowledgement ack = acknowledgement::end_of_sequence;
+	extension_indicator extension = extension_indicator::none;
 
 public:
 	NMEA_GETTER(fmt_spec);

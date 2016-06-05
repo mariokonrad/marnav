@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(ttm)
 
 /// @brief TTM - Tracked Target Message
 ///
@@ -41,6 +42,8 @@ namespace nmea
 ///
 class ttm : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(ttm)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::TTM;
 	constexpr static const char * TAG = "TTM";
@@ -48,9 +51,6 @@ public:
 	ttm();
 	ttm(const ttm &) = default;
 	ttm & operator=(const ttm &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	ttm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

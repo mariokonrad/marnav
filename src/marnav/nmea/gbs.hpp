@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gbs)
 
 /// @brief GBS - GPS Satellite Fault Detection
 ///
@@ -32,6 +33,8 @@ namespace nmea
 ///
 class gbs : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(gbs)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::GBS;
 	constexpr static const char * TAG = "GBS";
@@ -39,9 +42,6 @@ public:
 	gbs();
 	gbs(const gbs &) = default;
 	gbs & operator=(const gbs &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	gbs(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

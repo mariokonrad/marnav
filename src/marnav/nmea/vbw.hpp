@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vbw)
 
 /// @brief VBW - Dual Ground/Water Speed
 ///
@@ -31,6 +32,8 @@ namespace nmea
 ///
 class vbw : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(vbw)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::VBW;
 	constexpr static const char * TAG = "VBW";
@@ -38,9 +41,6 @@ public:
 	vbw();
 	vbw(const vbw &) = default;
 	vbw & operator=(const vbw &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	vbw(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

@@ -6,6 +6,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(pgrme)
 
 constexpr const char * pgrme::TAG;
 
@@ -19,7 +20,7 @@ pgrme::pgrme(
 	: sentence(ID, TAG, talker)
 {
 	if (std::distance(first, last) != 6)
-		throw std::invalid_argument{"invalid number of fields in pgrme::parse"};
+		throw std::invalid_argument{"invalid number of fields in pgrme"};
 
 	read(*(first + 0), horizontal_position_error);
 	read(*(first + 1), horizontal_position_error_unit);
@@ -27,12 +28,6 @@ pgrme::pgrme(
 	read(*(first + 3), vertical_position_error_unit);
 	read(*(first + 4), overall_spherical_equiv_position_error);
 	read(*(first + 5), overall_spherical_equiv_position_error_unit);
-}
-
-std::unique_ptr<sentence> pgrme::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<pgrme>(new pgrme(talker, first, last));
 }
 
 std::vector<std::string> pgrme::get_data() const

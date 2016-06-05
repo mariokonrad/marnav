@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(xte)
 
 /// @brief XTE - Cross-Track Error, Measured
 ///
@@ -36,6 +37,8 @@ namespace nmea
 ///
 class xte : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(xte)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::XTE;
 	constexpr static const char * TAG = "XTE";
@@ -43,9 +46,6 @@ public:
 	xte();
 	xte(const xte &) = default;
 	xte & operator=(const xte &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	xte(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

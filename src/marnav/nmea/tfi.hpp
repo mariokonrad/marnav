@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(tfi)
 
 /// @brief TFI - Trawl Filling Indicator
 ///
@@ -25,6 +26,8 @@ namespace nmea
 ///
 class tfi : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(tfi)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::TFI;
 	constexpr static const char * TAG = "TFI";
@@ -38,9 +41,6 @@ public:
 	tfi();
 	tfi(const tfi &) = default;
 	tfi & operator=(const tfi &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	tfi(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

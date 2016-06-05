@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(rot)
 
 /// @brief ROT - Rate Of Turn
 ///
@@ -25,6 +26,8 @@ namespace nmea
 ///
 class rot : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(rot)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::ROT;
 	constexpr static const char * TAG = "ROT";
@@ -32,9 +35,6 @@ public:
 	rot();
 	rot(const rot &) = default;
 	rot & operator=(const rot &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	rot(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

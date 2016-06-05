@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(zda)
 
 /// @brief ZDA - Time & Date - UTC, day, month, year and local time zone
 ///
@@ -30,6 +31,8 @@ namespace nmea
 ///
 class zda : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(zda)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::ZDA;
 	constexpr static const char * TAG = "ZDA";
@@ -37,9 +40,6 @@ public:
 	zda();
 	zda(const zda &) = default;
 	zda & operator=(const zda &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	zda(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

@@ -1,11 +1,11 @@
 #include "msk.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(msk)
 
 constexpr const char * msk::TAG;
 
@@ -18,7 +18,7 @@ msk::msk(const std::string & talker, fields::const_iterator first, fields::const
 	: sentence(ID, TAG, talker)
 {
 	if (std::distance(first, last) != 5)
-		throw std::invalid_argument{"invalid number of fields in msk::parse"};
+		throw std::invalid_argument{"invalid number of fields in msk"};
 
 	read(*(first + 0), frequency);
 	read(*(first + 1), frequency_mode);
@@ -37,12 +37,6 @@ void msk::set_bitrate(uint32_t rate, selection_mode mode) noexcept
 {
 	bitrate = rate;
 	bitrate_mode = mode;
-}
-
-std::unique_ptr<sentence> msk::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<msk>(new msk(talker, first, last));
 }
 
 std::vector<std::string> msk::get_data() const

@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(rsa)
 
 constexpr const char * rsa::TAG;
 
@@ -35,12 +36,6 @@ void rsa::set_rudder2(double t) noexcept
 {
 	rudder2 = t;
 	rudder2_valid = status::ok;
-}
-
-std::unique_ptr<sentence> rsa::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<rsa>(new rsa(talker, first, last));
 }
 
 std::vector<std::string> rsa::get_data() const

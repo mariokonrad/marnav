@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(r00)
 
 constexpr const char * r00::TAG;
 
@@ -24,12 +25,6 @@ r00::r00(const std::string & talker, fields::const_iterator first, fields::const
 		read(*(first + i), id);
 		set_waypoint_id(i, id);
 	}
-}
-
-std::unique_ptr<sentence> r00::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<r00>(new r00(talker, first, last));
 }
 
 std::vector<std::string> r00::get_data() const

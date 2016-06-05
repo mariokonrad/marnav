@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(hsc)
 
 /// @brief HSC - Heading Steering Command
 ///
@@ -27,6 +28,8 @@ namespace nmea
 ///
 class hsc : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(hsc)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::HSC;
 	constexpr static const char * TAG = "HSC";
@@ -34,9 +37,6 @@ public:
 	hsc();
 	hsc(const hsc &) = default;
 	hsc & operator=(const hsc &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	hsc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

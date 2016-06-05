@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gsv)
 
 /// @brief GSV - Satellites in view
 ///
@@ -42,6 +43,8 @@ namespace nmea
 ///       this class will write them in any case.
 class gsv : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(gsv)
+
 public:
 	struct satellite_info {
 		uint32_t id;
@@ -56,9 +59,6 @@ public:
 	gsv();
 	gsv(const gsv &) = default;
 	gsv & operator=(const gsv &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	gsv(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

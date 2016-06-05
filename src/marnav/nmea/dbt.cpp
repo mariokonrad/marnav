@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(dbt)
 
 constexpr const char * dbt::TAG;
 
@@ -43,12 +44,6 @@ void dbt::set_depth_fathom(double t) noexcept
 {
 	depth_fathom = t;
 	depth_fathom_unit = unit::distance::fathom;
-}
-
-std::unique_ptr<sentence> dbt::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<dbt>(new dbt(talker, first, last));
 }
 
 std::vector<std::string> dbt::get_data() const

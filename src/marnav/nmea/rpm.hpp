@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(rpm)
 
 /// @brief RPM - Revolutions
 ///
@@ -29,6 +30,8 @@ namespace nmea
 ///
 class rpm : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(rpm)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::RPM;
 	constexpr static const char * TAG = "RPM";
@@ -41,9 +44,6 @@ public:
 	rpm();
 	rpm(const rpm &) = default;
 	rpm & operator=(const rpm &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	rpm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

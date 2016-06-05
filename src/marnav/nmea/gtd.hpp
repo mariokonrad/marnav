@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gtd)
 
 /// @brief GTD - Geographic Location in Time Differences
 ///
@@ -27,6 +28,8 @@ namespace nmea
 ///
 class gtd : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(gtd)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::GTD;
 	constexpr static const char * TAG = "GTD";
@@ -34,9 +37,6 @@ public:
 	gtd();
 	gtd(const gtd &) = default;
 	gtd & operator=(const gtd &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	gtd(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(vdr)
 
 constexpr const char * vdr::TAG;
 
@@ -43,12 +44,6 @@ void vdr::set_speed(double t) noexcept
 {
 	speed = t;
 	speed_unit = unit::velocity::knot;
-}
-
-std::unique_ptr<sentence> vdr::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<vdr>(new vdr(talker, first, last));
 }
 
 std::vector<std::string> vdr::get_data() const

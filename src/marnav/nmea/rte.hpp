@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(rte)
 
 /// @brief RTE - Routes
 ///
@@ -30,6 +31,8 @@ namespace nmea
 ///
 class rte : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(rte)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::RTE;
 	constexpr static const char * TAG = "RTE";
@@ -37,9 +40,6 @@ public:
 	rte();
 	rte(const rte &) = default;
 	rte & operator=(const rte &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	rte(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

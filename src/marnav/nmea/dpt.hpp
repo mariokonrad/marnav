@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(dpt)
 
 /// @brief DPT - Depth of Water
 ///
@@ -28,6 +29,8 @@ namespace nmea
 ///
 class dpt : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(dpt)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::DPT;
 	constexpr static const char * TAG = "DPT";
@@ -36,9 +39,6 @@ public:
 	dpt(const std::string & talker);
 	dpt(const dpt &) = default;
 	dpt & operator=(const dpt &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	dpt(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

@@ -7,6 +7,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(rmc)
 
 constexpr const char * rmc::TAG;
 
@@ -61,12 +62,6 @@ void rmc::set_mag(double t, direction h)
 	check_value(h, {direction::east, direction::west}, "mag var hemisphere");
 	mag = t;
 	mag_hem = h;
-}
-
-std::unique_ptr<sentence> rmc::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<rmc>(new rmc(talker, first, last));
 }
 
 std::vector<std::string> rmc::get_data() const

@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(hdm)
 
 /// @brief HDM - Heading - Magnetic
 ///
@@ -30,6 +31,8 @@ namespace nmea
 ///
 class hdm : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(hdm)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::HDM;
 	constexpr static const char * TAG = "HDM";
@@ -37,9 +40,6 @@ public:
 	hdm();
 	hdm(const hdm &) = default;
 	hdm & operator=(const hdm &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	hdm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

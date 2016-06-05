@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(dbk)
 
 /// @brief DBK - Depth Below Keel
 ///
@@ -32,6 +33,8 @@ namespace nmea
 ///
 class dbk : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(dbk)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::DBK;
 	constexpr static const char * TAG = "DBK";
@@ -39,9 +42,6 @@ public:
 	dbk();
 	dbk(const dbk &) = default;
 	dbk & operator=(const dbk &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	dbk(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

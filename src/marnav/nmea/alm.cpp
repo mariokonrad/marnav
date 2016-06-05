@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(alm)
 
 constexpr const char * alm::TAG;
 
@@ -42,12 +43,6 @@ void alm::check() const
 {
 	if ((satellite_prn < 1) || (satellite_prn > 32))
 		throw std::invalid_argument{"invalid satellite PRN"};
-}
-
-std::unique_ptr<sentence> alm::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<alm>(new alm(talker, first, last));
 }
 
 std::vector<std::string> alm::get_data() const

@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(mwd)
 
 constexpr const char * mwd::TAG;
 
@@ -51,12 +52,6 @@ void mwd::set_speed_mps(double t) noexcept
 {
 	speed_ms = t;
 	speed_ms_unit = unit::velocity::mps;
-}
-
-std::unique_ptr<sentence> mwd::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<mwd>(new mwd(talker, first, last));
 }
 
 std::vector<std::string> mwd::get_data() const

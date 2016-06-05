@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(lcd)
 
 constexpr const char * lcd::TAG;
 
@@ -51,12 +52,6 @@ void lcd::set_time_diff(int index, time_difference t)
 {
 	check_index(index);
 	time_diffs[index] = t;
-}
-
-std::unique_ptr<sentence> lcd::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<lcd>(new lcd(talker, first, last));
 }
 
 std::vector<std::string> lcd::get_data() const

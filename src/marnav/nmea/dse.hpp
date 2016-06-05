@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(dse)
 
 /// @brief DSE - Extended DSC
 ///
@@ -37,6 +38,8 @@ namespace nmea
 ///
 class dse : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(dse)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::DSE;
 	constexpr static const char * TAG = "DSE";
@@ -61,9 +64,6 @@ public:
 	dse();
 	dse(const dse &) = default;
 	dse & operator=(const dse &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	dse(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

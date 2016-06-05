@@ -94,9 +94,9 @@ namespace nmea
 namespace
 {
 // local macro, used for convenience while registering sentences
-#define REGISTER_SENTENCE(s)    \
-	{                           \
-		s::TAG, s::ID, s::parse \
+#define REGISTER_SENTENCE(s)             \
+	{                                    \
+		s::TAG, s::ID, detail::parse_##s \
 	}
 
 struct entry {

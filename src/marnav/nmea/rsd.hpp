@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(rsd)
 
 /// @brief RSD - RADAR System Data
 ///
@@ -37,6 +38,8 @@ namespace nmea
 ///
 class rsd : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(rsd)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::RSD;
 	constexpr static const char * TAG = "RSD";
@@ -44,9 +47,6 @@ public:
 	rsd();
 	rsd(const rsd &) = default;
 	rsd & operator=(const rsd &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	rsd(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

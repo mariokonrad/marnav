@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(tpc)
 
 /// @brief TPC - Trawl Position Cartesian Coordinates
 ///
@@ -32,6 +33,8 @@ namespace nmea
 ///
 class tpc : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(tpc)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::TPC;
 	constexpr static const char * TAG = "TPC";
@@ -39,9 +42,6 @@ public:
 	tpc();
 	tpc(const tpc &) = default;
 	tpc & operator=(const tpc &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	tpc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

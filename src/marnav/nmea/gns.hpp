@@ -10,6 +10,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gns)
 
 /// @brief GNS - Fix data
 ///
@@ -39,6 +40,8 @@ namespace nmea
 ///
 class gns : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(gns)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::GNS;
 	constexpr static const char * TAG = "GNS";
@@ -46,9 +49,6 @@ public:
 	gns();
 	gns(const gns &) = default;
 	gns & operator=(const gns &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	gns(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

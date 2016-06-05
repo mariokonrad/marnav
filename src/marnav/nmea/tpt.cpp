@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(tpt)
 
 constexpr const char * tpt::TAG;
 
@@ -25,12 +26,6 @@ tpt::tpt(const std::string & talker, fields::const_iterator first, fields::const
 	// separator omitted intentionally
 	read(*(first + 4), depth);
 	read(*(first + 5), depth_unit);
-}
-
-std::unique_ptr<sentence> tpt::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<tpt>(new tpt(talker, first, last));
 }
 
 std::vector<std::string> tpt::get_data() const

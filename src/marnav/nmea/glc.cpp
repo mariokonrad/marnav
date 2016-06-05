@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(glc)
 
 constexpr const char * glc::TAG;
 
@@ -51,12 +52,6 @@ void glc::set_time_diff(int index, time_difference t)
 {
 	check_index(index);
 	time_diffs[index] = t;
-}
-
-std::unique_ptr<sentence> glc::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<glc>(new glc(talker, first, last));
 }
 
 std::vector<std::string> glc::get_data() const

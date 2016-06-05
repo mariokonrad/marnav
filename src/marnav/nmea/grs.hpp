@@ -10,6 +10,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(grs)
 
 /// @brief GRS - GPS Range Residuals
 ///
@@ -39,6 +40,8 @@ namespace nmea
 ///
 class grs : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(grs)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::GRS;
 	constexpr static const char * TAG = "GRS";
@@ -51,9 +54,6 @@ public:
 	grs();
 	grs(const grs &) = default;
 	grs & operator=(const grs &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	grs(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

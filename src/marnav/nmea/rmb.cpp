@@ -7,6 +7,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(rmb)
 
 constexpr const char * rmb::TAG;
 
@@ -68,12 +69,6 @@ void rmb::set_waypoint_from(const std::string & id)
 {
 	check_waypoint_id(id);
 	waypoint_from = id;
-}
-
-std::unique_ptr<sentence> rmb::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<rmb>(new rmb(talker, first, last));
 }
 
 std::vector<std::string> rmb::get_data() const

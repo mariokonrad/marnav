@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(osd)
 
 constexpr const char * osd::TAG;
 
@@ -46,12 +47,6 @@ void osd::set_drift(double t, unit::velocity u) noexcept
 {
 	vessel_drift = t;
 	vessel_drift_unit = u;
-}
-
-std::unique_ptr<sentence> osd::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<osd>(new osd(talker, first, last));
 }
 
 std::vector<std::string> osd::get_data() const

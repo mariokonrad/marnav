@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(mtw)
 
 /// @brief MTW - Mean Temperature of Water
 ///
@@ -24,6 +25,8 @@ namespace nmea
 ///
 class mtw : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(mtw)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::MTW;
 	constexpr static const char * TAG = "MTW";
@@ -31,9 +34,6 @@ public:
 	mtw();
 	mtw(const mtw &) = default;
 	mtw & operator=(const mtw &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	mtw(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

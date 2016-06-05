@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(vlw)
 
 constexpr const char * vlw::TAG;
 
@@ -35,12 +36,6 @@ void vlw::set_distance_reset_nm(double t) noexcept
 {
 	distance_reset = t;
 	distance_reset_unit = unit::distance::nm;
-}
-
-std::unique_ptr<sentence> vlw::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<vlw>(new vlw(talker, first, last));
 }
 
 std::vector<std::string> vlw::get_data() const

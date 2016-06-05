@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(sfi)
 
 /// @brief SFI - Scanning Frequency Information
 ///
@@ -25,6 +26,8 @@ namespace nmea
 ///
 class sfi : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(sfi)
+
 public:
 	struct scanning_frequency {
 		uint32_t frequency; // [kHz]
@@ -38,9 +41,6 @@ public:
 	sfi();
 	sfi(const sfi &) = default;
 	sfi & operator=(const sfi &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	sfi(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(bod)
 
 /// @brief BOD - Bearing - Waypoint to Waypoint
 ///
@@ -31,6 +32,8 @@ namespace nmea
 ///
 class bod : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(bod)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::BOD;
 	constexpr static const char * TAG = "BOD";
@@ -38,9 +41,6 @@ public:
 	bod();
 	bod(const bod &) = default;
 	bod & operator=(const bod &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	bod(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

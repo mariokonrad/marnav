@@ -6,6 +6,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(wcv)
 
 constexpr const char * wcv::TAG;
 
@@ -35,12 +36,6 @@ void wcv::set_waypoint(const std::string & id)
 {
 	check_waypoint_id(id);
 	waypoint_id = id;
-}
-
-std::unique_ptr<sentence> wcv::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<wcv>(new wcv(talker, first, last));
 }
 
 std::vector<std::string> wcv::get_data() const

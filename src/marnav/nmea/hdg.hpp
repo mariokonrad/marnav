@@ -8,6 +8,8 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(hdg)
+
 /// @brief HDG - Heading - Deviation & Variation
 ///
 /// @code
@@ -29,6 +31,8 @@ namespace nmea
 ///
 class hdg : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(hdg)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::HDG;
 	constexpr static const char * TAG = "HDG";
@@ -38,9 +42,6 @@ public:
 	hdg(hdg &&) = default;
 	hdg & operator=(const hdg &) = default;
 	hdg & operator=(hdg &&) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	hdg(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

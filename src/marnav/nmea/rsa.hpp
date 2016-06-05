@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(rsa)
 
 /// @brief RSA - Rudder Sensor Angle
 ///
@@ -29,6 +30,8 @@ namespace nmea
 ///
 class rsa : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(rsa)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::RSA;
 	constexpr static const char * TAG = "RSA";
@@ -36,9 +39,6 @@ public:
 	rsa();
 	rsa(const rsa &) = default;
 	rsa & operator=(const rsa &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	rsa(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

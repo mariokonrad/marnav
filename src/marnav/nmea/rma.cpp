@@ -7,6 +7,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(rma)
 
 constexpr const char * rma::TAG;
 
@@ -55,12 +56,6 @@ void rma::set_magnetic_var(double t, direction h)
 	check_value(h, {direction::east, direction::west}, "mag var hemisphere");
 	magnetic_var = t;
 	magnetic_var_hem = h;
-}
-
-std::unique_ptr<sentence> rma::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<rma>(new rma(talker, first, last));
 }
 
 std::vector<std::string> rma::get_data() const

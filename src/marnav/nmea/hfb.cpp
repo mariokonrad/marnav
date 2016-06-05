@@ -6,6 +6,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(hfb)
 
 constexpr const char * hfb::TAG;
 
@@ -18,18 +19,12 @@ hfb::hfb(const std::string & talker, fields::const_iterator first, fields::const
 	: sentence(ID, TAG, talker)
 {
 	if (std::distance(first, last) != 4)
-		throw std::invalid_argument{"invalid number of fields in hfb::parse"};
+		throw std::invalid_argument{"invalid number of fields in hfb"};
 
 	read(*(first + 0), distance_head_foot);
 	read(*(first + 1), distance_head_foot_unit);
 	read(*(first + 2), distance_head_bottom);
 	read(*(first + 3), distance_head_bottom_unit);
-}
-
-std::unique_ptr<sentence> hfb::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<hfb>(new hfb(talker, first, last));
 }
 
 std::vector<std::string> hfb::get_data() const

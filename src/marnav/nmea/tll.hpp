@@ -10,6 +10,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(tll)
 
 /// @brief TLL - Target latitude and longitude
 ///
@@ -41,6 +42,8 @@ namespace nmea
 ///
 class tll : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(tll)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::TLL;
 	constexpr static const char * TAG = "TLL";
@@ -48,9 +51,6 @@ public:
 	tll();
 	tll(const tll &) = default;
 	tll & operator=(const tll &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	tll(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

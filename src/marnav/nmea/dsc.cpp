@@ -6,6 +6,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(dsc)
 
 namespace
 {
@@ -161,14 +162,10 @@ constexpr const char * dsc::TAG;
 
 dsc::dsc()
 	: sentence(ID, TAG, talker_id::communications_dsc)
-	, fmt_spec(format_specifier::distress)
-	, address(0)
-	, cat(category::distress)
-	, ack(acknowledgement::end_of_sequence)
-	, extension(extension_indicator::none)
 {
 }
 
+/// @todo Read and interpret more fields
 dsc::dsc(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 	: sentence(ID, TAG, talker)
 {
@@ -243,14 +240,6 @@ geo::region dsc::get_geographical_area() const
 	const double d_lon = static_cast<double>(address % 100);
 
 	return geo::region{{{lat, 0, 0, lat_hem}, {lon, 0, 0, lon_hem}}, d_lat, d_lon};
-}
-
-/// @todo Read and interpret more fields
-///
-std::unique_ptr<sentence> dsc::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<dsc>(new dsc(talker, first, last));
 }
 
 /// @todo Implementation

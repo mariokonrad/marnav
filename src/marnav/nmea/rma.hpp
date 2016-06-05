@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(rma)
 
 /// @brief RMA - Recommended Minimum Navigation Information
 ///
@@ -39,6 +40,8 @@ namespace nmea
 ///
 class rma : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(rma)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::RMA;
 	constexpr static const char * TAG = "RMA";
@@ -46,9 +49,6 @@ public:
 	rma();
 	rma(const rma &) = default;
 	rma & operator=(const rma &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	rma(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

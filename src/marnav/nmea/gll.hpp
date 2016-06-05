@@ -10,6 +10,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gll)
 
 /// @brief GLL - Geographic Position - Latitude/Longitude
 ///
@@ -39,6 +40,8 @@ namespace nmea
 ///
 class gll : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(gll)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::GLL;
 	constexpr static const char * TAG = "GLL";
@@ -46,9 +49,6 @@ public:
 	gll();
 	gll(const gll &) = default;
 	gll & operator=(const gll &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	gll(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

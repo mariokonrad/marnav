@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(gbs)
 
 constexpr const char * gbs::TAG;
 
@@ -27,12 +28,6 @@ gbs::gbs(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 5), probability);
 	read(*(first + 6), bias);
 	read(*(first + 7), bias_dev);
-}
-
-std::unique_ptr<sentence> gbs::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<gbs>(new gbs(talker, first, last));
 }
 
 std::vector<std::string> gbs::get_data() const

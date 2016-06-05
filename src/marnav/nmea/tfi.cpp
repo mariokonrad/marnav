@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(tfi)
 
 namespace
 {
@@ -78,12 +79,6 @@ void tfi::set_sensor(int index, state t)
 {
 	check_index(index);
 	sensors[index] = t;
-}
-
-std::unique_ptr<sentence> tfi::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<tfi>(new tfi(talker, first, last));
 }
 
 std::vector<std::string> tfi::get_data() const

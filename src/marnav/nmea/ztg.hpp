@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(ztg)
 
 /// @brief ZTG - UTC & Time to Destination Waypoint
 ///
@@ -25,6 +26,8 @@ namespace nmea
 ///
 class ztg : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(ztg)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::ZTG;
 	constexpr static const char * TAG = "ZTG";
@@ -32,9 +35,6 @@ public:
 	ztg();
 	ztg(const ztg &) = default;
 	ztg & operator=(const ztg &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	ztg(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

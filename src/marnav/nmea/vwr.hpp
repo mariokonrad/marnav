@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vwr)
 
 /// @brief VWR - Relative Wind Speed and Angle.
 ///
@@ -34,6 +35,8 @@ namespace nmea
 ///
 class vwr : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(vwr)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::VWR;
 	constexpr static const char * TAG = "VWR";
@@ -41,9 +44,6 @@ public:
 	vwr();
 	vwr(const vwr &) = default;
 	vwr & operator=(const vwr &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	vwr(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

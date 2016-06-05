@@ -7,6 +7,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(vdm)
 
 constexpr const char * vdm::TAG;
 
@@ -37,12 +38,6 @@ void vdm::read_fields(fields::const_iterator first)
 	read(*(first + 3), radio_channel);
 	read(*(first + 4), payload);
 	read(*(first + 5), n_fill_bits);
-}
-
-std::unique_ptr<sentence> vdm::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<vdm>(new vdm(talker, first, last));
 }
 
 std::vector<std::string> vdm::get_data() const

@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(tds)
 
 constexpr const char * tds::TAG;
 
@@ -21,12 +22,6 @@ tds::tds(const std::string & talker, fields::const_iterator first, fields::const
 
 	read(*(first + 0), distance);
 	read(*(first + 1), distance_unit);
-}
-
-std::unique_ptr<sentence> tds::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<tds>(new tds(talker, first, last));
 }
 
 std::vector<std::string> tds::get_data() const

@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gst)
 
 /// @brief GST - GPS Pseudorange Noise Statistics
 ///
@@ -30,6 +31,8 @@ namespace nmea
 ///
 class gst : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(gst)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::GST;
 	constexpr static const char * TAG = "GST";
@@ -37,9 +40,6 @@ public:
 	gst();
 	gst(const gst &) = default;
 	gst & operator=(const gst &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	gst(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

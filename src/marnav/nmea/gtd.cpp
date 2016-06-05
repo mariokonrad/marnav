@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(gtd)
 
 constexpr const char * gtd::TAG;
 
@@ -41,12 +42,6 @@ void gtd::set_time_diff(int index, double value)
 {
 	check_index(index);
 	time_diffs[index] = value;
-}
-
-std::unique_ptr<sentence> gtd::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<gtd>(new gtd(talker, first, last));
 }
 
 std::vector<std::string> gtd::get_data() const

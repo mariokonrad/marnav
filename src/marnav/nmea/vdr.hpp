@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vdr)
 
 /// @brief VDR - Set and Drift
 ///
@@ -30,6 +31,8 @@ namespace nmea
 ///
 class vdr : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(vdr)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::VDR;
 	constexpr static const char * TAG = "VDR";
@@ -37,9 +40,6 @@ public:
 	vdr();
 	vdr(const vdr &) = default;
 	vdr & operator=(const vdr &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	vdr(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

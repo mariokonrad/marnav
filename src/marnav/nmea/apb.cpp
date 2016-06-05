@@ -6,6 +6,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(apb)
 
 constexpr const char * apb::TAG;
 
@@ -110,12 +111,6 @@ void apb::check() const
 									positioning_system_mode_indicator::autonomous,
 									positioning_system_mode_indicator::differential},
 		"mode_indicator");
-}
-
-std::unique_ptr<sentence> apb::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<apb>(new apb(talker, first, last));
 }
 
 std::vector<std::string> apb::get_data() const

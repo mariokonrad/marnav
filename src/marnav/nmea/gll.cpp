@@ -7,6 +7,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(gll)
 
 constexpr const char * gll::TAG;
 
@@ -51,12 +52,6 @@ void gll::set_lon(const geo::longitude & t)
 {
 	lon = t;
 	lon_hem = convert_hemisphere(t);
-}
-
-std::unique_ptr<sentence> gll::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<gll>(new gll(talker, first, last));
 }
 
 std::vector<std::string> gll::get_data() const

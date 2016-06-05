@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(rsd)
 
 constexpr const char * rsd::TAG;
 
@@ -39,12 +40,6 @@ void rsd::set_range(double scale, char unit) noexcept
 {
 	range_scale = scale;
 	range_unit = unit;
-}
-
-std::unique_ptr<sentence> rsd::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<rsd>(new rsd(talker, first, last));
 }
 
 std::vector<std::string> rsd::get_data() const

@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(tpr)
 
 /// @brief TPR - Trawl Position Relative Vessel
 ///
@@ -29,6 +30,8 @@ namespace nmea
 ///
 class tpr : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(tpr)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::TPR;
 	constexpr static const char * TAG = "TPR";
@@ -36,9 +39,6 @@ public:
 	tpr();
 	tpr(const tpr &) = default;
 	tpr & operator=(const tpr &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	tpr(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

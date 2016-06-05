@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(zdl)
 
 constexpr const char * zdl::TAG;
 
@@ -22,12 +23,6 @@ zdl::zdl(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 0), time_to_point);
 	read(*(first + 1), distance);
 	read(*(first + 2), type_point);
-}
-
-std::unique_ptr<sentence> zdl::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<zdl>(new zdl(talker, first, last));
 }
 
 std::vector<std::string> zdl::get_data() const

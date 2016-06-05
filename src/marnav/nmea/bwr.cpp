@@ -7,6 +7,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(bwr)
 
 constexpr const char * bwr::TAG;
 
@@ -73,12 +74,6 @@ void bwr::set_waypoint(const std::string & id)
 {
 	check_waypoint_id(id);
 	waypoint_id = id;
-}
-
-std::unique_ptr<sentence> bwr::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<bwr>(new bwr(talker, first, last));
 }
 
 std::vector<std::string> bwr::get_data() const

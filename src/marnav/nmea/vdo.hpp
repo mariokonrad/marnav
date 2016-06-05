@@ -7,6 +7,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vdo)
 
 /// @brief VDO - AIS VHF Data-Link Own-Vessel Report
 ///
@@ -15,6 +16,8 @@ namespace nmea
 ///
 class vdo : public vdm
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(vdo)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::VDO;
 	constexpr static const char * TAG = "VDO";
@@ -22,9 +25,6 @@ public:
 	vdo();
 	vdo(const vdo &) = default;
 	vdo & operator=(const vdo &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	vdo(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

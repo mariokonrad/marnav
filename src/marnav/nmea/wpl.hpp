@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(wpl)
 
 /// @brief WPL - Waypoint Location
 ///
@@ -31,6 +32,8 @@ namespace nmea
 ///
 class wpl : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(wpl)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::WPL;
 	constexpr static const char * TAG = "WPL";
@@ -38,9 +41,6 @@ public:
 	wpl();
 	wpl(const wpl &) = default;
 	wpl & operator=(const wpl &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	wpl(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

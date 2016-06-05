@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(vwr)
 
 constexpr const char * vwr::TAG;
 
@@ -51,12 +52,6 @@ void vwr::set_speed_kmh(double t) noexcept
 {
 	speed_kmh = t;
 	speed_kmh_unit = unit::velocity::kmh;
-}
-
-std::unique_ptr<sentence> vwr::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<vwr>(new vwr(talker, first, last));
 }
 
 std::vector<std::string> vwr::get_data() const

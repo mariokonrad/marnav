@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(tpr)
 
 constexpr const char * tpr::TAG;
 
@@ -17,7 +18,7 @@ tpr::tpr(const std::string & talker, fields::const_iterator first, fields::const
 	: sentence(ID, TAG, talker)
 {
 	if (std::distance(first, last) != 6)
-		throw std::invalid_argument{"invalid number of fields in tpr::parse"};
+		throw std::invalid_argument{"invalid number of fields in tpr"};
 
 	read(*(first + 0), range);
 	read(*(first + 1), range_unit);
@@ -25,12 +26,6 @@ tpr::tpr(const std::string & talker, fields::const_iterator first, fields::const
 	// separator omitted intentionally
 	read(*(first + 4), depth);
 	read(*(first + 5), depth_unit);
-}
-
-std::unique_ptr<sentence> tpr::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<tpr>(new tpr(talker, first, last));
 }
 
 std::vector<std::string> tpr::get_data() const

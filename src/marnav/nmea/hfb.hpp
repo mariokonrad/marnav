@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(hfb)
 
 /// @brief HFB - Trawl Headrope to Footrope and Bottom
 ///
@@ -27,6 +28,8 @@ namespace nmea
 ///
 class hfb : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(hfb)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::HFB;
 	constexpr static const char * TAG = "HFB";
@@ -34,9 +37,6 @@ public:
 	hfb();
 	hfb(const hfb &) = default;
 	hfb & operator=(const hfb &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	hfb(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

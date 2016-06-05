@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vdm)
 
 /// @brief VDM - AIS VHF Data-Link Message
 ///
@@ -29,6 +30,8 @@ namespace nmea
 ///
 class vdm : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(vdm)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::VDM;
 	constexpr static const char * TAG = "VDM";
@@ -38,9 +41,6 @@ public:
 	vdm & operator=(const vdm &) = default;
 
 	virtual ~vdm() {}
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	vdm(sentence_id id, const std::string & tag, const std::string & talker);

@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(tpc)
 
 constexpr const char * tpc::TAG;
 
@@ -25,12 +26,6 @@ tpc::tpc(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 3), distance_transducer_unit);
 	read(*(first + 4), depth);
 	read(*(first + 5), depth_unit);
-}
-
-std::unique_ptr<sentence> tpc::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<tpc>(new tpc(talker, first, last));
 }
 
 std::vector<std::string> tpc::get_data() const

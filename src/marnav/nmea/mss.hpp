@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(mss)
 
 /// @brief MSS - Beacon Receiver Status
 ///
@@ -26,6 +27,8 @@ namespace nmea
 ///
 class mss : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(mss)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::MSS;
 	constexpr static const char * TAG = "MSS";
@@ -33,9 +36,6 @@ public:
 	mss();
 	mss(const mss &) = default;
 	mss & operator=(const mss &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	mss(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

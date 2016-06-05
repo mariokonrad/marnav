@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(mss)
 
 constexpr const char * mss::TAG;
 
@@ -24,12 +25,6 @@ mss::mss(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 2), beacon_frequency);
 	read(*(first + 3), beacon_datarate);
 	read(*(first + 4), unknown);
-}
-
-std::unique_ptr<sentence> mss::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<mss>(new mss(talker, first, last));
 }
 
 std::vector<std::string> mss::get_data() const

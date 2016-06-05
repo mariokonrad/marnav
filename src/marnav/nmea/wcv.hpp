@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(wcv)
 
 /// @brief WCV - Waypoint Closure Velocity
 ///
@@ -25,6 +26,8 @@ namespace nmea
 ///
 class wcv : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(wcv)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::WCV;
 	constexpr static const char * TAG = "WCV";
@@ -32,9 +35,6 @@ public:
 	wcv();
 	wcv(const wcv &) = default;
 	wcv & operator=(const wcv &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	wcv(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

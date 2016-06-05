@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(alm)
 
 /// @brief ALM - GPS Almanac Data
 ///
@@ -43,6 +44,8 @@ namespace nmea
 ///
 class alm : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(alm)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::ALM;
 	constexpr static const char * TAG = "ALM";
@@ -50,9 +53,6 @@ public:
 	alm();
 	alm(const alm &) = default;
 	alm & operator=(const alm &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	alm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

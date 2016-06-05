@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(sfi)
 
 constexpr const char * sfi::TAG;
 
@@ -43,12 +44,6 @@ void sfi::set_frequencies(const std::vector<scanning_frequency> & v)
 			"number of frequencies exceeds max entries in sfi::set_frequencies"};
 
 	frequencies = v;
-}
-
-std::unique_ptr<sentence> sfi::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<sfi>(new sfi(talker, first, last));
 }
 
 std::vector<std::string> sfi::get_data() const

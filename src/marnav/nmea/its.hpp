@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(its)
 
 /// @brief ITS - Trawl Door Spread 2 Distance
 ///
@@ -24,6 +25,8 @@ namespace nmea
 ///
 class its : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(its)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::ITS;
 	constexpr static const char * TAG = "ITS";
@@ -31,9 +34,6 @@ public:
 	its();
 	its(const its &) = default;
 	its & operator=(const its &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	its(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

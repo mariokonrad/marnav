@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vtg)
 
 /// @brief VTG - Track made good and Ground speed
 ///
@@ -34,6 +35,8 @@ namespace nmea
 ///
 class vtg : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(vtg)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::VTG;
 	constexpr static const char * TAG = "VTG";
@@ -41,9 +44,6 @@ public:
 	vtg();
 	vtg(const vtg &) = default;
 	vtg & operator=(const vtg &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	vtg(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

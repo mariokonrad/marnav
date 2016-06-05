@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gsa)
 
 /// @brief GSA - GPS DOP and active satellites
 ///
@@ -39,6 +40,8 @@ namespace nmea
 ///
 class gsa : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(gsa)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::GSA;
 	constexpr static const char * TAG = "GSA";
@@ -46,9 +49,6 @@ public:
 	gsa();
 	gsa(const gsa &) = default;
 	gsa & operator=(const gsa &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	gsa(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(wnc)
 
 /// @brief WNC - Distance - Waypoint to Waypoint
 ///
@@ -29,6 +30,8 @@ namespace nmea
 ///
 class wnc : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(wnc)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::WNC;
 	constexpr static const char * TAG = "WNC";
@@ -36,9 +39,6 @@ public:
 	wnc();
 	wnc(const wnc &) = default;
 	wnc & operator=(const wnc &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	wnc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

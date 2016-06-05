@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(aam)
 
 /// @brief AAM - Waypoint Arrival Alarm
 ///
@@ -39,6 +40,8 @@ namespace nmea
 ///
 class aam : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(aam)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::AAM;
 	constexpr static const char * TAG = "AAM";
@@ -46,9 +49,6 @@ public:
 	aam();
 	aam(const aam &) = default;
 	aam & operator=(const aam &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	aam(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

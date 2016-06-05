@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(tll)
 
 constexpr const char * tll::TAG;
 
@@ -50,12 +51,6 @@ void tll::set_target_name(const std::string & t)
 {
 	check_waypoint_id(t);
 	target_name = t;
-}
-
-std::unique_ptr<sentence> tll::parse(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-{
-	return std::unique_ptr<tll>(new tll(talker, first, last));
 }
 
 std::vector<std::string> tll::get_data() const

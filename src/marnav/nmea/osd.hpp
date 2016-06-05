@@ -8,6 +8,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(osd)
 
 /// @brief OSD - Own Ship Data
 ///
@@ -33,6 +34,8 @@ namespace nmea
 ///
 class osd : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(osd)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::OSD;
 	constexpr static const char * TAG = "OSD";
@@ -40,9 +43,6 @@ public:
 	osd();
 	osd(const osd &) = default;
 	osd & operator=(const osd &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	osd(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

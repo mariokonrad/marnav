@@ -10,6 +10,7 @@ namespace marnav
 {
 namespace nmea
 {
+MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(bwc)
 
 /// @brief BWC - Bearing & Distance to Waypoint - Geat Circle
 ///
@@ -54,6 +55,8 @@ namespace nmea
 ///
 class bwc : public sentence
 {
+	MARNAV_NMEA_SENTENCE_FRIENDS(bwc)
+
 public:
 	constexpr static const sentence_id ID = sentence_id::BWC;
 	constexpr static const char * TAG = "BWC";
@@ -61,9 +64,6 @@ public:
 	bwc();
 	bwc(const bwc &) = default;
 	bwc & operator=(const bwc &) = default;
-
-	static std::unique_ptr<sentence> parse(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last);
 
 protected:
 	bwc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
