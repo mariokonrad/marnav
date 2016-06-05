@@ -21,19 +21,6 @@ matrix:
           - libboost1.55-all-dev
 
     - os: linux
-      env: COMPILER=g++-4.9 CMAKE_BUILD_TYPE=Release
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          packages:
-          - gcc-4.9
-          - g++-4.9
-          - libboost1.55-all-dev
-
-    - os: linux
       env: COMPILER=g++-5 CMAKE_BUILD_TYPE=Debug
       compiler: gcc
       addons:
@@ -47,42 +34,29 @@ matrix:
           - libboost1.55-all-dev
 
     - os: linux
-      env: COMPILER=clang++-3.6 CMAKE_BUILD_TYPE=Debug
-      compiler: clang
+      env: COMPILER=g++-6 CMAKE_BUILD_TYPE=Debug
+      compiler: gcc
       addons:
         apt:
           sources:
           - boost-latest
           - ubuntu-toolchain-r-test
-          - llvm-toolchain-precise-3.6
           packages:
-          - clang-3.6
+          - gcc-6
+          - g++-6
           - libboost1.55-all-dev
 
     - os: linux
-      env: COMPILER=clang++-3.7 CMAKE_BUILD_TYPE=Debug
-      compiler: clang
+      env: COMPILER=g++-4.9 CMAKE_BUILD_TYPE=Release
+      compiler: gcc
       addons:
         apt:
           sources:
           - boost-latest
           - ubuntu-toolchain-r-test
-          - llvm-toolchain-precise-3.7
           packages:
-          - clang-3.7
-          - libboost1.55-all-dev
-
-    - os: linux
-      env: COMPILER=clang++-3.7 CMAKE_BUILD_TYPE=Release
-      compiler: clang
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          - llvm-toolchain-precise-3.7
-          packages:
-          - clang-3.7
+          - gcc-4.9
+          - g++-4.9
           - libboost1.55-all-dev
 
     - os: linux
@@ -124,31 +98,57 @@ matrix:
           - g++-4.9
           - libboost1.55-all-dev
 
-    - os: linux
-      env: COMPILER=g++-6 CMAKE_BUILD_TYPE=Debug
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          packages:
-          - gcc-6
-          - g++-6
-          - libboost1.55-all-dev
-
-    - os: linux
-      env: COMPILER=clang++-3.8 CMAKE_BUILD_TYPE=Debug
-      compiler: clang
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          - llvm-toolchain-precise-3.8
-          packages:
-          - clang-3.8
-          - libboost1.55-all-dev
+#   - os: linux
+#     env: COMPILER=clang++-3.6 CMAKE_BUILD_TYPE=Debug
+#     compiler: clang
+#     addons:
+#       apt:
+#         sources:
+#         - boost-latest
+#         - ubuntu-toolchain-r-test
+#         - llvm-toolchain-precise-3.6
+#         packages:
+#         - clang-3.6
+#         - libboost1.55-all-dev
+#
+#   - os: linux
+#     env: COMPILER=clang++-3.7 CMAKE_BUILD_TYPE=Debug
+#     compiler: clang
+#     addons:
+#       apt:
+#         sources:
+#         - boost-latest
+#         - ubuntu-toolchain-r-test
+#         - llvm-toolchain-precise-3.7
+#         packages:
+#         - clang-3.7
+#         - libboost1.55-all-dev
+#
+#   - os: linux
+#     env: COMPILER=clang++-3.8 CMAKE_BUILD_TYPE=Debug
+#     compiler: clang
+#     addons:
+#       apt:
+#         sources:
+#         - boost-latest
+#         - ubuntu-toolchain-r-test
+#         - llvm-toolchain-precise-3.8
+#         packages:
+#         - clang-3.8
+#         - libboost1.55-all-dev
+#
+#   - os: linux
+#     env: COMPILER=clang++-3.8 CMAKE_BUILD_TYPE=Release
+#     compiler: clang
+#     addons:
+#       apt:
+#         sources:
+#         - boost-latest
+#         - ubuntu-toolchain-r-test
+#         - llvm-toolchain-precise-3.8
+#         packages:
+#         - clang-3.8
+#         - libboost1.55-all-dev
 
 install:
   # install a recent cmake
