@@ -297,6 +297,22 @@ std::unique_ptr<sentence> sentence_parse(const std::string & talker, const sente
 /// If the sentence is invalid, the returning string will be empty.
 std::string to_string(const sentence & s);
 
+/// @cond DEV
+namespace detail
+{
+/// Checks if the specified cast is valid, throws `bad_cast` if not.
+/// If the pointer is `nullptr`, false returns.
+template <class T> bool check_cast(const sentence * s)
+{
+	if (!s)
+		return false;
+	if (s->id() != T::ID)
+		throw std::bad_cast{};
+	return true;
+}
+}
+/// @endcond
+
 /// @{
 
 /// Casts the specified sentence to the sentence given by the template parameter.
@@ -325,12 +341,7 @@ std::string to_string(const sentence & s);
 /// @endcode
 template <class T> T * sentence_cast(sentence * s)
 {
-	if (!s)
-		return nullptr;
-	if (s->id() != T::ID)
-		throw std::bad_cast{};
-
-	return static_cast<T *>(s);
+	return detail::check_cast<T>(s) ? static_cast<T *>(s) : nullptr;
 }
 
 /// const variant.
@@ -338,38 +349,31 @@ template <class T> T * sentence_cast(sentence * s)
 /// @see sentence_cast(sentence * s)
 template <class T> const T * sentence_cast(const sentence * s)
 {
-	if (!s)
-		return nullptr;
-	if (s->id() != T::ID)
-		throw std::bad_cast{};
-
-	return static_cast<const T *>(s);
+	return detail::check_cast<T>(s) ? static_cast<const T *>(s) : nullptr;
 }
 
-/// std::unique_ptr variant.
+/// `std::unique_ptr` variant. This is only for convenience. It is the same as:
+/// @code
+/// auto p = nmea::make_sentence("$IIMTW,9.5,C*2F");
+/// auto q = nmea::sentence_cast<nmea::mtw>(p.get());
+/// @endcode
 ///
 /// @see sentence_cast(sentence * s)
 template <class T> T * sentence_cast(std::unique_ptr<sentence> & s)
 {
-	if (!s)
-		return nullptr;
-	if (s->id() != T::ID)
-		throw std::bad_cast{};
-
-	return static_cast<T *>(s.get());
+	return sentence_cast<T>(s.get());
 }
 
-/// const std::unique_ptr variant.
+/// `const std::unique_ptr` variant. This is only for convenience. It is the same as:
+/// @code
+/// const auto p = nmea::make_sentence("$IIMTW,9.5,C*2F");
+/// auto q = nmea::sentence_cast<nmea::mtw>(p.get());
+/// @endcode
 ///
 /// @see sentence_cast(sentence * s)
 template <class T> const T * sentence_cast(const std::unique_ptr<sentence> & s)
 {
-	if (!s)
-		return nullptr;
-	if (s->id() != T::ID)
-		throw std::bad_cast{};
-
-	return static_cast<const T *>(s.get());
+	return sentence_cast<const T>(s.get());
 }
 
 /// @}
