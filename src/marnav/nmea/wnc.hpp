@@ -2,6 +2,7 @@
 #define __NMEA__WNC__HPP__
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -49,8 +50,8 @@ private:
 	utils::optional<unit::distance> distance_nm_unit;
 	utils::optional<double> distance_km;
 	utils::optional<unit::distance> distance_km_unit;
-	utils::optional<std::string> waypoint_to;
-	utils::optional<std::string> waypoint_from;
+	utils::optional<waypoint> waypoint_to;
+	utils::optional<waypoint> waypoint_from;
 
 public:
 	NMEA_GETTER(distance_nm)
@@ -62,8 +63,8 @@ public:
 
 	void set_distance_nm(double t) noexcept;
 	void set_distance_km(double t) noexcept;
-	void set_waypoint_to(const std::string & id);
-	void set_waypoint_from(const std::string & id);
+	void set_waypoint_to(const waypoint & id) { waypoint_to = id; }
+	void set_waypoint_from(const waypoint & id) { waypoint_from = id; }
 };
 }
 }

@@ -2,6 +2,7 @@
 #define __NMEA__WCV__HPP__
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -43,7 +44,7 @@ protected:
 private:
 	utils::optional<double> speed;
 	utils::optional<unit::velocity> speed_unit;
-	utils::optional<std::string> waypoint_id;
+	utils::optional<waypoint> waypoint_id;
 
 public:
 	NMEA_GETTER(speed)
@@ -51,7 +52,7 @@ public:
 	NMEA_GETTER(waypoint_id)
 
 	void set_speed(double t) noexcept;
-	void set_waypoint(const std::string & id);
+	void set_waypoint(const waypoint & id) { waypoint_id = id; }
 };
 }
 }

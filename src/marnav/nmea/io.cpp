@@ -3,6 +3,7 @@
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/date.hpp>
 #include <marnav/nmea/time.hpp>
+#include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/mmsi.hpp>
 #include <marnav/utils/unused.hpp>
 
@@ -696,6 +697,13 @@ void read(const std::string & s, utils::mmsi & value, data_format fmt)
 	typename utils::mmsi::value_type t;
 	read(s, t, fmt);
 	value = utils::mmsi{t};
+}
+
+void read(const std::string & s, waypoint & value, data_format fmt)
+{
+	typename waypoint::value_type t;
+	read(s, t, fmt);
+	value = waypoint{t};
 }
 }
 }

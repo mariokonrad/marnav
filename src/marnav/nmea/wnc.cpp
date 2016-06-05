@@ -1,5 +1,4 @@
 #include "wnc.hpp"
-#include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav
@@ -39,18 +38,6 @@ void wnc::set_distance_km(double t) noexcept
 {
 	distance_km = t;
 	distance_km_unit = unit::distance::km;
-}
-
-void wnc::set_waypoint_to(const std::string & id)
-{
-	check_waypoint_id(id);
-	waypoint_to = id;
-}
-
-void wnc::set_waypoint_from(const std::string & id)
-{
-	check_waypoint_id(id);
-	waypoint_from = id;
 }
 
 std::vector<std::string> wnc::get_data() const

@@ -2,6 +2,7 @@
 #define __NMEA__BOD__HPP__
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -51,8 +52,8 @@ private:
 	utils::optional<reference> type_true; // T:true
 	utils::optional<double> bearing_magn;
 	utils::optional<reference> type_magn; // M:magnetic
-	utils::optional<std::string> waypoint_to; // TO waypoint ID
-	utils::optional<std::string> waypoint_from; // FROM waypoint ID
+	utils::optional<waypoint> waypoint_to; // TO waypoint ID
+	utils::optional<waypoint> waypoint_from; // FROM waypoint ID
 
 public:
 	NMEA_GETTER(bearing_true)
@@ -64,8 +65,8 @@ public:
 
 	void set_bearing_true(double t) noexcept;
 	void set_bearing_magn(double t) noexcept;
-	void set_waypoint_to(const std::string & id);
-	void set_waypoint_from(const std::string & id);
+	void set_waypoint_to(const waypoint & id) { waypoint_to = id; }
+	void set_waypoint_from(const waypoint & id) { waypoint_from = id; }
 };
 }
 }

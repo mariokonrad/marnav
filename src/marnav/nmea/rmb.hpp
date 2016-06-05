@@ -3,6 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/angle.hpp>
+#include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -73,8 +74,8 @@ private:
 	utils::optional<status> active; // V:warning
 	utils::optional<double> cross_track_error; // cross track error in nautical miles
 	utils::optional<side> steer_dir; // direction to steer, left or right
-	utils::optional<std::string> waypoint_to; // TO waypoint ID
-	utils::optional<std::string> waypoint_from; // FROM waypoint ID
+	utils::optional<waypoint> waypoint_to; // TO waypoint ID
+	utils::optional<waypoint> waypoint_from; // FROM waypoint ID
 	utils::optional<geo::latitude> lat; // destination waypoint latitude
 	utils::optional<direction> lat_hem; // destination waypoint latitude dir, N:north, S:south
 	utils::optional<geo::longitude> lon; // destination waypoint longitude
@@ -104,8 +105,8 @@ public:
 	void set_active(status t) noexcept { active = t; }
 	void set_cross_track_error(double t) noexcept { cross_track_error = t; }
 	void set_steer_dir(side t) noexcept { steer_dir = t; }
-	void set_waypoint_to(const std::string & id);
-	void set_waypoint_from(const std::string & id);
+	void set_waypoint_to(const waypoint & id) { waypoint_to = id; }
+	void set_waypoint_from(const waypoint & id) { waypoint_from = id; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
 	void set_range(double t) noexcept { range = t; }

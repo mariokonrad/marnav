@@ -2,6 +2,7 @@
 #define __NMEA__APB__HPP__
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -84,7 +85,7 @@ private:
 	utils::optional<status> status_perpendicular_passing;
 	utils::optional<uint32_t> bearing_origin_to_destination;
 	utils::optional<reference> bearing_origin_to_destination_ref;
-	utils::optional<std::string> waypoint_id;
+	utils::optional<waypoint> waypoint_id;
 	utils::optional<uint32_t> bearing_pos_to_destination;
 	utils::optional<reference> bearing_pos_to_destination_ref;
 	utils::optional<uint32_t> heading_to_steer_to_destination;
@@ -124,7 +125,7 @@ public:
 		status_perpendicular_passing = t;
 	}
 	void set_bearing_origin_to_destination(uint32_t t, reference ref);
-	void set_waypoint_id(const std::string & id);
+	void set_waypoint_id(const waypoint & id) { waypoint_id = id; }
 	void set_bearing_pos_to_destination(uint32_t t, reference ref);
 	void set_heading_to_steer_to_destination(uint32_t t, reference ref);
 	void set_mode_indicator(positioning_system_mode_indicator t);

@@ -1,5 +1,4 @@
 #include "zfo.hpp"
-#include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav
@@ -24,12 +23,6 @@ zfo::zfo(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 0), time_utc);
 	read(*(first + 1), time_elapsed);
 	read(*(first + 2), waypoint_id);
-}
-
-void zfo::set_waypoint_id(const std::string & id)
-{
-	check_waypoint_id(id);
-	waypoint_id = id;
 }
 
 std::vector<std::string> zfo::get_data() const

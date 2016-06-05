@@ -1,5 +1,4 @@
 #include "bww.hpp"
-#include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav
@@ -39,18 +38,6 @@ void bww::set_bearing_mag(double t) noexcept
 {
 	bearing_mag = t;
 	bearing_mag_ref = reference::MAGNETIC;
-}
-
-void bww::set_waypoint_to(const std::string & id)
-{
-	check_waypoint_id(id);
-	waypoint_to = id;
-}
-
-void bww::set_waypoint_from(const std::string & id)
-{
-	check_waypoint_id(id);
-	waypoint_from = id;
 }
 
 std::vector<std::string> bww::get_data() const

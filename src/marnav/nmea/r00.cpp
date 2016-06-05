@@ -21,7 +21,7 @@ r00::r00(const std::string & talker, fields::const_iterator first, fields::const
 		throw std::invalid_argument{"invalid number of fields in r00"};
 
 	for (auto i = 0; i < max_waypoint_ids; ++i) {
-		std::string id;
+		waypoint id;
 		read(*(first + i), id);
 		set_waypoint_id(i, id);
 	}
@@ -49,13 +49,13 @@ void r00::check_index(int index) const
 		throw std::out_of_range{"waypoint ID out of range"};
 }
 
-utils::optional<std::string> r00::get_waypoint_id(int index) const
+utils::optional<waypoint> r00::get_waypoint_id(int index) const
 {
 	check_index(index);
 	return waypoint_id[index];
 }
 
-void r00::set_waypoint_id(int index, const std::string & id)
+void r00::set_waypoint_id(int index, const waypoint & id)
 {
 	check_index(index);
 	waypoint_id[index] = id;

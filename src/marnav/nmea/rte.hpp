@@ -2,6 +2,7 @@
 #define __NMEA__RTE__HPP__
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -49,18 +50,18 @@ private:
 	utils::optional<uint32_t> n_messages;
 	utils::optional<uint32_t> message_number;
 	utils::optional<route> message_mode; // C:complete route, W:working route
-	utils::optional<std::string> waypoint_id[10]; // names or numbers of the active route
+	utils::optional<waypoint> waypoint_id[10]; // names or numbers of the active route
 
 public:
 	NMEA_GETTER(n_messages)
 	NMEA_GETTER(message_number)
 	NMEA_GETTER(message_mode)
-	utils::optional<std::string> get_waypoint_id(int index) const;
+	utils::optional<waypoint> get_waypoint_id(int index) const;
 
 	void set_n_messages(uint32_t t) noexcept { n_messages = t; }
 	void set_message_number(uint32_t t) noexcept { message_number = t; }
 	void set_message_mode(route t) noexcept { message_mode = t; }
-	void set_waypoint_id(int index, const std::string & id);
+	void set_waypoint_id(int index, const waypoint & id);
 };
 }
 }

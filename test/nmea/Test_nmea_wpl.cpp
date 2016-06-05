@@ -65,7 +65,7 @@ TEST_F(Test_nmea_wpl, set_lon_east)
 TEST_F(Test_nmea_wpl, set_waypoint)
 {
 	nmea::wpl wpl;
-	wpl.set_waypoint("POINT1");
+	wpl.set_waypoint(nmea::waypoint{"POINT1"});
 
 	EXPECT_STREQ("$GPWPL,,,,,POINT1*0D", nmea::to_string(wpl).c_str());
 }

@@ -60,7 +60,7 @@ private:
 	utils::optional<direction> lat_hem;
 	utils::optional<geo::longitude> lon;
 	utils::optional<direction> lon_hem;
-	utils::optional<std::string> mode_indicator;
+	std::string mode_indicator = "AA";
 	utils::optional<uint32_t> number_of_satellites;
 	utils::optional<double> hdrop;
 	utils::optional<double> antenna_altitude; // meters

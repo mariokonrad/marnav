@@ -57,30 +57,16 @@ TEST_F(Test_nmea_bod, set_bearing_magn)
 TEST_F(Test_nmea_bod, set_waypoint_to)
 {
 	nmea::bod bod;
-	bod.set_waypoint_to("wpt-to");
+	bod.set_waypoint_to(nmea::waypoint{"wpt-to"});
 
 	EXPECT_STREQ("$GPBOD,,,,,wpt-to,*1B", nmea::to_string(bod).c_str());
-}
-
-TEST_F(Test_nmea_bod, set_waypoint_to_to_large)
-{
-	nmea::bod bod;
-
-	EXPECT_ANY_THROW(bod.set_waypoint_to("1234567890"));
 }
 
 TEST_F(Test_nmea_bod, set_waypoint_from)
 {
 	nmea::bod bod;
-	bod.set_waypoint_from("wpt-from");
+	bod.set_waypoint_from(nmea::waypoint{"wpt-from"});
 
 	EXPECT_STREQ("$GPBOD,,,,,,wpt-from*16", nmea::to_string(bod).c_str());
-}
-
-TEST_F(Test_nmea_bod, set_waypoint_from_to_large)
-{
-	nmea::bod bod;
-
-	EXPECT_ANY_THROW(bod.set_waypoint_from("1234567890"));
 }
 }

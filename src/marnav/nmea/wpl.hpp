@@ -3,6 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/angle.hpp>
+#include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -51,7 +52,7 @@ private:
 	utils::optional<direction> lat_hem; // latitude hemisphere (N or S)
 	utils::optional<geo::longitude> lon;
 	utils::optional<direction> lon_hem; // longitude hemisphere (E or W)
-	utils::optional<std::string> waypoint_id;
+	utils::optional<waypoint> waypoint_id;
 
 public:
 	NMEA_GETTER(lat)
@@ -62,7 +63,7 @@ public:
 
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_waypoint(const std::string & id);
+	void set_waypoint(const waypoint & id) { waypoint_id = id; }
 };
 }
 }

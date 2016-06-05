@@ -2,6 +2,7 @@
 #define __NMEA__AAM__HPP__
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -59,7 +60,7 @@ private:
 	utils::optional<status> perpendicualar_passed;
 	utils::optional<double> arrival_circle_radius;
 	utils::optional<unit::distance> arrival_circle_radius_unit;
-	utils::optional<std::string> waypoint_id;
+	utils::optional<waypoint> waypoint_id;
 
 	void check() const;
 
@@ -73,7 +74,7 @@ public:
 	void set_arrival_circle_entered(status s);
 	void set_perpendicular_passed(status s);
 	void set_arrival_circle_radius(double t);
-	void set_waypoint_id(const std::string & id);
+	void set_waypoint_id(const waypoint & id) { waypoint_id = id; }
 };
 }
 }

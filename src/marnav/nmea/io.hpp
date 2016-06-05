@@ -26,6 +26,7 @@ namespace nmea
 class date; // forward declaration
 class time; // forward declaration
 class duration; // forward declaration
+class waypoint; // forward declaration
 
 enum class data_format { none, dec, hex };
 
@@ -155,6 +156,7 @@ void read(
 	const std::string & s, unit::temperature & value, data_format fmt = data_format::none);
 void read(const std::string & s, unit::pressure & value, data_format fmt = data_format::none);
 void read(const std::string & s, utils::mmsi & value, data_format fmt = data_format::none);
+void read(const std::string & s, waypoint & value, data_format fmt = data_format::none);
 
 template <class T>
 inline void read(

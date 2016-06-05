@@ -1,5 +1,4 @@
 #include "wpl.hpp"
-#include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 #include <marnav/nmea/convert.hpp>
 
@@ -43,12 +42,6 @@ void wpl::set_lon(const geo::longitude & t)
 {
 	lon = t;
 	lon_hem = convert_hemisphere(t);
-}
-
-void wpl::set_waypoint(const std::string & id)
-{
-	check_waypoint_id(id);
-	waypoint_id = id;
 }
 
 std::vector<std::string> wpl::get_data() const

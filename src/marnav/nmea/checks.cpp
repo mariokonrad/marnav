@@ -4,17 +4,6 @@ namespace marnav
 {
 namespace nmea
 {
-/// Checks the validity of the specified waypoint ID.
-///
-/// @param[in] id The waypoint ID to check.
-///
-/// @exception std::invalid_argument The waypoint ID is invalid.
-void check_waypoint_id(const std::string & id)
-{
-	if (id.size() > 8)
-		throw std::invalid_argument{"string size to large, only 8 characters allowed for id"};
-}
-
 /// Convinience function to check status.
 ///
 /// @param[in] value The value to check.

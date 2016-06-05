@@ -59,8 +59,6 @@ void check_value(const utils::optional<T> & value, std::initializer_list<T> opti
 		check_value(value.value(), options, name);
 }
 
-void check_waypoint_id(const std::string & id);
-
 void check_status(status value, const char * name = nullptr);
 
 void check_status(const utils::optional<status> & value, const char * name = nullptr);

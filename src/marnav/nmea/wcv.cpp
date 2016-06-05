@@ -1,5 +1,4 @@
 #include "wcv.hpp"
-#include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav
@@ -30,12 +29,6 @@ void wcv::set_speed(double t) noexcept
 {
 	speed = t;
 	speed_unit = unit::velocity::knot;
-}
-
-void wcv::set_waypoint(const std::string & id)
-{
-	check_waypoint_id(id);
-	waypoint_id = id;
 }
 
 std::vector<std::string> wcv::get_data() const

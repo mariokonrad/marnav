@@ -139,6 +139,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/geo/region.cpp
 	marnav/geo/cpa.cpp
 	marnav/geo/geodesic.cpp
+	marnav/nmea/waypoint.cpp
 	marnav/nmea/convert.cpp
 	marnav/nmea/manufacturer.cpp
 	marnav/nmea/checks.cpp
@@ -348,6 +349,7 @@ install(
 	FILES
 		marnav/nmea/constants.hpp
 		marnav/nmea/convert.hpp
+		marnav/nmea/waypoint.hpp
 		marnav/nmea/manufacturer.hpp
 		marnav/nmea/angle.hpp
 		marnav/nmea/io.hpp

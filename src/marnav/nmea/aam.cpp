@@ -50,12 +50,6 @@ void aam::set_arrival_circle_radius(double t)
 	arrival_circle_radius_unit = unit::distance::nm;
 }
 
-void aam::set_waypoint_id(const std::string & id)
-{
-	check_waypoint_id(id);
-	waypoint_id = id;
-}
-
 void aam::check() const
 {
 	check_status(arrival_circle_entered, "arrival_circle_entered");

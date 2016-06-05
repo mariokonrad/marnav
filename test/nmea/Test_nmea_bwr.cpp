@@ -90,7 +90,7 @@ TEST_F(Test_nmea_bwr, set_distance)
 TEST_F(Test_nmea_bwr, set_waypoint)
 {
 	nmea::bwr bwr;
-	bwr.set_waypoint("POINT1");
+	bwr.set_waypoint(nmea::waypoint{"POINT1"});
 
 	EXPECT_STREQ("$GPBWR,,,,,,,,,,,,POINT1*2D", nmea::to_string(bwr).c_str());
 }

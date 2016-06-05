@@ -1,5 +1,4 @@
 #include "gns.hpp"
-#include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 #include <marnav/nmea/convert.hpp>
 
@@ -54,7 +53,8 @@ void gns::set_lon(const geo::longitude & t)
 
 void gns::set_mode_indicator(const std::string & t)
 {
-	check_waypoint_id(t); // same requirements as waypoint IDs
+	if ((t.size() < 2) || (t.size() > 8))
+		throw std::invalid_argument{"invalid mode indicator"};
 	mode_indicator = t;
 }
 

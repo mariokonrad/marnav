@@ -4,6 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/time.hpp>
+#include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -81,7 +82,7 @@ private:
 	utils::optional<reference> bearing_mag_ref;
 	utils::optional<double> distance; // nautical miles
 	utils::optional<unit::distance> distance_unit;
-	utils::optional<std::string> waypoint_id;
+	utils::optional<waypoint> waypoint_id;
 	utils::optional<positioning_system_mode_indicator> mode_indicator; // NMEA 2.3 and later
 
 public:
@@ -105,7 +106,7 @@ public:
 	void set_bearing_true(double t) noexcept;
 	void set_bearing_mag(double t) noexcept;
 	void set_distance(double t) noexcept;
-	void set_waypoint(const std::string & id);
+	void set_waypoint(const waypoint & id) { waypoint_id = id; }
 	void set_faa_mode_indicator(positioning_system_mode_indicator t) noexcept
 	{
 		mode_indicator = t;

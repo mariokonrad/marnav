@@ -90,6 +90,7 @@ add_executable(testrunner
 	geo/Test_geo_region.cpp
 	geo/Test_geo_cpa.cpp
 	geo/Test_geo_geodesic.cpp
+	nmea/Test_nmea_waypoint.cpp
 	nmea/Test_nmea_checksum.cpp
 	nmea/Test_nmea_split.cpp
 	nmea/Test_nmea.cpp

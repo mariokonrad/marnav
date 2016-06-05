@@ -74,7 +74,7 @@ TEST_F(Test_nmea_rte, set_waypoint_id)
 {
 	nmea::rte rte;
 	rte.set_n_messages(1);
-	rte.set_waypoint_id(0, "POINT1");
+	rte.set_waypoint_id(0, nmea::waypoint{"POINT1"});
 
 	EXPECT_STREQ("$GPRTE,1,,,POINT1*18", nmea::to_string(rte).c_str());
 }
@@ -82,7 +82,7 @@ TEST_F(Test_nmea_rte, set_waypoint_id)
 TEST_F(Test_nmea_rte, set_waypoint_id_without_n_messages)
 {
 	nmea::rte rte;
-	rte.set_waypoint_id(0, "POINT1");
+	rte.set_waypoint_id(0, nmea::waypoint{"POINT1"});
 
 	EXPECT_STREQ("$GPRTE,,,*78", nmea::to_string(rte).c_str());
 }
@@ -91,28 +91,21 @@ TEST_F(Test_nmea_rte, set_waypoint_id_index_to_low)
 {
 	nmea::rte rte;
 
-	EXPECT_ANY_THROW(rte.set_waypoint_id(-1, "POINT1"));
+	EXPECT_ANY_THROW(rte.set_waypoint_id(-1, nmea::waypoint{"POINT1"}));
 }
 
 TEST_F(Test_nmea_rte, set_waypoint_id_index_to_high)
 {
 	nmea::rte rte;
 
-	EXPECT_ANY_THROW(rte.set_waypoint_id(10, "POINT1"));
-}
-
-TEST_F(Test_nmea_rte, set_waypoint_id_to_large)
-{
-	nmea::rte rte;
-
-	EXPECT_ANY_THROW(rte.set_waypoint_id(0, "POINT1abcdef"));
+	EXPECT_ANY_THROW(rte.set_waypoint_id(10, nmea::waypoint{"POINT1"}));
 }
 
 TEST_F(Test_nmea_rte, get_waypoint_id)
 {
 	nmea::rte rte;
 	rte.set_n_messages(1);
-	rte.set_waypoint_id(0, "POINT1");
+	rte.set_waypoint_id(0, nmea::waypoint{"POINT1"});
 
 	auto wp = rte.get_waypoint_id(0);
 

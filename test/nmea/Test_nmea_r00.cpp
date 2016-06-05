@@ -42,15 +42,15 @@ TEST_F(Test_nmea_r00, set_id_invalid_index)
 {
 	nmea::r00 r00;
 
-	EXPECT_ANY_THROW(r00.set_waypoint_id(-1, "ABC"));
-	EXPECT_ANY_THROW(r00.set_waypoint_id(15, "ABC"));
+	EXPECT_ANY_THROW(r00.set_waypoint_id(-1, nmea::waypoint{"ABC"}));
+	EXPECT_ANY_THROW(r00.set_waypoint_id(15, nmea::waypoint{"ABC"}));
 }
 
 TEST_F(Test_nmea_r00, set_id)
 {
 	nmea::r00 r00;
 
-	r00.set_waypoint_id(0, "ABC");
+	r00.set_waypoint_id(0, nmea::waypoint{"ABC"});
 	EXPECT_STREQ("$GPR00,ABC,,,,,,,,,,,,,*05", nmea::to_string(r00).c_str());
 }
 

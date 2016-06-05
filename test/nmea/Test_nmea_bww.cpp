@@ -57,7 +57,7 @@ TEST_F(Test_nmea_bww, set_bearing_mag)
 TEST_F(Test_nmea_bww, set_waypoint_to)
 {
 	nmea::bww bww;
-	bww.set_waypoint_to("POINT1");
+	bww.set_waypoint_to(nmea::waypoint{"POINT1"});
 
 	EXPECT_STREQ("$GPBWW,,,,,POINT1,*28", nmea::to_string(bww).c_str());
 }
@@ -65,7 +65,7 @@ TEST_F(Test_nmea_bww, set_waypoint_to)
 TEST_F(Test_nmea_bww, set_waypoint_from)
 {
 	nmea::bww bww;
-	bww.set_waypoint_from("POINT1");
+	bww.set_waypoint_from(nmea::waypoint{"POINT1"});
 
 	EXPECT_STREQ("$GPBWW,,,,,,POINT1*28", nmea::to_string(bww).c_str());
 }

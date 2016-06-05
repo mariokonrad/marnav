@@ -100,7 +100,7 @@ TEST_F(Test_nmea_bwc, set_distance)
 TEST_F(Test_nmea_bwc, set_waypoint)
 {
 	nmea::bwc bwc;
-	bwc.set_waypoint("POINT1");
+	bwc.set_waypoint(nmea::waypoint{"POINT1"});
 
 	EXPECT_STREQ("$GPBWC,,,,,,,,,,,,POINT1,*10", nmea::to_string(bwc).c_str());
 }

@@ -49,7 +49,7 @@ TEST_F(Test_nmea_wcv, set_speed)
 TEST_F(Test_nmea_wcv, set_waypoint)
 {
 	nmea::wcv wcv;
-	wcv.set_waypoint("POINT1");
+	wcv.set_waypoint(nmea::waypoint{"POINT1"});
 
 	EXPECT_STREQ("$GPWCV,,,POINT1*04", nmea::to_string(wcv).c_str());
 }

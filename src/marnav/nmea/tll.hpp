@@ -3,6 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
+#include <marnav/nmea/waypoint.hpp>
 #include <marnav/geo/angle.hpp>
 #include <marnav/utils/optional.hpp>
 
@@ -62,7 +63,7 @@ private:
 	direction lat_hem = direction::north;
 	geo::longitude lon;
 	direction lon_hem = direction::east;
-	std::string target_name;
+	waypoint target_name;
 	nmea::time time_utc;
 	char target_status = 'T'; // @todo use an enumeration
 	utils::optional<char> reference_target;
@@ -81,7 +82,7 @@ public:
 	void set_target_number(uint32_t t) noexcept { target_number = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_target_name(const std::string & t);
+	void set_target_name(const waypoint & t) { target_name = t; }
 	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
 	void set_target_status(char t) noexcept { target_status = t; }
 	void set_reference_target(char t) noexcept { reference_target = t; }

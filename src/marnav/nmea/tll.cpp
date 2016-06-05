@@ -47,12 +47,6 @@ void tll::set_lon(const geo::longitude & t)
 	lon_hem = convert_hemisphere(t);
 }
 
-void tll::set_target_name(const std::string & t)
-{
-	check_waypoint_id(t);
-	target_name = t;
-}
-
 std::vector<std::string> tll::get_data() const
 {
 	return {format(target_number, 2), to_string(lat), to_string(lat_hem), to_string(lon),

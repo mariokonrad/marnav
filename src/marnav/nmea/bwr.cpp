@@ -1,5 +1,4 @@
 #include "bwr.hpp"
-#include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 #include <marnav/nmea/convert.hpp>
 
@@ -68,12 +67,6 @@ void bwr::set_distance(double t) noexcept
 {
 	distance = t;
 	distance_unit = unit::distance::nm;
-}
-
-void bwr::set_waypoint(const std::string & id)
-{
-	check_waypoint_id(id);
-	waypoint_id = id;
 }
 
 std::vector<std::string> bwr::get_data() const

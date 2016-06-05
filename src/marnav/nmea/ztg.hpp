@@ -3,6 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
+#include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -43,7 +44,7 @@ protected:
 private:
 	utils::optional<nmea::time> time_utc;
 	utils::optional<nmea::time> time_remaining;
-	utils::optional<std::string> waypoint_id;
+	utils::optional<waypoint> waypoint_id;
 
 public:
 	NMEA_GETTER(time_utc)
@@ -52,7 +53,7 @@ public:
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
 	void set_time_remaining(const nmea::time & t) noexcept { time_remaining = t; }
-	void set_waypoint_id(const std::string & id);
+	void set_waypoint_id(const waypoint & id) { waypoint_id = id; }
 };
 }
 }

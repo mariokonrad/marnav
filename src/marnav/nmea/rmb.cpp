@@ -1,5 +1,4 @@
 #include "rmb.hpp"
-#include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 #include <marnav/nmea/convert.hpp>
 
@@ -57,18 +56,6 @@ void rmb::set_lon(const geo::longitude & t)
 {
 	lon = t;
 	lon_hem = convert_hemisphere(t);
-}
-
-void rmb::set_waypoint_to(const std::string & id)
-{
-	check_waypoint_id(id);
-	waypoint_to = id;
-}
-
-void rmb::set_waypoint_from(const std::string & id)
-{
-	check_waypoint_id(id);
-	waypoint_from = id;
 }
 
 std::vector<std::string> rmb::get_data() const

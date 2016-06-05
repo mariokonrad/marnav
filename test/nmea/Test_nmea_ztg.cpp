@@ -57,7 +57,7 @@ TEST_F(Test_nmea_ztg, set_time_remaining)
 TEST_F(Test_nmea_ztg, set_waypoint_id)
 {
 	nmea::ztg ztg;
-	ztg.set_waypoint_id("POINT1");
+	ztg.set_waypoint_id(nmea::waypoint{"POINT1"});
 
 	EXPECT_STREQ("$GPZTG,,,POINT1*0F", nmea::to_string(ztg).c_str());
 }

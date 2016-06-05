@@ -57,30 +57,16 @@ TEST_F(Test_nmea_wnc, set_distance_km)
 TEST_F(Test_nmea_wnc, set_waypoint_to)
 {
 	nmea::wnc wnc;
-	wnc.set_waypoint_to("wpt1");
+	wnc.set_waypoint_to(nmea::waypoint{"wpt1"});
 
 	EXPECT_STREQ("$GPWNC,,,,,wpt1,*0F", nmea::to_string(wnc).c_str());
-}
-
-TEST_F(Test_nmea_wnc, set_waypoint_to_string_to_large)
-{
-	nmea::wnc wnc;
-
-	EXPECT_ANY_THROW(wnc.set_waypoint_to("123456789"));
 }
 
 TEST_F(Test_nmea_wnc, set_waypoint_from)
 {
 	nmea::wnc wnc;
-	wnc.set_waypoint_from("wpt1");
+	wnc.set_waypoint_from(nmea::waypoint{"wpt1"});
 
 	EXPECT_STREQ("$GPWNC,,,,,,wpt1*0F", nmea::to_string(wnc).c_str());
-}
-
-TEST_F(Test_nmea_wnc, set_waypoint_from_string_to_large)
-{
-	nmea::wnc wnc;
-
-	EXPECT_ANY_THROW(wnc.set_waypoint_from("123456789"));
 }
 }

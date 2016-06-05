@@ -43,12 +43,6 @@ apb::apb(const std::string & talker, fields::const_iterator first, fields::const
 	check();
 }
 
-void apb::set_waypoint_id(const std::string & id)
-{
-	check_waypoint_id(id);
-	waypoint_id = id;
-}
-
 void apb::set_bearing_origin_to_destination(uint32_t t, reference ref)
 {
 	check_value(bearing_origin_to_destination_ref, {reference::TRUE, reference::MAGNETIC},

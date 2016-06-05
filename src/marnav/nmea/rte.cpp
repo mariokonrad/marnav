@@ -30,7 +30,7 @@ rte::rte(const std::string & talker, fields::const_iterator first, fields::const
 	}
 }
 
-utils::optional<std::string> rte::get_waypoint_id(int index) const
+utils::optional<waypoint> rte::get_waypoint_id(int index) const
 {
 	if ((index < 0)
 		|| (index >= static_cast<int>((sizeof(waypoint_id) / sizeof(waypoint_id[0])))))
@@ -39,7 +39,7 @@ utils::optional<std::string> rte::get_waypoint_id(int index) const
 	return waypoint_id[index];
 }
 
-void rte::set_waypoint_id(int index, const std::string & id)
+void rte::set_waypoint_id(int index, const waypoint & id)
 {
 	if ((index < 0)
 		|| (index >= static_cast<int>((sizeof(waypoint_id) / sizeof(waypoint_id[0])))))
