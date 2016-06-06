@@ -6,7 +6,6 @@ namespace marnav
 {
 namespace nmea
 {
-
 sentence::sentence(sentence_id id, const std::string & tag, const std::string & talker)
 	: id_(id)
 	, tag_(tag)
@@ -21,12 +20,6 @@ void sentence::set_talker(const std::string & talker)
 		return;
 	talker_ = talker;
 }
-
-sentence_id sentence::id() const { return id_; }
-
-std::string sentence::tag() const { return tag_; }
-
-std::string sentence::talker() const { return talker_; }
 
 /// Returns true of the speficied address string indicates a proprietary sentence.
 bool sentence::is_proprietary(const std::string & s)
@@ -48,7 +41,8 @@ std::string to_string(const sentence & s)
 		result += data;
 	}
 	result += s.get_end_token();
-	result += checksum_to_string(checksum(result.begin() + 1, result.end() - 1));
+	result += checksum_to_string(
+		checksum(std::next(std::begin(result)), std::prev(std::end(result))));
 	return result;
 }
 }

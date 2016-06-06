@@ -257,14 +257,9 @@ public:
 
 	virtual ~sentence() {}
 
-	/// Returns the ID of the sentence.
-	sentence_id id() const;
-
-	/// Returns the tag.
-	std::string tag() const;
-
-	/// Returns the talker.
-	std::string talker() const;
+	sentence_id id() const { return id_; }
+	std::string tag() const { return tag_; }
+	std::string talker() const { return talker_; }
 
 	static bool is_proprietary(const std::string & s);
 

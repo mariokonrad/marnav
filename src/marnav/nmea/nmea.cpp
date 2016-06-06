@@ -81,7 +81,6 @@
 #include <marnav/nmea/zfo.hpp>
 #include <marnav/nmea/ztg.hpp>
 #include <marnav/nmea/pgrme.hpp>
-#include <marnav/utils/unique.hpp>
 
 /// @example parse_nmea.cpp
 /// This is an example on how to parse and handle NMEA sentences from a string.
@@ -90,7 +89,6 @@ namespace marnav
 {
 namespace nmea
 {
-
 namespace
 {
 // local macro, used for convenience while registering sentences
@@ -309,7 +307,7 @@ std::unique_ptr<sentence> make_sentence(const std::string & s, bool ignore_check
 	std::string tag;
 	std::tie(talker, tag) = detail::parse_address(fields.front());
 
-	return detail::instantiate_sentence(tag)(talker, fields.begin() + 1, fields.end() - 1);
+	return detail::instantiate_sentence(tag)(talker, next(begin(fields)), prev(end(fields)));
 }
 }
 }
