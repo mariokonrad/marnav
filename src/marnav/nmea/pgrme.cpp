@@ -1,6 +1,5 @@
 #include "pgrme.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
@@ -16,7 +15,7 @@ pgrme::pgrme()
 }
 
 pgrme::pgrme(
-		const std::string & talker, fields::const_iterator first, fields::const_iterator last)
+	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 	: sentence(ID, TAG, talker)
 {
 	if (std::distance(first, last) != 6)

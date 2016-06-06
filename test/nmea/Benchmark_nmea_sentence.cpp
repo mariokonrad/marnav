@@ -84,7 +84,10 @@ struct sentence_data {
 	std::string text;
 };
 
-#define INFO(s, text) {std::type_index(typeid(marnav::nmea::s)), marnav::nmea::s::TAG, text}
+#define INFO(s, text)                                                        \
+	{                                                                        \
+		std::type_index(typeid(marnav::nmea::s)), marnav::nmea::s::TAG, text \
+	}
 
 // clang-format off
 static std::vector<sentence_data> sentences = {

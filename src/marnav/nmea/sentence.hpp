@@ -168,7 +168,8 @@ constexpr const char * electronic_chart_display
 	= "EC"; ///< Electronic Chart Display & Information System (ECDIS)
 constexpr const char * emergency_position_indicating_beacon
 	= "EP"; ///< Emergency Position Indicating Beacon (EPIRB)
-constexpr const char * engine_room_monitoring_systems = "ER"; ///< Engine Room Monitoring Systems
+constexpr const char * engine_room_monitoring_systems
+	= "ER"; ///< Engine Room Monitoring Systems
 constexpr const char * global_positioning_system = "GP"; ///< Global Positioning System (GPS)
 constexpr const char * magnetic_compass = "HC"; ///< Heading - Magnetic Compass
 constexpr const char * north_seeking_gyro = "HE"; ///< Heading - North Seeking Gyro
@@ -208,11 +209,13 @@ constexpr const char * transducer = "YX"; ///< Transducer
 constexpr const char * timekeeper_atomic_clock = "ZA"; ///< Timekeeper - Atomic Clock
 constexpr const char * timekeeper_chronometer = "ZC"; ///< Timekeeper - Chronometer
 constexpr const char * timekeeper_quartz = "ZQ"; ///< Timekeeper - Quartz
-constexpr const char * timekeeper_radio_update = "ZV"; ///< Timekeeper - Radio Update, WWV or WWVH
+constexpr const char * timekeeper_radio_update
+	= "ZV"; ///< Timekeeper - Radio Update, WWV or WWVH
 
 // AIS
 constexpr const char * ais_base_station = "AB"; ///< NMEA 4.0 Base AIS station
-constexpr const char * ais_dependent_base_station = "AD"; ///< MMEA 4.0 Dependent AIS Base Station
+constexpr const char * ais_dependent_base_station
+	= "AD"; ///< MMEA 4.0 Dependent AIS Base Station
 constexpr const char * ais_mobile_station = "AI"; ///< Mobile AIS station
 constexpr const char * ais_aid_to_navigation_station
 	= "AN"; ///< NMEA 4.0 Aid to Navigation AIS station
@@ -222,7 +225,8 @@ constexpr const char * ais_transmitting_station = "AT"; ///< NMEA 4.0 AIS Transm
 constexpr const char * ais_repeater_ais_station = "AX"; ///< NMEA 4.0 Repeater AIS station
 constexpr const char * ais_base_station_obsolete
 	= "BS"; ///< Base AIS station (deprecated in NMEA 4.0)
-constexpr const char * ais_physical_shore_station = "SA"; ///< NMEA 4.0 Physical Shore AIS Station
+constexpr const char * ais_physical_shore_station
+	= "SA"; ///< NMEA 4.0 Physical Shore AIS Station
 }
 
 /// @brief This is the base class for all sentences.

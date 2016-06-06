@@ -28,7 +28,7 @@ public:
 	waypoint & operator=(waypoint &&) = default;
 
 	value_type get() const { return id_; }
-	operator value_type () const { return id_; }
+	operator value_type() const { return id_; }
 
 	const char * c_str() const { return id_.c_str(); }
 

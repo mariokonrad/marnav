@@ -4,11 +4,13 @@
 
 namespace
 {
+// clang-format off
 static const std::vector<std::string> SENTENCES = {
 	"$GPRMC,201126,A,4702.3944,N,00818.3381,E,0.0,328.4,260807,0.6,E,A*1E",
 	"$GPRMC,,V,,,,,,,300510,0.6,E,N*39",
 	"$,,,,,,,,,,,,*",
 };
+// clang-format on
 
 // Baseline implementation.
 static std::vector<std::string> parse_fields__v0(const std::string & s)

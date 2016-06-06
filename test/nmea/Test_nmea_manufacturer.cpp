@@ -33,8 +33,10 @@ TEST_F(Test_nmea_manufacturer, get_manufacturer_tag_from_id)
 TEST_F(Test_nmea_manufacturer, get_manufacturer_name_from_id)
 {
 	EXPECT_STREQ("NMEA", nmea::get_manufacturer_name(nmea::manufacturer_id::NMEA).c_str());
-	EXPECT_STREQ("UNKNOWN", nmea::get_manufacturer_name(nmea::manufacturer_id::UNKNOWN).c_str());
-	EXPECT_STREQ("GARMIN CORPORATION", nmea::get_manufacturer_name(nmea::manufacturer_id::GRM).c_str());
+	EXPECT_STREQ(
+		"UNKNOWN", nmea::get_manufacturer_name(nmea::manufacturer_id::UNKNOWN).c_str());
+	EXPECT_STREQ(
+		"GARMIN CORPORATION", nmea::get_manufacturer_name(nmea::manufacturer_id::GRM).c_str());
 }
 
 TEST_F(Test_nmea_manufacturer, get_manufacturer_id_from_sentence)
