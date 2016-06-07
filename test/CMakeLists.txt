@@ -271,3 +271,14 @@ target_link_libraries(benchmark_nmea_sentence
 	pthread
 	)
 
+if(ENABLE_AIS)
+	add_executable(benchmark_ais_message
+		ais/Benchmark_ais_message.cpp
+		)
+
+	target_link_libraries(benchmark_ais_message
+		marnav
+		benchmark
+		pthread
+		)
+endif()
