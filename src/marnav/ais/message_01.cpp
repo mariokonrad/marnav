@@ -13,20 +13,6 @@ message_01::message_01()
 
 message_01::message_01(message_id id)
 	: message(id)
-	, repeat_indicator(0)
-	, mmsi(0)
-	, nav_status(navigation_status::not_defined)
-	, rot(-128)
-	, sog(0)
-	, position_accuracy(false)
-	, longitude_minutes(longitude_not_available)
-	, latitude_minutes(latitude_not_available)
-	, cog(cog_not_available)
-	, hdg(hdg_not_available)
-	, timestamp(timestamp_not_available)
-	, maneuver_indicator(maneuver_indictor_not_available)
-	, raim(0)
-	, radio_status(0)
 {
 }
 

@@ -214,6 +214,22 @@ void write_string(
 
 /// @}
 
+/// @cond DEV
+namespace detail
+{
+/// Checks if the specified cast is valid, throws `bad_cast` if not.
+/// If the pointer is `nullptr`, false returns.
+template <class T> bool check_cast(const message * s)
+{
+	if (!s)
+		return false;
+	if (s->type() != T::ID)
+		throw std::bad_cast{};
+	return true;
+}
+}
+/// @endcond
+
 /// @{
 
 /// Casts the specified message to the message given by the template parameter.
@@ -226,12 +242,7 @@ void write_string(
 /// @exception std::bad_cast The specified message has the wrong ID.
 template <class T> T * message_cast(message * s)
 {
-	if (!s)
-		return nullptr;
-	if (s->type() != T::ID)
-		throw std::bad_cast{};
-
-	return static_cast<T *>(s);
+	return detail::check_cast<T>(s) ? static_cast<T *>(s) : nullptr;
 }
 
 /// const variant.
@@ -239,12 +250,7 @@ template <class T> T * message_cast(message * s)
 /// @see message_cast(message * s)
 template <class T> const T * message_cast(const message * s)
 {
-	if (!s)
-		return nullptr;
-	if (s->type() != T::ID)
-		throw std::bad_cast{};
-
-	return static_cast<const T *>(s);
+	return detail::check_cast<T>(s) ? static_cast<const T *>(s) : nullptr;
 }
 
 /// std::unique_ptr variant.
@@ -252,12 +258,7 @@ template <class T> const T * message_cast(const message * s)
 /// @see message_cast(message * s)
 template <class T> T * message_cast(std::unique_ptr<message> & s)
 {
-	if (!s)
-		return nullptr;
-	if (s->type() != T::ID)
-		throw std::bad_cast{};
-
-	return static_cast<T *>(s.get());
+	return message_cast<T>(s.get());
 }
 
 /// const std::unique_ptr variant.
@@ -265,12 +266,7 @@ template <class T> T * message_cast(std::unique_ptr<message> & s)
 /// @see message_cast(message * s)
 template <class T> const T * message_cast(const std::unique_ptr<message> & s)
 {
-	if (!s)
-		return nullptr;
-	if (s->type() != T::ID)
-		throw std::bad_cast{};
-
-	return static_cast<T *>(s.get());
+	return message_cast<const T>(s.get());
 }
 
 /// @}
