@@ -15,20 +15,9 @@ message_24::message_24()
 
 message_24::message_24(message_id id)
 	: message(id)
-	, repeat_indicator(0)
-	, mmsi(0)
-	, part_number(part::A)
 	, shipname("@@@@@@@@@@@@@@@@@@@@")
-	, shiptype(ship_type::not_available)
 	, vendor_id("@@@")
-	, model(0)
-	, serial(0)
 	, callsign("@@@@@@@")
-	, to_bow(0)
-	, to_stern(0)
-	, to_port(0)
-	, to_starboard(0)
-	, mothership_mmsi(0)
 {
 }
 

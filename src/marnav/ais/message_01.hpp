@@ -34,7 +34,7 @@ private:
 	uint32_t mmsi = 0;
 	navigation_status nav_status = navigation_status::not_defined;
 	int8_t rot = -128; // rate of turn, raw format
-	uint32_t sog = 0; // speed over ground, in 0.1 knots
+	uint32_t sog = sog_not_available; // speed over ground, in 0.1 knots
 	bool position_accuracy = false;
 	uint32_t longitude_minutes = longitude_not_available; // in 10000 minutes
 	uint32_t latitude_minutes = latitude_not_available; // in 10000 minutes

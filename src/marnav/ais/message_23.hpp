@@ -45,17 +45,17 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	unsigned int repeat_indicator;
-	uint32_t mmsi;
-	uint32_t ne_lon; // 0.1 minutes
-	uint32_t ne_lat; // 0.1 minutes
-	uint32_t sw_lon; // 0.1 minutes
-	uint32_t sw_lat; // 0.1 minutes
-	uint32_t station_type;
-	ship_type shiptype;
-	uint32_t txrx_mode;
-	report_interval interval;
-	uint32_t quiet_time; // minutes (0=none, 1..15 minutes)
+	unsigned int repeat_indicator = 0;
+	uint32_t mmsi = 0;
+	uint32_t ne_lon = 0; // 0.1 minutes, TODO: fix initialization
+	uint32_t ne_lat = 0; // 0.1 minutes, TODO: fix initialization
+	uint32_t sw_lon = 0; // 0.1 minutes, TODO: fix initialization
+	uint32_t sw_lat = 0; // 0.1 minutes, TODO: fix initialization
+	uint32_t station_type = 0;
+	ship_type shiptype = ship_type::not_available;
+	uint32_t txrx_mode = 0;
+	report_interval interval = report_interval::autonomous_mode;
+	uint32_t quiet_time = 0; // minutes (0=none, 1..15 minutes)
 
 public:
 	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }

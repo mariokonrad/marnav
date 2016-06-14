@@ -30,23 +30,23 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	uint32_t repeat_indicator;
-	uint32_t mmsi;
-	uint32_t sog; // speed over ground, in 0.1 knots
-	bool position_accuracy;
-	uint32_t longitude_minutes; // in 10000 minutes
-	uint32_t latitude_minutes; // in 10000 minutes
-	uint32_t cog; // course of ground in 0.1 deg true north
-	uint32_t hdg; // true heading in deg
-	uint32_t timestamp;
-	bool cs_unit; // false = class B SOTDMA unit, true = class B CS unit
-	bool display_flag; // false = no visual display, true = has display
-	bool dsc_flag; // true = unit is attached to VHF with DSC capability
-	bool band_flag;
-	bool message_22_flag;
-	bool assigned; // false = autonomous mode (default), true = assigned mode
-	bool raim;
-	uint32_t radio_status;
+	uint32_t repeat_indicator = 0;
+	uint32_t mmsi = 0;
+	uint32_t sog = sog_not_available; // speed over ground, in 0.1 knots
+	bool position_accuracy = false;
+	uint32_t longitude_minutes = longitude_not_available; // in 10000 minutes
+	uint32_t latitude_minutes = latitude_not_available; // in 10000 minutes
+	uint32_t cog = cog_not_available; // course of ground in 0.1 deg true north
+	uint32_t hdg = hdg_not_available; // true heading in deg
+	uint32_t timestamp = timestamp_not_available;
+	bool cs_unit = false; // false = class B SOTDMA unit, true = class B CS unit
+	bool display_flag = false; // false = no visual display, true = has display
+	bool dsc_flag = false; // true = unit is attached to VHF with DSC capability
+	bool band_flag = false;
+	bool message_22_flag = false;
+	bool assigned = false; // false = autonomous mode (default), true = assigned mode
+	bool raim = false;
+	uint32_t radio_status = 0;
 
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }

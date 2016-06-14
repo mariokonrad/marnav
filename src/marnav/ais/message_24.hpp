@@ -42,28 +42,28 @@ private:
 	void read_data(const raw & bits);
 
 private:
-	uint32_t repeat_indicator;
-	uint32_t mmsi;
-	part part_number;
+	uint32_t repeat_indicator = 0;
+	uint32_t mmsi = 0;
+	part part_number = part::A;
 
 	// part A specific
 	std::string shipname;
 
 	// part B specific
-	ship_type shiptype;
+	ship_type shiptype = ship_type::not_available;
 	std::string vendor_id;
-	uint32_t model;
-	uint32_t serial;
+	uint32_t model = 0;
+	uint32_t serial = 0;
 	std::string callsign;
 
 	// part B specific (normal)
-	uint32_t to_bow;
-	uint32_t to_stern;
-	uint32_t to_port;
-	uint32_t to_starboard;
+	uint32_t to_bow = 0;
+	uint32_t to_stern = 0;
+	uint32_t to_port = 0;
+	uint32_t to_starboard = 0;
 
 	// part B specific (auxiliary)
-	uint32_t mothership_mmsi;
+	uint32_t mothership_mmsi = 0;
 
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }

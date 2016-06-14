@@ -5,7 +5,6 @@ namespace marnav
 {
 namespace ais
 {
-
 namespace
 {
 std::string trim_ais_string(const std::string & s) { return s.substr(0, s.find_first_of("@")); }
@@ -13,25 +12,9 @@ std::string trim_ais_string(const std::string & s) { return s.substr(0, s.find_f
 
 message_05::message_05()
 	: message(ID)
-	, repeat_indicator(0)
-	, mmsi(0)
-	, ais_version(0)
-	, imo_number(0)
 	, callsign("@@@@@@@")
 	, shipname("@@@@@@@@@@@@@@@@@@@@")
-	, shiptype(ship_type::not_available)
-	, to_bow(0)
-	, to_stern(0)
-	, to_port(0)
-	, to_starboard(0)
-	, epfd_fix(epfd_fix_type::undefined)
-	, eta_month(eta_month_not_available)
-	, eta_day(eta_day_not_available)
-	, eta_hour(eta_hour_not_available)
-	, eta_minute(eta_minute_not_available)
-	, draught(0)
 	, destination("@@@@@@@@@@@@@@@@@@@@")
-	, dte(true)
 {
 }
 

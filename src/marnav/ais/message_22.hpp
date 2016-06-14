@@ -32,27 +32,28 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	unsigned int repeat_indicator;
-	uint32_t mmsi;
-	uint32_t channel_a;
-	uint32_t channel_b;
-	uint32_t power;
-	uint32_t txrx_mode;
+	unsigned int repeat_indicator = 0;
+	uint32_t mmsi = 0;
+	uint32_t channel_a = 0;
+	uint32_t channel_b = 0;
+	uint32_t power = 0;
+	uint32_t txrx_mode = 0;
 
-	bool addressed;
-	bool band_a;
-	bool band_b;
-	uint32_t zone_size;
+	bool addressed = false;
+	bool band_a = false;
+	bool band_b = false;
+	uint32_t zone_size = 0;
 
 	// addressed = 0 (broadcast)
-	uint32_t ne_lon; // 0.1 minutes
-	uint32_t ne_lat; // 0.1 minutes
-	uint32_t sw_lon; // 0.1 minutes
-	uint32_t sw_lat; // 0.1 minutes
+	// TODO: correct initialization
+	uint32_t ne_lon = 0; // 0.1 minutes
+	uint32_t ne_lat = 0; // 0.1 minutes
+	uint32_t sw_lon = 0; // 0.1 minutes
+	uint32_t sw_lat = 0; // 0.1 minutes
 
 	// addressed = 1 (addressed)
-	uint32_t mmsi_1;
-	uint32_t mmsi_2;
+	uint32_t mmsi_1 = 0;
+	uint32_t mmsi_2 = 0;
 
 public:
 	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }

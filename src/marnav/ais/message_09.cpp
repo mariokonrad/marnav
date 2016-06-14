@@ -6,23 +6,8 @@ namespace marnav
 {
 namespace ais
 {
-
 message_09::message_09()
 	: message(ID)
-	, repeat_indicator(0)
-	, mmsi(0)
-	, altitude(altitude_not_available)
-	, speed(speed_not_available)
-	, position_accuracy(false)
-	, longitude_minutes(longitude_not_available)
-	, latitude_minutes(latitude_not_available)
-	, course(0)
-	, utc_second(second_not_available)
-	, reserved(0)
-	, dte(false)
-	, assigned(false)
-	, raim(0)
-	, radio_status(0)
 {
 }
 

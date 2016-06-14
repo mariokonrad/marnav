@@ -13,17 +13,6 @@ namespace ais
 
 message_23::message_23()
 	: message(ID)
-	, repeat_indicator(0)
-	, mmsi(0)
-	, ne_lon(0)
-	, ne_lat(0)
-	, sw_lon(0)
-	, sw_lat(0)
-	, station_type(0)
-	, shiptype(ship_type::not_available)
-	, txrx_mode(0)
-	, interval(report_interval::autonomous_mode)
-	, quiet_time(0)
 {
 }
 

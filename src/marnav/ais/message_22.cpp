@@ -13,22 +13,6 @@ namespace ais
 
 message_22::message_22()
 	: message(ID)
-	, repeat_indicator(0)
-	, mmsi(0)
-	, channel_a(0)
-	, channel_b(0)
-	, power(0)
-	, txrx_mode(0)
-	, addressed(false)
-	, band_a(false)
-	, band_b(false)
-	, zone_size(0)
-	, ne_lon(0)
-	, ne_lat(0)
-	, sw_lon(0)
-	, sw_lat(0)
-	, mmsi_1(0)
-	, mmsi_2(0)
 {
 }
 

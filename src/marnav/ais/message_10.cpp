@@ -6,12 +6,8 @@ namespace marnav
 {
 namespace ais
 {
-
 message_10::message_10()
 	: message(ID)
-	, repeat_indicator(0)
-	, mmsi(0)
-	, dest_mmsi(0)
 {
 }
 

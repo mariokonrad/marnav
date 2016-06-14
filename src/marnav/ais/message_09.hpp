@@ -18,7 +18,6 @@ public:
 	constexpr static const int SIZE_BITS = 168;
 
 	constexpr static const uint32_t altitude_not_available = 4095;
-	constexpr static const uint32_t speed_not_available = 1023;
 
 	message_09();
 	message_09(const message_09 &) = default;
@@ -32,20 +31,20 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	unsigned int repeat_indicator;
-	uint32_t mmsi;
-	uint32_t altitude;
-	uint32_t speed; // speed over ground in knots
-	uint32_t position_accuracy;
-	uint32_t longitude_minutes; // in 10000 minutes
-	uint32_t latitude_minutes; // in 10000 minutes
-	uint32_t course; // in 0.1 degrees
-	uint32_t utc_second;
-	uint8_t reserved;
-	bool dte;
-	bool assigned;
-	bool raim;
-	uint32_t radio_status;
+	unsigned int repeat_indicator = 0;
+	uint32_t mmsi = 0;
+	uint32_t altitude = altitude_not_available;
+	uint32_t speed = sog_not_available; // speed over ground in knots
+	bool position_accuracy = false;
+	uint32_t longitude_minutes = longitude_not_available; // in 10000 minutes
+	uint32_t latitude_minutes = latitude_not_available; // in 10000 minutes
+	uint32_t course = cog_not_available; // in 0.1 degrees
+	uint32_t utc_second = second_not_available;
+	uint8_t reserved = 0;
+	bool dte = false;
+	bool assigned = false;
+	bool raim = false;
+	uint32_t radio_status = 0;
 
 public:
 	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }

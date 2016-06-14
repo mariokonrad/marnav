@@ -136,24 +136,24 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	unsigned int repeat_indicator;
-	uint32_t mmsi;
-	aid_type_id aid_type;
+	unsigned int repeat_indicator = 0;
+	uint32_t mmsi = 0;
+	aid_type_id aid_type = aid_type_id::unspecified;
 	std::string name;
-	bool position_accuracy;
-	uint32_t longitude_minutes; // in 10000 minutes
-	uint32_t latitude_minutes; // in 10000 minutes
-	uint32_t to_bow;
-	uint32_t to_stern;
-	uint32_t to_port;
-	uint32_t to_starboard;
-	epfd_fix_type epfd_fix;
-	uint32_t utc_second;
-	off_position_indicator off_position;
-	uint8_t regional;
-	bool raim;
-	virtual_aid virtual_aid_flag;
-	bool assigned;
+	bool position_accuracy = false;
+	uint32_t longitude_minutes = longitude_not_available; // in 10000 minutes
+	uint32_t latitude_minutes = latitude_not_available; // in 10000 minutes
+	uint32_t to_bow = 0;
+	uint32_t to_stern = 0;
+	uint32_t to_port = 0;
+	uint32_t to_starboard = 0;
+	epfd_fix_type epfd_fix = epfd_fix_type::undefined;
+	uint32_t utc_second = 0;
+	off_position_indicator off_position = off_position_indicator::off_position;
+	uint8_t regional = 0;
+	bool raim = false;
+	virtual_aid virtual_aid_flag = virtual_aid::virtual_aid;
+	bool assigned = false;
 	std::string name_extension;
 
 public:

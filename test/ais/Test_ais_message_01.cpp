@@ -52,7 +52,7 @@ TEST_F(Test_ais_message_01, encode_default_values)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ("100000?P00<tSF0l4Q@>4?wh0000", v[0].first.c_str());
+	EXPECT_STREQ("100000?P?w<tSF0l4Q@>4?wh0000", v[0].first.c_str());
 	EXPECT_EQ(0u, v[0].second);
 }
 
@@ -64,7 +64,7 @@ TEST_F(Test_ais_message_01, set_latitude)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ("100000?P00<tSF073qp>4?wh0000", v[0].first.c_str());
+	EXPECT_STREQ("100000?P?w<tSF073qp>4?wh0000", v[0].first.c_str());
 	EXPECT_EQ(0u, v[0].second);
 }
 
@@ -76,7 +76,7 @@ TEST_F(Test_ais_message_01, set_longitude)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ("100000?P008m6wPl4Q@>4?wh0000", v[0].first.c_str());
+	EXPECT_STREQ("100000?P?w8m6wPl4Q@>4?wh0000", v[0].first.c_str());
 	EXPECT_EQ(0u, v[0].second);
 }
 

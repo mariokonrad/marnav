@@ -29,9 +29,9 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	unsigned int repeat_indicator;
-	uint32_t mmsi;
-	uint32_t dest_mmsi;
+	unsigned int repeat_indicator = 0;
+	uint32_t mmsi = 0;
+	uint32_t dest_mmsi = 0;
 
 public:
 	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }

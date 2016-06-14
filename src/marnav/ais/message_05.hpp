@@ -33,25 +33,25 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	unsigned int repeat_indicator;
-	uint32_t mmsi;
-	uint32_t ais_version;
-	uint32_t imo_number;
+	unsigned int repeat_indicator = 0;
+	uint32_t mmsi = 0;
+	uint32_t ais_version = 0;
+	uint32_t imo_number = 0;
 	std::string callsign;
 	std::string shipname;
-	ship_type shiptype;
-	uint32_t to_bow;
-	uint32_t to_stern;
-	uint32_t to_port;
-	uint32_t to_starboard;
-	epfd_fix_type epfd_fix;
-	uint32_t eta_month;
-	uint32_t eta_day;
-	uint32_t eta_hour;
-	uint32_t eta_minute;
-	uint32_t draught; // in 0.1m
+	ship_type shiptype = ship_type::not_available;
+	uint32_t to_bow = 0;
+	uint32_t to_stern = 0;
+	uint32_t to_port = 0;
+	uint32_t to_starboard = 0;
+	epfd_fix_type epfd_fix = epfd_fix_type::undefined;
+	uint32_t eta_month = eta_month_not_available;
+	uint32_t eta_day = eta_day_not_available;
+	uint32_t eta_hour = eta_hour_not_available;
+	uint32_t eta_minute = eta_minute_not_available;
+	uint32_t draught = 0; // in 0.1m
 	std::string destination;
-	bool dte;
+	bool dte = true;
 
 public:
 	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }

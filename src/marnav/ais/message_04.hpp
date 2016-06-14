@@ -35,20 +35,20 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	unsigned int repeat_indicator;
-	uint32_t mmsi;
-	uint32_t year; // UTC, 1..9999
-	uint32_t month; // UTC, 1..12
-	uint32_t day; // UTC, 1..31
-	uint32_t hour; // UTC, 0..23
-	uint32_t minute;
-	uint32_t second;
-	bool position_accuracy;
-	uint32_t longitude_minutes; // in 10000 minutes
-	uint32_t latitude_minutes; // in 10000 minutes
-	epfd_fix_type epfd_fix;
-	bool raim;
-	uint32_t radio_status;
+	unsigned int repeat_indicator = 0;
+	uint32_t mmsi = 0;
+	uint32_t year = year_not_available; // UTC, 1..9999
+	uint32_t month = month_not_available; // UTC, 1..12
+	uint32_t day = day_not_available; // UTC, 1..31
+	uint32_t hour = hour_not_available; // UTC, 0..23
+	uint32_t minute = minute_not_available;
+	uint32_t second = second_not_available;
+	bool position_accuracy = false;
+	uint32_t longitude_minutes = longitude_not_available; // in 10000 minutes
+	uint32_t latitude_minutes = latitude_not_available; // in 10000 minutes
+	epfd_fix_type epfd_fix = epfd_fix_type::undefined;
+	bool raim = false;
+	uint32_t radio_status = 0;
 
 public:
 	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }

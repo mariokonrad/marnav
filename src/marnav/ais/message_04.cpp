@@ -6,7 +6,6 @@ namespace marnav
 {
 namespace ais
 {
-
 message_04::message_04()
 	: message_04(ID)
 {
@@ -14,20 +13,6 @@ message_04::message_04()
 
 message_04::message_04(message_id id)
 	: message(id)
-	, repeat_indicator(0)
-	, mmsi(0)
-	, year(year_not_available)
-	, month(month_not_available)
-	, day(day_not_available)
-	, hour(hour_not_available)
-	, minute(minute_not_available)
-	, second(second_not_available)
-	, position_accuracy(false)
-	, longitude_minutes(longitude_not_available)
-	, latitude_minutes(latitude_not_available)
-	, epfd_fix(epfd_fix_type::undefined)
-	, raim(0)
-	, radio_status(0)
 {
 }
 

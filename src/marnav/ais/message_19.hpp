@@ -31,25 +31,25 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	uint32_t repeat_indicator;
-	uint32_t mmsi;
-	uint32_t sog; // speed over ground, in 0.1 knots
-	bool position_accuracy;
-	uint32_t longitude_minutes; // in 10000 minutes
-	uint32_t latitude_minutes; // in 10000 minutes
-	uint32_t cog; // course of ground in 0.1 deg true north
-	uint32_t hdg; // true heading in deg
-	uint32_t timestamp;
+	uint32_t repeat_indicator = 0;
+	uint32_t mmsi = 0;
+	uint32_t sog = sog_not_available; // speed over ground, in 0.1 knots
+	bool position_accuracy = false;
+	uint32_t longitude_minutes = longitude_not_available; // in 10000 minutes
+	uint32_t latitude_minutes = latitude_not_available; // in 10000 minutes
+	uint32_t cog = cog_not_available; // course of ground in 0.1 deg true north
+	uint32_t hdg = hdg_not_available; // true heading in deg
+	uint32_t timestamp = timestamp_not_available;
 	std::string shipname;
-	ship_type shiptype;
-	uint32_t to_bow;
-	uint32_t to_stern;
-	uint32_t to_port;
-	uint32_t to_starboard;
-	epfd_fix_type epfd_fix;
-	bool raim;
-	bool dte;
-	bool assigned;
+	ship_type shiptype = ship_type::not_available;
+	uint32_t to_bow = 0;
+	uint32_t to_stern = 0;
+	uint32_t to_port = 0;
+	uint32_t to_starboard = 0;
+	epfd_fix_type epfd_fix = epfd_fix_type::undefined;
+	bool raim = false;
+	bool dte = false;
+	bool assigned = false;
 
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }

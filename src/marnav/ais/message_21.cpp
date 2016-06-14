@@ -12,24 +12,7 @@ namespace ais
 
 message_21::message_21()
 	: message(ID)
-	, repeat_indicator(0)
-	, mmsi(0)
-	, aid_type(aid_type_id::unspecified)
 	, name("@@@@@@@@@@@@@@@@@@@@")
-	, position_accuracy(false)
-	, longitude_minutes(0)
-	, latitude_minutes(0)
-	, to_bow(0)
-	, to_stern(0)
-	, to_port(0)
-	, to_starboard(0)
-	, epfd_fix()
-	, utc_second(0)
-	, off_position(off_position_indicator::off_position)
-	, regional(0)
-	, raim(false)
-	, virtual_aid_flag(virtual_aid::virtual_aid)
-	, assigned(false)
 {
 }
 
@@ -61,7 +44,7 @@ void message_21::read_data(const raw & bits)
 	bits.get(to_starboard, 243, 6);
 	bits.get(epfd_fix, 249, 4);
 	bits.get(utc_second, 253, 6);
-	bits.get(regional, 259, 1);
+	bits.get(off_position, 259, 1);
 	bits.get(regional, 260, 8);
 	bits.get(raim, 268, 1);
 	bits.get(virtual_aid_flag, 269, 1);
@@ -93,7 +76,7 @@ raw message_21::get_data() const
 	bits.set(to_starboard, 243, 6);
 	bits.set(epfd_fix, 249, 4);
 	bits.set(utc_second, 253, 6);
-	bits.set(regional, 259, 1);
+	bits.set(off_position, 259, 1);
 	bits.set(regional, 260, 8);
 	bits.set(raim, 268, 1);
 	bits.set(virtual_aid_flag, 269, 1);

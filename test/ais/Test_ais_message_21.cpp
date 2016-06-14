@@ -37,7 +37,7 @@ TEST_F(Test_ais_message_21, encode_default_values)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ("E000000000000000000000000000000000000000000010", v[0].first.c_str());
+	EXPECT_STREQ("E000000000000000000000000006NAc0J2@`0000000@10", v[0].first.c_str());
 	EXPECT_EQ(4u, v[0].second);
 }
 
@@ -50,7 +50,7 @@ TEST_F(Test_ais_message_21, set_name_extension)
 		auto v = ais::encode_message(m);
 
 		ASSERT_EQ(1u, v.size());
-		EXPECT_STREQ("E00000000000000000000000000000000000000000001?h", v[0].first.c_str());
+		EXPECT_STREQ("E000000000000000000000000006NAc0J2@`0000000@1?h", v[0].first.c_str());
 		EXPECT_EQ(2u, v[0].second);
 	}
 	{
@@ -61,7 +61,7 @@ TEST_F(Test_ais_message_21, set_name_extension)
 
 		ASSERT_EQ(1u, v.size());
 		EXPECT_STREQ(
-			"E000000000000000000000000000000000000000000012?wwwmwwwwh", v[0].first.c_str());
+			"E000000000000000000000000006NAc0J2@`0000000@12?wwwmwwwwh", v[0].first.c_str());
 		EXPECT_EQ(0u, v[0].second);
 	}
 	{
@@ -72,7 +72,7 @@ TEST_F(Test_ais_message_21, set_name_extension)
 
 		ASSERT_EQ(2u, v.size());
 		EXPECT_STREQ(
-			"E000000000000000000000000000000000000000000012?wwwmwwwwh", v[0].first.c_str());
+			"E000000000000000000000000006NAc0J2@`0000000@12?wwwmwwwwh", v[0].first.c_str());
 		EXPECT_EQ(0u, v[0].second);
 		EXPECT_STREQ("@Pi0", v[1].first.c_str());
 		EXPECT_EQ(0u, v[1].second);
