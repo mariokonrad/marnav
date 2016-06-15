@@ -35,23 +35,25 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	unsigned int repeat_indicator = 0;
-	uint32_t mmsi = 0;
-	uint32_t year = year_not_available; // UTC, 1..9999
-	uint32_t month = month_not_available; // UTC, 1..12
-	uint32_t day = day_not_available; // UTC, 1..31
-	uint32_t hour = hour_not_available; // UTC, 0..23
-	uint32_t minute = minute_not_available;
-	uint32_t second = second_not_available;
-	bool position_accuracy = false;
-	uint32_t longitude_minutes = longitude_not_available; // in 10000 minutes
-	uint32_t latitude_minutes = latitude_not_available; // in 10000 minutes
-	epfd_fix_type epfd_fix = epfd_fix_type::undefined;
-	bool raim = false;
-	uint32_t radio_status = 0;
+	// clang-format off
+	bitset_value<  6,  2, uint32_t     > repeat_indicator = 0;
+	bitset_value<  8, 30, uint32_t     > mmsi = 0;
+	bitset_value< 38, 14, uint32_t     > year = year_not_available; // UTC, 1..9999
+	bitset_value< 52,  4, uint32_t     > month = month_not_available; // UTC, 1..12
+	bitset_value< 56,  5, uint32_t     > day = day_not_available; // UTC, 1..31
+	bitset_value< 61,  5, uint32_t     > hour = hour_not_available; // UTC, 0..23
+	bitset_value< 66,  6, uint32_t     > minute = minute_not_available;
+	bitset_value< 72,  6, uint32_t     > second = second_not_available;
+	bitset_value< 78,  1, bool         > position_accuracy = false;
+	bitset_value< 79, 28, uint32_t     > longitude_minutes = longitude_not_available; // in 10000 minutes
+	bitset_value<107, 27, uint32_t     > latitude_minutes = latitude_not_available; // in 10000 minutes
+	bitset_value<134,  4, epfd_fix_type> epfd_fix = epfd_fix_type::undefined;
+	bitset_value<148,  1, bool         > raim = false;
+	bitset_value<149, 19, uint32_t     > radio_status = 0;
+	// clang-format on
 
 public:
-	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }
+	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
 	uint32_t get_year() const noexcept { return year; }
 	uint32_t get_month() const noexcept { return month; }
@@ -64,7 +66,7 @@ public:
 	bool get_raim() const noexcept { return raim; }
 	uint32_t get_radio_status() const noexcept { return radio_status; }
 
-	void set_repeat_indicator(unsigned int t) noexcept { repeat_indicator = t; }
+	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
 	void set_year(uint32_t t) noexcept { year = t; }
 	void set_month(uint32_t t) noexcept { month = t; }

@@ -31,20 +31,17 @@ std::unique_ptr<message> message_23::parse(const raw & bits)
 
 void message_23::read_data(const raw & bits)
 {
-	bits.get(repeat_indicator, 6, 2);
-	bits.get(mmsi, 8, 30);
-	// spare: 38 - 39
-	bits.get(ne_lon, 40, 18);
-	bits.get(ne_lat, 58, 17);
-	bits.get(sw_lon, 75, 18);
-	bits.get(sw_lat, 93, 17);
-	bits.get(station_type, 110, 4);
-	bits.get(shiptype, 114, 8);
-	// spare: 122 - 143
-	bits.get(txrx_mode, 144, 2);
-	bits.get(interval, 146, 4);
-	bits.get(quiet_time, 150, 4);
-	// spare: 154 - 159
+	get(bits, repeat_indicator);
+	get(bits, mmsi);
+	get(bits, ne_lon);
+	get(bits, ne_lat);
+	get(bits, sw_lon);
+	get(bits, sw_lat);
+	get(bits, station_type);
+	get(bits, shiptype);
+	get(bits, txrx_mode);
+	get(bits, interval);
+	get(bits, quiet_time);
 }
 
 /// @todo possible refactoring for name_extension
@@ -53,17 +50,17 @@ raw message_23::get_data() const
 	raw bits{SIZE_BITS};
 
 	bits.set(type(), 0, 6);
-	bits.set(mmsi, 8, 30);
-	// spare: 38 - 39
-	bits.set(ne_lon, 40, 18);
-	bits.set(ne_lat, 58, 17);
-	bits.set(sw_lon, 75, 18);
-	bits.set(sw_lat, 93, 17);
-	bits.set(station_type, 110, 4);
-	bits.set(shiptype, 114, 8);
-	bits.set(txrx_mode, 144, 2);
-	bits.set(interval, 146, 4);
-	bits.set(quiet_time, 150, 4);
+	set(bits, repeat_indicator);
+	set(bits, mmsi);
+	set(bits, ne_lon);
+	set(bits, ne_lat);
+	set(bits, sw_lon);
+	set(bits, sw_lat);
+	set(bits, station_type);
+	set(bits, shiptype);
+	set(bits, txrx_mode);
+	set(bits, interval);
+	set(bits, quiet_time);
 
 	return bits;
 }

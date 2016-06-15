@@ -29,25 +29,6 @@ std::unique_ptr<message> message_01::parse(const raw & bits)
 	return result;
 }
 
-void message_01::read_data(const raw & bits)
-{
-	bits.get(repeat_indicator, 6, 2);
-	bits.get(mmsi, 8, 30);
-	bits.get(nav_status, 38, 4);
-	bits.get(rot, 42, 8);
-	bits.get(sog, 50, 10);
-	bits.get(position_accuracy, 60, 1);
-	bits.get(longitude_minutes, 61, 28);
-	bits.get(latitude_minutes, 89, 27);
-	bits.get(cog, 116, 12);
-	bits.get(hdg, 128, 9);
-	bits.get(timestamp, 136, 6);
-	bits.get(maneuver_indicator, 143, 2);
-	// spare: 145 - 147
-	bits.get(raim, 148, 1);
-	bits.get(radio_status, 149, 19);
-}
-
 geo::longitude message_01::get_longitude() const { return to_geo_longitude(longitude_minutes); }
 
 geo::latitude message_01::get_latitude() const { return to_geo_latitude(latitude_minutes); }
@@ -62,25 +43,43 @@ void message_01::set_latitude(const geo::latitude & t)
 	latitude_minutes = to_latitude_minutes(t);
 }
 
+void message_01::read_data(const raw & bits)
+{
+	get(bits, repeat_indicator);
+	get(bits, mmsi);
+	get(bits, nav_status);
+	get(bits, rot);
+	get(bits, sog);
+	get(bits, position_accuracy);
+	get(bits, longitude_minutes);
+	get(bits, latitude_minutes);
+	get(bits, cog);
+	get(bits, hdg);
+	get(bits, timestamp);
+	get(bits, maneuver_indicator);
+	get(bits, raim);
+	get(bits, radio_status);
+}
+
 raw message_01::get_data() const
 {
 	raw bits{SIZE_BITS};
 
 	bits.set(type(), 0, 6);
-	bits.set(repeat_indicator, 6, 2);
-	bits.set(mmsi, 8, 30);
-	bits.set(nav_status, 38, 4);
-	bits.set(rot, 42, 8);
-	bits.set(sog, 50, 10);
-	bits.set(position_accuracy, 60, 1);
-	bits.set(longitude_minutes, 61, 28);
-	bits.set(latitude_minutes, 89, 27);
-	bits.set(cog, 116, 12);
-	bits.set(hdg, 128, 9);
-	bits.set(timestamp, 136, 6);
-	bits.set(maneuver_indicator, 143, 2);
-	bits.set(raim, 148, 1);
-	bits.set(radio_status, 149, 19);
+	set(bits, repeat_indicator);
+	set(bits, mmsi);
+	set(bits, nav_status);
+	set(bits, rot);
+	set(bits, sog);
+	set(bits, position_accuracy);
+	set(bits, longitude_minutes);
+	set(bits, latitude_minutes);
+	set(bits, cog);
+	set(bits, hdg);
+	set(bits, timestamp);
+	set(bits, maneuver_indicator);
+	set(bits, raim);
+	set(bits, radio_status);
 
 	return bits;
 }

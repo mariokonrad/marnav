@@ -26,11 +26,9 @@ std::unique_ptr<message> message_10::parse(const raw & bits)
 
 void message_10::read_data(const raw & bits)
 {
-	bits.get(repeat_indicator, 6, 2);
-	bits.get(mmsi, 8, 30);
-	// spare 38 - 39
-	bits.get(dest_mmsi, 40, 30);
-	// spare 70 - 71
+	get(bits, repeat_indicator);
+	get(bits, mmsi);
+	get(bits, dest_mmsi);
 }
 
 raw message_10::get_data() const
@@ -38,8 +36,9 @@ raw message_10::get_data() const
 	raw bits{SIZE_BITS};
 
 	bits.set(type(), 0, 6);
-	bits.set(mmsi, 8, 30);
-	bits.set(dest_mmsi, 40, 30);
+	set(bits, repeat_indicator);
+	set(bits, mmsi);
+	set(bits, dest_mmsi);
 
 	return bits;
 }

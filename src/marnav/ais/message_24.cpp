@@ -44,31 +44,26 @@ bool message_24::is_auxiliary_vessel() const { return utils::mmsi{mmsi}.is_auxil
 
 void message_24::read_data(const raw & bits)
 {
-	bits.get(repeat_indicator, 6, 2);
-	bits.get(mmsi, 8, 30);
-
-	std::underlying_type<part>::type tmp = 3;
-	bits.get(tmp, 38, 2);
-	part_number = static_cast<part>(tmp);
+	get(bits, repeat_indicator);
+	get(bits, mmsi);
+	get(bits, part_number);
 
 	if (part_number == part::A) {
-		shipname = read_string(bits, 40, 20);
-		// spare: 160 - 167
+		get(bits, shipname);
 	} else {
-		bits.get(shiptype, 40, 8);
-		vendor_id = read_string(bits, 48, 3);
-		bits.get(model, 66, 4);
-		bits.get(serial, 70, 20);
-		callsign = read_string(bits, 90, 7);
+		get(bits, shiptype);
+		get(bits, vendor_id);
+		get(bits, model);
+		get(bits, serial);
+		get(bits, callsign);
 		if (is_auxiliary_vessel()) {
-			bits.get(mothership_mmsi, 132, 30);
+			get(bits, mothership_mmsi);
 		} else {
-			bits.get(to_bow, 132, 9);
-			bits.get(to_stern, 141, 9);
-			bits.get(to_port, 150, 6);
-			bits.get(to_starboard, 156, 6);
+			get(bits, to_bow);
+			get(bits, to_stern);
+			get(bits, to_port);
+			get(bits, to_starboard);
 		}
-		// spare: 162 - 167
 	}
 }
 
@@ -77,25 +72,25 @@ raw message_24::get_data() const
 	raw bits{SIZE_BITS};
 
 	bits.set(type(), 0, 6);
-	bits.set(repeat_indicator, 6, 2);
-	bits.set(mmsi, 8, 30);
-	bits.set(static_cast<std::underlying_type<part>::type>(part_number), 38, 2);
+	set(bits, repeat_indicator);
+	set(bits, mmsi);
+	set(bits, part_number);
 
 	if (part_number == part::A) {
-		write_string(bits, 40, 20, shipname);
+		set(bits, shipname);
 	} else {
-		bits.set(shiptype, 40, 8);
-		write_string(bits, 48, 3, vendor_id);
-		bits.set(model, 66, 4);
-		bits.set(serial, 70, 20);
-		write_string(bits, 90, 7, callsign);
+		set(bits, shiptype);
+		set(bits, vendor_id);
+		set(bits, model);
+		set(bits, serial);
+		set(bits, callsign);
 		if (is_auxiliary_vessel()) {
-			bits.set(mothership_mmsi, 132, 30);
+			set(bits, mothership_mmsi);
 		} else {
-			bits.set(to_bow, 132, 9);
-			bits.set(to_stern, 141, 9);
-			bits.set(to_port, 150, 6);
-			bits.set(to_starboard, 156, 6);
+			set(bits, to_bow);
+			set(bits, to_stern);
+			set(bits, to_port);
+			set(bits, to_starboard);
 		}
 	}
 

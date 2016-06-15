@@ -41,8 +41,17 @@ uint8_t encode_sixbit_ascii(char c)
 	return i != SIXBIT_ASCII_TABLE.end() ? i->first : 0xff;
 }
 
+/// Reads a string from the AIS message at the specified offset.
+/// The string is decoded and returned.
+///
+/// @param[in] bits The AIS message.
+/// @param[in] ofs The offset at which the string is being read.
+/// @param[in] count_sixbits Number of sixbits to be read.
+/// @return The decoded string.
+///
 /// @todo consider to hide characters after '@'
-std::string read_string(const raw & bits, raw::size_type ofs, raw::size_type count_sixbits)
+std::string message::read_string(
+	const raw & bits, raw::size_type ofs, raw::size_type count_sixbits)
 {
 	std::string s;
 	s.reserve(count_sixbits);
@@ -56,7 +65,16 @@ std::string read_string(const raw & bits, raw::size_type ofs, raw::size_type cou
 	return s;
 }
 
-void write_string(
+/// Writes the specified string into the AIS message. If the string does not fill
+/// the entire space within the message, fill characters `@` will be written
+/// until the specified number of sixbits is reached.
+///
+/// @param[out] bits The AIS message.
+/// @param[in] ofs The offset at which the string is being written within the message.
+/// @param[in] count_sixbits Number of sixbits to write into the message.
+/// @param[in] s The string to be written.
+///
+void message::write_string(
 	raw & bits, raw::size_type ofs, raw::size_type count_sixbits, const std::string & s)
 {
 	for (raw::size_type i = 0; i < count_sixbits; ++i) {

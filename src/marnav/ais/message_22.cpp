@@ -31,27 +31,26 @@ std::unique_ptr<message> message_22::parse(const raw & bits)
 
 void message_22::read_data(const raw & bits)
 {
-	bits.get(repeat_indicator, 6, 2);
-	bits.get(mmsi, 8, 30);
-	// spare: 38 - 39
-	bits.get(channel_a, 40, 12);
-	bits.get(channel_b, 52, 12);
-	bits.get(txrx_mode, 64, 4);
-	bits.get(power, 68, 1);
-	bits.get(addressed, 139, 1);
+	get(bits, repeat_indicator);
+	get(bits, mmsi);
+	get(bits, channel_a);
+	get(bits, channel_b);
+	get(bits, txrx_mode);
+	get(bits, power);
+	get(bits, addressed);
+	get(bits, band_a);
+	get(bits, band_b);
+	get(bits, zone_size);
+
 	if (addressed) {
-		bits.get(mmsi_1, 69, 30);
-		bits.get(mmsi_2, 104, 30);
+		get(bits, mmsi_1);
+		get(bits, mmsi_2);
 	} else {
-		bits.get(ne_lon, 69, 18);
-		bits.get(ne_lat, 87, 17);
-		bits.get(sw_lon, 104, 18);
-		bits.get(sw_lat, 122, 17);
+		get(bits, ne_lon);
+		get(bits, ne_lat);
+		get(bits, sw_lon);
+		get(bits, sw_lat);
 	}
-	bits.get(band_a, 140, 1);
-	bits.get(band_b, 141, 1);
-	bits.get(zone_size, 142, 3);
-	// spare: 145 - 167
 }
 
 /// @todo possible refactoring for name_extension
@@ -60,24 +59,26 @@ raw message_22::get_data() const
 	raw bits{SIZE_BITS};
 
 	bits.set(type(), 0, 6);
-	bits.set(mmsi, 8, 30);
-	bits.set(channel_a, 40, 12);
-	bits.set(channel_b, 52, 12);
-	bits.set(txrx_mode, 64, 4);
-	bits.set(power, 68, 1);
+	set(bits, repeat_indicator);
+	set(bits, mmsi);
+	set(bits, channel_a);
+	set(bits, channel_b);
+	set(bits, txrx_mode);
+	set(bits, power);
+	set(bits, addressed);
+	set(bits, band_a);
+	set(bits, band_b);
+	set(bits, zone_size);
+
 	if (addressed) {
-		bits.set(mmsi_1, 69, 30);
-		bits.set(mmsi_2, 104, 30);
+		set(bits, mmsi_1);
+		set(bits, mmsi_2);
 	} else {
-		bits.set(ne_lon, 69, 18);
-		bits.set(ne_lat, 87, 17);
-		bits.set(sw_lon, 104, 18);
-		bits.set(sw_lat, 122, 17);
+		set(bits, ne_lon);
+		set(bits, ne_lat);
+		set(bits, sw_lon);
+		set(bits, sw_lat);
 	}
-	bits.set(addressed, 139, 1);
-	bits.set(band_a, 140, 1);
-	bits.set(band_b, 141, 1);
-	bits.set(zone_size, 142, 3);
 
 	return bits;
 }

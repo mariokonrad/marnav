@@ -31,25 +31,24 @@ std::unique_ptr<message> message_21::parse(const raw & bits)
 
 void message_21::read_data(const raw & bits)
 {
-	bits.get(repeat_indicator, 6, 2);
-	bits.get(mmsi, 8, 30);
-	bits.get(aid_type, 38, 5);
-	name = read_string(bits, 43, 20);
-	bits.get(position_accuracy, 163, 1);
-	bits.get(longitude_minutes, 164, 28);
-	bits.get(latitude_minutes, 192, 27);
-	bits.get(to_bow, 219, 9);
-	bits.get(to_stern, 228, 9);
-	bits.get(to_port, 237, 6);
-	bits.get(to_starboard, 243, 6);
-	bits.get(epfd_fix, 249, 4);
-	bits.get(utc_second, 253, 6);
-	bits.get(off_position, 259, 1);
-	bits.get(regional, 260, 8);
-	bits.get(raim, 268, 1);
-	bits.get(virtual_aid_flag, 269, 1);
-	bits.get(assigned, 270, 1);
-	// spare: 271 - 271
+	get(bits, repeat_indicator);
+	get(bits, mmsi);
+	get(bits, aid_type);
+	get(bits, name);
+	get(bits, position_accuracy);
+	get(bits, longitude_minutes);
+	get(bits, latitude_minutes);
+	get(bits, to_bow);
+	get(bits, to_stern);
+	get(bits, to_port);
+	get(bits, to_starboard);
+	get(bits, epfd_fix);
+	get(bits, utc_second);
+	get(bits, off_position);
+	get(bits, regional);
+	get(bits, raim);
+	get(bits, virtual_aid_flag);
+	get(bits, assigned);
 
 	auto rest = static_cast<decltype(SIZE_BITS_MAX)>(bits.size()) - SIZE_BITS_MIN;
 	if (rest > 0) {
@@ -64,23 +63,24 @@ raw message_21::get_data() const
 	raw bits{SIZE_BITS_MIN};
 
 	bits.set(type(), 0, 6);
-	bits.set(mmsi, 8, 30);
-	bits.set(aid_type, 38, 5);
-	write_string(bits, 43, 20, name);
-	bits.set(position_accuracy, 163, 1);
-	bits.set(longitude_minutes, 164, 28);
-	bits.set(latitude_minutes, 192, 27);
-	bits.set(to_bow, 219, 9);
-	bits.set(to_stern, 228, 9);
-	bits.set(to_port, 237, 6);
-	bits.set(to_starboard, 243, 6);
-	bits.set(epfd_fix, 249, 4);
-	bits.set(utc_second, 253, 6);
-	bits.set(off_position, 259, 1);
-	bits.set(regional, 260, 8);
-	bits.set(raim, 268, 1);
-	bits.set(virtual_aid_flag, 269, 1);
-	bits.set(assigned, 270, 1);
+	set(bits, repeat_indicator);
+	set(bits, mmsi);
+	set(bits, aid_type);
+	set(bits, name);
+	set(bits, position_accuracy);
+	set(bits, longitude_minutes);
+	set(bits, latitude_minutes);
+	set(bits, to_bow);
+	set(bits, to_stern);
+	set(bits, to_port);
+	set(bits, to_starboard);
+	set(bits, epfd_fix);
+	set(bits, utc_second);
+	set(bits, off_position);
+	set(bits, regional);
+	set(bits, raim);
+	set(bits, virtual_aid_flag);
+	set(bits, assigned);
 
 	if (name_extension.size() > 0) {
 		// compute number of bits, must be on a 8-bit boundary

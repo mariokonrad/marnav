@@ -31,25 +31,23 @@ std::unique_ptr<message> message_18::parse(const raw & bits)
 
 void message_18::read_data(const raw & bits)
 {
-	bits.get(repeat_indicator, 6, 2);
-	bits.get(mmsi, 8, 30);
-	// regional reserved: 38 - 45
-	bits.get(sog, 46, 10);
-	bits.get(position_accuracy, 56, 1);
-	bits.get(longitude_minutes, 57, 28);
-	bits.get(latitude_minutes, 85, 27);
-	bits.get(cog, 112, 12);
-	bits.get(hdg, 124, 9);
-	bits.get(timestamp, 133, 6);
-	// regional reserved: 139 - 140
-	bits.get(cs_unit, 141, 1);
-	bits.get(display_flag, 142, 1);
-	bits.get(dsc_flag, 143, 1);
-	bits.get(band_flag, 144, 1);
-	bits.get(message_22_flag, 145, 1);
-	bits.get(assigned, 146, 1);
-	bits.get(raim, 147, 1);
-	bits.get(radio_status, 148, 20);
+	get(bits, repeat_indicator);
+	get(bits, mmsi);
+	get(bits, sog);
+	get(bits, position_accuracy);
+	get(bits, longitude_minutes);
+	get(bits, latitude_minutes);
+	get(bits, cog);
+	get(bits, hdg);
+	get(bits, timestamp);
+	get(bits, cs_unit);
+	get(bits, display_flag);
+	get(bits, dsc_flag);
+	get(bits, band_flag);
+	get(bits, message_22_flag);
+	get(bits, assigned);
+	get(bits, raim);
+	get(bits, radio_status);
 }
 
 raw message_18::get_data() const
@@ -57,23 +55,23 @@ raw message_18::get_data() const
 	raw bits{SIZE_BITS};
 
 	bits.set(type(), 0, 6);
-	bits.set(repeat_indicator, 6, 2);
-	bits.set(mmsi, 8, 30);
-	bits.set(sog, 46, 10);
-	bits.set(position_accuracy, 56, 1);
-	bits.set(longitude_minutes, 57, 28);
-	bits.set(latitude_minutes, 85, 27);
-	bits.set(cog, 112, 12);
-	bits.set(hdg, 124, 9);
-	bits.set(timestamp, 133, 6);
-	bits.set(cs_unit, 141, 1);
-	bits.set(display_flag, 142, 1);
-	bits.set(dsc_flag, 143, 1);
-	bits.set(band_flag, 144, 1);
-	bits.set(message_22_flag, 145, 1);
-	bits.set(assigned, 146, 1);
-	bits.set(raim, 147, 1);
-	bits.set(radio_status, 148, 20);
+	set(bits, repeat_indicator);
+	set(bits, mmsi);
+	set(bits, sog);
+	set(bits, position_accuracy);
+	set(bits, longitude_minutes);
+	set(bits, latitude_minutes);
+	set(bits, cog);
+	set(bits, hdg);
+	set(bits, timestamp);
+	set(bits, cs_unit);
+	set(bits, display_flag);
+	set(bits, dsc_flag);
+	set(bits, band_flag);
+	set(bits, message_22_flag);
+	set(bits, assigned);
+	set(bits, raim);
+	set(bits, radio_status);
 
 	return bits;
 }

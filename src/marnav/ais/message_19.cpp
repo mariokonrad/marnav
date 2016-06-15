@@ -6,7 +6,6 @@ namespace marnav
 {
 namespace ais
 {
-
 message_19::message_19()
 	: message_19(ID)
 {
@@ -33,28 +32,25 @@ std::unique_ptr<message> message_19::parse(const raw & bits)
 
 void message_19::read_data(const raw & bits)
 {
-	bits.get(repeat_indicator, 6, 2);
-	bits.get(mmsi, 8, 30);
-	// regional reserved: 38 - 45
-	bits.get(sog, 46, 10);
-	bits.get(position_accuracy, 56, 1);
-	bits.get(longitude_minutes, 57, 28);
-	bits.get(latitude_minutes, 85, 27);
-	bits.get(cog, 112, 12);
-	bits.get(hdg, 124, 9);
-	bits.get(timestamp, 133, 6);
-	// regional reserved: 139 - 142
-	shipname = read_string(bits, 143, 20);
-	bits.get(shiptype, 263, 8);
-	bits.get(to_bow, 271, 9);
-	bits.get(to_stern, 280, 9);
-	bits.get(to_port, 289, 6);
-	bits.get(to_starboard, 295, 6);
-	bits.get(epfd_fix, 301, 4);
-	bits.get(raim, 305, 1);
-	bits.get(dte, 306, 1);
-	bits.get(assigned, 307, 1);
-	// spare: 308 - 311
+	get(bits, repeat_indicator);
+	get(bits, mmsi);
+	get(bits, sog);
+	get(bits, position_accuracy);
+	get(bits, longitude_minutes);
+	get(bits, latitude_minutes);
+	get(bits, cog);
+	get(bits, hdg);
+	get(bits, timestamp);
+	get(bits, shipname);
+	get(bits, shiptype);
+	get(bits, to_bow);
+	get(bits, to_stern);
+	get(bits, to_port);
+	get(bits, to_starboard);
+	get(bits, epfd_fix);
+	get(bits, raim);
+	get(bits, dte);
+	get(bits, assigned);
 }
 
 raw message_19::get_data() const
@@ -62,25 +58,25 @@ raw message_19::get_data() const
 	raw bits{SIZE_BITS};
 
 	bits.set(type(), 0, 6);
-	bits.set(repeat_indicator, 6, 2);
-	bits.set(mmsi, 8, 30);
-	bits.set(sog, 46, 10);
-	bits.set(position_accuracy, 56, 1);
-	bits.set(longitude_minutes, 57, 28);
-	bits.set(latitude_minutes, 85, 27);
-	bits.set(cog, 112, 12);
-	bits.set(hdg, 124, 9);
-	bits.set(timestamp, 133, 6);
-	write_string(bits, 143, 20, shipname);
-	bits.set(shiptype, 263, 8);
-	bits.set(to_bow, 271, 9);
-	bits.set(to_stern, 280, 9);
-	bits.set(to_port, 289, 6);
-	bits.set(to_starboard, 295, 6);
-	bits.set(epfd_fix, 301, 4);
-	bits.set(raim, 305, 1);
-	bits.set(dte, 306, 1);
-	bits.set(assigned, 307, 1);
+	set(bits, repeat_indicator);
+	set(bits, mmsi);
+	set(bits, sog);
+	set(bits, position_accuracy);
+	set(bits, longitude_minutes);
+	set(bits, latitude_minutes);
+	set(bits, cog);
+	set(bits, hdg);
+	set(bits, timestamp);
+	set(bits, shipname);
+	set(bits, shiptype);
+	set(bits, to_bow);
+	set(bits, to_stern);
+	set(bits, to_port);
+	set(bits, to_starboard);
+	set(bits, epfd_fix);
+	set(bits, raim);
+	set(bits, dte);
+	set(bits, assigned);
 
 	return bits;
 }

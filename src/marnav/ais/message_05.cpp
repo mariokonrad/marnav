@@ -34,26 +34,25 @@ std::unique_ptr<message> message_05::parse(const raw & bits)
 
 void message_05::read_data(const raw & bits)
 {
-	bits.get(repeat_indicator, 6, 2);
-	bits.get(mmsi, 8, 30);
-	bits.get(ais_version, 38, 2);
-	bits.get(imo_number, 40, 30);
-	callsign = read_string(bits, 70, 7);
-	shipname = read_string(bits, 112, 20);
-	bits.get(shiptype, 232, 8);
-	bits.get(to_bow, 240, 9);
-	bits.get(to_stern, 249, 9);
-	bits.get(to_port, 258, 6);
-	bits.get(to_starboard, 264, 6);
-	bits.get(epfd_fix, 270, 4);
-	bits.get(eta_month, 274, 4);
-	bits.get(eta_day, 278, 5);
-	bits.get(eta_hour, 283, 5);
-	bits.get(eta_minute, 288, 6);
-	bits.get(draught, 294, 8);
-	destination = read_string(bits, 302, 20);
-	bits.get(dte, 422, 1);
-	// 423 spare
+	get(bits, repeat_indicator);
+	get(bits, mmsi);
+	get(bits, ais_version);
+	get(bits, imo_number);
+	get(bits, callsign);
+	get(bits, shipname);
+	get(bits, shiptype);
+	get(bits, to_bow);
+	get(bits, to_stern);
+	get(bits, to_port);
+	get(bits, to_starboard);
+	get(bits, epfd_fix);
+	get(bits, eta_month);
+	get(bits, eta_day);
+	get(bits, eta_hour);
+	get(bits, eta_minute);
+	get(bits, draught);
+	get(bits, destination);
+	get(bits, dte);
 }
 
 raw message_05::get_data() const
@@ -61,26 +60,25 @@ raw message_05::get_data() const
 	raw bits{SIZE_BITS};
 
 	bits.set(type(), 0, 6);
-	bits.set(repeat_indicator, 6, 2);
-	bits.set(mmsi, 8, 30);
-	bits.set(ais_version, 38, 2);
-	bits.set(imo_number, 40, 30);
-	write_string(bits, 70, 7, callsign);
-	write_string(bits, 112, 20, shipname);
-	bits.set(shiptype, 232, 8);
-	bits.set(to_bow, 240, 9);
-	bits.set(to_stern, 249, 9);
-	bits.set(to_port, 258, 6);
-	bits.set(to_starboard, 264, 6);
-	bits.set(epfd_fix, 270, 4);
-	bits.set(eta_month, 274, 4);
-	bits.set(eta_day, 278, 5);
-	bits.set(eta_hour, 283, 5);
-	bits.set(eta_minute, 288, 6);
-	bits.set(draught, 294, 8);
-	write_string(bits, 302, 20, destination);
-	bits.set(dte, 422, 1);
-	// 423 spare
+	set(bits, repeat_indicator);
+	set(bits, mmsi);
+	set(bits, ais_version);
+	set(bits, imo_number);
+	set(bits, callsign);
+	set(bits, shipname);
+	set(bits, shiptype);
+	set(bits, to_bow);
+	set(bits, to_stern);
+	set(bits, to_port);
+	set(bits, to_starboard);
+	set(bits, epfd_fix);
+	set(bits, eta_month);
+	set(bits, eta_day);
+	set(bits, eta_hour);
+	set(bits, eta_minute);
+	set(bits, draught);
+	set(bits, destination);
+	set(bits, dte);
 
 	return bits;
 }

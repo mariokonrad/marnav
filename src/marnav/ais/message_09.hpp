@@ -31,23 +31,25 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	unsigned int repeat_indicator = 0;
-	uint32_t mmsi = 0;
-	uint32_t altitude = altitude_not_available;
-	uint32_t speed = sog_not_available; // speed over ground in knots
-	bool position_accuracy = false;
-	uint32_t longitude_minutes = longitude_not_available; // in 10000 minutes
-	uint32_t latitude_minutes = latitude_not_available; // in 10000 minutes
-	uint32_t course = cog_not_available; // in 0.1 degrees
-	uint32_t utc_second = second_not_available;
-	uint8_t reserved = 0;
-	bool dte = false;
-	bool assigned = false;
-	bool raim = false;
-	uint32_t radio_status = 0;
+	// clang-format off
+	bitset_value<  6,  2, uint32_t> repeat_indicator = 0;
+	bitset_value<  8, 30, uint32_t> mmsi = 0;
+	bitset_value< 38, 12, uint32_t> altitude = altitude_not_available;
+	bitset_value< 50, 10, uint32_t> speed = sog_not_available; // speed over ground in knots
+	bitset_value< 60,  1, bool    > position_accuracy = false;
+	bitset_value< 61, 28, uint32_t> longitude_minutes = longitude_not_available; // in 10000 minutes
+	bitset_value< 89, 27, uint32_t> latitude_minutes = latitude_not_available; // in 10000 minutes
+	bitset_value<116, 12, uint32_t> course = cog_not_available; // in 0.1 degrees
+	bitset_value<128,  6, uint32_t> utc_second = second_not_available;
+	bitset_value<134,  8, uint8_t > reserved = 0;
+	bitset_value<142,  1, bool    > dte = false;
+	bitset_value<146,  1, bool    > assigned = false;
+	bitset_value<147,  1, bool    > raim = false;
+	bitset_value<148, 20, uint32_t> radio_status = 0;
+	// clang-format on
 
 public:
-	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }
+	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
 	uint32_t get_altitude() const noexcept { return altitude; }
 	uint32_t get_speed() const noexcept { return speed; }
@@ -59,7 +61,7 @@ public:
 	bool get_raim() const noexcept { return raim; }
 	uint32_t get_radio_status() const noexcept { return radio_status; }
 
-	void set_repeat_indicator(unsigned int t) noexcept { repeat_indicator = t; }
+	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
 	void set_altitude(uint32_t t) noexcept { altitude = t; }
 	void set_speed(uint32_t t) noexcept { speed = t; }

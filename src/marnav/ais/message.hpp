@@ -187,6 +187,13 @@ constexpr static const uint32_t second_not_available = 60;
 /// Type for raw AIS data.
 using raw = utils::bitset<uint8_t>;
 
+/// @{
+
+char decode_sixbit_ascii(uint8_t value);
+uint8_t encode_sixbit_ascii(char c);
+
+/// @}
+
 /// @brief Base class for all AIS messages.
 class message
 {
@@ -200,22 +207,139 @@ public:
 	virtual raw get_data() const = 0;
 
 protected:
+	/// Represents data to be read from / written to a bitset.
+	/// The offset and number of bits (or sixbits) is encoded in the
+	/// template signature.
+	///
+	/// This template is used to specify the mapping (offset, count) of
+	/// a specific datum within the bitset, without the need of repeating
+	/// the mapping for read and write operations.
+	template <std::size_t Offset, std::size_t Count, typename T> struct bitset_value final {
+		static constexpr std::size_t offset = Offset;
+		static constexpr std::size_t count = Count;
+		using value_type = T;
+
+		bitset_value(T t)
+			: value(t)
+		{
+		}
+
+		bitset_value(const bitset_value &) = default;
+		bitset_value & operator=(const bitset_value &) = default;
+
+		bitset_value(bitset_value &&) = default;
+		bitset_value & operator=(bitset_value &&) = default;
+
+		operator T() const { return value; }
+
+		bitset_value & operator=(T t)
+		{
+			value = t;
+			return *this;
+		}
+
+		T value;
+	};
+
 	explicit message(message_id type);
+
+	/// @{
+
+	static std::string read_string(
+		const raw & bits, raw::size_type ofs, raw::size_type count_sixbits);
+
+	static void write_string(
+		raw & bits, raw::size_type ofs, raw::size_type count_sixbits, const std::string & s);
+
+	/// @}
+
+	/// @{
+
+	/// Reads data from the AIS message (bitset).
+	/// This is the `enum` variant.
+	///
+	/// @tparam T `bitset_value` type.
+	/// @param[in] bits The AIS message to read from.
+	/// @param[out] t The data read from the message.
+	///
+	template <typename T,
+		typename std::enable_if<std::is_enum<typename T::value_type>::value, int>::type = 0>
+	static void get(const raw & bits, T & t)
+	{
+		typename std::underlying_type<typename T::value_type>::type tmp;
+		bits.get(tmp, T::offset, T::count);
+		t.value = static_cast<typename T::value_type>(tmp);
+	}
+
+	/// The non `enum` and non `string` variant of `get`.
+	/// @see get
+	template <typename T, typename std::enable_if<!std::is_enum<typename T::value_type>::value
+								  && !std::is_same<typename T::value_type, std::string>::value,
+							  int>::type
+		= 0>
+	static void get(const raw & bits, T & t)
+	{
+		bits.get(t.value, T::offset, T::count);
+	}
+
+	/// The `string` variant of `get`.
+	/// @see get
+	template <typename T, typename std::enable_if<!std::is_enum<typename T::value_type>::value
+								  && std::is_same<typename T::value_type, std::string>::value,
+							  int>::type
+		= 0>
+	static void get(const raw & bits, T & t)
+	{
+		t.value = read_string(bits, T::offset, T::count);
+	}
+
+	/// @}
+
+	/// @{
+
+	/// Writes data to the AIS message (bitset).
+	/// This is the `enum` variant.
+	///
+	/// @tparam T `bitset_value` type.
+	/// @param[in] bits The AIS message to write to.
+	/// @param[out] t The data to write into the message.
+	///
+	template <typename T,
+		typename std::enable_if<std::is_enum<typename T::value_type>::value, int>::type = 0>
+	static void set(raw & bits, const T & t)
+	{
+		bits.set(
+			static_cast<typename std::underlying_type<typename T::value_type>::type>(t.value),
+			T::offset, T::count);
+	}
+
+	/// The non `enum` and non `string` variant of `set`.
+	/// @see set
+	template <typename T, typename std::enable_if<!std::is_enum<typename T::value_type>::value
+								  && !std::is_same<typename T::value_type, std::string>::value,
+							  int>::type
+		= 0>
+	static void set(raw & bits, const T & t)
+	{
+		bits.set(t.value, T::offset, T::count);
+	}
+
+	/// The `string` variant of `set`.
+	/// @see set
+	template <typename T, typename std::enable_if<!std::is_enum<typename T::value_type>::value
+								  && std::is_same<typename T::value_type, std::string>::value,
+							  int>::type
+		= 0>
+	static void set(raw & bits, const T & t)
+	{
+		write_string(bits, T::offset, T::count, t.value);
+	}
+
+	/// @}
 
 private:
 	message_id message_type;
 };
-
-/// @{
-
-char decode_sixbit_ascii(uint8_t value);
-uint8_t encode_sixbit_ascii(char c);
-
-std::string read_string(const raw & bits, raw::size_type ofs, raw::size_type count_sixbits);
-void write_string(
-	raw & bits, raw::size_type ofs, raw::size_type count_sixbits, const std::string & s);
-
-/// @}
 
 /// @cond DEV
 namespace detail

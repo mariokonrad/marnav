@@ -29,16 +29,18 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	unsigned int repeat_indicator = 0;
-	uint32_t mmsi = 0;
-	uint32_t dest_mmsi = 0;
+	// clang-format off
+	bitset_value< 6,  2, uint32_t> repeat_indicator = 0;
+	bitset_value< 8, 30, uint32_t> mmsi = 0;
+	bitset_value<40, 30, uint32_t> dest_mmsi = 0;
+	// clang-format on
 
 public:
-	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }
+	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
 	utils::mmsi get_dest_mmsi() const noexcept { return utils::mmsi{dest_mmsi}; }
 
-	void set_repeat_indicator(unsigned int t) noexcept { repeat_indicator = t; }
+	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
 	void set_dest_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
 };

@@ -30,20 +30,22 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	uint32_t repeat_indicator = 0;
-	uint32_t mmsi = 0;
-	navigation_status nav_status = navigation_status::not_defined;
-	int8_t rot = -128; // rate of turn, raw format
-	uint32_t sog = sog_not_available; // speed over ground, in 0.1 knots
-	bool position_accuracy = false;
-	uint32_t longitude_minutes = longitude_not_available; // in 10000 minutes
-	uint32_t latitude_minutes = latitude_not_available; // in 10000 minutes
-	uint32_t cog = cog_not_available; // course of ground in 0.1 deg true north
-	uint32_t hdg = hdg_not_available; // true heading in deg
-	uint32_t timestamp = timestamp_not_available;
-	uint32_t maneuver_indicator = maneuver_indictor_not_available;
-	bool raim = false;
-	uint32_t radio_status = 0;
+	// clang-format off
+	bitset_value<  6,  2, uint32_t         > repeat_indicator = 0;
+	bitset_value<  8, 30, uint32_t         > mmsi = 0;
+	bitset_value< 38,  4, navigation_status> nav_status = navigation_status::not_defined;
+	bitset_value< 42,  8, int8_t           > rot = -128; // rate of turn, raw format
+	bitset_value< 50, 10, uint32_t         > sog = sog_not_available; // in 0.1 knots
+	bitset_value< 60,  1, bool             > position_accuracy = false;
+	bitset_value< 61, 28, uint32_t         > longitude_minutes = longitude_not_available; // in 10000 minutes
+	bitset_value< 89, 27, uint32_t         > latitude_minutes = latitude_not_available; // in 10000 minutes
+	bitset_value<116, 12, uint32_t         > cog = cog_not_available; // 0.1 deg true north
+	bitset_value<128,  9, uint32_t         > hdg = hdg_not_available; // true heading in deg
+	bitset_value<136,  6, uint32_t         > timestamp = timestamp_not_available;
+	bitset_value<143,  2, uint32_t         > maneuver_indicator = maneuver_indictor_not_available;
+	bitset_value<148,  1, bool             > raim = false;
+	bitset_value<149, 19, uint32_t         > radio_status = 0;
+	// clang-format on
 
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }

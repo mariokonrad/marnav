@@ -42,28 +42,30 @@ private:
 	void read_data(const raw & bits);
 
 private:
-	uint32_t repeat_indicator = 0;
-	uint32_t mmsi = 0;
-	part part_number = part::A;
+	// clang-format off
+	bitset_value< 6,  2, uint32_t> repeat_indicator = 0;
+	bitset_value< 8, 30, uint32_t> mmsi = 0;
+	bitset_value<38,  2, part    > part_number = part::A;
 
 	// part A specific
-	std::string shipname;
+	bitset_value<40, 20, std::string> shipname;
 
 	// part B specific
-	ship_type shiptype = ship_type::not_available;
-	std::string vendor_id;
-	uint32_t model = 0;
-	uint32_t serial = 0;
-	std::string callsign;
+	bitset_value<40,  8, ship_type  > shiptype = ship_type::not_available;
+	bitset_value<48,  3, std::string> vendor_id;
+	bitset_value<66,  4, uint32_t   > model = 0;
+	bitset_value<70, 20, uint32_t   > serial = 0;
+	bitset_value<90,  7, std::string> callsign;
 
 	// part B specific (normal)
-	uint32_t to_bow = 0;
-	uint32_t to_stern = 0;
-	uint32_t to_port = 0;
-	uint32_t to_starboard = 0;
+	bitset_value<132, 9, uint32_t> to_bow = 0;
+	bitset_value<141, 9, uint32_t> to_stern = 0;
+	bitset_value<150, 6, uint32_t> to_port = 0;
+	bitset_value<156, 6, uint32_t> to_starboard = 0;
 
 	// part B specific (auxiliary)
-	uint32_t mothership_mmsi = 0;
+	bitset_value<132, 30, uint32_t> mothership_mmsi = 0;
+	// clang-format on
 
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }

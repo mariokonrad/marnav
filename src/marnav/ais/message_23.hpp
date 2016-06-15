@@ -45,20 +45,22 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	unsigned int repeat_indicator = 0;
-	uint32_t mmsi = 0;
-	uint32_t ne_lon = 0; // 0.1 minutes, TODO: fix initialization
-	uint32_t ne_lat = 0; // 0.1 minutes, TODO: fix initialization
-	uint32_t sw_lon = 0; // 0.1 minutes, TODO: fix initialization
-	uint32_t sw_lat = 0; // 0.1 minutes, TODO: fix initialization
-	uint32_t station_type = 0;
-	ship_type shiptype = ship_type::not_available;
-	uint32_t txrx_mode = 0;
-	report_interval interval = report_interval::autonomous_mode;
-	uint32_t quiet_time = 0; // minutes (0=none, 1..15 minutes)
+	// clang-format off
+	bitset_value<  6,  2, uint32_t       > repeat_indicator = 0;
+	bitset_value<  8, 30, uint32_t       > mmsi = 0;
+	bitset_value< 40, 18, uint32_t       > ne_lon = 0; // 0.1 minutes, TODO: fix initialization
+	bitset_value< 58, 17, uint32_t       > ne_lat = 0; // 0.1 minutes, TODO: fix initialization
+	bitset_value< 75, 18, uint32_t       > sw_lon = 0; // 0.1 minutes, TODO: fix initialization
+	bitset_value< 93, 17, uint32_t       > sw_lat = 0; // 0.1 minutes, TODO: fix initialization
+	bitset_value<110,  4, uint32_t       > station_type = 0;
+	bitset_value<114,  8, ship_type      > shiptype = ship_type::not_available;
+	bitset_value<144,  2, uint32_t       > txrx_mode = 0;
+	bitset_value<146,  4, report_interval> interval = report_interval::autonomous_mode;
+	bitset_value<150,  4, uint32_t       > quiet_time = 0; // minutes (0=none, 1..15 minutes)
+	// clang-format on
 
 public:
-	unsigned int get_repeat_indicator() const noexcept { return repeat_indicator; }
+	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
 	uint32_t get_station_type() const noexcept { return station_type; }
 	uint32_t get_txrx_mode() const noexcept { return txrx_mode; }
@@ -68,7 +70,7 @@ public:
 	geo::position get_position_ne() const noexcept;
 	geo::position get_position_sw() const noexcept;
 
-	void set_repeat_indicator(unsigned int t) noexcept { repeat_indicator = t; }
+	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
 	void set_station_type(uint32_t t) noexcept { station_type = t; }
 	void set_txrx_mode(uint32_t t) noexcept { txrx_mode = t; }

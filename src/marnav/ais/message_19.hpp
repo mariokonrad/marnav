@@ -31,25 +31,27 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	uint32_t repeat_indicator = 0;
-	uint32_t mmsi = 0;
-	uint32_t sog = sog_not_available; // speed over ground, in 0.1 knots
-	bool position_accuracy = false;
-	uint32_t longitude_minutes = longitude_not_available; // in 10000 minutes
-	uint32_t latitude_minutes = latitude_not_available; // in 10000 minutes
-	uint32_t cog = cog_not_available; // course of ground in 0.1 deg true north
-	uint32_t hdg = hdg_not_available; // true heading in deg
-	uint32_t timestamp = timestamp_not_available;
-	std::string shipname;
-	ship_type shiptype = ship_type::not_available;
-	uint32_t to_bow = 0;
-	uint32_t to_stern = 0;
-	uint32_t to_port = 0;
-	uint32_t to_starboard = 0;
-	epfd_fix_type epfd_fix = epfd_fix_type::undefined;
-	bool raim = false;
-	bool dte = false;
-	bool assigned = false;
+	// clang-format off
+	bitset_value<  6,  2, uint32_t     > repeat_indicator = 0;
+	bitset_value<  8, 30, uint32_t     > mmsi = 0;
+	bitset_value< 46, 10, uint32_t     > sog = sog_not_available; // speed over ground, in 0.1 knots
+	bitset_value< 56,  1, bool         > position_accuracy = false;
+	bitset_value< 57, 28, uint32_t     > longitude_minutes = longitude_not_available; // in 10000 minutes
+	bitset_value< 85, 27, uint32_t     > latitude_minutes = latitude_not_available; // in 10000 minutes
+	bitset_value<112, 12, uint32_t     > cog = cog_not_available; // course of ground in 0.1 deg true north
+	bitset_value<124,  9, uint32_t     > hdg = hdg_not_available; // true heading in deg
+	bitset_value<133,  6, uint32_t     > timestamp = timestamp_not_available;
+	bitset_value<143, 20, std::string  > shipname;
+	bitset_value<263,  8, ship_type    > shiptype = ship_type::not_available;
+	bitset_value<271,  9, uint32_t     > to_bow = 0;
+	bitset_value<280,  9, uint32_t     > to_stern = 0;
+	bitset_value<289,  6, uint32_t     > to_port = 0;
+	bitset_value<295,  6, uint32_t     > to_starboard = 0;
+	bitset_value<301,  4, epfd_fix_type> epfd_fix = epfd_fix_type::undefined;
+	bitset_value<305,  1, bool         > raim = false;
+	bitset_value<306,  1, bool         > dte = false;
+	bitset_value<307,  1, bool         > assigned = false;
+	// clang-format on
 
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }

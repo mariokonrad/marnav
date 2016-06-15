@@ -30,23 +30,25 @@ protected:
 	void read_data(const raw & bits);
 
 private:
-	uint32_t repeat_indicator = 0;
-	uint32_t mmsi = 0;
-	uint32_t sog = sog_not_available; // speed over ground, in 0.1 knots
-	bool position_accuracy = false;
-	uint32_t longitude_minutes = longitude_not_available; // in 10000 minutes
-	uint32_t latitude_minutes = latitude_not_available; // in 10000 minutes
-	uint32_t cog = cog_not_available; // course of ground in 0.1 deg true north
-	uint32_t hdg = hdg_not_available; // true heading in deg
-	uint32_t timestamp = timestamp_not_available;
-	bool cs_unit = false; // false = class B SOTDMA unit, true = class B CS unit
-	bool display_flag = false; // false = no visual display, true = has display
-	bool dsc_flag = false; // true = unit is attached to VHF with DSC capability
-	bool band_flag = false;
-	bool message_22_flag = false;
-	bool assigned = false; // false = autonomous mode (default), true = assigned mode
-	bool raim = false;
-	uint32_t radio_status = 0;
+	// clang-format off
+	bitset_value<  6,  2, uint32_t> repeat_indicator = 0;
+	bitset_value<  8, 30, uint32_t> mmsi = 0;
+	bitset_value< 46, 10, uint32_t> sog = sog_not_available; // speed over ground, in 0.1 knots
+	bitset_value< 56,  1, bool    > position_accuracy = false;
+	bitset_value< 57, 28, uint32_t> longitude_minutes = longitude_not_available; // in 10000 minutes
+	bitset_value< 85, 27, uint32_t> latitude_minutes = latitude_not_available; // in 10000 minutes
+	bitset_value<112, 12, uint32_t> cog = cog_not_available; // course of ground in 0.1 deg true north
+	bitset_value<124,  9, uint32_t> hdg = hdg_not_available; // true heading in deg
+	bitset_value<133,  6, uint32_t> timestamp = timestamp_not_available;
+	bitset_value<141,  1, bool    > cs_unit = false; // false = class B SOTDMA unit, true = class B CS unit
+	bitset_value<142,  1, bool    > display_flag = false; // false = no visual display, true = has display
+	bitset_value<143,  1, bool    > dsc_flag = false; // true = unit is attached to VHF with DSC capability
+	bitset_value<144,  1, bool    > band_flag = false;
+	bitset_value<145,  1, bool    > message_22_flag = false;
+	bitset_value<146,  1, bool    > assigned = false; // false = autonomous mode (default), true = assigned mode
+	bitset_value<147,  1, bool    > raim = false;
+	bitset_value<148, 20, uint32_t> radio_status = 0;
+	// clang-format on
 
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }

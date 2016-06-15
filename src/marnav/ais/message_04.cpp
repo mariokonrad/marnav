@@ -31,21 +31,20 @@ std::unique_ptr<message> message_04::parse(const raw & bits)
 
 void message_04::read_data(const raw & bits)
 {
-	bits.get(repeat_indicator, 6, 2);
-	bits.get(mmsi, 8, 30);
-	bits.get(year, 38, 14);
-	bits.get(month, 52, 4);
-	bits.get(day, 56, 5);
-	bits.get(hour, 61, 5);
-	bits.get(minute, 66, 6);
-	bits.get(second, 72, 6);
-	bits.get(position_accuracy, 78, 1);
-	bits.get(longitude_minutes, 79, 28);
-	bits.get(latitude_minutes, 107, 27);
-	bits.get(epfd_fix, 134, 4);
-	// spare 138..147
-	bits.get(raim, 148, 1);
-	bits.get(radio_status, 149, 19);
+	get(bits, repeat_indicator);
+	get(bits, mmsi);
+	get(bits, year);
+	get(bits, month);
+	get(bits, day);
+	get(bits, hour);
+	get(bits, minute);
+	get(bits, second);
+	get(bits, position_accuracy);
+	get(bits, longitude_minutes);
+	get(bits, latitude_minutes);
+	get(bits, epfd_fix);
+	get(bits, raim);
+	get(bits, radio_status);
 }
 
 raw message_04::get_data() const
@@ -53,20 +52,20 @@ raw message_04::get_data() const
 	raw bits{SIZE_BITS};
 
 	bits.set(type(), 0, 6);
-	bits.set(repeat_indicator, 6, 2);
-	bits.set(mmsi, 8, 30);
-	bits.set(year, 38, 14);
-	bits.set(month, 52, 4);
-	bits.set(day, 56, 5);
-	bits.set(hour, 61, 5);
-	bits.set(minute, 66, 6);
-	bits.set(second, 72, 6);
-	bits.set(position_accuracy, 78, 1);
-	bits.set(longitude_minutes, 79, 28);
-	bits.set(latitude_minutes, 107, 27);
-	bits.set(epfd_fix, 134, 4);
-	bits.set(raim, 148, 1);
-	bits.set(radio_status, 149, 19);
+	set(bits, repeat_indicator);
+	set(bits, mmsi);
+	set(bits, year);
+	set(bits, month);
+	set(bits, day);
+	set(bits, hour);
+	set(bits, minute);
+	set(bits, second);
+	set(bits, position_accuracy);
+	set(bits, longitude_minutes);
+	set(bits, latitude_minutes);
+	set(bits, epfd_fix);
+	set(bits, raim);
+	set(bits, radio_status);
 
 	return bits;
 }
