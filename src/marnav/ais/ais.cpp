@@ -77,34 +77,38 @@ static raw collect(const std::vector<std::pair<std::string, uint32_t>> & v)
 
 static message::parse_function instantiate_message(message_id type, size_t size)
 {
-	using entry = std::pair<message_id, message::parse_function>;
-	static const std::vector<entry> known_messages = {
-		{message_id::position_report_class_a, message_01::parse},
-		{message_id::position_report_class_a_assigned_schedule, message_02::parse},
-		{message_id::position_report_class_a_response_to_interrogation, message_03::parse},
-		{message_id::base_station_report, message_04::parse},
-		{message_id::static_and_voyage_related_data, message_05::parse},
-		{message_id::standard_sar_aircraft_position_report, message_09::parse},
-		{message_id::utc_and_date_inquiry, message_10::parse},
-		{message_id::utc_and_date_response, message_11::parse},
-		{message_id::standard_class_b_cs_position_report, message_18::parse},
-		{message_id::extended_class_b_equipment_position_report, message_19::parse},
-		{message_id::aid_to_navigation_report, message_21::parse},
-		{message_id::channel_management, message_22::parse},
-		{message_id::group_assignment_command, message_23::parse},
-		{message_id::static_data_report, message_24::parse},
+#define REGISTER_MESSAGE(m)  \
+	{                   \
+		m::ID, detail::parse_##m \
+	}
+
+	struct entry {
+		const message_id id;
+		const message::parse_function parse;
 	};
+
+	static const std::vector<entry> known_messages = {
+		REGISTER_MESSAGE(message_01), REGISTER_MESSAGE(message_02),
+		REGISTER_MESSAGE(message_03), REGISTER_MESSAGE(message_04),
+		REGISTER_MESSAGE(message_05), REGISTER_MESSAGE(message_09),
+		REGISTER_MESSAGE(message_10), REGISTER_MESSAGE(message_11),
+		REGISTER_MESSAGE(message_18), REGISTER_MESSAGE(message_19),
+		REGISTER_MESSAGE(message_21), REGISTER_MESSAGE(message_22),
+		REGISTER_MESSAGE(message_23), REGISTER_MESSAGE(message_24),
+	};
+
+#undef REGISTER_MESSAGE
 
 	using namespace std;
 	auto const & i = std::find_if(begin(known_messages), end(known_messages),
-		[type](const entry & e) { return e.first == type; });
+		[type](const entry & e) { return e.id == type; });
 
 	if (i == end(known_messages))
 		throw unknown_message{"unknown message in ais/instantiate_message: "
 			+ std::to_string(static_cast<uint8_t>(type)) + " (" + std::to_string(size)
 			+ " bits)"};
 
-	return i->second;
+	return i->parse;
 }
 }
 

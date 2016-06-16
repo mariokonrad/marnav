@@ -1,11 +1,12 @@
 #include "message_01.hpp"
 #include <marnav/ais/angle.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
 namespace ais
 {
+MARNAV_AIS_DEFINE_MESSAGE_PARSE_FUNC(message_01)
+
 message_01::message_01()
 	: message_01(ID)
 {
@@ -16,17 +17,12 @@ message_01::message_01(message_id id)
 {
 }
 
-std::unique_ptr<message> message_01::parse(const raw & bits)
+message_01::message_01(const raw & bits)
+	: message_01(ID)
 {
 	if (bits.size() != SIZE_BITS)
-		throw std::invalid_argument{"invalid number of bits in ais/message_01::parse"};
-
-	std::unique_ptr<message> result = utils::make_unique<message_01>();
-	message_01 & msg = static_cast<message_01 &>(*result);
-
-	msg.read_data(bits);
-
-	return result;
+		throw std::invalid_argument{"invalid number of bits in ais/message_01"};
+	read_data(bits);
 }
 
 geo::longitude message_01::get_longitude() const { return to_geo_longitude(longitude_minutes); }

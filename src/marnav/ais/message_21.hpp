@@ -9,10 +9,13 @@ namespace marnav
 {
 namespace ais
 {
+MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_21)
 
 /// @brief Aid-to-Navigation Report
 class message_21 : public message
 {
+	MARNAV_AIS_MESSAGE_FRIENDS(message_21)
+
 public:
 	constexpr static const message_id ID = message_id::aid_to_navigation_report;
 	constexpr static const int SIZE_BITS_MIN = 272;
@@ -130,9 +133,8 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & bits);
-
 protected:
+	message_21(const raw & bits);
 	void read_data(const raw & bits);
 
 private:

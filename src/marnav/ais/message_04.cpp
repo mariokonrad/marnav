@@ -1,11 +1,12 @@
 #include "message_04.hpp"
 #include <marnav/ais/angle.hpp>
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
 namespace ais
 {
+MARNAV_AIS_DEFINE_MESSAGE_PARSE_FUNC(message_04)
+
 message_04::message_04()
 	: message_04(ID)
 {
@@ -16,17 +17,12 @@ message_04::message_04(message_id id)
 {
 }
 
-std::unique_ptr<message> message_04::parse(const raw & bits)
+message_04::message_04(const raw & bits)
+	: message_04(ID)
 {
 	if (bits.size() != SIZE_BITS)
-		throw std::invalid_argument{"invalid number of bits in message_04::parse"};
-
-	std::unique_ptr<message> result = utils::make_unique<message_04>();
-	message_04 & msg = static_cast<message_04 &>(*result);
-
-	msg.read_data(bits);
-
-	return result;
+		throw std::invalid_argument{"invalid number of bits in message_04"};
+	read_data(bits);
 }
 
 void message_04::read_data(const raw & bits)

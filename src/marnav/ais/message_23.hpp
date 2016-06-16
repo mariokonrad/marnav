@@ -9,11 +9,14 @@ namespace marnav
 {
 namespace ais
 {
+MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_23)
 
 /// @brief Group Assignment Command
 ///
 class message_23 : public message
 {
+	MARNAV_AIS_MESSAGE_FRIENDS(message_23)
+
 public:
 	constexpr static const message_id ID = message_id::group_assignment_command;
 	constexpr static const int SIZE_BITS = 160;
@@ -39,9 +42,8 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & bits);
-
 protected:
+	message_23(const raw & bits);
 	void read_data(const raw & bits);
 
 private:

@@ -1,12 +1,11 @@
 #include "message_24.hpp"
-#include <type_traits>
-#include <marnav/utils/unique.hpp>
 #include <marnav/utils/mmsi.hpp>
 
 namespace marnav
 {
 namespace ais
 {
+MARNAV_AIS_DEFINE_MESSAGE_PARSE_FUNC(message_24)
 
 message_24::message_24()
 	: message_24(ID)
@@ -21,23 +20,18 @@ message_24::message_24(message_id id)
 {
 }
 
-std::unique_ptr<message> message_24::parse(const raw & bits)
+message_24::message_24(const raw & bits)
+	: message_24(ID)
 {
 	if ((bits.size() != SIZE_BITS) && (bits.size() != SIZE_BITS_IGNORED_SPARES_OF_TYPE_A))
-		throw std::invalid_argument{"invalid number of bits in message_24::parse"};
+		throw std::invalid_argument{"invalid number of bits in message_24"};
 
 	uint32_t part = 3;
 	bits.get(part, 38, 2);
 
 	if (part > 1)
 		throw std::invalid_argument{"invalid part number message_24::parse"};
-
-	std::unique_ptr<message> result = utils::make_unique<message_24>();
-	message_24 & msg = static_cast<message_24 &>(*result);
-
-	msg.read_data(bits);
-
-	return result;
+	read_data(bits);
 }
 
 bool message_24::is_auxiliary_vessel() const { return utils::mmsi{mmsi}.is_auxiliary(); }

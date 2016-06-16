@@ -8,10 +8,13 @@ namespace marnav
 {
 namespace ais
 {
+MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_11)
 
 /// @brief UTC/Date Response
 class message_11 : public message_04
 {
+	MARNAV_AIS_MESSAGE_FRIENDS(message_11)
+
 public:
 	constexpr static const message_id ID = message_id::utc_and_date_response;
 
@@ -19,7 +22,8 @@ public:
 	message_11(const message_11 &) = default;
 	message_11 & operator=(const message_11 &) = default;
 
-	static std::unique_ptr<message> parse(const raw & bits);
+protected:
+	message_11(const raw & bits);
 };
 }
 }

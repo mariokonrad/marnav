@@ -7,10 +7,13 @@ namespace marnav
 {
 namespace ais
 {
+MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_03)
 
 /// @brief Position Report Class A (response to interrogation)
 class message_03 : public message_01
 {
+	MARNAV_AIS_MESSAGE_FRIENDS(message_03)
+
 public:
 	constexpr static const message_id ID
 		= message_id::position_report_class_a_response_to_interrogation;
@@ -19,7 +22,8 @@ public:
 	message_03(const message_03 &) = default;
 	message_03 & operator=(const message_03 &) = default;
 
-	static std::unique_ptr<message> parse(const raw & bits);
+protected:
+	message_03(const raw & bits);
 };
 }
 }

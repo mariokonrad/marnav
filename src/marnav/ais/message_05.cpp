@@ -1,10 +1,11 @@
 #include "message_05.hpp"
-#include <marnav/utils/unique.hpp>
 
 namespace marnav
 {
 namespace ais
 {
+MARNAV_AIS_DEFINE_MESSAGE_PARSE_FUNC(message_05)
+
 namespace
 {
 std::string trim_ais_string(const std::string & s) { return s.substr(0, s.find_first_of("@")); }
@@ -19,17 +20,15 @@ message_05::message_05()
 }
 
 /// @todo also handle message with length of 420 and 422 bits
-std::unique_ptr<message> message_05::parse(const raw & bits)
+message_05::message_05(const raw & bits)
+	: message(ID)
+	, callsign("@@@@@@@")
+	, shipname("@@@@@@@@@@@@@@@@@@@@")
+	, destination("@@@@@@@@@@@@@@@@@@@@")
 {
 	if (bits.size() != SIZE_BITS)
-		throw std::invalid_argument{"invalid number of bits in message_05::parse"};
-
-	std::unique_ptr<message> result = utils::make_unique<message_05>();
-	message_05 & msg = static_cast<message_05 &>(*result);
-
-	msg.read_data(bits);
-
-	return result;
+		throw std::invalid_argument{"invalid number of bits in message_05"};
+	read_data(bits);
 }
 
 void message_05::read_data(const raw & bits)

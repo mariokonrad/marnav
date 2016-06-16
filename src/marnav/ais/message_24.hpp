@@ -9,6 +9,7 @@ namespace marnav
 {
 namespace ais
 {
+MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_24)
 
 /// @brief Static Data Report
 ///
@@ -20,6 +21,8 @@ namespace ais
 ///       without further complication of the design.
 class message_24 : public message
 {
+	MARNAV_AIS_MESSAGE_FRIENDS(message_24)
+
 public:
 	constexpr static const message_id ID = message_id::static_data_report;
 	constexpr static const int SIZE_BITS = 168;
@@ -33,12 +36,11 @@ public:
 
 	virtual raw get_data() const override;
 
-	static std::unique_ptr<message> parse(const raw & bits);
-
 	bool is_auxiliary_vessel() const;
 
 private:
 	message_24(message_id id);
+	message_24(const raw & bits);
 	void read_data(const raw & bits);
 
 private:
