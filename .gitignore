@@ -1,3 +1,4 @@
 **/*.o
 nmea_sentence
 build
+.ycm*
