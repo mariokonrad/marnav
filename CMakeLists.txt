@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(GitInformation)
 
 project(marnav VERSION 0.4.0 LANGUAGES CXX C)

@@ -1,4 +1,4 @@
 **/*.o
 nmea_sentence
 build
-.ycm*
+.ycm_extra_conf.pyc
