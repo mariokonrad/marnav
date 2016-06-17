@@ -428,7 +428,6 @@ template <class T> const T * message_cast(const std::unique_ptr<message> & s)
 	}
 
 /// @endcond
-
 }
 }
 

@@ -80,8 +80,8 @@ static raw collect(const std::vector<std::pair<std::string, uint32_t>> & v)
 static std::function<std::unique_ptr<message>(const raw &)> instantiate_message(
 	message_id type, size_t size)
 {
-#define REGISTER_MESSAGE(m)  \
-	{                   \
+#define REGISTER_MESSAGE(m)      \
+	{                            \
 		m::ID, detail::parse_##m \
 	}
 
