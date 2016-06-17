@@ -62,6 +62,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::RMB;
 	constexpr static const char * TAG = "RMB";
 
+	virtual ~rmb() {}
+
 	rmb();
 	rmb(const rmb &) = default;
 	rmb & operator=(const rmb &) = default;

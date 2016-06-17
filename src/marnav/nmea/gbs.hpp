@@ -39,6 +39,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GBS;
 	constexpr static const char * TAG = "GBS";
 
+	virtual ~gbs() {}
+
 	gbs();
 	gbs(const gbs &) = default;
 	gbs & operator=(const gbs &) = default;

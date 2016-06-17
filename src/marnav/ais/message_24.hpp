@@ -30,11 +30,11 @@ public:
 
 	enum class part : uint32_t { A = 0, B = 1 };
 
+	virtual ~message_24() {}
+
 	message_24();
 	message_24(const message_24 &) = default;
 	message_24 & operator=(const message_24 &) = default;
-
-	virtual raw get_data() const override;
 
 	bool is_auxiliary_vessel() const;
 
@@ -42,6 +42,7 @@ private:
 	message_24(message_id id);
 	message_24(const raw & bits);
 	void read_data(const raw & bits);
+	virtual raw get_data() const override;
 
 private:
 	// clang-format off

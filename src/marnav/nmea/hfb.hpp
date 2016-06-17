@@ -34,6 +34,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::HFB;
 	constexpr static const char * TAG = "HFB";
 
+	virtual ~hfb() {}
+
 	hfb();
 	hfb(const hfb &) = default;
 	hfb & operator=(const hfb &) = default;

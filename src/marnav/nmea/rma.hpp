@@ -46,6 +46,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::RMA;
 	constexpr static const char * TAG = "RMA";
 
+	virtual ~rma() {}
+
 	rma();
 	rma(const rma &) = default;
 	rma & operator=(const rma &) = default;

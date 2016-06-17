@@ -46,6 +46,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GLL;
 	constexpr static const char * TAG = "GLL";
 
+	virtual ~gll() {}
+
 	gll();
 	gll(const gll &) = default;
 	gll & operator=(const gll &) = default;

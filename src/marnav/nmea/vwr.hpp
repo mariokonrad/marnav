@@ -41,6 +41,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VWR;
 	constexpr static const char * TAG = "VWR";
 
+	virtual ~vwr() {}
+
 	vwr();
 	vwr(const vwr &) = default;
 	vwr & operator=(const vwr &) = default;

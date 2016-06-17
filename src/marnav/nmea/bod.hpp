@@ -39,6 +39,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::BOD;
 	constexpr static const char * TAG = "BOD";
 
+	virtual ~bod() {}
+
 	bod();
 	bod(const bod &) = default;
 	bod & operator=(const bod &) = default;

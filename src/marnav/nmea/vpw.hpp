@@ -35,6 +35,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VPW;
 	constexpr static const char * TAG = "VPW";
 
+	virtual ~vpw() {}
+
 	vpw();
 	vpw(const vpw &) = default;
 	vpw & operator=(const vpw &) = default;

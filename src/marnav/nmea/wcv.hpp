@@ -33,6 +33,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::WCV;
 	constexpr static const char * TAG = "WCV";
 
+	virtual ~wcv() {}
+
 	wcv();
 	wcv(const wcv &) = default;
 	wcv & operator=(const wcv &) = default;

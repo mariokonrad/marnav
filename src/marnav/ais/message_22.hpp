@@ -23,15 +23,16 @@ public:
 	constexpr static const message_id ID = message_id::channel_management;
 	constexpr static const int SIZE_BITS = 168;
 
+	virtual ~message_22() {}
+
 	message_22();
 	message_22(const message_22 &) = default;
 	message_22 & operator=(const message_22 &) = default;
 
-	virtual raw get_data() const override;
-
 protected:
 	message_22(const raw & bits);
 	void read_data(const raw & bits);
+	virtual raw get_data() const override;
 
 private:
 	// clang-format off

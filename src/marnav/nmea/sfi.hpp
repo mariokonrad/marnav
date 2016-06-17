@@ -38,6 +38,8 @@ public:
 	constexpr static const char * TAG = "SFI";
 	constexpr static const unsigned int max_number_of_frequencies = 10;
 
+	virtual ~sfi() {}
+
 	sfi();
 	sfi(const sfi &) = default;
 	sfi & operator=(const sfi &) = default;

@@ -36,15 +36,16 @@ public:
 		// reserved for future use: 11 - 15
 	};
 
+	virtual ~message_23() {}
+
 	message_23();
 	message_23(const message_23 &) = default;
 	message_23 & operator=(const message_23 &) = default;
 
-	virtual raw get_data() const override;
-
 protected:
 	message_23(const raw & bits);
 	void read_data(const raw & bits);
+	virtual raw get_data() const override;
 
 private:
 	// clang-format off

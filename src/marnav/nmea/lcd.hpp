@@ -47,6 +47,8 @@ public:
 		int32_t ecd;
 	};
 
+	virtual ~lcd() {}
+
 	lcd();
 	lcd(const lcd &) = default;
 	lcd & operator=(const lcd &) = default;

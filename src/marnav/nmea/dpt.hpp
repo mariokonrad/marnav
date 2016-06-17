@@ -35,6 +35,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::DPT;
 	constexpr static const char * TAG = "DPT";
 
+	virtual ~dpt() {}
+
 	dpt();
 	dpt(const std::string & talker);
 	dpt(const dpt &) = default;

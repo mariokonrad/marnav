@@ -39,6 +39,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::WPL;
 	constexpr static const char * TAG = "WPL";
 
+	virtual ~wpl() {}
+
 	wpl();
 	wpl(const wpl &) = default;
 	wpl & operator=(const wpl &) = default;

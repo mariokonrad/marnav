@@ -37,6 +37,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::MSK;
 	constexpr static const char * TAG = "MSK";
 
+	virtual ~msk() {}
+
 	msk();
 	msk(const msk &) = default;
 	msk & operator=(const msk &) = default;

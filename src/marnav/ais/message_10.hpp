@@ -20,15 +20,16 @@ public:
 	constexpr static const message_id ID = message_id::utc_and_date_inquiry;
 	constexpr static const int SIZE_BITS = 72;
 
+	virtual ~message_10() {}
+
 	message_10();
 	message_10(const message_10 &) = default;
 	message_10 & operator=(const message_10 &) = default;
 
-	virtual raw get_data() const override;
-
 protected:
 	message_10(const raw & bits);
 	void read_data(const raw & bits);
+	virtual raw get_data() const override;
 
 private:
 	// clang-format off

@@ -61,6 +61,8 @@ public:
 		std::string data;
 	};
 
+	virtual ~dse() {}
+
 	dse();
 	dse(const dse &) = default;
 	dse & operator=(const dse &) = default;

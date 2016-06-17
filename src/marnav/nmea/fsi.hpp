@@ -37,6 +37,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::FSI;
 	constexpr static const char * TAG = "FSI";
 
+	virtual ~fsi() {}
+
 	fsi();
 	fsi(const fsi &) = default;
 	fsi & operator=(const fsi &) = default;

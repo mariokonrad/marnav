@@ -39,6 +39,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::DBK;
 	constexpr static const char * TAG = "DBK";
 
+	virtual ~dbk() {}
+
 	dbk();
 	dbk(const dbk &) = default;
 	dbk & operator=(const dbk &) = default;

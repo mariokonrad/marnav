@@ -41,6 +41,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VTG;
 	constexpr static const char * TAG = "VTG";
 
+	virtual ~vtg() {}
+
 	vtg();
 	vtg(const vtg &) = default;
 	vtg & operator=(const vtg &) = default;

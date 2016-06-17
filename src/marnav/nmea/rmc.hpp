@@ -54,6 +54,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::RMC;
 	constexpr static const char * TAG = "RMC";
 
+	virtual ~rmc() {}
+
 	rmc();
 	rmc(const rmc &) = default;
 	rmc & operator=(const rmc &) = default;

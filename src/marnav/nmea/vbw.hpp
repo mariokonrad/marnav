@@ -38,6 +38,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VBW;
 	constexpr static const char * TAG = "VBW";
 
+	virtual ~vbw() {}
+
 	vbw();
 	vbw(const vbw &) = default;
 	vbw & operator=(const vbw &) = default;

@@ -37,6 +37,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::BWW;
 	constexpr static const char * TAG = "BWW";
 
+	virtual ~bww() {}
+
 	bww();
 	bww(const bww &) = default;
 	bww & operator=(const bww &) = default;

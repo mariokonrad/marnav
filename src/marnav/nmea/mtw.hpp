@@ -31,6 +31,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::MTW;
 	constexpr static const char * TAG = "MTW";
 
+	virtual ~mtw() {}
+
 	mtw();
 	mtw(const mtw &) = default;
 	mtw & operator=(const mtw &) = default;

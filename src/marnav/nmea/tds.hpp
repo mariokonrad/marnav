@@ -31,6 +31,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::TDS;
 	constexpr static const char * TAG = "TDS";
 
+	virtual ~tds() {}
+
 	tds();
 	tds(const tds &) = default;
 	tds & operator=(const tds &) = default;

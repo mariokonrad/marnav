@@ -62,6 +62,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::BWC;
 	constexpr static const char * TAG = "BWC";
 
+	virtual ~bwc() {}
+
 	bwc();
 	bwc(const bwc &) = default;
 	bwc & operator=(const bwc &) = default;

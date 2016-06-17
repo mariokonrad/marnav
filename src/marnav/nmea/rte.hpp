@@ -38,6 +38,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::RTE;
 	constexpr static const char * TAG = "RTE";
 
+	virtual ~rte() {}
+
 	rte();
 	rte(const rte &) = default;
 	rte & operator=(const rte &) = default;

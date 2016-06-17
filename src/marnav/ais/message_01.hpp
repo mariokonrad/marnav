@@ -20,16 +20,17 @@ public:
 	constexpr static const message_id ID = message_id::position_report_class_a;
 	constexpr static const int SIZE_BITS = 168;
 
+	virtual ~message_01() {}
+
 	message_01();
 	message_01(const message_01 &) = default;
 	message_01 & operator=(const message_01 &) = default;
-
-	virtual raw get_data() const override;
 
 protected:
 	message_01(message_id id);
 	message_01(const raw & bits);
 	void read_data(const raw & bits);
+	virtual raw get_data() const override;
 
 private:
 	// clang-format off

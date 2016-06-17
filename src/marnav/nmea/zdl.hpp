@@ -38,6 +38,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::ZDL;
 	constexpr static const char * TAG = "ZDL";
 
+	virtual ~zdl() {}
+
 	zdl();
 	zdl(const zdl &) = default;
 	zdl & operator=(const zdl &) = default;

@@ -48,6 +48,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::TTM;
 	constexpr static const char * TAG = "TTM";
 
+	virtual ~ttm() {}
+
 	ttm();
 	ttm(const ttm &) = default;
 	ttm & operator=(const ttm &) = default;

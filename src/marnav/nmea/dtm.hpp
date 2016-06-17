@@ -44,6 +44,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::DTM;
 	constexpr static const char * TAG = "DTM";
 
+	virtual ~dtm() {}
+
 	dtm();
 	dtm(const dtm &) = default;
 	dtm & operator=(const dtm &) = default;

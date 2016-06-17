@@ -24,15 +24,16 @@ public:
 	constexpr static const uint32_t eta_hour_not_available = 24;
 	constexpr static const uint32_t eta_minute_not_available = 60;
 
+	virtual ~message_05() {}
+
 	message_05();
 	message_05(const message_05 &) = default;
 	message_05 & operator=(const message_05 &) = default;
 
-	virtual raw get_data() const override;
-
 protected:
 	message_05(const raw & bits);
 	void read_data(const raw & bits);
+	virtual raw get_data() const override;
 
 private:
 	// clang-format off

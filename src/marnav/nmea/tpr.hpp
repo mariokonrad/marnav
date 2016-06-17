@@ -36,6 +36,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::TPR;
 	constexpr static const char * TAG = "TPR";
 
+	virtual ~tpr() {}
+
 	tpr();
 	tpr(const tpr &) = default;
 	tpr & operator=(const tpr &) = default;

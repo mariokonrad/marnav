@@ -47,6 +47,8 @@ char encode_armoring(uint8_t value)
 	return value + '0';
 }
 
+/// @cond DEV
+
 namespace
 {
 static raw collect(const std::vector<std::pair<std::string, uint32_t>> & v)
@@ -75,7 +77,8 @@ static raw collect(const std::vector<std::pair<std::string, uint32_t>> & v)
 	return result;
 }
 
-static message::parse_function instantiate_message(message_id type, size_t size)
+static std::function<std::unique_ptr<message>(const raw &)> instantiate_message(
+	message_id type, size_t size)
 {
 #define REGISTER_MESSAGE(m)  \
 	{                   \
@@ -84,7 +87,7 @@ static message::parse_function instantiate_message(message_id type, size_t size)
 
 	struct entry {
 		const message_id id;
-		const message::parse_function parse;
+		const std::function<std::unique_ptr<message>(const raw &)> parse;
 	};
 
 	static const std::vector<entry> known_messages = {
@@ -112,6 +115,8 @@ static message::parse_function instantiate_message(message_id type, size_t size)
 }
 }
 
+/// @endcond
+
 /// Parses the specified data and creates corresponding AIS messages.
 ///
 /// @param[in] v All NMEA payloads, necessary to build the AIS message.
@@ -127,6 +132,12 @@ std::unique_ptr<message> make_message(const std::vector<std::pair<std::string, u
 	return instantiate_message(type, bits.size())(bits);
 }
 
+/// Encodes the specified message and returns a container with payload and padding
+/// information. This payload container can be used directly with NMEA funcitons.
+///
+/// @param[in] msg The message to encode.
+/// @return The container with payload/padding information
+///
 std::vector<std::pair<std::string, uint32_t>> encode_message(const message & msg)
 {
 	auto bits = msg.get_data();

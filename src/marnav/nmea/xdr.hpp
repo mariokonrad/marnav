@@ -42,6 +42,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::XDR;
 	constexpr static const char * TAG = "XDR";
 
+	virtual ~xdr() {}
+
 	xdr();
 	xdr(const xdr &) = default;
 	xdr & operator=(const xdr &) = default;

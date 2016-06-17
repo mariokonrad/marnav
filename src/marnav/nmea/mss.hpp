@@ -33,6 +33,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::MSS;
 	constexpr static const char * TAG = "MSS";
 
+	virtual ~mss() {}
+
 	mss();
 	mss(const mss &) = default;
 	mss & operator=(const mss &) = default;

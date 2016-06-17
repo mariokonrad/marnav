@@ -38,6 +38,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VHW;
 	constexpr static const char * TAG = "VHW";
 
+	virtual ~vhw() {}
+
 	vhw();
 	vhw(const vhw &) = default;
 	vhw & operator=(const vhw &) = default;

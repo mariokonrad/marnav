@@ -32,6 +32,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::ROT;
 	constexpr static const char * TAG = "ROT";
 
+	virtual ~rot() {}
+
 	rot();
 	rot(const rot &) = default;
 	rot & operator=(const rot &) = default;

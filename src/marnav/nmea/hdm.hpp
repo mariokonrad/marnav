@@ -37,6 +37,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::HDM;
 	constexpr static const char * TAG = "HDM";
 
+	virtual ~hdm() {}
+
 	hdm();
 	hdm(const hdm &) = default;
 	hdm & operator=(const hdm &) = default;

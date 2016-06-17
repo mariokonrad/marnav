@@ -33,6 +33,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::ZFO;
 	constexpr static const char * TAG = "ZFO";
 
+	virtual ~zfo() {}
+
 	zfo();
 	zfo(const zfo &) = default;
 	zfo & operator=(const zfo &) = default;

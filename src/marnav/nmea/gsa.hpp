@@ -46,6 +46,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GSA;
 	constexpr static const char * TAG = "GSA";
 
+	virtual ~gsa() {}
+
 	gsa();
 	gsa(const gsa &) = default;
 	gsa & operator=(const gsa &) = default;

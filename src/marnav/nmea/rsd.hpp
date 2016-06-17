@@ -44,6 +44,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::RSD;
 	constexpr static const char * TAG = "RSD";
 
+	virtual ~rsd() {}
+
 	rsd();
 	rsd(const rsd &) = default;
 	rsd & operator=(const rsd &) = default;

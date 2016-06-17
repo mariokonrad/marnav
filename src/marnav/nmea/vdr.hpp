@@ -37,6 +37,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VDR;
 	constexpr static const char * TAG = "VDR";
 
+	virtual ~vdr() {}
+
 	vdr();
 	vdr(const vdr &) = default;
 	vdr & operator=(const vdr &) = default;

@@ -67,6 +67,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GGA;
 	constexpr static const char * TAG = "GGA";
 
+	virtual ~gga() {}
+
 	gga();
 	gga(const gga &) = default;
 	gga & operator=(const gga &) = default;

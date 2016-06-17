@@ -58,6 +58,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::BWR;
 	constexpr static const char * TAG = "BWR";
 
+	virtual ~bwr() {}
+
 	bwr();
 	bwr(const bwr &) = default;
 	bwr & operator=(const bwr &) = default;

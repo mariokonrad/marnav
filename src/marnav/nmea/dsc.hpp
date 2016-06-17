@@ -110,6 +110,8 @@ public:
 		extension_follows ///< NMEA representation: 'E'
 	};
 
+	virtual ~dsc() {}
+
 	dsc();
 	dsc(const dsc &) = default;
 	dsc & operator=(const dsc &) = default;

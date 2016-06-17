@@ -1,9 +1,7 @@
 #ifndef __AIS__MESSAGE__HPP__
 #define __AIS__MESSAGE__HPP__
 
-#include <functional>
 #include <memory>
-#include <typeinfo>
 #include <marnav/utils/bitset.hpp>
 
 namespace marnav
@@ -197,14 +195,13 @@ uint8_t encode_sixbit_ascii(char c);
 /// @brief Base class for all AIS messages.
 class message
 {
-public:
-	using parse_function = std::function<std::unique_ptr<message>(const raw &)>;
+	friend std::vector<std::pair<std::string, uint32_t>> encode_message(const message & msg);
 
+public:
 	message() = delete;
 	virtual ~message() {}
 
-	message_id type() const;
-	virtual raw get_data() const = 0;
+	message_id type() const { return message_type; }
 
 protected:
 	/// Represents data to be read from / written to a bitset.
@@ -241,7 +238,12 @@ protected:
 		T value;
 	};
 
-	explicit message(message_id type);
+	explicit message(message_id type)
+		: message_type(type)
+	{
+	}
+
+	virtual raw get_data() const = 0;
 
 	/// @{
 

@@ -49,6 +49,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::TLL;
 	constexpr static const char * TAG = "TLL";
 
+	virtual ~tll() {}
+
 	tll();
 	tll(const tll &) = default;
 	tll & operator=(const tll &) = default;

@@ -34,6 +34,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::XTR;
 	constexpr static const char * TAG = "XTR";
 
+	virtual ~xtr() {}
+
 	xtr();
 	xtr(const xtr &) = default;
 	xtr & operator=(const xtr &) = default;

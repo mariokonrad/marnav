@@ -22,6 +22,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VDO;
 	constexpr static const char * TAG = "VDO";
 
+	virtual ~vdo() {}
+
 	vdo();
 	vdo(const vdo &) = default;
 	vdo & operator=(const vdo &) = default;

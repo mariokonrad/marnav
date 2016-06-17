@@ -34,6 +34,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::HSC;
 	constexpr static const char * TAG = "HSC";
 
+	virtual ~hsc() {}
+
 	hsc();
 	hsc(const hsc &) = default;
 	hsc & operator=(const hsc &) = default;

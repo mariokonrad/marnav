@@ -47,6 +47,8 @@ public:
 		nmea::status status;
 	};
 
+	virtual ~glc() {}
+
 	glc();
 	glc(const glc &) = default;
 	glc & operator=(const glc &) = default;

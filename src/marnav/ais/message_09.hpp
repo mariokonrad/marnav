@@ -22,15 +22,16 @@ public:
 
 	constexpr static const uint32_t altitude_not_available = 4095;
 
+	virtual ~message_09() {}
+
 	message_09();
 	message_09(const message_09 &) = default;
 	message_09 & operator=(const message_09 &) = default;
 
-	virtual raw get_data() const override;
-
 protected:
 	message_09(const raw & bits);
 	void read_data(const raw & bits);
+	virtual raw get_data() const override;
 
 private:
 	// clang-format off

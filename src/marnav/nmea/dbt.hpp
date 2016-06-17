@@ -40,6 +40,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::DBT;
 	constexpr static const char * TAG = "DBT";
 
+	virtual ~dbt() {}
+
 	dbt();
 	dbt(const dbt &) = default;
 	dbt & operator=(const dbt &) = default;

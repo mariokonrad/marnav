@@ -50,6 +50,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::ALM;
 	constexpr static const char * TAG = "ALM";
 
+	virtual ~alm() {}
+
 	alm();
 	alm(const alm &) = default;
 	alm & operator=(const alm &) = default;

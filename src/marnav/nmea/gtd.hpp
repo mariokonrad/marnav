@@ -34,6 +34,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GTD;
 	constexpr static const char * TAG = "GTD";
 
+	virtual ~gtd() {}
+
 	gtd();
 	gtd(const gtd &) = default;
 	gtd & operator=(const gtd &) = default;

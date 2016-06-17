@@ -21,16 +21,17 @@ public:
 		= message_id::extended_class_b_equipment_position_report;
 	constexpr static const int SIZE_BITS = 312;
 
+	virtual ~message_19() {}
+
 	message_19();
 	message_19(const message_19 &) = default;
 	message_19 & operator=(const message_19 &) = default;
-
-	virtual raw get_data() const override;
 
 protected:
 	message_19(message_id id);
 	message_19(const raw & bits);
 	void read_data(const raw & bits);
+	virtual raw get_data() const override;
 
 private:
 	// clang-format off

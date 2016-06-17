@@ -37,6 +37,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::HDG;
 	constexpr static const char * TAG = "HDG";
 
+	virtual ~hdg() {}
+
 	hdg();
 	hdg(const hdg &) = default;
 	hdg(hdg &&) = default;

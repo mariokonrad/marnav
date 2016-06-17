@@ -10,11 +10,15 @@ namespace nmea
 /// @cond DEV
 namespace
 {
-struct entry {
+struct entry final {
+	~entry() noexcept;
+
 	manufacturer_id id;
 	std::string tag;
 	std::string name;
 };
+
+entry::~entry() noexcept {}
 
 using manufacturer_map = std::vector<entry>;
 

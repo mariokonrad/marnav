@@ -67,6 +67,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::APB;
 	constexpr static const char * TAG = "APB";
 
+	virtual ~apb() {}
+
 	apb();
 	apb(const apb &) = default;
 	apb & operator=(const apb &) = default;

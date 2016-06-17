@@ -38,6 +38,8 @@ public:
 		no_answer ///< NMEA representation: 2
 	};
 
+	virtual ~tfi() {}
+
 	tfi();
 	tfi(const tfi &) = default;
 	tfi & operator=(const tfi &) = default;

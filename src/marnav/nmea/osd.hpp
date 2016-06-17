@@ -40,6 +40,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::OSD;
 	constexpr static const char * TAG = "OSD";
 
+	virtual ~osd() {}
+
 	osd();
 	osd(const osd &) = default;
 	osd & operator=(const osd &) = default;

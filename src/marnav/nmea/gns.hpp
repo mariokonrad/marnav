@@ -46,6 +46,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GNS;
 	constexpr static const char * TAG = "GNS";
 
+	virtual ~gns() {}
+
 	gns();
 	gns(const gns &) = default;
 	gns & operator=(const gns &) = default;

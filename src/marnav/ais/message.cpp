@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace ais
 {
+/// @cond DEV
 namespace
 {
 static const std::vector<std::pair<uint8_t, char>> SIXBIT_ASCII_TABLE = {
@@ -18,13 +19,7 @@ static const std::vector<std::pair<uint8_t, char>> SIXBIT_ASCII_TABLE = {
 	{57, '9'}, {58, ':'}, {59, ';'}, {60, '<'}, {61, '='}, {62, '>'}, {63, '?'},
 };
 }
-
-message::message(message_id type)
-	: message_type(type)
-{
-}
-
-message_id message::type() const { return message_type; }
+/// @endcond
 
 char decode_sixbit_ascii(uint8_t value)
 {

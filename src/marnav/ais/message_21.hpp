@@ -127,15 +127,16 @@ public:
 
 	enum class off_position_indicator : uint32_t { on_position = 0, off_position = 1 };
 
+	virtual ~message_21() {}
+
 	message_21();
 	message_21(const message_21 &) = default;
 	message_21 & operator=(const message_21 &) = default;
 
-	virtual raw get_data() const override;
-
 protected:
 	message_21(const raw & bits);
 	void read_data(const raw & bits);
+	virtual raw get_data() const override;
 
 private:
 	// clang-format off

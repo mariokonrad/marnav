@@ -37,6 +37,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GST;
 	constexpr static const char * TAG = "GST";
 
+	virtual ~gst() {}
+
 	gst();
 	gst(const gst &) = default;
 	gst & operator=(const gst &) = default;

@@ -41,6 +41,8 @@ public:
 		engine, ///< NMEA representation: 'E'
 	};
 
+	virtual ~rpm() {}
+
 	rpm();
 	rpm(const rpm &) = default;
 	rpm & operator=(const rpm &) = default;

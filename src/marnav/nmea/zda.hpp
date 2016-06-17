@@ -37,6 +37,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::ZDA;
 	constexpr static const char * TAG = "ZDA";
 
+	virtual ~zda() {}
+
 	zda();
 	zda(const zda &) = default;
 	zda & operator=(const zda &) = default;
