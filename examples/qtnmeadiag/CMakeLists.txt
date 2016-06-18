@@ -5,7 +5,7 @@ if(${Qt5Core_FOUND})
 	find_package(Qt5Widgets REQUIRED)
 	find_package(Qt5SerialPort REQUIRED)
 
-	message(STATUS "Qt5 found")
+	message(STATUS "Qt5 found: ${Qt5Core_VERSION}")
 	message(STATUS "  ${Qt5Core_LIBRARIES}")
 	message(STATUS "  ${Qt5Widgets_LIBRARIES}")
 	message(STATUS "  ${Qt5SerialPort_LIBRARIES}")
