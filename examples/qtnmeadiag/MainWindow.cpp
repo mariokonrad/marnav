@@ -12,21 +12,20 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSerialPort>
+#include <QTextStream>
 #include <QToolBar>
-#include <QDebug>
-#include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/checksum.hpp>
-#include <marnav/nmea/string.hpp>
 #include <marnav/nmea/gga.hpp>
 #include <marnav/nmea/mwv.hpp>
+#include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/rmc.hpp>
+#include <marnav/nmea/string.hpp>
 
 namespace marnav_example
 {
 namespace detail
 {
-template <typename T>
-static QString render(const marnav::utils::optional<T> & t)
+template <typename T> static QString render(const marnav::utils::optional<T> & t)
 {
 	if (!t)
 		return "-";

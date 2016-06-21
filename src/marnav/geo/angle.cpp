@@ -1,7 +1,7 @@
 #include "angle.hpp"
+#include <cmath>
 #include <algorithm>
 #include <stdexcept>
-#include <cmath>
 #include <marnav/math/floatingpoint.hpp>
 
 namespace marnav
@@ -169,6 +169,5 @@ std::string to_string(longitude::hemisphere h)
 	}
 	return "?";
 }
-
 }
 }
