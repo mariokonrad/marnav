@@ -1,33 +1,21 @@
 #include "MainWindow.hpp"
-#include <QMenuBar>
-#include <QToolBar>
-#include <QMessageBox>
-#include <QCoreApplication>
-#include <QPlainTextEdit>
-#include <QGridLayout>
-#include <QPushButton>
-#include <QLineEdit>
-#include <QSerialPort>
 #include <QComboBox>
+#include <QCoreApplication>
+#include <QGridLayout>
+#include <QLineEdit>
+#include <QMenuBar>
+#include <QMessageBox>
+#include <QPlainTextEdit>
+#include <QPushButton>
+#include <QSerialPort>
+#include <QToolBar>
 #include <marnav/nmea/nmea.hpp>
 
 namespace marnav_example
 {
-
 MainWindow::MainWindow()
-	: menu_file(nullptr)
-	, menu_help(nullptr)
-	, action_exit(nullptr)
-	, action_about(nullptr)
-	, action_about_qt(nullptr)
-	, btn_open(nullptr)
-	, btn_close(nullptr)
-	, port_name(nullptr)
-	, cb_baudrate(nullptr)
-	, text(nullptr)
-	, port(nullptr)
 {
-	setWindowTitle(tr("qtnmeadiag"));
+	setWindowTitle(QCoreApplication::instance()->applicationName());
 
 	create_actions();
 	create_menus();

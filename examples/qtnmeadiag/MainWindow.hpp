@@ -14,7 +14,6 @@ class QComboBox;
 
 namespace marnav_example
 {
-
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -36,19 +35,19 @@ private:
 	void setup_ui();
 	void process_nmea();
 
-	QMenu * menu_file;
-	QMenu * menu_help;
-	QAction * action_exit;
-	QAction * action_about;
-	QAction * action_about_qt;
+	QMenu * menu_file = nullptr;
+	QMenu * menu_help = nullptr;
+	QAction * action_exit = nullptr;
+	QAction * action_about = nullptr;
+	QAction * action_about_qt = nullptr;
 
-	QPushButton * btn_open;
-	QPushButton * btn_close;
-	QLineEdit * port_name;
-	QComboBox * cb_baudrate;
-	QPlainTextEdit * text;
+	QPushButton * btn_open = nullptr;
+	QPushButton * btn_close = nullptr;
+	QLineEdit * port_name = nullptr;
+	QComboBox * cb_baudrate = nullptr;
+	QPlainTextEdit * text = nullptr;
 
-	QSerialPort * port;
+	QSerialPort * port = nullptr;
 
 	std::string received_data;
 };
