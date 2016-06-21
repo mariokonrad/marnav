@@ -4,13 +4,13 @@
 #include <QMainWindow>
 #include <string>
 
-class QMenu;
 class QAction;
+class QComboBox;
+class QLabel;
 class QLineEdit;
-class QPlainTextEdit;
 class QPushButton;
 class QSerialPort;
-class QComboBox;
+class QListWidget;
 
 namespace marnav_example
 {
@@ -28,6 +28,8 @@ private slots:
 	void on_open();
 	void on_close();
 	void on_data_ready();
+	void on_sentence_selection();
+	void on_open_file();
 
 private:
 	void create_actions();
@@ -35,17 +37,17 @@ private:
 	void setup_ui();
 	void process_nmea();
 
-	QMenu * menu_file = nullptr;
-	QMenu * menu_help = nullptr;
 	QAction * action_exit = nullptr;
 	QAction * action_about = nullptr;
 	QAction * action_about_qt = nullptr;
+	QAction * action_open_port = nullptr;
+	QAction * action_close_port = nullptr;
+	QAction * action_open_file = nullptr;
 
-	QPushButton * btn_open = nullptr;
-	QPushButton * btn_close = nullptr;
 	QLineEdit * port_name = nullptr;
 	QComboBox * cb_baudrate = nullptr;
-	QPlainTextEdit * text = nullptr;
+	QListWidget * sentence_list = nullptr;
+	QLabel * sentence_desc = nullptr;
 
 	QSerialPort * port = nullptr;
 

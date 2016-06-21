@@ -96,10 +96,6 @@ private:
 
 public:
 	NMEA_GETTER(time)
-	NMEA_GETTER(lat)
-	NMEA_GETTER(lat_hem)
-	NMEA_GETTER(lon)
-	NMEA_GETTER(lon_hem)
 	NMEA_GETTER(quality_indicator)
 	NMEA_GETTER(n_satellites)
 	NMEA_GETTER(hor_dilution)
@@ -109,6 +105,9 @@ public:
 	NMEA_GETTER(geodial_separation_unit)
 	NMEA_GETTER(dgps_age)
 	NMEA_GETTER(dgps_ref)
+
+	utils::optional<geo::longitude> get_longitude() const;
+	utils::optional<geo::latitude> get_latitude() const;
 
 	void set_time(const nmea::time & t) noexcept { time = t; }
 	void set_lat(const geo::latitude & t);

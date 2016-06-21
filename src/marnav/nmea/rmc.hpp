@@ -81,16 +81,15 @@ private:
 public:
 	NMEA_GETTER(time_utc)
 	NMEA_GETTER(status)
-	NMEA_GETTER(lat)
-	NMEA_GETTER(lat_hem)
-	NMEA_GETTER(lon)
-	NMEA_GETTER(lon_hem)
 	NMEA_GETTER(sog)
 	NMEA_GETTER(heading)
 	NMEA_GETTER(date)
 	NMEA_GETTER(mag)
 	NMEA_GETTER(mag_hem)
 	NMEA_GETTER(mode_indicator)
+
+	utils::optional<geo::longitude> get_longitude() const;
+	utils::optional<geo::latitude> get_latitude() const;
 
 	void set_time_utc(const time & t) noexcept { time_utc = t; }
 	void set_status(char t) noexcept { status = t; }

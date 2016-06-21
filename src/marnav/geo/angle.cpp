@@ -98,6 +98,17 @@ void latitude::check(double a)
 		throw std::invalid_argument{"invalid value for nmea::latitude"};
 }
 
+std::string to_string(latitude::hemisphere h)
+{
+	switch (h) {
+		case latitude::hemisphere::north:
+			return "N";
+		case latitude::hemisphere::south:
+			return "S";
+	}
+	return "?";
+}
+
 /// Constructs a longitude with the specified angle in degrees.
 longitude::longitude(double deg)
 	: angle(deg)
@@ -147,5 +158,17 @@ void longitude::check(double a)
 	if ((a < min) || (a > max))
 		throw std::invalid_argument{"invalid value for nmea::longitude"};
 }
+
+std::string to_string(longitude::hemisphere h)
+{
+	switch (h) {
+		case longitude::hemisphere::east:
+			return "E";
+		case longitude::hemisphere::west:
+			return "W";
+	}
+	return "?";
+}
+
 }
 }

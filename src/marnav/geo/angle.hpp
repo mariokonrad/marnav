@@ -2,6 +2,7 @@
 #define __GEO__ANGLE__HPP__
 
 #include <cstdint>
+#include <string>
 
 namespace marnav
 {
@@ -98,6 +99,7 @@ private:
 
 bool operator==(const latitude & a, const latitude & b) noexcept;
 bool operator!=(const latitude & a, const latitude & b) noexcept;
+std::string to_string(latitude::hemisphere h);
 
 /// @{
 /// User defined literal to construct latitudes.
@@ -162,6 +164,7 @@ private:
 
 bool operator==(const longitude & a, const longitude & b) noexcept;
 bool operator!=(const longitude & a, const longitude & b) noexcept;
+std::string to_string(longitude::hemisphere h);
 
 /// @{
 /// User defined literal to construct latitudes.

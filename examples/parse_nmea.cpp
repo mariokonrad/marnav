@@ -17,10 +17,6 @@ int main(int, char **)
 	std::cout << "tag      :    " << rmc->tag() << "\n";
 	std::cout << "time     :        " << to_string(rmc->get_time_utc()) << "\n";
 	std::cout << "status   :               " << to_string(rmc->get_status()) << "\n";
-	std::cout << "latitude :                 " << to_string(rmc->get_lat()) << "\n";
-	std::cout << "lat hem  :                           " << to_string(rmc->get_lat_hem())
-			  << "\n";
-	std::cout << "longitude:                             " << to_string(rmc->get_lon()) << "\n";
-	std::cout << "lon hem  :                                        "
-			  << to_string(rmc->get_lon_hem()) << "\n";
+	std::cout << "latitude :                 " << to_string(rmc->get_latitude()) << "\n";
+	std::cout << "longitude:                             " << to_string(rmc->get_longitude()) << "\n";
 }

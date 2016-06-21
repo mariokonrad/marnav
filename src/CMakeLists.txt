@@ -145,6 +145,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/nmea/checks.cpp
 	marnav/nmea/split.cpp
 	marnav/nmea/angle.cpp
+	marnav/nmea/string.cpp
 	marnav/nmea/io.cpp
 	marnav/nmea/date.cpp
 	marnav/nmea/time.cpp
@@ -352,6 +353,7 @@ install(
 		marnav/nmea/waypoint.hpp
 		marnav/nmea/manufacturer.hpp
 		marnav/nmea/angle.hpp
+		marnav/nmea/string.hpp
 		marnav/nmea/io.hpp
 		marnav/nmea/date.hpp
 		marnav/nmea/time.hpp
