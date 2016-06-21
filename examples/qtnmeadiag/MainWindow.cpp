@@ -230,17 +230,8 @@ void MainWindow::setup_ui()
 	setCentralWidget(center);
 }
 
-void MainWindow::on_open_file()
+void MainWindow::read_sentences_from_file(QString filename)
 {
-	auto filename
-		= QFileDialog::getOpenFileName(this, tr("Open File"), ".", tr("Text Files (*.txt)"));
-
-	if (filename.size() == 0)
-		return;
-
-	sentence_list->clear();
-	sentence_desc->setText("");
-
 	QFile file{filename};
 	if (!file.open(QFile::ReadOnly)) {
 		QMessageBox::critical(this, "Error", "Unable to open file: " + filename);
@@ -256,8 +247,42 @@ void MainWindow::on_open_file()
 			continue;
 		if (s.startsWith("#"))
 			continue;
-		sentence_list->addItem(s);
+		add_item(s);
 	} while (true);
+}
+
+void MainWindow::open_file(QString filename)
+{
+	QFileInfo file(filename);
+	if (!file.exists())
+		return;
+	read_sentences_from_file(filename);
+}
+
+void MainWindow::on_open_file()
+{
+	auto filename
+		= QFileDialog::getOpenFileName(this, tr("Open File"), ".", tr("Text Files (*.txt)"));
+
+	if (filename.size() == 0)
+		return;
+
+	sentence_list->clear();
+	sentence_desc->setText("");
+
+	read_sentences_from_file(filename);
+}
+
+void MainWindow::add_item(QString raw_sentence)
+{
+	// if the list grows too large, remove a certain amount from
+	// the oldest entries before adding the new one.
+
+	if (sentence_list->count() > 1000) {
+		for (int i = 0; i < 10; ++i)
+			delete sentence_list->takeItem(0);
+	}
+	sentence_list->addItem(raw_sentence);
 }
 
 void MainWindow::on_about()
@@ -319,6 +344,9 @@ void MainWindow::on_open()
 		on_close();
 		QMessageBox::critical(this, "Error", "Unable to open port: " + port->portName());
 	}
+
+	sentence_list->clear();
+	sentence_desc->setText("");
 }
 
 void MainWindow::on_close()
@@ -332,21 +360,6 @@ void MainWindow::on_close()
 	disconnect(port, &QSerialPort::readyRead, this, &MainWindow::on_data_ready);
 
 	port->close();
-}
-
-void MainWindow::process_nmea()
-{
-	try {
-		auto sentence = marnav::nmea::make_sentence(received_data);
-
-		// sentence is ok, for now: just show the received data
-		// text->appendPlainText(received_data.c_str());
-
-		// TODO: print sentence specific data
-		//       ... not shown here
-	} catch (...) {
-		// ignore
-	}
 }
 
 void MainWindow::on_data_ready()
@@ -368,7 +381,7 @@ void MainWindow::on_data_ready()
 			case '\r':
 				break;
 			case '\n':
-				process_nmea();
+				add_item(received_data.c_str());
 				received_data.clear();
 				break;
 			default:

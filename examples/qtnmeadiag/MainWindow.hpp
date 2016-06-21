@@ -22,6 +22,8 @@ public:
 	MainWindow();
 	virtual ~MainWindow();
 
+	void open_file(QString filename);
+
 private slots:
 	void on_about();
 	void on_about_qt();
@@ -35,7 +37,8 @@ private:
 	void create_actions();
 	void create_menus();
 	void setup_ui();
-	void process_nmea();
+	void add_item(QString raw_sentence);
+	void read_sentences_from_file(QString filename);
 
 	QAction * action_exit = nullptr;
 	QAction * action_about = nullptr;
