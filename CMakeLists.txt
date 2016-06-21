@@ -15,7 +15,7 @@ else()
 	message(FATAL_ERROR "Unsupported compiler detected: ${CMAKE_CXX_COMPILER_ID}")
 endif()
 
-### versin handling
+### version handling
 if(NOT ("${CMAKE_BUILD_TYPE}" STREQUAL "Release"))
 	set(PROJECT_VERSION "${PROJECT_VERSION}-${GIT_COMMIT_HASH_SHORT}")
 endif()
@@ -42,6 +42,7 @@ file(MAKE_DIRECTORY
 	${CMAKE_CURRENT_BINARY_DIR}/doc/coverage
 	${CMAKE_CURRENT_BINARY_DIR}/local/include
 	)
+string(TOLOWER "${CMAKE_BUILD_TYPE}" build_type_lower)
 
 ### library
 add_subdirectory(src)
@@ -118,7 +119,7 @@ endmacro()
 add_subdirectory(test)
 
 ### coverage
-if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
+if(build_type_lower MATCHES coverage)
 	include(CodeCoverage)
 	setup_target_for_coverage(coverage
 		testrunner

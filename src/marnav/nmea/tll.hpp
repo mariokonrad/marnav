@@ -72,14 +72,13 @@ private:
 
 public:
 	NMEA_GETTER(target_number)
-	NMEA_GETTER(lat)
-	NMEA_GETTER(lat_hem)
-	NMEA_GETTER(lon)
-	NMEA_GETTER(lon_hem)
 	NMEA_GETTER(target_name)
 	NMEA_GETTER(time_utc)
 	NMEA_GETTER(target_status)
 	NMEA_GETTER(reference_target)
+
+	geo::longitude get_longitude() const;
+	geo::latitude get_latitude() const;
 
 	void set_target_number(uint32_t t) noexcept { target_number = t; }
 	void set_lat(const geo::latitude & t);

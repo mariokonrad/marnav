@@ -303,7 +303,6 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 				-Wno-switch-default
 			)
 	endif()
-	string(TOLOWER "${CMAKE_BUILD_TYPE}" build_type_lower)
 	if(build_type_lower MATCHES coverage)
 		message(STATUS "Coverage: enabled")
 		target_compile_options(marnav

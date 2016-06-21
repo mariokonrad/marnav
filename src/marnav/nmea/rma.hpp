@@ -72,16 +72,15 @@ private:
 
 public:
 	NMEA_GETTER(blink_warning)
-	NMEA_GETTER(lat)
-	NMEA_GETTER(lat_hem)
-	NMEA_GETTER(lon)
-	NMEA_GETTER(lon_hem)
 	NMEA_GETTER(time_diff_a)
 	NMEA_GETTER(time_diff_b)
 	NMEA_GETTER(sog)
 	NMEA_GETTER(track)
 	NMEA_GETTER(magnetic_var)
 	NMEA_GETTER(magnetic_var_hem)
+
+	utils::optional<geo::longitude> get_longitude() const;
+	utils::optional<geo::latitude> get_latitude() const;
 
 	void set_blink_warning(char t) noexcept { blink_warning = t; }
 	void set_lat(const geo::latitude & t);

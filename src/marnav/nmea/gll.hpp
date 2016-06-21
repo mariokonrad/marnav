@@ -66,13 +66,12 @@ private:
 	utils::optional<positioning_system_mode_indicator> mode_indicator;
 
 public:
-	NMEA_GETTER(lat)
-	NMEA_GETTER(lat_hem)
-	NMEA_GETTER(lon)
-	NMEA_GETTER(lon_hem)
 	NMEA_GETTER(time_utc)
 	NMEA_GETTER(data_valid)
 	NMEA_GETTER(mode_indicator)
+
+	utils::optional<geo::longitude> get_longitude() const;
+	utils::optional<geo::latitude> get_latitude() const;
 
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);

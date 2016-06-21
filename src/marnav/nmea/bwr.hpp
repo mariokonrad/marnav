@@ -84,10 +84,6 @@ private:
 
 public:
 	NMEA_GETTER(time_utc)
-	NMEA_GETTER(lat)
-	NMEA_GETTER(lat_hem)
-	NMEA_GETTER(lon)
-	NMEA_GETTER(lon_hem)
 	NMEA_GETTER(bearing_true)
 	NMEA_GETTER(bearing_true_ref)
 	NMEA_GETTER(bearing_mag)
@@ -95,6 +91,9 @@ public:
 	NMEA_GETTER(distance)
 	NMEA_GETTER(distance_unit)
 	NMEA_GETTER(waypoint_id)
+
+	utils::optional<geo::longitude> get_longitude() const;
+	utils::optional<geo::latitude> get_latitude() const;
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
 	void set_lat(const geo::latitude & t);

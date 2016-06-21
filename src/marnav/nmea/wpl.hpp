@@ -57,11 +57,10 @@ private:
 	utils::optional<waypoint> waypoint_id;
 
 public:
-	NMEA_GETTER(lat)
-	NMEA_GETTER(lat_hem)
-	NMEA_GETTER(lon)
-	NMEA_GETTER(lon_hem)
 	NMEA_GETTER(waypoint_id)
+
+	utils::optional<geo::longitude> get_longitude() const;
+	utils::optional<geo::latitude> get_latitude() const;
 
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);

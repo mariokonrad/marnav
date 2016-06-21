@@ -321,7 +321,7 @@ Compiler:
 - Clang 3.8
 
 Tools needed to build the library:
-- cmake 3.2
+- cmake 3.2 or newer
 
 Tools needed to develop the library:
 - git

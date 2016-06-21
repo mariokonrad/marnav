@@ -43,7 +43,7 @@ void swap(angle & a, angle & b) noexcept { std::swap(a.value, b.value); }
 
 bool operator==(const angle & a, const angle & b) noexcept
 {
-	return (&a == &b) || math::is_same(a.value, b.value);
+	return (&a == &b) || math::is_same(a.value, b.value, angle::epsilon);
 }
 
 bool operator!=(const angle & a, const angle & b) noexcept { return !(a == b); }
@@ -87,7 +87,7 @@ latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
 
 bool operator==(const latitude & a, const latitude & b) noexcept
 {
-	return (&a == &b) || math::is_same(a.get(), b.get());
+	return (&a == &b) || math::is_same(a.get(), b.get(), angle::epsilon);
 }
 
 bool operator!=(const latitude & a, const latitude & b) noexcept { return !(a == b); }
@@ -148,7 +148,7 @@ longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
 
 bool operator==(const longitude & a, const longitude & b) noexcept
 {
-	return (&a == &b) || math::is_same(a.get(), b.get());
+	return (&a == &b) || math::is_same(a.get(), b.get(), angle::epsilon);
 }
 
 bool operator!=(const longitude & a, const longitude & b) noexcept { return !(a == b); }

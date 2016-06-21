@@ -230,55 +230,57 @@ add_test(
 	WORKING_DIRECTOR "${CMAKE_CURRENT_BINARY_DIR}"
 	)
 
-
-add_executable(benchmark_nmea_split
-	nmea/Benchmark_nmea_split.cpp
-	)
-
-target_link_libraries(benchmark_nmea_split
-	marnav
-	benchmark
-	pthread
-	)
-
-add_executable(benchmark_nmea_checksum
-	nmea/Benchmark_nmea_checksum.cpp
-	)
-
-target_link_libraries(benchmark_nmea_checksum
-	marnav
-	benchmark
-	pthread
-	)
-
-add_executable(benchmark_nmea_manufacturer
-	nmea/Benchmark_nmea_manufacturer.cpp
-	)
-
-target_link_libraries(benchmark_nmea_manufacturer
-	marnav
-	benchmark
-	pthread
-	)
-
-add_executable(benchmark_nmea_sentence
-	nmea/Benchmark_nmea_sentence.cpp
-	)
-
-target_link_libraries(benchmark_nmea_sentence
-	marnav
-	benchmark
-	pthread
-	)
-
-if(ENABLE_AIS)
-	add_executable(benchmark_ais_message
-		ais/Benchmark_ais_message.cpp
+# excluded with coverage builds, does not make sense otherwise
+if(NOT build_type_lower MATCHES coverage)
+	add_executable(benchmark_nmea_split
+		nmea/Benchmark_nmea_split.cpp
 		)
 
-	target_link_libraries(benchmark_ais_message
+	target_link_libraries(benchmark_nmea_split
 		marnav
 		benchmark
 		pthread
 		)
+
+	add_executable(benchmark_nmea_checksum
+		nmea/Benchmark_nmea_checksum.cpp
+		)
+
+	target_link_libraries(benchmark_nmea_checksum
+		marnav
+		benchmark
+		pthread
+		)
+
+	add_executable(benchmark_nmea_manufacturer
+		nmea/Benchmark_nmea_manufacturer.cpp
+		)
+
+	target_link_libraries(benchmark_nmea_manufacturer
+		marnav
+		benchmark
+		pthread
+		)
+
+	add_executable(benchmark_nmea_sentence
+		nmea/Benchmark_nmea_sentence.cpp
+		)
+
+	target_link_libraries(benchmark_nmea_sentence
+		marnav
+		benchmark
+		pthread
+		)
+
+	if(ENABLE_AIS)
+		add_executable(benchmark_ais_message
+			ais/Benchmark_ais_message.cpp
+			)
+
+		target_link_libraries(benchmark_ais_message
+			marnav
+			benchmark
+			pthread
+			)
+	endif()
 endif()

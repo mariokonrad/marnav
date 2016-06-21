@@ -1,7 +1,5 @@
 #include "tll.hpp"
-
 #include <marnav/nmea/angle.hpp>
-#include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 #include <marnav/nmea/convert.hpp>
 
@@ -33,7 +31,15 @@ tll::tll(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 6), time_utc);
 	read(*(first + 7), target_status);
 	read(*(first + 8), reference_target);
+
+	// instead of reading data into temporary lat/lon, let's correct values afterwards
+	lat = correct_hemisphere(lat, lat_hem);
+	lon = correct_hemisphere(lon, lon_hem);
 }
+
+geo::longitude tll::get_longitude() const { return lon; }
+
+geo::latitude tll::get_latitude() const { return lat; }
 
 void tll::set_lat(const geo::latitude & t)
 {

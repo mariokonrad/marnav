@@ -42,6 +42,16 @@ gll::gll(const std::string & talker, fields::const_iterator first, fields::const
 	lon = correct_hemisphere(lon, lon_hem);
 }
 
+utils::optional<geo::longitude> gll::get_longitude() const
+{
+	return (lon && lon_hem) ? lon : utils::optional<geo::longitude>{};
+}
+
+utils::optional<geo::latitude> gll::get_latitude() const
+{
+	return (lat && lat_hem) ? lat : utils::optional<geo::latitude>{};
+}
+
 void gll::set_lat(const geo::latitude & t)
 {
 	lat = t;

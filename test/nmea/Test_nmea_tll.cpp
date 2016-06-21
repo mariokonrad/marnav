@@ -5,7 +5,6 @@
 
 namespace
 {
-
 using namespace marnav;
 
 class Test_nmea_tll : public ::testing::Test
@@ -39,13 +38,38 @@ TEST_F(Test_nmea_tll, empty_to_string)
 		"$GPTLL,00,0000.0000,N,00000.0000,E,,000000,T,*00", nmea::to_string(tll).c_str());
 }
 
-TEST_F(Test_nmea_tll, set_lat)
+TEST_F(Test_nmea_tll, set_lat_north)
 {
 	nmea::tll tll;
 	tll.set_lat(geo::latitude{12.34});
 
 	EXPECT_STREQ(
 		"$GPTLL,00,1220.4000,N,00000.0000,E,,000000,T,*05", nmea::to_string(tll).c_str());
+}
+
+TEST_F(Test_nmea_tll, get_latitude_north)
+{
+	const auto s = nmea::make_sentence("$GPTLL,00,1220.4000,N,00000.0000,E,,000000,T,*05");
+	const auto tll = nmea::sentence_cast<nmea::tll>(s);
+
+	EXPECT_EQ(geo::latitude{12.34}, tll->get_latitude());
+}
+
+TEST_F(Test_nmea_tll, set_lat_south)
+{
+	nmea::tll tll;
+	tll.set_lat(geo::latitude{-12.34});
+
+	EXPECT_STREQ(
+		"$GPTLL,00,1220.4000,S,00000.0000,E,,000000,T,*18", nmea::to_string(tll).c_str());
+}
+
+TEST_F(Test_nmea_tll, get_latitude_south)
+{
+	const auto s = nmea::make_sentence("$GPTLL,00,1220.4000,S,00000.0000,E,,000000,T,*18");
+	const auto tll = nmea::sentence_cast<nmea::tll>(s);
+
+	EXPECT_EQ(geo::latitude{-12.34}, tll->get_latitude());
 }
 
 TEST_F(Test_nmea_tll, set_lon_west)
@@ -57,6 +81,14 @@ TEST_F(Test_nmea_tll, set_lon_west)
 		"$GPTLL,00,0000.0000,N,12327.0000,W,,000000,T,*17", nmea::to_string(tll).c_str());
 }
 
+TEST_F(Test_nmea_tll, get_longitude_west)
+{
+	const auto s = nmea::make_sentence("$GPTLL,00,0000.0000,N,12327.0000,W,,000000,T,*17");
+	const auto tll = nmea::sentence_cast<nmea::tll>(s);
+
+	EXPECT_EQ(geo::longitude{-123.45}, tll->get_longitude());
+}
+
 TEST_F(Test_nmea_tll, set_lon_east)
 {
 	nmea::tll tll;
@@ -64,5 +96,13 @@ TEST_F(Test_nmea_tll, set_lon_east)
 
 	EXPECT_STREQ(
 		"$GPTLL,00,0000.0000,N,12327.0000,E,,000000,T,*05", nmea::to_string(tll).c_str());
+}
+
+TEST_F(Test_nmea_tll, get_longitude_east)
+{
+	const auto s = nmea::make_sentence("$GPTLL,00,0000.0000,N,12327.0000,E,,000000,T,*05");
+	const auto tll = nmea::sentence_cast<nmea::tll>(s);
+
+	EXPECT_EQ(geo::longitude{123.45}, tll->get_longitude());
 }
 }

@@ -71,20 +71,60 @@ static geo::longitude convert_longitude(const geo::longitude & v, direction d)
 }
 /// \endcond
 
+/// @{
+
+/// Convertes the specified latitude to a latitude with the specified
+/// hemisphere (specified as direction).
+///
+/// If the latitude is already on the specified hemisphere, no conversion
+/// will take place. Otherwise the latitude will be transformed to get
+/// the desired hemisphere.
+///
+/// @param[in] v The latitude to convert.
+/// @param[in] d The desired direction. For latitudes only `north` and `south`
+///   apply.
+/// @return The converted latitude.
+geo::latitude correct_hemisphere(const geo::latitude & v, const direction & d)
+{
+	return detail::convert_latitude(v, d);
+}
+
+/// The optional version of the latitude conversion.
+/// @see correct_hemisphere
 utils::optional<geo::latitude> correct_hemisphere(
 	const utils::optional<geo::latitude> & v, const utils::optional<direction> & d)
 {
 	if (v && d)
-		return detail::convert_latitude(v.value(), d.value());
+		return correct_hemisphere(v.value(), d.value());
 	return v;
 }
 
+/// Convertes the specified longitude to a longitude with the specified
+/// hemisphere (specified as direction).
+///
+/// If the longitude is already on the specified hemisphere, no conversion
+/// will take place. Otherwise the longitude will be transformed to get
+/// the desired hemisphere.
+///
+/// @param[in] v The longitude to convert.
+/// @param[in] d The desired direction. For longitudes only `east` and `west`
+///   apply.
+/// @return The converted longitude.
+geo::longitude correct_hemisphere(const geo::longitude & v, const direction & d)
+{
+	return detail::convert_longitude(v, d);
+}
+
+/// The optional version of the longitude conversion.
+/// @see correct_hemisphere
 utils::optional<geo::longitude> correct_hemisphere(
 	const utils::optional<geo::longitude> & v, const utils::optional<direction> & d)
 {
 	if (v && d)
-		return detail::convert_longitude(v.value(), d.value());
+		return correct_hemisphere(v.value(), d.value());
 	return v;
 }
+
+/// @}
 }
 }

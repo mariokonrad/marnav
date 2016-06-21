@@ -94,15 +94,14 @@ public:
 	NMEA_GETTER(steer_dir)
 	NMEA_GETTER(waypoint_to)
 	NMEA_GETTER(waypoint_from)
-	NMEA_GETTER(lat)
-	NMEA_GETTER(lat_hem)
-	NMEA_GETTER(lon)
-	NMEA_GETTER(lon_hem)
 	NMEA_GETTER(range)
 	NMEA_GETTER(bearing)
 	NMEA_GETTER(dst_velocity)
 	NMEA_GETTER(arrival_status)
 	NMEA_GETTER(mode_indicator)
+
+	utils::optional<geo::longitude> get_longitude() const;
+	utils::optional<geo::latitude> get_latitude() const;
 
 	void set_active(status t) noexcept { active = t; }
 	void set_cross_track_error(double t) noexcept { cross_track_error = t; }

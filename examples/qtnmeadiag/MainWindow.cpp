@@ -1,5 +1,5 @@
 #include "MainWindow.hpp"
-#include <unordered_map>
+#include <vector>
 #include <QComboBox>
 #include <QCoreApplication>
 #include <QFileDialog>
@@ -116,20 +116,21 @@ static QString details_gga(const marnav::nmea::sentence * s)
 
 static QString get_details(const marnav::nmea::sentence * s)
 {
-	using container =
-	std::unordered_map<marnav::nmea::sentence_id,
-		std::function<QString(const marnav::nmea::sentence *)>>;
-	static const container
-		details = {
-			{marnav::nmea::sentence_id::GGA, detail::details_gga},
-			{marnav::nmea::sentence_id::MWV, detail::details_mwv},
-			{marnav::nmea::sentence_id::RMC, detail::details_rmc},
-		};
+	struct entry {
+		marnav::nmea::sentence_id id;
+		std::function<QString(const marnav::nmea::sentence *)> func;
+	};
+	using container = std::vector<entry>;
+	static const container details = {
+		{marnav::nmea::sentence_id::GGA, detail::details_gga},
+		{marnav::nmea::sentence_id::MWV, detail::details_mwv},
+		{marnav::nmea::sentence_id::RMC, detail::details_rmc},
+	};
 
 	auto i = std::find_if(begin(details), end(details),
-		[s](const container::value_type & entry) { return entry.first == s->id(); });
+		[s](const container::value_type & entry) { return entry.id == s->id(); });
 
-	return (i == end(details)) ? QString{"unknown"} : i->second(s);
+	return (i == end(details)) ? QString{"unknown"} : i->func(s);
 }
 
 MainWindow::MainWindow()
