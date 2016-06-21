@@ -16,6 +16,7 @@
 #include <QToolBar>
 #include <marnav/nmea/checksum.hpp>
 #include <marnav/nmea/gga.hpp>
+#include <marnav/nmea/gsv.hpp>
 #include <marnav/nmea/mwv.hpp>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/rmc.hpp>
@@ -31,6 +32,8 @@ template <typename T> static QString render(const marnav::utils::optional<T> & t
 		return "-";
 	return marnav::nmea::to_string(*t).c_str();
 }
+
+static QString render(uint32_t t) { return QString{"%1"}.arg(t); }
 
 static QString render(const marnav::utils::optional<marnav::nmea::time> & t)
 {
@@ -111,6 +114,26 @@ static QString details_gga(const marnav::nmea::sentence * s)
 	result += "\nDGPS Ref        : " + render(t->get_dgps_ref());
 	return result;
 }
+
+static QString details_gsv(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gsv>(s);
+	QString result;
+	result += "\nNum Messages   : " + render(t->get_n_messages());
+	result += "\nMessages Number: " + render(t->get_message_number());
+	result += "\nNum Sat in View: " + render(t->get_n_satellites_in_view());
+	for (int i = 0; i < 4; ++i) {
+		const auto sat = t->get_sat(i);
+		if (sat) {
+			result += QString{"\nSat: ID:%1  ELEV:%2  AZIMUTH:%3  SNR:%4"}
+						  .arg(render(sat->id), 2)
+						  .arg(render(sat->elevation), 2)
+						  .arg(render(sat->azimuth), 3)
+						  .arg(render(sat->snr), 2);
+		}
+	}
+	return result;
+}
 }
 
 static QString get_details(const marnav::nmea::sentence * s)
@@ -122,6 +145,7 @@ static QString get_details(const marnav::nmea::sentence * s)
 	using container = std::vector<entry>;
 	static const container details = {
 		{marnav::nmea::sentence_id::GGA, detail::details_gga},
+		{marnav::nmea::sentence_id::GSV, detail::details_gsv},
 		{marnav::nmea::sentence_id::MWV, detail::details_mwv},
 		{marnav::nmea::sentence_id::RMC, detail::details_rmc},
 	};
