@@ -167,6 +167,19 @@ std::string to_string(quality t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
+std::string to_string(target_status t)
+{
+	switch (t) {
+		case target_status::lost:
+			return "L";
+		case target_status::query:
+			return "Q";
+		case target_status::tracking:
+			return "T";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
 std::string to_string(unit::distance t)
 {
 	switch (t) {

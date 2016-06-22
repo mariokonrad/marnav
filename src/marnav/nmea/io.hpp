@@ -116,6 +116,7 @@ void read(const std::string & s, positioning_system_mode_indicator & value,
 	data_format fmt = data_format::none);
 void read(const std::string & s, status & value, data_format fmt = data_format::none);
 void read(const std::string & s, quality & value, data_format fmt = data_format::none);
+void read(const std::string & s, target_status & value, data_format fmt = data_format::none);
 void read(const std::string & s, unit::distance & value, data_format fmt = data_format::none);
 void read(const std::string & s, unit::velocity & value, data_format fmt = data_format::none);
 void read(

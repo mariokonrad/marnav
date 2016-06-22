@@ -32,6 +32,7 @@ std::string to_string(reference t);
 std::string to_string(positioning_system_mode_indicator t);
 std::string to_string(status t);
 std::string to_string(quality t);
+std::string to_string(target_status t);
 std::string to_string(unit::distance t);
 std::string to_string(unit::velocity t);
 std::string to_string(unit::temperature t);

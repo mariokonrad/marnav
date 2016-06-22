@@ -413,6 +413,25 @@ void read(const std::string & s, quality & value, data_format fmt)
 	}
 }
 
+void read(const std::string & s, target_status & value, data_format fmt)
+{
+	typename std::underlying_type<target_status>::type t;
+	read(s, t, fmt);
+	switch (t) {
+		case 'L':
+			value = target_status::lost;
+			break;
+		case 'Q':
+			value = target_status::query;
+			break;
+		case 'T':
+			value = target_status::tracking;
+			break;
+		default:
+			throw std::runtime_error{"invalid data for nmea/target_status"};
+	}
+}
+
 void read(const std::string & s, unit::distance & value, data_format fmt)
 {
 	typename std::underlying_type<unit::distance>::type t;

@@ -105,4 +105,43 @@ TEST_F(Test_nmea_tll, get_longitude_east)
 
 	EXPECT_EQ(geo::longitude{123.45}, tll->get_longitude());
 }
+
+TEST_F(Test_nmea_tll, set_status)
+{
+	{
+		nmea::tll tll;
+		tll.set_status(nmea::target_status::lost);
+		EXPECT_STREQ(
+			"$GPTLL,00,0000.0000,N,00000.0000,E,,000000,L,*18", nmea::to_string(tll).c_str());
+	}
+	{
+		nmea::tll tll;
+		tll.set_status(nmea::target_status::query);
+		EXPECT_STREQ(
+			"$GPTLL,00,0000.0000,N,00000.0000,E,,000000,Q,*05", nmea::to_string(tll).c_str());
+	}
+	{
+		nmea::tll tll;
+		tll.set_status(nmea::target_status::tracking);
+		EXPECT_STREQ(
+			"$GPTLL,00,0000.0000,N,00000.0000,E,,000000,T,*00", nmea::to_string(tll).c_str());
+	}
+}
+
+TEST_F(Test_nmea_tll, get_status)
+{
+	{
+		const auto s = nmea::make_sentence("$GPTLL,00,0000.0000,N,00000.0000,E,,000000,L,*18");
+		EXPECT_EQ(nmea::target_status::lost, nmea::sentence_cast<nmea::tll>(s)->get_status());
+	}
+	{
+		const auto s = nmea::make_sentence("$GPTLL,00,0000.0000,N,00000.0000,E,,000000,Q,*05");
+		EXPECT_EQ(nmea::target_status::query, nmea::sentence_cast<nmea::tll>(s)->get_status());
+	}
+	{
+		const auto s = nmea::make_sentence("$GPTLL,00,0000.0000,N,00000.0000,E,,000000,T,*00");
+		EXPECT_EQ(
+			nmea::target_status::tracking, nmea::sentence_cast<nmea::tll>(s)->get_status());
+	}
+}
 }

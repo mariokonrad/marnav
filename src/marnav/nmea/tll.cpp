@@ -22,14 +22,14 @@ tll::tll(const std::string & talker, fields::const_iterator first, fields::const
 	if (std::distance(first, last) != 9)
 		throw std::invalid_argument{"invalid number of fields in tll"};
 
-	read(*(first + 0), target_number);
+	read(*(first + 0), number);
 	read(*(first + 1), lat);
 	read(*(first + 2), lat_hem);
 	read(*(first + 3), lon);
 	read(*(first + 4), lon_hem);
-	read(*(first + 5), target_name);
+	read(*(first + 5), name);
 	read(*(first + 6), time_utc);
-	read(*(first + 7), target_status);
+	read(*(first + 7), status);
 	read(*(first + 8), reference_target);
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
@@ -55,9 +55,9 @@ void tll::set_lon(const geo::longitude & t)
 
 std::vector<std::string> tll::get_data() const
 {
-	return {format(target_number, 2), to_string(lat), to_string(lat_hem), to_string(lon),
-		to_string(lon_hem), to_string(target_name), to_string(time_utc),
-		to_string(target_status), to_string(reference_target)};
+	return {format(number, 2), to_string(lat), to_string(lat_hem), to_string(lon),
+		to_string(lon_hem), to_string(name), to_string(time_utc), to_string(status),
+		to_string(reference_target)};
 }
 }
 }

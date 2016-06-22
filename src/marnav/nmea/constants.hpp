@@ -43,6 +43,13 @@ enum class quality : uint32_t {
 	simulation = 8 ///< NMEA representation: 8
 };
 
+/// Target status.
+enum class target_status : char {
+	lost, ///< NMEA representation: 'L'
+	query, ///< NMEA representation: 'Q'
+	tracking ///< NMEA representation: 'T'
+};
+
 /// Contains enumerations of units.
 namespace unit
 {

@@ -60,32 +60,32 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	uint32_t target_number = 0;
+	uint32_t number = 0;
 	geo::latitude lat;
 	direction lat_hem = direction::north;
 	geo::longitude lon;
 	direction lon_hem = direction::east;
-	waypoint target_name;
+	waypoint name;
 	nmea::time time_utc;
-	char target_status = 'T'; // @todo use an enumeration
+	target_status status = target_status::tracking;
 	utils::optional<char> reference_target;
 
 public:
-	NMEA_GETTER(target_number)
-	NMEA_GETTER(target_name)
+	NMEA_GETTER(number)
+	NMEA_GETTER(name)
 	NMEA_GETTER(time_utc)
-	NMEA_GETTER(target_status)
+	NMEA_GETTER(status)
 	NMEA_GETTER(reference_target)
 
 	geo::longitude get_longitude() const;
 	geo::latitude get_latitude() const;
 
-	void set_target_number(uint32_t t) noexcept { target_number = t; }
+	void set_number(uint32_t t) noexcept { number = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_target_name(const waypoint & t) { target_name = t; }
+	void set_name(const waypoint & t) { name = t; }
 	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
-	void set_target_status(char t) noexcept { target_status = t; }
+	void set_status(target_status t) noexcept { status = t; }
 	void set_reference_target(char t) noexcept { reference_target = t; }
 };
 }
