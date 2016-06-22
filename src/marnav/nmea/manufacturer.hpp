@@ -9,8 +9,6 @@ namespace marnav
 namespace nmea
 {
 /// Enumeration of manufacturer IDs.
-///
-/// @todo Conversion function from/to string
 enum class manufacturer_id {
 	UNKNOWN,
 	NMEA,
