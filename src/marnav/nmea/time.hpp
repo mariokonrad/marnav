@@ -85,8 +85,6 @@ public:
 
 std::string to_string(const time & t);
 std::string format(const nmea::time & t, unsigned int width);
-std::ostream & operator<<(std::ostream & os, const time & t);
-std::istream & operator>>(std::istream & is, time & t);
 
 /// Represents a duration up to 99 hours/59 minutes/59 seconds, suitable for NMEA purposes.
 ///
@@ -111,8 +109,6 @@ public:
 };
 
 std::string to_string(const duration & d);
-std::ostream & operator<<(std::ostream & os, const duration & t);
-std::istream & operator>>(std::istream & is, duration & t);
 }
 }
 

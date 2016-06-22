@@ -1,5 +1,4 @@
 #include "io.hpp"
-#include <sstream>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/date.hpp>
 #include <marnav/nmea/time.hpp>
@@ -120,73 +119,88 @@ void read(const std::string & s, geo::longitude & value, data_format fmt)
 void read(const std::string & s, date & value, data_format fmt)
 {
 	utils::unused(fmt);
-	std::istringstream{s} >> value;
+	value = date::parse(s);
 }
 
 void read(const std::string & s, time & value, data_format fmt)
 {
 	utils::unused(fmt);
-	std::istringstream{s} >> value;
+	value = time::parse(s);
 }
 
 void read(const std::string & s, duration & value, data_format fmt)
 {
 	utils::unused(fmt);
-	std::istringstream{s} >> value;
+	value = duration::parse(s);
 }
 
 void read(const std::string & s, char & value, data_format fmt)
 {
 	utils::unused(fmt);
-	std::istringstream{s} >> value;
+	if (s.empty())
+		return;
+	value = s[0];
 }
+
+/// @cond DEV
+
+namespace detail
+{
+template <typename T> T sto(const std::string &, std::size_t *, int);
+
+template <> uint64_t sto(const std::string & s, std::size_t * pos, int base)
+{
+	return std::stoull(s, pos, base);
+}
+
+template <> uint32_t sto(const std::string & s, std::size_t * pos, int base)
+{
+	return std::stoul(s, pos, base);
+}
+
+template <> int32_t sto(const std::string & s, std::size_t * pos, int base)
+{
+	return std::stol(s, pos, base);
+}
+
+template <typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+void read_integer(const std::string & s, T & value, data_format fmt)
+{
+	if (s.empty())
+		return;
+	std::size_t pos = 0;
+	value = sto<T>(s, &pos, (fmt == data_format::hex) ? 16 : 10);
+	if (pos != s.size())
+		throw std::runtime_error{"invalid string to convert to number"};
+}
+}
+
+/// @endcond
 
 void read(const std::string & s, uint64_t & value, data_format fmt)
 {
-	using namespace std;
-	switch (fmt) {
-		case data_format::none:
-		case data_format::dec:
-			std::istringstream{s} >> value;
-			break;
-		case data_format::hex:
-			std::istringstream{s} >> std::hex >> value;
-			break;
-	}
+	detail::read_integer(s, value, fmt);
 }
 
 void read(const std::string & s, uint32_t & value, data_format fmt)
 {
-	using namespace std;
-	switch (fmt) {
-		case data_format::none:
-		case data_format::dec:
-			std::istringstream{s} >> value;
-			break;
-		case data_format::hex:
-			std::istringstream{s} >> std::hex >> value;
-			break;
-	}
+	detail::read_integer(s, value, fmt);
 }
 
 void read(const std::string & s, int32_t & value, data_format fmt)
 {
-	using namespace std;
-	switch (fmt) {
-		case data_format::none:
-		case data_format::dec:
-			std::istringstream{s} >> value;
-			break;
-		case data_format::hex:
-			std::istringstream{s} >> std::hex >> value;
-			break;
-	}
+	detail::read_integer(s, value, fmt);
 }
 
 void read(const std::string & s, double & value, data_format fmt)
 {
 	utils::unused(fmt);
-	std::istringstream{s} >> value;
+	if (s.empty())
+		return;
+	std::size_t pos = 0;
+	value = std::stod(s, &pos);
+	if (pos != s.size())
+		throw std::runtime_error{"invalid string to convert to double"};
 }
 
 void read(const std::string & s, std::string & value, data_format fmt)

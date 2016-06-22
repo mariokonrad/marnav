@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include <marnav/nmea/time.hpp>
-#include <sstream>
 
 namespace
 {
@@ -68,16 +67,5 @@ TEST_F(Test_nmea_duration, to_string)
 	const std::string s = to_string(t);
 
 	EXPECT_STREQ("990203", s.c_str());
-}
-
-TEST_F(Test_nmea_duration, stream)
-{
-	nmea::duration t{99, 2, 3, 4};
-
-	using namespace marnav::nmea;
-	std::ostringstream os;
-	os << t;
-
-	EXPECT_STREQ("990203", os.str().c_str());
 }
 }

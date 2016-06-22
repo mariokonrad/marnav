@@ -6,6 +6,7 @@ namespace marnav
 namespace nmea
 {
 
+/// @cond DEV
 namespace
 {
 template <class T> static T parse_time(const std::string & str)
@@ -26,6 +27,7 @@ template <class T> static T parse_time(const std::string & str)
 	}
 }
 }
+/// @endcond
 
 void trait_time::check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms)
 {
@@ -96,16 +98,6 @@ std::string format(const nmea::time & t, unsigned int width)
 	return buf;
 }
 
-std::ostream & operator<<(std::ostream & os, const time & t) { return os << to_string(t); }
-
-std::istream & operator>>(std::istream & is, time & t)
-{
-	std::string s;
-	is >> s;
-	t = time::parse(s);
-	return is;
-}
-
 /// Parses the duration information within the specified string (start and end of string).
 /// If the string is empty, the result will be initialized to zero.
 /// The duration to be parsed must  be in the form: "HHMMSS.mmm" (milliseconds are optional).
@@ -125,16 +117,6 @@ std::string to_string(const duration & d)
 	char buf[7];
 	snprintf(buf, sizeof(buf), "%02u%02u%02u", d.hour(), d.minutes(), d.seconds());
 	return buf;
-}
-
-std::ostream & operator<<(std::ostream & os, const duration & t) { return os << to_string(t); }
-
-std::istream & operator>>(std::istream & is, duration & t)
-{
-	std::string s;
-	is >> s;
-	t = duration::parse(s);
-	return is;
 }
 }
 }

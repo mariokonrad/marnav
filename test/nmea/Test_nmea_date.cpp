@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include <marnav/nmea/date.hpp>
-#include <sstream>
 
 namespace
 {
@@ -71,16 +70,6 @@ TEST_F(Test_nmea_date, to_string)
 	auto s = nmea::to_string(d);
 
 	EXPECT_STREQ("010120", s.c_str());
-}
-
-TEST_F(Test_nmea_date, stream)
-{
-	nmea::date d{2010, nmea::month::january, 1};
-
-	std::ostringstream os;
-	os << d;
-
-	EXPECT_STREQ("010120", os.str().c_str());
 }
 
 TEST_F(Test_nmea_date, is_leap_year)

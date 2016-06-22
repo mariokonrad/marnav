@@ -2,7 +2,6 @@
 #define __NMEA__CHECKS__HPP__
 
 #include <algorithm>
-#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <marnav/nmea/constants.hpp>
@@ -13,24 +12,32 @@ namespace marnav
 {
 namespace nmea
 {
+/// @cond DEV
 namespace
 {
 template <typename T>
 static void throw_elaborated_invalid_argument(
 	T value, std::initializer_list<T> options, const char * name = nullptr)
 {
-	using namespace std;
-
-	ostringstream os;
-	os << "invalid argument, value '" << to_string(value) << "' not in options:{";
-	for (auto const & opt : options)
-		os << " " << to_string(opt);
-	os << " }";
-	if (name)
-		os << " for '" << name << "'";
-	throw invalid_argument{os.str()};
+	std::string text;
+	text.reserve(64);
+	text += "invalid argument, value '";
+	text += to_string(value);
+	text += "' not in options:{";
+	for (auto const & opt : options) {
+		text += ' ';
+		text += to_string(opt);
+	}
+	text += " }";
+	if (name) {
+		text += " for '";
+		text += name;
+		text += '\'';
+	}
+	throw std::invalid_argument{text};
 }
 }
+/// @endcond
 
 /// Checks the value agains a list of possible values.
 ///

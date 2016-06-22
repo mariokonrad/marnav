@@ -86,15 +86,5 @@ date date::parse(const std::string & str)
 		throw std::invalid_argument{"invalid date format, 'DDMMYY' expected"};
 	}
 }
-
-std::ostream & operator<<(std::ostream & os, const date & d) { return os << to_string(d); }
-
-std::istream & operator>>(std::istream & is, date & d)
-{
-	std::string s;
-	is >> s;
-	d = date::parse(s);
-	return is;
-}
 }
 }

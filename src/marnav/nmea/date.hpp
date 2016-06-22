@@ -67,8 +67,6 @@ private:
 
 bool operator==(const date & a, const date & b) noexcept;
 std::string to_string(const date & d);
-std::ostream & operator<<(std::ostream & os, const date & d);
-std::istream & operator>>(std::istream & is, date & d);
 }
 }
 
