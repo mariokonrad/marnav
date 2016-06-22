@@ -348,6 +348,8 @@ install(
 install(
 	FILES
 		marnav/nmea/constants.hpp
+		marnav/nmea/talker_id.hpp
+		marnav/nmea/sentence_id.hpp
 		marnav/nmea/convert.hpp
 		marnav/nmea/waypoint.hpp
 		marnav/nmea/manufacturer.hpp
