@@ -1,7 +1,10 @@
 #ifndef __NMEA__NMEA__HPP__
 #define __NMEA__NMEA__HPP__
 
-#include <marnav/nmea/sentence.hpp>
+#include <memory>
+#include <string>
+#include <vector>
+#include <marnav/nmea/sentence_id.hpp>
 
 namespace marnav
 {
@@ -49,6 +52,8 @@ class unknown_sentence : public std::logic_error
 public:
 	using logic_error::logic_error;
 };
+
+class sentence; // forward declaration
 
 std::unique_ptr<sentence> make_sentence(const std::string & s, bool ignore_checksum = false);
 

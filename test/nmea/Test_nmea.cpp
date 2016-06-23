@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
-#include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/checksum.hpp>
+#include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/sentence.hpp>
 
 namespace
 {

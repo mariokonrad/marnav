@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/sentence.hpp>
 
 namespace stackoverflow
 {
