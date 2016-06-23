@@ -159,6 +159,14 @@ static sentence::parse_function instantiate_sentence(const std::string & tag)
 	return i->parse;
 }
 
+/// Returns true of the speficied address string indicates a proprietary sentence.
+static bool is_proprietary(const std::string & s)
+{
+	if (s.size() < 1)
+		return false;
+	return s[0] == 'P';
+}
+
 /// Checks if the address field of the specified sentence is a vendor extension or
 /// a regular sentence. It returns the talker ID and tag accordingly.
 ///
@@ -173,7 +181,7 @@ static std::tuple<std::string, std::string> parse_address(const std::string & ad
 		throw std::invalid_argument{"invalid/malformed address in nmea/parse_address"};
 
 	// check for vendor extensions
-	if (sentence::is_proprietary(address)) {
+	if (is_proprietary(address)) {
 		// proprietary extension / vendor extension
 		return make_tuple(std::string{}, address);
 	}

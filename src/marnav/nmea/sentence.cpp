@@ -21,14 +21,6 @@ void sentence::set_talker(const std::string & talker)
 	talker_ = talker;
 }
 
-/// Returns true of the speficied address string indicates a proprietary sentence.
-bool sentence::is_proprietary(const std::string & s)
-{
-	if (s.size() < 1)
-		return false;
-	return s[0] == 'P';
-}
-
 std::string to_string(const sentence & s)
 {
 	std::string result;

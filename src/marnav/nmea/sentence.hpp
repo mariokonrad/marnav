@@ -45,8 +45,6 @@ public:
 	std::string tag() const { return tag_; }
 	std::string talker() const { return talker_; }
 
-	static bool is_proprietary(const std::string & s);
-
 	/// Sets the talker of the sentence.
 	///
 	/// @note All subclasses specify a default talker at construction.
