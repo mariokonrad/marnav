@@ -151,6 +151,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/nmea/time.cpp
 	marnav/nmea/checksum.cpp
 	marnav/nmea/sentence.cpp
+	marnav/nmea/detail.cpp
 	marnav/nmea/nmea.cpp
 	marnav/nmea/aam.cpp
 	marnav/nmea/alm.cpp
@@ -360,6 +361,7 @@ install(
 		marnav/nmea/time.hpp
 		marnav/nmea/checksum.hpp
 		marnav/nmea/sentence.hpp
+		marnav/nmea/detail.hpp
 		marnav/nmea/nmea.hpp
 		marnav/nmea/aam.hpp
 		marnav/nmea/alm.hpp

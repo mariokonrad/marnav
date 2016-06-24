@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# script for convenience setup of benchmark build
+
+CXX=g++-6 CC=gcc-6 \
+	cmake \
+		-DCMAKE_BUILD_TYPE=Release\
+		-DCMAKE_EXPORT_COMPILE_COMMANDS=YES \
+		-DENABLE_BENCHMARK=YES \
+		..
+

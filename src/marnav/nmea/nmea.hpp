@@ -33,6 +33,14 @@ namespace marnav
 /// }
 /// @endcode
 ///
+/// **Example:** create a specific sentence from a given string
+/// @code
+/// using namespace marnav;
+///
+/// const auto bod = nmea::create_sentence<nmea::bod>("$GPBOD,099.3,T,105.6,M,POINTB,*01");
+/// std::cout << bod.get_waypoint_from() << " -> " << bod.get_waypoint_to() << "\n";
+/// @endcode
+///
 /// **Example:** create a sentence and encode it to a string
 /// @code
 /// using namespace marnav;

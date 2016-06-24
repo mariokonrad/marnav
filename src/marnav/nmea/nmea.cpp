@@ -1,13 +1,11 @@
 #include "nmea.hpp"
-
 #include <algorithm>
-
-#include <marnav/nmea/split.hpp>
 #include <marnav/nmea/angle.hpp>
-#include <marnav/nmea/time.hpp>
-#include <marnav/nmea/date.hpp>
-#include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/checksum.hpp>
+#include <marnav/nmea/date.hpp>
+#include <marnav/nmea/detail.hpp>
+#include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/time.hpp>
 #include <marnav/nmea/aam.hpp>
 #include <marnav/nmea/alm.hpp>
 #include <marnav/nmea/apb.hpp>
@@ -89,6 +87,7 @@ namespace marnav
 {
 namespace nmea
 {
+/// @cond DEV
 namespace
 {
 // local macro, used for convenience while registering sentences
@@ -135,6 +134,8 @@ static const std::vector<entry> known_sentences = {
 #undef REGISTER_SENTENCE
 }
 
+/// @endcond
+
 /// @cond DEV
 namespace detail
 {
@@ -175,7 +176,11 @@ static bool is_proprietary(const std::string & s)
 ///   the talker ID may be empty.
 /// @exception std::invalid_argument The specified address was probably malformed or
 //    empty.
-static std::tuple<std::string, std::string> parse_address(const std::string & address)
+///
+/// @note This function must be defined here, not in the file detail.cpp,
+///       because it needs access to the known sentences, which the other file
+///       does not, nor should have.
+std::tuple<std::string, std::string> parse_address(const std::string & address)
 {
 	if (address.empty())
 		throw std::invalid_argument{"invalid/malformed address in nmea/parse_address"};
@@ -207,7 +212,11 @@ static std::tuple<std::string, std::string> parse_address(const std::string & ad
 /// @param[in] expected The expected checksum to test against.
 /// @exception checksum_error Thrown if the checksum does not match.
 /// @exception std::invalid_argument Arguments were invalid.
-static void ensure_checksum(const std::string & s, const std::string & expected)
+///
+/// @note This function must be defined here, not in the file detail.cpp,
+///       because it needs access to the class sentence, which the other file
+///       does not, nor should have.
+void ensure_checksum(const std::string & s, const std::string & expected)
 {
 	auto const end_pos = s.find_first_of(sentence::end_token, 1);
 	if (end_pos == std::string::npos) // end token not found
@@ -218,6 +227,18 @@ static void ensure_checksum(const std::string & s, const std::string & expected)
 	const uint8_t sum = checksum(begin(s) + 1, begin(s) + end_pos);
 	if (expected_checksum != sum)
 		throw checksum_error{expected_checksum, sum};
+}
+
+/// @note This function must be defined here, not in the file detail.cpp,
+///       because it needs access to the class sentence, which the other file
+///       does not, nor should have.
+void check_raw_sentence(const std::string & s)
+{
+	// perform various checks
+	if (s.empty())
+		throw std::invalid_argument{"empty string in nmea/make_sentence"};
+	if ((s[0] != sentence::start_token) && (s[0] != sentence::start_token_ais))
+		throw std::invalid_argument{"no start token in nmea/make_sentence"};
 }
 }
 /// @endcond
@@ -290,32 +311,12 @@ sentence_id tag_to_id(const std::string & tag)
 /// @endcode
 std::unique_ptr<sentence> make_sentence(const std::string & s, bool ignore_checksum)
 {
-	using namespace std;
-
-	// perform various checks
-	if (s.empty())
-		throw invalid_argument{"empty string in nmea/make_sentence"};
-	if ((s[0] != sentence::start_token) && (s[0] != sentence::start_token_ais))
-		throw invalid_argument{"no start token in nmea/make_sentence"};
-
-	// extract all fields, skip start token
-	std::vector<std::string> fields = detail::parse_fields(s);
-	if (fields.size() < 2) // at least address and checksum must be present
-		throw std::invalid_argument{"malformed sentence in nmea/make_sentence"};
-
-	// checksum stuff
-	if (!ignore_checksum) {
-		detail::ensure_checksum(s, fields.back());
-	}
-
-	// extract address and posibly talker_id and tag.
-	// check for vendor extension is necessary because the address field of this extensions
-	// to not follow the pattern talker_id/tag
 	std::string talker;
 	std::string tag;
-	std::tie(talker, tag) = detail::parse_address(fields.front());
-
-	return detail::instantiate_sentence(tag)(talker, next(begin(fields)), prev(end(fields)));
+	std::vector<std::string> fields;
+	std::tie(talker, tag, fields) = detail::extract_sentence_information(s, ignore_checksum);
+	return detail::instantiate_sentence(tag)(
+		talker, std::next(std::begin(fields)), std::prev(std::end(fields)));
 }
 }
 }

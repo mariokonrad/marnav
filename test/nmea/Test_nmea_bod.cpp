@@ -25,6 +25,18 @@ TEST_F(Test_nmea_bod, parse)
 	ASSERT_NE(nullptr, bod);
 }
 
+TEST_F(Test_nmea_bod, create_sentence)
+{
+	const auto s = nmea::create_sentence<nmea::bod>("$GPBOD,,T,,M,,*47");
+	EXPECT_EQ(nmea::sentence_id::BOD, s.id());
+}
+
+TEST_F(Test_nmea_bod, create_sentence_exception)
+{
+	EXPECT_ANY_THROW(nmea::create_sentence<nmea::bod>(""));
+	EXPECT_ANY_THROW(nmea::create_sentence<nmea::bod>("$IIMWV,084.0,R,10.4,N,A*04"));
+}
+
 TEST_F(Test_nmea_bod, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::bod>("@@", {5, "@"}));

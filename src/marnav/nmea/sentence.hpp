@@ -8,6 +8,7 @@
 #include <marnav/nmea/constants.hpp>
 #include <marnav/nmea/talker_id.hpp>
 #include <marnav/nmea/sentence_id.hpp>
+#include <marnav/nmea/detail.hpp>
 
 namespace marnav
 {
@@ -71,6 +72,30 @@ template <class T>
 std::unique_ptr<sentence> sentence_parse(const std::string & talker, const sentence::fields & f)
 {
 	return std::unique_ptr<T>(new T{talker, f.begin(), f.end()});
+}
+
+/// Creates the configured sentence object from the specified string.
+/// If the string is invalid or describes a non-configured sentence,
+/// an exception is thrown.
+///
+/// @note This function always checks the checksum and throws an
+///   exception if not correct.
+///
+/// @tparam T The type of sentence to create. The type must be derived
+///   from class sentence.
+///
+/// @param[in] s The raw NMEA sentence.
+/// @return The initialized sentence derived object.
+///
+template <typename T> T create_sentence(const std::string & s)
+{
+	detail::create_sentence_base_class_check<T>();
+	std::string talker;
+	std::string tag;
+	std::vector<std::string> fields;
+	std::tie(talker, tag, fields) = detail::extract_sentence_information(s);
+	// TODO: check (T::TAG == tag)? probably a bit too defensive...
+	return T{talker, std::next(std::begin(fields)), std::prev(std::end(fields))};
 }
 
 /// Renders the specified sentence into a string.
@@ -175,7 +200,8 @@ template <class T> const T * sentence_cast(const std::unique_ptr<sentence> & s)
 		sentence::fields::const_iterator first, sentence::fields::const_iterator last); \
 	template <class T>                                                                  \
 	friend std::unique_ptr<sentence> sentence_parse(                                    \
-		const std::string & talker, const sentence::fields & f);
+		const std::string & talker, const sentence::fields & f);                        \
+	template <typename T> friend T create_sentence(const std::string & s);
 
 #define MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(s)                                      \
 	namespace detail                                                                    \
