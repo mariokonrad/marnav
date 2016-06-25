@@ -3,6 +3,11 @@
 "
 " This just my personal preference for normal day-to-day development of this project.
 
+" clang-format
+map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.7.py<CR>
+imap <C-K> <ESC>:pyf /usr/share/vim/addons/syntax/clang-format-3.7.py<CR>i
+map <leader>fm ggVG :pyf /usr/share/vim/addons/syntax/clang-format-3.7.py<CR>
+
 " grepping
 map <F4> :grep -Ernw --include=*.c* --include=*.h* <cword> src <Bar> cw<CR>
 
