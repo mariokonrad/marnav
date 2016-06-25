@@ -76,6 +76,8 @@
 #include <marnav/nmea/pgrme.hpp>
 #include <marnav/nmea/nmea.hpp>
 
+using namespace marnav;
+
 namespace
 {
 struct sentence_data {
@@ -84,9 +86,9 @@ struct sentence_data {
 	std::string text;
 };
 
-#define INFO(s, text)                                                        \
-	{                                                                        \
-		std::type_index(typeid(marnav::nmea::s)), marnav::nmea::s::TAG, text \
+#define INFO(s, text)                                        \
+	{                                                        \
+		std::type_index(typeid(nmea::s)), nmea::s::TAG, text \
 	}
 
 // clang-format off
@@ -186,17 +188,107 @@ static void all_sentences(benchmark::internal::Benchmark * b)
 		b->Arg(i);
 	}
 }
+
+template <class T> static void specific(benchmark::internal::Benchmark * b)
+{
+	const auto i = std::find_if(sentences.begin(), sentences.end(),
+		[](const std::vector<sentence_data>::value_type & v) { return T::TAG == v.tag; });
+	b->Arg(std::distance(sentences.begin(), i));
+}
 }
 
 static void Benchmark_make_sentence(benchmark::State & state)
 {
 	state.SetLabel(sentences[state.range_x()].tag);
 	while (state.KeepRunning()) {
-		auto tmp = marnav::nmea::make_sentence(sentences[state.range_x()].text);
+		auto tmp = nmea::make_sentence(sentences[state.range_x()].text);
 		benchmark::DoNotOptimize(tmp);
 	}
 }
 
 BENCHMARK(Benchmark_make_sentence)->Apply(all_sentences);
+
+template <class T> static void Benchmark_create_sentence(benchmark::State & state)
+{
+	state.SetLabel(sentences[state.range_x()].tag);
+	while (state.KeepRunning()) {
+		auto tmp = nmea::create_sentence<T>(sentences[state.range_x()].text);
+		benchmark::DoNotOptimize(tmp);
+	}
+}
+
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::aam)->Apply(specific<nmea::aam>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::alm)->Apply(specific<nmea::alm>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::apb)->Apply(specific<nmea::apb>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::bod)->Apply(specific<nmea::bod>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::bwc)->Apply(specific<nmea::bwc>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::bwr)->Apply(specific<nmea::bwr>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::bww)->Apply(specific<nmea::bww>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::dbk)->Apply(specific<nmea::dbk>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::dbt)->Apply(specific<nmea::dbt>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::dpt)->Apply(specific<nmea::dpt>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::dsc)->Apply(specific<nmea::dsc>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::dse)->Apply(specific<nmea::dse>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::dtm)->Apply(specific<nmea::dtm>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::fsi)->Apply(specific<nmea::fsi>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::gbs)->Apply(specific<nmea::gbs>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::gga)->Apply(specific<nmea::gga>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::glc)->Apply(specific<nmea::glc>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::gll)->Apply(specific<nmea::gll>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::gns)->Apply(specific<nmea::gns>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::grs)->Apply(specific<nmea::grs>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::gsa)->Apply(specific<nmea::gsa>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::gst)->Apply(specific<nmea::gst>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::gsv)->Apply(specific<nmea::gsv>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::gtd)->Apply(specific<nmea::gtd>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::hdg)->Apply(specific<nmea::hdg>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::hfb)->Apply(specific<nmea::hfb>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::hdm)->Apply(specific<nmea::hdm>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::hsc)->Apply(specific<nmea::hsc>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::its)->Apply(specific<nmea::its>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::lcd)->Apply(specific<nmea::lcd>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::msk)->Apply(specific<nmea::msk>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::mss)->Apply(specific<nmea::mss>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::mtw)->Apply(specific<nmea::mtw>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::mwd)->Apply(specific<nmea::mwd>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::mwv)->Apply(specific<nmea::mwv>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::osd)->Apply(specific<nmea::osd>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::r00)->Apply(specific<nmea::r00>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::rma)->Apply(specific<nmea::rma>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::rmb)->Apply(specific<nmea::rmb>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::rmc)->Apply(specific<nmea::rmc>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::rot)->Apply(specific<nmea::rot>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::rpm)->Apply(specific<nmea::rpm>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::rsa)->Apply(specific<nmea::rsa>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::rsd)->Apply(specific<nmea::rsd>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::rte)->Apply(specific<nmea::rte>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::sfi)->Apply(specific<nmea::sfi>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::tds)->Apply(specific<nmea::tds>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::tfi)->Apply(specific<nmea::tfi>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::tll)->Apply(specific<nmea::tll>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::tpc)->Apply(specific<nmea::tpc>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::tpr)->Apply(specific<nmea::tpr>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::tpt)->Apply(specific<nmea::tpt>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::ttm)->Apply(specific<nmea::ttm>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::vbw)->Apply(specific<nmea::vbw>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::vdm)->Apply(specific<nmea::vdm>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::vdo)->Apply(specific<nmea::vdo>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::vdr)->Apply(specific<nmea::vdr>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::vhw)->Apply(specific<nmea::vhw>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::vlw)->Apply(specific<nmea::vlw>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::vpw)->Apply(specific<nmea::vpw>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::vtg)->Apply(specific<nmea::vtg>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::vwr)->Apply(specific<nmea::vwr>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::wcv)->Apply(specific<nmea::wcv>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::wnc)->Apply(specific<nmea::wnc>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::wpl)->Apply(specific<nmea::wpl>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::xdr)->Apply(specific<nmea::xdr>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::xte)->Apply(specific<nmea::xte>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::xtr)->Apply(specific<nmea::xtr>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::zda)->Apply(specific<nmea::zda>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::zdl)->Apply(specific<nmea::zdl>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::zfo)->Apply(specific<nmea::zfo>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::ztg)->Apply(specific<nmea::ztg>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::pgrme)->Apply(specific<nmea::pgrme>);
 
 BENCHMARK_MAIN()
