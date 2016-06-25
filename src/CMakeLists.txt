@@ -13,7 +13,6 @@ target_include_directories(nmeasum PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 	target_compile_options(nmeasum
 		PUBLIC
-			-std=c++11
 			-pipe
 			-ggdb
 			-Wall
@@ -23,7 +22,6 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 	target_compile_options(nmeasum
 		PUBLIC
-			-std=c++11
 			-pipe
 			-ggdb
 			-Wall
@@ -238,7 +236,6 @@ target_include_directories(marnav
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 	target_compile_options(marnav
 		PUBLIC
-			-std=c++11
 			-pipe
 			-ggdb
 			-Wall
@@ -319,7 +316,6 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 	target_compile_options(marnav
 		PUBLIC
-			-std=c++11
 			-pipe
 			-ggdb
 			-Wall
