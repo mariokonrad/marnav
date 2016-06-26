@@ -291,4 +291,15 @@ BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::zfo)->Apply(specific<nmea::z
 BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::ztg)->Apply(specific<nmea::ztg>);
 BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::pgrme)->Apply(specific<nmea::pgrme>);
 
+static void Benchmark_extract_id(benchmark::State & state)
+{
+	state.SetLabel(sentences[state.range_x()].tag);
+	while (state.KeepRunning()) {
+		auto tmp = nmea::extract_id(sentences[state.range_x()].text);
+		benchmark::DoNotOptimize(tmp);
+	}
+}
+
+BENCHMARK(Benchmark_extract_id)->Apply(all_sentences);
+
 BENCHMARK_MAIN()

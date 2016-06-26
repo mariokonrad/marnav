@@ -65,6 +65,8 @@ class sentence; // forward declaration
 
 std::unique_ptr<sentence> make_sentence(const std::string & s, bool ignore_checksum = false);
 
+sentence_id extract_id(const std::string & s);
+
 std::vector<std::string> get_supported_sentences_str();
 std::vector<sentence_id> get_supported_sentences_id();
 std::string to_string(sentence_id id);

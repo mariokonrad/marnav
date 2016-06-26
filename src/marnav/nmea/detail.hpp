@@ -15,7 +15,8 @@ class sentence; // forward declaration
 
 namespace detail
 {
-std::tuple<std::string, std::string> parse_address(const std::string & address);
+std::tuple<std::string, std::string> parse_address(
+	const std::string & address, bool ignore_unknown = false);
 
 void ensure_checksum(const std::string & s, const std::string & expected);
 

@@ -139,6 +139,13 @@ static const std::vector<entry> known_sentences = {
 /// @cond DEV
 namespace detail
 {
+/// Searches in the known sentences for the entry carrying the specified tag.
+static std::vector<entry>::const_iterator find_tag(const std::string & tag)
+{
+	return std::find_if(begin(known_sentences), end(known_sentences),
+		[tag](const entry & e) { return e.TAG == tag; });
+}
+
 /// Returns the parse function of a particular sentence.
 ///
 /// If an unknown sentence tag is specified, an exception is thrown.
@@ -147,15 +154,11 @@ namespace detail
 /// @return The parse function of the specified sentence.
 /// @exception std::unknown_sentence The specified tag could not be found,
 ///   the argument cannot be processed.
-static sentence::parse_function instantiate_sentence(const std::string & tag)
+static sentence::parse_function find_parse_func(const std::string & tag)
 {
-	using namespace std;
-
-	auto const & i = std::find_if(begin(known_sentences), end(known_sentences),
-		[tag](const entry & e) { return e.TAG == tag; });
-
-	if (i == end(known_sentences))
-		throw unknown_sentence{"unknown sentence in nmea/instantiate_sentence: " + tag};
+	const auto i = find_tag(tag);
+	if (i == std::end(known_sentences))
+		throw unknown_sentence{"unknown sentence in nmea/find_parse_func: " + tag};
 
 	return i->parse;
 }
@@ -172,6 +175,9 @@ static bool is_proprietary(const std::string & s)
 /// a regular sentence. It returns the talker ID and tag accordingly.
 ///
 /// @param[in] address The address field of a sentence.
+/// @param[in] ignore_unknown Flag to ignore unknown sentences. This prevents
+///   the function to search through all known sentences, which is not always
+///   necessary, depending on the context.
 /// @return The tuple contains talker ID and tag. In case of a vendor extension,
 ///   the talker ID may be empty.
 /// @exception std::invalid_argument The specified address was probably malformed or
@@ -180,23 +186,24 @@ static bool is_proprietary(const std::string & s)
 /// @note This function must be defined here, not in the file detail.cpp,
 ///       because it needs access to the known sentences, which the other file
 ///       does not, nor should have.
-std::tuple<std::string, std::string> parse_address(const std::string & address)
+std::tuple<std::string, std::string> parse_address(
+	const std::string & address, bool ignore_unknown)
 {
 	if (address.empty())
 		throw std::invalid_argument{"invalid/malformed address in nmea/parse_address"};
 
-	// check for vendor extensions
-	if (is_proprietary(address)) {
-		// proprietary extension / vendor extension
+	// check for proprietary extension / vendor extension
+	if (is_proprietary(address))
 		return make_tuple(std::string{}, address);
-	}
 
-	// search in all known sentences
-	using namespace std;
-	auto const & index = find_if(begin(known_sentences), end(known_sentences),
-		[address](const entry & e) { return e.TAG == address; });
-	if (index != end(known_sentences))
-		throw std::invalid_argument{"invalid address (" + address + ") in nmea/parse_address"};
+	if (!ignore_unknown) {
+		// search in all known sentences for 'long' tags. this is a special case
+		// and if the long address (not proprietary, this is covered above) doesn't exist,
+		// it must be an error.
+		if (find_tag(address) != std::end(known_sentences))
+			throw std::invalid_argument{
+				"invalid address (" + address + ") in nmea/parse_address"};
+	}
 
 	// found regular sentence
 	if (address.size() != 5) // talker ID:2 + tag:3
@@ -218,7 +225,7 @@ std::tuple<std::string, std::string> parse_address(const std::string & address)
 ///       does not, nor should have.
 void ensure_checksum(const std::string & s, const std::string & expected)
 {
-	auto const end_pos = s.find_first_of(sentence::end_token, 1);
+	const auto end_pos = s.find_first_of(sentence::end_token, 1);
 	if (end_pos == std::string::npos) // end token not found
 		throw std::invalid_argument{"invalid format in nmea/make_sentence"};
 	if (s.size() != end_pos + 3) // short or no checksum
@@ -246,10 +253,9 @@ void check_raw_sentence(const std::string & s)
 /// Returns a list of tags of supported sentences.
 std::vector<std::string> get_supported_sentences_str()
 {
-	using namespace std;
 	std::vector<std::string> v;
-	v.reserve(std::distance(begin(known_sentences), end(known_sentences)));
-	for (auto const & s : known_sentences) {
+	v.reserve(std::distance(std::begin(known_sentences), std::end(known_sentences)));
+	for (const auto & s : known_sentences) {
 		v.push_back(s.TAG);
 	}
 	return v;
@@ -258,10 +264,9 @@ std::vector<std::string> get_supported_sentences_str()
 /// Returns a list of IDs of supported sentences.
 std::vector<sentence_id> get_supported_sentences_id()
 {
-	using namespace std;
 	std::vector<sentence_id> v;
-	v.reserve(std::distance(begin(known_sentences), end(known_sentences)));
-	for (auto const & s : known_sentences) {
+	v.reserve(std::distance(std::begin(known_sentences), std::end(known_sentences)));
+	for (const auto & s : known_sentences) {
 		v.push_back(s.ID);
 	}
 	return v;
@@ -271,10 +276,9 @@ std::vector<sentence_id> get_supported_sentences_id()
 /// an exception is thrown.
 std::string to_string(sentence_id id)
 {
-	using namespace std;
-	auto i = find_if(begin(known_sentences), end(known_sentences),
+	auto i = std::find_if(std::begin(known_sentences), std::end(known_sentences),
 		[id](const entry & e) { return e.ID == id; });
-	if (i == end(known_sentences))
+	if (i == std::end(known_sentences))
 		throw unknown_sentence{"unknown sentence"};
 
 	return i->TAG;
@@ -284,10 +288,8 @@ std::string to_string(sentence_id id)
 /// an exceptioni s thrown.
 sentence_id tag_to_id(const std::string & tag)
 {
-	using namespace std;
-	auto i = find_if(begin(known_sentences), end(known_sentences),
-		[tag](const entry & e) { return e.TAG == tag; });
-	if (i == end(known_sentences))
+	const auto i = detail::find_tag(tag);
+	if (i == std::end(known_sentences))
 		throw unknown_sentence{"unknown sentence: " + tag};
 
 	return i->ID;
@@ -315,8 +317,30 @@ std::unique_ptr<sentence> make_sentence(const std::string & s, bool ignore_check
 	std::string tag;
 	std::vector<std::string> fields;
 	std::tie(talker, tag, fields) = detail::extract_sentence_information(s, ignore_checksum);
-	return detail::instantiate_sentence(tag)(
+	return detail::find_parse_func(tag)(
 		talker, std::next(std::begin(fields)), std::prev(std::end(fields)));
+}
+
+/// Extracts and returns the sentence ID of the specified raw NMEA sentence.
+///
+/// This function does not check the checksum.
+///
+/// @param[in] s The raw NMEA sentence.
+/// @return The sentence ID.
+/// @exception std::invalid_argument Thrown if the sentence is in invalid form.
+sentence_id extract_id(const std::string & s)
+{
+	detail::check_raw_sentence(s);
+
+	const auto pos = s.find_first_of(",");
+	if (pos == std::string::npos)
+		throw std::invalid_argument{"malformed sentence in extract_id"};
+
+	std::string talker;
+	std::string tag;
+	std::tie(talker, tag) = detail::parse_address(s.substr(1, pos - 1), true);
+
+	return tag_to_id(tag);
 }
 }
 }

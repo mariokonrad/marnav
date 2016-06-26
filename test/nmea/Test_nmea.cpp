@@ -52,7 +52,7 @@ TEST_F(Test_nmea, make_sentence_minimal_possible_sentence)
 	try {
 		nmea::make_sentence("$XXYYY*59");
 	} catch (std::exception & e) {
-		EXPECT_STREQ("unknown sentence in nmea/instantiate_sentence: YYY", e.what());
+		EXPECT_STREQ("unknown sentence in nmea/find_parse_func: YYY", e.what());
 	}
 }
 
@@ -61,7 +61,7 @@ TEST_F(Test_nmea, make_sentence_vendor_extension)
 	try {
 		nmea::make_sentence("$PXXX*08");
 	} catch (std::exception & e) {
-		EXPECT_STREQ("unknown sentence in nmea/instantiate_sentence: PXXX", e.what());
+		EXPECT_STREQ("unknown sentence in nmea/find_parse_func: PXXX", e.what());
 	}
 }
 
@@ -112,5 +112,17 @@ TEST_F(Test_nmea, to_string_sentence_id)
 TEST_F(Test_nmea, to_string_sentence_id_invalid_id)
 {
 	EXPECT_ANY_THROW(nmea::to_string(static_cast<nmea::sentence_id>(-1)));
+}
+
+TEST_F(Test_nmea, extract_id)
+{
+	EXPECT_EQ(nmea::sentence_id::BOD, nmea::extract_id("$GPBOD,,T,,M,,*47"));
+	EXPECT_ANY_THROW(nmea::extract_id(""));
+	EXPECT_ANY_THROW(nmea::extract_id("$"));
+	EXPECT_ANY_THROW(nmea::extract_id("XGPBOD,,T,,M,,*47"));
+	EXPECT_NO_THROW(nmea::extract_id("$GPBOD,,T,,M,,*XX"));
+	EXPECT_NO_THROW(nmea::extract_id("!GPBOD,,T,,M,,*XX"));
+	EXPECT_NO_THROW(nmea::extract_id("$GPBOD,"));
+	EXPECT_ANY_THROW(nmea::extract_id("$GPBOD"));
 }
 }
