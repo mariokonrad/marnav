@@ -211,8 +211,19 @@ auto sentence = nmea::make_sentence(
 	"$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
 std::cout << sentence->tag() << "\n";
 auto rmc = nmea::sentence_cast<nmea::rmc>(sentence);
-std::cout << "latitude : " << nmea::to_string(rmc->get_lat()) << "\n";
-std::cout << "longitude: " << nmea::to_string(rmc->get_lon()) << "\n";
+std::cout << "latitude : " << nmea::to_string(rmc->get_latitude()) << "\n";
+std::cout << "longitude: " << nmea::to_string(rmc->get_longitude()) << "\n";
+~~~~~~~~~~~~~
+
+Create a specific sentence directly:
+
+~~~~~~~~~~~~~{.cpp}
+using namespace marnav;
+
+auto rmc = nmea::create_sentence<nmea::rmc>(
+	"$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
+std::cout << "latitude : " << nmea::to_string(rmc.get_latitude()) << "\n";
+std::cout << "longitude: " << nmea::to_string(rmc.get_longitude()) << "\n";
 ~~~~~~~~~~~~~
 
 ### Write NMEA Sentence
