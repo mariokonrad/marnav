@@ -10,25 +10,14 @@ add_executable(nmeasum
 
 target_include_directories(nmeasum PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-	target_compile_options(nmeasum
-		PUBLIC
-			-pipe
-			-ggdb
-			-Wall
-			-Wextra
-			-pedantic-errors
-		)
-elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-	target_compile_options(nmeasum
-		PUBLIC
-			-pipe
-			-ggdb
-			-Wall
-			-Wextra
-			-pedantic-errors
-		)
-endif()
+target_compile_options(nmeasum
+	PRIVATE
+		-pipe
+		-ggdb
+		-Wall
+		-Wextra
+		-pedantic-errors
+	)
 
 ### lib: marnav
 
@@ -233,94 +222,84 @@ target_include_directories(marnav
 		${CMAKE_CURRENT_BINARY_DIR}
 	)
 
-if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+target_compile_options(marnav
+	PRIVATE
+		-pipe
+		-ggdb
+		-Wall
+		-Wextra
+		-pedantic-errors
+		-Wold-style-cast
+	)
+if(ENABLE_PROFILING)
 	target_compile_options(marnav
 		PUBLIC
-			-pipe
-			-ggdb
-			-Wall
-			-Wextra
-			-pedantic-errors
-			-Wold-style-cast
+			-pg
 		)
-	if(ENABLE_PROFILING)
-		target_compile_options(marnav
-			PUBLIC
-				-pg
-			)
-	endif()
-	if(ENABLE_BENCHMARK)
-		target_compile_options(marnav
-			PUBLIC
-				-fno-omit-frame-pointer
-			)
-	endif()
-	if(ENABLE_WARNING_HELL)
-		message(STATUS "Behold: entering the hell of extended warnings")
-		target_compile_options(marnav
-			PUBLIC
-				# some are not enabled on purpose
-				-Wcast-align
-				-Wcast-qual
-				-Werror
-				-Wdisabled-optimization
-				-Wfloat-equal
-				-Wformat=2
-				-Wformat-security
-				-Wformat-y2k
-				-Wimport
-				-Winit-self
-				-Winline
-				-Wmissing-field-initializers
-				-Wmissing-format-attribute
-				-Wmissing-include-dirs
-				-Wmissing-noreturn
-				-Woverloaded-virtual
-				-Wpacked
-				-Wpointer-arith
-				-Wredundant-decls
-				-Wstrict-aliasing=2
-				-Wswitch
-				-Wunreachable-code
-				-Wunused
-				-Wunused-parameter
-				-Wvariadic-macros
-				-Wwrite-strings
-				# explicitly disabled on purpose:
-				#-Wconversion
-				#-Wsign-conversion
-				#-Wstack-protector
-				-Wno-effc++
-				-Wno-padded
-				-Wno-long-long
-				-Wno-unused-function
-				-Wno-comment
-				-Wno-format-nonliteral
-				-Wno-shadow
-				-Wno-switch-enum
-				-Wno-switch-default
-			)
-	endif()
-	if(build_type_lower MATCHES coverage)
-		message(STATUS "Coverage: enabled")
-		target_compile_options(marnav
-			PUBLIC
-				--coverage
-				-fprofile-arcs
-				-ftest-coverage
-				-fno-inline
-				-fno-inline-small-functions
-				-fno-default-inline
-			)
-	endif()
-elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+endif()
+if(ENABLE_BENCHMARK)
 	target_compile_options(marnav
 		PUBLIC
-			-pipe
-			-ggdb
-			-Wall
-			-Wextra
-			-pedantic-errors
+			-fno-omit-frame-pointer
+		)
+endif()
+if(ENABLE_WARNING_HELL)
+	message(STATUS "Behold: entering the hell of extended warnings")
+	target_compile_options(marnav
+		PRIVATE
+			# some are not enabled on purpose
+			-Wcast-align
+			-Wcast-qual
+			-Werror
+			-Wdisabled-optimization
+			-Wfloat-equal
+			-Wformat=2
+			-Wformat-security
+			-Wformat-y2k
+			-Wimport
+			-Winit-self
+			-Winline
+			-Wmissing-field-initializers
+			-Wmissing-format-attribute
+			-Wmissing-include-dirs
+			-Wmissing-noreturn
+			-Woverloaded-virtual
+			-Wpacked
+			-Wpointer-arith
+			-Wredundant-decls
+			-Wstrict-aliasing=2
+			-Wswitch
+			-Wunreachable-code
+			-Wunused
+			-Wunused-parameter
+			-Wvariadic-macros
+			-Wwrite-strings
+			# explicitly disabled on purpose:
+			#-Wconversion
+			#-Wsign-conversion
+			#-Wstack-protector
+			-Wno-effc++
+			-Wno-padded
+			-Wno-long-long
+			-Wno-unused-function
+			-Wno-comment
+			-Wno-format-nonliteral
+			-Wno-shadow
+			-Wno-switch-enum
+			-Wno-switch-default
+		)
+endif()
+
+if(build_type_lower MATCHES coverage)
+	message(STATUS "Coverage: enabled")
+	target_compile_options(marnav
+		PUBLIC
+			--coverage
+			-fprofile-arcs
+			-ftest-coverage
+			-fno-inline
+			-fno-inline-small-functions
+			-fno-default-inline
 		)
 endif()
 
