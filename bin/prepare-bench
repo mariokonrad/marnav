@@ -2,10 +2,11 @@
 
 # script for convenience setup of benchmark build
 
-CXX=g++-6 CC=gcc-6 \
-	cmake \
-		-DCMAKE_BUILD_TYPE=Release\
-		-DCMAKE_EXPORT_COMPILE_COMMANDS=YES \
-		-DENABLE_BENCHMARK=YES \
-		..
+cmake \
+	-DCMAKE_CXX_COMPILER=g++-6 \
+	-DCMAKE_C_COMPILER=gcc-6 \
+	-DCMAKE_EXPORT_COMPILE_COMMANDS=YES \
+	-DCMAKE_BUILD_TYPE=Release\
+	-DENABLE_BENCHMARK=YES \
+	..
 

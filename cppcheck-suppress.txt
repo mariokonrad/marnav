@@ -2,3 +2,4 @@ unusedFunction
 missingIncludeSystem
 noExplicitConstructor
 noExplicitCopyMoveConstructor
+purgedConfiguration
