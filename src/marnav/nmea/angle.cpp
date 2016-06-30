@@ -6,7 +6,9 @@ namespace marnav
 {
 namespace nmea
 {
-
+/// @cond DEV
+namespace
+{
 static geo::angle parse_angle(const std::string & s)
 {
 	if (s.empty())
@@ -25,6 +27,8 @@ static geo::angle parse_angle(const std::string & s)
 
 	return geo::angle{deg + min};
 }
+}
+/// @endcond
 
 /// Returns the latitude, representing the specified string. The provided string is assumed
 /// to be in the form specified by the NMEA standard.

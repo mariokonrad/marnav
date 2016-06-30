@@ -34,9 +34,6 @@ public:
 
 	constexpr double get() const noexcept { return value; }
 
-	friend bool operator==(const angle & a, const angle & b) noexcept;
-	friend bool operator!=(const angle & a, const angle & b) noexcept;
-
 	angle & operator=(const angle &) = default;
 	angle & operator=(angle &&) noexcept = default;
 
@@ -77,9 +74,6 @@ public:
 
 	latitude & operator=(const latitude &) = default;
 	latitude & operator=(latitude &&) noexcept = default;
-
-	friend bool operator==(const latitude & a, const latitude & b) noexcept;
-	friend bool operator!=(const latitude & a, const latitude & b) noexcept;
 
 	/// Deletion of this operator prevents comparison of apples and oranges.
 	bool operator==(const angle &) const = delete;
@@ -142,9 +136,6 @@ public:
 
 	longitude & operator=(const longitude &) = default;
 	longitude & operator=(longitude &&) noexcept = default;
-
-	friend bool operator==(const longitude & a, const longitude & b) noexcept;
-	friend bool operator!=(const longitude & a, const longitude & b) noexcept;
 
 	/// Deletion of this operator prevents comparison of apples and oranges.
 	bool operator==(const angle &) const = delete;
