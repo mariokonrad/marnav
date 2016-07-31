@@ -94,7 +94,6 @@ template <typename T> T create_sentence(const std::string & s)
 	std::string tag;
 	std::vector<std::string> fields;
 	std::tie(talker, tag, fields) = detail::extract_sentence_information(s);
-	// TODO: check (T::TAG == tag)? probably a bit too defensive...
 	return T{talker, std::next(std::begin(fields)), std::prev(std::end(fields))};
 }
 

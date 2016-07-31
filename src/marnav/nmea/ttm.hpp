@@ -38,7 +38,9 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(ttm)
 /// 12. Target Status
 /// 13. Reference Target
 ///
-/// @todo Check reference from GLOBALSAT regarding field 14 and 15
+/// @note Field 14 and 15 are not supported right now due to lack of
+///       documentation. The sentence just ignores them. The other fields
+///       are being processed.
 ///
 class ttm : public sentence
 {

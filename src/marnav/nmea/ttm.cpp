@@ -1,5 +1,4 @@
 #include "ttm.hpp"
-
 #include <marnav/nmea/checks.hpp>
 #include <marnav/nmea/io.hpp>
 
@@ -19,7 +18,12 @@ ttm::ttm()
 ttm::ttm(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 	: sentence(ID, TAG, talker)
 {
-	if (std::distance(first, last) != 13)
+	// according to http://catb.org/gpsd/NMEA.html#_ttm_tracked_target_message
+	// there are fields 14 and 15, but not supported by this implementation.
+
+	const auto dist = std::distance(first, last);
+
+	if ((dist < 13) || (dist > 15))
 		throw std::invalid_argument{"invalid number of fields in ttm"};
 
 	read(*(first + 0), target_number);
