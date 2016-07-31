@@ -33,7 +33,7 @@ TEST_F(Test_ais_message_22, encode_default_values_broadcast)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ("F000000000000000000000000000", v[0].first.c_str());
+	EXPECT_STREQ("F00000000003D73EB6`>6bT00000", v[0].first.c_str());
 	EXPECT_EQ(0u, v[0].second);
 }
 

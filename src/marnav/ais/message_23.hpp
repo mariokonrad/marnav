@@ -51,10 +51,10 @@ private:
 	// clang-format off
 	bitset_value<  6,  2, uint32_t       > repeat_indicator = 0;
 	bitset_value<  8, 30, uint32_t       > mmsi = 0;
-	bitset_value< 40, 18, uint32_t       > ne_lon = 0; // 0.1 minutes, TODO: fix initialization
-	bitset_value< 58, 17, uint32_t       > ne_lat = 0; // 0.1 minutes, TODO: fix initialization
-	bitset_value< 75, 18, uint32_t       > sw_lon = 0; // 0.1 minutes, TODO: fix initialization
-	bitset_value< 93, 17, uint32_t       > sw_lat = 0; // 0.1 minutes, TODO: fix initialization
+	bitset_value< 40, 18, uint32_t       > ne_lon = longitude_not_available_short;
+	bitset_value< 58, 17, uint32_t       > ne_lat = latitude_not_available_short;
+	bitset_value< 75, 18, uint32_t       > sw_lon = longitude_not_available_short;
+	bitset_value< 93, 17, uint32_t       > sw_lat = latitude_not_available_short;
 	bitset_value<110,  4, uint32_t       > station_type = 0;
 	bitset_value<114,  8, ship_type      > shiptype = ship_type::not_available;
 	bitset_value<144,  2, uint32_t       > txrx_mode = 0;

@@ -48,11 +48,10 @@ private:
 	bitset_value<142,  3, uint32_t> zone_size = 0;
 
 	// addressed = 0 (broadcast)
-	// TODO: correct initialization
-	bitset_value< 69, 18, uint32_t> ne_lon = 0; // 0.1 minutes
-	bitset_value< 87, 17, uint32_t> ne_lat = 0; // 0.1 minutes
-	bitset_value<104, 18, uint32_t> sw_lon = 0; // 0.1 minutes
-	bitset_value<122, 17, uint32_t> sw_lat = 0; // 0.1 minutes
+	bitset_value< 69, 18, uint32_t> ne_lon = longitude_not_available_short;
+	bitset_value< 87, 17, uint32_t> ne_lat = latitude_not_available_short;
+	bitset_value<104, 18, uint32_t> sw_lon = longitude_not_available_short;
+	bitset_value<122, 17, uint32_t> sw_lat = latitude_not_available_short;
 
 	// addressed = 1 (addressed)
 	bitset_value< 69, 30, uint32_t> mmsi_1 = 0;

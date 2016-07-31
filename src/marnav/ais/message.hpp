@@ -147,6 +147,12 @@ constexpr static const uint32_t longitude_not_available = 0x6791AC0;
 /// Value for a latitude that is not specified.
 constexpr static const uint32_t latitude_not_available = 0x3412140;
 
+/// Value for a longitude that is not specified, short version.
+constexpr static const uint32_t longitude_not_available_short = 0x1a838;
+
+/// Value for a latitude that is not specified, short version.
+constexpr static const uint32_t latitude_not_available_short = 0xd548;
+
 /// Value for a speed over ground that is not specified.
 constexpr static const uint32_t sog_not_available = 1023;
 
