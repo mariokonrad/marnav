@@ -1,4 +1,5 @@
 #include "gsa.hpp"
+#include <limits>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav
@@ -23,11 +24,14 @@ gsa::gsa(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 0), sel_mode);
 	read(*(first + 1), mode);
 
+	constexpr uint32_t init_val = std::numeric_limits<uint32_t>::max();
+
 	int index = 2;
 	for (auto i = 0; i < max_satellite_ids; ++i, ++index) {
-		uint32_t id;
+		uint32_t id = init_val;
 		read(*(first + index), id);
-		set_satellite_id(i + 1, id);
+		if (id != init_val)
+			set_satellite_id(i, id);
 	}
 	read(*(first + 14), pdop);
 	read(*(first + 15), hdop);
@@ -36,7 +40,7 @@ gsa::gsa(const std::string & talker, fields::const_iterator first, fields::const
 
 void gsa::check_index(int index) const
 {
-	if ((index < 1) || (index > 12)) {
+	if ((index < 0) || (index >= max_satellite_ids)) {
 		throw std::out_of_range{"satellite id out of range"};
 	}
 }
@@ -44,13 +48,13 @@ void gsa::check_index(int index) const
 void gsa::set_satellite_id(int index, uint32_t t)
 {
 	check_index(index);
-	satellite_id[index - 1] = t;
+	satellite_id[index] = t;
 }
 
 utils::optional<uint32_t> gsa::get_satellite_id(int index) const
 {
 	check_index(index);
-	return satellite_id[index - 1];
+	return satellite_id[index];
 }
 
 std::vector<std::string> gsa::get_data() const

@@ -48,7 +48,7 @@ TEST_F(Test_nmea_gsa, set_sel_mode)
 
 TEST_F(Test_nmea_gsa, set_satellite_id_indexed)
 {
-	static const std::string DATA[12] = {
+	static const std::string DATA[nmea::gsa::max_satellite_ids] = {
 		"$GPGSA,,,01,,,,,,,,,,,,,,*6F", "$GPGSA,,,,01,,,,,,,,,,,,,*6F",
 		"$GPGSA,,,,,01,,,,,,,,,,,,*6F", "$GPGSA,,,,,,01,,,,,,,,,,,*6F",
 		"$GPGSA,,,,,,,01,,,,,,,,,,*6F", "$GPGSA,,,,,,,,01,,,,,,,,,*6F",
@@ -59,7 +59,7 @@ TEST_F(Test_nmea_gsa, set_satellite_id_indexed)
 
 	for (size_t i = 0; i < sizeof(DATA) / sizeof(DATA[0]); ++i) {
 		nmea::gsa gsa;
-		gsa.set_satellite_id(i + 1, 1);
+		gsa.set_satellite_id(i, 1);
 		EXPECT_STREQ(DATA[i].c_str(), nmea::to_string(gsa).c_str());
 	}
 }
@@ -68,8 +68,8 @@ TEST_F(Test_nmea_gsa, set_satellite_id_indexed_invalid_index)
 {
 	nmea::gsa gsa;
 
-	EXPECT_ANY_THROW(gsa.set_satellite_id(0, 1));
-	EXPECT_ANY_THROW(gsa.set_satellite_id(13, 1));
+	EXPECT_ANY_THROW(gsa.set_satellite_id(-1, 1));
+	EXPECT_ANY_THROW(gsa.set_satellite_id(12, 1));
 	EXPECT_ANY_THROW(gsa.set_satellite_id(99, 1));
 }
 
@@ -77,8 +77,8 @@ TEST_F(Test_nmea_gsa, get_satellite_id_invalid_index)
 {
 	nmea::gsa gsa;
 
-	EXPECT_ANY_THROW(gsa.get_satellite_id(0));
-	EXPECT_ANY_THROW(gsa.get_satellite_id(13));
+	EXPECT_ANY_THROW(gsa.get_satellite_id(-1));
+	EXPECT_ANY_THROW(gsa.get_satellite_id(12));
 	EXPECT_ANY_THROW(gsa.get_satellite_id(99));
 }
 
@@ -91,7 +91,7 @@ TEST_F(Test_nmea_gsa, get_satellite_id)
 	ASSERT_NE(nullptr, gsa);
 
 	uint32_t id = 11;
-	for (int index = 1; index <= 12; ++index, ++id) {
+	for (int index = 0; index < nmea::gsa::max_satellite_ids; ++index, ++id) {
 		EXPECT_EQ(id, *gsa->get_satellite_id(index));
 	}
 }

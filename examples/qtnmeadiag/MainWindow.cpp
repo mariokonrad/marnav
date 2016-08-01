@@ -17,6 +17,7 @@
 #include <marnav/nmea/checksum.hpp>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/gga.hpp>
+#include <marnav/nmea/gsa.hpp>
 #include <marnav/nmea/gsv.hpp>
 #include <marnav/nmea/mwv.hpp>
 #include <marnav/nmea/rmb.hpp>
@@ -66,6 +67,21 @@ static QString render(const marnav::utils::optional<marnav::geo::longitude> & t)
 		.arg(t->minutes(), 2, 10, QLatin1Char('0'))
 		.arg(t->seconds(), 2, 'f', 1, QLatin1Char('0'))
 		.arg(to_string(t->hem()).c_str());
+}
+
+static QString render(const marnav::utils::optional<marnav::nmea::selection_mode> & t)
+{
+	if (!t)
+		return "-";
+	switch (*t) {
+		case marnav::nmea::selection_mode::manual:
+			return QString{"manual"};
+		case marnav::nmea::selection_mode::automatic:
+			return QString{"automatic"};
+		default:
+			break;
+	}
+	return "-";
 }
 
 static QString details_rmb(const marnav::nmea::sentence * s)
@@ -153,6 +169,21 @@ static QString details_gsv(const marnav::nmea::sentence * s)
 	}
 	return result;
 }
+
+static QString details_gsa(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gsa>(s);
+	QString result;
+	result += "\nSelection Mode: " + render(t->get_sel_mode());
+	result += "\nMode          : " + render(t->get_mode());
+	for (auto i = 0; i < marnav::nmea::gsa::max_satellite_ids; ++i) {
+		result += QString{"\nSatellite %1  : %2"}.arg(i, 2).arg(render(t->get_satellite_id(i)));
+	}
+	result += "\nPDOP          : " + render(t->get_pdop());
+	result += "\nHDOP          : " + render(t->get_hdop());
+	result += "\nVDOP          : " + render(t->get_vdop());
+	return result;
+}
 }
 
 static QString get_details(const marnav::nmea::sentence * s)
@@ -164,6 +195,7 @@ static QString get_details(const marnav::nmea::sentence * s)
 	using container = std::vector<entry>;
 	static const container details = {
 		{marnav::nmea::sentence_id::GGA, detail::details_gga},
+		{marnav::nmea::sentence_id::GSA, detail::details_gsa},
 		{marnav::nmea::sentence_id::GSV, detail::details_gsv},
 		{marnav::nmea::sentence_id::MWV, detail::details_mwv},
 		{marnav::nmea::sentence_id::RMB, detail::details_rmb},

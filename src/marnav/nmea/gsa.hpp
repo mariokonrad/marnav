@@ -46,6 +46,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GSA;
 	constexpr static const char * TAG = "GSA";
 
+	constexpr static const int max_satellite_ids = 12;
+
 	virtual ~gsa() {}
 
 	gsa();
@@ -57,8 +59,6 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	constexpr static const int max_satellite_ids = 12;
-
 	utils::optional<selection_mode> sel_mode; // A:automatic 2D/3D, M:manual
 	utils::optional<uint32_t> mode; // 1 = no fix, 2 = 2D fix, 3 = 3D fix
 	std::array<utils::optional<uint32_t>, max_satellite_ids> satellite_id;
