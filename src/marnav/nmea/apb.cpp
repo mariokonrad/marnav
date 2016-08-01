@@ -43,7 +43,7 @@ apb::apb(const std::string & talker, fields::const_iterator first, fields::const
 	check();
 }
 
-void apb::set_bearing_origin_to_destination(uint32_t t, reference ref)
+void apb::set_bearing_origin_to_destination(double t, reference ref)
 {
 	check_value(bearing_origin_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
 		"bearing_origin_to_destination_ref");
@@ -51,7 +51,7 @@ void apb::set_bearing_origin_to_destination(uint32_t t, reference ref)
 	bearing_origin_to_destination_ref = ref;
 }
 
-void apb::set_bearing_pos_to_destination(uint32_t t, reference ref)
+void apb::set_bearing_pos_to_destination(double t, reference ref)
 {
 	check_value(bearing_pos_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
 		"bearing_pos_to_destination_ref");
@@ -59,7 +59,7 @@ void apb::set_bearing_pos_to_destination(uint32_t t, reference ref)
 	bearing_pos_to_destination_ref = ref;
 }
 
-void apb::set_heading_to_steer_to_destination(uint32_t t, reference ref)
+void apb::set_heading_to_steer_to_destination(double t, reference ref)
 {
 	check_value(heading_to_steer_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
 		"heading_to_steer_to_destination_ref");
@@ -112,10 +112,10 @@ std::vector<std::string> apb::get_data() const
 	return {to_string(loran_c_blink_warning), to_string(loran_c_cycle_lock_warning),
 		format(cross_track_error_magnitude, 2), to_string(direction_to_steer),
 		to_string(cross_track_unit), to_string(status_arrival),
-		to_string(status_perpendicular_passing), format(bearing_origin_to_destination, 3),
+		to_string(status_perpendicular_passing), format(bearing_origin_to_destination, 1),
 		to_string(bearing_origin_to_destination_ref), to_string(waypoint_id),
-		format(bearing_pos_to_destination, 3), to_string(bearing_pos_to_destination_ref),
-		format(heading_to_steer_to_destination, 3),
+		format(bearing_pos_to_destination, 1), to_string(bearing_pos_to_destination_ref),
+		format(heading_to_steer_to_destination, 1),
 		to_string(heading_to_steer_to_destination_ref), to_string(mode_indicator)};
 }
 }

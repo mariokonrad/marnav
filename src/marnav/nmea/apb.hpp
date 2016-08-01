@@ -85,12 +85,12 @@ private:
 	utils::optional<unit::distance> cross_track_unit;
 	utils::optional<status> status_arrival;
 	utils::optional<status> status_perpendicular_passing;
-	utils::optional<uint32_t> bearing_origin_to_destination;
+	utils::optional<double> bearing_origin_to_destination;
 	utils::optional<reference> bearing_origin_to_destination_ref;
 	utils::optional<waypoint> waypoint_id;
-	utils::optional<uint32_t> bearing_pos_to_destination;
+	utils::optional<double> bearing_pos_to_destination;
 	utils::optional<reference> bearing_pos_to_destination_ref;
-	utils::optional<uint32_t> heading_to_steer_to_destination;
+	utils::optional<double> heading_to_steer_to_destination;
 	utils::optional<reference> heading_to_steer_to_destination_ref;
 	utils::optional<positioning_system_mode_indicator> mode_indicator;
 
@@ -126,10 +126,10 @@ public:
 	{
 		status_perpendicular_passing = t;
 	}
-	void set_bearing_origin_to_destination(uint32_t t, reference ref);
+	void set_bearing_origin_to_destination(double t, reference ref);
 	void set_waypoint_id(const waypoint & id) { waypoint_id = id; }
-	void set_bearing_pos_to_destination(uint32_t t, reference ref);
-	void set_heading_to_steer_to_destination(uint32_t t, reference ref);
+	void set_bearing_pos_to_destination(double t, reference ref);
+	void set_heading_to_steer_to_destination(double t, reference ref);
 	void set_mode_indicator(positioning_system_mode_indicator t);
 };
 }

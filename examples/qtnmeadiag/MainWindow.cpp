@@ -15,10 +15,11 @@
 #include <QTextStream>
 #include <QToolBar>
 #include <marnav/nmea/checksum.hpp>
+#include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/gga.hpp>
 #include <marnav/nmea/gsv.hpp>
 #include <marnav/nmea/mwv.hpp>
-#include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/rmb.hpp>
 #include <marnav/nmea/rmc.hpp>
 #include <marnav/nmea/string.hpp>
 
@@ -65,6 +66,24 @@ static QString render(const marnav::utils::optional<marnav::geo::longitude> & t)
 		.arg(t->minutes(), 2, 10, QLatin1Char('0'))
 		.arg(t->seconds(), 2, 'f', 1, QLatin1Char('0'))
 		.arg(to_string(t->hem()).c_str());
+}
+
+static QString details_rmb(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rmb>(s);
+	QString result;
+	result += "\nActive           : " + render(t->get_active());
+	result += "\nCross Track Error: " + render(t->get_cross_track_error());
+	result += "\nWaypoint To      : " + render(t->get_waypoint_to());
+	result += "\nWaypoint From    : " + render(t->get_waypoint_from());
+	result += "\nLatitude         : " + render(t->get_latitude());
+	result += "\nLongitude        : " + render(t->get_longitude());
+	result += "\nRange            : " + render(t->get_range());
+	result += "\nBearing          : " + render(t->get_bearing());
+	result += "\nDest. Velocity   : " + render(t->get_dst_velocity());
+	result += "\nArrival Status   : " + render(t->get_arrival_status());
+	result += "\nMode Indicator   : " + render(t->get_mode_indicator());
+	return result;
 }
 
 static QString details_rmc(const marnav::nmea::sentence * s)
@@ -147,6 +166,7 @@ static QString get_details(const marnav::nmea::sentence * s)
 		{marnav::nmea::sentence_id::GGA, detail::details_gga},
 		{marnav::nmea::sentence_id::GSV, detail::details_gsv},
 		{marnav::nmea::sentence_id::MWV, detail::details_mwv},
+		{marnav::nmea::sentence_id::RMB, detail::details_rmb},
 		{marnav::nmea::sentence_id::RMC, detail::details_rmc},
 	};
 

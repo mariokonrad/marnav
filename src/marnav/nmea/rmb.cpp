@@ -39,7 +39,7 @@ rmb::rmb(const std::string & talker, fields::const_iterator first, fields::const
 
 	// NMEA 2.3 or newer
 	if (size > 13)
-		read(*(first + 12), mode_indicator);
+		read(*(first + 13), mode_indicator);
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
 	lat = correct_hemisphere(lat, lat_hem);

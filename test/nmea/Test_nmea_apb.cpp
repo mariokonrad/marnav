@@ -18,7 +18,7 @@ TEST_F(Test_nmea_apb, properties) { nmea_sentence_traits<nmea::apb>(); }
 
 TEST_F(Test_nmea_apb, parse)
 {
-	auto s = nmea::make_sentence("$GPAPB,A,A,0.10,R,N,V,V,011,M,DEST,011,M,011,M*3C");
+	auto s = nmea::make_sentence("$GPAPB,A,A,0.10,R,N,V,V,11.0,M,DEST,11.0,M,11.0,M*12");
 	ASSERT_NE(nullptr, s);
 
 	auto apb = nmea::sentence_cast<nmea::apb>(s);
@@ -50,25 +50,25 @@ TEST_F(Test_nmea_apb, set_bearing_origin_to_destination)
 {
 	nmea::apb apb;
 	apb.set_bearing_origin_to_destination(11, nmea::reference::MAGNETIC);
-	EXPECT_STREQ("$GPAPB,,,,,,,,011,M,,,,,,*15", nmea::to_string(apb).c_str());
+	EXPECT_STREQ("$GPAPB,,,,,,,,11.0,M,,,,,,*3B", nmea::to_string(apb).c_str());
 }
 
 TEST_F(Test_nmea_apb, set_bearing_pos_to_destination)
 {
 	nmea::apb apb;
 	apb.set_bearing_pos_to_destination(11, nmea::reference::MAGNETIC);
-	EXPECT_STREQ("$GPAPB,,,,,,,,,,,011,M,,,*15", nmea::to_string(apb).c_str());
+	EXPECT_STREQ("$GPAPB,,,,,,,,,,,11.0,M,,,*3B", nmea::to_string(apb).c_str());
 }
 
 TEST_F(Test_nmea_apb, get_bearing_pos_to_destination)
 {
-	auto s = nmea::make_sentence("$GPAPB,A,A,0.10,R,N,V,V,011,M,DEST,011,M,011,M*3C");
+	auto s = nmea::make_sentence("$GPAPB,A,A,0.10,R,N,V,V,11.0,M,DEST,11.0,M,11.0,M*12");
 	ASSERT_NE(nullptr, s);
 
 	auto apb = nmea::sentence_cast<nmea::apb>(s);
 	ASSERT_NE(nullptr, apb);
 
-	EXPECT_EQ(11u, *apb->get_bearing_pos_to_destination());
+	EXPECT_NEAR(11.0, *apb->get_bearing_pos_to_destination(), 1.0e-4);
 	EXPECT_EQ(nmea::reference::MAGNETIC, *apb->get_bearing_pos_to_destination_ref());
 }
 
@@ -77,18 +77,18 @@ TEST_F(Test_nmea_apb, set_heading_to_steer_to_destination)
 	nmea::apb apb;
 	apb.set_heading_to_steer_to_destination(11, nmea::reference::MAGNETIC);
 
-	EXPECT_STREQ("$GPAPB,,,,,,,,,,,,,011,M,*15", nmea::to_string(apb).c_str());
+	EXPECT_STREQ("$GPAPB,,,,,,,,,,,,,11.0,M,*3B", nmea::to_string(apb).c_str());
 }
 
 TEST_F(Test_nmea_apb, get_heading_to_steer)
 {
-	auto s = nmea::make_sentence("$GPAPB,A,A,0.10,R,N,V,V,011,M,DEST,011,M,011,M*3C");
+	auto s = nmea::make_sentence("$GPAPB,A,A,0.10,R,N,V,V,11.0,M,DEST,11.0,M,11.0,M*12");
 	ASSERT_NE(nullptr, s);
 
 	auto apb = nmea::sentence_cast<nmea::apb>(s);
 	ASSERT_NE(nullptr, apb);
 
-	EXPECT_EQ(11u, *apb->get_heading_to_steer_to_destination());
+	EXPECT_NEAR(11.0, *apb->get_heading_to_steer_to_destination(), 1.0e-4);
 	EXPECT_EQ(nmea::reference::MAGNETIC, *apb->get_heading_to_steer_to_destination_ref());
 }
 
