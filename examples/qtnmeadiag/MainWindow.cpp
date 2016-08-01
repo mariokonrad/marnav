@@ -16,12 +16,16 @@
 #include <QToolBar>
 #include <marnav/nmea/checksum.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/bod.hpp>
 #include <marnav/nmea/gga.hpp>
+#include <marnav/nmea/gll.hpp>
 #include <marnav/nmea/gsa.hpp>
 #include <marnav/nmea/gsv.hpp>
 #include <marnav/nmea/mwv.hpp>
 #include <marnav/nmea/rmb.hpp>
 #include <marnav/nmea/rmc.hpp>
+#include <marnav/nmea/vtg.hpp>
+#include <marnav/nmea/pgrme.hpp>
 #include <marnav/nmea/string.hpp>
 
 namespace marnav_example
@@ -78,6 +82,34 @@ static QString render(const marnav::utils::optional<marnav::nmea::selection_mode
 			return QString{"manual"};
 		case marnav::nmea::selection_mode::automatic:
 			return QString{"automatic"};
+		default:
+			break;
+	}
+	return "-";
+}
+
+static QString render(
+	const marnav::utils::optional<marnav::nmea::positioning_system_mode_indicator> & t)
+{
+	if (!t)
+		return "-";
+	switch (*t) {
+		case marnav::nmea::positioning_system_mode_indicator::invalid:
+			return QString{"invalid"};
+		case marnav::nmea::positioning_system_mode_indicator::autonomous:
+			return QString{"autonomous"};
+		case marnav::nmea::positioning_system_mode_indicator::differential:
+			return QString{"differential"};
+		case marnav::nmea::positioning_system_mode_indicator::estimated:
+			return QString{"estimated"};
+		case marnav::nmea::positioning_system_mode_indicator::manual_input:
+			return QString{"manual input"};
+		case marnav::nmea::positioning_system_mode_indicator::simulated:
+			return QString{"simulated"};
+		case marnav::nmea::positioning_system_mode_indicator::data_not_valid:
+			return QString{"not valid"};
+		case marnav::nmea::positioning_system_mode_indicator::precise:
+			return QString{"precise"};
 		default:
 			break;
 	}
@@ -184,6 +216,52 @@ static QString details_gsa(const marnav::nmea::sentence * s)
 	result += "\nVDOP          : " + render(t->get_vdop());
 	return result;
 }
+
+static QString details_gll(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gll>(s);
+	QString result;
+	result += "\nLatitude      : " + render(t->get_latitude());
+	result += "\nLongitude     : " + render(t->get_longitude());
+	result += "\nTime UTC      : " + render(t->get_time_utc());
+	result += "\nStatus        : " + render(t->get_data_valid());
+	result += "\nMode Indicator: " + render(t->get_mode_indicator());
+	return result;
+}
+
+static QString details_bod(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::bod>(s);
+	QString result;
+	result += "\nBearing True : " + render(t->get_bearing_true());
+	result += "\nBearing Magn : " + render(t->get_bearing_magn());
+	result += "\nWaypoint To  : " + render(t->get_waypoint_to());
+	result += "\nWaypoint From: " + render(t->get_waypoint_from());
+	return result;
+}
+
+static QString details_vtg(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vtg>(s);
+	QString result;
+	result += "\nTrack True    : " + render(t->get_track_true());
+	result += "\nTrack Magn    : " + render(t->get_track_magn());
+	result += "\nSpeed Knots   : " + render(t->get_speed_kn());
+	result += "\nSpeed kmh     : " + render(t->get_speed_kmh());
+	result += "\nMode Indicator: " + render(t->get_mode_indicator());
+	return result;
+}
+
+static QString details_pgrme(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::pgrme>(s);
+	QString result;
+	result += "\nHPE                      : " + render(t->get_horizontal_position_error());
+	result += "\nVPE                      : " + render(t->get_vertical_position_error());
+	result += "\nOverall sph equiv pos err: "
+		+ render(t->get_overall_spherical_equiv_position_error());
+	return result;
+}
 }
 
 static QString get_details(const marnav::nmea::sentence * s)
@@ -194,12 +272,16 @@ static QString get_details(const marnav::nmea::sentence * s)
 	};
 	using container = std::vector<entry>;
 	static const container details = {
+		{marnav::nmea::sentence_id::BOD, detail::details_bod},
 		{marnav::nmea::sentence_id::GGA, detail::details_gga},
 		{marnav::nmea::sentence_id::GSA, detail::details_gsa},
+		{marnav::nmea::sentence_id::GLL, detail::details_gll},
 		{marnav::nmea::sentence_id::GSV, detail::details_gsv},
 		{marnav::nmea::sentence_id::MWV, detail::details_mwv},
 		{marnav::nmea::sentence_id::RMB, detail::details_rmb},
 		{marnav::nmea::sentence_id::RMC, detail::details_rmc},
+		{marnav::nmea::sentence_id::VTG, detail::details_vtg},
+		{marnav::nmea::sentence_id::PGRME, detail::details_pgrme},
 	};
 
 	auto i = std::find_if(begin(details), end(details),
