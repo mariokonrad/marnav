@@ -21,9 +21,11 @@
 #include <marnav/nmea/gll.hpp>
 #include <marnav/nmea/gsa.hpp>
 #include <marnav/nmea/gsv.hpp>
+#include <marnav/nmea/hdg.hpp>
 #include <marnav/nmea/mwv.hpp>
 #include <marnav/nmea/rmb.hpp>
 #include <marnav/nmea/rmc.hpp>
+#include <marnav/nmea/rte.hpp>
 #include <marnav/nmea/vtg.hpp>
 #include <marnav/nmea/pgrme.hpp>
 #include <marnav/nmea/string.hpp>
@@ -262,6 +264,34 @@ static QString details_pgrme(const marnav::nmea::sentence * s)
 		+ render(t->get_overall_spherical_equiv_position_error());
 	return result;
 }
+
+static QString details_hdg(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::hdg>(s);
+	QString result;
+	result += "\nHeading       : " + render(t->get_heading());
+	result += "\nMagn Deviation: " + render(t->get_magn_dev()) + " "
+		+ render(t->get_magn_dev_hem());
+	result += "\nMagn Variation: " + render(t->get_magn_var()) + " "
+		+ render(t->get_magn_var_hem());
+	return result;
+}
+
+static QString details_rte(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rte>(s);
+	QString result;
+	result += "\nNum Messages  : " + render(t->get_n_messages());
+	result += "\nMessage Number: " + render(t->get_message_number());
+	result += "\nMessage Mode  : " + render(t->get_message_mode());
+	for (int i = 0; i < marnav::nmea::rte::max_waypoints; ++i) {
+		const auto wp = t->get_waypoint_id(i);
+		if (!wp)
+			break;
+		result += QString{"\nWaypoint ID %1: "}.arg(i, 2).arg(render(t->get_message_mode()));
+	}
+	return result;
+}
 }
 
 static QString get_details(const marnav::nmea::sentence * s)
@@ -277,9 +307,11 @@ static QString get_details(const marnav::nmea::sentence * s)
 		{marnav::nmea::sentence_id::GSA, detail::details_gsa},
 		{marnav::nmea::sentence_id::GLL, detail::details_gll},
 		{marnav::nmea::sentence_id::GSV, detail::details_gsv},
+		{marnav::nmea::sentence_id::HDG, detail::details_hdg},
 		{marnav::nmea::sentence_id::MWV, detail::details_mwv},
 		{marnav::nmea::sentence_id::RMB, detail::details_rmb},
 		{marnav::nmea::sentence_id::RMC, detail::details_rmc},
+		{marnav::nmea::sentence_id::RTE, detail::details_rte},
 		{marnav::nmea::sentence_id::VTG, detail::details_vtg},
 		{marnav::nmea::sentence_id::PGRME, detail::details_pgrme},
 	};

@@ -38,6 +38,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::RTE;
 	constexpr static const char * TAG = "RTE";
 
+	constexpr static int max_waypoints = 10;
+
 	virtual ~rte() {}
 
 	rte();
@@ -52,7 +54,7 @@ private:
 	utils::optional<uint32_t> n_messages;
 	utils::optional<uint32_t> message_number;
 	utils::optional<route> message_mode; // C:complete route, W:working route
-	utils::optional<waypoint> waypoint_id[10]; // names or numbers of the active route
+	utils::optional<waypoint> waypoint_id[max_waypoints]; // names or numbers of the active route
 
 public:
 	NMEA_GETTER(n_messages)

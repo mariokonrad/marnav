@@ -18,22 +18,21 @@ rte::rte(const std::string & talker, fields::const_iterator first, fields::const
 	: sentence(ID, TAG, talker)
 {
 	const auto size = std::distance(first, last);
-	if ((size < 3) || (size > 13))
+	if ((size < 3) || (size > max_waypoints + 3))
 		throw std::invalid_argument{"invalid number of fields in rte"};
 
 	read(*(first + 0), n_messages);
 	read(*(first + 1), message_number);
 	read(*(first + 2), message_mode);
 
-	for (auto i = 3; i < 10 && i < size; ++i) {
+	for (auto i = 3; i < (max_waypoints + 3) && i < size; ++i) {
 		read(*(first + i), waypoint_id[i - 3]);
 	}
 }
 
 utils::optional<waypoint> rte::get_waypoint_id(int index) const
 {
-	if ((index < 0)
-		|| (index >= static_cast<int>((sizeof(waypoint_id) / sizeof(waypoint_id[0])))))
+	if ((index < 0) || (index >= max_waypoints))
 		throw std::out_of_range{"get_waypoint_id"};
 
 	return waypoint_id[index];
@@ -41,8 +40,7 @@ utils::optional<waypoint> rte::get_waypoint_id(int index) const
 
 void rte::set_waypoint_id(int index, const waypoint & id)
 {
-	if ((index < 0)
-		|| (index >= static_cast<int>((sizeof(waypoint_id) / sizeof(waypoint_id[0])))))
+	if ((index < 0) || (index >= max_waypoints))
 		throw std::out_of_range{"set_waypoint_id"};
 
 	if (id.size() > 8)
