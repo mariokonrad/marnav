@@ -46,7 +46,6 @@ void message_22::read_data(const raw & bits)
 	}
 }
 
-/// @todo possible refactoring for name_extension
 raw message_22::get_data() const
 {
 	raw bits{SIZE_BITS};

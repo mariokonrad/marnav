@@ -37,7 +37,6 @@ void message_23::read_data(const raw & bits)
 	get(bits, quiet_time);
 }
 
-/// @todo possible refactoring for name_extension
 raw message_23::get_data() const
 {
 	raw bits{SIZE_BITS};
