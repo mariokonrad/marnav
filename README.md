@@ -48,6 +48,7 @@ Features
 Supported sentences for NMEA-0183 (read and write):
 - AAM: Waypoint Arrival Alarm
 - ALM: GPS Almanac Data
+- APA: Autopilot Sentence "A"
 - APB: Autopilot Sentence "B"
 - BOD: Bearing - Waypoint to Waypoint
 - BWC: Bearing & Distance to Waypoint - Geat Circle

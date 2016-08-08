@@ -83,14 +83,14 @@ TEST_F(Test_nmea, get_supported_sentences_str)
 {
 	auto v = nmea::get_supported_sentences_str();
 
-	EXPECT_EQ(73u, v.size());
+	EXPECT_EQ(74u, v.size());
 }
 
 TEST_F(Test_nmea, get_supported_sentences_id)
 {
 	auto v = nmea::get_supported_sentences_id();
 
-	EXPECT_EQ(73u, v.size());
+	EXPECT_EQ(74u, v.size());
 }
 
 TEST_F(Test_nmea, tag_to_id)

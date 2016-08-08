@@ -142,6 +142,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/nmea/nmea.cpp
 	marnav/nmea/aam.cpp
 	marnav/nmea/alm.cpp
+	marnav/nmea/apa.cpp
 	marnav/nmea/apb.cpp
 	marnav/nmea/bod.cpp
 	marnav/nmea/bwc.cpp
@@ -340,6 +341,7 @@ install(
 		marnav/nmea/nmea.hpp
 		marnav/nmea/aam.hpp
 		marnav/nmea/alm.hpp
+		marnav/nmea/apa.hpp
 		marnav/nmea/apb.hpp
 		marnav/nmea/bod.hpp
 		marnav/nmea/bwc.hpp

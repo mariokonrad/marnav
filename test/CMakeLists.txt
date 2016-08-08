@@ -103,6 +103,7 @@ add_executable(testrunner
 	nmea/Test_nmea_io.cpp
 	nmea/Test_nmea_aam.cpp
 	nmea/Test_nmea_alm.cpp
+	nmea/Test_nmea_apa.cpp
 	nmea/Test_nmea_apb.cpp
 	nmea/Test_nmea_bod.cpp
 	nmea/Test_nmea_bwc.cpp
