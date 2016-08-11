@@ -46,27 +46,27 @@ TEST_F(Test_nmea_pgrmz, set_altitude)
 	EXPECT_STREQ("$PGRMZ,100,f,*29", nmea::to_string(pgrmz).c_str());
 }
 
-TEST_F(Test_nmea_pgrmz, set_pos_fix_dim_user)
+TEST_F(Test_nmea_pgrmz, set_fix_nofix)
 {
 	nmea::pgrmz pgrmz;
-	pgrmz.set_pos_fix_dim(2);
+	pgrmz.set_fix(nmea::pgrmz::fix_type::no_fix);
+
+	EXPECT_STREQ("$PGRMZ,0,f,1*19", nmea::to_string(pgrmz).c_str());
+}
+
+TEST_F(Test_nmea_pgrmz, set_fix_2d)
+{
+	nmea::pgrmz pgrmz;
+	pgrmz.set_fix(nmea::pgrmz::fix_type::d2fix);
 
 	EXPECT_STREQ("$PGRMZ,0,f,2*1A", nmea::to_string(pgrmz).c_str());
 }
 
-TEST_F(Test_nmea_pgrmz, set_pos_fix_dim_gps)
+TEST_F(Test_nmea_pgrmz, set_fix_3d)
 {
 	nmea::pgrmz pgrmz;
-	pgrmz.set_pos_fix_dim(3);
+	pgrmz.set_fix(nmea::pgrmz::fix_type::d3fix);
 
 	EXPECT_STREQ("$PGRMZ,0,f,3*1B", nmea::to_string(pgrmz).c_str());
-}
-
-TEST_F(Test_nmea_pgrmz, set_pos_fix_dim_invalid)
-{
-	nmea::pgrmz pgrmz;
-	pgrmz.set_pos_fix_dim(99);
-
-	EXPECT_STREQ("$PGRMZ,0,f,*28", nmea::to_string(pgrmz).c_str());
 }
 }

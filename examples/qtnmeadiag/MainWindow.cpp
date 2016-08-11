@@ -292,8 +292,8 @@ static QString details_pgrmz(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::pgrmz>(s);
 	QString result;
-	result += "\nAltitude   : " + render(t->get_altitude()) + " feet";
-	result += "\nPos fix dim: " + render(t->get_pos_fix_dim());
+	result += "\nAltitude: " + render(t->get_altitude()) + " feet";
+	result += "\nFix Type: " + render(t->get_fix());
 	return result;
 }
 
