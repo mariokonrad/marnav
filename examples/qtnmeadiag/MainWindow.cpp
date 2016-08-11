@@ -90,6 +90,28 @@ static QString render(const marnav::utils::optional<marnav::nmea::selection_mode
 	return "-";
 }
 
+static QString render(const marnav::utils::optional<marnav::nmea::route> & t)
+{
+	if (!t)
+		return "-";
+	switch (*t) {
+		case marnav::nmea::route::complete:
+			return QString{"complete"};
+		case marnav::nmea::route::working:
+			return QString{"working"};
+		default:
+			break;
+	}
+	return "-";
+}
+
+static QString render(const marnav::utils::optional<marnav::nmea::waypoint> & t)
+{
+	if (!t)
+		return "-";
+	return t->c_str();
+}
+
 static QString render(
 	const marnav::utils::optional<marnav::nmea::positioning_system_mode_indicator> & t)
 {
@@ -288,7 +310,7 @@ static QString details_rte(const marnav::nmea::sentence * s)
 		const auto wp = t->get_waypoint_id(i);
 		if (!wp)
 			break;
-		result += QString{"\nWaypoint ID %1: "}.arg(i, 2).arg(render(t->get_message_mode()));
+		result += QString{"\nWaypoint ID %1: %2"}.arg(i, 2).arg(render(wp));
 	}
 	return result;
 }

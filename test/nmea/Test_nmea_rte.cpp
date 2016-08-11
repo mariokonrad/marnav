@@ -16,13 +16,40 @@ TEST_F(Test_nmea_rte, contruction) { EXPECT_NO_THROW(nmea::rte rte); }
 
 TEST_F(Test_nmea_rte, properties) { nmea_sentence_traits<nmea::rte>(); }
 
-TEST_F(Test_nmea_rte, parse)
+TEST_F(Test_nmea_rte, parse_0)
 {
 	auto s = nmea::make_sentence("$GPRTE,1,1,c,*37");
 	ASSERT_NE(nullptr, s);
 
 	auto rte = nmea::sentence_cast<nmea::rte>(s);
 	ASSERT_NE(nullptr, rte);
+
+	EXPECT_EQ(1u, *rte->get_n_messages());
+	EXPECT_EQ(1u, *rte->get_message_number());
+	EXPECT_EQ(nmea::route::complete, *rte->get_message_mode());
+
+	for (int i = 0; i < nmea::rte::max_waypoints; ++i)
+		EXPECT_FALSE(rte->get_waypoint_id(i));
+}
+
+TEST_F(Test_nmea_rte, parse_1)
+{
+	auto s = nmea::make_sentence("$GPRTE,1,1,c,0*07");
+	ASSERT_NE(nullptr, s);
+
+	auto rte = nmea::sentence_cast<nmea::rte>(s);
+	ASSERT_NE(nullptr, rte);
+
+	EXPECT_EQ(1u, *rte->get_n_messages());
+	EXPECT_EQ(1u, *rte->get_message_number());
+	EXPECT_EQ(nmea::route::complete, *rte->get_message_mode());
+
+	const auto wp0 = rte->get_waypoint_id(0);
+	EXPECT_TRUE(!!wp0);
+	EXPECT_STREQ("0", wp0->c_str());
+
+	for (int i = 1; i < nmea::rte::max_waypoints; ++i)
+		EXPECT_FALSE(rte->get_waypoint_id(i));
 }
 
 TEST_F(Test_nmea_rte, parse_invalid_number_of_arguments)

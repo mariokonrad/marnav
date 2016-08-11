@@ -25,8 +25,8 @@ rte::rte(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 1), message_number);
 	read(*(first + 2), message_mode);
 
-	for (auto i = 3; i < (max_waypoints + 3) && i < size; ++i) {
-		read(*(first + i), waypoint_id[i - 3]);
+	for (auto i = 0; (i < max_waypoints) && (i < (size - 3)); ++i) {
+		read(*(first + i + 3), waypoint_id[i]);
 	}
 }
 
