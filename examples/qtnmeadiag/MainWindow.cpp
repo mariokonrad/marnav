@@ -28,6 +28,7 @@
 #include <marnav/nmea/rte.hpp>
 #include <marnav/nmea/vtg.hpp>
 #include <marnav/nmea/pgrme.hpp>
+#include <marnav/nmea/pgrmz.hpp>
 #include <marnav/nmea/string.hpp>
 
 namespace marnav_example
@@ -287,6 +288,15 @@ static QString details_pgrme(const marnav::nmea::sentence * s)
 	return result;
 }
 
+static QString details_pgrmz(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::pgrmz>(s);
+	QString result;
+	result += "\nAltitude   : " + render(t->get_altitude()) + " feet";
+	result += "\nPos fix dim: " + render(t->get_pos_fix_dim());
+	return result;
+}
+
 static QString details_hdg(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::hdg>(s);
@@ -318,25 +328,26 @@ static QString details_rte(const marnav::nmea::sentence * s)
 
 static QString get_details(const marnav::nmea::sentence * s)
 {
+#define ADD_SENTENCE(s)                          \
+	{                                            \
+		marnav::nmea::s::ID, detail::details_##s \
+	}
+
 	struct entry {
 		marnav::nmea::sentence_id id;
 		std::function<QString(const marnav::nmea::sentence *)> func;
 	};
 	using container = std::vector<entry>;
 	static const container details = {
-		{marnav::nmea::sentence_id::BOD, detail::details_bod},
-		{marnav::nmea::sentence_id::GGA, detail::details_gga},
-		{marnav::nmea::sentence_id::GSA, detail::details_gsa},
-		{marnav::nmea::sentence_id::GLL, detail::details_gll},
-		{marnav::nmea::sentence_id::GSV, detail::details_gsv},
-		{marnav::nmea::sentence_id::HDG, detail::details_hdg},
-		{marnav::nmea::sentence_id::MWV, detail::details_mwv},
-		{marnav::nmea::sentence_id::RMB, detail::details_rmb},
-		{marnav::nmea::sentence_id::RMC, detail::details_rmc},
-		{marnav::nmea::sentence_id::RTE, detail::details_rte},
-		{marnav::nmea::sentence_id::VTG, detail::details_vtg},
-		{marnav::nmea::sentence_id::PGRME, detail::details_pgrme},
+		// common
+		ADD_SENTENCE(bod), ADD_SENTENCE(gga), ADD_SENTENCE(gsa), ADD_SENTENCE(gll),
+		ADD_SENTENCE(gsv), ADD_SENTENCE(hdg), ADD_SENTENCE(mwv), ADD_SENTENCE(rmb),
+		ADD_SENTENCE(rmc), ADD_SENTENCE(rte), ADD_SENTENCE(vtg),
+
+		// vendor specific
+		ADD_SENTENCE(pgrme), ADD_SENTENCE(pgrmz),
 	};
+#undef ADD_SENTENCE
 
 	auto i = std::find_if(begin(details), end(details),
 		[s](const container::value_type & entry) { return entry.id == s->id(); });

@@ -175,6 +175,7 @@ add_executable(testrunner
 	nmea/Test_nmea_zfo.cpp
 	nmea/Test_nmea_ztg.cpp
 	nmea/Test_nmea_pgrme.cpp
+	nmea/Test_nmea_pgrmz.cpp
 	${SOURCES}
 	)
 

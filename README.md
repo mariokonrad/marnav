@@ -124,6 +124,7 @@ Obsolete (according to the standard) but implemented:
 
 Vendor Extensions:
 - PGRME: Garmin Estimated Error
+- PGRMZ: Garmin Altitude Information
 
 
 ### AIS

@@ -80,6 +80,7 @@
 #include <marnav/nmea/zfo.hpp>
 #include <marnav/nmea/ztg.hpp>
 #include <marnav/nmea/pgrme.hpp>
+#include <marnav/nmea/pgrmz.hpp>
 
 /// @example parse_nmea.cpp
 /// This is an example on how to parse and handle NMEA sentences from a string.
@@ -131,7 +132,7 @@ static const std::vector<entry> known_sentences = {
 	REGISTER_SENTENCE(ztg),
 
 	// vendor extensions
-	REGISTER_SENTENCE(pgrme)};
+	REGISTER_SENTENCE(pgrme), REGISTER_SENTENCE(pgrmz)};
 
 #undef REGISTER_SENTENCE
 }
