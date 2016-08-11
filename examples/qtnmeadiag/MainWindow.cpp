@@ -28,6 +28,7 @@
 #include <marnav/nmea/rte.hpp>
 #include <marnav/nmea/vtg.hpp>
 #include <marnav/nmea/pgrme.hpp>
+#include <marnav/nmea/pgrmm.hpp>
 #include <marnav/nmea/pgrmz.hpp>
 #include <marnav/nmea/string.hpp>
 
@@ -43,6 +44,8 @@ template <typename T> static QString render(const marnav::utils::optional<T> & t
 }
 
 static QString render(uint32_t t) { return QString{"%1"}.arg(t); }
+
+static QString render(const std::string & t) { return QString{t.c_str()}; }
 
 static QString render(const marnav::utils::optional<marnav::nmea::time> & t)
 {
@@ -288,6 +291,14 @@ static QString details_pgrme(const marnav::nmea::sentence * s)
 	return result;
 }
 
+static QString details_pgrmm(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::pgrmm>(s);
+	QString result;
+	result += "\nMap Datum: " + render(t->get_map_datum());
+	return result;
+}
+
 static QString details_pgrmz(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::pgrmz>(s);
@@ -345,7 +356,7 @@ static QString get_details(const marnav::nmea::sentence * s)
 		ADD_SENTENCE(rmc), ADD_SENTENCE(rte), ADD_SENTENCE(vtg),
 
 		// vendor specific
-		ADD_SENTENCE(pgrme), ADD_SENTENCE(pgrmz),
+		ADD_SENTENCE(pgrme), ADD_SENTENCE(pgrmm), ADD_SENTENCE(pgrmz),
 	};
 #undef ADD_SENTENCE
 

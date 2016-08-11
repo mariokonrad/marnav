@@ -6,6 +6,8 @@ namespace marnav
 {
 namespace nmea
 {
+constexpr int sentence::max_length;
+
 sentence::sentence(sentence_id id, const std::string & tag, const std::string & talker)
 	: id_(id)
 	, tag_(tag)

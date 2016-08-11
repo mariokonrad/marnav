@@ -214,6 +214,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/nmea/zfo.cpp
 	marnav/nmea/ztg.cpp
 	marnav/nmea/pgrme.cpp
+	marnav/nmea/pgrmm.cpp
 	marnav/nmea/pgrmz.cpp
 	${SOURCES}
 	)
