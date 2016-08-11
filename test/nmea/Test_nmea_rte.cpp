@@ -24,9 +24,9 @@ TEST_F(Test_nmea_rte, parse_0)
 	auto rte = nmea::sentence_cast<nmea::rte>(s);
 	ASSERT_NE(nullptr, rte);
 
-	EXPECT_EQ(1u, *rte->get_n_messages());
-	EXPECT_EQ(1u, *rte->get_message_number());
-	EXPECT_EQ(nmea::route::complete, *rte->get_message_mode());
+	EXPECT_EQ(1u, rte->get_n_messages());
+	EXPECT_EQ(1u, rte->get_message_number());
+	EXPECT_EQ(nmea::route::complete, rte->get_message_mode());
 
 	for (int i = 0; i < nmea::rte::max_waypoints; ++i)
 		EXPECT_FALSE(rte->get_waypoint_id(i));
@@ -40,9 +40,9 @@ TEST_F(Test_nmea_rte, parse_1)
 	auto rte = nmea::sentence_cast<nmea::rte>(s);
 	ASSERT_NE(nullptr, rte);
 
-	EXPECT_EQ(1u, *rte->get_n_messages());
-	EXPECT_EQ(1u, *rte->get_message_number());
-	EXPECT_EQ(nmea::route::complete, *rte->get_message_mode());
+	EXPECT_EQ(1u, rte->get_n_messages());
+	EXPECT_EQ(1u, rte->get_message_number());
+	EXPECT_EQ(nmea::route::complete, rte->get_message_mode());
 
 	const auto wp0 = rte->get_waypoint_id(0);
 	EXPECT_TRUE(!!wp0);
@@ -62,7 +62,7 @@ TEST_F(Test_nmea_rte, empty_to_string)
 {
 	nmea::rte rte;
 
-	EXPECT_STREQ("$GPRTE,,,*78", nmea::to_string(rte).c_str());
+	EXPECT_STREQ("$GPRTE,1,1,c,*37", nmea::to_string(rte).c_str());
 }
 
 TEST_F(Test_nmea_rte, set_n_messages)
@@ -70,7 +70,7 @@ TEST_F(Test_nmea_rte, set_n_messages)
 	nmea::rte rte;
 	rte.set_n_messages(99);
 
-	EXPECT_STREQ("$GPRTE,99,,*78", nmea::to_string(rte).c_str());
+	EXPECT_STREQ("$GPRTE,99,1,c,,,,,,,,,,*2A", nmea::to_string(rte).c_str());
 }
 
 TEST_F(Test_nmea_rte, set_message_number)
@@ -78,7 +78,7 @@ TEST_F(Test_nmea_rte, set_message_number)
 	nmea::rte rte;
 	rte.set_message_number(66);
 
-	EXPECT_STREQ("$GPRTE,,66,*78", nmea::to_string(rte).c_str());
+	EXPECT_STREQ("$GPRTE,1,66,c,*06", nmea::to_string(rte).c_str());
 }
 
 TEST_F(Test_nmea_rte, set_message_mode_complete)
@@ -86,7 +86,7 @@ TEST_F(Test_nmea_rte, set_message_mode_complete)
 	nmea::rte rte;
 	rte.set_message_mode(marnav::nmea::route::complete);
 
-	EXPECT_STREQ("$GPRTE,,,c*1B", nmea::to_string(rte).c_str());
+	EXPECT_STREQ("$GPRTE,1,1,c,*37", nmea::to_string(rte).c_str());
 }
 
 TEST_F(Test_nmea_rte, set_message_mode_working)
@@ -94,7 +94,7 @@ TEST_F(Test_nmea_rte, set_message_mode_working)
 	nmea::rte rte;
 	rte.set_message_mode(marnav::nmea::route::working);
 
-	EXPECT_STREQ("$GPRTE,,,w*0F", nmea::to_string(rte).c_str());
+	EXPECT_STREQ("$GPRTE,1,1,w,*23", nmea::to_string(rte).c_str());
 }
 
 TEST_F(Test_nmea_rte, set_waypoint_id)
@@ -103,15 +103,16 @@ TEST_F(Test_nmea_rte, set_waypoint_id)
 	rte.set_n_messages(1);
 	rte.set_waypoint_id(0, nmea::waypoint{"POINT1"});
 
-	EXPECT_STREQ("$GPRTE,1,,,POINT1*18", nmea::to_string(rte).c_str());
+	EXPECT_STREQ("$GPRTE,1,1,c,POINT1*4A", nmea::to_string(rte).c_str());
 }
 
-TEST_F(Test_nmea_rte, set_waypoint_id_without_n_messages)
+TEST_F(Test_nmea_rte, set_waypoint_id_wrong_n_messages)
 {
 	nmea::rte rte;
 	rte.set_waypoint_id(0, nmea::waypoint{"POINT1"});
+	rte.set_waypoint_id(1, nmea::waypoint{"POINT2"});
 
-	EXPECT_STREQ("$GPRTE,,,*78", nmea::to_string(rte).c_str());
+	EXPECT_STREQ("$GPRTE,1,1,c,POINT1*4A", nmea::to_string(rte).c_str());
 }
 
 TEST_F(Test_nmea_rte, set_waypoint_id_index_to_low)

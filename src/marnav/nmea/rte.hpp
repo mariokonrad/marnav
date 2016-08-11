@@ -51,9 +51,9 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	utils::optional<uint32_t> n_messages;
-	utils::optional<uint32_t> message_number;
-	utils::optional<route> message_mode; // C:complete route, W:working route
+	uint32_t n_messages = 1;
+	uint32_t message_number = 1;
+	route message_mode = route::complete; // C:complete route, W:working route
 	utils::optional<waypoint> waypoint_id[max_waypoints]; // names or numbers of the active route
 
 public:

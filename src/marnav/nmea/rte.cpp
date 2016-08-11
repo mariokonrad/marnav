@@ -55,8 +55,7 @@ std::vector<std::string> rte::get_data() const
 		to_string(n_messages), to_string(message_number), to_string(message_mode)};
 
 	if (n_messages) {
-		const auto n = n_messages.value();
-		for (uint32_t i = 0; i < n && waypoint_id[i]; ++i) {
+		for (uint32_t i = 0; (i < n_messages) && (i < max_waypoints); ++i) {
 			v.push_back(waypoint_id[i].value());
 		}
 	}
