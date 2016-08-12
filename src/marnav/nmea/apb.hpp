@@ -92,7 +92,7 @@ private:
 	utils::optional<reference> bearing_pos_to_destination_ref;
 	utils::optional<double> heading_to_steer_to_destination;
 	utils::optional<reference> heading_to_steer_to_destination_ref;
-	utils::optional<positioning_system_mode_indicator> mode_indicator;
+	utils::optional<mode_indicator> mode_ind;
 
 	void check() const;
 
@@ -111,7 +111,7 @@ public:
 	NMEA_GETTER(bearing_pos_to_destination_ref)
 	NMEA_GETTER(heading_to_steer_to_destination)
 	NMEA_GETTER(heading_to_steer_to_destination_ref)
-	NMEA_GETTER(mode_indicator)
+	NMEA_GETTER(mode_ind)
 
 	void set_loran_c_blink_warning(status t) noexcept { loran_c_blink_warning = t; }
 	void set_loran_c_cycle_lock_warning(status t) noexcept { loran_c_cycle_lock_warning = t; }
@@ -130,7 +130,7 @@ public:
 	void set_waypoint_id(const waypoint & id) { waypoint_id = id; }
 	void set_bearing_pos_to_destination(double t, reference ref);
 	void set_heading_to_steer_to_destination(double t, reference ref);
-	void set_mode_indicator(positioning_system_mode_indicator t);
+	void set_mode_indicator(mode_indicator t);
 };
 }
 }

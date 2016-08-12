@@ -33,7 +33,7 @@ vtg::vtg(const std::string & talker, fields::const_iterator first, fields::const
 
 	// NMEA 2.3 or newer
 	if (size > 8)
-		read(*(first + 8), mode_indicator);
+		read(*(first + 8), mode_ind);
 }
 
 void vtg::set_speed_kn(double t) noexcept
@@ -64,7 +64,7 @@ std::vector<std::string> vtg::get_data() const
 {
 	return {to_string(track_true), to_string(type_true), to_string(track_magn),
 		to_string(type_magn), to_string(speed_kn), to_string(speed_kn_unit),
-		to_string(speed_kmh), to_string(speed_kmh_unit), to_string(mode_indicator)};
+		to_string(speed_kmh), to_string(speed_kmh_unit), to_string(mode_ind)};
 }
 }
 }

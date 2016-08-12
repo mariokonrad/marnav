@@ -112,8 +112,7 @@ void read(const std::string & s, ais_channel & value, data_format fmt = data_for
 void read(const std::string & s, type_of_point & value, data_format fmt = data_format::none);
 void read(const std::string & s, direction & value, data_format fmt = data_format::none);
 void read(const std::string & s, reference & value, data_format fmt = data_format::none);
-void read(const std::string & s, positioning_system_mode_indicator & value,
-	data_format fmt = data_format::none);
+void read(const std::string & s, mode_indicator & value, data_format fmt = data_format::none);
 void read(const std::string & s, status & value, data_format fmt = data_format::none);
 void read(const std::string & s, quality & value, data_format fmt = data_format::none);
 void read(const std::string & s, target_status & value, data_format fmt = data_format::none);

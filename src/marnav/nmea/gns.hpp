@@ -62,7 +62,7 @@ private:
 	utils::optional<direction> lat_hem;
 	utils::optional<geo::longitude> lon;
 	utils::optional<direction> lon_hem;
-	std::string mode_indicator = "AA";
+	std::string mode_ind = "AA";
 	utils::optional<uint32_t> number_of_satellites;
 	utils::optional<double> hdrop;
 	utils::optional<double> antenna_altitude; // meters
@@ -72,7 +72,7 @@ private:
 
 public:
 	NMEA_GETTER(time_utc)
-	NMEA_GETTER(mode_indicator)
+	NMEA_GETTER(mode_ind)
 	NMEA_GETTER(number_of_satellites)
 	NMEA_GETTER(hdrop)
 	NMEA_GETTER(antenna_altitude)

@@ -116,24 +116,24 @@ std::string to_string(reference t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-std::string to_string(positioning_system_mode_indicator t)
+std::string to_string(mode_indicator t)
 {
 	switch (t) {
-		case positioning_system_mode_indicator::invalid:
+		case mode_indicator::invalid:
 			return "V";
-		case positioning_system_mode_indicator::autonomous:
+		case mode_indicator::autonomous:
 			return "A";
-		case positioning_system_mode_indicator::differential:
+		case mode_indicator::differential:
 			return "D";
-		case positioning_system_mode_indicator::estimated:
+		case mode_indicator::estimated:
 			return "E";
-		case positioning_system_mode_indicator::manual_input:
+		case mode_indicator::manual_input:
 			return "M";
-		case positioning_system_mode_indicator::simulated:
+		case mode_indicator::simulated:
 			return "S";
-		case positioning_system_mode_indicator::data_not_valid:
+		case mode_indicator::data_not_valid:
 			return "N";
-		case positioning_system_mode_indicator::precise:
+		case mode_indicator::precise:
 			return "P";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning

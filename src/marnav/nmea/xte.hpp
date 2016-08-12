@@ -59,7 +59,7 @@ private:
 	utils::optional<double> cross_track_error_magnitude;
 	utils::optional<side> direction_to_steer;
 	utils::optional<unit::distance> cross_track_unit;
-	utils::optional<positioning_system_mode_indicator> mode_indicator;
+	utils::optional<mode_indicator> mode_ind;
 
 public:
 	NMEA_GETTER(status1)
@@ -67,7 +67,7 @@ public:
 	NMEA_GETTER(cross_track_error_magnitude)
 	NMEA_GETTER(direction_to_steer)
 	NMEA_GETTER(cross_track_unit)
-	NMEA_GETTER(mode_indicator)
+	NMEA_GETTER(mode_ind)
 
 	void set_status1(status t) noexcept { status1 = t; }
 	void set_status2(status t) noexcept { status2 = t; }
@@ -77,10 +77,7 @@ public:
 		cross_track_unit = unit::distance::nm;
 	}
 	void set_direction_to_steer(side t) noexcept { direction_to_steer = t; }
-	void set_faa_mode_indicato(positioning_system_mode_indicator t) noexcept
-	{
-		mode_indicator = t;
-	}
+	void set_mode_indicato(mode_indicator t) noexcept { mode_ind = t; }
 };
 }
 }

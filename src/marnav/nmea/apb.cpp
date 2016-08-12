@@ -38,7 +38,7 @@ apb::apb(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 13), heading_to_steer_to_destination_ref);
 
 	if (size > 14)
-		read(*(first + 14), mode_indicator);
+		read(*(first + 14), mode_ind);
 
 	check();
 }
@@ -67,13 +67,12 @@ void apb::set_heading_to_steer_to_destination(double t, reference ref)
 	heading_to_steer_to_destination_ref = ref;
 }
 
-void apb::set_mode_indicator(positioning_system_mode_indicator t)
+void apb::set_mode_indicator(mode_indicator t)
 {
-	check_value(t, {positioning_system_mode_indicator::invalid,
-					   positioning_system_mode_indicator::autonomous,
-					   positioning_system_mode_indicator::differential},
+	check_value(t,
+		{mode_indicator::invalid, mode_indicator::autonomous, mode_indicator::differential},
 		"mode_indicator");
-	mode_indicator = t;
+	mode_ind = t;
 }
 
 void apb::check() const
@@ -101,9 +100,8 @@ void apb::check() const
 	check_value(heading_to_steer_to_destination_ref, {reference::TRUE, reference::MAGNETIC},
 		"heading_to_steer_to_destination_ref");
 
-	check_value(mode_indicator, {positioning_system_mode_indicator::invalid,
-									positioning_system_mode_indicator::autonomous,
-									positioning_system_mode_indicator::differential},
+	check_value(mode_ind,
+		{mode_indicator::invalid, mode_indicator::autonomous, mode_indicator::differential},
 		"mode_indicator");
 }
 
@@ -116,7 +114,7 @@ std::vector<std::string> apb::get_data() const
 		to_string(bearing_origin_to_destination_ref), to_string(waypoint_id),
 		format(bearing_pos_to_destination, 1), to_string(bearing_pos_to_destination_ref),
 		format(heading_to_steer_to_destination, 1),
-		to_string(heading_to_steer_to_destination_ref), to_string(mode_indicator)};
+		to_string(heading_to_steer_to_destination_ref), to_string(mode_ind)};
 }
 }
 }

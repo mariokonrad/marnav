@@ -76,7 +76,7 @@ private:
 	utils::optional<nmea::date> date;
 	utils::optional<double> mag;
 	utils::optional<direction> mag_hem;
-	utils::optional<positioning_system_mode_indicator> mode_indicator;
+	utils::optional<mode_indicator> mode_ind;
 
 public:
 	NMEA_GETTER(time_utc)
@@ -86,7 +86,7 @@ public:
 	NMEA_GETTER(date)
 	NMEA_GETTER(mag)
 	NMEA_GETTER(mag_hem)
-	NMEA_GETTER(mode_indicator)
+	NMEA_GETTER(mode_ind)
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;
@@ -99,10 +99,7 @@ public:
 	void set_heading(double t) noexcept { heading = t; }
 	void set_date(const nmea::date & t) noexcept { date = t; }
 	void set_mag(double t, direction h);
-	void set_mode_indicator(positioning_system_mode_indicator t) noexcept
-	{
-		mode_indicator = t;
-	}
+	void set_mode_indicator(mode_indicator t) noexcept { mode_ind = t; }
 };
 }
 }

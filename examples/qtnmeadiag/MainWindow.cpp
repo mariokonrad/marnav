@@ -116,27 +116,26 @@ static QString render(const marnav::utils::optional<marnav::nmea::waypoint> & t)
 	return t->c_str();
 }
 
-static QString render(
-	const marnav::utils::optional<marnav::nmea::positioning_system_mode_indicator> & t)
+static QString render(const marnav::utils::optional<marnav::nmea::mode_indicator> & t)
 {
 	if (!t)
 		return "-";
 	switch (*t) {
-		case marnav::nmea::positioning_system_mode_indicator::invalid:
+		case marnav::nmea::mode_indicator::invalid:
 			return QString{"invalid"};
-		case marnav::nmea::positioning_system_mode_indicator::autonomous:
+		case marnav::nmea::mode_indicator::autonomous:
 			return QString{"autonomous"};
-		case marnav::nmea::positioning_system_mode_indicator::differential:
+		case marnav::nmea::mode_indicator::differential:
 			return QString{"differential"};
-		case marnav::nmea::positioning_system_mode_indicator::estimated:
+		case marnav::nmea::mode_indicator::estimated:
 			return QString{"estimated"};
-		case marnav::nmea::positioning_system_mode_indicator::manual_input:
+		case marnav::nmea::mode_indicator::manual_input:
 			return QString{"manual input"};
-		case marnav::nmea::positioning_system_mode_indicator::simulated:
+		case marnav::nmea::mode_indicator::simulated:
 			return QString{"simulated"};
-		case marnav::nmea::positioning_system_mode_indicator::data_not_valid:
+		case marnav::nmea::mode_indicator::data_not_valid:
 			return QString{"not valid"};
-		case marnav::nmea::positioning_system_mode_indicator::precise:
+		case marnav::nmea::mode_indicator::precise:
 			return QString{"precise"};
 		default:
 			break;
@@ -158,7 +157,7 @@ static QString details_rmb(const marnav::nmea::sentence * s)
 	result += "\nBearing          : " + render(t->get_bearing());
 	result += "\nDest. Velocity   : " + render(t->get_dst_velocity());
 	result += "\nArrival Status   : " + render(t->get_arrival_status());
-	result += "\nMode Indicator   : " + render(t->get_mode_indicator());
+	result += "\nMode Indicator   : " + render(t->get_mode_ind());
 	return result;
 }
 
@@ -175,7 +174,7 @@ static QString details_rmc(const marnav::nmea::sentence * s)
 	result += "\nDate     : " + render(t->get_date());
 	result += "\nMagn Dev : " + render(t->get_mag());
 	result += "\nMagn Hem : " + render(t->get_mag_hem());
-	result += "\nMode Ind : " + render(t->get_mode_indicator());
+	result += "\nMode Ind : " + render(t->get_mode_ind());
 	return result;
 }
 
@@ -253,7 +252,7 @@ static QString details_gll(const marnav::nmea::sentence * s)
 	result += "\nLongitude     : " + render(t->get_longitude());
 	result += "\nTime UTC      : " + render(t->get_time_utc());
 	result += "\nStatus        : " + render(t->get_data_valid());
-	result += "\nMode Indicator: " + render(t->get_mode_indicator());
+	result += "\nMode Indicator: " + render(t->get_mode_ind());
 	return result;
 }
 
@@ -276,7 +275,7 @@ static QString details_vtg(const marnav::nmea::sentence * s)
 	result += "\nTrack Magn    : " + render(t->get_track_magn());
 	result += "\nSpeed Knots   : " + render(t->get_speed_kn());
 	result += "\nSpeed kmh     : " + render(t->get_speed_kmh());
-	result += "\nMode Indicator: " + render(t->get_mode_indicator());
+	result += "\nMode Indicator: " + render(t->get_mode_ind());
 	return result;
 }
 

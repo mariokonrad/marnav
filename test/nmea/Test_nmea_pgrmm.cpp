@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <marnav/nmea/pgrmm.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/pgrmm.hpp>
 #include "type_traits_helper.hpp"
 
 namespace

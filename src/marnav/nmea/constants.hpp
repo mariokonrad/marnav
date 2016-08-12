@@ -23,7 +23,7 @@ enum class status : char {
 };
 
 /// Positioning System Mode Indicator constants.
-enum class positioning_system_mode_indicator : char {
+enum class mode_indicator : char {
 	invalid, ///< NMEA representation: 'V'
 	autonomous, ///< NMEA representation: 'A'
 	differential, ///< NMEA representation: 'D'

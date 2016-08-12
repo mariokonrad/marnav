@@ -28,13 +28,13 @@ xte::xte(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 4), cross_track_unit);
 
 	if (size == 6)
-		read(*(first + 5), mode_indicator);
+		read(*(first + 5), mode_ind);
 }
 
 std::vector<std::string> xte::get_data() const
 {
 	return {to_string(status1), to_string(status2), to_string(cross_track_error_magnitude),
-		to_string(direction_to_steer), to_string(cross_track_unit), to_string(mode_indicator)};
+		to_string(direction_to_steer), to_string(cross_track_unit), to_string(mode_ind)};
 }
 }
 }

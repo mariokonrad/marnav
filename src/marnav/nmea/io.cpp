@@ -338,37 +338,37 @@ void read(const std::string & s, reference & value, data_format fmt)
 	}
 }
 
-void read(const std::string & s, positioning_system_mode_indicator & value, data_format fmt)
+void read(const std::string & s, mode_indicator & value, data_format fmt)
 {
-	typename std::underlying_type<positioning_system_mode_indicator>::type t;
+	typename std::underlying_type<mode_indicator>::type t;
 	read(s, t, fmt);
 	switch (t) {
 		case 'V':
-			value = positioning_system_mode_indicator::invalid;
+			value = mode_indicator::invalid;
 			break;
 		case 'A':
-			value = positioning_system_mode_indicator::autonomous;
+			value = mode_indicator::autonomous;
 			break;
 		case 'D':
-			value = positioning_system_mode_indicator::differential;
+			value = mode_indicator::differential;
 			break;
 		case 'E':
-			value = positioning_system_mode_indicator::estimated;
+			value = mode_indicator::estimated;
 			break;
 		case 'M':
-			value = positioning_system_mode_indicator::manual_input;
+			value = mode_indicator::manual_input;
 			break;
 		case 'S':
-			value = positioning_system_mode_indicator::simulated;
+			value = mode_indicator::simulated;
 			break;
 		case 'N':
-			value = positioning_system_mode_indicator::data_not_valid;
+			value = mode_indicator::data_not_valid;
 			break;
 		case 'P':
-			value = positioning_system_mode_indicator::precise;
+			value = mode_indicator::precise;
 			break;
 		default:
-			throw std::runtime_error{"invalid data for nmea/positioning_system_mode_indicator"};
+			throw std::runtime_error{"invalid data for nmea/mode_indicator"};
 	}
 }
 

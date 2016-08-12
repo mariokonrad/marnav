@@ -13,7 +13,7 @@ constexpr const char * gll::TAG;
 
 gll::gll()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, mode_indicator(positioning_system_mode_indicator::invalid)
+	, mode_ind(mode_indicator::invalid)
 {
 }
 
@@ -35,7 +35,7 @@ gll::gll(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 5), data_valid);
 
 	if (size > 6)
-		read(*(first + 6), mode_indicator);
+		read(*(first + 6), mode_ind);
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
 	lat = correct_hemisphere(lat, lat_hem);
@@ -67,7 +67,7 @@ void gll::set_lon(const geo::longitude & t)
 std::vector<std::string> gll::get_data() const
 {
 	return {to_string(lat), to_string(lat_hem), to_string(lon), to_string(lon_hem),
-		to_string(time_utc), to_string(data_valid), to_string(mode_indicator)};
+		to_string(time_utc), to_string(data_valid), to_string(mode_ind)};
 }
 }
 }

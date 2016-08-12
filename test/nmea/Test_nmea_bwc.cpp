@@ -105,10 +105,10 @@ TEST_F(Test_nmea_bwc, set_waypoint)
 	EXPECT_STREQ("$GPBWC,,,,,,,,,,,,POINT1,*10", nmea::to_string(bwc).c_str());
 }
 
-TEST_F(Test_nmea_bwc, set_faa_mode_indicator)
+TEST_F(Test_nmea_bwc, set_mode_indicator)
 {
 	nmea::bwc bwc;
-	bwc.set_faa_mode_indicator(nmea::positioning_system_mode_indicator::differential);
+	bwc.set_mode_indicator(nmea::mode_indicator::differential);
 
 	EXPECT_STREQ("$GPBWC,,,,,,,,,,,,,D*29", nmea::to_string(bwc).c_str());
 }

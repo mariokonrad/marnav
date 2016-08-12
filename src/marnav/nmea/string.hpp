@@ -29,7 +29,7 @@ std::string to_string(ais_channel t);
 std::string to_string(type_of_point t);
 std::string to_string(direction t);
 std::string to_string(reference t);
-std::string to_string(positioning_system_mode_indicator t);
+std::string to_string(mode_indicator t);
 std::string to_string(status t);
 std::string to_string(quality t);
 std::string to_string(target_status t);

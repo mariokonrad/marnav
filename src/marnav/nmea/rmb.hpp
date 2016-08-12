@@ -86,7 +86,7 @@ private:
 	utils::optional<double> bearing; // bearing to destination in degrees to true
 	utils::optional<double> dst_velocity; // destination closing velocity in knots
 	utils::optional<status> arrival_status; // arrival status, A:arrival circle entered
-	utils::optional<positioning_system_mode_indicator> mode_indicator;
+	utils::optional<mode_indicator> mode_ind;
 
 public:
 	NMEA_GETTER(active)
@@ -98,7 +98,7 @@ public:
 	NMEA_GETTER(bearing)
 	NMEA_GETTER(dst_velocity)
 	NMEA_GETTER(arrival_status)
-	NMEA_GETTER(mode_indicator)
+	NMEA_GETTER(mode_ind)
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;
@@ -114,10 +114,7 @@ public:
 	void set_bearing(double t) noexcept { bearing = t; }
 	void set_dst_velocity(double t) noexcept { dst_velocity = t; }
 	void set_arrival_status(status t) noexcept { arrival_status = t; }
-	void set_mode_indicator(positioning_system_mode_indicator t) noexcept
-	{
-		mode_indicator = t;
-	}
+	void set_mode_indicator(mode_indicator t) noexcept { mode_ind = t; }
 };
 }
 }

@@ -26,7 +26,7 @@ gns::gns(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 2), lat_hem);
 	read(*(first + 3), lon);
 	read(*(first + 4), lon_hem);
-	read(*(first + 5), mode_indicator);
+	read(*(first + 5), mode_ind);
 	read(*(first + 6), number_of_satellites);
 	read(*(first + 7), hdrop);
 	read(*(first + 8), antenna_altitude);
@@ -65,13 +65,13 @@ void gns::set_mode_indicator(const std::string & t)
 {
 	if ((t.size() < 2) || (t.size() > 8))
 		throw std::invalid_argument{"invalid mode indicator"};
-	mode_indicator = t;
+	mode_ind = t;
 }
 
 std::vector<std::string> gns::get_data() const
 {
 	return {to_string(time_utc), to_string(lat), to_string(lat_hem), to_string(lon),
-		to_string(lon_hem), to_string(mode_indicator), to_string(number_of_satellites),
+		to_string(lon_hem), to_string(mode_ind), to_string(number_of_satellites),
 		to_string(hdrop), to_string(antenna_altitude), to_string(geodial_sepration),
 		to_string(age_of_differential_data), to_string(differential_ref_station_id)};
 }
