@@ -200,7 +200,7 @@ template <class T> const T * sentence_cast(const std::unique_ptr<sentence> & s)
 	template <class T>                                                                  \
 	friend std::unique_ptr<sentence> sentence_parse(                                    \
 		const std::string & talker, const sentence::fields & f);                        \
-	template <typename T> friend T create_sentence(const std::string & s);
+	template <typename T> friend T create_sentence(const std::string &);
 
 #define MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(s)                                      \
 	namespace detail                                                                    \

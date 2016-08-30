@@ -3,12 +3,19 @@
 export SCRIPT_BASE=$(dirname `readlink -f $0`)
 export BASE=${SCRIPT_BASE}/..
 
+# search for a suitable clang-format version
+CLANG_TIDY_BIN=
+if [ `which clang-tidy-3.7` ] ; then
+	CLANG_TIDY_BIN=`which clang-tidy-3.7`
+fi
+
 function exec_file()
 {
 	echo -n "--- $1 "
 	printf '%*s\n' $((`tput cols` - 10 - ${#1})) "" | tr ' ' '-'
-	clang-tidy-3.7 $1 \
-		-checks=modernize-*,readability-*,misc-*,clang-analyzer-*,-readability-braces-around-statements \
+	${CLANG_TIDY_BIN} $1 \
+		-checks=cppcoreguidelines-*,modernize-*,readability-*,misc-*,clang-analyzer-*,-readability-braces-around-statements \
+		-p ${BASE}/build \
 		-- -I${BASE}/src -std=c++11
 }
 
@@ -18,6 +25,11 @@ function exec_directory()
 		exec_file $fn
 	done
 }
+
+if [ ! -x ${CLANG_TIDY_BIN} ] ; then
+	echo "error: clang tidy not found. abort."
+	exit -1
+fi
 
 if [ $# -gt 1 ] ; then
 	echo "error: invalid number of parameters: $#"
