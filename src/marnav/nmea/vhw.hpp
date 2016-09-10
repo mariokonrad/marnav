@@ -27,8 +27,8 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vhw)
 ///    - M = Magnetic
 /// 5. Knots (speed of vessel relative to the water)
 /// 6. N = Knots
-/// 7. Kilometers (speed of vessel relative to the water)
-/// 8. K = Kilometers
+/// 7. Kilometers per hour (speed of vessel relative to the water)
+/// 8. K = Kilometers per hour
 ///
 class vhw : public sentence
 {

@@ -27,7 +27,10 @@
 #include <marnav/nmea/rmb.hpp>
 #include <marnav/nmea/rmc.hpp>
 #include <marnav/nmea/rte.hpp>
+#include <marnav/nmea/vhw.hpp>
+#include <marnav/nmea/vlw.hpp>
 #include <marnav/nmea/vtg.hpp>
+#include <marnav/nmea/vwr.hpp>
 #include <marnav/nmea/zda.hpp>
 
 #include <marnav/nmea/pgrme.hpp>
@@ -562,6 +565,31 @@ static void print_detail_pgrmz(const marnav::nmea::sentence * s)
 	print("Altitude", render(t->get_altitude()));
 	print("Fix Type", render(t->get_fix()));
 }
+
+static void print_detail_vwr(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vwr>(s);
+	print("Angle", fmt::sprintf("%s %s", render(t->get_angle()), render(t->get_angle_side())));
+	print("Speed Knots", render(t->get_speed_knots()));
+	print("Speed m/s", render(t->get_speed_mps()));
+	print("Speed km/h", render(t->get_speed_kmh()));
+}
+
+static void print_detail_vlw(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vlw>(s);
+	print("Distance Cumulative nm", render(t->get_distance_cum()));
+	print("Distance since Rest nm", render(t->get_distance_reset()));
+}
+
+static void print_detail_vhw(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vhw>(s);
+	print("Heading True", render(t->get_heading_empty()));
+	print("Heading Magn", render(t->get_heading()));
+	print("Speed kn", render(t->get_speed_knots()));
+	print("Speed km/h", render(t->get_speed_kmh()));
+}
 }
 
 static void dump_nmea(const std::string & line)
@@ -575,6 +603,7 @@ static void dump_nmea(const std::string & line)
 		std::function<void(const marnav::nmea::sentence *)> func;
 	};
 	using container = std::vector<entry>;
+	// clang-format off
 	static const container sentences = {
 		// standard
 		ADD_SENTENCE(aam),
@@ -592,7 +621,10 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(rmb),
 		ADD_SENTENCE(rmc),
 		ADD_SENTENCE(rte),
+		ADD_SENTENCE(vhw),
+		ADD_SENTENCE(vlw),
 		ADD_SENTENCE(vtg),
+		ADD_SENTENCE(vwr),
 		ADD_SENTENCE(zda),
 
 		// proprietary
@@ -600,6 +632,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(pgrmm),
 		ADD_SENTENCE(pgrmz)
 	};
+	// clang-format on
 #undef ADD_SENTENCE
 
 	using namespace marnav;

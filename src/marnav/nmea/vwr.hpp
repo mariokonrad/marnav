@@ -56,7 +56,7 @@ private:
 	utils::optional<side> angle_side; // side of vessel, R:right, L:left
 	utils::optional<double> speed_knots; // wind speed in knots
 	utils::optional<unit::velocity> speed_knots_unit; // N:knots
-	utils::optional<double> speed_mps; // wind speed in miles per second
+	utils::optional<double> speed_mps; // wind speed in meters per second
 	utils::optional<unit::velocity> speed_mps_unit; // M:mps
 	utils::optional<double> speed_kmh; // wind speed in kilometers per hour
 	utils::optional<unit::velocity> speed_kmh_unit; // K:kmh
