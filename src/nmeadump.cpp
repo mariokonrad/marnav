@@ -1,12 +1,17 @@
 #include <fstream>
 #include <iostream>
-#include <iomanip>
 #include <vector>
-#include <cxxopts.hpp>
+
+#include <cxxopts/cxxopts.hpp>
+
+#define FMT_HEADER_ONLY
+#include <fmt/format.h>
+
 #include <marnav/nmea/nmea.hpp>
-#include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/checksum.hpp>
+#include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
+
 #include <marnav/nmea/bod.hpp>
 #include <marnav/nmea/dtm.hpp>
 #include <marnav/nmea/gga.hpp>
@@ -19,6 +24,7 @@
 #include <marnav/nmea/rmc.hpp>
 #include <marnav/nmea/vtg.hpp>
 #include <marnav/nmea/zda.hpp>
+
 #include <marnav/nmea/pgrme.hpp>
 #include <marnav/nmea/pgrmm.hpp>
 #include <marnav/nmea/pgrmz.hpp>
@@ -27,21 +33,22 @@ namespace nmeadump
 {
 namespace terminal
 {
-static constexpr const char * normal  = "\033[0m";
-static constexpr const char * black   = "\033[30m";
-static constexpr const char * red     = "\033[31m";
-static constexpr const char * green   = "\033[32m";
-static constexpr const char * yellow  = "\033[33m";
-static constexpr const char * blue    = "\033[34m";
+static constexpr const char * normal = "\033[0m";
+static constexpr const char * black = "\033[30m";
+static constexpr const char * red = "\033[31m";
+static constexpr const char * green = "\033[32m";
+static constexpr const char * yellow = "\033[33m";
+static constexpr const char * blue = "\033[34m";
 static constexpr const char * magenta = "\033[35m";
-static constexpr const char * cyan    = "\033[36m";
-static constexpr const char * white   = "\033[37m";
+static constexpr const char * cyan = "\033[36m";
+static constexpr const char * white = "\033[37m";
 }
 
 namespace
 {
 template <class Container>
-static bool contains(const Container & container, const typename Container::value_type & element)
+static bool contains(
+	const Container & container, const typename Container::value_type & element)
 {
 	return std::find(std::begin(container), std::end(container), element)
 		!= std::end(container);
@@ -78,9 +85,8 @@ static bool parse_options(int argc, char ** argv)
 	options.parse(argc, argv);
 
 	if (options.count("help")) {
-		std::cout << options.help() << '\n';
-		std::cout << "If no file or port is specified, stdin is used to read data from.\n";
-		std::cout << '\n';
+		fmt::printf("%s\n", options.help());
+		fmt::printf("If no file or port is specified, stdin is used to read data from.\n\n");
 		return true;
 	}
 
@@ -111,68 +117,33 @@ template <typename T> static std::string render(const T & t)
 	return marnav::nmea::to_string(t);
 }
 
-static std::string render(const std::string & t)
-{
-	return t;
-}
+static std::string render(const std::string & t) { return t; }
 
-static std::string render(char t)
-{
-	return std::string{} + t;
-}
+static std::string render(char t) { return fmt::sprintf("%c", t); }
 
-static std::string render(const uint32_t t)
-{
-	std::stringstream s;
-	s << t;
-	return s.str();
-}
+static std::string render(const uint32_t t) { return fmt::sprintf("%u", t); }
 
-static std::string render(const int32_t t)
-{
-	std::stringstream s;
-	s << t;
-	return s.str();
-}
+static std::string render(const int32_t t) { return fmt::sprintf("%d", t); }
 
-static std::string render(const double t)
-{
-	std::stringstream s;
-	s << std::left << std::setw(7) << std::setprecision(5) << t;
-	return s.str();
-}
+static std::string render(const double t) { return fmt::sprintf("%-8.3f", t); }
 
 static std::string render(const marnav::nmea::time & t)
 {
-	using namespace marnav::nmea;
-
-	std::stringstream s;
-	s << std::setw(2) << std::setfill('0') << t.hour() << ':' << std::setw(2)
-	  << std::setfill('0') << t.minutes() << ':' << std::setw(2) << std::setfill('0')
-	  << t.seconds();
-	return s.str();
+	return fmt::sprintf("%02u:%02u:%02u", t.hour(), t.minutes(), t.seconds());
 }
 
 static std::string render(const marnav::geo::latitude & t)
 {
 	using namespace marnav::nmea;
-
-	std::stringstream s;
-	s << ' ' << std::setw(2) << std::setfill('0') << t.degrees() << "\u00b0" << std::setw(2)
-	  << std::setfill('0') << t.minutes() << '\'' << std::setw(4) << std::setprecision(3)
-	  << std::setfill('0') << t.seconds() << to_string(t.hem());
-	return s.str();
+	return fmt::sprintf(
+		" %02u\u00b0%02u'%04.1f%s", t.degrees(), t.minutes(), t.seconds(), to_string(t.hem()));
 }
 
 static std::string render(const marnav::geo::longitude & t)
 {
 	using namespace marnav::nmea;
-
-	std::stringstream s;
-	s << std::setw(3) << std::setfill('0') << t.degrees() << "\u00b0" << std::setw(2)
-	  << std::setfill('0') << t.minutes() << '\'' << std::setw(4) << std::setprecision(3)
-	  << std::setfill('0') << t.seconds() << to_string(t.hem());
-	return s.str();
+	return fmt::sprintf(
+		"%03u\u00b0%02u'%04.1f%s", t.degrees(), t.minutes(), t.seconds(), to_string(t.hem()));
 }
 
 static std::string render(const marnav::nmea::unit::distance t)
@@ -299,10 +270,7 @@ static std::string render(const marnav::nmea::route t)
 	return "-";
 }
 
-static std::string render(const marnav::nmea::waypoint & t)
-{
-	return t.c_str();
-}
+static std::string render(const marnav::nmea::waypoint & t) { return t.c_str(); }
 
 static std::string render(const marnav::nmea::mode_indicator t)
 {
@@ -336,181 +304,176 @@ template <typename T> static std::string render(const marnav::utils::optional<T>
 	return render(*t);
 }
 
-static void print_detail_hdg(std::ostream & os, const marnav::nmea::sentence * s)
+static void print(const std::string & name, const std::string & value)
+{
+	fmt::printf("\t%-18s : %s\n", name, value);
+}
+
+static void print_detail_hdg(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::hdg>(s);
-	os << '\t' << "Heading          : " << render(t->get_heading()) << '\n';
-	os << '\t' << "Magn Deviation   : " << render(t->get_magn_dev()) << ' '
-	   << render(t->get_magn_dev_hem()) << '\n';
-	os << '\t' << "Magn Variation   : " << render(t->get_magn_var()) << ' '
-	   << render(t->get_magn_var_hem()) << '\n';
+	print("Heading", render(t->get_heading()));
+	print("Magn Deviation",
+		fmt::sprintf("%s %s", render(t->get_magn_dev()), render(t->get_magn_dev_hem())));
+	print("Magn Variation",
+		fmt::sprintf("%s %s", render(t->get_magn_var()), render(t->get_magn_var_hem())));
 }
 
-static void print_detail_rmb(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_rmb(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rmb>(s);
-	os << '\t' << "Active           : " << render(t->get_active()) << '\n';
-	os << '\t' << "Cross Track Error: " << render(t->get_cross_track_error()) << '\n';
-	os << '\t' << "Waypoint To      : " << render(t->get_waypoint_to()) << '\n';
-	os << '\t' << "Waypoint From    : " << render(t->get_waypoint_from()) << '\n';
-	os << '\t' << "Latitude         : " << render(t->get_latitude()) << '\n';
-	os << '\t' << "Longitude        : " << render(t->get_longitude()) << '\n';
-	os << '\t' << "Range            : " << render(t->get_range()) << '\n';
-	os << '\t' << "Bearing          : " << render(t->get_bearing()) << '\n';
-	os << '\t' << "Dest. Velocity   : " << render(t->get_dst_velocity()) << '\n';
-	os << '\t' << "Arrival Status   : " << render(t->get_arrival_status()) << '\n';
-	os << '\t' << "Mode Indicator   : " << render(t->get_mode_ind()) << '\n';
+	print("Active", render(t->get_active()));
+	print("Cross Track Error", render(t->get_cross_track_error()));
+	print("Waypoint To", render(t->get_waypoint_to()));
+	print("Waypoint From", render(t->get_waypoint_from()));
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("Range", render(t->get_range()));
+	print("Bearing", render(t->get_bearing()));
+	print("Dest. Velocity", render(t->get_dst_velocity()));
+	print("Arrival Status", render(t->get_arrival_status()));
+	print("Mode Indicator", render(t->get_mode_ind()));
 }
 
-static void print_detail_rmc(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_rmc(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rmc>(s);
-	os << '\t' << "Time UTC         : " << render(t->get_time_utc()) << '\n';
-	os << '\t' << "Status           : " << render(t->get_status()) << '\n';
-	os << '\t' << "Latitude         : " << render(t->get_latitude()) << '\n';
-	os << '\t' << "Longitude        : " << render(t->get_longitude()) << '\n';
-	os << '\t' << "SOG              : " << render(t->get_sog()) << '\n';
-	os << '\t' << "Heading          : " << render(t->get_heading()) << '\n';
-	os << '\t' << "Date             : " << render(t->get_date()) << '\n';
-	os << '\t' << "Magn Dev         : " << render(t->get_mag()) << '\n';
-	os << '\t' << "Magn Hem         : " << render(t->get_mag_hem()) << '\n';
-	os << '\t' << "Mode Ind         : " << render(t->get_mode_ind()) << '\n';
+	print("Time UTC", render(t->get_time_utc()));
+	print("Status", render(t->get_status()));
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("SOG", render(t->get_sog()));
+	print("Heading", render(t->get_heading()));
+	print("Date", render(t->get_date()));
+	print("Magn Dev", fmt::sprintf("%s %s", render(t->get_mag()), render(t->get_mag_hem())));
+	print("Mode Ind ", render(t->get_mode_ind()));
 }
 
-static void print_detail_vtg(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_vtg(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vtg>(s);
-	os << '\t' << "Track True       : " << render(t->get_track_true()) << '\n';
-	os << '\t' << "Track Magn       : " << render(t->get_track_magn()) << '\n';
-	os << '\t' << "Speed Knots      : " << render(t->get_speed_kn()) << '\n';
-	os << '\t' << "Speed kmh        : " << render(t->get_speed_kmh()) << '\n';
-	os << '\t' << "Mode Indicator   : " << render(t->get_mode_ind()) << '\n';
+	print("Track True", render(t->get_track_true()));
+	print("Track Magn", render(t->get_track_magn()));
+	print("Speed Knots", render(t->get_speed_kn()));
+	print("Speed kmh", render(t->get_speed_kmh()));
+	print("Mode Indicator", render(t->get_mode_ind()));
 }
 
-static void print_detail_gll(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_gll(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gll>(s);
-	os << '\t' << "Latitude         : " << render(t->get_latitude()) << '\n';
-	os << '\t' << "Longitude        : " << render(t->get_longitude()) << '\n';
-	os << '\t' << "Time UTC         : " << render(t->get_time_utc()) << '\n';
-	os << '\t' << "Status           : " << render(t->get_data_valid()) << '\n';
-	os << '\t' << "Mode Indicator   : " << render(t->get_mode_ind()) << '\n';
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("Time UTC", render(t->get_time_utc()));
+	print("Status", render(t->get_data_valid()));
+	print("Mode Indicator", render(t->get_mode_ind()));
 }
 
-static void print_detail_bod(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_bod(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::bod>(s);
-	os << '\t' << "Bearing True     : " << render(t->get_bearing_true()) << '\n';
-	os << '\t' << "Bearing Magn     : " << render(t->get_bearing_magn()) << '\n';
-	os << '\t' << "Waypoint To      : " << render(t->get_waypoint_to()) << '\n';
-	os << '\t' << "Waypoint From    : " << render(t->get_waypoint_from()) << '\n';
+	print("Bearing True", render(t->get_bearing_true()));
+	print("Bearing Magn", render(t->get_bearing_magn()));
+	print("Waypoint To", render(t->get_waypoint_to()));
+	print("Waypoint From", render(t->get_waypoint_from()));
 }
 
-static void print_detail_gsa(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_gsa(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gsa>(s);
-	os << '\t' << "Selection Mode   : " + render(t->get_sel_mode()) << '\n';
-	os << '\t' << "Mode             : " + render(t->get_mode()) << '\n';
+	print("Selection Mode", render(t->get_sel_mode()));
+	print("Mode", render(t->get_mode()));
 	for (auto i = 0; i < marnav::nmea::gsa::max_satellite_ids; ++i) {
-		os << '\t' << "Satellite " << std::setw(2) << i << "     : "
-		   << render(t->get_satellite_id(i)) << '\n';
+		print(fmt::sprintf("Satellite %02u", i), render(t->get_satellite_id(i)));
 	}
-	os << '\t' << "PDOP             : " + render(t->get_pdop()) << '\n';
-	os << '\t' << "HDOP             : " + render(t->get_hdop()) << '\n';
-	os << '\t' << "VDOP             : " + render(t->get_vdop()) << '\n';
+	print("PDOP", render(t->get_pdop()));
+	print("HDOP", render(t->get_hdop()));
+	print("VDOP", render(t->get_vdop()));
 }
 
-static void print_detail_gga(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_gga(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gga>(s);
-	os << '\t' << "Time             : " << render(t->get_time()) << '\n';
-	os << '\t' << "Latitude         : " << render(t->get_latitude()) << '\n';
-	os << '\t' << "Longitude        : " << render(t->get_longitude()) << '\n';
-	os << '\t' << "Quality Ind      : " << render(t->get_quality_indicator()) << '\n';
-	os << '\t' << "Num Satellites   : " << render(t->get_n_satellites()) << '\n';
-	os << '\t' << "Horiz Dilution   : " << render(t->get_hor_dilution()) << '\n';
-	os << '\t' << "Altitude         : " << render(t->get_altitude()) << '\n';
-	os << '\t' << "Altitude Unit    : " << render(t->get_altitude_unit()) << '\n';
-	os << '\t' << "Geodial Sep      : " << render(t->get_geodial_separation()) << '\n';
-	os << '\t' << "Geodial Sep Unit : " << render(t->get_geodial_separation_unit()) << '\n';
-	os << '\t' << "DGPS Age         : " << render(t->get_dgps_age()) << '\n';
-	os << '\t' << "DGPS Ref         : " << render(t->get_dgps_ref()) << '\n';
+	print("Time", render(t->get_time()));
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("Quality Ind", render(t->get_quality_indicator()));
+	print("Num Satellites", render(t->get_n_satellites()));
+	print("Horiz Dilution", render(t->get_hor_dilution()));
+	print("Altitude",
+		fmt::sprintf("%s %s", render(t->get_altitude()), render(t->get_altitude_unit())));
+	print("Geodial Sep", fmt::sprintf("%s %s", render(t->get_geodial_separation()),
+							 render(t->get_geodial_separation_unit())));
+	print("DGPS Age", render(t->get_dgps_age()));
+	print("DGPS Ref", render(t->get_dgps_ref()));
 }
 
-static void print_detail_mwv(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_mwv(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::mwv>(s);
-	os << '\t' << "Angle            : " << render(t->get_angle()) << '\n';
-	os << '\t' << "Angle Ref        : " << render(t->get_angle_ref()) << '\n';
-	os << '\t' << "Speed            : " << render(t->get_speed()) << '\n';
-	os << '\t' << "Speed Unit       : " << render(t->get_speed_unit()) << '\n';
-	os << '\t' << "Data Valid       : " << render(t->get_data_valid()) << '\n';
+	print("Angle", fmt::sprintf("%s %s", render(t->get_angle()), render(t->get_angle_ref())));
+	print("Speed", fmt::sprintf("%s %s", render(t->get_speed()), render(t->get_speed_unit())));
+	print("Data Valid", render(t->get_data_valid()));
 }
 
-static void print_detail_gsv(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_gsv(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gsv>(s);
-	os << '\t' << "Num Messages     : " << render(t->get_n_messages()) << '\n';
-	os << '\t' << "Messages Number  : " << render(t->get_message_number()) << '\n';
-	os << '\t' << "Num Sat in View  : " << render(t->get_n_satellites_in_view()) << '\n';
+	print("Num Messages", render(t->get_n_messages()));
+	print("Messages Number", render(t->get_message_number()));
+	print("Num Sat in View", render(t->get_n_satellites_in_view()));
 	for (int i = 0; i < 4; ++i) {
 		const auto sat = t->get_sat(i);
 		if (sat) {
-			os << '\t' << "Sat              : "
-			   << "ID:" << std::setw(2) << std::setfill('0') << render(sat->id) << "  "
-			   << "ELEV:" << std::setw(2) << std::setfill('0') << render(sat->elevation) << "  "
-			   << "AZIMUTH:" << std::setw(3) << std::setfill('0') << render(sat->azimuth)
-			   << "  "
-			   << "SNR:" << std::setw(2) << std::setfill('0') << render(sat->snr) << '\n';
+			print("Sat", fmt::sprintf("ID:%02u ELEV:%02u AZIMUTH:%03u SNR:%02u", sat->id,
+							 sat->elevation, sat->azimuth, sat->snr));
 		}
 	}
 }
 
-static void print_detail_zda(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_zda(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::zda>(s);
-	os << '\t' << "Time UTC         : " << render(t->get_time_utc()) << '\n';
-	os << '\t' << "Day              : " << render(t->get_day()) << '\n';
-	os << '\t' << "Month            : " << render(t->get_month()) << '\n';
-	os << '\t' << "Year             : " << render(t->get_year()) << '\n';
-	os << '\t' << "Local Zone Hours : " << render(t->get_local_zone_hours()) << '\n';
-	os << '\t' << "Local Zone Min   : " << render(t->get_local_zone_minutes()) << '\n';
+	print("Time UTC", render(t->get_time_utc()));
+	print("Day", render(t->get_day()));
+	print("Month", render(t->get_month()));
+	print("Year", render(t->get_year()));
+	print("Local Zone Hours", render(t->get_local_zone_hours()));
+	print("Local Zone Min", render(t->get_local_zone_minutes()));
 }
 
-static void print_detail_dtm(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_dtm(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::dtm>(s);
-	os << '\t' << "Ref              : " << render(t->get_ref()) << '\n';
-	os << '\t' << "Subcode          : " << render(t->get_subcode()) << '\n';
-	os << '\t' << "Latitude Offset  : " << render(t->get_lat_offset()) << '\n';
-	os << '\t' << "Latitude Hem     : " << render(t->get_lat_hem()) << '\n';
-	os << '\t' << "Longitude Offset : " << render(t->get_lon_offset()) << '\n';
-	os << '\t' << "Longitude Hem    : " << render(t->get_lon_hem()) << '\n';
-	os << '\t' << "Altitude         : " << render(t->get_altitude()) << '\n';
-	os << '\t' << "Name             : " << render(t->get_name()) << '\n';
+	print("Ref", render(t->get_ref()));
+	print("Subcode", render(t->get_subcode()));
+	print("Latitude Offset", render(t->get_lat_offset()));
+	print("Latitude Hem", render(t->get_lat_hem()));
+	print("Longitude Offset", render(t->get_lon_offset()));
+	print("Longitude Hem", render(t->get_lon_hem()));
+	print("Altitude", render(t->get_altitude()));
+	print("Name", render(t->get_name()));
 }
 
-static void print_detail_pgrme(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_pgrme(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::pgrme>(s);
-	os << '\t' << "HPE              : " << render(t->get_horizontal_position_error()) << '\n';
-	os << '\t' << "VPE              : " << render(t->get_vertical_position_error()) << '\n';
-	os << '\t'
-	   << "O.sph.eq.pos err : " << render(t->get_overall_spherical_equiv_position_error())
-	   << '\n';
+	print("HPE", render(t->get_horizontal_position_error()));
+	print("VPE", render(t->get_vertical_position_error()));
+	print("O.sph.eq.pos err", render(t->get_overall_spherical_equiv_position_error()));
 }
 
-static void print_detail_pgrmm(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_pgrmm(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::pgrmm>(s);
-	os << '\t' << "Map Datum        : " << render(t->get_map_datum()) << '\n';
+	print("Map Datum", render(t->get_map_datum()));
 }
 
-static void print_detail_pgrmz(std::ostream & os, const marnav::nmea::sentence * s)
+static void print_detail_pgrmz(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::pgrmz>(s);
-	os << '\t' << "Altitude         : " << render(t->get_altitude()) << " feet" << '\n';
-	os << '\t' << "Fix Type         : " << render(t->get_fix()) << '\n';
+	print("Altitude", render(t->get_altitude()));
+	print("Fix Type", render(t->get_fix()));
 }
 }
 
@@ -522,7 +485,7 @@ static void dump_nmea(const std::string & line)
 	}
 	struct entry {
 		marnav::nmea::sentence_id id;
-		std::function<void(std::ostream &, const marnav::nmea::sentence *)> func;
+		std::function<void(const marnav::nmea::sentence *)> func;
 	};
 	using container = std::vector<entry>;
 	static const container sentences = {
@@ -554,27 +517,21 @@ static void dump_nmea(const std::string & line)
 		auto i = std::find_if(std::begin(sentences), std::end(sentences),
 			[&s](const container::value_type & item) { return item.id == s->id(); });
 		if (i == std::end(sentences)) {
-			std::cout << terminal::magenta << "unknown: " << terminal::normal << line << '\n'
-					  << '\n';
+			fmt::printf("%sunknown:%s %s\n\n", terminal::magenta, terminal::normal, line);
 		} else {
-			std::cout << terminal::green << line << terminal::normal << '\n';
-			i->func(std::cout, s.get());
-			std::cout << '\n';
+			fmt::printf("%s%s%s\n", terminal::green, line, terminal::normal);
+			i->func(s.get());
+			fmt::printf("\n");
 		}
 	} catch (nmea::unknown_sentence & error) {
-		std::cerr << terminal::red << "error: unknown sentence: " << terminal::normal << line
-				  << '\n'
-				  << '\t' << error.what() << '\n'
-				  << '\n';
+		fmt::printf("%serror: unknown sentence:%s %s\n\t%s\n\n", terminal::red,
+			terminal::normal, line, error.what());
 	} catch (nmea::checksum_error & error) {
-		std::cerr << terminal::red << "error: checksum error: " << terminal::normal << line
-				  << '\n'
-				  << '\t' << error.what() << '\n'
-				  << '\n';
+		fmt::printf("%serror: checksum error:%s %s\n\t%s\n\n", terminal::red, terminal::normal,
+			line, error.what());
 	} catch (std::invalid_argument & error) {
-		std::cerr << terminal::red << "error: " << terminal::normal << line << '\n'
-				  << '\t' << error.what() << '\n'
-				  << '\n';
+		fmt::printf(
+			"%serror:%s %s\n\t%s\n\n", terminal::red, terminal::normal, line, error.what());
 	}
 }
 
@@ -598,7 +555,7 @@ static void dump_stream(std::istream & is)
 				// TODO
 				break;
 			default:
-				std::cout << line << '\n';
+				fmt::printf("%s\n", line);
 				break;
 		}
 	}
@@ -615,10 +572,7 @@ static void dump_port(const std::string &, uint32_t)
 	throw std::runtime_error{"NOT IMPLEMENTED"};
 }
 
-static void dump_stdin()
-{
-	dump_stream(std::cin);
-}
+static void dump_stdin() { dump_stream(std::cin); }
 }
 
 int main(int argc, char ** argv)

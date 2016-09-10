@@ -28,7 +28,7 @@ add_executable(nmeadump
 target_include_directories(nmeadump
 	PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
-		${CMAKE_CURRENT_SOURCE_DIR}/../extern/cxxopts
+		${CMAKE_CURRENT_SOURCE_DIR}/../extern
 	)
 
 target_compile_options(nmeadump
