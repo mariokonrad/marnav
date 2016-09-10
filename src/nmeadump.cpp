@@ -12,16 +12,21 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
 
+#include <marnav/nmea/aam.hpp>
+#include <marnav/nmea/apb.hpp>
 #include <marnav/nmea/bod.hpp>
+#include <marnav/nmea/dbt.hpp>
 #include <marnav/nmea/dtm.hpp>
 #include <marnav/nmea/gga.hpp>
 #include <marnav/nmea/gll.hpp>
 #include <marnav/nmea/gsa.hpp>
 #include <marnav/nmea/gsv.hpp>
 #include <marnav/nmea/hdg.hpp>
+#include <marnav/nmea/mtw.hpp>
 #include <marnav/nmea/mwv.hpp>
 #include <marnav/nmea/rmb.hpp>
 #include <marnav/nmea/rmc.hpp>
+#include <marnav/nmea/rte.hpp>
 #include <marnav/nmea/vtg.hpp>
 #include <marnav/nmea/zda.hpp>
 
@@ -165,6 +170,17 @@ static std::string render(const marnav::nmea::unit::distance t)
 	return "-";
 }
 
+static std::string render(const marnav::nmea::unit::temperature t)
+{
+	switch (t) {
+		case marnav::nmea::unit::temperature::celsius:
+			return "\u00b0C";
+		default:
+			break;
+	}
+	return "-";
+}
+
 static std::string render(const marnav::nmea::unit::velocity t)
 {
 	switch (t) {
@@ -174,6 +190,19 @@ static std::string render(const marnav::nmea::unit::velocity t)
 			return "km/h";
 		case marnav::nmea::unit::velocity::mps:
 			return "m/s";
+		default:
+			break;
+	}
+	return "-";
+}
+
+static std::string render(const marnav::nmea::side t)
+{
+	switch (t) {
+		case marnav::nmea::side::left:
+			return "Left";
+		case marnav::nmea::side::right:
+			return "Rigth";
 		default:
 			break;
 	}
@@ -306,7 +335,7 @@ template <typename T> static std::string render(const marnav::utils::optional<T>
 
 static void print(const std::string & name, const std::string & value)
 {
-	fmt::printf("\t%-18s : %s\n", name, value);
+	fmt::printf("\t%-30s : %s\n", name, value);
 }
 
 static void print_detail_hdg(const marnav::nmea::sentence * s)
@@ -455,6 +484,64 @@ static void print_detail_dtm(const marnav::nmea::sentence * s)
 	print("Name", render(t->get_name()));
 }
 
+static void print_detail_aam(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::aam>(s);
+	print("Arrival Circle Entred", render(t->get_arrival_circle_entered()));
+	print("Perpendicular Passed", render(t->get_perpendicualar_passed()));
+	print("Arrival Circle Radius", fmt::sprintf("%s %s", render(t->get_arrival_circle_radius()),
+									   render(t->get_arrival_circle_radius_unit())));
+	print("Waypoint", render(t->get_waypoint_id()));
+}
+
+static void print_detail_rte(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rte>(s);
+	print("Number of Messages", render(t->get_n_messages()));
+	print("Message Number", render(t->get_message_number()));
+	print("Message Mode", render(t->get_message_mode()));
+	for (int i = 0; i < marnav::nmea::rte::max_waypoints; ++i) {
+		const auto wp = t->get_waypoint_id(i);
+		if (wp)
+			print(fmt::sprintf("Waypoint %i", i), render(wp));
+	}
+}
+
+static void print_detail_mtw(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::mtw>(s);
+	print("Water Temperature",
+		fmt::sprintf("%s %s", render(t->get_temperature()), render(t->get_temperature_unit())));
+}
+
+static void print_detail_dbt(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::dbt>(s);
+	print("Depth Feet", render(t->get_depth_feet()));
+	print("Depth Meter", render(t->get_depth_meter()));
+	print("Depth Fathom", render(t->get_depth_fathom()));
+}
+
+static void print_detail_apb(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::apb>(s);
+	print("Loran C blink warn", render(t->get_loran_c_blink_warning()));
+	print("Loran C cycle lock warn", render(t->get_loran_c_cycle_lock_warning()));
+	print("Cross Track Error Magnitude", render(t->get_cross_track_error_magnitude()));
+	print("Direction to Steer", render(t->get_direction_to_steer()));
+	print("Cross Track Unit", render(t->get_cross_track_unit()));
+	print("Status Arrival", render(t->get_status_arrival()));
+	print("Status Perpendicular Pass", render(t->get_status_perpendicular_passing()));
+	print("Bearing Org to Dest", render(t->get_bearing_origin_to_destination()));
+	print("Bearing Org to Dest Ref", render(t->get_bearing_origin_to_destination_ref()));
+	print("Waypoint", render(t->get_waypoint_id()));
+	print("Bearing Pos to Dest", render(t->get_bearing_pos_to_destination()));
+	print("Bearing Pos to Dest Ref", render(t->get_bearing_pos_to_destination_ref()));
+	print("Heading to Steer to Dest", render(t->get_heading_to_steer_to_destination()));
+	print("Heading to Steer to Dest Ref", render(t->get_heading_to_steer_to_destination_ref()));
+	print("Mode Indicator", render(t->get_mode_ind()));
+}
+
 static void print_detail_pgrme(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::pgrme>(s);
@@ -490,16 +577,21 @@ static void dump_nmea(const std::string & line)
 	using container = std::vector<entry>;
 	static const container sentences = {
 		// standard
+		ADD_SENTENCE(aam),
+		ADD_SENTENCE(apb),
 		ADD_SENTENCE(bod),
+		ADD_SENTENCE(dbt),
 		ADD_SENTENCE(dtm),
 		ADD_SENTENCE(gga),
 		ADD_SENTENCE(gll),
 		ADD_SENTENCE(gsa),
 		ADD_SENTENCE(gsv),
 		ADD_SENTENCE(hdg),
+		ADD_SENTENCE(mtw),
 		ADD_SENTENCE(mwv),
 		ADD_SENTENCE(rmb),
 		ADD_SENTENCE(rmc),
+		ADD_SENTENCE(rte),
 		ADD_SENTENCE(vtg),
 		ADD_SENTENCE(zda),
 
@@ -517,21 +609,22 @@ static void dump_nmea(const std::string & line)
 		auto i = std::find_if(std::begin(sentences), std::end(sentences),
 			[&s](const container::value_type & item) { return item.id == s->id(); });
 		if (i == std::end(sentences)) {
-			fmt::printf("%sunknown:%s %s\n\n", terminal::magenta, terminal::normal, line);
+			fmt::printf(
+				"%s%s%s\n\tnot implemented\n\n", terminal::magenta, line, terminal::normal);
 		} else {
 			fmt::printf("%s%s%s\n", terminal::green, line, terminal::normal);
 			i->func(s.get());
 			fmt::printf("\n");
 		}
 	} catch (nmea::unknown_sentence & error) {
-		fmt::printf("%serror: unknown sentence:%s %s\n\t%s\n\n", terminal::red,
-			terminal::normal, line, error.what());
+		fmt::printf("%s%s%s\n\terror: unknown sentence: %s\n\n", terminal::red, line,
+			terminal::normal, error.what());
 	} catch (nmea::checksum_error & error) {
-		fmt::printf("%serror: checksum error:%s %s\n\t%s\n\n", terminal::red, terminal::normal,
-			line, error.what());
+		fmt::printf("%s%s%s\n\terror: checksum error: %s\n\n", terminal::red, line,
+			terminal::normal, error.what());
 	} catch (std::invalid_argument & error) {
 		fmt::printf(
-			"%serror:%s %s\n\t%s\n\n", terminal::red, terminal::normal, line, error.what());
+			"%s%s%s\n\terror: %s\n\n", terminal::red, line, terminal::normal, error.what());
 	}
 }
 
