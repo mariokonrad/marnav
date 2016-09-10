@@ -19,6 +19,31 @@ target_compile_options(nmeasum
 		-pedantic-errors
 	)
 
+### bin: nmeadump
+
+add_executable(nmeadump
+	nmeadump.cpp
+	)
+
+target_include_directories(nmeadump
+	PRIVATE
+		${CMAKE_CURRENT_SOURCE_DIR}
+		${CMAKE_CURRENT_SOURCE_DIR}/../extern/cxxopts
+	)
+
+target_compile_options(nmeadump
+	PRIVATE
+		-pipe
+		-ggdb
+		-Wall
+		-Wextra
+		-pedantic-errors
+	)
+
+target_link_libraries(nmeadump
+	marnav
+	)
+
 ### lib: marnav
 
 if(${ENABLE_STATIC})
