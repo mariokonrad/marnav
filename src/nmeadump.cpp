@@ -32,10 +32,19 @@
 #include <marnav/nmea/vtg.hpp>
 #include <marnav/nmea/vwr.hpp>
 #include <marnav/nmea/zda.hpp>
+#include <marnav/nmea/vdm.hpp>
+#include <marnav/nmea/vdo.hpp>
 
 #include <marnav/nmea/pgrme.hpp>
 #include <marnav/nmea/pgrmm.hpp>
 #include <marnav/nmea/pgrmz.hpp>
+
+#include <marnav/ais/ais.hpp>
+
+#include <marnav/ais/message_01.hpp>
+#include <marnav/ais/message_02.hpp>
+#include <marnav/ais/message_03.hpp>
+#include <marnav/ais/message_05.hpp>
 
 namespace nmeadump
 {
@@ -127,13 +136,22 @@ template <typename T> static std::string render(const T & t)
 
 static std::string render(const std::string & t) { return t; }
 
+static std::string render(bool t) { return t ? "true" : "false"; }
+
 static std::string render(char t) { return fmt::sprintf("%c", t); }
 
 static std::string render(const uint32_t t) { return fmt::sprintf("%u", t); }
 
+static std::string render(const int8_t t) { return fmt::sprintf("%d", t); }
+
 static std::string render(const int32_t t) { return fmt::sprintf("%d", t); }
 
 static std::string render(const double t) { return fmt::sprintf("%-8.3f", t); }
+
+static std::string render(const marnav::utils::mmsi & t)
+{
+	return fmt::sprintf("%09u", static_cast<marnav::utils::mmsi::value_type>(t));
+}
 
 static std::string render(const marnav::nmea::time & t)
 {
@@ -152,6 +170,146 @@ static std::string render(const marnav::geo::longitude & t)
 	using namespace marnav::nmea;
 	return fmt::sprintf(
 		"%03u\u00b0%02u'%04.1f%s", t.degrees(), t.minutes(), t.seconds(), to_string(t.hem()));
+}
+
+static std::string render(const marnav::ais::ship_type t)
+{
+	switch (t) {
+		case marnav::ais::ship_type::not_available:
+			return "Not Available";
+		case marnav::ais::ship_type::wing_in_ground:
+			return "Wing in ground";
+		case marnav::ais::ship_type::wing_in_ground_hazardous_cat_a:
+			return "Wing in ground hazardous Cat A";
+		case marnav::ais::ship_type::wing_in_ground_hazardous_cat_b:
+			return "Wing in ground hazardous Cat B";
+		case marnav::ais::ship_type::wing_in_ground_hazardous_cat_c:
+			return "Wing in ground hazardous Cat C";
+		case marnav::ais::ship_type::wing_in_ground_hazardous_cat_d:
+			return "Wing in ground hazardous Cat D";
+		case marnav::ais::ship_type::fishing:
+			return "Fishing";
+		case marnav::ais::ship_type::towing:
+			return "Towing";
+		case marnav::ais::ship_type::towing_large:
+			return "Towing large";
+		case marnav::ais::ship_type::dredging_or_underwater_ops:
+			return "Dredging or underwater ops";
+		case marnav::ais::ship_type::diving_ops:
+			return "Diving ops";
+		case marnav::ais::ship_type::military_ops:
+			return "Military ops";
+		case marnav::ais::ship_type::sailing:
+			return "Sailing";
+		case marnav::ais::ship_type::pleasure_craft:
+			return "Pleasure Craft";
+		case marnav::ais::ship_type::high_speed_craft:
+			return "High speed craft";
+		case marnav::ais::ship_type::high_speed_craft_hazardous_cat_a:
+			return "High speed craft hazardous Cat A";
+		case marnav::ais::ship_type::high_speed_craft_hazardous_cat_b:
+			return "High speed craft hazardous Cat B";
+		case marnav::ais::ship_type::high_speed_craft_hazardous_cat_c:
+			return "High speed craft hazardous Cat C";
+		case marnav::ais::ship_type::high_speed_craft_hazardous_cat_d:
+			return "High speed craft hazardous Cat D";
+		case marnav::ais::ship_type::high_speed_craft_no_info:
+			return "High speed craft no_info";
+		case marnav::ais::ship_type::pilot_vessel:
+			return "Pilot Vessel";
+		case marnav::ais::ship_type::search_and_rescue_vessel:
+			return "Search and Rescue Vessel";
+		case marnav::ais::ship_type::tug:
+			return "Tug";
+		case marnav::ais::ship_type::port_tender:
+			return "Port Tender";
+		case marnav::ais::ship_type::anti_pollution_equipment:
+			return "Anti Pollution Equipment";
+		case marnav::ais::ship_type::law_enforcement:
+			return "Law Enforcement";
+		case marnav::ais::ship_type::medical_transport:
+			return "Medical Transport";
+		case marnav::ais::ship_type::noncombatant:
+			return "Noncombatant";
+		case marnav::ais::ship_type::passenger:
+			return "Passenger";
+		case marnav::ais::ship_type::passenger_hazardous_cat_a:
+			return "Passenger hazardous Cat A";
+		case marnav::ais::ship_type::passenger_hazardous_cat_b:
+			return "Passenger hazardous Cat B";
+		case marnav::ais::ship_type::passenger_hazardous_cat_c:
+			return "Passenger hazardous Cat C";
+		case marnav::ais::ship_type::passenger_hazardous_cat_d:
+			return "Passenger hazardous Cat D";
+		case marnav::ais::ship_type::passenger_no_info:
+			return "Passenger no info";
+		case marnav::ais::ship_type::cargo:
+			return "Cargo";
+		case marnav::ais::ship_type::cargo_hazardous_cat_a:
+			return "Cargo hazardous Cat A";
+		case marnav::ais::ship_type::cargo_hazardous_cat_b:
+			return "Cargo hazardous Cat B";
+		case marnav::ais::ship_type::cargo_hazardous_cat_c:
+			return "Cargo hazardous Cat C";
+		case marnav::ais::ship_type::cargo_hazardous_cat_d:
+			return "Cargo hazardous Cat D";
+		case marnav::ais::ship_type::cargo_no_info:
+			return "Cargo no info";
+		case marnav::ais::ship_type::tanker:
+			return "Tanker";
+		case marnav::ais::ship_type::tanker_hazardous_cat_a:
+			return "Tanker hazardous Cat A";
+		case marnav::ais::ship_type::tanker_hazardous_cat_b:
+			return "Tanker hazardous Cat B";
+		case marnav::ais::ship_type::tanker_hazardous_cat_c:
+			return "Tanker hazardous Cat C";
+		case marnav::ais::ship_type::tanker_hazardous_cat_d:
+			return "Tanker hazardous Cat D";
+		case marnav::ais::ship_type::tanker_no_info:
+			return "Tanker no info";
+		case marnav::ais::ship_type::other:
+			return "Other";
+		case marnav::ais::ship_type::other_hazardous_cat_a:
+			return "Other hazardous Cat A";
+		case marnav::ais::ship_type::other_hazardous_cat_b:
+			return "Other hazardous Cat B";
+		case marnav::ais::ship_type::other_hazardous_cat_c:
+			return "Other hazardous Cat C";
+		case marnav::ais::ship_type::other_hazardous_cat_d:
+			return "Other hazardous Cat D";
+		case marnav::ais::ship_type::other_no_info:
+			return "Other no info";
+		default:
+			break;
+	}
+	return "-";
+}
+
+static std::string render(const marnav::ais::epfd_fix_type t)
+{
+	switch (t) {
+		case marnav::ais::epfd_fix_type::undefined:
+			return "undefined";
+		case marnav::ais::epfd_fix_type::gps:
+			return "GPS";
+		case marnav::ais::epfd_fix_type::glonass:
+			return "GLONASS";
+		case marnav::ais::epfd_fix_type::combined_gps_glonass:
+			return "Combined GPS GLONASS";
+		case marnav::ais::epfd_fix_type::loran_c:
+			return "Loran C";
+		case marnav::ais::epfd_fix_type::chayka:
+			return "Chayka";
+		case marnav::ais::epfd_fix_type::integrated_navigation_system:
+			return "Integrated Navigation System";
+		case marnav::ais::epfd_fix_type::surveyed:
+			return "surveyed";
+		case marnav::ais::epfd_fix_type::galileo:
+			return "Galileo";
+		default:
+			break;
+	}
+	return "-";
 }
 
 static std::string render(const marnav::nmea::unit::distance t)
@@ -590,6 +748,55 @@ static void print_detail_vhw(const marnav::nmea::sentence * s)
 	print("Speed kn", render(t->get_speed_knots()));
 	print("Speed km/h", render(t->get_speed_kmh()));
 }
+
+static void print_detail_message_01(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_01>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	print("ROT", render(t->get_rot()));
+	print("SOG", render(t->get_sog()));
+	print("Pos Accuracy", render(t->get_position_accuracy()));
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("COG", render(t->get_cog()));
+	print("HDG", render(t->get_hdg()));
+	print("Time Stamp", render(t->get_timestamp()));
+	print("RAIM", render(t->get_raim()));
+	print("Radio Status", render(t->get_radio_status()));
+}
+
+static void print_detail_message_02(const marnav::ais::message * m)
+{
+	print_detail_message_01(m);
+}
+
+static void print_detail_message_03(const marnav::ais::message * m)
+{
+	print_detail_message_01(m);
+}
+
+static void print_detail_message_05(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_05>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	print("AIS Version", render(t->get_ais_version()));
+	print("IMO", render(t->get_imo_number()));
+	print("Callsign", render(t->get_callsign()));
+	print("Shipname", render(t->get_shipname()));
+	print("Shiptype", render(t->get_shiptype()));
+	print("Length", render(t->get_to_bow() + t->get_to_stern()));
+	print("Width", render(t->get_to_port() + t->get_to_starboard()));
+	print("Draught", render(t->get_draught()));
+	print("EPFD Fix", render(t->get_epfd_fix()));
+	print("ETA Month", render(t->get_eta_month()));
+	print("ETA Day", render(t->get_eta_day()));
+	print("ETA Hour", render(t->get_eta_hour()));
+	print("ETA Minute", render(t->get_eta_minute()));
+	print("Destination", render(t->get_destination()));
+	print("DTE", render(t->get_dte()));
+}
 }
 
 static void dump_nmea(const std::string & line)
@@ -661,8 +868,49 @@ static void dump_nmea(const std::string & line)
 	}
 }
 
+static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> & sentences)
+{
+#define ADD_MESSAGE(m)                               \
+	{                                                 \
+		marnav::ais::m::ID, detail::print_detail_##m \
+	}
+	struct entry {
+		marnav::ais::message_id id;
+		std::function<void(const marnav::ais::message *)> func;
+	};
+	using container = std::vector<entry>;
+	// clang-format off
+	static const container messages = {
+		ADD_MESSAGE(message_01),
+		ADD_MESSAGE(message_02),
+		ADD_MESSAGE(message_03),
+		ADD_MESSAGE(message_05)
+	};
+	// clang-format on
+#undef ADD_MESSAGE
+
+	using namespace marnav;
+
+	try {
+		auto m = ais::make_message(nmea::collect_payload(sentences.begin(), sentences.end()));
+		auto i = std::find_if(std::begin(messages), std::end(messages),
+			[&m](const container::value_type & item) { return item.id == m->type(); });
+		if (i == std::end(messages)) {
+			fmt::printf("%smessage_%02u%s\n\tnot implemented\n\n", terminal::magenta,
+				static_cast<uint8_t>(m->type()), terminal::normal);
+		} else {
+			i->func(m.get());
+			fmt::printf("\n");
+		}
+	} catch (std::exception & error) {
+		fmt::printf("\t%serror:%s %s\n\n", terminal::red, terminal::normal, error.what());
+	}
+}
+
 static void dump_stream(std::istream & is)
 {
+	std::vector<std::unique_ptr<marnav::nmea::sentence>> sentences;
+
 	while (is) {
 		std::string line;
 		std::getline(is, line);
@@ -677,9 +925,31 @@ static void dump_stream(std::istream & is)
 			case marnav::nmea::sentence::start_token:
 				dump_nmea(line);
 				break;
-			case marnav::nmea::sentence::start_token_ais:
-				// TODO
-				break;
+			case marnav::nmea::sentence::start_token_ais: {
+				fmt::printf("%s%s%s\n", terminal::blue, line, terminal::normal);
+				auto s = marnav::nmea::make_sentence(line);
+				std::unique_ptr<marnav::nmea::vdm> v;
+				if (s->id() == marnav::nmea::sentence_id::VDM)
+					v.reset(marnav::nmea::sentence_cast<marnav::nmea::vdm>(s));
+				if (s->id() == marnav::nmea::sentence_id::VDO)
+					v.reset(marnav::nmea::sentence_cast<marnav::nmea::vdo>(s));
+
+				if (v) {
+					const auto n_fragments = v->get_n_fragments();
+					const auto fragment = v->get_fragment();
+					v.release();
+					sentences.push_back(std::move(s));
+					if (fragment == n_fragments) {
+						dump_ais(sentences);
+						sentences.clear();
+					}
+				} else {
+					fmt::printf(
+						"%s%s%s\n\terror: ignoring AIS sentence, dropping collection.\n\n",
+						terminal::red, line, terminal::normal);
+					sentences.clear();
+				}
+			} break;
 			default:
 				fmt::printf("%s\n", line);
 				break;
