@@ -750,9 +750,8 @@ static void print_detail_vhw(const marnav::nmea::sentence * s)
 	print("Speed km/h", render(t->get_speed_kmh()));
 }
 
-static void print_detail_message_01(const marnav::ais::message * m)
+static void print_detail_message_01_common( const marnav::ais::message_01 * t)
 {
-	const auto t = marnav::ais::message_cast<marnav::ais::message_01>(m);
 	print("Repeat Indicator", render(t->get_repeat_indicator()));
 	print("MMSI", render(t->get_mmsi()));
 	print("ROT", render(t->get_rot()));
@@ -767,14 +766,19 @@ static void print_detail_message_01(const marnav::ais::message * m)
 	print("Radio Status", render(t->get_radio_status()));
 }
 
+static void print_detail_message_01(const marnav::ais::message * m)
+{
+	print_detail_message_01_common(marnav::ais::message_cast<marnav::ais::message_01>(m));
+}
+
 static void print_detail_message_02(const marnav::ais::message * m)
 {
-	print_detail_message_01(m);
+	print_detail_message_01_common(marnav::ais::message_cast<marnav::ais::message_02>(m));
 }
 
 static void print_detail_message_03(const marnav::ais::message * m)
 {
-	print_detail_message_01(m);
+	print_detail_message_01_common(marnav::ais::message_cast<marnav::ais::message_03>(m));
 }
 
 static void print_detail_message_05(const marnav::ais::message * m)
@@ -924,38 +928,50 @@ static void dump_stream(std::istream & is)
 		if (line[0] == '#')
 			continue;
 
-		switch (line[0]) {
-			case nmea::sentence::start_token:
-				dump_nmea(line);
-				break;
-			case nmea::sentence::start_token_ais: {
-				fmt::printf("%s%s%s\n", terminal::blue, line, terminal::normal);
-				auto s = nmea::make_sentence(line);
-				std::unique_ptr<nmea::vdm> v;
-				if (s->id() == nmea::sentence_id::VDM)
-					v.reset(nmea::sentence_cast<nmea::vdm>(s));
-				if (s->id() == nmea::sentence_id::VDO)
-					v.reset(nmea::sentence_cast<nmea::vdo>(s));
+		if (line[0] == nmea::sentence::start_token) {
+			dump_nmea(line);
+		} else if (line[0] == nmea::sentence::start_token_ais) {
+			fmt::printf("%s%s%s\n", terminal::blue, line, terminal::normal);
+			auto s = nmea::make_sentence(line);
 
-				if (v) {
-					const auto n_fragments = v->get_n_fragments();
-					const auto fragment = v->get_fragment();
-					v.release();
-					sentences.push_back(std::move(s));
-					if (fragment == n_fragments) {
-						dump_ais(sentences);
-						sentences.clear();
-					}
-				} else {
-					fmt::printf(
-						"%s%s%s\n\terror: ignoring AIS sentence, dropping collection.\n\n",
-						terminal::red, line, terminal::normal);
-					sentences.clear();
-				}
-			} break;
-			default:
-				fmt::printf("%s\n", line);
-				break;
+			nmea::vdm * v = nullptr; // VDM is the common denominator for AIS relevant messages
+
+			if (s->id() == nmea::sentence_id::VDO) {
+				v = nmea::sentence_cast<nmea::vdo>(s);
+			} else if (s->id() == nmea::sentence_id::VDM) {
+				v = nmea::sentence_cast<nmea::vdm>(s);
+			} else {
+				// something strange happened, no VDM nor VDO
+				fmt::printf("%s%s%s\n\terror: ignoring AIS sentence, dropping collection.\n\n",
+					terminal::red, line, terminal::normal);
+				sentences.clear();
+				continue;
+			}
+
+			// check sentences if a discontuniation has occurred
+			if (sentences.size() && (sentences.back()->id() != v->id())) {
+				sentences.clear(); // there was a discontinuation, start over collecting
+				fmt::printf(
+					"\t%swarning:%s dropping collection.\n", terminal::cyan, terminal::normal);
+			}
+
+			// check if a previous message was not complete
+			const auto n_fragments = v->get_n_fragments();
+			const auto fragment = v->get_fragment();
+			if (sentences.size() >= fragment) {
+				sentences.clear();
+				fmt::printf(
+					"\t%swarning:%s dropping collection.\n", terminal::cyan, terminal::normal);
+			}
+
+			sentences.push_back(std::move(s));
+			if (fragment == n_fragments) {
+				dump_ais(sentences);
+				sentences.clear();
+			}
+		} else {
+			fmt::printf("%s%s%s\n\terror: ignoring AIS sentence.\n\n", terminal::red, line,
+				terminal::normal);
 		}
 	}
 }

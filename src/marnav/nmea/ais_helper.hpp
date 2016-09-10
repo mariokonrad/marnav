@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <marnav/nmea/vdm.hpp>
+#include <marnav/nmea/vdo.hpp>
 
 namespace marnav
 {
@@ -13,7 +14,7 @@ namespace nmea
 /// @brief Collects payload from proper NMEA sentences.
 ///
 /// @note This function assumes, that all sentences in the specified range are
-///   providing payload (VDM or descendents).
+///   providing payload (VDM or VDO).
 ///
 /// @param[in] begin Iterator pointing to the beginning of the messges to process.
 /// @param[in] end   Iterator pointing after the messages to process (will not be
@@ -38,8 +39,19 @@ std::vector<std::pair<std::string, uint32_t>> collect_payload(InputIt begin, Inp
 	v.reserve(std::distance(begin, end));
 
 	for (; begin != end; ++begin) {
-		const auto & s = sentence_cast<nmea::vdm>(*begin);
-		v.push_back(make_pair(s->get_payload(), s->get_n_fill_bits()));
+		const auto & t = *begin;
+
+		// sentence_cast is not dynamic_cast, therefore the class hierarchy
+		// is not detected automatically (the advantage is, it is faster).
+		// this means, we have to check individually for VDM and VDO.
+
+		if (t->id() == sentence_id::VDM) {
+			const auto & s = sentence_cast<nmea::vdm>(t);
+			v.push_back(make_pair(s->get_payload(), s->get_n_fill_bits()));
+		} else if (t->id() == sentence_id::VDO) {
+			const auto & s = sentence_cast<nmea::vdo>(t);
+			v.push_back(make_pair(s->get_payload(), s->get_n_fill_bits()));
+		}
 	}
 
 	return v;
