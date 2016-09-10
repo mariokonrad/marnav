@@ -2,6 +2,7 @@
 #include <marnav/nmea/vdm.hpp>
 #include <marnav/nmea/mtw.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/ais_helper.hpp>
 #include "type_traits_helper.hpp"
 
 namespace

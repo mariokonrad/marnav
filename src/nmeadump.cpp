@@ -8,6 +8,7 @@
 #include <fmt/format.h>
 
 #include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/ais_helper.hpp>
 #include <marnav/nmea/checksum.hpp>
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
@@ -909,7 +910,9 @@ static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> 
 
 static void dump_stream(std::istream & is)
 {
-	std::vector<std::unique_ptr<marnav::nmea::sentence>> sentences;
+	using namespace marnav;
+
+	std::vector<std::unique_ptr<nmea::sentence>> sentences;
 
 	while (is) {
 		std::string line;
@@ -922,17 +925,17 @@ static void dump_stream(std::istream & is)
 			continue;
 
 		switch (line[0]) {
-			case marnav::nmea::sentence::start_token:
+			case nmea::sentence::start_token:
 				dump_nmea(line);
 				break;
-			case marnav::nmea::sentence::start_token_ais: {
+			case nmea::sentence::start_token_ais: {
 				fmt::printf("%s%s%s\n", terminal::blue, line, terminal::normal);
-				auto s = marnav::nmea::make_sentence(line);
-				std::unique_ptr<marnav::nmea::vdm> v;
-				if (s->id() == marnav::nmea::sentence_id::VDM)
-					v.reset(marnav::nmea::sentence_cast<marnav::nmea::vdm>(s));
-				if (s->id() == marnav::nmea::sentence_id::VDO)
-					v.reset(marnav::nmea::sentence_cast<marnav::nmea::vdo>(s));
+				auto s = nmea::make_sentence(line);
+				std::unique_ptr<nmea::vdm> v;
+				if (s->id() == nmea::sentence_id::VDM)
+					v.reset(nmea::sentence_cast<nmea::vdm>(s));
+				if (s->id() == nmea::sentence_id::VDO)
+					v.reset(nmea::sentence_cast<nmea::vdo>(s));
 
 				if (v) {
 					const auto n_fragments = v->get_n_fragments();

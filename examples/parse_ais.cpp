@@ -1,7 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <marnav/nmea/nmea.hpp>
-#include <marnav/nmea/vdm.hpp>
+#include <marnav/nmea/ais_helper.hpp>
 #include <marnav/ais/ais.hpp>
 #include <marnav/ais/message_05.hpp>
 

@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 #include <marnav/nmea/nmea.hpp>
-#include <marnav/nmea/vdm.hpp>
+#include <marnav/nmea/ais_helper.hpp>
 #include <marnav/ais/ais.hpp>
 
 namespace stackoverflow
