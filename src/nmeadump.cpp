@@ -47,7 +47,9 @@
 #include <marnav/ais/message_03.hpp>
 #include <marnav/ais/message_04.hpp>
 #include <marnav/ais/message_05.hpp>
+#include <marnav/ais/message_11.hpp>
 #include <marnav/ais/message_18.hpp>
+#include <marnav/ais/message_21.hpp>
 #include <marnav/ais/message_24.hpp>
 
 namespace nmeadump
@@ -146,9 +148,11 @@ static std::string render(char t) { return fmt::sprintf("%c", t); }
 
 static std::string render(const uint32_t t) { return fmt::sprintf("%u", t); }
 
+static std::string render(const int32_t t) { return fmt::sprintf("%d", t); }
+
 static std::string render(const int8_t t) { return fmt::sprintf("%d", t); }
 
-static std::string render(const int32_t t) { return fmt::sprintf("%d", t); }
+static std::string render(const uint8_t t) { return fmt::sprintf("%u", t); }
 
 static std::string render(const double t) { return fmt::sprintf("%-8.3f", t); }
 
@@ -323,6 +327,105 @@ static std::string render(const marnav::ais::epfd_fix_type t)
 			return "surveyed";
 		case marnav::ais::epfd_fix_type::galileo:
 			return "Galileo";
+		default:
+			break;
+	}
+	return "-";
+}
+
+static std::string render(const marnav::ais::message_21::off_position_indicator t)
+{
+	switch (t) {
+		case marnav::ais::message_21::off_position_indicator::on_position:
+			return "On Position";
+		case marnav::ais::message_21::off_position_indicator::off_position:
+			return "Off Position";
+		default:
+			break;
+	}
+	return "-";
+}
+
+static std::string render(const marnav::ais::message_21::virtual_aid t)
+{
+	switch (t) {
+		case marnav::ais::message_21::virtual_aid::real_aid:
+			return "Real Aid";
+		case marnav::ais::message_21::virtual_aid::virtual_aid:
+			return "Virtual Aid";
+		default:
+			break;
+	}
+	return "-";
+}
+
+static std::string render(const marnav::ais::message_21::aid_type_id t)
+{
+	switch (t) {
+		case marnav::ais::message_21::aid_type_id::unspecified:
+			return "unspecified";
+		case marnav::ais::message_21::aid_type_id::reference_point:
+			return "Reference point";
+		case marnav::ais::message_21::aid_type_id::racon:
+			return "RACON (radar transponder marking a navigation hazard)";
+		case marnav::ais::message_21::aid_type_id::fixed_structure:
+			return "Fixed structure";
+		case marnav::ais::message_21::aid_type_id::reserved:
+			return "Spare, Reserved for future use";
+		case marnav::ais::message_21::aid_type_id::light_no_sectors:
+			return "Light, without sectors";
+		case marnav::ais::message_21::aid_type_id::light_sectors:
+			return "Light, with sectors";
+		case marnav::ais::message_21::aid_type_id::leading_light_fromt:
+			return "Leading Light Front";
+		case marnav::ais::message_21::aid_type_id::leading_light_rear:
+			return "Leading Light Rear";
+		case marnav::ais::message_21::aid_type_id::beacon_cardinal_n:
+			return "Beacon, Cardinal N";
+		case marnav::ais::message_21::aid_type_id::beacon_cardinal_e:
+			return "Beacon, Cardinal E";
+		case marnav::ais::message_21::aid_type_id::beacon_cardinal_s:
+			return "Beacon, Cardinal S";
+		case marnav::ais::message_21::aid_type_id::beacon_cardinal_w:
+			return "Beacon, Cardinal W";
+		case marnav::ais::message_21::aid_type_id::beacon_port_hand:
+			return "Beacon, Port hand";
+		case marnav::ais::message_21::aid_type_id::beacon_starboard_hand:
+			return "Beacon, Starboard hand";
+		case marnav::ais::message_21::aid_type_id::beacon_preferred_channel_port_hand:
+			return "Beacon, Preferred Channel port hand";
+		case marnav::ais::message_21::aid_type_id::beacon_preferred_channel_starboard_hand:
+			return "Beacon, Preferred Channel starboard hand";
+		case marnav::ais::message_21::aid_type_id::beacon_isolated_danger:
+			return "Beacon, Isolated danger";
+		case marnav::ais::message_21::aid_type_id::beacon_safe_water:
+			return "Beacon, Safe water";
+		case marnav::ais::message_21::aid_type_id::beacon_sepcial_mark:
+			return "Beacon, Special mark";
+		case marnav::ais::message_21::aid_type_id::cardinal_n:
+			return "Cardinal Mark N";
+		case marnav::ais::message_21::aid_type_id::cardinal_e:
+			return "Cardinal Mark E";
+		case marnav::ais::message_21::aid_type_id::cardinal_s:
+			return "Cardinal Mark S";
+		case marnav::ais::message_21::aid_type_id::cardinal_w:
+			return "Cardinal Mark W";
+		case marnav::ais::message_21::aid_type_id::mark_port_hand:
+			return "Port hand Mark";
+		case marnav::ais::message_21::aid_type_id::mark_starboard_hand:
+			return "Starboard hand Mark";
+		case marnav::ais::message_21::aid_type_id::preferred_channel_port_hand:
+			return "Preferred Channel Port hand";
+		case marnav::ais::message_21::aid_type_id::preferred_channel_starboard_hand:
+			return "Preferred Channel Starboard hand";
+		case marnav::ais::message_21::aid_type_id::isolated_danger:
+			return "Isolated danger";
+		case marnav::ais::message_21::aid_type_id::safe_water:
+			return "Safe Water";
+		case marnav::ais::message_21::aid_type_id::special_mark:
+			return "Special Mark";
+		case marnav::ais::message_21::aid_type_id::light_vessel:
+			return "Light Vessel / LANBY / Rigs";
 		default:
 			break;
 	}
@@ -797,9 +900,8 @@ static void print_detail_message_03(const marnav::ais::message * m)
 	print_detail_message_01_common(marnav::ais::message_cast<marnav::ais::message_03>(m));
 }
 
-static void print_detail_message_04(const marnav::ais::message * m)
+static void print_detail_message_04_common(const marnav::ais::message_04 * t)
 {
-	const auto t = marnav::ais::message_cast<marnav::ais::message_04>(m);
 	print("Repeat Indicator", render(t->get_repeat_indicator()));
 	print("MMSI", render(t->get_mmsi()));
 	print("Year", render(t->get_year()));
@@ -814,6 +916,16 @@ static void print_detail_message_04(const marnav::ais::message * m)
 	print("EPFD Fix", render(t->get_epfd_fix()));
 	print("RAIM", render(t->get_raim()));
 	print("Radio Status", render(t->get_radio_status()));
+}
+
+static void print_detail_message_04(const marnav::ais::message * m)
+{
+	print_detail_message_04_common(marnav::ais::message_cast<marnav::ais::message_04>(m));
+}
+
+static void print_detail_message_11(const marnav::ais::message * m)
+{
+	print_detail_message_04_common(marnav::ais::message_cast<marnav::ais::message_11>(m));
 }
 
 static void print_detail_message_05(const marnav::ais::message * m)
@@ -858,6 +970,28 @@ static void print_detail_message_18(const marnav::ais::message * m)
 	print("Assigned", render(t->get_assigned()));
 	print("RAIM", render(t->get_raim()));
 	print("Radio Status", render(t->get_radio_status()));
+}
+
+static void print_detail_message_21(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_21>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	print("Aid Type", render(t->get_aid_type()));
+	print("Name", render(t->get_name()));
+	print("Pos Accuracy", render(t->get_position_accuracy()));
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("Length", render(t->get_to_bow() + t->get_to_stern()));
+	print("Width", render(t->get_to_port() + t->get_to_starboard()));
+	print("EPFD Fix", render(t->get_epfd_fix()));
+	print("UTC Second", render(t->get_utc_second()));
+	print("Off Pos Indicator", render(t->get_off_position()));
+	print("Regional", render(t->get_regional()));
+	print("RAIM", render(t->get_raim()));
+	print("Virtual Aid Flag", render(t->get_virtual_aid_flag()));
+	print("Assigned", render(t->get_assigned()));
+	print("Name Extension", render(t->get_name_extension()));
 }
 
 static void print_detail_message_24(const marnav::ais::message * m)
@@ -971,7 +1105,9 @@ static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> 
 		ADD_MESSAGE(message_03),
 		ADD_MESSAGE(message_04),
 		ADD_MESSAGE(message_05),
+		ADD_MESSAGE(message_11),
 		ADD_MESSAGE(message_18),
+		ADD_MESSAGE(message_21),
 		ADD_MESSAGE(message_24)
 	};
 	// clang-format on

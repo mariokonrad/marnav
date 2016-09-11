@@ -92,6 +92,8 @@ raw message_21::get_data() const
 	return bits;
 }
 
+std::string message_21::get_name() const { return trim_ais_string(name); }
+
 void message_21::set_name(const std::string & t)
 {
 	if (t.size() > 20) {
@@ -100,6 +102,8 @@ void message_21::set_name(const std::string & t)
 		name = t;
 	}
 }
+
+std::string message_21::get_name_extension() const { return trim_ais_string(name_extension); }
 
 void message_21::set_name_extension(const std::string & t)
 {

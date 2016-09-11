@@ -165,7 +165,7 @@ public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
 	aid_type_id get_aid_type() const noexcept { return aid_type; }
-	std::string get_name() const { return name; }
+	std::string get_name() const;
 	bool get_position_accuracy() const noexcept { return position_accuracy; }
 	uint32_t get_to_bow() const noexcept { return to_bow; }
 	uint32_t get_to_stern() const noexcept { return to_stern; }
@@ -178,7 +178,7 @@ public:
 	bool get_raim() const noexcept { return raim; }
 	virtual_aid get_virtual_aid_flag() const noexcept { return virtual_aid_flag; }
 	bool get_assigned() const noexcept { return assigned; }
-	std::string get_name_extension() const { return name_extension; }
+	std::string get_name_extension() const;
 
 	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
