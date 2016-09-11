@@ -88,5 +88,38 @@ raw message_24::get_data() const
 
 	return bits;
 }
+
+std::string message_24::get_shipname() const { return trim_ais_string(shipname); }
+
+std::string message_24::get_vendor_id() const { return trim_ais_string(vendor_id); }
+
+std::string message_24::get_callsign() const { return trim_ais_string(callsign); }
+
+void message_24::set_shipname(const std::string & t)
+{
+	if (t.size() > 20) {
+		shipname = t.substr(0, 20);
+	} else {
+		shipname = t;
+	}
+}
+
+void message_24::set_vendor_id(const std::string & t)
+{
+	if (t.size() > 3) {
+		callsign = t.substr(0, 3);
+	} else {
+		callsign = t;
+	}
+}
+
+void message_24::set_callsign(const std::string & t)
+{
+	if (t.size() > 7) {
+		callsign = t.substr(0, 7);
+	} else {
+		callsign = t;
+	}
+}
 }
 }

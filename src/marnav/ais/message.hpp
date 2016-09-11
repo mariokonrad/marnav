@@ -198,6 +198,8 @@ uint8_t encode_sixbit_ascii(char c);
 
 /// @}
 
+std::string trim_ais_string(const std::string & s);
+
 /// @brief Base class for all AIS messages.
 class message
 {

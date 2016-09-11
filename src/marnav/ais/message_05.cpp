@@ -6,11 +6,6 @@ namespace ais
 {
 MARNAV_AIS_DEFINE_MESSAGE_PARSE_FUNC(message_05)
 
-namespace
-{
-std::string trim_ais_string(const std::string & s) { return s.substr(0, s.find_first_of("@")); }
-}
-
 message_05::message_05()
 	: message(ID)
 	, callsign("@@@@@@@")

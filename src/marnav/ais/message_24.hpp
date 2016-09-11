@@ -76,14 +76,14 @@ public:
 	part get_part_number() const noexcept { return part_number; }
 
 	// part A specific
-	std::string get_shipname() const { return shipname; }
+	std::string get_shipname() const;
 
 	// part B specific (normal)
 	ship_type get_shiptype() const noexcept { return shiptype; }
-	std::string get_vendor_id() const { return vendor_id; }
+	std::string get_vendor_id() const;
 	uint32_t get_model() const noexcept { return model; }
 	uint32_t get_serial() const noexcept { return serial; }
-	std::string get_callsign() const { return callsign; }
+	std::string get_callsign() const;
 
 	// part B specific (normal)
 	uint32_t get_to_bow() const noexcept { return to_bow; }
@@ -99,14 +99,14 @@ public:
 	void set_part_number(part t) noexcept { part_number = t; }
 
 	// part A specific
-	void set_shipname(const std::string & t) { shipname = t; }
+	void set_shipname(const std::string & t);
 
 	// part B specific
 	void set_shiptype(ship_type t) noexcept { shiptype = t; }
-	void set_vendor_id(const std::string & t) { vendor_id = t; }
+	void set_vendor_id(const std::string & t);
 	void set_model(uint32_t t) noexcept { model = t; }
 	void set_serial(uint32_t t) noexcept { serial = t; }
-	void set_callsign(const std::string & t) { callsign = t; }
+	void set_callsign(const std::string & t);
 
 	// part B specific (normal)
 	void set_to_bow(uint32_t t) noexcept { to_bow = t; }

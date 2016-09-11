@@ -45,7 +45,10 @@
 #include <marnav/ais/message_01.hpp>
 #include <marnav/ais/message_02.hpp>
 #include <marnav/ais/message_03.hpp>
+#include <marnav/ais/message_04.hpp>
 #include <marnav/ais/message_05.hpp>
+#include <marnav/ais/message_18.hpp>
+#include <marnav/ais/message_24.hpp>
 
 namespace nmeadump
 {
@@ -171,6 +174,19 @@ static std::string render(const marnav::geo::longitude & t)
 	using namespace marnav::nmea;
 	return fmt::sprintf(
 		"%03u\u00b0%02u'%04.1f%s", t.degrees(), t.minutes(), t.seconds(), to_string(t.hem()));
+}
+
+static std::string render(const marnav::ais::message_24::part t)
+{
+	switch (t) {
+		case marnav::ais::message_24::part::A:
+			return "A";
+		case marnav::ais::message_24::part::B:
+			return "B";
+		default:
+			break;
+	}
+	return "-";
 }
 
 static std::string render(const marnav::ais::ship_type t)
@@ -781,6 +797,25 @@ static void print_detail_message_03(const marnav::ais::message * m)
 	print_detail_message_01_common(marnav::ais::message_cast<marnav::ais::message_03>(m));
 }
 
+static void print_detail_message_04(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_04>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	print("Year", render(t->get_year()));
+	print("Month", render(t->get_month()));
+	print("Day", render(t->get_day()));
+	print("Hour", render(t->get_hour()));
+	print("Minute", render(t->get_minute()));
+	print("Second", render(t->get_second()));
+	print("Pos Accuracy", render(t->get_position_accuracy()));
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("EPFD Fix", render(t->get_epfd_fix()));
+	print("RAIM", render(t->get_raim()));
+	print("Radio Status", render(t->get_radio_status()));
+}
+
 static void print_detail_message_05(const marnav::ais::message * m)
 {
 	const auto t = marnav::ais::message_cast<marnav::ais::message_05>(m);
@@ -801,6 +836,51 @@ static void print_detail_message_05(const marnav::ais::message * m)
 	print("ETA Minute", render(t->get_eta_minute()));
 	print("Destination", render(t->get_destination()));
 	print("DTE", render(t->get_dte()));
+}
+
+static void print_detail_message_18(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_18>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	print("SOG", render(t->get_sog()));
+	print("Pos Accuracy", render(t->get_position_accuracy()));
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("COG", render(t->get_cog()));
+	print("HDG", render(t->get_hdg()));
+	print("Time Stamp", render(t->get_timestamp()));
+	print("CS Unit", render(t->get_cs_unit()));
+	print("Display Flag", render(t->get_display_flag()));
+	print("DSC Flag", render(t->get_dsc_flag()));
+	print("Band Flag", render(t->get_band_flag()));
+	print("Message 22 Flag", render(t->get_message_22_flag()));
+	print("Assigned", render(t->get_assigned()));
+	print("RAIM", render(t->get_raim()));
+	print("Radio Status", render(t->get_radio_status()));
+}
+
+static void print_detail_message_24(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_24>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	print("Part", render(t->get_part_number()));
+	if (t->get_part_number() == marnav::ais::message_24::part::A) {
+		print("Ship Name", render(t->get_shipname()));
+	} else {
+		print("Ship Type", render(t->get_shiptype()));
+		print("Vendor ID", render(t->get_vendor_id()));
+		print("Model", render(t->get_model()));
+		print("Serial", render(t->get_serial()));
+		print("Callsign", render(t->get_callsign()));
+		if (t->is_auxiliary_vessel()) {
+			print("Mothership MMSI", render(t->get_mothership_mmsi()));
+		} else {
+			print("Length", render(t->get_to_bow() + t->get_to_stern()));
+			print("Width", render(t->get_to_port() + t->get_to_starboard()));
+		}
+	}
 }
 }
 
@@ -889,7 +969,10 @@ static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> 
 		ADD_MESSAGE(message_01),
 		ADD_MESSAGE(message_02),
 		ADD_MESSAGE(message_03),
-		ADD_MESSAGE(message_05)
+		ADD_MESSAGE(message_04),
+		ADD_MESSAGE(message_05),
+		ADD_MESSAGE(message_18),
+		ADD_MESSAGE(message_24)
 	};
 	// clang-format on
 #undef ADD_MESSAGE

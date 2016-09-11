@@ -51,6 +51,8 @@ std::vector<std::pair<std::string, uint32_t>> collect_payload(InputIt begin, Inp
 		} else if (t->id() == sentence_id::VDO) {
 			const auto & s = sentence_cast<nmea::vdo>(t);
 			v.push_back(make_pair(s->get_payload(), s->get_n_fill_bits()));
+		} else {
+			throw std::runtime_error{"invalid sentence in collect_payload"};
 		}
 	}
 
