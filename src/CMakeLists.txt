@@ -194,6 +194,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/nmea/hdg.cpp
 	marnav/nmea/hfb.cpp
 	marnav/nmea/hdm.cpp
+	marnav/nmea/hdt.cpp
 	marnav/nmea/hsc.cpp
 	marnav/nmea/its.cpp
 	marnav/nmea/lcd.cpp
@@ -396,6 +397,7 @@ install(
 		marnav/nmea/hdg.hpp
 		marnav/nmea/hfb.hpp
 		marnav/nmea/hdm.hpp
+		marnav/nmea/hdt.hpp
 		marnav/nmea/hsc.hpp
 		marnav/nmea/its.hpp
 		marnav/nmea/lcd.hpp

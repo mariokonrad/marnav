@@ -28,6 +28,7 @@
 #include <marnav/nmea/gsv.hpp>
 #include <marnav/nmea/hdg.hpp>
 #include <marnav/nmea/hdm.hpp>
+#include <marnav/nmea/hdt.hpp>
 #include <marnav/nmea/mtw.hpp>
 #include <marnav/nmea/mwv.hpp>
 #include <marnav/nmea/rmb.hpp>
@@ -929,6 +930,12 @@ static void print_detail_hdm(const marnav::nmea::sentence * s)
 	print("Heading", render(t->get_heading()));
 }
 
+static void print_detail_hdt(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::hdt>(s);
+	print("Heading", render(t->get_heading()));
+}
+
 static void print_detail_rmb(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rmb>(s);
@@ -1357,6 +1364,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(gsv),
 		ADD_SENTENCE(hdg),
 		ADD_SENTENCE(hdm),
+		ADD_SENTENCE(hdt),
 		ADD_SENTENCE(mtw),
 		ADD_SENTENCE(mwv),
 		ADD_SENTENCE(rmb),
