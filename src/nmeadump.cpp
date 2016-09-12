@@ -1,3 +1,6 @@
+// This is a diagnostics tool and also serves as demonstration
+// on how to use the library.
+
 #include <fstream>
 #include <iostream>
 #include <vector>
