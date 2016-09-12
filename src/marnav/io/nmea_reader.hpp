@@ -13,12 +13,14 @@ namespace io
 ///
 /// In order to use this NMEA reader, it must be subclassed.
 ///
+/// This reader opens the device upon construction.
+///
 class nmea_reader
 {
 public:
 	virtual ~nmea_reader();
 
-	nmea_reader(std::unique_ptr<device> && dev);
+	nmea_reader(std::unique_ptr<device> && d);
 	nmea_reader(const nmea_reader &) = delete;
 	nmea_reader(nmea_reader &&) = default;
 

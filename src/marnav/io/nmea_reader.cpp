@@ -8,11 +8,16 @@ namespace io
 {
 nmea_reader::~nmea_reader() {}
 
-nmea_reader::nmea_reader(std::unique_ptr<device> && dev)
+/// Initializes the reader, opens the device (if valid).
+///
+/// @param[in] d The device to read data from, will be opened.
+nmea_reader::nmea_reader(std::unique_ptr<device> && d)
 	: raw(0)
-	, dev(std::move(dev))
+	, dev(std::move(d))
 {
 	sentence.reserve(nmea::sentence::max_length + 1);
+	if (dev)
+		dev->open();
 }
 
 void nmea_reader::close()

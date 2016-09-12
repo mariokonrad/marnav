@@ -55,6 +55,11 @@
 #include <marnav/ais/message_21.hpp>
 #include <marnav/ais/message_24.hpp>
 
+#include <marnav/io/default_nmea_reader.hpp>
+#include <marnav/io/serial.hpp>
+
+#include <marnav/utils/unique.hpp>
+
 namespace nmeadump
 {
 namespace terminal
@@ -1423,17 +1428,15 @@ static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> 
 	}
 }
 
-static void dump_stream(std::istream & is)
+static void process(std::function<bool(std::string &)> source)
 {
 	using namespace marnav;
 
+	std::string line;
 	std::vector<std::unique_ptr<nmea::sentence>> sentences;
 
-	while (is) {
-		std::string line;
-		std::getline(is, line);
+	while (source(line)) {
 		line = trim(line);
-
 		if (line.empty())
 			continue;
 		if (line[0] == '#')
@@ -1487,18 +1490,18 @@ static void dump_stream(std::istream & is)
 	}
 }
 
-static void dump_file(const std::string & filename)
+static marnav::io::serial::baud get_baud_rate(uint32_t speed)
 {
-	std::ifstream ifs{filename.c_str()};
-	dump_stream(ifs);
+	switch (speed) {
+		case 4800:
+			return marnav::io::serial::baud::baud_4800;
+		case 38400:
+			return marnav::io::serial::baud::baud_38400;
+		default:
+			break;
+	}
+	throw std::runtime_error{"invalid baud rate"};
 }
-
-static void dump_port(const std::string &, uint32_t)
-{
-	throw std::runtime_error{"NOT IMPLEMENTED"};
-}
-
-static void dump_stdin() { dump_stream(std::cin); }
 }
 
 int main(int argc, char ** argv)
@@ -1509,11 +1512,17 @@ int main(int argc, char ** argv)
 		return EXIT_SUCCESS;
 
 	if (!global.config.file.empty()) {
-		dump_file(global.config.file);
+		std::ifstream ifs{global.config.file.c_str()};
+		process([&](std::string & line) { return !!std::getline(ifs, line); });
 	} else if (!global.config.port.empty()) {
-		dump_port(global.config.port, global.config.port_speed);
+		using namespace marnav;
+		using namespace marnav::io;
+		default_nmea_reader source{utils::make_unique<serial>(global.config.port,
+			get_baud_rate(global.config.port_speed), serial::databits::bit_8,
+			serial::stopbits::bit_1, serial::parity::none)};
+		process([&](std::string & line) { return source.read_sentence(line); });
 	} else {
-		dump_stdin();
+		process([&](std::string & line) { return !!std::getline(std::cin, line); });
 	}
 
 	return EXIT_SUCCESS;
