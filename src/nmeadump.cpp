@@ -187,8 +187,6 @@ static std::string render(const marnav::ais::message_24::part t)
 			return "A";
 		case marnav::ais::message_24::part::B:
 			return "B";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -300,8 +298,6 @@ static std::string render(const marnav::ais::ship_type t)
 			return "Other hazardous Cat D";
 		case marnav::ais::ship_type::other_no_info:
 			return "Other no info";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -327,8 +323,6 @@ static std::string render(const marnav::ais::epfd_fix_type t)
 			return "surveyed";
 		case marnav::ais::epfd_fix_type::galileo:
 			return "Galileo";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -340,8 +334,6 @@ static std::string render(const marnav::ais::message_21::off_position_indicator 
 			return "On Position";
 		case marnav::ais::message_21::off_position_indicator::off_position:
 			return "Off Position";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -353,8 +345,6 @@ static std::string render(const marnav::ais::message_21::virtual_aid t)
 			return "Real Aid";
 		case marnav::ais::message_21::virtual_aid::virtual_aid:
 			return "Virtual Aid";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -426,8 +416,322 @@ static std::string render(const marnav::ais::message_21::aid_type_id t)
 			return "Special Mark";
 		case marnav::ais::message_21::aid_type_id::light_vessel:
 			return "Light Vessel / LANBY / Rigs";
-		default:
-			break;
+	}
+	return "-";
+}
+
+static std::string render(const marnav::ais::message_id t)
+{
+	switch (t) {
+		case marnav::ais::message_id::NONE:
+			return "<none>";
+		case marnav::ais::message_id::position_report_class_a:
+			return "Position Report Class A";
+		case marnav::ais::message_id::position_report_class_a_assigned_schedule:
+			return "Position Report Class A - Assigned Schedule";
+		case marnav::ais::message_id::position_report_class_a_response_to_interrogation:
+			return "Position Report Class A - Response to Interrogation";
+		case marnav::ais::message_id::base_station_report:
+			return "Base Station Report";
+		case marnav::ais::message_id::static_and_voyage_related_data:
+			return "Static and Voyage related Data";
+		case marnav::ais::message_id::binary_addressed_message:
+			return "Binary Addressed Message";
+		case marnav::ais::message_id::binary_acknowledge:
+			return "Binary Acknowledge";
+		case marnav::ais::message_id::binary_broadcast_message:
+			return "Binary Broadcast Message";
+		case marnav::ais::message_id::standard_sar_aircraft_position_report:
+			return "Standard SAR Aircraft Position Report";
+		case marnav::ais::message_id::utc_and_date_inquiry:
+			return "UTC and Date Inquiry";
+		case marnav::ais::message_id::utc_and_date_response:
+			return "UTC and Date Response";
+		case marnav::ais::message_id::addressed_safety_related_message:
+			return "Addresed Safety related Message";
+		case marnav::ais::message_id::safety_related_acknowledgement_:
+			return "Safety related Acknowledgement";
+		case marnav::ais::message_id::safety_related_broadcast_message:
+			return "Safety related Broadcast Message";
+		case marnav::ais::message_id::interrogation:
+			return "Interrogation";
+		case marnav::ais::message_id::assignment_mode_command:
+			return "Assignment Mode Command";
+		case marnav::ais::message_id::dgnss_binary_broadcast_message:
+			return "DGNSS Binary Broadcast Message";
+		case marnav::ais::message_id::standard_class_b_cs_position_report:
+			return "Standard Class B CS Position Report";
+		case marnav::ais::message_id::extended_class_b_equipment_position_report:
+			return "Extended Class B Equipment Position Report";
+		case marnav::ais::message_id::data_link_management:
+			return "Data Link Management";
+		case marnav::ais::message_id::aid_to_navigation_report:
+			return "Aid to Navigation Report";
+		case marnav::ais::message_id::channel_management:
+			return "Channel Management";
+		case marnav::ais::message_id::group_assignment_command:
+			return "Group Assignment Command";
+		case marnav::ais::message_id::static_data_report:
+			return "Static Data Report";
+		case marnav::ais::message_id::single_slot_binary_message:
+			return "Single Slot Binary Message";
+		case marnav::ais::message_id::multiple_slot_binary_message_with_communications_state:
+			return "Multiple slot Binary Message with Communication State";
+		case marnav::ais::message_id::position_report_for_long_range_applications:
+			return "Position Report for long range Applications";
+	}
+	return "-";
+}
+
+static std::string render(const marnav::nmea::sentence_id t)
+{
+	switch (t) {
+		case marnav::nmea::sentence_id::NONE:
+			return "<none>";
+		case marnav::nmea::sentence_id::AAM:
+			return "Waypoint Arrival Alarm";
+		case marnav::nmea::sentence_id::ALM:
+			return "GPS Almanac Data";
+		case marnav::nmea::sentence_id::APB:
+			return "Autopilot Sentence 'B'";
+		case marnav::nmea::sentence_id::BOD:
+			return "Bearing - Waypoint to Waypoint";
+		case marnav::nmea::sentence_id::BWC:
+			return "Bearing & Distance to Waypoint - Geat Circle";
+		case marnav::nmea::sentence_id::BWR:
+			return "Bearing and Distance to Waypoint - Rhumb Line";
+		case marnav::nmea::sentence_id::BWW:
+			return "Bearing - Waypoint to Waypoint";
+		case marnav::nmea::sentence_id::DBT:
+			return "Depth below transducer (II)";
+		case marnav::nmea::sentence_id::DPT:
+			return "Depth of Water";
+		case marnav::nmea::sentence_id::DSC:
+			return "Digital Selective Calling Information";
+		case marnav::nmea::sentence_id::DSE:
+			return "Extended DSC";
+		case marnav::nmea::sentence_id::DSI:
+			return "DSC Transponder Initiate";
+		case marnav::nmea::sentence_id::DSR:
+			return "DSC Transponder Response";
+		case marnav::nmea::sentence_id::DTM:
+			return "Datum Reference";
+		case marnav::nmea::sentence_id::FSI:
+			return "Frequency Set Information";
+		case marnav::nmea::sentence_id::GBS:
+			return "GPS Satellite Fault Detection";
+		case marnav::nmea::sentence_id::GGA:
+			return "Global Positioning System Fix Data";
+		case marnav::nmea::sentence_id::GLC:
+			return "Geographic Position, Loran-C";
+		case marnav::nmea::sentence_id::GLL:
+			return "Geographic Position - Latitude/Longitude";
+		case marnav::nmea::sentence_id::GNS:
+			return "Fix data";
+		case marnav::nmea::sentence_id::GRS:
+			return "GPS Range Residuals";
+		case marnav::nmea::sentence_id::GST:
+			return "GPS Pseudorange Noise Statistics";
+		case marnav::nmea::sentence_id::GSA:
+			return "GPS DOP and active satellites";
+		case marnav::nmea::sentence_id::GSV:
+			return "Satellites in view";
+		case marnav::nmea::sentence_id::HDG:
+			return "Heading - Deviation & Variation (vendor extension)";
+		case marnav::nmea::sentence_id::HFB:
+			return "Trawl Headrope to Footrope and Bottom";
+		case marnav::nmea::sentence_id::HSC:
+			return "Heading Steering Command";
+		case marnav::nmea::sentence_id::ITS:
+			return "Trawl Door Spread 2 Distance";
+		case marnav::nmea::sentence_id::LCD:
+			return "Loran-C Signal Data";
+		case marnav::nmea::sentence_id::MSK:
+			return "Control for a Beacon Receiver";
+		case marnav::nmea::sentence_id::MSS:
+			return "Beacon Receiver Status";
+		case marnav::nmea::sentence_id::MWD:
+			return "Wind Directinon and Speed";
+		case marnav::nmea::sentence_id::MTW:
+			return "Mean Temperature of Water (II)";
+		case marnav::nmea::sentence_id::MWV:
+			return "Wind Speed and Angle (II)";
+		case marnav::nmea::sentence_id::OSD:
+			return "Own Ship Data";
+		case marnav::nmea::sentence_id::RMA:
+			return "Recommended Minimum Navigation Information A";
+		case marnav::nmea::sentence_id::RMB:
+			return "Recommended Minimum Navigation Information B";
+		case marnav::nmea::sentence_id::RMC:
+			return "Recommended Minimum Navigation Information C";
+		case marnav::nmea::sentence_id::ROT:
+			return "Rate Of Turn";
+		case marnav::nmea::sentence_id::RPM:
+			return "Revolutions";
+		case marnav::nmea::sentence_id::RSA:
+			return "Rudder Sensor Angle";
+		case marnav::nmea::sentence_id::RSD:
+			return "RADAR System Data";
+		case marnav::nmea::sentence_id::RTE:
+			return "Routes";
+		case marnav::nmea::sentence_id::SFI:
+			return "Scanning Frequency Information";
+		case marnav::nmea::sentence_id::STN:
+			return "Multiple Data ID";
+		case marnav::nmea::sentence_id::TDS:
+			return "Trawl Door Spread Distance";
+		case marnav::nmea::sentence_id::TFI:
+			return "Trawl Filling Indicator";
+		case marnav::nmea::sentence_id::TPC:
+			return "Trawl Position Cartesian Coordinates";
+		case marnav::nmea::sentence_id::TPR:
+			return "Trawl Position Relative Vessel";
+		case marnav::nmea::sentence_id::TPT:
+			return "Trawl Position True";
+		case marnav::nmea::sentence_id::TRF:
+			return "TRANSIT Fix Data";
+		case marnav::nmea::sentence_id::TLL:
+			return "Target latitude and longitude";
+		case marnav::nmea::sentence_id::TTM:
+			return "Tracked Target Message";
+		case marnav::nmea::sentence_id::VBW:
+			return "Dual Ground/Water Speed";
+		case marnav::nmea::sentence_id::VDM:
+			return "AIS";
+		case marnav::nmea::sentence_id::VDO:
+			return "AIS, own ship data";
+		case marnav::nmea::sentence_id::VDR:
+			return "Set and Drift";
+		case marnav::nmea::sentence_id::VHW:
+			return "Water speed and heading (II)";
+		case marnav::nmea::sentence_id::VLW:
+			return "Distance Traveled through Water (II)";
+		case marnav::nmea::sentence_id::VPW:
+			return "Speed - Measured Parallel to Wind";
+		case marnav::nmea::sentence_id::VTG:
+			return "Track made good and Ground speed";
+		case marnav::nmea::sentence_id::VWR:
+			return "Relative Wind Speed and Angle (II)";
+		case marnav::nmea::sentence_id::WCV:
+			return "Waypoint Closure Velocity";
+		case marnav::nmea::sentence_id::WNC:
+			return "Distance - Waypoint to Waypoint";
+		case marnav::nmea::sentence_id::WPL:
+			return "Waypoint Location";
+		case marnav::nmea::sentence_id::XDR:
+			return "Transducer Measurement";
+		case marnav::nmea::sentence_id::XTE:
+			return "Cross-Track Error, Measured";
+		case marnav::nmea::sentence_id::XTR:
+			return "Cross Track Error - Dead Reckoning";
+		case marnav::nmea::sentence_id::ZDA:
+			return "Time & Date - UTC, day, month, year and local time zone";
+		case marnav::nmea::sentence_id::ZDL:
+			return "Time and Distance to Variable Point";
+		case marnav::nmea::sentence_id::ZFO:
+			return "UTC & Time from origin Waypoint";
+		case marnav::nmea::sentence_id::ZTG:
+			return "UTC & Time to Destination Waypoint";
+		case marnav::nmea::sentence_id::APA:
+			return "Autopilot Sentence 'A'";
+		case marnav::nmea::sentence_id::BER:
+			return "Bearing & Distance to Waypoint, Dead Reckoning, Rhumb Line";
+		case marnav::nmea::sentence_id::BPI:
+			return "Bearing & Distance to Point of Interest";
+		case marnav::nmea::sentence_id::DBK:
+			return "Depth Below Keel";
+		case marnav::nmea::sentence_id::DBS:
+			return "Depth Below Surface";
+		case marnav::nmea::sentence_id::DCN:
+			return "Decca Position";
+		case marnav::nmea::sentence_id::DRU:
+			return "Dual Doppler Auxiliary Data";
+		case marnav::nmea::sentence_id::GDA:
+			return "Dead Reckoning Positions";
+		case marnav::nmea::sentence_id::GLA:
+			return "Loran-C Positions";
+		case marnav::nmea::sentence_id::GOA:
+			return "OMEGA Positions";
+		case marnav::nmea::sentence_id::GTD:
+			return "Geographical Position, Loran-C TDs";
+		case marnav::nmea::sentence_id::GXA:
+			return "TRANSIT Position";
+		case marnav::nmea::sentence_id::HCC:
+			return "Compass Heading";
+		case marnav::nmea::sentence_id::HCD:
+			return "Heading and Deviation";
+		case marnav::nmea::sentence_id::HDM:
+			return "Heading, Magnetic";
+		case marnav::nmea::sentence_id::HDT:
+			return "Heading, True";
+		case marnav::nmea::sentence_id::HVD:
+			return "Magnetic Variation, Automatic";
+		case marnav::nmea::sentence_id::HVM:
+			return "Magnetic Variation, Manually Set";
+		case marnav::nmea::sentence_id::IMA:
+			return "Vessel Identification";
+		case marnav::nmea::sentence_id::MDA:
+			return "Meteorological Composite";
+		case marnav::nmea::sentence_id::MHU:
+			return "Humidity";
+		case marnav::nmea::sentence_id::MMB:
+			return "Barometer";
+		case marnav::nmea::sentence_id::MTA:
+			return "Air Temperature";
+		case marnav::nmea::sentence_id::MWH:
+			return "Wave Height";
+		case marnav::nmea::sentence_id::MWS:
+			return "Wind & Sea State";
+		case marnav::nmea::sentence_id::OLN:
+			return "Omega Lane Numbers";
+		case marnav::nmea::sentence_id::R00:
+			return "(Rnn) Waypoints in active route";
+		case marnav::nmea::sentence_id::SBK:
+			return "Loran-C Blink Status";
+		case marnav::nmea::sentence_id::SCY:
+			return "Loran-C Cycle Lock Status";
+		case marnav::nmea::sentence_id::SCD:
+			return "Loran-C ECDs";
+		case marnav::nmea::sentence_id::SDB:
+			return "Loran-C Signal Strength";
+		case marnav::nmea::sentence_id::SGD:
+			return "Position Accuracy Estimate";
+		case marnav::nmea::sentence_id::SGR:
+			return "Loran-C Chain Identifier";
+		case marnav::nmea::sentence_id::SIU:
+			return "Loran-C Stations in Use";
+		case marnav::nmea::sentence_id::SLC:
+			return "Loran-C Status";
+		case marnav::nmea::sentence_id::SNC:
+			return "Navigation Calculation Basis";
+		case marnav::nmea::sentence_id::SNU:
+			return "Loran-C SNR Status";
+		case marnav::nmea::sentence_id::SPS:
+			return "Loran-C Predicted Signal Strength";
+		case marnav::nmea::sentence_id::SSF:
+			return "Position Correction Offset";
+		case marnav::nmea::sentence_id::STC:
+			return "Time Constant";
+		case marnav::nmea::sentence_id::STR:
+			return "Tracking Reference";
+		case marnav::nmea::sentence_id::SYS:
+			return "Hybrid System Configuration";
+		case marnav::nmea::sentence_id::VWT:
+			return "True Wind Speed and Angle";
+		case marnav::nmea::sentence_id::PGRME:
+			return "Estimated Error Information (Garmin Extension)";
+		case marnav::nmea::sentence_id::PGRMM:
+			return "Map Datum (Garmin Extension)";
+		case marnav::nmea::sentence_id::PGRMZ:
+			return "Altitude (Garmin Extension)";
+		case marnav::nmea::sentence_id::PMGNST:
+			return "Magellan Status";
+		case marnav::nmea::sentence_id::PRWIZCH:
+			return "Rockwell Channel Status";
+		case marnav::nmea::sentence_id::PUBX:
+			return "u-blox (misc formats, depending on first field)";
+		case marnav::nmea::sentence_id::TMVTD:
+			return "Transas VTS / SML tracking system report";
 	}
 	return "-";
 }
@@ -445,8 +749,6 @@ static std::string render(const marnav::nmea::unit::distance t)
 			return "km";
 		case marnav::nmea::unit::distance::fathom:
 			return "fathom";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -456,8 +758,6 @@ static std::string render(const marnav::nmea::unit::temperature t)
 	switch (t) {
 		case marnav::nmea::unit::temperature::celsius:
 			return "\u00b0C";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -471,8 +771,6 @@ static std::string render(const marnav::nmea::unit::velocity t)
 			return "km/h";
 		case marnav::nmea::unit::velocity::mps:
 			return "m/s";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -484,8 +782,6 @@ static std::string render(const marnav::nmea::side t)
 			return "Left";
 		case marnav::nmea::side::right:
 			return "Rigth";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -499,8 +795,6 @@ static std::string render(const marnav::nmea::reference t)
 			return "true";
 		case marnav::nmea::reference::MAGNETIC:
 			return "magnetic";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -518,8 +812,6 @@ static std::string render(const marnav::nmea::quality t)
 			return "guess";
 		case marnav::nmea::quality::simulation:
 			return "simulation";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -535,8 +827,8 @@ static std::string render(const marnav::nmea::direction t)
 			return "W";
 		case marnav::nmea::direction::east:
 			return "E";
-		default:
-			break;
+		case marnav::nmea::direction::none:
+			return "<none>";
 	}
 	return "-";
 }
@@ -548,8 +840,6 @@ static std::string render(const marnav::nmea::selection_mode t)
 			return "manual";
 		case marnav::nmea::selection_mode::automatic:
 			return "automatic";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -561,8 +851,6 @@ static std::string render(const marnav::nmea::status t)
 			return "OK";
 		case marnav::nmea::status::warning:
 			return "Warning";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -574,8 +862,6 @@ static std::string render(const marnav::nmea::route t)
 			return "complete";
 		case marnav::nmea::route::working:
 			return "working";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -601,8 +887,6 @@ static std::string render(const marnav::nmea::mode_indicator t)
 			return "not valid";
 		case marnav::nmea::mode_indicator::precise:
 			return "precise";
-		default:
-			break;
 	}
 	return "-";
 }
@@ -840,7 +1124,8 @@ static void print_detail_pgrmm(const marnav::nmea::sentence * s)
 static void print_detail_pgrmz(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::pgrmz>(s);
-	print("Altitude", render(t->get_altitude()));
+	print("Altitude",
+		fmt::sprintf("%s %s", render(t->get_altitude()), render(t->get_altitude_unit())));
 	print("Fix Type", render(t->get_fix()));
 }
 
@@ -869,7 +1154,7 @@ static void print_detail_vhw(const marnav::nmea::sentence * s)
 	print("Speed km/h", render(t->get_speed_kmh()));
 }
 
-static void print_detail_message_01_common( const marnav::ais::message_01 * t)
+static void print_detail_message_01_common(const marnav::ais::message_01 * t)
 {
 	print("Repeat Indicator", render(t->get_repeat_indicator()));
 	print("MMSI", render(t->get_mmsi()));
@@ -1058,7 +1343,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(pgrmm),
 		ADD_SENTENCE(pgrmz)
 	};
-	// clang-format on
+// clang-format on
 #undef ADD_SENTENCE
 
 	using namespace marnav;
@@ -1068,10 +1353,12 @@ static void dump_nmea(const std::string & line)
 		auto i = std::find_if(std::begin(sentences), std::end(sentences),
 			[&s](const container::value_type & item) { return item.id == s->id(); });
 		if (i == std::end(sentences)) {
+			fmt::printf("\t%s\n", detail::render(s->id()));
 			fmt::printf(
 				"%s%s%s\n\tnot implemented\n\n", terminal::magenta, line, terminal::normal);
 		} else {
 			fmt::printf("%s%s%s\n", terminal::green, line, terminal::normal);
+			fmt::printf("\t%s\n", detail::render(s->id()));
 			i->func(s.get());
 			fmt::printf("\n");
 		}
@@ -1090,7 +1377,7 @@ static void dump_nmea(const std::string & line)
 static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> & sentences)
 {
 #define ADD_MESSAGE(m)                               \
-	{                                                 \
+	{                                                \
 		marnav::ais::m::ID, detail::print_detail_##m \
 	}
 	struct entry {
@@ -1110,7 +1397,7 @@ static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> 
 		ADD_MESSAGE(message_21),
 		ADD_MESSAGE(message_24)
 	};
-	// clang-format on
+// clang-format on
 #undef ADD_MESSAGE
 
 	using namespace marnav;
@@ -1120,9 +1407,11 @@ static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> 
 		auto i = std::find_if(std::begin(messages), std::end(messages),
 			[&m](const container::value_type & item) { return item.id == m->type(); });
 		if (i == std::end(messages)) {
+			fmt::printf("\t%s\n", detail::render(m->type()));
 			fmt::printf("%smessage_%02u%s\n\tnot implemented\n\n", terminal::magenta,
 				static_cast<uint8_t>(m->type()), terminal::normal);
 		} else {
+			fmt::printf("\t%s\n", detail::render(m->type()));
 			i->func(m.get());
 			fmt::printf("\n");
 		}
