@@ -98,7 +98,7 @@ std::string to_string(direction t)
 		case direction::west:
 			return "W";
 		case direction::none:
-			break;
+			return "none";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }

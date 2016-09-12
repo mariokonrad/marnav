@@ -15,6 +15,8 @@
 #include <marnav/nmea/checksum.hpp>
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
+#include <marnav/nmea/name.hpp>
+#include <marnav/nmea/string.hpp>
 
 #include <marnav/nmea/aam.hpp>
 #include <marnav/nmea/apb.hpp>
@@ -47,6 +49,7 @@
 #include <marnav/nmea/pgrmz.hpp>
 
 #include <marnav/ais/ais.hpp>
+#include <marnav/ais/name.hpp>
 
 #include <marnav/ais/message_01.hpp>
 #include <marnav/ais/message_02.hpp>
@@ -202,140 +205,11 @@ static std::string render(const marnav::ais::message_24::part t)
 	return "-";
 }
 
-static std::string render(const marnav::ais::ship_type t)
-{
-	switch (t) {
-		case marnav::ais::ship_type::not_available:
-			return "Not Available";
-		case marnav::ais::ship_type::wing_in_ground:
-			return "Wing in ground";
-		case marnav::ais::ship_type::wing_in_ground_hazardous_cat_a:
-			return "Wing in ground hazardous Cat A";
-		case marnav::ais::ship_type::wing_in_ground_hazardous_cat_b:
-			return "Wing in ground hazardous Cat B";
-		case marnav::ais::ship_type::wing_in_ground_hazardous_cat_c:
-			return "Wing in ground hazardous Cat C";
-		case marnav::ais::ship_type::wing_in_ground_hazardous_cat_d:
-			return "Wing in ground hazardous Cat D";
-		case marnav::ais::ship_type::fishing:
-			return "Fishing";
-		case marnav::ais::ship_type::towing:
-			return "Towing";
-		case marnav::ais::ship_type::towing_large:
-			return "Towing large";
-		case marnav::ais::ship_type::dredging_or_underwater_ops:
-			return "Dredging or underwater ops";
-		case marnav::ais::ship_type::diving_ops:
-			return "Diving ops";
-		case marnav::ais::ship_type::military_ops:
-			return "Military ops";
-		case marnav::ais::ship_type::sailing:
-			return "Sailing";
-		case marnav::ais::ship_type::pleasure_craft:
-			return "Pleasure Craft";
-		case marnav::ais::ship_type::high_speed_craft:
-			return "High speed craft";
-		case marnav::ais::ship_type::high_speed_craft_hazardous_cat_a:
-			return "High speed craft hazardous Cat A";
-		case marnav::ais::ship_type::high_speed_craft_hazardous_cat_b:
-			return "High speed craft hazardous Cat B";
-		case marnav::ais::ship_type::high_speed_craft_hazardous_cat_c:
-			return "High speed craft hazardous Cat C";
-		case marnav::ais::ship_type::high_speed_craft_hazardous_cat_d:
-			return "High speed craft hazardous Cat D";
-		case marnav::ais::ship_type::high_speed_craft_no_info:
-			return "High speed craft no_info";
-		case marnav::ais::ship_type::pilot_vessel:
-			return "Pilot Vessel";
-		case marnav::ais::ship_type::search_and_rescue_vessel:
-			return "Search and Rescue Vessel";
-		case marnav::ais::ship_type::tug:
-			return "Tug";
-		case marnav::ais::ship_type::port_tender:
-			return "Port Tender";
-		case marnav::ais::ship_type::anti_pollution_equipment:
-			return "Anti Pollution Equipment";
-		case marnav::ais::ship_type::law_enforcement:
-			return "Law Enforcement";
-		case marnav::ais::ship_type::medical_transport:
-			return "Medical Transport";
-		case marnav::ais::ship_type::noncombatant:
-			return "Noncombatant";
-		case marnav::ais::ship_type::passenger:
-			return "Passenger";
-		case marnav::ais::ship_type::passenger_hazardous_cat_a:
-			return "Passenger hazardous Cat A";
-		case marnav::ais::ship_type::passenger_hazardous_cat_b:
-			return "Passenger hazardous Cat B";
-		case marnav::ais::ship_type::passenger_hazardous_cat_c:
-			return "Passenger hazardous Cat C";
-		case marnav::ais::ship_type::passenger_hazardous_cat_d:
-			return "Passenger hazardous Cat D";
-		case marnav::ais::ship_type::passenger_no_info:
-			return "Passenger no info";
-		case marnav::ais::ship_type::cargo:
-			return "Cargo";
-		case marnav::ais::ship_type::cargo_hazardous_cat_a:
-			return "Cargo hazardous Cat A";
-		case marnav::ais::ship_type::cargo_hazardous_cat_b:
-			return "Cargo hazardous Cat B";
-		case marnav::ais::ship_type::cargo_hazardous_cat_c:
-			return "Cargo hazardous Cat C";
-		case marnav::ais::ship_type::cargo_hazardous_cat_d:
-			return "Cargo hazardous Cat D";
-		case marnav::ais::ship_type::cargo_no_info:
-			return "Cargo no info";
-		case marnav::ais::ship_type::tanker:
-			return "Tanker";
-		case marnav::ais::ship_type::tanker_hazardous_cat_a:
-			return "Tanker hazardous Cat A";
-		case marnav::ais::ship_type::tanker_hazardous_cat_b:
-			return "Tanker hazardous Cat B";
-		case marnav::ais::ship_type::tanker_hazardous_cat_c:
-			return "Tanker hazardous Cat C";
-		case marnav::ais::ship_type::tanker_hazardous_cat_d:
-			return "Tanker hazardous Cat D";
-		case marnav::ais::ship_type::tanker_no_info:
-			return "Tanker no info";
-		case marnav::ais::ship_type::other:
-			return "Other";
-		case marnav::ais::ship_type::other_hazardous_cat_a:
-			return "Other hazardous Cat A";
-		case marnav::ais::ship_type::other_hazardous_cat_b:
-			return "Other hazardous Cat B";
-		case marnav::ais::ship_type::other_hazardous_cat_c:
-			return "Other hazardous Cat C";
-		case marnav::ais::ship_type::other_hazardous_cat_d:
-			return "Other hazardous Cat D";
-		case marnav::ais::ship_type::other_no_info:
-			return "Other no info";
-	}
-	return "-";
-}
+static std::string render(const marnav::ais::ship_type t) { return marnav::ais::to_name(t); }
 
 static std::string render(const marnav::ais::epfd_fix_type t)
 {
-	switch (t) {
-		case marnav::ais::epfd_fix_type::undefined:
-			return "undefined";
-		case marnav::ais::epfd_fix_type::gps:
-			return "GPS";
-		case marnav::ais::epfd_fix_type::glonass:
-			return "GLONASS";
-		case marnav::ais::epfd_fix_type::combined_gps_glonass:
-			return "Combined GPS GLONASS";
-		case marnav::ais::epfd_fix_type::loran_c:
-			return "Loran C";
-		case marnav::ais::epfd_fix_type::chayka:
-			return "Chayka";
-		case marnav::ais::epfd_fix_type::integrated_navigation_system:
-			return "Integrated Navigation System";
-		case marnav::ais::epfd_fix_type::surveyed:
-			return "surveyed";
-		case marnav::ais::epfd_fix_type::galileo:
-			return "Galileo";
-	}
-	return "-";
+	return marnav::ais::to_name(t);
 }
 
 static std::string render(const marnav::ais::message_21::off_position_indicator t)
@@ -431,475 +305,53 @@ static std::string render(const marnav::ais::message_21::aid_type_id t)
 	return "-";
 }
 
-static std::string render(const marnav::ais::message_id t)
-{
-	switch (t) {
-		case marnav::ais::message_id::NONE:
-			return "<none>";
-		case marnav::ais::message_id::position_report_class_a:
-			return "Position Report Class A";
-		case marnav::ais::message_id::position_report_class_a_assigned_schedule:
-			return "Position Report Class A - Assigned Schedule";
-		case marnav::ais::message_id::position_report_class_a_response_to_interrogation:
-			return "Position Report Class A - Response to Interrogation";
-		case marnav::ais::message_id::base_station_report:
-			return "Base Station Report";
-		case marnav::ais::message_id::static_and_voyage_related_data:
-			return "Static and Voyage related Data";
-		case marnav::ais::message_id::binary_addressed_message:
-			return "Binary Addressed Message";
-		case marnav::ais::message_id::binary_acknowledge:
-			return "Binary Acknowledge";
-		case marnav::ais::message_id::binary_broadcast_message:
-			return "Binary Broadcast Message";
-		case marnav::ais::message_id::standard_sar_aircraft_position_report:
-			return "Standard SAR Aircraft Position Report";
-		case marnav::ais::message_id::utc_and_date_inquiry:
-			return "UTC and Date Inquiry";
-		case marnav::ais::message_id::utc_and_date_response:
-			return "UTC and Date Response";
-		case marnav::ais::message_id::addressed_safety_related_message:
-			return "Addresed Safety related Message";
-		case marnav::ais::message_id::safety_related_acknowledgement_:
-			return "Safety related Acknowledgement";
-		case marnav::ais::message_id::safety_related_broadcast_message:
-			return "Safety related Broadcast Message";
-		case marnav::ais::message_id::interrogation:
-			return "Interrogation";
-		case marnav::ais::message_id::assignment_mode_command:
-			return "Assignment Mode Command";
-		case marnav::ais::message_id::dgnss_binary_broadcast_message:
-			return "DGNSS Binary Broadcast Message";
-		case marnav::ais::message_id::standard_class_b_cs_position_report:
-			return "Standard Class B CS Position Report";
-		case marnav::ais::message_id::extended_class_b_equipment_position_report:
-			return "Extended Class B Equipment Position Report";
-		case marnav::ais::message_id::data_link_management:
-			return "Data Link Management";
-		case marnav::ais::message_id::aid_to_navigation_report:
-			return "Aid to Navigation Report";
-		case marnav::ais::message_id::channel_management:
-			return "Channel Management";
-		case marnav::ais::message_id::group_assignment_command:
-			return "Group Assignment Command";
-		case marnav::ais::message_id::static_data_report:
-			return "Static Data Report";
-		case marnav::ais::message_id::single_slot_binary_message:
-			return "Single Slot Binary Message";
-		case marnav::ais::message_id::multiple_slot_binary_message_with_communications_state:
-			return "Multiple slot Binary Message with Communication State";
-		case marnav::ais::message_id::position_report_for_long_range_applications:
-			return "Position Report for long range Applications";
-	}
-	return "-";
-}
+static std::string render(const marnav::ais::message_id t) { return marnav::ais::to_name(t); }
 
 static std::string render(const marnav::nmea::sentence_id t)
 {
-	switch (t) {
-		case marnav::nmea::sentence_id::NONE:
-			return "<none>";
-		case marnav::nmea::sentence_id::AAM:
-			return "Waypoint Arrival Alarm";
-		case marnav::nmea::sentence_id::ALM:
-			return "GPS Almanac Data";
-		case marnav::nmea::sentence_id::APB:
-			return "Autopilot Sentence 'B'";
-		case marnav::nmea::sentence_id::BOD:
-			return "Bearing - Waypoint to Waypoint";
-		case marnav::nmea::sentence_id::BWC:
-			return "Bearing & Distance to Waypoint - Geat Circle";
-		case marnav::nmea::sentence_id::BWR:
-			return "Bearing and Distance to Waypoint - Rhumb Line";
-		case marnav::nmea::sentence_id::BWW:
-			return "Bearing - Waypoint to Waypoint";
-		case marnav::nmea::sentence_id::DBT:
-			return "Depth below transducer (II)";
-		case marnav::nmea::sentence_id::DPT:
-			return "Depth of Water";
-		case marnav::nmea::sentence_id::DSC:
-			return "Digital Selective Calling Information";
-		case marnav::nmea::sentence_id::DSE:
-			return "Extended DSC";
-		case marnav::nmea::sentence_id::DSI:
-			return "DSC Transponder Initiate";
-		case marnav::nmea::sentence_id::DSR:
-			return "DSC Transponder Response";
-		case marnav::nmea::sentence_id::DTM:
-			return "Datum Reference";
-		case marnav::nmea::sentence_id::FSI:
-			return "Frequency Set Information";
-		case marnav::nmea::sentence_id::GBS:
-			return "GPS Satellite Fault Detection";
-		case marnav::nmea::sentence_id::GGA:
-			return "Global Positioning System Fix Data";
-		case marnav::nmea::sentence_id::GLC:
-			return "Geographic Position, Loran-C";
-		case marnav::nmea::sentence_id::GLL:
-			return "Geographic Position - Latitude/Longitude";
-		case marnav::nmea::sentence_id::GNS:
-			return "Fix data";
-		case marnav::nmea::sentence_id::GRS:
-			return "GPS Range Residuals";
-		case marnav::nmea::sentence_id::GST:
-			return "GPS Pseudorange Noise Statistics";
-		case marnav::nmea::sentence_id::GSA:
-			return "GPS DOP and active satellites";
-		case marnav::nmea::sentence_id::GSV:
-			return "Satellites in view";
-		case marnav::nmea::sentence_id::HDG:
-			return "Heading - Deviation & Variation (vendor extension)";
-		case marnav::nmea::sentence_id::HFB:
-			return "Trawl Headrope to Footrope and Bottom";
-		case marnav::nmea::sentence_id::HSC:
-			return "Heading Steering Command";
-		case marnav::nmea::sentence_id::ITS:
-			return "Trawl Door Spread 2 Distance";
-		case marnav::nmea::sentence_id::LCD:
-			return "Loran-C Signal Data";
-		case marnav::nmea::sentence_id::MSK:
-			return "Control for a Beacon Receiver";
-		case marnav::nmea::sentence_id::MSS:
-			return "Beacon Receiver Status";
-		case marnav::nmea::sentence_id::MWD:
-			return "Wind Directinon and Speed";
-		case marnav::nmea::sentence_id::MTW:
-			return "Mean Temperature of Water (II)";
-		case marnav::nmea::sentence_id::MWV:
-			return "Wind Speed and Angle (II)";
-		case marnav::nmea::sentence_id::OSD:
-			return "Own Ship Data";
-		case marnav::nmea::sentence_id::RMA:
-			return "Recommended Minimum Navigation Information A";
-		case marnav::nmea::sentence_id::RMB:
-			return "Recommended Minimum Navigation Information B";
-		case marnav::nmea::sentence_id::RMC:
-			return "Recommended Minimum Navigation Information C";
-		case marnav::nmea::sentence_id::ROT:
-			return "Rate Of Turn";
-		case marnav::nmea::sentence_id::RPM:
-			return "Revolutions";
-		case marnav::nmea::sentence_id::RSA:
-			return "Rudder Sensor Angle";
-		case marnav::nmea::sentence_id::RSD:
-			return "RADAR System Data";
-		case marnav::nmea::sentence_id::RTE:
-			return "Routes";
-		case marnav::nmea::sentence_id::SFI:
-			return "Scanning Frequency Information";
-		case marnav::nmea::sentence_id::STN:
-			return "Multiple Data ID";
-		case marnav::nmea::sentence_id::TDS:
-			return "Trawl Door Spread Distance";
-		case marnav::nmea::sentence_id::TFI:
-			return "Trawl Filling Indicator";
-		case marnav::nmea::sentence_id::TPC:
-			return "Trawl Position Cartesian Coordinates";
-		case marnav::nmea::sentence_id::TPR:
-			return "Trawl Position Relative Vessel";
-		case marnav::nmea::sentence_id::TPT:
-			return "Trawl Position True";
-		case marnav::nmea::sentence_id::TRF:
-			return "TRANSIT Fix Data";
-		case marnav::nmea::sentence_id::TLL:
-			return "Target latitude and longitude";
-		case marnav::nmea::sentence_id::TTM:
-			return "Tracked Target Message";
-		case marnav::nmea::sentence_id::VBW:
-			return "Dual Ground/Water Speed";
-		case marnav::nmea::sentence_id::VDM:
-			return "AIS";
-		case marnav::nmea::sentence_id::VDO:
-			return "AIS, own ship data";
-		case marnav::nmea::sentence_id::VDR:
-			return "Set and Drift";
-		case marnav::nmea::sentence_id::VHW:
-			return "Water speed and heading (II)";
-		case marnav::nmea::sentence_id::VLW:
-			return "Distance Traveled through Water (II)";
-		case marnav::nmea::sentence_id::VPW:
-			return "Speed - Measured Parallel to Wind";
-		case marnav::nmea::sentence_id::VTG:
-			return "Track made good and Ground speed";
-		case marnav::nmea::sentence_id::VWR:
-			return "Relative Wind Speed and Angle (II)";
-		case marnav::nmea::sentence_id::WCV:
-			return "Waypoint Closure Velocity";
-		case marnav::nmea::sentence_id::WNC:
-			return "Distance - Waypoint to Waypoint";
-		case marnav::nmea::sentence_id::WPL:
-			return "Waypoint Location";
-		case marnav::nmea::sentence_id::XDR:
-			return "Transducer Measurement";
-		case marnav::nmea::sentence_id::XTE:
-			return "Cross-Track Error, Measured";
-		case marnav::nmea::sentence_id::XTR:
-			return "Cross Track Error - Dead Reckoning";
-		case marnav::nmea::sentence_id::ZDA:
-			return "Time & Date - UTC, day, month, year and local time zone";
-		case marnav::nmea::sentence_id::ZDL:
-			return "Time and Distance to Variable Point";
-		case marnav::nmea::sentence_id::ZFO:
-			return "UTC & Time from origin Waypoint";
-		case marnav::nmea::sentence_id::ZTG:
-			return "UTC & Time to Destination Waypoint";
-		case marnav::nmea::sentence_id::APA:
-			return "Autopilot Sentence 'A'";
-		case marnav::nmea::sentence_id::BER:
-			return "Bearing & Distance to Waypoint, Dead Reckoning, Rhumb Line";
-		case marnav::nmea::sentence_id::BPI:
-			return "Bearing & Distance to Point of Interest";
-		case marnav::nmea::sentence_id::DBK:
-			return "Depth Below Keel";
-		case marnav::nmea::sentence_id::DBS:
-			return "Depth Below Surface";
-		case marnav::nmea::sentence_id::DCN:
-			return "Decca Position";
-		case marnav::nmea::sentence_id::DRU:
-			return "Dual Doppler Auxiliary Data";
-		case marnav::nmea::sentence_id::GDA:
-			return "Dead Reckoning Positions";
-		case marnav::nmea::sentence_id::GLA:
-			return "Loran-C Positions";
-		case marnav::nmea::sentence_id::GOA:
-			return "OMEGA Positions";
-		case marnav::nmea::sentence_id::GTD:
-			return "Geographical Position, Loran-C TDs";
-		case marnav::nmea::sentence_id::GXA:
-			return "TRANSIT Position";
-		case marnav::nmea::sentence_id::HCC:
-			return "Compass Heading";
-		case marnav::nmea::sentence_id::HCD:
-			return "Heading and Deviation";
-		case marnav::nmea::sentence_id::HDM:
-			return "Heading, Magnetic";
-		case marnav::nmea::sentence_id::HDT:
-			return "Heading, True";
-		case marnav::nmea::sentence_id::HVD:
-			return "Magnetic Variation, Automatic";
-		case marnav::nmea::sentence_id::HVM:
-			return "Magnetic Variation, Manually Set";
-		case marnav::nmea::sentence_id::IMA:
-			return "Vessel Identification";
-		case marnav::nmea::sentence_id::MDA:
-			return "Meteorological Composite";
-		case marnav::nmea::sentence_id::MHU:
-			return "Humidity";
-		case marnav::nmea::sentence_id::MMB:
-			return "Barometer";
-		case marnav::nmea::sentence_id::MTA:
-			return "Air Temperature";
-		case marnav::nmea::sentence_id::MWH:
-			return "Wave Height";
-		case marnav::nmea::sentence_id::MWS:
-			return "Wind & Sea State";
-		case marnav::nmea::sentence_id::OLN:
-			return "Omega Lane Numbers";
-		case marnav::nmea::sentence_id::R00:
-			return "(Rnn) Waypoints in active route";
-		case marnav::nmea::sentence_id::SBK:
-			return "Loran-C Blink Status";
-		case marnav::nmea::sentence_id::SCY:
-			return "Loran-C Cycle Lock Status";
-		case marnav::nmea::sentence_id::SCD:
-			return "Loran-C ECDs";
-		case marnav::nmea::sentence_id::SDB:
-			return "Loran-C Signal Strength";
-		case marnav::nmea::sentence_id::SGD:
-			return "Position Accuracy Estimate";
-		case marnav::nmea::sentence_id::SGR:
-			return "Loran-C Chain Identifier";
-		case marnav::nmea::sentence_id::SIU:
-			return "Loran-C Stations in Use";
-		case marnav::nmea::sentence_id::SLC:
-			return "Loran-C Status";
-		case marnav::nmea::sentence_id::SNC:
-			return "Navigation Calculation Basis";
-		case marnav::nmea::sentence_id::SNU:
-			return "Loran-C SNR Status";
-		case marnav::nmea::sentence_id::SPS:
-			return "Loran-C Predicted Signal Strength";
-		case marnav::nmea::sentence_id::SSF:
-			return "Position Correction Offset";
-		case marnav::nmea::sentence_id::STC:
-			return "Time Constant";
-		case marnav::nmea::sentence_id::STR:
-			return "Tracking Reference";
-		case marnav::nmea::sentence_id::SYS:
-			return "Hybrid System Configuration";
-		case marnav::nmea::sentence_id::VWT:
-			return "True Wind Speed and Angle";
-		case marnav::nmea::sentence_id::PGRME:
-			return "Estimated Error Information (Garmin Extension)";
-		case marnav::nmea::sentence_id::PGRMM:
-			return "Map Datum (Garmin Extension)";
-		case marnav::nmea::sentence_id::PGRMZ:
-			return "Altitude (Garmin Extension)";
-		case marnav::nmea::sentence_id::PMGNST:
-			return "Magellan Status";
-		case marnav::nmea::sentence_id::PRWIZCH:
-			return "Rockwell Channel Status";
-		case marnav::nmea::sentence_id::PUBX:
-			return "u-blox (misc formats, depending on first field)";
-		case marnav::nmea::sentence_id::TMVTD:
-			return "Transas VTS / SML tracking system report";
-	}
-	return "-";
+	return marnav::nmea::to_name(t);
 }
 
 static std::string render(const marnav::nmea::unit::distance t)
 {
-	switch (t) {
-		case marnav::nmea::unit::distance::meter:
-			return "m";
-		case marnav::nmea::unit::distance::feet:
-			return "ft";
-		case marnav::nmea::unit::distance::nm:
-			return "nm";
-		case marnav::nmea::unit::distance::km:
-			return "km";
-		case marnav::nmea::unit::distance::fathom:
-			return "fathom";
-	}
-	return "-";
+	return marnav::nmea::to_name(t);
 }
 
 static std::string render(const marnav::nmea::unit::temperature t)
 {
-	switch (t) {
-		case marnav::nmea::unit::temperature::celsius:
-			return "\u00b0C";
-	}
-	return "-";
+	return marnav::nmea::to_name(t);
 }
 
 static std::string render(const marnav::nmea::unit::velocity t)
 {
-	switch (t) {
-		case marnav::nmea::unit::velocity::knot:
-			return "kn";
-		case marnav::nmea::unit::velocity::kmh:
-			return "km/h";
-		case marnav::nmea::unit::velocity::mps:
-			return "m/s";
-	}
-	return "-";
+	return marnav::nmea::to_name(t);
 }
 
-static std::string render(const marnav::nmea::side t)
-{
-	switch (t) {
-		case marnav::nmea::side::left:
-			return "Left";
-		case marnav::nmea::side::right:
-			return "Rigth";
-	}
-	return "-";
-}
+static std::string render(const marnav::nmea::side t) { return marnav::nmea::to_name(t); }
 
-static std::string render(const marnav::nmea::reference t)
-{
-	switch (t) {
-		case marnav::nmea::reference::RELATIVE:
-			return "relative";
-		case marnav::nmea::reference::TRUE:
-			return "true";
-		case marnav::nmea::reference::MAGNETIC:
-			return "magnetic";
-	}
-	return "-";
-}
+static std::string render(const marnav::nmea::reference t) { return marnav::nmea::to_name(t); }
 
-static std::string render(const marnav::nmea::quality t)
-{
-	switch (t) {
-		case marnav::nmea::quality::invalid:
-			return "invaild";
-		case marnav::nmea::quality::gps_fix:
-			return "GPS fix";
-		case marnav::nmea::quality::dgps_fix:
-			return "DGPS fix";
-		case marnav::nmea::quality::guess:
-			return "guess";
-		case marnav::nmea::quality::simulation:
-			return "simulation";
-	}
-	return "-";
-}
+static std::string render(const marnav::nmea::quality t) { return marnav::nmea::to_name(t); }
 
 static std::string render(const marnav::nmea::direction t)
 {
-	switch (t) {
-		case marnav::nmea::direction::north:
-			return "N";
-		case marnav::nmea::direction::south:
-			return "S";
-		case marnav::nmea::direction::west:
-			return "W";
-		case marnav::nmea::direction::east:
-			return "E";
-		case marnav::nmea::direction::none:
-			return "<none>";
-	}
-	return "-";
+	return marnav::nmea::to_string(t);
 }
 
 static std::string render(const marnav::nmea::selection_mode t)
 {
-	switch (t) {
-		case marnav::nmea::selection_mode::manual:
-			return "manual";
-		case marnav::nmea::selection_mode::automatic:
-			return "automatic";
-	}
-	return "-";
+	return marnav::nmea::to_name(t);
 }
 
-static std::string render(const marnav::nmea::status t)
-{
-	switch (t) {
-		case marnav::nmea::status::ok:
-			return "OK";
-		case marnav::nmea::status::warning:
-			return "Warning";
-	}
-	return "-";
-}
+static std::string render(const marnav::nmea::status t) { return marnav::nmea::to_name(t); }
 
-static std::string render(const marnav::nmea::route t)
-{
-	switch (t) {
-		case marnav::nmea::route::complete:
-			return "complete";
-		case marnav::nmea::route::working:
-			return "working";
-	}
-	return "-";
-}
+static std::string render(const marnav::nmea::route t) { return marnav::nmea::to_name(t); }
 
 static std::string render(const marnav::nmea::waypoint & t) { return t.c_str(); }
 
 static std::string render(const marnav::nmea::mode_indicator t)
 {
-	switch (t) {
-		case marnav::nmea::mode_indicator::invalid:
-			return "invalid";
-		case marnav::nmea::mode_indicator::autonomous:
-			return "autonomous";
-		case marnav::nmea::mode_indicator::differential:
-			return "differential";
-		case marnav::nmea::mode_indicator::estimated:
-			return "estimated";
-		case marnav::nmea::mode_indicator::manual_input:
-			return "manual input";
-		case marnav::nmea::mode_indicator::simulated:
-			return "simulated";
-		case marnav::nmea::mode_indicator::data_not_valid:
-			return "not valid";
-		case marnav::nmea::mode_indicator::precise:
-			return "precise";
-	}
-	return "-";
+	return marnav::nmea::to_name(t);
 }
 
 template <typename T> static std::string render(const marnav::utils::optional<T> & t)

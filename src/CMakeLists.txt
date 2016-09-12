@@ -107,6 +107,7 @@ if(ENABLE_AIS)
 	set(SOURCES ${SOURCES}
 		marnav/ais/ais.cpp
 		marnav/ais/angle.cpp
+		marnav/ais/name.cpp
 		marnav/ais/message.cpp
 		marnav/ais/message_01.cpp
 		marnav/ais/message_02.cpp
@@ -158,6 +159,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/nmea/split.cpp
 	marnav/nmea/angle.cpp
 	marnav/nmea/string.cpp
+	marnav/nmea/name.cpp
 	marnav/nmea/io.cpp
 	marnav/nmea/date.cpp
 	marnav/nmea/time.cpp
@@ -361,6 +363,7 @@ install(
 		marnav/nmea/manufacturer.hpp
 		marnav/nmea/angle.hpp
 		marnav/nmea/string.hpp
+		marnav/nmea/name.hpp
 		marnav/nmea/io.hpp
 		marnav/nmea/date.hpp
 		marnav/nmea/time.hpp
@@ -452,6 +455,7 @@ if(ENABLE_AIS)
 		FILES
 			marnav/ais/ais.hpp
 			marnav/ais/angle.hpp
+			marnav/ais/name.hpp
 			marnav/ais/message.hpp
 			marnav/ais/message_01.hpp
 			marnav/ais/message_02.hpp

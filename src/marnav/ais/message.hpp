@@ -45,7 +45,7 @@ enum class navigation_status : uint8_t {
 	under_way_using_engine = 0,
 	at_anchor = 1,
 	not_under_command = 2,
-	restricted_manoeuverability = 3,
+	restricted_maneuverability = 3,
 	constrained_by_her_draught = 4,
 	moored = 5,
 	aground = 6,
