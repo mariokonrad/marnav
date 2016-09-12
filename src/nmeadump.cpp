@@ -19,6 +19,7 @@
 #include <marnav/nmea/aam.hpp>
 #include <marnav/nmea/apb.hpp>
 #include <marnav/nmea/bod.hpp>
+#include <marnav/nmea/bwc.hpp>
 #include <marnav/nmea/dbt.hpp>
 #include <marnav/nmea/dtm.hpp>
 #include <marnav/nmea/gga.hpp>
@@ -26,6 +27,7 @@
 #include <marnav/nmea/gsa.hpp>
 #include <marnav/nmea/gsv.hpp>
 #include <marnav/nmea/hdg.hpp>
+#include <marnav/nmea/hdm.hpp>
 #include <marnav/nmea/mtw.hpp>
 #include <marnav/nmea/mwv.hpp>
 #include <marnav/nmea/rmb.hpp>
@@ -921,6 +923,12 @@ static void print_detail_hdg(const marnav::nmea::sentence * s)
 		fmt::sprintf("%s %s", render(t->get_magn_var()), render(t->get_magn_var_hem())));
 }
 
+static void print_detail_hdm(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::hdm>(s);
+	print("Heading", render(t->get_heading()));
+}
+
 static void print_detail_rmb(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rmb>(s);
@@ -978,6 +986,18 @@ static void print_detail_bod(const marnav::nmea::sentence * s)
 	print("Bearing Magn", render(t->get_bearing_magn()));
 	print("Waypoint To", render(t->get_waypoint_to()));
 	print("Waypoint From", render(t->get_waypoint_from()));
+}
+
+static void print_detail_bwc(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::bwc>(s);
+	print("Time UTC", render(t->get_time_utc()));
+	print("Bearing True", render(t->get_bearing_true()));
+	print("Bearing Magnetic", render(t->get_bearing_mag()));
+	print("Distance",
+		fmt::sprintf("%s %s", render(t->get_distance()), render(t->get_distance_unit())));
+	print("Waypoint", render(t->get_waypoint_id()));
+	print("Mode Indicator", render(t->get_mode_ind()));
 }
 
 static void print_detail_gsa(const marnav::nmea::sentence * s)
@@ -1328,6 +1348,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(aam),
 		ADD_SENTENCE(apb),
 		ADD_SENTENCE(bod),
+		ADD_SENTENCE(bwc),
 		ADD_SENTENCE(dbt),
 		ADD_SENTENCE(dtm),
 		ADD_SENTENCE(gga),
@@ -1335,6 +1356,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(gsa),
 		ADD_SENTENCE(gsv),
 		ADD_SENTENCE(hdg),
+		ADD_SENTENCE(hdm),
 		ADD_SENTENCE(mtw),
 		ADD_SENTENCE(mwv),
 		ADD_SENTENCE(rmb),
