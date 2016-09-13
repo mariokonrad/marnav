@@ -24,7 +24,7 @@ TEST_F(Test_ais_message_03, parse)
 
 	EXPECT_EQ(0u, m->get_repeat_indicator());
 	EXPECT_EQ(205344990u, m->get_mmsi());
-	EXPECT_EQ(-128, m->get_rot());
+	EXPECT_EQ(ais::rot_not_available, m->get_rot());
 	EXPECT_EQ(0u, m->get_sog());
 	EXPECT_EQ(true, m->get_position_accuracy());
 	EXPECT_NEAR(4.40705, m->get_longitude(), 4e-5);
