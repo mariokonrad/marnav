@@ -94,7 +94,8 @@ bool operator!=(const latitude & a, const latitude & b) noexcept { return !(a ==
 void latitude::check(double a)
 {
 	if ((a < min) || (a > max))
-		throw std::invalid_argument{"invalid value for nmea::latitude"};
+		throw std::invalid_argument{
+			"invalid value for geo::latitude (" + std::to_string(a) + ')'};
 }
 
 std::string to_string(latitude::hemisphere h)
@@ -155,7 +156,8 @@ bool operator!=(const longitude & a, const longitude & b) noexcept { return !(a 
 void longitude::check(double a)
 {
 	if ((a < min) || (a > max))
-		throw std::invalid_argument{"invalid value for nmea::longitude"};
+		throw std::invalid_argument{
+			"invalid value for geo::longitude (" + std::to_string(a) + ')'};
 }
 
 std::string to_string(longitude::hemisphere h)
