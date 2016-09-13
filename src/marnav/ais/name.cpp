@@ -245,5 +245,98 @@ std::string to_name(navigation_status t)
 	}
 	return "-";
 }
+
+std::string to_name(virtual_aid t)
+{
+	switch (t) {
+		case virtual_aid::real_aid:
+			return "Real Aid";
+		case virtual_aid::virtual_aid:
+			return "Virtual Aid";
+	}
+	return "-";
+}
+
+std::string to_name(off_position_indicator t)
+{
+	switch (t) {
+		case off_position_indicator::on_position:
+			return "On Position";
+		case off_position_indicator::off_position:
+			return "Off Position";
+	}
+	return "-";
+}
+
+std::string to_name(aid_type_id t)
+{
+	switch (t) {
+		case aid_type_id::unspecified:
+			return "unspecified";
+		case aid_type_id::reference_point:
+			return "Reference point";
+		case aid_type_id::racon:
+			return "RACON (radar transponder marking a navigation hazard)";
+		case aid_type_id::fixed_structure:
+			return "Fixed structure";
+		case aid_type_id::reserved:
+			return "Spare, Reserved for future use";
+		case aid_type_id::light_no_sectors:
+			return "Light, without sectors";
+		case aid_type_id::light_sectors:
+			return "Light, with sectors";
+		case aid_type_id::leading_light_fromt:
+			return "Leading Light Front";
+		case aid_type_id::leading_light_rear:
+			return "Leading Light Rear";
+		case aid_type_id::beacon_cardinal_n:
+			return "Beacon, Cardinal N";
+		case aid_type_id::beacon_cardinal_e:
+			return "Beacon, Cardinal E";
+		case aid_type_id::beacon_cardinal_s:
+			return "Beacon, Cardinal S";
+		case aid_type_id::beacon_cardinal_w:
+			return "Beacon, Cardinal W";
+		case aid_type_id::beacon_port_hand:
+			return "Beacon, Port hand";
+		case aid_type_id::beacon_starboard_hand:
+			return "Beacon, Starboard hand";
+		case aid_type_id::beacon_preferred_channel_port_hand:
+			return "Beacon, Preferred Channel port hand";
+		case aid_type_id::beacon_preferred_channel_starboard_hand:
+			return "Beacon, Preferred Channel starboard hand";
+		case aid_type_id::beacon_isolated_danger:
+			return "Beacon, Isolated danger";
+		case aid_type_id::beacon_safe_water:
+			return "Beacon, Safe water";
+		case aid_type_id::beacon_sepcial_mark:
+			return "Beacon, Special mark";
+		case aid_type_id::cardinal_n:
+			return "Cardinal Mark N";
+		case aid_type_id::cardinal_e:
+			return "Cardinal Mark E";
+		case aid_type_id::cardinal_s:
+			return "Cardinal Mark S";
+		case aid_type_id::cardinal_w:
+			return "Cardinal Mark W";
+		case aid_type_id::mark_port_hand:
+			return "Port hand Mark";
+		case aid_type_id::mark_starboard_hand:
+			return "Starboard hand Mark";
+		case aid_type_id::preferred_channel_port_hand:
+			return "Preferred Channel Port hand";
+		case aid_type_id::preferred_channel_starboard_hand:
+			return "Preferred Channel Starboard hand";
+		case aid_type_id::isolated_danger:
+			return "Isolated danger";
+		case aid_type_id::safe_water:
+			return "Safe Water";
+		case aid_type_id::special_mark:
+			return "Special Mark";
+		case aid_type_id::light_vessel:
+			return "Light Vessel / LANBY / Rigs";
+	}
+	return "-";
+}
 }
 }

@@ -137,6 +137,112 @@ enum class epfd_fix_type : uint8_t {
 	galileo = 8,
 };
 
+enum class virtual_aid : uint32_t { real_aid = 0, virtual_aid = 1 };
+
+enum class off_position_indicator : uint32_t { on_position = 0, off_position = 1 };
+
+/// Enumeration of all aid types
+enum class aid_type_id : uint32_t {
+	/// 0 : Default, Type of Aid to Navigation not specified
+	unspecified = 0,
+
+	/// 1 : Reference point
+	reference_point = 1,
+
+	/// 2 : RACON (radar transponder marking a navigation hazard)
+	racon = 2,
+
+	/// 3 : Fixed structure off shore, such as oil platforms, wind farms, rigs. (Note: This
+	/// code should identify an obstruction that is fitted with an Aid-to-Navigation AIS
+	/// station.)
+	fixed_structure = 3,
+
+	/// 4 : Spare, Reserved for future use.
+	reserved = 4,
+
+	/// 5 : Light, without sectors
+	light_no_sectors = 5,
+
+	/// 6 : Light, with sectors
+	light_sectors = 6,
+
+	/// 7 : Leading Light Front
+	leading_light_fromt = 7,
+
+	/// 8 : Leading Light Rear
+	leading_light_rear = 8,
+
+	/// 9 : Beacon, Cardinal N
+	beacon_cardinal_n = 9,
+
+	/// 10: Beacon, Cardinal E
+	beacon_cardinal_e = 10,
+
+	/// 11: Beacon, Cardinal S
+	beacon_cardinal_s = 11,
+
+	/// 12: Beacon, Cardinal W
+	beacon_cardinal_w = 12,
+
+	/// 13: Beacon, Port hand
+	beacon_port_hand = 13,
+
+	/// 14: Beacon, Starboard hand
+	beacon_starboard_hand = 14,
+
+	/// 15: Beacon, Preferred Channel port hand
+	beacon_preferred_channel_port_hand = 15,
+
+	///< 16: Beacon, Preferred Channel starboard hand
+	beacon_preferred_channel_starboard_hand = 16,
+
+	/// 17: Beacon, Isolated danger
+	beacon_isolated_danger = 17,
+
+	/// 18: Beacon, Safe water
+	beacon_safe_water = 18,
+
+	/// 19: Beacon, Special mark
+	beacon_sepcial_mark = 19,
+
+	/// 20: Cardinal Mark N
+	cardinal_n = 20,
+
+	/// 21: Cardinal Mark E
+	cardinal_e = 21,
+
+	/// 22: Cardinal Mark S
+	cardinal_s = 22,
+
+	/// 23: Cardinal Mark W
+	cardinal_w = 23,
+
+	/// 24: Port hand Mark
+	mark_port_hand = 24,
+
+	/// 25: Starboard hand Mark
+	mark_starboard_hand = 25,
+
+	/// 26: Preferred Channel Port hand
+	preferred_channel_port_hand = 26,
+
+	/// 27: Preferred Channel Starboard hand
+	preferred_channel_starboard_hand = 27,
+
+	/// 28: Isolated danger
+	isolated_danger = 28,
+
+	/// 29: Safe Water
+	safe_water = 29,
+
+	/// 30: Special Mark
+	special_mark = 30,
+
+	/// 31: Light Vessel / LANBY / Rigs
+	light_vessel = 31,
+
+};
+
 // AIS data is coded in a binary form. This implies a need for special
 // value that mark the invalidity of a certain value.
 /// @{
