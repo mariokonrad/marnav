@@ -53,6 +53,7 @@ private:
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
+	navigation_status get_nav_status() const noexcept { return nav_status; }
 	int8_t get_rot() const noexcept { return rot; }
 	uint32_t get_sog() const noexcept { return sog; }
 	bool get_position_accuracy() const noexcept { return position_accuracy; }

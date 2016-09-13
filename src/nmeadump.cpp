@@ -307,6 +307,11 @@ static std::string render(const marnav::ais::message_21::aid_type_id t)
 
 static std::string render(const marnav::ais::message_id t) { return marnav::ais::to_name(t); }
 
+static std::string render(const marnav::ais::navigation_status t)
+{
+	return marnav::ais::to_name(t);
+}
+
 static std::string render(const marnav::nmea::sentence_id t)
 {
 	return marnav::nmea::to_name(t);
@@ -645,6 +650,7 @@ static void print_detail_message_01_common(const marnav::ais::message_01 * t)
 {
 	print("Repeat Indicator", render(t->get_repeat_indicator()));
 	print("MMSI", render(t->get_mmsi()));
+	print("Nav Status", render(t->get_nav_status()));
 	print("ROT", render(t->get_rot()));
 	print("SOG", render(t->get_sog()));
 	print("Pos Accuracy", render(t->get_position_accuracy()));
