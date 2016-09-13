@@ -27,8 +27,12 @@ TEST_F(Test_ais_message_03, parse)
 	EXPECT_EQ(ais::rot_not_available, m->get_rot());
 	EXPECT_EQ(0u, m->get_sog());
 	EXPECT_EQ(true, m->get_position_accuracy());
-	EXPECT_NEAR(4.40705, m->get_longitude(), 4e-5);
-	EXPECT_NEAR(51.2296, m->get_latitude(), 4e-5);
+	const auto lon = m->get_longitude();
+	EXPECT_TRUE(!!lon);
+	EXPECT_NEAR(4.40705, lon.value(), 4e-5);
+	const auto lat = m->get_latitude();
+	EXPECT_TRUE(!!lat);
+	EXPECT_NEAR(51.2296, lat.value(), 4e-5);
 	EXPECT_EQ(1107u, m->get_cog());
 	EXPECT_EQ(511u, m->get_hdg());
 	EXPECT_EQ(52u, m->get_timestamp());

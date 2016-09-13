@@ -4,6 +4,7 @@
 #include <marnav/ais/message.hpp>
 #include <marnav/geo/angle.hpp>
 #include <marnav/utils/mmsi.hpp>
+#include <marnav/utils/optional.hpp>
 
 namespace marnav
 {
@@ -198,10 +199,10 @@ public:
 	void set_assigned(bool t) noexcept { assigned = t; }
 	void set_name_extension(const std::string & t);
 
-	geo::longitude get_longitude() const;
-	geo::latitude get_latitude() const;
-	void set_longitude(const geo::longitude & t);
-	void set_latitude(const geo::latitude & t);
+	utils::optional<geo::longitude> get_longitude() const;
+	utils::optional<geo::latitude> get_latitude() const;
+	void set_longitude(const utils::optional<geo::longitude> & t);
+	void set_latitude(const utils::optional<geo::latitude> & t);
 };
 }
 }

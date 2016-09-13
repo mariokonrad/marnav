@@ -72,18 +72,28 @@ raw message_18::get_data() const
 	return bits;
 }
 
-geo::longitude message_18::get_longitude() const { return to_geo_longitude(longitude_minutes); }
-
-geo::latitude message_18::get_latitude() const { return to_geo_latitude(latitude_minutes); }
-
-void message_18::set_longitude(const geo::longitude & t)
+utils::optional<geo::longitude> message_18::get_longitude() const
 {
-	longitude_minutes = to_longitude_minutes(t);
+	if (longitude_minutes == longitude_not_available)
+		return utils::make_optional<geo::longitude>();
+	return to_geo_longitude(longitude_minutes);
 }
 
-void message_18::set_latitude(const geo::latitude & t)
+utils::optional<geo::latitude> message_18::get_latitude() const
 {
-	latitude_minutes = to_latitude_minutes(t);
+	if (latitude_minutes == latitude_not_available)
+		return utils::make_optional<geo::latitude>();
+	return to_geo_latitude(latitude_minutes);
+}
+
+void message_18::set_longitude(const utils::optional<geo::longitude> & t)
+{
+	longitude_minutes = t ? to_longitude_minutes(t.value()) : longitude_not_available;
+}
+
+void message_18::set_latitude(const utils::optional<geo::latitude> & t)
+{
+	latitude_minutes = t ? to_latitude_minutes(t.value()) : latitude_not_available;
 }
 }
 }

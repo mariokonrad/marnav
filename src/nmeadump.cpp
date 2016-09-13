@@ -164,8 +164,6 @@ static std::string render(const uint32_t t) { return fmt::sprintf("%u", t); }
 
 static std::string render(const int32_t t) { return fmt::sprintf("%d", t); }
 
-static std::string render(const int8_t t) { return fmt::sprintf("%d", t); }
-
 static std::string render(const uint8_t t) { return fmt::sprintf("%u", t); }
 
 static std::string render(const double t) { return fmt::sprintf("%-8.3f", t); }

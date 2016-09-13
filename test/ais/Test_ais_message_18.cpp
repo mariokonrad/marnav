@@ -64,7 +64,7 @@ TEST_F(Test_ais_message_18, get_latitude)
 	ASSERT_TRUE(m != nullptr);
 
 	const geo::latitude expected{12.34};
-	const geo::latitude decoded = m->get_latitude();
+	const geo::latitude decoded = *m->get_latitude();
 
 	EXPECT_EQ(expected, decoded) << "expected value:" << static_cast<double>(expected)
 								 << ", decoded value:" << static_cast<double>(decoded);
@@ -94,7 +94,7 @@ TEST_F(Test_ais_message_18, get_longitude)
 	ASSERT_TRUE(m != nullptr);
 
 	const geo::longitude expected{123.45};
-	const geo::longitude decoded = m->get_longitude();
+	const geo::longitude decoded = *m->get_longitude();
 
 	EXPECT_EQ(expected, decoded) << "expected value:" << static_cast<double>(expected)
 								 << ", decoded value:" << static_cast<double>(decoded);
