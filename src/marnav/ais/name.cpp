@@ -338,5 +338,18 @@ std::string to_name(aid_type_id t)
 	}
 	return "-";
 }
+
+std::string to_name(maneuver_indicator_id t)
+{
+	switch (t) {
+		case maneuver_indicator_id::not_available:
+			return "Not Available";
+		case maneuver_indicator_id::normal:
+			return "Not Special";
+		case maneuver_indicator_id::special:
+			return "Special";
+	}
+	return "-";
+}
 }
 }

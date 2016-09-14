@@ -243,6 +243,8 @@ enum class aid_type_id : uint32_t {
 
 };
 
+enum class maneuver_indicator_id : uint32_t { not_available = 0, normal = 1, special = 2 };
+
 // AIS data is coded in a binary form. This implies a need for special
 // value that mark the invalidity of a certain value.
 /// @{
@@ -273,9 +275,6 @@ constexpr static const int32_t rot_not_available = 128;
 
 /// Value to indicate the absense of a timestamp.
 constexpr static const uint8_t timestamp_not_available = 60;
-
-/// Value to indicate the absense of a maneuver indicator.
-constexpr static const uint8_t maneuver_indictor_not_available = 0;
 
 /// Value for a year that is not specified.
 constexpr static const uint32_t year_not_available = 0;

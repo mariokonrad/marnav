@@ -14,6 +14,7 @@ std::string to_name(navigation_status t);
 std::string to_name(virtual_aid t);
 std::string to_name(off_position_indicator t);
 std::string to_name(aid_type_id t);
+std::string to_name(maneuver_indicator_id t);
 }
 }
 

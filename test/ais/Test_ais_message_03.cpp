@@ -36,7 +36,7 @@ TEST_F(Test_ais_message_03, parse)
 	EXPECT_EQ(1107u, m->get_cog());
 	EXPECT_EQ(511u, m->get_hdg());
 	EXPECT_EQ(52u, m->get_timestamp());
-	EXPECT_EQ(0u, m->get_maneuver_indicator());
+	EXPECT_EQ(ais::maneuver_indicator_id::not_available, m->get_maneuver_indicator());
 	EXPECT_EQ(true, m->get_raim());
 	EXPECT_EQ(82419u, m->get_radio_status());
 }

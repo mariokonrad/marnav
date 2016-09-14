@@ -221,6 +221,11 @@ static std::string render(const marnav::ais::aid_type_id t) { return marnav::ais
 
 static std::string render(const marnav::ais::message_id t) { return marnav::ais::to_name(t); }
 
+static std::string render(const marnav::ais::maneuver_indicator_id t)
+{
+	return marnav::ais::to_name(t);
+}
+
 static std::string render(const marnav::ais::navigation_status t)
 {
 	return marnav::ais::to_name(t);
@@ -573,6 +578,7 @@ static void print_detail_message_01_common(const marnav::ais::message_01 * t)
 	print("COG", render(t->get_cog()));
 	print("HDG", render(t->get_hdg()));
 	print("Time Stamp", render(t->get_timestamp()));
+	print("Maneuver Indicator", render(t->get_maneuver_indicator()));
 	print("RAIM", render(t->get_raim()));
 	print("Radio Status", render(t->get_radio_status()));
 }
