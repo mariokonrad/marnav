@@ -17,70 +17,70 @@ bool mmsi::operator!=(const mmsi & other) const { return !(*this == other); }
 mmsi::value_type mmsi::regular_mid() const
 {
 	if (!is_regular())
-		return 0;
+		return initial_value;
 	return (value / 1000000) % 1000;
 }
 
 mmsi::value_type mmsi::regular_id() const
 {
 	if (!is_regular())
-		return 0;
+		return initial_value;
 	return value % 1000000;
 }
 
 mmsi::value_type mmsi::group_mid() const
 {
 	if (!is_group())
-		return 0;
+		return initial_value;
 	return (value / 100000) % 1000;
 }
 
 mmsi::value_type mmsi::group_id() const
 {
 	if (!is_group())
-		return 0;
+		return initial_value;
 	return value % 100000;
 }
 
 mmsi::value_type mmsi::coastal_mid() const
 {
 	if (!is_coastal())
-		return 0;
+		return initial_value;
 	return (value / 10000) % 1000;
 }
 
 mmsi::value_type mmsi::coastal_id() const
 {
 	if (!is_coastal())
-		return 0;
+		return initial_value;
 	return value % 10000;
 }
 
 mmsi::value_type mmsi::auxiliary_mid() const
 {
 	if (!is_auxiliary())
-		return 0;
+		return initial_value;
 	return (value / 10000) % 1000;
 }
 
 mmsi::value_type mmsi::auxiliary_id() const
 {
 	if (!is_auxiliary())
-		return 0;
+		return initial_value;
 	return value % 10000;
 }
 
 mmsi::value_type mmsi::mob_mid() const
 {
 	if (!is_mob())
-		return 0;
+		return initial_value;
 	return (value / 1000) % 1000;
 }
 
 mmsi::value_type mmsi::mob_id() const
 {
 	if (!is_mob())
-		return 0;
+		return initial_value;
 	return value % 1000;
 }
 

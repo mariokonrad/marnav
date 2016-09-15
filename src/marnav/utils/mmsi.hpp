@@ -19,7 +19,9 @@ class mmsi
 public:
 	using value_type = uint32_t;
 
-	mmsi() noexcept : value(0) {}
+	static constexpr value_type initial_value = 0;
+
+	mmsi() noexcept {}
 
 	explicit mmsi(value_type t) noexcept : value(t) {}
 
@@ -57,7 +59,7 @@ public:
 	bool is_epirb_ais() const;
 
 private:
-	value_type value;
+	value_type value = initial_value;
 };
 }
 }

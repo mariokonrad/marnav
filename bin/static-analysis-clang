@@ -1,8 +1,12 @@
 #!/bin/bash -u
 
+export SCRIPT_BASE=$(dirname `readlink -f $0`)
+export BASE=${SCRIPT_BASE}/..
+export BUILD=${BASE}/build
+
 CLANG_VERSION=3.7
 CLANG_ANALYZER=/usr/share/clang/scan-build-${CLANG_VERSION}/c++-analyzer
-CLANG_SCAN_BUILD=/usr/bin/scan-build-${CLANG_VERSION}
+CLANG_SCAN_BUILD=/usr/share/clang/scan-build-${CLANG_VERSION}/scan-build
 CLANG_COMPILER=/usr/bin/clang++-${CLANG_VERSION}
 
 if [ ! -x ${CLANG_ANALYZER} ] ; then
@@ -20,19 +24,19 @@ if [ ! -x ${CLANG_COMPILER} ] ; then
 	exit 1
 fi
 
-if [ -d build ] ; then
+if [ -d ${BUILD} ] ; then
 	echo ""
 	echo "warning: directory 'build' already exists."
 	echo ""
 else
-	mkdir build
+	mkdir -p ${BUILD}
 fi
 
-if [ ! -d build/doc/analysis ] ; then
-	mkdir -p build/doc/analysis
+if [ ! -d ${BUILD}/doc/analysis ] ; then
+	mkdir -p ${BUILD}/doc/analysis
 fi
 
-cd build
+cd ${BUILD}
 cmake -DCMAKE_CXX_COMPILER=${CLANG_ANALYZER} ..
 ${CLANG_SCAN_BUILD} -o doc/analysis --use-analyzer=${CLANG_COMPILER} make -j 4 marnav
 

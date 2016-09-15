@@ -507,7 +507,7 @@ void read(const std::string & s, unit::pressure & value, data_format fmt)
 
 void read(const std::string & s, utils::mmsi & value, data_format fmt)
 {
-	typename utils::mmsi::value_type t;
+	typename utils::mmsi::value_type t = utils::mmsi::initial_value;
 	read(s, t, fmt);
 	value = utils::mmsi{t};
 }
