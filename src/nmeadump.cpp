@@ -19,6 +19,7 @@
 #include <marnav/nmea/string.hpp>
 
 #include <marnav/nmea/aam.hpp>
+#include <marnav/nmea/alm.hpp>
 #include <marnav/nmea/apb.hpp>
 #include <marnav/nmea/bod.hpp>
 #include <marnav/nmea/bwc.hpp>
@@ -470,6 +471,26 @@ static void print_detail_aam(const marnav::nmea::sentence * s)
 	print("Waypoint", render(t->get_waypoint_id()));
 }
 
+static void print_detail_alm(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::alm>(s);
+	print("Number of Messages", render(t->get_number_of_messages()));
+	print("Message Number", render(t->get_message_number()));
+	print("Satellite PRN", render(t->get_satellite_prn()));
+	print("GPS Week Number", render(t->get_gps_week_number()));
+	print("SV Health", render(t->get_sv_health()));
+	print("Eccentricity", render(t->get_eccentricity()));
+	print("Almanac Reference Time", render(t->get_almanac_reference_time()));
+	print("Inclination Angle", render(t->get_inclination_angle()));
+	print("Rate of right ascension", render(t->get_rate_of_right_ascension()));
+	print("Root of Semimajor Axis", render(t->get_root_of_semimajor_axis()));
+	print("Argument of perigee", render(t->get_argument_of_perigee()));
+	print("Longitude of ascension node", render(t->get_longitude_of_ascension_node()));
+	print("Mean Anomaly", render(t->get_mean_anomaly()));
+	print("F0 clock parameter", render(t->get_f0_clock_parameter()));
+	print("F1 clock parameter", render(t->get_f1_clock_parameter()));
+}
+
 static void print_detail_rte(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rte>(s);
@@ -731,6 +752,7 @@ static void dump_nmea(const std::string & line)
 	static const container sentences = {
 		// standard
 		ADD_SENTENCE(aam),
+		ADD_SENTENCE(alm),
 		ADD_SENTENCE(apb),
 		ADD_SENTENCE(bod),
 		ADD_SENTENCE(bwc),

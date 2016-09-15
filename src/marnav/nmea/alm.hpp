@@ -40,7 +40,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(alm)
 /// Fields 5 through 15 are dumped as raw hex.
 ///
 /// Example:
-/// <tt>$GPALM,1,1,15,1159,00,441d,4e,16be,fd5e,a10c9f,4a2da4,686e81,58cbe1,0a4,001*5B</tt>
+/// <tt>$GPALM,1,1,15,1159,00,441d,4e,16be,fd5e,a10c9f,4a2da4,686e81,58cbe1,0a4,001*77</tt>
 ///
 class alm : public sentence
 {
