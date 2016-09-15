@@ -12,7 +12,8 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(hdt)
 
 /// @brief HDM - Heading - True
 ///
-/// Actual vessel heading in degrees true produced by any device or system producing true heading.
+/// Actual vessel heading in degrees true produced by any device or system producing true
+/// heading.
 ///
 /// @code
 ///        1   2
