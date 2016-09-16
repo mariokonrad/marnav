@@ -36,4 +36,3 @@ std::vector<std::string> hdt::get_data() const
 }
 }
 }
-

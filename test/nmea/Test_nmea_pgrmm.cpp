@@ -67,4 +67,3 @@ TEST_F(Test_nmea_pgrmm, set_map_datum_too_large)
 		s.c_str());
 }
 }
-

@@ -50,4 +50,3 @@ TEST_F(Test_nmea_hdt, set_heading)
 	EXPECT_STREQ("$IIHDT,45.8,T*1B", nmea::to_string(hdt).c_str());
 }
 }
-
