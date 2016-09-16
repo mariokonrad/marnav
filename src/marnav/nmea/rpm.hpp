@@ -19,7 +19,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(rpm)
 /// @endcode
 ///
 /// Field Number:
-/// 1. Sourse, S = Shaft, E = Engine
+/// 1. Source, S = Shaft, E = Engine
 ///    - S = Shaft
 ///    - E = Engine
 /// 2. Engine or shaft number

@@ -1,5 +1,25 @@
 // This is a diagnostics tool and also serves as demonstration
 // on how to use the library.
+//
+// This tool is able to read data fromm stdin, file or a serial
+// port.
+//
+// Usage, read from file:
+//
+//   nmeadump -f logged-data.txt
+//
+// Usage, read from NMEA-0183 port:
+//
+//   nmeadump -p /dev/ttyUSB0 -s 4800
+//
+// Usage, read from NMEA-0183-HS port:
+//
+//   nmeadump -p /dev/ttyUSB0 -s 38400
+//
+// Usage, read from stdin:
+//
+//   cat logged-data.txt | nmeadump
+//
 
 #include <fstream>
 #include <iostream>
@@ -24,15 +44,14 @@
 #include <marnav/nmea/apb.hpp>
 #include <marnav/nmea/bod.hpp>
 #include <marnav/nmea/bwc.hpp>
-//#include <marnav/nmea/bwr.hpp>
-//#include <marnav/nmea/bww.hpp>
 #include <marnav/nmea/bwr.hpp>
+#include <marnav/nmea/bww.hpp>
 #include <marnav/nmea/dbt.hpp>
-//#include <marnav/nmea/dpt.hpp>
+#include <marnav/nmea/dpt.hpp>
 //#include <marnav/nmea/dsc.hpp>
 //#include <marnav/nmea/dse.hpp>
 #include <marnav/nmea/dtm.hpp>
-//#include <marnav/nmea/fsi.hpp>
+#include <marnav/nmea/fsi.hpp>
 //#include <marnav/nmea/gbs.hpp>
 #include <marnav/nmea/gga.hpp>
 //#include <marnav/nmea/glc.hpp>
@@ -60,8 +79,8 @@
 //#include <marnav/nmea/rma.hpp>
 #include <marnav/nmea/rmb.hpp>
 #include <marnav/nmea/rmc.hpp>
-//#include <marnav/nmea/rot.hpp>
-//#include <marnav/nmea/rpm.hpp>
+#include <marnav/nmea/rot.hpp>
+#include <marnav/nmea/rpm.hpp>
 //#include <marnav/nmea/rsa.hpp>
 //#include <marnav/nmea/rsd.hpp>
 #include <marnav/nmea/rte.hpp>
@@ -76,7 +95,7 @@
 //#include <marnav/nmea/vbw.hpp>
 #include <marnav/nmea/vdm.hpp>
 #include <marnav/nmea/vdo.hpp>
-//#include <marnav/nmea/vdr.hpp>
+#include <marnav/nmea/vdr.hpp>
 #include <marnav/nmea/vhw.hpp>
 #include <marnav/nmea/vlw.hpp>
 //#include <marnav/nmea/vpw.hpp>
@@ -408,6 +427,23 @@ static void print_detail_rmc(const marnav::nmea::sentence * s)
 	print("Mode Ind ", render(t->get_mode_ind()));
 }
 
+static void print_detail_rot(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rot>(s);
+	print("Rate of Turn", render(t->get_deg_per_minute()));
+	print("Status", render(t->get_data_valid()));
+}
+
+static void print_detail_rpm(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rpm>(s);
+	print("Source", render(t->get_source()));
+	print("Source Number", render(t->get_source_number()));
+	print("RPM", render(t->get_revolutions()));
+	print("Propeller Pitch", render(t->get_propeller_pitch()));
+	print("Status", render(t->get_data_valid()));
+}
+
 static void print_detail_vtg(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vtg>(s);
@@ -460,6 +496,15 @@ static void print_detail_bwr(const marnav::nmea::sentence * s)
 	print("Distance NM", render(t->get_distance()));
 	print("Waypoint", render(t->get_waypoint_id()));
 	print("Mode Indicator", render(t->get_mode_ind()));
+}
+
+static void print_detail_bww(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::bww>(s);
+	print("Bearing True", render(t->get_bearing_true()));
+	print("Bearing Magnetic", render(t->get_bearing_mag()));
+	print("Waypoint To", render(t->get_waypoint_to()));
+	print("Waypoint From", render(t->get_waypoint_from()));
 }
 
 static void print_detail_gsa(const marnav::nmea::sentence * s)
@@ -539,6 +584,16 @@ static void print_detail_dtm(const marnav::nmea::sentence * s)
 	print("Name", render(t->get_name()));
 }
 
+static void print_detail_fsi(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::fsi>(s);
+	print("Tx Freuency 100 Hz", render(t->get_tx_frequency()));
+	print("Rx Freuency 100 Hz", render(t->get_rx_frequency()));
+	print("Mode of Operation", render(t->get_communications_mode()));
+	print("Power Level", render(t->get_power_level()));
+	print("Sentence Status Flag", render(t->get_sentence_status()));
+}
+
 static void print_detail_aam(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::aam>(s);
@@ -582,6 +637,14 @@ static void print_detail_rte(const marnav::nmea::sentence * s)
 	}
 }
 
+static void print_detail_vdr(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vdr>(s);
+	print("Degrees True", render(t->get_degrees_true()));
+	print("Degrees Magnetic", render(t->get_degrees_mag()));
+	print("Speed of Current", render(t->get_speed()));
+}
+
 static void print_detail_mtw(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::mtw>(s);
@@ -595,6 +658,14 @@ static void print_detail_dbt(const marnav::nmea::sentence * s)
 	print("Depth Feet", render(t->get_depth_feet()));
 	print("Depth Meter", render(t->get_depth_meter()));
 	print("Depth Fathom", render(t->get_depth_fathom()));
+}
+
+static void print_detail_dpt(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::dpt>(s);
+	print("Depth Meter", render(t->get_depth_meter()));
+	print("Offset from Transducer", render(t->get_transducer_offset()));
+	print("Max Depth", render(t->get_max_depth()));
 }
 
 static void print_detail_apb(const marnav::nmea::sentence * s)
@@ -835,8 +906,11 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(bod),
 		ADD_SENTENCE(bwc),
 		ADD_SENTENCE(bwr),
+		ADD_SENTENCE(bww),
 		ADD_SENTENCE(dbt),
+		ADD_SENTENCE(dpt),
 		ADD_SENTENCE(dtm),
+		ADD_SENTENCE(fsi),
 		ADD_SENTENCE(gga),
 		ADD_SENTENCE(gll),
 		ADD_SENTENCE(gsa),
@@ -848,7 +922,10 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(mwv),
 		ADD_SENTENCE(rmb),
 		ADD_SENTENCE(rmc),
+		ADD_SENTENCE(rot),
+		ADD_SENTENCE(rpm),
 		ADD_SENTENCE(rte),
+		ADD_SENTENCE(vdr),
 		ADD_SENTENCE(vhw),
 		ADD_SENTENCE(vlw),
 		ADD_SENTENCE(vtg),
