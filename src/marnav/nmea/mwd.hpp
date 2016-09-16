@@ -63,14 +63,14 @@ private:
 	utils::optional<unit::velocity> speed_ms_unit;
 
 public:
-	NMEA_GETTER(direction_true)
-	NMEA_GETTER(direction_true_ref)
-	NMEA_GETTER(direction_mag)
-	NMEA_GETTER(direction_mag_ref)
-	NMEA_GETTER(speed_kn)
-	NMEA_GETTER(speed_kn_unit)
-	NMEA_GETTER(speed_ms)
-	NMEA_GETTER(speed_ms_unit)
+	MARNAV_NMEA_GETTER(direction_true)
+	MARNAV_NMEA_GETTER(direction_true_ref)
+	MARNAV_NMEA_GETTER(direction_mag)
+	MARNAV_NMEA_GETTER(direction_mag_ref)
+	MARNAV_NMEA_GETTER(speed_kn)
+	MARNAV_NMEA_GETTER(speed_kn_unit)
+	MARNAV_NMEA_GETTER(speed_ms)
+	MARNAV_NMEA_GETTER(speed_ms_unit)
 
 	void set_direction_true(double t) noexcept;
 	void set_direction_mag(double t) noexcept;

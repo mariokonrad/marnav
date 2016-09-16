@@ -46,8 +46,8 @@ private:
 	utils::optional<unit::temperature> temperature_unit; // unit degrees, C:celcius
 
 public:
-	NMEA_GETTER(temperature)
-	NMEA_GETTER(temperature_unit)
+	MARNAV_NMEA_GETTER(temperature)
+	MARNAV_NMEA_GETTER(temperature_unit)
 
 	void set_temperature(double t) noexcept;
 };

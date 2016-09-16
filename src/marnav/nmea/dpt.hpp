@@ -52,9 +52,9 @@ private:
 	utils::optional<double> max_depth;
 
 public:
-	NMEA_GETTER(depth_meter)
-	NMEA_GETTER(transducer_offset)
-	NMEA_GETTER(max_depth)
+	MARNAV_NMEA_GETTER(depth_meter)
+	MARNAV_NMEA_GETTER(transducer_offset)
+	MARNAV_NMEA_GETTER(max_depth)
 
 	void set_depth_meter(double t) noexcept { depth_meter = t; }
 	void set_transducer_offset(double t) noexcept { transducer_offset = t; }

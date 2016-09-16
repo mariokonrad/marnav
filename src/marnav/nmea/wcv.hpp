@@ -49,9 +49,9 @@ private:
 	utils::optional<waypoint> waypoint_id;
 
 public:
-	NMEA_GETTER(speed)
-	NMEA_GETTER(speed_unit)
-	NMEA_GETTER(waypoint_id)
+	MARNAV_NMEA_GETTER(speed)
+	MARNAV_NMEA_GETTER(speed_unit)
+	MARNAV_NMEA_GETTER(waypoint_id)
 
 	void set_speed(double t) noexcept;
 	void set_waypoint(const waypoint & id) { waypoint_id = id; }

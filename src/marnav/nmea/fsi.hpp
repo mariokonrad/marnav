@@ -55,11 +55,11 @@ private:
 	utils::optional<char> sentence_status;
 
 public:
-	NMEA_GETTER(tx_frequency)
-	NMEA_GETTER(rx_frequency)
-	NMEA_GETTER(communications_mode)
-	NMEA_GETTER(power_level)
-	NMEA_GETTER(sentence_status)
+	MARNAV_NMEA_GETTER(tx_frequency)
+	MARNAV_NMEA_GETTER(rx_frequency)
+	MARNAV_NMEA_GETTER(communications_mode)
+	MARNAV_NMEA_GETTER(power_level)
+	MARNAV_NMEA_GETTER(sentence_status)
 
 	void set_tx_frequency(uint32_t t) noexcept { tx_frequency = t; }
 	void set_rx_frequency(uint32_t t) noexcept { rx_frequency = t; }

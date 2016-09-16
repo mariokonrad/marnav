@@ -60,12 +60,12 @@ private:
 	uint32_t n_fill_bits = 0; // 0..5
 
 public:
-	NMEA_GETTER(n_fragments)
-	NMEA_GETTER(fragment)
-	NMEA_GETTER(seq_msg_id)
-	NMEA_GETTER(radio_channel)
-	NMEA_GETTER(payload)
-	NMEA_GETTER(n_fill_bits)
+	MARNAV_NMEA_GETTER(n_fragments)
+	MARNAV_NMEA_GETTER(fragment)
+	MARNAV_NMEA_GETTER(seq_msg_id)
+	MARNAV_NMEA_GETTER(radio_channel)
+	MARNAV_NMEA_GETTER(payload)
+	MARNAV_NMEA_GETTER(n_fill_bits)
 
 	void set_n_fragments(uint32_t t) noexcept { n_fragments = t; }
 	void set_fragment(uint32_t t) noexcept { fragment = t; }

@@ -60,9 +60,9 @@ private:
 	utils::optional<fix_type> fix;
 
 public:
-	NMEA_GETTER(altitude)
-	NMEA_GETTER(altitude_unit)
-	NMEA_GETTER(fix)
+	MARNAV_NMEA_GETTER(altitude)
+	MARNAV_NMEA_GETTER(altitude_unit)
+	MARNAV_NMEA_GETTER(fix)
 
 	void set_altitude(double t) noexcept
 	{

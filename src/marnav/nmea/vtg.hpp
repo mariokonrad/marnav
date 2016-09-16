@@ -63,15 +63,15 @@ private:
 	utils::optional<mode_indicator> mode_ind; // NMEA 2.3 or newer
 
 public:
-	NMEA_GETTER(track_true)
-	NMEA_GETTER(type_true)
-	NMEA_GETTER(track_magn)
-	NMEA_GETTER(type_magn)
-	NMEA_GETTER(speed_kn)
-	NMEA_GETTER(speed_kn_unit)
-	NMEA_GETTER(speed_kmh)
-	NMEA_GETTER(speed_kmh_unit)
-	NMEA_GETTER(mode_ind)
+	MARNAV_NMEA_GETTER(track_true)
+	MARNAV_NMEA_GETTER(type_true)
+	MARNAV_NMEA_GETTER(track_magn)
+	MARNAV_NMEA_GETTER(type_magn)
+	MARNAV_NMEA_GETTER(speed_kn)
+	MARNAV_NMEA_GETTER(speed_kn_unit)
+	MARNAV_NMEA_GETTER(speed_kmh)
+	MARNAV_NMEA_GETTER(speed_kmh_unit)
+	MARNAV_NMEA_GETTER(mode_ind)
 
 	void set_track_true(double t) noexcept;
 	void set_track_magn(double t) noexcept;

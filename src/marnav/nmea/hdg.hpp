@@ -57,11 +57,11 @@ private:
 	utils::optional<direction> magn_var_hem; // E:east, W:west
 
 public:
-	NMEA_GETTER(heading)
-	NMEA_GETTER(magn_dev)
-	NMEA_GETTER(magn_dev_hem)
-	NMEA_GETTER(magn_var)
-	NMEA_GETTER(magn_var_hem)
+	MARNAV_NMEA_GETTER(heading)
+	MARNAV_NMEA_GETTER(magn_dev)
+	MARNAV_NMEA_GETTER(magn_dev_hem)
+	MARNAV_NMEA_GETTER(magn_var)
+	MARNAV_NMEA_GETTER(magn_var_hem)
 
 	void set_heading(double t) noexcept { heading = t; }
 	void set_magn_dev(double deg, direction hem);

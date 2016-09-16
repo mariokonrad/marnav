@@ -97,21 +97,21 @@ private:
 	void check() const;
 
 public:
-	NMEA_GETTER(loran_c_blink_warning)
-	NMEA_GETTER(loran_c_cycle_lock_warning)
-	NMEA_GETTER(cross_track_error_magnitude)
-	NMEA_GETTER(direction_to_steer)
-	NMEA_GETTER(cross_track_unit)
-	NMEA_GETTER(status_arrival)
-	NMEA_GETTER(status_perpendicular_passing)
-	NMEA_GETTER(bearing_origin_to_destination)
-	NMEA_GETTER(bearing_origin_to_destination_ref)
-	NMEA_GETTER(waypoint_id)
-	NMEA_GETTER(bearing_pos_to_destination)
-	NMEA_GETTER(bearing_pos_to_destination_ref)
-	NMEA_GETTER(heading_to_steer_to_destination)
-	NMEA_GETTER(heading_to_steer_to_destination_ref)
-	NMEA_GETTER(mode_ind)
+	MARNAV_NMEA_GETTER(loran_c_blink_warning)
+	MARNAV_NMEA_GETTER(loran_c_cycle_lock_warning)
+	MARNAV_NMEA_GETTER(cross_track_error_magnitude)
+	MARNAV_NMEA_GETTER(direction_to_steer)
+	MARNAV_NMEA_GETTER(cross_track_unit)
+	MARNAV_NMEA_GETTER(status_arrival)
+	MARNAV_NMEA_GETTER(status_perpendicular_passing)
+	MARNAV_NMEA_GETTER(bearing_origin_to_destination)
+	MARNAV_NMEA_GETTER(bearing_origin_to_destination_ref)
+	MARNAV_NMEA_GETTER(waypoint_id)
+	MARNAV_NMEA_GETTER(bearing_pos_to_destination)
+	MARNAV_NMEA_GETTER(bearing_pos_to_destination_ref)
+	MARNAV_NMEA_GETTER(heading_to_steer_to_destination)
+	MARNAV_NMEA_GETTER(heading_to_steer_to_destination_ref)
+	MARNAV_NMEA_GETTER(mode_ind)
 
 	void set_loran_c_blink_warning(status t) noexcept { loran_c_blink_warning = t; }
 	void set_loran_c_cycle_lock_warning(status t) noexcept { loran_c_cycle_lock_warning = t; }

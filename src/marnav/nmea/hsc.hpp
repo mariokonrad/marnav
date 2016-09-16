@@ -51,10 +51,10 @@ private:
 	utils::optional<reference> heading_mag_ref;
 
 public:
-	NMEA_GETTER(heading_true)
-	NMEA_GETTER(heading_true_ref)
-	NMEA_GETTER(heading_mag)
-	NMEA_GETTER(heading_mag_ref)
+	MARNAV_NMEA_GETTER(heading_true)
+	MARNAV_NMEA_GETTER(heading_true_ref)
+	MARNAV_NMEA_GETTER(heading_mag)
+	MARNAV_NMEA_GETTER(heading_mag_ref)
 
 	void set_heading_true(double t) noexcept;
 	void set_heading_mag(double t) noexcept;

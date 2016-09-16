@@ -58,12 +58,12 @@ private:
 	utils::optional<waypoint> waypoint_from; // FROM waypoint ID
 
 public:
-	NMEA_GETTER(bearing_true)
-	NMEA_GETTER(type_true)
-	NMEA_GETTER(bearing_magn)
-	NMEA_GETTER(type_magn)
-	NMEA_GETTER(waypoint_to)
-	NMEA_GETTER(waypoint_from)
+	MARNAV_NMEA_GETTER(bearing_true)
+	MARNAV_NMEA_GETTER(type_true)
+	MARNAV_NMEA_GETTER(bearing_magn)
+	MARNAV_NMEA_GETTER(type_magn)
+	MARNAV_NMEA_GETTER(waypoint_to)
+	MARNAV_NMEA_GETTER(waypoint_from)
 
 	void set_bearing_true(double t) noexcept;
 	void set_bearing_magn(double t) noexcept;

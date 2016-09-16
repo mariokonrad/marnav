@@ -62,14 +62,14 @@ private:
 	utils::optional<unit::velocity> speed_kmh_unit; // K:kmh
 
 public:
-	NMEA_GETTER(angle)
-	NMEA_GETTER(angle_side)
-	NMEA_GETTER(speed_knots)
-	NMEA_GETTER(speed_knots_unit)
-	NMEA_GETTER(speed_mps)
-	NMEA_GETTER(speed_mps_unit)
-	NMEA_GETTER(speed_kmh)
-	NMEA_GETTER(speed_kmh_unit)
+	MARNAV_NMEA_GETTER(angle)
+	MARNAV_NMEA_GETTER(angle_side)
+	MARNAV_NMEA_GETTER(speed_knots)
+	MARNAV_NMEA_GETTER(speed_knots_unit)
+	MARNAV_NMEA_GETTER(speed_mps)
+	MARNAV_NMEA_GETTER(speed_mps_unit)
+	MARNAV_NMEA_GETTER(speed_kmh)
+	MARNAV_NMEA_GETTER(speed_kmh_unit)
 
 	void set_angle(double angle, side s) noexcept;
 	void set_speed_knots(double t) noexcept;

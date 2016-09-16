@@ -59,14 +59,14 @@ private:
 	utils::optional<unit::velocity> speed_kmh_unit; // K:kmh
 
 public:
-	NMEA_GETTER(heading_empty)
-	NMEA_GETTER(degrees_true)
-	NMEA_GETTER(heading)
-	NMEA_GETTER(degrees_mag)
-	NMEA_GETTER(speed_knots)
-	NMEA_GETTER(speed_knots_unit)
-	NMEA_GETTER(speed_kmh)
-	NMEA_GETTER(speed_kmh_unit)
+	MARNAV_NMEA_GETTER(heading_empty)
+	MARNAV_NMEA_GETTER(degrees_true)
+	MARNAV_NMEA_GETTER(heading)
+	MARNAV_NMEA_GETTER(degrees_mag)
+	MARNAV_NMEA_GETTER(speed_knots)
+	MARNAV_NMEA_GETTER(speed_knots_unit)
+	MARNAV_NMEA_GETTER(speed_kmh)
+	MARNAV_NMEA_GETTER(speed_kmh_unit)
 
 	void set_heading(double t) noexcept;
 	void set_speed_knots(double t) noexcept;

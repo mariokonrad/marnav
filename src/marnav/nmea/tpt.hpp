@@ -54,11 +54,11 @@ private:
 	unit::distance depth_unit = unit::distance::meter;
 
 public:
-	NMEA_GETTER(range)
-	NMEA_GETTER(range_unit)
-	NMEA_GETTER(bearing)
-	NMEA_GETTER(depth)
-	NMEA_GETTER(depth_unit)
+	MARNAV_NMEA_GETTER(range)
+	MARNAV_NMEA_GETTER(range_unit)
+	MARNAV_NMEA_GETTER(bearing)
+	MARNAV_NMEA_GETTER(depth)
+	MARNAV_NMEA_GETTER(depth_unit)
 
 	void set_range(double t) noexcept
 	{

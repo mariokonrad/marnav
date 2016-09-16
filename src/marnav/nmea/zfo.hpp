@@ -49,9 +49,9 @@ private:
 	utils::optional<waypoint> waypoint_id;
 
 public:
-	NMEA_GETTER(time_utc)
-	NMEA_GETTER(time_elapsed)
-	NMEA_GETTER(waypoint_id)
+	MARNAV_NMEA_GETTER(time_utc)
+	MARNAV_NMEA_GETTER(time_elapsed)
+	MARNAV_NMEA_GETTER(waypoint_id)
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
 	void set_time_elapsed(const nmea::duration & t) noexcept { time_elapsed = t; }

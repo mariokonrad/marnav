@@ -58,12 +58,12 @@ private:
 	unit::distance overall_spherical_equiv_position_error_unit = unit::distance::meter;
 
 public:
-	NMEA_GETTER(horizontal_position_error)
-	NMEA_GETTER(horizontal_position_error_unit)
-	NMEA_GETTER(vertical_position_error)
-	NMEA_GETTER(vertical_position_error_unit)
-	NMEA_GETTER(overall_spherical_equiv_position_error)
-	NMEA_GETTER(overall_spherical_equiv_position_error_unit)
+	MARNAV_NMEA_GETTER(horizontal_position_error)
+	MARNAV_NMEA_GETTER(horizontal_position_error_unit)
+	MARNAV_NMEA_GETTER(vertical_position_error)
+	MARNAV_NMEA_GETTER(vertical_position_error_unit)
+	MARNAV_NMEA_GETTER(overall_spherical_equiv_position_error)
+	MARNAV_NMEA_GETTER(overall_spherical_equiv_position_error_unit)
 
 	void set_horizontal_position_error(double t) noexcept { horizontal_position_error = t; }
 	void set_vertical_position_error(double t) noexcept { vertical_position_error = t; }

@@ -129,12 +129,12 @@ private:
 	extension_indicator extension = extension_indicator::none;
 
 public:
-	NMEA_GETTER(fmt_spec);
-	NMEA_GETTER(cat);
+	MARNAV_NMEA_GETTER(fmt_spec);
+	MARNAV_NMEA_GETTER(cat);
 	utils::mmsi get_mmsi() const;
 	geo::region get_geographical_area() const;
-	NMEA_GETTER(ack);
-	NMEA_GETTER(extension);
+	MARNAV_NMEA_GETTER(ack);
+	MARNAV_NMEA_GETTER(extension);
 };
 
 std::string to_string(dsc::format_specifier value);

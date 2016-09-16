@@ -84,15 +84,15 @@ private:
 	utils::optional<mode_indicator> mode_ind;
 
 public:
-	NMEA_GETTER(time_utc)
-	NMEA_GETTER(bearing_true)
-	NMEA_GETTER(bearing_true_ref)
-	NMEA_GETTER(bearing_mag)
-	NMEA_GETTER(bearing_mag_ref)
-	NMEA_GETTER(distance)
-	NMEA_GETTER(distance_unit)
-	NMEA_GETTER(waypoint_id)
-	NMEA_GETTER(mode_ind)
+	MARNAV_NMEA_GETTER(time_utc)
+	MARNAV_NMEA_GETTER(bearing_true)
+	MARNAV_NMEA_GETTER(bearing_true_ref)
+	MARNAV_NMEA_GETTER(bearing_mag)
+	MARNAV_NMEA_GETTER(bearing_mag_ref)
+	MARNAV_NMEA_GETTER(distance)
+	MARNAV_NMEA_GETTER(distance_unit)
+	MARNAV_NMEA_GETTER(waypoint_id)
+	MARNAV_NMEA_GETTER(mode_ind)
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;

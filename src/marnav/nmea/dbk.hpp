@@ -58,12 +58,12 @@ private:
 	utils::optional<unit::distance> depth_fathom_unit;
 
 public:
-	NMEA_GETTER(depth_feet)
-	NMEA_GETTER(depth_feet_unit)
-	NMEA_GETTER(depth_meter)
-	NMEA_GETTER(depth_meter_unit)
-	NMEA_GETTER(depth_fathom)
-	NMEA_GETTER(depth_fathom_unit)
+	MARNAV_NMEA_GETTER(depth_feet)
+	MARNAV_NMEA_GETTER(depth_feet_unit)
+	MARNAV_NMEA_GETTER(depth_meter)
+	MARNAV_NMEA_GETTER(depth_meter_unit)
+	MARNAV_NMEA_GETTER(depth_fathom)
+	MARNAV_NMEA_GETTER(depth_fathom_unit)
 
 	void set_depth_feet(double t) noexcept;
 	void set_depth_meter(double t) noexcept;

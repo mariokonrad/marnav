@@ -67,11 +67,11 @@ private:
 	void check() const;
 
 public:
-	NMEA_GETTER(arrival_circle_entered)
-	NMEA_GETTER(perpendicualar_passed)
-	NMEA_GETTER(arrival_circle_radius)
-	NMEA_GETTER(arrival_circle_radius_unit)
-	NMEA_GETTER(waypoint_id)
+	MARNAV_NMEA_GETTER(arrival_circle_entered)
+	MARNAV_NMEA_GETTER(perpendicualar_passed)
+	MARNAV_NMEA_GETTER(arrival_circle_radius)
+	MARNAV_NMEA_GETTER(arrival_circle_radius_unit)
+	MARNAV_NMEA_GETTER(waypoint_id)
 
 	void set_arrival_circle_entered(status s);
 	void set_perpendicular_passed(status s);

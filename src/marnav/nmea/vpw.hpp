@@ -52,10 +52,10 @@ private:
 	utils::optional<unit::velocity> speed_meters_per_second_unit;
 
 public:
-	NMEA_GETTER(speed_knots)
-	NMEA_GETTER(speed_knots_unit)
-	NMEA_GETTER(speed_meters_per_second)
-	NMEA_GETTER(speed_meters_per_second_unit)
+	MARNAV_NMEA_GETTER(speed_knots)
+	MARNAV_NMEA_GETTER(speed_knots_unit)
+	MARNAV_NMEA_GETTER(speed_meters_per_second)
+	MARNAV_NMEA_GETTER(speed_meters_per_second_unit)
 
 	void set_speed_knots(double t) noexcept;
 	void set_speed_mps(double t) noexcept;

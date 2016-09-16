@@ -69,12 +69,12 @@ private:
 	void check_index(int index) const;
 
 public:
-	NMEA_GETTER(sel_mode)
-	NMEA_GETTER(mode)
+	MARNAV_NMEA_GETTER(sel_mode)
+	MARNAV_NMEA_GETTER(mode)
 	utils::optional<uint32_t> get_satellite_id(int index) const;
-	NMEA_GETTER(pdop)
-	NMEA_GETTER(hdop)
-	NMEA_GETTER(vdop)
+	MARNAV_NMEA_GETTER(pdop)
+	MARNAV_NMEA_GETTER(hdop)
+	MARNAV_NMEA_GETTER(vdop)
 
 	void set_sel_mode(selection_mode t) noexcept { sel_mode = t; }
 	void set_mode(uint32_t t) noexcept { mode = t; }

@@ -47,7 +47,7 @@ private:
 	std::string map_datum;
 
 public:
-	NMEA_GETTER(map_datum)
+	MARNAV_NMEA_GETTER(map_datum)
 
 	void set_map_datum(const std::string & t) noexcept;
 };

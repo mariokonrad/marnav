@@ -71,11 +71,11 @@ private:
 	utils::optional<char> reference_target;
 
 public:
-	NMEA_GETTER(number)
-	NMEA_GETTER(name)
-	NMEA_GETTER(time_utc)
-	NMEA_GETTER(status)
-	NMEA_GETTER(reference_target)
+	MARNAV_NMEA_GETTER(number)
+	MARNAV_NMEA_GETTER(name)
+	MARNAV_NMEA_GETTER(time_utc)
+	MARNAV_NMEA_GETTER(status)
+	MARNAV_NMEA_GETTER(reference_target)
 
 	geo::longitude get_longitude() const;
 	geo::latitude get_latitude() const;

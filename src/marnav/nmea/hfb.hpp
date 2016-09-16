@@ -51,10 +51,10 @@ private:
 	unit::distance distance_head_bottom_unit = unit::distance::meter;
 
 public:
-	NMEA_GETTER(distance_head_foot)
-	NMEA_GETTER(distance_head_foot_unit)
-	NMEA_GETTER(distance_head_bottom)
-	NMEA_GETTER(distance_head_bottom_unit)
+	MARNAV_NMEA_GETTER(distance_head_foot)
+	MARNAV_NMEA_GETTER(distance_head_foot_unit)
+	MARNAV_NMEA_GETTER(distance_head_bottom)
+	MARNAV_NMEA_GETTER(distance_head_bottom_unit)
 
 	void set_head_foot(double t) noexcept
 	{

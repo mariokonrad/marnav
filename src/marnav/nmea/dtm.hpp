@@ -65,14 +65,14 @@ private:
 	std::string name = "W84";
 
 public:
-	NMEA_GETTER(ref)
-	NMEA_GETTER(subcode)
-	NMEA_GETTER(lat_offset)
-	NMEA_GETTER(lat_hem)
-	NMEA_GETTER(lon_offset)
-	NMEA_GETTER(lon_hem)
-	NMEA_GETTER(altitude)
-	NMEA_GETTER(name)
+	MARNAV_NMEA_GETTER(ref)
+	MARNAV_NMEA_GETTER(subcode)
+	MARNAV_NMEA_GETTER(lat_offset)
+	MARNAV_NMEA_GETTER(lat_hem)
+	MARNAV_NMEA_GETTER(lon_offset)
+	MARNAV_NMEA_GETTER(lon_hem)
+	MARNAV_NMEA_GETTER(altitude)
+	MARNAV_NMEA_GETTER(name)
 
 	void set_ref(const std::string & t) noexcept;
 	void set_subcode(const std::string & t) noexcept;

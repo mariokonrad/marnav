@@ -51,11 +51,11 @@ private:
 	int32_t unknown = 0;
 
 public:
-	NMEA_GETTER(signal_strength)
-	NMEA_GETTER(signal_to_noise_ratio)
-	NMEA_GETTER(beacon_frequency)
-	NMEA_GETTER(beacon_datarate)
-	NMEA_GETTER(unknown)
+	MARNAV_NMEA_GETTER(signal_strength)
+	MARNAV_NMEA_GETTER(signal_to_noise_ratio)
+	MARNAV_NMEA_GETTER(beacon_frequency)
+	MARNAV_NMEA_GETTER(beacon_datarate)
+	MARNAV_NMEA_GETTER(unknown)
 
 	void set_signal_strength(uint32_t t) noexcept { signal_strength = t; }
 	void set_signal_to_noise_ratio(uint32_t t) noexcept { signal_to_noise_ratio = t; }

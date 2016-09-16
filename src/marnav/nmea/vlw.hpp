@@ -51,10 +51,10 @@ private:
 	utils::optional<unit::distance> distance_reset_unit; // N:nautical miles
 
 public:
-	NMEA_GETTER(distance_cum)
-	NMEA_GETTER(distance_cum_unit)
-	NMEA_GETTER(distance_reset)
-	NMEA_GETTER(distance_reset_unit)
+	MARNAV_NMEA_GETTER(distance_cum)
+	MARNAV_NMEA_GETTER(distance_cum_unit)
+	MARNAV_NMEA_GETTER(distance_reset)
+	MARNAV_NMEA_GETTER(distance_reset_unit)
 
 	void set_distance_cum_nm(double t) noexcept;
 	void set_distance_reset_nm(double t) noexcept;

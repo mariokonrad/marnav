@@ -50,9 +50,9 @@ private:
 	utils::optional<unit::distance> cross_track_unit;
 
 public:
-	NMEA_GETTER(cross_track_error_magnitude)
-	NMEA_GETTER(direction_to_steer)
-	NMEA_GETTER(cross_track_unit)
+	MARNAV_NMEA_GETTER(cross_track_error_magnitude)
+	MARNAV_NMEA_GETTER(direction_to_steer)
+	MARNAV_NMEA_GETTER(cross_track_unit)
 
 	void set_cross_track_error_magnitude(double t) noexcept
 	{

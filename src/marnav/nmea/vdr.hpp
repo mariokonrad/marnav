@@ -56,12 +56,12 @@ private:
 	utils::optional<unit::velocity> speed_unit; // N:knots
 
 public:
-	NMEA_GETTER(degrees_true)
-	NMEA_GETTER(degrees_true_ref)
-	NMEA_GETTER(degrees_mag)
-	NMEA_GETTER(degrees_mag_ref)
-	NMEA_GETTER(speed)
-	NMEA_GETTER(speed_unit)
+	MARNAV_NMEA_GETTER(degrees_true)
+	MARNAV_NMEA_GETTER(degrees_true_ref)
+	MARNAV_NMEA_GETTER(degrees_mag)
+	MARNAV_NMEA_GETTER(degrees_mag_ref)
+	MARNAV_NMEA_GETTER(speed)
+	MARNAV_NMEA_GETTER(speed_unit)
 
 	void set_degrees_true(double t) noexcept;
 	void set_degrees_mag(double t) noexcept;

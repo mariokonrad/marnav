@@ -78,9 +78,9 @@ private:
 	uint64_t address = 0;
 
 public:
-	NMEA_GETTER(number_of_messages)
-	NMEA_GETTER(sentence_number)
-	NMEA_GETTER(flag)
+	MARNAV_NMEA_GETTER(number_of_messages)
+	MARNAV_NMEA_GETTER(sentence_number)
+	MARNAV_NMEA_GETTER(flag)
 	utils::mmsi get_mmsi() const;
 
 	void set_number_of_messages(uint32_t t) noexcept { number_of_messages = t; }

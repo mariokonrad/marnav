@@ -80,21 +80,21 @@ private:
 	void check() const;
 
 public:
-	NMEA_GETTER(number_of_messages)
-	NMEA_GETTER(message_number)
-	NMEA_GETTER(satellite_prn)
-	NMEA_GETTER(gps_week_number)
-	NMEA_GETTER(sv_health)
-	NMEA_GETTER(eccentricity)
-	NMEA_GETTER(almanac_reference_time)
-	NMEA_GETTER(inclination_angle)
-	NMEA_GETTER(rate_of_right_ascension)
-	NMEA_GETTER(root_of_semimajor_axis)
-	NMEA_GETTER(argument_of_perigee)
-	NMEA_GETTER(longitude_of_ascension_node)
-	NMEA_GETTER(mean_anomaly)
-	NMEA_GETTER(f0_clock_parameter)
-	NMEA_GETTER(f1_clock_parameter)
+	MARNAV_NMEA_GETTER(number_of_messages)
+	MARNAV_NMEA_GETTER(message_number)
+	MARNAV_NMEA_GETTER(satellite_prn)
+	MARNAV_NMEA_GETTER(gps_week_number)
+	MARNAV_NMEA_GETTER(sv_health)
+	MARNAV_NMEA_GETTER(eccentricity)
+	MARNAV_NMEA_GETTER(almanac_reference_time)
+	MARNAV_NMEA_GETTER(inclination_angle)
+	MARNAV_NMEA_GETTER(rate_of_right_ascension)
+	MARNAV_NMEA_GETTER(root_of_semimajor_axis)
+	MARNAV_NMEA_GETTER(argument_of_perigee)
+	MARNAV_NMEA_GETTER(longitude_of_ascension_node)
+	MARNAV_NMEA_GETTER(mean_anomaly)
+	MARNAV_NMEA_GETTER(f0_clock_parameter)
+	MARNAV_NMEA_GETTER(f1_clock_parameter)
 
 	void set_number_of_messages(uint32_t t) noexcept { number_of_messages = t; }
 	void set_message_number(uint32_t t) noexcept { message_number = t; }

@@ -63,11 +63,11 @@ private:
 	char unknown = 'V';
 
 public:
-	NMEA_GETTER(cursor_range)
-	NMEA_GETTER(cursor_bearing)
-	NMEA_GETTER(range_scale)
-	NMEA_GETTER(range_unit)
-	NMEA_GETTER(unknown)
+	MARNAV_NMEA_GETTER(cursor_range)
+	MARNAV_NMEA_GETTER(cursor_bearing)
+	MARNAV_NMEA_GETTER(range_scale)
+	MARNAV_NMEA_GETTER(range_unit)
+	MARNAV_NMEA_GETTER(unknown)
 
 	void set_unknowns(std::array<double, 8> t) noexcept { unknowns = t; }
 	void set_cursor(double range, double bearing) noexcept;

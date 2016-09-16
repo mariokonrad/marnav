@@ -49,8 +49,8 @@ private:
 	utils::optional<reference> heading_true;
 
 public:
-	NMEA_GETTER(heading)
-	NMEA_GETTER(heading_true)
+	MARNAV_NMEA_GETTER(heading)
+	MARNAV_NMEA_GETTER(heading_true)
 
 	void set_heading(double t) noexcept;
 };

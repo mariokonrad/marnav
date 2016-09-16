@@ -76,19 +76,19 @@ private:
 	utils::optional<char> reference_target;
 
 public:
-	NMEA_GETTER(target_number)
-	NMEA_GETTER(target_distance)
-	NMEA_GETTER(bearing_from_ownship)
-	NMEA_GETTER(bearing_from_ownship_ref)
-	NMEA_GETTER(target_speed)
-	NMEA_GETTER(target_course)
-	NMEA_GETTER(target_course_ref)
-	NMEA_GETTER(distance_cpa)
-	NMEA_GETTER(tcpa)
-	NMEA_GETTER(unknown)
-	NMEA_GETTER(target_name)
-	NMEA_GETTER(target_status)
-	NMEA_GETTER(reference_target)
+	MARNAV_NMEA_GETTER(target_number)
+	MARNAV_NMEA_GETTER(target_distance)
+	MARNAV_NMEA_GETTER(bearing_from_ownship)
+	MARNAV_NMEA_GETTER(bearing_from_ownship_ref)
+	MARNAV_NMEA_GETTER(target_speed)
+	MARNAV_NMEA_GETTER(target_course)
+	MARNAV_NMEA_GETTER(target_course_ref)
+	MARNAV_NMEA_GETTER(distance_cpa)
+	MARNAV_NMEA_GETTER(tcpa)
+	MARNAV_NMEA_GETTER(unknown)
+	MARNAV_NMEA_GETTER(target_name)
+	MARNAV_NMEA_GETTER(target_status)
+	MARNAV_NMEA_GETTER(reference_target)
 
 	void set_target_number(uint32_t t) noexcept { target_number = t; }
 	void set_target_distance(double t) noexcept { target_distance = t; }

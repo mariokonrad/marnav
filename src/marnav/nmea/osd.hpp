@@ -62,15 +62,15 @@ private:
 	utils::optional<unit::velocity> vessel_drift_unit;
 
 public:
-	NMEA_GETTER(heading)
-	NMEA_GETTER(data_valid)
-	NMEA_GETTER(course)
-	NMEA_GETTER(course_ref)
-	NMEA_GETTER(speed)
-	NMEA_GETTER(speed_unit)
-	NMEA_GETTER(vessel_set)
-	NMEA_GETTER(vessel_drift)
-	NMEA_GETTER(vessel_drift_unit)
+	MARNAV_NMEA_GETTER(heading)
+	MARNAV_NMEA_GETTER(data_valid)
+	MARNAV_NMEA_GETTER(course)
+	MARNAV_NMEA_GETTER(course_ref)
+	MARNAV_NMEA_GETTER(speed)
+	MARNAV_NMEA_GETTER(speed_unit)
+	MARNAV_NMEA_GETTER(vessel_set)
+	MARNAV_NMEA_GETTER(vessel_drift)
+	MARNAV_NMEA_GETTER(vessel_drift_unit)
 
 	void set_heading(double t) noexcept { heading = t; }
 	void set_data_valid(status t) noexcept { data_valid = t; }

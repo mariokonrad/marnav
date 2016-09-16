@@ -56,12 +56,12 @@ private:
 	utils::optional<waypoint> waypoint_from;
 
 public:
-	NMEA_GETTER(distance_nm)
-	NMEA_GETTER(distance_nm_unit)
-	NMEA_GETTER(distance_km)
-	NMEA_GETTER(distance_km_unit)
-	NMEA_GETTER(waypoint_to)
-	NMEA_GETTER(waypoint_from)
+	MARNAV_NMEA_GETTER(distance_nm)
+	MARNAV_NMEA_GETTER(distance_nm_unit)
+	MARNAV_NMEA_GETTER(distance_km)
+	MARNAV_NMEA_GETTER(distance_km_unit)
+	MARNAV_NMEA_GETTER(waypoint_to)
+	MARNAV_NMEA_GETTER(waypoint_from)
 
 	void set_distance_nm(double t) noexcept;
 	void set_distance_km(double t) noexcept;

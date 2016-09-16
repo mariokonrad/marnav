@@ -56,12 +56,12 @@ private:
 	utils::optional<int32_t> local_zone_minutes;
 
 public:
-	NMEA_GETTER(time_utc)
-	NMEA_GETTER(day)
-	NMEA_GETTER(month)
-	NMEA_GETTER(year)
-	NMEA_GETTER(local_zone_hours)
-	NMEA_GETTER(local_zone_minutes)
+	MARNAV_NMEA_GETTER(time_utc)
+	MARNAV_NMEA_GETTER(day)
+	MARNAV_NMEA_GETTER(month)
+	MARNAV_NMEA_GETTER(year)
+	MARNAV_NMEA_GETTER(local_zone_hours)
+	MARNAV_NMEA_GETTER(local_zone_minutes)
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
 	void set_date(uint32_t y, uint32_t m, uint32_t d) noexcept

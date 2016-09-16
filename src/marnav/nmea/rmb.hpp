@@ -89,16 +89,16 @@ private:
 	utils::optional<mode_indicator> mode_ind;
 
 public:
-	NMEA_GETTER(active)
-	NMEA_GETTER(cross_track_error)
-	NMEA_GETTER(steer_dir)
-	NMEA_GETTER(waypoint_to)
-	NMEA_GETTER(waypoint_from)
-	NMEA_GETTER(range)
-	NMEA_GETTER(bearing)
-	NMEA_GETTER(dst_velocity)
-	NMEA_GETTER(arrival_status)
-	NMEA_GETTER(mode_ind)
+	MARNAV_NMEA_GETTER(active)
+	MARNAV_NMEA_GETTER(cross_track_error)
+	MARNAV_NMEA_GETTER(steer_dir)
+	MARNAV_NMEA_GETTER(waypoint_to)
+	MARNAV_NMEA_GETTER(waypoint_from)
+	MARNAV_NMEA_GETTER(range)
+	MARNAV_NMEA_GETTER(bearing)
+	MARNAV_NMEA_GETTER(dst_velocity)
+	MARNAV_NMEA_GETTER(arrival_status)
+	MARNAV_NMEA_GETTER(mode_ind)
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;

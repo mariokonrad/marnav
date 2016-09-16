@@ -58,12 +58,12 @@ private:
 	unit::distance depth_unit = unit::distance::meter;
 
 public:
-	NMEA_GETTER(distance_centerline)
-	NMEA_GETTER(distance_centerline_unit)
-	NMEA_GETTER(distance_transducer)
-	NMEA_GETTER(distance_transducer_unit)
-	NMEA_GETTER(depth)
-	NMEA_GETTER(depth_unit)
+	MARNAV_NMEA_GETTER(distance_centerline)
+	MARNAV_NMEA_GETTER(distance_centerline_unit)
+	MARNAV_NMEA_GETTER(distance_transducer)
+	MARNAV_NMEA_GETTER(distance_transducer_unit)
+	MARNAV_NMEA_GETTER(depth)
+	MARNAV_NMEA_GETTER(depth_unit)
 
 	void set_distance_centerline(double t) noexcept
 	{

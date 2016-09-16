@@ -57,12 +57,12 @@ private:
 	utils::optional<status> ground_speed_status;
 
 public:
-	NMEA_GETTER(water_speed_longitudinal)
-	NMEA_GETTER(water_speed_transveral)
-	NMEA_GETTER(water_speed_status)
-	NMEA_GETTER(ground_speed_longitudinal)
-	NMEA_GETTER(ground_speed_transveral)
-	NMEA_GETTER(ground_speed_status)
+	MARNAV_NMEA_GETTER(water_speed_longitudinal)
+	MARNAV_NMEA_GETTER(water_speed_transveral)
+	MARNAV_NMEA_GETTER(water_speed_status)
+	MARNAV_NMEA_GETTER(ground_speed_longitudinal)
+	MARNAV_NMEA_GETTER(ground_speed_transveral)
+	MARNAV_NMEA_GETTER(ground_speed_status)
 
 	void set_water_speed(double l, double t, status s) noexcept;
 	void set_ground_speed(double l, double t, status s) noexcept;

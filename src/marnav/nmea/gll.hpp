@@ -66,9 +66,9 @@ private:
 	utils::optional<mode_indicator> mode_ind;
 
 public:
-	NMEA_GETTER(time_utc)
-	NMEA_GETTER(data_valid)
-	NMEA_GETTER(mode_ind)
+	MARNAV_NMEA_GETTER(time_utc)
+	MARNAV_NMEA_GETTER(data_valid)
+	MARNAV_NMEA_GETTER(mode_ind)
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;

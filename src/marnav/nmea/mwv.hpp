@@ -58,11 +58,11 @@ private:
 	utils::optional<status> data_valid; // status, A:valid
 
 public:
-	NMEA_GETTER(angle)
-	NMEA_GETTER(angle_ref)
-	NMEA_GETTER(speed)
-	NMEA_GETTER(speed_unit)
-	NMEA_GETTER(data_valid)
+	MARNAV_NMEA_GETTER(angle)
+	MARNAV_NMEA_GETTER(angle_ref)
+	MARNAV_NMEA_GETTER(speed)
+	MARNAV_NMEA_GETTER(speed_unit)
+	MARNAV_NMEA_GETTER(data_valid)
 
 	void set_angle(double deg, reference ref);
 	void set_speed(double speed, unit::velocity u) noexcept;

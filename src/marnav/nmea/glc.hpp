@@ -67,8 +67,8 @@ private:
 	void check_index(int index) const;
 
 public:
-	NMEA_GETTER(gri)
-	NMEA_GETTER(master)
+	MARNAV_NMEA_GETTER(gri)
+	MARNAV_NMEA_GETTER(master)
 	utils::optional<time_difference> get_time_diff(int index) const;
 
 	void set_gri(uint32_t t) noexcept { gri = t; }

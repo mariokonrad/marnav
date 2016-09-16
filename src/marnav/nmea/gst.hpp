@@ -58,14 +58,14 @@ private:
 	double dev_alt = 0.0;
 
 public:
-	NMEA_GETTER(time_utc)
-	NMEA_GETTER(total_rms)
-	NMEA_GETTER(dev_semi_major)
-	NMEA_GETTER(dev_semi_minor)
-	NMEA_GETTER(orientation)
-	NMEA_GETTER(dev_lat)
-	NMEA_GETTER(dev_lon)
-	NMEA_GETTER(dev_alt)
+	MARNAV_NMEA_GETTER(time_utc)
+	MARNAV_NMEA_GETTER(total_rms)
+	MARNAV_NMEA_GETTER(dev_semi_major)
+	MARNAV_NMEA_GETTER(dev_semi_minor)
+	MARNAV_NMEA_GETTER(orientation)
+	MARNAV_NMEA_GETTER(dev_lat)
+	MARNAV_NMEA_GETTER(dev_lon)
+	MARNAV_NMEA_GETTER(dev_alt)
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
 	void set_total_rms(double t) noexcept { total_rms = t; }

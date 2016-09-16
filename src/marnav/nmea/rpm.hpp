@@ -59,11 +59,11 @@ private:
 	utils::optional<status> data_valid;
 
 public:
-	NMEA_GETTER(source)
-	NMEA_GETTER(source_number)
-	NMEA_GETTER(revolutions)
-	NMEA_GETTER(propeller_pitch)
-	NMEA_GETTER(data_valid)
+	MARNAV_NMEA_GETTER(source)
+	MARNAV_NMEA_GETTER(source_number)
+	MARNAV_NMEA_GETTER(revolutions)
+	MARNAV_NMEA_GETTER(propeller_pitch)
+	MARNAV_NMEA_GETTER(data_valid)
 
 	void set_source(source_id id, uint32_t num);
 	void set_revolutions(double t) noexcept { revolutions = t; }

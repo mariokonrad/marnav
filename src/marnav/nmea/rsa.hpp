@@ -53,10 +53,10 @@ private:
 	utils::optional<status> rudder2_valid;
 
 public:
-	NMEA_GETTER(rudder1)
-	NMEA_GETTER(rudder1_valid)
-	NMEA_GETTER(rudder2)
-	NMEA_GETTER(rudder2_valid)
+	MARNAV_NMEA_GETTER(rudder1)
+	MARNAV_NMEA_GETTER(rudder1_valid)
+	MARNAV_NMEA_GETTER(rudder2)
+	MARNAV_NMEA_GETTER(rudder2_valid)
 
 	void set_rudder1(double t) noexcept;
 	void set_rudder2(double t) noexcept;
