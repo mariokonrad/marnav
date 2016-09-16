@@ -18,7 +18,8 @@ bwr::bwr()
 bwr::bwr(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
 	: sentence(ID, TAG, talker)
 {
-	if (std::distance(first, last) != 12)
+	const auto n = std::distance(first, last);
+	if ((n < 12) || (n > 13))
 		throw std::invalid_argument{"invalid number of fields in bwr"};
 
 	read(*(first + 0), time_utc);
@@ -33,6 +34,9 @@ bwr::bwr(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 9), distance);
 	read(*(first + 10), distance_unit);
 	read(*(first + 11), waypoint_id);
+
+	if (n > 12)
+		read(*(first + 12), mode_ind);
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
 	lat = correct_hemisphere(lat, lat_hem);
@@ -84,7 +88,7 @@ std::vector<std::string> bwr::get_data() const
 	return {to_string(time_utc), to_string(lat), to_string(lat_hem), to_string(lon),
 		to_string(lon_hem), to_string(bearing_true), to_string(bearing_true_ref),
 		to_string(bearing_mag), to_string(bearing_mag_ref), to_string(distance),
-		to_string(distance_unit), to_string(waypoint_id)};
+		to_string(distance_unit), to_string(waypoint_id), to_string(mode_ind)};
 }
 }
 }

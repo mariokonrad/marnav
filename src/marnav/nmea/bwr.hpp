@@ -81,6 +81,7 @@ private:
 	utils::optional<double> distance; // nautical miles
 	utils::optional<unit::distance> distance_unit;
 	utils::optional<waypoint> waypoint_id;
+	utils::optional<mode_indicator> mode_ind;
 
 public:
 	NMEA_GETTER(time_utc)
@@ -91,6 +92,7 @@ public:
 	NMEA_GETTER(distance)
 	NMEA_GETTER(distance_unit)
 	NMEA_GETTER(waypoint_id)
+	NMEA_GETTER(mode_ind)
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;
@@ -102,6 +104,7 @@ public:
 	void set_bearing_mag(double t) noexcept;
 	void set_distance(double t) noexcept;
 	void set_waypoint(const waypoint & id) { waypoint_id = id; }
+	void set_mode_ind(mode_indicator t) { mode_ind = t; }
 };
 }
 }

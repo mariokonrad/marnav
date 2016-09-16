@@ -23,6 +23,7 @@
 #include <marnav/nmea/apb.hpp>
 #include <marnav/nmea/bod.hpp>
 #include <marnav/nmea/bwc.hpp>
+#include <marnav/nmea/bwr.hpp>
 #include <marnav/nmea/dbt.hpp>
 #include <marnav/nmea/dtm.hpp>
 #include <marnav/nmea/gga.hpp>
@@ -380,6 +381,19 @@ static void print_detail_bwc(const marnav::nmea::sentence * s)
 	print("Bearing Magnetic", render(t->get_bearing_mag()));
 	print("Distance",
 		fmt::sprintf("%s %s", render(t->get_distance()), render(t->get_distance_unit())));
+	print("Waypoint", render(t->get_waypoint_id()));
+	print("Mode Indicator", render(t->get_mode_ind()));
+}
+
+static void print_detail_bwr(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::bwr>(s);
+	print("Time UTC", render(t->get_time_utc()));
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("Bearing True", render(t->get_bearing_true()));
+	print("Bearing Magnetic", render(t->get_bearing_mag()));
+	print("Distance NM", render(t->get_distance()));
 	print("Waypoint", render(t->get_waypoint_id()));
 	print("Mode Indicator", render(t->get_mode_ind()));
 }
@@ -756,6 +770,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(apb),
 		ADD_SENTENCE(bod),
 		ADD_SENTENCE(bwc),
+		ADD_SENTENCE(bwr),
 		ADD_SENTENCE(dbt),
 		ADD_SENTENCE(dtm),
 		ADD_SENTENCE(gga),
