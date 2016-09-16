@@ -148,13 +148,15 @@ static bool contains(
 static struct {
 	struct {
 		std::string port;
-		uint32_t port_speed = 0;
+		marnav::io::serial::baud speed;
 		std::string file;
 	} config;
 } global;
 
 static bool parse_options(int argc, char ** argv)
 {
+	uint32_t port_speed = 0;
+
 	// clang-format off
 	cxxopts::Options options{argv[0], "NMEA Dump"};
 	options.add_options()
@@ -165,7 +167,7 @@ static bool parse_options(int argc, char ** argv)
 			cxxopts::value<std::string>(global.config.port))
 		("s,speed",
 			"Specifies the port speed. Valid values: 4800, 38400",
-			cxxopts::value<uint32_t>(global.config.port_speed))
+			cxxopts::value<uint32_t>(port_speed))
 		("f,file",
 			"Specifies the file to use.",
 			cxxopts::value<std::string>(global.config.file))
@@ -186,8 +188,19 @@ static bool parse_options(int argc, char ** argv)
 
 	if (options.count("port") && options.count("file"))
 		throw std::runtime_error{"specifying port and file is illegal"};
-	if (options.count("port") && !contains(valid_port_speeds, global.config.port_speed))
+	if (options.count("port") && !contains(valid_port_speeds, port_speed))
 		throw std::runtime_error{"invalid port speed"};
+
+	switch (port_speed) {
+		case 4800:
+			global.config.speed = marnav::io::serial::baud::baud_4800;
+			break;
+		case 38400:
+			global.config.speed = marnav::io::serial::baud::baud_38400;
+			break;
+		default:
+			break;
+	}
 
 	return false;
 }
@@ -986,18 +999,6 @@ static void process(std::function<bool(std::string &)> source)
 	}
 }
 
-static marnav::io::serial::baud get_baud_rate(uint32_t speed)
-{
-	switch (speed) {
-		case 4800:
-			return marnav::io::serial::baud::baud_4800;
-		case 38400:
-			return marnav::io::serial::baud::baud_38400;
-		default:
-			break;
-	}
-	throw std::runtime_error{"invalid baud rate"};
-}
 }
 
 int main(int argc, char ** argv)
@@ -1013,9 +1014,9 @@ int main(int argc, char ** argv)
 	} else if (!global.config.port.empty()) {
 		using namespace marnav;
 		using namespace marnav::io;
-		default_nmea_reader source{utils::make_unique<serial>(global.config.port,
-			get_baud_rate(global.config.port_speed), serial::databits::bit_8,
-			serial::stopbits::bit_1, serial::parity::none)};
+		default_nmea_reader source{
+			utils::make_unique<serial>(global.config.port, global.config.speed,
+				serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none)};
 		process([&](std::string & line) { return source.read_sentence(line); });
 	} else {
 		process([&](std::string & line) { return !!std::getline(std::cin, line); });
