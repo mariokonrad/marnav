@@ -3,10 +3,11 @@
 export SCRIPT_BASE=$(dirname `readlink -f $0`)
 export BASE=${SCRIPT_BASE}/..
 
-# search for a suitable clang-format version
-CLANG_TIDY_BIN=
-if [ `which clang-tidy-3.7` ] ; then
-	CLANG_TIDY_BIN=`which clang-tidy-3.7`
+# search for a suitable clang-tidy version
+CLANG_TIDY_BIN=`which clang-tidy-3.9`
+if [ ! -x ${CLANG_TIDY_BIN} ] ; then
+	echo "error: clang-tidy not found. abort."
+	exit 1
 fi
 
 function exec_file()

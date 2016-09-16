@@ -1,29 +1,32 @@
-#!/bin/bash -u
+#!/bin/bash -eu
+
+export SCRIPT_BASE=$(dirname `readlink -f $0`)
+export BASE=${SCRIPT_BASE}/..
 
 # search for a suitable clang-format version
-CLANG_FORMAT_BIN=
-if [ `which clang-format-3.7` ] ; then
-	CLANG_FORMAT_BIN=`which clang-format-3.7`
+CLANG_FORMAT_BIN=`which clang-format-3.9`
+if [ ! -x ${CLANG_FORMAT_BIN} ] ; then
+	echo "error: clang-format not found. abort."
+	exit 1
 fi
 
-# clang format found, performing checks
-if [ -x ${CLANG_FORMAT_BIN} ] ; then
-	FILES=()
-	for fn in $(find src test examples -type f -name "*.[ch]pp") ; do
-		d=$(${CLANG_FORMAT_BIN} $fn | diff $fn -)
-		if [ "x${d}" != "x" ] ; then
-			FILES+=($fn)
-		fi
-	done
-
-	# abort commit and show violating files
-	if [ ${#FILES[@]} -gt 0 ] ; then
-		echo "error: files not formatted correctly:"
-		for fn in ${FILES[@]} ; do
-			echo "  $fn"
-		done
-		exit 1
+# performing checks
+cd ${BASE}
+FILES=()
+for fn in $(find src test examples -type f -name "*.[ch]pp") ; do
+	d=$(${CLANG_FORMAT_BIN} $fn | diff $fn -)
+	if [ "x${d}" != "x" ] ; then
+		FILES+=($fn)
 	fi
+done
+
+# abort commit and show violating files
+if [ ${#FILES[@]} -gt 0 ] ; then
+	echo "error: files not formatted correctly:"
+	for fn in ${FILES[@]} ; do
+		echo "  $fn"
+	done
+	exit 1
 fi
 
 exit 0

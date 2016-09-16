@@ -327,20 +327,19 @@ Tools and their versions are listed below, newer/older/other tools
 
 Compiler:
 - GCC 4.9
-- GCC 5.1
-- GCC 5.2
-- GCC 5.3
-- GCC 6.1
+- GCC 5
+- GCC 6
 - Clang 3.6
 - Clang 3.7
 - Clang 3.8
+- Clang 3.9
 
 Tools needed to build the library:
 - cmake 3.2 or newer
 
 Tools needed to develop the library:
 - git
-- clang-format 3.7
+- clang-format 3.9
 
 Tools needed to build the documentation:
 - doxygen
@@ -350,7 +349,7 @@ Tools needed to build the documentation:
 Optional used for development:
 - lcov / genhtml, c++filt
 - cppcheck
-- clang-analyze 3.7
+- clang-analyze 3.9
 - ctags, cscope
 - perf
 
@@ -429,8 +428,8 @@ There is a script ```bin/static-analysis-clang``` for doing this, or do it manua
 
 	mkdir build
 	cd build
-	cmake -DCMAKE_CXX_COMPILER=/usr/share/clang/scan-build-3.7/c++-analyzer ..
-	scan-build-3.7 -o doc/analysis --use-analyzer=/usr/bin/clang++-3.7 make
+	cmake -DCMAKE_CXX_COMPILER=/usr/share/clang/scan-build-3.9/libexec/c++-analyzer ..
+	scan-build-3.9 -o doc/analysis --use-analyzer=/usr/bin/clang++-3.9 make
 
 After the build, ```scan-build``` will tell you what to do in order to inspect
 the findings.
