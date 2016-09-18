@@ -722,8 +722,8 @@ static void print_detail_vwr(const marnav::nmea::sentence * s)
 static void print_detail_vlw(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vlw>(s);
-	print("Distance Cumulative nm", render(t->get_distance_cum()));
-	print("Distance since Rest nm", render(t->get_distance_reset()));
+	print("Distance Cumulative NM", render(t->get_distance_cum()));
+	print("Distance since Rest NM", render(t->get_distance_reset()));
 }
 
 static void print_detail_vhw(const marnav::nmea::sentence * s)

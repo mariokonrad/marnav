@@ -362,7 +362,7 @@ std::string to_name(unit::distance t)
 		case unit::distance::feet:
 			return "ft";
 		case unit::distance::nm:
-			return "nm";
+			return "NM";
 		case unit::distance::km:
 			return "km";
 		case unit::distance::fathom:
