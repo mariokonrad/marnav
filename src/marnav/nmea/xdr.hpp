@@ -42,6 +42,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::XDR;
 	constexpr static const char * TAG = "XDR";
 
+	constexpr static const int max_transducer_info = 10;
+
 	virtual ~xdr() {}
 
 	xdr();
@@ -53,8 +55,6 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	constexpr static const int max_transducer_info = 10;
-
 	std::array<utils::optional<transducer_info>, max_transducer_info> transducer_data;
 
 	void check_index(int index) const;

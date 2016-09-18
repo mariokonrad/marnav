@@ -98,13 +98,13 @@
 #include <marnav/nmea/vdr.hpp>
 #include <marnav/nmea/vhw.hpp>
 #include <marnav/nmea/vlw.hpp>
-//#include <marnav/nmea/vpw.hpp>
+#include <marnav/nmea/vpw.hpp>
 #include <marnav/nmea/vtg.hpp>
 #include <marnav/nmea/vwr.hpp>
-//#include <marnav/nmea/wcv.hpp>
-//#include <marnav/nmea/wnc.hpp>
-//#include <marnav/nmea/wpl.hpp>
-//#include <marnav/nmea/xdr.hpp>
+#include <marnav/nmea/wcv.hpp>
+#include <marnav/nmea/wnc.hpp>
+#include <marnav/nmea/wpl.hpp>
+#include <marnav/nmea/xdr.hpp>
 //#include <marnav/nmea/xte.hpp>
 //#include <marnav/nmea/xtr.hpp>
 #include <marnav/nmea/zda.hpp>
@@ -714,9 +714,46 @@ static void print_detail_vwr(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vwr>(s);
 	print("Angle", fmt::sprintf("%s %s", render(t->get_angle()), render(t->get_angle_side())));
-	print("Speed Knots", render(t->get_speed_knots()));
+	print("Speed kn", render(t->get_speed_knots()));
 	print("Speed m/s", render(t->get_speed_mps()));
 	print("Speed km/h", render(t->get_speed_kmh()));
+}
+
+static void print_detail_wcv(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::wcv>(s);
+	print("Speed kn", render(t->get_speed()));
+	print("Waypoint", render(t->get_waypoint_id()));
+}
+
+static void print_detail_wnc(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::wnc>(s);
+	print("Distnace NM", render(t->get_distance_nm()));
+	print("Distnace km", render(t->get_distance_km()));
+	print("Waypoint To", render(t->get_waypoint_to()));
+	print("Waypoint From", render(t->get_waypoint_from()));
+}
+
+static void print_detail_wpl(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::wpl>(s);
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("Waypoint", render(t->get_waypoint_id()));
+}
+
+static void print_detail_xdr(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::xdr>(s);
+	for (auto i = 0; i < marnav::nmea::xdr::max_transducer_info; ++i) {
+		const auto info = t->get_info(i);
+		if (info) {
+			print("Transducer Info",
+				fmt::sprintf("Type:%c  Data:%f  Unit:%c  Name:%s", info->transducer_type,
+					info->measurement_data, info->units_of_measurement, info->name));
+		}
+	}
 }
 
 static void print_detail_vlw(const marnav::nmea::sentence * s)
@@ -724,6 +761,13 @@ static void print_detail_vlw(const marnav::nmea::sentence * s)
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vlw>(s);
 	print("Distance Cumulative NM", render(t->get_distance_cum()));
 	print("Distance since Rest NM", render(t->get_distance_reset()));
+}
+
+static void print_detail_vpw(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vpw>(s);
+	print("Speed kn", render(t->get_speed_knots()));
+	print("Speed m/s", render(t->get_speed_meters_per_second()));
 }
 
 static void print_detail_vhw(const marnav::nmea::sentence * s)
@@ -928,8 +972,13 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(vdr),
 		ADD_SENTENCE(vhw),
 		ADD_SENTENCE(vlw),
+		ADD_SENTENCE(vpw),
 		ADD_SENTENCE(vtg),
 		ADD_SENTENCE(vwr),
+		ADD_SENTENCE(wcv),
+		ADD_SENTENCE(wnc),
+		ADD_SENTENCE(wpl),
+		ADD_SENTENCE(xdr),
 		ADD_SENTENCE(zda),
 
 		// proprietary

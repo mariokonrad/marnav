@@ -52,7 +52,7 @@ TEST_F(Test_nmea_xdr, get_info_invalid_index)
 	nmea::xdr xdr;
 
 	EXPECT_ANY_THROW(xdr.get_info(-1));
-	EXPECT_ANY_THROW(xdr.get_info(40));
+	EXPECT_ANY_THROW(xdr.get_info(nmea::xdr::max_length + 1));
 }
 
 TEST_F(Test_nmea_xdr, one_data_point)
