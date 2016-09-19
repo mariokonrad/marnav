@@ -105,12 +105,12 @@
 #include <marnav/nmea/wnc.hpp>
 #include <marnav/nmea/wpl.hpp>
 #include <marnav/nmea/xdr.hpp>
-//#include <marnav/nmea/xte.hpp>
-//#include <marnav/nmea/xtr.hpp>
+#include <marnav/nmea/xte.hpp>
+#include <marnav/nmea/xtr.hpp>
 #include <marnav/nmea/zda.hpp>
-//#include <marnav/nmea/zdl.hpp>
-//#include <marnav/nmea/zfo.hpp>
-//#include <marnav/nmea/ztg.hpp>
+#include <marnav/nmea/zdl.hpp>
+#include <marnav/nmea/zfo.hpp>
+#include <marnav/nmea/ztg.hpp>
 #include <marnav/nmea/pgrme.hpp>
 #include <marnav/nmea/pgrmm.hpp>
 #include <marnav/nmea/pgrmz.hpp>
@@ -571,6 +571,30 @@ static void print_detail_zda(const marnav::nmea::sentence * s)
 	print("Local Zone Min", render(t->get_local_zone_minutes()));
 }
 
+static void print_detail_zdl(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::zdl>(s);
+	print("Time to Point", render(t->get_time_to_point()));
+	print("Distance to Point NM", render(t->get_distance()));
+	print("Type of Point", render(t->get_type_point()));
+}
+
+static void print_detail_zfo(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::zfo>(s);
+	print("Time UTC", render(t->get_time_utc()));
+	print("Elapsed Time", render(t->get_time_elapsed()));
+	print("Origin Waypoint", render(t->get_waypoint_id()));
+}
+
+static void print_detail_ztg(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::ztg>(s);
+	print("Time UTC", render(t->get_time_utc()));
+	print("Time Remaining", render(t->get_time_remaining()));
+	print("Destination Waypoint", render(t->get_waypoint_id()));
+}
+
 static void print_detail_dtm(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::dtm>(s);
@@ -754,6 +778,23 @@ static void print_detail_xdr(const marnav::nmea::sentence * s)
 					info->measurement_data, info->units_of_measurement, info->name));
 		}
 	}
+}
+
+static void print_detail_xte(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::xte>(s);
+	print("Status 1", render(t->get_status1()));
+	print("Status 2", render(t->get_status2()));
+	print("Cross Track Error Magnitude", render(t->get_cross_track_error_magnitude()));
+	print("Direction to Steer", render(t->get_direction_to_steer()));
+	print("Mode Indicator", render(t->get_mode_ind()));
+}
+
+static void print_detail_xtr(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::xtr>(s);
+	print("Cross Track Error Magnitude", render(t->get_cross_track_error_magnitude()));
+	print("Direction to Steer", render(t->get_direction_to_steer()));
 }
 
 static void print_detail_vlw(const marnav::nmea::sentence * s)
@@ -979,7 +1020,12 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(wnc),
 		ADD_SENTENCE(wpl),
 		ADD_SENTENCE(xdr),
+		ADD_SENTENCE(xte),
+		ADD_SENTENCE(xtr),
 		ADD_SENTENCE(zda),
+		ADD_SENTENCE(zdl),
+		ADD_SENTENCE(zfo),
+		ADD_SENTENCE(ztg),
 
 		// proprietary
 		ADD_SENTENCE(pgrme),

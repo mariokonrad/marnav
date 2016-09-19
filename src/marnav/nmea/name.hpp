@@ -18,6 +18,7 @@ std::string to_name(mode_indicator t);
 std::string to_name(quality t);
 std::string to_name(reference t);
 std::string to_name(side t);
+std::string to_name(type_of_point t);
 
 std::string to_name(unit::distance t);
 std::string to_name(unit::temperature t);

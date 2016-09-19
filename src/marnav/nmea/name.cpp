@@ -354,6 +354,21 @@ std::string to_name(side t)
 	return "-";
 }
 
+std::string to_name(type_of_point t)
+{
+	switch (t) {
+		case type_of_point::collision:
+			return "collision";
+		case type_of_point::turning_point:
+			return "turning_point";
+		case type_of_point::reference:
+			return "reference";
+		case type_of_point::wheelover:
+			return "wheelover";
+	}
+	return "-";
+}
+
 std::string to_name(unit::distance t)
 {
 	switch (t) {
