@@ -52,18 +52,18 @@
 //#include <marnav/nmea/dse.hpp>
 #include <marnav/nmea/dtm.hpp>
 #include <marnav/nmea/fsi.hpp>
-//#include <marnav/nmea/gbs.hpp>
+#include <marnav/nmea/gbs.hpp>
 #include <marnav/nmea/gga.hpp>
 //#include <marnav/nmea/glc.hpp>
 #include <marnav/nmea/gll.hpp>
 //#include <marnav/nmea/gns.hpp>
 //#include <marnav/nmea/grs.hpp>
 #include <marnav/nmea/gsa.hpp>
-//#include <marnav/nmea/gst.hpp>
+#include <marnav/nmea/gst.hpp>
 #include <marnav/nmea/gsv.hpp>
-//#include <marnav/nmea/gtd.hpp>
+#include <marnav/nmea/gtd.hpp>
 #include <marnav/nmea/hdg.hpp>
-//#include <marnav/nmea/hfb.hpp>
+#include <marnav/nmea/hfb.hpp>
 #include <marnav/nmea/hdm.hpp>
 #include <marnav/nmea/hdt.hpp>
 //#include <marnav/nmea/hsc.hpp>
@@ -385,6 +385,13 @@ static void print_detail_hdg(const marnav::nmea::sentence * s)
 		fmt::sprintf("%s %s", render(t->get_magn_var()), render(t->get_magn_var_hem())));
 }
 
+static void print_detail_hfb(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::hfb>(s);
+	print("Distance Head Foot [m]", render(t->get_distance_head_foot()));
+	print("Distance Head Bottom [m]", render(t->get_distance_head_bottom()));
+}
+
 static void print_detail_hdm(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::hdm>(s);
@@ -520,6 +527,19 @@ static void print_detail_gsa(const marnav::nmea::sentence * s)
 	print("VDOP", render(t->get_vdop()));
 }
 
+static void print_detail_gst(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gst>(s);
+	print("Time UTC", render(t->get_time_utc()));
+	print("Total RMS", render(t->get_total_rms()));
+	print("Std Dev Semi-Major Axis", render(t->get_dev_semi_major()));
+	print("Std Dev Semi-Minor Axis", render(t->get_dev_semi_minor()));
+	print("Orientation Semi-Major Axis", render(t->get_orientation()));
+	print("Std Dev. Latitude Error", render(t->get_dev_lat()));
+	print("Std Dev. Longitude Error", render(t->get_dev_lon()));
+	print("Std Dev. Altitude Error", render(t->get_dev_alt()));
+}
+
 static void print_detail_gga(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gga>(s);
@@ -558,6 +578,13 @@ static void print_detail_gsv(const marnav::nmea::sentence * s)
 							 sat->elevation, sat->azimuth, sat->snr));
 		}
 	}
+}
+
+static void print_detail_gtd(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gtd>(s);
+	for (int i = 0; i < marnav::nmea::gtd::max_time_diffs; ++i)
+		print(fmt::sprintf("Time Diff %d", i), render(t->get_time_diff(i)));
 }
 
 static void print_detail_zda(const marnav::nmea::sentence * s)
@@ -616,6 +643,19 @@ static void print_detail_fsi(const marnav::nmea::sentence * s)
 	print("Mode of Operation", render(t->get_communications_mode()));
 	print("Power Level", render(t->get_power_level()));
 	print("Sentence Status Flag", render(t->get_sentence_status()));
+}
+
+static void print_detail_gbs(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gbs>(s);
+	print("Time UTC", render(t->get_time_utc()));
+	print("Error Latitude", render(t->get_err_lat()));
+	print("Error Longitude", render(t->get_err_lon()));
+	print("Error Altitude", render(t->get_err_alt()));
+	print("Satellite PRN", render(t->get_satellite()));
+	print("Probability", render(t->get_probability()));
+	print("Bias in Meters", render(t->get_bias()));
+	print("Standard Deviation of bias", render(t->get_bias_dev()));
 }
 
 static void print_detail_aam(const marnav::nmea::sentence * s)
@@ -996,11 +1036,15 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(dpt),
 		ADD_SENTENCE(dtm),
 		ADD_SENTENCE(fsi),
+		ADD_SENTENCE(gbs),
 		ADD_SENTENCE(gga),
 		ADD_SENTENCE(gll),
 		ADD_SENTENCE(gsa),
+		ADD_SENTENCE(gst),
 		ADD_SENTENCE(gsv),
+		ADD_SENTENCE(gtd),
 		ADD_SENTENCE(hdg),
+		ADD_SENTENCE(hfb),
 		ADD_SENTENCE(hdm),
 		ADD_SENTENCE(hdt),
 		ADD_SENTENCE(mtw),

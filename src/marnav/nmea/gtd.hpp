@@ -34,6 +34,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GTD;
 	constexpr static const char * TAG = "GTD";
 
+	constexpr static const int max_time_diffs = 5;
+
 	virtual ~gtd() {}
 
 	gtd();
@@ -45,9 +47,7 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	constexpr static const int num_data = 5;
-
-	std::array<double, num_data> time_diffs;
+	std::array<double, max_time_diffs> time_diffs;
 
 	void check_index(int index) const;
 

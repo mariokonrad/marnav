@@ -56,6 +56,7 @@ TEST_F(Test_nmea_gtd, set_time_diff_invalid_index)
 
 	EXPECT_ANY_THROW(gtd.set_time_diff(-1, 0.0));
 	EXPECT_ANY_THROW(gtd.set_time_diff(5, 0.0));
+	EXPECT_ANY_THROW(gtd.set_time_diff(nmea::gtd::max_time_diffs, 0.0));
 }
 
 TEST_F(Test_nmea_gtd, get_time_diff)
@@ -79,5 +80,6 @@ TEST_F(Test_nmea_gtd, get_time_diff_invalid_index)
 
 	EXPECT_ANY_THROW(gtd.get_time_diff(-1));
 	EXPECT_ANY_THROW(gtd.get_time_diff(5));
+	EXPECT_ANY_THROW(gtd.get_time_diff(nmea::gtd::max_time_diffs));
 }
 }

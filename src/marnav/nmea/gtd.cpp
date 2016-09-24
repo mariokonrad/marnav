@@ -21,13 +21,13 @@ gtd::gtd(const std::string & talker, fields::const_iterator first, fields::const
 	if (std::distance(first, last) != 5)
 		throw std::invalid_argument{"invalid number of fields in gtd"};
 
-	for (int i = 0; i < num_data; ++i)
+	for (int i = 0; i < max_time_diffs; ++i)
 		read(*(first + i), time_diffs[i]);
 }
 
 void gtd::check_index(int index) const
 {
-	if ((index < 0) || (index >= num_data)) {
+	if ((index < 0) || (index >= max_time_diffs)) {
 		throw std::out_of_range{"time difference index out of range"};
 	}
 }
