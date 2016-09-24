@@ -66,13 +66,13 @@
 #include <marnav/nmea/hfb.hpp>
 #include <marnav/nmea/hdm.hpp>
 #include <marnav/nmea/hdt.hpp>
-//#include <marnav/nmea/hsc.hpp>
-//#include <marnav/nmea/its.hpp>
-//#include <marnav/nmea/lcd.hpp>
+#include <marnav/nmea/hsc.hpp>
+#include <marnav/nmea/its.hpp>
+#include <marnav/nmea/lcd.hpp>
 //#include <marnav/nmea/msk.hpp>
 //#include <marnav/nmea/mss.hpp>
 #include <marnav/nmea/mtw.hpp>
-//#include <marnav/nmea/mwd.hpp>
+#include <marnav/nmea/mwd.hpp>
 #include <marnav/nmea/mwv.hpp>
 //#include <marnav/nmea/osd.hpp>
 //#include <marnav/nmea/r00.hpp>
@@ -404,6 +404,33 @@ static void print_detail_hdt(const marnav::nmea::sentence * s)
 	print("Heading", render(t->get_heading()));
 }
 
+static void print_detail_hsc(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::hsc>(s);
+	print("Heading True", render(t->get_heading_true()));
+	print("Heading Magnetic", render(t->get_heading_mag()));
+}
+
+static void print_detail_its(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::its>(s);
+	print("Distance [m]", render(t->get_distance()));
+}
+
+static void print_detail_lcd(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::lcd>(s);
+	print("GRI microseconds", render(t->get_gri()));
+	print("Master", fmt::sprintf("SNR:%d  ECD:%d", t->get_master().snr, t->get_master().ecd));
+	for (int i = 0; i < marnav::nmea::lcd::max_differences; ++i) {
+		const auto diff = t->get_time_diff(i);
+		if (diff) {
+			print(fmt::sprintf("Time Diff %d", i),
+				fmt::sprintf("SNR:%d  ECD:%d", diff->snr, diff->ecd));
+		}
+	}
+}
+
 static void print_detail_rmb(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rmb>(s);
@@ -714,6 +741,15 @@ static void print_detail_mtw(const marnav::nmea::sentence * s)
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::mtw>(s);
 	print("Water Temperature",
 		fmt::sprintf("%s %s", render(t->get_temperature()), render(t->get_temperature_unit())));
+}
+
+static void print_detail_mwd(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::mwd>(s);
+	print("Direction True", render(t->get_direction_true()));
+	print("Direction Magnetic", render(t->get_direction_mag()));
+	print("Speed kn", render(t->get_speed_kn()));
+	print("Speed m/s", render(t->get_speed_ms()));
 }
 
 static void print_detail_dbt(const marnav::nmea::sentence * s)
@@ -1047,7 +1083,11 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(hfb),
 		ADD_SENTENCE(hdm),
 		ADD_SENTENCE(hdt),
+		ADD_SENTENCE(hsc),
+		ADD_SENTENCE(its),
+		ADD_SENTENCE(lcd),
 		ADD_SENTENCE(mtw),
+		ADD_SENTENCE(mwd),
 		ADD_SENTENCE(mwv),
 		ADD_SENTENCE(rmb),
 		ADD_SENTENCE(rmc),

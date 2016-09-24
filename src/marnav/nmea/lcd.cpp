@@ -24,7 +24,7 @@ lcd::lcd(const std::string & talker, fields::const_iterator first, fields::const
 	read(*(first + 0), gri);
 	read(*(first + 1), master.snr);
 	read(*(first + 2), master.ecd);
-	for (int i = 0; i < num_differences; ++i) {
+	for (int i = 0; i < max_differences; ++i) {
 		utils::optional<decltype(time_difference::snr)> snr;
 		utils::optional<decltype(time_difference::ecd)> ecd;
 		read(*(first + (i * 2) + 3 + 0), snr);
@@ -37,7 +37,7 @@ lcd::lcd(const std::string & talker, fields::const_iterator first, fields::const
 
 void lcd::check_index(int index) const
 {
-	if ((index < 0) || (index >= num_differences)) {
+	if ((index < 0) || (index >= max_differences)) {
 		throw std::out_of_range{"time difference index out of range"};
 	}
 }
@@ -61,7 +61,7 @@ std::vector<std::string> lcd::get_data() const
 	result.push_back(to_string(gri));
 	result.push_back(format(master.snr, 3));
 	result.push_back(format(master.ecd, 3));
-	for (int i = 0; i < num_differences; ++i) {
+	for (int i = 0; i < max_differences; ++i) {
 		auto const & t = time_diffs[i];
 		if (t) {
 			result.push_back(format(t->snr, 3));

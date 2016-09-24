@@ -44,6 +44,7 @@ TEST_F(Test_nmea_lcd, set_time_diff_invalid_index)
 
 	EXPECT_ANY_THROW(lcd.set_time_diff(-1, {0, 0}));
 	EXPECT_ANY_THROW(lcd.set_time_diff(5, {0, 0}));
+	EXPECT_ANY_THROW(lcd.set_time_diff(nmea::lcd::max_differences, {0, 0}));
 }
 
 TEST_F(Test_nmea_lcd, get_time_diff_invalid_index)
@@ -52,5 +53,6 @@ TEST_F(Test_nmea_lcd, get_time_diff_invalid_index)
 
 	EXPECT_ANY_THROW(lcd.get_time_diff(-1));
 	EXPECT_ANY_THROW(lcd.get_time_diff(5));
+	EXPECT_ANY_THROW(lcd.get_time_diff(nmea::lcd::max_differences));
 }
 }
