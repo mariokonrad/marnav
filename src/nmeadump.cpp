@@ -85,14 +85,14 @@
 //#include <marnav/nmea/rsd.hpp>
 #include <marnav/nmea/rte.hpp>
 //#include <marnav/nmea/sfi.hpp>
-//#include <marnav/nmea/tds.hpp>
-//#include <marnav/nmea/tfi.hpp>
-//#include <marnav/nmea/tll.hpp>
-//#include <marnav/nmea/tpc.hpp>
-//#include <marnav/nmea/tpr.hpp>
-//#include <marnav/nmea/tpt.hpp>
+#include <marnav/nmea/tds.hpp>
+#include <marnav/nmea/tfi.hpp>
+#include <marnav/nmea/tll.hpp>
+#include <marnav/nmea/tpc.hpp>
+#include <marnav/nmea/tpr.hpp>
+#include <marnav/nmea/tpt.hpp>
 //#include <marnav/nmea/ttm.hpp>
-//#include <marnav/nmea/vbw.hpp>
+#include <marnav/nmea/vbw.hpp>
 #include <marnav/nmea/vdm.hpp>
 #include <marnav/nmea/vdo.hpp>
 #include <marnav/nmea/vdr.hpp>
@@ -314,6 +314,19 @@ static std::string render(const marnav::ais::maneuver_indicator_id t)
 static std::string render(const marnav::ais::navigation_status t)
 {
 	return marnav::ais::to_name(t);
+}
+
+static std::string render(const marnav::nmea::tfi::state t)
+{
+	switch (t) {
+		case marnav::nmea::tfi::state::off:
+			return "OFF";
+		case marnav::nmea::tfi::state::on:
+			return "ON";
+		case marnav::nmea::tfi::state::no_answer:
+			return "no answer";
+	}
+	return "-";
 }
 
 static std::string render(const marnav::nmea::sentence_id t)
@@ -728,6 +741,67 @@ static void print_detail_rte(const marnav::nmea::sentence * s)
 	}
 }
 
+static void print_detail_tds(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::tds>(s);
+	print("Distance [m]", render(t->get_distance()));
+}
+
+static void print_detail_tfi(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::tfi>(s);
+	print("Sensor #1", render(t->get_sensor(0)));
+	print("Sensor #2", render(t->get_sensor(1)));
+	print("Sensor #3", render(t->get_sensor(2)));
+}
+
+static void print_detail_tll(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::tll>(s);
+	print("Target Number", render(t->get_number()));
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("Target Name", render(t->get_name()));
+	print("Time UTC", render(t->get_time_utc()));
+	print("Target Status", render(t->get_status()));
+	print("Reference Target", render(t->get_reference_target()));
+}
+
+static void print_detail_tpc(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::tpc>(s);
+	print("Horiz. Range from Center Line [m]", render(t->get_distance_centerline()));
+	print("Horiz. dist from Transd. along [m]", render(t->get_distance_transducer()));
+	print("Depth [m]", render(t->get_depth()));
+}
+
+static void print_detail_tpr(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::tpr>(s);
+	print("Horizontal Range [m]", render(t->get_range()));
+	print("Bearing to Target to Vessel", render(t->get_bearing()));
+	print("Depth [m]", render(t->get_depth()));
+}
+
+static void print_detail_tpt(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::tpt>(s);
+	print("Horizontal Range [m]", render(t->get_range()));
+	print("Bearing to Target True", render(t->get_bearing()));
+	print("Depth [m]", render(t->get_depth()));
+}
+
+static void print_detail_vbw(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vbw>(s);
+	print("Longitudinal Water Speed", render(t->get_water_speed_longitudinal()));
+	print("Transverse Water Speed", render(t->get_water_speed_transveral()));
+	print("Status", render(t->get_water_speed_status()));
+	print("Longitudinal Ground Speed", render(t->get_ground_speed_longitudinal()));
+	print("Transverse Ground Speed", render(t->get_ground_speed_transveral()));
+	print("Status", render(t->get_ground_speed_status()));
+}
+
 static void print_detail_vdr(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vdr>(s);
@@ -1094,6 +1168,13 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(rot),
 		ADD_SENTENCE(rpm),
 		ADD_SENTENCE(rte),
+		ADD_SENTENCE(tds),
+		ADD_SENTENCE(tfi),
+		ADD_SENTENCE(tll),
+		ADD_SENTENCE(tpc),
+		ADD_SENTENCE(tpr),
+		ADD_SENTENCE(tpt),
+		ADD_SENTENCE(vbw),
 		ADD_SENTENCE(vdr),
 		ADD_SENTENCE(vhw),
 		ADD_SENTENCE(vlw),

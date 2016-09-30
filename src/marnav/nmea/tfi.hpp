@@ -32,6 +32,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::TFI;
 	constexpr static const char * TAG = "TFI";
 
+	static constexpr const int num_sensors = 3;
+
 	enum class state : uint32_t {
 		off, ///< NMEA representation: 0
 		on, ///< NMEA representation: 1
@@ -49,8 +51,6 @@ protected:
 	virtual std::vector<std::string> get_data() const override;
 
 private:
-	static constexpr const int num_sensors = 3;
-
 	std::array<state, num_sensors> sensors;
 
 	void check_index(int index) const;
