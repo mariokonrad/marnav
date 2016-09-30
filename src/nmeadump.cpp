@@ -54,7 +54,7 @@
 #include <marnav/nmea/fsi.hpp>
 #include <marnav/nmea/gbs.hpp>
 #include <marnav/nmea/gga.hpp>
-//#include <marnav/nmea/glc.hpp>
+#include <marnav/nmea/glc.hpp>
 #include <marnav/nmea/gll.hpp>
 //#include <marnav/nmea/gns.hpp>
 //#include <marnav/nmea/grs.hpp>
@@ -74,9 +74,9 @@
 #include <marnav/nmea/mtw.hpp>
 #include <marnav/nmea/mwd.hpp>
 #include <marnav/nmea/mwv.hpp>
-//#include <marnav/nmea/osd.hpp>
-//#include <marnav/nmea/r00.hpp>
-//#include <marnav/nmea/rma.hpp>
+#include <marnav/nmea/osd.hpp>
+#include <marnav/nmea/r00.hpp>
+#include <marnav/nmea/rma.hpp>
 #include <marnav/nmea/rmb.hpp>
 #include <marnav/nmea/rmc.hpp>
 #include <marnav/nmea/rot.hpp>
@@ -580,6 +580,21 @@ static void print_detail_gst(const marnav::nmea::sentence * s)
 	print("Std Dev. Altitude Error", render(t->get_dev_alt()));
 }
 
+static void print_detail_glc(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::glc>(s);
+	print("GRI", render(t->get_gri()));
+	print("Master TOA", fmt::sprintf("DIFF:%s STATUS:%s", render(t->get_master().diff),
+							render(t->get_master().status)));
+	for (int i = 0; i < marnav::nmea::glc::max_differences; ++i) {
+		const auto & td = t->get_time_diff(i);
+		if (td) {
+			print(fmt::sprintf("Time Diff %d", i),
+				fmt::sprintf("DIFF:%s STATUS:%s", render(td->diff), render(td->status)));
+		}
+	}
+}
+
 static void print_detail_gga(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gga>(s);
@@ -595,6 +610,44 @@ static void print_detail_gga(const marnav::nmea::sentence * s)
 							 render(t->get_geodial_separation_unit())));
 	print("DGPS Age", render(t->get_dgps_age()));
 	print("DGPS Ref", render(t->get_dgps_ref()));
+}
+
+static void print_detail_osd(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::osd>(s);
+	print("Heading", render(t->get_heading()));
+	print("Status", render(t->get_data_valid()));
+	print("Vessel Course True", render(t->get_course()));
+	print("Vessel Speed",
+		fmt::sprintf("%s %s", render(t->get_speed()), render(t->get_speed_unit())));
+	print("Vessel Set", render(t->get_vessel_set()));
+	print("Vessel Drift", fmt::sprintf("%s %s", render(t->get_vessel_drift()),
+							  render(t->get_vessel_drift_unit())));
+}
+
+static void print_detail_r00(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::r00>(s);
+	for (int i = 0; i < marnav::nmea::r00::max_waypoint_ids; ++i) {
+		const auto & wp = t->get_waypoint_id(i);
+		if (wp) {
+			print("Waypoint", render(*wp));
+		}
+	}
+}
+
+static void print_detail_rma(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rma>(s);
+	print("Blink Warning", render(t->get_blink_warning()));
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("Time Diff A", render(t->get_time_diff_a()));
+	print("Time Diff B", render(t->get_time_diff_b()));
+	print("SOG [kn]", render(t->get_sog()));
+	print("Track made good", render(t->get_track()));
+	print("Magnetic Variation", fmt::sprintf("%s %s", render(t->get_magnetic_var()),
+									render(t->get_magnetic_var_hem())));
 }
 
 static void print_detail_mwv(const marnav::nmea::sentence * s)
@@ -1147,6 +1200,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(dtm),
 		ADD_SENTENCE(fsi),
 		ADD_SENTENCE(gbs),
+		ADD_SENTENCE(glc),
 		ADD_SENTENCE(gga),
 		ADD_SENTENCE(gll),
 		ADD_SENTENCE(gsa),
@@ -1163,6 +1217,9 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(mtw),
 		ADD_SENTENCE(mwd),
 		ADD_SENTENCE(mwv),
+		ADD_SENTENCE(osd),
+		ADD_SENTENCE(r00),
+		ADD_SENTENCE(rma),
 		ADD_SENTENCE(rmb),
 		ADD_SENTENCE(rmc),
 		ADD_SENTENCE(rot),

@@ -52,6 +52,7 @@ TEST_F(Test_nmea_glc, get_time_diff_invalid_index)
 
 	EXPECT_ANY_THROW(glc.get_time_diff(-1));
 	EXPECT_ANY_THROW(glc.get_time_diff(5));
+	EXPECT_ANY_THROW(glc.get_time_diff(nmea::glc::max_differences));
 }
 
 TEST_F(Test_nmea_glc, set_time_diff)
