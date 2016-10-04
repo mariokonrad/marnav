@@ -67,11 +67,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GGA;
 	constexpr static const char * TAG = "GGA";
 
-	virtual ~gga() {}
-
 	gga();
 	gga(const gga &) = default;
 	gga & operator=(const gga &) = default;
+	gga(gga &&) = default;
+	gga & operator=(gga &&) = default;
 
 protected:
 	gga(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

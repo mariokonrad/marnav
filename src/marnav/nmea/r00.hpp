@@ -32,11 +32,11 @@ public:
 	constexpr static const char * TAG = "R00";
 	constexpr static const int max_waypoint_ids = 14;
 
-	virtual ~r00() {}
-
 	r00();
 	r00(const r00 &) = default;
 	r00 & operator=(const r00 &) = default;
+	r00(r00 &&) = default;
+	r00 & operator=(r00 &&) = default;
 
 protected:
 	r00(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

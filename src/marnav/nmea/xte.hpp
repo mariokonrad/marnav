@@ -43,11 +43,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::XTE;
 	constexpr static const char * TAG = "XTE";
 
-	virtual ~xte() {}
-
 	xte();
 	xte(const xte &) = default;
 	xte & operator=(const xte &) = default;
+	xte(xte &&) = default;
+	xte & operator=(xte &&) = default;
 
 protected:
 	xte(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

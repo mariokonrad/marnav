@@ -36,11 +36,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VDM;
 	constexpr static const char * TAG = "VDM";
 
-	virtual ~vdm() {}
-
 	vdm();
 	vdm(const vdm &) = default;
 	vdm & operator=(const vdm &) = default;
+	vdm(vdm &&) = default;
+	vdm & operator=(vdm &&) = default;
 
 protected:
 	vdm(sentence_id id, const std::string & tag, const std::string & talker);

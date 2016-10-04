@@ -38,11 +38,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::PGRME;
 	constexpr static const char * TAG = "PGRME";
 
-	virtual ~pgrme() {}
-
 	pgrme();
 	pgrme(const pgrme &) = default;
 	pgrme & operator=(const pgrme &) = default;
+	pgrme(pgrme &&) = default;
+	pgrme & operator=(pgrme &&) = default;
 
 protected:
 	pgrme(

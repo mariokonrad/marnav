@@ -54,11 +54,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::RMC;
 	constexpr static const char * TAG = "RMC";
 
-	virtual ~rmc() {}
-
 	rmc();
 	rmc(const rmc &) = default;
 	rmc & operator=(const rmc &) = default;
+	rmc(rmc &&) = default;
+	rmc & operator=(rmc &&) = default;
 
 protected:
 	rmc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

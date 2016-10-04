@@ -3,8 +3,9 @@
 
 #include <functional>
 #include <memory>
-#include <vector>
 #include <string>
+#include <type_traits>
+#include <vector>
 #include <marnav/nmea/constants.hpp>
 #include <marnav/nmea/talker_id.hpp>
 #include <marnav/nmea/sentence_id.hpp>
@@ -38,9 +39,13 @@ public:
 	/// The end token (right before the checksum) of all NMEA sentences.
 	constexpr static char end_token = '*';
 
-	sentence() = delete;
+	virtual ~sentence() = default;
 
-	virtual ~sentence() {}
+	sentence() = delete;
+	sentence(const sentence &) = default;
+	sentence & operator=(const sentence &) = default;
+	sentence(sentence &&) = default;
+	sentence & operator=(sentence &&) = default;
 
 	sentence_id id() const { return id_; }
 	std::string tag() const { return tag_; }
@@ -66,6 +71,11 @@ private:
 	const std::string tag_;
 	std::string talker_;
 };
+
+// Class `sentence` must be an abstract class, this protectes
+// against object slicing because it prevents an instance
+// of `sentence` itself, e.g. const nmea::sentence = nmea::bod{};
+static_assert(std::is_abstract<sentence>::value, "");
 
 /// Helper function to parse a specific sentence.
 template <class T>

@@ -40,11 +40,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::MWV;
 	constexpr static const char * TAG = "MWV";
 
-	virtual ~mwv() {}
-
 	mwv();
 	mwv(const mwv &) = default;
 	mwv & operator=(const mwv &) = default;
+	mwv(mwv &&) = default;
+	mwv & operator=(mwv &&) = default;
 
 protected:
 	mwv(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

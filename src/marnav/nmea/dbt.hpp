@@ -40,11 +40,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::DBT;
 	constexpr static const char * TAG = "DBT";
 
-	virtual ~dbt() {}
-
 	dbt();
 	dbt(const dbt &) = default;
 	dbt & operator=(const dbt &) = default;
+	dbt(dbt &&) = default;
+	dbt & operator=(dbt &&) = default;
 
 protected:
 	dbt(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

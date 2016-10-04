@@ -56,11 +56,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GSV;
 	constexpr static const char * TAG = "GSV";
 
-	virtual ~gsv() {}
-
 	gsv();
 	gsv(const gsv &) = default;
 	gsv & operator=(const gsv &) = default;
+	gsv(gsv &&) = default;
+	gsv & operator=(gsv &&) = default;
 
 protected:
 	gsv(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

@@ -36,11 +36,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::RSA;
 	constexpr static const char * TAG = "RSA";
 
-	virtual ~rsa() {}
-
 	rsa();
 	rsa(const rsa &) = default;
 	rsa & operator=(const rsa &) = default;
+	rsa(rsa &&) = default;
+	rsa & operator=(rsa &&) = default;
 
 protected:
 	rsa(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

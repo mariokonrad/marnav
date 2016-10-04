@@ -37,11 +37,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::HDM;
 	constexpr static const char * TAG = "HDM";
 
-	virtual ~hdm() {}
-
 	hdm();
 	hdm(const hdm &) = default;
 	hdm & operator=(const hdm &) = default;
+	hdm(hdm &&) = default;
+	hdm & operator=(hdm &&) = default;
 
 protected:
 	hdm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

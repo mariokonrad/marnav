@@ -40,11 +40,11 @@ public:
 
 	constexpr static int max_waypoints = 10;
 
-	virtual ~rte() {}
-
 	rte();
 	rte(const rte &) = default;
 	rte & operator=(const rte &) = default;
+	rte(rte &&) = default;
+	rte & operator=(rte &&) = default;
 
 protected:
 	rte(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

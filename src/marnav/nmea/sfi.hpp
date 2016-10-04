@@ -38,11 +38,11 @@ public:
 	constexpr static const char * TAG = "SFI";
 	constexpr static const unsigned int max_number_of_frequencies = 10;
 
-	virtual ~sfi() {}
-
 	sfi();
 	sfi(const sfi &) = default;
 	sfi & operator=(const sfi &) = default;
+	sfi(sfi &&) = default;
+	sfi & operator=(sfi &&) = default;
 
 protected:
 	sfi(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

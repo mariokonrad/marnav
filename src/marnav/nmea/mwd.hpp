@@ -42,11 +42,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::MWD;
 	constexpr static const char * TAG = "MWD";
 
-	virtual ~mwd() {}
-
 	mwd();
 	mwd(const mwd &) = default;
 	mwd & operator=(const mwd &) = default;
+	mwd(mwd &&) = default;
+	mwd & operator=(mwd &&) = default;
 
 protected:
 	mwd(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

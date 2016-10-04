@@ -34,11 +34,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::HDT;
 	constexpr static const char * TAG = "HDT";
 
-	virtual ~hdt() {}
-
 	hdt();
 	hdt(const hdt &) = default;
 	hdt & operator=(const hdt &) = default;
+	hdt(hdt &&) = default;
+	hdt & operator=(hdt &&) = default;
 
 protected:
 	hdt(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

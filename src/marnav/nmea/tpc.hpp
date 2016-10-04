@@ -39,11 +39,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::TPC;
 	constexpr static const char * TAG = "TPC";
 
-	virtual ~tpc() {}
-
 	tpc();
 	tpc(const tpc &) = default;
 	tpc & operator=(const tpc &) = default;
+	tpc(tpc &&) = default;
+	tpc & operator=(tpc &&) = default;
 
 protected:
 	tpc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

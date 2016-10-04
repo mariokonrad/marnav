@@ -47,11 +47,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::AAM;
 	constexpr static const char * TAG = "AAM";
 
-	virtual ~aam() {}
-
 	aam();
 	aam(const aam &) = default;
 	aam & operator=(const aam &) = default;
+	aam(aam &&) = default;
+	aam & operator=(aam &&) = default;
 
 protected:
 	aam(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

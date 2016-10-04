@@ -37,11 +37,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::FSI;
 	constexpr static const char * TAG = "FSI";
 
-	virtual ~fsi() {}
-
 	fsi();
 	fsi(const fsi &) = default;
 	fsi & operator=(const fsi &) = default;
+	fsi(fsi &&) = default;
+	fsi & operator=(fsi &&) = default;
 
 protected:
 	fsi(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

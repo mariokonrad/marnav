@@ -31,11 +31,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::ITS;
 	constexpr static const char * TAG = "ITS";
 
-	virtual ~its() {}
-
 	its();
 	its(const its &) = default;
 	its & operator=(const its &) = default;
+	its(its &&) = default;
+	its & operator=(its &&) = default;
 
 protected:
 	its(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

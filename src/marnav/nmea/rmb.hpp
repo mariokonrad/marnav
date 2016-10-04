@@ -62,11 +62,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::RMB;
 	constexpr static const char * TAG = "RMB";
 
-	virtual ~rmb() {}
-
 	rmb();
 	rmb(const rmb &) = default;
 	rmb & operator=(const rmb &) = default;
+	rmb(rmb &&) = default;
+	rmb & operator=(rmb &&) = default;
 
 protected:
 	rmb(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

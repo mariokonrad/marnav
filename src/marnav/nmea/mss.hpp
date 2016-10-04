@@ -33,11 +33,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::MSS;
 	constexpr static const char * TAG = "MSS";
 
-	virtual ~mss() {}
-
 	mss();
 	mss(const mss &) = default;
 	mss & operator=(const mss &) = default;
+	mss(mss &&) = default;
+	mss & operator=(mss &&) = default;
 
 protected:
 	mss(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

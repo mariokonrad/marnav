@@ -41,11 +41,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VWR;
 	constexpr static const char * TAG = "VWR";
 
-	virtual ~vwr() {}
-
 	vwr();
 	vwr(const vwr &) = default;
 	vwr & operator=(const vwr &) = default;
+	vwr(vwr &&) = default;
+	vwr & operator=(vwr &&) = default;
 
 protected:
 	vwr(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

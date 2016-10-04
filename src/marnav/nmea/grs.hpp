@@ -51,11 +51,11 @@ public:
 		calculated_after_gga, ///< NMEA representation: 1
 	};
 
-	virtual ~grs() {}
-
 	grs();
 	grs(const grs &) = default;
 	grs & operator=(const grs &) = default;
+	grs(grs &&) = default;
+	grs & operator=(grs &&) = default;
 
 protected:
 	grs(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

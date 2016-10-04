@@ -41,11 +41,11 @@ public:
 		engine, ///< NMEA representation: 'E'
 	};
 
-	virtual ~rpm() {}
-
 	rpm();
 	rpm(const rpm &) = default;
 	rpm & operator=(const rpm &) = default;
+	rpm(rpm &&) = default;
+	rpm & operator=(rpm &&) = default;
 
 protected:
 	rpm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

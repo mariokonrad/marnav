@@ -31,11 +31,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::TDS;
 	constexpr static const char * TAG = "TDS";
 
-	virtual ~tds() {}
-
 	tds();
 	tds(const tds &) = default;
 	tds & operator=(const tds &) = default;
+	tds(tds &&) = default;
+	tds & operator=(tds &&) = default;
 
 protected:
 	tds(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

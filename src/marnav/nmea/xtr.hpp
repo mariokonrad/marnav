@@ -34,11 +34,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::XTR;
 	constexpr static const char * TAG = "XTR";
 
-	virtual ~xtr() {}
-
 	xtr();
 	xtr(const xtr &) = default;
 	xtr & operator=(const xtr &) = default;
+	xtr(xtr &&) = default;
+	xtr & operator=(xtr &&) = default;
 
 protected:
 	xtr(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

@@ -37,11 +37,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VDR;
 	constexpr static const char * TAG = "VDR";
 
-	virtual ~vdr() {}
-
 	vdr();
 	vdr(const vdr &) = default;
 	vdr & operator=(const vdr &) = default;
+	vdr(vdr &&) = default;
+	vdr & operator=(vdr &&) = default;
 
 protected:
 	vdr(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

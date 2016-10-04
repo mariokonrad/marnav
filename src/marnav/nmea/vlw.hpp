@@ -34,11 +34,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VLW;
 	constexpr static const char * TAG = "VLW";
 
-	virtual ~vlw() {}
-
 	vlw();
 	vlw(const vlw &) = default;
 	vlw & operator=(const vlw &) = default;
+	vlw(vlw &&) = default;
+	vlw & operator=(vlw &&) = default;
 
 protected:
 	vlw(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

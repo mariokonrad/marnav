@@ -33,11 +33,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::WCV;
 	constexpr static const char * TAG = "WCV";
 
-	virtual ~wcv() {}
-
 	wcv();
 	wcv(const wcv &) = default;
 	wcv & operator=(const wcv &) = default;
+	wcv(wcv &&) = default;
+	wcv & operator=(wcv &&) = default;
 
 protected:
 	wcv(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

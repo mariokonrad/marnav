@@ -39,11 +39,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::WPL;
 	constexpr static const char * TAG = "WPL";
 
-	virtual ~wpl() {}
-
 	wpl();
 	wpl(const wpl &) = default;
 	wpl & operator=(const wpl &) = default;
+	wpl(wpl &&) = default;
+	wpl & operator=(wpl &&) = default;
 
 protected:
 	wpl(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

@@ -49,11 +49,11 @@ public:
 		nmea::status status;
 	};
 
-	virtual ~glc() {}
-
 	glc();
 	glc(const glc &) = default;
 	glc & operator=(const glc &) = default;
+	glc(glc &&) = default;
+	glc & operator=(glc &&) = default;
 
 protected:
 	glc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

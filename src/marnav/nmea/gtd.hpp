@@ -36,11 +36,11 @@ public:
 
 	constexpr static const int max_time_diffs = 5;
 
-	virtual ~gtd() {}
-
 	gtd();
 	gtd(const gtd &) = default;
 	gtd & operator=(const gtd &) = default;
+	gtd(gtd &&) = default;
+	gtd & operator=(gtd &&) = default;
 
 protected:
 	gtd(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

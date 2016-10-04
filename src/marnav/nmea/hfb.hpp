@@ -34,11 +34,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::HFB;
 	constexpr static const char * TAG = "HFB";
 
-	virtual ~hfb() {}
-
 	hfb();
 	hfb(const hfb &) = default;
 	hfb & operator=(const hfb &) = default;
+	hfb(hfb &&) = default;
+	hfb & operator=(hfb &&) = default;
 
 protected:
 	hfb(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

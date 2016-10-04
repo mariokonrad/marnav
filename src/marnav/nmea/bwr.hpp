@@ -58,11 +58,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::BWR;
 	constexpr static const char * TAG = "BWR";
 
-	virtual ~bwr() {}
-
 	bwr();
 	bwr(const bwr &) = default;
 	bwr & operator=(const bwr &) = default;
+	bwr(bwr &&) = default;
+	bwr & operator=(bwr &&) = default;
 
 protected:
 	bwr(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

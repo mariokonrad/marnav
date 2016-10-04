@@ -37,11 +37,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GST;
 	constexpr static const char * TAG = "GST";
 
-	virtual ~gst() {}
-
 	gst();
 	gst(const gst &) = default;
 	gst & operator=(const gst &) = default;
+	gst(gst &&) = default;
+	gst & operator=(gst &&) = default;
 
 protected:
 	gst(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

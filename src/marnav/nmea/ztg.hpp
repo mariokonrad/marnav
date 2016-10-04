@@ -33,11 +33,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::ZTG;
 	constexpr static const char * TAG = "ZTG";
 
-	virtual ~ztg() {}
-
 	ztg();
 	ztg(const ztg &) = default;
 	ztg & operator=(const ztg &) = default;
+	ztg(ztg &&) = default;
+	ztg & operator=(ztg &&) = default;
 
 protected:
 	ztg(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

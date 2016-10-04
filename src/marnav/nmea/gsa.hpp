@@ -48,11 +48,11 @@ public:
 
 	constexpr static const int max_satellite_ids = 12;
 
-	virtual ~gsa() {}
-
 	gsa();
 	gsa(const gsa &) = default;
 	gsa & operator=(const gsa &) = default;
+	gsa(gsa &&) = default;
+	gsa & operator=(gsa &&) = default;
 
 protected:
 	gsa(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

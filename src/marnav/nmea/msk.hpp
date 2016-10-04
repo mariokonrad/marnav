@@ -37,11 +37,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::MSK;
 	constexpr static const char * TAG = "MSK";
 
-	virtual ~msk() {}
-
 	msk();
 	msk(const msk &) = default;
 	msk & operator=(const msk &) = default;
+	msk(msk &&) = default;
+	msk & operator=(msk &&) = default;
 
 protected:
 	msk(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

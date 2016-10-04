@@ -38,11 +38,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::ZDL;
 	constexpr static const char * TAG = "ZDL";
 
-	virtual ~zdl() {}
-
 	zdl();
 	zdl(const zdl &) = default;
 	zdl & operator=(const zdl &) = default;
+	zdl(zdl &&) = default;
+	zdl & operator=(zdl &&) = default;
 
 protected:
 	zdl(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

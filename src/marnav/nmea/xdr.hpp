@@ -44,11 +44,11 @@ public:
 
 	constexpr static const int max_transducer_info = 10;
 
-	virtual ~xdr() {}
-
 	xdr();
 	xdr(const xdr &) = default;
 	xdr & operator=(const xdr &) = default;
+	xdr(xdr &&) = default;
+	xdr & operator=(xdr &&) = default;
 
 protected:
 	xdr(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

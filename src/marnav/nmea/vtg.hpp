@@ -41,11 +41,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VTG;
 	constexpr static const char * TAG = "VTG";
 
-	virtual ~vtg() {}
-
 	vtg();
 	vtg(const vtg &) = default;
 	vtg & operator=(const vtg &) = default;
+	vtg(vtg &&) = default;
+	vtg & operator=(vtg &&) = default;
 
 protected:
 	vtg(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

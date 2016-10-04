@@ -39,11 +39,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::BOD;
 	constexpr static const char * TAG = "BOD";
 
-	virtual ~bod() {}
-
 	bod();
 	bod(const bod &) = default;
 	bod & operator=(const bod &) = default;
+	bod(bod &&) = default;
+	bod & operator=(bod &&) = default;
 
 protected:
 	bod(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

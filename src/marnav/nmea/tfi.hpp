@@ -40,11 +40,11 @@ public:
 		no_answer ///< NMEA representation: 2
 	};
 
-	virtual ~tfi() {}
-
 	tfi();
 	tfi(const tfi &) = default;
 	tfi & operator=(const tfi &) = default;
+	tfi(tfi &&) = default;
+	tfi & operator=(tfi &&) = default;
 
 protected:
 	tfi(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

@@ -34,11 +34,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::HSC;
 	constexpr static const char * TAG = "HSC";
 
-	virtual ~hsc() {}
-
 	hsc();
 	hsc(const hsc &) = default;
 	hsc & operator=(const hsc &) = default;
+	hsc(hsc &&) = default;
+	hsc & operator=(hsc &&) = default;
 
 protected:
 	hsc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

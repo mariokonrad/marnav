@@ -32,11 +32,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::ROT;
 	constexpr static const char * TAG = "ROT";
 
-	virtual ~rot() {}
-
 	rot();
 	rot(const rot &) = default;
 	rot & operator=(const rot &) = default;
+	rot(rot &&) = default;
+	rot & operator=(rot &&) = default;
 
 protected:
 	rot(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

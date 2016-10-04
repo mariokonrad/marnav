@@ -110,11 +110,11 @@ public:
 		extension_follows ///< NMEA representation: 'E'
 	};
 
-	virtual ~dsc() {}
-
 	dsc();
 	dsc(const dsc &) = default;
 	dsc & operator=(const dsc &) = default;
+	dsc(dsc &&) = default;
+	dsc & operator=(dsc &&) = default;
 
 protected:
 	dsc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

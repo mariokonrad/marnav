@@ -46,11 +46,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GNS;
 	constexpr static const char * TAG = "GNS";
 
-	virtual ~gns() {}
-
 	gns();
 	gns(const gns &) = default;
 	gns & operator=(const gns &) = default;
+	gns(gns &&) = default;
+	gns & operator=(gns &&) = default;
 
 protected:
 	gns(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

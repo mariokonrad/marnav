@@ -61,11 +61,11 @@ public:
 		std::string data;
 	};
 
-	virtual ~dse() {}
-
 	dse();
 	dse(const dse &) = default;
 	dse & operator=(const dse &) = default;
+	dse(dse &&) = default;
+	dse & operator=(dse &&) = default;
 
 protected:
 	dse(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

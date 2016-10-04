@@ -44,11 +44,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::RSD;
 	constexpr static const char * TAG = "RSD";
 
-	virtual ~rsd() {}
-
 	rsd();
 	rsd(const rsd &) = default;
 	rsd & operator=(const rsd &) = default;
+	rsd(rsd &&) = default;
+	rsd & operator=(rsd &&) = default;
 
 protected:
 	rsd(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

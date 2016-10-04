@@ -37,11 +37,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::ZDA;
 	constexpr static const char * TAG = "ZDA";
 
-	virtual ~zda() {}
-
 	zda();
 	zda(const zda &) = default;
 	zda & operator=(const zda &) = default;
+	zda(zda &&) = default;
+	zda & operator=(zda &&) = default;
 
 protected:
 	zda(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

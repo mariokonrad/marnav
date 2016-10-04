@@ -50,11 +50,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::TTM;
 	constexpr static const char * TAG = "TTM";
 
-	virtual ~ttm() {}
-
 	ttm();
 	ttm(const ttm &) = default;
 	ttm & operator=(const ttm &) = default;
+	ttm(ttm &&) = default;
+	ttm & operator=(ttm &&) = default;
 
 protected:
 	ttm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

@@ -37,11 +37,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::WNC;
 	constexpr static const char * TAG = "WNC";
 
-	virtual ~wnc() {}
-
 	wnc();
 	wnc(const wnc &) = default;
 	wnc & operator=(const wnc &) = default;
+	wnc(wnc &&) = default;
+	wnc & operator=(wnc &&) = default;
 
 protected:
 	wnc(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

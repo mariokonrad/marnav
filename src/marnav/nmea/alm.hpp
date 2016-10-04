@@ -50,11 +50,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::ALM;
 	constexpr static const char * TAG = "ALM";
 
-	virtual ~alm() {}
-
 	alm();
 	alm(const alm &) = default;
 	alm & operator=(const alm &) = default;
+	alm(alm &&) = default;
+	alm & operator=(alm &&) = default;
 
 protected:
 	alm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

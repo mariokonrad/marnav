@@ -38,11 +38,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VBW;
 	constexpr static const char * TAG = "VBW";
 
-	virtual ~vbw() {}
-
 	vbw();
 	vbw(const vbw &) = default;
 	vbw & operator=(const vbw &) = default;
+	vbw(vbw &&) = default;
+	vbw & operator=(vbw &&) = default;
 
 protected:
 	vbw(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

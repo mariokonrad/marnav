@@ -22,11 +22,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::VDO;
 	constexpr static const char * TAG = "VDO";
 
-	virtual ~vdo() {}
-
 	vdo();
 	vdo(const vdo &) = default;
 	vdo & operator=(const vdo &) = default;
+	vdo(vdo &&) = default;
+	vdo & operator=(vdo &&) = default;
 
 protected:
 	vdo(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

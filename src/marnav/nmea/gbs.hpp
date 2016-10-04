@@ -39,11 +39,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GBS;
 	constexpr static const char * TAG = "GBS";
 
-	virtual ~gbs() {}
-
 	gbs();
 	gbs(const gbs &) = default;
 	gbs & operator=(const gbs &) = default;
+	gbs(gbs &&) = default;
+	gbs & operator=(gbs &&) = default;
 
 protected:
 	gbs(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

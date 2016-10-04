@@ -35,12 +35,12 @@ public:
 	constexpr static const sentence_id ID = sentence_id::DPT;
 	constexpr static const char * TAG = "DPT";
 
-	virtual ~dpt() {}
-
 	dpt();
 	dpt(const std::string & talker);
 	dpt(const dpt &) = default;
 	dpt & operator=(const dpt &) = default;
+	dpt(dpt &&) = default;
+	dpt & operator=(dpt &&) = default;
 
 protected:
 	dpt(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

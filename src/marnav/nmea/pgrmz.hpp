@@ -43,11 +43,11 @@ public:
 		d3fix ///< NMEA representation: '3'
 	};
 
-	virtual ~pgrmz() {}
-
 	pgrmz();
 	pgrmz(const pgrmz &) = default;
 	pgrmz & operator=(const pgrmz &) = default;
+	pgrmz(pgrmz &&) = default;
+	pgrmz & operator=(pgrmz &&) = default;
 
 protected:
 	pgrmz(

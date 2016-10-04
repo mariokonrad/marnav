@@ -40,11 +40,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::OSD;
 	constexpr static const char * TAG = "OSD";
 
-	virtual ~osd() {}
-
 	osd();
 	osd(const osd &) = default;
 	osd & operator=(const osd &) = default;
+	osd(osd &&) = default;
+	osd & operator=(osd &&) = default;
 
 protected:
 	osd(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

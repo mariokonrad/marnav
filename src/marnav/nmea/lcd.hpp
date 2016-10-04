@@ -49,11 +49,11 @@ public:
 		int32_t ecd;
 	};
 
-	virtual ~lcd() {}
-
 	lcd();
 	lcd(const lcd &) = default;
 	lcd & operator=(const lcd &) = default;
+	lcd(lcd &&) = default;
+	lcd & operator=(lcd &&) = default;
 
 protected:
 	lcd(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

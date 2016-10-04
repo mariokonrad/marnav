@@ -32,11 +32,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::PGRMM;
 	constexpr static const char * TAG = "PGRMM";
 
-	virtual ~pgrmm() {}
-
 	pgrmm();
 	pgrmm(const pgrmm &) = default;
 	pgrmm & operator=(const pgrmm &) = default;
+	pgrmm(pgrmm &&) = default;
+	pgrmm & operator=(pgrmm &&) = default;
 
 protected:
 	pgrmm(

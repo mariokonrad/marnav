@@ -31,11 +31,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::MTW;
 	constexpr static const char * TAG = "MTW";
 
-	virtual ~mtw() {}
-
 	mtw();
 	mtw(const mtw &) = default;
 	mtw & operator=(const mtw &) = default;
+	mtw(mtw &&) = default;
+	mtw & operator=(mtw &&) = default;
 
 protected:
 	mtw(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

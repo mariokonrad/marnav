@@ -49,11 +49,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::TLL;
 	constexpr static const char * TAG = "TLL";
 
-	virtual ~tll() {}
-
 	tll();
 	tll(const tll &) = default;
 	tll & operator=(const tll &) = default;
+	tll(tll &&) = default;
+	tll & operator=(tll &&) = default;
 
 protected:
 	tll(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

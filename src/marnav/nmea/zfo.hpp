@@ -33,11 +33,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::ZFO;
 	constexpr static const char * TAG = "ZFO";
 
-	virtual ~zfo() {}
-
 	zfo();
 	zfo(const zfo &) = default;
 	zfo & operator=(const zfo &) = default;
+	zfo(zfo &&) = default;
+	zfo & operator=(zfo &&) = default;
 
 protected:
 	zfo(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

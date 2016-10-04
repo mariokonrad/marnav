@@ -67,11 +67,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::APB;
 	constexpr static const char * TAG = "APB";
 
-	virtual ~apb() {}
-
 	apb();
 	apb(const apb &) = default;
 	apb & operator=(const apb &) = default;
+	apb(apb &&) = default;
+	apb & operator=(apb &&) = default;
 
 protected:
 	apb(const std::string & talker, fields::const_iterator first, fields::const_iterator last);

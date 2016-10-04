@@ -46,11 +46,11 @@ public:
 	constexpr static const sentence_id ID = sentence_id::RMA;
 	constexpr static const char * TAG = "RMA";
 
-	virtual ~rma() {}
-
 	rma();
 	rma(const rma &) = default;
 	rma & operator=(const rma &) = default;
+	rma(rma &&) = default;
+	rma & operator=(rma &&) = default;
 
 protected:
 	rma(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
