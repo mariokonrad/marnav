@@ -36,11 +36,11 @@ public:
 		// reserved for future use: 11 - 15
 	};
 
-	virtual ~message_23() {}
-
 	message_23();
 	message_23(const message_23 &) = default;
 	message_23 & operator=(const message_23 &) = default;
+	message_23(message_23 &&) = default;
+	message_23 & operator=(message_23 &&) = default;
 
 protected:
 	message_23(const raw & bits);

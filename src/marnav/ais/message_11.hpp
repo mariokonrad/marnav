@@ -21,6 +21,8 @@ public:
 	message_11();
 	message_11(const message_11 &) = default;
 	message_11 & operator=(const message_11 &) = default;
+	message_11(message_11 &&) = default;
+	message_11 & operator=(message_11 &&) = default;
 
 protected:
 	message_11(const raw & bits);

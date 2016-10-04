@@ -23,11 +23,11 @@ public:
 	constexpr static const message_id ID = message_id::channel_management;
 	constexpr static const int SIZE_BITS = 168;
 
-	virtual ~message_22() {}
-
 	message_22();
 	message_22(const message_22 &) = default;
 	message_22 & operator=(const message_22 &) = default;
+	message_22(message_22 &&) = default;
+	message_22 & operator=(message_22 &&) = default;
 
 protected:
 	message_22(const raw & bits);

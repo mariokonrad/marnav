@@ -23,11 +23,11 @@ public:
 
 	constexpr static const uint32_t altitude_not_available = 4095;
 
-	virtual ~message_09() {}
-
 	message_09();
 	message_09(const message_09 &) = default;
 	message_09 & operator=(const message_09 &) = default;
+	message_09(message_09 &&) = default;
+	message_09 & operator=(message_09 &&) = default;
 
 protected:
 	message_09(const raw & bits);

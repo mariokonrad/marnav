@@ -22,11 +22,11 @@ public:
 	constexpr static const int SIZE_BITS_MIN = 272;
 	constexpr static const int SIZE_BITS_MAX = 360;
 
-	virtual ~message_21() {}
-
 	message_21();
 	message_21(const message_21 &) = default;
 	message_21 & operator=(const message_21 &) = default;
+	message_21(message_21 &&) = default;
+	message_21 & operator=(message_21 &&) = default;
 
 protected:
 	message_21(const raw & bits);

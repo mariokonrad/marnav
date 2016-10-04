@@ -314,8 +314,12 @@ class message
 	friend std::vector<std::pair<std::string, uint32_t>> encode_message(const message & msg);
 
 public:
+	virtual ~message() = default;
 	message() = delete;
-	virtual ~message() {}
+	message(const message &) = default;
+	message & operator=(const message &) = default;
+	message(message &&) = default;
+	message & operator=(message &&) = default;
 
 	message_id type() const { return message_type; }
 

@@ -26,11 +26,11 @@ public:
 	constexpr static const uint32_t eta_hour_not_available = 24;
 	constexpr static const uint32_t eta_minute_not_available = 60;
 
-	virtual ~message_04() {}
-
 	message_04();
 	message_04(const message_04 &) = default;
 	message_04 & operator=(const message_04 &) = default;
+	message_04(message_04 &&) = default;
+	message_04 & operator=(message_04 &&) = default;
 
 protected:
 	message_04(message_id id);

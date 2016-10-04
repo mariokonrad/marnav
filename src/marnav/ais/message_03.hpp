@@ -21,6 +21,8 @@ public:
 	message_03();
 	message_03(const message_03 &) = default;
 	message_03 & operator=(const message_03 &) = default;
+	message_03(message_03 &&) = default;
+	message_03 & operator=(message_03 &&) = default;
 
 protected:
 	message_03(const raw & bits);

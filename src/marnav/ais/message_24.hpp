@@ -30,11 +30,11 @@ public:
 
 	enum class part : uint32_t { A = 0, B = 1 };
 
-	virtual ~message_24() {}
-
 	message_24();
 	message_24(const message_24 &) = default;
 	message_24 & operator=(const message_24 &) = default;
+	message_24(message_24 &&) = default;
+	message_24 & operator=(message_24 &&) = default;
 
 	bool is_auxiliary_vessel() const;
 

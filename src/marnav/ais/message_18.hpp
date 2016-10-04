@@ -21,11 +21,11 @@ public:
 	constexpr static const message_id ID = message_id::standard_class_b_cs_position_report;
 	constexpr static const int SIZE_BITS = 168;
 
-	virtual ~message_18() {}
-
 	message_18();
 	message_18(const message_18 &) = default;
 	message_18 & operator=(const message_18 &) = default;
+	message_18(message_18 &&) = default;
+	message_18 & operator=(message_18 &&) = default;
 
 protected:
 	message_18(message_id id);
