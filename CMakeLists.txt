@@ -19,8 +19,14 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+git_commit_hash(GIT_COMMIT_HASH GIT_COMMIT_HASH_SHORT)
+git_branch_name(GIT_BRANCH)
+
+message(STATUS "git branch: ${GIT_BRANCH}")
+message(STATUS "git commit hash: ${GIT_COMMIT_HASH}")
+
 ### version handling
-if(NOT ("${CMAKE_BUILD_TYPE}" STREQUAL "Release"))
+if(NOT ("${CMAKE_BUILD_TYPE}" MATCHES "Release"))
 	set(PROJECT_VERSION "${PROJECT_VERSION}-${GIT_COMMIT_HASH_SHORT}")
 endif()
 message(STATUS "Project Vesion: ${PROJECT_VERSION}")
@@ -80,6 +86,7 @@ endif()
 ### documentation
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
+	git_authors(GIT_AUTHORS AUTHOR_LIST)
 	configure_file(
 		${CMAKE_CURRENT_SOURCE_DIR}/doc/main.dox.in
 		${CMAKE_CURRENT_BINARY_DIR}/doc/main.dox
