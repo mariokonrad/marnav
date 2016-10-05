@@ -62,7 +62,9 @@ add_subdirectory(examples)
 
 ### ctags / cscope
 include(CTags)
-setup_ctags_target("${CMAKE_CURRENT_SOURCE_DIR}/src/*.?pp")
+if(CTAGS_PATH AND CSCOPE_PATH)
+	setup_ctags_target("${CMAKE_CURRENT_SOURCE_DIR}/src/*.?pp")
+endif()
 
 ### documentation
 find_package(Doxygen)
