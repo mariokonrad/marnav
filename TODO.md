@@ -1,6 +1,7 @@
 TODO
 ====
 
+@todo Consider using std::chrono in nmea/time
 @todo Implement additional checks in NMEA sentences, wheather or not the received data is correct.
 @todo Implement NMEA sentence: ASD: Autopilot System Data
 @todo Implement NMEA sentence: DSI: DSC Transponder Initiate
