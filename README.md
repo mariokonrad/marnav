@@ -1,8 +1,6 @@
 marnav
 ======
 
-[![Build Status](https://travis-ci.org/mariokonrad/marnav.svg?branch=master)](https://travis-ci.org/mariokonrad/marnav)
-
 Copyright (c) 2016 Mario Konrad (mario.konrad@gmx.net)
 
 ---
