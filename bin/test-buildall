@@ -1,0 +1,30 @@
+#!/bin/bash -eu
+
+# builds all relevant configurations, executes tests
+
+export SCRIPT_BASE=$(dirname `readlink -f $0`)
+export BASE=${SCRIPT_BASE}/..
+export BUILD=${BASE}/build
+
+# prepare master build directory
+if [ -d ${BUILD} ] ; then
+	rm -fr ${BUILD}
+fi
+mkdir -p ${BUILD}
+
+# execute builds
+for cfg in $(${SCRIPT_BASE}/bld --list | grep -E "clang[0-9]+|gcc[0-9]+") ; do
+	echo -n "target: ${cfg} "
+	printf '%*s' $((40 - ${#cfg})) "" | tr ' ' '.'
+	set +e
+	BUILD_DIR=${BUILD}/${cfg} ${SCRIPT_BASE}/bld ${cfg} >&${BUILD}/${cfg}.log
+	if [ $? -eq 0 ] ; then
+		echo "SUCCESS" >> ${BUILD}/${cfg}.log
+		echo -e " \033[32mSUCCESS\033[0m"
+	else
+		echo "FAILURE" >> ${BUILD}/${cfg}.log
+		echo -e " \033[31mFAILURE\033[0m"
+	fi
+	set -e
+	rm -fr ${BUILD}/${cfg}
+done
