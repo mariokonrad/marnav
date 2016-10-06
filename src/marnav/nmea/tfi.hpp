@@ -1,5 +1,5 @@
-#ifndef __NMEA__TFI__HPP__
-#define __NMEA__TFI__HPP__
+#ifndef __MARNAV__NMEA__TFI__HPP__
+#define __MARNAV__NMEA__TFI__HPP__
 
 #include <array>
 #include <marnav/nmea/sentence.hpp>

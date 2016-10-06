@@ -1,5 +1,5 @@
-#ifndef __NMEA__BWC__HPP__
-#define __NMEA__BWC__HPP__
+#ifndef __MARNAV__NMEA__BWC__HPP__
+#define __MARNAV__NMEA__BWC__HPP__
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/angle.hpp>

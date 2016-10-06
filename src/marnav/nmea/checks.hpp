@@ -1,5 +1,5 @@
-#ifndef __NMEA__CHECKS__HPP__
-#define __NMEA__CHECKS__HPP__
+#ifndef __MARNAV__NMEA__CHECKS__HPP__
+#define __MARNAV__NMEA__CHECKS__HPP__
 
 #include <algorithm>
 #include <stdexcept>

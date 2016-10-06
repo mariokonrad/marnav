@@ -1,5 +1,5 @@
-#ifndef __NMEA__DBT__HPP__
-#define __NMEA__DBT__HPP__
+#ifndef __MARNAV__NMEA__DBT__HPP__
+#define __MARNAV__NMEA__DBT__HPP__
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>

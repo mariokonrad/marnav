@@ -1,5 +1,5 @@
-#ifndef __MAINWINDOW__HPP__
-#define __MAINWINDOW__HPP__
+#ifndef __MARNAV__QTNMEADIAG__MAINWINDOW__HPP__
+#define __MARNAV__QTNMEADIAG__MAINWINDOW__HPP__
 
 #include <QMainWindow>
 #include <string>

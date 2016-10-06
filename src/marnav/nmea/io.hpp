@@ -1,5 +1,5 @@
-#ifndef __NMEA__IO__HPP__
-#define __NMEA__IO__HPP__
+#ifndef __MARNAV__NMEA__IO__HPP__
+#define __MARNAV__NMEA__IO__HPP__
 
 #include <string>
 #include <functional>

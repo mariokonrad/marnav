@@ -1,5 +1,5 @@
-#ifndef __NMEA__RMC__HPP__
-#define __NMEA__RMC__HPP__
+#ifndef __MARNAV__NMEA__RMC__HPP__
+#define __MARNAV__NMEA__RMC__HPP__
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/date.hpp>

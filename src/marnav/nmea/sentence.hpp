@@ -1,5 +1,5 @@
-#ifndef __NMEA__SENTENCE__HPP__
-#define __NMEA__SENTENCE__HPP__
+#ifndef __MARNAV__NMEA__SENTENCE__HPP__
+#define __MARNAV__NMEA__SENTENCE__HPP__
 
 #include <functional>
 #include <memory>

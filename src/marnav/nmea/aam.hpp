@@ -1,5 +1,5 @@
-#ifndef __NMEA__AAM__HPP__
-#define __NMEA__AAM__HPP__
+#ifndef __MARNAV__NMEA__AAM__HPP__
+#define __MARNAV__NMEA__AAM__HPP__
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>

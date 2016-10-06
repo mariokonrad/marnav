@@ -1,5 +1,5 @@
-#ifndef __SEATALK__MESSAGE_86__HPP__
-#define __SEATALK__MESSAGE_86__HPP__
+#ifndef __MARNAV__SEATALK__MESSAGE_86__HPP__
+#define __MARNAV__SEATALK__MESSAGE_86__HPP__
 
 #include <marnav/seatalk/message.hpp>
 #include <marnav/seatalk/key.hpp>

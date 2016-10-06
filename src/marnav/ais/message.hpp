@@ -1,5 +1,5 @@
-#ifndef __AIS__MESSAGE__HPP__
-#define __AIS__MESSAGE__HPP__
+#ifndef __MARNAV__AIS__MESSAGE__HPP__
+#define __MARNAV__AIS__MESSAGE__HPP__
 
 #include <memory>
 #include <marnav/utils/bitset.hpp>

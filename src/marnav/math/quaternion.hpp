@@ -1,5 +1,5 @@
-#ifndef __MATH__QUATERNION__HPP__
-#define __MATH__QUATERNION__HPP__
+#ifndef __MARNAV__MATH__QUATERNION__HPP__
+#define __MARNAV__MATH__QUATERNION__HPP__
 
 #include <cmath>
 #include <cassert>

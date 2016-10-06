@@ -1,5 +1,5 @@
-#ifndef __MATH__MATRIX__HPP__
-#define __MATH__MATRIX__HPP__
+#ifndef __MARNAV__MATH__MATRIX__HPP__
+#define __MARNAV__MATH__MATRIX__HPP__
 
 #include <marnav/math/vector.hpp>
 #include <marnav/math/floatingpoint.hpp>

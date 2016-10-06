@@ -1,5 +1,5 @@
-#ifndef __UTILS__OPTIONAL__HPP__
-#define __UTILS__OPTIONAL__HPP__
+#ifndef __MARNAV__UTILS__OPTIONAL__HPP__
+#define __MARNAV__UTILS__OPTIONAL__HPP__
 
 #include <utility>
 

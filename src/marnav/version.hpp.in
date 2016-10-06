@@ -1,12 +1,11 @@
-#ifndef __VERISION__HPP__
-#define __VERISION__HPP__
+#ifndef __MARNAV__VERISION__HPP__
+#define __MARNAV__VERISION__HPP__
 
-namespace marnav{
-
+namespace marnav
+{
 constexpr auto version_major = "@PROJECT_VERSION_MAJOR@";
 constexpr auto version_minor = "@PROJECT_VERSION_MINOR@";
 constexpr auto version_patch = "@PROJECT_VERSION_PATCH@";
-
 }
 
 #endif
