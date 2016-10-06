@@ -3,7 +3,9 @@
 export SCRIPT_BASE=$(dirname `readlink -f $0`)
 export BASE=${SCRIPT_BASE}/..
 export CONFIG_BASE=${SCRIPT_BASE}/buildconf.d
-export BUILD_DIR=${BASE}/build
+
+# takes default value if provided by the environment
+export BUILD_DIR=${BUILD_DIR:-${BASE}/build}
 
 function valid_target()
 {
