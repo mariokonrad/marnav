@@ -1,0 +1,103 @@
+#!/bin/bash -eu
+
+export SCRIPT_BASE=$(dirname `readlink -f $0`)
+export BASE=${SCRIPT_BASE}/..
+export CONFIG_BASE=${SCRIPT_BASE}/buildconf.d
+export BUILD_DIR=${BASE}/build
+
+function valid_target()
+{
+	for t in ${CONFIG_BASE}/* ; do
+		if [ "x$1" == "x$(basename $t)" ] ; then
+			echo "found"
+			return
+		fi
+	done
+	echo "notfound"
+}
+
+# read command line arguments
+
+args=$(getopt \
+	--options "hl" \
+	--longopt "help" \
+	--longopt "list" \
+	--longopt "prepare" \
+	-- "$@")
+if [ $? != 0 ] ; then
+	echo "error: parameters. aborting." >&2
+	exit 1
+fi
+
+eval set -- "${args}"
+
+# handle arguments
+
+target=""
+only_prepare="no"
+while [ $# -ne 0 ] ; do
+	case "$1" in
+		--help|-h)
+			echo ""
+			echo "usage: $(basename $0) [option] [target]"
+			echo ""
+			echo "options:"
+			echo "   --help|-h  : print help information"
+			echo "   --list|-l  : list all targets"
+			echo ""
+			exit 0
+			;;
+		--list|-l)
+			for t in ${CONFIG_BASE}/* ; do
+				echo $(basename $t)
+			done
+			exit 0
+			;;
+		--prepare)
+			only_prepare="yes"
+			;;
+		*)
+			if [ $# -gt 1 ] ; then
+				target="$2"
+			fi
+			;;
+	esac
+	shift
+done
+
+# check specified target
+
+if [ -z "$target" ] ; then
+	echo "error: no target specified. aborting." >&2
+	exit 1
+fi
+
+if [ $(valid_target "$target") != "found" ] ; then
+	echo "error: invalid target specified: $target. aborting." >&2
+	exit 1
+fi
+
+# check for cmake
+if [ -z "$(which cmake)" ] ; then
+	echo "error: no cmake found. aborting."
+	exit 1
+fi
+
+# prepare
+if [ -d ${BUILD_DIR} ] ; then
+	rm -fr ${BUILD_DIR}
+fi
+mkdir -p ${BUILD_DIR}
+cd ${BUILD_DIR}
+cmake $(cat ${CONFIG_BASE}/${target}) -DCMAKE_EXPORT_COMPILE_COMMANDS=YES ${BASE}
+
+# only prepare, do not build or test
+if [ "$only_prepare" == "yes" ] ; then exit 0 ; fi
+
+# build
+cmake --build .
+
+# perform tests
+cmake --build . --target unittest
+cmake --build . --target test
+

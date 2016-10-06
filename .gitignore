@@ -1,4 +1,2 @@
-**/*.o
-nmea_sentence
 build
 .ycm_extra_conf.pyc
