@@ -2,48 +2,6 @@ cmake_minimum_required(VERSION 3.2)
 
 option(ENABLE_STATIC "Enable static library" ON)
 
-### bin: nmeasum
-
-add_executable(nmeasum
-	nmeasum.cpp
-	)
-
-target_include_directories(nmeasum PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-
-target_compile_options(nmeasum
-	PRIVATE
-		-pipe
-		-ggdb
-		-Wall
-		-Wextra
-		-pedantic-errors
-	)
-
-### bin: nmeadump
-
-add_executable(nmeadump
-	nmeadump.cpp
-	)
-
-target_include_directories(nmeadump
-	PRIVATE
-		${CMAKE_CURRENT_SOURCE_DIR}
-		${CMAKE_CURRENT_SOURCE_DIR}/../extern
-	)
-
-target_compile_options(nmeadump
-	PRIVATE
-		-pipe
-		-ggdb
-		-Wall
-		-Wextra
-		-pedantic-errors
-	)
-
-target_link_libraries(nmeadump
-	marnav
-	)
-
 ### lib: marnav
 
 if(${ENABLE_STATIC})
@@ -587,3 +545,48 @@ install(
 	DESTINATION
 		"${LIB_INSTALL_DIR}/${PROJECT_NAME}/cmake"
 	)
+
+### bin: nmeasum
+
+add_executable(nmeasum
+	nmeasum.cpp
+	)
+
+target_include_directories(nmeasum PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_compile_options(nmeasum
+	PRIVATE
+		-pipe
+		-ggdb
+		-Wall
+		-Wextra
+		-pedantic-errors
+	)
+
+### bin: nmeadump
+
+if(ENABLE_AIS AND ENABLE_IO)
+	add_executable(nmeadump
+		nmeadump.cpp
+		)
+
+	target_include_directories(nmeadump
+		PRIVATE
+			${CMAKE_CURRENT_SOURCE_DIR}
+			${CMAKE_CURRENT_SOURCE_DIR}/../extern
+		)
+
+	target_compile_options(nmeadump
+		PRIVATE
+			-pipe
+			-ggdb
+			-Wall
+			-Wextra
+			-pedantic-errors
+		)
+
+	target_link_libraries(nmeadump
+		marnav
+		)
+endif()
+
