@@ -47,7 +47,7 @@ private:
 	std::string map_datum;
 
 public:
-	MARNAV_NMEA_GETTER(map_datum)
+	decltype(map_datum) get_map_datum() const { return map_datum; }
 
 	void set_map_datum(const std::string & t) noexcept;
 };

@@ -67,11 +67,23 @@ private:
 	void check() const;
 
 public:
-	MARNAV_NMEA_GETTER(arrival_circle_entered)
-	MARNAV_NMEA_GETTER(perpendicualar_passed)
-	MARNAV_NMEA_GETTER(arrival_circle_radius)
-	MARNAV_NMEA_GETTER(arrival_circle_radius_unit)
-	MARNAV_NMEA_GETTER(waypoint_id)
+	decltype(arrival_circle_entered) get_arrival_circle_entered() const
+	{
+		return arrival_circle_entered;
+	}
+	decltype(perpendicualar_passed) get_perpendicualar_passed() const
+	{
+		return perpendicualar_passed;
+	}
+	decltype(arrival_circle_radius) get_arrival_circle_radius() const
+	{
+		return arrival_circle_radius;
+	}
+	decltype(arrival_circle_radius_unit) get_arrival_circle_radius_unit() const
+	{
+		return arrival_circle_radius_unit;
+	}
+	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
 
 	void set_arrival_circle_entered(status s);
 	void set_perpendicular_passed(status s);

@@ -58,12 +58,32 @@ private:
 	unit::distance overall_spherical_equiv_position_error_unit = unit::distance::meter;
 
 public:
-	MARNAV_NMEA_GETTER(horizontal_position_error)
-	MARNAV_NMEA_GETTER(horizontal_position_error_unit)
-	MARNAV_NMEA_GETTER(vertical_position_error)
-	MARNAV_NMEA_GETTER(vertical_position_error_unit)
-	MARNAV_NMEA_GETTER(overall_spherical_equiv_position_error)
-	MARNAV_NMEA_GETTER(overall_spherical_equiv_position_error_unit)
+	decltype(horizontal_position_error) get_horizontal_position_error() const
+	{
+		return horizontal_position_error;
+	}
+	decltype(horizontal_position_error_unit) get_horizontal_position_error_unit() const
+	{
+		return horizontal_position_error_unit;
+	}
+	decltype(vertical_position_error) get_vertical_position_error() const
+	{
+		return vertical_position_error;
+	}
+	decltype(vertical_position_error_unit) get_vertical_position_error_unit() const
+	{
+		return vertical_position_error_unit;
+	}
+	decltype(overall_spherical_equiv_position_error)
+	get_overall_spherical_equiv_position_error() const
+	{
+		return overall_spherical_equiv_position_error;
+	}
+	decltype(overall_spherical_equiv_position_error_unit)
+	get_overall_spherical_equiv_position_error_unit() const
+	{
+		return overall_spherical_equiv_position_error_unit;
+	}
 
 	void set_horizontal_position_error(double t) noexcept { horizontal_position_error = t; }
 	void set_vertical_position_error(double t) noexcept { vertical_position_error = t; }

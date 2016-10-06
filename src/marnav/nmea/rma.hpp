@@ -71,13 +71,13 @@ private:
 		magnetic_var_hem; // magnetic variation hemisphere, E:east, W:west
 
 public:
-	MARNAV_NMEA_GETTER(blink_warning)
-	MARNAV_NMEA_GETTER(time_diff_a)
-	MARNAV_NMEA_GETTER(time_diff_b)
-	MARNAV_NMEA_GETTER(sog)
-	MARNAV_NMEA_GETTER(track)
-	MARNAV_NMEA_GETTER(magnetic_var)
-	MARNAV_NMEA_GETTER(magnetic_var_hem)
+	decltype(blink_warning) get_blink_warning() const { return blink_warning; }
+	decltype(time_diff_a) get_time_diff_a() const { return time_diff_a; }
+	decltype(time_diff_b) get_time_diff_b() const { return time_diff_b; }
+	decltype(sog) get_sog() const { return sog; }
+	decltype(track) get_track() const { return track; }
+	decltype(magnetic_var) get_magnetic_var() const { return magnetic_var; }
+	decltype(magnetic_var_hem) get_magnetic_var_hem() const { return magnetic_var_hem; }
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;

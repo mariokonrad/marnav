@@ -51,10 +51,19 @@ private:
 	unit::distance distance_head_bottom_unit = unit::distance::meter;
 
 public:
-	MARNAV_NMEA_GETTER(distance_head_foot)
-	MARNAV_NMEA_GETTER(distance_head_foot_unit)
-	MARNAV_NMEA_GETTER(distance_head_bottom)
-	MARNAV_NMEA_GETTER(distance_head_bottom_unit)
+	decltype(distance_head_foot) get_distance_head_foot() const { return distance_head_foot; }
+	decltype(distance_head_foot_unit) get_distance_head_foot_unit() const
+	{
+		return distance_head_foot_unit;
+	}
+	decltype(distance_head_bottom) get_distance_head_bottom() const
+	{
+		return distance_head_bottom;
+	}
+	decltype(distance_head_bottom_unit) get_distance_head_bottom_unit() const
+	{
+		return distance_head_bottom_unit;
+	}
 
 	void set_head_foot(double t) noexcept
 	{

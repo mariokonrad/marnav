@@ -58,12 +58,12 @@ private:
 	utils::optional<waypoint> waypoint_from; // FROM waypoint ID
 
 public:
-	MARNAV_NMEA_GETTER(bearing_true)
-	MARNAV_NMEA_GETTER(type_true)
-	MARNAV_NMEA_GETTER(bearing_magn)
-	MARNAV_NMEA_GETTER(type_magn)
-	MARNAV_NMEA_GETTER(waypoint_to)
-	MARNAV_NMEA_GETTER(waypoint_from)
+	decltype(bearing_true) get_bearing_true() const { return bearing_true; }
+	decltype(type_true) get_type_true() const { return type_true; }
+	decltype(bearing_magn) get_bearing_magn() const { return bearing_magn; }
+	decltype(type_magn) get_type_magn() const { return type_magn; }
+	decltype(waypoint_to) get_waypoint_to() const { return waypoint_to; }
+	decltype(waypoint_from) get_waypoint_from() const { return waypoint_from; }
 
 	void set_bearing_true(double t) noexcept;
 	void set_bearing_magn(double t) noexcept;

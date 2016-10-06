@@ -65,14 +65,14 @@ private:
 	std::string name = "W84";
 
 public:
-	MARNAV_NMEA_GETTER(ref)
-	MARNAV_NMEA_GETTER(subcode)
-	MARNAV_NMEA_GETTER(lat_offset)
-	MARNAV_NMEA_GETTER(lat_hem)
-	MARNAV_NMEA_GETTER(lon_offset)
-	MARNAV_NMEA_GETTER(lon_hem)
-	MARNAV_NMEA_GETTER(altitude)
-	MARNAV_NMEA_GETTER(name)
+	decltype(ref) get_ref() const { return ref; }
+	decltype(subcode) get_subcode() const { return subcode; }
+	decltype(lat_offset) get_lat_offset() const { return lat_offset; }
+	decltype(lat_hem) get_lat_hem() const { return lat_hem; }
+	decltype(lon_offset) get_lon_offset() const { return lon_offset; }
+	decltype(lon_hem) get_lon_hem() const { return lon_hem; }
+	decltype(altitude) get_altitude() const { return altitude; }
+	decltype(name) get_name() const { return name; }
 
 	void set_ref(const std::string & t) noexcept;
 	void set_subcode(const std::string & t) noexcept;

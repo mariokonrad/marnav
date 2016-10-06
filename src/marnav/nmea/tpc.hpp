@@ -58,12 +58,24 @@ private:
 	unit::distance depth_unit = unit::distance::meter;
 
 public:
-	MARNAV_NMEA_GETTER(distance_centerline)
-	MARNAV_NMEA_GETTER(distance_centerline_unit)
-	MARNAV_NMEA_GETTER(distance_transducer)
-	MARNAV_NMEA_GETTER(distance_transducer_unit)
-	MARNAV_NMEA_GETTER(depth)
-	MARNAV_NMEA_GETTER(depth_unit)
+	decltype(distance_centerline) get_distance_centerline() const
+	{
+		return distance_centerline;
+	}
+	decltype(distance_centerline_unit) get_distance_centerline_unit() const
+	{
+		return distance_centerline_unit;
+	}
+	decltype(distance_transducer) get_distance_transducer() const
+	{
+		return distance_transducer;
+	}
+	decltype(distance_transducer_unit) get_distance_transducer_unit() const
+	{
+		return distance_transducer_unit;
+	}
+	decltype(depth) get_depth() const { return depth; }
+	decltype(depth_unit) get_depth_unit() const { return depth_unit; }
 
 	void set_distance_centerline(double t) noexcept
 	{

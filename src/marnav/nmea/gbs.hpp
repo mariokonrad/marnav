@@ -60,14 +60,14 @@ private:
 	double bias_dev = 0.0;
 
 public:
-	MARNAV_NMEA_GETTER(time_utc)
-	MARNAV_NMEA_GETTER(err_lat)
-	MARNAV_NMEA_GETTER(err_lon)
-	MARNAV_NMEA_GETTER(err_alt)
-	MARNAV_NMEA_GETTER(satellite)
-	MARNAV_NMEA_GETTER(probability)
-	MARNAV_NMEA_GETTER(bias)
-	MARNAV_NMEA_GETTER(bias_dev)
+	decltype(time_utc) get_time_utc() const { return time_utc; }
+	decltype(err_lat) get_err_lat() const { return err_lat; }
+	decltype(err_lon) get_err_lon() const { return err_lon; }
+	decltype(err_alt) get_err_alt() const { return err_alt; }
+	decltype(satellite) get_satellite() const { return satellite; }
+	decltype(probability) get_probability() const { return probability; }
+	decltype(bias) get_bias() const { return bias; }
+	decltype(bias_dev) get_bias_dev() const { return bias_dev; }
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
 	void set_err_lat(double t) noexcept { err_lat = t; }

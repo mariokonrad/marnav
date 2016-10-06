@@ -62,14 +62,14 @@ private:
 	utils::optional<unit::velocity> speed_kmh_unit; // K:kmh
 
 public:
-	MARNAV_NMEA_GETTER(angle)
-	MARNAV_NMEA_GETTER(angle_side)
-	MARNAV_NMEA_GETTER(speed_knots)
-	MARNAV_NMEA_GETTER(speed_knots_unit)
-	MARNAV_NMEA_GETTER(speed_mps)
-	MARNAV_NMEA_GETTER(speed_mps_unit)
-	MARNAV_NMEA_GETTER(speed_kmh)
-	MARNAV_NMEA_GETTER(speed_kmh_unit)
+	decltype(angle) get_angle() const { return angle; }
+	decltype(angle_side) get_angle_side() const { return angle_side; }
+	decltype(speed_knots) get_speed_knots() const { return speed_knots; }
+	decltype(speed_knots_unit) get_speed_knots_unit() const { return speed_knots_unit; }
+	decltype(speed_mps) get_speed_mps() const { return speed_mps; }
+	decltype(speed_mps_unit) get_speed_mps_unit() const { return speed_mps_unit; }
+	decltype(speed_kmh) get_speed_kmh() const { return speed_kmh; }
+	decltype(speed_kmh_unit) get_speed_kmh_unit() const { return speed_kmh_unit; }
 
 	void set_angle(double angle, side s) noexcept;
 	void set_speed_knots(double t) noexcept;

@@ -58,9 +58,9 @@ private:
 		waypoint_id[max_waypoints]; // names or numbers of the active route
 
 public:
-	MARNAV_NMEA_GETTER(n_messages)
-	MARNAV_NMEA_GETTER(message_number)
-	MARNAV_NMEA_GETTER(message_mode)
+	decltype(n_messages) get_n_messages() const { return n_messages; }
+	decltype(message_number) get_message_number() const { return message_number; }
+	decltype(message_mode) get_message_mode() const { return message_mode; }
 	utils::optional<waypoint> get_waypoint_id(int index) const;
 
 	void set_n_messages(uint32_t t) noexcept { n_messages = t; }

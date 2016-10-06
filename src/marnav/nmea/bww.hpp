@@ -56,12 +56,12 @@ private:
 	utils::optional<waypoint> waypoint_from;
 
 public:
-	MARNAV_NMEA_GETTER(bearing_true)
-	MARNAV_NMEA_GETTER(bearing_true_ref)
-	MARNAV_NMEA_GETTER(bearing_mag)
-	MARNAV_NMEA_GETTER(bearing_mag_ref)
-	MARNAV_NMEA_GETTER(waypoint_to)
-	MARNAV_NMEA_GETTER(waypoint_from)
+	decltype(bearing_true) get_bearing_true() const { return bearing_true; }
+	decltype(bearing_true_ref) get_bearing_true_ref() const { return bearing_true_ref; }
+	decltype(bearing_mag) get_bearing_mag() const { return bearing_mag; }
+	decltype(bearing_mag_ref) get_bearing_mag_ref() const { return bearing_mag_ref; }
+	decltype(waypoint_to) get_waypoint_to() const { return waypoint_to; }
+	decltype(waypoint_from) get_waypoint_from() const { return waypoint_from; }
 
 	void set_bearing_true(double t) noexcept;
 	void set_bearing_mag(double t) noexcept;

@@ -60,12 +60,12 @@ private:
 	uint32_t n_fill_bits = 0; // 0..5
 
 public:
-	MARNAV_NMEA_GETTER(n_fragments)
-	MARNAV_NMEA_GETTER(fragment)
-	MARNAV_NMEA_GETTER(seq_msg_id)
-	MARNAV_NMEA_GETTER(radio_channel)
-	MARNAV_NMEA_GETTER(payload)
-	MARNAV_NMEA_GETTER(n_fill_bits)
+	decltype(n_fragments) get_n_fragments() const { return n_fragments; }
+	decltype(fragment) get_fragment() const { return fragment; }
+	decltype(seq_msg_id) get_seq_msg_id() const { return seq_msg_id; }
+	decltype(radio_channel) get_radio_channel() const { return radio_channel; }
+	decltype(payload) get_payload() const { return payload; }
+	decltype(n_fill_bits) get_n_fill_bits() const { return n_fill_bits; }
 
 	void set_n_fragments(uint32_t t) noexcept { n_fragments = t; }
 	void set_fragment(uint32_t t) noexcept { fragment = t; }

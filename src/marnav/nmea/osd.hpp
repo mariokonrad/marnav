@@ -62,15 +62,15 @@ private:
 	utils::optional<unit::velocity> vessel_drift_unit;
 
 public:
-	MARNAV_NMEA_GETTER(heading)
-	MARNAV_NMEA_GETTER(data_valid)
-	MARNAV_NMEA_GETTER(course)
-	MARNAV_NMEA_GETTER(course_ref)
-	MARNAV_NMEA_GETTER(speed)
-	MARNAV_NMEA_GETTER(speed_unit)
-	MARNAV_NMEA_GETTER(vessel_set)
-	MARNAV_NMEA_GETTER(vessel_drift)
-	MARNAV_NMEA_GETTER(vessel_drift_unit)
+	decltype(heading) get_heading() const { return heading; }
+	decltype(data_valid) get_data_valid() const { return data_valid; }
+	decltype(course) get_course() const { return course; }
+	decltype(course_ref) get_course_ref() const { return course_ref; }
+	decltype(speed) get_speed() const { return speed; }
+	decltype(speed_unit) get_speed_unit() const { return speed_unit; }
+	decltype(vessel_set) get_vessel_set() const { return vessel_set; }
+	decltype(vessel_drift) get_vessel_drift() const { return vessel_drift; }
+	decltype(vessel_drift_unit) get_vessel_drift_unit() const { return vessel_drift_unit; }
 
 	void set_heading(double t) noexcept { heading = t; }
 	void set_data_valid(status t) noexcept { data_valid = t; }

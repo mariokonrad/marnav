@@ -129,12 +129,12 @@ private:
 	extension_indicator extension = extension_indicator::none;
 
 public:
-	MARNAV_NMEA_GETTER(fmt_spec);
-	MARNAV_NMEA_GETTER(cat);
+	decltype(fmt_spec) get_fmt_spec() const { return fmt_spec; }
+	decltype(cat) get_cat() const { return cat; }
 	utils::mmsi get_mmsi() const;
 	geo::region get_geographical_area() const;
-	MARNAV_NMEA_GETTER(ack);
-	MARNAV_NMEA_GETTER(extension);
+	decltype(ack) get_ack() const { return ack; }
+	decltype(extension) get_extension() const { return extension; }
 };
 
 std::string to_string(dsc::format_specifier value);

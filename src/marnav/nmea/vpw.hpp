@@ -52,10 +52,16 @@ private:
 	utils::optional<unit::velocity> speed_meters_per_second_unit;
 
 public:
-	MARNAV_NMEA_GETTER(speed_knots)
-	MARNAV_NMEA_GETTER(speed_knots_unit)
-	MARNAV_NMEA_GETTER(speed_meters_per_second)
-	MARNAV_NMEA_GETTER(speed_meters_per_second_unit)
+	decltype(speed_knots) get_speed_knots() const { return speed_knots; }
+	decltype(speed_knots_unit) get_speed_knots_unit() const { return speed_knots_unit; }
+	decltype(speed_meters_per_second) get_speed_meters_per_second() const
+	{
+		return speed_meters_per_second;
+	}
+	decltype(speed_meters_per_second_unit) get_speed_meters_per_second_unit() const
+	{
+		return speed_meters_per_second_unit;
+	}
 
 	void set_speed_knots(double t) noexcept;
 	void set_speed_mps(double t) noexcept;

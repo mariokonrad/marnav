@@ -46,8 +46,8 @@ private:
 	utils::optional<unit::temperature> temperature_unit; // unit degrees, C:celcius
 
 public:
-	MARNAV_NMEA_GETTER(temperature)
-	MARNAV_NMEA_GETTER(temperature_unit)
+	decltype(temperature) get_temperature() const { return temperature; }
+	decltype(temperature_unit) get_temperature_unit() const { return temperature_unit; }
 
 	void set_temperature(double t) noexcept;
 };

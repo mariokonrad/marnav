@@ -57,7 +57,7 @@ private:
 	utils::optional<waypoint> waypoint_id;
 
 public:
-	MARNAV_NMEA_GETTER(waypoint_id)
+	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;

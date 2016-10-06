@@ -56,12 +56,12 @@ private:
 	utils::optional<unit::velocity> speed_unit; // N:knots
 
 public:
-	MARNAV_NMEA_GETTER(degrees_true)
-	MARNAV_NMEA_GETTER(degrees_true_ref)
-	MARNAV_NMEA_GETTER(degrees_mag)
-	MARNAV_NMEA_GETTER(degrees_mag_ref)
-	MARNAV_NMEA_GETTER(speed)
-	MARNAV_NMEA_GETTER(speed_unit)
+	decltype(degrees_true) get_degrees_true() const { return degrees_true; }
+	decltype(degrees_true_ref) get_degrees_true_ref() const { return degrees_true_ref; }
+	decltype(degrees_mag) get_degrees_mag() const { return degrees_mag; }
+	decltype(degrees_mag_ref) get_degrees_mag_ref() const { return degrees_mag_ref; }
+	decltype(speed) get_speed() const { return speed; }
+	decltype(speed_unit) get_speed_unit() const { return speed_unit; }
 
 	void set_degrees_true(double t) noexcept;
 	void set_degrees_mag(double t) noexcept;

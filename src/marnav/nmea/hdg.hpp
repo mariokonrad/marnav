@@ -55,11 +55,11 @@ private:
 	utils::optional<direction> magn_var_hem; // E:east, W:west
 
 public:
-	MARNAV_NMEA_GETTER(heading)
-	MARNAV_NMEA_GETTER(magn_dev)
-	MARNAV_NMEA_GETTER(magn_dev_hem)
-	MARNAV_NMEA_GETTER(magn_var)
-	MARNAV_NMEA_GETTER(magn_var_hem)
+	decltype(heading) get_heading() const { return heading; }
+	decltype(magn_dev) get_magn_dev() const { return magn_dev; }
+	decltype(magn_dev_hem) get_magn_dev_hem() const { return magn_dev_hem; }
+	decltype(magn_var) get_magn_var() const { return magn_var; }
+	decltype(magn_var_hem) get_magn_var_hem() const { return magn_var_hem; }
 
 	void set_heading(double t) noexcept { heading = t; }
 	void set_magn_dev(double deg, direction hem);

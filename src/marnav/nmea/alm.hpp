@@ -80,21 +80,36 @@ private:
 	void check() const;
 
 public:
-	MARNAV_NMEA_GETTER(number_of_messages)
-	MARNAV_NMEA_GETTER(message_number)
-	MARNAV_NMEA_GETTER(satellite_prn)
-	MARNAV_NMEA_GETTER(gps_week_number)
-	MARNAV_NMEA_GETTER(sv_health)
-	MARNAV_NMEA_GETTER(eccentricity)
-	MARNAV_NMEA_GETTER(almanac_reference_time)
-	MARNAV_NMEA_GETTER(inclination_angle)
-	MARNAV_NMEA_GETTER(rate_of_right_ascension)
-	MARNAV_NMEA_GETTER(root_of_semimajor_axis)
-	MARNAV_NMEA_GETTER(argument_of_perigee)
-	MARNAV_NMEA_GETTER(longitude_of_ascension_node)
-	MARNAV_NMEA_GETTER(mean_anomaly)
-	MARNAV_NMEA_GETTER(f0_clock_parameter)
-	MARNAV_NMEA_GETTER(f1_clock_parameter)
+	decltype(number_of_messages) get_number_of_messages() const { return number_of_messages; }
+	decltype(message_number) get_message_number() const { return message_number; }
+	decltype(satellite_prn) get_satellite_prn() const { return satellite_prn; }
+	decltype(gps_week_number) get_gps_week_number() const { return gps_week_number; }
+	decltype(sv_health) get_sv_health() const { return sv_health; }
+	decltype(eccentricity) get_eccentricity() const { return eccentricity; }
+	decltype(almanac_reference_time) get_almanac_reference_time() const
+	{
+		return almanac_reference_time;
+	}
+	decltype(inclination_angle) get_inclination_angle() const { return inclination_angle; }
+	decltype(rate_of_right_ascension) get_rate_of_right_ascension() const
+	{
+		return rate_of_right_ascension;
+	}
+	decltype(root_of_semimajor_axis) get_root_of_semimajor_axis() const
+	{
+		return root_of_semimajor_axis;
+	}
+	decltype(argument_of_perigee) get_argument_of_perigee() const
+	{
+		return argument_of_perigee;
+	}
+	decltype(longitude_of_ascension_node) get_longitude_of_ascension_node() const
+	{
+		return longitude_of_ascension_node;
+	}
+	decltype(mean_anomaly) get_mean_anomaly() const { return mean_anomaly; }
+	decltype(f0_clock_parameter) get_f0_clock_parameter() const { return f0_clock_parameter; }
+	decltype(f1_clock_parameter) get_f1_clock_parameter() const { return f1_clock_parameter; }
 
 	void set_number_of_messages(uint32_t t) noexcept { number_of_messages = t; }
 	void set_message_number(uint32_t t) noexcept { message_number = t; }

@@ -54,9 +54,9 @@ private:
 	type_of_point type_point = type_of_point::reference;
 
 public:
-	MARNAV_NMEA_GETTER(time_to_point)
-	MARNAV_NMEA_GETTER(distance)
-	MARNAV_NMEA_GETTER(type_point)
+	decltype(time_to_point) get_time_to_point() const { return time_to_point; }
+	decltype(distance) get_distance() const { return distance; }
+	decltype(type_point) get_type_point() const { return type_point; }
 
 	void set_time_to_point(const duration & t) noexcept { time_to_point = t; }
 	void set_distance(double t) noexcept { distance = t; }

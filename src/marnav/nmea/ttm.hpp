@@ -76,19 +76,25 @@ private:
 	utils::optional<char> reference_target;
 
 public:
-	MARNAV_NMEA_GETTER(target_number)
-	MARNAV_NMEA_GETTER(target_distance)
-	MARNAV_NMEA_GETTER(bearing_from_ownship)
-	MARNAV_NMEA_GETTER(bearing_from_ownship_ref)
-	MARNAV_NMEA_GETTER(target_speed)
-	MARNAV_NMEA_GETTER(target_course)
-	MARNAV_NMEA_GETTER(target_course_ref)
-	MARNAV_NMEA_GETTER(distance_cpa)
-	MARNAV_NMEA_GETTER(tcpa)
-	MARNAV_NMEA_GETTER(unknown)
-	MARNAV_NMEA_GETTER(target_name)
-	MARNAV_NMEA_GETTER(target_status)
-	MARNAV_NMEA_GETTER(reference_target)
+	decltype(target_number) get_target_number() const { return target_number; }
+	decltype(target_distance) get_target_distance() const { return target_distance; }
+	decltype(bearing_from_ownship) get_bearing_from_ownship() const
+	{
+		return bearing_from_ownship;
+	}
+	decltype(bearing_from_ownship_ref) get_bearing_from_ownship_ref() const
+	{
+		return bearing_from_ownship_ref;
+	}
+	decltype(target_speed) get_target_speed() const { return target_speed; }
+	decltype(target_course) get_target_course() const { return target_course; }
+	decltype(target_course_ref) get_target_course_ref() const { return target_course_ref; }
+	decltype(distance_cpa) get_distance_cpa() const { return distance_cpa; }
+	decltype(tcpa) get_tcpa() const { return tcpa; }
+	decltype(unknown) get_unknown() const { return unknown; }
+	decltype(target_name) get_target_name() const { return target_name; }
+	decltype(target_status) get_target_status() const { return target_status; }
+	decltype(reference_target) get_reference_target() const { return reference_target; }
 
 	void set_target_number(uint32_t t) noexcept { target_number = t; }
 	void set_target_distance(double t) noexcept { target_distance = t; }

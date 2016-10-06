@@ -84,15 +84,15 @@ private:
 	utils::optional<mode_indicator> mode_ind;
 
 public:
-	MARNAV_NMEA_GETTER(time_utc)
-	MARNAV_NMEA_GETTER(bearing_true)
-	MARNAV_NMEA_GETTER(bearing_true_ref)
-	MARNAV_NMEA_GETTER(bearing_mag)
-	MARNAV_NMEA_GETTER(bearing_mag_ref)
-	MARNAV_NMEA_GETTER(distance)
-	MARNAV_NMEA_GETTER(distance_unit)
-	MARNAV_NMEA_GETTER(waypoint_id)
-	MARNAV_NMEA_GETTER(mode_ind)
+	decltype(time_utc) get_time_utc() const { return time_utc; }
+	decltype(bearing_true) get_bearing_true() const { return bearing_true; }
+	decltype(bearing_true_ref) get_bearing_true_ref() const { return bearing_true_ref; }
+	decltype(bearing_mag) get_bearing_mag() const { return bearing_mag; }
+	decltype(bearing_mag_ref) get_bearing_mag_ref() const { return bearing_mag_ref; }
+	decltype(distance) get_distance() const { return distance; }
+	decltype(distance_unit) get_distance_unit() const { return distance_unit; }
+	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
+	decltype(mode_ind) get_mode_ind() const { return mode_ind; }
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;

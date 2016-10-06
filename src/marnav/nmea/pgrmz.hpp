@@ -60,9 +60,9 @@ private:
 	utils::optional<fix_type> fix;
 
 public:
-	MARNAV_NMEA_GETTER(altitude)
-	MARNAV_NMEA_GETTER(altitude_unit)
-	MARNAV_NMEA_GETTER(fix)
+	decltype(altitude) get_altitude() const { return altitude; }
+	decltype(altitude_unit) get_altitude_unit() const { return altitude_unit; }
+	decltype(fix) get_fix() const { return fix; }
 
 	void set_altitude(double t) noexcept
 	{

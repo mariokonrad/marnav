@@ -63,11 +63,11 @@ private:
 	char unknown = 'V';
 
 public:
-	MARNAV_NMEA_GETTER(cursor_range)
-	MARNAV_NMEA_GETTER(cursor_bearing)
-	MARNAV_NMEA_GETTER(range_scale)
-	MARNAV_NMEA_GETTER(range_unit)
-	MARNAV_NMEA_GETTER(unknown)
+	decltype(cursor_range) get_cursor_range() const { return cursor_range; }
+	decltype(cursor_bearing) get_cursor_bearing() const { return cursor_bearing; }
+	decltype(range_scale) get_range_scale() const { return range_scale; }
+	decltype(range_unit) get_range_unit() const { return range_unit; }
+	decltype(unknown) get_unknown() const { return unknown; }
 
 	void set_unknowns(std::array<double, 8> t) noexcept { unknowns = t; }
 	void set_cursor(double range, double bearing) noexcept;

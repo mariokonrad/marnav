@@ -69,8 +69,8 @@ private:
 	void check_index(int index) const;
 
 public:
-	MARNAV_NMEA_GETTER(time_utc)
-	MARNAV_NMEA_GETTER(usage)
+	decltype(time_utc) get_time_utc() const { return time_utc; }
+	decltype(usage) get_usage() const { return usage; }
 	utils::optional<double> get_sat_residual(int index) const;
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }

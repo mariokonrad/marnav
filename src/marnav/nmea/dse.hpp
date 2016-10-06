@@ -78,9 +78,9 @@ private:
 	uint64_t address = 0;
 
 public:
-	MARNAV_NMEA_GETTER(number_of_messages)
-	MARNAV_NMEA_GETTER(sentence_number)
-	MARNAV_NMEA_GETTER(flag)
+	decltype(number_of_messages) get_number_of_messages() const { return number_of_messages; }
+	decltype(sentence_number) get_sentence_number() const { return sentence_number; }
+	decltype(flag) get_flag() const { return flag; }
 	utils::mmsi get_mmsi() const;
 
 	void set_number_of_messages(uint32_t t) noexcept { number_of_messages = t; }

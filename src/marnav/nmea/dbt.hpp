@@ -59,12 +59,12 @@ private:
 	utils::optional<unit::distance> depth_fathom_unit; // F:fathom
 
 public:
-	MARNAV_NMEA_GETTER(depth_feet)
-	MARNAV_NMEA_GETTER(depth_feet_unit)
-	MARNAV_NMEA_GETTER(depth_meter)
-	MARNAV_NMEA_GETTER(depth_meter_unit)
-	MARNAV_NMEA_GETTER(depth_fathom)
-	MARNAV_NMEA_GETTER(depth_fathom_unit)
+	decltype(depth_feet) get_depth_feet() const { return depth_feet; }
+	decltype(depth_feet_unit) get_depth_feet_unit() const { return depth_feet_unit; }
+	decltype(depth_meter) get_depth_meter() const { return depth_meter; }
+	decltype(depth_meter_unit) get_depth_meter_unit() const { return depth_meter_unit; }
+	decltype(depth_fathom) get_depth_fathom() const { return depth_fathom; }
+	decltype(depth_fathom_unit) get_depth_fathom_unit() const { return depth_fathom_unit; }
 
 	void set_depth_feet(double t) noexcept;
 	void set_depth_meter(double t) noexcept;

@@ -62,12 +62,15 @@ private:
 	utils::optional<mode_indicator> mode_ind;
 
 public:
-	MARNAV_NMEA_GETTER(status1)
-	MARNAV_NMEA_GETTER(status2)
-	MARNAV_NMEA_GETTER(cross_track_error_magnitude)
-	MARNAV_NMEA_GETTER(direction_to_steer)
-	MARNAV_NMEA_GETTER(cross_track_unit)
-	MARNAV_NMEA_GETTER(mode_ind)
+	decltype(status1) get_status1() const { return status1; }
+	decltype(status2) get_status2() const { return status2; }
+	decltype(cross_track_error_magnitude) get_cross_track_error_magnitude() const
+	{
+		return cross_track_error_magnitude;
+	}
+	decltype(direction_to_steer) get_direction_to_steer() const { return direction_to_steer; }
+	decltype(cross_track_unit) get_cross_track_unit() const { return cross_track_unit; }
+	decltype(mode_ind) get_mode_ind() const { return mode_ind; }
 
 	void set_status1(status t) noexcept { status1 = t; }
 	void set_status2(status t) noexcept { status2 = t; }

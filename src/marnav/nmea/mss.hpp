@@ -51,11 +51,14 @@ private:
 	int32_t unknown = 0;
 
 public:
-	MARNAV_NMEA_GETTER(signal_strength)
-	MARNAV_NMEA_GETTER(signal_to_noise_ratio)
-	MARNAV_NMEA_GETTER(beacon_frequency)
-	MARNAV_NMEA_GETTER(beacon_datarate)
-	MARNAV_NMEA_GETTER(unknown)
+	decltype(signal_strength) get_signal_strength() const { return signal_strength; }
+	decltype(signal_to_noise_ratio) get_signal_to_noise_ratio() const
+	{
+		return signal_to_noise_ratio;
+	}
+	decltype(beacon_frequency) get_beacon_frequency() const { return beacon_frequency; }
+	decltype(beacon_datarate) get_beacon_datarate() const { return beacon_datarate; }
+	decltype(unknown) get_unknown() const { return unknown; }
 
 	void set_signal_strength(uint32_t t) noexcept { signal_strength = t; }
 	void set_signal_to_noise_ratio(uint32_t t) noexcept { signal_to_noise_ratio = t; }

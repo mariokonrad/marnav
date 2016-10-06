@@ -47,8 +47,8 @@ private:
 	utils::optional<status> data_valid;
 
 public:
-	MARNAV_NMEA_GETTER(deg_per_minute)
-	MARNAV_NMEA_GETTER(data_valid)
+	decltype(deg_per_minute) get_deg_per_minute() const { return deg_per_minute; }
+	decltype(data_valid) get_data_valid() const { return data_valid; }
 
 	void set_deg_per_minute(double t) noexcept { deg_per_minute = t; }
 	void set_data_valid(status t) noexcept { data_valid = t; }

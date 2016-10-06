@@ -50,9 +50,12 @@ private:
 	utils::optional<unit::distance> cross_track_unit;
 
 public:
-	MARNAV_NMEA_GETTER(cross_track_error_magnitude)
-	MARNAV_NMEA_GETTER(direction_to_steer)
-	MARNAV_NMEA_GETTER(cross_track_unit)
+	decltype(cross_track_error_magnitude) get_cross_track_error_magnitude() const
+	{
+		return cross_track_error_magnitude;
+	}
+	decltype(direction_to_steer) get_direction_to_steer() const { return direction_to_steer; }
+	decltype(cross_track_unit) get_cross_track_unit() const { return cross_track_unit; }
 
 	void set_cross_track_error_magnitude(double t) noexcept
 	{

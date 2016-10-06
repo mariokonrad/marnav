@@ -75,9 +75,12 @@ private:
 	void check_index(int index) const;
 
 public:
-	MARNAV_NMEA_GETTER(n_messages)
-	MARNAV_NMEA_GETTER(message_number)
-	MARNAV_NMEA_GETTER(n_satellites_in_view)
+	decltype(n_messages) get_n_messages() const { return n_messages; }
+	decltype(message_number) get_message_number() const { return message_number; }
+	decltype(n_satellites_in_view) get_n_satellites_in_view() const
+	{
+		return n_satellites_in_view;
+	}
 	utils::optional<satellite_info> get_sat(int index) const;
 
 	void set_n_messages(uint32_t t);

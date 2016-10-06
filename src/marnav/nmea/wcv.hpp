@@ -49,9 +49,9 @@ private:
 	utils::optional<waypoint> waypoint_id;
 
 public:
-	MARNAV_NMEA_GETTER(speed)
-	MARNAV_NMEA_GETTER(speed_unit)
-	MARNAV_NMEA_GETTER(waypoint_id)
+	decltype(speed) get_speed() const { return speed; }
+	decltype(speed_unit) get_speed_unit() const { return speed_unit; }
+	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
 
 	void set_speed(double t) noexcept;
 	void set_waypoint(const waypoint & id) { waypoint_id = id; }

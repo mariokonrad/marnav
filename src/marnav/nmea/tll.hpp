@@ -71,11 +71,11 @@ private:
 	utils::optional<char> reference_target;
 
 public:
-	MARNAV_NMEA_GETTER(number)
-	MARNAV_NMEA_GETTER(name)
-	MARNAV_NMEA_GETTER(time_utc)
-	MARNAV_NMEA_GETTER(status)
-	MARNAV_NMEA_GETTER(reference_target)
+	decltype(number) get_number() const { return number; }
+	decltype(name) get_name() const { return name; }
+	decltype(time_utc) get_time_utc() const { return time_utc; }
+	decltype(status) get_status() const { return status; }
+	decltype(reference_target) get_reference_target() const { return reference_target; }
 
 	geo::longitude get_longitude() const;
 	geo::latitude get_latitude() const;

@@ -59,14 +59,14 @@ private:
 	utils::optional<unit::velocity> speed_kmh_unit; // K:kmh
 
 public:
-	MARNAV_NMEA_GETTER(heading_empty)
-	MARNAV_NMEA_GETTER(degrees_true)
-	MARNAV_NMEA_GETTER(heading)
-	MARNAV_NMEA_GETTER(degrees_mag)
-	MARNAV_NMEA_GETTER(speed_knots)
-	MARNAV_NMEA_GETTER(speed_knots_unit)
-	MARNAV_NMEA_GETTER(speed_kmh)
-	MARNAV_NMEA_GETTER(speed_kmh_unit)
+	decltype(heading_empty) get_heading_empty() const { return heading_empty; }
+	decltype(degrees_true) get_degrees_true() const { return degrees_true; }
+	decltype(heading) get_heading() const { return heading; }
+	decltype(degrees_mag) get_degrees_mag() const { return degrees_mag; }
+	decltype(speed_knots) get_speed_knots() const { return speed_knots; }
+	decltype(speed_knots_unit) get_speed_knots_unit() const { return speed_knots_unit; }
+	decltype(speed_kmh) get_speed_kmh() const { return speed_kmh; }
+	decltype(speed_kmh_unit) get_speed_kmh_unit() const { return speed_kmh_unit; }
 
 	void set_heading(double t) noexcept;
 	void set_speed_knots(double t) noexcept;

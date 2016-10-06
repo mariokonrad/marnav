@@ -71,14 +71,23 @@ private:
 	utils::optional<double> differential_ref_station_id;
 
 public:
-	MARNAV_NMEA_GETTER(time_utc)
-	MARNAV_NMEA_GETTER(mode_ind)
-	MARNAV_NMEA_GETTER(number_of_satellites)
-	MARNAV_NMEA_GETTER(hdrop)
-	MARNAV_NMEA_GETTER(antenna_altitude)
-	MARNAV_NMEA_GETTER(geodial_sepration)
-	MARNAV_NMEA_GETTER(age_of_differential_data)
-	MARNAV_NMEA_GETTER(differential_ref_station_id)
+	decltype(time_utc) get_time_utc() const { return time_utc; }
+	decltype(mode_ind) get_mode_ind() const { return mode_ind; }
+	decltype(number_of_satellites) get_number_of_satellites() const
+	{
+		return number_of_satellites;
+	}
+	decltype(hdrop) get_hdrop() const { return hdrop; }
+	decltype(antenna_altitude) get_antenna_altitude() const { return antenna_altitude; }
+	decltype(geodial_sepration) get_geodial_sepration() const { return geodial_sepration; }
+	decltype(age_of_differential_data) get_age_of_differential_data() const
+	{
+		return age_of_differential_data;
+	}
+	decltype(differential_ref_station_id) get_differential_ref_station_id() const
+	{
+		return differential_ref_station_id;
+	}
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;

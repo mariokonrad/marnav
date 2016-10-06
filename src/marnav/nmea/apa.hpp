@@ -87,16 +87,34 @@ private:
 	void check() const;
 
 public:
-	MARNAV_NMEA_GETTER(loran_c_blink_warning)
-	MARNAV_NMEA_GETTER(loran_c_cycle_lock_warning)
-	MARNAV_NMEA_GETTER(cross_track_error_magnitude)
-	MARNAV_NMEA_GETTER(direction_to_steer)
-	MARNAV_NMEA_GETTER(cross_track_unit)
-	MARNAV_NMEA_GETTER(status_arrival)
-	MARNAV_NMEA_GETTER(status_perpendicular_passing)
-	MARNAV_NMEA_GETTER(bearing_origin_to_destination)
-	MARNAV_NMEA_GETTER(bearing_origin_to_destination_ref)
-	MARNAV_NMEA_GETTER(waypoint_id)
+	decltype(loran_c_blink_warning) get_loran_c_blink_warning() const
+	{
+		return loran_c_blink_warning;
+	}
+	decltype(loran_c_cycle_lock_warning) get_loran_c_cycle_lock_warning() const
+	{
+		return loran_c_cycle_lock_warning;
+	}
+	decltype(cross_track_error_magnitude) get_cross_track_error_magnitude() const
+	{
+		return cross_track_error_magnitude;
+	}
+	decltype(direction_to_steer) get_direction_to_steer() const { return direction_to_steer; }
+	decltype(cross_track_unit) get_cross_track_unit() const { return cross_track_unit; }
+	decltype(status_arrival) get_status_arrival() const { return status_arrival; }
+	decltype(status_perpendicular_passing) get_status_perpendicular_passing() const
+	{
+		return status_perpendicular_passing;
+	}
+	decltype(bearing_origin_to_destination) get_bearing_origin_to_destination() const
+	{
+		return bearing_origin_to_destination;
+	}
+	decltype(bearing_origin_to_destination_ref) get_bearing_origin_to_destination_ref() const
+	{
+		return bearing_origin_to_destination_ref;
+	}
+	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
 
 	void set_loran_c_blink_warning(status t) noexcept { loran_c_blink_warning = t; }
 	void set_loran_c_cycle_lock_warning(status t) noexcept { loran_c_cycle_lock_warning = t; }

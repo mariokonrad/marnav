@@ -195,15 +195,6 @@ template <class T> const T * sentence_cast(const std::unique_ptr<sentence> & s)
 
 /// @cond DEV
 
-/// @brief This macro defines a getter method for NMEA sentence data.
-///
-/// Macros are avoided as far as possible, this one however improves readability.
-/// All it does is declare and implement inline a getter method. Handy for
-/// NMEA sentence member data.
-///
-#define MARNAV_NMEA_GETTER(attribute) \
-	decltype(attribute) get_##attribute() const { return attribute; }
-
 #define MARNAV_NMEA_SENTENCE_FRIENDS(s)                                                 \
 	friend std::unique_ptr<sentence> detail::parse_##s(const std::string & talker,      \
 		sentence::fields::const_iterator first, sentence::fields::const_iterator last); \

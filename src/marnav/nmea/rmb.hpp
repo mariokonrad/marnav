@@ -89,16 +89,16 @@ private:
 	utils::optional<mode_indicator> mode_ind;
 
 public:
-	MARNAV_NMEA_GETTER(active)
-	MARNAV_NMEA_GETTER(cross_track_error)
-	MARNAV_NMEA_GETTER(steer_dir)
-	MARNAV_NMEA_GETTER(waypoint_to)
-	MARNAV_NMEA_GETTER(waypoint_from)
-	MARNAV_NMEA_GETTER(range)
-	MARNAV_NMEA_GETTER(bearing)
-	MARNAV_NMEA_GETTER(dst_velocity)
-	MARNAV_NMEA_GETTER(arrival_status)
-	MARNAV_NMEA_GETTER(mode_ind)
+	decltype(active) get_active() const { return active; }
+	decltype(cross_track_error) get_cross_track_error() const { return cross_track_error; }
+	decltype(steer_dir) get_steer_dir() const { return steer_dir; }
+	decltype(waypoint_to) get_waypoint_to() const { return waypoint_to; }
+	decltype(waypoint_from) get_waypoint_from() const { return waypoint_from; }
+	decltype(range) get_range() const { return range; }
+	decltype(bearing) get_bearing() const { return bearing; }
+	decltype(dst_velocity) get_dst_velocity() const { return dst_velocity; }
+	decltype(arrival_status) get_arrival_status() const { return arrival_status; }
+	decltype(mode_ind) get_mode_ind() const { return mode_ind; }
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;

@@ -54,11 +54,11 @@ private:
 	unit::distance depth_unit = unit::distance::meter;
 
 public:
-	MARNAV_NMEA_GETTER(range)
-	MARNAV_NMEA_GETTER(range_unit)
-	MARNAV_NMEA_GETTER(bearing)
-	MARNAV_NMEA_GETTER(depth)
-	MARNAV_NMEA_GETTER(depth_unit)
+	decltype(range) get_range() const { return range; }
+	decltype(range_unit) get_range_unit() const { return range_unit; }
+	decltype(bearing) get_bearing() const { return bearing; }
+	decltype(depth) get_depth() const { return depth; }
+	decltype(depth_unit) get_depth_unit() const { return depth_unit; }
 
 	void set_range(double t) noexcept
 	{

@@ -53,10 +53,10 @@ private:
 	utils::optional<status> rudder2_valid;
 
 public:
-	MARNAV_NMEA_GETTER(rudder1)
-	MARNAV_NMEA_GETTER(rudder1_valid)
-	MARNAV_NMEA_GETTER(rudder2)
-	MARNAV_NMEA_GETTER(rudder2_valid)
+	decltype(rudder1) get_rudder1() const { return rudder1; }
+	decltype(rudder1_valid) get_rudder1_valid() const { return rudder1_valid; }
+	decltype(rudder2) get_rudder2() const { return rudder2; }
+	decltype(rudder2_valid) get_rudder2_valid() const { return rudder2_valid; }
 
 	void set_rudder1(double t) noexcept;
 	void set_rudder2(double t) noexcept;

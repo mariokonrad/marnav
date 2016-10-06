@@ -46,8 +46,8 @@ private:
 	nmea::unit::distance distance_unit = nmea::unit::distance::meter;
 
 public:
-	MARNAV_NMEA_GETTER(distance)
-	MARNAV_NMEA_GETTER(distance_unit)
+	decltype(distance) get_distance() const { return distance; }
+	decltype(distance_unit) get_distance_unit() const { return distance_unit; }
 
 	void set_distance(double t) noexcept
 	{

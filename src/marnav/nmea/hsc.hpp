@@ -51,10 +51,10 @@ private:
 	utils::optional<reference> heading_mag_ref;
 
 public:
-	MARNAV_NMEA_GETTER(heading_true)
-	MARNAV_NMEA_GETTER(heading_true_ref)
-	MARNAV_NMEA_GETTER(heading_mag)
-	MARNAV_NMEA_GETTER(heading_mag_ref)
+	decltype(heading_true) get_heading_true() const { return heading_true; }
+	decltype(heading_true_ref) get_heading_true_ref() const { return heading_true_ref; }
+	decltype(heading_mag) get_heading_mag() const { return heading_mag; }
+	decltype(heading_mag_ref) get_heading_mag_ref() const { return heading_mag_ref; }
 
 	void set_heading_true(double t) noexcept;
 	void set_heading_mag(double t) noexcept;

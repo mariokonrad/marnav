@@ -54,9 +54,9 @@ private:
 	std::vector<scanning_frequency> frequencies;
 
 public:
-	MARNAV_NMEA_GETTER(number_of_messages)
-	MARNAV_NMEA_GETTER(message_number)
-	MARNAV_NMEA_GETTER(frequencies)
+	decltype(number_of_messages) get_number_of_messages() const { return number_of_messages; }
+	decltype(message_number) get_message_number() const { return message_number; }
+	decltype(frequencies) get_frequencies() const { return frequencies; }
 
 	void set_number_of_messages(uint32_t t) noexcept { number_of_messages = t; }
 	void set_message_number(uint32_t t) noexcept { message_number = t; }

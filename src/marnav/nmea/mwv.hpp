@@ -58,11 +58,11 @@ private:
 	utils::optional<status> data_valid; // status, A:valid
 
 public:
-	MARNAV_NMEA_GETTER(angle)
-	MARNAV_NMEA_GETTER(angle_ref)
-	MARNAV_NMEA_GETTER(speed)
-	MARNAV_NMEA_GETTER(speed_unit)
-	MARNAV_NMEA_GETTER(data_valid)
+	decltype(angle) get_angle() const { return angle; }
+	decltype(angle_ref) get_angle_ref() const { return angle_ref; }
+	decltype(speed) get_speed() const { return speed; }
+	decltype(speed_unit) get_speed_unit() const { return speed_unit; }
+	decltype(data_valid) get_data_valid() const { return data_valid; }
 
 	void set_angle(double deg, reference ref);
 	void set_speed(double speed, unit::velocity u) noexcept;

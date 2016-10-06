@@ -57,12 +57,27 @@ private:
 	utils::optional<status> ground_speed_status;
 
 public:
-	MARNAV_NMEA_GETTER(water_speed_longitudinal)
-	MARNAV_NMEA_GETTER(water_speed_transveral)
-	MARNAV_NMEA_GETTER(water_speed_status)
-	MARNAV_NMEA_GETTER(ground_speed_longitudinal)
-	MARNAV_NMEA_GETTER(ground_speed_transveral)
-	MARNAV_NMEA_GETTER(ground_speed_status)
+	decltype(water_speed_longitudinal) get_water_speed_longitudinal() const
+	{
+		return water_speed_longitudinal;
+	}
+	decltype(water_speed_transveral) get_water_speed_transveral() const
+	{
+		return water_speed_transveral;
+	}
+	decltype(water_speed_status) get_water_speed_status() const { return water_speed_status; }
+	decltype(ground_speed_longitudinal) get_ground_speed_longitudinal() const
+	{
+		return ground_speed_longitudinal;
+	}
+	decltype(ground_speed_transveral) get_ground_speed_transveral() const
+	{
+		return ground_speed_transveral;
+	}
+	decltype(ground_speed_status) get_ground_speed_status() const
+	{
+		return ground_speed_status;
+	}
 
 	void set_water_speed(double l, double t, status s) noexcept;
 	void set_ground_speed(double l, double t, status s) noexcept;

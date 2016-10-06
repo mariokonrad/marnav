@@ -58,14 +58,14 @@ private:
 	double dev_alt = 0.0;
 
 public:
-	MARNAV_NMEA_GETTER(time_utc)
-	MARNAV_NMEA_GETTER(total_rms)
-	MARNAV_NMEA_GETTER(dev_semi_major)
-	MARNAV_NMEA_GETTER(dev_semi_minor)
-	MARNAV_NMEA_GETTER(orientation)
-	MARNAV_NMEA_GETTER(dev_lat)
-	MARNAV_NMEA_GETTER(dev_lon)
-	MARNAV_NMEA_GETTER(dev_alt)
+	decltype(time_utc) get_time_utc() const { return time_utc; }
+	decltype(total_rms) get_total_rms() const { return total_rms; }
+	decltype(dev_semi_major) get_dev_semi_major() const { return dev_semi_major; }
+	decltype(dev_semi_minor) get_dev_semi_minor() const { return dev_semi_minor; }
+	decltype(orientation) get_orientation() const { return orientation; }
+	decltype(dev_lat) get_dev_lat() const { return dev_lat; }
+	decltype(dev_lon) get_dev_lon() const { return dev_lon; }
+	decltype(dev_alt) get_dev_alt() const { return dev_alt; }
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
 	void set_total_rms(double t) noexcept { total_rms = t; }

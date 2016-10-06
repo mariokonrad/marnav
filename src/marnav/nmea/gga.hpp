@@ -95,16 +95,19 @@ private:
 	utils::optional<uint32_t> dgps_ref; // dgps reference station 0000..1023
 
 public:
-	MARNAV_NMEA_GETTER(time)
-	MARNAV_NMEA_GETTER(quality_indicator)
-	MARNAV_NMEA_GETTER(n_satellites)
-	MARNAV_NMEA_GETTER(hor_dilution)
-	MARNAV_NMEA_GETTER(altitude)
-	MARNAV_NMEA_GETTER(altitude_unit)
-	MARNAV_NMEA_GETTER(geodial_separation)
-	MARNAV_NMEA_GETTER(geodial_separation_unit)
-	MARNAV_NMEA_GETTER(dgps_age)
-	MARNAV_NMEA_GETTER(dgps_ref)
+	decltype(time) get_time() const { return time; }
+	decltype(quality_indicator) get_quality_indicator() const { return quality_indicator; }
+	decltype(n_satellites) get_n_satellites() const { return n_satellites; }
+	decltype(hor_dilution) get_hor_dilution() const { return hor_dilution; }
+	decltype(altitude) get_altitude() const { return altitude; }
+	decltype(altitude_unit) get_altitude_unit() const { return altitude_unit; }
+	decltype(geodial_separation) get_geodial_separation() const { return geodial_separation; }
+	decltype(geodial_separation_unit) get_geodial_separation_unit() const
+	{
+		return geodial_separation_unit;
+	}
+	decltype(dgps_age) get_dgps_age() const { return dgps_age; }
+	decltype(dgps_ref) get_dgps_ref() const { return dgps_ref; }
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;

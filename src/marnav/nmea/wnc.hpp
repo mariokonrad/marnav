@@ -56,12 +56,12 @@ private:
 	utils::optional<waypoint> waypoint_from;
 
 public:
-	MARNAV_NMEA_GETTER(distance_nm)
-	MARNAV_NMEA_GETTER(distance_nm_unit)
-	MARNAV_NMEA_GETTER(distance_km)
-	MARNAV_NMEA_GETTER(distance_km_unit)
-	MARNAV_NMEA_GETTER(waypoint_to)
-	MARNAV_NMEA_GETTER(waypoint_from)
+	decltype(distance_nm) get_distance_nm() const { return distance_nm; }
+	decltype(distance_nm_unit) get_distance_nm_unit() const { return distance_nm_unit; }
+	decltype(distance_km) get_distance_km() const { return distance_km; }
+	decltype(distance_km_unit) get_distance_km_unit() const { return distance_km_unit; }
+	decltype(waypoint_to) get_waypoint_to() const { return waypoint_to; }
+	decltype(waypoint_from) get_waypoint_from() const { return waypoint_from; }
 
 	void set_distance_nm(double t) noexcept;
 	void set_distance_km(double t) noexcept;

@@ -49,8 +49,8 @@ private:
 	utils::optional<reference> heading_true;
 
 public:
-	MARNAV_NMEA_GETTER(heading)
-	MARNAV_NMEA_GETTER(heading_true)
+	decltype(heading) get_heading() const { return heading; }
+	decltype(heading_true) get_heading_true() const { return heading_true; }
 
 	void set_heading(double t) noexcept;
 };

@@ -55,11 +55,14 @@ private:
 	utils::optional<uint32_t> frequency_mss_status;
 
 public:
-	MARNAV_NMEA_GETTER(frequency)
-	MARNAV_NMEA_GETTER(frequency_mode)
-	MARNAV_NMEA_GETTER(bitrate)
-	MARNAV_NMEA_GETTER(bitrate_mode)
-	MARNAV_NMEA_GETTER(frequency_mss_status)
+	decltype(frequency) get_frequency() const { return frequency; }
+	decltype(frequency_mode) get_frequency_mode() const { return frequency_mode; }
+	decltype(bitrate) get_bitrate() const { return bitrate; }
+	decltype(bitrate_mode) get_bitrate_mode() const { return bitrate_mode; }
+	decltype(frequency_mss_status) get_frequency_mss_status() const
+	{
+		return frequency_mss_status;
+	}
 
 	void set_frequency(uint32_t f, selection_mode mode) noexcept;
 	void set_bitrate(uint32_t rate, selection_mode mode) noexcept;

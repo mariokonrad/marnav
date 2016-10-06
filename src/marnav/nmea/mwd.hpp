@@ -63,14 +63,14 @@ private:
 	utils::optional<unit::velocity> speed_ms_unit;
 
 public:
-	MARNAV_NMEA_GETTER(direction_true)
-	MARNAV_NMEA_GETTER(direction_true_ref)
-	MARNAV_NMEA_GETTER(direction_mag)
-	MARNAV_NMEA_GETTER(direction_mag_ref)
-	MARNAV_NMEA_GETTER(speed_kn)
-	MARNAV_NMEA_GETTER(speed_kn_unit)
-	MARNAV_NMEA_GETTER(speed_ms)
-	MARNAV_NMEA_GETTER(speed_ms_unit)
+	decltype(direction_true) get_direction_true() const { return direction_true; }
+	decltype(direction_true_ref) get_direction_true_ref() const { return direction_true_ref; }
+	decltype(direction_mag) get_direction_mag() const { return direction_mag; }
+	decltype(direction_mag_ref) get_direction_mag_ref() const { return direction_mag_ref; }
+	decltype(speed_kn) get_speed_kn() const { return speed_kn; }
+	decltype(speed_kn_unit) get_speed_kn_unit() const { return speed_kn_unit; }
+	decltype(speed_ms) get_speed_ms() const { return speed_ms; }
+	decltype(speed_ms_unit) get_speed_ms_unit() const { return speed_ms_unit; }
 
 	void set_direction_true(double t) noexcept;
 	void set_direction_mag(double t) noexcept;
