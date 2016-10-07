@@ -7,6 +7,9 @@ export CONFIG_BASE=${SCRIPT_BASE}/buildconf.d
 # takes default value if provided by the environment
 export BUILD_DIR=${BUILD_DIR:-${BASE}/build}
 
+# ask system about number of processors, accept already specified number
+export NUM_PROC=${NUM_PROC:-$(cat /proc/cpuinfo | grep -E "^processor" | wc -l)}
+
 function valid_target()
 {
 	for t in ${CONFIG_BASE}/* ; do
@@ -79,9 +82,13 @@ if [ $(valid_target "$target") != "found" ] ; then
 	exit 1
 fi
 
-# check for cmake
+# check for tools
 if [ -z "$(which cmake)" ] ; then
 	echo "error: no cmake found. aborting."
+	exit 1
+fi
+if [ -z "$(which make)" ] ; then
+	echo "error: no make found. aborting."
 	exit 1
 fi
 
@@ -91,13 +98,16 @@ if [ -d ${BUILD_DIR} ] ; then
 fi
 mkdir -p ${BUILD_DIR}
 cd ${BUILD_DIR}
-cmake $(cat ${CONFIG_BASE}/${target}) -DCMAKE_EXPORT_COMPILE_COMMANDS=YES ${BASE}
+cmake -G "Unix Makefiles" \
+	$(cat ${CONFIG_BASE}/${target}) \
+	-DCMAKE_EXPORT_COMPILE_COMMANDS=YES \
+	${BASE}
 
 # only prepare, do not build or test
 if [ "$only_prepare" == "yes" ] ; then exit 0 ; fi
 
 # build
-cmake --build .
+cmake --build . -- -j ${NUM_PROC}
 
 # perform tests
 cmake --build . --target unittest

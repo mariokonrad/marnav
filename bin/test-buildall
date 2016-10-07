@@ -6,6 +6,9 @@ export SCRIPT_BASE=$(dirname `readlink -f $0`)
 export BASE=${SCRIPT_BASE}/..
 export BUILD=${BASE}/build
 
+# ask system about number of processors, accept already specified number
+export NUM_PROC=${NUM_PROC:-$(cat /proc/cpuinfo | grep -E "^processor" | wc -l)}
+
 # prepare master build directory
 if [ -d ${BUILD} ] ; then
 	rm -fr ${BUILD}
