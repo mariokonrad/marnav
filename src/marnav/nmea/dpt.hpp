@@ -52,9 +52,12 @@ private:
 	utils::optional<double> max_depth;
 
 public:
-	decltype(depth_meter) get_depth_meter() const { return depth_meter; }
-	decltype(transducer_offset) get_transducer_offset() const { return transducer_offset; }
-	decltype(max_depth) get_max_depth() const { return max_depth; }
+	decltype(depth_meter) get_depth_meter() const noexcept { return depth_meter; }
+	decltype(transducer_offset) get_transducer_offset() const noexcept
+	{
+		return transducer_offset;
+	}
+	decltype(max_depth) get_max_depth() const noexcept { return max_depth; }
 
 	void set_depth_meter(double t) noexcept { depth_meter = t; }
 	void set_transducer_offset(double t) noexcept { transducer_offset = t; }

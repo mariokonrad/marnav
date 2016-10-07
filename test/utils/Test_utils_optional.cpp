@@ -20,7 +20,7 @@ public:
 		// EXPECT_TRUE(std::is_trivially_copy_constructible<opt>::value);
 		EXPECT_TRUE(std::is_move_constructible<opt>::value);
 		EXPECT_TRUE(std::is_copy_assignable<opt>::value);
-		EXPECT_FALSE(std::is_nothrow_copy_assignable<opt>::value);
+		EXPECT_TRUE(std::is_nothrow_copy_assignable<opt>::value);
 		// EXPECT_TRUE(std::is_trivially_copy_assignable<opt>::value);
 		EXPECT_TRUE(std::is_move_assignable<opt>::value);
 		EXPECT_TRUE(std::is_destructible<opt>::value);

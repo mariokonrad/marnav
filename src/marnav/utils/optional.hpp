@@ -30,7 +30,11 @@ public:
 	// constructors
 
 	/// Initializes the optional with the default constructed data.
-	constexpr optional() noexcept : flag(false), data() {}
+	constexpr optional() noexcept
+		: flag(false)
+		, data()
+	{
+	}
 
 	constexpr optional(const T & data)
 		: flag(true)
@@ -38,14 +42,27 @@ public:
 	{
 	}
 
-	constexpr optional(T && data) noexcept : flag(true), data(std::move(data)) {}
+	constexpr optional(T && data) noexcept
+		: flag(true)
+		, data(std::move(data))
+	{
+	}
 
-	optional(const optional &) = default;
-	optional(optional &&) noexcept = default;
+	optional(const optional & other) noexcept
+		: flag(other.flag)
+		, data(other.data)
+	{
+	}
+
+	optional(optional && other) noexcept
+		: flag(std::move(other.flag))
+		, data(std::move(other.data))
+	{
+	}
 
 	// assignment
 
-	optional & operator=(const optional & other)
+	optional & operator=(const optional & other) noexcept
 	{
 		this->data = other.data;
 		this->flag = other.flag;
