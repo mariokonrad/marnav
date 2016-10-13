@@ -51,7 +51,7 @@ public:
 	dtm & operator=(dtm &&) = default;
 
 protected:
-	dtm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
+	dtm(talker talk, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:

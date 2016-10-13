@@ -54,8 +54,8 @@ pgrmz::pgrmz()
 }
 
 pgrmz::pgrmz(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+	talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	if (std::distance(first, last) != 3)
 		throw std::invalid_argument{"invalid number of fields in pgrmz"};

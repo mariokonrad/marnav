@@ -27,8 +27,8 @@ TEST_F(Test_nmea_gst, parse)
 
 TEST_F(Test_nmea_gst, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::gst>("@@", {7, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::gst>("@@", {9, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::gst>(nmea::talker_id::none, {7, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::gst>(nmea::talker_id::none, {9, "@"}));
 }
 
 TEST_F(Test_nmea_gst, empty_to_string)

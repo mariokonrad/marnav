@@ -36,14 +36,14 @@ public:
 	constexpr static const char * TAG = "DPT";
 
 	dpt();
-	dpt(const std::string & talker);
+	dpt(talker talk);
 	dpt(const dpt &) = default;
 	dpt & operator=(const dpt &) = default;
 	dpt(dpt &&) = default;
 	dpt & operator=(dpt &&) = default;
 
 protected:
-	dpt(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
+	dpt(talker talk, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:

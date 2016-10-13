@@ -15,8 +15,8 @@ bwr::bwr()
 {
 }
 
-bwr::bwr(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+bwr::bwr(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	const auto n = std::distance(first, last);
 	if ((n < 12) || (n > 13))

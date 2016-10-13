@@ -50,7 +50,7 @@ TEST_F(Test_nmea, make_sentence_invalid_checksum)
 TEST_F(Test_nmea, make_sentence_minimal_possible_sentence)
 {
 	try {
-		nmea::make_sentence("$XXYYY*59");
+		nmea::make_sentence("$IIYYY*59");
 	} catch (std::exception & e) {
 		EXPECT_STREQ("unknown sentence in nmea/find_parse_func: YYY", e.what());
 	}

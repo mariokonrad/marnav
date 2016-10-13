@@ -29,7 +29,7 @@ public:
 	vdo & operator=(vdo &&) = default;
 
 protected:
-	vdo(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
+	vdo(talker talk, fields::const_iterator first, fields::const_iterator last);
 };
 }
 }

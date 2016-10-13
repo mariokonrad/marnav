@@ -14,8 +14,8 @@ r00::r00()
 {
 }
 
-r00::r00(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+r00::r00(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	if (std::distance(first, last) != r00::max_waypoint_ids)
 		throw std::invalid_argument{"invalid number of fields in r00"};

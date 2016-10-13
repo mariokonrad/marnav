@@ -51,7 +51,7 @@ public:
 	xdr & operator=(xdr &&) = default;
 
 protected:
-	xdr(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
+	xdr(talker talk, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:

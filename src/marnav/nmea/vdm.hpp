@@ -43,8 +43,8 @@ public:
 	vdm & operator=(vdm &&) = default;
 
 protected:
-	vdm(sentence_id id, const std::string & tag, const std::string & talker);
-	vdm(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
+	vdm(sentence_id id, const std::string & tag, talker talk);
+	vdm(talker talk, fields::const_iterator first, fields::const_iterator last);
 
 	virtual std::vector<std::string> get_data() const override;
 	virtual char get_start_token() const override { return start_token_ais; }

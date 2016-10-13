@@ -14,8 +14,8 @@ xte::xte()
 {
 }
 
-xte::xte(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+xte::xte(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	const auto size = std::distance(first, last);
 	if ((size < 5) || (size > 6))

@@ -14,8 +14,8 @@ sfi::sfi()
 {
 }
 
-sfi::sfi(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+sfi::sfi(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	const auto size = std::distance(first, last);
 	if ((size < 2) || (size > 2 + max_number_of_frequencies * 2))

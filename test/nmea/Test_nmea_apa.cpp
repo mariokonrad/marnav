@@ -26,8 +26,8 @@ TEST_F(Test_nmea_apa, parse)
 
 TEST_F(Test_nmea_apa, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::apa>("@@", {9, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::apa>("@@", {11, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::apa>(nmea::talker_id::none, {9, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::apa>(nmea::talker_id::none, {11, "@"}));
 }
 
 TEST_F(Test_nmea_apa, empty_to_string)

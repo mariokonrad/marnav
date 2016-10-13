@@ -17,8 +17,8 @@ gll::gll()
 {
 }
 
-gll::gll(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+gll::gll(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	// older version has no 'mode_indicator'
 	const auto size = std::distance(first, last);

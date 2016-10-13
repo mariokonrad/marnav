@@ -166,8 +166,8 @@ dsc::dsc()
 }
 
 /// @todo Read and interpret more fields
-dsc::dsc(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+dsc::dsc(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	if (std::distance(first, last) != 11)
 		throw std::invalid_argument{"invalid number of fields in dsc"};

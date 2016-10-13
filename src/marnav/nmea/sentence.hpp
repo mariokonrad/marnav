@@ -25,7 +25,7 @@ public:
 	/// This signature is used in all subclasses to parse data fields
 	/// of a particular sentence.
 	using parse_function = std::function<std::unique_ptr<sentence>(
-		const std::string &, fields::const_iterator, fields::const_iterator)>;
+		talker, fields::const_iterator, fields::const_iterator)>;
 
 	/// Maximum length of a NMEA sentence (raw format as string).
 	constexpr static int max_length = 82;
@@ -49,19 +49,19 @@ public:
 
 	sentence_id id() const { return id_; }
 	std::string tag() const { return tag_; }
-	std::string talker() const { return talker_; }
+	talker get_talker() const { return talker_; }
 
 	/// Sets the talker of the sentence.
 	///
 	/// @note All subclasses specify a default talker at construction.
 	///   This method is used to override the default or to set the
 	///   talker ID explicitly.
-	void set_talker(const std::string & talker);
+	void set_talker(const talker & t) { talker_ = t; }
 
 	friend std::string to_string(const sentence &);
 
 protected:
-	sentence(sentence_id id, const std::string & tag, const std::string & talker);
+	sentence(sentence_id id, const std::string & tag, talker t);
 	virtual std::vector<std::string> get_data() const = 0;
 	virtual char get_start_token() const { return start_token; }
 	virtual char get_end_token() const { return end_token; }
@@ -69,7 +69,7 @@ protected:
 private:
 	const sentence_id id_;
 	const std::string tag_;
-	std::string talker_;
+	talker talker_;
 };
 
 // Class `sentence` must be an abstract class, this protectes
@@ -79,9 +79,9 @@ static_assert(std::is_abstract<sentence>::value, "");
 
 /// Helper function to parse a specific sentence.
 template <class T>
-std::unique_ptr<sentence> sentence_parse(const std::string & talker, const sentence::fields & f)
+std::unique_ptr<sentence> sentence_parse(talker talk, const sentence::fields & f)
 {
-	return std::unique_ptr<T>(new T{talker, f.begin(), f.end()});
+	return std::unique_ptr<T>(new T{talk, f.begin(), f.end()});
 }
 
 /// Creates the configured sentence object from the specified string.
@@ -100,11 +100,11 @@ std::unique_ptr<sentence> sentence_parse(const std::string & talker, const sente
 template <typename T> T create_sentence(const std::string & s)
 {
 	detail::create_sentence_base_class_check<T>();
-	std::string talker;
+	talker talk{talker_id::none};
 	std::string tag;
 	std::vector<std::string> fields;
-	std::tie(talker, tag, fields) = detail::extract_sentence_information(s);
-	return T{talker, std::next(std::begin(fields)), std::prev(std::end(fields))};
+	std::tie(talk, tag, fields) = detail::extract_sentence_information(s);
+	return T{talk, std::next(std::begin(fields)), std::prev(std::end(fields))};
 }
 
 /// Renders the specified sentence into a string.
@@ -195,29 +195,28 @@ template <class T> const T * sentence_cast(const std::unique_ptr<sentence> & s)
 
 /// @cond DEV
 
-#define MARNAV_NMEA_SENTENCE_FRIENDS(s)                                                 \
-	friend std::unique_ptr<sentence> detail::parse_##s(const std::string & talker,      \
-		sentence::fields::const_iterator first, sentence::fields::const_iterator last); \
-	template <class T>                                                                  \
-	friend std::unique_ptr<sentence> sentence_parse(                                    \
-		const std::string & talker, const sentence::fields & f);                        \
+#define MARNAV_NMEA_SENTENCE_FRIENDS(s)                                                       \
+	friend std::unique_ptr<sentence> detail::parse_##s(talker talk,                           \
+		sentence::fields::const_iterator first, sentence::fields::const_iterator last);       \
+	template <class T>                                                                        \
+	friend std::unique_ptr<sentence> sentence_parse(talker talk, const sentence::fields & f); \
 	template <typename T> friend T create_sentence(const std::string &);
 
-#define MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(s)                                      \
-	namespace detail                                                                    \
-	{                                                                                   \
-	std::unique_ptr<sentence> parse_##s(const std::string & talker,                     \
-		sentence::fields::const_iterator first, sentence::fields::const_iterator last); \
+#define MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(s)                                           \
+	namespace detail                                                                         \
+	{                                                                                        \
+	std::unique_ptr<sentence> parse_##s(talker talk, sentence::fields::const_iterator first, \
+		sentence::fields::const_iterator last);                                              \
 	}
 
-#define MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(s)                                      \
-	namespace detail                                                                   \
-	{                                                                                  \
-	std::unique_ptr<sentence> parse_##s(const std::string & talker,                    \
-		sentence::fields::const_iterator first, sentence::fields::const_iterator last) \
-	{                                                                                  \
-		return std::unique_ptr<s>(new s{talker, first, last});                         \
-	}                                                                                  \
+#define MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(s)                                            \
+	namespace detail                                                                         \
+	{                                                                                        \
+	std::unique_ptr<sentence> parse_##s(talker talk, sentence::fields::const_iterator first, \
+		sentence::fields::const_iterator last)                                               \
+	{                                                                                        \
+		return std::unique_ptr<s>(new s{talk, first, last});                                 \
+	}                                                                                        \
 	}
 
 /// @endcond

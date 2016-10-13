@@ -35,8 +35,8 @@ TEST_F(Test_nmea_mwv, parse)
 
 TEST_F(Test_nmea_mwv, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::mwv>("@@", {4, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::mwv>("@@", {6, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::mwv>(nmea::talker_id::none, {4, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::mwv>(nmea::talker_id::none, {6, "@"}));
 }
 
 TEST_F(Test_nmea_mwv, empty_to_string)

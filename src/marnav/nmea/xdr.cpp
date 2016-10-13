@@ -28,8 +28,8 @@ xdr::xdr()
 {
 }
 
-xdr::xdr(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+xdr::xdr(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	const auto size = std::distance(first, last);
 	if ((size < 1) || (size > 4 * xdr::max_transducer_info))

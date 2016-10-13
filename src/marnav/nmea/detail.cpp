@@ -21,7 +21,7 @@ namespace detail
 /// - The `tag` extracted from the raw NMEA sentence.
 /// - Extracted `fields` from the raw NMEA sentence.
 ///
-std::tuple<std::string, std::string, std::vector<std::string>> extract_sentence_information(
+std::tuple<talker, std::string, std::vector<std::string>> extract_sentence_information(
 	const std::string & s, bool ignore_checksum)
 {
 	detail::check_raw_sentence(s);
@@ -37,11 +37,11 @@ std::tuple<std::string, std::string, std::vector<std::string>> extract_sentence_
 	// extract address and posibly talker_id and tag.
 	// check for vendor extension is necessary because the address field of this extensions
 	// to not follow the pattern talker_id/tag
-	std::string talker;
+	talker talk{talker_id::none};
 	std::string tag;
-	std::tie(talker, tag) = detail::parse_address(fields.front());
+	std::tie(talk, tag) = detail::parse_address(fields.front());
 
-	return std::make_tuple(talker, tag, fields);
+	return std::make_tuple(talk, tag, fields);
 }
 }
 /// @endcond

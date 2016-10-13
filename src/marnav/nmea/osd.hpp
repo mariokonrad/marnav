@@ -47,7 +47,7 @@ public:
 	osd & operator=(osd &&) = default;
 
 protected:
-	osd(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
+	osd(talker talk, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:

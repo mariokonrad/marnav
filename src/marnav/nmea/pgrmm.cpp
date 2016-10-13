@@ -15,8 +15,8 @@ pgrmm::pgrmm()
 }
 
 pgrmm::pgrmm(
-	const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+	talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	if (std::distance(first, last) != 1)
 		throw std::invalid_argument{"invalid number of fields in pgrmm"};

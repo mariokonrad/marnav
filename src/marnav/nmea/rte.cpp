@@ -14,8 +14,8 @@ rte::rte()
 {
 }
 
-rte::rte(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+rte::rte(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	const auto size = std::distance(first, last);
 	if ((size < 3) || (size > max_waypoints + 3))

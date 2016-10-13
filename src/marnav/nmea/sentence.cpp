@@ -8,19 +8,11 @@ namespace nmea
 {
 constexpr int sentence::max_length;
 
-sentence::sentence(sentence_id id, const std::string & tag, const std::string & talker)
+sentence::sentence(sentence_id id, const std::string & tag, talker t)
 	: id_(id)
 	, tag_(tag)
-	, talker_(talker)
+	, talker_(t)
 {
-}
-
-/// Overwrites the default talker for a sentence.
-void sentence::set_talker(const std::string & talker)
-{
-	if (talker.size() != 2)
-		return;
-	talker_ = talker;
 }
 
 std::string to_string(const sentence & s)
@@ -28,7 +20,7 @@ std::string to_string(const sentence & s)
 	std::string result;
 	result.reserve(sentence::max_length);
 	result += s.get_start_token();
-	result += s.talker();
+	result += s.get_talker().str();
 	result += s.tag();
 	for (auto const & data : s.get_data()) {
 		result += ",";

@@ -111,6 +111,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/geo/cpa.cpp
 	marnav/geo/geodesic.cpp
 	marnav/nmea/waypoint.cpp
+	marnav/nmea/talker_id.cpp
 	marnav/nmea/convert.cpp
 	marnav/nmea/manufacturer.cpp
 	marnav/nmea/checks.cpp

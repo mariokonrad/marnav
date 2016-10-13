@@ -49,7 +49,7 @@ public:
 	mwd & operator=(mwd &&) = default;
 
 protected:
-	mwd(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
+	mwd(talker talk, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:

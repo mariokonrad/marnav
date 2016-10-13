@@ -16,8 +16,8 @@ rmc::rmc()
 {
 }
 
-rmc::rmc(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+rmc::rmc(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	// before and after NMEA 2.3
 	const auto size = std::distance(first, last);

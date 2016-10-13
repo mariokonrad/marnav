@@ -15,8 +15,8 @@ bwc::bwc()
 {
 }
 
-bwc::bwc(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+bwc::bwc(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	const auto size = std::distance(first, last);
 	if ((size != 12) && (size != 13))

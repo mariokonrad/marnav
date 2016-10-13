@@ -39,7 +39,7 @@ public:
 	rot & operator=(rot &&) = default;
 
 protected:
-	rot(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
+	rot(talker talk, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:

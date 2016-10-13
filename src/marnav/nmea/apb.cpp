@@ -15,8 +15,8 @@ apb::apb()
 {
 }
 
-apb::apb(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+apb::apb(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	const auto size = std::distance(first, last);
 	if ((size < 14) || (size > 15))

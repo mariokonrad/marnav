@@ -27,8 +27,8 @@ TEST_F(Test_nmea_dbt, parse)
 
 TEST_F(Test_nmea_dbt, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::dbt>("@@", {5, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::dbt>("@@", {7, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::dbt>(nmea::talker_id::none, {5, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::dbt>(nmea::talker_id::none, {7, "@"}));
 }
 
 TEST_F(Test_nmea_dbt, empty_to_string)

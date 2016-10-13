@@ -27,8 +27,8 @@ TEST_F(Test_nmea_rsd, parse)
 
 TEST_F(Test_nmea_rsd, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::rsd>("@@", {12, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::rsd>("@@", {14, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::rsd>(nmea::talker_id::none, {12, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::rsd>(nmea::talker_id::none, {14, "@"}));
 }
 
 TEST_F(Test_nmea_rsd, empty_to_string)

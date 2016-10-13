@@ -27,8 +27,8 @@ TEST_F(Test_nmea_vtg, parse)
 
 TEST_F(Test_nmea_vtg, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vtg>("@@", {7, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vtg>("@@", {10, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vtg>(nmea::talker_id::none, {7, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vtg>(nmea::talker_id::none, {10, "@"}));
 }
 
 TEST_F(Test_nmea_vtg, empty_to_string)

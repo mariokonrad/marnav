@@ -53,7 +53,7 @@ public:
 	gns & operator=(gns &&) = default;
 
 protected:
-	gns(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
+	gns(talker talk, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:

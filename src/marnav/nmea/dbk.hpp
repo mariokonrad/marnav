@@ -46,7 +46,7 @@ public:
 	dbk & operator=(dbk &&) = default;
 
 protected:
-	dbk(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
+	dbk(talker talk, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:

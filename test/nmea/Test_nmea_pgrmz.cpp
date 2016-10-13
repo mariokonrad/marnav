@@ -27,8 +27,8 @@ TEST_F(Test_nmea_pgrmz, parse)
 
 TEST_F(Test_nmea_pgrmz, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::pgrmz>("@@", {2, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::pgrmz>("@@", {4, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::pgrmz>(nmea::talker_id::none, {2, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::pgrmz>(nmea::talker_id::none, {4, "@"}));
 }
 
 TEST_F(Test_nmea_pgrmz, empty_to_string)

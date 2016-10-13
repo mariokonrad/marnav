@@ -14,13 +14,13 @@ dpt::dpt()
 {
 }
 
-dpt::dpt(const std::string & talker)
-	: sentence(ID, TAG, talker)
+dpt::dpt(talker talk)
+	: sentence(ID, TAG, talk)
 {
 }
 
-dpt::dpt(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+dpt::dpt(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	const auto size = std::distance(first, last);
 	if ((size < 2) || (size > 3))

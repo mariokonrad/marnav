@@ -27,8 +27,8 @@ TEST_F(Test_nmea_vdr, parse)
 
 TEST_F(Test_nmea_vdr, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vdr>("@@", {5, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vdr>("@@", {7, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vdr>(nmea::talker_id::none, {5, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vdr>(nmea::talker_id::none, {7, "@"}));
 }
 
 TEST_F(Test_nmea_vdr, empty_to_string)

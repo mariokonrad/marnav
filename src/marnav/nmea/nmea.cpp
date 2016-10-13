@@ -1,5 +1,6 @@
 #include "nmea.hpp"
 #include <algorithm>
+#include <string>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/checksum.hpp>
 #include <marnav/nmea/date.hpp>
@@ -190,15 +191,14 @@ static bool is_proprietary(const std::string & s)
 /// @note This function must be defined here, not in the file detail.cpp,
 ///       because it needs access to the known sentences, which the other file
 ///       does not, nor should have.
-std::tuple<std::string, std::string> parse_address(
-	const std::string & address, bool ignore_unknown)
+std::tuple<talker, std::string> parse_address(const std::string & address, bool ignore_unknown)
 {
 	if (address.empty())
 		throw std::invalid_argument{"invalid/malformed address in nmea/parse_address"};
 
 	// check for proprietary extension / vendor extension
 	if (is_proprietary(address))
-		return make_tuple(std::string{}, address);
+		return make_tuple(talker_id::none, address);
 
 	if (!ignore_unknown) {
 		// search in all known sentences for 'long' tags. this is a special case
@@ -213,7 +213,7 @@ std::tuple<std::string, std::string> parse_address(
 	if (address.size() != 5) // talker ID:2 + tag:3
 		throw std::invalid_argument{"unknown or malformed address field: [" + address + "]"};
 
-	return make_tuple(address.substr(0, 2), address.substr(2, 3));
+	return make_tuple(make_talker(address.substr(0, 2)), address.substr(2, 3));
 }
 
 /// Computes and checks the checksum of the specified sentence against the
@@ -317,12 +317,12 @@ sentence_id tag_to_id(const std::string & tag)
 /// @endcode
 std::unique_ptr<sentence> make_sentence(const std::string & s, bool ignore_checksum)
 {
-	std::string talker;
+	talker talk{talker_id::none};
 	std::string tag;
 	std::vector<std::string> fields;
-	std::tie(talker, tag, fields) = detail::extract_sentence_information(s, ignore_checksum);
+	std::tie(talk, tag, fields) = detail::extract_sentence_information(s, ignore_checksum);
 	return detail::find_parse_func(tag)(
-		talker, std::next(std::begin(fields)), std::prev(std::end(fields)));
+		talk, std::next(std::begin(fields)), std::prev(std::end(fields)));
 }
 
 /// Extracts and returns the sentence ID of the specified raw NMEA sentence.
@@ -340,9 +340,9 @@ sentence_id extract_id(const std::string & s)
 	if (pos == std::string::npos)
 		throw std::invalid_argument{"malformed sentence in extract_id"};
 
-	std::string talker;
+	talker talk{talker_id::none};
 	std::string tag;
-	std::tie(talker, tag) = detail::parse_address(s.substr(1, pos - 1), true);
+	std::tie(talk, tag) = detail::parse_address(s.substr(1, pos - 1), true);
 
 	return tag_to_id(tag);
 }

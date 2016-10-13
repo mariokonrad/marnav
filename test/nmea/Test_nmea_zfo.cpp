@@ -27,8 +27,8 @@ TEST_F(Test_nmea_zfo, parse)
 
 TEST_F(Test_nmea_zfo, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::zfo>("@@", {2, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::zfo>("@@", {4, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::zfo>(nmea::talker_id::none, {2, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::zfo>(nmea::talker_id::none, {4, "@"}));
 }
 
 TEST_F(Test_nmea_zfo, empty_to_string)

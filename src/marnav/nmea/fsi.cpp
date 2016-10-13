@@ -15,8 +15,8 @@ fsi::fsi()
 {
 }
 
-fsi::fsi(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+fsi::fsi(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	if (std::distance(first, last) != 5)
 		throw std::invalid_argument{"invalid number of fields in fsi"};

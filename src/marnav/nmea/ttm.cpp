@@ -15,8 +15,8 @@ ttm::ttm()
 {
 }
 
-ttm::ttm(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+ttm::ttm(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	// according to http://catb.org/gpsd/NMEA.html#_ttm_tracked_target_message
 	// there are fields 14 and 15, but not supported by this implementation.

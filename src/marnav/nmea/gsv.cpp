@@ -27,8 +27,8 @@ gsv::gsv()
 {
 }
 
-gsv::gsv(const std::string & talker, fields::const_iterator first, fields::const_iterator last)
-	: sentence(ID, TAG, talker)
+gsv::gsv(talker talk, fields::const_iterator first, fields::const_iterator last)
+	: sentence(ID, TAG, talk)
 {
 	// empty fields for satellite information are not necessary, therefore
 	// there are a variable number of fields. however, the first 3 are

@@ -27,8 +27,8 @@ TEST_F(Test_nmea_fsi, parse)
 
 TEST_F(Test_nmea_fsi, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::fsi>("@@", {4, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::fsi>("@@", {6, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::fsi>(nmea::talker_id::none, {4, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::fsi>(nmea::talker_id::none, {6, "@"}));
 }
 
 TEST_F(Test_nmea_fsi, empty_to_string)

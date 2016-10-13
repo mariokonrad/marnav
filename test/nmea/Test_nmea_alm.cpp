@@ -34,8 +34,8 @@ TEST_F(Test_nmea_alm, parse_invalid_satellite_prn)
 
 TEST_F(Test_nmea_alm, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::alm>("@@", {14, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::alm>("@@", {16, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::alm>(nmea::talker_id::none, {14, "@"}));
+	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::alm>(nmea::talker_id::none, {16, "@"}));
 }
 
 TEST_F(Test_nmea_alm, empty_to_string)

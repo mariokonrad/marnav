@@ -39,7 +39,7 @@ public:
 	r00 & operator=(r00 &&) = default;
 
 protected:
-	r00(const std::string & talker, fields::const_iterator first, fields::const_iterator last);
+	r00(talker talk, fields::const_iterator first, fields::const_iterator last);
 	virtual std::vector<std::string> get_data() const override;
 
 private:
