@@ -1,0 +1,61 @@
+#!/bin/bash -eu
+
+# builds different branches to do benchmarks
+
+export SCRIPT_BASE=$(dirname `readlink -f $0`)
+export BASE=${SCRIPT_BASE}/..
+export BUILD=${BASE}/build
+
+# check arguments
+if [ $# -eq 0 ] ; then
+	echo "no branches specified. aborting."
+	echo ""
+	echo "usage: $0 branch [branch ...]"
+	echo ""
+	exit 1
+fi
+
+# ask system about number of processors, accept already specified number
+export NUM_PROC=${NUM_PROC:-$(cat /proc/cpuinfo | grep -E "^processor" | wc -l)}
+
+# prepare master build directory
+if [ -d ${BUILD} ] ; then
+	rm -fr ${BUILD}
+fi
+mkdir -p ${BUILD}
+
+# execute builds
+for branch in $* ; do
+	logfile=$(echo "${BUILD}/${branch}.log")
+	echo -n "branch: ${branch} "
+	printf '%*s' $((40 - ${#branch})) "" | tr ' ' '.'
+
+	# prepare branch
+	git checkout ${branch} >> ${logfile} 2>&1
+
+	# build
+	set +e
+	BUILD_DIR=${BUILD}/${branch} ${SCRIPT_BASE}/bld gcc-bench >&${logfile}
+	if [ $? -eq 0 ] ; then
+		echo "SUCCESS" >> ${logfile}
+		echo -n -e " \033[32mSUCCESS\033[0m"
+	else
+		echo "FAILURE" >> ${logfile}
+		echo -n -e " \033[31mFAILURE\033[0m"
+	fi
+	set -e
+
+	# perform benchmark
+	${BUILD}/${branch}/test/benchmark_nmea_sentence --benchmark_format=csv \
+		> ${BUILD}/bench-nmea-${branch}.csv 2>/dev/null
+
+	echo -n -e " \033[33mBENCHMARK DONE\033[0m"
+
+	rm -fr ${BUILD}/${branch}
+done
+
+echo ""
+git checkout master
+
+# TODO: consolidate benchmark
+
