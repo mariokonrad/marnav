@@ -334,6 +334,11 @@ static std::string render(const marnav::nmea::sentence_id t)
 	return marnav::nmea::to_name(t);
 }
 
+static std::string render(const marnav::nmea::talker t)
+{
+	return marnav::nmea::to_name(t);
+}
+
 static std::string render(const marnav::nmea::unit::distance t)
 {
 	return marnav::nmea::to_name(t);
@@ -1269,7 +1274,8 @@ static void dump_nmea(const std::string & line)
 				"%s%s%s\n\tnot implemented\n\n", terminal::magenta, line, terminal::normal);
 		} else {
 			fmt::printf("%s%s%s\n", terminal::green, line, terminal::normal);
-			fmt::printf("\t%s\n", detail::render(s->id()));
+			fmt::printf("\tName  : %s\n", detail::render(s->id()));
+			fmt::printf("\tTalker: %s\n", detail::render(s->get_talker()));
 			i->func(s.get());
 			fmt::printf("\n");
 		}
@@ -1392,7 +1398,6 @@ static void process(std::function<bool(std::string &)> source)
 		}
 	}
 }
-
 }
 
 int main(int argc, char ** argv)

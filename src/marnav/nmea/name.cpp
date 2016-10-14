@@ -1,4 +1,6 @@
 #include "name.hpp"
+#include <algorithm>
+#include <array>
 
 namespace marnav
 {
@@ -255,6 +257,85 @@ std::string to_name(sentence_id t)
 			return "Transas VTS / SML tracking system report";
 	}
 	return "-";
+}
+
+std::string to_name(talker t)
+{
+	using entry = std::pair<talker, const char *>;
+	static constexpr const std::array<entry, talker_id::num_talkers> talkers = {{
+		{talker_id::none, "used for vendor extensions"},
+		{talker_id::autopilot_general, "Autopilot (General)"},
+		{talker_id::autopilot_magnetic, "Autopilot (Magnetic)"},
+		{talker_id::beidou_2, "Beidou (China)"},
+		{talker_id::computer_calculator, "programmed calculator (obsolete)"},
+		{talker_id::communications_dsc, "digital selective calling (DSC)"},
+		{talker_id::computer_memory, "memory data (obsolete)"},
+		{talker_id::communications_satellite, "Satellite Telephone"},
+		{talker_id::communications_mfhf, "Radio-Telephone (MF/HF)"},
+		{talker_id::communications_vhf, "Radio-Telephone (VHF)"},
+		{talker_id::communications_scanning_receiver, "Scanning Receiver"},
+		{talker_id::decca_navigation, "DECCA Navigation (obsolete)"},
+		{talker_id::direction_finder, "Direction Finder"},
+		{talker_id::electronic_chart_display,
+			"Electronic Chart Display & Information System (ECDIS)"},
+		{talker_id::emergency_position_indicating_beacon,
+			"Emergency Position Indicating Beacon (EPIRB)"},
+		{talker_id::engine_room_monitoring_systems, "Engine Room Monitoring Systems"},
+		{talker_id::galileo, "Galileo (Europe)"}, {talker_id::beidou_1, "Beidou (China)"},
+		{talker_id::global_positioning_system, "Global Positioning System (GPS)"},
+		{talker_id::glonass, "GLONASS"},
+		{talker_id::mixed_gps_glonass, "Mixed GPS and GLONASS"},
+		{talker_id::magnetic_compass, "Heading - Magnetic Compass"},
+		{talker_id::north_seeking_gyro, "Heading - North Seeking Gyro"},
+		{talker_id::non_north_seeking_gyro, "Heading - Non North Seeking Gyro"},
+		{talker_id::integrated_instrumentation, "Integrated Instrumentation"},
+		{talker_id::integrated_navigation, "Integrated Navigation"},
+		{talker_id::loran_a, "Loran A (obsolete)"}, {talker_id::loran_c, "Loran C (obsolete)"},
+		{talker_id::microwave_positioning_system, "Microwave Positioning System (obsolete)"},
+		{talker_id::omega_navigation_system, "OMEGA Navigation System (obsolete)"},
+		{talker_id::distress_alarm_system, "Distress Alarm System (obsolete)"},
+		{talker_id::qzss_gps_augmentation_system, "QZSS GPS augmentation system (Japan)"},
+		{talker_id::radar, "RADAR and/or ARPA"}, {talker_id::sounder_depth, "Sounder, Depth"},
+		{talker_id::electronic_positioning_system,
+			"Electronic Positioning System, other/general"},
+		{talker_id::sounder_scanning, "Sounder, Scanning"},
+		{talker_id::turn_rate_indicator, "Turn Rate Indicator"},
+		{talker_id::transit_navigation_system, "TRANSIT Navigation System"},
+		{talker_id::velocity_sensor_doppler, "Velocity Sensor, Doppler, other/general"},
+		{talker_id::velocity_sensor_water_magnetic,
+			"Velocity Sensor, Speed Log, Water, Magnetic"},
+		{talker_id::velocity_sensor_water_mechanical,
+			"Velocity Sensor, Speed Log, Water, Mechanical"},
+		{talker_id::weather_instruments, "Weather Instruments"},
+		{talker_id::transducer_temperature, "Transducer - Temperature (obsolete)"},
+		{talker_id::transducer_displacement,
+			"Transducer - Displacement, Angular or Linear (obsolete)"},
+		{talker_id::transducer_frequency, "Transducer - Frequency (obsolete)"},
+		{talker_id::transducer_level, "Transducer - Level (obsolete)"},
+		{talker_id::transducer_pressure, "Transducer - Pressure (obsolete)"},
+		{talker_id::transducer_flow_rate, "Transducer - Flow Rate (obsolete)"},
+		{talker_id::transducer_tachometer, "Transducer - Tachometer (obsolete)"},
+		{talker_id::transducer_volume, "Transducer - Volume (obsolete)"},
+		{talker_id::transducer, "Transducer"},
+		{talker_id::timekeeper_atomic_clock, "Timekeeper - Atomic Clock"},
+		{talker_id::timekeeper_chronometer, "Timekeeper - Chronometer"},
+		{talker_id::timekeeper_quartz, "Timekeeper - Quartz"},
+		{talker_id::timekeeper_radio_update, "Timekeeper - Radio Update, WWV or WWVH"},
+		{talker_id::ais_base_station, "NMEA 4.0 Base AIS station"},
+		{talker_id::ais_dependent_base_station, "MMEA 4.0 Dependent AIS Base Station"},
+		{talker_id::ais_mobile_station, "Mobile AIS station"},
+		{talker_id::ais_aid_to_navigation_station, "NMEA 4.0 Aid to Navigation AIS station"},
+		{talker_id::ais_receiving_station, "NMEA 4.0 AIS Receiving Station"},
+		{talker_id::ais_limited_base_station, "NMEA 4.0 Limited Base Station"},
+		{talker_id::ais_transmitting_station, "NMEA 4.0 AIS Transmitting Station"},
+		{talker_id::ais_repeater_ais_station, "NMEA 4.0 Repeater AIS station"},
+		{talker_id::ais_base_station_obsolete, "Base AIS station (deprecated in NMEA 4.0)"},
+		{talker_id::ais_physical_shore_station, "NMEA 4.0 Physical Shore AIS Station"},
+	}};
+
+	const auto i = std::find_if(
+		std::begin(talkers), std::end(talkers), [&](const entry & e) { return e.first == t; });
+	return (i == std::end(talkers)) ? "-" : i->second;
 }
 
 std::string to_name(selection_mode t)
