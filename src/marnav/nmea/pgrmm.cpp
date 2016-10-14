@@ -14,8 +14,7 @@ pgrmm::pgrmm()
 {
 }
 
-pgrmm::pgrmm(
-	talker talk, fields::const_iterator first, fields::const_iterator last)
+pgrmm::pgrmm(talker talk, fields::const_iterator first, fields::const_iterator last)
 	: sentence(ID, TAG, talk)
 {
 	if (std::distance(first, last) != 1)
@@ -24,7 +23,10 @@ pgrmm::pgrmm(
 	read(*(first + 0), map_datum);
 }
 
-std::vector<std::string> pgrmm::get_data() const { return {to_string(map_datum)}; }
+std::vector<std::string> pgrmm::get_data() const
+{
+	return {to_string(map_datum)};
+}
 
 void pgrmm::set_map_datum(const std::string & t) noexcept
 {

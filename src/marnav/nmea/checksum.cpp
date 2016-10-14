@@ -15,7 +15,10 @@ checksum_error::checksum_error(uint8_t expected, uint8_t actual)
 /// @cond DEV
 namespace detail
 {
-static constexpr char hex_digit(unsigned int t) noexcept { return "0123456789ABCDEF"[t & 0xf]; }
+static constexpr char hex_digit(unsigned int t) noexcept
+{
+	return "0123456789ABCDEF"[t & 0xf];
+}
 }
 /// @endcond
 

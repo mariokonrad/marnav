@@ -14,8 +14,7 @@ pgrme::pgrme()
 {
 }
 
-pgrme::pgrme(
-	talker talk, fields::const_iterator first, fields::const_iterator last)
+pgrme::pgrme(talker talk, fields::const_iterator first, fields::const_iterator last)
 	: sentence(ID, TAG, talk)
 {
 	if (std::distance(first, last) != 6)

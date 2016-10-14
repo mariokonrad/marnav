@@ -21,7 +21,10 @@ static constexpr const double earth_semi_major_axis = 6378137.0; // [m]
 static constexpr const double earth_flattening = 1.0 / 298.257223563;
 
 /// Computes the square of the specified value.
-template <typename T> static T sqr(const T & a) { return a * a; }
+template <typename T> static T sqr(const T & a)
+{
+	return a * a;
+}
 
 /// Returns the spherical angle between the two specified position in rad.
 ///
@@ -149,8 +152,8 @@ double distance_ellipsoid_vincenty(
 	B = u_sqr / 1024.0 * (256.0 + u_sqr * (-128.0 + u_sqr * (74.0 - 47.0 * u_sqr))); // eq 4
 	d_sigma = B * sin_sigma
 		* (cos_2_sigma_m + B / 4.0 * (cos_sigma * (-1.0 + 2.0 * cos_sqr_2_sigma_m))
-				  - B / 6.0 * cos_2_sigma_m * (-3.0 + 4.0 * sin_sqr_sigma)
-					  * (-3.0 + 4.0 * cos_sqr_2_sigma_m)); // eq 6
+			  - B / 6.0 * cos_2_sigma_m * (-3.0 + 4.0 * sin_sqr_sigma)
+				  * (-3.0 + 4.0 * cos_sqr_2_sigma_m)); // eq 6
 	s = A * b * (sigma - d_sigma); // eq 7
 	alpha1 = atan((cos_U2 * sin_lambda) / (cos_U1 * sin_U2 - sin_U1 * cos_U2 * cos_lambda));
 	alpha2 = atan((cos_U1 * sin_lambda) / (-sin_U1 * cos_U2 + cos_U1 * sin_U2 * cos_lambda));
@@ -225,8 +228,7 @@ position point_ellipsoid_vincenty(
 		cos_sqr_2_sigma_m = sqr(cos_2_sigma_m);
 		cos_sigma = cos(sigma);
 		sin_sigma = sin(sigma);
-		double delta_sigma
-			= B * sin_sigma
+		double delta_sigma = B * sin_sigma
 			* (cos_2_sigma_m
 				  + B / 4.0 * (cos_sigma * (-1.0 + 2.0 * cos_sqr_2_sigma_m)
 								  - B / 6.0 * cos_2_sigma_m * (-3.0 + 4.0 * sqr(sin_sigma))

@@ -12,9 +12,15 @@ class Test_nmea_xtr : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_xtr, contruction) { EXPECT_NO_THROW(nmea::xtr xtr); }
+TEST_F(Test_nmea_xtr, contruction)
+{
+	EXPECT_NO_THROW(nmea::xtr xtr);
+}
 
-TEST_F(Test_nmea_xtr, properties) { nmea_sentence_traits<nmea::xtr>(); }
+TEST_F(Test_nmea_xtr, properties)
+{
+	nmea_sentence_traits<nmea::xtr>();
+}
 
 TEST_F(Test_nmea_xtr, parse)
 {

@@ -54,7 +54,10 @@ public:
 	// clang-format on
 };
 
-TEST_F(Test_seatalk_message_89, construction) { EXPECT_NO_THROW(message_89 m); }
+TEST_F(Test_seatalk_message_89, construction)
+{
+	EXPECT_NO_THROW(message_89 m);
+}
 
 TEST_F(Test_seatalk_message_89, parse_invalid_data_size)
 {

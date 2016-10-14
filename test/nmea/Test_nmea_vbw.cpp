@@ -12,9 +12,15 @@ class Test_nmea_vbw : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_vbw, contruction) { EXPECT_NO_THROW(nmea::vbw vbw); }
+TEST_F(Test_nmea_vbw, contruction)
+{
+	EXPECT_NO_THROW(nmea::vbw vbw);
+}
 
-TEST_F(Test_nmea_vbw, properties) { nmea_sentence_traits<nmea::vbw>(); }
+TEST_F(Test_nmea_vbw, properties)
+{
+	nmea_sentence_traits<nmea::vbw>();
+}
 
 TEST_F(Test_nmea_vbw, parse)
 {

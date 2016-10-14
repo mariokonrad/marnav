@@ -64,7 +64,10 @@ void trait_duration::check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms)
 /// @param[in] str The string to parse.
 /// @return The parsed time.
 /// @exception std::invalid_argument Thrown if the string is malformed.
-time time::parse(const std::string & str) { return parse_time<time>(str); }
+time time::parse(const std::string & str)
+{
+	return parse_time<time>(str);
+}
 
 /// Returns a string representation in the form 'hhmmss', does not render fractions of seconds.
 std::string to_string(const time & t)
@@ -109,7 +112,10 @@ std::string format(const nmea::time & t, unsigned int width)
 /// @param[in] str The string to parse.
 /// @return The parsed duration
 /// @exception std::invalid_argument Thrown if the string is malformed.
-duration duration::parse(const std::string & str) { return parse_time<duration>(str); }
+duration duration::parse(const std::string & str)
+{
+	return parse_time<duration>(str);
+}
 
 /// Returns a string representation in the form 'hhmmss', does not render fractions of seconds.
 std::string to_string(const duration & d)

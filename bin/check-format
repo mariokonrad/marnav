@@ -14,15 +14,13 @@ fi
 cd ${BASE}
 FILES=()
 for fn in $(find src test examples -type f -name "*.[ch]pp") ; do
-	d=$(${CLANG_FORMAT_BIN} $fn | diff $fn -)
-	if [ "x${d}" != "x" ] ; then
+	if [ "$(${CLANG_FORMAT_BIN} "$fn" | diff "$fn" -)" ] ; then
 		FILES+=($fn)
 	fi
 done
 
 # abort commit and show violating files
 if [ ${#FILES[@]} -gt 0 ] ; then
-	echo "error: files not formatted correctly:"
 	for fn in ${FILES[@]} ; do
 		echo "  $fn"
 	done

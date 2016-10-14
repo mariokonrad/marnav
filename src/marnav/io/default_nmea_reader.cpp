@@ -26,7 +26,9 @@ default_nmea_reader::default_nmea_reader(std::unique_ptr<device> && dev)
 {
 }
 
-default_nmea_reader::~default_nmea_reader() {}
+default_nmea_reader::~default_nmea_reader()
+{
+}
 
 /// Reads synchronously messages from the device.
 ///

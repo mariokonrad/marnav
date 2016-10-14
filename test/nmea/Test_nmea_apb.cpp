@@ -12,9 +12,15 @@ class Test_nmea_apb : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_apb, contruction) { EXPECT_NO_THROW(nmea::apb apb); }
+TEST_F(Test_nmea_apb, contruction)
+{
+	EXPECT_NO_THROW(nmea::apb apb);
+}
 
-TEST_F(Test_nmea_apb, properties) { nmea_sentence_traits<nmea::apb>(); }
+TEST_F(Test_nmea_apb, properties)
+{
+	nmea_sentence_traits<nmea::apb>();
+}
 
 TEST_F(Test_nmea_apb, parse)
 {

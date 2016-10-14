@@ -12,9 +12,15 @@ class Test_nmea_hdt : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_hdt, contruction) { EXPECT_NO_THROW(nmea::hdt hdt); }
+TEST_F(Test_nmea_hdt, contruction)
+{
+	EXPECT_NO_THROW(nmea::hdt hdt);
+}
 
-TEST_F(Test_nmea_hdt, properties) { nmea_sentence_traits<nmea::hdt>(); }
+TEST_F(Test_nmea_hdt, properties)
+{
+	nmea_sentence_traits<nmea::hdt>();
+}
 
 TEST_F(Test_nmea_hdt, parse)
 {

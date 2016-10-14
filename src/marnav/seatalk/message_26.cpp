@@ -44,14 +44,26 @@ raw message_26::get_data() const
 }
 
 /// @return Value in knots.
-double message_26::get_speed1() const noexcept { return 0.01 * speed1; }
+double message_26::get_speed1() const noexcept
+{
+	return 0.01 * speed1;
+}
 
 /// @return Value in knots.
-double message_26::get_speed2() const noexcept { return 0.01 * speed2; }
+double message_26::get_speed2() const noexcept
+{
+	return 0.01 * speed2;
+}
 
-void message_26::set_speed1(double t) noexcept { speed1 = std::round(std::abs(t) * 100); }
+void message_26::set_speed1(double t) noexcept
+{
+	speed1 = std::round(std::abs(t) * 100);
+}
 
-void message_26::set_speed2(double t) noexcept { speed2 = std::round(std::abs(t) * 100); }
+void message_26::set_speed2(double t) noexcept
+{
+	speed2 = std::round(std::abs(t) * 100);
+}
 
 void message_26::set_display_in_mph(bool t) noexcept
 {

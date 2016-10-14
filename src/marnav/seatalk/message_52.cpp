@@ -37,9 +37,15 @@ raw message_52::get_data() const
 }
 
 /// Returns the speed over ground in knots.
-double message_52::get_sog() const noexcept { return 0.1 * sog; }
+double message_52::get_sog() const noexcept
+{
+	return 0.1 * sog;
+}
 
 /// Sets the speed over ground in knots.
-void message_52::set_sog(double t) noexcept { sog = std::floor(t * 10.0); }
+void message_52::set_sog(double t) noexcept
+{
+	sog = std::floor(t * 10.0);
+}
 }
 }

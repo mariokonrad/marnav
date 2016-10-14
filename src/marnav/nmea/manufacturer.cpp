@@ -18,7 +18,9 @@ struct entry final {
 	std::string name;
 };
 
-entry::~entry() noexcept {}
+entry::~entry() noexcept
+{
+}
 
 using manufacturer_map = std::vector<entry>;
 
@@ -592,7 +594,10 @@ static bool is_nmea(const std::string & tag)
 	return (tag.size() == 3) || ((tag.size() == 5) && (tag[0] != 'P'));
 }
 
-static bool is_unkown(const std::string & tag) { return (tag.size() < 4) || (tag[0] != 'P'); }
+static bool is_unkown(const std::string & tag)
+{
+	return (tag.size() < 4) || (tag[0] != 'P');
+}
 }
 /// @endcond
 
@@ -618,7 +623,10 @@ manufacturer_id get_manufacturer_id(const std::string & tag)
 ///
 /// @param[in] s Sentence to get the manufacturer ID from.
 /// @return The manufacturers ID.
-manufacturer_id get_manufacturer_id(const sentence & s) { return get_manufacturer_id(s.tag()); }
+manufacturer_id get_manufacturer_id(const sentence & s)
+{
+	return get_manufacturer_id(s.tag());
+}
 
 /// Returns the tag of the manufacturer specified by the ID.
 std::string get_manufacturer_tag(manufacturer_id id)

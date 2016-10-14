@@ -12,9 +12,15 @@ class Test_nmea_wcv : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_wcv, contruction) { EXPECT_NO_THROW(nmea::wcv wcv); }
+TEST_F(Test_nmea_wcv, contruction)
+{
+	EXPECT_NO_THROW(nmea::wcv wcv);
+}
 
-TEST_F(Test_nmea_wcv, properties) { nmea_sentence_traits<nmea::wcv>(); }
+TEST_F(Test_nmea_wcv, properties)
+{
+	nmea_sentence_traits<nmea::wcv>();
+}
 
 TEST_F(Test_nmea_wcv, parse)
 {

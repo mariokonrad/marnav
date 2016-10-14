@@ -92,7 +92,10 @@ raw message_21::get_data() const
 	return bits;
 }
 
-std::string message_21::get_name() const { return trim_ais_string(name); }
+std::string message_21::get_name() const
+{
+	return trim_ais_string(name);
+}
 
 void message_21::set_name(const std::string & t)
 {
@@ -103,7 +106,10 @@ void message_21::set_name(const std::string & t)
 	}
 }
 
-std::string message_21::get_name_extension() const { return trim_ais_string(name_extension); }
+std::string message_21::get_name_extension() const
+{
+	return trim_ais_string(name_extension);
+}
 
 void message_21::set_name_extension(const std::string & t)
 {

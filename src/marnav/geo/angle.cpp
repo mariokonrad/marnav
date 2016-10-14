@@ -38,14 +38,20 @@ double angle::seconds() const noexcept
 	return a;
 }
 
-void swap(angle & a, angle & b) noexcept { std::swap(a.value, b.value); }
+void swap(angle & a, angle & b) noexcept
+{
+	std::swap(a.value, b.value);
+}
 
 bool operator==(const angle & a, const angle & b) noexcept
 {
 	return (&a == &b) || math::is_same(a.get(), b.get(), angle::epsilon);
 }
 
-bool operator!=(const angle & a, const angle & b) noexcept { return !(a == b); }
+bool operator!=(const angle & a, const angle & b) noexcept
+{
+	return !(a == b);
+}
 
 /// Constructs a latitude with the specified angle in degrees.
 latitude::latitude(double deg)
@@ -89,7 +95,10 @@ bool operator==(const latitude & a, const latitude & b) noexcept
 	return (&a == &b) || math::is_same(a.get(), b.get(), angle::epsilon);
 }
 
-bool operator!=(const latitude & a, const latitude & b) noexcept { return !(a == b); }
+bool operator!=(const latitude & a, const latitude & b) noexcept
+{
+	return !(a == b);
+}
 
 void latitude::check(double a)
 {
@@ -151,7 +160,10 @@ bool operator==(const longitude & a, const longitude & b) noexcept
 	return (&a == &b) || math::is_same(a.get(), b.get(), angle::epsilon);
 }
 
-bool operator!=(const longitude & a, const longitude & b) noexcept { return !(a == b); }
+bool operator!=(const longitude & a, const longitude & b) noexcept
+{
+	return !(a == b);
+}
 
 void longitude::check(double a)
 {

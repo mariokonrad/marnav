@@ -81,13 +81,25 @@ region::region(const position & a, double d_lat, double d_lon)
 	p1 = position{t_lat, t_lon};
 }
 
-longitude region::left() const { return p0.lon(); }
+longitude region::left() const
+{
+	return p0.lon();
+}
 
-longitude region::right() const { return p1.lon(); }
+longitude region::right() const
+{
+	return p1.lon();
+}
 
-latitude region::top() const { return p0.lat(); }
+latitude region::top() const
+{
+	return p0.lat();
+}
 
-latitude region::bottom() const { return p1.lat(); }
+latitude region::bottom() const
+{
+	return p1.lat();
+}
 
 /// Returns true if the specified position is inside (inclusive)
 /// the region.

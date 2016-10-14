@@ -239,19 +239,40 @@ template <typename T> static std::string render(const T & t)
 	return marnav::nmea::to_string(t);
 }
 
-static std::string render(const std::string & t) { return t; }
+static std::string render(const std::string & t)
+{
+	return t;
+}
 
-static std::string render(bool t) { return t ? "true" : "false"; }
+static std::string render(bool t)
+{
+	return t ? "true" : "false";
+}
 
-static std::string render(char t) { return fmt::sprintf("%c", t); }
+static std::string render(char t)
+{
+	return fmt::sprintf("%c", t);
+}
 
-static std::string render(const uint32_t t) { return fmt::sprintf("%u", t); }
+static std::string render(const uint32_t t)
+{
+	return fmt::sprintf("%u", t);
+}
 
-static std::string render(const int32_t t) { return fmt::sprintf("%d", t); }
+static std::string render(const int32_t t)
+{
+	return fmt::sprintf("%d", t);
+}
 
-static std::string render(const uint8_t t) { return fmt::sprintf("%u", t); }
+static std::string render(const uint8_t t)
+{
+	return fmt::sprintf("%u", t);
+}
 
-static std::string render(const double t) { return fmt::sprintf("%-8.3f", t); }
+static std::string render(const double t)
+{
+	return fmt::sprintf("%-8.3f", t);
+}
 
 static std::string render(const marnav::utils::mmsi & t)
 {
@@ -288,7 +309,10 @@ static std::string render(const marnav::ais::message_24::part t)
 	return "-";
 }
 
-static std::string render(const marnav::ais::ship_type t) { return marnav::ais::to_name(t); }
+static std::string render(const marnav::ais::ship_type t)
+{
+	return marnav::ais::to_name(t);
+}
 
 static std::string render(const marnav::ais::epfd_fix_type t)
 {
@@ -300,11 +324,20 @@ static std::string render(const marnav::ais::off_position_indicator t)
 	return marnav::ais::to_name(t);
 }
 
-static std::string render(const marnav::ais::virtual_aid t) { return marnav::ais::to_name(t); }
+static std::string render(const marnav::ais::virtual_aid t)
+{
+	return marnav::ais::to_name(t);
+}
 
-static std::string render(const marnav::ais::aid_type_id t) { return marnav::ais::to_name(t); }
+static std::string render(const marnav::ais::aid_type_id t)
+{
+	return marnav::ais::to_name(t);
+}
 
-static std::string render(const marnav::ais::message_id t) { return marnav::ais::to_name(t); }
+static std::string render(const marnav::ais::message_id t)
+{
+	return marnav::ais::to_name(t);
+}
 
 static std::string render(const marnav::ais::maneuver_indicator_id t)
 {
@@ -354,11 +387,20 @@ static std::string render(const marnav::nmea::unit::velocity t)
 	return marnav::nmea::to_name(t);
 }
 
-static std::string render(const marnav::nmea::side t) { return marnav::nmea::to_name(t); }
+static std::string render(const marnav::nmea::side t)
+{
+	return marnav::nmea::to_name(t);
+}
 
-static std::string render(const marnav::nmea::reference t) { return marnav::nmea::to_name(t); }
+static std::string render(const marnav::nmea::reference t)
+{
+	return marnav::nmea::to_name(t);
+}
 
-static std::string render(const marnav::nmea::quality t) { return marnav::nmea::to_name(t); }
+static std::string render(const marnav::nmea::quality t)
+{
+	return marnav::nmea::to_name(t);
+}
 
 static std::string render(const marnav::nmea::direction t)
 {
@@ -370,11 +412,20 @@ static std::string render(const marnav::nmea::selection_mode t)
 	return marnav::nmea::to_name(t);
 }
 
-static std::string render(const marnav::nmea::status t) { return marnav::nmea::to_name(t); }
+static std::string render(const marnav::nmea::status t)
+{
+	return marnav::nmea::to_name(t);
+}
 
-static std::string render(const marnav::nmea::route t) { return marnav::nmea::to_name(t); }
+static std::string render(const marnav::nmea::route t)
+{
+	return marnav::nmea::to_name(t);
+}
 
-static std::string render(const marnav::nmea::waypoint & t) { return t.c_str(); }
+static std::string render(const marnav::nmea::waypoint & t)
+{
+	return t.c_str();
+}
 
 static std::string render(const marnav::nmea::mode_indicator t)
 {

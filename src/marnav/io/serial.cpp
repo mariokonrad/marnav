@@ -107,7 +107,10 @@ static tcflag_t get_parity_iflag(serial::parity par)
 }
 /// @endcond
 
-serial::~serial() { close(); }
+serial::~serial()
+{
+	close();
+}
 
 serial::serial(const std::string & dev, baud b, databits d, stopbits s, parity p)
 	: fd(-1)

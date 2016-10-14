@@ -41,6 +41,9 @@ raw message_53::get_data() const
 	return raw{static_cast<uint8_t>(ID), static_cast<uint8_t>(((u1 + u2) << 4) & 0xf0), vw};
 }
 
-void message_53::set_cog(double t) noexcept { cog = std::fmod(std::abs(t), 360.0); }
+void message_53::set_cog(double t) noexcept
+{
+	cog = std::fmod(std::abs(t), 360.0);
+}
 }
 }

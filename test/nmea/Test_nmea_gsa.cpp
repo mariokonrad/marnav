@@ -12,9 +12,15 @@ class Test_nmea_gsa : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_gsa, contruction) { EXPECT_NO_THROW(nmea::gsa gsa); }
+TEST_F(Test_nmea_gsa, contruction)
+{
+	EXPECT_NO_THROW(nmea::gsa gsa);
+}
 
-TEST_F(Test_nmea_gsa, properties) { nmea_sentence_traits<nmea::gsa>(); }
+TEST_F(Test_nmea_gsa, properties)
+{
+	nmea_sentence_traits<nmea::gsa>();
+}
 
 TEST_F(Test_nmea_gsa, parse)
 {

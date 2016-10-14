@@ -12,7 +12,10 @@ bool mmsi::operator==(const mmsi & other) const
 	return value == other.value;
 }
 
-bool mmsi::operator!=(const mmsi & other) const { return !(*this == other); }
+bool mmsi::operator!=(const mmsi & other) const
+{
+	return !(*this == other);
+}
 
 mmsi::value_type mmsi::regular_mid() const
 {

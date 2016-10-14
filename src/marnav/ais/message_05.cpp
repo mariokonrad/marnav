@@ -77,11 +77,20 @@ raw message_05::get_data() const
 	return bits;
 }
 
-std::string message_05::get_callsign() const { return trim_ais_string(callsign); }
+std::string message_05::get_callsign() const
+{
+	return trim_ais_string(callsign);
+}
 
-std::string message_05::get_shipname() const { return trim_ais_string(shipname); }
+std::string message_05::get_shipname() const
+{
+	return trim_ais_string(shipname);
+}
 
-std::string message_05::get_destination() const { return trim_ais_string(destination); }
+std::string message_05::get_destination() const
+{
+	return trim_ais_string(destination);
+}
 
 void message_05::set_callsign(const std::string & t)
 {

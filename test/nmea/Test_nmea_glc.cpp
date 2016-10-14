@@ -12,9 +12,15 @@ class Test_nmea_glc : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_glc, contruction) { EXPECT_NO_THROW(nmea::glc glc); }
+TEST_F(Test_nmea_glc, contruction)
+{
+	EXPECT_NO_THROW(nmea::glc glc);
+}
 
-TEST_F(Test_nmea_glc, properties) { nmea_sentence_traits<nmea::glc>(); }
+TEST_F(Test_nmea_glc, properties)
+{
+	nmea_sentence_traits<nmea::glc>();
+}
 
 TEST_F(Test_nmea_glc, parse)
 {

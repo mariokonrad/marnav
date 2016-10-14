@@ -12,9 +12,15 @@ class Test_nmea_dsc : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_dsc, contruction) { EXPECT_NO_THROW(nmea::dsc dsc); }
+TEST_F(Test_nmea_dsc, contruction)
+{
+	EXPECT_NO_THROW(nmea::dsc dsc);
+}
 
-TEST_F(Test_nmea_dsc, properties) { nmea_sentence_traits<nmea::dsc>(); }
+TEST_F(Test_nmea_dsc, properties)
+{
+	nmea_sentence_traits<nmea::dsc>();
+}
 
 TEST_F(Test_nmea_dsc, parse_invalid_number_of_arguments)
 {

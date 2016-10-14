@@ -12,11 +12,20 @@ std::string to_string(char data)
 	return buf;
 }
 
-std::string to_string(uint64_t data) { return std::to_string(data); }
+std::string to_string(uint64_t data)
+{
+	return std::to_string(data);
+}
 
-std::string to_string(uint32_t data) { return std::to_string(data); }
+std::string to_string(uint32_t data)
+{
+	return std::to_string(data);
+}
 
-std::string to_string(int32_t data) { return std::to_string(data); }
+std::string to_string(int32_t data)
+{
+	return std::to_string(data);
+}
 
 std::string to_string(double data)
 {
@@ -25,7 +34,10 @@ std::string to_string(double data)
 	return buf;
 }
 
-std::string to_string(const std::string & data) { return data; }
+std::string to_string(const std::string & data)
+{
+	return data;
+}
 
 std::string to_string(side t)
 {

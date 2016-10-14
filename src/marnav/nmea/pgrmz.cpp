@@ -53,8 +53,7 @@ pgrmz::pgrmz()
 {
 }
 
-pgrmz::pgrmz(
-	talker talk, fields::const_iterator first, fields::const_iterator last)
+pgrmz::pgrmz(talker talk, fields::const_iterator first, fields::const_iterator last)
 	: sentence(ID, TAG, talk)
 {
 	if (std::distance(first, last) != 3)

@@ -12,9 +12,15 @@ class Test_nmea_dbk : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_dbk, contruction) { EXPECT_NO_THROW(nmea::dbk dbk); }
+TEST_F(Test_nmea_dbk, contruction)
+{
+	EXPECT_NO_THROW(nmea::dbk dbk);
+}
 
-TEST_F(Test_nmea_dbk, properties) { nmea_sentence_traits<nmea::dbk>(); }
+TEST_F(Test_nmea_dbk, properties)
+{
+	nmea_sentence_traits<nmea::dbk>();
+}
 
 TEST_F(Test_nmea_dbk, parse)
 {

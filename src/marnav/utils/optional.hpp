@@ -151,7 +151,10 @@ template <class T, class... Args> optional<T> make_optional(Args &&... args)
 ///
 /// @tparam T The optional type
 /// @return the optional of type T
-template <class T> optional<T> make_optional() { return optional<T>(); }
+template <class T> optional<T> make_optional()
+{
+	return optional<T>();
+}
 }
 }
 

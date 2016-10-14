@@ -23,7 +23,10 @@ public:
 
 	mmsi() noexcept {}
 
-	explicit mmsi(value_type t) noexcept : value(t) {}
+	explicit mmsi(value_type t) noexcept
+		: value(t)
+	{
+	}
 
 	mmsi(const mmsi &) = default;
 	mmsi(mmsi &&) noexcept = default;

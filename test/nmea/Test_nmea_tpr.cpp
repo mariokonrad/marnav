@@ -12,9 +12,15 @@ class Test_nmea_tpr : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_tpr, contruction) { EXPECT_NO_THROW(nmea::tpr tpr); }
+TEST_F(Test_nmea_tpr, contruction)
+{
+	EXPECT_NO_THROW(nmea::tpr tpr);
+}
 
-TEST_F(Test_nmea_tpr, properties) { nmea_sentence_traits<nmea::tpr>(); }
+TEST_F(Test_nmea_tpr, properties)
+{
+	nmea_sentence_traits<nmea::tpr>();
+}
 
 TEST_F(Test_nmea_tpr, parse)
 {

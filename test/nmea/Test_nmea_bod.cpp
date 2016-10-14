@@ -12,9 +12,15 @@ class Test_nmea_bod : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_bod, contruction) { EXPECT_NO_THROW(nmea::bod bod); }
+TEST_F(Test_nmea_bod, contruction)
+{
+	EXPECT_NO_THROW(nmea::bod bod);
+}
 
-TEST_F(Test_nmea_bod, properties) { nmea_sentence_traits<nmea::bod>(); }
+TEST_F(Test_nmea_bod, properties)
+{
+	nmea_sentence_traits<nmea::bod>();
+}
 
 TEST_F(Test_nmea_bod, parse)
 {

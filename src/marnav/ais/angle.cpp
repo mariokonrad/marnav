@@ -51,8 +51,14 @@ static uint32_t deg_to_I4(double value, std::size_t bits)
 }
 
 // used only with static constant values, therefore compile time computation.
-template <unsigned int n> double exp_10() { return 10.0 * exp_10<n - 1>(); }
-template <> double exp_10<0>() { return 1.0; }
+template <unsigned int n> double exp_10()
+{
+	return 10.0 * exp_10<n - 1>();
+}
+template <> double exp_10<0>()
+{
+	return 1.0;
+}
 
 template <unsigned int n> double round_n(double value)
 {

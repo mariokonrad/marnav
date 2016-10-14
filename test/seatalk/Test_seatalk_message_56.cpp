@@ -22,7 +22,10 @@ public:
 	};
 };
 
-TEST_F(Test_seatalk_message_56, construction) { EXPECT_NO_THROW(message_56 m); }
+TEST_F(Test_seatalk_message_56, construction)
+{
+	EXPECT_NO_THROW(message_56 m);
+}
 
 TEST_F(Test_seatalk_message_56, parse_invalid_data_size)
 {

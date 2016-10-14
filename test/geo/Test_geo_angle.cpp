@@ -10,9 +10,15 @@ class Test_geo_angle : public ::testing::Test
 {
 };
 
-TEST_F(Test_geo_angle, construction_default) { geo::angle{}; }
+TEST_F(Test_geo_angle, construction_default)
+{
+	geo::angle{};
+}
 
-TEST_F(Test_geo_angle, construction_value) { geo::angle{1.0}; }
+TEST_F(Test_geo_angle, construction_value)
+{
+	geo::angle{1.0};
+}
 
 TEST_F(Test_geo_angle, angle_type_check)
 {
@@ -95,9 +101,15 @@ TEST_F(Test_geo_angle, seconds)
 	EXPECT_NEAR(3.60, geo::angle{0.0010}.seconds(), 1e-4);
 }
 
-TEST_F(Test_geo_angle, latitude_invalid_value) { EXPECT_ANY_THROW(geo::latitude{91.0}); }
+TEST_F(Test_geo_angle, latitude_invalid_value)
+{
+	EXPECT_ANY_THROW(geo::latitude{91.0});
+}
 
-TEST_F(Test_geo_angle, longitude_invalid_value) { EXPECT_ANY_THROW(geo::longitude{181.0}); }
+TEST_F(Test_geo_angle, longitude_invalid_value)
+{
+	EXPECT_ANY_THROW(geo::longitude{181.0});
+}
 
 TEST_F(Test_geo_angle, latitude_hemisphere)
 {

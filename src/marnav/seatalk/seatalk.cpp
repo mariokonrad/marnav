@@ -107,7 +107,10 @@ std::unique_ptr<message> make_message(const raw & data)
 /// @b Example: getting raw data from message
 /// @snippet seatalk_snippets.cpp Getting raw data from message
 ///
-raw encode_message(const message & msg) { return msg.get_data(); }
+raw encode_message(const message & msg)
+{
+	return msg.get_data();
+}
 
 /// Returns the message size of the specified message id.
 ///

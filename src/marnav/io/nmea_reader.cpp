@@ -6,7 +6,9 @@ namespace marnav
 {
 namespace io
 {
-nmea_reader::~nmea_reader() {}
+nmea_reader::~nmea_reader()
+{
+}
 
 /// Initializes the reader, opens the device (if valid).
 ///

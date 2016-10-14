@@ -10,7 +10,10 @@ class Test_seatalk_message_51 : public ::testing::Test
 {
 };
 
-TEST_F(Test_seatalk_message_51, construction) { EXPECT_NO_THROW(message_51 m); }
+TEST_F(Test_seatalk_message_51, construction)
+{
+	EXPECT_NO_THROW(message_51 m);
+}
 
 TEST_F(Test_seatalk_message_51, parse_invalid_data_size)
 {

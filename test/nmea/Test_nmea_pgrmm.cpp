@@ -12,9 +12,15 @@ class Test_nmea_pgrmm : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_pgrmm, contruction) { nmea::pgrmm pgrmm; }
+TEST_F(Test_nmea_pgrmm, contruction)
+{
+	nmea::pgrmm pgrmm;
+}
 
-TEST_F(Test_nmea_pgrmm, properties) { nmea_sentence_traits<nmea::pgrmm>(); }
+TEST_F(Test_nmea_pgrmm, properties)
+{
+	nmea_sentence_traits<nmea::pgrmm>();
+}
 
 TEST_F(Test_nmea_pgrmm, parse)
 {

@@ -18,12 +18,18 @@ public:
 	angle(const angle &) = default;
 	angle(angle &&) noexcept = default;
 
-	constexpr angle() noexcept : value(0.0) {}
+	constexpr angle() noexcept
+		: value(0.0)
+	{
+	}
 
 	/// Initializes the angle with the specified angle in degrees.
 	///
 	/// @param[in] degrees Angle in degrees.
-	constexpr angle(double degrees) noexcept : value(degrees) {}
+	constexpr angle(double degrees) noexcept
+		: value(degrees)
+	{
+	}
 
 	uint32_t degrees() const noexcept;
 	uint32_t minutes() const noexcept;
@@ -63,7 +69,10 @@ public:
 	constexpr static const double min = -90.0;
 	constexpr static const double max = +90.0;
 
-	constexpr latitude() noexcept : angle(0.0) {}
+	constexpr latitude() noexcept
+		: angle(0.0)
+	{
+	}
 
 	latitude(double degrees);
 	latitude(double degrees, hemisphere h);
@@ -125,7 +134,10 @@ public:
 	constexpr static const double min = -180.0;
 	constexpr static const double max = +180.0;
 
-	constexpr longitude() noexcept : angle(0.0) {}
+	constexpr longitude() noexcept
+		: angle(0.0)
+	{
+	}
 
 	longitude(double degrees);
 	longitude(double degrees, hemisphere h);

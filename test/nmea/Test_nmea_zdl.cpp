@@ -12,9 +12,15 @@ class Test_nmea_zdl : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_zdl, contruction) { EXPECT_NO_THROW(nmea::zdl zdl); }
+TEST_F(Test_nmea_zdl, contruction)
+{
+	EXPECT_NO_THROW(nmea::zdl zdl);
+}
 
-TEST_F(Test_nmea_zdl, properties) { nmea_sentence_traits<nmea::zdl>(); }
+TEST_F(Test_nmea_zdl, properties)
+{
+	nmea_sentence_traits<nmea::zdl>();
+}
 
 TEST_F(Test_nmea_zdl, parse)
 {

@@ -11,7 +11,10 @@ message::message(message_id id)
 {
 }
 
-message_id message::type() const { return message_type; }
+message_id message::type() const
+{
+	return message_type;
+}
 
 /// Checks the specified sizes for the raw data. In case of error, an
 /// exception is thrown (std::invalid_argument).

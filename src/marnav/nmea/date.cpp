@@ -53,13 +53,22 @@ bool date::check() const noexcept
 }
 
 /// Returns the year component.
-uint32_t date::year() const noexcept { return y; }
+uint32_t date::year() const noexcept
+{
+	return y;
+}
 
 /// Returns the month component.
-month date::mon() const noexcept { return m; }
+month date::mon() const noexcept
+{
+	return m;
+}
 
 /// Returns the day component.
-uint32_t date::day() const noexcept { return d; }
+uint32_t date::day() const noexcept
+{
+	return d;
+}
 
 bool operator==(const date & a, const date & b) noexcept
 {

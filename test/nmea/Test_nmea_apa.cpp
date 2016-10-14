@@ -11,9 +11,15 @@ class Test_nmea_apa : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_apa, contruction) { EXPECT_NO_THROW(nmea::apa apa); }
+TEST_F(Test_nmea_apa, contruction)
+{
+	EXPECT_NO_THROW(nmea::apa apa);
+}
 
-TEST_F(Test_nmea_apa, properties) { nmea_sentence_traits<nmea::apa>(); }
+TEST_F(Test_nmea_apa, properties)
+{
+	nmea_sentence_traits<nmea::apa>();
+}
 
 TEST_F(Test_nmea_apa, parse)
 {

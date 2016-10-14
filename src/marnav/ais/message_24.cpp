@@ -32,7 +32,10 @@ message_24::message_24(const raw & bits)
 	read_data(bits);
 }
 
-bool message_24::is_auxiliary_vessel() const { return utils::mmsi{mmsi}.is_auxiliary(); }
+bool message_24::is_auxiliary_vessel() const
+{
+	return utils::mmsi{mmsi}.is_auxiliary();
+}
 
 void message_24::read_data(const raw & bits)
 {
@@ -89,11 +92,20 @@ raw message_24::get_data() const
 	return bits;
 }
 
-std::string message_24::get_shipname() const { return trim_ais_string(shipname); }
+std::string message_24::get_shipname() const
+{
+	return trim_ais_string(shipname);
+}
 
-std::string message_24::get_vendor_id() const { return trim_ais_string(vendor_id); }
+std::string message_24::get_vendor_id() const
+{
+	return trim_ais_string(vendor_id);
+}
 
-std::string message_24::get_callsign() const { return trim_ais_string(callsign); }
+std::string message_24::get_callsign() const
+{
+	return trim_ais_string(callsign);
+}
 
 void message_24::set_shipname(const std::string & t)
 {

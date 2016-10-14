@@ -5,7 +5,9 @@ namespace marnav
 {
 namespace io
 {
-seatalk_reader::~seatalk_reader() {}
+seatalk_reader::~seatalk_reader()
+{
+}
 
 seatalk_reader::seatalk_reader(std::unique_ptr<device> && dev)
 	: dev(std::move(dev))

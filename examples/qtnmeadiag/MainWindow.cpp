@@ -43,9 +43,15 @@ template <typename T> static QString render(const marnav::utils::optional<T> & t
 	return marnav::nmea::to_string(*t).c_str();
 }
 
-static QString render(uint32_t t) { return QString{"%1"}.arg(t); }
+static QString render(uint32_t t)
+{
+	return QString{"%1"}.arg(t);
+}
 
-static QString render(const std::string & t) { return QString{t.c_str()}; }
+static QString render(const std::string & t)
+{
+	return QString{t.c_str()};
+}
 
 static QString render(const marnav::utils::optional<marnav::nmea::time> & t)
 {
@@ -376,7 +382,10 @@ MainWindow::MainWindow()
 	port = new QSerialPort(this);
 }
 
-MainWindow::~MainWindow() { on_close(); }
+MainWindow::~MainWindow()
+{
+	on_close();
+}
 
 void MainWindow::create_menus()
 {

@@ -12,9 +12,15 @@ class Test_nmea_rsd : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_rsd, contruction) { EXPECT_NO_THROW(nmea::rsd rsd); }
+TEST_F(Test_nmea_rsd, contruction)
+{
+	EXPECT_NO_THROW(nmea::rsd rsd);
+}
 
-TEST_F(Test_nmea_rsd, properties) { nmea_sentence_traits<nmea::rsd>(); }
+TEST_F(Test_nmea_rsd, properties)
+{
+	nmea_sentence_traits<nmea::rsd>();
+}
 
 TEST_F(Test_nmea_rsd, parse)
 {

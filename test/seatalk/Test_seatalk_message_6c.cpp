@@ -10,7 +10,10 @@ class Test_seatalk_message_6c : public ::testing::Test
 {
 };
 
-TEST_F(Test_seatalk_message_6c, construction) { message_6c m; }
+TEST_F(Test_seatalk_message_6c, construction)
+{
+	message_6c m;
+}
 
 TEST_F(Test_seatalk_message_6c, parse_invalid_data_size)
 {

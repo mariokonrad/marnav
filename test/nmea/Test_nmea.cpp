@@ -28,14 +28,20 @@ TEST_F(Test_nmea, checksum_to_string)
 	EXPECT_STREQ("FF", nmea::checksum_to_string(0xff).c_str());
 }
 
-TEST_F(Test_nmea, make_sentence_empty_string) { EXPECT_ANY_THROW(nmea::make_sentence("")); }
+TEST_F(Test_nmea, make_sentence_empty_string)
+{
+	EXPECT_ANY_THROW(nmea::make_sentence(""));
+}
 
 TEST_F(Test_nmea, make_sentence_no_start_token)
 {
 	EXPECT_ANY_THROW(nmea::make_sentence("1234567890"));
 }
 
-TEST_F(Test_nmea, make_sentence_to_short) { EXPECT_ANY_THROW(nmea::make_sentence("12")); }
+TEST_F(Test_nmea, make_sentence_to_short)
+{
+	EXPECT_ANY_THROW(nmea::make_sentence("12"));
+}
 
 TEST_F(Test_nmea, make_sentence_no_end_token)
 {
@@ -100,7 +106,10 @@ TEST_F(Test_nmea, tag_to_id)
 	EXPECT_EQ(nmea::sentence_id::BOD, id);
 }
 
-TEST_F(Test_nmea, tag_to_id_invalid_tag) { EXPECT_ANY_THROW(nmea::tag_to_id("???")); }
+TEST_F(Test_nmea, tag_to_id_invalid_tag)
+{
+	EXPECT_ANY_THROW(nmea::tag_to_id("???"));
+}
 
 TEST_F(Test_nmea, to_string_sentence_id)
 {

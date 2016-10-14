@@ -45,6 +45,9 @@ raw message_89::get_data() const
 /// in steps of `0.5` degrees.
 ///
 /// @param[in] t Heading in degrees, steps of `0.5`. The absolute value will be used.
-void message_89::set_heading(double t) { value = std::fmod(std::fabs(t), 360.0); }
+void message_89::set_heading(double t)
+{
+	value = std::fmod(std::fabs(t), 360.0);
+}
 }
 }

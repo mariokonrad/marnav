@@ -12,9 +12,15 @@ class Test_nmea_vdo : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_vdo, contruction) { EXPECT_NO_THROW(nmea::vdo vdo); }
+TEST_F(Test_nmea_vdo, contruction)
+{
+	EXPECT_NO_THROW(nmea::vdo vdo);
+}
 
-TEST_F(Test_nmea_vdo, properties) { nmea_sentence_traits<nmea::vdo>(); }
+TEST_F(Test_nmea_vdo, properties)
+{
+	nmea_sentence_traits<nmea::vdo>();
+}
 
 TEST_F(Test_nmea_vdo, parse)
 {

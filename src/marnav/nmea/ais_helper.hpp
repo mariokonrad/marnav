@@ -30,7 +30,7 @@ namespace nmea
 /// @endcode
 template <class InputIt, typename std::enable_if<std::is_class<InputIt>::value
 								 && std::is_convertible<typename InputIt::value_type,
-													 std::unique_ptr<sentence>>::value,
+										std::unique_ptr<sentence>>::value,
 							 int>::type
 	= 0>
 std::vector<std::pair<std::string, uint32_t>> collect_payload(InputIt begin, InputIt end)
@@ -68,7 +68,7 @@ std::vector<std::pair<std::string, uint32_t>> collect_payload(InputIt begin, Inp
 /// @endcode
 template <class InputIt, typename std::enable_if<std::is_class<InputIt>::value
 								 && !std::is_convertible<typename InputIt::value_type,
-													 std::unique_ptr<sentence>>::value,
+										std::unique_ptr<sentence>>::value,
 							 int>::type
 	= 0>
 std::vector<std::pair<std::string, uint32_t>> collect_payload(InputIt begin, InputIt end)
