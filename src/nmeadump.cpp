@@ -40,7 +40,7 @@
 
 #include <marnav/nmea/aam.hpp>
 #include <marnav/nmea/alm.hpp>
-//#include <marnav/nmea/apa.hpp>
+#include <marnav/nmea/apa.hpp>
 #include <marnav/nmea/apb.hpp>
 #include <marnav/nmea/bod.hpp>
 #include <marnav/nmea/bwc.hpp>
@@ -56,8 +56,8 @@
 #include <marnav/nmea/gga.hpp>
 #include <marnav/nmea/glc.hpp>
 #include <marnav/nmea/gll.hpp>
-//#include <marnav/nmea/gns.hpp>
-//#include <marnav/nmea/grs.hpp>
+#include <marnav/nmea/gns.hpp>
+#include <marnav/nmea/grs.hpp>
 #include <marnav/nmea/gsa.hpp>
 #include <marnav/nmea/gst.hpp>
 #include <marnav/nmea/gsv.hpp>
@@ -69,8 +69,8 @@
 #include <marnav/nmea/hsc.hpp>
 #include <marnav/nmea/its.hpp>
 #include <marnav/nmea/lcd.hpp>
-//#include <marnav/nmea/msk.hpp>
-//#include <marnav/nmea/mss.hpp>
+#include <marnav/nmea/msk.hpp>
+#include <marnav/nmea/mss.hpp>
 #include <marnav/nmea/mtw.hpp>
 #include <marnav/nmea/mwd.hpp>
 #include <marnav/nmea/mwv.hpp>
@@ -81,17 +81,17 @@
 #include <marnav/nmea/rmc.hpp>
 #include <marnav/nmea/rot.hpp>
 #include <marnav/nmea/rpm.hpp>
-//#include <marnav/nmea/rsa.hpp>
-//#include <marnav/nmea/rsd.hpp>
+#include <marnav/nmea/rsa.hpp>
+#include <marnav/nmea/rsd.hpp>
 #include <marnav/nmea/rte.hpp>
-//#include <marnav/nmea/sfi.hpp>
+#include <marnav/nmea/sfi.hpp>
 #include <marnav/nmea/tds.hpp>
 #include <marnav/nmea/tfi.hpp>
 #include <marnav/nmea/tll.hpp>
 #include <marnav/nmea/tpc.hpp>
 #include <marnav/nmea/tpr.hpp>
 #include <marnav/nmea/tpt.hpp>
-//#include <marnav/nmea/ttm.hpp>
+#include <marnav/nmea/ttm.hpp>
 #include <marnav/nmea/vbw.hpp>
 #include <marnav/nmea/vdm.hpp>
 #include <marnav/nmea/vdo.hpp>
@@ -500,6 +500,16 @@ static void print_detail_lcd(const marnav::nmea::sentence * s)
 	}
 }
 
+static void print_detail_msk(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::msk>(s);
+	print("Frequency to use", render(t->get_frequency()));
+	print("Frequency Mode", render(t->get_frequency_mode()));
+	print("Beacon Bit Rate", render(t->get_bitrate()));
+	print("Beacon Mode", render(t->get_bitrate_mode()));
+	print("Frequency for MSS message status", render(t->get_frequency_mss_status()));
+}
+
 static void print_detail_rmb(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rmb>(s);
@@ -547,6 +557,24 @@ static void print_detail_rpm(const marnav::nmea::sentence * s)
 	print("Status", render(t->get_data_valid()));
 }
 
+static void print_detail_rsa(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rsa>(s);
+	print("Starbord Angle", render(t->get_rudder1()));
+	print("Starbord Status", render(t->get_rudder1_valid()));
+	print("Port Angle", render(t->get_rudder2()));
+	print("Port Status", render(t->get_rudder2_valid()));
+}
+
+static void print_detail_rsd(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rsd>(s);
+	print("Cursor Range from own ship", render(t->get_cursor_range()));
+	print("Cursor Bearing from own ship", render(t->get_cursor_bearing()));
+	print("Range Scale", render(t->get_range_scale()));
+	print("Range Units", render(t->get_range_unit()));
+}
+
 static void print_detail_vtg(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vtg>(s);
@@ -565,6 +593,33 @@ static void print_detail_gll(const marnav::nmea::sentence * s)
 	print("Time UTC", render(t->get_time_utc()));
 	print("Status", render(t->get_data_valid()));
 	print("Mode Indicator", render(t->get_mode_ind()));
+}
+
+static void print_detail_gns(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gns>(s);
+	print("Time UTC", render(t->get_time_utc()));
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("Mode Indicator", render(t->get_mode_ind()));
+	print("Number of Satellites", render(t->get_number_of_satellites()));
+	print("HDROP", render(t->get_hdrop()));
+	print("Antenna Altitude [m]", render(t->get_antenna_altitude()));
+	print("Geoidal Separation [m]", render(t->get_geodial_sepration()));
+	print("Age of differential Data", render(t->get_age_of_differential_data()));
+	print("Differential Ref Station ID", render(t->get_differential_ref_station_id()));
+}
+
+static void print_detail_grs(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::grs>(s);
+	print("UTC time associated with GGA", render(t->get_time_utc()));
+	print("Status", render(t->get_usage()));
+	for (int i = 0; i < marnav::nmea::grs::num_satellite_residuals; ++i) {
+		const auto residual = t->get_sat_residual(i);
+		if (residual)
+			print(fmt::sprintf("Sat %02d Residual [m]", i), render(*residual));
+	}
 }
 
 static void print_detail_bod(const marnav::nmea::sentence * s)
@@ -837,6 +892,21 @@ static void print_detail_alm(const marnav::nmea::sentence * s)
 	print("F1 clock parameter", render(t->get_f1_clock_parameter()));
 }
 
+static void print_detail_apa(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::apa>(s);
+	print("Lorac C Blink Warning", render(t->get_loran_c_blink_warning()));
+	print("Lorac C Cycle Lock Warning", render(t->get_loran_c_cycle_lock_warning()));
+	print("Magnitude of Cross Track Error", render(t->get_cross_track_error_magnitude()));
+	print("Direction to Steer", render(t->get_direction_to_steer()));
+	print("Cross Track Units", render(t->get_cross_track_unit()));
+	print("Status Arrival", render(t->get_status_arrival()));
+	print("Status Perpendicular Passed", render(t->get_status_perpendicular_passing()));
+	print("Bearing Origin to Dest", render(t->get_bearing_origin_to_destination()));
+	print("Bearing Origin to Dest Ref", render(t->get_bearing_origin_to_destination_ref()));
+	print("Destination Waypoint", render(t->get_waypoint_id()));
+}
+
 static void print_detail_rte(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rte>(s);
@@ -848,6 +918,15 @@ static void print_detail_rte(const marnav::nmea::sentence * s)
 		if (wp)
 			print(fmt::sprintf("Waypoint %i", i), render(wp));
 	}
+}
+
+static void print_detail_sfi(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::sfi>(s);
+	print("Number of Messages", render(t->get_n_messages()));
+	print("Message Number", render(t->get_message_number()));
+	for (const auto & f : t->get_frequencies())
+		print("Frequency [kHz]", fmt::sprintf("%s %s", render(f.frequency), render(f.mode)));
 }
 
 static void print_detail_tds(const marnav::nmea::sentence * s)
@@ -900,6 +979,24 @@ static void print_detail_tpt(const marnav::nmea::sentence * s)
 	print("Depth [m]", render(t->get_depth()));
 }
 
+static void print_detail_ttm(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::ttm>(s);
+	print("Target Number", render(t->get_target_number()));
+	print("Target Distance", render(t->get_target_distance()));
+	print("Bearing from own ship", render(t->get_bearing_from_ownship()));
+	print("Bearing from own ship Ref", render(t->get_bearing_from_ownship_ref()));
+	print("Target Speed", render(t->get_target_speed()));
+	print("Target Course", render(t->get_target_course()));
+	print("Target Course Ref", render(t->get_target_course_ref()));
+	print("CPA", render(t->get_distance_cpa()));
+	print("TCPA", render(t->get_tcpa()));
+	print("Unknown", render(t->get_unknown()));
+	print("Target Name", render(t->get_target_name()));
+	print("Target Status", render(t->get_target_status()));
+	print("Reference Target", render(t->get_reference_target()));
+}
+
 static void print_detail_vbw(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vbw>(s);
@@ -917,6 +1014,16 @@ static void print_detail_vdr(const marnav::nmea::sentence * s)
 	print("Degrees True", render(t->get_degrees_true()));
 	print("Degrees Magnetic", render(t->get_degrees_mag()));
 	print("Speed of Current", render(t->get_speed()));
+}
+
+static void print_detail_mss(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::mss>(s);
+	print("Signal Strength [dB 1uV]", render(t->get_signal_strength()));
+	print("Signal to Noise Ratio (dB)", render(t->get_signal_to_noise_ratio()));
+	print("Beacon Frequency [kHz]", render(t->get_beacon_frequency()));
+	print("Beacon Data Rate BPS", render(t->get_beacon_datarate()));
+	print("unknown", render(t->get_unknown()));
 }
 
 static void print_detail_mtw(const marnav::nmea::sentence * s)
@@ -1246,6 +1353,7 @@ static void dump_nmea(const std::string & line)
 		// standard
 		ADD_SENTENCE(aam),
 		ADD_SENTENCE(alm),
+		ADD_SENTENCE(apa),
 		ADD_SENTENCE(apb),
 		ADD_SENTENCE(bod),
 		ADD_SENTENCE(bwc),
@@ -1259,6 +1367,8 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(glc),
 		ADD_SENTENCE(gga),
 		ADD_SENTENCE(gll),
+		ADD_SENTENCE(gns),
+		ADD_SENTENCE(grs),
 		ADD_SENTENCE(gsa),
 		ADD_SENTENCE(gst),
 		ADD_SENTENCE(gsv),
@@ -1270,6 +1380,8 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(hsc),
 		ADD_SENTENCE(its),
 		ADD_SENTENCE(lcd),
+		ADD_SENTENCE(msk),
+		ADD_SENTENCE(mss),
 		ADD_SENTENCE(mtw),
 		ADD_SENTENCE(mwd),
 		ADD_SENTENCE(mwv),
@@ -1280,13 +1392,17 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(rmc),
 		ADD_SENTENCE(rot),
 		ADD_SENTENCE(rpm),
+		ADD_SENTENCE(rsa),
+		ADD_SENTENCE(rsd),
 		ADD_SENTENCE(rte),
+		ADD_SENTENCE(sfi),
 		ADD_SENTENCE(tds),
 		ADD_SENTENCE(tfi),
 		ADD_SENTENCE(tll),
 		ADD_SENTENCE(tpc),
 		ADD_SENTENCE(tpr),
 		ADD_SENTENCE(tpt),
+		ADD_SENTENCE(ttm),
 		ADD_SENTENCE(vbw),
 		ADD_SENTENCE(vdr),
 		ADD_SENTENCE(vhw),

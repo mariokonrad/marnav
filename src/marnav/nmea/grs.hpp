@@ -21,7 +21,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(grs)
 /// @endcode
 ///
 /// Field Number:
-/// 1.  TC time of associated GGA fix
+/// 1.  UTC time of associated GGA fix
 /// 2.  0 = Residuals used in GGA, 1 = residuals calculated after GGA
 /// 3.  Satellite 1 residual in meters
 /// 4.  Satellite 2 residual in meters
@@ -46,6 +46,8 @@ public:
 	constexpr static const sentence_id ID = sentence_id::GRS;
 	constexpr static const char * TAG = "GRS";
 
+	constexpr static int num_satellite_residuals = 12;
+
 	enum class residual_usage : uint32_t {
 		used_in_gga, ///< NMEA representation: 0
 		calculated_after_gga, ///< NMEA representation: 1
@@ -64,7 +66,7 @@ protected:
 private:
 	nmea::time time_utc;
 	residual_usage usage;
-	std::array<utils::optional<double>, 12> sat_residual;
+	std::array<utils::optional<double>, num_satellite_residuals> sat_residual;
 
 	void check_index(int index) const;
 

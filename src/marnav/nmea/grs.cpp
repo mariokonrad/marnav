@@ -67,8 +67,8 @@ grs::grs(talker talk, fields::const_iterator first, fields::const_iterator last)
 
 void grs::check_index(int index) const
 {
-	if ((index < 1) || (index > 12)) {
-		throw std::out_of_range{"satellite id out of range"};
+	if ((index < 0) || (index >= num_satellite_residuals)) {
+		throw std::out_of_range{"satellite index out of range"};
 	}
 }
 
