@@ -123,14 +123,14 @@
 #include <marnav/ais/message_03.hpp>
 #include <marnav/ais/message_04.hpp>
 #include <marnav/ais/message_05.hpp>
-//#include <marnav/ais/message_09.hpp>
-//#include <marnav/ais/message_10.hpp>
+#include <marnav/ais/message_09.hpp>
+#include <marnav/ais/message_10.hpp>
 #include <marnav/ais/message_11.hpp>
 #include <marnav/ais/message_18.hpp>
-//#include <marnav/ais/message_19.hpp>
+#include <marnav/ais/message_19.hpp>
 #include <marnav/ais/message_21.hpp>
-//#include <marnav/ais/message_22.hpp>
-//#include <marnav/ais/message_23.hpp>
+#include <marnav/ais/message_22.hpp>
+#include <marnav/ais/message_23.hpp>
 #include <marnav/ais/message_24.hpp>
 
 #include <marnav/io/default_nmea_reader.hpp>
@@ -296,6 +296,41 @@ static std::string render(const marnav::geo::longitude & t)
 	using namespace marnav::nmea;
 	return fmt::sprintf(
 		"%03u\u00b0%02u'%04.1f%s", t.degrees(), t.minutes(), t.seconds(), to_string(t.hem()));
+}
+
+static std::string render(const marnav::geo::position & p)
+{
+	using namespace marnav::nmea;
+	return fmt::sprintf("%s %s", render(p.lat()), render(p.lon()));
+}
+
+static std::string render(const marnav::ais::message_23::report_interval t)
+{
+	switch (t) {
+		case marnav::ais::message_23::report_interval::autonomous_mode:
+			return "Autonomous Mode";
+		case marnav::ais::message_23::report_interval::minutes_10:
+			return "Minutes 10";
+		case marnav::ais::message_23::report_interval::minutes_06:
+			return "Minutes  6";
+		case marnav::ais::message_23::report_interval::minutes_03:
+			return "Minutes  3";
+		case marnav::ais::message_23::report_interval::minutes_01:
+			return "Minutes  1";
+		case marnav::ais::message_23::report_interval::seconds_30:
+			return "Seconds 30";
+		case marnav::ais::message_23::report_interval::seconds_15:
+			return "Seconds 15";
+		case marnav::ais::message_23::report_interval::seconds_10:
+			return "Seconds 10";
+		case marnav::ais::message_23::report_interval::seconds_05:
+			return "Seconds  5";
+		case marnav::ais::message_23::report_interval::next_shorter:
+			return "Next Shorter";
+		case marnav::ais::message_23::report_interval::next_longer:
+			return "Next Longer";
+	}
+	return "-";
 }
 
 static std::string render(const marnav::ais::message_24::part t)
@@ -1269,6 +1304,29 @@ static void print_detail_message_05(const marnav::ais::message * m)
 	print("DTE", render(t->get_dte()));
 }
 
+static void print_detail_message_09(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_09>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	print("Altitude", render(t->get_altitude()));
+	print("Speed", render(t->get_speed()));
+	print("Pos Accuracy", render(t->get_position_accuracy()));
+	print("COG", render(t->get_course()));
+	print("UTC Second", render(t->get_utc_second()));
+	print("DTE", render(t->get_dte()));
+	print("RAIM", render(t->get_raim()));
+	print("Radio Status", render(t->get_radio_status()));
+}
+
+static void print_detail_message_10(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_10>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	print("Destination MMSI", render(t->get_dest_mmsi()));
+}
+
 static void print_detail_message_18(const marnav::ais::message * m)
 {
 	const auto t = marnav::ais::message_cast<marnav::ais::message_18>(m);
@@ -1291,6 +1349,28 @@ static void print_detail_message_18(const marnav::ais::message * m)
 	print("Radio Status", render(t->get_radio_status()));
 }
 
+static void print_detail_message_19(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_19>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	print("SOG", render(t->get_sog()));
+	print("Pos Accuracy", render(t->get_position_accuracy()));
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("COG", render(t->get_cog()));
+	print("HDG", render(t->get_hdg()));
+	print("Time Stamp", render(t->get_timestamp()));
+	print("Ship Name", render(t->get_shipname()));
+	print("Ship Type", render(t->get_shiptype()));
+	print("Length", render(t->get_to_bow() + t->get_to_stern()));
+	print("Width", render(t->get_to_port() + t->get_to_starboard()));
+	print("EPFD Fix", render(t->get_epfd_fix()));
+	print("RAIM", render(t->get_raim()));
+	print("DTE", render(t->get_dte()));
+	print("Assigned", render(t->get_assigned()));
+}
+
 static void print_detail_message_21(const marnav::ais::message * m)
 {
 	const auto t = marnav::ais::message_cast<marnav::ais::message_21>(m);
@@ -1311,6 +1391,39 @@ static void print_detail_message_21(const marnav::ais::message * m)
 	print("Virtual Aid Flag", render(t->get_virtual_aid_flag()));
 	print("Assigned", render(t->get_assigned()));
 	print("Name Extension", render(t->get_name_extension()));
+}
+
+static void print_detail_message_22(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_22>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	print("Channel A", render(t->get_channel_a()));
+	print("Channel B", render(t->get_channel_b()));
+	print("TxRx Mode", render(t->get_txrx_mode()));
+	print("Power", render(t->get_power()));
+	print("Adressed", render(t->get_addressed()));
+	if (t->get_addressed()) {
+		print("MMSI 1", render(t->get_mmsi_1()));
+		print("MMSI 2", render(t->get_mmsi_2()));
+	} else {
+		print("Position NE", render(t->get_position_ne()));
+		print("Position SW", render(t->get_position_sw()));
+	}
+}
+
+static void print_detail_message_23(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_23>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	print("Position NE", render(t->get_position_ne()));
+	print("Position SW", render(t->get_position_sw()));
+	print("Station Type", render(t->get_station_type()));
+	print("Ship Type", render(t->get_shiptype()));
+	print("TxRx Mode", render(t->get_txrx_mode()));
+	print("Report Interval", render(t->get_interval()));
+	print("Quiet Time", render(t->get_quiet_time()));
 }
 
 static void print_detail_message_24(const marnav::ais::message * m)
@@ -1476,9 +1589,14 @@ static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> 
 		ADD_MESSAGE(message_03),
 		ADD_MESSAGE(message_04),
 		ADD_MESSAGE(message_05),
+		ADD_MESSAGE(message_09),
+		ADD_MESSAGE(message_10),
 		ADD_MESSAGE(message_11),
 		ADD_MESSAGE(message_18),
+		ADD_MESSAGE(message_19),
 		ADD_MESSAGE(message_21),
+		ADD_MESSAGE(message_22),
+		ADD_MESSAGE(message_23),
 		ADD_MESSAGE(message_24)
 	};
 // clang-format on

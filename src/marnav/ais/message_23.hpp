@@ -66,6 +66,7 @@ public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
 	uint32_t get_station_type() const noexcept { return station_type; }
+	ship_type get_shiptype() const noexcept { return shiptype; }
 	uint32_t get_txrx_mode() const noexcept { return txrx_mode; }
 	report_interval get_interval() const noexcept { return interval; }
 	uint32_t get_quiet_time() const noexcept { return quiet_time; }
