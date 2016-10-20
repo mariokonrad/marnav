@@ -500,7 +500,7 @@ template <class T> T * message_cast(message * s)
 	return detail::check_cast<T>(s) ? static_cast<T *>(s) : nullptr;
 }
 
-/// const variant.
+/// Raw pointer const variant.
 ///
 /// @see message_cast(message * s)
 template <class T> const T * message_cast(const message * s)
@@ -508,20 +508,29 @@ template <class T> const T * message_cast(const message * s)
 	return detail::check_cast<T>(s) ? static_cast<const T *>(s) : nullptr;
 }
 
-/// std::unique_ptr variant.
+/// `std::unique_ptr` variant. If the cast is possible, the original `unique_ptr<message>`
+/// will be invalidated and a new `unique_ptr<T>` will be returned. This has implications
+/// within the calling code.
 ///
-/// @see message_cast(message * s)
-template <class T> T * message_cast(std::unique_ptr<message> & s)
+/// @param[in,out] s The message to cast.
+/// @return The casted message. If the specified sentence was `nullptr`, the function
+///   also returns `nullptr`.
+/// @exception bad_cast This exception is thrown if the specified message is
+///   not castable into the destination type `T`.
+///
+template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message> & s)
 {
-	return message_cast<T>(s.get());
+	return detail::check_cast<T>(s.get()) ? std::unique_ptr<T>(static_cast<T *>(s.release()))
+										  : nullptr;
 }
 
-/// const std::unique_ptr variant.
+/// `unique_ptr` ref ref variant.
 ///
-/// @see message_cast(message * s)
-template <class T> const T * message_cast(const std::unique_ptr<message> & s)
+/// @see message_cast(std::unique_ptr<message> & s)
+template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message> && s)
 {
-	return message_cast<const T>(s.get());
+	return detail::check_cast<T>(s.get()) ? std::unique_ptr<T>(static_cast<T *>(s.release()))
+										  : nullptr;
 }
 
 /// @}

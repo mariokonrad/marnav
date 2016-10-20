@@ -25,7 +25,7 @@ int main(int, char **)
 
 		// do something with the sentence, for example dump the position
 		if (sentence->id() == nmea::sentence_id::RMC) {
-			auto rmc = nmea::sentence_cast<nmea::rmc>(sentence);
+			auto rmc = nmea::sentence_cast<nmea::rmc>(sentence.get());
 			std::cout << "latitude : " << nmea::to_string(rmc->get_latitude()) << "\n";
 			std::cout << "longitude: " << nmea::to_string(rmc->get_longitude()) << "\n";
 		}

@@ -90,6 +90,22 @@ private:
 	message_id message_type;
 };
 
+/// @cond DEV
+namespace detail
+{
+/// Checks if the specified cast is valid, throws `bad_cast` if not.
+/// If the pointer is `nullptr`, false returns.
+template <class T> bool check_cast(const message * s)
+{
+	if (!s)
+		return false;
+	if (s->type() != T::ID)
+		throw std::bad_cast{};
+	return true;
+}
+}
+/// @endcond
+
 /// Casts the specified message to the message given by the template parameter.
 /// The object converted only if it is valid and of the correct type. It is not
 /// possible to cast a message into a completley different one.
@@ -100,57 +116,15 @@ private:
 /// @exception std::bad_cast The specified message has the wrong ID.
 template <class T> T * message_cast(message * s)
 {
-	if (!s)
-		return nullptr;
-	if (s->type() != T::ID)
-		throw std::bad_cast{};
-
-	return static_cast<T *>(s);
+	return detail::check_cast<T>(s) ? static_cast<T *>(s) : nullptr;
 }
 
-/// const variant.
+/// Raw pointer const variant.
 ///
 /// @see message_cast(message * s)
 template <class T> const T * message_cast(const message * s)
 {
-	if (!s)
-		return nullptr;
-	if (s->type() != T::ID)
-		throw std::bad_cast{};
-
-	return static_cast<const T *>(s);
-}
-
-/// std::unique_ptr variant.
-///
-/// @note This cast does not change ownership of the specified pointer.
-///  The return value is a naked pointer.
-///
-/// @see message_cast(message * s)
-template <class T> T * message_cast(std::unique_ptr<message> & s)
-{
-	if (!s)
-		return nullptr;
-	if (s->type() != T::ID)
-		throw std::bad_cast{};
-
-	return static_cast<T *>(s.get());
-}
-
-/// const std::unique_ptr variant.
-///
-/// @note This cast does not change ownership of the specified pointer.
-///  The return value is a naked pointer.
-///
-/// @see message_cast(message * s)
-template <class T> const T * message_cast(const std::unique_ptr<message> & s)
-{
-	if (!s)
-		return nullptr;
-	if (s->type() != T::ID)
-		throw std::bad_cast{};
-
-	return static_cast<const T *>(s.get());
+	return detail::check_cast<T>(s) ? static_cast<const T *>(s) : nullptr;
 }
 
 /// reference variant
@@ -171,6 +145,31 @@ template <class T> const T & message_cast(const message & s)
 	if (s.type() != T::ID)
 		throw std::bad_cast{};
 	return *static_cast<const T *>(&s);
+}
+
+/// `std::unique_ptr` variant. If the cast is possible, the original `unique_ptr<message>`
+/// will be invalidated and a new `unique_ptr<T>` will be returned. This has implications
+/// within the calling code.
+///
+/// @param[in,out] s The message to cast.
+/// @return The casted message. If the specified sentence was `nullptr`, the function
+///   also returns `nullptr`.
+/// @exception bad_cast This exception is thrown if the specified message is
+///   not castable into the destination type `T`.
+///
+template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message> & s)
+{
+	return detail::check_cast<T>(s.get()) ? std::unique_ptr<T>(static_cast<T *>(s.release()))
+										  : nullptr;
+}
+
+/// `unique_ptr` ref ref variant.
+///
+/// @see message_cast(std::unique_ptr<message> & s)
+template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message> && s)
+{
+	return detail::check_cast<T>(s.get()) ? std::unique_ptr<T>(static_cast<T *>(s.release()))
+										  : nullptr;
 }
 }
 }

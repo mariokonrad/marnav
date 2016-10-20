@@ -159,7 +159,7 @@ template <class T> T * sentence_cast(sentence * s)
 	return detail::check_cast<T>(s) ? static_cast<T *>(s) : nullptr;
 }
 
-/// const variant.
+/// Raw pointer const variant.
 ///
 /// @see sentence_cast(sentence * s)
 template <class T> const T * sentence_cast(const sentence * s)
@@ -167,28 +167,50 @@ template <class T> const T * sentence_cast(const sentence * s)
 	return detail::check_cast<T>(s) ? static_cast<const T *>(s) : nullptr;
 }
 
-/// `std::unique_ptr` variant. This is only for convenience. It is the same as:
+/// `std::unique_ptr` variant. If the cast is possible, the original `unique_ptr<sentence>`
+/// will be invalidated and a new `unique_ptr<T>` will be returned. This has implications
+/// within the calling code.
+///
+/// Code using a temporary `unique_ptr`:
+/// @code
+/// auto q = nmea::sentence_cast<nmea::mtw>(nmea::make_sentence("$IIMTW,9.5,C*2F"));
+///   // here `q` is valid and an `unique_ptr`
+/// @endcode
+///
+/// Possible undefined behaviour if not careful:
+/// @code
+/// auto p = nmea::make_sentence("$IIMTW,9.5,C*2F");
+/// auto q = nmea::sentence_cast<nmea::mtw>(p);
+///   // here `p` no is no longer valid, `q` is an `unique_ptr`.
+///   // accessing `p` at this point is undefined behaviour.
+/// @endcode
+///
+/// This can easily be resolved, when using the raw pointer variant of `sentence_cast`:
 /// @code
 /// auto p = nmea::make_sentence("$IIMTW,9.5,C*2F");
 /// auto q = nmea::sentence_cast<nmea::mtw>(p.get());
+///   // here `p` is still valid, `q` is a raw pointer.
 /// @endcode
 ///
-/// @see sentence_cast(sentence * s)
-template <class T> T * sentence_cast(std::unique_ptr<sentence> & s)
+/// @param[in,out] s The sentence to cast.
+/// @return The casted sentence. If the specified sentence was `nullptr`, the function
+///   also returns `nullptr`.
+/// @exception bad_cast This exception is thrown if the specified sentence is
+///   not castable into the destination type `T`.
+///
+template <class T> std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence> & s)
 {
-	return sentence_cast<T>(s.get());
+	return detail::check_cast<T>(s.get()) ? std::unique_ptr<T>(static_cast<T *>(s.release()))
+										  : nullptr;
 }
 
-/// `const std::unique_ptr` variant. This is only for convenience. It is the same as:
-/// @code
-/// const auto p = nmea::make_sentence("$IIMTW,9.5,C*2F");
-/// auto q = nmea::sentence_cast<nmea::mtw>(p.get());
-/// @endcode
+/// `unique_ptr` ref ref variant.
 ///
-/// @see sentence_cast(sentence * s)
-template <class T> const T * sentence_cast(const std::unique_ptr<sentence> & s)
+/// @see sentence_cast(std::unique_ptr<sentence> & s)
+template <class T> std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence> && s)
 {
-	return sentence_cast<const T>(s.get());
+	return detail::check_cast<T>(s.get()) ? std::unique_ptr<T>(static_cast<T *>(s.release()))
+										  : nullptr;
 }
 
 /// @}

@@ -89,7 +89,7 @@ TEST_F(Test_ais_message_01, github_issue_2)
 	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("15RTgt0PAso;90TKcjM8h6g208CQ", 0));
 
-	const auto result = ais::make_message(v);
+	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
 
 	const auto m = ais::message_cast<ais::message_01>(result);

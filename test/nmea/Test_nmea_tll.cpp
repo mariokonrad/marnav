@@ -55,8 +55,8 @@ TEST_F(Test_nmea_tll, set_lat_north)
 
 TEST_F(Test_nmea_tll, get_latitude_north)
 {
-	const auto s = nmea::make_sentence("$GPTLL,00,1220.4000,N,00000.0000,E,,000000,T,*05");
-	const auto tll = nmea::sentence_cast<nmea::tll>(s);
+	const auto tll = nmea::sentence_cast<nmea::tll>(
+		nmea::make_sentence("$GPTLL,00,1220.4000,N,00000.0000,E,,000000,T,*05"));
 
 	EXPECT_EQ(geo::latitude{12.34}, tll->get_latitude());
 }
@@ -72,8 +72,8 @@ TEST_F(Test_nmea_tll, set_lat_south)
 
 TEST_F(Test_nmea_tll, get_latitude_south)
 {
-	const auto s = nmea::make_sentence("$GPTLL,00,1220.4000,S,00000.0000,E,,000000,T,*18");
-	const auto tll = nmea::sentence_cast<nmea::tll>(s);
+	const auto tll = nmea::sentence_cast<nmea::tll>(
+		nmea::make_sentence("$GPTLL,00,1220.4000,S,00000.0000,E,,000000,T,*18"));
 
 	EXPECT_EQ(geo::latitude{-12.34}, tll->get_latitude());
 }
@@ -89,8 +89,8 @@ TEST_F(Test_nmea_tll, set_lon_west)
 
 TEST_F(Test_nmea_tll, get_longitude_west)
 {
-	const auto s = nmea::make_sentence("$GPTLL,00,0000.0000,N,12327.0000,W,,000000,T,*17");
-	const auto tll = nmea::sentence_cast<nmea::tll>(s);
+	const auto tll = nmea::sentence_cast<nmea::tll>(
+		nmea::make_sentence("$GPTLL,00,0000.0000,N,12327.0000,W,,000000,T,*17"));
 
 	EXPECT_EQ(geo::longitude{-123.45}, tll->get_longitude());
 }
@@ -106,8 +106,8 @@ TEST_F(Test_nmea_tll, set_lon_east)
 
 TEST_F(Test_nmea_tll, get_longitude_east)
 {
-	const auto s = nmea::make_sentence("$GPTLL,00,0000.0000,N,12327.0000,E,,000000,T,*05");
-	const auto tll = nmea::sentence_cast<nmea::tll>(s);
+	const auto tll = nmea::sentence_cast<nmea::tll>(
+		nmea::make_sentence("$GPTLL,00,0000.0000,N,12327.0000,E,,000000,T,*05"));
 
 	EXPECT_EQ(geo::longitude{123.45}, tll->get_longitude());
 }
@@ -137,15 +137,15 @@ TEST_F(Test_nmea_tll, set_status)
 TEST_F(Test_nmea_tll, get_status)
 {
 	{
-		const auto s = nmea::make_sentence("$GPTLL,00,0000.0000,N,00000.0000,E,,000000,L,*18");
+		auto s = nmea::make_sentence("$GPTLL,00,0000.0000,N,00000.0000,E,,000000,L,*18");
 		EXPECT_EQ(nmea::target_status::lost, nmea::sentence_cast<nmea::tll>(s)->get_status());
 	}
 	{
-		const auto s = nmea::make_sentence("$GPTLL,00,0000.0000,N,00000.0000,E,,000000,Q,*05");
+		auto s = nmea::make_sentence("$GPTLL,00,0000.0000,N,00000.0000,E,,000000,Q,*05");
 		EXPECT_EQ(nmea::target_status::query, nmea::sentence_cast<nmea::tll>(s)->get_status());
 	}
 	{
-		const auto s = nmea::make_sentence("$GPTLL,00,0000.0000,N,00000.0000,E,,000000,T,*00");
+		auto s = nmea::make_sentence("$GPTLL,00,0000.0000,N,00000.0000,E,,000000,T,*00");
 		EXPECT_EQ(
 			nmea::target_status::tracking, nmea::sentence_cast<nmea::tll>(s)->get_status());
 	}

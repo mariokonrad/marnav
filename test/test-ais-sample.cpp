@@ -130,7 +130,7 @@ int main(int, char **)
 		try {
 			auto sentence = nmea::make_sentence(line);
 			if (sentence->id() == nmea::sentence_id::VDM) {
-				const auto vdm = nmea::sentence_cast<nmea::vdm>(sentence);
+				const auto vdm = nmea::sentence_cast<nmea::vdm>(sentence.get());
 				const auto n_fragments = vdm->get_n_fragments();
 				const auto fragment = vdm->get_fragment();
 				sentences.push_back(std::move(sentence));

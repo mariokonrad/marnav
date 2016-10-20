@@ -105,9 +105,9 @@ TEST_F(Test_nmea_dsc, get_cat)
 
 TEST_F(Test_nmea_dsc, get_mmsi)
 {
-	auto s = nmea::sentence_cast<nmea::dsc>(
+	const auto s = nmea::sentence_cast<nmea::dsc>(
 		nmea::make_sentence("$CDDSC,02,3380210040,00,21,26,1394807410,2231,,,B,E*75"));
-	ASSERT_NE(nullptr, s);
+	ASSERT_FALSE(s == nullptr);
 	EXPECT_EQ(utils::mmsi{338021004}, s->get_mmsi());
 }
 

@@ -116,7 +116,7 @@ int main(int, char **)
 			// and does not check for sequence or overlapping of messages.
 			// it simply assumes all necessary messages are subsequent.
 			// there is simply a check, whether or not all parts have arrived.
-			const auto vdm = nmea::sentence_cast<nmea::vdm>(nmea_sentence);
+			const auto vdm = nmea::sentence_cast<nmea::vdm>(nmea_sentence.get());
 			const auto n_fragments = vdm->get_n_fragments();
 			const auto fragment = vdm->get_fragment();
 

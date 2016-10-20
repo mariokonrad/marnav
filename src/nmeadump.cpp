@@ -1645,9 +1645,9 @@ static void process(std::function<bool(std::string &)> source)
 			nmea::vdm * v = nullptr; // VDM is the common denominator for AIS relevant messages
 
 			if (s->id() == nmea::sentence_id::VDO) {
-				v = nmea::sentence_cast<nmea::vdo>(s);
+				v = nmea::sentence_cast<nmea::vdo>(s.get());
 			} else if (s->id() == nmea::sentence_id::VDM) {
-				v = nmea::sentence_cast<nmea::vdm>(s);
+				v = nmea::sentence_cast<nmea::vdm>(s.get());
 			} else {
 				// something strange happened, no VDM nor VDO
 				fmt::printf("%s%s%s\n\terror: ignoring AIS sentence, dropping collection.\n\n",
