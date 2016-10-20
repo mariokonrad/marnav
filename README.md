@@ -378,6 +378,7 @@ Build options:
   Currently implemented only for GCC.  Default is `OFF`
 - `ENABLE_PROFILING` : enables profiling for `gprof`
 - `ENABLE_BENCHMARK` : enables benchmarking (disables some optimization)
+- `ENABLE_SANITIZER` : enables address and undefined sanitizers
 
 Features:
 - `ENABLE_AIS ` : enables AIS support. Default: `ON`

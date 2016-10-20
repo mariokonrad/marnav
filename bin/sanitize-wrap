@@ -1,0 +1,29 @@
+#!/bin/bash -eux
+
+# when using the address sanitizer, libasan must be linked/loaded first.
+# to make sure this happens, this script uses LD_PRELOAD to load the
+# library first, but only if it is necessary. If the executable is not
+# linked against libasan, it will be executed just as it is.
+#
+# example:
+#
+#     sanitize-wrap build/test/testrunner --gtest_shuffle
+#
+
+# find link to libasan
+libasan=$(ldd $1 | grep libasan | sed 's/^[[:space:]]//' | cut -d ' ' -f1)
+
+# define LD_PRELOAD if necessary
+if [ -n "${libasan}" ] ; then
+	set +u
+	if [ -n "${LD_PRELOAD}" ] ; then
+		export LD_PRELOAD="${libasan};${LD_PRELOAD}"
+	else
+		export LD_PRELOAD="${libasan}"
+	fi
+	set -u
+fi
+
+# execute binary
+exec $@
+

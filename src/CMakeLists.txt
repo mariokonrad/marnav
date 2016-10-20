@@ -224,13 +224,13 @@ target_compile_options(marnav
 	)
 if(ENABLE_PROFILING)
 	target_compile_options(marnav
-		PUBLIC
+		PRIVATE
 			-pg
 		)
 endif()
 if(ENABLE_BENCHMARK)
 	target_compile_options(marnav
-		PUBLIC
+		PRIVATE
 			-fno-omit-frame-pointer
 		)
 endif()
@@ -281,10 +281,24 @@ if(ENABLE_WARNING_HELL)
 		)
 endif()
 
+if(ENABLE_SANITIZER)
+	message(STATUS "Sanitizer: enabled")
+	target_compile_options(marnav
+		PRIVATE
+			-fsanitize=address
+			-fsanitize=undefined
+		)
+
+	target_link_libraries(marnav
+		asan
+		ubsan
+		)
+endif()
+
 if(build_type_lower MATCHES coverage)
 	message(STATUS "Coverage: enabled")
 	target_compile_options(marnav
-		PUBLIC
+		PRIVATE
 			--coverage
 			-fprofile-arcs
 			-ftest-coverage
