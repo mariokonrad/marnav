@@ -115,7 +115,7 @@ std::string to_string(const sentence & s);
 /// @cond DEV
 namespace detail
 {
-/// Checks if the specified cast is valid, throws `bad_cast` if not.
+/// Checks if the specified cast is valid, throws `std::bad_cast` if not.
 /// If the pointer is `nullptr`, false returns.
 template <class T> bool check_cast(const sentence * s)
 {
@@ -195,7 +195,7 @@ template <class T> const T * sentence_cast(const sentence * s)
 /// @param[in,out] s The sentence to cast.
 /// @return The casted sentence. If the specified sentence was `nullptr`, the function
 ///   also returns `nullptr`.
-/// @exception bad_cast This exception is thrown if the specified sentence is
+/// @exception std::bad_cast This exception is thrown if the specified sentence is
 ///   not castable into the destination type `T`.
 ///
 template <class T> std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence> & s)

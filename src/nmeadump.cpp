@@ -232,6 +232,7 @@ static std::string trim(const std::string & s)
 	return begin != std::string::npos ? s.substr(begin, end - begin + 1) : "";
 }
 
+/// @cond DEV
 namespace detail
 {
 template <typename T> static std::string render(const T & t)
@@ -1449,6 +1450,7 @@ static void print_detail_message_24(const marnav::ais::message * m)
 	}
 }
 }
+/// @endcond
 
 static void dump_nmea(const std::string & line)
 {

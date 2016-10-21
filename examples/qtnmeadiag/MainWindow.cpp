@@ -34,6 +34,7 @@
 
 namespace marnav_example
 {
+/// @cond DEV
 namespace detail
 {
 template <typename T> static QString render(const marnav::utils::optional<T> & t)
@@ -341,6 +342,7 @@ static QString details_rte(const marnav::nmea::sentence * s)
 	return result;
 }
 }
+/// @endcond
 
 static QString get_details(const marnav::nmea::sentence * s)
 {
