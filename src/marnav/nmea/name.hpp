@@ -11,6 +11,11 @@ namespace marnav
 namespace nmea
 {
 /// @{
+/// Returns a printable / human readable name for the specified argument.
+///
+/// @param[in] t The argument to return the name for.
+/// @return The human readable name.
+
 std::string to_name(sentence_id t);
 std::string to_name(talker t);
 std::string to_name(selection_mode t);
