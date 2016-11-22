@@ -149,6 +149,7 @@ add_executable(testrunner
 	nmea/Test_nmea_rsd.cpp
 	nmea/Test_nmea_rte.cpp
 	nmea/Test_nmea_sfi.cpp
+	nmea/Test_nmea_stn.cpp
 	nmea/Test_nmea_tds.cpp
 	nmea/Test_nmea_tfi.cpp
 	nmea/Test_nmea_tll.cpp

@@ -175,6 +175,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/nmea/rsd.cpp
 	marnav/nmea/rte.cpp
 	marnav/nmea/sfi.cpp
+	marnav/nmea/stn.cpp
 	marnav/nmea/tds.cpp
 	marnav/nmea/tfi.cpp
 	marnav/nmea/tll.cpp
@@ -393,6 +394,7 @@ install(
 		marnav/nmea/rsd.hpp
 		marnav/nmea/rte.hpp
 		marnav/nmea/sfi.hpp
+		marnav/nmea/stn.hpp
 		marnav/nmea/tds.hpp
 		marnav/nmea/tfi.hpp
 		marnav/nmea/tll.hpp

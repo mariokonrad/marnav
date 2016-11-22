@@ -6,7 +6,6 @@ TODO
 @todo Implement NMEA sentence: ASD: Autopilot System Data
 @todo Implement NMEA sentence: DSI: DSC Transponder Initiate
 @todo Implement NMEA sentence: DSR: DSC Transponder Response
-@todo Implement NMEA sentence: STN: Multiple Data ID
 
 @todo Implement AIS message: Type 06: Binary Addressed Message
 @todo Implement AIS message: Type 07: Binary Acknowledge

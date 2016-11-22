@@ -85,6 +85,7 @@
 #include <marnav/nmea/rsd.hpp>
 #include <marnav/nmea/rte.hpp>
 #include <marnav/nmea/sfi.hpp>
+#include <marnav/nmea/stn.hpp>
 #include <marnav/nmea/tds.hpp>
 #include <marnav/nmea/tfi.hpp>
 #include <marnav/nmea/tll.hpp>
@@ -965,6 +966,12 @@ static void print_detail_sfi(const marnav::nmea::sentence * s)
 		print("Frequency [kHz]", fmt::sprintf("%s %s", render(f.frequency), render(f.mode)));
 }
 
+static void print_detail_stn(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::stn>(s);
+	print("Number ID", render(t->get_number()));
+}
+
 static void print_detail_tds(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::tds>(s);
@@ -1511,6 +1518,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(rsd),
 		ADD_SENTENCE(rte),
 		ADD_SENTENCE(sfi),
+		ADD_SENTENCE(stn),
 		ADD_SENTENCE(tds),
 		ADD_SENTENCE(tfi),
 		ADD_SENTENCE(tll),
