@@ -47,6 +47,7 @@
 #include <marnav/nmea/rsd.hpp>
 #include <marnav/nmea/rte.hpp>
 #include <marnav/nmea/sfi.hpp>
+#include <marnav/nmea/stn.hpp>
 #include <marnav/nmea/tds.hpp>
 #include <marnav/nmea/tfi.hpp>
 #include <marnav/nmea/tll.hpp>
@@ -139,6 +140,7 @@ static std::vector<sentence_data> sentences = {
 	INFO(rsd, "$IIRSD,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,A,A*47"),
 	INFO(rte, "$GPRTE,1,1,c,*37"),
 	INFO(sfi, "$GPSFI,1,1,156025,M*03"),
+	INFO(stn, "$GPSTN,10*73"),
 	INFO(tds, "$GPTDS,12.3,M*07"),
 	INFO(tfi, "$GPTFI,0,1,2*53"),
 	INFO(tll, "$GPTLL,00,0000.0000,N,00000.0000,E,,000000,T,*00"),
@@ -263,6 +265,7 @@ BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::rsa)->Apply(specific<nmea::r
 BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::rsd)->Apply(specific<nmea::rsd>);
 BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::rte)->Apply(specific<nmea::rte>);
 BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::sfi)->Apply(specific<nmea::sfi>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::stn)->Apply(specific<nmea::stn>);
 BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::tds)->Apply(specific<nmea::tds>);
 BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::tfi)->Apply(specific<nmea::tfi>);
 BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::tll)->Apply(specific<nmea::tll>);
