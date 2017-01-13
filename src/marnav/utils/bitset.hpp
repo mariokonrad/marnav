@@ -1,20 +1,21 @@
 #ifndef __MARNAV__UTILS__BITSET__HPP__
 #define __MARNAV__UTILS__BITSET__HPP__
 
-/// Copyright (c) 2015 Mario Konrad <mario.konrad@gmx.net>
-/// The code is licensed under the BSD License (see file LICENSE)
+/// Copyright (c) 2016 Mario Konrad <mario.konrad@gmx.net>
+/// The code is licensed under the BSD License.
 
-#include <vector>
-#include <type_traits>
 #include <limits>
-#include <istream>
 #include <stdexcept>
+#include <type_traits>
+#include <vector>
+#include <cassert>
 
 namespace marnav
 {
 namespace utils
 {
-/// @brief This is a dynamically growing bitset (theoretically of arbitrary size).
+
+/// This is a dynamically growing bitset (theoretically of arbitrary size).
 ///
 /// Bits are stored in blocks, whose data type is configurable.
 ///
@@ -25,7 +26,6 @@ namespace utils
 /// claims nor wants to be.
 ///
 /// @tparam Block The data type of the underlying block type.
-/// @tparam Container The container type to store blocks.
 ///
 /// **Example:** appending individual bits
 /// @code
@@ -51,22 +51,28 @@ namespace utils
 /// bits.set(1, 512, 1); // set one bit to 1 at offset 512
 /// @endcode
 ///
-template <class Block, class Container = std::vector<Block>,
+/// @todo shr: shift right
+/// @todo iterator
+/// @todo function to extract a subrange of the bitset: bitset sub(const_iterator, const_iterator) cont
+/// @todo function set(bitset, size_type) or set(bitset, const_iterator)
+///
+template <class Block,
 	class = typename std::enable_if<!std::numeric_limits<Block>::is_signed>::type>
 class bitset
 {
 public:
 	using block_type = Block;
-	enum {
-		/// It is assumed, that a byte has 8 bits. This template will
-		/// not work on other architectures.
-		bits_per_byte = 8
-	};
-	enum { bits_per_block = sizeof(block_type) * bits_per_byte };
+
+	/// It is assumed, that a byte has 8 bits. This template will
+	/// not work on other architectures.
+	static constexpr auto bits_per_byte = 8u;
+
+	static constexpr auto bits_per_block = sizeof(block_type) * bits_per_byte;
 
 public:
-	using size_type = typename Container::size_type;
-	using data_const_iterator = typename Container::const_iterator;
+	using container = std::vector<block_type>;
+	using size_type = typename container::size_type;
+	using data_const_iterator = typename container::const_iterator;
 
 	/// This is a non-std conform const iterator. The intention is
 	/// to provide a basic iterator functionality without claiming
@@ -77,10 +83,11 @@ public:
 
 	public:
 		using value_type = bool;
+		using iterator_category = std::random_access_iterator_tag;
 
 	private:
-		const bitset * bs;
-		size_type pos;
+		const bitset * bs; ///< Associated bitset.
+		size_type pos; ///< Position (bit) within the bitset.
 
 	private:
 		const_iterator(const bitset * const bs, size_type pos)
@@ -104,32 +111,32 @@ public:
 		const_iterator & operator=(const const_iterator &) = default;
 		const_iterator & operator=(const_iterator &&) noexcept = default;
 
-		bool operator==(const const_iterator & other) const
+		bool operator==(const const_iterator & other) const noexcept
 		{
 			return bs == other.bs && pos == other.pos;
 		}
 
-		bool operator!=(const const_iterator & other) const
+		bool operator!=(const const_iterator & other) const noexcept
 		{
 			return bs != other.bs || pos != other.pos;
 		}
 
-		bool operator<(const const_iterator & other) const
+		bool operator<(const const_iterator & other) const noexcept
 		{
 			return bs == other.bs && pos < other.pos;
 		}
 
-		bool operator>(const const_iterator & other) const
+		bool operator>(const const_iterator & other) const noexcept
 		{
 			return bs == other.bs && pos > other.pos;
 		}
 
-		bool operator<=(const const_iterator & other) const
+		bool operator<=(const const_iterator & other) const noexcept
 		{
 			return bs == other.bs && pos <= other.pos;
 		}
 
-		bool operator>=(const const_iterator & other) const
+		bool operator>=(const const_iterator & other) const noexcept
 		{
 			return bs == other.bs && pos >= other.pos;
 		}
@@ -137,6 +144,16 @@ public:
 		bool operator*() const
 		{
 			return bs != nullptr && pos < bs->size() && bs->get_bit(pos) == true;
+		}
+
+		const_iterator operator+(size_type n) const noexcept
+		{
+			return const_iterator{*this} += n;
+		}
+
+		const_iterator operator-(size_type n) const noexcept
+		{
+			return const_iterator{*this} -= n;
 		}
 
 		const_iterator & operator+=(size_type ofs)
@@ -191,6 +208,7 @@ public:
 			return res;
 		}
 
+		/// Peeks from the bitset, but does not advance the iterator.
 		template <typename T> void peek(T & v, size_type bits = sizeof(T) * bits_per_byte) const
 		{
 			if (bs == nullptr)
@@ -201,6 +219,7 @@ public:
 			bs->get(v, pos, bits);
 		}
 
+		/// Reads from the bitset and advances the iterator the number of read bits.
 		template <typename T> void read(T & v, size_type bits = sizeof(T) * bits_per_byte)
 		{
 			peek(v, bits);
@@ -210,15 +229,14 @@ public:
 
 private:
 	size_type pos; // number of bits contained within the set
-	Container data;
+	container data;
 
 private:
 	/// Extends the container by the specified number of bits.
 	/// Extension is always one block.
 	void extend(size_type bits)
 	{
-		if (bits <= 0)
-			return;
+		assert(bits > 0);
 		size_type n_blocks = (pos + bits + bits_per_block - 1) / bits_per_block;
 		if (n_blocks > data.capacity()) {
 			data.reserve(n_blocks);
@@ -237,8 +255,7 @@ private:
 	///            appended, only the least significant bits are being taken.
 	void append_block(block_type v, size_type bits = bits_per_block)
 	{
-		if (bits <= 0)
-			return;
+		assert(bits > 0);
 		extend(bits);
 		size_type i = pos / bits_per_block; // index of current block
 
@@ -302,8 +319,7 @@ private:
 	template <typename T>
 	void set_impl(T v, size_type ofs, size_type bits = sizeof(T) * bits_per_byte)
 	{
-		if (bits <= 0)
-			return;
+		assert(bits > 0);
 		if (bits > sizeof(v) * bits_per_byte)
 			throw std::invalid_argument{"number of bit exceed number of available bits"};
 		if (ofs + bits > capacity())
@@ -346,7 +362,7 @@ private:
 
 	/// Reads a block from the bit set.
 	///
-	/// @param[out] v The container to hold the data.
+	/// @return    The container to hold the data.
 	/// @param[in] ofs The offset in bits at which the data has to be read.
 	/// @param[in] bits Number of bits to be read.
 	///            If the number of bits is smaller than what the specified data can
@@ -354,33 +370,37 @@ private:
 	/// @exception std::out_of_range There are not enough bits to read, offset and number
 	///            of bits exceed the total number of available bits. It is not possible
 	///            to read past the end.
-	void get_block(block_type & v, size_type ofs, size_type bits = bits_per_block) const
+	block_type get_block(size_type ofs, size_type bits = bits_per_block) const noexcept
 	{
-		if (bits <= 0)
-			return;
-		if (ofs + bits > size())
-			throw std::out_of_range{"offset and requested bits out of range of available bits"};
-		size_type i = ofs / bits_per_block; // index of current block
+		assert(bits > 0);
+		const size_type i = ofs / bits_per_block; // index of current block
 
 		// number of bits unused within the current block
-		size_type u_bits = bits_per_block - (ofs % bits_per_block);
+		const size_type u_bits = bits_per_block - (ofs % bits_per_block);
 
 		if (u_bits >= bits) {
 			// desired data fully within the current block
 			block_type mask = (1 << u_bits) - 1;
-			v = (data[i] & mask) >> (u_bits - bits);
+			return (data[i] & mask) >> (u_bits - bits);
 		} else {
 			// desired value is part from current block and part from next
 			block_type mask0 = (1 << u_bits) - 1;
 			block_type mask1 = ((1 << (bits_per_block - (bits - u_bits))) - 1)
 				<< (bits - u_bits);
-			v = (data[i + 0] & mask0) << (bits - u_bits)
+			return (data[i + 0] & mask0) << (bits - u_bits)
 				| (data[i + 1] & mask1) >> (bits_per_block - (bits - u_bits));
 		}
 	}
 
-public:
-	// ---- constructors
+	/// Copies a block from source to destination offsets.
+	///
+	/// This is the equivalent of `set_block(get_block(...), ...)`
+	void copy_block(size_type r_ofs, size_type w_ofs, size_type bits = bits_per_block)
+	{
+		set_block(get_block(r_ofs, bits), w_ofs, bits);
+	}
+
+public: // constructors
 
 	/// Copy constructor
 	bitset(const bitset &) = default;
@@ -415,27 +435,27 @@ public:
 	///
 	/// @param[in] begin Start position of the data (inclusive)
 	/// @param[in] end End position of the data (exclusive)
-	bitset(typename Container::const_iterator begin, typename Container::const_iterator end)
+	bitset(typename container::const_iterator begin, typename container::const_iterator end)
 		: pos((end - begin) * bits_per_block)
 		, data(begin, end)
 	{
 	}
 
 	/// Construction with move of the container, this does not copy any data.
-	explicit bitset(Container && container)
+	explicit bitset(container && container)
 		: pos(container.size() * bits_per_block)
 		, data(std::move(container))
 	{
 	}
 
-	// ---- container operations
+public: // container operations
 
 	/// Returns the capacity of this bit set. Note: not all bits must have
 	/// been occupied.
-	size_type capacity() const { return data.size() * bits_per_block; }
+	size_type capacity() const noexcept { return data.size() * bits_per_block; }
 
 	/// Returns the number of used bits.
-	size_type size() const { return pos; }
+	size_type size() const noexcept { return pos; }
 
 	/// Reserves the number of blocks within this set.
 	///
@@ -449,7 +469,7 @@ public:
 		pos = 0;
 	}
 
-	// ---- iterators
+public: // iterators
 
 	/// Returns a const iterator to the beginning of the data itself.
 	/// Note: this iterator accesses the data up to capacity(), some bits
@@ -463,7 +483,11 @@ public:
 
 	const_iterator end() const { return const_iterator(this, size()); }
 
-	// ---- append
+	const_iterator cbegin() const { return const_iterator(this, 0); }
+
+	const_iterator cend() const { return const_iterator(this, size()); }
+
+public: // append
 
 	/// Appends another bitset to this one.
 	///
@@ -477,23 +501,6 @@ public:
 			return;
 		for (const auto & bit : bs)
 			append(bit, 1);
-	}
-
-	/// Reads blocks from the stream and appends them to the bitset.
-	///
-	/// @param[in] is Stream to read block from.
-	/// @param[in] blocks Number of blocks to read.
-	/// @return Number of blocks read from the stream.
-	size_type append(std::istream & is, size_type blocks)
-	{
-		size_type i = 0;
-		block_type block;
-		while (is.good() && !is.eof() && i < blocks) {
-			is.read(reinterpret_cast<char *>(&block), sizeof(block));
-			append_block(block);
-			++i;
-		}
-		return i;
 	}
 
 	/// Appends the lowest significant bits of the specified data to the
@@ -525,7 +532,7 @@ public:
 		}
 	}
 
-	// ---- set
+public: // set
 
 	/// Sets the specified bitset at the offset within this bitset.
 	///
@@ -594,7 +601,7 @@ public:
 		}
 	}
 
-	// ---- get
+public: // get
 
 	/// Returns the bit at the specified position. If the index is larger
 	/// than the actual number of bits, 'false' will rturn.
@@ -648,18 +655,16 @@ public:
 		// number of bits unused within the current block
 		size_type u_bits = bits_per_block - (ofs % bits_per_block);
 
-		block_type block{};
-
 		// fraction of the first block
 		if (u_bits > 0) {
-			get_block(block, ofs, u_bits);
+			auto block = get_block(ofs, u_bits);
 			if (bits < u_bits) {
 				block >>= (u_bits - bits);
 				bits = 0;
 			} else {
 				bits -= u_bits;
 			}
-			value = +block;
+			value += block;
 			ofs += u_bits;
 		}
 
@@ -669,18 +674,16 @@ public:
 		// probably will eliminated it completely.
 		if (sizeof(T) * bits_per_byte > bits_per_block) {
 			for (; bits >= bits_per_block; bits -= bits_per_block) {
-				get_block(block, ofs);
 				value <<= bits_per_block;
-				value += block;
+				value += get_block(ofs);
 				ofs += bits_per_block;
 			}
 		}
 
 		// fraction of the last block
 		if (bits > 0) {
-			get_block(block, ofs, bits);
 			value <<= bits;
-			value += block;
+			value += get_block(ofs, bits);
 		}
 
 		return value;
@@ -701,18 +704,357 @@ public:
 
 	bool get(size_type index) const { return get<bool>(index, 1); }
 
-	// ---- operators
+public: // access operators
 
 	/// Returns the bit at the specified position.
 	bool operator[](size_type i) const { return get_bit(i); }
 
-	/// Comparison operator for the same bitset type.
+public: // comparison operators
+
+	/// Equality comparison operator for the same bitset type.
 	bool operator==(const bitset & other) const { return this == &other || data == other.data; }
 
-	/// Comparison operator for the same bitset type.
+	/// Inequality comparison operator for the same bitset type.
 	bool operator!=(const bitset & other) const { return !(*this == other); }
 
-	// ---- other
+	/// Equalily comparison operator for different bitset types.
+	///
+	/// Since the blocks differ, a comparison bit by bit is done.
+	///
+	/// @note This is implemented for readablility, not max performance.
+	template <class XBlock,
+		class = typename std::enable_if<!std::numeric_limits<XBlock>::is_signed>::type>
+	bool operator==(const bitset<XBlock> & other) const
+	{
+		if (size() != other.size())
+			return false;
+
+		auto i = begin();
+		auto j = other.begin();
+		while (i != end()) {
+			if (*i != *j)
+				return false;
+			++i;
+			++j;
+		}
+		return true;
+	}
+
+	/// Inequality comparison operator for different bitset types.
+	///
+	/// Since the blocks differ, a comparison bit by bit is done.
+	///
+	/// @note This is implemented for readablility, not max performance.
+	template <class XBlock,
+		class = typename std::enable_if<!std::numeric_limits<XBlock>::is_signed>::type>
+	bool operator!=(const bitset<XBlock> & other) const
+	{
+		return !(*this == other);
+	}
+
+	/// Comparinson for 'less'.
+	bool operator<(const bitset & other) const
+	{
+		// are there any bits in the range of one bitset that exceeds the other
+		if (size() > other.size()) {
+			if (any(begin() + (size() - other.size()), end()))
+				return false;
+		} else if (other.size() > size()) {
+			if (other.any(other.begin() + (other.size() - size()), other.end()))
+				return true;
+		}
+
+		// check all blocks from the most to the least significant.
+		for (auto i = size() / bits_per_block; i > 0; --i) {
+			if (data[i - 1] < other.data[i - 1])
+				return true;
+		}
+
+		// no difference found, they are the same
+		return false;
+	}
+
+	/// Comparinson for 'less or equal'.
+	bool operator<=(const bitset & other) const
+	{
+		// are there any bits in the range of one bitset that exceeds the other
+		if (size() > other.size()) {
+			if (any(begin() + (size() - other.size()), end()))
+				return false;
+		} else if (other.size() > size()) {
+			if (other.any(other.begin() + (other.size() - size()), other.end()))
+				return true;
+		}
+
+		// check all blocks from the most to the least significant.
+		for (auto i = size() / bits_per_block; i > 0; --i) {
+			if (data[i - 1] > other.data[i - 1])
+				return false;
+		}
+
+		// no difference found, they are the same
+		return true;
+	}
+
+	/// Comparinson for 'greater'.
+	bool operator>(const bitset & other) const { return !(*this <= other); }
+
+	/// Comparinson for 'greater or equal'.
+	bool operator>=(const bitset & other) const { return !(*this < other); }
+
+public: // arithmetic operators
+
+	/// Increments the bitset by one. If an overflow is to occurr, the bitset
+	/// resets to 0 and continues counting.
+	bitset & operator++() // ++bitset
+	{
+		if (size() <= 0)
+			return *this;
+
+		const size_type u_bits = size() % bits_per_block;
+
+		// parts of a block
+		if (u_bits > 0) {
+			size_type ofs = bits_per_block * (size() / bits_per_block);
+
+			block_type block = get_block(ofs, u_bits);
+
+			if (block < ((block_type{1} << u_bits) - 1)) {
+				++block;
+				set_block(block, ofs, u_bits);
+				return *this;
+			}
+			block = block_type{}; // maximum reached, overflow to the next block
+			set_block(block, ofs, u_bits);
+		}
+
+		// full blocks
+		for (size_type i = size() / bits_per_block; i > 0; --i) {
+			if (data[i - 1] < std::numeric_limits<block_type>::max()) {
+				++data[i - 1];
+				return *this;
+			}
+			data[i - 1] = block_type{};
+		}
+
+		return *this;
+	}
+
+	bitset operator++(int) // bitset++
+	{
+		bitset result{*this};
+		++(*this);
+		return result;
+	}
+
+	/// Decrements the bitset by one. If an underflow is to occurr, the bitset
+	/// resets to all 1es and continues counting.
+	bitset & operator--() // --bitset
+	{
+		if (size() <= 0)
+			return *this;
+
+		const size_type u_bits = size() % bits_per_block;
+
+		// parts of a block
+		if (u_bits > 0) {
+			size_type ofs = bits_per_block * (size() / bits_per_block);
+
+			block_type block = get_block(ofs, u_bits);
+
+			if (block > 0) {
+				--block;
+				set_block(block, ofs, u_bits);
+				return *this;
+			}
+			block = (block_type{1} << u_bits) - 1; // maximum reached, overflow to the next block
+			set_block(block, ofs, u_bits);
+		}
+
+		// full blocks
+		for (size_type i = size() / bits_per_block; i > 0; --i) {
+			if (data[i - 1] > 0) {
+				--data[i - 1];
+				return *this;
+			}
+			data[i - 1] = std::numeric_limits<block_type>::max();
+		}
+
+		return *this;
+	}
+
+	bitset operator--(int) // bitset--
+	{
+		bitset result{*this};
+		--(*this);
+		return result;
+	}
+
+public: // shift operator
+
+	/// Bit shift left. This function tries to shift entire blocks at once.
+	bitset & shl(size_type bits)
+	{
+		if (bits >= size()) {
+			reset();
+			return *this;
+		}
+
+		// copy all bits necessary, block wise.
+		size_type r_ofs = bits;
+		size_type w_ofs = 0;
+		while (r_ofs < size()) {
+
+			// this resembles std::min, but std::min complains about
+			// bits_per_block being an undefined reference.
+			const size_type d = size() - r_ofs;
+			size_type u_bits = d < bits_per_block ? d : bits_per_block;
+
+			copy_block(r_ofs, w_ofs, u_bits);
+			r_ofs += u_bits;
+			w_ofs += u_bits;
+		}
+
+		// overwrite all remaining bits with zeroes.
+		while (w_ofs < size()) {
+
+			// same issue with std::min here.
+			const size_type d = size() - w_ofs;
+			size_type u_bits = d < bits_per_block ? d : bits_per_block;
+
+			set_block(0, w_ofs, u_bits);
+			w_ofs += bits_per_block;
+		}
+
+		return *this;
+	}
+
+	bitset & operator<<=(size_type bits) { return shl(bits); }
+
+	bitset operator<<(size_type bits) const { return bitset{*this} <<= bits; }
+
+	/// Bit shift right. This function tries to shift entire blocks
+	/// at once.
+	bitset & shr(size_type bits)
+	{
+		if (bits >= size()) {
+			reset();
+			return *this;
+		}
+
+		size_type r_ofs = 0;
+		size_type w_ofs = 0;
+
+		// first: handle the last bits (probably partially a block, or a single block)
+		size_type u_bits = size() % bits_per_block;
+		if (u_bits > 0) {
+			if (u_bits == size()) {
+				u_bits = size() - bits;
+				r_ofs = 0;
+				w_ofs = bits;
+			} else {
+				r_ofs = size() - u_bits - bits;
+				w_ofs = size() - u_bits;
+			}
+		} else {
+			if (size() == bits_per_block) {
+				u_bits = bits_per_block - bits;
+				r_ofs = 0;
+				w_ofs = bits;
+			} else {
+				u_bits = bits_per_block;
+				r_ofs = size() - bits_per_block - bits;
+				w_ofs = size() - bits_per_block;
+			}
+		}
+		copy_block(r_ofs, w_ofs, u_bits);
+
+		// second: handle whole blocks
+		while (r_ofs > 0) {
+			if (r_ofs > bits_per_block) {
+				u_bits = bits_per_block;
+				r_ofs -= bits_per_block;
+				w_ofs -= bits_per_block;
+			} else {
+				u_bits = r_ofs;
+				r_ofs = 0;
+				w_ofs -= u_bits;
+			}
+			copy_block(r_ofs, w_ofs, u_bits);
+		}
+
+		// third: reset all bits remaining in front
+		while (w_ofs > 0) {
+			u_bits = (w_ofs < bits_per_block) ? w_ofs : bits_per_block;
+			w_ofs -= u_bits;
+			set_block(0, w_ofs, u_bits);
+		}
+
+		return *this;
+	}
+
+	bitset & operator>>=(size_type bits) { return shr(bits); }
+
+	bitset operator>>(size_type bits) const { return bitset{*this} >>= bits; }
+
+public: // logic operator
+
+	/// Logical or operation. The resulting bitset is of the size of the larger one.
+	///
+	/// Example: '0011' | '11000' = '11110'
+	bitset & operator|=(const bitset & other)
+	{
+		if (size() < other.size()) {
+			extend(other.size() - size());
+			pos = other.size();
+		}
+
+		for (auto i = 0u; i < data.size(); ++i)
+			data[i] |= other.data[i];
+
+		return *this;
+	}
+
+	bitset operator|(const bitset & other) const { return bitset{*this} |= other; }
+
+	/// Logical or operation. The resulting bitset is of the size of the smaller one.
+	///
+	/// Example: '0111' & '11001' = '0100'
+	bitset & operator&=(const bitset & other)
+	{
+		if (size() > other.size()) {
+			for (auto i = other.size(); i < size(); ++i)
+				reset(i);
+			pos = other.size();
+		}
+
+		for (auto i = 0u; i < data.size(); ++i)
+			data[i] &= other.data[i];
+
+		return *this;
+	}
+
+	bitset operator&(const bitset & other) const { return bitset{*this} &= other; }
+
+	/// Logical xor operation. The resulting bitset is of the size of the larger one.
+	///
+	/// Example: '0011' ^ '11100' = '11011'
+	bitset & operator^=(const bitset & other)
+	{
+		if (size() < other.size()) {
+			extend(other.size() - size());
+			pos = other.size();
+		}
+
+		for (auto i = 0u; i < data.size(); ++i)
+			data[i] ^= other.data[i];
+
+		return *this;
+	}
+
+	bitset operator^(const bitset & other) const { return bitset{*this} ^= other; }
+
+public: // other
 
 	/// Flips the bit at the specified index.
 	///
@@ -733,9 +1075,14 @@ public:
 	/// Returns true if any of the bits are true.
 	///
 	/// @note This is implemented for readablility, not max performance.
-	bool any() const noexcept
+	bool any() const noexcept { return any(begin(), end()); }
+
+	/// Returns true if any of the bits in the specified range are true.
+	///
+	/// @note This is implemented for readablility, not max performance.
+	bool any(const_iterator first, const_iterator last) const noexcept
 	{
-		for (auto i = begin(); i != end(); ++i)
+		for (auto i = first; i != last; ++i)
 			if (*i == true)
 				return true;
 		return false;
@@ -744,9 +1091,14 @@ public:
 	/// Returns true if none of the bits are true.
 	///
 	/// @note This is implemented for readablility, not max performance.
-	bool none() const noexcept
+	bool none() const noexcept { return none(begin(), end()); }
+
+	/// Returns true if none of the bits within the specified range are true.
+	///
+	/// @note This is implemented for readablility, not max performance.
+	bool none(const_iterator first, const_iterator last) const noexcept
 	{
-		for (auto i = begin(); i != end(); ++i)
+		for (auto i = first; i != last; ++i)
 			if (*i == true)
 				return false;
 		return true;
@@ -755,10 +1107,18 @@ public:
 	/// Returns the number of bits set to true.
 	///
 	/// @note This is implemented for readablility, not max performance.
-	size_type count() const noexcept
+	size_type count() const noexcept { return count(begin(), end()); }
+
+	/// Returns the number of bits between the specified iterators.
+	///
+	/// @param[in] first Ponints to the first bit of the range to test.
+	/// @param[in] last Ponits to the bit after the range.
+	///
+	/// @note This is implemented for readablility, not max performance.
+	size_type count(const_iterator first, const_iterator last) const noexcept
 	{
 		size_type n = 0;
-		for (auto i = begin(); i != end(); ++i)
+		for (auto i = first; i != last; ++i)
 			if (*i == true)
 				++n;
 		return n;

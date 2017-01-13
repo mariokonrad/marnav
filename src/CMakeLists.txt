@@ -497,6 +497,7 @@ install(
 		marnav/utils/unused.hpp
 		marnav/utils/unique.hpp
 		marnav/utils/bitset.hpp
+		marnav/utils/bitset_string.hpp
 		marnav/utils/optional.hpp
 		marnav/utils/mmsi.hpp
 		marnav/utils/mmsi_country.hpp
