@@ -48,6 +48,7 @@ public:
 	value_type auxiliary_id() const;
 	value_type mob_mid() const;
 	value_type mob_id() const;
+	value_type sar_mid() const;
 
 	bool is_regular() const;
 	bool is_group() const;

@@ -87,6 +87,13 @@ mmsi::value_type mmsi::mob_id() const
 	return value % 1000;
 }
 
+mmsi::value_type mmsi::sar_mid() const
+{
+	if (!is_sar_aircraft())
+		return initial_value;
+	return (value / 1000) % 1000;
+}
+
 /// True if MIDxxxxxx
 bool mmsi::is_regular() const
 {

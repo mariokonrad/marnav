@@ -105,6 +105,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/math/matrix.hpp
 	marnav/math/quaternion.hpp
 	marnav/utils/mmsi.cpp
+	marnav/utils/mmsi_country.cpp
 	marnav/geo/angle.cpp
 	marnav/geo/position.cpp
 	marnav/geo/region.cpp
@@ -498,6 +499,7 @@ install(
 		marnav/utils/bitset.hpp
 		marnav/utils/optional.hpp
 		marnav/utils/mmsi.hpp
+		marnav/utils/mmsi_country.hpp
 	DESTINATION include/marnav/utils
 	)
 

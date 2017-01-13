@@ -61,6 +61,7 @@ TEST_F(Test_utils_mmsi, regular)
 	EXPECT_EQ(0u, m.coastal_id());
 	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
+	EXPECT_EQ(0u, m.sar_mid());
 }
 
 TEST_F(Test_utils_mmsi, group)
@@ -86,6 +87,7 @@ TEST_F(Test_utils_mmsi, group)
 	EXPECT_EQ(0u, m.coastal_id());
 	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
+	EXPECT_EQ(0u, m.sar_mid());
 }
 
 TEST_F(Test_utils_mmsi, auxiliary)
@@ -111,6 +113,7 @@ TEST_F(Test_utils_mmsi, auxiliary)
 	EXPECT_EQ(0u, m.coastal_id());
 	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
+	EXPECT_EQ(0u, m.sar_mid());
 }
 
 TEST_F(Test_utils_mmsi, ais_aids)
@@ -136,6 +139,7 @@ TEST_F(Test_utils_mmsi, ais_aids)
 	EXPECT_EQ(0u, m.coastal_id());
 	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
+	EXPECT_EQ(0u, m.sar_mid());
 }
 
 TEST_F(Test_utils_mmsi, coastal)
@@ -163,6 +167,7 @@ TEST_F(Test_utils_mmsi, coastal)
 	EXPECT_EQ(1111u, m.coastal_id());
 	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
+	EXPECT_EQ(0u, m.sar_mid());
 }
 
 TEST_F(Test_utils_mmsi, coastal_all)
@@ -221,6 +226,7 @@ TEST_F(Test_utils_mmsi, sar_aircraft)
 	EXPECT_EQ(0u, m.coastal_id());
 	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
+	EXPECT_EQ(269u, m.sar_mid());
 }
 
 TEST_F(Test_utils_mmsi, sart)
@@ -247,6 +253,7 @@ TEST_F(Test_utils_mmsi, sart)
 	EXPECT_EQ(0u, m.coastal_id());
 	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
+	EXPECT_EQ(0u, m.sar_mid());
 }
 
 TEST_F(Test_utils_mmsi, mob)
@@ -273,6 +280,7 @@ TEST_F(Test_utils_mmsi, mob)
 	EXPECT_EQ(0u, m.coastal_id());
 	EXPECT_EQ(269u, m.mob_mid());
 	EXPECT_EQ(123u, m.mob_id());
+	EXPECT_EQ(0u, m.sar_mid());
 }
 
 TEST_F(Test_utils_mmsi, eprib_ais)
@@ -299,5 +307,6 @@ TEST_F(Test_utils_mmsi, eprib_ais)
 	EXPECT_EQ(0u, m.coastal_id());
 	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
+	EXPECT_EQ(0u, m.sar_mid());
 }
 }
