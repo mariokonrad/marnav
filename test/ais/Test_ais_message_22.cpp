@@ -48,4 +48,19 @@ TEST_F(Test_ais_message_22, encode_default_values_addressed)
 	EXPECT_STREQ("F0000000000000000000000@0000", v[0].first.c_str());
 	EXPECT_EQ(0u, v[0].second);
 }
+
+TEST_F(Test_ais_message_22, error_invalid_position)
+{
+	static const std::vector<std::pair<std::string, uint32_t>> raw
+		= {{"F030p?j2N2P73FiiNesU3FR10000", 0}};
+
+	auto m = ais::make_message(raw);
+	ASSERT_TRUE(m != nullptr);
+	ASSERT_TRUE(m->type() == ais::message_id::channel_management);
+
+	auto m22 = ais::message_cast<ais::message_22>(m);
+
+	EXPECT_ANY_THROW(m22->get_position_ne());
+	EXPECT_ANY_THROW(m22->get_position_sw());
+}
 }

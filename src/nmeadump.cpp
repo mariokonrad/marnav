@@ -138,6 +138,7 @@
 #include <marnav/io/serial.hpp>
 
 #include <marnav/utils/unique.hpp>
+#include <marnav/utils/mmsi_country.hpp>
 
 namespace nmeadump
 {
@@ -278,6 +279,10 @@ static std::string render(const double t)
 
 static std::string render(const marnav::utils::mmsi & t)
 {
+	const auto country = mmsi_country(t).name;
+	if (!country.empty())
+		return fmt::sprintf(
+			"%09u (%s)", static_cast<marnav::utils::mmsi::value_type>(t), country);
 	return fmt::sprintf("%09u", static_cast<marnav::utils::mmsi::value_type>(t));
 }
 

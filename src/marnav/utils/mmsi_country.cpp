@@ -148,7 +148,7 @@ static const std::vector<mmsi_country_info> country_list = {
 	{ 405, "BD", "Bangladesh" },
 	{ 408, "BH", "Bahrain" },
 	{ 410, "BT", "Bhutan" },
-	{ 412, "", "" },
+	{ 412, "", "" }, // TODO: found in the wild
 	{ 413, "", "" },
 	{ 414, "CN", "China" },
 	{ 416, "TW", "Taiwan" },

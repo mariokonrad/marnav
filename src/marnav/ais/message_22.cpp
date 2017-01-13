@@ -75,14 +75,26 @@ raw message_22::get_data() const
 	return bits;
 }
 
-geo::position message_22::get_position_ne() const noexcept
+utils::optional<geo::position> message_22::get_position_ne() const
 {
-	return {geo::latitude{ne_lat / (60.0 * 10.0)}, geo::longitude{ne_lon / (60.0 * 10.0)}};
+	if ((ne_lat == latitude_not_available_short) || (ne_lon == longitude_not_available_short))
+		return utils::make_optional<geo::position>();
+
+	// TODO: investigate lat/lon range (lon values of 385.xxx discovered in the wild)
+
+	return utils::make_optional<geo::position>(
+		geo::latitude{ne_lat / (60.0 * 10.0)}, geo::longitude{ne_lon / (60.0 * 10.0)});
 }
 
-geo::position message_22::get_position_sw() const noexcept
+utils::optional<geo::position> message_22::get_position_sw() const
 {
-	return {geo::latitude{sw_lat / (60.0 * 10.0)}, geo::longitude{sw_lon / (60.0 * 10.0)}};
+	if ((sw_lat == latitude_not_available_short) || (sw_lon == longitude_not_available_short))
+		return utils::make_optional<geo::position>();
+
+	// TODO: investigate lat/lon range
+
+	return utils::make_optional<geo::position>(
+		geo::latitude{sw_lat / (60.0 * 10.0)}, geo::longitude{sw_lon / (60.0 * 10.0)});
 }
 
 void message_22::set_position_ne(const geo::position & t) noexcept
