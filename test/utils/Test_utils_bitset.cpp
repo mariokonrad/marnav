@@ -41,7 +41,8 @@ TEST_F(Test_utils_bitset, to_string_pack)
 	EXPECT_STREQ("0000:0000:0000", to_string(bitset<uint8_t>{12}, 4, ':').c_str());
 	EXPECT_STREQ("0000:0000:0000:0000", to_string(bitset<uint8_t>{16}, 4, ':').c_str());
 	EXPECT_STREQ("0000:0000:0000:0000:0000", to_string(bitset<uint8_t>{20}, 4, ':').c_str());
-	EXPECT_STREQ("0000:0000:0000:0000:0000:0000", to_string(bitset<uint8_t>{24}, 4, ':').c_str());
+	EXPECT_STREQ(
+		"0000:0000:0000:0000:0000:0000", to_string(bitset<uint8_t>{24}, 4, ':').c_str());
 }
 
 TEST_F(Test_utils_bitset, uint8__construction_bit_size)
@@ -189,13 +190,13 @@ TEST_F(Test_utils_bitset, uint8__index_operator)
 	b.append(0xaa, 8);
 	ASSERT_STREQ("10101010", to_string(b).c_str());
 
-	EXPECT_EQ(true,  b[0]);
+	EXPECT_EQ(true, b[0]);
 	EXPECT_EQ(false, b[1]);
-	EXPECT_EQ(true,  b[2]);
+	EXPECT_EQ(true, b[2]);
 	EXPECT_EQ(false, b[3]);
-	EXPECT_EQ(true,  b[4]);
+	EXPECT_EQ(true, b[4]);
 	EXPECT_EQ(false, b[5]);
-	EXPECT_EQ(true,  b[6]);
+	EXPECT_EQ(true, b[6]);
 	EXPECT_EQ(false, b[7]);
 }
 
@@ -338,8 +339,8 @@ TEST_F(Test_utils_bitset, uint8__append_multiple_bits)
 		bits.append(0x00000001, 10);
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
-		EXPECT_STREQ("1010010001000010000010000001000000010000000010000000001",
-			to_string(bits).c_str());
+		EXPECT_STREQ(
+			"1010010001000010000010000001000000010000000010000000001", to_string(bits).c_str());
 	}
 	{
 		bitset<uint8_t> bits;
@@ -619,8 +620,7 @@ TEST_F(Test_utils_bitset, uint8__assignment)
 	EXPECT_STREQ("00000100000000000000000000000000", to_string(copy).c_str());
 }
 
-template <class T>
-bitset<uint8_t> get_test_data(unsigned int size)
+template <class T> bitset<uint8_t> get_test_data(unsigned int size)
 {
 	bitset<T> result{size};
 
@@ -644,7 +644,10 @@ TEST_F(Test_utils_bitset, uint8__as_return_value_medium)
 
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+
-	ASSERT_STREQ("000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", to_string(bits).c_str());
+	ASSERT_STREQ("00000100000000000000000000000000000000000000000000000000000000000000000000000"
+				 "00000000000000000000000000000000000000000000000000000000000000000000000000000"
+				 "00000000000000",
+		to_string(bits).c_str());
 }
 
 TEST_F(Test_utils_bitset, uint8__set_multiple_values)
@@ -697,7 +700,6 @@ TEST_F(Test_utils_bitset, uint8__flip)
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
 	EXPECT_STREQ("1000000000100000000000000000000010000000000000000000000000000000",
 		to_string(bits).c_str());
-
 }
 
 TEST_F(Test_utils_bitset, uint8__append_bitset_to_empty_bitset)

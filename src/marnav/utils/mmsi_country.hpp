@@ -9,8 +9,7 @@ namespace utils
 {
 class mmsi; // forward
 
-struct mmsi_country_info
-{
+struct mmsi_country_info {
 	uint32_t mid;
 	std::string code;
 	std::string name;

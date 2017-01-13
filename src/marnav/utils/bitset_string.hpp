@@ -31,7 +31,8 @@ template <class T> std::string to_string(const bitset<T> & bits)
 /// @param[in] delm Delimitter to separate the packs.
 /// @return String representing the bitset as stream of '0' and '1', separated by
 ///   the delimitter.
-template <class T> std::string to_string(const bitset<T> & bits, std::size_t pack, char delm = ' ')
+template <class T>
+std::string to_string(const bitset<T> & bits, std::size_t pack, char delm = ' ')
 {
 	if ((pack == 0) || (pack >= bits.size()))
 		return to_string(bits);

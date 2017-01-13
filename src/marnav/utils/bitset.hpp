@@ -53,7 +53,8 @@ namespace utils
 ///
 /// @todo shr: shift right
 /// @todo iterator
-/// @todo function to extract a subrange of the bitset: bitset sub(const_iterator, const_iterator) cont
+/// @todo function to extract a subrange of the bitset: bitset sub(const_iterator,
+/// const_iterator) cont
 /// @todo function set(bitset, size_type) or set(bitset, const_iterator)
 ///
 template <class Block,
@@ -401,7 +402,6 @@ private:
 	}
 
 public: // constructors
-
 	/// Copy constructor
 	bitset(const bitset &) = default;
 
@@ -449,7 +449,6 @@ public: // constructors
 	}
 
 public: // container operations
-
 	/// Returns the capacity of this bit set. Note: not all bits must have
 	/// been occupied.
 	size_type capacity() const noexcept { return data.size() * bits_per_block; }
@@ -470,7 +469,6 @@ public: // container operations
 	}
 
 public: // iterators
-
 	/// Returns a const iterator to the beginning of the data itself.
 	/// Note: this iterator accesses the data up to capacity(), some bits
 	/// may be unused at the end of the set.
@@ -488,7 +486,6 @@ public: // iterators
 	const_iterator cend() const { return const_iterator(this, size()); }
 
 public: // append
-
 	/// Appends another bitset to this one.
 	///
 	/// @param[in] bs The bitset to be appended to this one.
@@ -533,7 +530,6 @@ public: // append
 	}
 
 public: // set
-
 	/// Sets the specified bitset at the offset within this bitset.
 	///
 	/// @param[in] bs The bitset to copy.
@@ -602,7 +598,6 @@ public: // set
 	}
 
 public: // get
-
 	/// Returns the bit at the specified position. If the index is larger
 	/// than the actual number of bits, 'false' will rturn.
 	///
@@ -705,12 +700,10 @@ public: // get
 	bool get(size_type index) const { return get<bool>(index, 1); }
 
 public: // access operators
-
 	/// Returns the bit at the specified position.
 	bool operator[](size_type i) const { return get_bit(i); }
 
 public: // comparison operators
-
 	/// Equality comparison operator for the same bitset type.
 	bool operator==(const bitset & other) const { return this == &other || data == other.data; }
 
@@ -803,7 +796,6 @@ public: // comparison operators
 	bool operator>=(const bitset & other) const { return !(*this < other); }
 
 public: // arithmetic operators
-
 	/// Increments the bitset by one. If an overflow is to occurr, the bitset
 	/// resets to 0 and continues counting.
 	bitset & operator++() // ++bitset
@@ -867,7 +859,8 @@ public: // arithmetic operators
 				set_block(block, ofs, u_bits);
 				return *this;
 			}
-			block = (block_type{1} << u_bits) - 1; // maximum reached, overflow to the next block
+			block
+				= (block_type{1} << u_bits) - 1; // maximum reached, overflow to the next block
 			set_block(block, ofs, u_bits);
 		}
 
@@ -891,7 +884,6 @@ public: // arithmetic operators
 	}
 
 public: // shift operator
-
 	/// Bit shift left. This function tries to shift entire blocks at once.
 	bitset & shl(size_type bits)
 	{
@@ -998,7 +990,6 @@ public: // shift operator
 	bitset operator>>(size_type bits) const { return bitset{*this} >>= bits; }
 
 public: // logic operator
-
 	/// Logical or operation. The resulting bitset is of the size of the larger one.
 	///
 	/// Example: '0011' | '11000' = '11110'
@@ -1055,7 +1046,6 @@ public: // logic operator
 	bitset operator^(const bitset & other) const { return bitset{*this} ^= other; }
 
 public: // other
-
 	/// Flips the bit at the specified index.
 	///
 	/// @exception std::out_of_range Specified index is out of range.
