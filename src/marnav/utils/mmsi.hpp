@@ -38,6 +38,8 @@ public:
 
 	operator value_type() const { return value; }
 
+	value_type mid() const;
+
 	value_type regular_mid() const;
 	value_type regular_id() const;
 	value_type group_mid() const;

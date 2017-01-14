@@ -17,6 +17,26 @@ bool mmsi::operator!=(const mmsi & other) const
 	return !(*this == other);
 }
 
+/// This function is for convenience. It tries to find
+/// out about the type of MMSI, and returns the appropriate
+/// MID. If there is no MID, `initial_value` will return.
+mmsi::value_type mmsi::mid() const
+{
+	if (is_regular())
+		return regular_mid();
+	if (is_group())
+		return group_mid();
+	if (is_coastal())
+		return coastal_mid();
+	if (is_auxiliary())
+		return auxiliary_mid();
+	if (is_sar_aircraft())
+		return sar_mid();
+	if (is_mob())
+		return mob_mid();
+	return initial_value;
+}
+
 mmsi::value_type mmsi::regular_mid() const
 {
 	if (!is_regular())
