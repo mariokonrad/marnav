@@ -4,6 +4,7 @@
 #include <marnav/ais/message.hpp>
 #include <marnav/geo/position.hpp>
 #include <marnav/utils/mmsi.hpp>
+#include <marnav/utils/optional.hpp>
 
 namespace marnav
 {
@@ -71,8 +72,8 @@ public:
 	report_interval get_interval() const noexcept { return interval; }
 	uint32_t get_quiet_time() const noexcept { return quiet_time; }
 
-	geo::position get_position_ne() const noexcept;
-	geo::position get_position_sw() const noexcept;
+	utils::optional<geo::position> get_position_ne() const;
+	utils::optional<geo::position> get_position_sw() const;
 
 	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }

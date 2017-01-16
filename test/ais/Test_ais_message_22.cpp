@@ -49,7 +49,7 @@ TEST_F(Test_ais_message_22, encode_default_values_addressed)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_22, error_invalid_position)
+TEST_F(Test_ais_message_22, non_addressed_region)
 {
 	static const std::vector<std::pair<std::string, uint32_t>> raw
 		= {{"F030p?j2N2P73FiiNesU3FR10000", 0}};
@@ -60,7 +60,12 @@ TEST_F(Test_ais_message_22, error_invalid_position)
 
 	auto m22 = ais::message_cast<ais::message_22>(m);
 
-	EXPECT_ANY_THROW(m22->get_position_ne());
-	EXPECT_ANY_THROW(m22->get_position_sw());
+	const auto ne = m22->get_position_ne();
+	const auto sw = m22->get_position_sw();
+
+	EXPECT_NEAR(ne->lat(), 48.4167, 1e-3);
+	EXPECT_NEAR(ne->lon(), -51.75, 1e-3);
+	EXPECT_NEAR(sw->lat(), 45.7667, 1e-3);
+	EXPECT_NEAR(sw->lon(), -56.5, 1e-3);
 }
 }

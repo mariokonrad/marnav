@@ -125,24 +125,28 @@ utils::optional<geo::longitude> message_21::get_longitude() const
 {
 	if (longitude_minutes == longitude_not_available)
 		return utils::make_optional<geo::longitude>();
-	return to_geo_longitude(longitude_minutes);
+	return to_geo_longitude(longitude_minutes, longitude_minutes.count, angle_scale::I4);
 }
 
 utils::optional<geo::latitude> message_21::get_latitude() const
 {
 	if (latitude_minutes == latitude_not_available)
 		return utils::make_optional<geo::latitude>();
-	return to_geo_latitude(latitude_minutes);
+	return to_geo_latitude(latitude_minutes, latitude_minutes.count, angle_scale::I4);
 }
 
 void message_21::set_longitude(const utils::optional<geo::longitude> & t)
 {
-	longitude_minutes = t ? to_longitude_minutes(t.value()) : longitude_not_available;
+	longitude_minutes = t
+		? to_longitude_minutes(t.value(), longitude_minutes.count, angle_scale::I4)
+		: longitude_not_available;
 }
 
 void message_21::set_latitude(const utils::optional<geo::latitude> & t)
 {
-	latitude_minutes = t ? to_latitude_minutes(t.value()) : latitude_not_available;
+	latitude_minutes = t
+		? to_latitude_minutes(t.value(), latitude_minutes.count, angle_scale::I4)
+		: latitude_not_available;
 }
 }
 }

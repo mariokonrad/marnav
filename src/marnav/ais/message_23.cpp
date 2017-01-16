@@ -57,26 +57,36 @@ raw message_23::get_data() const
 	return bits;
 }
 
-geo::position message_23::get_position_ne() const noexcept
+utils::optional<geo::position> message_23::get_position_ne() const
 {
-	return {geo::latitude{ne_lat / (60.0 * 10.0)}, geo::longitude{ne_lon / (60.0 * 10.0)}};
+	if ((ne_lat == latitude_not_available_short) || (ne_lon == longitude_not_available_short))
+		return utils::make_optional<geo::position>();
+
+	return utils::make_optional<geo::position>(
+		to_geo_latitude(ne_lat, ne_lat.count, angle_scale::I1),
+		to_geo_longitude(ne_lon, ne_lon.count, angle_scale::I1));
 }
 
-geo::position message_23::get_position_sw() const noexcept
+utils::optional<geo::position> message_23::get_position_sw() const
 {
-	return {geo::latitude{sw_lat / (60.0 * 10.0)}, geo::longitude{sw_lon / (60.0 * 10.0)}};
+	if ((sw_lat == latitude_not_available_short) || (sw_lon == longitude_not_available_short))
+		return utils::make_optional<geo::position>();
+
+	return utils::make_optional<geo::position>(
+		to_geo_latitude(sw_lat, sw_lat.count, angle_scale::I1),
+		to_geo_longitude(sw_lon, sw_lon.count, angle_scale::I1));
 }
 
 void message_23::set_position_ne(const geo::position & t) noexcept
 {
-	ne_lat = std::floor(60.0 * 10.0 * t.lat());
-	ne_lon = std::floor(60.0 * 10.0 * t.lon());
+	ne_lat = to_latitude_minutes(t.lat(), ne_lat.count, angle_scale::I1);
+	ne_lon = to_longitude_minutes(t.lon(), ne_lon.count, angle_scale::I1);
 }
 
 void message_23::set_position_sw(const geo::position & t) noexcept
 {
-	sw_lat = std::floor(60.0 * 10.0 * t.lat());
-	sw_lon = std::floor(60.0 * 10.0 * t.lon());
+	sw_lat = to_latitude_minutes(t.lat(), sw_lat.count, angle_scale::I1);
+	sw_lon = to_longitude_minutes(t.lon(), sw_lon.count, angle_scale::I1);
 }
 }
 }
