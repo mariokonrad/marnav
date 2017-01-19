@@ -13,8 +13,9 @@ MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_05)
 /// @brief Static and Voyage related Data
 ///
 /// This message handles messages of normal size 424 bits. The (presumably) common
-/// occurrences of 420 and 422 bits, are also handled. The encoded message always
-/// is 424 bits.
+/// occurrence of 422 bits, are also handled. The encoded message always is 424 bits.
+/// The occurrence of 420 bits messages are not supported.
+///
 class message_05 : public message
 {
 	MARNAV_AIS_MESSAGE_FRIENDS(message_05)
@@ -22,8 +23,7 @@ class message_05 : public message
 public:
 	constexpr static const message_id ID = message_id::static_and_voyage_related_data;
 	constexpr static const int SIZE_BITS = 424;
-	constexpr static const int SIZE_BITS_MED = 422;
-	constexpr static const int SIZE_BITS_MIN = 420;
+	constexpr static const int SIZE_BITS_MIN = 422;
 
 	constexpr static const uint32_t eta_month_not_available = 0;
 	constexpr static const uint32_t eta_day_not_available = 0;

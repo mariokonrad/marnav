@@ -46,7 +46,7 @@ void message_05::read_data(const raw & bits)
 	get(bits, draught);
 	get(bits, destination);
 
-	if (bits.size() >= SIZE_BITS_MED)
+	if (bits.size() > SIZE_BITS_MIN)
 		get(bits, dte);
 }
 
