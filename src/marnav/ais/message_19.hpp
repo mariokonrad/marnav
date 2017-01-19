@@ -53,7 +53,7 @@ private:
 	bitset_value<295,  6, uint32_t     > to_starboard = 0;
 	bitset_value<301,  4, epfd_fix_type> epfd_fix = epfd_fix_type::undefined;
 	bitset_value<305,  1, bool         > raim = false;
-	bitset_value<306,  1, bool         > dte = false;
+	bitset_value<306,  1, data_terminal> dte = data_terminal::not_ready;
 	bitset_value<307,  1, bool         > assigned = false;
 	// clang-format on
 
@@ -73,7 +73,7 @@ public:
 	uint32_t get_to_starboard() const noexcept { return to_starboard; }
 	epfd_fix_type get_epfd_fix() const noexcept { return epfd_fix; }
 	bool get_raim() const noexcept { return raim; }
-	bool get_dte() const noexcept { return dte; }
+	data_terminal get_dte() const noexcept { return dte; }
 	bool get_assigned() const noexcept { return assigned; }
 
 	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
@@ -91,7 +91,7 @@ public:
 	void set_to_starboard(uint32_t t) noexcept { to_starboard = t; }
 	void set_epfd_fix(epfd_fix_type t) noexcept { epfd_fix = t; }
 	void set_raim(bool t) noexcept { raim = t; }
-	void set_dte(bool t) noexcept { dte = t; }
+	void set_dte(data_terminal t) noexcept { dte = t; }
 	void set_assigned(bool t) noexcept { assigned = t; }
 
 	utils::optional<geo::longitude> get_longitude() const;

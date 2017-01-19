@@ -11,6 +11,10 @@ namespace ais
 MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_05)
 
 /// @brief Static and Voyage related Data
+///
+/// This message handles messages of normal size 424 bits. The (presumably) common
+/// occurrences of 420 and 422 bits, are also handled. The encoded message always
+/// is 424 bits.
 class message_05 : public message
 {
 	MARNAV_AIS_MESSAGE_FRIENDS(message_05)
@@ -18,6 +22,8 @@ class message_05 : public message
 public:
 	constexpr static const message_id ID = message_id::static_and_voyage_related_data;
 	constexpr static const int SIZE_BITS = 424;
+	constexpr static const int SIZE_BITS_MED = 422;
+	constexpr static const int SIZE_BITS_MIN = 420;
 
 	constexpr static const uint32_t eta_month_not_available = 0;
 	constexpr static const uint32_t eta_day_not_available = 0;
@@ -55,7 +61,7 @@ private:
 	bitset_value<288,  6, uint32_t     > eta_minute = eta_minute_not_available;
 	bitset_value<294,  8, uint32_t     > draught = 0; // in 0.1m
 	bitset_value<302, 20, std::string  > destination;
-	bitset_value<422,  1, bool         > dte = true;
+	bitset_value<422,  1, data_terminal> dte = data_terminal::not_ready;
 	// clang-format on
 
 public:
@@ -77,7 +83,7 @@ public:
 	uint32_t get_eta_minute() const noexcept { return eta_minute; }
 	uint32_t get_draught() const noexcept { return draught; }
 	std::string get_destination() const;
-	bool get_dte() const noexcept { return dte; }
+	data_terminal get_dte() const noexcept { return dte; }
 
 	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
@@ -97,7 +103,7 @@ public:
 	void set_eta_minute(uint32_t t) noexcept { eta_minute = t; }
 	void set_draught(uint32_t t) noexcept { draught = t; }
 	void set_destination(const std::string & t);
-	void set_dte(bool t) noexcept { dte = t; }
+	void set_dte(data_terminal t) noexcept { dte = t; }
 };
 }
 }

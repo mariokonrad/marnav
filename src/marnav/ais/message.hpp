@@ -137,6 +137,9 @@ enum class epfd_fix_type : uint8_t {
 	galileo = 8,
 };
 
+/// Enumeration of data terminal status.
+enum class data_terminal : uint8_t { ready = 0, not_ready = 1 };
+
 enum class virtual_aid : uint32_t { real_aid = 0, virtual_aid = 1 };
 
 enum class off_position_indicator : uint32_t { on_position = 0, off_position = 1 };

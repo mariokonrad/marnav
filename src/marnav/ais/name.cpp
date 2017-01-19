@@ -351,5 +351,16 @@ std::string to_name(maneuver_indicator_id t)
 	}
 	return "-";
 }
+
+std::string to_name(data_terminal t)
+{
+	switch (t) {
+		case data_terminal::ready:
+			return "ready";
+		case data_terminal::not_ready:
+			return "not ready";
+	}
+	return "-";
+}
 }
 }

@@ -41,12 +41,12 @@ TEST_F(Test_ais_message_05, parse)
 	EXPECT_EQ(0u, m->get_eta_minute());
 	EXPECT_EQ(60u, m->get_draught());
 	EXPECT_STREQ("SEATTLE", m->get_destination().c_str());
-	EXPECT_FALSE(m->get_dte());
+	EXPECT_EQ(ais::data_terminal::ready, m->get_dte());
 }
 
 TEST_F(Test_ais_message_05, wrong_number_of_bits)
 {
-	EXPECT_ANY_THROW(ais::message_parse<ais::message_05>(ais::raw{423}));
+	EXPECT_ANY_THROW(ais::message_parse<ais::message_05>(ais::raw{419}));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_05>(ais::raw{425}));
 }
 

@@ -386,6 +386,11 @@ static std::string render(const marnav::ais::maneuver_indicator_id t)
 	return marnav::ais::to_name(t);
 }
 
+static std::string render(const marnav::ais::data_terminal t)
+{
+	return marnav::ais::to_name(t);
+}
+
 static std::string render(const marnav::ais::navigation_status t)
 {
 	return marnav::ais::to_name(t);

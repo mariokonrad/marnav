@@ -14,14 +14,13 @@ message_05::message_05()
 {
 }
 
-/// @todo also handle message with length of 420 and 422 bits
 message_05::message_05(const raw & bits)
 	: message(ID)
 	, callsign("@@@@@@@")
 	, shipname("@@@@@@@@@@@@@@@@@@@@")
 	, destination("@@@@@@@@@@@@@@@@@@@@")
 {
-	if (bits.size() != SIZE_BITS)
+	if ((bits.size() < SIZE_BITS_MIN) || (bits.size() > SIZE_BITS))
 		throw std::invalid_argument{"invalid number of bits in message_05"};
 	read_data(bits);
 }
@@ -46,7 +45,9 @@ void message_05::read_data(const raw & bits)
 	get(bits, eta_minute);
 	get(bits, draught);
 	get(bits, destination);
-	get(bits, dte);
+
+	if (bits.size() >= SIZE_BITS_MED)
+		get(bits, dte);
 }
 
 raw message_05::get_data() const
