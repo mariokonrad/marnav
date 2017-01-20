@@ -7,6 +7,7 @@
 #include <marnav/ais/message_03.hpp>
 #include <marnav/ais/message_04.hpp>
 #include <marnav/ais/message_05.hpp>
+#include <marnav/ais/message_08.hpp>
 #include <marnav/ais/message_09.hpp>
 #include <marnav/ais/message_10.hpp>
 #include <marnav/ais/message_11.hpp>
@@ -93,11 +94,12 @@ static std::function<std::unique_ptr<message>(const raw &)> instantiate_message(
 	static const std::vector<entry> known_messages = {
 		REGISTER_MESSAGE(message_01), REGISTER_MESSAGE(message_02),
 		REGISTER_MESSAGE(message_03), REGISTER_MESSAGE(message_04),
-		REGISTER_MESSAGE(message_05), REGISTER_MESSAGE(message_09),
-		REGISTER_MESSAGE(message_10), REGISTER_MESSAGE(message_11),
-		REGISTER_MESSAGE(message_18), REGISTER_MESSAGE(message_19),
-		REGISTER_MESSAGE(message_21), REGISTER_MESSAGE(message_22),
-		REGISTER_MESSAGE(message_23), REGISTER_MESSAGE(message_24),
+		REGISTER_MESSAGE(message_05), REGISTER_MESSAGE(message_08),
+		REGISTER_MESSAGE(message_09), REGISTER_MESSAGE(message_10),
+		REGISTER_MESSAGE(message_11), REGISTER_MESSAGE(message_18),
+		REGISTER_MESSAGE(message_19), REGISTER_MESSAGE(message_21),
+		REGISTER_MESSAGE(message_22), REGISTER_MESSAGE(message_23),
+		REGISTER_MESSAGE(message_24),
 	};
 
 #undef REGISTER_MESSAGE
