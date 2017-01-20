@@ -2,7 +2,7 @@
 #define __MARNAV__UTILS__BITSET__HPP__
 
 /// Copyright (c) 2016 Mario Konrad <mario.konrad@gmx.net>
-/// The code is licensed under the BSD License.
+/// The code is licensed under the BSD License (see file LICENSE)
 
 #include <limits>
 #include <stdexcept>
@@ -50,12 +50,6 @@ namespace utils
 /// bitset<uint8_t> bits{1024};
 /// bits.set(1, 512, 1); // set one bit to 1 at offset 512
 /// @endcode
-///
-/// @todo shr: shift right
-/// @todo iterator
-/// @todo function to extract a subrange of the bitset: bitset sub(const_iterator,
-/// const_iterator) cont
-/// @todo function set(bitset, size_type) or set(bitset, const_iterator)
 ///
 template <class Block,
 	class = typename std::enable_if<!std::numeric_limits<Block>::is_signed>::type>
@@ -446,6 +440,36 @@ public: // constructors
 		: pos(container.size() * bits_per_block)
 		, data(std::move(container))
 	{
+	}
+
+	/// Constructs a bitset from the specified range.
+	///
+	/// It tries to copy blockwise.
+	bitset(const_iterator first, const_iterator last)
+		: pos(0)
+	{
+		if (last <= first)
+			return;
+		if (!first.bs)
+			return;
+
+		const size_type distance = last.pos - first.pos;
+		const size_type n_blocks = distance / bits_per_block;
+		const size_type u_bits = distance % bits_per_block;
+
+		if (u_bits > 0) {
+			data.reserve(n_blocks + 1);
+		} else {
+			data.reserve(n_blocks);
+		}
+
+		size_type r_ofs = first.pos;
+		for (size_type i = 0; i < n_blocks; ++i, r_ofs += bits_per_block)
+			data.push_back(first.bs->get_block(r_ofs, bits_per_block));
+		pos = n_blocks * bits_per_block;
+
+		if (u_bits > 0)
+			append(first.bs->get_block(r_ofs, u_bits), u_bits);
 	}
 
 public: // container operations
@@ -859,8 +883,7 @@ public: // arithmetic operators
 				set_block(block, ofs, u_bits);
 				return *this;
 			}
-			block
-				= (block_type{1} << u_bits) - 1; // maximum reached, overflow to the next block
+			block = (block_type{1} << u_bits) - 1; // max reached, overflow to the next block
 			set_block(block, ofs, u_bits);
 		}
 

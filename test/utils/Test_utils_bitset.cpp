@@ -87,6 +87,16 @@ TEST_F(Test_utils_bitset, uint8__construction_bitset_move)
 	EXPECT_STREQ("1010101001010101", to_string(b).c_str());
 }
 
+TEST_F(Test_utils_bitset, uint8__construction_range)
+{
+	bitset<uint8_t> b;
+	b.append(0xf0f0, 16);
+	ASSERT_STREQ("1111000011110000", to_string(b).c_str());
+
+	bitset<uint8_t> c{b.begin() + 4, b.end() - 4};
+	EXPECT_STREQ("00001111", to_string(c).c_str());
+}
+
 TEST_F(Test_utils_bitset, uint8__reserve)
 {
 	bitset<uint8_t>::container c;
