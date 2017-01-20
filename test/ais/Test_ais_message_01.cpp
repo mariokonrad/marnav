@@ -98,4 +98,14 @@ TEST_F(Test_ais_message_01, github_issue_2)
 	EXPECT_NEAR(-123.3954, *m->get_longitude(), 1e-4);
 	EXPECT_NEAR(48.3816, *m->get_latitude(), 1e-4);
 }
+
+TEST_F(Test_ais_message_01, error_bit_length)
+{
+	std::vector<std::pair<std::string, uint32_t>> v;
+
+	// message was encountered near Gibraltar in 2016
+	v.push_back(std::make_pair("13miaA70120H5DvQlv5IRWeF05ItGbgv>1", 0));
+
+	EXPECT_ANY_THROW(ais::make_message(v));
+}
 }
