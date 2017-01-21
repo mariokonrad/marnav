@@ -134,6 +134,7 @@
 #include <marnav/ais/message_22.hpp>
 #include <marnav/ais/message_23.hpp>
 #include <marnav/ais/message_24.hpp>
+#include <marnav/ais/binary_001_11.hpp>
 
 #include <marnav/io/default_nmea_reader.hpp>
 #include <marnav/io/serial.hpp>
@@ -352,48 +353,48 @@ static std::string render(const marnav::ais::message_24::part t)
 	return "-";
 }
 
-static std::string render(const marnav::ais::message_08::binary_001_11::trend t)
+static std::string render(const marnav::ais::binary_001_11::trend t)
 {
 	switch (t) {
-		case marnav::ais::message_08::binary_001_11::trend::steady:
+		case marnav::ais::binary_001_11::trend::steady:
 			return "steady";
-		case marnav::ais::message_08::binary_001_11::trend::decreasing:
+		case marnav::ais::binary_001_11::trend::decreasing:
 			return "decreasing ";
-		case marnav::ais::message_08::binary_001_11::trend::increasing:
+		case marnav::ais::binary_001_11::trend::increasing:
 			return "increasing";
-		case marnav::ais::message_08::binary_001_11::trend::not_available:
+		case marnav::ais::binary_001_11::trend::not_available:
 			return "not available";
 	}
 	return "-";
 }
 
-static std::string render(const marnav::ais::message_08::binary_001_11::ice t)
+static std::string render(const marnav::ais::binary_001_11::ice t)
 {
 	switch (t) {
-		case marnav::ais::message_08::binary_001_11::ice::no:
+		case marnav::ais::binary_001_11::ice::no:
 			return "no";
-		case marnav::ais::message_08::binary_001_11::ice::yes:
+		case marnav::ais::binary_001_11::ice::yes:
 			return "yes";
-		case marnav::ais::message_08::binary_001_11::ice::not_available:
+		case marnav::ais::binary_001_11::ice::not_available:
 			return "not available";
 	}
 	return "-";
 }
 
-static std::string render(const marnav::ais::message_08::binary_001_11::precipitation t)
+static std::string render(const marnav::ais::binary_001_11::precipitation t)
 {
 	switch (t) {
-		case marnav::ais::message_08::binary_001_11::precipitation::rain:
+		case marnav::ais::binary_001_11::precipitation::rain:
 			return "rain";
-		case marnav::ais::message_08::binary_001_11::precipitation::thunderstorm:
+		case marnav::ais::binary_001_11::precipitation::thunderstorm:
 			return "thunderstorm";
-		case marnav::ais::message_08::binary_001_11::precipitation::freezing_rain:
+		case marnav::ais::binary_001_11::precipitation::freezing_rain:
 			return "freezing_rain";
-		case marnav::ais::message_08::binary_001_11::precipitation::mixed_ice:
+		case marnav::ais::binary_001_11::precipitation::mixed_ice:
 			return "mixed_ice";
-		case marnav::ais::message_08::binary_001_11::precipitation::snow:
+		case marnav::ais::binary_001_11::precipitation::snow:
 			return "snow";
-		case marnav::ais::message_08::binary_001_11::precipitation::not_available:
+		case marnav::ais::binary_001_11::precipitation::not_available:
 			return "not available";
 	}
 	return "-";
@@ -1384,7 +1385,8 @@ static void print_detail_message_08(const marnav::ais::message * m)
 	print("FID", render(t->get_fid()));
 
 	if (t->get_dac() == 1 && t->get_fid() == 11) {
-		const auto b = t->get_binary_001_11();
+		marnav::ais::binary_001_11 b;
+		t->read_binary(b);
 		fmt::printf("\n");
 		print("Meteological and Hydrological Data (001/11) IMO236");
 		print("Position", render(b.get_position()));
