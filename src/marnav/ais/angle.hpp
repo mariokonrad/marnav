@@ -8,7 +8,7 @@ namespace marnav
 namespace ais
 {
 /// Enumeration of angle scaling according to http://www.catb.org/gpsd/AIVDM.html
-enum class angle_scale { I1, I4 };
+enum class angle_scale { I1, I3, I4 };
 
 marnav::geo::latitude to_geo_latitude(
 	uint32_t latitude_minutes, std::size_t bits, angle_scale scale);

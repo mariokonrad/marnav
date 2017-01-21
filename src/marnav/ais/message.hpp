@@ -334,12 +334,19 @@ protected:
 	/// This template is used to specify the mapping (offset, count) of
 	/// a specific datum within the bitset, without the need of repeating
 	/// the mapping for read and write operations.
+	///
+	/// @tparam Offset The offset of the value within the bitset.
+	/// @tparam Count Number of bits of the value within the bitset.
+	/// @tparam T Data type to be used.
 	template <std::size_t Offset, std::size_t Count, typename T> struct bitset_value final {
+		friend class message;
+
+	public:
 		static constexpr std::size_t offset = Offset;
 		static constexpr std::size_t count = Count;
 		using value_type = T;
 
-		bitset_value(T t)
+		bitset_value(value_type t)
 			: value(t)
 		{
 		}
@@ -350,15 +357,18 @@ protected:
 		bitset_value(bitset_value &&) = default;
 		bitset_value & operator=(bitset_value &&) = default;
 
-		operator T() const { return value; }
+		value_type get() const { return value; }
 
-		bitset_value & operator=(T t)
+		operator value_type() const { return value; }
+
+		bitset_value & operator=(value_type t)
 		{
 			value = t;
 			return *this;
 		}
 
-		T value;
+	private:
+		value_type value;
 	};
 
 	explicit message(message_id type)

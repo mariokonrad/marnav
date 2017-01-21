@@ -16,6 +16,8 @@ static double scale_value(angle_scale scale)
 	switch (scale) {
 		case angle_scale::I1:
 			return 10.0;
+		case angle_scale::I3:
+			return 1000.0;
 		case angle_scale::I4:
 			return 10000.0;
 	}

@@ -352,6 +352,53 @@ static std::string render(const marnav::ais::message_24::part t)
 	return "-";
 }
 
+static std::string render(const marnav::ais::message_08::binary_001_11::trend t)
+{
+	switch (t) {
+		case marnav::ais::message_08::binary_001_11::trend::steady:
+			return "steady";
+		case marnav::ais::message_08::binary_001_11::trend::decreasing:
+			return "decreasing ";
+		case marnav::ais::message_08::binary_001_11::trend::increasing:
+			return "increasing";
+		case marnav::ais::message_08::binary_001_11::trend::not_available:
+			return "not available";
+	}
+	return "-";
+}
+
+static std::string render(const marnav::ais::message_08::binary_001_11::ice t)
+{
+	switch (t) {
+		case marnav::ais::message_08::binary_001_11::ice::no:
+			return "no";
+		case marnav::ais::message_08::binary_001_11::ice::yes:
+			return "yes";
+		case marnav::ais::message_08::binary_001_11::ice::not_available:
+			return "not available";
+	}
+	return "-";
+}
+
+static std::string render(const marnav::ais::message_08::binary_001_11::precipitation t)
+{
+	switch (t) {
+		case marnav::ais::message_08::binary_001_11::precipitation::rain:
+			return "rain";
+		case marnav::ais::message_08::binary_001_11::precipitation::thunderstorm:
+			return "thunderstorm";
+		case marnav::ais::message_08::binary_001_11::precipitation::freezing_rain:
+			return "freezing_rain";
+		case marnav::ais::message_08::binary_001_11::precipitation::mixed_ice:
+			return "mixed_ice";
+		case marnav::ais::message_08::binary_001_11::precipitation::snow:
+			return "snow";
+		case marnav::ais::message_08::binary_001_11::precipitation::not_available:
+			return "not available";
+	}
+	return "-";
+}
+
 static std::string render(const marnav::ais::ship_type t)
 {
 	return marnav::ais::to_name(t);
@@ -490,6 +537,11 @@ template <typename T> static std::string render(const marnav::utils::optional<T>
 static void print(const std::string & name, const std::string & value)
 {
 	fmt::printf("\t%-30s : %s\n", name, value);
+}
+
+static void print(const std::string & title)
+{
+	fmt::printf("\t%s\n", title);
 }
 
 static void print_detail_hdg(const marnav::nmea::sentence * s)
@@ -1330,6 +1382,47 @@ static void print_detail_message_08(const marnav::ais::message * m)
 	print("MMSI", render(t->get_mmsi()));
 	print("DAC", render(t->get_dac()));
 	print("FID", render(t->get_fid()));
+
+	if (t->get_dac() == 1 && t->get_fid() == 11) {
+		const auto b = t->get_binary_001_11();
+		fmt::printf("\n");
+		print("Meteological and Hydrological Data (001/11) IMO236");
+		print("Position", render(b.get_position()));
+		print("Day", render(b.get_day()));
+		print("Hour", render(b.get_hour()));
+		print("Minute", render(b.get_minute()));
+		print("Wind Speed 10min avg [kn]", render(b.get_wind_speed_avg()));
+		print("Wind Gust [kn]", render(b.get_wind_gust()));
+		print("Wind Direction", render(b.get_wind_direction()));
+		print("Wind Gust Direction", render(b.get_wind_gust_direction()));
+		print("Temperature [C]", render(b.get_temperature()));
+		print("Humidity [%]", render(b.get_humidity()));
+		print("Dew Point [%]", render(b.get_dew_point()));
+		print("Air Pressure [hPa]", render(b.get_pressure()));
+		print("Air Pressure Trend", render(b.get_pressure_trend()));
+		print("Visibility [NM]", render(b.get_visibility()));
+		print("Water Level [m]", render(b.get_water_level()));
+		print("Water Level Trend", render(b.get_water_level_trend()));
+		print("Sufrace Current Speed [kn]", render(b.get_surface_current_speed()));
+		print("Sufrace Current Direction", render(b.get_surface_current_direction()));
+		print("Current 2 Speed [kn]", render(b.get_current_2_speed()));
+		print("Current 2 Direction", render(b.get_current_2_direction()));
+		print("Current 2 Depth [m]", render(b.get_current_2_depth()));
+		print("Current 3 Speed [kn]", render(b.get_current_3_speed()));
+		print("Current 3 Direction", render(b.get_current_3_direction()));
+		print("Current 3 Depth [m]", render(b.get_current_3_depth()));
+		print("Wave Height [m]", render(b.get_wave_height()));
+		print("Wave Period [s]", render(b.get_wave_period()));
+		print("Wave Direction", render(b.get_wave_direction()));
+		print("Swell Height [m]", render(b.get_swell_height()));
+		print("Swell Period [s]", render(b.get_swell_period()));
+		print("Swell Direction",  render(b.get_swell_direction()));
+		print("Sea State",  render(b.get_sea_state()));
+		print("Water Temperature [C]", render(b.get_water_temperature()));
+		print("Precipitation", render(b.get_precipitation()));
+		print("Salinity [%]", render(b.get_salinity()));
+		print("Ice", render(b.get_ice()));
+	}
 }
 
 static void print_detail_message_09(const marnav::ais::message * m)
