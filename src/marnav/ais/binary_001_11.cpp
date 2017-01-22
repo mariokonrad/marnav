@@ -144,6 +144,7 @@ utils::optional<uint32_t> binary_001_11::get_wind_gust_direction() const
 	return {wind_gust_direction};
 }
 
+/// Returns the temperature in degrees Celsius between `-60.0` and `+60.0`.
 utils::optional<double> binary_001_11::get_temperature() const
 {
 	if (temperature == temperature_not_available)
@@ -158,6 +159,7 @@ utils::optional<uint32_t> binary_001_11::get_humidity() const
 	return {humidity};
 }
 
+/// Returns in degrees Celsius between `-20.0` and `+50.0`.
 utils::optional<double> binary_001_11::get_dew_point() const
 {
 	if (dew_point == dew_point_not_available)
@@ -165,6 +167,7 @@ utils::optional<double> binary_001_11::get_dew_point() const
 	return -20.0 + 0.1 * dew_point;
 }
 
+/// Returns the pressure in `hPa` between `800` and `1200`.
 utils::optional<uint32_t> binary_001_11::get_pressure() const
 {
 	if (pressure == pressure_not_available)
@@ -179,6 +182,7 @@ utils::optional<binary_001_11::trend> binary_001_11::get_pressure_trend() const
 	return {pressure_trend};
 }
 
+/// Returns the visibility in nautical miles.
 utils::optional<double> binary_001_11::get_visibility() const
 {
 	if (visibility == visibility_not_available)
@@ -186,6 +190,7 @@ utils::optional<double> binary_001_11::get_visibility() const
 	return 0.1 * visibility;
 }
 
+/// Returns the water level in meters between `-10.0` and `+30.0`.
 utils::optional<double> binary_001_11::get_water_level() const
 {
 	if (water_level == water_level_not_available)
@@ -200,6 +205,7 @@ utils::optional<binary_001_11::trend> binary_001_11::get_water_level_trend() con
 	return {water_level_trend};
 }
 
+/// Returns the speed in knots.
 utils::optional<double> binary_001_11::get_surface_current_speed() const
 {
 	if (surface_current_speed == current_speed_not_available)
@@ -214,6 +220,7 @@ utils::optional<uint32_t> binary_001_11::get_surface_current_direction() const
 	return {surface_current_direction};
 }
 
+/// Returns the speed in knots.
 utils::optional<double> binary_001_11::get_current_2_speed() const
 {
 	if (current_2_speed == current_speed_not_available)
@@ -235,6 +242,7 @@ utils::optional<uint32_t> binary_001_11::get_current_2_depth() const
 	return {current_2_depth};
 }
 
+/// Returns the speed in knots.
 utils::optional<double> binary_001_11::get_current_3_speed() const
 {
 	if (current_3_speed == current_speed_not_available)
@@ -256,6 +264,7 @@ utils::optional<uint32_t> binary_001_11::get_current_3_depth() const
 	return {current_3_depth};
 }
 
+/// Returns the wave height in meters.
 utils::optional<double> binary_001_11::get_wave_height() const
 {
 	if (wave_height == wave_height_not_available)
@@ -277,6 +286,7 @@ utils::optional<uint32_t> binary_001_11::get_wave_direction() const
 	return {wave_direction};
 }
 
+/// Returns the swell height in meters.
 utils::optional<double> binary_001_11::get_swell_height() const
 {
 	if (swell_height == wave_height_not_available)
@@ -305,6 +315,7 @@ utils::optional<uint32_t> binary_001_11::get_sea_state() const
 	return {sea_state};
 }
 
+/// Returns the water temperature in degrees Celsius between `-10.0` and `+50.0`.
 utils::optional<double> binary_001_11::get_water_temperature() const
 {
 	if (water_temperature == water_temperature_not_available)
@@ -319,6 +330,7 @@ utils::optional<binary_001_11::precipitation> binary_001_11::get_precipitation()
 	return {precipitation_type};
 }
 
+/// Returns the sailinity in percent.
 utils::optional<double> binary_001_11::get_salinity() const
 {
 	if (sailinity == salinity_not_available)
