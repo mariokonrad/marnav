@@ -135,6 +135,7 @@
 #include <marnav/ais/message_23.hpp>
 #include <marnav/ais/message_24.hpp>
 #include <marnav/ais/binary_001_11.hpp>
+#include <marnav/ais/binary_200_10.hpp>
 
 #include <marnav/io/default_nmea_reader.hpp>
 #include <marnav/io/serial.hpp>
@@ -396,6 +397,19 @@ static std::string render(const marnav::ais::binary_001_11::precipitation t)
 			return "snow";
 		case marnav::ais::binary_001_11::precipitation::not_available:
 			return "not available";
+	}
+	return "-";
+}
+
+static std::string render(const marnav::ais::binary_200_10::loaded_state t)
+{
+	switch (t) {
+		case marnav::ais::binary_200_10::loaded_state::not_available:
+			return "not available";
+		case marnav::ais::binary_200_10::loaded_state::unloaded:
+			return "unloaded";
+		case marnav::ais::binary_200_10::loaded_state::loaded:
+			return "loaded";
 	}
 	return "-";
 }
@@ -1424,6 +1438,24 @@ static void print_detail_message_08(const marnav::ais::message * m)
 		print("Precipitation", render(b.get_precipitation()));
 		print("Salinity [%]", render(b.get_salinity()));
 		print("Ice", render(b.get_ice()));
+	} else if (t->get_dac() == 200 && t->get_fid() == 10) {
+		marnav::ais::binary_200_10 b;
+		t->read_binary(b);
+		fmt::printf("\n");
+		print("Inland ship static and voyage related data (200/10)");
+		print("Vessel ID", render(b.get_vessel_id()));
+		print("Length [m]", render(b.get_length()));
+		print("Beam [m]", render(b.get_beam()));
+		print("Shiptype", render(b.get_shiptype()));
+		print("Hazard", render(b.get_hazard()));
+		print("Draught [m]", render(b.get_draught()));
+		print("Loaded", render(b.get_loaded()));
+		print("Speed quality", render(b.get_speed_q()));
+		print("Course quality", render(b.get_course_q()));
+		print("Heading quality", render(b.get_heading_q()));
+	} else {
+		fmt::printf("\n\twarning: decoding of payload not implemented: %03d/%02d\n", t->get_dac(),
+			t->get_fid());
 	}
 }
 

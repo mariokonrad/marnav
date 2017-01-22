@@ -11,6 +11,7 @@ namespace ais
 MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_08)
 
 class binary_001_11; // forward
+class binary_200_10; // forward
 
 /// @brief Binary Broadcast Message
 class message_08 : public message
@@ -53,6 +54,7 @@ public:
 
 	// payload
 	void read_binary(binary_001_11 & m) const;
+	void read_binary(binary_200_10 & m) const;
 
 	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
@@ -61,6 +63,7 @@ public:
 
 	// payload
 	void write_binary(const binary_001_11 & m);
+	void write_binary(const binary_200_10 & m);
 };
 }
 }

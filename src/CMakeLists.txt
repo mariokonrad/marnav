@@ -68,7 +68,7 @@ if(ENABLE_AIS)
 		marnav/ais/name.cpp
 		marnav/ais/binary_data.cpp
 		marnav/ais/binary_001_11.cpp
-		marnav/ais/message.cpp
+		marnav/ais/binary_200_10.cpp
 		marnav/ais/message_01.cpp
 		marnav/ais/message_02.cpp
 		marnav/ais/message_03.cpp
@@ -437,6 +437,7 @@ if(ENABLE_AIS)
 			marnav/ais/name.hpp
 			marnav/ais/binary_data.hpp
 			marnav/ais/binary_001_11.hpp
+			marnav/ais/binary_200_10.hpp
 			marnav/ais/message.hpp
 			marnav/ais/message_01.hpp
 			marnav/ais/message_02.hpp

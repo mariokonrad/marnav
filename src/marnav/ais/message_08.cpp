@@ -1,5 +1,6 @@
 #include "message_08.hpp"
 #include <marnav/ais/binary_001_11.hpp>
+#include <marnav/ais/binary_200_10.hpp>
 
 namespace marnav
 {
@@ -53,6 +54,19 @@ void message_08::read_binary(binary_001_11 & m) const
 }
 
 void message_08::write_binary(const binary_001_11 & m)
+{
+	m.write_to(payload);
+}
+
+void message_08::read_binary(binary_200_10 & m) const
+{
+	if (std::make_tuple(200, 10) != std::tie(dac, fid))
+		throw std::invalid_argument{
+			"invalid DAC/FID for Inland ship static voyage related data"};
+	m.read_from(payload);
+}
+
+void message_08::write_binary(const binary_200_10 & m)
 {
 	m.write_to(payload);
 }

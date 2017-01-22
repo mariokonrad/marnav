@@ -9,7 +9,6 @@ TODO
 
 @todo Implement AIS message: Type 06: Binary Addressed Message
 @todo Implement AIS message: Type 07: Binary Acknowledge
-@todo Implement AIS message: Type 08: Binary Broadcast Message
 @todo Implement AIS message: Type 12: Addressed Safety-Related Message
 @todo Implement AIS message: Type 13: Safety-Related Acknowledgement
 @todo Implement AIS message: Type 14: Safety-Related Broadcast Message

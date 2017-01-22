@@ -1,7 +1,7 @@
 marnav
 ======
 
-Copyright (c) 2016 Mario Konrad (mario.konrad@gmx.net)
+Copyright (c) 2017 Mario Konrad (mario.konrad@gmx.net)
 
 ---
 
@@ -136,7 +136,7 @@ Supported messages for AIS (decode and encode):
 - Type 03: Position Report Class A (Response to Interrogation)
 - Type 04: Base Station Report
 - Type 05: Static and Voyage Related Data
-- Type 08: Extracting payload of it, not interpretation of the payload.
+- Type 08: Binary Broadcast Message
 - Type 09: Standard SAR Aircraft Position Report
 - Type 10: UTC/Date Inquiry
 - Type 11: UTC/Date Response
@@ -147,6 +147,9 @@ Supported messages for AIS (decode and encode):
 - Type 23: Group Assignment Command
 - Type 24: Static Data Report (part A and B, norma and auxiliary vessel)
 
+Supported payload of binary message 08:
+- 001/11: Meteorological and Hydrological Data (IMO236)
+- 200/10: Inland ship static and voyage related data (Inland AIS)
 
 ### SeaTalk
 

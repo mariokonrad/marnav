@@ -1,6 +1,7 @@
 #ifndef __MARNAV__AIS__BINARY_DATA__HPP__
 #define __MARNAV__AIS__BINARY_DATA__HPP__
 
+#include <string>
 #include <marnav/utils/bitset.hpp>
 
 namespace marnav
@@ -16,6 +17,8 @@ char decode_sixbit_ascii(uint8_t value);
 uint8_t encode_sixbit_ascii(char c);
 
 /// @}
+
+std::string trim_ais_string(const std::string & s);
 
 /// Empty baseclass for binary data, provides protected functions to read and
 /// write binary data from/to bitsets.

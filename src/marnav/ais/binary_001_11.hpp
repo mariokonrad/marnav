@@ -9,6 +9,8 @@ namespace marnav
 {
 namespace ais
 {
+/// @brief Meteorological and Hydrological Data (IMO236).
+///
 class binary_001_11 final : public binary_data
 {
 public:

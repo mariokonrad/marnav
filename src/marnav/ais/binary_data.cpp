@@ -36,6 +36,11 @@ uint8_t encode_sixbit_ascii(char c)
 	return i != SIXBIT_ASCII_TABLE.end() ? i->first : 0xff;
 }
 
+std::string trim_ais_string(const std::string & s)
+{
+	return s.substr(0, s.find_first_of("@"));
+}
+
 /// Reads a string from the AIS message at the specified offset.
 /// The string is decoded and returned.
 ///

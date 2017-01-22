@@ -300,8 +300,6 @@ constexpr static const uint32_t second_not_available = 60;
 
 /// @}
 
-std::string trim_ais_string(const std::string & s);
-
 /// @brief Base class for all AIS messages.
 class message : public binary_data
 {
