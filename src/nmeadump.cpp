@@ -1861,6 +1861,7 @@ int main(int argc, char ** argv)
 				serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none)};
 		process([&](std::string & line) { return source.read_sentence(line); });
 	} else {
+		std::cin.sync_with_stdio(false);
 		process([&](std::string & line) { return !!std::getline(std::cin, line); });
 	}
 

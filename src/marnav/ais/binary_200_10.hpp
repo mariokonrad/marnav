@@ -21,7 +21,7 @@ public:
 	/// the header of the message 08 must not be included in this header.
 	constexpr static uint32_t MSG08_HEAD = 56;
 
-	constexpr static const int SIZE_BITS = 168 - MSG08_HEAD;
+	constexpr static uint32_t SIZE_BITS = 168 - MSG08_HEAD;
 
 	enum class loaded_state : uint8_t { not_available = 0, unloaded = 1, loaded = 2 };
 

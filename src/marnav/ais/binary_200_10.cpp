@@ -13,6 +13,9 @@ binary_200_10::binary_200_10()
 
 void binary_200_10::read_from(const raw & payload)
 {
+	if (payload.size() != SIZE_BITS)
+		throw std::invalid_argument{"wrong number of bits in playload of binary_200_10"};
+
 	get(payload, vessel_id);
 	get(payload, length);
 	get(payload, beam);
@@ -27,6 +30,7 @@ void binary_200_10::read_from(const raw & payload)
 
 void binary_200_10::write_to(raw & payload) const
 {
+	payload = raw{SIZE_BITS};
 	set(payload, vessel_id);
 	set(payload, length);
 	set(payload, beam);

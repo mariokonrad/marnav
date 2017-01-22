@@ -29,6 +29,8 @@ if(ENABLE_AIS)
 		ais/Test_ais_message_22.cpp
 		ais/Test_ais_message_23.cpp
 		ais/Test_ais_message_24.cpp
+		ais/Test_ais_binary_001_11.cpp
+		ais/Test_ais_binary_200_10.cpp
 	)
 endif()
 

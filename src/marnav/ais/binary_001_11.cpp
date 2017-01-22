@@ -8,6 +8,9 @@ namespace ais
 {
 void binary_001_11::read_from(const raw & payload)
 {
+	if (payload.size() != SIZE_BITS)
+		throw std::invalid_argument{"wrong number of bits in playload of binary_001_11"};
+
 	get(payload, lat);
 	get(payload, lon);
 	get(payload, day);
@@ -48,7 +51,7 @@ void binary_001_11::read_from(const raw & payload)
 
 void binary_001_11::write_to(raw & payload) const
 {
-	payload = raw{binary_001_11::SIZE_BITS};
+	payload = raw{SIZE_BITS};
 	set(payload, lat);
 	set(payload, lon);
 	set(payload, day);
