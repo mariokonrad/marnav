@@ -14,7 +14,8 @@ class Test_ais_message_08 : public ::testing::Test
 TEST_F(Test_ais_message_08, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("802R5Ph0BkEachFWA2GaOwwwwwwwwwwwwkBwwwwwwwwwwwwwwwwwwwwwwwu", 2));
+	v.push_back(
+		std::make_pair("802R5Ph0BkEachFWA2GaOwwwwwwwwwwwwkBwwwwwwwwwwwwwwwwwwwwwwwu", 2));
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);

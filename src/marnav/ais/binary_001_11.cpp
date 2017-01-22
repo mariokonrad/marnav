@@ -2,6 +2,8 @@
 #include <cmath>
 #include <marnav/ais/angle.hpp>
 
+/// @todo binary_001_11: Range checks for setters
+
 namespace marnav
 {
 namespace ais
@@ -359,19 +361,25 @@ void binary_001_11::set_position(utils::optional<geo::position> t)
 	}
 }
 
+/// Sets the day. Value must be either empty optional or a value between `1` and `31`.
+/// A value out of range is treated the same as an empty optional.
 void binary_001_11::set_day(utils::optional<uint32_t> t)
 {
-	day = !t ? day_not_available : *t;
+	day = (!t || *t >= 31) ? day_not_available : *t;
 }
 
+/// Sets the hour. Value must be either empty optional or a value between `0` and `23`.
+/// A value out of range is treated the same as an empty optional.
 void binary_001_11::set_hour(utils::optional<uint32_t> t)
 {
-	hour = !t ? hour_not_available : *t;
+	hour = (!t || *t >= 24) ? hour_not_available : *t;
 }
 
+/// Sets the minute. Value must be either empty optional or a value between `0` and `59`.
+/// A value out of range is treated the same as an empty optional.
 void binary_001_11::set_minute(utils::optional<uint32_t> t)
 {
-	minute = !t ? minute_not_available : *t;
+	minute = (!t || *t > 59u) ? minute_not_available : *t;
 }
 
 void binary_001_11::set_wind_speed_avg(utils::optional<uint32_t> t)

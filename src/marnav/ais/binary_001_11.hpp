@@ -75,7 +75,7 @@ private:
 	// clang-format off
 	bitset_value< 56 - MSG08_HEAD, 24, uint32_t     > lat = lat_not_available;
 	bitset_value< 80 - MSG08_HEAD, 25, uint32_t     > lon = lon_not_available;
-	bitset_value<105 - MSG08_HEAD,  5, uint32_t     > day = day_not_available;
+	bitset_value<105 - MSG08_HEAD,  5, uint32_t     > day = day_not_available; /// @todo Investigation about range and not_available value, because 31 could be a valid day in the range of 1..31
 	bitset_value<110 - MSG08_HEAD,  5, uint32_t     > hour = hour_not_available;
 	bitset_value<115 - MSG08_HEAD,  6, uint32_t     > minute = minute_not_available;
 	bitset_value<121 - MSG08_HEAD,  7, uint32_t     > wind_speed_avg = wind_speed_avg_not_available;
@@ -184,7 +184,6 @@ public:
 	void set_salinity(utils::optional<double> t);
 	void set_ice(utils::optional<ice> t);
 };
-
 }
 }
 

@@ -1432,8 +1432,8 @@ static void print_detail_message_08(const marnav::ais::message * m)
 		print("Wave Direction", render(b.get_wave_direction()));
 		print("Swell Height [m]", render(b.get_swell_height()));
 		print("Swell Period [s]", render(b.get_swell_period()));
-		print("Swell Direction",  render(b.get_swell_direction()));
-		print("Sea State",  render(b.get_sea_state()));
+		print("Swell Direction", render(b.get_swell_direction()));
+		print("Sea State", render(b.get_sea_state()));
 		print("Water Temperature [C]", render(b.get_water_temperature()));
 		print("Precipitation", render(b.get_precipitation()));
 		print("Salinity [%]", render(b.get_salinity()));
@@ -1454,8 +1454,8 @@ static void print_detail_message_08(const marnav::ais::message * m)
 		print("Course quality", render(b.get_course_q()));
 		print("Heading quality", render(b.get_heading_q()));
 	} else {
-		fmt::printf("\n\twarning: decoding of payload not implemented: %03d/%02d\n", t->get_dac(),
-			t->get_fid());
+		fmt::printf("\n\twarning: decoding of payload not implemented: %03d/%02d\n",
+			t->get_dac(), t->get_fid());
 	}
 }
 
