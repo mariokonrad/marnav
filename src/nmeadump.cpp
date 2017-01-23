@@ -124,6 +124,7 @@
 #include <marnav/ais/message_03.hpp>
 #include <marnav/ais/message_04.hpp>
 #include <marnav/ais/message_05.hpp>
+#include <marnav/ais/message_06.hpp>
 #include <marnav/ais/message_08.hpp>
 #include <marnav/ais/message_09.hpp>
 #include <marnav/ais/message_10.hpp>
@@ -1390,6 +1391,21 @@ static void print_detail_message_05(const marnav::ais::message * m)
 	print("DTE", render(t->get_dte()));
 }
 
+static void print_detail_message_06(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_06>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	print("Sequence No", render(t->get_sequnce_no()));
+	print("Destination MMSI", render(t->get_dest_mmsi()));
+	print("Retransmit Flag", render(t->get_retransmit_flag()));
+	print("DAC", render(t->get_dac()));
+	print("FID", render(t->get_fid()));
+	// TODO
+	fmt::printf("\n\twarning: message 06: decoding of payload not implemented: %03d/%02d\n",
+		t->get_dac(), t->get_fid());
+}
+
 static void print_detail_message_08(const marnav::ais::message * m)
 {
 	const auto t = marnav::ais::message_cast<marnav::ais::message_08>(m);
@@ -1454,7 +1470,7 @@ static void print_detail_message_08(const marnav::ais::message * m)
 		print("Course quality", render(b.get_course_q()));
 		print("Heading quality", render(b.get_heading_q()));
 	} else {
-		fmt::printf("\n\twarning: decoding of payload not implemented: %03d/%02d\n",
+		fmt::printf("\n\twarning: message 08: decoding of payload not implemented: %03d/%02d\n",
 			t->get_dac(), t->get_fid());
 	}
 }
@@ -1746,6 +1762,7 @@ static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> 
 		ADD_MESSAGE(message_03),
 		ADD_MESSAGE(message_04),
 		ADD_MESSAGE(message_05),
+		ADD_MESSAGE(message_06),
 		ADD_MESSAGE(message_08),
 		ADD_MESSAGE(message_09),
 		ADD_MESSAGE(message_10),
