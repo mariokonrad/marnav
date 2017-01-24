@@ -1,4 +1,5 @@
 #include "message_18.hpp"
+#include <cmath>
 #include <marnav/ais/angle.hpp>
 
 namespace marnav
@@ -98,6 +99,45 @@ void message_18::set_latitude(const utils::optional<geo::latitude> & t)
 	latitude_minutes = t
 		? to_latitude_minutes(t.value(), latitude_minutes.count, angle_scale::I4)
 		: latitude_not_available;
+}
+
+/// Returns speed in knots.
+utils::optional<double> message_18::get_sog() const noexcept
+{
+	if (sog == sog_not_available)
+		return {};
+	return 0.1 * sog;
+}
+
+void message_18::set_sog(utils::optional<double> t) noexcept
+{
+	sog = !t ? sog_not_available : static_cast<uint32_t>(std::round(*t / 0.1));
+}
+
+/// Returns course over ground in degrees true north.
+utils::optional<double> message_18::get_cog() const noexcept
+{
+	if (cog == cog_not_available)
+		return {};
+	return 0.1 * cog;
+}
+
+void message_18::set_cog(utils::optional<double> t) noexcept
+{
+	cog = !t ? cog_not_available : static_cast<uint32_t>(std::round(*t / 0.1));
+}
+
+/// Returns heading in degrees.
+utils::optional<uint32_t> message_18::get_hdg() const noexcept
+{
+	if (hdg == hdg_not_available)
+		return {};
+	return {hdg};
+}
+
+void message_18::set_hdg(utils::optional<uint32_t> t) noexcept
+{
+	hdg = !t ? hdg_not_available : *t;
 }
 }
 }
