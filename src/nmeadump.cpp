@@ -125,6 +125,7 @@
 #include <marnav/ais/message_04.hpp>
 #include <marnav/ais/message_05.hpp>
 #include <marnav/ais/message_06.hpp>
+#include <marnav/ais/message_07.hpp>
 #include <marnav/ais/message_08.hpp>
 #include <marnav/ais/message_09.hpp>
 #include <marnav/ais/message_10.hpp>
@@ -1406,6 +1407,17 @@ static void print_detail_message_06(const marnav::ais::message * m)
 		t->get_dac(), t->get_fid());
 }
 
+static void print_detail_message_07(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_07>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	print("MMSI_1", render(t->get_mmsi_1()));
+	print("MMSI_2", render(t->get_mmsi_2()));
+	print("MMSI_3", render(t->get_mmsi_3()));
+	print("MMSI_4", render(t->get_mmsi_4()));
+}
+
 static void print_detail_message_08(const marnav::ais::message * m)
 {
 	const auto t = marnav::ais::message_cast<marnav::ais::message_08>(m);
@@ -1763,6 +1775,7 @@ static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> 
 		ADD_MESSAGE(message_04),
 		ADD_MESSAGE(message_05),
 		ADD_MESSAGE(message_06),
+		ADD_MESSAGE(message_07),
 		ADD_MESSAGE(message_08),
 		ADD_MESSAGE(message_09),
 		ADD_MESSAGE(message_10),

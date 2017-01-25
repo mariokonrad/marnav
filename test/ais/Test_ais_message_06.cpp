@@ -13,8 +13,7 @@ class Test_ais_message_06 : public ::testing::Test
 TEST_F(Test_ais_message_06, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(
-		std::make_pair("6h2E:p66B2SR04<0@00000000000", 0));
+	v.push_back(std::make_pair("6h2E:p66B2SR04<0@00000000000", 0));
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);

@@ -139,6 +139,7 @@ Supported messages for AIS (decode and encode):
 - Type 04: Base Station Report
 - Type 05: Static and Voyage Related Data
 - Type 06: Binary Addressed Message
+- Type 06: Binary Acknowledge
 - Type 08: Binary Broadcast Message
 - Type 09: Standard SAR Aircraft Position Report
 - Type 10: UTC/Date Inquiry
