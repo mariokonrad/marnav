@@ -132,6 +132,7 @@
 #include <marnav/ais/message_11.hpp>
 #include <marnav/ais/message_18.hpp>
 #include <marnav/ais/message_19.hpp>
+#include <marnav/ais/message_20.hpp>
 #include <marnav/ais/message_21.hpp>
 #include <marnav/ais/message_22.hpp>
 #include <marnav/ais/message_23.hpp>
@@ -1554,6 +1555,19 @@ static void print_detail_message_19(const marnav::ais::message * m)
 	print("Assigned", render(t->get_assigned()));
 }
 
+static void print_detail_message_20(const marnav::ais::message * m)
+{
+	const auto t = marnav::ais::message_cast<marnav::ais::message_20>(m);
+	print("Repeat Indicator", render(t->get_repeat_indicator()));
+	print("MMSI", render(t->get_mmsi()));
+	for (int i = 0; i < 3; ++i) {
+		const auto entry = t->get_entry(i);
+		print(fmt::sprintf("Entry %d", i + 1),
+			fmt::sprintf("Offset:%4u  Slots:%1u  Timeout:%1u  Increment:%4u", entry.offset,
+				entry.slots, entry.timeout, entry.increment));
+	}
+}
+
 static void print_detail_message_21(const marnav::ais::message * m)
 {
 	const auto t = marnav::ais::message_cast<marnav::ais::message_21>(m);
@@ -1782,6 +1796,7 @@ static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> 
 		ADD_MESSAGE(message_11),
 		ADD_MESSAGE(message_18),
 		ADD_MESSAGE(message_19),
+		ADD_MESSAGE(message_20),
 		ADD_MESSAGE(message_21),
 		ADD_MESSAGE(message_22),
 		ADD_MESSAGE(message_23),

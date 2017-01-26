@@ -82,6 +82,7 @@ if(ENABLE_AIS)
 		marnav/ais/message_11.cpp
 		marnav/ais/message_18.cpp
 		marnav/ais/message_19.cpp
+		marnav/ais/message_20.cpp
 		marnav/ais/message_21.cpp
 		marnav/ais/message_22.cpp
 		marnav/ais/message_23.cpp
@@ -454,6 +455,7 @@ if(ENABLE_AIS)
 			marnav/ais/message_11.hpp
 			marnav/ais/message_18.hpp
 			marnav/ais/message_19.hpp
+			marnav/ais/message_20.hpp
 			marnav/ais/message_21.hpp
 			marnav/ais/message_22.hpp
 			marnav/ais/message_23.hpp
