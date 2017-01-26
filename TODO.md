@@ -12,7 +12,6 @@ TODO
 @todo Implement AIS message: Type 14: Safety-Related Broadcast Message
 @todo Implement AIS message: Type 15: Interrogation
 @todo Implement AIS message: Type 16: Assignment Mode Command
-@todo Implement AIS message: Type 17: DGNSS Broadcast Binary Message
 @todo Implement AIS message: Type 25: Single Slot Binary Message
 @todo Implement AIS message: Type 26: Multiple Slot Binary Message
 @todo Implement AIS message: Type 27: Long Range AIS Broadcast message
