@@ -13,8 +13,11 @@ namespace detail
 /// to be at the beginning of a NMEA sentence. The start token has to be ignored.
 ///
 /// @param[in] s The string to parse.
+/// @param[in] start_pos The position witin the string to start the parsing of the
+///   fields.
 /// @return Container with separate fields.
-std::vector<std::string> parse_fields(const std::string & s)
+std::vector<std::string> parse_fields(
+	const std::string & s, const std::string::size_type start_pos)
 {
 	if (s.size() < 1)
 		return std::vector<std::string>{};
@@ -22,7 +25,7 @@ std::vector<std::string> parse_fields(const std::string & s)
 	static constexpr const char * DELIMITERS = ",*";
 	std::vector<std::string> result;
 	result.reserve(14); // number of fields in RMC, fairly common case
-	std::string::size_type p = 0;
+	std::string::size_type p = start_pos;
 	do {
 		const auto last = p + 1;
 		p = s.find_first_of(DELIMITERS, last);

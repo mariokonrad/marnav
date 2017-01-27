@@ -1,4 +1,5 @@
 #include "detail.hpp"
+#include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/split.hpp>
 
 namespace marnav
@@ -26,13 +27,25 @@ std::tuple<talker, std::string, std::vector<std::string>> extract_sentence_infor
 {
 	detail::check_raw_sentence(s);
 
+	// handle tag block
+	std::string::size_type search_pos = 0u;
+	if (s[0] == sentence::tag_block_token) {
+		const auto i = s.find(sentence::tag_block_token, 1);
+		if (i != std::string::npos) {
+			search_pos = i + 1;
+			const std::string block = s.substr(1, i - 1);
+
+			// TODO: parse tag block
+		}
+	}
+
 	// extract all fields, skip start token
-	std::vector<std::string> fields = detail::parse_fields(s);
+	std::vector<std::string> fields = detail::parse_fields(s, search_pos);
 	if (fields.size() < 2) // at least address and checksum must be present
 		throw std::invalid_argument{"malformed sentence in nmea/make_sentence"};
 
 	if (!ignore_checksum)
-		detail::ensure_checksum(s, fields.back());
+		detail::ensure_checksum(s, fields.back(), search_pos);
 
 	// extract address and posibly talker_id and tag.
 	// check for vendor extension is necessary because the address field of this extensions

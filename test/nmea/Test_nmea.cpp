@@ -134,4 +134,23 @@ TEST_F(Test_nmea, extract_id)
 	EXPECT_NO_THROW(nmea::extract_id("$GPBOD,"));
 	EXPECT_ANY_THROW(nmea::extract_id("$GPBOD"));
 }
+
+TEST_F(Test_nmea, extract_id_tag_block)
+{
+	static const std::string t = "\\g:1-2-73874,n:157036,s:r003669945,c:1241544035*4A\\!AIVDM,"
+								 "1,1,,B,15N4cJ`005Jrek0H@9n`DW5608EP,0*13";
+
+	EXPECT_NO_THROW(nmea::extract_id(t));
+	EXPECT_EQ(nmea::sentence_id::VDM, nmea::extract_id(t));
+}
+
+TEST_F(Test_nmea, make_sentence_tag_block)
+{
+	static const std::string t = "\\g:1-2-73874,n:157036,s:r003669945,c:1241544035*4A\\!AIVDM,"
+								 "1,1,,B,15N4cJ`005Jrek0H@9n`DW5608EP,0*13";
+
+	const auto s = nmea::make_sentence(t);
+
+	EXPECT_TRUE(s != nullptr);
+}
 }

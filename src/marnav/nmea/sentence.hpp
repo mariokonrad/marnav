@@ -39,6 +39,9 @@ public:
 	/// The end token (right before the checksum) of all NMEA sentences.
 	constexpr static char end_token = '*';
 
+	/// The start and end token of a tag block.
+	constexpr static char tag_block_token = '\\';
+
 	virtual ~sentence() = default;
 
 	sentence() = delete;

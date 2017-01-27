@@ -222,21 +222,26 @@ std::tuple<talker, std::string> parse_address(const std::string & address, bool 
 ///
 /// @param[in] s Sentence to check.
 /// @param[in] expected The expected checksum to test against.
+/// @param[in] start_pos Position within the sentence to start with computation of the checksum.
 /// @exception checksum_error Thrown if the checksum does not match.
 /// @exception std::invalid_argument Arguments were invalid.
 ///
 /// @note This function must be defined here, not in the file detail.cpp,
 ///       because it needs access to the class sentence, which the other file
 ///       does not, nor should have.
-void ensure_checksum(const std::string & s, const std::string & expected)
+///
+/// @todo Parameters s/start_pos should be replaced with `string_view`, but not available in C++11.
+///
+void ensure_checksum(
+	const std::string & s, const std::string & expected, std::string::size_type start_pos)
 {
-	const auto end_pos = s.find_first_of(sentence::end_token, 1);
+	const auto end_pos = s.find_first_of(sentence::end_token, start_pos);
 	if (end_pos == std::string::npos) // end token not found
-		throw std::invalid_argument{"invalid format in nmea/make_sentence"};
+		throw std::invalid_argument{"invalid format in nmea/ensure_checksum"};
 	if (s.size() != end_pos + 3) // short or no checksum
-		throw std::invalid_argument{"invalid format in nmea/make_sentence"};
+		throw std::invalid_argument{"invalid format in nmea/ensure_checksum"};
 	const uint8_t expected_checksum = static_cast<uint8_t>(std::stoul(expected, nullptr, 16));
-	const uint8_t sum = checksum(begin(s) + 1, begin(s) + end_pos);
+	const uint8_t sum = checksum(begin(s) + start_pos + 1, begin(s) + end_pos);
 	if (expected_checksum != sum)
 		throw checksum_error{expected_checksum, sum};
 }
@@ -249,7 +254,8 @@ void check_raw_sentence(const std::string & s)
 	// perform various checks
 	if (s.empty())
 		throw std::invalid_argument{"empty string in nmea/make_sentence"};
-	if ((s[0] != sentence::start_token) && (s[0] != sentence::start_token_ais))
+	if ((s[0] != sentence::start_token) && (s[0] != sentence::start_token_ais)
+		&& (s[0] != sentence::tag_block_token))
 		throw std::invalid_argument{"no start token in nmea/make_sentence"};
 }
 }
@@ -337,13 +343,24 @@ sentence_id extract_id(const std::string & s)
 {
 	detail::check_raw_sentence(s);
 
-	const auto pos = s.find_first_of(",");
+	std::string::size_type search_pos = 0;
+
+	// skip tag block
+	if (s[0] == sentence::tag_block_token) {
+		const auto i = s.find(sentence::tag_block_token, 1);
+		if (i != std::string::npos)
+			search_pos = i + 1;
+	}
+
+	// get ID from first (regular) field
+	const auto pos = s.find_first_of(",", search_pos);
 	if (pos == std::string::npos)
 		throw std::invalid_argument{"malformed sentence in extract_id"};
 
 	talker talk{talker_id::none};
 	std::string tag;
-	std::tie(talk, tag) = detail::parse_address(s.substr(1, pos - 1), true);
+	std::tie(talk, tag)
+		= detail::parse_address(s.substr(search_pos + 1, pos - search_pos - 1), true);
 
 	return tag_to_id(tag);
 }

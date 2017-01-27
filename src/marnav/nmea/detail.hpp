@@ -19,7 +19,8 @@ namespace detail
 std::tuple<talker, std::string> parse_address(
 	const std::string & address, bool ignore_unknown = false);
 
-void ensure_checksum(const std::string & s, const std::string & expected);
+void ensure_checksum(
+	const std::string & s, const std::string & expected, std::string::size_type start_pos = 1u);
 
 void check_raw_sentence(const std::string & s);
 
