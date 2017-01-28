@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <type_traits>
+#include <marnav/nmea/checksum.hpp>
 #include <marnav/nmea/detail.hpp>
 #include <marnav/nmea/split.hpp>
 
@@ -166,6 +167,12 @@ std::string to_string(const tag_block & b)
 		extend(result,  "s:" + b.get_source());
 	if (b.is_text_valid())
 		extend(result,  "t:" + b.get_text());
+
+	if (!result.empty()) {
+		const auto cs = checksum(begin(result), end(result));
+		result += tag_block::end_token;
+		result += checksum_to_string(cs);
+	}
 
 	return result;
 }

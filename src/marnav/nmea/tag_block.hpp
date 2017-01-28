@@ -12,6 +12,8 @@ namespace nmea
 class tag_block
 {
 public:
+	constexpr static char end_token = '*';
+
 	struct sentence_group {
 		int number = 0;
 		int total_number = 0;
