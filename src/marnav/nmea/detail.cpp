@@ -20,22 +20,22 @@ namespace detail
 /// @return A tuple containing:
 /// - The `talker` extracted from the raw NMEA sentence.
 /// - The `tag` extracted from the raw NMEA sentence.
+/// - The optional tag block.
 /// - Extracted `fields` from the raw NMEA sentence.
 ///
-std::tuple<talker, std::string, std::vector<std::string>> extract_sentence_information(
-	const std::string & s, bool ignore_checksum)
+std::tuple<talker, std::string, std::string, std::vector<std::string>>
+extract_sentence_information(const std::string & s, bool ignore_checksum)
 {
 	detail::check_raw_sentence(s);
 
 	// handle tag block
-	std::string::size_type search_pos = 0u;
+	std::string tag_block;
+	std::string::size_type search_pos = 1u; // ignore start token
 	if (s[0] == sentence::tag_block_token) {
 		const auto i = s.find(sentence::tag_block_token, 1);
 		if (i != std::string::npos) {
-			search_pos = i + 1;
-			const std::string block = s.substr(1, i - 1);
-
-			// TODO: parse tag block
+			search_pos += i + 1u; // next after tag block end token
+			tag_block = s.substr(1, i - 1);
 		}
 	}
 
@@ -44,8 +44,10 @@ std::tuple<talker, std::string, std::vector<std::string>> extract_sentence_infor
 	if (fields.size() < 2) // at least address and checksum must be present
 		throw std::invalid_argument{"malformed sentence in nmea/make_sentence"};
 
-	if (!ignore_checksum)
+	if (!ignore_checksum) {
+		// check checksum from next character on, ignoring the start token.
 		detail::ensure_checksum(s, fields.back(), search_pos);
+	}
 
 	// extract address and posibly talker_id and tag.
 	// check for vendor extension is necessary because the address field of this extensions
@@ -54,7 +56,7 @@ std::tuple<talker, std::string, std::vector<std::string>> extract_sentence_infor
 	std::string tag;
 	std::tie(talk, tag) = detail::parse_address(fields.front());
 
-	return std::make_tuple(talk, tag, fields);
+	return std::make_tuple(talk, tag, tag_block, fields);
 }
 }
 /// @endcond

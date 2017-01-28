@@ -241,7 +241,7 @@ void ensure_checksum(
 	if (s.size() != end_pos + 3) // short or no checksum
 		throw std::invalid_argument{"invalid format in nmea/ensure_checksum"};
 	const uint8_t expected_checksum = static_cast<uint8_t>(std::stoul(expected, nullptr, 16));
-	const uint8_t sum = checksum(begin(s) + start_pos + 1, begin(s) + end_pos);
+	const uint8_t sum = checksum(begin(s) + start_pos, begin(s) + end_pos);
 	if (expected_checksum != sum)
 		throw checksum_error{expected_checksum, sum};
 }
@@ -326,10 +326,14 @@ std::unique_ptr<sentence> make_sentence(const std::string & s, bool ignore_check
 {
 	talker talk{talker_id::none};
 	std::string tag;
+	std::string tag_block;
 	std::vector<std::string> fields;
-	std::tie(talk, tag, fields) = detail::extract_sentence_information(s, ignore_checksum);
-	return detail::find_parse_func(tag)(
+	std::tie(talk, tag, tag_block, fields)
+		= detail::extract_sentence_information(s, ignore_checksum);
+	auto result = detail::find_parse_func(tag)(
 		talk, std::next(std::begin(fields)), std::prev(std::end(fields)));
+	result->set_tag_block(tag_block);
+	return result;
 }
 
 /// Extracts and returns the sentence ID of the specified raw NMEA sentence.

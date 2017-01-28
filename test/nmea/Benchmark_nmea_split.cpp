@@ -77,6 +77,23 @@ static std::vector<std::string> parse_fields__v3(const std::string & s)
 	}
 	return result;
 }
+
+static std::vector<std::string> parse_fields__v4(const std::string & s)
+{
+	if (s.size() < 1)
+		return std::vector<std::string>{};
+
+	static constexpr const char * DELIMITERS = ",*";
+	std::vector<std::string> result;
+	result.reserve(14); // number of fields in RMC, fairly common case
+	std::string::size_type p = 0u;
+	do {
+		const auto last = p + 1;
+		p = s.find_first_of(DELIMITERS, last);
+		result.push_back(s.substr(last, p - last));
+	} while (p != std::string::npos);
+	return result;
+}
 }
 
 static void Benchmark_nmea_split_v0(benchmark::State & state)
@@ -126,6 +143,18 @@ static void Benchmark_nmea_split_v3(benchmark::State & state)
 }
 
 BENCHMARK(Benchmark_nmea_split_v3)->Range(0, 2);
+
+static void Benchmark_nmea_split_v4(benchmark::State & state)
+{
+	std::string sentence = SENTENCES[state.range_x()];
+	std::vector<std::string> result;
+	while (state.KeepRunning()) {
+		result = parse_fields__v4(sentence);
+		benchmark::DoNotOptimize(result);
+	}
+}
+
+BENCHMARK(Benchmark_nmea_split_v4)->Range(0, 2);
 
 static void Benchmark_nmea_split(benchmark::State & state)
 {

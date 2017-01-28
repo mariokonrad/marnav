@@ -119,6 +119,7 @@ add_library(marnav ${LIBRARY_TYPE}
 	marnav/geo/cpa.cpp
 	marnav/geo/geodesic.cpp
 	marnav/nmea/waypoint.cpp
+	marnav/nmea/tag_block.cpp
 	marnav/nmea/talker_id.cpp
 	marnav/nmea/convert.cpp
 	marnav/nmea/manufacturer.cpp
@@ -338,6 +339,7 @@ install(
 install(
 	FILES
 		marnav/nmea/constants.hpp
+		marnav/nmea/tag_block.hpp
 		marnav/nmea/talker_id.hpp
 		marnav/nmea/sentence_id.hpp
 		marnav/nmea/convert.hpp

@@ -12,7 +12,7 @@ namespace nmea
 namespace detail
 {
 std::vector<std::string> parse_fields(
-	const std::string & s, const std::string::size_type start_pos = 0u);
+	const std::string & s, const std::string::size_type start_pos = 1u);
 }
 /// @endcond
 }

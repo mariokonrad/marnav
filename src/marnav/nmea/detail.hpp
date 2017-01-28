@@ -20,12 +20,12 @@ std::tuple<talker, std::string> parse_address(
 	const std::string & address, bool ignore_unknown = false);
 
 void ensure_checksum(
-	const std::string & s, const std::string & expected, std::string::size_type start_pos = 1u);
+	const std::string & s, const std::string & expected, std::string::size_type start_pos);
 
 void check_raw_sentence(const std::string & s);
 
-std::tuple<talker, std::string, std::vector<std::string>> extract_sentence_information(
-	const std::string & s, bool ignore_checksum = false);
+std::tuple<talker, std::string, std::string, std::vector<std::string>>
+extract_sentence_information(const std::string & s, bool ignore_checksum = false);
 
 /// Exists only to do SFINAE on the template parameter type `T`.
 /// Since it does nothing, the compiler will optimize it out.

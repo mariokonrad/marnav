@@ -61,6 +61,11 @@ public:
 	///   talker ID explicitly.
 	void set_talker(const talker & t) { talker_ = t; }
 
+	/// Sets the tag block. This overwrites a possibly existent block.
+	void set_tag_block(const std::string & t) { tag_block_ = t; }
+
+	const std::string & get_tag_block() { return tag_block_; }
+
 	friend std::string to_string(const sentence &);
 
 protected:
@@ -73,6 +78,7 @@ private:
 	const sentence_id id_;
 	const std::string tag_;
 	talker talker_;
+	std::string tag_block_;
 };
 
 // Class `sentence` must be an abstract class, this protectes
@@ -105,9 +111,12 @@ template <typename T> T create_sentence(const std::string & s)
 	detail::create_sentence_base_class_check<T>();
 	talker talk{talker_id::none};
 	std::string tag;
+	std::string tag_block;
 	std::vector<std::string> fields;
-	std::tie(talk, tag, fields) = detail::extract_sentence_information(s);
-	return T{talk, std::next(std::begin(fields)), std::prev(std::end(fields))};
+	std::tie(talk, tag, tag_block, fields) = detail::extract_sentence_information(s);
+	T result{talk, std::next(std::begin(fields)), std::prev(std::end(fields))};
+	result.set_tag_block(tag_block);
+	return result;
 }
 
 /// Renders the specified sentence into a string.

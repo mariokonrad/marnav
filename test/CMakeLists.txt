@@ -101,6 +101,7 @@ add_executable(testrunner
 	nmea/Test_nmea_waypoint.cpp
 	nmea/Test_nmea_checksum.cpp
 	nmea/Test_nmea_split.cpp
+	nmea/Test_nmea_tag_block.cpp
 	nmea/Test_nmea.cpp
 	nmea/Test_nmea_angle.cpp
 	nmea/Test_nmea_date.cpp

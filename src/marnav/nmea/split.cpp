@@ -25,12 +25,13 @@ std::vector<std::string> parse_fields(
 	static constexpr const char * DELIMITERS = ",*";
 	std::vector<std::string> result;
 	result.reserve(14); // number of fields in RMC, fairly common case
-	std::string::size_type p = start_pos;
-	do {
-		const auto last = p + 1;
+	for (std::string::size_type p = start_pos;; ++p) {
+		const auto last = p;
 		p = s.find_first_of(DELIMITERS, last);
 		result.push_back(s.substr(last, p - last));
-	} while (p != std::string::npos);
+		if (p == std::string::npos) // test before increment
+			break;
+	}
 	return result;
 }
 }
