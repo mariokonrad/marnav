@@ -118,5 +118,56 @@ tag_block make_tag_block(const std::string & s)
 {
 	return {s};
 }
+
+/// @cond DEV
+namespace
+{
+static std::string & extend(std::string & s, const std::string & t)
+{
+	if (s.size() > 0u)
+		s += ',';
+	s += t;
+	return s;
+}
+}
+/// @endcond
+
+/// Returns a string representing the group as string, usable directly
+/// within the tag block.
+std::string to_string(const tag_block::sentence_group & g)
+{
+	if (!g.is_valid())
+		return {};
+
+	return std::string{"g:"} + std::to_string(g.number) + "-" + std::to_string(g.total_number)
+		+ "-" + std::to_string(g.id);
+}
+
+/// Returns a string representing the tag block. The string does not
+/// contain the start and end tokens.
+///
+/// @param[in] b The tag block to render as string.
+/// @return The tag block as string. If the tag block contained no
+///   data, the string will be empty.
+std::string to_string(const tag_block & b)
+{
+	std::string result;
+
+	extend(result, to_string(b.get_group()));
+	if (b.is_line_count_valid())
+		extend(result,  "n:" + std::to_string(b.get_line_count()));
+	if (b.is_relative_time_valid())
+		extend(result,  "r:" + std::to_string(b.get_relative_time()));
+	if (b.is_unix_time_valid())
+		extend(result,  "c:" + std::to_string(b.get_unix_time()));
+	if (b.is_destination_valid())
+		extend(result,  "d:" + b.get_destination());
+	if (b.is_source_valid())
+		extend(result,  "s:" + b.get_source());
+	if (b.is_text_valid())
+		extend(result,  "t:" + b.get_text());
+
+	return result;
+}
 }
 }

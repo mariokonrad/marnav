@@ -130,6 +130,9 @@ Vendor Extensions:
 - PGRMM: Garmin Map Datum
 - PGRMZ: Garmin Altitude Information
 
+Miscellaneous:
+- Tag Block Support (generic for all sentences)
+
 \subsection subsec_features_ais AIS
 
 Supported messages for AIS (decode and encode):

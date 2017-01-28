@@ -127,6 +127,9 @@ Vendor Extensions:
 - PGRMM: Garmin Map Datum
 - PGRMZ: Garmin Altitude Information
 
+Miscellaneous:
+- Tag Block Support (generic for all sentences)
+
 
 ### AIS
 

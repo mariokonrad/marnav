@@ -6,7 +6,6 @@ TODO
 @todo Implement NMEA sentence: ASD: Autopilot System Data
 @todo Implement NMEA sentence: DSI: DSC Transponder Initiate
 @todo Implement NMEA sentence: DSR: DSC Transponder Response
-@todo Consider implementing NMEA Tag Blocks
 
 @todo Implement AIS message: Type 12: Addressed Safety-Related Message
 @todo Implement AIS message: Type 13: Safety-Related Acknowledgement

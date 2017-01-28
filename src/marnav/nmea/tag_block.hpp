@@ -9,12 +9,24 @@ namespace nmea
 {
 /// This structure holds all possible data, specified by a tag block,
 /// preceeding a NMEA sentence.
-struct tag_block {
+class tag_block
+{
 public:
 	struct sentence_group {
 		int number = 0;
 		int total_number = 0;
 		int id = 0;
+
+		sentence_group() {}
+
+		constexpr sentence_group(int n, int t, int i) noexcept
+			: number(n)
+			, total_number(t)
+			, id(i)
+		{
+		}
+
+		bool is_valid() const { return (number > 0) && (total_number > 0) && (id > 0); }
 	};
 
 public:
@@ -28,6 +40,14 @@ public:
 	tag_block & operator=(tag_block &&) = default;
 
 public:
+	bool is_unix_time_valid() const { return unix_time > 0; }
+	bool is_line_count_valid() const { return line_count > 0; }
+	bool is_relative_time_valid() const { return relative_time > 0; }
+	bool is_destination_valid() const { return !destination.empty(); }
+	bool is_source_valid() const { return !source.empty(); }
+	bool is_text_valid() const { return !text.empty(); }
+	bool is_group_valid() const { return group.is_valid(); }
+
 	int64_t get_unix_time() const { return unix_time; }
 	int get_line_count() const { return line_count; }
 	int get_relative_time() const { return relative_time; }
@@ -67,6 +87,8 @@ private:
 };
 
 tag_block make_tag_block(const std::string & s);
+std::string to_string(const tag_block::sentence_group & g);
+std::string to_string(const tag_block & b);
 }
 }
 

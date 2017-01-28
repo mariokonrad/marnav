@@ -64,7 +64,9 @@ public:
 	/// Sets the tag block. This overwrites a possibly existent block.
 	void set_tag_block(const std::string & t) { tag_block_ = t; }
 
-	const std::string & get_tag_block() { return tag_block_; }
+	/// Returns the raw tag block string. Since tag blocks are not common
+	/// at the moment, its handling is separated, @see tag_block.
+	const std::string & get_tag_block() const { return tag_block_; }
 
 	friend std::string to_string(const sentence &);
 
