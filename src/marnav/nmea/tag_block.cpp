@@ -12,11 +12,11 @@ namespace nmea
 /// @cond DEV
 namespace
 {
-static tag_block_entry::sentence_group extract_group(const std::string & s)
+static tag_block::sentence_group extract_group(const std::string & s)
 {
 	static constexpr char DELIMITER = '-';
 
-	tag_block_entry::sentence_group group;
+	tag_block::sentence_group group;
 
 	std::string::size_type first = 2;
 	std::string::size_type last = 0;
@@ -49,16 +49,16 @@ static int extract_int(const std::string & s)
 }
 /// @endcond
 
-static_assert(std::is_default_constructible<tag_block_entry>::value, "");
+static_assert(std::is_default_constructible<tag_block>::value, "");
 
-tag_block_entry::tag_block_entry(const std::string & s)
+tag_block::tag_block(const std::string & s)
 {
 	if (s.empty())
-		throw std::invalid_argument{"invalid argument in nmea/tag_block_entry"};
+		throw std::invalid_argument{"invalid argument in nmea/tag_block"};
 
 	const auto fields = detail::parse_fields(s, 0u);
 	if (fields.size() < 1u)
-		throw std::invalid_argument{"malformed tag block in nmea/tag_block_entry"};
+		throw std::invalid_argument{"malformed tag block in nmea/tag_block"};
 
 	detail::ensure_checksum(s, fields.back(), 0u);
 
@@ -93,28 +93,28 @@ tag_block_entry::tag_block_entry(const std::string & s)
 				text = extract_string(t);
 				break;
 			default:
-				throw std::invalid_argument{"invalid field in nmea/tag_block_entry"};
+				throw std::invalid_argument{"invalid field in nmea/tag_block"};
 		}
 	}
 }
 
-void tag_block_entry::set_destination(const std::string & t)
+void tag_block::set_destination(const std::string & t)
 {
 	destination = (t.size() <= 15u) ? t : t.substr(0, 15);
 }
 
-void tag_block_entry::set_source(const std::string & t)
+void tag_block::set_source(const std::string & t)
 {
 	source = (t.size() <= 15u) ? t : t.substr(0, 15);
 }
 
-void tag_block_entry::set_text(const std::string & t)
+void tag_block::set_text(const std::string & t)
 {
 	text = (t.size() <= 15u) ? t : t.substr(0, 15);
 }
 
 /// Parses the specified string and returns the tag block from it.
-tag_block_entry make_tag_block(const std::string & s)
+tag_block make_tag_block(const std::string & s)
 {
 	return {s};
 }

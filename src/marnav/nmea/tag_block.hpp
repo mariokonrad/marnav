@@ -9,7 +9,7 @@ namespace nmea
 {
 /// This structure holds all possible data, specified by a tag block,
 /// preceeding a NMEA sentence.
-struct tag_block_entry {
+struct tag_block {
 public:
 	struct sentence_group {
 		int number = 0;
@@ -18,14 +18,14 @@ public:
 	};
 
 public:
-	tag_block_entry() = default;
-	tag_block_entry(const std::string & s);
+	tag_block() = default;
+	tag_block(const std::string & s);
 
-	tag_block_entry(const tag_block_entry &) = default;
-	tag_block_entry & operator=(const tag_block_entry &) = default;
+	tag_block(const tag_block &) = default;
+	tag_block & operator=(const tag_block &) = default;
 
-	tag_block_entry(tag_block_entry &&) = default;
-	tag_block_entry & operator=(tag_block_entry &&) = default;
+	tag_block(tag_block &&) = default;
+	tag_block & operator=(tag_block &&) = default;
 
 public:
 	int64_t get_unix_time() const { return unix_time; }
@@ -66,7 +66,7 @@ private:
 	std::string text;
 };
 
-tag_block_entry make_tag_block(const std::string & s);
+tag_block make_tag_block(const std::string & s);
 }
 }
 

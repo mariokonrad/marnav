@@ -11,7 +11,7 @@ class Test_nmea_tag_block : public ::testing::Test
 
 TEST_F(Test_nmea_tag_block, default_construction)
 {
-	nmea::tag_block_entry b;
+	nmea::tag_block b;
 
 	EXPECT_EQ(0u, b.get_unix_time());
 	EXPECT_EQ(0u, b.get_line_count());
