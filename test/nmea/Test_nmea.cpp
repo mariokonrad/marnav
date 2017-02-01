@@ -152,5 +152,7 @@ TEST_F(Test_nmea, make_sentence_tag_block)
 	const auto s = nmea::make_sentence(t);
 
 	EXPECT_TRUE(s != nullptr);
+	EXPECT_TRUE(!s->get_tag_block().empty());
+	EXPECT_STREQ("g:1-2-73874,n:157036,s:r003669945,c:1241544035*4A", s->get_tag_block().c_str());
 }
 }
