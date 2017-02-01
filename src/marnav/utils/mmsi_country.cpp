@@ -180,6 +180,7 @@ static const std::vector<mmsi_country_info> country_list = {
 	{ 466, "QA", "Qatar" },
 	{ 468, "SY", "Syrian Arab Republic" },
 	{ 470, "AE", "United Arab Emirates" },
+	{ 471, "AE", "United Arab Emirates" },
 	{ 472, "TJ", "Tajikistan" },
 	{ 473, "YE", "Yemen" },
 	{ 475, "YE", "Yemen" },
