@@ -1,5 +1,5 @@
-#ifndef __MARNAV__AIS__DECODE__HPP__
-#define __MARNAV__AIS__DECODE__HPP__
+#ifndef MARNAV__AIS__DECODE__HPP
+#define MARNAV__AIS__DECODE__HPP
 
 #include <vector>
 #include <stdexcept>

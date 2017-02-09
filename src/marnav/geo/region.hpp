@@ -1,5 +1,5 @@
-#ifndef __MARNAV__GEO__REGION__HPP__
-#define __MARNAV__GEO__REGION__HPP__
+#ifndef MARNAV__GEO__REGION__HPP
+#define MARNAV__GEO__REGION__HPP
 
 #include <marnav/geo/position.hpp>
 

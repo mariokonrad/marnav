@@ -1,5 +1,5 @@
-#ifndef __MARNAV__NMEA__TAG_BLOCK__HPP__
-#define __MARNAV__NMEA__TAG_BLOCK__HPP__
+#ifndef MARNAV__NMEA__TAG_BLOCK__HPP
+#define MARNAV__NMEA__TAG_BLOCK__HPP
 
 #include <string>
 

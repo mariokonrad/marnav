@@ -1,5 +1,5 @@
-#ifndef __MARNAV__IO__SELECTABLE__HPP__
-#define __MARNAV__IO__SELECTABLE__HPP__
+#ifndef MARNAV__IO__SELECTABLE__HPP
+#define MARNAV__IO__SELECTABLE__HPP
 
 namespace marnav
 {

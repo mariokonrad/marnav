@@ -1,5 +1,5 @@
-#ifndef __MARNAV__AIS__ANGLE__HPP__
-#define __MARNAV__AIS__ANGLE__HPP__
+#ifndef MARNAV__AIS__ANGLE__HPP
+#define MARNAV__AIS__ANGLE__HPP
 
 #include <marnav/geo/angle.hpp>
 

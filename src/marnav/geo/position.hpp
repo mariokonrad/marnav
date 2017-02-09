@@ -1,5 +1,5 @@
-#ifndef __MARNAV__GEO__POSITION__HPP__
-#define __MARNAV__GEO__POSITION__HPP__
+#ifndef MARNAV__GEO__POSITION__HPP
+#define MARNAV__GEO__POSITION__HPP
 
 #include <marnav/geo/angle.hpp>
 

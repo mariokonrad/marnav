@@ -1,5 +1,5 @@
-#ifndef __MARNAV__NMEA__WAYPOINT__HPP__
-#define __MARNAV__NMEA__WAYPOINT__HPP__
+#ifndef MARNAV__NMEA__WAYPOINT__HPP
+#define MARNAV__NMEA__WAYPOINT__HPP
 
 #include <string>
 

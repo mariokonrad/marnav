@@ -1,5 +1,5 @@
-#ifndef __MARNAV__AIS__MESSAGE_03__HPP__
-#define __MARNAV__AIS__MESSAGE_03__HPP__
+#ifndef MARNAV__AIS__MESSAGE_03__HPP
+#define MARNAV__AIS__MESSAGE_03__HPP
 
 #include <marnav/ais/message_01.hpp>
 

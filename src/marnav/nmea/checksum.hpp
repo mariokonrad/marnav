@@ -1,5 +1,5 @@
-#ifndef __MARNAV__NMEA__CHECKSUM__HPP__
-#define __MARNAV__NMEA__CHECKSUM__HPP__
+#ifndef MARNAV__NMEA__CHECKSUM__HPP
+#define MARNAV__NMEA__CHECKSUM__HPP
 
 #include <string>
 #include <stdexcept>

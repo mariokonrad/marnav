@@ -1,5 +1,5 @@
-#ifndef __MARNAV__UTILS__MMSI__HPP__
-#define __MARNAV__UTILS__MMSI__HPP__
+#ifndef MARNAV__UTILS__MMSI__HPP
+#define MARNAV__UTILS__MMSI__HPP
 
 #include <cstdint>
 

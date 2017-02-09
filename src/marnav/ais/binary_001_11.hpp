@@ -1,5 +1,5 @@
-#ifndef __MARNAV__AIS__BINARY_001_11__HPP__
-#define __MARNAV__AIS__BINARY_001_11__HPP__
+#ifndef MARNAV__AIS__BINARY_001_11__HPP
+#define MARNAV__AIS__BINARY_001_11__HPP
 
 #include <marnav/ais/binary_data.hpp>
 #include <marnav/geo/position.hpp>

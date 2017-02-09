@@ -1,5 +1,5 @@
-#ifndef __MARNAV__NMEA__SENTENCE_ID__HPP__
-#define __MARNAV__NMEA__SENTENCE_ID__HPP__
+#ifndef MARNAV__NMEA__SENTENCE_ID__HPP
+#define MARNAV__NMEA__SENTENCE_ID__HPP
 
 namespace marnav
 {

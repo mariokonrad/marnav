@@ -1,5 +1,5 @@
-#ifndef __MARNAV__NMEA__DETAIL__HPP__
-#define __MARNAV__NMEA__DETAIL__HPP__
+#ifndef MARNAV__NMEA__DETAIL__HPP
+#define MARNAV__NMEA__DETAIL__HPP
 
 #include <string>
 #include <tuple>

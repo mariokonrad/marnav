@@ -1,5 +1,5 @@
-#ifndef __MARNAV__SEATALK__EQUIPMENT__HPP__
-#define __MARNAV__SEATALK__EQUIPMENT__HPP__
+#ifndef MARNAV__SEATALK__EQUIPMENT__HPP
+#define MARNAV__SEATALK__EQUIPMENT__HPP
 
 #include <array>
 

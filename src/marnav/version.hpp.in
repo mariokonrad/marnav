@@ -1,5 +1,5 @@
-#ifndef __MARNAV__VERISION__HPP__
-#define __MARNAV__VERISION__HPP__
+#ifndef MARNAV__VERISION__HPP
+#define MARNAV__VERISION__HPP
 
 namespace marnav
 {

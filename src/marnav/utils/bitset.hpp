@@ -1,5 +1,5 @@
-#ifndef __MARNAV__UTILS__BITSET__HPP__
-#define __MARNAV__UTILS__BITSET__HPP__
+#ifndef MARNAV__UTILS__BITSET__HPP
+#define MARNAV__UTILS__BITSET__HPP
 
 /// Copyright (c) 2016 Mario Konrad <mario.konrad@gmx.net>
 /// The code is licensed under the BSD License (see file LICENSE)

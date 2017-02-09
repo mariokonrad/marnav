@@ -1,5 +1,5 @@
-#ifndef __MARNAV__GEO__GREATCIRCLE__HPP__
-#define __MARNAV__GEO__GREATCIRCLE__HPP__
+#ifndef MARNAV__GEO__GREATCIRCLE__HPP
+#define MARNAV__GEO__GREATCIRCLE__HPP
 
 #include <marnav/geo/position.hpp>
 

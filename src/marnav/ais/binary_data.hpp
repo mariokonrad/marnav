@@ -1,5 +1,5 @@
-#ifndef __MARNAV__AIS__BINARY_DATA__HPP__
-#define __MARNAV__AIS__BINARY_DATA__HPP__
+#ifndef MARNAV__AIS__BINARY_DATA__HPP
+#define MARNAV__AIS__BINARY_DATA__HPP
 
 #include <string>
 #include <marnav/utils/bitset.hpp>

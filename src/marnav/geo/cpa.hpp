@@ -1,5 +1,5 @@
-#ifndef __MARNAV__GEO__CPA__HPP__
-#define __MARNAV__GEO__CPA__HPP__
+#ifndef MARNAV__GEO__CPA__HPP
+#define MARNAV__GEO__CPA__HPP
 
 #include <chrono>
 #include <tuple>

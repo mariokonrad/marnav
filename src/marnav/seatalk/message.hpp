@@ -1,5 +1,5 @@
-#ifndef __MARNAV__SEATALK__MESSAGE__HPP__
-#define __MARNAV__SEATALK__MESSAGE__HPP__
+#ifndef MARNAV__SEATALK__MESSAGE__HPP
+#define MARNAV__SEATALK__MESSAGE__HPP
 
 #include <vector>
 #include <functional>

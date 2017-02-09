@@ -1,5 +1,5 @@
-#ifndef __TEST__TYPE_TRAITS_HELPER__HPP__
-#define __TEST__TYPE_TRAITS_HELPER__HPP__
+#ifndef TEST__TYPE_TRAITS_HELPER__HPP
+#define TEST__TYPE_TRAITS_HELPER__HPP
 
 #include <type_traits>
 #include <gtest/gtest.h>

@@ -1,5 +1,5 @@
-#ifndef __MARNAV__UTILS__MMSI_COUNTRY__HPP__
-#define __MARNAV__UTILS__MMSI_COUNTRY__HPP__
+#ifndef MARNAV__UTILS__MMSI_COUNTRY__HPP
+#define MARNAV__UTILS__MMSI_COUNTRY__HPP
 
 #include <string>
 

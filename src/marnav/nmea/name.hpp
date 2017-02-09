@@ -1,5 +1,5 @@
-#ifndef __MARNAV__NMEA__NAME__HPP__
-#define __MARNAV__NMEA__NAME__HPP__
+#ifndef MARNAV__NMEA__NAME__HPP
+#define MARNAV__NMEA__NAME__HPP
 
 #include <string>
 #include <marnav/nmea/sentence_id.hpp>

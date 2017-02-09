@@ -1,5 +1,5 @@
-#ifndef __MARNAV__AIS__MESSAGE__HPP__
-#define __MARNAV__AIS__MESSAGE__HPP__
+#ifndef MARNAV__AIS__MESSAGE__HPP
+#define MARNAV__AIS__MESSAGE__HPP
 
 #include <memory>
 #include <string>

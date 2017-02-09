@@ -1,5 +1,5 @@
-#ifndef __MARNAV__NMEA__AIS_HELPER__HPP__
-#define __MARNAV__NMEA__AIS_HELPER__HPP__
+#ifndef MARNAV__NMEA__AIS_HELPER__HPP
+#define MARNAV__NMEA__AIS_HELPER__HPP
 
 #include <vector>
 #include <marnav/nmea/vdm.hpp>

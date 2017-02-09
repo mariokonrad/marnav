@@ -1,5 +1,5 @@
-#ifndef __MARNAV__GEO__ANGLE__HPP__
-#define __MARNAV__GEO__ANGLE__HPP__
+#ifndef MARNAV__GEO__ANGLE__HPP
+#define MARNAV__GEO__ANGLE__HPP
 
 #include <cstdint>
 #include <string>
