@@ -10,13 +10,11 @@ namespace marnav
 {
 namespace ais
 {
-MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_23)
-
 /// @brief Group Assignment Command
 ///
 class message_23 : public message
 {
-	MARNAV_AIS_MESSAGE_FRIENDS(message_23)
+	friend class detail::factory;
 
 public:
 	constexpr static const message_id ID = message_id::group_assignment_command;

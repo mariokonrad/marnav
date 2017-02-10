@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(hdm)
-
 /// @brief HDM - Heading - Magnetic
 ///
 /// Vessel heading in degrees with respect to magnetic north produced by any device
@@ -31,7 +29,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(hdm)
 ///
 class hdm : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(hdm)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::HDM;

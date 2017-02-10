@@ -10,8 +10,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(wpl)
-
 /// @brief WPL - Waypoint Location
 ///
 /// @code
@@ -33,7 +31,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(wpl)
 ///
 class wpl : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(wpl)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::WPL;

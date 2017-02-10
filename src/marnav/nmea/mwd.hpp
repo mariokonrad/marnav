@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(mwd)
-
 /// @brief MWD - Wind Direction and Speed
 ///
 /// Wind Direction and Speed, with respect to north.
@@ -36,7 +34,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(mwd)
 ///
 class mwd : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(mwd)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::MWD;

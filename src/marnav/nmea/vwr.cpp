@@ -5,8 +5,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(vwr)
-
 constexpr const char * vwr::TAG;
 
 vwr::vwr()

@@ -327,12 +327,6 @@ private:
 	message_id message_type;
 };
 
-/// Helper function to parse a specific sentence.
-template <class T> std::unique_ptr<message> message_parse(const raw & bits)
-{
-	return std::unique_ptr<T>(new T{bits});
-}
-
 /// @cond DEV
 namespace detail
 {
@@ -346,8 +340,28 @@ template <class T> bool check_cast(const message * s)
 		throw std::bad_cast{};
 	return true;
 }
+
+class factory
+{
+public:
+	template <class T,
+		typename std::enable_if<std::is_base_of<message, T>::value, int>::type = 0>
+	static std::unique_ptr<message> parse(const raw & bits)
+	{
+		return std::unique_ptr<T>(new T{bits});
+	}
+};
 }
 /// @endcond
+
+/// Helper function to parse a specific message, to be used in unit tests.
+///
+/// @todo This breaks encapsulation.
+template <class T, typename std::enable_if<std::is_base_of<message, T>::value, int>::type = 0>
+std::unique_ptr<message> message_parse(const raw & bits)
+{
+	return detail::factory::parse<T>(bits);
+}
 
 /// @{
 
@@ -398,29 +412,6 @@ template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message> && s
 }
 
 /// @}
-
-/// @cond DEV
-
-#define MARNAV_AIS_MESSAGE_FRIENDS(s)                                    \
-	friend std::unique_ptr<message> detail::parse_##s(const raw & bits); \
-	template <class T> friend std::unique_ptr<message> message_parse(const raw & bits);
-
-#define MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(s)          \
-	namespace detail                                      \
-	{                                                     \
-	std::unique_ptr<message> parse_##s(const raw & bits); \
-	}
-
-#define MARNAV_AIS_DEFINE_MESSAGE_PARSE_FUNC(s)          \
-	namespace detail                                     \
-	{                                                    \
-	std::unique_ptr<message> parse_##s(const raw & bits) \
-	{                                                    \
-		return std::unique_ptr<s>(new s{bits});          \
-	}                                                    \
-	}
-
-/// @endcond
 }
 }
 

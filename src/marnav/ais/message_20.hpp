@@ -8,18 +8,16 @@ namespace marnav
 {
 namespace ais
 {
-MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_20)
-
 /// @brief Data Link Management
 class message_20 : public message
 {
-	MARNAV_AIS_MESSAGE_FRIENDS(message_20)
+	friend class detail::factory;
 
 public:
 	struct entry {
-		uint32_t offset    = 0u;
-		uint32_t slots     = 0u;
-		uint32_t timeout   = 0u;
+		uint32_t offset = 0u;
+		uint32_t slots = 0u;
+		uint32_t timeout = 0u;
 		uint32_t increment = 0u;
 
 		constexpr entry(uint32_t o = 0u, uint32_t s = 0u, uint32_t t = 0u, uint32_t i = 0u)

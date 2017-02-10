@@ -9,8 +9,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gsv)
-
 /// @brief GSV - Satellites in view
 ///
 /// These sentences describe the sky position of a UPS satellite in view. Typically they’re
@@ -43,7 +41,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gsv)
 ///       this class will write them in any case.
 class gsv : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(gsv)
+	friend class detail::factory;
 
 public:
 	struct satellite_info {

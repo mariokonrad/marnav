@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vdm)
-
 /// @brief VDM - AIS VHF Data-Link Message
 ///
 /// @code
@@ -30,7 +28,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vdm)
 ///
 class vdm : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(vdm)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::VDM;

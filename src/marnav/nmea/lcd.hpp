@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(lcd)
-
 /// @brief LCD - Loran-C Signal Data
 ///
 /// @code
@@ -36,7 +34,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(lcd)
 ///
 class lcd : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(lcd)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::LCD;

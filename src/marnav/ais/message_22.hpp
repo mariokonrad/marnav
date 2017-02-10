@@ -10,15 +10,13 @@ namespace marnav
 {
 namespace ais
 {
-MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_22)
-
 /// @brief Channel Management
 ///
 /// @todo Refactoring to resolve the different cases (addressed or broadcast)
 ///
 class message_22 : public message
 {
-	MARNAV_AIS_MESSAGE_FRIENDS(message_22)
+	friend class detail::factory;
 
 public:
 	constexpr static const message_id ID = message_id::channel_management;

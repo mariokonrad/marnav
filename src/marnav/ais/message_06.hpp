@@ -8,12 +8,10 @@ namespace marnav
 {
 namespace ais
 {
-MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_06)
-
 /// @brief Binary Addressed Message
 class message_06 : public message
 {
-	MARNAV_AIS_MESSAGE_FRIENDS(message_06)
+	friend class detail::factory;
 
 public:
 	constexpr static const message_id ID = message_id::binary_addressed_message;

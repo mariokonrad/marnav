@@ -11,8 +11,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(tll)
-
 /// @brief TLL - Target latitude and longitude
 ///
 /// @code
@@ -43,7 +41,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(tll)
 ///
 class tll : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(tll)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::TLL;

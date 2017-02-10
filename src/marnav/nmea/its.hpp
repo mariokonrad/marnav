@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(its)
-
 /// @brief ITS - Trawl Door Spread 2 Distance
 ///
 /// @code
@@ -25,7 +23,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(its)
 ///
 class its : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(its)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::ITS;

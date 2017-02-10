@@ -11,8 +11,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(bwc)
-
 /// @brief BWC - Bearing & Distance to Waypoint - Geat Circle
 ///
 /// @code
@@ -56,7 +54,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(bwc)
 ///
 class bwc : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(bwc)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::BWC;

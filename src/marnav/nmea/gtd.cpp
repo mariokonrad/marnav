@@ -5,8 +5,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(gtd)
-
 constexpr const char * gtd::TAG;
 
 gtd::gtd()

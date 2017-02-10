@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace ais
 {
-MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_05)
-
 /// @brief Static and Voyage related Data
 ///
 /// This message handles messages of normal size 424 bits. The (presumably) common
@@ -18,7 +16,7 @@ MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_05)
 ///
 class message_05 : public message
 {
-	MARNAV_AIS_MESSAGE_FRIENDS(message_05)
+	friend class detail::factory;
 
 public:
 	constexpr static const message_id ID = message_id::static_and_voyage_related_data;

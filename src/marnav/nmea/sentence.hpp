@@ -88,39 +88,6 @@ private:
 // of `sentence` itself, e.g. const nmea::sentence = nmea::bod{};
 static_assert(std::is_abstract<sentence>::value, "");
 
-/// Helper function to parse a specific sentence.
-template <class T>
-std::unique_ptr<sentence> sentence_parse(talker talk, const sentence::fields & f)
-{
-	return std::unique_ptr<T>(new T{talk, f.begin(), f.end()});
-}
-
-/// Creates the configured sentence object from the specified string.
-/// If the string is invalid or describes a non-configured sentence,
-/// an exception is thrown.
-///
-/// @note This function always checks the checksum and throws an
-///   exception if not correct.
-///
-/// @tparam T The type of sentence to create. The type must be derived
-///   from class sentence.
-///
-/// @param[in] s The raw NMEA sentence.
-/// @return The initialized sentence derived object.
-///
-template <typename T> T create_sentence(const std::string & s)
-{
-	detail::create_sentence_base_class_check<T>();
-	talker talk{talker_id::none};
-	std::string tag;
-	std::string tag_block;
-	std::vector<std::string> fields;
-	std::tie(talk, tag, tag_block, fields) = detail::extract_sentence_information(s);
-	T result{talk, std::next(std::begin(fields)), std::prev(std::end(fields))};
-	result.set_tag_block(tag_block);
-	return result;
-}
-
 /// Renders the specified sentence into a string.
 ///
 /// If the sentence is invalid, the returning string will be empty.
@@ -139,8 +106,81 @@ template <class T> bool check_cast(const sentence * s)
 		throw std::bad_cast{};
 	return true;
 }
+
+/// This class provides different means to instantiate subclasses of `sentence`.
+///
+/// This is based on the fact, that this class is friend of all subclasses of `sentence`.
+class factory
+{
+public:
+	/// Function to create sentences, used by the NMEA registry of known sentences.
+	template <class T,
+		typename std::enable_if<std::is_base_of<sentence, T>::value, int>::type = 0>
+	static std::unique_ptr<T> parse(talker talk, sentence::fields::const_iterator first,
+		sentence::fields::const_iterator last)
+	{
+		return std::unique_ptr<T>(new T{talk, first, last});
+	}
+
+	/// Helper function to parse a specific sentence.
+	///
+	/// @note Only to be used in unit tests.
+	template <class T,
+		typename std::enable_if<std::is_base_of<sentence, T>::value, int>::type = 0>
+	static std::unique_ptr<T> sentence_parse(talker talk, const sentence::fields & f)
+	{
+		return parse<T>(talk, begin(f), end(f));
+	}
+
+	/// Creates the configured sentence object from the specified string.
+	/// If the string is invalid or describes a non-configured sentence,
+	/// an exception is thrown.
+	///
+	/// @note This function always checks the checksum and throws an
+	///   exception if not correct.
+	///
+	/// @tparam T The type of sentence to create. The type must be derived
+	///   from class sentence.
+	///
+	/// @param[in] s The raw NMEA sentence.
+	/// @return The initialized sentence derived object.
+	///
+	template <typename T,
+		typename std::enable_if<std::is_base_of<sentence, T>::value, int>::type = 0>
+	static T create_sentence(const std::string & s)
+	{
+		talker talk{talker_id::none};
+		std::string tag;
+		std::string tag_block;
+		std::vector<std::string> fields;
+		std::tie(talk, tag, tag_block, fields) = detail::extract_sentence_information(s);
+		T result{talk, std::next(std::begin(fields)), std::prev(std::end(fields))};
+		result.set_tag_block(tag_block);
+		return result;
+	}
+};
 }
 /// @endcond
+
+/// Creates the configured sentence object from the specified string.
+/// If the string is invalid or describes a non-configured sentence,
+/// an exception is thrown.
+///
+/// @note This function always checks the checksum and throws an
+///   exception if not correct.
+///
+/// @tparam T The type of sentence to create. The type must be derived
+///   from class sentence.
+///
+/// @param[in] s The raw NMEA sentence.
+/// @return The initialized sentence derived object.
+///
+template <typename T,
+	typename std::enable_if<std::is_base_of<sentence, T>::value, int>::type = 0>
+T create_sentence(const std::string & s)
+{
+	return detail::factory::create_sentence<T>(s);
+}
 
 /// @{
 
@@ -228,34 +268,6 @@ template <class T> std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence> &&
 }
 
 /// @}
-
-/// @cond DEV
-
-#define MARNAV_NMEA_SENTENCE_FRIENDS(s)                                                       \
-	friend std::unique_ptr<sentence> detail::parse_##s(talker talk,                           \
-		sentence::fields::const_iterator first, sentence::fields::const_iterator last);       \
-	template <class T>                                                                        \
-	friend std::unique_ptr<sentence> sentence_parse(talker talk, const sentence::fields & f); \
-	template <typename T> friend T create_sentence(const std::string &);
-
-#define MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(s)                                           \
-	namespace detail                                                                         \
-	{                                                                                        \
-	std::unique_ptr<sentence> parse_##s(talker talk, sentence::fields::const_iterator first, \
-		sentence::fields::const_iterator last);                                              \
-	}
-
-#define MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(s)                                            \
-	namespace detail                                                                         \
-	{                                                                                        \
-	std::unique_ptr<sentence> parse_##s(talker talk, sentence::fields::const_iterator first, \
-		sentence::fields::const_iterator last)                                               \
-	{                                                                                        \
-		return std::unique_ptr<s>(new s{talk, first, last});                                 \
-	}                                                                                        \
-	}
-
-/// @endcond
 }
 }
 

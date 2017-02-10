@@ -4,8 +4,6 @@ namespace marnav
 {
 namespace ais
 {
-MARNAV_AIS_DEFINE_MESSAGE_PARSE_FUNC(message_07)
-
 message_07::message_07()
 	: message(ID)
 {

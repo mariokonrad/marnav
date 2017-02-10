@@ -10,8 +10,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gll)
-
 /// @brief GLL - Geographic Position - Latitude/Longitude
 ///
 /// @code
@@ -40,7 +38,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gll)
 ///
 class gll : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(gll)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::GLL;

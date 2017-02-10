@@ -39,7 +39,9 @@ TEST_F(Test_nmea_vdo, parse)
 
 TEST_F(Test_nmea_vdo, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vdo>(nmea::talker_id::none, {5, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::vdo>(nmea::talker_id::none, {7, "@"}));
+	EXPECT_ANY_THROW(
+		nmea::detail::factory::sentence_parse<nmea::vdo>(nmea::talker_id::none, {5, "@"}));
+	EXPECT_ANY_THROW(
+		nmea::detail::factory::sentence_parse<nmea::vdo>(nmea::talker_id::none, {7, "@"}));
 }
 }

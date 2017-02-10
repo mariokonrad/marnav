@@ -33,8 +33,10 @@ TEST_F(Test_nmea_wnc, parse)
 
 TEST_F(Test_nmea_wnc, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::wnc>(nmea::talker_id::none, {5, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::wnc>(nmea::talker_id::none, {7, "@"}));
+	EXPECT_ANY_THROW(
+		nmea::detail::factory::sentence_parse<nmea::wnc>(nmea::talker_id::none, {5, "@"}));
+	EXPECT_ANY_THROW(
+		nmea::detail::factory::sentence_parse<nmea::wnc>(nmea::talker_id::none, {7, "@"}));
 }
 
 TEST_F(Test_nmea_wnc, empty_to_string)

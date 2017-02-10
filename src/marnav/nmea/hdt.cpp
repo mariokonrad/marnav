@@ -5,8 +5,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(hdt)
-
 constexpr const char * hdt::TAG;
 
 hdt::hdt()

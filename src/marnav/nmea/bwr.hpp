@@ -11,8 +11,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(bwr)
-
 /// @brief BWR - Bearing & Distance to Waypoint - Rhumb line
 ///
 /// @code
@@ -52,7 +50,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(bwr)
 ///
 class bwr : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(bwr)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::BWR;

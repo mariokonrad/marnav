@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(sfi)
-
 /// @brief SFI - Scanning Frequency Information
 ///
 /// @code
@@ -26,7 +24,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(sfi)
 ///
 class sfi : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(sfi)
+	friend class detail::factory;
 
 public:
 	struct scanning_frequency {

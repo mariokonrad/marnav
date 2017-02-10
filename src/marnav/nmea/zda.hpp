@@ -9,8 +9,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(zda)
-
 /// @brief ZDA - Time & Date - UTC, day, month, year and local time zone
 ///
 /// @code
@@ -31,7 +29,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(zda)
 ///
 class zda : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(zda)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::ZDA;

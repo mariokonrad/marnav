@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vbw)
-
 /// @brief VBW - Dual Ground/Water Speed
 ///
 /// @code
@@ -32,7 +30,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vbw)
 ///
 class vbw : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(vbw)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::VBW;

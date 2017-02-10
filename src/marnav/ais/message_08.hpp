@@ -8,15 +8,13 @@ namespace marnav
 {
 namespace ais
 {
-MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_08)
-
 class binary_001_11; // forward
 class binary_200_10; // forward
 
 /// @brief Binary Broadcast Message
 class message_08 : public message
 {
-	MARNAV_AIS_MESSAGE_FRIENDS(message_08)
+	friend class detail::factory;
 
 public:
 	constexpr static const message_id ID = message_id::binary_broadcast_message;

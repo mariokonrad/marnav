@@ -5,8 +5,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(vtg)
-
 constexpr const char * vtg::TAG;
 
 vtg::vtg()

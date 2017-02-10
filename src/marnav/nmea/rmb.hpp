@@ -10,8 +10,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(rmb)
-
 /// @brief RMB - Recommended Minimum Navigation Information
 ///
 /// To be sent by a navigation receiver when a destination waypoint is active.
@@ -56,7 +54,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(rmb)
 ///
 class rmb : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(rmb)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::RMB;

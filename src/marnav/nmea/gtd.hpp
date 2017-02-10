@@ -9,8 +9,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gtd)
-
 /// @brief GTD - Geographic Location in Time Differences
 ///
 /// @code
@@ -28,7 +26,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gtd)
 ///
 class gtd : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(gtd)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::GTD;

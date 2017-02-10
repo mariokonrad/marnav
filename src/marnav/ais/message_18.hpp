@@ -10,12 +10,10 @@ namespace marnav
 {
 namespace ais
 {
-MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_18)
-
 /// @brief Standard Class B CS Position Report
 class message_18 : public message
 {
-	MARNAV_AIS_MESSAGE_FRIENDS(message_18)
+	friend class detail::factory;
 
 public:
 	constexpr static const message_id ID = message_id::standard_class_b_cs_position_report;

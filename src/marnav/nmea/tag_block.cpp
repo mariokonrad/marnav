@@ -156,17 +156,17 @@ std::string to_string(const tag_block & b)
 
 	extend(result, to_string(b.get_group()));
 	if (b.is_line_count_valid())
-		extend(result,  "n:" + std::to_string(b.get_line_count()));
+		extend(result, "n:" + std::to_string(b.get_line_count()));
 	if (b.is_relative_time_valid())
-		extend(result,  "r:" + std::to_string(b.get_relative_time()));
+		extend(result, "r:" + std::to_string(b.get_relative_time()));
 	if (b.is_unix_time_valid())
-		extend(result,  "c:" + std::to_string(b.get_unix_time()));
+		extend(result, "c:" + std::to_string(b.get_unix_time()));
 	if (b.is_destination_valid())
-		extend(result,  "d:" + b.get_destination());
+		extend(result, "d:" + b.get_destination());
 	if (b.is_source_valid())
-		extend(result,  "s:" + b.get_source());
+		extend(result, "s:" + b.get_source());
 	if (b.is_text_valid())
-		extend(result,  "t:" + b.get_text());
+		extend(result, "t:" + b.get_text());
 
 	if (!result.empty()) {
 		const auto cs = checksum(begin(result), end(result));

@@ -5,8 +5,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(rsa)
-
 constexpr const char * rsa::TAG;
 
 rsa::rsa()

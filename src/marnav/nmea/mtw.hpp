@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(mtw)
-
 /// @brief MTW - Mean Temperature of Water
 ///
 /// @code
@@ -25,7 +23,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(mtw)
 ///
 class mtw : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(mtw)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::MTW;

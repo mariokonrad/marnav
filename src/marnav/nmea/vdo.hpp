@@ -7,8 +7,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vdo)
-
 /// @brief VDO - AIS VHF Data-Link Own-Vessel Report
 ///
 /// This sentence is basically the same as marnav::nmea::vdm, it just indicates the source
@@ -16,7 +14,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vdo)
 ///
 class vdo : public vdm
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(vdo)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::VDO;

@@ -6,8 +6,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(gsv)
-
 namespace
 {
 inline std::string to_string(const utils::optional<gsv::satellite_info> & data)

@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(xdr)
-
 /// @brief XDR - Transducer Measurement
 ///
 /// @code
@@ -29,7 +27,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(xdr)
 ///
 class xdr : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(xdr)
+	friend class detail::factory;
 
 public:
 	struct transducer_info {

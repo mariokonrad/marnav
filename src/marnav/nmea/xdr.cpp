@@ -5,8 +5,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(xdr)
-
 namespace
 {
 inline std::string to_string(const utils::optional<xdr::transducer_info> & data)

@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(tpc)
-
 /// @brief TPC - Trawl Position Cartesian Coordinates
 ///
 /// @code
@@ -33,7 +31,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(tpc)
 ///
 class tpc : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(tpc)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::TPC;

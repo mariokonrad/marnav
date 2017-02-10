@@ -9,8 +9,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(apa)
-
 /// @brief APA - Autopilot Sentence "A"
 ///
 /// This sentence is sent by some GPS receivers to allow them to be used to control
@@ -56,7 +54,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(apa)
 ///
 class apa : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(apa)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::APA;

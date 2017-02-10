@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(dpt)
-
 /// @brief DPT - Depth of Water
 ///
 /// Water depth relative to the transducer and offset of the measuring transducer.
@@ -29,7 +27,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(dpt)
 ///
 class dpt : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(dpt)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::DPT;

@@ -7,8 +7,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(tll)
-
 constexpr const char * tll::TAG;
 
 tll::tll()

@@ -5,8 +5,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(tds)
-
 constexpr const char * tds::TAG;
 
 tds::tds()

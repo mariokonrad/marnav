@@ -10,8 +10,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(dsc)
-
 /// @brief DSC - Digital Selective Calling Information
 ///
 /// @note This class is @b EXPERIMENTAL
@@ -44,7 +42,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(dsc)
 ///
 class dsc : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(dsc)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::DSC;

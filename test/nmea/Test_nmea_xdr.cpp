@@ -33,9 +33,12 @@ TEST_F(Test_nmea_xdr, parse)
 
 TEST_F(Test_nmea_xdr, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::xdr>(nmea::talker_id::none, {0, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::xdr>(nmea::talker_id::none, {41, "@"}));
-	EXPECT_ANY_THROW(nmea::sentence_parse<nmea::xdr>(nmea::talker_id::none, {3, "@"}));
+	EXPECT_ANY_THROW(
+		nmea::detail::factory::sentence_parse<nmea::xdr>(nmea::talker_id::none, {0, "@"}));
+	EXPECT_ANY_THROW(
+		nmea::detail::factory::sentence_parse<nmea::xdr>(nmea::talker_id::none, {41, "@"}));
+	EXPECT_ANY_THROW(
+		nmea::detail::factory::sentence_parse<nmea::xdr>(nmea::talker_id::none, {3, "@"}));
 }
 
 TEST_F(Test_nmea_xdr, empty_to_string)

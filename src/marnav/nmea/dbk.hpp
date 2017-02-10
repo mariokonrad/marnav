@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(dbk)
-
 /// @brief DBK - Depth Below Keel
 ///
 /// @note This sentence appears to be deprected, use @ref marnav::nmea::dpt "DPT" instead.
@@ -33,7 +31,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(dbk)
 ///
 class dbk : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(dbk)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::DBK;

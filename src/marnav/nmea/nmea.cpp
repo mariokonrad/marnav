@@ -97,9 +97,9 @@ namespace nmea
 namespace
 {
 // local macro, used for convenience while registering sentences
-#define REGISTER_SENTENCE(s)             \
-	{                                    \
-		s::TAG, s::ID, detail::parse_##s \
+#define REGISTER_SENTENCE(s)                     \
+	{                                            \
+		s::TAG, s::ID, detail::factory::parse<s> \
 	}
 
 struct entry {
@@ -230,7 +230,8 @@ std::tuple<talker, std::string> parse_address(const std::string & address, bool 
 ///       because it needs access to the class sentence, which the other file
 ///       does not, nor should have.
 ///
-/// @todo Parameters s/start_pos should be replaced with `string_view`, but not available in C++11.
+/// @todo Parameters s/start_pos should be replaced with `string_view`, but not available in
+/// C++11.
 ///
 void ensure_checksum(
 	const std::string & s, const std::string & expected, std::string::size_type start_pos)

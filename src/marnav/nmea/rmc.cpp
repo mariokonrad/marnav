@@ -7,8 +7,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(rmc)
-
 constexpr const char * rmc::TAG;
 
 rmc::rmc()

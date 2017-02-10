@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(alm)
-
 /// @brief ALM - GPS Almanac Data
 ///
 /// This sentence expresses orbital data for a specified GPS satellite.
@@ -44,7 +42,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(alm)
 ///
 class alm : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(alm)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::ALM;

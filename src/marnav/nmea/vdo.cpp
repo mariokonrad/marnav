@@ -4,8 +4,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(vdo)
-
 constexpr const char * vdo::TAG;
 
 vdo::vdo()

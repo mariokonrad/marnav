@@ -10,8 +10,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gga)
-
 /// @brief GGA - Global Positioning System Fix Data
 ///
 /// Time, Position and fix related data for a GPS receiver.
@@ -61,7 +59,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(gga)
 ///
 class gga : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(gga)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::GGA;

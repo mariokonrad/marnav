@@ -6,8 +6,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(dse)
-
 namespace
 {
 static dse::query_flag flag_mapping(typename std::underlying_type<dse::query_flag>::type value)

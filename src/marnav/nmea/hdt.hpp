@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(hdt)
-
 /// @brief HDM - Heading - True
 ///
 /// Actual vessel heading in degrees true produced by any device or system producing true
@@ -28,7 +26,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(hdt)
 ///
 class hdt : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(hdt)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::HDT;

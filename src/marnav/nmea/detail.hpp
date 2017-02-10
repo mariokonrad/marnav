@@ -26,15 +26,6 @@ void check_raw_sentence(const std::string & s);
 
 std::tuple<talker, std::string, std::string, std::vector<std::string>>
 extract_sentence_information(const std::string & s, bool ignore_checksum = false);
-
-/// Exists only to do SFINAE on the template parameter type `T`.
-/// Since it does nothing, the compiler will optimize it out.
-template <typename T,
-	typename std::enable_if<std::is_base_of<sentence, T>::value, int>::type = 0>
-void create_sentence_base_class_check()
-{
-	// intentionally left blank
-}
 }
 /// @endcond
 }

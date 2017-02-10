@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(pgrmz)
-
 /// @brief PGRMZ - Garmin Altitude Information
 ///
 /// @code
@@ -31,7 +29,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(pgrmz)
 ///
 class pgrmz : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(pgrmz)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::PGRMZ;

@@ -154,7 +154,7 @@ TEST_F(Test_nmea_tag_block, write_sentence_with_tag_block)
 
 	nmea::tag_block t;
 	t.set_unix_time(1234);
-	t.set_group({1,2,3});
+	t.set_group({1, 2, 3});
 
 	nmea::bod b;
 	b.set_bearing_true(123.0);

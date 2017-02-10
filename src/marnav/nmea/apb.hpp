@@ -9,8 +9,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(apb)
-
 /// @brief APB - Autopilot Sentence "B"
 ///
 /// This is a fixed form of the APA sentence with some ambiguities removed.
@@ -61,7 +59,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(apb)
 ///
 class apb : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(apb)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::APB;

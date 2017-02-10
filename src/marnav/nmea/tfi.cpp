@@ -5,8 +5,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(tfi)
-
 namespace
 {
 /// Converts data read from the NMEA string to the corresponding

@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vpw)
-
 /// @brief VPW - Speed - Measured Parallel to Wind
 ///
 /// @code
@@ -29,7 +27,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(vpw)
 ///
 class vpw : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(vpw)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::VPW;

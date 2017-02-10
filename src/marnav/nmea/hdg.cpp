@@ -6,8 +6,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DEFINE_SENTENCE_PARSE_FUNC(hdg)
-
 constexpr const char * hdg::TAG;
 
 hdg::hdg()

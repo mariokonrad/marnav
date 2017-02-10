@@ -9,12 +9,10 @@ namespace marnav
 {
 namespace ais
 {
-MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_10)
-
 /// @brief UTC/Date Inquiry
 class message_10 : public message
 {
-	MARNAV_AIS_MESSAGE_FRIENDS(message_10)
+	friend class detail::factory;
 
 public:
 	constexpr static const message_id ID = message_id::utc_and_date_inquiry;

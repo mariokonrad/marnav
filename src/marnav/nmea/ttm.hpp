@@ -8,8 +8,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(ttm)
-
 /// @brief TTM - Tracked Target Message
 ///
 /// @code
@@ -44,7 +42,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(ttm)
 ///
 class ttm : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(ttm)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::TTM;

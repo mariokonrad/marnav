@@ -9,8 +9,6 @@ namespace marnav
 {
 namespace nmea
 {
-MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(rma)
-
 /// @brief RMA - Recommended Minimum Navigation Information
 ///
 /// @code
@@ -40,7 +38,7 @@ MARNAV_NMEA_DECLARE_SENTENCE_PARSE_FUNC(rma)
 ///
 class rma : public sentence
 {
-	MARNAV_NMEA_SENTENCE_FRIENDS(rma)
+	friend class detail::factory;
 
 public:
 	constexpr static const sentence_id ID = sentence_id::RMA;

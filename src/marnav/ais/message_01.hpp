@@ -10,12 +10,10 @@ namespace marnav
 {
 namespace ais
 {
-MARNAV_AIS_DECLARE_MESSAGE_PARSE_FUNC(message_01)
-
 /// @brief Position Report Class A
 class message_01 : public message
 {
-	MARNAV_AIS_MESSAGE_FRIENDS(message_01)
+	friend class detail::factory;
 
 public:
 	constexpr static const message_id ID = message_id::position_report_class_a;
@@ -60,7 +58,10 @@ public:
 	bool get_position_accuracy() const noexcept { return position_accuracy; }
 	utils::optional<double> get_cog() const noexcept;
 	utils::optional<uint32_t> get_hdg() const noexcept;
-	uint32_t get_timestamp() const noexcept { return timestamp; } ///< @todo Handle special values (61..63)
+
+	/// @todo Handle special values (61..63)
+	uint32_t get_timestamp() const noexcept { return timestamp; }
+
 	maneuver_indicator_id get_maneuver_indicator() const noexcept { return maneuver_indicator; }
 	bool get_raim() const noexcept { return raim; }
 	uint32_t get_radio_status() const noexcept { return radio_status; }
