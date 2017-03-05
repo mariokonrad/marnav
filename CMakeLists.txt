@@ -33,8 +33,6 @@ message(STATUS "Project Vesion: ${PROJECT_VERSION}")
 
 ### external projects
 include(ExternalProject)
-include(ExternGmock)
-include(ExternBenchmark)
 
 ### options
 option(ENABLE_PROFILING "Enable Profiling" OFF)
@@ -44,6 +42,9 @@ option(ENABLE_SANITIZER "Enable Sanitizing (address, undefined)" OFF)
 option(ENABLE_AIS "Enable AIS support" ON)
 option(ENABLE_SEATALK "Enable SeaTalk support" ON)
 option(ENABLE_IO "Enable IO support" ON)
+option(ENABLE_EXAMPLES "Enable Examples" ON)
+option(ENABLE_TESTS "Enable Tests" ON)
+option(ENABLE_TOOLS "Enable Tools" ON)
 
 ### common
 message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
@@ -59,7 +60,10 @@ string(TOLOWER "${CMAKE_BUILD_TYPE}" build_type_lower)
 add_subdirectory(src)
 
 ### examples
-add_subdirectory(examples)
+message(STATUS "Build Examples: ${ENABLE_EXAMPLES}")
+if(ENABLE_EXAMPLES)
+	add_subdirectory(examples)
+endif()
 
 ### ctags / cscope
 include(CTags)
@@ -101,17 +105,22 @@ endif()
 enable_testing()
 
 ### unit tests, assumes gtest (because of the program argument)
-add_custom_target(unittest)
-macro(run_unittest unittest_target)
-	add_custom_target(${unittest_target}_runtest
-		COMMAND ${unittest_target} --gtest_shuffle
-		DEPENDS ${unittest_target}
-		WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
-		)
-	add_dependencies(unittest ${unittest_target}_runtest)
-endmacro()
+message(STATUS "Build Tests: ${ENABLE_TESTS}")
+if(ENABLE_TESTS)
+	include(ExternGmock)
+	include(ExternBenchmark)
+	add_custom_target(unittest)
+	macro(run_unittest unittest_target)
+		add_custom_target(${unittest_target}_runtest
+			COMMAND ${unittest_target} --gtest_shuffle
+			DEPENDS ${unittest_target}
+			WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+			)
+		add_dependencies(unittest ${unittest_target}_runtest)
+	endmacro()
 
-add_subdirectory(test)
+	add_subdirectory(test)
+endif()
 
 ### coverage
 if(build_type_lower MATCHES coverage)

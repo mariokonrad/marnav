@@ -397,6 +397,11 @@ Features:
 - `ENABLE_SEATALK` : enables SeaTalk support. Default: `ON`
 - `ENABLE_IO` : enables IO support. Default: `ON`
 
+Components:
+- `ENABLE_EXAMPLES`: enables examples. Default: `ON`
+- `ENABLE_TESTS`: enables unit tests, integration tests and benchmarks. Default: `ON`
+- `ENABLE_TOOLS`: enables tools. Default: `ON`
+
 
 ### Library
 

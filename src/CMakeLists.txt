@@ -583,37 +583,17 @@ install(
 		"${LIB_INSTALL_DIR}/${PROJECT_NAME}/cmake"
 	)
 
-### bin: nmeasum
 
-add_executable(nmeasum
-	nmeasum.cpp
-	)
-
-target_include_directories(nmeasum PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-
-target_compile_options(nmeasum
-	PRIVATE
-		-pipe
-		-ggdb
-		-Wall
-		-Wextra
-		-pedantic-errors
-	)
-
-### bin: nmeadump
-
-if(ENABLE_AIS AND ENABLE_IO)
-	add_executable(nmeadump
-		nmeadump.cpp
+message(STATUS "Build Tools: ${ENABLE_TOOLS}")
+if(ENABLE_TOOLS)
+	### bin: nmeasum
+	add_executable(nmeasum
+		nmeasum.cpp
 		)
 
-	target_include_directories(nmeadump
-		PRIVATE
-			${CMAKE_CURRENT_SOURCE_DIR}
-			${CMAKE_CURRENT_SOURCE_DIR}/../extern
-		)
+	target_include_directories(nmeasum PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-	target_compile_options(nmeadump
+	target_compile_options(nmeasum
 		PRIVATE
 			-pipe
 			-ggdb
@@ -622,8 +602,29 @@ if(ENABLE_AIS AND ENABLE_IO)
 			-pedantic-errors
 		)
 
-	target_link_libraries(nmeadump
-		marnav
-		)
-endif()
+	### bin: nmeadump
+	if(ENABLE_AIS AND ENABLE_IO)
+		add_executable(nmeadump
+			nmeadump.cpp
+			)
 
+		target_include_directories(nmeadump
+			PRIVATE
+				${CMAKE_CURRENT_SOURCE_DIR}
+				${CMAKE_CURRENT_SOURCE_DIR}/../extern
+			)
+
+		target_compile_options(nmeadump
+			PRIVATE
+				-pipe
+				-ggdb
+				-Wall
+				-Wextra
+				-pedantic-errors
+			)
+
+		target_link_libraries(nmeadump
+			marnav
+			)
+	endif()
+endif()
