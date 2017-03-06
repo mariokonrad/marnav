@@ -1,6 +1,10 @@
 TODO
 ====
 
+@todo Improve documentation (especially remove duplication of README.md and doc/main.dox.in)
+@todo Test about having the library as submodule/subtree and CMake build integration
+@todo Investigate library bloat (optional? bitset?)
+
 @todo Consider using std::chrono in nmea/time
 @todo Implement additional checks in NMEA sentences, wheather or not the received data is correct.
 @todo Implement NMEA sentence: ASD: Autopilot System Data
