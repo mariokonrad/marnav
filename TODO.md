@@ -11,7 +11,6 @@ TODO
 @todo Implement NMEA sentence: DSR: DSC Transponder Response
 
 @todo Implement AIS message: Type 13: Safety-Related Acknowledgement
-@todo Implement AIS message: Type 14: Safety-Related Broadcast Message
 @todo Implement AIS message: Type 15: Interrogation
 @todo Implement AIS message: Type 16: Assignment Mode Command
 @todo Implement AIS message: Type 25: Single Slot Binary Message

@@ -14,6 +14,7 @@
 #include <marnav/ais/message_10.hpp>
 #include <marnav/ais/message_11.hpp>
 #include <marnav/ais/message_12.hpp>
+#include <marnav/ais/message_14.hpp>
 #include <marnav/ais/message_17.hpp>
 #include <marnav/ais/message_18.hpp>
 #include <marnav/ais/message_19.hpp>
@@ -103,10 +104,11 @@ static std::function<std::unique_ptr<message>(const raw &)> instantiate_message(
 		REGISTER_MESSAGE(message_07), REGISTER_MESSAGE(message_08),
 		REGISTER_MESSAGE(message_09), REGISTER_MESSAGE(message_10),
 		REGISTER_MESSAGE(message_11), REGISTER_MESSAGE(message_12),
-		REGISTER_MESSAGE(message_17), REGISTER_MESSAGE(message_18),
-		REGISTER_MESSAGE(message_19), REGISTER_MESSAGE(message_20),
-		REGISTER_MESSAGE(message_21), REGISTER_MESSAGE(message_22),
-		REGISTER_MESSAGE(message_23), REGISTER_MESSAGE(message_24),
+		REGISTER_MESSAGE(message_14), REGISTER_MESSAGE(message_17),
+		REGISTER_MESSAGE(message_18), REGISTER_MESSAGE(message_19),
+		REGISTER_MESSAGE(message_20), REGISTER_MESSAGE(message_21),
+		REGISTER_MESSAGE(message_22), REGISTER_MESSAGE(message_23),
+		REGISTER_MESSAGE(message_24),
 	};
 
 #undef REGISTER_MESSAGE
