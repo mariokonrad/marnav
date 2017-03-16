@@ -163,6 +163,19 @@ matrix:
     #      - clang-3.9
     #      - libboost1.55-all-dev
 
+    #- os: linux
+    #  env: COMPILER=clang++-4.0 CMAKE_BUILD_TYPE=Debug
+    #  compiler: clang
+    #  addons:
+    #    apt:
+    #      sources:
+    #      - boost-latest
+    #      - ubuntu-toolchain-r-test
+    #      - llvm-toolchain-precise-4.0
+    #      packages:
+    #      - clang-4.0
+    #      - libboost1.55-all-dev
+
 install:
   # install a recent cmake
   - curl -O https://cmake.org/files/v3.6/cmake-3.6.2-Linux-x86_64.tar.gz
