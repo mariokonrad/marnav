@@ -25,7 +25,7 @@ enum class message_id : uint8_t {
 	utc_and_date_inquiry = 10,
 	utc_and_date_response = 11,
 	addressed_safety_related_message = 12,
-	safety_related_acknowledgement_ = 13,
+	safety_related_acknowledgement = 13,
 	safety_related_broadcast_message = 14,
 	interrogation = 15,
 	assignment_mode_command = 16,

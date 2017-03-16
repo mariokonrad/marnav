@@ -33,7 +33,7 @@ std::string to_name(message_id t)
 			return "UTC and Date Response";
 		case message_id::addressed_safety_related_message:
 			return "Addresed Safety related Message";
-		case message_id::safety_related_acknowledgement_:
+		case message_id::safety_related_acknowledgement:
 			return "Safety related Acknowledgement";
 		case message_id::safety_related_broadcast_message:
 			return "Safety related Broadcast Message";
