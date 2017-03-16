@@ -145,6 +145,7 @@ Supported messages for AIS (decode and encode):
 - Type 09: Standard SAR Aircraft Position Report
 - Type 10: UTC/Date Inquiry
 - Type 11: UTC/Date Response
+- Type 12: Addressed Safety-Related Message
 - Type 17: DGNSS Broadcast Binary Message
 - Type 18: Standard Class B CS Position Report
 - Type 19: Extended Class B CS Position Report

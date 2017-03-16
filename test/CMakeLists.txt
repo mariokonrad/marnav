@@ -25,6 +25,7 @@ if(ENABLE_AIS)
 		ais/Test_ais_message_09.cpp
 		ais/Test_ais_message_10.cpp
 		ais/Test_ais_message_11.cpp
+		ais/Test_ais_message_12.cpp
 		ais/Test_ais_message_17.cpp
 		ais/Test_ais_message_18.cpp
 		ais/Test_ais_message_19.cpp
