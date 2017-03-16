@@ -2,7 +2,6 @@ TODO
 ====
 
 @todo Improve documentation (especially remove duplication of README.md and doc/main.dox.in)
-@todo Test about having the library as submodule/subtree and CMake build integration
 @todo Investigate library bloat (optional? bitset?)
 
 @todo Consider using std::chrono in nmea/time

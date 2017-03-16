@@ -1,0 +1,28 @@
+ExternalProject_Add(extern_marnav
+	PREFIX "${CMAKE_CURRENT_BINARY_DIR}/marnav"
+	SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/extern/marnav"
+	# configure
+	CMAKE_ARGS
+		-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+		-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+		-DCMAKE_INSTALL_PREFIX=${LOCAL_INSTALL_PREFIX}
+		-DCMAKE_BUILD_TYPE=Release
+		-DENABLE_TESTS=NO
+		-DENABLE_TOOLS=NO
+		-DENABLE_EXAMPLES=NO
+	# install
+	INSTALL_DIR ${LOCAL_INSTALL_PREFIX}
+	)
+
+add_library(marnav STATIC IMPORTED)
+
+set_target_properties(marnav
+	PROPERTIES
+		IMPORTED_LOCATION
+			${LOCAL_INSTALL_PREFIX}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}marnav${CMAKE_STATIC_LIBRARY_SUFFIX}
+	)
+
+set(marnav_INCLUDE_DIR "${LOCAL_INSTALL_PREFIX}/include")
+set(marnav_LIBRARIES "marnav")
+
+add_dependencies(marnav extern_marnav)
