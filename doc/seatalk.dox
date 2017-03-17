@@ -1,0 +1,38 @@
+/**
+
+\page features_seatalk SeaTalk (Raymarine device communication)
+
+Suported messages for SeaTalk-1 (decode and encode):
+
+- \link marnav::seatalk::message_00 Type 00 \endlink : depth below transducer
+- \link marnav::seatalk::message_01 Type 01 \endlink : equipment id
+- \link marnav::seatalk::message_05 Type 05 \endlink : Engine RPM and PITCH
+- \link marnav::seatalk::message_10 Type 10 \endlink : apparent wind angle
+- \link marnav::seatalk::message_11 Type 11 \endlink : apparent wind speed
+- \link marnav::seatalk::message_20 Type 20 \endlink : speed through water
+- \link marnav::seatalk::message_21 Type 21 \endlink : trip mileage
+- \link marnav::seatalk::message_22 Type 22 \endlink : total mileage
+- \link marnav::seatalk::message_23 Type 23 \endlink : water temperature 1
+- \link marnav::seatalk::message_24 Type 24 \endlink : Display unit for Mileage and Speed
+- \link marnav::seatalk::message_25 Type 25 \endlink : total and trip log
+- \link marnav::seatalk::message_26 Type 26 \endlink : Speed through Water
+- \link marnav::seatalk::message_27 Type 27 \endlink : water temperature 2
+- \link marnav::seatalk::message_30 Type 30 \endlink : Set Lamp Intensity
+- \link marnav::seatalk::message_36 Type 36 \endlink : Cancel MOB condition
+- \link marnav::seatalk::message_38 Type 38 \endlink : Codelock data (**experimental**)
+- \link marnav::seatalk::message_50 Type 50 \endlink : LAT Postion
+- \link marnav::seatalk::message_51 Type 51 \endlink : LON Postion
+- \link marnav::seatalk::message_52 Type 52 \endlink : Speed over Ground
+- \link marnav::seatalk::message_53 Type 53 \endlink : Magnetic Course in Degrees
+- \link marnav::seatalk::message_54 Type 54 \endlink : GMT Time
+- \link marnav::seatalk::message_56 Type 56 \endlink : Date
+- \link marnav::seatalk::message_58 Type 58 \endlink : LAT/LON
+- \link marnav::seatalk::message_59 Type 59 \endlink : Set Count Down Timer (sent by ST60)
+- \link marnav::seatalk::message_65 Type 65 \endlink : Select Fathom display unit for depth display (see message 00)
+- \link marnav::seatalk::message_66 Type 66 \endlink : Wind Alarm
+- \link marnav::seatalk::message_6C Type 6C \endlink : Second equipment-ID
+- \link marnav::seatalk::message_86 Type 86 \endlink : Keystroke
+- \link marnav::seatalk::message_87 Type 87 \endlink : Response Level
+- \link marnav::seatalk::message_89 Type 89 \endlink : Compass heading (sent by ST40 compass instrument)
+
+*/

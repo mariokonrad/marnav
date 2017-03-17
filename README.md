@@ -140,7 +140,7 @@ Supported messages for AIS (decode and encode):
 - Type 04: Base Station Report
 - Type 05: Static and Voyage Related Data
 - Type 06: Binary Addressed Message
-- Type 06: Binary Acknowledge
+- Type 07: Binary Acknowledge
 - Type 08: Binary Broadcast Message
 - Type 09: Standard SAR Aircraft Position Report
 - Type 10: UTC/Date Inquiry
@@ -346,6 +346,7 @@ Compiler:
 - Clang 3.7
 - Clang 3.8
 - Clang 3.9
+- Clang 4.0
 
 Tools needed to build the library:
 - cmake 3.2 or newer

@@ -1,0 +1,124 @@
+/**
+
+\page technical_overview Technical Overview
+
+\tableofcontents
+
+\subsection subsec_overview_directory Directory Overview
+This section explains the directory structure.
+
+\verbatim
+root
++- bin
++- cmake
++- doc
++- examples
++- extern
++- src
+|  +- marnav
+|     +- ais
+|     +- geo
+|     +- io
+|     +- math
+|     +- nmea
+|     +- seatalk
+|     +- utils
++- test
+\endverbatim
+
+- \c bin      : helper scripts
+- \c cmake    : CMake Modules
+- \c doc      : Documentation
+- \c examples : Examples included in the documentation and build as well.
+                This examples use the library to demonstrate its usage.
+- \c extern   : External projects and resources used by the library.
+- \c test     : All tests
+- \c src      : Complete source of the library, source and header files.
+                Packages are grouped in their own subdirectory, named
+                accordingly (e.g. \c marnav/nmea).
+
+                \b Note: both, private and public headers of the library are
+                located here.
+
+   - \c ais     : all AIS related stuff. Note that despite the AIS builds on
+                  the NMEA protocol (VDM, VDO sentences), the package does not
+                  have any dependencies to the \c nmea package.
+   - \c geo     : collection of geographic and geodesic functions
+   - \c io      : input output stuff, mainly for NMEA and SeaTalk. Please note,
+                  that this package is not mandatory. It is perfectly fine
+                  to use the \c nmea package without \c io.
+   - \c math    : generic math stuff
+   - \c nmea    : everything NMEA-0183 related
+   - \c seatalk : everything SeaTalk related, except IO.
+   - \c utils   : common utils
+
+
+\subsection subsec_overview_package_dependencies Package dependencies
+The directory structure underneath \c src reflects the packages.
+Every package has its own namespace.
+
+\dot
+	digraph G {
+		node [shape=record, fonthame=Helvetica, fontsize=10];
+		ais -> { geo utils };
+		nmea -> { geo utils };
+		seatalk -> { utils };
+		io -> { nmea seatalk utils };
+		geo -> { math };
+	}
+\enddot
+
+Not shown in the picture:
+- The standard library
+- Unittests (using GoogleTest/GoogleMock)
+- Benchmarking (using Google's Benchmark)
+- Examples (some of them use boost.asio or Qt5)
+
+
+\subsection subsec_overview_general General Stuff
+
+The code of the library is quite defensive. This should usually not
+be a problem, because the (usual) environment of a library as this
+is not high performance. Some additional checks will not hurt too much.
+
+
+\subsection subsec_overview_naming Naming Conventions
+
+Everything is in small case (types, classes, structs, member functions,
+member data, etc.) with underscores (snakes).
+
+There are occasional exceptions of constants in all captial letters.
+For the future, this practice is discouraged.
+
+Reason:
+- other libraries do this too (std, boost)
+- I like it this way
+
+
+\subsection subsec_overview_formatting Formatting
+
+Code formatting is done using \c clang-format, using the provided
+configuration file (\c .clang-format)
+
+
+\subsection subsec_overview_header_inclusion Order of Header inclusion
+
+In general the order is from system headers to project headers. The
+more private, the later the inclusion.
+
+For header files:
+- system headers
+- thrid party library headers
+- marnav headers
+
+For translation units:
+- its own header
+- system headers
+- thrid party library headers
+- marnav headers
+
+With the exception of the translation unit's own header file, are all
+header included with full qualified path.
+
+
+*/

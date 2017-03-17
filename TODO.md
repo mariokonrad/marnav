@@ -1,7 +1,6 @@
 TODO
 ====
 
-@todo Improve documentation (especially remove duplication of README.md and doc/main.dox.in)
 @todo Investigate library bloat (optional? bitset?)
 
 @todo Consider using std::chrono in nmea/time

@@ -1,0 +1,35 @@
+/**
+
+\page features_ais AIS
+
+Supported messages for AIS (decode and encode):
+
+- \link marnav::ais::message_01 Type 01 \endlink : Position Report Class A
+- \link marnav::ais::message_02 Type 02 \endlink : Position Report Class A (Assigned Schedule)
+- \link marnav::ais::message_03 Type 03 \endlink : Position Report Class A (Response to Interrogation)
+- \link marnav::ais::message_04 Type 04 \endlink : Base Station Report
+- \link marnav::ais::message_05 Type 05 \endlink : Static and Voyage Related Data
+- \link marnav::ais::message_06 Type 06 \endlink : Binary Addressed Message
+- \link marnav::ais::message_07 Type 07 \endlink : Binary Acknowledge
+- \link marnav::ais::message_08 Type 08 \endlink : Binary Broadcast Message
+- \link marnav::ais::message_09 Type 09 \endlink : Standard SAR Aircraft Position Report
+- \link marnav::ais::message_10 Type 10 \endlink : UTC/Date Inquiry
+- \link marnav::ais::message_11 Type 11 \endlink : UTC/Date Response
+- \link marnav::ais::message_12 Type 12 \endlink : Addressed Safety-Related Message
+- \link marnav::ais::message_13 Type 13 \endlink : Safety-Related Acknowledgement
+- \link marnav::ais::message_14 Type 14 \endlink : Safety-Related Broadcast Message
+- \link marnav::ais::message_17 Type 17 \endlink : DGNSS Broadcast Binary Message
+- \link marnav::ais::message_18 Type 18 \endlink : Standard Class B CS Position Report
+- \link marnav::ais::message_19 Type 19 \endlink : Extended Class B CS Position Report
+- \link marnav::ais::message_20 Type 20 \endlink : Data Link Management
+- \link marnav::ais::message_21 Type 21 \endlink : Aid-to-Navigation Report
+- \link marnav::ais::message_22 Type 22 \endlink : Channel Management
+- \link marnav::ais::message_23 Type 23 \endlink : Group Assignment Command
+- \link marnav::ais::message_24 Type 24 \endlink : Static Data Report (part A and B, norma and auxiliary vessel)
+
+Supported payload of binary message 08:
+
+- \link marnav::ais::binary_001_11 \c 001/11 \endlink : Meteorological and Hydrological Data (IMO236)
+- \link marnav::ais::binary_200_10 \c 200/10 \endlink : Inland ship static and voyage related data (Inland AIS)
+
+*/

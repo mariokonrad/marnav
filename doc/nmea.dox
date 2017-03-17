@@ -1,0 +1,96 @@
+/**
+
+\page features_nmea NMEA-0183
+
+Supported sentences for NMEA-0183 (read and write):
+
+- \link marnav::nmea::aam \c AAM \endlink : Waypoint Arrival Alarm
+- \link marnav::nmea::alm \c ALM \endlink : GPS Almanac Data
+- \link marnav::nmea::apa \c APA \endlink : Autopilot Sentence "A"
+- \link marnav::nmea::apb \c APB \endlink : Autopilot Sentence "B"
+- \link marnav::nmea::bod \c BOD \endlink : Bearing - Waypoint to Waypoint
+- \link marnav::nmea::bwc \c BWC \endlink : Bearing & Distance to Waypoint - Geat Circle
+- \link marnav::nmea::bwr \c BWR \endlink : Bearing and Distance to Waypoint - Rhumb Line
+- \link marnav::nmea::bww \c BWW \endlink : Bearing - Waypoint to Waypoint
+- \link marnav::nmea::dbt \c DBT \endlink : Depth Below Transducer
+- \link marnav::nmea::dpt \c DPT \endlink : Depth of Water
+- \link marnav::nmea::dsc \c DSC \endlink : Digital Selective Calling Information (**experimental**)
+- \link marnav::nmea::dse \c DSE \endlink : Extended DSC (**experimental**)
+- \link marnav::nmea::dtm \c DTM \endlink : Datum Reference
+- \link marnav::nmea::fsi \c FSI \endlink : Frequency Set Information
+- \link marnav::nmea::gbs \c GBS \endlink : GPS Satellite Fault Detection
+- \link marnav::nmea::gga \c GGA \endlink : Global Positioning System Fix Data
+- \link marnav::nmea::glc \c GLC \endlink : Geographic Position, Loran-C
+- \link marnav::nmea::gll \c GLL \endlink : Geographic Position - Latitude/Longitude
+- \link marnav::nmea::gns \c GNS \endlink : Fix data
+- \link marnav::nmea::grs \c GRS \endlink : GPS Range Residuals
+- \link marnav::nmea::gsa \c GSA \endlink : Geographic Position - Latitude/Longitude
+- \link marnav::nmea::gst \c GST \endlink : GPS Pseudorange Noise Statistics
+- \link marnav::nmea::gsv \c GSV \endlink : Satellites in view
+- \link marnav::nmea::gtd \c GTD \endlink : Geographic Location in Time Differences
+- \link marnav::nmea::hdg \c HDG \endlink : Heading - Deviation & Variation
+- \link marnav::nmea::hdt \c HDT \endlink : Heading - True
+- \link marnav::nmea::hfb \c HFB \endlink : Trawl Headrope to Footrope and Bottom
+- \link marnav::nmea::hsc \c HSC \endlink : Heading Steering Command
+- \link marnav::nmea::its \c ITS \endlink : Trawl Door Spread 2 Distance
+- \link marnav::nmea::lcd \c LCD \endlink : Loran-C Signal Data
+- \link marnav::nmea::msk \c MSK \endlink : Control for a Beacon Receiver
+- \link marnav::nmea::mss \c MSS \endlink : Beacon Receiver Status
+- \link marnav::nmea::mtw \c MTW \endlink : Mean Temperature of Water
+- \link marnav::nmea::mwd \c MWD \endlink : Wind Direction and Speed
+- \link marnav::nmea::mwv \c MWV \endlink : Wind Speed and Angle
+- \link marnav::nmea::osd \c OSD \endlink : Own Ship Data
+- \link marnav::nmea::rma \c RMA \endlink : Recommended Minimum Navigation Information
+- \link marnav::nmea::rmb \c RMB \endlink : Recommended Minimum Navigation Information
+- \link marnav::nmea::rmc \c RMC \endlink : Recommended Minimum Navigation Information
+- \link marnav::nmea::rot \c ROT \endlink : Rate Of Turn
+- \link marnav::nmea::rpm \c RPM \endlink : Revolutions
+- \link marnav::nmea::rsa \c RSA \endlink : Rudder Sensor Angle
+- \link marnav::nmea::rsd \c RSD \endlink : RADAR System Data (**experimental**)
+- \link marnav::nmea::rte \c RTE \endlink : Routes
+- \link marnav::nmea::sfi \c SFI \endlink : Scanning Frequency Information
+- \link marnav::nmea::stn \c STN \endlink : Multiple Data ID
+- \link marnav::nmea::tds \c TDS \endlink : Trawl Door Spread Distance
+- \link marnav::nmea::tfi \c TFI \endlink : Trawl Filling Indicator
+- \link marnav::nmea::tll \c TLL \endlink : Target Latitude and Longitude
+- \link marnav::nmea::tpc \c TPC \endlink : Trawl Position Cartesian Coordinates
+- \link marnav::nmea::tpr \c TPR \endlink : Trawl Position Relative Vessel
+- \link marnav::nmea::tpt \c TPT \endlink : Trawl Position True
+- \link marnav::nmea::ttm \c TTM \endlink : Tracked Target Message
+- \link marnav::nmea::vbw \c VBW \endlink : Dual Ground/Water Speed
+- \link marnav::nmea::vdm \c VDM \endlink : AIS VHF Data-Link Message
+- \link marnav::nmea::vdo \c VDO \endlink : AIS VHF Data-Link Own-Vessel Report
+- \link marnav::nmea::vdr \c VDR \endlink : Set and Drift
+- \link marnav::nmea::vhw \c VHW \endlink : Water speed and heading
+- \link marnav::nmea::vlw \c VLW \endlink : Distance Traveled through Water
+- \link marnav::nmea::vtg \c VTG \endlink : Track made good and Ground speed
+- \link marnav::nmea::vwr \c VWR \endlink : Relative Wind Speed and Angle.
+- \link marnav::nmea::vpw \c VPW \endlink : Speed - Measured Parallel to Wind
+- \link marnav::nmea::wcv \c WCV \endlink : Waypoint Closure Velocity
+- \link marnav::nmea::wnc \c WNC \endlink : Distance - Waypoint to Waypoint
+- \link marnav::nmea::wpl \c WPL \endlink : Waypoint Location
+- \link marnav::nmea::xdr \c XDR \endlink : Transducer Measurement
+- \link marnav::nmea::xte \c XTE \endlink : Cross-Track Error, Measured
+- \link marnav::nmea::xtr \c XTR \endlink : Cross Track Error - Dead Reckoning
+- \link marnav::nmea::zda \c ZDA \endlink : Time & Date - UTC, day, month, year and local time zone
+- \link marnav::nmea::zdl \c ZDL \endlink : Time and Distance to Variable Point
+- \link marnav::nmea::zfo \c ZFO \endlink : UTC & Time from origin Waypoint
+- \link marnav::nmea::ztg \c ZTG \endlink : UTC & Time to Destination Waypoint
+
+Obsolete (according to the standard) but implemented:
+
+- \link marnav::nmea::dbk \c DBK \endlink : Depth Below Keel
+- \link marnav::nmea::hdm \c HDM \endlink : Heading - Magnetic (obsolete as of 2009)
+- \link marnav::nmea::r00 \c R00 \endlink : Waypoints in active route
+
+Vendor Extensions:
+
+- \link marnav::nmea::pgrme \c PGRME \endlink : Garmin Estimated Error
+- \link marnav::nmea::pgrmm \c PGRMM \endlink : Garmin Map Datum
+- \link marnav::nmea::pgrmz \c PGRMZ \endlink : Garmin Altitude Information
+
+Miscellaneous:
+
+- Tag Block Support (generic for all sentences)
+
+*/

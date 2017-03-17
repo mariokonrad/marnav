@@ -1,0 +1,132 @@
+/**
+
+\page page_examples Examples
+
+\tableofcontents
+
+\section sec_examples_nmea NMEA-0183
+
+\subsection subsec_examples_nmea_parse Parse a NMEA sentence
+\code{.cpp}
+	auto sentence = nmea::make_sentence(
+		"$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
+	std::cout << sentence->tag() << "\n";
+	auto rmc = nmea::sentence_cast<nmea::rmc>(sentence);
+	std::cout << "latitude : " << nmea::to_string(rmc->get_latitude()) << "\n";
+	std::cout << "longitude: " << nmea::to_string(rmc->get_longitude()) << "\n";
+\endcode
+
+Create a specific sentence directly:
+
+\code{.cpp}
+	using namespace marnav;
+
+	auto rmc = nmea::create_sentence<nmea::rmc>(
+		"$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
+	std::cout << "latitude : " << nmea::to_string(rmc.get_latitude()) << "\n";
+	std::cout << "longitude: " << nmea::to_string(rmc.get_longitude()) << "\n";
+\endcode
+
+
+\subsection subsec_examples_nmea_write Write a NMEA sentence
+\code{.cpp}
+	nmea::mtw mtw;
+	mtw.set_temperature(22.5);
+	std::string data = nmea::to_string(mtw);
+\endcode
+
+\section sec_examples_ais AIS
+
+\subsection subsec_examples_ais_read Process AIS related NMEA messages
+Example 1:
+\code{.cpp}
+	// collect NMEA data of all fragments, from whatever source
+	std::vector<std::unique_ptr<nmea::sentence>> v;
+	v.push_back(nmea::make_sentence("!AIVDM,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5C"));
+
+	// collect payload from all fragments
+	auto payload = nmea::collect_payload(v.begin(), v.end());
+
+	// make AIS message from payload
+	auto msg = ais::make_message(payload);
+
+	// process concrete AIS message
+	auto pos_report = ais::message_cast<ais::message_01>(msg);
+	auto mmsi = pos_report->get_mmsi();
+\endcode
+
+Example 2:
+\code{.cpp}
+	using namespace marnav;
+
+	// received sentences
+	const std::vector<std::string> received_strings
+		= {"!AIVDM,2,1,3,B,55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53,0*3E",
+			"!AIVDM,2,2,3,B,1@0000000000000,2*55"};
+
+	// parse NMEA sentences
+	std::vector<std::unique_ptr<nmea::sentence>> sentences;
+	for (auto const & txt : received_strings) {
+		auto sentence = nmea::make_sentence(txt);
+		if (sentence->id() == nmea::sentence_id::VDM) {
+			sentences.push_back(std::move(sentence));
+		}
+	}
+
+	// parse and and process AIS messags
+	auto payload = nmea::collect_payload(sentences.begin(), sentences.end());
+	auto message = ais::make_message(payload);
+	if (message->type() == ais::message_id::static_and_voyage_related_data) {
+		auto report = ais::message_cast<ais::message_05>(message);
+		std::cout << "shipname: " << report->get_shipname() << "\n";
+		std::cout << "callsign: " << report->get_callsign() << "\n";
+	}
+\endcode
+
+\subsection subsec_examples_ais_create Create NMEA sentences from AIS data
+\includelineno examples/create_nmea_from_ais.cpp
+
+\subsection subsec_examples_ais_create_2 Create NMEA sentences from AIS data using make_vdms
+\includelineno examples/create_nmea_from_ais_2.cpp
+
+\section sec_examples_utils Utils
+
+\subsection subsec_examples_utils_bitset_iterate Iterate through a bitset
+\includelineno examples/bitset_iterate.cpp
+
+\section sec_examples_complete Complete examples
+All those examples are to be found in the directory `examples`.
+
+\subsection subsec_examples_file_parse_nmea Parse NMEA from a string
+\includelineno examples/parse_nmea.cpp
+
+\subsection subsec_examples_file_read_nmea Read NMEA from serial port
+\includelineno examples/read_nmea.cpp
+
+\subsection subsec_examples_file_read_nmea_boostasio Read NMEA from serial port using Boost.ASIO
+\includelineno examples/read_nmea_boostasio.cpp
+
+\subsection subsec_examples_file_read_seatalk Read SeaTalk from serial port
+\includelineno examples/read_seatalk.cpp
+
+\subsection subsec_examples_file_read_ais Read AIS data from string
+\includelineno examples/read_ais.cpp
+
+\subsection subsec_examples_file_nmea_multiplexer Run a NMEA multiplexer
+\includelineno examples/nmea_multiplexer.cpp
+
+\subsection subsec_examples_file_select Using select with marnav::io::device
+\includelineno examples/select.cpp
+
+\subsection subsec_examples_file_seatalk_to_nmea Simple SeaTalk to NMEA converter
+\includelineno examples/simple_seatalk_nmea_converter.cpp
+
+\subsection subsec_examples_file_qt5 Qt5 GUI application reading NMEA
+\includelineno examples/qtnmeadiag/main.cpp
+\includelineno examples/qtnmeadiag/MainWindow.hpp
+\includelineno examples/qtnmeadiag/MainWindow.cpp
+
+\subsection subsec_examples_file_tcp_forward Simple NMEA receiver and forward to a TCP server
+\includelineno examples/serial_to_tcp.cpp
+
+*/
