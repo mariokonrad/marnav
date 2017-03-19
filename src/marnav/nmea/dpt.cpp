@@ -31,9 +31,11 @@ dpt::dpt(talker talk, fields::const_iterator first, fields::const_iterator last)
 		read(*(first + 2), max_depth);
 }
 
-std::vector<std::string> dpt::get_data() const
+void dpt::append_data_to(std::string & s) const
 {
-	return {to_string(depth_meter), to_string(transducer_offset), to_string(max_depth)};
+	append(s, to_string(depth_meter));
+	append(s, to_string(transducer_offset));
+	append(s, to_string(max_depth));
 }
 }
 }

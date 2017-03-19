@@ -43,20 +43,23 @@ void alm::check() const
 		throw std::invalid_argument{"invalid satellite PRN"};
 }
 
-std::vector<std::string> alm::get_data() const
+void alm::append_data_to(std::string & s) const
 {
-	return {to_string(number_of_messages), to_string(message_number), format(satellite_prn, 2),
-		to_string(gps_week_number), format(sv_health, 2),
-		format(eccentricity, 1, data_format::hex),
-		format(almanac_reference_time, 1, data_format::hex),
-		format(inclination_angle, 1, data_format::hex),
-		format(rate_of_right_ascension, 1, data_format::hex),
-		format(root_of_semimajor_axis, 1, data_format::hex),
-		format(argument_of_perigee, 1, data_format::hex),
-		format(longitude_of_ascension_node, 1, data_format::hex),
-		format(mean_anomaly, 1, data_format::hex),
-		format(f0_clock_parameter, 1, data_format::hex),
-		format(f1_clock_parameter, 1, data_format::hex)};
+	append(s, to_string(number_of_messages));
+	append(s, to_string(message_number));
+	append(s, format(satellite_prn, 2));
+	append(s, to_string(gps_week_number));
+	append(s, format(sv_health, 2));
+	append(s, format(eccentricity, 1, data_format::hex));
+	append(s, format(almanac_reference_time, 1, data_format::hex));
+	append(s, format(inclination_angle, 1, data_format::hex));
+	append(s, format(rate_of_right_ascension, 1, data_format::hex));
+	append(s, format(root_of_semimajor_axis, 1, data_format::hex));
+	append(s, format(argument_of_perigee, 1, data_format::hex));
+	append(s, format(longitude_of_ascension_node, 1, data_format::hex));
+	append(s, format(mean_anomaly, 1, data_format::hex));
+	append(s, format(f0_clock_parameter, 1, data_format::hex));
+	append(s, format(f1_clock_parameter, 1, data_format::hex));
 }
 }
 }

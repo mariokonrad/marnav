@@ -66,15 +66,13 @@ utils::optional<xdr::transducer_info> xdr::get_info(int index) const
 	return transducer_data[index];
 }
 
-std::vector<std::string> xdr::get_data() const
+void xdr::append_data_to(std::string & s) const
 {
-	std::vector<std::string> result;
 	for (const auto & data : transducer_data) {
-		auto s = to_string(data);
-		if (!s.empty())
-			result.push_back(s);
+		auto t = to_string(data);
+		if (!t.empty())
+			append(s, t);
 	}
-	return result;
 }
 }
 }

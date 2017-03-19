@@ -52,11 +52,16 @@ void mwd::set_speed_mps(double t) noexcept
 	speed_ms_unit = unit::velocity::mps;
 }
 
-std::vector<std::string> mwd::get_data() const
+void mwd::append_data_to(std::string & s) const
 {
-	return {format(direction_true, 1), to_string(direction_true_ref), format(direction_mag, 1),
-		to_string(direction_mag_ref), format(speed_kn, 1), to_string(speed_kn_unit),
-		format(speed_ms, 1), to_string(speed_ms_unit)};
+	append(s, format(direction_true, 1));
+	append(s, to_string(direction_true_ref));
+	append(s, format(direction_mag, 1));
+	append(s, to_string(direction_mag_ref));
+	append(s, format(speed_kn, 1));
+	append(s, to_string(speed_kn_unit));
+	append(s, format(speed_ms, 1));
+	append(s, to_string(speed_ms_unit));
 }
 }
 }

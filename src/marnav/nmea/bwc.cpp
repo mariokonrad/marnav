@@ -81,12 +81,21 @@ void bwc::set_distance(double t) noexcept
 	distance_unit = unit::distance::nm;
 }
 
-std::vector<std::string> bwc::get_data() const
+void bwc::append_data_to(std::string & s) const
 {
-	return {to_string(time_utc), to_string(lat), to_string(lat_hem), to_string(lon),
-		to_string(lon_hem), to_string(bearing_true), to_string(bearing_true_ref),
-		to_string(bearing_mag), to_string(bearing_mag_ref), to_string(distance),
-		to_string(distance_unit), to_string(waypoint_id), to_string(mode_ind)};
+	append(s, to_string(time_utc));
+	append(s, to_string(lat));
+	append(s, to_string(lat_hem));
+	append(s, to_string(lon));
+	append(s, to_string(lon_hem));
+	append(s, to_string(bearing_true));
+	append(s, to_string(bearing_true_ref));
+	append(s, to_string(bearing_mag));
+	append(s, to_string(bearing_mag_ref));
+	append(s, to_string(distance));
+	append(s, to_string(distance_unit));
+	append(s, to_string(waypoint_id));
+	append(s, to_string(mode_ind));
 }
 }
 }

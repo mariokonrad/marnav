@@ -52,24 +52,21 @@ void glc::set_time_diff(int index, time_difference t)
 	time_diffs[index] = t;
 }
 
-std::vector<std::string> glc::get_data() const
+void glc::append_data_to(std::string & s) const
 {
-	std::vector<std::string> result;
-	result.reserve(13);
-	result.push_back(to_string(gri));
-	result.push_back(to_string(master.diff));
-	result.push_back(to_string(master.status));
+	append(s, to_string(gri));
+	append(s, to_string(master.diff));
+	append(s, to_string(master.status));
 	for (int i = 0; i < max_differences; ++i) {
 		auto const & t = time_diffs[i];
 		if (t) {
-			result.push_back(to_string(t->diff));
-			result.push_back(to_string(t->status));
+			append(s, to_string(t->diff));
+			append(s, to_string(t->status));
 		} else {
-			result.push_back("");
-			result.push_back("");
+			append(s, "");
+			append(s, "");
 		}
 	}
-	return result;
 }
 }
 }

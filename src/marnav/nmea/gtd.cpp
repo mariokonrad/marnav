@@ -42,13 +42,10 @@ void gtd::set_time_diff(int index, double value)
 	time_diffs[index] = value;
 }
 
-std::vector<std::string> gtd::get_data() const
+void gtd::append_data_to(std::string & s) const
 {
-	std::vector<std::string> result;
-	result.reserve(time_diffs.size());
 	for (auto const & t : time_diffs)
-		result.push_back(to_string(t));
-	return result;
+		append(s, to_string(t));
 }
 }
 }

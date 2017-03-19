@@ -57,11 +57,17 @@ void tll::set_lon(const geo::longitude & t)
 	lon_hem = convert_hemisphere(t);
 }
 
-std::vector<std::string> tll::get_data() const
+void tll::append_data_to(std::string & s) const
 {
-	return {format(number, 2), to_string(lat), to_string(lat_hem), to_string(lon),
-		to_string(lon_hem), to_string(name), to_string(time_utc), to_string(status),
-		to_string(reference_target)};
+	append(s, format(number, 2));
+	append(s, to_string(lat));
+	append(s, to_string(lat_hem));
+	append(s, to_string(lon));
+	append(s, to_string(lon_hem));
+	append(s, to_string(name));
+	append(s, to_string(time_utc));
+	append(s, to_string(status));
+	append(s, to_string(reference_target));
 }
 }
 }

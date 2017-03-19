@@ -47,11 +47,17 @@ void osd::set_drift(double t, unit::velocity u) noexcept
 	vessel_drift_unit = u;
 }
 
-std::vector<std::string> osd::get_data() const
+void osd::append_data_to(std::string & s) const
 {
-	return {to_string(heading), to_string(data_valid), to_string(course), to_string(course_ref),
-		to_string(speed), to_string(speed_unit), to_string(vessel_set), to_string(vessel_drift),
-		to_string(vessel_drift_unit)};
+	append(s, to_string(heading));
+	append(s, to_string(data_valid));
+	append(s, to_string(course));
+	append(s, to_string(course_ref));
+	append(s, to_string(speed));
+	append(s, to_string(speed_unit));
+	append(s, to_string(vessel_set));
+	append(s, to_string(vessel_drift));
+	append(s, to_string(vessel_drift_unit));
 }
 }
 }

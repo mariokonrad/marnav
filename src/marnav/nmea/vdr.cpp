@@ -44,10 +44,14 @@ void vdr::set_speed(double t) noexcept
 	speed_unit = unit::velocity::knot;
 }
 
-std::vector<std::string> vdr::get_data() const
+void vdr::append_data_to(std::string & s) const
 {
-	return {to_string(degrees_true), to_string(degrees_true_ref), to_string(degrees_mag),
-		to_string(degrees_mag_ref), to_string(speed), to_string(speed_unit)};
+	append(s, to_string(degrees_true));
+	append(s, to_string(degrees_true_ref));
+	append(s, to_string(degrees_mag));
+	append(s, to_string(degrees_mag_ref));
+	append(s, to_string(speed));
+	append(s, to_string(speed_unit));
 }
 }
 }

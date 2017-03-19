@@ -28,10 +28,16 @@ gbs::gbs(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 7), bias_dev);
 }
 
-std::vector<std::string> gbs::get_data() const
+void gbs::append_data_to(std::string & s) const
 {
-	return {format(time_utc, 2), to_string(err_lat), to_string(err_lon), to_string(err_alt),
-		format(satellite, 3), to_string(probability), to_string(bias), to_string(bias_dev)};
+	append(s, format(time_utc, 2));
+	append(s, to_string(err_lat));
+	append(s, to_string(err_lon));
+	append(s, to_string(err_alt));
+	append(s, format(satellite, 3));
+	append(s, to_string(probability));
+	append(s, to_string(bias));
+	append(s, to_string(bias_dev));
 }
 }
 }

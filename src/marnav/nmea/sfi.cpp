@@ -44,16 +44,14 @@ void sfi::set_frequencies(const std::vector<scanning_frequency> & v)
 	frequencies = v;
 }
 
-std::vector<std::string> sfi::get_data() const
+void sfi::append_data_to(std::string & s) const
 {
-	std::vector<std::string> result{to_string(number_of_messages), to_string(message_number)};
-
+	append(s, to_string(number_of_messages));
+	append(s, to_string(message_number));
 	for (auto const & entry : frequencies) {
-		result.push_back(to_string(entry.frequency));
-		result.push_back(to_string(entry.mode));
+		append(s, to_string(entry.frequency));
+		append(s, to_string(entry.mode));
 	}
-
-	return result;
 }
 }
 }

@@ -52,11 +52,16 @@ void vwr::set_speed_kmh(double t) noexcept
 	speed_kmh_unit = unit::velocity::kmh;
 }
 
-std::vector<std::string> vwr::get_data() const
+void vwr::append_data_to(std::string & s) const
 {
-	return {to_string(angle), to_string(angle_side), to_string(speed_knots),
-		to_string(speed_knots_unit), to_string(speed_mps), to_string(speed_mps_unit),
-		to_string(speed_kmh), to_string(speed_kmh_unit)};
+	append(s, to_string(angle));
+	append(s, to_string(angle_side));
+	append(s, to_string(speed_knots));
+	append(s, to_string(speed_knots_unit));
+	append(s, to_string(speed_mps));
+	append(s, to_string(speed_mps_unit));
+	append(s, to_string(speed_kmh));
+	append(s, to_string(speed_kmh_unit));
 }
 }
 }

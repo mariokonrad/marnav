@@ -242,12 +242,19 @@ geo::region dsc::get_geographical_area() const
 
 /// @todo Implementation
 ///
-std::vector<std::string> dsc::get_data() const
+void dsc::append_data_to(std::string & s) const
 {
-	return {
-		to_string(fmt_spec), format(address, 10), to_string(cat), "", "", "", "", "", "",
-		to_string(ack), to_string(extension),
-	};
+	append(s, to_string(fmt_spec));
+	append(s, format(address, 10));
+	append(s, to_string(cat));
+	append(s, "");
+	append(s, "");
+	append(s, "");
+	append(s, "");
+	append(s, "");
+	append(s, "");
+	append(s, to_string(ack));
+	append(s, to_string(extension));
 }
 }
 }

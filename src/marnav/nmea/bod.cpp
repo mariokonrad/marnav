@@ -38,10 +38,14 @@ void bod::set_bearing_magn(double t) noexcept
 	type_magn = reference::MAGNETIC;
 }
 
-std::vector<std::string> bod::get_data() const
+void bod::append_data_to(std::string & s) const
 {
-	return {to_string(bearing_true), to_string(type_true), to_string(bearing_magn),
-		to_string(type_magn), to_string(waypoint_to), to_string(waypoint_from)};
+	append(s, to_string(bearing_true));
+	append(s, to_string(type_true));
+	append(s, to_string(bearing_magn));
+	append(s, to_string(type_magn));
+	append(s, to_string(waypoint_to));
+	append(s, to_string(waypoint_from));
 }
 }
 }

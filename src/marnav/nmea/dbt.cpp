@@ -44,10 +44,14 @@ void dbt::set_depth_fathom(double t) noexcept
 	depth_fathom_unit = unit::distance::fathom;
 }
 
-std::vector<std::string> dbt::get_data() const
+void dbt::append_data_to(std::string & s) const
 {
-	return {to_string(depth_feet), to_string(depth_feet_unit), to_string(depth_meter),
-		to_string(depth_meter_unit), to_string(depth_fathom), to_string(depth_fathom_unit)};
+	append(s, to_string(depth_feet));
+	append(s, to_string(depth_feet_unit));
+	append(s, to_string(depth_meter));
+	append(s, to_string(depth_meter_unit));
+	append(s, to_string(depth_fathom));
+	append(s, to_string(depth_fathom_unit));
 }
 }
 }

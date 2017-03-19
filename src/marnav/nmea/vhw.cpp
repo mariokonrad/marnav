@@ -47,11 +47,16 @@ void vhw::set_speed_kmh(double t) noexcept
 	speed_kmh_unit = unit::velocity::kmh;
 }
 
-std::vector<std::string> vhw::get_data() const
+void vhw::append_data_to(std::string & s) const
 {
-	return {to_string(heading_empty), to_string(degrees_true), to_string(heading),
-		to_string(degrees_mag), to_string(speed_knots), to_string(speed_knots_unit),
-		to_string(speed_kmh), to_string(speed_kmh_unit)};
+	append(s, to_string(heading_empty));
+	append(s, to_string(degrees_true));
+	append(s, to_string(heading));
+	append(s, to_string(degrees_mag));
+	append(s, to_string(speed_knots));
+	append(s, to_string(speed_knots_unit));
+	append(s, to_string(speed_kmh));
+	append(s, to_string(speed_kmh_unit));
 }
 }
 }

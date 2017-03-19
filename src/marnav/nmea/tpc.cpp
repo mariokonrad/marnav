@@ -26,11 +26,14 @@ tpc::tpc(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 5), depth_unit);
 }
 
-std::vector<std::string> tpc::get_data() const
+void tpc::append_data_to(std::string & s) const
 {
-	return {to_string(distance_centerline), to_string(distance_centerline_unit),
-		to_string(distance_transducer), to_string(distance_transducer_unit), to_string(depth),
-		to_string(depth_unit)};
+	append(s, to_string(distance_centerline));
+	append(s, to_string(distance_centerline_unit));
+	append(s, to_string(distance_transducer));
+	append(s, to_string(distance_transducer_unit));
+	append(s, to_string(depth));
+	append(s, to_string(depth_unit));
 }
 }
 }

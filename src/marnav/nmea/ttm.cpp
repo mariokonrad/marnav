@@ -39,13 +39,21 @@ ttm::ttm(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 12), reference_target);
 }
 
-std::vector<std::string> ttm::get_data() const
+void ttm::append_data_to(std::string & s) const
 {
-	return {format(target_number, 2), to_string(target_distance),
-		to_string(bearing_from_ownship), to_string(bearing_from_ownship_ref),
-		to_string(target_speed), to_string(target_course), to_string(target_course_ref),
-		to_string(distance_cpa), to_string(tcpa), to_string(unknown), to_string(target_name),
-		to_string(target_status), to_string(reference_target)};
+	append(s, format(target_number, 2));
+	append(s, to_string(target_distance));
+	append(s, to_string(bearing_from_ownship));
+	append(s, to_string(bearing_from_ownship_ref));
+	append(s, to_string(target_speed));
+	append(s, to_string(target_course));
+	append(s, to_string(target_course_ref));
+	append(s, to_string(distance_cpa));
+	append(s, to_string(tcpa));
+	append(s, to_string(unknown));
+	append(s, to_string(target_name));
+	append(s, to_string(target_status));
+	append(s, to_string(reference_target));
 }
 }
 }

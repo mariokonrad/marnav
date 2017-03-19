@@ -64,10 +64,13 @@ void rpm::set_source(source_id id, uint32_t num)
 	source_number = num;
 }
 
-std::vector<std::string> rpm::get_data() const
+void rpm::append_data_to(std::string & s) const
 {
-	return {to_string(source), to_string(source_number), format(revolutions, 1),
-		format(propeller_pitch, 1), to_string(data_valid)};
+	append(s, to_string(source));
+	append(s, to_string(source_number));
+	append(s, format(revolutions, 1));
+	append(s, format(propeller_pitch, 1));
+	append(s, to_string(data_valid));
 }
 }
 }

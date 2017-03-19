@@ -58,11 +58,17 @@ void vtg::set_track_true(double t) noexcept
 	type_true = reference::TRUE;
 }
 
-std::vector<std::string> vtg::get_data() const
+void vtg::append_data_to(std::string & s) const
 {
-	return {to_string(track_true), to_string(type_true), to_string(track_magn),
-		to_string(type_magn), to_string(speed_kn), to_string(speed_kn_unit),
-		to_string(speed_kmh), to_string(speed_kmh_unit), to_string(mode_ind)};
+	append(s, to_string(track_true));
+	append(s, to_string(type_true));
+	append(s, to_string(track_magn));
+	append(s, to_string(type_magn));
+	append(s, to_string(speed_kn));
+	append(s, to_string(speed_kn_unit));
+	append(s, to_string(speed_kmh));
+	append(s, to_string(speed_kmh_unit));
+	append(s, to_string(mode_ind));
 }
 }
 }

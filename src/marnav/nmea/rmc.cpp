@@ -72,11 +72,20 @@ void rmc::set_mag(double t, direction h)
 	mag_hem = h;
 }
 
-std::vector<std::string> rmc::get_data() const
+void rmc::append_data_to(std::string & s) const
 {
-	return {to_string(time_utc), to_string(status), to_string(lat), to_string(lat_hem),
-		to_string(lon), to_string(lon_hem), to_string(sog), to_string(heading), to_string(date),
-		to_string(mag), to_string(mag_hem), to_string(mode_ind)};
+	append(s, to_string(time_utc));
+	append(s, to_string(status));
+	append(s, to_string(lat));
+	append(s, to_string(lat_hem));
+	append(s, to_string(lon));
+	append(s, to_string(lon_hem));
+	append(s, to_string(sog));
+	append(s, to_string(heading));
+	append(s, to_string(date));
+	append(s, to_string(mag));
+	append(s, to_string(mag_hem));
+	append(s, to_string(mode_ind));
 }
 }
 }

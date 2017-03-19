@@ -52,10 +52,13 @@ void wpl::set_lon(const geo::longitude & t)
 	lon_hem = convert_hemisphere(t);
 }
 
-std::vector<std::string> wpl::get_data() const
+void wpl::append_data_to(std::string & s) const
 {
-	return {to_string(lat), to_string(lat_hem), to_string(lon), to_string(lon_hem),
-		to_string(waypoint_id)};
+	append(s, to_string(lat));
+	append(s, to_string(lat_hem));
+	append(s, to_string(lon));
+	append(s, to_string(lon_hem));
+	append(s, to_string(waypoint_id));
 }
 }
 }

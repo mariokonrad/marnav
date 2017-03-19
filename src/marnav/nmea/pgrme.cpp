@@ -26,12 +26,14 @@ pgrme::pgrme(talker talk, fields::const_iterator first, fields::const_iterator l
 	read(*(first + 5), overall_spherical_equiv_position_error_unit);
 }
 
-std::vector<std::string> pgrme::get_data() const
+void pgrme::append_data_to(std::string & s) const
 {
-	return {to_string(horizontal_position_error), to_string(horizontal_position_error_unit),
-		to_string(vertical_position_error), to_string(vertical_position_error_unit),
-		to_string(overall_spherical_equiv_position_error),
-		to_string(overall_spherical_equiv_position_error_unit)};
+	append(s, to_string(horizontal_position_error));
+	append(s, to_string(horizontal_position_error_unit));
+	append(s, to_string(vertical_position_error));
+	append(s, to_string(vertical_position_error_unit));
+	append(s, to_string(overall_spherical_equiv_position_error));
+	append(s, to_string(overall_spherical_equiv_position_error_unit));
 }
 }
 }

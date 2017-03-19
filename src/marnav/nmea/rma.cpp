@@ -66,11 +66,19 @@ void rma::set_magnetic_var(double t, direction h)
 	magnetic_var_hem = h;
 }
 
-std::vector<std::string> rma::get_data() const
+void rma::append_data_to(std::string & s) const
 {
-	return {to_string(blink_warning), to_string(lat), to_string(lat_hem), to_string(lon),
-		to_string(lon_hem), to_string(time_diff_a), to_string(time_diff_b), to_string(sog),
-		to_string(track), to_string(magnetic_var), to_string(magnetic_var_hem)};
+	append(s, to_string(blink_warning));
+	append(s, to_string(lat));
+	append(s, to_string(lat_hem));
+	append(s, to_string(lon));
+	append(s, to_string(lon_hem));
+	append(s, to_string(time_diff_a));
+	append(s, to_string(time_diff_b));
+	append(s, to_string(sog));
+	append(s, to_string(track));
+	append(s, to_string(magnetic_var));
+	append(s, to_string(magnetic_var_hem));
 }
 }
 }

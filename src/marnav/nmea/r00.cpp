@@ -25,20 +25,15 @@ r00::r00(talker talk, fields::const_iterator first, fields::const_iterator last)
 	}
 }
 
-std::vector<std::string> r00::get_data() const
+void r00::append_data_to(std::string & s) const
 {
-	std::vector<std::string> result;
-	result.reserve(max_waypoint_ids);
-
 	for (auto i = 0; i < max_waypoint_ids; ++i) {
 		if (waypoint_id[i]) {
-			result.push_back(waypoint_id[i].value());
+			append(s, waypoint_id[i].value());
 		} else {
-			result.push_back("");
+			append(s, "");
 		}
 	}
-
-	return result;
 }
 
 void r00::check_index(int index) const

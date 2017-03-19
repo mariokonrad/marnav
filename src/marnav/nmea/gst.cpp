@@ -28,11 +28,16 @@ gst::gst(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 7), dev_alt);
 }
 
-std::vector<std::string> gst::get_data() const
+void gst::append_data_to(std::string & s) const
 {
-	return {format(time_utc, 2), to_string(total_rms), to_string(dev_semi_major),
-		to_string(dev_semi_minor), to_string(orientation), to_string(dev_lat),
-		to_string(dev_lon), to_string(dev_alt)};
+	append(s, format(time_utc, 2));
+	append(s, to_string(total_rms));
+	append(s, to_string(dev_semi_major));
+	append(s, to_string(dev_semi_minor));
+	append(s, to_string(orientation));
+	append(s, to_string(dev_lat));
+	append(s, to_string(dev_lon));
+	append(s, to_string(dev_alt));
 }
 }
 }

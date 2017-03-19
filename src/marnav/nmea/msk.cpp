@@ -37,10 +37,13 @@ void msk::set_bitrate(uint32_t rate, selection_mode mode) noexcept
 	bitrate_mode = mode;
 }
 
-std::vector<std::string> msk::get_data() const
+void msk::append_data_to(std::string & s) const
 {
-	return {format(frequency, 3), to_string(frequency_mode), format(bitrate, 3),
-		to_string(bitrate_mode), format(frequency_mss_status, 3)};
+	append(s, format(frequency, 3));
+	append(s, to_string(frequency_mode));
+	append(s, format(bitrate, 3));
+	append(s, to_string(bitrate_mode));
+	append(s, format(frequency_mss_status, 3));
 }
 }
 }

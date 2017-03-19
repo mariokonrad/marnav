@@ -39,10 +39,13 @@ void mwv::set_speed(double speed, unit::velocity u) noexcept
 	speed_unit = u;
 }
 
-std::vector<std::string> mwv::get_data() const
+void mwv::append_data_to(std::string & s) const
 {
-	return {to_string(angle), to_string(angle_ref), to_string(speed), to_string(speed_unit),
-		to_string(data_valid)};
+	append(s, to_string(angle));
+	append(s, to_string(angle_ref));
+	append(s, to_string(speed));
+	append(s, to_string(speed_unit));
+	append(s, to_string(data_valid));
 }
 }
 }

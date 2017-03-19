@@ -29,10 +29,14 @@ xte::xte(talker talk, fields::const_iterator first, fields::const_iterator last)
 		read(*(first + 5), mode_ind);
 }
 
-std::vector<std::string> xte::get_data() const
+void xte::append_data_to(std::string & s) const
 {
-	return {to_string(status1), to_string(status2), to_string(cross_track_error_magnitude),
-		to_string(direction_to_steer), to_string(cross_track_unit), to_string(mode_ind)};
+	append(s, to_string(status1));
+	append(s, to_string(status2));
+	append(s, to_string(cross_track_error_magnitude));
+	append(s, to_string(direction_to_steer));
+	append(s, to_string(cross_track_unit));
+	append(s, to_string(mode_ind));
 }
 }
 }

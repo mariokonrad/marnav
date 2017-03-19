@@ -79,13 +79,10 @@ void tfi::set_sensor(int index, state t)
 	sensors[index] = t;
 }
 
-std::vector<std::string> tfi::get_data() const
+void tfi::append_data_to(std::string & s) const
 {
-	std::vector<std::string> result;
-	result.reserve(num_sensors);
 	for (auto const & t : sensors)
-		result.push_back(to_string(t));
-	return result;
+		append(s, to_string(t));
 }
 }
 }

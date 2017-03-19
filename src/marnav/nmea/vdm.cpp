@@ -38,10 +38,14 @@ void vdm::read_fields(fields::const_iterator first)
 	read(*(first + 5), n_fill_bits);
 }
 
-std::vector<std::string> vdm::get_data() const
+void vdm::append_data_to(std::string & s) const
 {
-	return {to_string(n_fragments), to_string(fragment), to_string(seq_msg_id),
-		to_string(radio_channel), to_string(payload), to_string(n_fill_bits)};
+	append(s, to_string(n_fragments));
+	append(s, to_string(fragment));
+	append(s, to_string(seq_msg_id));
+	append(s, to_string(radio_channel));
+	append(s, to_string(payload));
+	append(s, to_string(n_fill_bits));
 }
 }
 }

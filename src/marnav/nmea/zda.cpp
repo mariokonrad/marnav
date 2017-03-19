@@ -26,10 +26,14 @@ zda::zda(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 5), local_zone_minutes);
 }
 
-std::vector<std::string> zda::get_data() const
+void zda::append_data_to(std::string & s) const
 {
-	return {to_string(time_utc), format(day, 2), format(month, 2), format(year, 4),
-		format(local_zone_hours, 2), format(local_zone_minutes, 2)};
+	append(s, to_string(time_utc));
+	append(s, format(day, 2));
+	append(s, format(month, 2));
+	append(s, format(year, 4));
+	append(s, format(local_zone_hours, 2));
+	append(s, format(local_zone_minutes, 2));
 }
 }
 }

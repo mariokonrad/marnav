@@ -40,11 +40,14 @@ void vbw::set_ground_speed(double l, double t, status s) noexcept
 	ground_speed_status = s;
 }
 
-std::vector<std::string> vbw::get_data() const
+void vbw::append_data_to(std::string & s) const
 {
-	return {format(water_speed_longitudinal, 1), format(water_speed_transveral, 1),
-		to_string(water_speed_status), format(ground_speed_longitudinal, 1),
-		format(ground_speed_transveral, 1), to_string(ground_speed_status)};
+	append(s, format(water_speed_longitudinal, 1));
+	append(s, format(water_speed_transveral, 1));
+	append(s, to_string(water_speed_status));
+	append(s, format(ground_speed_longitudinal, 1));
+	append(s, format(ground_speed_transveral, 1));
+	append(s, to_string(ground_speed_status));
 }
 }
 }

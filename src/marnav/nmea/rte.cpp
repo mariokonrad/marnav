@@ -47,18 +47,17 @@ void rte::set_waypoint_id(int index, const waypoint & id)
 	waypoint_id[index] = id;
 }
 
-std::vector<std::string> rte::get_data() const
+void rte::append_data_to(std::string & s) const
 {
-	std::vector<std::string> v{
-		to_string(n_messages), to_string(message_number), to_string(message_mode)};
+	append(s, to_string(n_messages));
+	append(s, to_string(message_number));
+	append(s, to_string(message_mode));
 
 	if (n_messages) {
 		for (uint32_t i = 0; (i < n_messages) && (i < max_waypoints); ++i) {
-			v.push_back(waypoint_id[i].value());
+			append(s, waypoint_id[i].value());
 		}
 	}
-
-	return v;
 }
 }
 }

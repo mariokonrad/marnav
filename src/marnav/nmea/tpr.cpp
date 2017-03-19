@@ -26,10 +26,14 @@ tpr::tpr(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 5), depth_unit);
 }
 
-std::vector<std::string> tpr::get_data() const
+void tpr::append_data_to(std::string & s) const
 {
-	return {to_string(range), to_string(range_unit), to_string(bearing), "P", to_string(depth),
-		to_string(depth_unit)};
+	append(s, to_string(range));
+	append(s, to_string(range_unit));
+	append(s, to_string(bearing));
+	append(s, 'P');
+	append(s, to_string(depth));
+	append(s, to_string(depth_unit));
 }
 }
 }

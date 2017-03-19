@@ -70,10 +70,16 @@ void dtm::set_name(const std::string & t) noexcept
 	}
 }
 
-std::vector<std::string> dtm::get_data() const
+void dtm::append_data_to(std::string & s) const
 {
-	return {to_string(ref), to_string(subcode), format(lat_offset, 4), to_string(lat_hem),
-		format(lon_offset, 4), to_string(lon_hem), format(altitude, 1), to_string(name)};
+	append(s, to_string(ref));
+	append(s, to_string(subcode));
+	append(s, format(lat_offset, 4));
+	append(s, to_string(lat_hem));
+	append(s, format(lon_offset, 4));
+	append(s, to_string(lon_hem));
+	append(s, format(altitude, 1));
+	append(s, to_string(name));
 }
 }
 }

@@ -39,10 +39,13 @@ void fsi::set_sentence_status(char t)
 	sentence_status = t;
 }
 
-std::vector<std::string> fsi::get_data() const
+void fsi::append_data_to(std::string & s) const
 {
-	return {to_string(tx_frequency), to_string(rx_frequency), to_string(communications_mode),
-		to_string(power_level), to_string(sentence_status)};
+	append(s, to_string(tx_frequency));
+	append(s, to_string(rx_frequency));
+	append(s, to_string(communications_mode));
+	append(s, to_string(power_level));
+	append(s, to_string(sentence_status));
 }
 }
 }

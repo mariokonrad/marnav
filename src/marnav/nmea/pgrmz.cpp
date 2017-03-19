@@ -62,9 +62,11 @@ pgrmz::pgrmz(talker talk, fields::const_iterator first, fields::const_iterator l
 	read(*(first + 2), fix, fix_type_mapping);
 }
 
-std::vector<std::string> pgrmz::get_data() const
+void pgrmz::append_data_to(std::string & s) const
 {
-	return {to_string(altitude), to_string(altitude_unit), to_string(fix)};
+	append(s, to_string(altitude));
+	append(s, to_string(altitude_unit));
+	append(s, to_string(fix));
 }
 }
 }

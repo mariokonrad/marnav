@@ -23,9 +23,11 @@ zfo::zfo(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 2), waypoint_id);
 }
 
-std::vector<std::string> zfo::get_data() const
+void zfo::append_data_to(std::string & s) const
 {
-	return {to_string(time_utc), to_string(time_elapsed), to_string(waypoint_id)};
+	append(s, to_string(time_utc));
+	append(s, to_string(time_elapsed));
+	append(s, to_string(waypoint_id));
 }
 }
 }

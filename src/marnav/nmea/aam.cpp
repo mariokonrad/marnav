@@ -57,11 +57,13 @@ void aam::check() const
 	check_value(arrival_circle_radius_unit, {unit::distance::nm}, "arrival_circle_radius_unit");
 }
 
-std::vector<std::string> aam::get_data() const
+void aam::append_data_to(std::string & s) const
 {
-	return {to_string(arrival_circle_entered), to_string(perpendicualar_passed),
-		to_string(arrival_circle_radius), to_string(arrival_circle_radius_unit),
-		to_string(waypoint_id)};
+	append(s, to_string(arrival_circle_entered));
+	append(s, to_string(perpendicualar_passed));
+	append(s, to_string(arrival_circle_radius));
+	append(s, to_string(arrival_circle_radius_unit));
+	append(s, to_string(waypoint_id));
 }
 }
 }

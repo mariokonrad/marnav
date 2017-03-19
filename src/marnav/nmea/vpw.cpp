@@ -36,10 +36,12 @@ void vpw::set_speed_mps(double t) noexcept
 	speed_meters_per_second_unit = unit::velocity::mps;
 }
 
-std::vector<std::string> vpw::get_data() const
+void vpw::append_data_to(std::string & s) const
 {
-	return {to_string(speed_knots), to_string(speed_knots_unit),
-		to_string(speed_meters_per_second), to_string(speed_meters_per_second_unit)};
+	append(s, to_string(speed_knots));
+	append(s, to_string(speed_knots_unit));
+	append(s, to_string(speed_meters_per_second));
+	append(s, to_string(speed_meters_per_second_unit));
 }
 }
 }

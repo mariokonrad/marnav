@@ -28,9 +28,10 @@ void hdt::set_heading(double t) noexcept
 	heading_true = reference::TRUE;
 }
 
-std::vector<std::string> hdt::get_data() const
+void hdt::append_data_to(std::string & s) const
 {
-	return {to_string(heading), to_string(heading_true)};
+	append(s, to_string(heading));
+	append(s, to_string(heading_true));
 }
 }
 }

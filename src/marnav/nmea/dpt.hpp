@@ -42,7 +42,7 @@ public:
 
 protected:
 	dpt(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual std::vector<std::string> get_data() const override;
+	virtual void append_data_to(std::string &) const override;
 
 private:
 	double depth_meter = 0.0;

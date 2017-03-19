@@ -39,6 +39,9 @@ public:
 	/// The end token (right before the checksum) of all NMEA sentences.
 	constexpr static char end_token = '*';
 
+	/// Delimiter of fields.
+	constexpr static char field_delimiter = ',';
+
 	/// The start and end token of a tag block.
 	constexpr static char tag_block_token = '\\';
 
@@ -72,9 +75,13 @@ public:
 
 protected:
 	sentence(sentence_id id, const std::string & tag, talker t);
-	virtual std::vector<std::string> get_data() const = 0;
 	virtual char get_start_token() const { return start_token; }
 	virtual char get_end_token() const { return end_token; }
+
+	virtual void append_data_to(std::string &) const = 0;
+
+	static void append(std::string & s, const std::string & t);
+	static void append(std::string & s, const char t);
 
 private:
 	const sentence_id id_;

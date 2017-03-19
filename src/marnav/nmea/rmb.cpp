@@ -66,12 +66,22 @@ void rmb::set_lon(const geo::longitude & t)
 	lon_hem = convert_hemisphere(t);
 }
 
-std::vector<std::string> rmb::get_data() const
+void rmb::append_data_to(std::string & s) const
 {
-	return {to_string(active), to_string(cross_track_error), to_string(steer_dir),
-		to_string(waypoint_to), to_string(waypoint_from), to_string(lat), to_string(lat_hem),
-		to_string(lon), to_string(lon_hem), to_string(range), to_string(bearing),
-		to_string(dst_velocity), to_string(arrival_status), to_string(mode_ind)};
+	append(s, to_string(active));
+	append(s, to_string(cross_track_error));
+	append(s, to_string(steer_dir));
+	append(s, to_string(waypoint_to));
+	append(s, to_string(waypoint_from));
+	append(s, to_string(lat));
+	append(s, to_string(lat_hem));
+	append(s, to_string(lon));
+	append(s, to_string(lon_hem));
+	append(s, to_string(range));
+	append(s, to_string(bearing));
+	append(s, to_string(dst_velocity));
+	append(s, to_string(arrival_status));
+	append(s, to_string(mode_ind));
 }
 }
 }

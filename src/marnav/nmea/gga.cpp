@@ -62,13 +62,22 @@ void gga::set_lon(const geo::longitude & t)
 	lon_hem = convert_hemisphere(t);
 }
 
-std::vector<std::string> gga::get_data() const
+void gga::append_data_to(std::string & s) const
 {
-	return {to_string(time), to_string(lat), to_string(lat_hem), to_string(lon),
-		to_string(lon_hem), to_string(quality_indicator), to_string(n_satellites),
-		to_string(hor_dilution), to_string(altitude), to_string(altitude_unit),
-		to_string(geodial_separation), to_string(geodial_separation_unit), to_string(dgps_age),
-		to_string(dgps_ref)};
+	append(s, to_string(time));
+	append(s, to_string(lat));
+	append(s, to_string(lat_hem));
+	append(s, to_string(lon));
+	append(s, to_string(lon_hem));
+	append(s, to_string(quality_indicator));
+	append(s, to_string(n_satellites));
+	append(s, to_string(hor_dilution));
+	append(s, to_string(altitude));
+	append(s, to_string(altitude_unit));
+	append(s, to_string(geodial_separation));
+	append(s, to_string(geodial_separation_unit));
+	append(s, to_string(dgps_age));
+	append(s, to_string(dgps_ref));
 }
 }
 }

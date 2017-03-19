@@ -22,9 +22,10 @@ rot::rot(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 1), data_valid);
 }
 
-std::vector<std::string> rot::get_data() const
+void rot::append_data_to(std::string & s) const
 {
-	return {format(deg_per_minute, 1), to_string(data_valid)};
+	append(s, format(deg_per_minute, 1));
+	append(s, to_string(data_valid));
 }
 }
 }

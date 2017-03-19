@@ -66,12 +66,20 @@ void gns::set_mode_indicator(const std::string & t)
 	mode_ind = t;
 }
 
-std::vector<std::string> gns::get_data() const
+void gns::append_data_to(std::string & s) const
 {
-	return {to_string(time_utc), to_string(lat), to_string(lat_hem), to_string(lon),
-		to_string(lon_hem), to_string(mode_ind), to_string(number_of_satellites),
-		to_string(hdrop), to_string(antenna_altitude), to_string(geodial_sepration),
-		to_string(age_of_differential_data), to_string(differential_ref_station_id)};
+	append(s, to_string(time_utc));
+	append(s, to_string(lat));
+	append(s, to_string(lat_hem));
+	append(s, to_string(lon));
+	append(s, to_string(lon_hem));
+	append(s, to_string(mode_ind));
+	append(s, to_string(number_of_satellites));
+	append(s, to_string(hdrop));
+	append(s, to_string(antenna_altitude));
+	append(s, to_string(geodial_sepration));
+	append(s, to_string(age_of_differential_data));
+	append(s, to_string(differential_ref_station_id));
 }
 }
 }

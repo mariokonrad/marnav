@@ -109,10 +109,14 @@ void dse::set_mmsi(const utils::mmsi & t) noexcept
 	address *= 10;
 }
 
-std::vector<std::string> dse::get_data() const
+void dse::append_data_to(std::string & s) const
 {
-	return {to_string(number_of_messages), to_string(sentence_number), to_string(flag),
-		format(address, 10), "", ""};
+	append(s, to_string(number_of_messages));
+	append(s, to_string(sentence_number));
+	append(s, to_string(flag));
+	append(s, format(address, 10));
+	append(s, "");
+	append(s, "");
 }
 }
 }

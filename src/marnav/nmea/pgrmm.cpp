@@ -21,9 +21,9 @@ pgrmm::pgrmm(talker talk, fields::const_iterator first, fields::const_iterator l
 	read(*(first + 0), map_datum);
 }
 
-std::vector<std::string> pgrmm::get_data() const
+void pgrmm::append_data_to(std::string & s) const
 {
-	return {to_string(map_datum)};
+	append(s, to_string(map_datum));
 }
 
 void pgrmm::set_map_datum(const std::string & t) noexcept

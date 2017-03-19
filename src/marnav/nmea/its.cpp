@@ -22,9 +22,10 @@ its::its(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 1), distance_unit);
 }
 
-std::vector<std::string> its::get_data() const
+void its::append_data_to(std::string & s) const
 {
-	return {to_string(distance), to_string(distance_unit)};
+	append(s, to_string(distance));
+	append(s, to_string(distance_unit));
 }
 }
 }

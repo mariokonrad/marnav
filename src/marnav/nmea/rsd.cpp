@@ -40,18 +40,15 @@ void rsd::set_range(double scale, char unit) noexcept
 	range_unit = unit;
 }
 
-std::vector<std::string> rsd::get_data() const
+void rsd::append_data_to(std::string & s) const
 {
-	std::vector<std::string> result;
-	result.reserve(13);
 	for (auto const & t : unknowns)
-		result.push_back(to_string(t));
-	result.push_back(to_string(cursor_range));
-	result.push_back(to_string(cursor_bearing));
-	result.push_back(to_string(range_scale));
-	result.push_back(to_string(range_unit));
-	result.push_back(to_string(unknown));
-	return result;
+		append(s, to_string(t));
+	append(s, to_string(cursor_range));
+	append(s, to_string(cursor_bearing));
+	append(s, to_string(range_scale));
+	append(s, to_string(range_unit));
+	append(s, to_string(unknown));
 }
 }
 }

@@ -55,14 +55,25 @@ utils::optional<uint32_t> gsa::get_satellite_id(int index) const
 	return satellite_id[index];
 }
 
-std::vector<std::string> gsa::get_data() const
+void gsa::append_data_to(std::string & s) const
 {
-	return {to_string(sel_mode), to_string(mode), format(satellite_id[0], 2),
-		format(satellite_id[1], 2), format(satellite_id[2], 2), format(satellite_id[3], 2),
-		format(satellite_id[4], 2), format(satellite_id[5], 2), format(satellite_id[6], 2),
-		format(satellite_id[7], 2), format(satellite_id[8], 2), format(satellite_id[9], 2),
-		format(satellite_id[10], 2), format(satellite_id[11], 2), to_string(pdop),
-		to_string(hdop), to_string(vdop)};
+	append(s, to_string(sel_mode));
+	append(s, to_string(mode));
+	append(s, format(satellite_id[0], 2));
+	append(s, format(satellite_id[1], 2));
+	append(s, format(satellite_id[2], 2));
+	append(s, format(satellite_id[3], 2));
+	append(s, format(satellite_id[4], 2));
+	append(s, format(satellite_id[5], 2));
+	append(s, format(satellite_id[6], 2));
+	append(s, format(satellite_id[7], 2));
+	append(s, format(satellite_id[8], 2));
+	append(s, format(satellite_id[9], 2));
+	append(s, format(satellite_id[10], 2));
+	append(s, format(satellite_id[11], 2));
+	append(s, to_string(pdop));
+	append(s, to_string(hdop));
+	append(s, to_string(vdop));
 }
 }
 }

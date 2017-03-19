@@ -38,10 +38,14 @@ void wnc::set_distance_km(double t) noexcept
 	distance_km_unit = unit::distance::km;
 }
 
-std::vector<std::string> wnc::get_data() const
+void wnc::append_data_to(std::string & s) const
 {
-	return {to_string(distance_nm), to_string(distance_nm_unit), to_string(distance_km),
-		to_string(distance_km_unit), to_string(waypoint_to), to_string(waypoint_from)};
+	append(s, to_string(distance_nm));
+	append(s, to_string(distance_nm_unit));
+	append(s, to_string(distance_km));
+	append(s, to_string(distance_km_unit));
+	append(s, to_string(waypoint_to));
+	append(s, to_string(waypoint_from));
 }
 }
 }

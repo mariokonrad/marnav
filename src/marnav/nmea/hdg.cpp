@@ -40,10 +40,13 @@ void hdg::set_magn_var(double deg, direction hem)
 	magn_var_hem = hem;
 }
 
-std::vector<std::string> hdg::get_data() const
+void hdg::append_data_to(std::string & s) const
 {
-	return {to_string(heading), to_string(magn_dev), to_string(magn_dev_hem),
-		to_string(magn_var), to_string(magn_var_hem)};
+	append(s, to_string(heading));
+	append(s, to_string(magn_dev));
+	append(s, to_string(magn_dev_hem));
+	append(s, to_string(magn_var));
+	append(s, to_string(magn_var_hem));
 }
 }
 }

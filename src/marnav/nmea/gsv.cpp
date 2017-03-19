@@ -88,10 +88,15 @@ utils::optional<gsv::satellite_info> gsv::get_sat(int index) const
 	return sat[index];
 }
 
-std::vector<std::string> gsv::get_data() const
+void gsv::append_data_to(std::string & s) const
 {
-	return {to_string(n_messages), to_string(message_number), to_string(n_satellites_in_view),
-		to_string(sat[0]), to_string(sat[1]), to_string(sat[2]), to_string(sat[3])};
+	append(s, to_string(n_messages));
+	append(s, to_string(message_number));
+	append(s, to_string(n_satellites_in_view));
+	append(s, to_string(sat[0]));
+	append(s, to_string(sat[1]));
+	append(s, to_string(sat[2]));
+	append(s, to_string(sat[3]));
 }
 }
 }

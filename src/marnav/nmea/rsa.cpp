@@ -36,10 +36,12 @@ void rsa::set_rudder2(double t) noexcept
 	rudder2_valid = status::ok;
 }
 
-std::vector<std::string> rsa::get_data() const
+void rsa::append_data_to(std::string & s) const
 {
-	return {format(rudder1, 1), to_string(rudder1_valid), format(rudder2, 1),
-		to_string(rudder2_valid)};
+	append(s, format(rudder1, 1));
+	append(s, to_string(rudder1_valid));
+	append(s, format(rudder2, 1));
+	append(s, to_string(rudder2_valid));
 }
 }
 }

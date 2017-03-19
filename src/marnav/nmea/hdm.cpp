@@ -28,9 +28,10 @@ void hdm::set_heading(double t) noexcept
 	heading_mag = reference::MAGNETIC;
 }
 
-std::vector<std::string> hdm::get_data() const
+void hdm::append_data_to(std::string & s) const
 {
-	return {to_string(heading), to_string(heading_mag)};
+	append(s, to_string(heading));
+	append(s, to_string(heading_mag));
 }
 }
 }

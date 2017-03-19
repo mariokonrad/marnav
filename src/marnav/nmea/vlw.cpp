@@ -36,10 +36,12 @@ void vlw::set_distance_reset_nm(double t) noexcept
 	distance_reset_unit = unit::distance::nm;
 }
 
-std::vector<std::string> vlw::get_data() const
+void vlw::append_data_to(std::string & s) const
 {
-	return {to_string(distance_cum), to_string(distance_cum_unit), to_string(distance_reset),
-		to_string(distance_reset_unit)};
+	append(s, to_string(distance_cum));
+	append(s, to_string(distance_cum_unit));
+	append(s, to_string(distance_reset));
+	append(s, to_string(distance_reset_unit));
 }
 }
 }

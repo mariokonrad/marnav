@@ -25,10 +25,13 @@ mss::mss(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 4), unknown);
 }
 
-std::vector<std::string> mss::get_data() const
+void mss::append_data_to(std::string & s) const
 {
-	return {format(signal_strength, 2), format(signal_to_noise_ratio, 2),
-		format(beacon_frequency, 3), format(beacon_datarate, 3), to_string(unknown)};
+	append(s, format(signal_strength, 2));
+	append(s, format(signal_to_noise_ratio, 2));
+	append(s, format(beacon_frequency, 3));
+	append(s, format(beacon_datarate, 3));
+	append(s, to_string(unknown));
 }
 }
 }

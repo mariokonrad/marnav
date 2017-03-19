@@ -29,9 +29,11 @@ void wcv::set_speed(double t) noexcept
 	speed_unit = unit::velocity::knot;
 }
 
-std::vector<std::string> wcv::get_data() const
+void wcv::append_data_to(std::string & s) const
 {
-	return {format(speed, 1), to_string(speed_unit), to_string(waypoint_id)};
+	append(s, format(speed, 1));
+	append(s, to_string(speed_unit));
+	append(s, to_string(waypoint_id));
 }
 }
 }

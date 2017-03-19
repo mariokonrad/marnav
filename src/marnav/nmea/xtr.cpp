@@ -23,10 +23,11 @@ xtr::xtr(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 2), cross_track_unit);
 }
 
-std::vector<std::string> xtr::get_data() const
+void xtr::append_data_to(std::string & s) const
 {
-	return {to_string(cross_track_error_magnitude), to_string(direction_to_steer),
-		to_string(cross_track_unit)};
+	append(s, to_string(cross_track_error_magnitude));
+	append(s, to_string(direction_to_steer));
+	append(s, to_string(cross_track_unit));
 }
 }
 }

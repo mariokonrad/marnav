@@ -43,7 +43,7 @@ public:
 
 protected:
 	fsi(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual std::vector<std::string> get_data() const override;
+	virtual void append_data_to(std::string &) const override;
 
 private:
 	utils::optional<uint32_t> tx_frequency;

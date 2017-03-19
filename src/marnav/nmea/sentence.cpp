@@ -36,14 +36,23 @@ std::string to_string(const sentence & s)
 	result += s.get_start_token();
 	result += s.get_talker().str();
 	result += s.tag();
-	for (auto const & data : s.get_data()) {
-		result += ",";
-		result += data;
-	}
+	s.append_data_to(result);
 	result += s.get_end_token();
 	result += checksum_to_string(
 		checksum(std::next(std::begin(result)), std::prev(std::end(result))));
 	return result;
+}
+
+void sentence::append(std::string & s, const std::string & t)
+{
+	s += field_delimiter;
+	s += t;
+}
+
+void sentence::append(std::string & s, const char t)
+{
+	s += field_delimiter;
+	s += t;
 }
 }
 }

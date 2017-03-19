@@ -57,13 +57,18 @@ void apa::check() const
 		"bearing_origin_to_destination_ref");
 }
 
-std::vector<std::string> apa::get_data() const
+void apa::append_data_to(std::string & s) const
 {
-	return {to_string(loran_c_blink_warning), to_string(loran_c_cycle_lock_warning),
-		format(cross_track_error_magnitude, 2), to_string(direction_to_steer),
-		to_string(cross_track_unit), to_string(status_arrival),
-		to_string(status_perpendicular_passing), format(bearing_origin_to_destination, 1),
-		to_string(bearing_origin_to_destination_ref), to_string(waypoint_id)};
+	append(s, to_string(loran_c_blink_warning));
+	append(s, to_string(loran_c_cycle_lock_warning));
+	append(s, format(cross_track_error_magnitude, 2));
+	append(s, to_string(direction_to_steer));
+	append(s, to_string(cross_track_unit));
+	append(s, to_string(status_arrival));
+	append(s, to_string(status_perpendicular_passing));
+	append(s, format(bearing_origin_to_destination, 1));
+	append(s, to_string(bearing_origin_to_destination_ref));
+	append(s, to_string(waypoint_id));
 }
 }
 }

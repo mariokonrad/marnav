@@ -21,9 +21,9 @@ stn::stn(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 0), number);
 }
 
-std::vector<std::string> stn::get_data() const
+void stn::append_data_to(std::string & s) const
 {
-	return {to_string(number)};
+	append(s, to_string(number));
 }
 }
 }

@@ -23,9 +23,11 @@ zdl::zdl(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 2), type_point);
 }
 
-std::vector<std::string> zdl::get_data() const
+void zdl::append_data_to(std::string & s) const
 {
-	return {to_string(time_to_point), format(distance, 1), to_string(type_point)};
+	append(s, to_string(time_to_point));
+	append(s, format(distance, 1));
+	append(s, to_string(type_point));
 }
 }
 }

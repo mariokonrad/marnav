@@ -52,24 +52,21 @@ void lcd::set_time_diff(int index, time_difference t)
 	time_diffs[index] = t;
 }
 
-std::vector<std::string> lcd::get_data() const
+void lcd::append_data_to(std::string & s) const
 {
-	std::vector<std::string> result;
-	result.reserve(13);
-	result.push_back(to_string(gri));
-	result.push_back(format(master.snr, 3));
-	result.push_back(format(master.ecd, 3));
+	append(s, to_string(gri));
+	append(s, format(master.snr, 3));
+	append(s, format(master.ecd, 3));
 	for (int i = 0; i < max_differences; ++i) {
 		auto const & t = time_diffs[i];
 		if (t) {
-			result.push_back(format(t->snr, 3));
-			result.push_back(format(t->ecd, 3));
+			append(s, format(t->snr, 3));
+			append(s, format(t->ecd, 3));
 		} else {
-			result.push_back("");
-			result.push_back("");
+			append(s, "");
+			append(s, "");
 		}
 	}
-	return result;
 }
 }
 }

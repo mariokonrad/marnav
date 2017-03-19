@@ -38,10 +38,14 @@ void bww::set_bearing_mag(double t) noexcept
 	bearing_mag_ref = reference::MAGNETIC;
 }
 
-std::vector<std::string> bww::get_data() const
+void bww::append_data_to(std::string & s) const
 {
-	return {to_string(bearing_true), to_string(bearing_true_ref), to_string(bearing_mag),
-		to_string(bearing_mag_ref), to_string(waypoint_to), to_string(waypoint_from)};
+	append(s, to_string(bearing_true));
+	append(s, to_string(bearing_true_ref));
+	append(s, to_string(bearing_mag));
+	append(s, to_string(bearing_mag_ref));
+	append(s, to_string(waypoint_to));
+	append(s, to_string(waypoint_from));
 }
 }
 }

@@ -25,10 +25,12 @@ hfb::hfb(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 3), distance_head_bottom_unit);
 }
 
-std::vector<std::string> hfb::get_data() const
+void hfb::append_data_to(std::string & s) const
 {
-	return {to_string(distance_head_foot), to_string(distance_head_foot_unit),
-		to_string(distance_head_bottom), to_string(distance_head_bottom_unit)};
+	append(s, to_string(distance_head_foot));
+	append(s, to_string(distance_head_foot_unit));
+	append(s, to_string(distance_head_bottom));
+	append(s, to_string(distance_head_bottom_unit));
 }
 }
 }

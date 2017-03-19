@@ -28,9 +28,10 @@ void mtw::set_temperature(double t) noexcept
 	temperature_unit = unit::temperature::celsius;
 }
 
-std::vector<std::string> mtw::get_data() const
+void mtw::append_data_to(std::string & s) const
 {
-	return {to_string(temperature), to_string(temperature_unit)};
+	append(s, to_string(temperature));
+	append(s, to_string(temperature_unit));
 }
 }
 }

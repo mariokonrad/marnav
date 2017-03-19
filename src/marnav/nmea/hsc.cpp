@@ -36,10 +36,12 @@ void hsc::set_heading_mag(double t) noexcept
 	heading_mag_ref = reference::MAGNETIC;
 }
 
-std::vector<std::string> hsc::get_data() const
+void hsc::append_data_to(std::string & s) const
 {
-	return {to_string(heading_true), to_string(heading_true_ref), to_string(heading_mag),
-		to_string(heading_mag_ref)};
+	append(s, to_string(heading_true));
+	append(s, to_string(heading_true_ref));
+	append(s, to_string(heading_mag));
+	append(s, to_string(heading_mag_ref));
 }
 }
 }

@@ -82,15 +82,12 @@ void grs::set_sat_residual(int index, double value)
 	sat_residual[index] = value;
 }
 
-std::vector<std::string> grs::get_data() const
+void grs::append_data_to(std::string & s) const
 {
-	std::vector<std::string> result;
-	result.reserve(14);
-	result.push_back(format(time_utc, 2));
-	result.push_back(to_string(usage));
+	append(s, format(time_utc, 2));
+	append(s, to_string(usage));
 	for (auto const & t : sat_residual)
-		result.push_back(to_string(t));
-	return result;
+		append(s, to_string(t));
 }
 }
 }
