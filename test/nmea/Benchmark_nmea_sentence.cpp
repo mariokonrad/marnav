@@ -210,6 +210,21 @@ static void Benchmark_make_sentence(benchmark::State & state)
 
 BENCHMARK(Benchmark_make_sentence)->Apply(all_sentences);
 
+static void Benchmark_sentence_to_string(benchmark::State & state)
+{
+	state.SetLabel(sentences[state.range_x()].tag);
+	while (state.KeepRunning()) {
+		state.PauseTiming();
+		const auto raw = sentences[state.range_x()].text;
+		const auto sentence = nmea::make_sentence(raw);
+		state.ResumeTiming();
+		std::string s = to_string(*sentence);
+		benchmark::DoNotOptimize(s);
+	}
+}
+
+BENCHMARK(Benchmark_sentence_to_string)->Apply(all_sentences);
+
 template <class T> static void Benchmark_create_sentence(benchmark::State & state)
 {
 	state.SetLabel(sentences[state.range_x()].tag);
