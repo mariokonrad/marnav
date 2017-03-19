@@ -78,6 +78,18 @@ protected:
 	virtual char get_start_token() const { return start_token; }
 	virtual char get_end_token() const { return end_token; }
 
+	/// Lets the concrete sentence append its data (as strings)
+	/// to the specified string.
+	///
+	/// Benchmark has shown, this method is on average about 7% faster
+	/// than the previous solution (returning a vector of strings).
+	/// However, in some cases this solution is slower (!) and subject
+	/// for investigation.
+	///
+	/// @note It is recommended to use the static functions `append`
+	///       to append data to the string. This functions take care
+	///       of field delimiters automatically.
+	///
 	virtual void append_data_to(std::string &) const = 0;
 
 	static void append(std::string & s, const std::string & t);
