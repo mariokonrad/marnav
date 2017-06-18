@@ -97,6 +97,8 @@ public:
 
 	constexpr explicit operator bool() const { return flag; }
 
+	constexpr bool has_value() const { return flag; }
+
 	constexpr const T & value() const & { return data; }
 
 	T & value() & { return data; }
