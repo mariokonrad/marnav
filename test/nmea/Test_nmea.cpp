@@ -2,6 +2,7 @@
 #include <marnav/nmea/checksum.hpp>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/vwr.hpp>
 
 namespace
 {
@@ -83,6 +84,29 @@ TEST_F(Test_nmea, make_sentence_invalid_checksum_what)
 TEST_F(Test_nmea, make_sentence_unknown_sentence)
 {
 	EXPECT_ANY_THROW(nmea::make_sentence("$XX???,1,2,3*23"));
+}
+
+TEST_F(Test_nmea, make_sentence_ignoring_checksum_ignored)
+{
+	const std::string raw = "$IIVWR,084.0,R,10.4,N,5.4,M,19.3,K*4A";
+
+	auto s = nmea::make_sentence(raw, nmea::checksum_handling::ignore);
+
+	EXPECT_TRUE(s != nullptr);
+	EXPECT_TRUE(s->tag() == "VWR");
+}
+
+TEST_F(Test_nmea, make_sentence_ignoring_checksum_equal)
+{
+	const std::string raw_1 = "$IIVWR,084.0,R,10.4,N,5.4,M,19.3,K*4A";
+	const std::string raw_2 = "$IIVWR,084.0,R,10.4,N,5.4,M,19.3,K*00";
+
+	auto s1 = nmea::make_sentence(raw_1, nmea::checksum_handling::check);
+	auto s2 = nmea::make_sentence(raw_2, nmea::checksum_handling::ignore);
+
+	ASSERT_TRUE(s1 != nullptr);
+	ASSERT_TRUE(s2 != nullptr);
+	EXPECT_TRUE(s1->tag() == s2->tag());
 }
 
 TEST_F(Test_nmea, get_supported_sentences_str)

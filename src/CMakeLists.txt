@@ -355,6 +355,7 @@ install(
 		marnav/nmea/date.hpp
 		marnav/nmea/time.hpp
 		marnav/nmea/checksum.hpp
+		marnav/nmea/checksum_enum.hpp
 		marnav/nmea/sentence.hpp
 		marnav/nmea/detail.hpp
 		marnav/nmea/ais_helper.hpp

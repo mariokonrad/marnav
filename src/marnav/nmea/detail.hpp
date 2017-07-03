@@ -6,6 +6,7 @@
 #include <type_traits>
 #include <vector>
 #include <marnav/nmea/talker_id.hpp>
+#include <marnav/nmea/checksum_enum.hpp>
 
 namespace marnav
 {
@@ -25,7 +26,8 @@ void ensure_checksum(
 void check_raw_sentence(const std::string & s);
 
 std::tuple<talker, std::string, std::string, std::vector<std::string>>
-extract_sentence_information(const std::string & s, bool ignore_checksum = false);
+extract_sentence_information(
+	const std::string & s, checksum_handling chksum = checksum_handling::check);
 }
 /// @endcond
 }

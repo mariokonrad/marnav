@@ -16,7 +16,7 @@ namespace detail
 /// of the template function create_sentence.
 ///
 /// @param[in] s The raw NMEA sentence.
-/// @param[in] ignore_checksum Option to ignore the checksum.
+/// @param[in] chksum Checksum handling strategy.
 /// @return A tuple containing:
 /// - The `talker` extracted from the raw NMEA sentence.
 /// - The `tag` extracted from the raw NMEA sentence.
@@ -24,7 +24,7 @@ namespace detail
 /// - Extracted `fields` from the raw NMEA sentence.
 ///
 std::tuple<talker, std::string, std::string, std::vector<std::string>>
-extract_sentence_information(const std::string & s, bool ignore_checksum)
+extract_sentence_information(const std::string & s, checksum_handling chksum)
 {
 	detail::check_raw_sentence(s);
 
@@ -44,7 +44,7 @@ extract_sentence_information(const std::string & s, bool ignore_checksum)
 	if (fields.size() < 2) // at least address and checksum must be present
 		throw std::invalid_argument{"malformed sentence in nmea/make_sentence"};
 
-	if (!ignore_checksum) {
+	if (chksum == checksum_handling::check) {
 		// check checksum from next character on, ignoring the start token.
 		detail::ensure_checksum(s, fields.back(), search_pos);
 	}

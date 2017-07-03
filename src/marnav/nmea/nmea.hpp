@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <marnav/nmea/sentence_id.hpp>
+#include <marnav/nmea/checksum_enum.hpp>
 
 namespace marnav
 {
@@ -64,7 +65,8 @@ public:
 
 class sentence; // forward declaration
 
-std::unique_ptr<sentence> make_sentence(const std::string & s, bool ignore_checksum = false);
+std::unique_ptr<sentence> make_sentence(
+	const std::string & s, checksum_handling chksum = checksum_handling::check);
 
 sentence_id extract_id(const std::string & s);
 

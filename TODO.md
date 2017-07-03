@@ -8,12 +8,14 @@ TODO
 @todo Implement NMEA sentence: ASD: Autopilot System Data
 @todo Implement NMEA sentence: DSI: DSC Transponder Initiate
 @todo Implement NMEA sentence: DSR: DSC Transponder Response
+@todo Implement comparison operators for NMEA sentences
 
 @todo Implement AIS message: Type 15: Interrogation
 @todo Implement AIS message: Type 16: Assignment Mode Command
 @todo Implement AIS message: Type 25: Single Slot Binary Message
 @todo Implement AIS message: Type 26: Multiple Slot Binary Message
 @todo Implement AIS message: Type 27: Long Range AIS Broadcast message
+@todo Implement comparison operators for AIS messages
 
 @todo Implement SeaTalk writer for serial devices
 @todo Implement SeaTalk message: Type 55: TRACK keystroke on GPS unit

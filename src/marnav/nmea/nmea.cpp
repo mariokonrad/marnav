@@ -310,27 +310,30 @@ sentence_id tag_to_id(const std::string & tag)
 /// Parses the string and returns the corresponding sentence.
 ///
 /// @param[in] s The sentence to parse.
-/// @param[in] ignore_checksum Option to ignore the checksum.
+/// @param[in] chksum Checksum handling strategy.
 /// @return The object of the corresponding type.
 /// @exception checksum_error Will be thrown if the checksum is wrong.
 /// @exception std::invalid_argument Will be thrown if the specified string
 ///   is not a NMEA sentence (malformed).
-/// @exception unknown_sentence Will be thrown if the sentence is
-///   not supported.
+/// @exception unknown_sentence Will be thrown if the sentence is not supported.
 ///
 /// Example:
 /// @code
-///   auto s =
-///   nmea::make_sentence("$GPRMC,201034,A,4702.4040,N,00818.3281,E,0.0,328.4,260807,0.6,E,A*17");
+///   auto s = nmea::make_sentence("$IIVWR,084.0,R,10.4,N,5.4,M,19.3,K*4A");
 /// @endcode
-std::unique_ptr<sentence> make_sentence(const std::string & s, bool ignore_checksum)
+///
+/// Example with ignoring the checksum:
+/// @code
+///   auto s = nmea::make_sentence("$IIVWR,084.0,R,10.4,N,5.4,M,19.3,K*00",
+///                                checksum_handling::ignore);
+/// @endcode
+std::unique_ptr<sentence> make_sentence(const std::string & s, checksum_handling chksum)
 {
 	talker talk{talker_id::none};
 	std::string tag;
 	std::string tag_block;
 	std::vector<std::string> fields;
-	std::tie(talk, tag, tag_block, fields)
-		= detail::extract_sentence_information(s, ignore_checksum);
+	std::tie(talk, tag, tag_block, fields) = detail::extract_sentence_information(s, chksum);
 	auto result = detail::find_parse_func(tag)(
 		talk, std::next(std::begin(fields)), std::prev(std::end(fields)));
 	result->set_tag_block(tag_block);
