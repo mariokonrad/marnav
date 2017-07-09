@@ -1,6 +1,7 @@
 #include "ais.hpp"
 
 #include <algorithm>
+#include <functional>
 
 #include <marnav/ais/message_01.hpp>
 #include <marnav/ais/message_02.hpp>
