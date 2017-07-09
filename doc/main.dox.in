@@ -33,11 +33,12 @@ It supports (partially):
 \section goals Goals
 There are already implementaions for reading and writing NMEA-0183 or AIS.
 The goal of this library is
-- to have an implementation in modern C++ (C++11)
+- to have an implementation in modern C++
 - easy to use API (std lib like, integrating well)
 - unit tested (high test coverage)
 - trivial integration into projects (liberal license, as few dependencies as possible)
 - (more or less) well documented
+- having fun
 
 
 \section sec_authors Authors

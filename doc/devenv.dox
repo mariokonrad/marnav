@@ -11,6 +11,7 @@ Compiler supported (older/others may work, but not tested):
 - GCC 4.9
 - GCC 5
 - GCC 6
+- GCC 7
 - Clang 3.6
 - Clang 3.7
 - Clang 3.8

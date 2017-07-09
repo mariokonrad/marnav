@@ -26,8 +26,7 @@ Goals
 
 There are already implementaions for reading and writing NMEA-0183 or AIS.
 The goal of this library is
-- to have an implementation in modern C++ (C++11 right now, C++14 as soon as compilers
-  catch up, but not necessarily bleeding edge)
+- to have an implementation in modern C++
 - easy to use API (std lib like, integrating well)
 - unit tested (high test coverage)
 - trivial integration into projects (liberal license, as few dependencies as
@@ -342,6 +341,7 @@ Compiler:
 - GCC 4.9
 - GCC 5
 - GCC 6
+- GCC 7
 - Clang 3.6
 - Clang 3.7
 - Clang 3.8
