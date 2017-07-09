@@ -38,7 +38,7 @@ void message_09::read_data(const raw & bits)
 
 raw message_09::get_data() const
 {
-	raw bits{SIZE_BITS};
+	raw bits(SIZE_BITS);
 
 	bits.set(type(), 0, 6);
 	set(bits, repeat_indicator);

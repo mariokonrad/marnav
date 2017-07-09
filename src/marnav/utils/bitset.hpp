@@ -1,7 +1,7 @@
 #ifndef MARNAV__UTILS__BITSET__HPP
 #define MARNAV__UTILS__BITSET__HPP
 
-/// Copyright (c) 2016 Mario Konrad <mario.konrad@gmx.net>
+/// Copyright (c) 2017 Mario Konrad <mario.konrad@gmx.net>
 /// The code is licensed under the BSD License (see file LICENSE)
 
 #include <limits>
@@ -47,7 +47,7 @@ namespace utils
 ///
 /// **Example:** bitset with initial number of bits
 /// @code
-/// bitset<uint8_t> bits{1024};
+/// bitset<uint8_t> bits(1024);
 /// bits.set(1, 512, 1); // set one bit to 1 at offset 512
 /// @endcode
 ///
@@ -77,6 +77,7 @@ public:
 		friend class bitset;
 
 	public:
+		using difference_type = long long;
 		using value_type = bool;
 		using iterator_category = std::random_access_iterator_tag;
 
@@ -472,6 +473,14 @@ public: // constructors
 			append(first.bs->get_block(r_ofs, u_bits), u_bits);
 	}
 
+	/// Constructs a bitset using the provided blocks.
+	bitset(std::initializer_list<Block> init_list)
+		: pos(0)
+	{
+		data.assign(init_list);
+		pos = data.size() * bits_per_block;
+	}
+
 public: // container operations
 	/// Returns the capacity of this bit set. Note: not all bits must have
 	/// been occupied.
@@ -655,8 +664,9 @@ public: // get
 	/// @exception std::out_of_range Offset and bits exceed the number of available
 	///            bits. It is not possible to read beyond the end.
 	template <class T>
-	typename std::enable_if<std::is_integral<T>::value, T>::type get(
-		size_type ofs, size_type bits = sizeof(T) * bits_per_byte) const
+	typename std::enable_if<std::is_integral<T>::value && !std::is_same<T, bool>::value,
+		T>::type
+	get(size_type ofs, size_type bits = sizeof(T) * bits_per_byte) const
 	{
 		if (bits <= 0)
 			return T{};
@@ -708,6 +718,7 @@ public: // get
 		return value;
 	}
 
+	/// Specialization of `get` for enumerations.
 	template <class T>
 	typename std::enable_if<std::is_enum<T>::value, T>::type get(
 		size_type ofs, size_type bits = sizeof(T) * bits_per_byte) const
@@ -715,13 +726,20 @@ public: // get
 		return static_cast<T>(get<typename std::underlying_type<T>::type>(ofs, bits));
 	}
 
-	template <class T>
+	/// Specialization of `get` for bool.
+	template <class T, typename std::enable_if<std::is_same<T, bool>::value, int>::type = 0>
+	void get(T & value, size_type ofs, size_type = 1) const
+	{
+		value = get_bit(ofs);
+	}
+
+	template <class T, typename std::enable_if<!std::is_same<T, bool>::value, int>::type = 0>
 	void get(T & value, size_type ofs, size_type bits = sizeof(T) * bits_per_byte) const
 	{
 		value = get<T>(ofs, bits);
 	}
 
-	bool get(size_type index) const { return get<bool>(index, 1); }
+	bool get(size_type ofs) const { return get_bit(ofs); }
 
 public: // access operators
 	/// Returns the bit at the specified position.

@@ -51,7 +51,7 @@ void message_21::read_data(const raw & bits)
 
 raw message_21::get_data() const
 {
-	raw bits{SIZE_BITS_MIN};
+	raw bits(SIZE_BITS_MIN);
 
 	bits.set(type(), 0, 6);
 	set(bits, repeat_indicator);
@@ -81,7 +81,7 @@ raw message_21::get_data() const
 
 		if (size <= SIZE_BITS_MAX - SIZE_BITS_MIN) {
 			// append a temporary bitset to the real one
-			raw t{size};
+			raw t(size);
 			write_string(t, 0, name_extension.size(), name_extension);
 			bits.append(t);
 		}

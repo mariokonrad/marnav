@@ -45,8 +45,8 @@ TEST_F(Test_ais_message_01, parse)
 
 TEST_F(Test_ais_message_01, wrong_number_of_bits)
 {
-	EXPECT_ANY_THROW(ais::message_parse<ais::message_01>(ais::raw{167}));
-	EXPECT_ANY_THROW(ais::message_parse<ais::message_01>(ais::raw{169}));
+	EXPECT_ANY_THROW(ais::message_parse<ais::message_01>(ais::raw(167)));
+	EXPECT_ANY_THROW(ais::message_parse<ais::message_01>(ais::raw(169)));
 }
 
 TEST_F(Test_ais_message_01, encode_default_values)

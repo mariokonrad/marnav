@@ -24,8 +24,8 @@ TEST_F(Test_ais_message_20, parse)
 
 TEST_F(Test_ais_message_20, wrong_number_of_bits)
 {
-	EXPECT_ANY_THROW(ais::message_parse<ais::message_20>(ais::raw{69}));
-	EXPECT_ANY_THROW(ais::message_parse<ais::message_20>(ais::raw{161}));
+	EXPECT_ANY_THROW(ais::message_parse<ais::message_20>(ais::raw(69)));
+	EXPECT_ANY_THROW(ais::message_parse<ais::message_20>(ais::raw(161)));
 }
 
 TEST_F(Test_ais_message_20, get_entry_invalid_offset)

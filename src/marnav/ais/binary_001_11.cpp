@@ -53,7 +53,7 @@ void binary_001_11::read_from(const raw & payload)
 
 void binary_001_11::write_to(raw & payload) const
 {
-	payload = raw{SIZE_BITS};
+	payload = raw(SIZE_BITS);
 	set(payload, lat);
 	set(payload, lon);
 	set(payload, day);

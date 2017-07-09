@@ -30,7 +30,7 @@ void binary_200_10::read_from(const raw & payload)
 
 void binary_200_10::write_to(raw & payload) const
 {
-	payload = raw{SIZE_BITS};
+	payload = raw(SIZE_BITS);
 	set(payload, vessel_id);
 	set(payload, length);
 	set(payload, beam);

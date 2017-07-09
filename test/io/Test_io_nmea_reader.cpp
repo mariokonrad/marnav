@@ -31,12 +31,11 @@ public:
 	{
 	}
 
-	void open() throw(std::runtime_error) override {}
+	void open() override {}
 	void close() override {}
 
 	/// Just go through the data once.
-	virtual int read(char * buffer, uint32_t size) throw(
-		std::invalid_argument, std::runtime_error) override
+	virtual int read(char * buffer, uint32_t size) override
 	{
 		if (size != sizeof(*buffer))
 			throw std::invalid_argument{"buffer type not supported"};
@@ -47,8 +46,7 @@ public:
 		return 1;
 	}
 
-	virtual int write(const char *, uint32_t) throw(
-		std::invalid_argument, std::runtime_error) override
+	virtual int write(const char *, uint32_t) override
 	{
 		throw std::runtime_error{"operation not supported"};
 	}
@@ -66,19 +64,12 @@ public:
 	{
 	}
 
-	void open() throw(std::runtime_error) override {}
+	void open() override {}
 	void close() override {}
 
-	virtual int read(char *, uint32_t) throw(std::invalid_argument, std::runtime_error) override
-	{
-		return result;
-	}
+	virtual int read(char *, uint32_t) override { return result; }
 
-	virtual int write(const char *, uint32_t) throw(
-		std::invalid_argument, std::runtime_error) override
-	{
-		return result;
-	}
+	virtual int write(const char *, uint32_t) override { return result; }
 
 private:
 	int result;
