@@ -18,22 +18,22 @@ pgrme::pgrme(talker talk, fields::const_iterator first, fields::const_iterator l
 	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in pgrme"};
 
-	read(*(first + 0), horizontal_position_error);
-	read(*(first + 1), horizontal_position_error_unit);
-	read(*(first + 2), vertical_position_error);
-	read(*(first + 3), vertical_position_error_unit);
-	read(*(first + 4), overall_spherical_equiv_position_error);
-	read(*(first + 5), overall_spherical_equiv_position_error_unit);
+	read(*(first + 0), horizontal_position_error_);
+	read(*(first + 1), horizontal_position_error_unit_);
+	read(*(first + 2), vertical_position_error_);
+	read(*(first + 3), vertical_position_error_unit_);
+	read(*(first + 4), overall_spherical_equiv_position_error_);
+	read(*(first + 5), overall_spherical_equiv_position_error_unit_);
 }
 
 void pgrme::append_data_to(std::string & s) const
 {
-	append(s, to_string(horizontal_position_error));
-	append(s, to_string(horizontal_position_error_unit));
-	append(s, to_string(vertical_position_error));
-	append(s, to_string(vertical_position_error_unit));
-	append(s, to_string(overall_spherical_equiv_position_error));
-	append(s, to_string(overall_spherical_equiv_position_error_unit));
+	append(s, to_string(horizontal_position_error_));
+	append(s, to_string(horizontal_position_error_unit_));
+	append(s, to_string(vertical_position_error_));
+	append(s, to_string(vertical_position_error_unit_));
+	append(s, to_string(overall_spherical_equiv_position_error_));
+	append(s, to_string(overall_spherical_equiv_position_error_unit_));
 }
 }
 }

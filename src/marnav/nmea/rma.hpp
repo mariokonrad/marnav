@@ -55,38 +55,38 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<char> blink_warning;
-	utils::optional<geo::latitude> lat;
-	utils::optional<direction> lat_hem; // latitude dir, N:north, S:south
-	utils::optional<geo::longitude> lon;
-	utils::optional<direction> lon_hem; // longitude dir, E:east, W:west
-	utils::optional<double> time_diff_a; // time difference A in microseconds
-	utils::optional<double> time_diff_b; // time difference B in microseconds
-	utils::optional<double> sog; // speed over ground in knots
-	utils::optional<double> track; // track made good, degrees
-	utils::optional<double> magnetic_var; // magnetic variation in degrees
+	utils::optional<char> blink_warning_;
+	utils::optional<geo::latitude> lat_;
+	utils::optional<direction> lat_hem_; // latitude dir, N:north, S:south
+	utils::optional<geo::longitude> lon_;
+	utils::optional<direction> lon_hem_; // longitude dir, E:east, W:west
+	utils::optional<double> time_diff_a_; // time difference A in microseconds
+	utils::optional<double> time_diff_b_; // time difference B in microseconds
+	utils::optional<double> sog_; // speed over ground in knots
+	utils::optional<double> track_; // track made good, degrees
+	utils::optional<double> magnetic_var_; // magnetic variation in degrees
 	utils::optional<direction>
-		magnetic_var_hem; // magnetic variation hemisphere, E:east, W:west
+		magnetic_var_hem_; // magnetic variation hemisphere, E:east, W:west
 
 public:
-	decltype(blink_warning) get_blink_warning() const { return blink_warning; }
-	decltype(time_diff_a) get_time_diff_a() const { return time_diff_a; }
-	decltype(time_diff_b) get_time_diff_b() const { return time_diff_b; }
-	decltype(sog) get_sog() const { return sog; }
-	decltype(track) get_track() const { return track; }
-	decltype(magnetic_var) get_magnetic_var() const { return magnetic_var; }
-	decltype(magnetic_var_hem) get_magnetic_var_hem() const { return magnetic_var_hem; }
+	decltype(blink_warning_) get_blink_warning() const { return blink_warning_; }
+	decltype(time_diff_a_) get_time_diff_a() const { return time_diff_a_; }
+	decltype(time_diff_b_) get_time_diff_b() const { return time_diff_b_; }
+	decltype(sog_) get_sog() const { return sog_; }
+	decltype(track_) get_track() const { return track_; }
+	decltype(magnetic_var_) get_magnetic_var() const { return magnetic_var_; }
+	decltype(magnetic_var_hem_) get_magnetic_var_hem() const { return magnetic_var_hem_; }
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;
 
-	void set_blink_warning(char t) noexcept { blink_warning = t; }
+	void set_blink_warning(char t) noexcept { blink_warning_ = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_time_diff_a(double t) noexcept { time_diff_a = t; }
-	void set_time_diff_b(double t) noexcept { time_diff_b = t; }
-	void set_sog(double t) noexcept { sog = t; }
-	void set_track(double t) noexcept { track = t; }
+	void set_time_diff_a(double t) noexcept { time_diff_a_ = t; }
+	void set_time_diff_b(double t) noexcept { time_diff_b_ = t; }
+	void set_sog(double t) noexcept { sog_ = t; }
+	void set_track(double t) noexcept { track_ = t; }
 	void set_magnetic_var(double t, direction h);
 };
 }

@@ -58,19 +58,19 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	uint32_t gri = 0; ///< unit: 0.1 microseconds
-	time_difference master;
-	std::array<utils::optional<time_difference>, max_differences> time_diffs;
+	uint32_t gri_ = 0; ///< unit: 0.1 microseconds
+	time_difference master_;
+	std::array<utils::optional<time_difference>, max_differences> time_diffs_;
 
 	void check_index(int index) const;
 
 public:
-	decltype(gri) get_gri() const { return gri; }
-	decltype(master) get_master() const { return master; }
+	decltype(gri_) get_gri() const { return gri_; }
+	decltype(master_) get_master() const { return master_; }
 	utils::optional<time_difference> get_time_diff(int index) const;
 
-	void set_gri(uint32_t t) noexcept { gri = t; }
-	void set_master(const time_difference & t) noexcept { master = t; }
+	void set_gri(uint32_t t) noexcept { gri_ = t; }
+	void set_master(const time_difference & t) noexcept { master_ = t; }
 	void set_time_diff(int index, time_difference t);
 };
 }

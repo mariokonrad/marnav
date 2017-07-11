@@ -37,9 +37,9 @@ private:
 	void process_nmea();
 	bool read_data();
 
-	char raw;
-	std::string sentence;
-	std::unique_ptr<device> dev; ///< Device to read data from.
+	char raw_;
+	std::string sentence_;
+	std::unique_ptr<device> dev_; ///< Device to read data from.
 };
 }
 }

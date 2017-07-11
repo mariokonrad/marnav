@@ -49,7 +49,7 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	std::array<state, num_sensors> sensors;
+	std::array<state, num_sensors> sensors_;
 
 	void check_index(int index) const;
 

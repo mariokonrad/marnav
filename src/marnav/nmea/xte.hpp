@@ -52,33 +52,33 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<status> status1;
-	utils::optional<status> status2;
-	utils::optional<double> cross_track_error_magnitude;
-	utils::optional<side> direction_to_steer;
-	utils::optional<unit::distance> cross_track_unit;
-	utils::optional<mode_indicator> mode_ind;
+	utils::optional<status> status1_;
+	utils::optional<status> status2_;
+	utils::optional<double> cross_track_error_magnitude_;
+	utils::optional<side> direction_to_steer_;
+	utils::optional<unit::distance> cross_track_unit_;
+	utils::optional<mode_indicator> mode_ind_;
 
 public:
-	decltype(status1) get_status1() const { return status1; }
-	decltype(status2) get_status2() const { return status2; }
-	decltype(cross_track_error_magnitude) get_cross_track_error_magnitude() const
+	decltype(status1_) get_status1() const { return status1_; }
+	decltype(status2_) get_status2() const { return status2_; }
+	decltype(cross_track_error_magnitude_) get_cross_track_error_magnitude() const
 	{
-		return cross_track_error_magnitude;
+		return cross_track_error_magnitude_;
 	}
-	decltype(direction_to_steer) get_direction_to_steer() const { return direction_to_steer; }
-	decltype(cross_track_unit) get_cross_track_unit() const { return cross_track_unit; }
-	decltype(mode_ind) get_mode_ind() const { return mode_ind; }
+	decltype(direction_to_steer_) get_direction_to_steer() const { return direction_to_steer_; }
+	decltype(cross_track_unit_) get_cross_track_unit() const { return cross_track_unit_; }
+	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
 
-	void set_status1(status t) noexcept { status1 = t; }
-	void set_status2(status t) noexcept { status2 = t; }
+	void set_status1(status t) noexcept { status1_ = t; }
+	void set_status2(status t) noexcept { status2_ = t; }
 	void set_cross_track_error_magnitude(double t) noexcept
 	{
-		cross_track_error_magnitude = t;
-		cross_track_unit = unit::distance::nm;
+		cross_track_error_magnitude_ = t;
+		cross_track_unit_ = unit::distance::nm;
 	}
-	void set_direction_to_steer(side t) noexcept { direction_to_steer = t; }
-	void set_mode_indicato(mode_indicator t) noexcept { mode_ind = t; }
+	void set_direction_to_steer(side t) noexcept { direction_to_steer_ = t; }
+	void set_mode_indicato(mode_indicator t) noexcept { mode_ind_ = t; }
 };
 }
 }

@@ -18,22 +18,22 @@ tpt::tpt(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in tpt"};
 
-	read(*(first + 0), range);
-	read(*(first + 1), range_unit);
-	read(*(first + 2), bearing);
+	read(*(first + 0), range_);
+	read(*(first + 1), range_unit_);
+	read(*(first + 2), bearing_);
 	// separator omitted intentionally
-	read(*(first + 4), depth);
-	read(*(first + 5), depth_unit);
+	read(*(first + 4), depth_);
+	read(*(first + 5), depth_unit_);
 }
 
 void tpt::append_data_to(std::string & s) const
 {
-	append(s, to_string(range));
-	append(s, to_string(range_unit));
-	append(s, to_string(bearing));
+	append(s, to_string(range_));
+	append(s, to_string(range_unit_));
+	append(s, to_string(bearing_));
 	append(s, 'P');
-	append(s, to_string(depth));
-	append(s, to_string(depth_unit));
+	append(s, to_string(depth_));
+	append(s, to_string(depth_unit_));
 }
 }
 }

@@ -90,31 +90,31 @@ dse::dse(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in dse"};
 
-	read(*(first + 0), number_of_messages);
-	read(*(first + 1), sentence_number);
-	read(*(first + 2), flag, flag_mapping);
-	read(*(first + 3), address);
+	read(*(first + 0), number_of_messages_);
+	read(*(first + 1), sentence_number_);
+	read(*(first + 2), flag_, flag_mapping);
+	read(*(first + 3), address_);
 
 	// TODO: read data set fields
 }
 
 utils::mmsi dse::get_mmsi() const
 {
-	return utils::mmsi{static_cast<utils::mmsi::value_type>(address / 10)};
+	return utils::mmsi{static_cast<utils::mmsi::value_type>(address_ / 10)};
 }
 
 void dse::set_mmsi(const utils::mmsi & t) noexcept
 {
-	address = t;
-	address *= 10;
+	address_ = t;
+	address_ *= 10;
 }
 
 void dse::append_data_to(std::string & s) const
 {
-	append(s, to_string(number_of_messages));
-	append(s, to_string(sentence_number));
-	append(s, to_string(flag));
-	append(s, format(address, 10));
+	append(s, to_string(number_of_messages_));
+	append(s, to_string(sentence_number_));
+	append(s, to_string(flag_));
+	append(s, format(address_, 10));
 	append(s, "");
 	append(s, "");
 }

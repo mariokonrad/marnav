@@ -76,58 +76,58 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<nmea::time> time;
-	utils::optional<geo::latitude> lat;
-	utils::optional<direction> lat_hem; // N:north, S:south
-	utils::optional<geo::longitude> lon;
-	utils::optional<direction> lon_hem; // E:east, W:west
-	utils::optional<quality> quality_indicator;
-	utils::optional<uint32_t> n_satellites;
-	utils::optional<double> hor_dilution; // horizontal dilution of precision
-	utils::optional<double> altitude;
-	utils::optional<unit::distance> altitude_unit; // M:meter
+	utils::optional<nmea::time> time_;
+	utils::optional<geo::latitude> lat_;
+	utils::optional<direction> lat_hem_; // N:north, S:south
+	utils::optional<geo::longitude> lon_;
+	utils::optional<direction> lon_hem_; // E:east, W:west
+	utils::optional<quality> quality_indicator_;
+	utils::optional<uint32_t> n_satellites_;
+	utils::optional<double> hor_dilution_; // horizontal dilution of precision
+	utils::optional<double> altitude_;
+	utils::optional<unit::distance> altitude_unit_; // M:meter
 	utils::optional<double>
-		geodial_separation; // geodial separation, sea level below the ellipsoid
-	utils::optional<unit::distance> geodial_separation_unit; // M:meter
-	utils::optional<double> dgps_age; // age of dgps data
-	utils::optional<uint32_t> dgps_ref; // dgps reference station 0000..1023
+		geodial_separation_; // geodial separation, sea level below the ellipsoid
+	utils::optional<unit::distance> geodial_separation_unit_; // M:meter
+	utils::optional<double> dgps_age_; // age of dgps data
+	utils::optional<uint32_t> dgps_ref_; // dgps reference station 0000..1023
 
 public:
-	decltype(time) get_time() const { return time; }
-	decltype(quality_indicator) get_quality_indicator() const { return quality_indicator; }
-	decltype(n_satellites) get_n_satellites() const { return n_satellites; }
-	decltype(hor_dilution) get_hor_dilution() const { return hor_dilution; }
-	decltype(altitude) get_altitude() const { return altitude; }
-	decltype(altitude_unit) get_altitude_unit() const { return altitude_unit; }
-	decltype(geodial_separation) get_geodial_separation() const { return geodial_separation; }
-	decltype(geodial_separation_unit) get_geodial_separation_unit() const
+	decltype(time_) get_time() const { return time_; }
+	decltype(quality_indicator_) get_quality_indicator() const { return quality_indicator_; }
+	decltype(n_satellites_) get_n_satellites() const { return n_satellites_; }
+	decltype(hor_dilution_) get_hor_dilution() const { return hor_dilution_; }
+	decltype(altitude_) get_altitude() const { return altitude_; }
+	decltype(altitude_unit_) get_altitude_unit() const { return altitude_unit_; }
+	decltype(geodial_separation_) get_geodial_separation() const { return geodial_separation_; }
+	decltype(geodial_separation_unit_) get_geodial_separation_unit() const
 	{
-		return geodial_separation_unit;
+		return geodial_separation_unit_;
 	}
-	decltype(dgps_age) get_dgps_age() const { return dgps_age; }
-	decltype(dgps_ref) get_dgps_ref() const { return dgps_ref; }
+	decltype(dgps_age_) get_dgps_age() const { return dgps_age_; }
+	decltype(dgps_ref_) get_dgps_ref() const { return dgps_ref_; }
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;
 
-	void set_time(const nmea::time & t) noexcept { time = t; }
+	void set_time(const nmea::time & t) noexcept { time_ = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_quality(quality t) noexcept { quality_indicator = t; }
-	void set_n_satellites(uint32_t t) noexcept { n_satellites = t; }
-	void set_hor_dilution(double t) noexcept { hor_dilution = t; }
+	void set_quality(quality t) noexcept { quality_indicator_ = t; }
+	void set_n_satellites(uint32_t t) noexcept { n_satellites_ = t; }
+	void set_hor_dilution(double t) noexcept { hor_dilution_ = t; }
 	void set_altitude(double t) noexcept
 	{
-		altitude = t;
-		altitude_unit = unit::distance::meter;
+		altitude_ = t;
+		altitude_unit_ = unit::distance::meter;
 	}
 	void set_geodial_separation(double t) noexcept
 	{
-		geodial_separation = t;
-		geodial_separation_unit = unit::distance::meter;
+		geodial_separation_ = t;
+		geodial_separation_unit_ = unit::distance::meter;
 	}
-	void set_dgps_age(double t) noexcept { dgps_age = t; }
-	void set_dgps_ref(uint32_t t) noexcept { dgps_ref = t; }
+	void set_dgps_age(double t) noexcept { dgps_age_ = t; }
+	void set_dgps_ref(uint32_t t) noexcept { dgps_ref_ = t; }
 };
 }
 }

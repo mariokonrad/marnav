@@ -125,7 +125,7 @@ public:
 	{
 		while (read()) {
 			if (sentence_received) {
-				s = sentence;
+				s = sentence_;
 				sentence_received = false;
 				return true;
 			}
@@ -136,13 +136,13 @@ public:
 protected:
 	virtual void process_sentence(const std::string & s) override
 	{
-		sentence = s;
+		sentence_ = s;
 		sentence_received = true;
 	}
 
 private:
 	bool sentence_received;
-	std::string sentence;
+	std::string sentence_;
 };
 
 class Test_io_nmea_reader : public ::testing::Test

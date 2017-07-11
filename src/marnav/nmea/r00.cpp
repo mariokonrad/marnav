@@ -28,8 +28,8 @@ r00::r00(talker talk, fields::const_iterator first, fields::const_iterator last)
 void r00::append_data_to(std::string & s) const
 {
 	for (auto i = 0; i < max_waypoint_ids; ++i) {
-		if (waypoint_id[i]) {
-			append(s, waypoint_id[i].value());
+		if (waypoint_id_[i]) {
+			append(s, waypoint_id_[i].value());
 		} else {
 			append(s, "");
 		}
@@ -45,13 +45,13 @@ void r00::check_index(int index) const
 utils::optional<waypoint> r00::get_waypoint_id(int index) const
 {
 	check_index(index);
-	return waypoint_id[index];
+	return waypoint_id_[index];
 }
 
 void r00::set_waypoint_id(int index, const waypoint & id)
 {
 	check_index(index);
-	waypoint_id[index] = id;
+	waypoint_id_[index] = id;
 }
 }
 }

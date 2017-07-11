@@ -63,41 +63,41 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<nmea::time> time_utc;
-	utils::optional<char> status;
-	utils::optional<geo::latitude> lat;
-	utils::optional<direction> lat_hem;
-	utils::optional<geo::longitude> lon;
-	utils::optional<direction> lon_hem;
-	utils::optional<double> sog;
-	utils::optional<double> heading;
-	utils::optional<nmea::date> date;
-	utils::optional<double> mag;
-	utils::optional<direction> mag_hem;
-	utils::optional<mode_indicator> mode_ind;
+	utils::optional<nmea::time> time_utc_;
+	utils::optional<char> status_;
+	utils::optional<geo::latitude> lat_;
+	utils::optional<direction> lat_hem_;
+	utils::optional<geo::longitude> lon_;
+	utils::optional<direction> lon_hem_;
+	utils::optional<double> sog_;
+	utils::optional<double> heading_;
+	utils::optional<nmea::date> date_;
+	utils::optional<double> mag_;
+	utils::optional<direction> mag_hem_;
+	utils::optional<mode_indicator> mode_ind_;
 
 public:
-	decltype(time_utc) get_time_utc() const { return time_utc; }
-	decltype(status) get_status() const { return status; }
-	decltype(sog) get_sog() const { return sog; }
-	decltype(heading) get_heading() const { return heading; }
-	decltype(date) get_date() const { return date; }
-	decltype(mag) get_mag() const { return mag; }
-	decltype(mag_hem) get_mag_hem() const { return mag_hem; }
-	decltype(mode_ind) get_mode_ind() const { return mode_ind; }
+	decltype(time_utc_) get_time_utc() const { return time_utc_; }
+	decltype(status_) get_status() const { return status_; }
+	decltype(sog_) get_sog() const { return sog_; }
+	decltype(heading_) get_heading() const { return heading_; }
+	decltype(date_) get_date() const { return date_; }
+	decltype(mag_) get_mag() const { return mag_; }
+	decltype(mag_hem_) get_mag_hem() const { return mag_hem_; }
+	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;
 
-	void set_time_utc(const time & t) noexcept { time_utc = t; }
-	void set_status(char t) noexcept { status = t; }
+	void set_time_utc(const time & t) noexcept { time_utc_ = t; }
+	void set_status(char t) noexcept { status_ = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_sog(double t) noexcept { sog = t; }
-	void set_heading(double t) noexcept { heading = t; }
-	void set_date(const nmea::date & t) noexcept { date = t; }
+	void set_sog(double t) noexcept { sog_ = t; }
+	void set_heading(double t) noexcept { heading_ = t; }
+	void set_date(const nmea::date & t) noexcept { date_ = t; }
 	void set_mag(double t, direction h);
-	void set_mode_indicator(mode_indicator t) noexcept { mode_ind = t; }
+	void set_mode_indicator(mode_indicator t) noexcept { mode_ind_ = t; }
 };
 }
 }

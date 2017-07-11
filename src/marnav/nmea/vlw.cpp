@@ -18,30 +18,30 @@ vlw::vlw(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 4)
 		throw std::invalid_argument{"invalid number of fields in vlw"};
 
-	read(*(first + 0), distance_cum);
-	read(*(first + 1), distance_cum_unit);
-	read(*(first + 2), distance_reset);
-	read(*(first + 3), distance_reset_unit);
+	read(*(first + 0), distance_cum_);
+	read(*(first + 1), distance_cum_unit_);
+	read(*(first + 2), distance_reset_);
+	read(*(first + 3), distance_reset_unit_);
 }
 
 void vlw::set_distance_cum_nm(double t) noexcept
 {
-	distance_cum = t;
-	distance_cum_unit = unit::distance::nm;
+	distance_cum_ = t;
+	distance_cum_unit_ = unit::distance::nm;
 }
 
 void vlw::set_distance_reset_nm(double t) noexcept
 {
-	distance_reset = t;
-	distance_reset_unit = unit::distance::nm;
+	distance_reset_ = t;
+	distance_reset_unit_ = unit::distance::nm;
 }
 
 void vlw::append_data_to(std::string & s) const
 {
-	append(s, to_string(distance_cum));
-	append(s, to_string(distance_cum_unit));
-	append(s, to_string(distance_reset));
-	append(s, to_string(distance_reset_unit));
+	append(s, to_string(distance_cum_));
+	append(s, to_string(distance_cum_unit_));
+	append(s, to_string(distance_reset_));
+	append(s, to_string(distance_reset_unit_));
 }
 }
 }

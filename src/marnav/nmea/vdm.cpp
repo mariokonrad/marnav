@@ -30,22 +30,22 @@ vdm::vdm(talker talk, fields::const_iterator first, fields::const_iterator last)
 
 void vdm::read_fields(fields::const_iterator first)
 {
-	read(*(first + 0), n_fragments);
-	read(*(first + 1), fragment);
-	read(*(first + 2), seq_msg_id);
-	read(*(first + 3), radio_channel);
-	read(*(first + 4), payload);
-	read(*(first + 5), n_fill_bits);
+	read(*(first + 0), n_fragments_);
+	read(*(first + 1), fragment_);
+	read(*(first + 2), seq_msg_id_);
+	read(*(first + 3), radio_channel_);
+	read(*(first + 4), payload_);
+	read(*(first + 5), n_fill_bits_);
 }
 
 void vdm::append_data_to(std::string & s) const
 {
-	append(s, to_string(n_fragments));
-	append(s, to_string(fragment));
-	append(s, to_string(seq_msg_id));
-	append(s, to_string(radio_channel));
-	append(s, to_string(payload));
-	append(s, to_string(n_fill_bits));
+	append(s, to_string(n_fragments_));
+	append(s, to_string(fragment_));
+	append(s, to_string(seq_msg_id_));
+	append(s, to_string(radio_channel_));
+	append(s, to_string(payload_));
+	append(s, to_string(n_fill_bits_));
 }
 }
 }

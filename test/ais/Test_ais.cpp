@@ -36,7 +36,7 @@ public:
 	{
 	}
 
-	virtual ais::raw get_data() const throw(std::out_of_range) override { return ais::raw{}; }
+	virtual ais::raw get_data() const override { return ais::raw{}; }
 };
 
 TEST_F(Test_ais, make_message)

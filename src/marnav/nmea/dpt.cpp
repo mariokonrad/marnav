@@ -24,18 +24,18 @@ dpt::dpt(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if ((size < 2) || (size > 3))
 		throw std::invalid_argument{"invalid number of fields in dpt"};
 
-	read(*(first + 0), depth_meter);
-	read(*(first + 1), transducer_offset);
+	read(*(first + 0), depth_meter_);
+	read(*(first + 1), transducer_offset_);
 
 	if (size > 2)
-		read(*(first + 2), max_depth);
+		read(*(first + 2), max_depth_);
 }
 
 void dpt::append_data_to(std::string & s) const
 {
-	append(s, to_string(depth_meter));
-	append(s, to_string(transducer_offset));
-	append(s, to_string(max_depth));
+	append(s, to_string(depth_meter_));
+	append(s, to_string(transducer_offset_));
+	append(s, to_string(max_depth_));
 }
 }
 }

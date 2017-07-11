@@ -18,20 +18,20 @@ hdt::hdt(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 2)
 		throw std::invalid_argument{"invalid number of fields in hdt"};
 
-	read(*(first + 0), heading);
-	read(*(first + 1), heading_true);
+	read(*(first + 0), heading_);
+	read(*(first + 1), heading_true_);
 }
 
 void hdt::set_heading(double t) noexcept
 {
-	heading = t;
-	heading_true = reference::TRUE;
+	heading_ = t;
+	heading_true_ = reference::TRUE;
 }
 
 void hdt::append_data_to(std::string & s) const
 {
-	append(s, to_string(heading));
-	append(s, to_string(heading_true));
+	append(s, to_string(heading_));
+	append(s, to_string(heading_true_));
 }
 }
 }

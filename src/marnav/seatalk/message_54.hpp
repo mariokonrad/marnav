@@ -36,14 +36,14 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint8_t hour;
-	uint8_t minute;
-	uint8_t second;
+	uint8_t hour_;
+	uint8_t minute_;
+	uint8_t second_;
 
 public:
-	uint8_t get_hour() const noexcept { return hour; }
-	uint8_t get_minute() const noexcept { return minute; }
-	uint8_t get_second() const noexcept { return second; }
+	uint8_t get_hour() const noexcept { return hour_; }
+	uint8_t get_minute() const noexcept { return minute_; }
+	uint8_t get_second() const noexcept { return second_; }
 
 	void set_time(uint8_t h, uint8_t m, uint8_t s) noexcept;
 };

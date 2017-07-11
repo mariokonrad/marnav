@@ -43,18 +43,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> distance_cum; // total cumulative distance
-	utils::optional<unit::distance> distance_cum_unit; // N:nautical miles
-	utils::optional<double> distance_reset; // distance since reset
-	utils::optional<unit::distance> distance_reset_unit; // N:nautical miles
+	utils::optional<double> distance_cum_; // total cumulative distance
+	utils::optional<unit::distance> distance_cum_unit_; // N:nautical miles
+	utils::optional<double> distance_reset_; // distance since reset
+	utils::optional<unit::distance> distance_reset_unit_; // N:nautical miles
 
 public:
-	decltype(distance_cum) get_distance_cum() const { return distance_cum; }
-	decltype(distance_cum_unit) get_distance_cum_unit() const { return distance_cum_unit; }
-	decltype(distance_reset) get_distance_reset() const { return distance_reset; }
-	decltype(distance_reset_unit) get_distance_reset_unit() const
+	decltype(distance_cum_) get_distance_cum() const { return distance_cum_; }
+	decltype(distance_cum_unit_) get_distance_cum_unit() const { return distance_cum_unit_; }
+	decltype(distance_reset_) get_distance_reset() const { return distance_reset_; }
+	decltype(distance_reset_unit_) get_distance_reset_unit() const
 	{
-		return distance_reset_unit;
+		return distance_reset_unit_;
 	}
 
 	void set_distance_cum_nm(double t) noexcept;

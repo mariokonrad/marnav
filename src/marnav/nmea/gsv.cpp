@@ -39,9 +39,9 @@ gsv::gsv(talker talk, fields::const_iterator first, fields::const_iterator last)
 			+ std::to_string(size)};
 	}
 
-	read(*(first + 0), n_messages);
-	read(*(first + 1), message_number);
-	read(*(first + 2), n_satellites_in_view);
+	read(*(first + 0), n_messages_);
+	read(*(first + 1), message_number_);
+	read(*(first + 2), n_satellites_in_view_);
 
 	const int num_satellite_info = std::min(4, static_cast<int>((size - 3) / 4));
 	int index = 3;
@@ -59,14 +59,14 @@ void gsv::set_n_messages(uint32_t t)
 {
 	if (t < 1)
 		throw std::invalid_argument{"minimum of 1 for n_messages mandatory"};
-	n_messages = t;
+	n_messages_ = t;
 }
 
 void gsv::set_message_number(uint32_t t)
 {
 	if (t < 1)
 		throw std::invalid_argument{"minimum of 1 for message_number mandatory"};
-	message_number = t;
+	message_number_ = t;
 }
 
 void gsv::check_index(int index) const
@@ -79,24 +79,24 @@ void gsv::check_index(int index) const
 void gsv::set_sat(int index, const satellite_info & info)
 {
 	check_index(index);
-	sat[index] = info;
+	sat_[index] = info;
 }
 
 utils::optional<gsv::satellite_info> gsv::get_sat(int index) const
 {
 	check_index(index);
-	return sat[index];
+	return sat_[index];
 }
 
 void gsv::append_data_to(std::string & s) const
 {
-	append(s, to_string(n_messages));
-	append(s, to_string(message_number));
-	append(s, to_string(n_satellites_in_view));
-	append(s, to_string(sat[0]));
-	append(s, to_string(sat[1]));
-	append(s, to_string(sat[2]));
-	append(s, to_string(sat[3]));
+	append(s, to_string(n_messages_));
+	append(s, to_string(message_number_));
+	append(s, to_string(n_satellites_in_view_));
+	append(s, to_string(sat_[0]));
+	append(s, to_string(sat_[1]));
+	append(s, to_string(sat_[2]));
+	append(s, to_string(sat_[3]));
 }
 }
 }

@@ -59,60 +59,60 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<uint32_t> target_number;
-	utils::optional<double> target_distance;
-	utils::optional<double> bearing_from_ownship;
-	utils::optional<reference> bearing_from_ownship_ref;
-	utils::optional<double> target_speed;
-	utils::optional<double> target_course;
-	utils::optional<reference> target_course_ref;
-	utils::optional<double> distance_cpa; ///< Distance to closest point of approach
-	utils::optional<double> tcpa;
-	utils::optional<char> unknown;
-	utils::optional<std::string> target_name;
-	utils::optional<char> target_status;
-	utils::optional<char> reference_target;
+	utils::optional<uint32_t> target_number_;
+	utils::optional<double> target_distance_;
+	utils::optional<double> bearing_from_ownship_;
+	utils::optional<reference> bearing_from_ownship_ref_;
+	utils::optional<double> target_speed_;
+	utils::optional<double> target_course_;
+	utils::optional<reference> target_course_ref_;
+	utils::optional<double> distance_cpa_; ///< Distance to closest point of approach
+	utils::optional<double> tcpa_;
+	utils::optional<char> unknown_;
+	utils::optional<std::string> target_name_;
+	utils::optional<char> target_status_;
+	utils::optional<char> reference_target_;
 
 public:
-	decltype(target_number) get_target_number() const { return target_number; }
-	decltype(target_distance) get_target_distance() const { return target_distance; }
-	decltype(bearing_from_ownship) get_bearing_from_ownship() const
+	decltype(target_number_) get_target_number() const { return target_number_; }
+	decltype(target_distance_) get_target_distance() const { return target_distance_; }
+	decltype(bearing_from_ownship_) get_bearing_from_ownship() const
 	{
-		return bearing_from_ownship;
+		return bearing_from_ownship_;
 	}
-	decltype(bearing_from_ownship_ref) get_bearing_from_ownship_ref() const
+	decltype(bearing_from_ownship_ref_) get_bearing_from_ownship_ref() const
 	{
-		return bearing_from_ownship_ref;
+		return bearing_from_ownship_ref_;
 	}
-	decltype(target_speed) get_target_speed() const { return target_speed; }
-	decltype(target_course) get_target_course() const { return target_course; }
-	decltype(target_course_ref) get_target_course_ref() const { return target_course_ref; }
-	decltype(distance_cpa) get_distance_cpa() const { return distance_cpa; }
-	decltype(tcpa) get_tcpa() const { return tcpa; }
-	decltype(unknown) get_unknown() const { return unknown; }
-	decltype(target_name) get_target_name() const { return target_name; }
-	decltype(target_status) get_target_status() const { return target_status; }
-	decltype(reference_target) get_reference_target() const { return reference_target; }
+	decltype(target_speed_) get_target_speed() const { return target_speed_; }
+	decltype(target_course_) get_target_course() const { return target_course_; }
+	decltype(target_course_ref_) get_target_course_ref() const { return target_course_ref_; }
+	decltype(distance_cpa_) get_distance_cpa() const { return distance_cpa_; }
+	decltype(tcpa_) get_tcpa() const { return tcpa_; }
+	decltype(unknown_) get_unknown() const { return unknown_; }
+	decltype(target_name_) get_target_name() const { return target_name_; }
+	decltype(target_status_) get_target_status() const { return target_status_; }
+	decltype(reference_target_) get_reference_target() const { return reference_target_; }
 
-	void set_target_number(uint32_t t) noexcept { target_number = t; }
-	void set_target_distance(double t) noexcept { target_distance = t; }
+	void set_target_number(uint32_t t) noexcept { target_number_ = t; }
+	void set_target_distance(double t) noexcept { target_distance_ = t; }
 	void set_bearing_from_ownship(double t, reference r) noexcept
 	{
-		bearing_from_ownship = t;
-		bearing_from_ownship_ref = r;
+		bearing_from_ownship_ = t;
+		bearing_from_ownship_ref_ = r;
 	}
-	void set_target_speed(double t) noexcept { target_speed = t; }
+	void set_target_speed(double t) noexcept { target_speed_ = t; }
 	void set_target_course(double t, reference r) noexcept
 	{
-		target_course = t;
-		target_course_ref = r;
+		target_course_ = t;
+		target_course_ref_ = r;
 	}
-	void set_distance_cpa(double t) noexcept { distance_cpa = t; }
-	void set_tcpa(double t) noexcept { tcpa = t; }
-	void set_unknown(char t) noexcept { unknown = t; }
-	void set_target_name(const std::string & t) { target_name = t; }
-	void set_target_status(char t) noexcept { target_status = t; }
-	void set_reference_target(char t) noexcept { reference_target = t; }
+	void set_distance_cpa(double t) noexcept { distance_cpa_ = t; }
+	void set_tcpa(double t) noexcept { tcpa_ = t; }
+	void set_unknown(char t) noexcept { unknown_ = t; }
+	void set_target_name(const std::string & t) { target_name_ = t; }
+	void set_target_status(char t) noexcept { target_status_ = t; }
+	void set_reference_target(char t) noexcept { reference_target_ = t; }
 };
 }
 }

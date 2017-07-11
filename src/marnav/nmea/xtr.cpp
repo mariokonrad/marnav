@@ -18,16 +18,16 @@ xtr::xtr(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 3)
 		throw std::invalid_argument{"invalid number of fields in xtr"};
 
-	read(*(first + 0), cross_track_error_magnitude);
-	read(*(first + 1), direction_to_steer);
-	read(*(first + 2), cross_track_unit);
+	read(*(first + 0), cross_track_error_magnitude_);
+	read(*(first + 1), direction_to_steer_);
+	read(*(first + 2), cross_track_unit_);
 }
 
 void xtr::append_data_to(std::string & s) const
 {
-	append(s, to_string(cross_track_error_magnitude));
-	append(s, to_string(direction_to_steer));
-	append(s, to_string(cross_track_unit));
+	append(s, to_string(cross_track_error_magnitude_));
+	append(s, to_string(direction_to_steer_));
+	append(s, to_string(cross_track_unit_));
 }
 }
 }

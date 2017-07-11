@@ -42,26 +42,26 @@ public:
 	tag_block & operator=(tag_block &&) = default;
 
 public:
-	bool is_unix_time_valid() const { return unix_time > 0; }
-	bool is_line_count_valid() const { return line_count > 0; }
-	bool is_relative_time_valid() const { return relative_time > 0; }
-	bool is_destination_valid() const { return !destination.empty(); }
-	bool is_source_valid() const { return !source.empty(); }
-	bool is_text_valid() const { return !text.empty(); }
-	bool is_group_valid() const { return group.is_valid(); }
+	bool is_unix_time_valid() const { return unix_time_ > 0; }
+	bool is_line_count_valid() const { return line_count_ > 0; }
+	bool is_relative_time_valid() const { return relative_time_ > 0; }
+	bool is_destination_valid() const { return !destination_.empty(); }
+	bool is_source_valid() const { return !source_.empty(); }
+	bool is_text_valid() const { return !text_.empty(); }
+	bool is_group_valid() const { return group_.is_valid(); }
 
-	int64_t get_unix_time() const { return unix_time; }
-	int get_line_count() const { return line_count; }
-	int get_relative_time() const { return relative_time; }
-	sentence_group get_group() const { return group; }
-	std::string get_destination() const { return destination; }
-	std::string get_source() const { return source; }
-	std::string get_text() const { return text; }
+	int64_t get_unix_time() const { return unix_time_; }
+	int get_line_count() const { return line_count_; }
+	int get_relative_time() const { return relative_time_; }
+	sentence_group get_group() const { return group_; }
+	std::string get_destination() const { return destination_; }
+	std::string get_source() const { return source_; }
+	std::string get_text() const { return text_; }
 
-	void set_unix_time(int64_t t) { unix_time = t; }
-	void set_line_count(int t) { line_count = t; }
-	void set_relative_time(int t) { relative_time = t; }
-	void set_group(sentence_group t) { group = t; }
+	void set_unix_time(int64_t t) { unix_time_ = t; }
+	void set_line_count(int t) { line_count_ = t; }
+	void set_relative_time(int t) { relative_time_ = t; }
+	void set_group(sentence_group t) { group_ = t; }
 	void set_destination(const std::string & t);
 	void set_source(const std::string & t);
 	void set_text(const std::string & t);
@@ -69,23 +69,23 @@ public:
 private:
 	/// Unix time stamp.
 	/// Integral value greater than zero.
-	int64_t unix_time = 0;
+	int64_t unix_time_ = 0;
 
 	/// Destination, max. 15 characters.
-	std::string destination;
+	std::string destination_;
 
-	sentence_group group;
-
-	/// Integral value greater than zero.
-	int line_count = 0;
+	sentence_group group_;
 
 	/// Integral value greater than zero.
-	int relative_time = 0;
+	int line_count_ = 0;
 
-	std::string source;
+	/// Integral value greater than zero.
+	int relative_time_ = 0;
+
+	std::string source_;
 
 	/// Text string, max. 15 characters.
-	std::string text;
+	std::string text_;
 };
 
 tag_block make_tag_block(const std::string & s);

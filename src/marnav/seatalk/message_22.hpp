@@ -31,12 +31,12 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint32_t distance; // in 1/10th nautical miles
+	uint32_t distance_; // in 1/10th nautical miles
 
 public:
-	uint32_t get_distance() const noexcept { return distance; }
+	uint32_t get_distance() const noexcept { return distance_; }
 
-	void set_distance(uint32_t t) noexcept { distance = t; }
+	void set_distance(uint32_t t) noexcept { distance_ = t; }
 };
 }
 }

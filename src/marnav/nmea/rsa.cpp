@@ -18,30 +18,30 @@ rsa::rsa(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 4)
 		throw std::invalid_argument{"invalid number of fields in rsa"};
 
-	read(*(first + 0), rudder1);
-	read(*(first + 1), rudder1_valid);
-	read(*(first + 2), rudder2);
-	read(*(first + 3), rudder2_valid);
+	read(*(first + 0), rudder1_);
+	read(*(first + 1), rudder1_valid_);
+	read(*(first + 2), rudder2_);
+	read(*(first + 3), rudder2_valid_);
 }
 
 void rsa::set_rudder1(double t) noexcept
 {
-	rudder1 = t;
-	rudder1_valid = status::ok;
+	rudder1_ = t;
+	rudder1_valid_ = status::ok;
 }
 
 void rsa::set_rudder2(double t) noexcept
 {
-	rudder2 = t;
-	rudder2_valid = status::ok;
+	rudder2_ = t;
+	rudder2_valid_ = status::ok;
 }
 
 void rsa::append_data_to(std::string & s) const
 {
-	append(s, format(rudder1, 1));
-	append(s, to_string(rudder1_valid));
-	append(s, format(rudder2, 1));
-	append(s, to_string(rudder2_valid));
+	append(s, format(rudder1_, 1));
+	append(s, to_string(rudder1_valid_));
+	append(s, format(rudder2_, 1));
+	append(s, to_string(rudder2_valid_));
 }
 }
 }

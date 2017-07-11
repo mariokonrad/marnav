@@ -29,7 +29,7 @@ public:
 
 	void close();
 	bool read();
-	uint32_t get_collisions() const { return ctx.collisions; }
+	uint32_t get_collisions() const { return ctx_.collisions; }
 
 protected:
 	virtual void process_message(const seatalk::raw &) = 0;
@@ -55,8 +55,8 @@ private:
 	void process_seatalk();
 	bool read_data();
 
-	context ctx;
-	std::unique_ptr<device> dev; ///< Device to read data from.
+	context ctx_;
+	std::unique_ptr<device> dev_; ///< Device to read data from.
 };
 }
 }

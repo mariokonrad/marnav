@@ -70,20 +70,20 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	uint32_t number_of_messages = 1;
-	uint32_t sentence_number = 1;
-	query_flag flag = query_flag::query;
-	uint64_t address = 0;
+	uint32_t number_of_messages_ = 1;
+	uint32_t sentence_number_ = 1;
+	query_flag flag_ = query_flag::query;
+	uint64_t address_ = 0;
 
 public:
-	decltype(number_of_messages) get_number_of_messages() const { return number_of_messages; }
-	decltype(sentence_number) get_sentence_number() const { return sentence_number; }
-	decltype(flag) get_flag() const { return flag; }
+	decltype(number_of_messages_) get_number_of_messages() const { return number_of_messages_; }
+	decltype(sentence_number_) get_sentence_number() const { return sentence_number_; }
+	decltype(flag_) get_flag() const { return flag_; }
 	utils::mmsi get_mmsi() const;
 
-	void set_number_of_messages(uint32_t t) noexcept { number_of_messages = t; }
-	void set_sentence_number(uint32_t t) noexcept { sentence_number = t; }
-	void set_flag(query_flag t) noexcept { flag = t; }
+	void set_number_of_messages(uint32_t t) noexcept { number_of_messages_ = t; }
+	void set_sentence_number(uint32_t t) noexcept { sentence_number_ = t; }
+	void set_flag(query_flag t) noexcept { flag_ = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept;
 };
 

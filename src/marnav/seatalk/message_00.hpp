@@ -40,27 +40,27 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	bool anchor_alarm_active;
-	bool metric_display_units;
-	bool transducer_defective;
-	bool depth_alarm_active;
-	bool shallow_depth_alarm_active;
-	uint16_t depth; // in 1/10th of feet, 1 m = 3.2808 feet
+	bool anchor_alarm_active_;
+	bool metric_display_units_;
+	bool transducer_defective_;
+	bool depth_alarm_active_;
+	bool shallow_depth_alarm_active_;
+	uint16_t depth_; // in 1/10th of feet, 1 m = 3.2808 feet
 
 public:
-	bool get_anchor_alarm_active() const noexcept { return anchor_alarm_active; }
-	bool get_metric_display_units() const noexcept { return metric_display_units; }
-	bool get_transducer_defective() const noexcept { return transducer_defective; }
-	bool get_depth_alarm_active() const noexcept { return depth_alarm_active; }
-	bool get_shallow_depth_alarm_active() const noexcept { return shallow_depth_alarm_active; }
-	uint16_t get_depth() const noexcept { return depth; }
+	bool get_anchor_alarm_active() const noexcept { return anchor_alarm_active_; }
+	bool get_metric_display_units() const noexcept { return metric_display_units_; }
+	bool get_transducer_defective() const noexcept { return transducer_defective_; }
+	bool get_depth_alarm_active() const noexcept { return depth_alarm_active_; }
+	bool get_shallow_depth_alarm_active() const noexcept { return shallow_depth_alarm_active_; }
+	uint16_t get_depth() const noexcept { return depth_; }
 
-	void set_anchor_alarm_active(bool t) noexcept { anchor_alarm_active = t; }
-	void set_metric_display_units(bool t) noexcept { metric_display_units = t; }
-	void set_transducer_defective(bool t) noexcept { transducer_defective = t; }
-	void set_depth_alarm_active(bool t) noexcept { depth_alarm_active = t; }
-	void set_shallow_depth_alarm_active(bool t) noexcept { shallow_depth_alarm_active = t; }
-	void set_depth(uint16_t t) noexcept { depth = t; }
+	void set_anchor_alarm_active(bool t) noexcept { anchor_alarm_active_ = t; }
+	void set_metric_display_units(bool t) noexcept { metric_display_units_ = t; }
+	void set_transducer_defective(bool t) noexcept { transducer_defective_ = t; }
+	void set_depth_alarm_active(bool t) noexcept { depth_alarm_active_ = t; }
+	void set_shallow_depth_alarm_active(bool t) noexcept { shallow_depth_alarm_active_ = t; }
+	void set_depth(uint16_t t) noexcept { depth_ = t; }
 
 public:
 	double get_depth_meters() const noexcept;

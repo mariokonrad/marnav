@@ -50,23 +50,23 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<source_id> source;
-	utils::optional<uint32_t> source_number;
-	utils::optional<double> revolutions;
-	utils::optional<double> propeller_pitch;
-	utils::optional<status> data_valid;
+	utils::optional<source_id> source_;
+	utils::optional<uint32_t> source_number_;
+	utils::optional<double> revolutions_;
+	utils::optional<double> propeller_pitch_;
+	utils::optional<status> data_valid_;
 
 public:
-	decltype(source) get_source() const { return source; }
-	decltype(source_number) get_source_number() const { return source_number; }
-	decltype(revolutions) get_revolutions() const { return revolutions; }
-	decltype(propeller_pitch) get_propeller_pitch() const { return propeller_pitch; }
-	decltype(data_valid) get_data_valid() const { return data_valid; }
+	decltype(source_) get_source() const { return source_; }
+	decltype(source_number_) get_source_number() const { return source_number_; }
+	decltype(revolutions_) get_revolutions() const { return revolutions_; }
+	decltype(propeller_pitch_) get_propeller_pitch() const { return propeller_pitch_; }
+	decltype(data_valid_) get_data_valid() const { return data_valid_; }
 
 	void set_source(source_id id, uint32_t num);
-	void set_revolutions(double t) noexcept { revolutions = t; }
-	void set_propeller_pitch(double t) noexcept { propeller_pitch = t; }
-	void set_data_valid(status t) noexcept { data_valid = t; }
+	void set_revolutions(double t) noexcept { revolutions_ = t; }
+	void set_propeller_pitch(double t) noexcept { propeller_pitch_ = t; }
+	void set_data_valid(status t) noexcept { data_valid_ = t; }
 };
 
 std::string to_string(rpm::source_id value);

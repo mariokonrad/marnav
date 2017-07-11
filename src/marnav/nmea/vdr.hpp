@@ -46,20 +46,20 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> degrees_true;
-	utils::optional<reference> degrees_true_ref; // T:true
-	utils::optional<double> degrees_mag;
-	utils::optional<reference> degrees_mag_ref; // M:magnetic
-	utils::optional<double> speed;
-	utils::optional<unit::velocity> speed_unit; // N:knots
+	utils::optional<double> degrees_true_;
+	utils::optional<reference> degrees_true_ref_; // T:true
+	utils::optional<double> degrees_mag_;
+	utils::optional<reference> degrees_mag_ref_; // M:magnetic
+	utils::optional<double> speed_;
+	utils::optional<unit::velocity> speed_unit_; // N:knots
 
 public:
-	decltype(degrees_true) get_degrees_true() const { return degrees_true; }
-	decltype(degrees_true_ref) get_degrees_true_ref() const { return degrees_true_ref; }
-	decltype(degrees_mag) get_degrees_mag() const { return degrees_mag; }
-	decltype(degrees_mag_ref) get_degrees_mag_ref() const { return degrees_mag_ref; }
-	decltype(speed) get_speed() const { return speed; }
-	decltype(speed_unit) get_speed_unit() const { return speed_unit; }
+	decltype(degrees_true_) get_degrees_true() const { return degrees_true_; }
+	decltype(degrees_true_ref_) get_degrees_true_ref() const { return degrees_true_ref_; }
+	decltype(degrees_mag_) get_degrees_mag() const { return degrees_mag_; }
+	decltype(degrees_mag_ref_) get_degrees_mag_ref() const { return degrees_mag_ref_; }
+	decltype(speed_) get_speed() const { return speed_; }
+	decltype(speed_unit_) get_speed_unit() const { return speed_unit_; }
 
 	void set_degrees_true(double t) noexcept;
 	void set_degrees_mag(double t) noexcept;

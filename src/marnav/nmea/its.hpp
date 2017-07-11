@@ -40,17 +40,17 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	double distance = 0.0;
-	unit::distance distance_unit = unit::distance::meter;
+	double distance_ = 0.0;
+	unit::distance distance_unit_ = unit::distance::meter;
 
 public:
-	decltype(distance) get_distance() const { return distance; }
-	decltype(distance_unit) get_distance_unit() const { return distance_unit; }
+	decltype(distance_) get_distance() const { return distance_; }
+	decltype(distance_unit_) get_distance_unit() const { return distance_unit_; }
 
 	void set_distance(double t) noexcept
 	{
-		distance = t;
-		distance_unit = unit::distance::meter;
+		distance_ = t;
+		distance_unit_ = unit::distance::meter;
 	};
 };
 }

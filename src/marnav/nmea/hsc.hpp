@@ -43,16 +43,16 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> heading_true;
-	utils::optional<reference> heading_true_ref;
-	utils::optional<double> heading_mag;
-	utils::optional<reference> heading_mag_ref;
+	utils::optional<double> heading_true_;
+	utils::optional<reference> heading_true_ref_;
+	utils::optional<double> heading_mag_;
+	utils::optional<reference> heading_mag_ref_;
 
 public:
-	decltype(heading_true) get_heading_true() const { return heading_true; }
-	decltype(heading_true_ref) get_heading_true_ref() const { return heading_true_ref; }
-	decltype(heading_mag) get_heading_mag() const { return heading_mag; }
-	decltype(heading_mag_ref) get_heading_mag_ref() const { return heading_mag_ref; }
+	decltype(heading_true_) get_heading_true() const { return heading_true_; }
+	decltype(heading_true_ref_) get_heading_true_ref() const { return heading_true_ref_; }
+	decltype(heading_mag_) get_heading_mag() const { return heading_mag_; }
+	decltype(heading_mag_ref_) get_heading_mag_ref() const { return heading_mag_ref_; }
 
 	void set_heading_true(double t) noexcept;
 	void set_heading_mag(double t) noexcept;

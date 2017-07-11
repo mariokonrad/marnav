@@ -33,12 +33,12 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	response_level level;
+	response_level level_;
 
 public:
-	response_level get_level() const { return level; }
+	response_level get_level() const { return level_; }
 
-	void set_level(response_level t) { level = t; }
+	void set_level(response_level t) { level_ = t; }
 };
 }
 }

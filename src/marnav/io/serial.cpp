@@ -114,11 +114,11 @@ serial::~serial()
 
 serial::serial(const std::string & dv, baud b, databits d, stopbits s, parity p)
 	: fd(-1)
-	, dev(dv)
-	, baud_rate(b)
-	, data_bits(d)
-	, stop_bits(s)
-	, par(p)
+	, dev_(dv)
+	, baud_rate_(b)
+	, data_bits_(d)
+	, stop_bits_(s)
+	, par_(p)
 {
 }
 
@@ -131,18 +131,18 @@ void serial::open()
 	if (fd >= 0)
 		return;
 
-	fd = ::open(dev.c_str(), O_RDWR | O_NOCTTY);
+	fd = ::open(dev_.c_str(), O_RDWR | O_NOCTTY);
 	if (fd < 0)
-		throw std::runtime_error{"unable to open device: " + dev};
+		throw std::runtime_error{"unable to open device: " + dev_};
 
 	tcgetattr(fd, &old_tio);
 	memset(&new_tio, 0, sizeof(new_tio));
-	new_tio.c_cflag = detail::get_baud(baud_rate) | detail::get_data_bits(data_bits)
-		| detail::get_stop_bits(stop_bits) | detail::get_parity_cflag(par)
+	new_tio.c_cflag = detail::get_baud(baud_rate_) | detail::get_data_bits(data_bits_)
+		| detail::get_stop_bits(stop_bits_) | detail::get_parity_cflag(par_)
 		| CLOCAL // ignore modem control lines
 		| CREAD // enable receiver
 		;
-	new_tio.c_iflag = 0 | detail::get_parity_iflag(par);
+	new_tio.c_iflag = 0 | detail::get_parity_iflag(par_);
 	new_tio.c_oflag = 0;
 	new_tio.c_lflag = 0;
 

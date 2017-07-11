@@ -41,10 +41,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	std::string map_datum;
+	std::string map_datum_;
 
 public:
-	decltype(map_datum) get_map_datum() const { return map_datum; }
+	decltype(map_datum_) get_map_datum() const { return map_datum_; }
 
 	void set_map_datum(const std::string & t) noexcept;
 };

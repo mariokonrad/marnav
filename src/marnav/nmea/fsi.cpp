@@ -19,33 +19,33 @@ fsi::fsi(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 5)
 		throw std::invalid_argument{"invalid number of fields in fsi"};
 
-	read(*(first + 0), tx_frequency);
-	read(*(first + 1), rx_frequency);
-	read(*(first + 2), communications_mode);
-	read(*(first + 3), power_level);
-	read(*(first + 4), sentence_status);
+	read(*(first + 0), tx_frequency_);
+	read(*(first + 1), rx_frequency_);
+	read(*(first + 2), communications_mode_);
+	read(*(first + 3), power_level_);
+	read(*(first + 4), sentence_status_);
 }
 
 void fsi::set_power_level(uint32_t t)
 {
 	if (t > 9)
 		throw std::invalid_argument{"invalid value for power_level (0..9)"};
-	power_level = t;
+	power_level_ = t;
 }
 
 void fsi::set_sentence_status(char t)
 {
 	check_value(t, {'R', 'C'}, "sentence_status");
-	sentence_status = t;
+	sentence_status_ = t;
 }
 
 void fsi::append_data_to(std::string & s) const
 {
-	append(s, to_string(tx_frequency));
-	append(s, to_string(rx_frequency));
-	append(s, to_string(communications_mode));
-	append(s, to_string(power_level));
-	append(s, to_string(sentence_status));
+	append(s, to_string(tx_frequency_));
+	append(s, to_string(rx_frequency_));
+	append(s, to_string(communications_mode_));
+	append(s, to_string(power_level_));
+	append(s, to_string(sentence_status_));
 }
 }
 }

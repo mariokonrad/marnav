@@ -53,11 +53,11 @@ protected:
 	int fd; ///< File descriptor for serial device communication.
 
 private:
-	std::string dev;
-	baud baud_rate;
-	databits data_bits;
-	stopbits stop_bits;
-	parity par;
+	std::string dev_;
+	baud baud_rate_;
+	databits data_bits_;
+	stopbits stop_bits_;
+	parity par_;
 };
 }
 }

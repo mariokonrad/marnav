@@ -8,7 +8,7 @@ namespace seatalk
 
 message_53::message_53()
 	: message(ID)
-	, cog(0.0)
+	, cog_(0.0)
 {
 }
 
@@ -27,23 +27,23 @@ std::unique_ptr<message> message_53::parse(const raw & data)
 	cog += static_cast<double>(data[2] & 0x3f) * 2.0;
 	cog += static_cast<double>((data[1] >> 4) & 0x0c) / 8.0;
 
-	msg.cog = cog;
+	msg.cog_ = cog;
 
 	return result;
 }
 
 raw message_53::get_data() const
 {
-	const uint8_t u1 = static_cast<uint8_t>(cog / 90.0) & 0x03;
-	const uint8_t u2 = static_cast<uint8_t>(std::fmod(cog, 2.0) * 8.0) & 0x0c;
-	const uint8_t vw = static_cast<uint8_t>(std::fmod(cog, 90.0) / 2.0) & 0x3f;
+	const uint8_t u1 = static_cast<uint8_t>(cog_ / 90.0) & 0x03;
+	const uint8_t u2 = static_cast<uint8_t>(std::fmod(cog_, 2.0) * 8.0) & 0x0c;
+	const uint8_t vw = static_cast<uint8_t>(std::fmod(cog_, 90.0) / 2.0) & 0x3f;
 
 	return raw{static_cast<uint8_t>(ID), static_cast<uint8_t>(((u1 + u2) << 4) & 0xf0), vw};
 }
 
 void message_53::set_cog(double t) noexcept
 {
-	cog = std::fmod(std::abs(t), 360.0);
+	cog_ = std::fmod(std::abs(t), 360.0);
 }
 }
 }

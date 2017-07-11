@@ -6,8 +6,8 @@ namespace seatalk
 {
 message_86::message_86()
 	: message(ID)
-	, org(origin::st1000)
-	, k(key::key_standby)
+	, org_(origin::st1000)
+	, k_(key::key_standby)
 {
 }
 
@@ -27,17 +27,17 @@ std::unique_ptr<message> message_86::parse(const raw & data)
 	if (kn != ki)
 		throw std::invalid_argument{"data error in SeaTalk message 86"};
 
-	msg.org = static_cast<message_86::origin>((data[1] >> 4) & 0x0f);
-	msg.k = static_cast<key>(data[2]);
+	msg.org_ = static_cast<message_86::origin>((data[1] >> 4) & 0x0f);
+	msg.k_ = static_cast<key>(data[2]);
 
 	return result;
 }
 
 raw message_86::get_data() const
 {
-	const uint8_t vn = static_cast<uint8_t>(k);
+	const uint8_t vn = static_cast<uint8_t>(k_);
 	const uint8_t vi = ~vn;
-	const uint8_t o = static_cast<uint8_t>(org) & 0x0f;
+	const uint8_t o = static_cast<uint8_t>(org_) & 0x0f;
 	return raw{static_cast<uint8_t>(ID), static_cast<uint8_t>(0x01 | (o << 4)), vn, vi};
 }
 }

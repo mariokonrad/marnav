@@ -58,33 +58,33 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	uint32_t number = 0;
-	geo::latitude lat;
-	direction lat_hem = direction::north;
-	geo::longitude lon;
-	direction lon_hem = direction::east;
-	waypoint name;
-	nmea::time time_utc;
-	target_status status = target_status::tracking;
-	utils::optional<char> reference_target;
+	uint32_t number_ = 0;
+	geo::latitude lat_;
+	direction lat_hem_ = direction::north;
+	geo::longitude lon_;
+	direction lon_hem_ = direction::east;
+	waypoint name_;
+	nmea::time time_utc_;
+	target_status status_ = target_status::tracking;
+	utils::optional<char> reference_target_;
 
 public:
-	decltype(number) get_number() const { return number; }
-	decltype(name) get_name() const { return name; }
-	decltype(time_utc) get_time_utc() const { return time_utc; }
-	decltype(status) get_status() const { return status; }
-	decltype(reference_target) get_reference_target() const { return reference_target; }
+	decltype(number_) get_number() const { return number_; }
+	decltype(name_) get_name() const { return name_; }
+	decltype(time_utc_) get_time_utc() const { return time_utc_; }
+	decltype(status_) get_status() const { return status_; }
+	decltype(reference_target_) get_reference_target() const { return reference_target_; }
 
 	geo::longitude get_longitude() const;
 	geo::latitude get_latitude() const;
 
-	void set_number(uint32_t t) noexcept { number = t; }
+	void set_number(uint32_t t) noexcept { number_ = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_name(const waypoint & t) { name = t; }
-	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
-	void set_status(target_status t) noexcept { status = t; }
-	void set_reference_target(char t) noexcept { reference_target = t; }
+	void set_name(const waypoint & t) { name_ = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
+	void set_status(target_status t) noexcept { status_ = t; }
+	void set_reference_target(char t) noexcept { reference_target_ = t; }
 };
 }
 }

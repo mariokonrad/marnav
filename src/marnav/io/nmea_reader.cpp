@@ -14,19 +14,19 @@ nmea_reader::~nmea_reader()
 ///
 /// @param[in] d The device to read data from, will be opened.
 nmea_reader::nmea_reader(std::unique_ptr<device> && d)
-	: raw(0)
-	, dev(std::move(d))
+	: raw_(0)
+	, dev_(std::move(d))
 {
-	sentence.reserve(nmea::sentence::max_length + 1);
-	if (dev)
-		dev->open();
+	sentence_.reserve(nmea::sentence::max_length + 1);
+	if (dev_)
+		dev_->open();
 }
 
 void nmea_reader::close()
 {
-	if (dev)
-		dev->close();
-	dev.reset();
+	if (dev_)
+		dev_->close();
+	dev_.reset();
 }
 
 /// Reads data from the device.
@@ -36,14 +36,14 @@ void nmea_reader::close()
 /// @exception std::runtime_error The device was invalid or read error.
 bool nmea_reader::read_data()
 {
-	if (!dev)
+	if (!dev_)
 		throw std::runtime_error{"device invalid"};
-	int rc = dev->read(&raw, sizeof(raw));
+	int rc = dev_->read(&raw_, sizeof(raw_));
 	if (rc == 0)
 		return false;
 	if (rc < 0)
 		throw std::runtime_error{"read error"};
-	if (rc != sizeof(raw))
+	if (rc != sizeof(raw_))
 		throw std::runtime_error{"read error"};
 	return true;
 }
@@ -54,23 +54,23 @@ bool nmea_reader::read_data()
 ///   Maybe the end of line was missed or left out.
 void nmea_reader::process_nmea()
 {
-	switch (raw) {
+	switch (raw_) {
 		case '\r':
 			break;
 		case '\n': // end of sentence
-			process_sentence(sentence);
-			sentence.clear();
+			process_sentence(sentence_);
+			sentence_.clear();
 			break;
 		default:
 			// ignore invalid characters. if this makes the sentence incomplete,
 			// the sentence would have been invalid anyway. the result will be
 			// an invalid sentence or a std::length_error.
-			if ((raw <= 32) || (raw >= 127))
+			if ((raw_ <= 32) || (raw_ >= 127))
 				return;
 
-			if (sentence.size() > nmea::sentence::max_length)
+			if (sentence_.size() > nmea::sentence::max_length)
 				throw std::length_error{"sentence size to large. receiving NMEA data?"};
-			sentence += raw;
+			sentence_ += raw_;
 			break;
 	}
 }

@@ -41,11 +41,11 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	double cog;
+	double cog_;
 
 public:
 	/// Returns the COG in degrees.
-	double get_cog() const noexcept { return cog; }
+	double get_cog() const noexcept { return cog_; }
 
 	void set_cog(double t) noexcept;
 };

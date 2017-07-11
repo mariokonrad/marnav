@@ -41,15 +41,15 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> deg_per_minute;
-	utils::optional<status> data_valid;
+	utils::optional<double> deg_per_minute_;
+	utils::optional<status> data_valid_;
 
 public:
-	decltype(deg_per_minute) get_deg_per_minute() const { return deg_per_minute; }
-	decltype(data_valid) get_data_valid() const { return data_valid; }
+	decltype(deg_per_minute_) get_deg_per_minute() const { return deg_per_minute_; }
+	decltype(data_valid_) get_data_valid() const { return data_valid_; }
 
-	void set_deg_per_minute(double t) noexcept { deg_per_minute = t; }
-	void set_data_valid(status t) noexcept { data_valid = t; }
+	void set_deg_per_minute(double t) noexcept { deg_per_minute_ = t; }
+	void set_data_valid(status t) noexcept { data_valid_ = t; }
 };
 }
 }

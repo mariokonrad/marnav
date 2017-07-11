@@ -33,12 +33,12 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	int32_t temperature; // temperature in 1/10th degrees celsius
+	int32_t temperature_; // temperature in 1/10th degrees celsius
 
 public:
-	int32_t get_temperature() const noexcept { return temperature; }
+	int32_t get_temperature() const noexcept { return temperature_; }
 
-	void set_temperature(int32_t t) noexcept { temperature = t; }
+	void set_temperature(int32_t t) noexcept { temperature_ = t; }
 };
 }
 }

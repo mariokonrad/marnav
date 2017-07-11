@@ -31,7 +31,7 @@ std::unique_ptr<message> message_51::parse(const raw & data)
 	const geo::longitude::hemisphere hemisphere
 		= (m & 0x8000) ? geo::longitude::hemisphere::east : geo::longitude::hemisphere::west;
 
-	msg.lon = geo::longitude{degrees, minutes, seconds, hemisphere};
+	msg.lon_ = geo::longitude{degrees, minutes, seconds, hemisphere};
 
 	// deliberately ignored 'Z'
 
@@ -41,12 +41,12 @@ std::unique_ptr<message> message_51::parse(const raw & data)
 raw message_51::get_data() const
 {
 	uint16_t m = 0;
-	m += lon.minutes() * 100;
-	m += (lon.seconds() * 100) / 60;
-	if (lon.hem() == geo::longitude::hemisphere::east)
+	m += lon_.minutes() * 100;
+	m += (lon_.seconds() * 100) / 60;
+	if (lon_.hem() == geo::longitude::hemisphere::east)
 		m |= 0x8000;
 
-	return raw{static_cast<uint8_t>(ID), 0x02, static_cast<uint8_t>(lon.degrees() & 0xff),
+	return raw{static_cast<uint8_t>(ID), 0x02, static_cast<uint8_t>(lon_.degrees() & 0xff),
 		static_cast<uint8_t>((m >> 8) & 0xff), static_cast<uint8_t>((m >> 0) & 0xff)};
 }
 }

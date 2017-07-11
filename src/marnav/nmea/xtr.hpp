@@ -43,24 +43,24 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> cross_track_error_magnitude;
-	utils::optional<side> direction_to_steer;
-	utils::optional<unit::distance> cross_track_unit;
+	utils::optional<double> cross_track_error_magnitude_;
+	utils::optional<side> direction_to_steer_;
+	utils::optional<unit::distance> cross_track_unit_;
 
 public:
-	decltype(cross_track_error_magnitude) get_cross_track_error_magnitude() const
+	decltype(cross_track_error_magnitude_) get_cross_track_error_magnitude() const
 	{
-		return cross_track_error_magnitude;
+		return cross_track_error_magnitude_;
 	}
-	decltype(direction_to_steer) get_direction_to_steer() const { return direction_to_steer; }
-	decltype(cross_track_unit) get_cross_track_unit() const { return cross_track_unit; }
+	decltype(direction_to_steer_) get_direction_to_steer() const { return direction_to_steer_; }
+	decltype(cross_track_unit_) get_cross_track_unit() const { return cross_track_unit_; }
 
 	void set_cross_track_error_magnitude(double t) noexcept
 	{
-		cross_track_error_magnitude = t;
-		cross_track_unit = unit::distance::nm;
+		cross_track_error_magnitude_ = t;
+		cross_track_unit_ = unit::distance::nm;
 	}
-	void set_direction_to_steer(side t) noexcept { direction_to_steer = t; }
+	void set_direction_to_steer(side t) noexcept { direction_to_steer_ = t; }
 };
 }
 }

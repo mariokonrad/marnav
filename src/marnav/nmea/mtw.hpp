@@ -40,12 +40,12 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> temperature; // water temperature
-	utils::optional<unit::temperature> temperature_unit; // unit degrees, C:celcius
+	utils::optional<double> temperature_; // water temperature
+	utils::optional<unit::temperature> temperature_unit_; // unit degrees, C:celcius
 
 public:
-	decltype(temperature) get_temperature() const { return temperature; }
-	decltype(temperature_unit) get_temperature_unit() const { return temperature_unit; }
+	decltype(temperature_) get_temperature() const { return temperature_; }
+	decltype(temperature_unit_) get_temperature_unit() const { return temperature_unit_; }
 
 	void set_temperature(double t) noexcept;
 };

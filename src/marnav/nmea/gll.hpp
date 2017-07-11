@@ -55,27 +55,27 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<geo::latitude> lat;
-	utils::optional<direction> lat_hem;
-	utils::optional<geo::longitude> lon;
-	utils::optional<direction> lon_hem;
-	utils::optional<nmea::time> time_utc;
-	utils::optional<status> data_valid;
-	utils::optional<mode_indicator> mode_ind;
+	utils::optional<geo::latitude> lat_;
+	utils::optional<direction> lat_hem_;
+	utils::optional<geo::longitude> lon_;
+	utils::optional<direction> lon_hem_;
+	utils::optional<nmea::time> time_utc_;
+	utils::optional<status> data_valid_;
+	utils::optional<mode_indicator> mode_ind_;
 
 public:
-	decltype(time_utc) get_time_utc() const { return time_utc; }
-	decltype(data_valid) get_data_valid() const { return data_valid; }
-	decltype(mode_ind) get_mode_ind() const { return mode_ind; }
+	decltype(time_utc_) get_time_utc() const { return time_utc_; }
+	decltype(data_valid_) get_data_valid() const { return data_valid_; }
+	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;
 
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
-	void set_data_valid(status t) noexcept { data_valid = t; }
-	void set_mode_indicator(mode_indicator t) noexcept { mode_ind = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
+	void set_data_valid(status t) noexcept { data_valid_ = t; }
+	void set_mode_indicator(mode_indicator t) noexcept { mode_ind_ = t; }
 };
 }
 }

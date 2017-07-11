@@ -8,7 +8,7 @@ namespace seatalk
 
 message_89::message_89()
 	: message(ID)
-	, value(0.0)
+	, value_(0.0)
 {
 }
 
@@ -27,16 +27,16 @@ std::unique_ptr<message> message_89::parse(const raw & data)
 	t += 2.0 * (data[2] & 0x3f);
 	t += 0.5 * ((data[1] & 0xc0) >> 6);
 
-	msg.value = std::fmod(t, 360.0);
+	msg.value_ = std::fmod(t, 360.0);
 
 	return result;
 }
 
 raw message_89::get_data() const
 {
-	uint8_t u = static_cast<uint8_t>(std::floor(value / 90.0)) & 0x03;
-	uint8_t vw = static_cast<uint8_t>(std::floor((value - (90.0 * u)) / 2.0));
-	u += static_cast<uint8_t>(std::floor(std::fmod(value, 2.0) * 2.0)) << 2;
+	uint8_t u = static_cast<uint8_t>(std::floor(value_ / 90.0)) & 0x03;
+	uint8_t vw = static_cast<uint8_t>(std::floor((value_ - (90.0 * u)) / 2.0));
+	u += static_cast<uint8_t>(std::floor(std::fmod(value_, 2.0) * 2.0)) << 2;
 
 	return raw{static_cast<uint8_t>(ID), static_cast<uint8_t>(0x02 | (u << 4)), vw, 0x00, 0x20};
 }
@@ -47,7 +47,7 @@ raw message_89::get_data() const
 /// @param[in] t Heading in degrees, steps of `0.5`. The absolute value will be used.
 void message_89::set_heading(double t)
 {
-	value = std::fmod(std::fabs(t), 360.0);
+	value_ = std::fmod(std::fabs(t), 360.0);
 }
 }
 }

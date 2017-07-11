@@ -62,19 +62,19 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	nmea::time time_utc;
-	residual_usage usage;
-	std::array<utils::optional<double>, num_satellite_residuals> sat_residual;
+	nmea::time time_utc_;
+	residual_usage usage_;
+	std::array<utils::optional<double>, num_satellite_residuals> sat_residual_;
 
 	void check_index(int index) const;
 
 public:
-	decltype(time_utc) get_time_utc() const { return time_utc; }
-	decltype(usage) get_usage() const { return usage; }
+	decltype(time_utc_) get_time_utc() const { return time_utc_; }
+	decltype(usage_) get_usage() const { return usage_; }
 	utils::optional<double> get_sat_residual(int index) const;
 
-	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
-	void set_usage(residual_usage t) noexcept { usage = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
+	void set_usage(residual_usage t) noexcept { usage_ = t; }
 	void set_sat_residual(int index, double value);
 };
 

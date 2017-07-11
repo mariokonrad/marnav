@@ -37,13 +37,13 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	double value;
+	double value_;
 
 public:
 	/// Returns the heading in degrees, resolution of `0.5` degrees.
 	///
 	/// This value will always be in the interval `[0.0 .. 359.5]`.
-	double get_heading() const noexcept { return value; }
+	double get_heading() const noexcept { return value_; }
 
 	void set_heading(double t);
 };

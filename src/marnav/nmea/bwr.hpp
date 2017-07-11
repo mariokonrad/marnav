@@ -67,42 +67,42 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<nmea::time> time_utc;
-	utils::optional<geo::latitude> lat;
-	utils::optional<direction> lat_hem;
-	utils::optional<geo::longitude> lon;
-	utils::optional<direction> lon_hem;
-	utils::optional<double> bearing_true;
-	utils::optional<reference> bearing_true_ref;
-	utils::optional<double> bearing_mag;
-	utils::optional<reference> bearing_mag_ref;
-	utils::optional<double> distance; // nautical miles
-	utils::optional<unit::distance> distance_unit;
-	utils::optional<waypoint> waypoint_id;
-	utils::optional<mode_indicator> mode_ind;
+	utils::optional<nmea::time> time_utc_;
+	utils::optional<geo::latitude> lat_;
+	utils::optional<direction> lat_hem_;
+	utils::optional<geo::longitude> lon_;
+	utils::optional<direction> lon_hem_;
+	utils::optional<double> bearing_true_;
+	utils::optional<reference> bearing_true_ref_;
+	utils::optional<double> bearing_mag_;
+	utils::optional<reference> bearing_mag_ref_;
+	utils::optional<double> distance_; // nautical miles
+	utils::optional<unit::distance> distance_unit_;
+	utils::optional<waypoint> waypoint_id_;
+	utils::optional<mode_indicator> mode_ind_;
 
 public:
-	decltype(time_utc) get_time_utc() const { return time_utc; }
-	decltype(bearing_true) get_bearing_true() const { return bearing_true; }
-	decltype(bearing_true_ref) get_bearing_true_ref() const { return bearing_true_ref; }
-	decltype(bearing_mag) get_bearing_mag() const { return bearing_mag; }
-	decltype(bearing_mag_ref) get_bearing_mag_ref() const { return bearing_mag_ref; }
-	decltype(distance) get_distance() const { return distance; }
-	decltype(distance_unit) get_distance_unit() const { return distance_unit; }
-	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
-	decltype(mode_ind) get_mode_ind() const { return mode_ind; }
+	decltype(time_utc_) get_time_utc() const { return time_utc_; }
+	decltype(bearing_true_) get_bearing_true() const { return bearing_true_; }
+	decltype(bearing_true_ref_) get_bearing_true_ref() const { return bearing_true_ref_; }
+	decltype(bearing_mag_) get_bearing_mag() const { return bearing_mag_; }
+	decltype(bearing_mag_ref_) get_bearing_mag_ref() const { return bearing_mag_ref_; }
+	decltype(distance_) get_distance() const { return distance_; }
+	decltype(distance_unit_) get_distance_unit() const { return distance_unit_; }
+	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }
+	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;
 
-	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
 	void set_bearing_true(double t) noexcept;
 	void set_bearing_mag(double t) noexcept;
 	void set_distance(double t) noexcept;
-	void set_waypoint(const waypoint & id) { waypoint_id = id; }
-	void set_mode_ind(mode_indicator t) { mode_ind = t; }
+	void set_waypoint(const waypoint & id) { waypoint_id_ = id; }
+	void set_mode_ind(mode_indicator t) { mode_ind_ = t; }
 };
 }
 }

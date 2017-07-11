@@ -45,21 +45,21 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	double depth_meter = 0.0;
-	double transducer_offset = 0.0;
-	utils::optional<double> max_depth;
+	double depth_meter_ = 0.0;
+	double transducer_offset_ = 0.0;
+	utils::optional<double> max_depth_;
 
 public:
-	decltype(depth_meter) get_depth_meter() const noexcept { return depth_meter; }
-	decltype(transducer_offset) get_transducer_offset() const noexcept
+	decltype(depth_meter_) get_depth_meter() const noexcept { return depth_meter_; }
+	decltype(transducer_offset_) get_transducer_offset() const noexcept
 	{
-		return transducer_offset;
+		return transducer_offset_;
 	}
-	decltype(max_depth) get_max_depth() const noexcept { return max_depth; }
+	decltype(max_depth_) get_max_depth() const noexcept { return max_depth_; }
 
-	void set_depth_meter(double t) noexcept { depth_meter = t; }
-	void set_transducer_offset(double t) noexcept { transducer_offset = t; }
-	void set_max_depth(double t) noexcept { max_depth = t; }
+	void set_depth_meter(double t) noexcept { depth_meter_ = t; }
+	void set_transducer_offset(double t) noexcept { transducer_offset_ = t; }
+	void set_max_depth(double t) noexcept { max_depth_ = t; }
 };
 }
 }

@@ -33,7 +33,7 @@ std::unique_ptr<message> message_58::parse(const raw & data)
 	if (((data[1] & 0x20) == 0x00) && (std::abs(lon) > std::numeric_limits<double>::epsilon()))
 		lon = -lon;
 
-	msg.pos = geo::position{geo::latitude{lat}, geo::longitude{lon}};
+	msg.pos_ = geo::position{geo::latitude{lat}, geo::longitude{lon}};
 
 	return result;
 }
@@ -42,13 +42,13 @@ raw message_58::get_data() const
 {
 	uint8_t z = 0;
 
-	const auto lat = pos.lat();
+	const auto lat = pos_.lat();
 	const uint8_t la = lat.degrees();
 	const uint32_t la_min = std::floor(std::fmod(lat.get(), 1.0) * 60.0 / 100.0 * 100 * 1000.0);
 	if (lat.hem() == geo::latitude::hemisphere::south)
 		z |= 0x10;
 
-	const auto lon = pos.lon();
+	const auto lon = pos_.lon();
 	const uint8_t lo = lon.degrees();
 	const uint32_t lo_min
 		= std::floor(std::fmod(lon.get(), 1.0) * 60.0 / 100.0 * 100.0 * 1000.0);

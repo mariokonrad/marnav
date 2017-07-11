@@ -46,32 +46,32 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<nmea::time> time_utc;
-	utils::optional<uint32_t> day;
-	utils::optional<uint32_t> month;
-	utils::optional<uint32_t> year;
-	utils::optional<int32_t> local_zone_hours;
-	utils::optional<int32_t> local_zone_minutes;
+	utils::optional<nmea::time> time_utc_;
+	utils::optional<uint32_t> day_;
+	utils::optional<uint32_t> month_;
+	utils::optional<uint32_t> year_;
+	utils::optional<int32_t> local_zone_hours_;
+	utils::optional<int32_t> local_zone_minutes_;
 
 public:
-	decltype(time_utc) get_time_utc() const { return time_utc; }
-	decltype(day) get_day() const { return day; }
-	decltype(month) get_month() const { return month; }
-	decltype(year) get_year() const { return year; }
-	decltype(local_zone_hours) get_local_zone_hours() const { return local_zone_hours; }
-	decltype(local_zone_minutes) get_local_zone_minutes() const { return local_zone_minutes; }
+	decltype(time_utc_) get_time_utc() const { return time_utc_; }
+	decltype(day_) get_day() const { return day_; }
+	decltype(month_) get_month() const { return month_; }
+	decltype(year_) get_year() const { return year_; }
+	decltype(local_zone_hours_) get_local_zone_hours() const { return local_zone_hours_; }
+	decltype(local_zone_minutes_) get_local_zone_minutes() const { return local_zone_minutes_; }
 
-	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
 	void set_date(uint32_t y, uint32_t m, uint32_t d) noexcept
 	{
-		year = y;
-		month = m;
-		day = d;
+		year_ = y;
+		month_ = m;
+		day_ = d;
 	}
 	void set_local_zone(int32_t h, int32_t m) noexcept
 	{
-		local_zone_hours = h;
-		local_zone_minutes = m;
+		local_zone_hours_ = h;
+		local_zone_minutes_ = m;
 	}
 };
 }

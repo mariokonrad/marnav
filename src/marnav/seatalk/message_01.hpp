@@ -49,12 +49,12 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	equipment_id id;
+	equipment_id id_;
 
 public:
-	equipment_id get_equipment_id() const noexcept { return id; }
+	equipment_id get_equipment_id() const noexcept { return id_; }
 
-	void set_equipment_id(const equipment_id & t) noexcept { id = t; }
+	void set_equipment_id(const equipment_id & t) noexcept { id_ = t; }
 };
 }
 }

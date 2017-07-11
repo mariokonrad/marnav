@@ -9,7 +9,7 @@ checksum_error::checksum_error(uint8_t exp, uint8_t act)
 	, actual(act)
 {
 	snprintf(
-		text, sizeof(text), "checksum error (actual:%02X, expected:%02X)", actual, expected);
+		text_, sizeof(text_), "checksum error (actual:%02X, expected:%02X)", actual, expected);
 }
 
 /// @cond DEV

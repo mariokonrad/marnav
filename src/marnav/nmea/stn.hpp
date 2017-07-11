@@ -37,12 +37,12 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	uint32_t number = 0;
+	uint32_t number_ = 0;
 
 public:
-	decltype(number) get_number() const { return number; }
+	decltype(number_) get_number() const { return number_; }
 
-	void set_number(uint32_t t) noexcept { number = t; }
+	void set_number(uint32_t t) noexcept { number_ = t; }
 };
 }
 }

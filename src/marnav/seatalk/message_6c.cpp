@@ -10,7 +10,7 @@ constexpr equipment_id message_6c::st80_masterview;
 
 message_6c::message_6c()
 	: message(ID)
-	, id(equipment_invalid)
+	, id_(equipment_invalid)
 {
 }
 
@@ -22,14 +22,14 @@ std::unique_ptr<message> message_6c::parse(const raw & data)
 	message_6c & msg = static_cast<message_6c &>(*result);
 
 	for (auto i = 0; i < 6; ++i)
-		msg.id[i] = data[i + 2];
+		msg.id_[i] = data[i + 2];
 
 	return result;
 }
 
 raw message_6c::get_data() const
 {
-	return raw{static_cast<uint8_t>(ID), 0x05, id[0], id[1], id[2], id[3], id[4], id[5]};
+	return raw{static_cast<uint8_t>(ID), 0x05, id_[0], id_[1], id_[2], id_[3], id_[4], id_[5]};
 }
 }
 }

@@ -7,7 +7,7 @@ namespace seatalk
 
 message_66::message_66()
 	: message(ID)
-	, value(alarm::no_alarm)
+	, value_(alarm::no_alarm)
 {
 }
 
@@ -21,14 +21,14 @@ std::unique_ptr<message> message_66::parse(const raw & data)
 	//  66 00 XX
 	// raw  1  2
 
-	msg.value = static_cast<alarm>(data[2]);
+	msg.value_ = static_cast<alarm>(data[2]);
 
 	return result;
 }
 
 raw message_66::get_data() const
 {
-	return raw{static_cast<uint8_t>(ID), 0x00, value};
+	return raw{static_cast<uint8_t>(ID), 0x00, value_};
 }
 
 message_66::alarm operator|(message_66::alarm a, message_66::alarm b) noexcept

@@ -50,32 +50,32 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> track_true;
-	utils::optional<reference> type_true; // T:true
-	utils::optional<double> track_magn;
-	utils::optional<reference> type_magn; // M:magnetic
-	utils::optional<double> speed_kn;
-	utils::optional<unit::velocity> speed_kn_unit; // N:knots
-	utils::optional<double> speed_kmh;
-	utils::optional<unit::velocity> speed_kmh_unit; // K:kilometers per hour
-	utils::optional<mode_indicator> mode_ind; // NMEA 2.3 or newer
+	utils::optional<double> track_true_;
+	utils::optional<reference> type_true_; // T:true
+	utils::optional<double> track_magn_;
+	utils::optional<reference> type_magn_; // M:magnetic
+	utils::optional<double> speed_kn_;
+	utils::optional<unit::velocity> speed_kn_unit_; // N:knots
+	utils::optional<double> speed_kmh_;
+	utils::optional<unit::velocity> speed_kmh_unit_; // K:kilometers per hour
+	utils::optional<mode_indicator> mode_ind_; // NMEA 2.3 or newer
 
 public:
-	decltype(track_true) get_track_true() const { return track_true; }
-	decltype(type_true) get_type_true() const { return type_true; }
-	decltype(track_magn) get_track_magn() const { return track_magn; }
-	decltype(type_magn) get_type_magn() const { return type_magn; }
-	decltype(speed_kn) get_speed_kn() const { return speed_kn; }
-	decltype(speed_kn_unit) get_speed_kn_unit() const { return speed_kn_unit; }
-	decltype(speed_kmh) get_speed_kmh() const { return speed_kmh; }
-	decltype(speed_kmh_unit) get_speed_kmh_unit() const { return speed_kmh_unit; }
-	decltype(mode_ind) get_mode_ind() const { return mode_ind; }
+	decltype(track_true_) get_track_true() const { return track_true_; }
+	decltype(type_true_) get_type_true() const { return type_true_; }
+	decltype(track_magn_) get_track_magn() const { return track_magn_; }
+	decltype(type_magn_) get_type_magn() const { return type_magn_; }
+	decltype(speed_kn_) get_speed_kn() const { return speed_kn_; }
+	decltype(speed_kn_unit_) get_speed_kn_unit() const { return speed_kn_unit_; }
+	decltype(speed_kmh_) get_speed_kmh() const { return speed_kmh_; }
+	decltype(speed_kmh_unit_) get_speed_kmh_unit() const { return speed_kmh_unit_; }
+	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
 
 	void set_track_true(double t) noexcept;
 	void set_track_magn(double t) noexcept;
 	void set_speed_kn(double t) noexcept;
 	void set_speed_kmh(double t) noexcept;
-	void set_mode_indicator(mode_indicator t) noexcept { mode_ind = t; }
+	void set_mode_indicator(mode_indicator t) noexcept { mode_ind_ = t; }
 };
 }
 }

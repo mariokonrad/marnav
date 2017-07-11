@@ -24,13 +24,13 @@ public:
 	checksum_error & operator=(const checksum_error &) = default;
 	checksum_error & operator=(checksum_error &&) = default;
 
-	virtual const char * what() const noexcept override { return text; }
+	virtual const char * what() const noexcept override { return text_; }
 
 	const uint8_t expected;
 	const uint8_t actual;
 
 private:
-	char text[64];
+	char text_[64];
 };
 
 /// Computes and returns the checksum of the specified range.

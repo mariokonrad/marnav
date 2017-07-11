@@ -12,6 +12,8 @@ namespace io
 class selectable
 {
 public:
+	virtual ~selectable() {}
+
 	/// Returns the filedescriptor.
 	virtual int get_fd() const = 0;
 };

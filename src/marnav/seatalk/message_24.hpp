@@ -43,12 +43,12 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	unit_type unit;
+	unit_type unit_;
 
 public:
-	unit_type get_unit() const noexcept { return unit; }
+	unit_type get_unit() const noexcept { return unit_; }
 
-	void set_unit(unit_type t) noexcept { unit = t; }
+	void set_unit(unit_type t) noexcept { unit_ = t; }
 };
 }
 }

@@ -27,8 +27,8 @@ protected:
 	virtual void process_message(const seatalk::raw & msg) override;
 
 private:
-	bool message_received;
-	seatalk::raw message;
+	bool message_received_;
+	seatalk::raw message_;
 };
 }
 }

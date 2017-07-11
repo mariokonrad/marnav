@@ -38,12 +38,12 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	geo::latitude lat;
+	geo::latitude lat_;
 
 public:
-	const geo::latitude & get_lat() const noexcept { return lat; }
+	const geo::latitude & get_lat() const noexcept { return lat_; }
 
-	void set_lat(const geo::latitude & t) noexcept { lat = t; }
+	void set_lat(const geo::latitude & t) noexcept { lat_ = t; }
 };
 }
 }

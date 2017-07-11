@@ -37,16 +37,16 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint16_t speed1;
-	uint16_t speed2;
-	uint8_t status;
+	uint16_t speed1_;
+	uint16_t speed2_;
+	uint8_t status_;
 
 public:
-	bool is_display_in_mph() const noexcept { return (status & 0x02) != 0; }
-	bool avg_speed_calc_stopped() const noexcept { return (status & 0x01) != 0; }
-	bool is_sensor1_valid() const noexcept { return (status & 0x40) != 0; }
-	bool is_avg_valid() const noexcept { return (status & 0x80) == 0; }
-	bool is_sensor2_valid() const noexcept { return (status & 0x80) != 0; }
+	bool is_display_in_mph() const noexcept { return (status_ & 0x02) != 0; }
+	bool avg_speed_calc_stopped() const noexcept { return (status_ & 0x01) != 0; }
+	bool is_sensor1_valid() const noexcept { return (status_ & 0x40) != 0; }
+	bool is_avg_valid() const noexcept { return (status_ & 0x80) == 0; }
+	bool is_sensor2_valid() const noexcept { return (status_ & 0x80) != 0; }
 
 	double get_speed1() const noexcept;
 	double get_speed2() const noexcept;
@@ -54,8 +54,8 @@ public:
 	void set_display_in_mph(bool t) noexcept;
 	void set_avg_speed_calc_stopped(bool t) noexcept;
 	void set_sensor1_valid(bool t) noexcept;
-	void set_avg_valid() noexcept { status &= ~0x80; }
-	void set_sensor2_valid() noexcept { status |= 0x80; }
+	void set_avg_valid() noexcept { status_ &= ~0x80; }
+	void set_sensor2_valid() noexcept { status_ |= 0x80; }
 
 	void set_speed1(double t) noexcept;
 	void set_speed2(double t) noexcept;

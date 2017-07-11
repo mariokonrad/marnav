@@ -7,7 +7,6 @@ namespace marnav
 {
 namespace io
 {
-
 /// This is the base class for devices needed to perform IO operations.
 /// It is simply an interface, no data members.
 class device

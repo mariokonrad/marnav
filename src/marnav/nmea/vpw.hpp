@@ -44,21 +44,21 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> speed_knots; // negative means downwind
-	utils::optional<unit::velocity> speed_knots_unit;
-	utils::optional<double> speed_meters_per_second; // negative means downwind
-	utils::optional<unit::velocity> speed_meters_per_second_unit;
+	utils::optional<double> speed_knots_; // negative means downwind
+	utils::optional<unit::velocity> speed_knots_unit_;
+	utils::optional<double> speed_meters_per_second_; // negative means downwind
+	utils::optional<unit::velocity> speed_meters_per_second_unit_;
 
 public:
-	decltype(speed_knots) get_speed_knots() const { return speed_knots; }
-	decltype(speed_knots_unit) get_speed_knots_unit() const { return speed_knots_unit; }
-	decltype(speed_meters_per_second) get_speed_meters_per_second() const
+	decltype(speed_knots_) get_speed_knots() const { return speed_knots_; }
+	decltype(speed_knots_unit_) get_speed_knots_unit() const { return speed_knots_unit_; }
+	decltype(speed_meters_per_second_) get_speed_meters_per_second() const
 	{
-		return speed_meters_per_second;
+		return speed_meters_per_second_;
 	}
-	decltype(speed_meters_per_second_unit) get_speed_meters_per_second_unit() const
+	decltype(speed_meters_per_second_unit_) get_speed_meters_per_second_unit() const
 	{
-		return speed_meters_per_second_unit;
+		return speed_meters_per_second_unit_;
 	}
 
 	void set_speed_knots(double t) noexcept;

@@ -15,7 +15,7 @@ namespace io
 {
 default_seatalk_reader::default_seatalk_reader(std::unique_ptr<device> && dv)
 	: seatalk_reader(std::move(dv))
-	, message_received(false)
+	, message_received_(false)
 {
 }
 
@@ -32,9 +32,9 @@ bool default_seatalk_reader::read_message(seatalk::raw & data)
 		// the message was received, return it and reset the 'semaphore'.
 		// please note: this works only in single threaded environment,
 		// since the 'semaphore' isn't really one.
-		if (message_received) {
-			data = message;
-			message_received = false;
+		if (message_received_) {
+			data = message_;
+			message_received_ = false;
 			return true;
 		}
 	}
@@ -47,8 +47,8 @@ bool default_seatalk_reader::read_message(seatalk::raw & data)
 /// After the reception, the message will be stored temporarily.
 void default_seatalk_reader::process_message(const seatalk::raw & msg)
 {
-	message = msg;
-	message_received = true;
+	message_ = msg;
+	message_received_ = true;
 }
 }
 }

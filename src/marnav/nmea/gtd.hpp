@@ -45,7 +45,7 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	std::array<double, max_time_diffs> time_diffs;
+	std::array<double, max_time_diffs> time_diffs_;
 
 	void check_index(int index) const;
 

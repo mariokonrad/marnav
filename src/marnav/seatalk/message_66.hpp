@@ -52,12 +52,12 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	alarm value;
+	alarm value_;
 
 public:
-	alarm get_alarm() const noexcept { return value; }
+	alarm get_alarm() const noexcept { return value_; }
 
-	void set_alarm(alarm t) { value = t; }
+	void set_alarm(alarm t) { value_ = t; }
 };
 
 message_66::alarm operator|(message_66::alarm a, message_66::alarm b) noexcept;

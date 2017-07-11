@@ -34,12 +34,12 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint16_t angle; // 1/10th of degrees right of bow
+	uint16_t angle_; // 1/10th of degrees right of bow
 
 public:
-	uint16_t get_angle() const noexcept { return angle; }
+	uint16_t get_angle() const noexcept { return angle_; }
 
-	void set_angle(uint16_t t) noexcept { angle = t; }
+	void set_angle(uint16_t t) noexcept { angle_ = t; }
 };
 }
 }

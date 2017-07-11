@@ -45,13 +45,13 @@ private:
 	uint8_t hours_;
 	uint8_t minutes_;
 	uint8_t seconds_;
-	mode count_mode;
+	mode count_mode_;
 
 public:
 	uint8_t get_hours() const { return hours_; }
 	uint8_t get_minutes() const { return minutes_; }
 	uint8_t get_seconds() const { return seconds_; }
-	mode get_mode() const { return count_mode; }
+	mode get_mode() const { return count_mode_; }
 
 	void set_timer(uint8_t hours, uint8_t minutes, uint8_t seconds, mode m);
 };

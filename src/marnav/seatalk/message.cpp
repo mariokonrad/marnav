@@ -7,13 +7,13 @@ namespace seatalk
 {
 
 message::message(message_id id)
-	: message_type(id)
+	: message_type_(id)
 {
 }
 
 message_id message::type() const
 {
-	return message_type;
+	return message_type_;
 }
 
 /// Checks the specified sizes for the raw data. In case of error, an

@@ -76,8 +76,8 @@ public:
 	bool inside(const position & p) const;
 
 private:
-	position p0; // top, left
-	position p1; // bottom, right
+	position p0_; // top, left
+	position p1_; // bottom, right
 };
 }
 }

@@ -24,7 +24,7 @@ public:
 	mmsi() noexcept {}
 
 	explicit mmsi(value_type t) noexcept
-		: value(t)
+		: value_(t)
 	{
 	}
 
@@ -36,7 +36,7 @@ public:
 	bool operator==(const mmsi & other) const;
 	bool operator!=(const mmsi & other) const;
 
-	operator value_type() const { return value; }
+	operator value_type() const { return value_; }
 
 	value_type mid() const;
 
@@ -65,7 +65,7 @@ public:
 	bool is_epirb_ais() const;
 
 private:
-	value_type value = initial_value;
+	value_type value_ = initial_value;
 };
 }
 }

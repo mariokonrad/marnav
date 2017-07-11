@@ -31,15 +31,15 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint32_t total; // in 1/10th nautical miles
-	uint32_t trip; // in 1/100th nautical miles
+	uint32_t total_; // in 1/10th nautical miles
+	uint32_t trip_; // in 1/100th nautical miles
 
 public:
-	uint32_t get_total() const noexcept { return total; }
-	uint32_t get_trip() const noexcept { return trip; }
+	uint32_t get_total() const noexcept { return total_; }
+	uint32_t get_trip() const noexcept { return trip_; }
 
-	void set_total(uint32_t t) noexcept { total = t; }
-	void set_trip(uint32_t t) noexcept { trip = t; }
+	void set_total(uint32_t t) noexcept { total_ = t; }
+	void set_trip(uint32_t t) noexcept { trip_ = t; }
 };
 }
 }

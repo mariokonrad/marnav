@@ -38,18 +38,18 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	side_id side;
-	int32_t rpm;
-	int8_t percent_pitch;
+	side_id side_;
+	int32_t rpm_;
+	int8_t percent_pitch_;
 
 public:
-	side_id get_side() const noexcept { return side; }
-	int16_t get_rpm() const noexcept { return rpm; }
-	int8_t get_percent_pitch() const noexcept { return percent_pitch; }
+	side_id get_side() const noexcept { return side_; }
+	int16_t get_rpm() const noexcept { return rpm_; }
+	int8_t get_percent_pitch() const noexcept { return percent_pitch_; }
 
-	void set_side(side_id t) noexcept { side = t; }
-	void set_rpm(int16_t t) noexcept { rpm = t; }
-	void set_percent_pitch(int8_t t) noexcept { percent_pitch = t; }
+	void set_side(side_id t) noexcept { side_ = t; }
+	void set_rpm(int16_t t) noexcept { rpm_ = t; }
+	void set_percent_pitch(int8_t t) noexcept { percent_pitch_ = t; }
 };
 }
 }

@@ -38,12 +38,12 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	intensity value;
+	intensity value_;
 
 public:
-	intensity get_intensity() const noexcept { return value; }
+	intensity get_intensity() const noexcept { return value_; }
 
-	void set_intensity(intensity t) noexcept { value = t; }
+	void set_intensity(intensity t) noexcept { value_ = t; }
 };
 }
 }

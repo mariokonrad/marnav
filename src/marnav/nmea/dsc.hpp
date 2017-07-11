@@ -119,20 +119,20 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	format_specifier fmt_spec = format_specifier::distress;
-	uint64_t address = 0; // space for 10 decimal digits
-	category cat = category::distress;
+	format_specifier fmt_spec_ = format_specifier::distress;
+	uint64_t address_ = 0; // space for 10 decimal digits
+	category cat_ = category::distress;
 	// @todo Implement other 6 data members
-	acknowledgement ack = acknowledgement::end_of_sequence;
-	extension_indicator extension = extension_indicator::none;
+	acknowledgement ack_ = acknowledgement::end_of_sequence;
+	extension_indicator extension_ = extension_indicator::none;
 
 public:
-	decltype(fmt_spec) get_fmt_spec() const { return fmt_spec; }
-	decltype(cat) get_cat() const { return cat; }
+	decltype(fmt_spec_) get_fmt_spec() const { return fmt_spec_; }
+	decltype(cat_) get_cat() const { return cat_; }
 	utils::mmsi get_mmsi() const;
 	geo::region get_geographical_area() const;
-	decltype(ack) get_ack() const { return ack; }
-	decltype(extension) get_extension() const { return extension; }
+	decltype(ack_) get_ack() const { return ack_; }
+	decltype(extension_) get_extension() const { return extension_; }
 };
 
 std::string to_string(dsc::format_specifier value);

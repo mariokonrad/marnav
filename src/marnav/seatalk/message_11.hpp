@@ -35,15 +35,15 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint8_t unit; // unit of value
-	uint16_t speed; // wind speed in 1/10th of unit
+	uint8_t unit_; // unit of value
+	uint16_t speed_; // wind speed in 1/10th of unit
 
 public:
-	uint8_t get_unit() const noexcept { return unit; }
-	uint16_t get_speed() const noexcept { return speed; }
+	uint8_t get_unit() const noexcept { return unit_; }
+	uint16_t get_speed() const noexcept { return speed_; }
 
-	void set_unit(uint8_t t) noexcept { unit = t; }
-	void set_speed(uint16_t t) noexcept { speed = t; }
+	void set_unit(uint8_t t) noexcept { unit_ = t; }
+	void set_speed(uint16_t t) noexcept { speed_ = t; }
 };
 }
 }

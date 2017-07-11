@@ -53,7 +53,7 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	std::array<utils::optional<transducer_info>, max_transducer_info> transducer_data;
+	std::array<utils::optional<transducer_info>, max_transducer_info> transducer_data_;
 
 	void check_index(int index) const;
 

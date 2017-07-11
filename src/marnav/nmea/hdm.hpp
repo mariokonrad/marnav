@@ -46,12 +46,12 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> heading; // magnetic sensor heading in deg
-	utils::optional<reference> heading_mag;
+	utils::optional<double> heading_; // magnetic sensor heading in deg
+	utils::optional<reference> heading_mag_;
 
 public:
-	decltype(heading) get_heading() const { return heading; }
-	decltype(heading_mag) get_heading_mag() const { return heading_mag; }
+	decltype(heading_) get_heading() const { return heading_; }
+	decltype(heading_mag_) get_heading_mag() const { return heading_mag_; }
 
 	void set_heading(double t) noexcept;
 };

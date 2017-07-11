@@ -71,48 +71,48 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<status> active; // V:warning
-	utils::optional<double> cross_track_error; // cross track error in nautical miles
-	utils::optional<side> steer_dir; // direction to steer, left or right
-	utils::optional<waypoint> waypoint_to; // TO waypoint ID
-	utils::optional<waypoint> waypoint_from; // FROM waypoint ID
-	utils::optional<geo::latitude> lat; // destination waypoint latitude
-	utils::optional<direction> lat_hem; // destination waypoint latitude dir, N:north, S:south
-	utils::optional<geo::longitude> lon; // destination waypoint longitude
-	utils::optional<direction> lon_hem; // destination waypoint longitude dir, E:east, W:west
-	utils::optional<double> range; // range to destination in nautical miles
-	utils::optional<double> bearing; // bearing to destination in degrees to true
-	utils::optional<double> dst_velocity; // destination closing velocity in knots
-	utils::optional<status> arrival_status; // arrival status, A:arrival circle entered
-	utils::optional<mode_indicator> mode_ind;
+	utils::optional<status> active_; // V:warning
+	utils::optional<double> cross_track_error_; // cross track error in nautical miles
+	utils::optional<side> steer_dir_; // direction to steer, left or right
+	utils::optional<waypoint> waypoint_to_; // TO waypoint ID
+	utils::optional<waypoint> waypoint_from_; // FROM waypoint ID
+	utils::optional<geo::latitude> lat_; // destination waypoint latitude
+	utils::optional<direction> lat_hem_; // destination waypoint latitude dir, N:north, S:south
+	utils::optional<geo::longitude> lon_; // destination waypoint longitude
+	utils::optional<direction> lon_hem_; // destination waypoint longitude dir, E:east, W:west
+	utils::optional<double> range_; // range to destination in nautical miles
+	utils::optional<double> bearing_; // bearing to destination in degrees to true
+	utils::optional<double> dst_velocity_; // destination closing velocity in knots
+	utils::optional<status> arrival_status_; // arrival status, A:arrival circle entered
+	utils::optional<mode_indicator> mode_ind_;
 
 public:
-	decltype(active) get_active() const { return active; }
-	decltype(cross_track_error) get_cross_track_error() const { return cross_track_error; }
-	decltype(steer_dir) get_steer_dir() const { return steer_dir; }
-	decltype(waypoint_to) get_waypoint_to() const { return waypoint_to; }
-	decltype(waypoint_from) get_waypoint_from() const { return waypoint_from; }
-	decltype(range) get_range() const { return range; }
-	decltype(bearing) get_bearing() const { return bearing; }
-	decltype(dst_velocity) get_dst_velocity() const { return dst_velocity; }
-	decltype(arrival_status) get_arrival_status() const { return arrival_status; }
-	decltype(mode_ind) get_mode_ind() const { return mode_ind; }
+	decltype(active_) get_active() const { return active_; }
+	decltype(cross_track_error_) get_cross_track_error() const { return cross_track_error_; }
+	decltype(steer_dir_) get_steer_dir() const { return steer_dir_; }
+	decltype(waypoint_to_) get_waypoint_to() const { return waypoint_to_; }
+	decltype(waypoint_from_) get_waypoint_from() const { return waypoint_from_; }
+	decltype(range_) get_range() const { return range_; }
+	decltype(bearing_) get_bearing() const { return bearing_; }
+	decltype(dst_velocity_) get_dst_velocity() const { return dst_velocity_; }
+	decltype(arrival_status_) get_arrival_status() const { return arrival_status_; }
+	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;
 
-	void set_active(status t) noexcept { active = t; }
-	void set_cross_track_error(double t) noexcept { cross_track_error = t; }
-	void set_steer_dir(side t) noexcept { steer_dir = t; }
-	void set_waypoint_to(const waypoint & id) { waypoint_to = id; }
-	void set_waypoint_from(const waypoint & id) { waypoint_from = id; }
+	void set_active(status t) noexcept { active_ = t; }
+	void set_cross_track_error(double t) noexcept { cross_track_error_ = t; }
+	void set_steer_dir(side t) noexcept { steer_dir_ = t; }
+	void set_waypoint_to(const waypoint & id) { waypoint_to_ = id; }
+	void set_waypoint_from(const waypoint & id) { waypoint_from_ = id; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_range(double t) noexcept { range = t; }
-	void set_bearing(double t) noexcept { bearing = t; }
-	void set_dst_velocity(double t) noexcept { dst_velocity = t; }
-	void set_arrival_status(status t) noexcept { arrival_status = t; }
-	void set_mode_indicator(mode_indicator t) noexcept { mode_ind = t; }
+	void set_range(double t) noexcept { range_ = t; }
+	void set_bearing(double t) noexcept { bearing_ = t; }
+	void set_dst_velocity(double t) noexcept { dst_velocity_ = t; }
+	void set_arrival_status(status t) noexcept { arrival_status_ = t; }
+	void set_mode_indicator(mode_indicator t) noexcept { mode_ind_ = t; }
 };
 }
 }

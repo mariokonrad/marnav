@@ -10,20 +10,20 @@ seatalk_reader::~seatalk_reader()
 }
 
 seatalk_reader::seatalk_reader(std::unique_ptr<device> && dv)
-	: dev(std::move(dv))
+	: dev_(std::move(dv))
 {
-	std::fill_n(reinterpret_cast<uint8_t *>(&ctx), sizeof(ctx), 0);
+	std::fill_n(reinterpret_cast<uint8_t *>(&ctx_), sizeof(ctx_), 0);
 
-	ctx.state = State::READ;
-	ctx.remaining = 255;
-	ctx.index = 0;
+	ctx_.state = State::READ;
+	ctx_.remaining = 255;
+	ctx_.index = 0;
 }
 
 void seatalk_reader::close()
 {
-	if (dev)
-		dev->close();
-	dev.reset();
+	if (dev_)
+		dev_->close();
+	dev_.reset();
 }
 
 uint8_t seatalk_reader::parity(uint8_t a) const
@@ -40,35 +40,35 @@ uint8_t seatalk_reader::parity(uint8_t a) const
 
 void seatalk_reader::write_cmd(uint8_t c)
 {
-	if (ctx.remaining > 0 && ctx.remaining < 254) {
-		++ctx.collisions;
+	if (ctx_.remaining > 0 && ctx_.remaining < 254) {
+		++ctx_.collisions;
 	}
 
-	ctx.data[0] = c;
-	ctx.index = 1;
-	ctx.remaining = 254;
+	ctx_.data[0] = c;
+	ctx_.index = 1;
+	ctx_.remaining = 254;
 }
 
 /// Writes data into the read context buffer.
 void seatalk_reader::write_data(uint8_t c)
 {
-	if (ctx.index >= sizeof(ctx.data))
+	if (ctx_.index >= sizeof(ctx_.data))
 		return;
 
-	if (ctx.remaining == 0)
+	if (ctx_.remaining == 0)
 		return;
 
-	if (ctx.remaining == 255) // not yet in sync
+	if (ctx_.remaining == 255) // not yet in sync
 		return;
 
-	if (ctx.remaining == 254) {
+	if (ctx_.remaining == 254) {
 		// attribute byte, -1 because cmd is already consumed
-		ctx.remaining = 3 + (c & 0x0f) - 1;
+		ctx_.remaining = 3 + (c & 0x0f) - 1;
 	}
 
-	ctx.data[ctx.index] = c;
-	++ctx.index;
-	--ctx.remaining;
+	ctx_.data[ctx_.index] = c;
+	++ctx_.index;
+	--ctx_.remaining;
 }
 
 /// Processes SeaTalk data read from the device.
@@ -87,43 +87,43 @@ void seatalk_reader::write_data(uint8_t c)
 /// @exception std::runtime_error Bus read error.
 void seatalk_reader::process_seatalk()
 {
-	switch (ctx.state) {
+	switch (ctx_.state) {
 		case State::READ:
-			if (ctx.raw == 0xff) {
-				ctx.state = State::ESCAPE;
+			if (ctx_.raw == 0xff) {
+				ctx_.state = State::ESCAPE;
 			} else {
-				if (parity(ctx.raw)) {
-					write_cmd(ctx.raw);
+				if (parity(ctx_.raw)) {
+					write_cmd(ctx_.raw);
 				} else {
-					write_data(ctx.raw);
-					if (ctx.remaining == 0)
+					write_data(ctx_.raw);
+					if (ctx_.remaining == 0)
 						emit_message();
 				}
 			}
 			break;
 
 		case State::ESCAPE:
-			if (ctx.raw == 0x00) {
-				ctx.state = State::PARITY;
-			} else if (ctx.raw == 0xff) {
-				write_data(ctx.raw);
-				if (ctx.remaining == 0)
+			if (ctx_.raw == 0x00) {
+				ctx_.state = State::PARITY;
+			} else if (ctx_.raw == 0xff) {
+				write_data(ctx_.raw);
+				if (ctx_.remaining == 0)
 					emit_message();
-				ctx.state = State::READ;
+				ctx_.state = State::READ;
 			} else {
 				throw std::runtime_error{"SeaTalk bus read error."};
 			}
 			break;
 
 		case State::PARITY:
-			if (parity(ctx.raw)) {
-				write_data(ctx.raw);
-				if (ctx.remaining == 0)
+			if (parity(ctx_.raw)) {
+				write_data(ctx_.raw);
+				if (ctx_.remaining == 0)
 					emit_message();
 			} else {
-				write_cmd(ctx.raw);
+				write_cmd(ctx_.raw);
 			}
-			ctx.state = State::READ;
+			ctx_.state = State::READ;
 			break;
 	}
 }
@@ -135,14 +135,14 @@ void seatalk_reader::process_seatalk()
 /// @exception std::runtime_error The device was invalid or read error.
 bool seatalk_reader::read_data()
 {
-	if (!dev)
+	if (!dev_)
 		throw std::runtime_error{"device invalid"};
-	int rc = dev->read(reinterpret_cast<char *>(&ctx.raw), sizeof(ctx.raw));
+	int rc = dev_->read(reinterpret_cast<char *>(&ctx_.raw), sizeof(ctx_.raw));
 	if (rc == 0)
 		return false;
 	if (rc < 0)
 		throw std::runtime_error{"read error"};
-	if (rc != sizeof(ctx.raw))
+	if (rc != sizeof(ctx_.raw))
 		throw std::runtime_error{"read error"};
 	return true;
 }
@@ -164,7 +164,7 @@ bool seatalk_reader::read()
 
 void seatalk_reader::emit_message()
 {
-	process_message(std::vector<uint8_t>{ctx.data, ctx.data + ctx.index});
+	process_message(std::vector<uint8_t>{ctx_.data, ctx_.data + ctx_.index});
 }
 }
 }

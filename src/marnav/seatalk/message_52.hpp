@@ -34,7 +34,7 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint16_t sog;
+	uint16_t sog_;
 
 public:
 	double get_sog() const noexcept;

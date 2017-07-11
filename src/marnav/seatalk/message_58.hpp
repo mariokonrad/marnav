@@ -41,12 +41,12 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	geo::position pos;
+	geo::position pos_;
 
 public:
-	const geo::position & get_pos() const noexcept { return pos; }
+	const geo::position & get_pos() const noexcept { return pos_; }
 
-	void set_pos(const geo::position & p) noexcept { pos = p; }
+	void set_pos(const geo::position & p) noexcept { pos_ = p; }
 };
 }
 }

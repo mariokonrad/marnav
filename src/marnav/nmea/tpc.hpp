@@ -48,47 +48,47 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	double distance_centerline = 0.0;
-	unit::distance distance_centerline_unit = unit::distance::meter;
-	double distance_transducer = 0.0;
-	unit::distance distance_transducer_unit = unit::distance::meter;
-	double depth = 0.0;
-	unit::distance depth_unit = unit::distance::meter;
+	double distance_centerline_ = 0.0;
+	unit::distance distance_centerline_unit_ = unit::distance::meter;
+	double distance_transducer_ = 0.0;
+	unit::distance distance_transducer_unit_ = unit::distance::meter;
+	double depth_ = 0.0;
+	unit::distance depth_unit_ = unit::distance::meter;
 
 public:
-	decltype(distance_centerline) get_distance_centerline() const
+	decltype(distance_centerline_) get_distance_centerline() const
 	{
-		return distance_centerline;
+		return distance_centerline_;
 	}
-	decltype(distance_centerline_unit) get_distance_centerline_unit() const
+	decltype(distance_centerline_unit_) get_distance_centerline_unit() const
 	{
-		return distance_centerline_unit;
+		return distance_centerline_unit_;
 	}
-	decltype(distance_transducer) get_distance_transducer() const
+	decltype(distance_transducer_) get_distance_transducer() const
 	{
-		return distance_transducer;
+		return distance_transducer_;
 	}
-	decltype(distance_transducer_unit) get_distance_transducer_unit() const
+	decltype(distance_transducer_unit_) get_distance_transducer_unit() const
 	{
-		return distance_transducer_unit;
+		return distance_transducer_unit_;
 	}
-	decltype(depth) get_depth() const { return depth; }
-	decltype(depth_unit) get_depth_unit() const { return depth_unit; }
+	decltype(depth_) get_depth() const { return depth_; }
+	decltype(depth_unit_) get_depth_unit() const { return depth_unit_; }
 
 	void set_distance_centerline(double t) noexcept
 	{
-		distance_centerline = t;
-		distance_centerline_unit = unit::distance::meter;
+		distance_centerline_ = t;
+		distance_centerline_unit_ = unit::distance::meter;
 	}
 	void set_distance_transducer(double t) noexcept
 	{
-		distance_transducer = t;
-		distance_centerline_unit = unit::distance::meter;
+		distance_transducer_ = t;
+		distance_centerline_unit_ = unit::distance::meter;
 	}
 	void set_depth(double t) noexcept
 	{
-		depth = t;
-		distance_centerline_unit = unit::distance::meter;
+		depth_ = t;
+		distance_centerline_unit_ = unit::distance::meter;
 	}
 };
 }

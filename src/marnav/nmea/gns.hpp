@@ -55,51 +55,54 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<nmea::time> time_utc;
-	utils::optional<geo::latitude> lat;
-	utils::optional<direction> lat_hem;
-	utils::optional<geo::longitude> lon;
-	utils::optional<direction> lon_hem;
-	std::string mode_ind = "AA";
-	utils::optional<uint32_t> number_of_satellites;
-	utils::optional<double> hdrop;
-	utils::optional<double> antenna_altitude; // meters
-	utils::optional<double> geodial_sepration; // meters
-	utils::optional<double> age_of_differential_data;
-	utils::optional<double> differential_ref_station_id;
+	utils::optional<nmea::time> time_utc_;
+	utils::optional<geo::latitude> lat_;
+	utils::optional<direction> lat_hem_;
+	utils::optional<geo::longitude> lon_;
+	utils::optional<direction> lon_hem_;
+	std::string mode_ind_ = "AA";
+	utils::optional<uint32_t> number_of_satellites_;
+	utils::optional<double> hdrop_;
+	utils::optional<double> antenna_altitude_; // meters
+	utils::optional<double> geodial_sepration_; // meters
+	utils::optional<double> age_of_differential_data_;
+	utils::optional<double> differential_ref_station_id_;
 
 public:
-	decltype(time_utc) get_time_utc() const { return time_utc; }
-	decltype(mode_ind) get_mode_ind() const { return mode_ind; }
-	decltype(number_of_satellites) get_number_of_satellites() const
+	decltype(time_utc_) get_time_utc() const { return time_utc_; }
+	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
+	decltype(number_of_satellites_) get_number_of_satellites() const
 	{
-		return number_of_satellites;
+		return number_of_satellites_;
 	}
-	decltype(hdrop) get_hdrop() const { return hdrop; }
-	decltype(antenna_altitude) get_antenna_altitude() const { return antenna_altitude; }
-	decltype(geodial_sepration) get_geodial_sepration() const { return geodial_sepration; }
-	decltype(age_of_differential_data) get_age_of_differential_data() const
+	decltype(hdrop_) get_hdrop() const { return hdrop_; }
+	decltype(antenna_altitude_) get_antenna_altitude() const { return antenna_altitude_; }
+	decltype(geodial_sepration_) get_geodial_sepration() const { return geodial_sepration_; }
+	decltype(age_of_differential_data_) get_age_of_differential_data() const
 	{
-		return age_of_differential_data;
+		return age_of_differential_data_;
 	}
-	decltype(differential_ref_station_id) get_differential_ref_station_id() const
+	decltype(differential_ref_station_id_) get_differential_ref_station_id() const
 	{
-		return differential_ref_station_id;
+		return differential_ref_station_id_;
 	}
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;
 
-	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
 	void set_mode_indicator(const std::string & t);
-	void set_number_of_satellites(uint32_t t) noexcept { number_of_satellites = t; }
-	void set_hdrop(double t) noexcept { hdrop = t; }
-	void set_antenna_altitude(double t) noexcept { antenna_altitude = t; }
-	void set_geodial_sepration(double t) noexcept { geodial_sepration = t; }
-	void set_age_of_differential_data(double t) noexcept { age_of_differential_data = t; }
-	void set_differential_ref_station_id(double t) noexcept { differential_ref_station_id = t; }
+	void set_number_of_satellites(uint32_t t) noexcept { number_of_satellites_ = t; }
+	void set_hdrop(double t) noexcept { hdrop_ = t; }
+	void set_antenna_altitude(double t) noexcept { antenna_altitude_ = t; }
+	void set_geodial_sepration(double t) noexcept { geodial_sepration_ = t; }
+	void set_age_of_differential_data(double t) noexcept { age_of_differential_data_ = t; }
+	void set_differential_ref_station_id(double t) noexcept
+	{
+		differential_ref_station_id_ = t;
+	}
 };
 }
 }

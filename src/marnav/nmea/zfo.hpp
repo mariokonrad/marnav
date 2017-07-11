@@ -42,18 +42,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<nmea::time> time_utc;
-	utils::optional<nmea::duration> time_elapsed;
-	utils::optional<waypoint> waypoint_id;
+	utils::optional<nmea::time> time_utc_;
+	utils::optional<nmea::duration> time_elapsed_;
+	utils::optional<waypoint> waypoint_id_;
 
 public:
-	decltype(time_utc) get_time_utc() const { return time_utc; }
-	decltype(time_elapsed) get_time_elapsed() const { return time_elapsed; }
-	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
+	decltype(time_utc_) get_time_utc() const { return time_utc_; }
+	decltype(time_elapsed_) get_time_elapsed() const { return time_elapsed_; }
+	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }
 
-	void set_time_utc(const nmea::time & t) noexcept { time_utc = t; }
-	void set_time_elapsed(const nmea::duration & t) noexcept { time_elapsed = t; }
-	void set_waypoint_id(const waypoint & id) { waypoint_id = id; }
+	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
+	void set_time_elapsed(const nmea::duration & t) noexcept { time_elapsed_ = t; }
+	void set_waypoint_id(const waypoint & id) { waypoint_id_ = id; }
 };
 }
 }

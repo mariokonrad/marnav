@@ -33,12 +33,12 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint16_t speed; // speed in 1/10th of knots
+	uint16_t speed_; // speed in 1/10th of knots
 
 public:
-	uint16_t get_speed() const noexcept { return speed; }
+	uint16_t get_speed() const noexcept { return speed_; }
 
-	void set_speed(uint16_t t) noexcept { speed = t; }
+	void set_speed(uint16_t t) noexcept { speed_ = t; }
 };
 }
 }

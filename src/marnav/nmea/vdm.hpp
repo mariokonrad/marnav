@@ -50,29 +50,29 @@ protected:
 	void read_fields(fields::const_iterator first);
 
 private:
-	uint32_t n_fragments = 0;
-	uint32_t fragment = 0;
-	utils::optional<uint32_t> seq_msg_id;
-	utils::optional<ais_channel> radio_channel; // A = 161.975MHz (87B), B = 162.025MHz (88B)
-	std::string payload; // 6bit encoded content
-	uint32_t n_fill_bits = 0; // 0..5
+	uint32_t n_fragments_ = 0;
+	uint32_t fragment_ = 0;
+	utils::optional<uint32_t> seq_msg_id_;
+	utils::optional<ais_channel> radio_channel_; // A = 161.975MHz (87B), B = 162.025MHz (88B)
+	std::string payload_; // 6bit encoded content
+	uint32_t n_fill_bits_ = 0; // 0..5
 
 public:
-	decltype(n_fragments) get_n_fragments() const { return n_fragments; }
-	decltype(fragment) get_fragment() const { return fragment; }
-	decltype(seq_msg_id) get_seq_msg_id() const { return seq_msg_id; }
-	decltype(radio_channel) get_radio_channel() const { return radio_channel; }
-	decltype(payload) get_payload() const { return payload; }
-	decltype(n_fill_bits) get_n_fill_bits() const { return n_fill_bits; }
+	decltype(n_fragments_) get_n_fragments() const { return n_fragments_; }
+	decltype(fragment_) get_fragment() const { return fragment_; }
+	decltype(seq_msg_id_) get_seq_msg_id() const { return seq_msg_id_; }
+	decltype(radio_channel_) get_radio_channel() const { return radio_channel_; }
+	decltype(payload_) get_payload() const { return payload_; }
+	decltype(n_fill_bits_) get_n_fill_bits() const { return n_fill_bits_; }
 
-	void set_n_fragments(uint32_t t) noexcept { n_fragments = t; }
-	void set_fragment(uint32_t t) noexcept { fragment = t; }
-	void set_seq_msg_id(uint32_t t) { seq_msg_id = t; }
-	void set_radio_channel(ais_channel channel) noexcept { radio_channel = channel; }
+	void set_n_fragments(uint32_t t) noexcept { n_fragments_ = t; }
+	void set_fragment(uint32_t t) noexcept { fragment_ = t; }
+	void set_seq_msg_id(uint32_t t) { seq_msg_id_ = t; }
+	void set_radio_channel(ais_channel channel) noexcept { radio_channel_ = channel; }
 	void set_payload(const std::string & data, uint32_t fill_bits) noexcept
 	{
-		payload = data;
-		n_fill_bits = fill_bits;
+		payload_ = data;
+		n_fill_bits_ = fill_bits;
 	}
 	void set_payload(const std::pair<std::string, uint32_t> & data)
 	{

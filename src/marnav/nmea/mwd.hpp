@@ -51,24 +51,24 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> direction_true;
-	utils::optional<reference> direction_true_ref;
-	utils::optional<double> direction_mag;
-	utils::optional<reference> direction_mag_ref;
-	utils::optional<double> speed_kn;
-	utils::optional<unit::velocity> speed_kn_unit;
-	utils::optional<double> speed_ms;
-	utils::optional<unit::velocity> speed_ms_unit;
+	utils::optional<double> direction_true_;
+	utils::optional<reference> direction_true_ref_;
+	utils::optional<double> direction_mag_;
+	utils::optional<reference> direction_mag_ref_;
+	utils::optional<double> speed_kn_;
+	utils::optional<unit::velocity> speed_kn_unit_;
+	utils::optional<double> speed_ms_;
+	utils::optional<unit::velocity> speed_ms_unit_;
 
 public:
-	decltype(direction_true) get_direction_true() const { return direction_true; }
-	decltype(direction_true_ref) get_direction_true_ref() const { return direction_true_ref; }
-	decltype(direction_mag) get_direction_mag() const { return direction_mag; }
-	decltype(direction_mag_ref) get_direction_mag_ref() const { return direction_mag_ref; }
-	decltype(speed_kn) get_speed_kn() const { return speed_kn; }
-	decltype(speed_kn_unit) get_speed_kn_unit() const { return speed_kn_unit; }
-	decltype(speed_ms) get_speed_ms() const { return speed_ms; }
-	decltype(speed_ms_unit) get_speed_ms_unit() const { return speed_ms_unit; }
+	decltype(direction_true_) get_direction_true() const { return direction_true_; }
+	decltype(direction_true_ref_) get_direction_true_ref() const { return direction_true_ref_; }
+	decltype(direction_mag_) get_direction_mag() const { return direction_mag_; }
+	decltype(direction_mag_ref_) get_direction_mag_ref() const { return direction_mag_ref_; }
+	decltype(speed_kn_) get_speed_kn() const { return speed_kn_; }
+	decltype(speed_kn_unit_) get_speed_kn_unit() const { return speed_kn_unit_; }
+	decltype(speed_ms_) get_speed_ms() const { return speed_ms_; }
+	decltype(speed_ms_unit_) get_speed_ms_unit() const { return speed_ms_unit_; }
 
 	void set_direction_true(double t) noexcept;
 	void set_direction_mag(double t) noexcept;

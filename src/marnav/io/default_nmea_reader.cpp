@@ -22,7 +22,7 @@ namespace io
 
 default_nmea_reader::default_nmea_reader(std::unique_ptr<device> && dv)
 	: nmea_reader(std::move(dv))
-	, received(false)
+	, received_(false)
 {
 }
 
@@ -44,9 +44,9 @@ bool default_nmea_reader::read_sentence(std::string & s)
 		// the sentence was received, return it and reset the 'semaphore'.
 		// please note: this works only in single threaded environment,
 		// since the 'semaphore' isn't really one.
-		if (received) {
-			s = sentence;
-			received = false;
+		if (received_) {
+			s = sentence_;
+			received_ = false;
 			return true;
 		}
 	}
@@ -59,8 +59,8 @@ bool default_nmea_reader::read_sentence(std::string & s)
 /// After the reception, the message will be stored temporarily.
 void default_nmea_reader::process_sentence(const std::string & s)
 {
-	sentence = s;
-	received = true;
+	sentence_ = s;
+	received_ = true;
 }
 }
 }

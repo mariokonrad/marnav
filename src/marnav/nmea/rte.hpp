@@ -49,21 +49,21 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	uint32_t n_messages = 1;
-	uint32_t message_number = 1;
-	route message_mode = route::complete; // C:complete route, W:working route
+	uint32_t n_messages_ = 1;
+	uint32_t message_number_ = 1;
+	route message_mode_ = route::complete; // C:complete route, W:working route
 	utils::optional<waypoint>
-		waypoint_id[max_waypoints]; // names or numbers of the active route
+		waypoint_id_[max_waypoints]; // names or numbers of the active route
 
 public:
-	decltype(n_messages) get_n_messages() const { return n_messages; }
-	decltype(message_number) get_message_number() const { return message_number; }
-	decltype(message_mode) get_message_mode() const { return message_mode; }
+	decltype(n_messages_) get_n_messages() const { return n_messages_; }
+	decltype(message_number_) get_message_number() const { return message_number_; }
+	decltype(message_mode_) get_message_mode() const { return message_mode_; }
 	utils::optional<waypoint> get_waypoint_id(int index) const;
 
-	void set_n_messages(uint32_t t) noexcept { n_messages = t; }
-	void set_message_number(uint32_t t) noexcept { message_number = t; }
-	void set_message_mode(route t) noexcept { message_mode = t; }
+	void set_n_messages(uint32_t t) noexcept { n_messages_ = t; }
+	void set_message_number(uint32_t t) noexcept { message_number_ = t; }
+	void set_message_mode(route t) noexcept { message_mode_ = t; }
 	void set_waypoint_id(int index, const waypoint & id);
 };
 }

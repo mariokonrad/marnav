@@ -43,12 +43,12 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> heading;
-	utils::optional<reference> heading_true;
+	utils::optional<double> heading_;
+	utils::optional<reference> heading_true_;
 
 public:
-	decltype(heading) get_heading() const { return heading; }
-	decltype(heading_true) get_heading_true() const { return heading_true; }
+	decltype(heading_) get_heading() const { return heading_; }
+	decltype(heading_true_) get_heading_true() const { return heading_true_; }
 
 	void set_heading(double t) noexcept;
 };

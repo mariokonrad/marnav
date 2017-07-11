@@ -51,26 +51,26 @@ rpm::rpm(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 5)
 		throw std::invalid_argument{"invalid number of fields in rpm"};
 
-	read(*(first + 0), source, source_id_mapping);
-	read(*(first + 1), source_number);
-	read(*(first + 2), revolutions);
-	read(*(first + 3), propeller_pitch);
-	read(*(first + 4), data_valid);
+	read(*(first + 0), source_, source_id_mapping);
+	read(*(first + 1), source_number_);
+	read(*(first + 2), revolutions_);
+	read(*(first + 3), propeller_pitch_);
+	read(*(first + 4), data_valid_);
 }
 
 void rpm::set_source(source_id id, uint32_t num)
 {
-	source = id;
-	source_number = num;
+	source_ = id;
+	source_number_ = num;
 }
 
 void rpm::append_data_to(std::string & s) const
 {
-	append(s, to_string(source));
-	append(s, to_string(source_number));
-	append(s, format(revolutions, 1));
-	append(s, format(propeller_pitch, 1));
-	append(s, to_string(data_valid));
+	append(s, to_string(source_));
+	append(s, to_string(source_number_));
+	append(s, format(revolutions_, 1));
+	append(s, format(propeller_pitch_, 1));
+	append(s, to_string(data_valid_));
 }
 }
 }

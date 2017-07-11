@@ -87,7 +87,7 @@ protected:
 	static void check_size(const raw & data, size_t size);
 
 private:
-	message_id message_type;
+	message_id message_type_;
 };
 
 /// @cond DEV

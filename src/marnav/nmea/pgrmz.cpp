@@ -57,16 +57,16 @@ pgrmz::pgrmz(talker talk, fields::const_iterator first, fields::const_iterator l
 	if (std::distance(first, last) != 3)
 		throw std::invalid_argument{"invalid number of fields in pgrmz"};
 
-	read(*(first + 0), altitude);
-	read(*(first + 1), altitude_unit);
-	read(*(first + 2), fix, fix_type_mapping);
+	read(*(first + 0), altitude_);
+	read(*(first + 1), altitude_unit_);
+	read(*(first + 2), fix_, fix_type_mapping);
 }
 
 void pgrmz::append_data_to(std::string & s) const
 {
-	append(s, to_string(altitude));
-	append(s, to_string(altitude_unit));
-	append(s, to_string(fix));
+	append(s, to_string(altitude_));
+	append(s, to_string(altitude_unit_));
+	append(s, to_string(fix_));
 }
 }
 }

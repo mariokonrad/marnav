@@ -45,16 +45,16 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> rudder1;
-	utils::optional<status> rudder1_valid;
-	utils::optional<double> rudder2;
-	utils::optional<status> rudder2_valid;
+	utils::optional<double> rudder1_;
+	utils::optional<status> rudder1_valid_;
+	utils::optional<double> rudder2_;
+	utils::optional<status> rudder2_valid_;
 
 public:
-	decltype(rudder1) get_rudder1() const { return rudder1; }
-	decltype(rudder1_valid) get_rudder1_valid() const { return rudder1_valid; }
-	decltype(rudder2) get_rudder2() const { return rudder2; }
-	decltype(rudder2_valid) get_rudder2_valid() const { return rudder2_valid; }
+	decltype(rudder1_) get_rudder1() const { return rudder1_; }
+	decltype(rudder1_valid_) get_rudder1_valid() const { return rudder1_valid_; }
+	decltype(rudder2_) get_rudder2() const { return rudder2_; }
+	decltype(rudder2_valid_) get_rudder2_valid() const { return rudder2_valid_; }
 
 	void set_rudder1(double t) noexcept;
 	void set_rudder2(double t) noexcept;

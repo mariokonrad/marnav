@@ -82,15 +82,15 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	origin org;
-	key k;
+	origin org_;
+	key k_;
 
 public:
-	origin get_org() const { return org; }
-	key get_key() const { return k; }
+	origin get_org() const { return org_; }
+	key get_key() const { return k_; }
 
-	void set_org(origin t) { org = t; }
-	void set_key(key t) { k = t; }
+	void set_org(origin t) { org_ = t; }
+	void set_key(key t) { k_ = t; }
 };
 }
 }

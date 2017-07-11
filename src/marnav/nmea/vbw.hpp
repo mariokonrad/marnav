@@ -47,34 +47,34 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> water_speed_longitudinal;
-	utils::optional<double> water_speed_transveral;
-	utils::optional<status> water_speed_status;
-	utils::optional<double> ground_speed_longitudinal;
-	utils::optional<double> ground_speed_transveral;
-	utils::optional<status> ground_speed_status;
+	utils::optional<double> water_speed_longitudinal_;
+	utils::optional<double> water_speed_transveral_;
+	utils::optional<status> water_speed_status_;
+	utils::optional<double> ground_speed_longitudinal_;
+	utils::optional<double> ground_speed_transveral_;
+	utils::optional<status> ground_speed_status_;
 
 public:
-	decltype(water_speed_longitudinal) get_water_speed_longitudinal() const
+	decltype(water_speed_longitudinal_) get_water_speed_longitudinal() const
 	{
-		return water_speed_longitudinal;
+		return water_speed_longitudinal_;
 	}
-	decltype(water_speed_transveral) get_water_speed_transveral() const
+	decltype(water_speed_transveral_) get_water_speed_transveral() const
 	{
-		return water_speed_transveral;
+		return water_speed_transveral_;
 	}
-	decltype(water_speed_status) get_water_speed_status() const { return water_speed_status; }
-	decltype(ground_speed_longitudinal) get_ground_speed_longitudinal() const
+	decltype(water_speed_status_) get_water_speed_status() const { return water_speed_status_; }
+	decltype(ground_speed_longitudinal_) get_ground_speed_longitudinal() const
 	{
-		return ground_speed_longitudinal;
+		return ground_speed_longitudinal_;
 	}
-	decltype(ground_speed_transveral) get_ground_speed_transveral() const
+	decltype(ground_speed_transveral_) get_ground_speed_transveral() const
 	{
-		return ground_speed_transveral;
+		return ground_speed_transveral_;
 	}
-	decltype(ground_speed_status) get_ground_speed_status() const
+	decltype(ground_speed_status_) get_ground_speed_status() const
 	{
-		return ground_speed_status;
+		return ground_speed_status_;
 	}
 
 	void set_water_speed(double l, double t, status s) noexcept;

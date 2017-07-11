@@ -42,17 +42,17 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> speed;
-	utils::optional<unit::velocity> speed_unit;
-	utils::optional<waypoint> waypoint_id;
+	utils::optional<double> speed_;
+	utils::optional<unit::velocity> speed_unit_;
+	utils::optional<waypoint> waypoint_id_;
 
 public:
-	decltype(speed) get_speed() const { return speed; }
-	decltype(speed_unit) get_speed_unit() const { return speed_unit; }
-	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
+	decltype(speed_) get_speed() const { return speed_; }
+	decltype(speed_unit_) get_speed_unit() const { return speed_unit_; }
+	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }
 
 	void set_speed(double t) noexcept;
-	void set_waypoint(const waypoint & id) { waypoint_id = id; }
+	void set_waypoint(const waypoint & id) { waypoint_id_ = id; }
 };
 }
 }

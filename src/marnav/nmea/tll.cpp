@@ -20,54 +20,54 @@ tll::tll(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 9)
 		throw std::invalid_argument{"invalid number of fields in tll"};
 
-	read(*(first + 0), number);
-	read(*(first + 1), lat);
-	read(*(first + 2), lat_hem);
-	read(*(first + 3), lon);
-	read(*(first + 4), lon_hem);
-	read(*(first + 5), name);
-	read(*(first + 6), time_utc);
-	read(*(first + 7), status);
-	read(*(first + 8), reference_target);
+	read(*(first + 0), number_);
+	read(*(first + 1), lat_);
+	read(*(first + 2), lat_hem_);
+	read(*(first + 3), lon_);
+	read(*(first + 4), lon_hem_);
+	read(*(first + 5), name_);
+	read(*(first + 6), time_utc_);
+	read(*(first + 7), status_);
+	read(*(first + 8), reference_target_);
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
-	lat = correct_hemisphere(lat, lat_hem);
-	lon = correct_hemisphere(lon, lon_hem);
+	lat_ = correct_hemisphere(lat_, lat_hem_);
+	lon_ = correct_hemisphere(lon_, lon_hem_);
 }
 
 geo::longitude tll::get_longitude() const
 {
-	return lon;
+	return lon_;
 }
 
 geo::latitude tll::get_latitude() const
 {
-	return lat;
+	return lat_;
 }
 
 void tll::set_lat(const geo::latitude & t)
 {
-	lat = t;
-	lat_hem = convert_hemisphere(t);
+	lat_ = t;
+	lat_hem_ = convert_hemisphere(t);
 }
 
 void tll::set_lon(const geo::longitude & t)
 {
-	lon = t;
-	lon_hem = convert_hemisphere(t);
+	lon_ = t;
+	lon_hem_ = convert_hemisphere(t);
 }
 
 void tll::append_data_to(std::string & s) const
 {
-	append(s, format(number, 2));
-	append(s, to_string(lat));
-	append(s, to_string(lat_hem));
-	append(s, to_string(lon));
-	append(s, to_string(lon_hem));
-	append(s, to_string(name));
-	append(s, to_string(time_utc));
-	append(s, to_string(status));
-	append(s, to_string(reference_target));
+	append(s, format(number_, 2));
+	append(s, to_string(lat_));
+	append(s, to_string(lat_hem_));
+	append(s, to_string(lon_));
+	append(s, to_string(lon_hem_));
+	append(s, to_string(name_));
+	append(s, to_string(time_utc_));
+	append(s, to_string(status_));
+	append(s, to_string(reference_target_));
 }
 }
 }

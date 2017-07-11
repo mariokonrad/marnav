@@ -6,7 +6,7 @@ namespace seatalk
 {
 message_87::message_87()
 	: message(ID)
-	, level(response_level::automatic)
+	, level_(response_level::automatic)
 {
 }
 
@@ -20,14 +20,14 @@ std::unique_ptr<message> message_87::parse(const raw & data)
 	//  87 00 0X
 	// raw  1  2
 
-	msg.level = static_cast<response_level>(data[2] & 0x0f);
+	msg.level_ = static_cast<response_level>(data[2] & 0x0f);
 
 	return result;
 }
 
 raw message_87::get_data() const
 {
-	return raw{static_cast<uint8_t>(ID), 0x00, static_cast<uint8_t>(level)};
+	return raw{static_cast<uint8_t>(ID), 0x00, static_cast<uint8_t>(level_)};
 }
 }
 }

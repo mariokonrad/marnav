@@ -57,18 +57,18 @@ void xdr::check_index(int index) const
 void xdr::set_info(int index, const transducer_info & info)
 {
 	check_index(index);
-	transducer_data[index] = info;
+	transducer_data_[index] = info;
 }
 
 utils::optional<xdr::transducer_info> xdr::get_info(int index) const
 {
 	check_index(index);
-	return transducer_data[index];
+	return transducer_data_[index];
 }
 
 void xdr::append_data_to(std::string & s) const
 {
-	for (const auto & data : transducer_data) {
+	for (const auto & data : transducer_data_) {
 		auto t = to_string(data);
 		if (!t.empty())
 			append(s, t);

@@ -29,8 +29,8 @@ namespace geo
 ///   are party or fully the same.
 ///
 region::region(const position & a0, const position & a1)
-	: p0(a0)
-	, p1(a1)
+	: p0_(a0)
+	, p1_(a1)
 {
 	if ((a0.lat() == a1.lat()) || (a0.lon() == a1.lon()))
 		throw std::invalid_argument{"specified region lacks a dimension"};
@@ -56,13 +56,13 @@ region::region(const position & a0, const position & a1)
 ///                  value of this is processed.
 ///
 region::region(const position & a, double d_lat, double d_lon)
-	: p0(a)
-	, p1(a)
+	: p0_(a)
+	, p1_(a)
 {
 	d_lat = std::abs(d_lat);
 	d_lon = std::abs(d_lon);
 
-	double t_lat = p0.lat() - d_lat;
+	double t_lat = p0_.lat() - d_lat;
 	if (t_lat < latitude::min) {
 		t_lat += (latitude::max - latitude::min);
 	}
@@ -70,7 +70,7 @@ region::region(const position & a, double d_lat, double d_lon)
 		t_lat -= (latitude::max - latitude::min);
 	}
 
-	double t_lon = p0.lon() + d_lon;
+	double t_lon = p0_.lon() + d_lon;
 	if (t_lon < longitude::min) {
 		t_lon += (longitude::max - longitude::min);
 	}
@@ -78,27 +78,27 @@ region::region(const position & a, double d_lat, double d_lon)
 		t_lon -= (longitude::max - longitude::min);
 	}
 
-	p1 = position{t_lat, t_lon};
+	p1_ = position{t_lat, t_lon};
 }
 
 longitude region::left() const
 {
-	return p0.lon();
+	return p0_.lon();
 }
 
 longitude region::right() const
 {
-	return p1.lon();
+	return p1_.lon();
 }
 
 latitude region::top() const
 {
-	return p0.lat();
+	return p0_.lat();
 }
 
 latitude region::bottom() const
 {
-	return p1.lat();
+	return p1_.lat();
 }
 
 /// Returns true if the specified position is inside (inclusive)
@@ -111,17 +111,17 @@ latitude region::bottom() const
 bool region::inside(const position & p) const
 {
 	// testing latitude is easy, there is no date line, no wrap-arround
-	if (p.lat() > p0.lat())
+	if (p.lat() > p0_.lat())
 		return false;
-	if (p.lat() < p1.lat())
+	if (p.lat() < p1_.lat())
 		return false;
 
 	// testint longitude
 
 	// shifted longitudes, now between 0..360 (date line, eastwards)
 	const double plon_s = 180.0 + p.lon();
-	const double p0lon_s = 180.0 + p0.lon();
-	const double p1lon_s = 180.0 + p1.lon();
+	const double p0lon_s = 180.0 + p0_.lon();
+	const double p1lon_s = 180.0 + p1_.lon();
 
 	// p is west of p0, but not west enough to reach p1
 	if ((plon_s < p0lon_s) && (plon_s > p1lon_s))

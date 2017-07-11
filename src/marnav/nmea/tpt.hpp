@@ -45,29 +45,29 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	double range = 0.0;
-	unit::distance range_unit = unit::distance::meter;
-	double bearing = 0.0;
-	double depth = 0.0;
-	unit::distance depth_unit = unit::distance::meter;
+	double range_ = 0.0;
+	unit::distance range_unit_ = unit::distance::meter;
+	double bearing_ = 0.0;
+	double depth_ = 0.0;
+	unit::distance depth_unit_ = unit::distance::meter;
 
 public:
-	decltype(range) get_range() const { return range; }
-	decltype(range_unit) get_range_unit() const { return range_unit; }
-	decltype(bearing) get_bearing() const { return bearing; }
-	decltype(depth) get_depth() const { return depth; }
-	decltype(depth_unit) get_depth_unit() const { return depth_unit; }
+	decltype(range_) get_range() const { return range_; }
+	decltype(range_unit_) get_range_unit() const { return range_unit_; }
+	decltype(bearing_) get_bearing() const { return bearing_; }
+	decltype(depth_) get_depth() const { return depth_; }
+	decltype(depth_unit_) get_depth_unit() const { return depth_unit_; }
 
 	void set_range(double t) noexcept
 	{
-		range = t;
-		range_unit = unit::distance::meter;
+		range_ = t;
+		range_unit_ = unit::distance::meter;
 	}
-	void set_bearing(double t) noexcept { bearing = t; }
+	void set_bearing(double t) noexcept { bearing_ = t; }
 	void set_depth(double t) noexcept
 	{
-		depth = t;
-		range_unit = unit::distance::meter;
+		depth_ = t;
+		range_unit_ = unit::distance::meter;
 	}
 };
 }

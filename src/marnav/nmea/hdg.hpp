@@ -46,20 +46,20 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> heading; // magnetic sensor heading in deg
-	utils::optional<double> magn_dev; // magnetic deviation in deg
-	utils::optional<direction> magn_dev_hem; // E:east, W:west
-	utils::optional<double> magn_var; // magnetic variation in deg
-	utils::optional<direction> magn_var_hem; // E:east, W:west
+	utils::optional<double> heading_; // magnetic sensor heading in deg
+	utils::optional<double> magn_dev_; // magnetic deviation in deg
+	utils::optional<direction> magn_dev_hem_; // E:east, W:west
+	utils::optional<double> magn_var_; // magnetic variation in deg
+	utils::optional<direction> magn_var_hem_; // E:east, W:west
 
 public:
-	decltype(heading) get_heading() const { return heading; }
-	decltype(magn_dev) get_magn_dev() const { return magn_dev; }
-	decltype(magn_dev_hem) get_magn_dev_hem() const { return magn_dev_hem; }
-	decltype(magn_var) get_magn_var() const { return magn_var; }
-	decltype(magn_var_hem) get_magn_var_hem() const { return magn_var_hem; }
+	decltype(heading_) get_heading() const { return heading_; }
+	decltype(magn_dev_) get_magn_dev() const { return magn_dev_; }
+	decltype(magn_dev_hem_) get_magn_dev_hem() const { return magn_dev_hem_; }
+	decltype(magn_var_) get_magn_var() const { return magn_var_; }
+	decltype(magn_var_hem_) get_magn_var_hem() const { return magn_var_hem_; }
 
-	void set_heading(double t) noexcept { heading = t; }
+	void set_heading(double t) noexcept { heading_ = t; }
 	void set_magn_dev(double deg, direction hem);
 	void set_magn_var(double deg, direction hem);
 };

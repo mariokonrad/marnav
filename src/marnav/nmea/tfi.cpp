@@ -46,7 +46,7 @@ constexpr const char * tfi::TAG;
 tfi::tfi()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
 {
-	for (auto & t : sensors)
+	for (auto & t : sensors_)
 		t = state::no_answer;
 }
 
@@ -57,7 +57,7 @@ tfi::tfi(talker talk, fields::const_iterator first, fields::const_iterator last)
 		throw std::invalid_argument{"invalid number of fields in tfi"};
 
 	for (size_t i = 0; i < num_sensors; ++i)
-		read(*(first + i), sensors[i], state_mapping);
+		read(*(first + i), sensors_[i], state_mapping);
 }
 
 void tfi::check_index(int index) const
@@ -70,18 +70,18 @@ void tfi::check_index(int index) const
 tfi::state tfi::get_sensor(int index) const
 {
 	check_index(index);
-	return sensors[index];
+	return sensors_[index];
 }
 
 void tfi::set_sensor(int index, state t)
 {
 	check_index(index);
-	sensors[index] = t;
+	sensors_[index] = t;
 }
 
 void tfi::append_data_to(std::string & s) const
 {
-	for (auto const & t : sensors)
+	for (auto const & t : sensors_)
 		append(s, to_string(t));
 }
 }

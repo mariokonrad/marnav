@@ -170,12 +170,12 @@ dsc::dsc(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 11)
 		throw std::invalid_argument{"invalid number of fields in dsc"};
 
-	read(*(first + 0), fmt_spec, format_specifier_mapping);
-	read(*(first + 1), address);
-	read(*(first + 2), cat, category_mapping);
+	read(*(first + 0), fmt_spec_, format_specifier_mapping);
+	read(*(first + 1), address_);
+	read(*(first + 2), cat_, category_mapping);
 	// @todo read other 6 data members
-	read(*(first + 9), ack, acknowledgement_mapping);
-	read(*(first + 10), extension, extension_indicator_mapping);
+	read(*(first + 9), ack_, acknowledgement_mapping);
+	read(*(first + 10), extension_, extension_indicator_mapping);
 }
 
 /// Valid only for format specifier other than geographical area.
@@ -183,7 +183,7 @@ dsc::dsc(talker talk, fields::const_iterator first, fields::const_iterator last)
 /// simply wrong if taken with an invalid format specifier.
 utils::mmsi dsc::get_mmsi() const
 {
-	return utils::mmsi{static_cast<utils::mmsi::value_type>(address / 10)};
+	return utils::mmsi{static_cast<utils::mmsi::value_type>(address_ / 10)};
 }
 
 /// Valid only for format specifier geographical_area.
@@ -207,7 +207,7 @@ utils::mmsi dsc::get_mmsi() const
 ///
 geo::region dsc::get_geographical_area() const
 {
-	const auto quadrant = (address / 1000000000) % 10;
+	const auto quadrant = (address_ / 1000000000) % 10;
 
 	geo::latitude::hemisphere lat_hem = geo::latitude::hemisphere::north;
 	geo::longitude::hemisphere lon_hem = geo::longitude::hemisphere::west;
@@ -232,10 +232,10 @@ geo::region dsc::get_geographical_area() const
 			throw std::invalid_argument{"invalid quadrant"};
 	}
 
-	const uint32_t lat = static_cast<uint32_t>((address / 10000000) % 100);
-	const uint32_t lon = static_cast<uint32_t>((address / 10000) % 1000);
-	const double d_lat = static_cast<double>((address / 100) % 100);
-	const double d_lon = static_cast<double>(address % 100);
+	const uint32_t lat = static_cast<uint32_t>((address_ / 10000000) % 100);
+	const uint32_t lon = static_cast<uint32_t>((address_ / 10000) % 1000);
+	const double d_lat = static_cast<double>((address_ / 100) % 100);
+	const double d_lon = static_cast<double>(address_ % 100);
 
 	return geo::region{{{lat, 0, 0, lat_hem}, {lon, 0, 0, lon_hem}}, d_lat, d_lon};
 }
@@ -244,17 +244,17 @@ geo::region dsc::get_geographical_area() const
 ///
 void dsc::append_data_to(std::string & s) const
 {
-	append(s, to_string(fmt_spec));
-	append(s, format(address, 10));
-	append(s, to_string(cat));
+	append(s, to_string(fmt_spec_));
+	append(s, format(address_, 10));
+	append(s, to_string(cat_));
 	append(s, "");
 	append(s, "");
 	append(s, "");
 	append(s, "");
 	append(s, "");
 	append(s, "");
-	append(s, to_string(ack));
-	append(s, to_string(extension));
+	append(s, to_string(ack_));
+	append(s, to_string(extension_));
 }
 }
 }

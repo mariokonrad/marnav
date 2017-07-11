@@ -21,17 +21,17 @@ sfi::sfi(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (size % 2 != 0)
 		throw std::invalid_argument{"invalid number of fields in sfi"};
 
-	read(*(first + 0), number_of_messages);
-	read(*(first + 1), message_number);
+	read(*(first + 0), number_of_messages_);
+	read(*(first + 1), message_number_);
 
-	frequencies.clear();
-	frequencies.reserve(size - 2);
+	frequencies_.clear();
+	frequencies_.reserve(size - 2);
 	for (auto i = 2; i < size; i += 2) {
 		uint32_t frequency;
 		char mode;
 		read(*(first + i + 0), frequency);
 		read(*(first + i + 1), mode);
-		frequencies.push_back({frequency, mode});
+		frequencies_.push_back({frequency, mode});
 	}
 }
 
@@ -41,14 +41,14 @@ void sfi::set_frequencies(const std::vector<scanning_frequency> & v)
 		throw std::invalid_argument{
 			"number of frequencies exceeds max entries in sfi::set_frequencies"};
 
-	frequencies = v;
+	frequencies_ = v;
 }
 
 void sfi::append_data_to(std::string & s) const
 {
-	append(s, to_string(number_of_messages));
-	append(s, to_string(message_number));
-	for (auto const & entry : frequencies) {
+	append(s, to_string(number_of_messages_));
+	append(s, to_string(message_number_));
+	for (auto const & entry : frequencies_) {
 		append(s, to_string(entry.frequency));
 		append(s, to_string(entry.mode));
 	}

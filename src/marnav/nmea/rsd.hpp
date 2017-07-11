@@ -53,24 +53,24 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	std::array<double, 8> unknowns;
-	double cursor_range = 0.0;
-	double cursor_bearing = 0.0;
-	double range_scale = 0.0;
-	char range_unit = 'V';
-	char unknown = 'V';
+	std::array<double, 8> unknowns_;
+	double cursor_range_ = 0.0;
+	double cursor_bearing_ = 0.0;
+	double range_scale_ = 0.0;
+	char range_unit_ = 'V';
+	char unknown_ = 'V';
 
 public:
-	decltype(cursor_range) get_cursor_range() const { return cursor_range; }
-	decltype(cursor_bearing) get_cursor_bearing() const { return cursor_bearing; }
-	decltype(range_scale) get_range_scale() const { return range_scale; }
-	decltype(range_unit) get_range_unit() const { return range_unit; }
-	decltype(unknown) get_unknown() const { return unknown; }
+	decltype(cursor_range_) get_cursor_range() const { return cursor_range_; }
+	decltype(cursor_bearing_) get_cursor_bearing() const { return cursor_bearing_; }
+	decltype(range_scale_) get_range_scale() const { return range_scale_; }
+	decltype(range_unit_) get_range_unit() const { return range_unit_; }
+	decltype(unknown_) get_unknown() const { return unknown_; }
 
-	void set_unknowns(std::array<double, 8> t) noexcept { unknowns = t; }
+	void set_unknowns(std::array<double, 8> t) noexcept { unknowns_ = t; }
 	void set_cursor(double range, double bearing) noexcept;
 	void set_range(double scale, char unit) noexcept;
-	void set_unknown(char t) noexcept { unknown = t; }
+	void set_unknown(char t) noexcept { unknown_ = t; }
 };
 }
 }

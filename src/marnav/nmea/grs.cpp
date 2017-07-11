@@ -43,12 +43,12 @@ constexpr const char * grs::TAG;
 
 grs::grs()
 	: sentence(ID, TAG, talker_id::global_positioning_system)
-	, usage(grs::residual_usage::used_in_gga)
+	, usage_(grs::residual_usage::used_in_gga)
 {
 	// first three residuals are not optional
-	sat_residual[0] = 0.0;
-	sat_residual[1] = 0.0;
-	sat_residual[2] = 0.0;
+	sat_residual_[0] = 0.0;
+	sat_residual_[1] = 0.0;
+	sat_residual_[2] = 0.0;
 }
 
 grs::grs(talker talk, fields::const_iterator first, fields::const_iterator last)
@@ -57,10 +57,10 @@ grs::grs(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 14)
 		throw std::invalid_argument{"invalid number of fields in grs"};
 
-	read(*(first + 0), time_utc);
-	read(*(first + 1), usage, residual_usage_mapping);
-	for (size_t i = 0; i < sat_residual.size(); ++i)
-		read(*(first + i + 2), sat_residual[i]);
+	read(*(first + 0), time_utc_);
+	read(*(first + 1), usage_, residual_usage_mapping);
+	for (size_t i = 0; i < sat_residual_.size(); ++i)
+		read(*(first + i + 2), sat_residual_[i]);
 }
 
 void grs::check_index(int index) const
@@ -73,20 +73,20 @@ void grs::check_index(int index) const
 utils::optional<double> grs::get_sat_residual(int index) const
 {
 	check_index(index);
-	return sat_residual[index];
+	return sat_residual_[index];
 }
 
 void grs::set_sat_residual(int index, double value)
 {
 	check_index(index);
-	sat_residual[index] = value;
+	sat_residual_[index] = value;
 }
 
 void grs::append_data_to(std::string & s) const
 {
-	append(s, format(time_utc, 2));
-	append(s, to_string(usage));
-	for (auto const & t : sat_residual)
+	append(s, format(time_utc_, 2));
+	append(s, to_string(usage_));
+	for (auto const & t : sat_residual_)
 		append(s, to_string(t));
 }
 }

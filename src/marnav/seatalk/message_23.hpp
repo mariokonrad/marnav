@@ -34,18 +34,18 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	bool sensor_defective;
-	uint8_t temperature_celsius; // degrees celsius
-	uint8_t temperature_fahrenheit; // degrees fahrenheit
+	bool sensor_defective_;
+	uint8_t temperature_celsius_; // degrees celsius
+	uint8_t temperature_fahrenheit_; // degrees fahrenheit
 
 public:
-	bool get_sensor_defective() const noexcept { return sensor_defective; }
-	uint8_t get_celsius() const noexcept { return temperature_celsius; }
-	uint8_t get_fahrenheit() const noexcept { return temperature_fahrenheit; }
+	bool get_sensor_defective() const noexcept { return sensor_defective_; }
+	uint8_t get_celsius() const noexcept { return temperature_celsius_; }
+	uint8_t get_fahrenheit() const noexcept { return temperature_fahrenheit_; }
 
-	void set_sensor_defective(bool t) noexcept { sensor_defective = t; }
-	void set_celsius(uint8_t t) noexcept { temperature_celsius = t; }
-	void set_fahrenheit(uint8_t t) noexcept { temperature_fahrenheit = t; }
+	void set_sensor_defective(bool t) noexcept { sensor_defective_ = t; }
+	void set_celsius(uint8_t t) noexcept { temperature_celsius_ = t; }
+	void set_fahrenheit(uint8_t t) noexcept { temperature_fahrenheit_ = t; }
 };
 }
 }

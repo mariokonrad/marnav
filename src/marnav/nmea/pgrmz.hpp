@@ -52,21 +52,21 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	double altitude = 0.0;
-	unit::distance altitude_unit = unit::distance::feet;
-	utils::optional<fix_type> fix;
+	double altitude_ = 0.0;
+	unit::distance altitude_unit_ = unit::distance::feet;
+	utils::optional<fix_type> fix_;
 
 public:
-	decltype(altitude) get_altitude() const { return altitude; }
-	decltype(altitude_unit) get_altitude_unit() const { return altitude_unit; }
-	decltype(fix) get_fix() const { return fix; }
+	decltype(altitude_) get_altitude() const { return altitude_; }
+	decltype(altitude_unit_) get_altitude_unit() const { return altitude_unit_; }
+	decltype(fix_) get_fix() const { return fix_; }
 
 	void set_altitude(double t) noexcept
 	{
-		altitude = t;
-		altitude_unit = unit::distance::feet;
+		altitude_ = t;
+		altitude_unit_ = unit::distance::feet;
 	}
-	void set_fix(fix_type t) noexcept { fix = t; }
+	void set_fix(fix_type t) noexcept { fix_ = t; }
 };
 
 std::string to_string(pgrmz::fix_type value);

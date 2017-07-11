@@ -41,7 +41,7 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	std::array<utils::optional<waypoint>, max_waypoint_ids> waypoint_id;
+	std::array<utils::optional<waypoint>, max_waypoint_ids> waypoint_id_;
 
 	void check_index(int index) const;
 

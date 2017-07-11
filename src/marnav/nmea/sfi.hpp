@@ -47,17 +47,17 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	uint32_t number_of_messages = 0;
-	uint32_t message_number = 0;
-	std::vector<scanning_frequency> frequencies;
+	uint32_t number_of_messages_ = 0;
+	uint32_t message_number_ = 0;
+	std::vector<scanning_frequency> frequencies_;
 
 public:
-	decltype(number_of_messages) get_n_messages() const { return number_of_messages; }
-	decltype(message_number) get_message_number() const { return message_number; }
-	decltype(frequencies) get_frequencies() const { return frequencies; }
+	decltype(number_of_messages_) get_n_messages() const { return number_of_messages_; }
+	decltype(message_number_) get_message_number() const { return message_number_; }
+	decltype(frequencies_) get_frequencies() const { return frequencies_; }
 
-	void set_number_of_messages(uint32_t t) noexcept { number_of_messages = t; }
-	void set_message_number(uint32_t t) noexcept { message_number = t; }
+	void set_number_of_messages(uint32_t t) noexcept { number_of_messages_ = t; }
+	void set_message_number(uint32_t t) noexcept { message_number_ = t; }
 	void set_frequencies(const std::vector<scanning_frequency> & v);
 };
 }

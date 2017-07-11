@@ -30,8 +30,8 @@ protected:
 	virtual void process_sentence(const std::string & s) override;
 
 private:
-	bool received;
-	std::string sentence;
+	bool received_;
+	std::string sentence_;
 };
 }
 }

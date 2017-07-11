@@ -53,30 +53,30 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	std::string ref = "W84";
-	utils::optional<std::string> subcode;
-	double lat_offset = 0.0;
-	direction lat_hem = direction::north;
-	double lon_offset = 0.0;
-	direction lon_hem = direction::east;
-	double altitude = 0.0;
-	std::string name = "W84";
+	std::string ref_ = "W84";
+	utils::optional<std::string> subcode_;
+	double lat_offset_ = 0.0;
+	direction lat_hem_ = direction::north;
+	double lon_offset_ = 0.0;
+	direction lon_hem_ = direction::east;
+	double altitude_ = 0.0;
+	std::string name_ = "W84";
 
 public:
-	decltype(ref) get_ref() const { return ref; }
-	decltype(subcode) get_subcode() const { return subcode; }
-	decltype(lat_offset) get_lat_offset() const { return lat_offset; }
-	decltype(lat_hem) get_lat_hem() const { return lat_hem; }
-	decltype(lon_offset) get_lon_offset() const { return lon_offset; }
-	decltype(lon_hem) get_lon_hem() const { return lon_hem; }
-	decltype(altitude) get_altitude() const { return altitude; }
-	decltype(name) get_name() const { return name; }
+	decltype(ref_) get_ref() const { return ref_; }
+	decltype(subcode_) get_subcode() const { return subcode_; }
+	decltype(lat_offset_) get_lat_offset() const { return lat_offset_; }
+	decltype(lat_hem_) get_lat_hem() const { return lat_hem_; }
+	decltype(lon_offset_) get_lon_offset() const { return lon_offset_; }
+	decltype(lon_hem_) get_lon_hem() const { return lon_hem_; }
+	decltype(altitude_) get_altitude() const { return altitude_; }
+	decltype(name_) get_name() const { return name_; }
 
 	void set_ref(const std::string & t) noexcept;
 	void set_subcode(const std::string & t) noexcept;
 	void set_lat_offset(double t, direction h);
 	void set_lon_offset(double t, direction h);
-	void set_altitude(double t) { altitude = t; }
+	void set_altitude(double t) { altitude_ = t; }
 	void set_name(const std::string & t) noexcept;
 };
 }

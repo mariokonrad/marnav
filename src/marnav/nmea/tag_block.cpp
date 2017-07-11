@@ -73,25 +73,25 @@ tag_block::tag_block(const std::string & s)
 			continue;
 		switch (t[0]) {
 			case 'c':
-				unix_time = std::stoll(t.substr(2, std::string::npos));
+				unix_time_ = std::stoll(t.substr(2, std::string::npos));
 				break;
 			case 'd':
-				destination = extract_string(t);
+				destination_ = extract_string(t);
 				break;
 			case 'g':
-				group = extract_group(t);
+				group_ = extract_group(t);
 				break;
 			case 'n':
-				line_count = extract_int(t);
+				line_count_ = extract_int(t);
 				break;
 			case 'r':
-				relative_time = extract_int(t);
+				relative_time_ = extract_int(t);
 				break;
 			case 's':
-				source = extract_string(t);
+				source_ = extract_string(t);
 				break;
 			case 't':
-				text = extract_string(t);
+				text_ = extract_string(t);
 				break;
 			default:
 				throw std::invalid_argument{"invalid field in nmea/tag_block"};
@@ -101,17 +101,17 @@ tag_block::tag_block(const std::string & s)
 
 void tag_block::set_destination(const std::string & t)
 {
-	destination = (t.size() <= 15u) ? t : t.substr(0, 15);
+	destination_ = (t.size() <= 15u) ? t : t.substr(0, 15);
 }
 
 void tag_block::set_source(const std::string & t)
 {
-	source = (t.size() <= 15u) ? t : t.substr(0, 15);
+	source_ = (t.size() <= 15u) ? t : t.substr(0, 15);
 }
 
 void tag_block::set_text(const std::string & t)
 {
-	text = (t.size() <= 15u) ? t : t.substr(0, 15);
+	text_ = (t.size() <= 15u) ? t : t.substr(0, 15);
 }
 
 /// Parses the specified string and returns the tag block from it.

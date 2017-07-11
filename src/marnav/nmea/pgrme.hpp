@@ -47,46 +47,46 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> horizontal_position_error;
-	unit::distance horizontal_position_error_unit = unit::distance::meter;
-	utils::optional<double> vertical_position_error;
-	unit::distance vertical_position_error_unit = unit::distance::meter;
-	utils::optional<double> overall_spherical_equiv_position_error;
-	unit::distance overall_spherical_equiv_position_error_unit = unit::distance::meter;
+	utils::optional<double> horizontal_position_error_;
+	unit::distance horizontal_position_error_unit_ = unit::distance::meter;
+	utils::optional<double> vertical_position_error_;
+	unit::distance vertical_position_error_unit_ = unit::distance::meter;
+	utils::optional<double> overall_spherical_equiv_position_error_;
+	unit::distance overall_spherical_equiv_position_error_unit_ = unit::distance::meter;
 
 public:
-	decltype(horizontal_position_error) get_horizontal_position_error() const
+	decltype(horizontal_position_error_) get_horizontal_position_error() const
 	{
-		return horizontal_position_error;
+		return horizontal_position_error_;
 	}
-	decltype(horizontal_position_error_unit) get_horizontal_position_error_unit() const
+	decltype(horizontal_position_error_unit_) get_horizontal_position_error_unit() const
 	{
-		return horizontal_position_error_unit;
+		return horizontal_position_error_unit_;
 	}
-	decltype(vertical_position_error) get_vertical_position_error() const
+	decltype(vertical_position_error_) get_vertical_position_error() const
 	{
-		return vertical_position_error;
+		return vertical_position_error_;
 	}
-	decltype(vertical_position_error_unit) get_vertical_position_error_unit() const
+	decltype(vertical_position_error_unit_) get_vertical_position_error_unit() const
 	{
-		return vertical_position_error_unit;
+		return vertical_position_error_unit_;
 	}
-	decltype(overall_spherical_equiv_position_error)
+	decltype(overall_spherical_equiv_position_error_)
 	get_overall_spherical_equiv_position_error() const
 	{
-		return overall_spherical_equiv_position_error;
+		return overall_spherical_equiv_position_error_;
 	}
-	decltype(overall_spherical_equiv_position_error_unit)
+	decltype(overall_spherical_equiv_position_error_unit_)
 	get_overall_spherical_equiv_position_error_unit() const
 	{
-		return overall_spherical_equiv_position_error_unit;
+		return overall_spherical_equiv_position_error_unit_;
 	}
 
-	void set_horizontal_position_error(double t) noexcept { horizontal_position_error = t; }
-	void set_vertical_position_error(double t) noexcept { vertical_position_error = t; }
+	void set_horizontal_position_error(double t) noexcept { horizontal_position_error_ = t; }
+	void set_vertical_position_error(double t) noexcept { vertical_position_error_ = t; }
 	void set_overall_spherical_equiv_position_error(double t) noexcept
 	{
-		overall_spherical_equiv_position_error = t;
+		overall_spherical_equiv_position_error_ = t;
 	}
 };
 }

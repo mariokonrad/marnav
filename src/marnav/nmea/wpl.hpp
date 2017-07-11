@@ -48,21 +48,21 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<geo::latitude> lat;
-	utils::optional<direction> lat_hem; // latitude hemisphere (N or S)
-	utils::optional<geo::longitude> lon;
-	utils::optional<direction> lon_hem; // longitude hemisphere (E or W)
-	utils::optional<waypoint> waypoint_id;
+	utils::optional<geo::latitude> lat_;
+	utils::optional<direction> lat_hem_; // latitude hemisphere (N or S)
+	utils::optional<geo::longitude> lon_;
+	utils::optional<direction> lon_hem_; // longitude hemisphere (E or W)
+	utils::optional<waypoint> waypoint_id_;
 
 public:
-	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
+	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }
 
 	utils::optional<geo::longitude> get_longitude() const;
 	utils::optional<geo::latitude> get_latitude() const;
 
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_waypoint(const waypoint & id) { waypoint_id = id; }
+	void set_waypoint(const waypoint & id) { waypoint_id_ = id; }
 };
 }
 }

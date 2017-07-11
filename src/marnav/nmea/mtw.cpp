@@ -18,20 +18,20 @@ mtw::mtw(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 2)
 		throw std::invalid_argument{"invalid number of fields in mtw"};
 
-	read(*(first + 0), temperature);
-	read(*(first + 1), temperature_unit);
+	read(*(first + 0), temperature_);
+	read(*(first + 1), temperature_unit_);
 }
 
 void mtw::set_temperature(double t) noexcept
 {
-	temperature = t;
-	temperature_unit = unit::temperature::celsius;
+	temperature_ = t;
+	temperature_unit_ = unit::temperature::celsius;
 }
 
 void mtw::append_data_to(std::string & s) const
 {
-	append(s, to_string(temperature));
-	append(s, to_string(temperature_unit));
+	append(s, to_string(temperature_));
+	append(s, to_string(temperature_unit_));
 }
 }
 }

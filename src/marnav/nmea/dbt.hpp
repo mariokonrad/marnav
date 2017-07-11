@@ -49,20 +49,20 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> depth_feet; // water depth in feet
-	utils::optional<unit::distance> depth_feet_unit; // f:feet
-	utils::optional<double> depth_meter; // water depth in meter
-	utils::optional<unit::distance> depth_meter_unit; // M:meter
-	utils::optional<double> depth_fathom; // water depth in fathom
-	utils::optional<unit::distance> depth_fathom_unit; // F:fathom
+	utils::optional<double> depth_feet_; // water depth in feet
+	utils::optional<unit::distance> depth_feet_unit_; // f:feet
+	utils::optional<double> depth_meter_; // water depth in meter
+	utils::optional<unit::distance> depth_meter_unit_; // M:meter
+	utils::optional<double> depth_fathom_; // water depth in fathom
+	utils::optional<unit::distance> depth_fathom_unit_; // F:fathom
 
 public:
-	decltype(depth_feet) get_depth_feet() const { return depth_feet; }
-	decltype(depth_feet_unit) get_depth_feet_unit() const { return depth_feet_unit; }
-	decltype(depth_meter) get_depth_meter() const { return depth_meter; }
-	decltype(depth_meter_unit) get_depth_meter_unit() const { return depth_meter_unit; }
-	decltype(depth_fathom) get_depth_fathom() const { return depth_fathom; }
-	decltype(depth_fathom_unit) get_depth_fathom_unit() const { return depth_fathom_unit; }
+	decltype(depth_feet_) get_depth_feet() const { return depth_feet_; }
+	decltype(depth_feet_unit_) get_depth_feet_unit() const { return depth_feet_unit_; }
+	decltype(depth_meter_) get_depth_meter() const { return depth_meter_; }
+	decltype(depth_meter_unit_) get_depth_meter_unit() const { return depth_meter_unit_; }
+	decltype(depth_fathom_) get_depth_fathom() const { return depth_fathom_; }
+	decltype(depth_fathom_unit_) get_depth_fathom_unit() const { return depth_fathom_unit_; }
 
 	void set_depth_feet(double t) noexcept;
 	void set_depth_meter(double t) noexcept;

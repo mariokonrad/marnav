@@ -46,25 +46,25 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	uint32_t frequency = 0;
-	selection_mode frequency_mode = selection_mode::automatic;
-	uint32_t bitrate = 0;
-	selection_mode bitrate_mode = selection_mode::automatic;
-	utils::optional<uint32_t> frequency_mss_status;
+	uint32_t frequency_ = 0;
+	selection_mode frequency_mode_ = selection_mode::automatic;
+	uint32_t bitrate_ = 0;
+	selection_mode bitrate_mode_ = selection_mode::automatic;
+	utils::optional<uint32_t> frequency_mss_status_;
 
 public:
-	decltype(frequency) get_frequency() const { return frequency; }
-	decltype(frequency_mode) get_frequency_mode() const { return frequency_mode; }
-	decltype(bitrate) get_bitrate() const { return bitrate; }
-	decltype(bitrate_mode) get_bitrate_mode() const { return bitrate_mode; }
-	decltype(frequency_mss_status) get_frequency_mss_status() const
+	decltype(frequency_) get_frequency() const { return frequency_; }
+	decltype(frequency_mode_) get_frequency_mode() const { return frequency_mode_; }
+	decltype(bitrate_) get_bitrate() const { return bitrate_; }
+	decltype(bitrate_mode_) get_bitrate_mode() const { return bitrate_mode_; }
+	decltype(frequency_mss_status_) get_frequency_mss_status() const
 	{
-		return frequency_mss_status;
+		return frequency_mss_status_;
 	}
 
 	void set_frequency(uint32_t f, selection_mode mode) noexcept;
 	void set_bitrate(uint32_t rate, selection_mode mode) noexcept;
-	void set_frequency_mss_status(uint32_t t) noexcept { frequency_mss_status = t; }
+	void set_frequency_mss_status(uint32_t t) noexcept { frequency_mss_status_ = t; }
 };
 }
 }

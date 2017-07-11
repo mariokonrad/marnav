@@ -40,7 +40,7 @@ double angle::seconds() const noexcept
 
 void swap(angle & a, angle & b) noexcept
 {
-	std::swap(a.value, b.value);
+	std::swap(a.value_, b.value_);
 }
 
 bool operator==(const angle & a, const angle & b) noexcept

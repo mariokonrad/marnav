@@ -19,7 +19,7 @@ public:
 	angle(angle &&) noexcept = default;
 
 	constexpr angle() noexcept
-		: value(0.0)
+		: value_(0.0)
 	{
 	}
 
@@ -27,7 +27,7 @@ public:
 	///
 	/// @param[in] degrees Angle in degrees.
 	constexpr angle(double degrees) noexcept
-		: value(degrees)
+		: value_(degrees)
 	{
 	}
 
@@ -36,9 +36,9 @@ public:
 	double seconds() const noexcept;
 
 	/// Converts an angle to double, units: degrees.
-	constexpr operator double() const noexcept { return value; }
+	constexpr operator double() const noexcept { return value_; }
 
-	constexpr double get() const noexcept { return value; }
+	constexpr double get() const noexcept { return value_; }
 
 	angle & operator=(const angle &) = default;
 	angle & operator=(angle &&) noexcept = default;
@@ -49,10 +49,10 @@ protected:
 	/// Sets the angle in degrees.
 	///
 	/// Not part of the public interface intentionally.
-	void set(double degrees) noexcept { value = degrees; }
+	void set(double degrees) noexcept { value_ = degrees; }
 
 private:
-	double value; // angle in degrees
+	double value_; // angle in degrees
 };
 
 void swap(angle & a, angle & b) noexcept;

@@ -57,29 +57,29 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<selection_mode> sel_mode; // A:automatic 2D/3D, M:manual
-	utils::optional<uint32_t> mode; // 1 = no fix, 2 = 2D fix, 3 = 3D fix
-	std::array<utils::optional<uint32_t>, max_satellite_ids> satellite_id;
-	utils::optional<double> pdop;
-	utils::optional<double> hdop;
-	utils::optional<double> vdop;
+	utils::optional<selection_mode> sel_mode_; // A:automatic 2D/3D, M:manual
+	utils::optional<uint32_t> mode_; // 1 = no fix, 2 = 2D fix, 3 = 3D fix, TODO: enum
+	std::array<utils::optional<uint32_t>, max_satellite_ids> satellite_id_;
+	utils::optional<double> pdop_;
+	utils::optional<double> hdop_;
+	utils::optional<double> vdop_;
 
 	void check_index(int index) const;
 
 public:
-	decltype(sel_mode) get_sel_mode() const { return sel_mode; }
-	decltype(mode) get_mode() const { return mode; }
+	decltype(sel_mode_) get_sel_mode() const { return sel_mode_; }
+	decltype(mode_) get_mode() const { return mode_; }
 	utils::optional<uint32_t> get_satellite_id(int index) const;
-	decltype(pdop) get_pdop() const { return pdop; }
-	decltype(hdop) get_hdop() const { return hdop; }
-	decltype(vdop) get_vdop() const { return vdop; }
+	decltype(pdop_) get_pdop() const { return pdop_; }
+	decltype(hdop_) get_hdop() const { return hdop_; }
+	decltype(vdop_) get_vdop() const { return vdop_; }
 
-	void set_sel_mode(selection_mode t) noexcept { sel_mode = t; }
-	void set_mode(uint32_t t) noexcept { mode = t; }
+	void set_sel_mode(selection_mode t) noexcept { sel_mode_ = t; }
+	void set_mode(uint32_t t) noexcept { mode_ = t; }
 	void set_satellite_id(int index, uint32_t t);
-	void set_pdop(double t) noexcept { pdop = t; }
-	void set_hdop(double t) noexcept { hdop = t; }
-	void set_vdop(double t) noexcept { vdop = t; }
+	void set_pdop(double t) noexcept { pdop_ = t; }
+	void set_hdop(double t) noexcept { hdop_ = t; }
+	void set_vdop(double t) noexcept { vdop_ = t; }
 };
 }
 }

@@ -65,25 +65,25 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	uint32_t n_messages = 1;
-	uint32_t message_number = 1;
-	uint32_t n_satellites_in_view = 0;
-	std::array<utils::optional<satellite_info>, 4> sat;
+	uint32_t n_messages_ = 1;
+	uint32_t message_number_ = 1;
+	uint32_t n_satellites_in_view_ = 0;
+	std::array<utils::optional<satellite_info>, 4> sat_;
 
 	void check_index(int index) const;
 
 public:
-	decltype(n_messages) get_n_messages() const { return n_messages; }
-	decltype(message_number) get_message_number() const { return message_number; }
-	decltype(n_satellites_in_view) get_n_satellites_in_view() const
+	decltype(n_messages_) get_n_messages() const { return n_messages_; }
+	decltype(message_number_) get_message_number() const { return message_number_; }
+	decltype(n_satellites_in_view_) get_n_satellites_in_view() const
 	{
-		return n_satellites_in_view;
+		return n_satellites_in_view_;
 	}
 	utils::optional<satellite_info> get_sat(int index) const;
 
 	void set_n_messages(uint32_t t);
 	void set_message_number(uint32_t t);
-	void set_n_satellites_in_view(uint32_t t) noexcept { n_satellites_in_view = t; }
+	void set_n_satellites_in_view(uint32_t t) noexcept { n_satellites_in_view_ = t; }
 	void set_sat(int index, const satellite_info & info);
 };
 }
