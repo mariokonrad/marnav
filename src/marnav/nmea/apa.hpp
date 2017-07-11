@@ -71,64 +71,64 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<status> loran_c_blink_warning;
-	utils::optional<status> loran_c_cycle_lock_warning;
-	utils::optional<double> cross_track_error_magnitude;
-	utils::optional<side> direction_to_steer;
-	utils::optional<unit::distance> cross_track_unit;
-	utils::optional<status> status_arrival;
-	utils::optional<status> status_perpendicular_passing;
-	utils::optional<double> bearing_origin_to_destination;
-	utils::optional<reference> bearing_origin_to_destination_ref;
-	utils::optional<waypoint> waypoint_id;
+	utils::optional<status> loran_c_blink_warning_;
+	utils::optional<status> loran_c_cycle_lock_warning_;
+	utils::optional<double> cross_track_error_magnitude_;
+	utils::optional<side> direction_to_steer_;
+	utils::optional<unit::distance> cross_track_unit_;
+	utils::optional<status> status_arrival_;
+	utils::optional<status> status_perpendicular_passing_;
+	utils::optional<double> bearing_origin_to_destination_;
+	utils::optional<reference> bearing_origin_to_destination_ref_;
+	utils::optional<waypoint> waypoint_id_;
 
 	void check() const;
 
 public:
-	decltype(loran_c_blink_warning) get_loran_c_blink_warning() const
+	decltype(loran_c_blink_warning_) get_loran_c_blink_warning() const
 	{
-		return loran_c_blink_warning;
+		return loran_c_blink_warning_;
 	}
-	decltype(loran_c_cycle_lock_warning) get_loran_c_cycle_lock_warning() const
+	decltype(loran_c_cycle_lock_warning_) get_loran_c_cycle_lock_warning() const
 	{
-		return loran_c_cycle_lock_warning;
+		return loran_c_cycle_lock_warning_;
 	}
-	decltype(cross_track_error_magnitude) get_cross_track_error_magnitude() const
+	decltype(cross_track_error_magnitude_) get_cross_track_error_magnitude() const
 	{
-		return cross_track_error_magnitude;
+		return cross_track_error_magnitude_;
 	}
-	decltype(direction_to_steer) get_direction_to_steer() const { return direction_to_steer; }
-	decltype(cross_track_unit) get_cross_track_unit() const { return cross_track_unit; }
-	decltype(status_arrival) get_status_arrival() const { return status_arrival; }
-	decltype(status_perpendicular_passing) get_status_perpendicular_passing() const
+	decltype(direction_to_steer_) get_direction_to_steer() const { return direction_to_steer_; }
+	decltype(cross_track_unit_) get_cross_track_unit() const { return cross_track_unit_; }
+	decltype(status_arrival_) get_status_arrival() const { return status_arrival_; }
+	decltype(status_perpendicular_passing_) get_status_perpendicular_passing() const
 	{
-		return status_perpendicular_passing;
+		return status_perpendicular_passing_;
 	}
-	decltype(bearing_origin_to_destination) get_bearing_origin_to_destination() const
+	decltype(bearing_origin_to_destination_) get_bearing_origin_to_destination() const
 	{
-		return bearing_origin_to_destination;
+		return bearing_origin_to_destination_;
 	}
-	decltype(bearing_origin_to_destination_ref) get_bearing_origin_to_destination_ref() const
+	decltype(bearing_origin_to_destination_ref_) get_bearing_origin_to_destination_ref() const
 	{
-		return bearing_origin_to_destination_ref;
+		return bearing_origin_to_destination_ref_;
 	}
-	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
+	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }
 
-	void set_loran_c_blink_warning(status t) noexcept { loran_c_blink_warning = t; }
-	void set_loran_c_cycle_lock_warning(status t) noexcept { loran_c_cycle_lock_warning = t; }
+	void set_loran_c_blink_warning(status t) noexcept { loran_c_blink_warning_ = t; }
+	void set_loran_c_cycle_lock_warning(status t) noexcept { loran_c_cycle_lock_warning_ = t; }
 	void set_cross_track_error_magnitude(double t) noexcept
 	{
-		cross_track_error_magnitude = t;
-		cross_track_unit = unit::distance::nm;
+		cross_track_error_magnitude_ = t;
+		cross_track_unit_ = unit::distance::nm;
 	}
-	void set_direction_to_steer(side t) noexcept { direction_to_steer = t; }
-	void set_status_arrival(status t) noexcept { status_arrival = t; }
+	void set_direction_to_steer(side t) noexcept { direction_to_steer_ = t; }
+	void set_status_arrival(status t) noexcept { status_arrival_ = t; }
 	void set_status_perpendicular_passing(status t) noexcept
 	{
-		status_perpendicular_passing = t;
+		status_perpendicular_passing_ = t;
 	}
 	void set_bearing_origin_to_destination(double t, reference ref);
-	void set_waypoint_id(const waypoint & id) { waypoint_id = id; }
+	void set_waypoint_id(const waypoint & id) { waypoint_id_ = id; }
 };
 }
 }

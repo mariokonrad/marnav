@@ -18,50 +18,50 @@ vwr::vwr(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 8)
 		throw std::invalid_argument{"invalid number of fields in vwr"};
 
-	read(*(first + 0), angle);
-	read(*(first + 1), angle_side);
-	read(*(first + 2), speed_knots);
-	read(*(first + 3), speed_knots_unit);
-	read(*(first + 4), speed_mps);
-	read(*(first + 5), speed_mps_unit);
-	read(*(first + 6), speed_kmh);
-	read(*(first + 7), speed_kmh_unit);
+	read(*(first + 0), angle_);
+	read(*(first + 1), angle_side_);
+	read(*(first + 2), speed_knots_);
+	read(*(first + 3), speed_knots_unit_);
+	read(*(first + 4), speed_mps_);
+	read(*(first + 5), speed_mps_unit_);
+	read(*(first + 6), speed_kmh_);
+	read(*(first + 7), speed_kmh_unit_);
 }
 
 void vwr::set_angle(double angle, side s) noexcept
 {
-	this->angle = angle;
-	this->angle_side = s;
+	angle_ = angle;
+	angle_side_ = s;
 }
 
 void vwr::set_speed_knots(double t) noexcept
 {
-	speed_knots = t;
-	speed_knots_unit = unit::velocity::knot;
+	speed_knots_ = t;
+	speed_knots_unit_ = unit::velocity::knot;
 }
 
 void vwr::set_speed_mps(double t) noexcept
 {
-	speed_mps = t;
-	speed_mps_unit = unit::velocity::mps;
+	speed_mps_ = t;
+	speed_mps_unit_ = unit::velocity::mps;
 }
 
 void vwr::set_speed_kmh(double t) noexcept
 {
-	speed_kmh = t;
-	speed_kmh_unit = unit::velocity::kmh;
+	speed_kmh_ = t;
+	speed_kmh_unit_ = unit::velocity::kmh;
 }
 
 void vwr::append_data_to(std::string & s) const
 {
-	append(s, to_string(angle));
-	append(s, to_string(angle_side));
-	append(s, to_string(speed_knots));
-	append(s, to_string(speed_knots_unit));
-	append(s, to_string(speed_mps));
-	append(s, to_string(speed_mps_unit));
-	append(s, to_string(speed_kmh));
-	append(s, to_string(speed_kmh_unit));
+	append(s, to_string(angle_));
+	append(s, to_string(angle_side_));
+	append(s, to_string(speed_knots_));
+	append(s, to_string(speed_knots_unit_));
+	append(s, to_string(speed_mps_));
+	append(s, to_string(speed_mps_unit_));
+	append(s, to_string(speed_kmh_));
+	append(s, to_string(speed_kmh_unit_));
 }
 }
 }

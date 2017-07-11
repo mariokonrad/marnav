@@ -50,24 +50,24 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> angle; // wind angle, 0..180
-	utils::optional<side> angle_side; // side of vessel, R:right, L:left
-	utils::optional<double> speed_knots; // wind speed in knots
-	utils::optional<unit::velocity> speed_knots_unit; // N:knots
-	utils::optional<double> speed_mps; // wind speed in meters per second
-	utils::optional<unit::velocity> speed_mps_unit; // M:mps
-	utils::optional<double> speed_kmh; // wind speed in kilometers per hour
-	utils::optional<unit::velocity> speed_kmh_unit; // K:kmh
+	utils::optional<double> angle_; // wind angle, 0..180
+	utils::optional<side> angle_side_; // side of vessel, R:right, L:left
+	utils::optional<double> speed_knots_; // wind speed in knots
+	utils::optional<unit::velocity> speed_knots_unit_; // N:knots
+	utils::optional<double> speed_mps_; // wind speed in meters per second
+	utils::optional<unit::velocity> speed_mps_unit_; // M:mps
+	utils::optional<double> speed_kmh_; // wind speed in kilometers per hour
+	utils::optional<unit::velocity> speed_kmh_unit_; // K:kmh
 
 public:
-	decltype(angle) get_angle() const { return angle; }
-	decltype(angle_side) get_angle_side() const { return angle_side; }
-	decltype(speed_knots) get_speed_knots() const { return speed_knots; }
-	decltype(speed_knots_unit) get_speed_knots_unit() const { return speed_knots_unit; }
-	decltype(speed_mps) get_speed_mps() const { return speed_mps; }
-	decltype(speed_mps_unit) get_speed_mps_unit() const { return speed_mps_unit; }
-	decltype(speed_kmh) get_speed_kmh() const { return speed_kmh; }
-	decltype(speed_kmh_unit) get_speed_kmh_unit() const { return speed_kmh_unit; }
+	decltype(angle_) get_angle() const { return angle_; }
+	decltype(angle_side_) get_angle_side() const { return angle_side_; }
+	decltype(speed_knots_) get_speed_knots() const { return speed_knots_; }
+	decltype(speed_knots_unit_) get_speed_knots_unit() const { return speed_knots_unit_; }
+	decltype(speed_mps_) get_speed_mps() const { return speed_mps_; }
+	decltype(speed_mps_unit_) get_speed_mps_unit() const { return speed_mps_unit_; }
+	decltype(speed_kmh_) get_speed_kmh() const { return speed_kmh_; }
+	decltype(speed_kmh_unit_) get_speed_kmh_unit() const { return speed_kmh_unit_; }
 
 	void set_angle(double angle, side s) noexcept;
 	void set_speed_knots(double t) noexcept;

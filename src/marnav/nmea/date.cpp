@@ -7,16 +7,16 @@ namespace nmea
 {
 
 date::date()
-	: y(0)
-	, m(month::january)
-	, d(1)
+	: y_(0)
+	, m_(month::january)
+	, d_(1)
 {
 }
 
 date::date(uint32_t y, month m, uint32_t d)
-	: y(y)
-	, m(m)
-	, d(d)
+	: y_(y)
+	, m_(m)
+	, d_(d)
 {
 	if (!check())
 		throw std::invalid_argument{"invalid date"};
@@ -24,10 +24,10 @@ date::date(uint32_t y, month m, uint32_t d)
 
 bool date::check() const noexcept
 {
-	if (d == 0)
+	if (d_ == 0)
 		return false;
 
-	switch (m) {
+	switch (m_) {
 		case month::january:
 		case month::march:
 		case month::may:
@@ -35,18 +35,18 @@ bool date::check() const noexcept
 		case month::august:
 		case month::october:
 		case month::december:
-			return d <= 31;
+			return d_ <= 31;
 
 		case month::april:
 		case month::june:
 		case month::september:
 		case month::november:
-			return d <= 30;
+			return d_ <= 30;
 
 		case month::february:
-			if (is_leap_year(y))
-				return d <= 29;
-			return d <= 28;
+			if (is_leap_year(y_))
+				return d_ <= 29;
+			return d_ <= 28;
 	}
 
 	return false; // never reached, bad for coverage, supresses compiler warning
@@ -55,24 +55,24 @@ bool date::check() const noexcept
 /// Returns the year component.
 uint32_t date::year() const noexcept
 {
-	return y;
+	return y_;
 }
 
 /// Returns the month component.
 month date::mon() const noexcept
 {
-	return m;
+	return m_;
 }
 
 /// Returns the day component.
 uint32_t date::day() const noexcept
 {
-	return d;
+	return d_;
 }
 
 bool operator==(const date & a, const date & b) noexcept
 {
-	return (&a == &b) || ((a.y == b.y) && (a.m == b.m) && (a.d == b.d));
+	return (&a == &b) || ((a.y_ == b.y_) && (a.m_ == b.m_) && (a.d_ == b.d_));
 }
 
 std::string to_string(const date & d)

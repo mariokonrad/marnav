@@ -17,7 +17,7 @@ class checksum_error : public std::exception
 {
 public:
 	checksum_error() = delete;
-	explicit checksum_error(uint8_t expected, uint8_t actual);
+	explicit checksum_error(uint8_t exp, uint8_t act);
 	checksum_error(const checksum_error &) = default;
 	checksum_error(checksum_error &&) = default;
 

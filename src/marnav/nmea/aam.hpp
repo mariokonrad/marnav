@@ -56,37 +56,37 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<status> arrival_circle_entered;
-	utils::optional<status> perpendicualar_passed;
-	utils::optional<double> arrival_circle_radius;
-	utils::optional<unit::distance> arrival_circle_radius_unit;
-	utils::optional<waypoint> waypoint_id;
+	utils::optional<status> arrival_circle_entered_;
+	utils::optional<status> perpendicualar_passed_;
+	utils::optional<double> arrival_circle_radius_;
+	utils::optional<unit::distance> arrival_circle_radius_unit_;
+	utils::optional<waypoint> waypoint_id_;
 
 	void check() const;
 
 public:
-	decltype(arrival_circle_entered) get_arrival_circle_entered() const
+	decltype(arrival_circle_entered_) get_arrival_circle_entered() const
 	{
-		return arrival_circle_entered;
+		return arrival_circle_entered_;
 	}
-	decltype(perpendicualar_passed) get_perpendicualar_passed() const
+	decltype(perpendicualar_passed_) get_perpendicualar_passed() const
 	{
-		return perpendicualar_passed;
+		return perpendicualar_passed_;
 	}
-	decltype(arrival_circle_radius) get_arrival_circle_radius() const
+	decltype(arrival_circle_radius_) get_arrival_circle_radius() const
 	{
-		return arrival_circle_radius;
+		return arrival_circle_radius_;
 	}
-	decltype(arrival_circle_radius_unit) get_arrival_circle_radius_unit() const
+	decltype(arrival_circle_radius_unit_) get_arrival_circle_radius_unit() const
 	{
-		return arrival_circle_radius_unit;
+		return arrival_circle_radius_unit_;
 	}
-	decltype(waypoint_id) get_waypoint_id() const { return waypoint_id; }
+	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }
 
 	void set_arrival_circle_entered(status s);
 	void set_perpendicular_passed(status s);
 	void set_arrival_circle_radius(double t);
-	void set_waypoint_id(const waypoint & id) { waypoint_id = id; }
+	void set_waypoint_id(const waypoint & id) { waypoint_id_ = id; }
 };
 }
 }

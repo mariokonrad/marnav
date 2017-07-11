@@ -42,15 +42,15 @@ public:
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint8_t hours;
-	uint8_t minutes;
-	uint8_t seconds;
+	uint8_t hours_;
+	uint8_t minutes_;
+	uint8_t seconds_;
 	mode count_mode;
 
 public:
-	uint8_t get_hours() const { return hours; }
-	uint8_t get_minutes() const { return minutes; }
-	uint8_t get_seconds() const { return seconds; }
+	uint8_t get_hours() const { return hours_; }
+	uint8_t get_minutes() const { return minutes_; }
+	uint8_t get_seconds() const { return seconds_; }
 	mode get_mode() const { return count_mode; }
 
 	void set_timer(uint8_t hours, uint8_t minutes, uint8_t seconds, mode m);

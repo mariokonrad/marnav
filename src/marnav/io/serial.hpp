@@ -38,7 +38,7 @@ public:
 	virtual ~serial();
 
 	serial() = delete;
-	serial(const std::string & dev, baud b, databits d, stopbits s, parity p);
+	serial(const std::string & dv, baud b, databits d, stopbits s, parity p);
 	serial(const serial &) = delete;
 	serial(serial &&) noexcept = default;
 	serial & operator=(const serial &) noexcept = delete;

@@ -13,6 +13,8 @@ namespace io
 class device
 {
 public:
+	virtual ~device() {}
+
 	/// Opens the device.
 	///
 	/// @exception std::runtime_error Error on opening the device.

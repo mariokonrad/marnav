@@ -60,9 +60,9 @@ public:
 private:
 	bool check() const noexcept;
 
-	uint32_t y; // year
-	month m;
-	uint32_t d; // day: 1..31
+	uint32_t y_; // year
+	month m_;
+	uint32_t d_; // day: 1..31
 };
 
 bool operator==(const date & a, const date & b) noexcept;

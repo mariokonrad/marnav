@@ -14,37 +14,37 @@ template <class Traits> class time_base
 public:
 	time_base(const time_base &) = default;
 	explicit time_base(uint32_t h = 0, uint32_t m = 0, uint32_t s = 0, uint32_t ms = 0)
-		: h(h)
-		, m(m)
-		, s(s)
-		, ms(ms)
+		: h_(h)
+		, m_(m)
+		, s_(s)
+		, ms_(ms)
 	{
-		Traits::check(h, m, s, ms);
+		Traits::check(h_, m_, s_, ms_);
 	}
 
 	/// Returns the hour component.
-	uint32_t hour() const { return h; }
+	uint32_t hour() const { return h_; }
 
 	/// Returns the minutes component.
-	uint32_t minutes() const { return m; }
+	uint32_t minutes() const { return m_; }
 
 	/// Returns the seconds component.
-	uint32_t seconds() const { return s; }
+	uint32_t seconds() const { return s_; }
 
 	/// Returns the milliseconds component.
-	uint32_t milliseconds() const { return ms; }
+	uint32_t milliseconds() const { return ms_; }
 
 	template <class T> bool operator==(const time_base<T> & other) noexcept
 	{
 		return (this == &other)
-			|| ((h == other.h) && (m == other.m) && (s == other.s) && (ms == other.ms));
+			|| ((h_ == other.h_) && (m_ == other.m_) && (s_ == other.s_) && (ms_ == other.ms_));
 	}
 
 private:
-	uint32_t h; // hour: 0..23
-	uint32_t m; // minute: 0..59
-	uint32_t s; // second: 0..59
-	uint32_t ms; // millisecond: 0..999
+	uint32_t h_; // hour: 0..23
+	uint32_t m_; // minute: 0..59
+	uint32_t s_; // second: 0..59
+	uint32_t ms_; // millisecond: 0..999
 };
 
 /// Traits to check for the correctness of time.

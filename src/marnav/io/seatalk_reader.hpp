@@ -20,7 +20,7 @@ public:
 	virtual ~seatalk_reader();
 
 	seatalk_reader() = delete;
-	seatalk_reader(std::unique_ptr<device> && dev);
+	seatalk_reader(std::unique_ptr<device> &&);
 	seatalk_reader(const seatalk_reader &) = delete;
 	seatalk_reader(seatalk_reader &&) = default;
 

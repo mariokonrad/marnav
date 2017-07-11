@@ -9,8 +9,8 @@ seatalk_reader::~seatalk_reader()
 {
 }
 
-seatalk_reader::seatalk_reader(std::unique_ptr<device> && dev)
-	: dev(std::move(dev))
+seatalk_reader::seatalk_reader(std::unique_ptr<device> && dv)
+	: dev(std::move(dv))
 {
 	std::fill_n(reinterpret_cast<uint8_t *>(&ctx), sizeof(ctx), 0);
 

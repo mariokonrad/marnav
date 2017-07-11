@@ -86,9 +86,9 @@ public:
 		size_type pos; ///< Position (bit) within the bitset.
 
 	private:
-		const_iterator(const bitset * const bs, size_type pos)
-			: bs(bs)
-			, pos(pos)
+		const_iterator(const bitset * const b, size_type p)
+			: bs(b)
+			, pos(p)
 		{
 		}
 

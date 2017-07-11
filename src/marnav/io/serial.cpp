@@ -112,9 +112,9 @@ serial::~serial()
 	close();
 }
 
-serial::serial(const std::string & dev, baud b, databits d, stopbits s, parity p)
+serial::serial(const std::string & dv, baud b, databits d, stopbits s, parity p)
 	: fd(-1)
-	, dev(dev)
+	, dev(dv)
 	, baud_rate(b)
 	, data_bits(d)
 	, stop_bits(s)

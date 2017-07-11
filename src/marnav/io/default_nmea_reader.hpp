@@ -17,7 +17,7 @@ public:
 	virtual ~default_nmea_reader();
 
 	default_nmea_reader() = delete;
-	default_nmea_reader(std::unique_ptr<device> && dev);
+	default_nmea_reader(std::unique_ptr<device> &&);
 	default_nmea_reader(const default_nmea_reader &) = delete;
 	default_nmea_reader(default_nmea_reader &&) = default;
 

@@ -13,8 +13,8 @@ namespace marnav
 {
 namespace io
 {
-default_seatalk_reader::default_seatalk_reader(std::unique_ptr<device> && dev)
-	: seatalk_reader(std::move(dev))
+default_seatalk_reader::default_seatalk_reader(std::unique_ptr<device> && dv)
+	: seatalk_reader(std::move(dv))
 	, message_received(false)
 {
 }

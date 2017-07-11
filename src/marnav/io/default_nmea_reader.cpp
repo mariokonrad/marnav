@@ -20,8 +20,8 @@ namespace marnav
 namespace io
 {
 
-default_nmea_reader::default_nmea_reader(std::unique_ptr<device> && dev)
-	: nmea_reader(std::move(dev))
+default_nmea_reader::default_nmea_reader(std::unique_ptr<device> && dv)
+	: nmea_reader(std::move(dv))
 	, received(false)
 {
 }

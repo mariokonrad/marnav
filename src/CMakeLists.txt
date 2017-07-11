@@ -251,7 +251,6 @@ if(ENABLE_WARNING_HELL)
 	message(STATUS "Behold: entering the hell of extended warnings")
 	target_compile_options(marnav
 		PRIVATE
-			# some are not enabled on purpose
 			-Wcast-align
 			-Wcast-qual
 			-Werror
@@ -267,10 +266,12 @@ if(ENABLE_WARNING_HELL)
 			-Wmissing-format-attribute
 			-Wmissing-include-dirs
 			-Wmissing-noreturn
+			-Wnon-virtual-dtor
 			-Woverloaded-virtual
 			-Wpacked
 			-Wpointer-arith
 			-Wredundant-decls
+			-Wshadow
 			-Wstrict-aliasing=2
 			-Wswitch
 			-Wunreachable-code
@@ -279,16 +280,15 @@ if(ENABLE_WARNING_HELL)
 			-Wvariadic-macros
 			-Wwrite-strings
 			# explicitly disabled on purpose:
-			#-Wconversion
-			#-Wsign-conversion
-			#-Wstack-protector
+			-Wno-conversion
+			-Wno-sign-conversion
+			-Wno-stack-protector
 			-Wno-effc++
 			-Wno-padded
 			-Wno-long-long
 			-Wno-unused-function
 			-Wno-comment
 			-Wno-format-nonliteral
-			-Wno-shadow
 			-Wno-switch-enum
 			-Wno-switch-default
 		)

@@ -12,7 +12,7 @@ class default_seatalk_reader : public seatalk_reader
 {
 public:
 	default_seatalk_reader() = delete;
-	default_seatalk_reader(std::unique_ptr<device> && dev);
+	default_seatalk_reader(std::unique_ptr<device> &&);
 	default_seatalk_reader(const default_seatalk_reader &) = delete;
 	default_seatalk_reader(default_seatalk_reader &&) = default;
 

@@ -48,25 +48,25 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> bearing_true;
-	utils::optional<reference> type_true; // T:true
-	utils::optional<double> bearing_magn;
-	utils::optional<reference> type_magn; // M:magnetic
-	utils::optional<waypoint> waypoint_to; // TO waypoint ID
-	utils::optional<waypoint> waypoint_from; // FROM waypoint ID
+	utils::optional<double> bearing_true_;
+	utils::optional<reference> type_true_; // T:true
+	utils::optional<double> bearing_magn_;
+	utils::optional<reference> type_magn_; // M:magnetic
+	utils::optional<waypoint> waypoint_to_; // TO waypoint ID
+	utils::optional<waypoint> waypoint_from_; // FROM waypoint ID
 
 public:
-	decltype(bearing_true) get_bearing_true() const { return bearing_true; }
-	decltype(type_true) get_type_true() const { return type_true; }
-	decltype(bearing_magn) get_bearing_magn() const { return bearing_magn; }
-	decltype(type_magn) get_type_magn() const { return type_magn; }
-	decltype(waypoint_to) get_waypoint_to() const { return waypoint_to; }
-	decltype(waypoint_from) get_waypoint_from() const { return waypoint_from; }
+	decltype(bearing_true_) get_bearing_true() const { return bearing_true_; }
+	decltype(type_true_) get_type_true() const { return type_true_; }
+	decltype(bearing_magn_) get_bearing_magn() const { return bearing_magn_; }
+	decltype(type_magn_) get_type_magn() const { return type_magn_; }
+	decltype(waypoint_to_) get_waypoint_to() const { return waypoint_to_; }
+	decltype(waypoint_from_) get_waypoint_from() const { return waypoint_from_; }
 
 	void set_bearing_true(double t) noexcept;
 	void set_bearing_magn(double t) noexcept;
-	void set_waypoint_to(const waypoint & id) { waypoint_to = id; }
-	void set_waypoint_from(const waypoint & id) { waypoint_from = id; }
+	void set_waypoint_to(const waypoint & id) { waypoint_to_ = id; }
+	void set_waypoint_from(const waypoint & id) { waypoint_from_ = id; }
 };
 }
 }

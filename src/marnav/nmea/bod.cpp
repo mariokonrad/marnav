@@ -18,34 +18,34 @@ bod::bod(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in bod"};
 
-	read(*(first + 0), bearing_true);
-	read(*(first + 1), type_true);
-	read(*(first + 2), bearing_magn);
-	read(*(first + 3), type_magn);
-	read(*(first + 4), waypoint_to);
-	read(*(first + 5), waypoint_from);
+	read(*(first + 0), bearing_true_);
+	read(*(first + 1), type_true_);
+	read(*(first + 2), bearing_magn_);
+	read(*(first + 3), type_magn_);
+	read(*(first + 4), waypoint_to_);
+	read(*(first + 5), waypoint_from_);
 }
 
 void bod::set_bearing_true(double t) noexcept
 {
-	bearing_true = t;
-	type_true = reference::TRUE;
+	bearing_true_ = t;
+	type_true_ = reference::TRUE;
 }
 
 void bod::set_bearing_magn(double t) noexcept
 {
-	bearing_magn = t;
-	type_magn = reference::MAGNETIC;
+	bearing_magn_ = t;
+	type_magn_ = reference::MAGNETIC;
 }
 
 void bod::append_data_to(std::string & s) const
 {
-	append(s, to_string(bearing_true));
-	append(s, to_string(type_true));
-	append(s, to_string(bearing_magn));
-	append(s, to_string(type_magn));
-	append(s, to_string(waypoint_to));
-	append(s, to_string(waypoint_from));
+	append(s, to_string(bearing_true_));
+	append(s, to_string(type_true_));
+	append(s, to_string(bearing_magn_));
+	append(s, to_string(type_magn_));
+	append(s, to_string(waypoint_to_));
+	append(s, to_string(waypoint_from_));
 }
 }
 }

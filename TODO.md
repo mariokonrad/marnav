@@ -2,6 +2,7 @@ TODO
 ====
 
 @todo Investigate library bloat (optional? bitset?)
+@todo Deal with units (velocity, depth, temperatures, etc)
 
 @todo Consider using std::chrono in nmea/time
 @todo Implement additional checks in NMEA sentences, wheather or not the received data is correct.

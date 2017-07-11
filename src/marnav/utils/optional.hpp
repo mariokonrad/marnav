@@ -31,32 +31,32 @@ public:
 
 	/// Initializes the optional with the default constructed data.
 	constexpr optional() noexcept
-		: flag(false)
-		, data()
+		: flag_(false)
+		, data_()
 	{
 	}
 
 	constexpr optional(const T & data)
-		: flag(true)
-		, data(data)
+		: flag_(true)
+		, data_(data)
 	{
 	}
 
 	constexpr optional(T && data) noexcept
-		: flag(true)
-		, data(std::move(data))
+		: flag_(true)
+		, data_(std::move(data))
 	{
 	}
 
 	optional(const optional & other) noexcept
-		: flag(other.flag)
-		, data(other.data)
+		: flag_(other.flag_)
+		, data_(other.data_)
 	{
 	}
 
 	optional(optional && other) noexcept
-		: flag(std::move(other.flag))
-		, data(std::move(other.data))
+		: flag_(std::move(other.flag_))
+		, data_(std::move(other.data_))
 	{
 	}
 
@@ -64,46 +64,46 @@ public:
 
 	optional & operator=(const optional & other) noexcept
 	{
-		this->data = other.data;
-		this->flag = other.flag;
+		this->data_ = other.data_;
+		this->flag_ = other.flag_;
 		return *this;
 	}
 
 	optional & operator=(optional && other) noexcept
 	{
-		this->data = std::move(other.data);
-		this->flag = std::move(other.flag);
+		this->data_ = std::move(other.data_);
+		this->flag_ = std::move(other.flag_);
 		return *this;
 	}
 
 	template <class U> optional & operator=(U && data)
 	{
-		this->data = std::move(data);
-		flag = true;
+		this->data_ = std::move(data);
+		flag_ = true;
 		return *this;
 	}
 
 	// observers
 
-	constexpr const T * operator->() const { return &data; }
+	constexpr const T * operator->() const { return &data_; }
 
-	T * operator->() { return &data; }
+	T * operator->() { return &data_; }
 
-	constexpr const T & operator*() const { return data; }
+	constexpr const T & operator*() const { return data_; }
 
-	T & operator*() { return data; }
+	T & operator*() { return data_; }
 
-	bool available() const { return flag; }
+	bool available() const { return flag_; }
 
-	constexpr explicit operator bool() const { return flag; }
+	constexpr explicit operator bool() const { return flag_; }
 
-	constexpr bool has_value() const { return flag; }
+	constexpr bool has_value() const { return flag_; }
 
-	constexpr const T & value() const & { return data; }
+	constexpr const T & value() const & { return data_; }
 
-	T & value() & { return data; }
+	T & value() & { return data_; }
 
-	T && value() && { return data; }
+	T && value() && { return data_; }
 
 	/* disabling c++14 extensions for now
 	template <class U> constexpr T value_or(U && value) const &
@@ -127,13 +127,13 @@ public:
 	/// the optional as 'not set'.
 	void reset()
 	{
-		data = T{};
-		flag = false;
+		data_ = T{};
+		flag_ = false;
 	}
 
 private:
-	bool flag;
-	T data;
+	bool flag_;
+	T data_;
 };
 
 /// @brief Creates and returns an optioal of type T, initialized with the specified

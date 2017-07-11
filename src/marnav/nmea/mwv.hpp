@@ -49,22 +49,22 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> angle; // wind angle, 0..359 right of bow
-	utils::optional<reference> angle_ref; // R:relative, T:true
-	utils::optional<double> speed; // wind speed
-	utils::optional<unit::velocity> speed_unit; // wind speed unit, K:knots, M:mph
-	utils::optional<status> data_valid; // status, A:valid
+	utils::optional<double> angle_; // wind angle, 0..359 right of bow
+	utils::optional<reference> angle_ref_; // R:relative, T:true
+	utils::optional<double> speed_; // wind speed
+	utils::optional<unit::velocity> speed_unit_; // wind speed unit, K:knots, M:mph
+	utils::optional<status> data_valid_; // status, A:valid
 
 public:
-	decltype(angle) get_angle() const { return angle; }
-	decltype(angle_ref) get_angle_ref() const { return angle_ref; }
-	decltype(speed) get_speed() const { return speed; }
-	decltype(speed_unit) get_speed_unit() const { return speed_unit; }
-	decltype(data_valid) get_data_valid() const { return data_valid; }
+	decltype(angle_) get_angle() const { return angle_; }
+	decltype(angle_ref_) get_angle_ref() const { return angle_ref_; }
+	decltype(speed_) get_speed() const { return speed_; }
+	decltype(speed_unit_) get_speed_unit() const { return speed_unit_; }
+	decltype(data_valid_) get_data_valid() const { return data_valid_; }
 
 	void set_angle(double deg, reference ref);
 	void set_speed(double speed, unit::velocity u) noexcept;
-	void set_data_valid(status t) noexcept { data_valid = t; }
+	void set_data_valid(status t) noexcept { data_valid_ = t; }
 };
 }
 }
