@@ -28,14 +28,18 @@ namespace geo
 ///
 /// Formulae:
 ///
-/// Position of vessel 1 and in function of time: @f{eqnarray*}{
+/// Position of vessels and in function of time: @f{eqnarray*}{
 /// V_1(t) &=& V_1(0) + t \cdot \vec{u} \\
 /// V_2(t) &=& V_2(0) + t \cdot \vec{v}
 /// @f}
-/// with @f{eqnarray*}{
+/// with polar coordinates @f{eqnarray*}{
 /// \vec{u} = (sog_1, \phi cog_1) \\
 /// \vec{v} = (sog_2, \phi cog_2)
 /// @f}
+///
+/// - @f${sog}@f$ : speed over ground
+/// - @f${cog}@f$ : course over ground in degrees
+///
 /// The distance between the two vessels as function of time: @f[
 /// \vec{d}_t = V_1(t) - V_2(t)
 /// @f]
