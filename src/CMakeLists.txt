@@ -271,7 +271,6 @@ if(ENABLE_WARNING_HELL)
 			-Wpacked
 			-Wpointer-arith
 			-Wredundant-decls
-			-Wshadow
 			-Wstrict-aliasing=2
 			-Wswitch
 			-Wunreachable-code
@@ -281,6 +280,7 @@ if(ENABLE_WARNING_HELL)
 			-Wwrite-strings
 			# explicitly disabled on purpose:
 			-Wno-conversion
+			-Wno-shadow
 			-Wno-sign-conversion
 			-Wno-stack-protector
 			-Wno-effc++
