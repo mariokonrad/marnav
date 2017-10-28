@@ -347,6 +347,8 @@ Compiler:
 - Clang 3.8
 - Clang 3.9
 - Clang 4.0
+- Clang 5.0
+- Clang 6.0
 
 Tools needed to build the library:
 - cmake 3.2 or newer
