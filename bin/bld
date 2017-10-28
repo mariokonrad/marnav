@@ -119,7 +119,11 @@ cmake --build . -- -j ${NUM_PROC}
 # only build, do not test
 if [ "$only_build" == "yes" ] ; then exit 0 ; fi
 
-# perform tests
-cmake --build . --target unittest
-cmake --build . --target test
+# perform tests if not disabled
+if [[ $(cat "${CONFIG_BASE}/${target}" | grep -E "ENABLE_TESTS=OFF") ]] ; then
+	echo "tests disabled"
+else
+	cmake --build . --target unittest
+	cmake --build . --target test
+fi
 
