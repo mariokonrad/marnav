@@ -1,4 +1,4 @@
-#include <benchmark/benchmark_api.h>
+#include <benchmark/benchmark.h>
 #include <marnav/nmea/manufacturer.hpp>
 
 static void benchmark_get_manufacturer_name_from_id(benchmark::State & state)

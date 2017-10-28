@@ -1,4 +1,4 @@
-#include <benchmark/benchmark_api.h>
+#include <benchmark/benchmark.h>
 #include <marnav/ais/ais.hpp>
 
 namespace
@@ -38,9 +38,9 @@ static void all_messages(benchmark::internal::Benchmark * b)
 
 static void Benchmark_make_message(benchmark::State & state)
 {
-	state.SetLabel(messages[state.range_x()].label);
+	state.SetLabel(messages[state.range(0)].label);
 	while (state.KeepRunning()) {
-		auto tmp = marnav::ais::make_message(messages[state.range_x()].data);
+		auto tmp = marnav::ais::make_message(messages[state.range(0)].data);
 		benchmark::DoNotOptimize(tmp);
 	}
 }

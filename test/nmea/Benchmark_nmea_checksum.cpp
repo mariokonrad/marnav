@@ -1,4 +1,4 @@
-#include <benchmark/benchmark_api.h>
+#include <benchmark/benchmark.h>
 #include <marnav/nmea/checksum.hpp>
 
 namespace
@@ -16,7 +16,7 @@ static void Benchmark_nmea_checksum_to_string_v0(benchmark::State & state)
 {
 	std::string result;
 	while (state.KeepRunning()) {
-		result = checksum_to_string__v0(state.range_x());
+		result = checksum_to_string__v0(state.range(0));
 		benchmark::DoNotOptimize(result);
 	}
 }
@@ -27,7 +27,7 @@ static void Benchmark_nmea_checksum_to_string(benchmark::State & state)
 {
 	std::string result;
 	while (state.KeepRunning()) {
-		result = marnav::nmea::checksum_to_string(state.range_x());
+		result = marnav::nmea::checksum_to_string(state.range(0));
 		benchmark::DoNotOptimize(result);
 	}
 }

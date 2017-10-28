@@ -1,4 +1,4 @@
-#include <benchmark/benchmark_api.h>
+#include <benchmark/benchmark.h>
 #include <marnav/nmea/split.hpp>
 #include <regex>
 
@@ -98,7 +98,7 @@ static std::vector<std::string> parse_fields__v4(const std::string & s)
 
 static void Benchmark_nmea_split_v0(benchmark::State & state)
 {
-	std::string sentence = SENTENCES[state.range_x()];
+	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
 	while (state.KeepRunning()) {
 		result = parse_fields__v0(sentence);
@@ -110,7 +110,7 @@ BENCHMARK(Benchmark_nmea_split_v0)->Range(0, 2);
 
 static void Benchmark_nmea_split_v1(benchmark::State & state)
 {
-	std::string sentence = SENTENCES[state.range_x()];
+	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
 	while (state.KeepRunning()) {
 		result = parse_fields__v1(sentence);
@@ -122,7 +122,7 @@ BENCHMARK(Benchmark_nmea_split_v1)->Range(0, 2);
 
 static void Benchmark_nmea_split_v2(benchmark::State & state)
 {
-	std::string sentence = SENTENCES[state.range_x()];
+	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
 	while (state.KeepRunning()) {
 		result = parse_fields__v2(sentence);
@@ -134,7 +134,7 @@ BENCHMARK(Benchmark_nmea_split_v2)->Range(0, 2);
 
 static void Benchmark_nmea_split_v3(benchmark::State & state)
 {
-	std::string sentence = SENTENCES[state.range_x()];
+	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
 	while (state.KeepRunning()) {
 		result = parse_fields__v3(sentence);
@@ -146,7 +146,7 @@ BENCHMARK(Benchmark_nmea_split_v3)->Range(0, 2);
 
 static void Benchmark_nmea_split_v4(benchmark::State & state)
 {
-	std::string sentence = SENTENCES[state.range_x()];
+	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
 	while (state.KeepRunning()) {
 		result = parse_fields__v4(sentence);
@@ -158,7 +158,7 @@ BENCHMARK(Benchmark_nmea_split_v4)->Range(0, 2);
 
 static void Benchmark_nmea_split(benchmark::State & state)
 {
-	std::string sentence = SENTENCES[state.range_x()];
+	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
 	while (state.KeepRunning()) {
 		result = marnav::nmea::detail::parse_fields(sentence);

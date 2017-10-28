@@ -34,6 +34,14 @@ License: Apache 2.0 (http://www.apache.org/licences)
 Homepage: https://github.com/google/benchmark
 
 
+benchmark-1.2.0
+---------------
+
+License: Apache 2.0 (http://www.apache.org/licences)
+
+Homepage: https://github.com/google/benchmark
+
+
 cxxopts - c45bcc385870b8707ef5475cdd7c14b1ce7fc4a1
 --------------------------------------------------
 

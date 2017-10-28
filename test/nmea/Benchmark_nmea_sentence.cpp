@@ -1,4 +1,4 @@
-#include <benchmark/benchmark_api.h>
+#include <benchmark/benchmark.h>
 #include <algorithm>
 #include <typeindex>
 #include <marnav/nmea/aam.hpp>
@@ -201,9 +201,9 @@ template <class T> static void specific(benchmark::internal::Benchmark * b)
 
 static void Benchmark_make_sentence(benchmark::State & state)
 {
-	state.SetLabel(sentences[state.range_x()].tag);
+	state.SetLabel(sentences[state.range(0)].tag);
 	while (state.KeepRunning()) {
-		auto tmp = nmea::make_sentence(sentences[state.range_x()].text);
+		auto tmp = nmea::make_sentence(sentences[state.range(0)].text);
 		benchmark::DoNotOptimize(tmp);
 	}
 }
@@ -212,10 +212,10 @@ BENCHMARK(Benchmark_make_sentence)->Apply(all_sentences);
 
 static void Benchmark_sentence_to_string(benchmark::State & state)
 {
-	state.SetLabel(sentences[state.range_x()].tag);
+	state.SetLabel(sentences[state.range(0)].tag);
 	while (state.KeepRunning()) {
 		state.PauseTiming();
-		const auto raw = sentences[state.range_x()].text;
+		const auto raw = sentences[state.range(0)].text;
 		const auto sentence = nmea::make_sentence(raw);
 		state.ResumeTiming();
 		std::string s = to_string(*sentence);
@@ -227,9 +227,9 @@ BENCHMARK(Benchmark_sentence_to_string)->Apply(all_sentences);
 
 template <class T> static void Benchmark_create_sentence(benchmark::State & state)
 {
-	state.SetLabel(sentences[state.range_x()].tag);
+	state.SetLabel(sentences[state.range(0)].tag);
 	while (state.KeepRunning()) {
-		auto tmp = nmea::create_sentence<T>(sentences[state.range_x()].text);
+		auto tmp = nmea::create_sentence<T>(sentences[state.range(0)].text);
 		benchmark::DoNotOptimize(tmp);
 	}
 }
@@ -311,9 +311,9 @@ BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::pgrme)->Apply(specific<nmea:
 
 static void Benchmark_extract_id(benchmark::State & state)
 {
-	state.SetLabel(sentences[state.range_x()].tag);
+	state.SetLabel(sentences[state.range(0)].tag);
 	while (state.KeepRunning()) {
-		auto tmp = nmea::extract_id(sentences[state.range_x()].text);
+		auto tmp = nmea::extract_id(sentences[state.range(0)].text);
 		benchmark::DoNotOptimize(tmp);
 	}
 }
