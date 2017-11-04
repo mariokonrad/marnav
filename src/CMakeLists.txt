@@ -575,7 +575,7 @@ include(CMakePackageConfigHelpers)
 configure_package_config_file(
 	config.cmake.in
 	"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
-	INSTALL_DESTINATION "${LIB_INSTALL_DIR}/${PROJECT_NAME}/cmake"
+	INSTALL_DESTINATION "${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME}"
 	PATH_VARS INCLUDE_INSTALL_DIR
 	)
 write_basic_package_version_file(
@@ -587,7 +587,7 @@ install(
 		"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
 		"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
 	DESTINATION
-		"${LIB_INSTALL_DIR}/${PROJECT_NAME}/cmake"
+		"${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME}"
 	)
 
 

@@ -106,6 +106,7 @@ fi
 mkdir -p ${BUILD_DIR}
 cd ${BUILD_DIR}
 cmake -G "Unix Makefiles" \
+	-DCMAKE_INSTALL_PREFIX=${BUILD_DIR}/local \
 	$(cat ${CONFIG_BASE}/${target}) \
 	-DCMAKE_EXPORT_COMPILE_COMMANDS=YES \
 	${BASE}

@@ -1,4 +1,2 @@
 @PACKAGE_INIT@
-
 set_and_check(marnav_INCLUDE_DIR "@PACKAGE_INCLUDE_INSTALL_DIR@")
-
