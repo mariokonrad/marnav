@@ -8,32 +8,65 @@ namespace ais
 /// @cond DEV
 namespace
 {
-static const std::vector<std::pair<uint8_t, char>> SIXBIT_ASCII_TABLE = {
-	{0, '@'}, {1, 'A'}, {2, 'B'}, {3, 'C'}, {4, 'D'}, {5, 'E'}, {6, 'F'}, {7, 'G'}, {8, 'H'},
-	{9, 'I'}, {10, 'J'}, {11, 'K'}, {12, 'L'}, {13, 'M'}, {14, 'N'}, {15, 'O'}, {16, 'P'},
-	{17, 'Q'}, {18, 'R'}, {19, 'S'}, {20, 'T'}, {21, 'U'}, {22, 'V'}, {23, 'W'}, {24, 'X'},
-	{25, 'Y'}, {26, 'Z'}, {27, '['}, {28, '\\'}, {29, ']'}, {30, '^'}, {31, '_'}, {32, ' '},
-	{33, '!'}, {34, '\"'}, {35, '#'}, {36, '$'}, {37, '%'}, {38, '&'}, {39, '\''}, {40, '('},
-	{41, ')'}, {42, '*'}, {43, '+'}, {44, ','}, {45, '-'}, {46, '.'}, {47, '/'}, {48, '0'},
-	{49, '1'}, {50, '2'}, {51, '3'}, {52, '4'}, {53, '5'}, {54, '6'}, {55, '7'}, {56, '8'},
-	{57, '9'}, {58, ':'}, {59, ';'}, {60, '<'}, {61, '='}, {62, '>'}, {63, '?'},
+struct sixbit_entry {
+	uint8_t value;
+	char c;
 };
+
+class sixbit_span
+{
+public:
+	constexpr sixbit_span(const sixbit_entry * first, const sixbit_entry * last)
+		: first_(first)
+		, last_(last)
+	{
+	}
+
+	constexpr const sixbit_entry * begin() const { return first_; }
+	constexpr const sixbit_entry * end() const { return last_; }
+
+private:
+	const sixbit_entry * first_ = nullptr;
+	const sixbit_entry * last_ = nullptr;
+};
+
+static sixbit_span sixbit_table()
+{
+	// construct-on-first-use with static, in this case not a problem on destruction,
+	// because // the table contains only primitive types, no complex destruction involved,
+	// and access functions (see below) return values not references or pointers.
+
+	static constexpr sixbit_entry SIXBIT_ASCII_TABLE[] = {
+		{0, '@'}, {1, 'A'}, {2, 'B'}, {3, 'C'}, {4, 'D'}, {5, 'E'}, {6, 'F'}, {7, 'G'},
+		{8, 'H'}, {9, 'I'}, {10, 'J'}, {11, 'K'}, {12, 'L'}, {13, 'M'}, {14, 'N'}, {15, 'O'},
+		{16, 'P'}, {17, 'Q'}, {18, 'R'}, {19, 'S'}, {20, 'T'}, {21, 'U'}, {22, 'V'}, {23, 'W'},
+		{24, 'X'}, {25, 'Y'}, {26, 'Z'}, {27, '['}, {28, '\\'}, {29, ']'}, {30, '^'}, {31, '_'},
+		{32, ' '}, {33, '!'}, {34, '\"'}, {35, '#'}, {36, '$'}, {37, '%'}, {38, '&'},
+		{39, '\''}, {40, '('}, {41, ')'}, {42, '*'}, {43, '+'}, {44, ','}, {45, '-'}, {46, '.'},
+		{47, '/'}, {48, '0'}, {49, '1'}, {50, '2'}, {51, '3'}, {52, '4'}, {53, '5'}, {54, '6'},
+		{55, '7'}, {56, '8'}, {57, '9'}, {58, ':'}, {59, ';'}, {60, '<'}, {61, '='}, {62, '>'},
+		{63, '?'},
+	};
+	return {SIXBIT_ASCII_TABLE,
+		SIXBIT_ASCII_TABLE + (sizeof(SIXBIT_ASCII_TABLE) / sizeof(sixbit_entry))};
+}
 }
 /// @endcond
 
 char decode_sixbit_ascii(uint8_t value)
 {
-	value &= 0x3f;
-	auto i = std::find_if(SIXBIT_ASCII_TABLE.begin(), SIXBIT_ASCII_TABLE.end(),
-		[value](const std::pair<uint8_t, char> & p) { return p.first == value; });
-	return i != SIXBIT_ASCII_TABLE.end() ? i->second : 0xff;
+	for (const auto p : sixbit_table())
+		if (p.value == value)
+			return p.c;
+	return static_cast<char>(0xff);
 }
 
 uint8_t encode_sixbit_ascii(char c)
 {
-	auto i = std::find_if(SIXBIT_ASCII_TABLE.begin(), SIXBIT_ASCII_TABLE.end(),
-		[c](const std::pair<uint8_t, char> & p) { return p.second == c; });
-	return i != SIXBIT_ASCII_TABLE.end() ? i->first : 0xff;
+	for (const auto p : sixbit_table())
+		if (p.c == c)
+			return p.value;
+	return 0xffu;
 }
 
 std::string trim_ais_string(const std::string & s)
