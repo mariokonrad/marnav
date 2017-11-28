@@ -244,7 +244,7 @@ target_link_libraries(test-nmea-sample
 add_test(
 	NAME integrationtest-test-nmea-sample
 	COMMAND test-nmea-sample
-	WORKING_DIRECTOR "${CMAKE_CURRENT_BINARY_DIR}"
+	WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
 	)
 
 # excluded with coverage builds, does not make sense otherwise
