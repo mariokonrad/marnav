@@ -105,10 +105,10 @@ void message_19::set_latitude(const utils::optional<geo::latitude> & t)
 
 void message_19::set_shipname(const std::string & t)
 {
-        if (t.size() > 20) {
-	        shipname = t.substr(0, 20);
+	if (t.size() > 20) {
+		shipname = t.substr(0, 20);
 	} else {
-	        shipname = t;
+		shipname = t;
 	}
 }
 }
