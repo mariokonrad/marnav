@@ -102,5 +102,14 @@ void message_19::set_latitude(const utils::optional<geo::latitude> & t)
 		? to_latitude_minutes(t.value(), latitude_minutes.count, angle_scale::I4)
 		: latitude_not_available;
 }
+
+void message_19::set_shipname(const std::string & t)
+{
+	if (t.size() > 20) {
+		shipname = t.substr(0, 20);
+	} else {
+		shipname = t;
+	}
+}
 }
 }
