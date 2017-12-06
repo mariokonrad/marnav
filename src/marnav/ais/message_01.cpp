@@ -52,12 +52,27 @@ void message_01::set_latitude(const utils::optional<geo::latitude> & t)
 		: latitude_not_available;
 }
 
+/// Returns rot in degrees per minutes.
+utils::optional<double> message_01::get_rot() const noexcept
+{
+	if (rot == rot_not_available)
+		return {};
+	return rot * std::abs(rot) / 22.401289;
+}
+
 /// Returns speed in knots.
 utils::optional<double> message_01::get_sog() const noexcept
 {
 	if (sog == sog_not_available)
 		return {};
 	return 0.1 * sog;
+}
+
+void message_01::set_rot(utils::optional<double> t) noexcept
+{
+	int sign = (*t > 0) ? 1 : -1;
+	rot = !t ? rot_not_available
+			 : static_cast<int32_t>(std::round(4.733 * std::sqrt(std::abs(*t)) * sign));
 }
 
 void message_01::set_sog(utils::optional<double> t) noexcept
