@@ -65,6 +65,7 @@ if(ENABLE_AIS)
 	set(SOURCES ${SOURCES}
 		marnav/ais/ais.cpp
 		marnav/ais/angle.cpp
+		marnav/ais/rate_of_turn.cpp
 		marnav/ais/name.cpp
 		marnav/ais/binary_data.cpp
 		marnav/ais/binary_001_11.cpp
@@ -444,6 +445,7 @@ if(ENABLE_AIS)
 		FILES
 			marnav/ais/ais.hpp
 			marnav/ais/angle.hpp
+			marnav/ais/rate_of_turn.hpp
 			marnav/ais/name.hpp
 			marnav/ais/binary_data.hpp
 			marnav/ais/binary_001_11.hpp

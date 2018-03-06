@@ -421,6 +421,19 @@ static std::string render(const marnav::ais::binary_200_10::loaded_state t)
 	return "-";
 }
 
+static std::string render(const marnav::ais::rate_of_turn t)
+{
+	if (!t.available())
+		return "not available";
+	if (t.is_not_turning())
+		return "not turning";
+	if (t.is_more_5deg30s_right())
+		return "more 5deg/30s right";
+	if (t.is_more_5deg30s_left())
+		return "more 5deg/30s left";
+	return fmt::sprintf("%f", t.value());
+}
+
 static std::string render(const marnav::ais::ship_type t)
 {
 	return marnav::ais::to_name(t);

@@ -13,6 +13,7 @@ if(ENABLE_AIS)
 	set(SOURCES ${SOURCES}
 		ais/Test_ais.cpp
 		ais/Test_ais_angle.cpp
+		ais/Test_ais_rate_of_turn.cpp
 		ais/Test_ais_message.cpp
 		ais/Test_ais_message_01.cpp
 		ais/Test_ais_message_02.cpp

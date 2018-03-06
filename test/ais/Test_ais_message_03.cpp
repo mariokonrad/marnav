@@ -1,10 +1,9 @@
-#include <gtest/gtest.h>
 #include <marnav/ais/message_03.hpp>
 #include <marnav/ais/ais.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {
-
 using namespace marnav;
 
 class Test_ais_message_03 : public ::testing::Test
@@ -24,7 +23,7 @@ TEST_F(Test_ais_message_03, parse)
 
 	EXPECT_EQ(0u, m->get_repeat_indicator());
 	EXPECT_EQ(205344990u, m->get_mmsi());
-	EXPECT_EQ(ais::rot_not_available, m->get_rot());
+	EXPECT_FALSE(m->get_rot().available());
 	EXPECT_NEAR(0.0, *m->get_sog(), 1e-4);
 	EXPECT_EQ(true, m->get_position_accuracy());
 	const auto lon = m->get_longitude();

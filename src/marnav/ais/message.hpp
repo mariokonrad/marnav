@@ -274,9 +274,6 @@ constexpr static const uint32_t cog_not_available = 3600;
 /// Value for a heading that is not specified.
 constexpr static const uint32_t hdg_not_available = 511;
 
-/// Value for a rate of turn that is not specified.
-constexpr static const int32_t rot_not_available = 128;
-
 /// Value to indicate the absense of a timestamp.
 constexpr static const uint8_t timestamp_not_available = 60;
 

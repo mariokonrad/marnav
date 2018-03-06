@@ -91,6 +91,16 @@ void message_01::set_hdg(utils::optional<uint32_t> t) noexcept
 	hdg = !t ? hdg_not_available : *t;
 }
 
+rate_of_turn message_01::get_rot() const noexcept
+{
+	return rate_of_turn(rot);
+}
+
+void message_01::set_rot(rate_of_turn t) noexcept
+{
+	rot = t.raw();
+}
+
 void message_01::read_data(const raw & bits)
 {
 	get(bits, repeat_indicator);
