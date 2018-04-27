@@ -8,6 +8,7 @@
 #include <stdexcept>
 #include <type_traits>
 #include <vector>
+#include <algorithm>
 #include <cassert>
 
 namespace marnav
@@ -144,12 +145,18 @@ public:
 
 		const_iterator operator+(size_type n) const noexcept
 		{
-			return const_iterator{*this} += n;
+			if (bs != nullptr && pos < bs->size())
+				return const_iterator{bs, (pos > bs->size() ? pos : pos + n)};
+
+			return const_iterator{*this};
 		}
 
 		const_iterator operator-(size_type n) const noexcept
 		{
-			return const_iterator{*this} -= n;
+			if (bs != nullptr)
+				return const_iterator{bs, (n > pos ? 0 : pos - n)};
+
+			return const_iterator{*this};
 		}
 
 		const_iterator & operator+=(size_type ofs)

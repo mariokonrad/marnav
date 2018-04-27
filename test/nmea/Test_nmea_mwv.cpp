@@ -57,7 +57,7 @@ TEST_F(Test_nmea_mwv, empty_to_string)
 TEST_F(Test_nmea_mwv, set_angle)
 {
 	nmea::mwv mwv;
-	mwv.set_angle(12.5, nmea::reference::RELATIVE);
+	mwv.set_angle(12.5, nmea::reference::RELATIVE_NORTH);
 
 	EXPECT_STREQ("$IIMWV,12.5,R,,,*2A", nmea::to_string(mwv).c_str());
 }

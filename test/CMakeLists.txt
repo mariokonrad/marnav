@@ -5,6 +5,10 @@ include_directories(
 	${CMAKE_CURRENT_BINARY_DIR}/../src
 	)
 
+if(MSVC)
+	add_definitions(-D_USE_MATH_DEFINES)
+endif()
+
 set(SOURCES
 	# intentionally left blank
 	)
@@ -198,8 +202,13 @@ add_executable(testrunner
 target_link_libraries(testrunner
 	marnav
 	gmock
-	pthread
 	)
+
+if(UNIX)
+	target_link_libraries(testrunner
+		pthread
+	)
+endif()
 
 add_test(
 	NAME unittest-testrunner
@@ -257,8 +266,16 @@ if(NOT build_type_lower MATCHES coverage)
 	target_link_libraries(benchmark_nmea_split
 		marnav
 		benchmark
-		pthread
 		)
+
+	if(UNIX)
+		target_link_libraries(benchmark_nmea_split
+			pthread
+		)
+	endif()
+	if(MSVC)
+		target_link_libraries(benchmark_nmea_split Shlwapi)
+	endif()
 
 	add_executable(benchmark_nmea_checksum
 		nmea/Benchmark_nmea_checksum.cpp
@@ -267,8 +284,15 @@ if(NOT build_type_lower MATCHES coverage)
 	target_link_libraries(benchmark_nmea_checksum
 		marnav
 		benchmark
-		pthread
 		)
+	if(UNIX)
+		target_link_libraries(benchmark_nmea_checksum
+			pthread
+		)
+	endif()
+	if(MSVC)
+		target_link_libraries(benchmark_nmea_checksum Shlwapi)
+	endif()
 
 	add_executable(benchmark_nmea_manufacturer
 		nmea/Benchmark_nmea_manufacturer.cpp
@@ -277,8 +301,16 @@ if(NOT build_type_lower MATCHES coverage)
 	target_link_libraries(benchmark_nmea_manufacturer
 		marnav
 		benchmark
-		pthread
 		)
+
+	if(UNIX)
+		target_link_libraries(benchmark_nmea_manufacturer
+			pthread
+		)
+	endif()
+	if(MSVC)
+		target_link_libraries(benchmark_nmea_manufacturer Shlwapi)
+	endif()
 
 	add_executable(benchmark_nmea_sentence
 		nmea/Benchmark_nmea_sentence.cpp
@@ -287,8 +319,16 @@ if(NOT build_type_lower MATCHES coverage)
 	target_link_libraries(benchmark_nmea_sentence
 		marnav
 		benchmark
-		pthread
 		)
+
+	if(UNIX)
+		target_link_libraries(benchmark_nmea_sentence
+			pthread
+		)
+	endif()
+	if(MSVC)
+		target_link_libraries(benchmark_nmea_sentence Shlwapi)
+	endif()
 
 	if(ENABLE_AIS)
 		add_executable(benchmark_ais_message
@@ -298,7 +338,14 @@ if(NOT build_type_lower MATCHES coverage)
 		target_link_libraries(benchmark_ais_message
 			marnav
 			benchmark
-			pthread
 			)
+		if(UNIX)
+			target_link_libraries(benchmark_ais_message
+				pthread
+			)
+		endif()
+		if(MSVC)
+			target_link_libraries(benchmark_ais_message Shlwapi)
+		endif()
 	endif()
 endif()

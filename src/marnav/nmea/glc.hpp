@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <array>
+
 namespace marnav
 {
 namespace nmea

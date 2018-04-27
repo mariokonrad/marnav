@@ -118,11 +118,11 @@ std::string to_string(direction t)
 std::string to_string(reference t)
 {
 	switch (t) {
-		case reference::TRUE:
+		case reference::TRUE_NORTH:
 			return "T";
 		case reference::MAGNETIC:
 			return "M";
-		case reference::RELATIVE:
+		case reference::RELATIVE_NORTH:
 			return "R";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
@@ -236,7 +236,7 @@ std::string to_string(unit::pressure t)
 	switch (t) {
 		case unit::pressure::bar:
 			return "B";
-		case unit::pressure::pascal:
+		case unit::pressure::Pa:
 			return "P";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning

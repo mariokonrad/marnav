@@ -20,6 +20,10 @@ configure_file(
 	${CMAKE_CURRENT_BINARY_DIR}/marnav/version.hpp
 	)
 
+if(MSVC)
+	add_definitions(-D_USE_MATH_DEFINES)
+endif()
+
 set(SOURCES
 	# intentionally left blank
 	)
@@ -96,8 +100,21 @@ if(ENABLE_AIS)
 endif()
 
 if(ENABLE_IO)
+
+	if(MSVC)
+		# Create in separate library so we don't have Windows.h bleeding
+		add_library(marnav_serial STATIC marnav/io/win/serial.cpp)
+		target_include_directories(marnav_serial
+			PRIVATE
+				${CMAKE_CURRENT_SOURCE_DIR}
+				${CMAKE_CURRENT_BINARY_DIR}
+			)
+	else()
+		set(SOURCES ${SOURCES}
+			marnav/io/serial.cpp
+			)
+	endif()
 	set(SOURCES ${SOURCES}
-		marnav/io/serial.cpp
 		marnav/io/nmea_reader.cpp
 		marnav/io/default_nmea_reader.cpp
 		)
@@ -221,21 +238,29 @@ add_library(marnav ${LIBRARY_TYPE}
 	${SOURCES}
 	)
 
+if(MSVC)
+	target_link_libraries(marnav marnav_serial)
+endif()
+
+
 target_include_directories(marnav
 	PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
 		${CMAKE_CURRENT_BINARY_DIR}
 	)
 
-target_compile_options(marnav
-	PRIVATE
-		-pipe
-		-ggdb
-		-Wall
-		-Wextra
-		-pedantic-errors
-		-Wold-style-cast
-	)
+if(NOT MSVC)
+	target_compile_options(marnav
+		PRIVATE
+			-pipe
+			-ggdb
+			-Wall
+			-Wextra
+			-pedantic-errors
+			-Wold-style-cast
+		)
+endif()
+
 if(ENABLE_PROFILING)
 	target_compile_options(marnav
 		PRIVATE
@@ -602,14 +627,16 @@ if(ENABLE_TOOLS)
 
 	target_include_directories(nmeasum PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-	target_compile_options(nmeasum
-		PRIVATE
-			-pipe
-			-ggdb
-			-Wall
-			-Wextra
-			-pedantic-errors
-		)
+	if(NOT MSVC)
+		target_compile_options(nmeasum
+			PRIVATE
+				-pipe
+				-ggdb
+				-Wall
+				-Wextra
+				-pedantic-errors
+			)
+	endif()
 
 	### bin: nmeadump
 	if(ENABLE_AIS AND ENABLE_IO)
@@ -623,14 +650,16 @@ if(ENABLE_TOOLS)
 				${CMAKE_CURRENT_SOURCE_DIR}/../extern
 			)
 
-		target_compile_options(nmeadump
-			PRIVATE
-				-pipe
-				-ggdb
-				-Wall
-				-Wextra
-				-pedantic-errors
-			)
+		if(NOT MSVC)
+			target_compile_options(nmeadump
+				PRIVATE
+					-pipe
+					-ggdb
+					-Wall
+					-Wextra
+					-pedantic-errors
+				)
+		endif()
 
 		target_link_libraries(nmeadump
 			marnav

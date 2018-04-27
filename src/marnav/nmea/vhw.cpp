@@ -9,7 +9,7 @@ constexpr const char * vhw::TAG;
 
 vhw::vhw()
 	: sentence(ID, TAG, talker_id::integrated_instrumentation)
-	, degrees_true_(reference::TRUE)
+	, degrees_true_(reference::TRUE_NORTH)
 {
 }
 

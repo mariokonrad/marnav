@@ -29,7 +29,7 @@ vdr::vdr(talker talk, fields::const_iterator first, fields::const_iterator last)
 void vdr::set_degrees_true(double t) noexcept
 {
 	degrees_true_ = t;
-	degrees_true_ref_ = reference::TRUE;
+	degrees_true_ref_ = reference::TRUE_NORTH;
 }
 
 void vdr::set_degrees_mag(double t) noexcept

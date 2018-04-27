@@ -4,6 +4,12 @@
 #include <string>
 #include <marnav/io/device.hpp>
 
+#ifdef _MSC_VER
+typedef void* SERIAL_DEVICE_HANDLE_T;
+#else
+typedef int SERIAL_DEVICE_HANDLE_T;
+#endif
+
 namespace marnav
 {
 namespace io
@@ -50,7 +56,7 @@ public:
 	virtual int write(const char * buffer, uint32_t size) override;
 
 protected:
-	int fd; ///< File descriptor for serial device communication.
+	SERIAL_DEVICE_HANDLE_T fd; ///< File descriptor for serial device communication.
 
 private:
 	std::string dev_;

@@ -27,7 +27,7 @@ hsc::hsc(talker talk, fields::const_iterator first, fields::const_iterator last)
 void hsc::set_heading_true(double t) noexcept
 {
 	heading_true_ = t;
-	heading_true_ref_ = reference::TRUE;
+	heading_true_ref_ = reference::TRUE_NORTH;
 }
 
 void hsc::set_heading_mag(double t) noexcept

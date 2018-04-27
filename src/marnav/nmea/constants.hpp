@@ -77,15 +77,15 @@ enum class temperature : char {
 /// Enumeration of unis of pressure.
 enum class pressure : char {
 	bar, ///< NMEA representation: 'B'
-	pascal ///< NMEA representation: 'P'
+	Pa ///< NMEA representation: 'P'
 };
 }
 
 /// Enumeration of all possible references of data.
 enum class reference : char {
-	TRUE, ///< NMEA representation: 'T'
+	TRUE_NORTH, ///< NMEA representation: 'T'
 	MAGNETIC, ///< NMEA representation: 'M'
-	RELATIVE ///< NMEA representation: 'R'
+	RELATIVE_NORTH ///< NMEA representation: 'R'
 };
 
 /// Side of the vessel.
