@@ -5,13 +5,15 @@ find_package(Boost 1.53.0
 include_directories(${CMAKE_SOURCE_DIR}/src)
 include_directories(${CMAKE_BINARY_DIR}/src)
 
-add_compile_options(
-	-pipe
-	-ggdb
-	-Wall
-	-Wextra
-	-pedantic-errors
-	)
+if(UNIX)
+	add_compile_options(
+		-pipe
+		-ggdb
+		-Wall
+		-Wextra
+		-pedantic-errors
+		)
+endif()
 
 add_executable(parse_nmea parse_nmea.cpp)
 target_link_libraries(parse_nmea marnav)
@@ -52,8 +54,10 @@ endif()
 
 add_executable(bitset_iterate bitset_iterate.cpp)
 
-add_executable(select select.cpp)
-target_link_libraries(select marnav)
+if(UNIX)
+	add_executable(select select.cpp)
+	target_link_libraries(select marnav)
+endif()
 
 if(Boost_FOUND AND ENABLE_IO)
 	include_directories(${Boost_INCLUDE_DIRS})

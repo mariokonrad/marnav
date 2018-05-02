@@ -6,7 +6,7 @@ include_directories(
 	)
 
 if(MSVC)
-	add_definitions(-D_USE_MATH_DEFINES)
+	add_definitions(-D_USE_MATH_DEFINES -D_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING)
 endif()
 
 set(SOURCES
