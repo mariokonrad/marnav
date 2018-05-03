@@ -16,7 +16,7 @@ TEST_F(Test_nmea_io, read_empty_latitude_string)
 	geo::latitude lat{12.3};
 	nmea::read("", lat);
 
-	EXPECT_EQ(geo::latitude{}, lat);
+	EXPECT_DOUBLE_EQ(geo::latitude{}, lat);
 }
 
 TEST_F(Test_nmea_io, read_empty_longitude_string)
@@ -24,7 +24,7 @@ TEST_F(Test_nmea_io, read_empty_longitude_string)
 	geo::longitude lon{123.4};
 	nmea::read("", lon);
 
-	EXPECT_EQ(geo::longitude{}, lon);
+	EXPECT_DOUBLE_EQ(geo::longitude{}, lon);
 }
 
 TEST_F(Test_nmea_io, read_int32_positive_hex)

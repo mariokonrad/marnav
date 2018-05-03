@@ -14,7 +14,7 @@ TEST_F(Test_nmea_angle, parse_empty_string)
 
 	auto result = marnav::nmea::parse_latitude("");
 
-	EXPECT_EQ(expected, result);
+	EXPECT_DOUBLE_EQ(expected, result);
 }
 
 TEST_F(Test_nmea_angle, parse_invalid_string)
