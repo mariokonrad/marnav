@@ -42,7 +42,7 @@ raw message_51::get_data() const
 {
 	uint16_t m = 0;
 	m += lon_.minutes() * 100;
-	m += (lon_.seconds() * 100) / 60;
+	m += static_cast<uint16_t>((lon_.seconds() * 100) / 60);
 	if (lon_.hem() == geo::longitude::hemisphere::east)
 		m |= 0x8000;
 

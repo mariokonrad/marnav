@@ -58,12 +58,12 @@ double message_26::get_speed2() const noexcept
 
 void message_26::set_speed1(double t) noexcept
 {
-	speed1_ = std::round(std::abs(t) * 100);
+	speed1_ = static_cast<uint16_t>(std::round(std::abs(t) * 100));
 }
 
 void message_26::set_speed2(double t) noexcept
 {
-	speed2_ = std::round(std::abs(t) * 100);
+	speed2_ = static_cast<uint16_t>(std::round(std::abs(t) * 100));
 }
 
 void message_26::set_display_in_mph(bool t) noexcept
