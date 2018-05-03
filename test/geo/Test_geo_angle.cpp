@@ -154,7 +154,7 @@ TEST_F(Test_geo_angle, latitude_literal_north)
 	const latitude expected{12.34};
 	const latitude t = 12.34_lat;
 
-	EXPECT_EQ(expected, t);
+	EXPECT_DOUBLE_EQ(expected, t);
 	EXPECT_EQ(geo::latitude::hemisphere::north, t.hem());
 }
 
@@ -165,7 +165,7 @@ TEST_F(Test_geo_angle, latitude_literal_explicit_north)
 	const latitude expected{12.34};
 	const latitude t = 12.34_north;
 
-	EXPECT_EQ(expected, t);
+	EXPECT_DOUBLE_EQ(expected, t);
 	EXPECT_EQ(geo::latitude::hemisphere::north, t.hem());
 }
 
@@ -176,7 +176,7 @@ TEST_F(Test_geo_angle, latitude_literal_south)
 	const latitude expected{-12.34};
 	const latitude t = -12.34_lat;
 
-	EXPECT_EQ(expected, t);
+	EXPECT_DOUBLE_EQ(expected, t);
 	EXPECT_EQ(geo::latitude::hemisphere::south, t.hem());
 }
 
@@ -187,7 +187,7 @@ TEST_F(Test_geo_angle, latitude_literal_explicit_south)
 	const latitude expected{-12.34};
 	const latitude t = 12.34_south;
 
-	EXPECT_EQ(expected, t);
+	EXPECT_DOUBLE_EQ(expected, t);
 	EXPECT_EQ(geo::latitude::hemisphere::south, t.hem());
 }
 
@@ -198,7 +198,7 @@ TEST_F(Test_geo_angle, longitude_literal_east)
 	const longitude expected{123.45};
 	const longitude t = 123.45_lon;
 
-	EXPECT_EQ(expected, t);
+	EXPECT_DOUBLE_EQ(expected, t);
 	EXPECT_EQ(geo::longitude::hemisphere::east, t.hem());
 }
 
@@ -209,7 +209,7 @@ TEST_F(Test_geo_angle, longitude_literal_explicit_east)
 	const longitude expected{123.45};
 	const longitude t = 123.45_east;
 
-	EXPECT_EQ(expected, t);
+	EXPECT_DOUBLE_EQ(expected, t);
 	EXPECT_EQ(geo::longitude::hemisphere::east, t.hem());
 }
 
@@ -220,7 +220,7 @@ TEST_F(Test_geo_angle, longitude_literal_west)
 	const longitude expected{-123.45};
 	const longitude t = -123.45_lon;
 
-	EXPECT_EQ(expected, t);
+	EXPECT_DOUBLE_EQ(expected, t);
 	EXPECT_EQ(geo::longitude::hemisphere::west, t.hem());
 }
 
@@ -231,7 +231,7 @@ TEST_F(Test_geo_angle, longitude_literal_explicit_west)
 	const longitude expected{-123.45};
 	const longitude t = 123.45_west;
 
-	EXPECT_EQ(expected, t);
+	EXPECT_DOUBLE_EQ(expected, t);
 	EXPECT_EQ(geo::longitude::hemisphere::west, t.hem());
 }
 }

@@ -181,14 +181,14 @@ TEST_F(Test_utils_bitset, uint8__test_bit)
 	b.append(0xaa, 8);
 	ASSERT_STREQ("10101010", to_string(b).c_str());
 
-	EXPECT_EQ(1u, b.test(0));
-	EXPECT_EQ(0u, b.test(1));
-	EXPECT_EQ(1u, b.test(2));
-	EXPECT_EQ(0u, b.test(3));
-	EXPECT_EQ(1u, b.test(4));
-	EXPECT_EQ(0u, b.test(5));
-	EXPECT_EQ(1u, b.test(6));
-	EXPECT_EQ(0u, b.test(7));
+	EXPECT_EQ(true, b.test(0));
+	EXPECT_EQ(false, b.test(1));
+	EXPECT_EQ(true, b.test(2));
+	EXPECT_EQ(false, b.test(3));
+	EXPECT_EQ(true, b.test(4));
+	EXPECT_EQ(false, b.test(5));
+	EXPECT_EQ(true, b.test(6));
+	EXPECT_EQ(false, b.test(7));
 }
 
 TEST_F(Test_utils_bitset, uint8__get)

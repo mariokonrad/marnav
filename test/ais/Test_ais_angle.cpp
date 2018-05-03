@@ -35,7 +35,7 @@ TEST_F(Test_ais_angle, to_geo_latitude)
 		const geo::latitude expected{test.angle};
 		const geo::latitude converted
 			= ais::to_geo_latitude(test.angle_minutes, 27, ais::angle_scale::I4);
-		EXPECT_EQ(expected, converted) << "expected:" << static_cast<double>(expected)
+		EXPECT_DOUBLE_EQ(expected, converted) << "expected:" << static_cast<double>(expected)
 									   << ", converted:" << static_cast<double>(converted);
 	}
 }
@@ -57,7 +57,7 @@ TEST_F(Test_ais_angle, to_geo_longitude)
 		const geo::longitude expected{test.angle};
 		const geo::longitude converted
 			= ais::to_geo_longitude(test.angle_minutes, 28, ais::angle_scale::I4);
-		EXPECT_EQ(expected, converted) << "expected:" << static_cast<double>(expected)
+		EXPECT_DOUBLE_EQ(expected, converted) << "expected:" << static_cast<double>(expected)
 									   << ", converted:" << static_cast<double>(converted);
 	}
 }
