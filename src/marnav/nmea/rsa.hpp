@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -26,7 +28,7 @@ namespace nmea
 ///    - A = data is valid
 ///    - V = invalid
 ///
-class rsa : public sentence
+class MARNAV_EXPORT rsa : public sentence
 {
 	friend class detail::factory;
 
@@ -45,10 +47,17 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> rudder1_;
 	utils::optional<status> rudder1_valid_;
 	utils::optional<double> rudder2_;
 	utils::optional<status> rudder2_valid_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(rudder1_) get_rudder1() const { return rudder1_; }

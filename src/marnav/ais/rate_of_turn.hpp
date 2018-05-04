@@ -3,11 +3,13 @@
 
 #include <cstdint>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace ais
 {
-class rate_of_turn
+class MARNAV_EXPORT rate_of_turn
 {
 public:
 	using value_type = int8_t;

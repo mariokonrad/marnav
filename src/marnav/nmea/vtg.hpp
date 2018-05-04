@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -31,7 +33,7 @@ namespace nmea
 ///    - K = Kilometers Per Hour
 /// 9. FAA mode indicator (NMEA 2.3 and later)
 ///
-class vtg : public sentence
+class MARNAV_EXPORT vtg : public sentence
 {
 	friend class detail::factory;
 
@@ -50,6 +52,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> track_true_;
 	utils::optional<reference> type_true_; // T:true
 	utils::optional<double> track_magn_;
@@ -59,6 +65,9 @@ private:
 	utils::optional<double> speed_kmh_;
 	utils::optional<unit::velocity> speed_kmh_unit_; // K:kilometers per hour
 	utils::optional<mode_indicator> mode_ind_; // NMEA 2.3 or newer
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(track_true_) get_track_true() const { return track_true_; }

@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -25,7 +27,7 @@ namespace nmea
 ///    - negative value means distance from transducer to keel
 /// 3. Max depth in meters, might be empty. This field exists allegedly since NMEA 3.0
 ///
-class dpt : public sentence
+class MARNAV_EXPORT dpt : public sentence
 {
 	friend class detail::factory;
 
@@ -45,9 +47,16 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	double depth_meter_ = 0.0;
 	double transducer_offset_ = 0.0;
 	utils::optional<double> max_depth_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(depth_meter_) get_depth_meter() const noexcept { return depth_meter_; }

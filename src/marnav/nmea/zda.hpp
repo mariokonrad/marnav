@@ -5,6 +5,8 @@
 #include <marnav/nmea/time.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -27,7 +29,7 @@ namespace nmea
 ///
 /// Example: <tt>$GPZDA,160012.71,11,03,2004,-1,00*7D</tt>
 ///
-class zda : public sentence
+class MARNAV_EXPORT zda : public sentence
 {
 	friend class detail::factory;
 
@@ -46,12 +48,19 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<nmea::time> time_utc_;
 	utils::optional<uint32_t> day_;
 	utils::optional<uint32_t> month_;
 	utils::optional<uint32_t> year_;
 	utils::optional<int32_t> local_zone_hours_;
 	utils::optional<int32_t> local_zone_minutes_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(time_utc_) get_time_utc() const { return time_utc_; }

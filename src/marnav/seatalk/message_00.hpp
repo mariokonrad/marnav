@@ -3,6 +3,8 @@
 
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -25,7 +27,7 @@ namespace seatalk
 ///
 /// Corresponding NMEA sentences: DPT, DBT
 ///
-class message_00 : public message
+class MARNAV_EXPORT message_00 : public message
 {
 public:
 	constexpr static message_id ID = message_id::depth_below_transducer;

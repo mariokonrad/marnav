@@ -3,13 +3,15 @@
 
 #include <marnav/ais/binary_data.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace ais
 {
 /// @brief Inland ship static and voyage related data (Inland AIS).
 ///
-class binary_200_10 final : public binary_data
+class MARNAV_EXPORT binary_200_10 final : public binary_data
 {
 public:
 	/// This offset is the size of the header of the binary message 08,
@@ -31,6 +33,10 @@ public:
 	void write_to(raw & payload) const;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	// clang-format off
 	bitset_value< 56 - MSG08_HEAD,  8, std::string > vessel_id;
 	bitset_value<104 - MSG08_HEAD, 13, uint32_t    > length = 0;
@@ -43,6 +49,9 @@ private:
 	bitset_value<158 - MSG08_HEAD,  1, bool        > course_q = false;
 	bitset_value<159 - MSG08_HEAD,  1, bool        > heading_q = false;
 	// clang-format on
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	std::string get_vessel_id() const;

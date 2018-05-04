@@ -3,6 +3,8 @@
 
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -16,7 +18,7 @@ namespace seatalk
 ///
 /// @todo Implement data of this message
 ///
-class message_38 : public message
+class MARNAV_EXPORT message_38 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::codelock_data;

@@ -3,6 +3,8 @@
 
 #include <marnav/geo/angle.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace geo
@@ -12,7 +14,7 @@ namespace geo
 ///
 /// Immutable.
 ///
-class position
+class MARNAV_EXPORT position
 {
 public:
 	position() = default;
@@ -33,8 +35,8 @@ private:
 	longitude lon_;
 };
 
-position deg2rad(const position & p);
-position rad2deg(const position & p);
+MARNAV_EXPORT position deg2rad(const position & p);
+MARNAV_EXPORT position rad2deg(const position & p);
 }
 }
 

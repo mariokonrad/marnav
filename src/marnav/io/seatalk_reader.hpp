@@ -4,6 +4,8 @@
 #include <marnav/io/device.hpp>
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace io
@@ -14,7 +16,7 @@ namespace io
 /// In order to use this SeaTalk reader, it must be subclassed.
 ///
 /// @example read_seatalk.cpp
-class seatalk_reader
+class MARNAV_EXPORT seatalk_reader
 {
 public:
 	virtual ~seatalk_reader();
@@ -56,7 +58,14 @@ private:
 	bool read_data();
 
 	context ctx_;
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	std::unique_ptr<device> dev_; ///< Device to read data from.
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 };
 }
 }

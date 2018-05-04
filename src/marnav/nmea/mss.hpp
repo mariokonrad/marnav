@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -23,7 +25,7 @@ namespace nmea
 /// 4. Beacon data rate (BPS)
 /// 5. Unknown integer value
 ///
-class mss : public sentence
+class MARNAV_EXPORT mss : public sentence
 {
 	friend class detail::factory;
 

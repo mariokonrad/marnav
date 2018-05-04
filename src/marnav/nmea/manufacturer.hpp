@@ -4,12 +4,14 @@
 #include <string>
 #include <vector>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
 {
 /// Enumeration of manufacturer IDs.
-enum class manufacturer_id {
+enum class MARNAV_EXPORT manufacturer_id {
 	UNKNOWN,
 	NMEA,
 	_3SN, ///< 3-S NAVIGATION
@@ -557,13 +559,13 @@ enum class manufacturer_id {
 
 class sentence; // forward declaration
 
-manufacturer_id get_manufacturer_id(const std::string & tag);
-manufacturer_id get_manufacturer_id(const sentence & s);
+MARNAV_EXPORT manufacturer_id get_manufacturer_id(const std::string & tag);
+MARNAV_EXPORT manufacturer_id get_manufacturer_id(const sentence & s);
 
-std::string get_manufacturer_tag(manufacturer_id id);
-std::string get_manufacturer_name(manufacturer_id id);
+MARNAV_EXPORT std::string get_manufacturer_tag(manufacturer_id id);
+MARNAV_EXPORT std::string get_manufacturer_name(manufacturer_id id);
 
-std::vector<manufacturer_id> get_supported_manufacturer_id();
+MARNAV_EXPORT std::vector<manufacturer_id> get_supported_manufacturer_id();
 }
 }
 

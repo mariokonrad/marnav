@@ -5,6 +5,8 @@
 #include <marnav/nmea/angle.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -36,7 +38,7 @@ namespace nmea
 ///     - E = East
 ///     - W = West
 ///
-class rma : public sentence
+class MARNAV_EXPORT rma : public sentence
 {
 	friend class detail::factory;
 
@@ -55,6 +57,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<char> blink_warning_;
 	utils::optional<geo::latitude> lat_;
 	utils::optional<direction> lat_hem_; // latitude dir, N:north, S:south
@@ -67,6 +73,9 @@ private:
 	utils::optional<double> magnetic_var_; // magnetic variation in degrees
 	utils::optional<direction>
 		magnetic_var_hem_; // magnetic variation hemisphere, E:east, W:west
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(blink_warning_) get_blink_warning() const { return blink_warning_; }

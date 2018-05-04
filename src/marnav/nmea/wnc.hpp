@@ -5,6 +5,8 @@
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -27,7 +29,7 @@ namespace nmea
 /// 5. TO Waypoint ID
 /// 6. FROM Waypoint ID
 ///
-class wnc : public sentence
+class MARNAV_EXPORT wnc : public sentence
 {
 	friend class detail::factory;
 
@@ -46,12 +48,19 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> distance_nm_;
 	utils::optional<unit::distance> distance_nm_unit_;
 	utils::optional<double> distance_km_;
 	utils::optional<unit::distance> distance_km_unit_;
 	utils::optional<waypoint> waypoint_to_;
 	utils::optional<waypoint> waypoint_from_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(distance_nm_) get_distance_nm() const { return distance_nm_; }

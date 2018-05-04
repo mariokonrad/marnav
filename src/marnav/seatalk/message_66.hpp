@@ -3,6 +3,8 @@
 
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -25,7 +27,7 @@ namespace seatalk
 ///     XX        = 0x00: End of wind alarm (only sent once)
 /// @endcode
 ///
-class message_66 : public message
+class MARNAV_EXPORT message_66 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::wind_alarm;
@@ -60,8 +62,8 @@ public:
 	void set_alarm(alarm t) { value_ = t; }
 };
 
-message_66::alarm operator|(message_66::alarm a, message_66::alarm b) noexcept;
-message_66::alarm operator&(message_66::alarm a, message_66::alarm b) noexcept;
+MARNAV_EXPORT message_66::alarm operator|(message_66::alarm a, message_66::alarm b) noexcept;
+MARNAV_EXPORT message_66::alarm operator&(message_66::alarm a, message_66::alarm b) noexcept;
 }
 }
 

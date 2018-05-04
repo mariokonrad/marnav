@@ -5,6 +5,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -36,7 +38,7 @@ namespace nmea
 /// 16. HDOP
 /// 17. VDOP
 ///
-class gsa : public sentence
+class MARNAV_EXPORT gsa : public sentence
 {
 	friend class detail::factory;
 
@@ -57,12 +59,19 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<selection_mode> sel_mode_; // A:automatic 2D/3D, M:manual
 	utils::optional<uint32_t> mode_; // 1 = no fix, 2 = 2D fix, 3 = 3D fix, TODO: enum
 	std::array<utils::optional<uint32_t>, max_satellite_ids> satellite_id_;
 	utils::optional<double> pdop_;
 	utils::optional<double> hdop_;
 	utils::optional<double> vdop_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 	void check_index(int index) const;
 

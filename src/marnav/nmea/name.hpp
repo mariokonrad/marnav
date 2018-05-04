@@ -6,6 +6,8 @@
 #include <marnav/nmea/constants.hpp>
 #include <marnav/nmea/talker_id.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -16,20 +18,20 @@ namespace nmea
 /// @param[in] t The argument to return the name for.
 /// @return The human readable name.
 
-std::string to_name(sentence_id t);
-std::string to_name(talker t);
-std::string to_name(selection_mode t);
-std::string to_name(status t);
-std::string to_name(route t);
-std::string to_name(mode_indicator t);
-std::string to_name(quality t);
-std::string to_name(reference t);
-std::string to_name(side t);
-std::string to_name(type_of_point t);
+MARNAV_EXPORT std::string to_name(sentence_id t);
+MARNAV_EXPORT std::string to_name(talker t);
+MARNAV_EXPORT std::string to_name(selection_mode t);
+MARNAV_EXPORT std::string to_name(status t);
+MARNAV_EXPORT std::string to_name(route t);
+MARNAV_EXPORT std::string to_name(mode_indicator t);
+MARNAV_EXPORT std::string to_name(quality t);
+MARNAV_EXPORT std::string to_name(reference t);
+MARNAV_EXPORT std::string to_name(side t);
+MARNAV_EXPORT std::string to_name(type_of_point t);
 
-std::string to_name(unit::distance t);
-std::string to_name(unit::temperature t);
-std::string to_name(unit::velocity t);
+MARNAV_EXPORT std::string to_name(unit::distance t);
+MARNAV_EXPORT std::string to_name(unit::temperature t);
+MARNAV_EXPORT std::string to_name(unit::velocity t);
 /// @}
 }
 }

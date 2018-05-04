@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -27,7 +29,7 @@ namespace nmea
 /// 6. Speed of current unit
 ///    - N = Knots
 ///
-class vdr : public sentence
+class MARNAV_EXPORT vdr : public sentence
 {
 	friend class detail::factory;
 
@@ -46,12 +48,19 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> degrees_true_;
 	utils::optional<reference> degrees_true_ref_; // T:true
 	utils::optional<double> degrees_mag_;
 	utils::optional<reference> degrees_mag_ref_; // M:magnetic
 	utils::optional<double> speed_;
 	utils::optional<unit::velocity> speed_unit_; // N:knots
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(degrees_true_) get_degrees_true() const { return degrees_true_; }

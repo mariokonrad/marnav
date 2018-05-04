@@ -5,6 +5,8 @@
 #include <marnav/utils/optional.hpp>
 #include <marnav/utils/mmsi.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -34,7 +36,7 @@ namespace nmea
 ///
 /// @todo Implementation of data set fields
 ///
-class dse : public sentence
+class MARNAV_EXPORT dse : public sentence
 {
 	friend class detail::factory;
 

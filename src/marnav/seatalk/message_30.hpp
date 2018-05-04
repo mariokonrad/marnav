@@ -3,6 +3,8 @@
 
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -21,7 +23,7 @@ namespace seatalk
 ///
 /// only sent once when setting the lamp intensity
 ///
-class message_30 : public message
+class MARNAV_EXPORT message_30 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::set_lamp_intensity;

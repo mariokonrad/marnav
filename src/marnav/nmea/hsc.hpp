@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -24,7 +26,7 @@ namespace nmea
 /// 4. Heading Degrees Magnetic reference
 ///    - M = Magnetic
 ///
-class hsc : public sentence
+class MARNAV_EXPORT hsc : public sentence
 {
 	friend class detail::factory;
 
@@ -43,10 +45,17 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> heading_true_;
 	utils::optional<reference> heading_true_ref_;
 	utils::optional<double> heading_mag_;
 	utils::optional<reference> heading_mag_ref_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(heading_true_) get_heading_true() const { return heading_true_; }

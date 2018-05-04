@@ -3,6 +3,8 @@
 
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -20,7 +22,7 @@ namespace seatalk
 ///
 /// Corresponding NMEA sentence: MWV
 ///
-class message_11 : public message
+class MARNAV_EXPORT message_11 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::apparent_wind_speed;

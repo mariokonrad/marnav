@@ -3,12 +3,14 @@
 
 #include <cstdint>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
 {
 /// Enumeration of all possible directions.
-enum class direction : char {
+enum class MARNAV_EXPORT direction : char {
 	east, ///< NMEA representation: 'E'
 	west, ///< NMEA representation: 'W'
 	north, ///< NMEA representation: 'N'
@@ -17,13 +19,13 @@ enum class direction : char {
 };
 
 /// Status values used in NMEA.
-enum class status : char {
+enum class MARNAV_EXPORT status : char {
 	ok, ///< NMEA representation: 'A'
 	warning ///< NMEA representation: 'V'
 };
 
 /// Positioning System Mode Indicator constants.
-enum class mode_indicator : char {
+enum class MARNAV_EXPORT mode_indicator : char {
 	invalid, ///< NMEA representation: 'V'
 	autonomous, ///< NMEA representation: 'A'
 	differential, ///< NMEA representation: 'D'
@@ -35,7 +37,7 @@ enum class mode_indicator : char {
 };
 
 /// Signal quality.
-enum class quality : uint32_t {
+enum class MARNAV_EXPORT quality : uint32_t {
 	invalid = 0, ///< NMEA representation: 0
 	gps_fix = 1, ///< NMEA representation: 1
 	dgps_fix = 2, ///< NMEA representation: 2
@@ -44,7 +46,7 @@ enum class quality : uint32_t {
 };
 
 /// Target status.
-enum class target_status : char {
+enum class MARNAV_EXPORT target_status : char {
 	lost, ///< NMEA representation: 'L'
 	query, ///< NMEA representation: 'Q'
 	tracking ///< NMEA representation: 'T'
@@ -54,7 +56,7 @@ enum class target_status : char {
 namespace unit
 {
 /// Enumeration of unis of distance.
-enum class distance : char {
+enum class MARNAV_EXPORT distance : char {
 	meter, ///< NMEA representation: 'M'
 	feet, ///< NMEA representation: 'f'
 	nm, ///< NMEA representation: 'N' / nautical miles
@@ -63,54 +65,54 @@ enum class distance : char {
 };
 
 /// Enumeration of unis of velocity.
-enum class velocity : char {
+enum class MARNAV_EXPORT velocity : char {
 	knot, ///< NMEA representation: 'N'
 	kmh, ///< NMEA representation: 'K' / kilometers per hour
 	mps ///< NMEA representation: 'M' / meters per second
 };
 
 /// Enumeration of unis of temperature.
-enum class temperature : char {
+enum class MARNAV_EXPORT temperature : char {
 	celsius ///< NMEA representation: 'C'
 };
 
 /// Enumeration of unis of pressure.
-enum class pressure : char {
+enum class MARNAV_EXPORT pressure : char {
 	bar, ///< NMEA representation: 'B'
 	Pa ///< NMEA representation: 'P'
 };
 }
 
 /// Enumeration of all possible references of data.
-enum class reference : char {
+enum class MARNAV_EXPORT reference : char {
 	TRUE_NORTH, ///< NMEA representation: 'T'
 	MAGNETIC, ///< NMEA representation: 'M'
 	RELATIVE_NORTH ///< NMEA representation: 'R'
 };
 
 /// Side of the vessel.
-enum class side : char {
+enum class MARNAV_EXPORT side : char {
 	left, ///< NMEA representation: 'L'
 	right ///< NMEA Representation: 'R'
 };
 
 /// Status of routes.
-enum class route : char {
+enum class MARNAV_EXPORT route : char {
 	complete, ///< NMEA representation: 'c'
 	working ///< NMEA representation: 'w'
 };
 
-enum class selection_mode : char {
+enum class MARNAV_EXPORT selection_mode : char {
 	manual, ///< NMEA representation: 'M'
 	automatic ///< NMEA representation: 'A'
 };
 
-enum class ais_channel : char {
+enum class MARNAV_EXPORT ais_channel : char {
 	A, ///< NMEA representation: 'A'
 	B ///< NMEA representation: 'B'
 };
 
-enum class type_of_point : char {
+enum class MARNAV_EXPORT type_of_point : char {
 	collision, ///< NMEA representation: 'C'
 	turning_point, ///< NMEA representation: 'T'
 	reference, ///< NMEA representation: 'R'

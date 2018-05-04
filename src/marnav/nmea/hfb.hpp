@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -24,7 +26,7 @@ namespace nmea
 /// 4. Unit of distance headrope to bottom
 ///    - M = Meters
 ///
-class hfb : public sentence
+class MARNAV_EXPORT hfb : public sentence
 {
 	friend class detail::factory;
 

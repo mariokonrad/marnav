@@ -3,6 +3,8 @@
 
 #include <marnav/nmea/sentence.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -18,7 +20,7 @@ namespace nmea
 /// Field Number:
 /// 1. Talker ID Number
 ///
-class stn : public sentence
+class MARNAV_EXPORT stn : public sentence
 {
 	friend class detail::factory;
 

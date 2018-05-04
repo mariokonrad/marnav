@@ -5,6 +5,8 @@
 #include <marnav/nmea/time.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -29,7 +31,7 @@ namespace nmea
 ///
 /// @note The 8-field version is in NMEA 3.0
 ///
-class gbs : public sentence
+class MARNAV_EXPORT gbs : public sentence
 {
 	friend class detail::factory;
 

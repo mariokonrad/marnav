@@ -6,13 +6,15 @@
 #include <marnav/utils/mmsi.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace ais
 {
 /// @brief Group Assignment Command
 ///
-class message_23 : public message
+class MARNAV_EXPORT message_23 : public message
 {
 	friend class detail::factory;
 
@@ -47,6 +49,10 @@ protected:
 	virtual raw get_data() const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	// clang-format off
 	bitset_value<  6,  2, uint32_t       > repeat_indicator = 0;
 	bitset_value<  8, 30, uint32_t       > mmsi = 0;
@@ -60,6 +66,9 @@ private:
 	bitset_value<146,  4, report_interval> interval = report_interval::autonomous_mode;
 	bitset_value<150,  4, uint32_t       > quiet_time = 0; // minutes (0=none, 1..15 minutes)
 	// clang-format on
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }

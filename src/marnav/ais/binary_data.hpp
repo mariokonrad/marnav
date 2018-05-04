@@ -4,6 +4,8 @@
 #include <string>
 #include <marnav/utils/bitset.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace ais
@@ -13,16 +15,16 @@ using raw = utils::bitset<uint8_t>;
 
 /// @{
 
-char decode_sixbit_ascii(uint8_t value);
-uint8_t encode_sixbit_ascii(char c);
+MARNAV_EXPORT char decode_sixbit_ascii(uint8_t value);
+MARNAV_EXPORT uint8_t encode_sixbit_ascii(char c);
 
 /// @}
 
-std::string trim_ais_string(const std::string & s);
+MARNAV_EXPORT std::string trim_ais_string(const std::string & s);
 
 /// Empty baseclass for binary data, provides protected functions to read and
 /// write binary data from/to bitsets.
-class binary_data
+class MARNAV_EXPORT binary_data
 {
 protected:
 	/// Represents data to be read from / written to a bitset.

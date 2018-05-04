@@ -5,6 +5,8 @@
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -28,7 +30,7 @@ namespace nmea
 ///
 /// The Garmin 65 and possibly other units report a <tt>$GPR00</tt> in the same format.
 ///
-class rte : public sentence
+class MARNAV_EXPORT rte : public sentence
 {
 	friend class detail::factory;
 
@@ -49,11 +51,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	uint32_t n_messages_ = 1;
 	uint32_t message_number_ = 1;
 	route message_mode_ = route::complete; // C:complete route, W:working route
 	utils::optional<waypoint>
 		waypoint_id_[max_waypoints]; // names or numbers of the active route
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(n_messages_) get_n_messages() const { return n_messages_; }

@@ -7,6 +7,8 @@
 #include <marnav/nmea/angle.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -44,7 +46,7 @@ namespace nmea
 /// threshold, e.g. because the dilution of precision is too high or an elevation
 /// mask test failed.
 ///
-class rmc : public sentence
+class MARNAV_EXPORT rmc : public sentence
 {
 	friend class detail::factory;
 
@@ -63,6 +65,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<nmea::time> time_utc_;
 	utils::optional<char> status_;
 	utils::optional<geo::latitude> lat_;
@@ -75,6 +81,9 @@ private:
 	utils::optional<double> mag_;
 	utils::optional<direction> mag_hem_;
 	utils::optional<mode_indicator> mode_ind_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(time_utc_) get_time_utc() const { return time_utc_; }

@@ -3,6 +3,8 @@
 
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -16,7 +18,7 @@ namespace seatalk
 ///  X=2  Response level 2: Minimum Deadband
 /// @endcode
 ///
-class message_87 : public message
+class MARNAV_EXPORT message_87 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::response_level;

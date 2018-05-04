@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -24,7 +26,7 @@ namespace nmea
 /// 4. Distance since Reset unit
 ///    - N = Nautical Miles
 ///
-class vlw : public sentence
+class MARNAV_EXPORT vlw : public sentence
 {
 	friend class detail::factory;
 
@@ -43,10 +45,17 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> distance_cum_; // total cumulative distance
 	utils::optional<unit::distance> distance_cum_unit_; // N:nautical miles
 	utils::optional<double> distance_reset_; // distance since reset
 	utils::optional<unit::distance> distance_reset_unit_; // N:nautical miles
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(distance_cum_) get_distance_cum() const { return distance_cum_; }

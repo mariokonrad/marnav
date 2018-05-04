@@ -5,13 +5,15 @@
 #include <string>
 #include <marnav/ais/binary_data.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace ais
 {
 
 /// All known AIS message IDs.
-enum class message_id : uint8_t {
+enum class MARNAV_EXPORT message_id : uint8_t {
 	NONE = 0,
 	position_report_class_a = 1,
 	position_report_class_a_assigned_schedule = 2,
@@ -42,7 +44,7 @@ enum class message_id : uint8_t {
 	position_report_for_long_range_applications = 27,
 };
 
-enum class navigation_status : uint8_t {
+enum class MARNAV_EXPORT navigation_status : uint8_t {
 	under_way_using_engine = 0,
 	at_anchor = 1,
 	not_under_command = 2,
@@ -61,7 +63,7 @@ enum class navigation_status : uint8_t {
 	not_defined = 15, // default
 };
 
-enum class ship_type : uint8_t {
+enum class MARNAV_EXPORT ship_type : uint8_t {
 	not_available = 0,
 	// 1..19 reserved for future use
 	wing_in_ground = 20,
@@ -126,7 +128,7 @@ enum class ship_type : uint8_t {
 };
 
 /// Electronic Position Fixing Device
-enum class epfd_fix_type : uint8_t {
+enum class MARNAV_EXPORT epfd_fix_type : uint8_t {
 	undefined = 0,
 	gps = 1,
 	glonass = 2,
@@ -139,14 +141,14 @@ enum class epfd_fix_type : uint8_t {
 };
 
 /// Enumeration of data terminal status.
-enum class data_terminal : uint8_t { ready = 0, not_ready = 1 };
+enum class MARNAV_EXPORT data_terminal : uint8_t { ready = 0, not_ready = 1 };
 
-enum class virtual_aid : uint32_t { real_aid = 0, virtual_aid = 1 };
+enum class MARNAV_EXPORT virtual_aid : uint32_t { real_aid = 0, virtual_aid = 1 };
 
-enum class off_position_indicator : uint32_t { on_position = 0, off_position = 1 };
+enum class MARNAV_EXPORT off_position_indicator : uint32_t { on_position = 0, off_position = 1 };
 
 /// Enumeration of all aid types
-enum class aid_type_id : uint32_t {
+enum class MARNAV_EXPORT aid_type_id : uint32_t {
 	/// 0 : Default, Type of Aid to Navigation not specified
 	unspecified = 0,
 
@@ -247,7 +249,7 @@ enum class aid_type_id : uint32_t {
 
 };
 
-enum class maneuver_indicator_id : uint32_t { not_available = 0, normal = 1, special = 2 };
+enum class MARNAV_EXPORT maneuver_indicator_id : uint32_t { not_available = 0, normal = 1, special = 2 };
 
 // AIS data is coded in a binary form. This implies a need for special
 // value that mark the invalidity of a certain value.
@@ -298,9 +300,9 @@ constexpr static const uint32_t second_not_available = 60;
 /// @}
 
 /// @brief Base class for all AIS messages.
-class message : public binary_data
+class MARNAV_EXPORT message : public binary_data
 {
-	friend std::vector<std::pair<std::string, uint32_t>> encode_message(const message & msg);
+	friend MARNAV_EXPORT std::vector<std::pair<std::string, uint32_t>> encode_message(const message & msg);
 
 public:
 	virtual ~message() = default;

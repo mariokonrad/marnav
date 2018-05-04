@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -40,7 +42,7 @@ namespace nmea
 /// Example:
 /// <tt>$GPALM,1,1,15,1159,00,441d,4e,16be,fd5e,a10c9f,4a2da4,686e81,58cbe1,0a4,001*77</tt>
 ///
-class alm : public sentence
+class MARNAV_EXPORT alm : public sentence
 {
 	friend class detail::factory;
 

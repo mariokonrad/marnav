@@ -3,6 +3,8 @@
 
 #include <cstdint>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace utils
@@ -14,7 +16,7 @@ namespace utils
 ///
 /// @note Not all variations and criterias are implemented.
 ///
-class mmsi
+class MARNAV_EXPORT mmsi
 {
 public:
 	using value_type = uint32_t;

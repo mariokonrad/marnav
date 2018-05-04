@@ -5,6 +5,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -22,7 +24,7 @@ namespace nmea
 /// 2. Catch sensor #2 (0 = off, 1 = on, 2 = no answer)
 /// 3. Catch sensor #3 (0 = off, 1 = on, 2 = no answer)
 ///
-class tfi : public sentence
+class MARNAV_EXPORT tfi : public sentence
 {
 	friend class detail::factory;
 

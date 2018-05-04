@@ -5,6 +5,8 @@
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -29,7 +31,7 @@ namespace nmea
 ///
 /// Example: <tt>$GPBOD,099.3,T,105.6,M,POINTB,*01</tt>
 ///
-class bod : public sentence
+class MARNAV_EXPORT bod : public sentence
 {
 	friend class detail::factory;
 
@@ -48,12 +50,19 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> bearing_true_;
 	utils::optional<reference> type_true_; // T:true
 	utils::optional<double> bearing_magn_;
 	utils::optional<reference> type_magn_; // M:magnetic
 	utils::optional<waypoint> waypoint_to_; // TO waypoint ID
 	utils::optional<waypoint> waypoint_from_; // FROM waypoint ID
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(bearing_true_) get_bearing_true() const { return bearing_true_; }

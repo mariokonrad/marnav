@@ -3,6 +3,8 @@
 
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -16,7 +18,7 @@ namespace seatalk
 /// Trip Mileage: XXXXX/100 nautical miles
 /// @endcode
 ///
-class message_21 : public message
+class MARNAV_EXPORT message_21 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::trip_mileage;

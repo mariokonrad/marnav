@@ -6,6 +6,8 @@
 #include <typeinfo>
 #include <marnav/utils/unique.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -17,7 +19,7 @@ constexpr const int MAX_MESSAGE_SIZE = 32;
 ///
 /// Omitted: 0x81
 ///
-enum class message_id : uint8_t {
+enum class MARNAV_EXPORT message_id : uint8_t {
 	depth_below_transducer = 0x00,
 	equipment_id = 0x01,
 	engine_rpm_and_pitch = 0x05,
@@ -72,7 +74,7 @@ using raw = std::vector<uint8_t>;
 
 /// @brief Base class for all SeaTalk messages
 ///
-class message
+class MARNAV_EXPORT message
 {
 public:
 	using parse_function = std::function<std::unique_ptr<message>(const raw &)>;

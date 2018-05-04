@@ -5,6 +5,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -34,7 +36,7 @@ namespace nmea
 /// 12. Range Units
 /// 13. Unknown
 ///
-class rsd : public sentence
+class MARNAV_EXPORT rsd : public sentence
 {
 	friend class detail::factory;
 

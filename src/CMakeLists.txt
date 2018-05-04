@@ -102,12 +102,8 @@ endif()
 if(ENABLE_IO)
 
 	if(MSVC)
-		# Create in separate library so we don't have Windows.h bleeding
-		add_library(marnav_serial STATIC marnav/io/win/serial.cpp)
-		target_include_directories(marnav_serial
-			PRIVATE
-				${CMAKE_CURRENT_SOURCE_DIR}
-				${CMAKE_CURRENT_BINARY_DIR}
+		set(SOURCES ${SOURCES}
+			marnav/io/win/serial.cpp
 			)
 	else()
 		set(SOURCES ${SOURCES}
@@ -238,13 +234,13 @@ add_library(marnav ${LIBRARY_TYPE}
 	${SOURCES}
 	)
 
-if(MSVC)
-	target_link_libraries(marnav marnav_serial)
-endif()
+include(GenerateExportHeader)
+
+generate_export_header(marnav EXPORT_FILE_NAME "marnav/marnav_export.h")
 
 
 target_include_directories(marnav
-	PRIVATE
+	PUBLIC
 		${CMAKE_CURRENT_SOURCE_DIR}
 		${CMAKE_CURRENT_BINARY_DIR}
 	)
@@ -362,6 +358,7 @@ install(
 install(
 	FILES
 		${CMAKE_CURRENT_BINARY_DIR}/marnav/version.hpp
+		${CMAKE_CURRENT_BINARY_DIR}/marnav/marnav_export.h
 	DESTINATION include/marnav
 	)
 
@@ -625,7 +622,11 @@ if(ENABLE_TOOLS)
 		nmeasum.cpp
 		)
 
-	target_include_directories(nmeasum PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+	target_include_directories(nmeasum
+		PRIVATE
+			${CMAKE_CURRENT_SOURCE_DIR}
+			${CMAKE_CURRENT_BINARY_DIR}
+		)
 
 	if(NOT MSVC)
 		target_compile_options(nmeasum

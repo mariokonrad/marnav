@@ -4,12 +4,14 @@
 #include <marnav/ais/message.hpp>
 #include <marnav/utils/mmsi.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace ais
 {
 /// @brief Safety-Related Broadcast Message
-class message_14 : public message
+class MARNAV_EXPORT message_14 : public message
 {
 	friend class detail::factory;
 
@@ -31,12 +33,19 @@ protected:
 	virtual raw get_data() const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	// clang-format off
 	bitset_value< 6,  2, uint32_t> repeat_indicator = 0;
 	bitset_value< 8, 30, uint32_t> mmsi = 0;
 	// clang-format on
 
 	std::string text; // bits 72..1008
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }

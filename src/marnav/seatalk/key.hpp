@@ -3,6 +3,8 @@
 
 #include <cstdint>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -17,7 +19,7 @@ namespace seatalk
 /// This must be an `enum class` in order to prevent combinations
 /// of the listed keystrokes, they are not supposed to be combined.
 ///
-enum class key : uint8_t {
+enum class MARNAV_EXPORT key : uint8_t {
 	//                      0x00
 	key_auto              = 0x01, ///< Auto
 	key_standby           = 0x02, ///< Standby

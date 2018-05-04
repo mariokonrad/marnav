@@ -8,6 +8,8 @@
 #include <marnav/nmea/talker_id.hpp>
 #include <marnav/nmea/checksum_enum.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -17,15 +19,15 @@ class sentence; // forward declaration
 
 namespace detail
 {
-std::tuple<talker, std::string> parse_address(
+MARNAV_EXPORT std::tuple<talker, std::string> parse_address(
 	const std::string & address, bool ignore_unknown = false);
 
-void ensure_checksum(
+MARNAV_EXPORT void ensure_checksum(
 	const std::string & s, const std::string & expected, std::string::size_type start_pos);
 
-void check_raw_sentence(const std::string & s);
+MARNAV_EXPORT void check_raw_sentence(const std::string & s);
 
-std::tuple<talker, std::string, std::string, std::vector<std::string>>
+MARNAV_EXPORT std::tuple<talker, std::string, std::string, std::vector<std::string>>
 extract_sentence_information(
 	const std::string & s, checksum_handling chksum = checksum_handling::check);
 }

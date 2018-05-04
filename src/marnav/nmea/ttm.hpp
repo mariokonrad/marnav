@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -40,7 +42,7 @@ namespace nmea
 ///       documentation. The sentence just ignores them. The other fields
 ///       are being processed.
 ///
-class ttm : public sentence
+class MARNAV_EXPORT ttm : public sentence
 {
 	friend class detail::factory;
 
@@ -59,6 +61,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<uint32_t> target_number_;
 	utils::optional<double> target_distance_;
 	utils::optional<double> bearing_from_ownship_;
@@ -72,6 +78,9 @@ private:
 	utils::optional<std::string> target_name_;
 	utils::optional<char> target_status_;
 	utils::optional<char> reference_target_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(target_number_) get_target_number() const { return target_number_; }

@@ -6,6 +6,8 @@
 #include <marnav/nmea/time.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -57,7 +59,7 @@ namespace nmea
 /// @note Raytheon RN300 sends an additional value, which is invalid and not supported
 ///       by the sentence
 ///
-class gga : public sentence
+class MARNAV_EXPORT gga : public sentence
 {
 	friend class detail::factory;
 
@@ -76,6 +78,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<nmea::time> time_;
 	utils::optional<geo::latitude> lat_;
 	utils::optional<direction> lat_hem_; // N:north, S:south
@@ -91,6 +97,9 @@ private:
 	utils::optional<unit::distance> geodial_separation_unit_; // M:meter
 	utils::optional<double> dgps_age_; // age of dgps data
 	utils::optional<uint32_t> dgps_ref_; // dgps reference station 0000..1023
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(time_) get_time() const { return time_; }

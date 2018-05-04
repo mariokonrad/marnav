@@ -6,6 +6,8 @@
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -29,7 +31,7 @@ namespace nmea
 ///    - W = West
 /// 5. Waypoint ID
 ///
-class wpl : public sentence
+class MARNAV_EXPORT wpl : public sentence
 {
 	friend class detail::factory;
 
@@ -48,11 +50,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<geo::latitude> lat_;
 	utils::optional<direction> lat_hem_; // latitude hemisphere (N or S)
 	utils::optional<geo::longitude> lon_;
 	utils::optional<direction> lon_hem_; // longitude hemisphere (E or W)
 	utils::optional<waypoint> waypoint_id_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }

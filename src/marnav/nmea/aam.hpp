@@ -5,6 +5,8 @@
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -37,7 +39,7 @@ namespace nmea
 ///
 /// `WPTNME` is the waypoint name.
 ///
-class aam : public sentence
+class MARNAV_EXPORT aam : public sentence
 {
 	friend class detail::factory;
 
@@ -56,11 +58,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<status> arrival_circle_entered_;
 	utils::optional<status> perpendicualar_passed_;
 	utils::optional<double> arrival_circle_radius_;
 	utils::optional<unit::distance> arrival_circle_radius_unit_;
 	utils::optional<waypoint> waypoint_id_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 	void check() const;
 

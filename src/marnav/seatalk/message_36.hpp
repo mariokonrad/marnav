@@ -3,6 +3,8 @@
 
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -14,7 +16,7 @@ namespace seatalk
 /// 36 00 01
 /// @endcode
 ///
-class message_36 : public message
+class MARNAV_EXPORT message_36 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::cancel_mob_condition;

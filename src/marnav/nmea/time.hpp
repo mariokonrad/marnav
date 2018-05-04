@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -48,14 +50,14 @@ private:
 };
 
 /// Traits to check for the correctness of time.
-class trait_time
+class MARNAV_EXPORT trait_time
 {
 public:
 	static void check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms);
 };
 
 /// Traits to check for the correctness of duration.
-class trait_duration
+class MARNAV_EXPORT trait_duration
 {
 public:
 	static void check(uint32_t h, uint32_t m, uint32_t s, uint32_t ms);
@@ -68,7 +70,7 @@ public:
 ///  - MM  : zero leading minute of the hour (00..59)
 ///  - SS  : zero leading second of the minute (00..59)
 ///  - mmm : milliseconds (000..999)
-class time : public time_base<trait_time>
+class MARNAV_EXPORT time : public time_base<trait_time>
 {
 public:
 	using time_base::time_base;
@@ -83,8 +85,8 @@ public:
 	static time parse(const std::string & str);
 };
 
-std::string to_string(const time & t);
-std::string format(const nmea::time & t, unsigned int width);
+MARNAV_EXPORT std::string to_string(const time & t);
+MARNAV_EXPORT std::string format(const nmea::time & t, unsigned int width);
 
 /// Represents a duration up to 99 hours/59 minutes/59 seconds, suitable for NMEA purposes.
 ///
@@ -93,7 +95,7 @@ std::string format(const nmea::time & t, unsigned int width);
 ///  - MM  : zero leading minute of the hour (00..59)
 ///  - SS  : zero leading second of the minute (00..59)
 ///  - mmm : milliseconds (000..999)
-class duration : public time_base<trait_duration>
+class MARNAV_EXPORT duration : public time_base<trait_duration>
 {
 public:
 	using time_base::time_base;
@@ -108,7 +110,7 @@ public:
 	static duration parse(const std::string & str);
 };
 
-std::string to_string(const duration & d);
+MARNAV_EXPORT std::string to_string(const duration & d);
 }
 }
 

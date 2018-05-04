@@ -5,6 +5,8 @@
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -52,7 +54,7 @@ namespace nmea
 ///
 /// @note Not recommended for new designs.
 ///
-class apa : public sentence
+class MARNAV_EXPORT apa : public sentence
 {
 	friend class detail::factory;
 
@@ -71,6 +73,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<status> loran_c_blink_warning_;
 	utils::optional<status> loran_c_cycle_lock_warning_;
 	utils::optional<double> cross_track_error_magnitude_;
@@ -81,6 +87,9 @@ private:
 	utils::optional<double> bearing_origin_to_destination_;
 	utils::optional<reference> bearing_origin_to_destination_ref_;
 	utils::optional<waypoint> waypoint_id_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 	void check() const;
 

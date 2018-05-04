@@ -4,6 +4,8 @@
 #include <marnav/seatalk/message.hpp>
 #include <marnav/seatalk/key.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -65,7 +67,7 @@ namespace seatalk
 ///      X1 84 7B     +1, -1, +10 or -10 released
 /// @endcode
 ///
-class message_86 : public message
+class MARNAV_EXPORT message_86 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::keystroke;

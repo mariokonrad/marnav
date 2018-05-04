@@ -6,6 +6,8 @@
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -52,7 +54,7 @@ namespace nmea
 /// $GPRMB,A,0.66,L,003,004,4917.24,N,12309.57,W,001.3,052.5,000.5,V*0B
 /// @endcode
 ///
-class rmb : public sentence
+class MARNAV_EXPORT rmb : public sentence
 {
 	friend class detail::factory;
 
@@ -71,6 +73,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<status> active_; // V:warning
 	utils::optional<double> cross_track_error_; // cross track error in nautical miles
 	utils::optional<side> steer_dir_; // direction to steer, left or right
@@ -85,6 +91,9 @@ private:
 	utils::optional<double> dst_velocity_; // destination closing velocity in knots
 	utils::optional<status> arrival_status_; // arrival status, A:arrival circle entered
 	utils::optional<mode_indicator> mode_ind_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(active_) get_active() const { return active_; }

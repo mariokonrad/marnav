@@ -4,6 +4,8 @@
 #include <marnav/io/device.hpp>
 #include <marnav/nmea/sentence.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace io
@@ -15,7 +17,7 @@ namespace io
 ///
 /// This reader opens the device upon construction.
 ///
-class nmea_reader
+class MARNAV_EXPORT nmea_reader
 {
 public:
 	virtual ~nmea_reader();
@@ -38,8 +40,15 @@ private:
 	bool read_data();
 
 	char raw_;
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	std::string sentence_;
 	std::unique_ptr<device> dev_; ///< Device to read data from.
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 };
 }
 }
