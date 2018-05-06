@@ -124,18 +124,18 @@ matrix:
           - clang-3.7
           - libboost1.55-all-dev
 
-    - os: linux
-      env: COMPILER=clang++-3.8 CMAKE_BUILD_TYPE=Debug
-      compiler: clang
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          - llvm-toolchain-precise-3.8
-          packages:
-          - clang-3.8
-          - libboost1.55-all-dev
+    #- os: linux
+    #  env: COMPILER=clang++-3.8 CMAKE_BUILD_TYPE=Debug
+    #  compiler: clang
+    #  addons:
+    #    apt:
+    #      sources:
+    #      - boost-latest
+    #      - ubuntu-toolchain-r-test
+    #      - llvm-toolchain-precise-3.8
+    #      packages:
+    #      - clang-3.8
+    #      - libboost1.55-all-dev
 
     #- os: linux
     #  env: COMPILER=clang++-3.9 CMAKE_BUILD_TYPE=Debug
