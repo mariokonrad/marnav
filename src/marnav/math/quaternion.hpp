@@ -166,12 +166,12 @@ public:
 
 	friend quaternion operator+(const quaternion & q1, const quaternion & q2)
 	{
-		return quaternion{q1} += q2;
+		return quaternion{q1.a[0] + q2.a[0], q1.a[1] + q2.a[1], q1.a[2] + q2.a[2], q1.a[3] + q2.a[3]};
 	}
 
 	friend quaternion operator-(const quaternion & q1, const quaternion & q2)
 	{
-		return quaternion{q1} -= q2;
+		return quaternion{q1.a[0] - q2.a[0], q1.a[1] - q2.a[1], q1.a[2] - q2.a[2], q1.a[3] - q2.a[3]};
 	}
 
 	friend quaternion operator*(const quaternion & q1, const quaternion & q2)
@@ -184,17 +184,17 @@ public:
 
 	friend quaternion operator*(const quaternion & q, value_type s)
 	{
-		return quaternion{q} *= s;
+		return quaternion{q.a[0] * s, q.a[1] * s, q.a[2] * s, q.a[3] * s};
 	}
 
 	friend quaternion operator*(value_type s, const quaternion & q)
 	{
-		return quaternion{q} *= s;
+		return q * s;
 	}
 
 	friend quaternion operator*(const vector3<T> & v, const quaternion & q)
 	{
-		return quaternion{0, v} *= q;
+		return quaternion{0, v} * q;
 	}
 
 	friend quaternion operator*(const quaternion & q, const vector3<T> & v)

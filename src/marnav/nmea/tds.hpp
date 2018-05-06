@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -21,7 +23,7 @@ namespace nmea
 /// 2. Units
 ///    - M = Meters
 ///
-class tds : public sentence
+class MARNAV_EXPORT tds : public sentence
 {
 	friend class detail::factory;
 

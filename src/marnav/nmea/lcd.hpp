@@ -4,6 +4,10 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <array>
+
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -32,7 +36,7 @@ namespace nmea
 /// 12. Time Difference 5 Microseconds
 /// 13. Time Difference 5 Signal Status
 ///
-class lcd : public sentence
+class MARNAV_EXPORT lcd : public sentence
 {
 	friend class detail::factory;
 

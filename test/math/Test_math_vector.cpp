@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include <marnav/math/vector.hpp>
 
+#include <cmath>
+
 using namespace marnav::math;
 
 namespace marnav

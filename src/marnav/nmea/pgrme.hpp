@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -28,7 +30,7 @@ namespace nmea
 ///
 /// Example: <tt>$PGRME,15.0,M,45.0,M,25.0,M*22</tt>
 ///
-class pgrme : public sentence
+class MARNAV_EXPORT pgrme : public sentence
 {
 	friend class detail::factory;
 
@@ -47,12 +49,19 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> horizontal_position_error_;
 	unit::distance horizontal_position_error_unit_ = unit::distance::meter;
 	utils::optional<double> vertical_position_error_;
 	unit::distance vertical_position_error_unit_ = unit::distance::meter;
 	utils::optional<double> overall_spherical_equiv_position_error_;
 	unit::distance overall_spherical_equiv_position_error_unit_ = unit::distance::meter;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(horizontal_position_error_) get_horizontal_position_error() const

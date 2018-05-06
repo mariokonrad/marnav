@@ -4,6 +4,10 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <array>
+
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -25,7 +29,7 @@ namespace nmea
 /// There may be any number of quadruplets like this, each describing a sensor.
 /// The last field will be a checksum as usual.
 ///
-class xdr : public sentence
+class MARNAV_EXPORT xdr : public sentence
 {
 	friend class detail::factory;
 

@@ -3,6 +3,8 @@
 
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -19,7 +21,7 @@ namespace seatalk
 ///  0x86 : kilometers (1000m), kilometers per hour
 /// @endcode
 ///
-class message_24 : public message
+class MARNAV_EXPORT message_24 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::display_units_mileage_speed;

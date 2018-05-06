@@ -31,7 +31,7 @@ mwd::mwd(talker talk, fields::const_iterator first, fields::const_iterator last)
 void mwd::set_direction_true(double t) noexcept
 {
 	direction_true_ = t;
-	direction_true_ref_ = reference::TRUE;
+	direction_true_ref_ = reference::TRUE_NORTH;
 }
 
 void mwd::set_direction_mag(double t) noexcept

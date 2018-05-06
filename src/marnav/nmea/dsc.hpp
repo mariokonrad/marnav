@@ -6,6 +6,8 @@
 #include <marnav/utils/mmsi.hpp>
 #include <marnav/geo/region.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -40,7 +42,7 @@ namespace nmea
 ///
 /// @todo IMPLEMENTATION
 ///
-class dsc : public sentence
+class MARNAV_EXPORT dsc : public sentence
 {
 	friend class detail::factory;
 

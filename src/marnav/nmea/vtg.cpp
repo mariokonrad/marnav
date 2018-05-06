@@ -55,7 +55,7 @@ void vtg::set_track_magn(double t) noexcept
 void vtg::set_track_true(double t) noexcept
 {
 	track_true_ = t;
-	type_true_ = reference::TRUE;
+	type_true_ = reference::TRUE_NORTH;
 }
 
 void vtg::append_data_to(std::string & s) const

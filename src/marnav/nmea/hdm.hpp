@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -27,7 +29,7 @@ namespace nmea
 /// 2. Heading Degrees magnetic reference
 ///    - M = magnetic
 ///
-class hdm : public sentence
+class MARNAV_EXPORT hdm : public sentence
 {
 	friend class detail::factory;
 
@@ -46,8 +48,15 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> heading_; // magnetic sensor heading in deg
 	utils::optional<reference> heading_mag_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(heading_) get_heading() const { return heading_; }

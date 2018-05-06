@@ -3,6 +3,8 @@
 
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -15,7 +17,7 @@ namespace seatalk
 ///
 /// Select Fathom (feet/3.33) display units for depth display (see command 00)
 ///
-class message_65 : public message
+class MARNAV_EXPORT message_65 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::display_unit_select_fathom;

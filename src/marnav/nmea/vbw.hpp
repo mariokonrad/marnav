@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -28,7 +30,7 @@ namespace nmea
 ///    - A = Data Valid
 ///    - V = Invalid
 ///
-class vbw : public sentence
+class MARNAV_EXPORT vbw : public sentence
 {
 	friend class detail::factory;
 
@@ -47,12 +49,19 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> water_speed_longitudinal_;
 	utils::optional<double> water_speed_transveral_;
 	utils::optional<status> water_speed_status_;
 	utils::optional<double> ground_speed_longitudinal_;
 	utils::optional<double> ground_speed_transveral_;
 	utils::optional<status> ground_speed_status_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(water_speed_longitudinal_) get_water_speed_longitudinal() const

@@ -3,6 +3,8 @@
 
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -25,7 +27,7 @@ namespace seatalk
 ///
 /// `59 22 0A 00 80` : Sent by ST60 in countdown mode when counted down to 10 Seconds.
 ///
-class message_59 : public message
+class MARNAV_EXPORT message_59 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::countdown_timer;

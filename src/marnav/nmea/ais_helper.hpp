@@ -5,6 +5,8 @@
 #include <marnav/nmea/vdm.hpp>
 #include <marnav/nmea/vdo.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -110,7 +112,7 @@ std::vector<std::pair<std::string, uint32_t>> collect_payload(InputIt begin, Inp
 
 /// @}
 
-std::vector<std::unique_ptr<nmea::sentence>> make_vdms(
+MARNAV_EXPORT std::vector<std::unique_ptr<nmea::sentence>> make_vdms(
 	const std::vector<std::pair<std::string, uint32_t>> & payload,
 	utils::optional<uint32_t> seq_msg_id = utils::optional<uint32_t>{},
 	ais_channel radio_channel = ais_channel::B);

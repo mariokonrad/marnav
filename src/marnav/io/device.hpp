@@ -3,13 +3,15 @@
 
 #include <cstdint>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace io
 {
 /// This is the base class for devices needed to perform IO operations.
 /// It is simply an interface, no data members.
-class device
+class MARNAV_EXPORT device
 {
 public:
 	virtual ~device() {}

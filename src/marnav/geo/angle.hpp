@@ -4,13 +4,15 @@
 #include <cstdint>
 #include <string>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace geo
 {
 
 /// @brief A geographic angle. This is the base class for Latitudes and Longitudes.
-class angle
+class MARNAV_EXPORT angle
 {
 public:
 	static constexpr double epsilon = 1.0e-8;
@@ -43,7 +45,7 @@ public:
 	angle & operator=(const angle &) = default;
 	angle & operator=(angle &&) noexcept = default;
 
-	friend void swap(angle & a, angle & b) noexcept;
+	friend MARNAV_EXPORT void swap(angle & a, angle & b) noexcept;
 
 protected:
 	/// Sets the angle in degrees.
@@ -55,14 +57,14 @@ private:
 	double value_; // angle in degrees
 };
 
-void swap(angle & a, angle & b) noexcept;
-bool operator==(const angle & a, const angle & b) noexcept;
-bool operator!=(const angle & a, const angle & b) noexcept;
+MARNAV_EXPORT void swap(angle & a, angle & b) noexcept;
+MARNAV_EXPORT bool operator==(const angle & a, const angle & b) noexcept;
+MARNAV_EXPORT bool operator!=(const angle & a, const angle & b) noexcept;
 
 /// @brief Geographic Latitude
 ///
 /// Value ranges between +90.0 (north) to -90.0 (south).
-class latitude : public angle
+class MARNAV_EXPORT latitude : public angle
 {
 public:
 	enum class hemisphere { north, south };
@@ -100,9 +102,9 @@ private:
 	static void check(double a);
 };
 
-bool operator==(const latitude & a, const latitude & b) noexcept;
-bool operator!=(const latitude & a, const latitude & b) noexcept;
-std::string to_string(latitude::hemisphere h);
+MARNAV_EXPORT bool operator==(const latitude & a, const latitude & b) noexcept;
+MARNAV_EXPORT bool operator!=(const latitude & a, const latitude & b) noexcept;
+MARNAV_EXPORT std::string to_string(latitude::hemisphere h);
 
 /// @{
 /// User defined literal to construct latitudes.
@@ -127,7 +129,7 @@ inline latitude operator"" _south(long double value)
 /// @brief Geographic Longitude
 ///
 /// Value ranges between -180.0 (west) to +180.0 (east).
-class longitude : public angle
+class MARNAV_EXPORT longitude : public angle
 {
 public:
 	enum class hemisphere { east, west };
@@ -165,9 +167,9 @@ private:
 	static void check(double a);
 };
 
-bool operator==(const longitude & a, const longitude & b) noexcept;
-bool operator!=(const longitude & a, const longitude & b) noexcept;
-std::string to_string(longitude::hemisphere h);
+MARNAV_EXPORT bool operator==(const longitude & a, const longitude & b) noexcept;
+MARNAV_EXPORT bool operator!=(const longitude & a, const longitude & b) noexcept;
+MARNAV_EXPORT std::string to_string(longitude::hemisphere h);
 
 /// @{
 /// User defined literal to construct latitudes.

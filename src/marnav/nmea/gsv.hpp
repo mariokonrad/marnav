@@ -5,6 +5,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -39,7 +41,7 @@ namespace nmea
 ///
 /// @note Although null fields for unused satellite info are not required,
 ///       this class will write them in any case.
-class gsv : public sentence
+class MARNAV_EXPORT gsv : public sentence
 {
 	friend class detail::factory;
 

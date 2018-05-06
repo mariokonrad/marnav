@@ -8,6 +8,7 @@
 #include <stdexcept>
 #include <type_traits>
 #include <vector>
+#include <algorithm>
 #include <cassert>
 
 namespace marnav
@@ -144,12 +145,18 @@ public:
 
 		const_iterator operator+(size_type n) const noexcept
 		{
-			return const_iterator{*this} += n;
+			if (bs != nullptr && pos < bs->size())
+				return const_iterator{bs, (pos > bs->size() ? pos : pos + n)};
+
+			return const_iterator{*this};
 		}
 
 		const_iterator operator-(size_type n) const noexcept
 		{
-			return const_iterator{*this} -= n;
+			if (bs != nullptr)
+				return const_iterator{bs, (n > pos ? 0 : pos - n)};
+
+			return const_iterator{*this};
 		}
 
 		const_iterator & operator+=(size_type ofs)
@@ -325,11 +332,11 @@ private:
 		size_type u_bits = bits_per_block - (ofs % bits_per_block); // part of the first block
 		if (u_bits > 0) {
 			if (bits <= u_bits) {
-				set_block(v, ofs, bits);
+				set_block(static_cast<block_type>(v), ofs, bits);
 				ofs += bits;
 				bits = 0;
 			} else {
-				set_block(v >> (bits - u_bits), ofs, u_bits);
+				set_block(static_cast<block_type>(v >> (bits - u_bits)), ofs, u_bits);
 				ofs += u_bits;
 				bits -= u_bits;
 			}
@@ -337,12 +344,12 @@ private:
 
 		// all complete blocks
 		for (; bits > bits_per_block; bits -= bits_per_block, ofs += bits_per_block) {
-			set_block(v >> (bits - bits_per_block), ofs);
+			set_block(static_cast<block_type>(v >> (bits - bits_per_block)), ofs);
 		}
 
 		// fraction of the last block
 		if (bits > 0) {
-			set_block(v << (bits_per_block - bits), ofs);
+			set_block(static_cast<block_type>(v << (bits_per_block - bits)), ofs);
 		}
 	}
 

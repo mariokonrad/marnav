@@ -3,6 +3,8 @@
 
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -21,7 +23,7 @@ namespace seatalk
 ///    PP = % Pitch (signed value -128%...+127%, example 0x03=3%, 0xFD= -3%)
 /// @endcode
 ///
-class message_05 : public message
+class MARNAV_EXPORT message_05 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::engine_rpm_and_pitch;

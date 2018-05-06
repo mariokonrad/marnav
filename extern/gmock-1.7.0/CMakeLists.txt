@@ -14,6 +14,9 @@ if(UNIX)
 		-Wno-missing-field-initializers
 		)
 endif()
+if(MSVC)
+	add_definitions(-D_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING)
+endif()
 
 message("@@ ${CMAKE_CURRENT_SOURCE_DIR}")
 

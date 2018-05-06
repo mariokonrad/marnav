@@ -7,6 +7,8 @@
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -52,7 +54,7 @@ namespace nmea
 ///
 /// Example: <tt>$GPBWC,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM*11</tt>
 ///
-class bwc : public sentence
+class MARNAV_EXPORT bwc : public sentence
 {
 	friend class detail::factory;
 
@@ -71,6 +73,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<nmea::time> time_utc_;
 	utils::optional<geo::latitude> lat_;
 	utils::optional<direction> lat_hem_;
@@ -84,6 +90,9 @@ private:
 	utils::optional<unit::distance> distance_unit_;
 	utils::optional<waypoint> waypoint_id_;
 	utils::optional<mode_indicator> mode_ind_; // NMEA 2.3 and later
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(time_utc_) get_time_utc() const { return time_utc_; }

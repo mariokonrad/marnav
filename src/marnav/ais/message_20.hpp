@@ -4,12 +4,14 @@
 #include <marnav/ais/message.hpp>
 #include <marnav/utils/mmsi.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace ais
 {
 /// @brief Data Link Management
-class message_20 : public message
+class MARNAV_EXPORT message_20 : public message
 {
 	friend class detail::factory;
 
@@ -45,6 +47,10 @@ protected:
 	virtual raw get_data() const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	// clang-format off
 	bitset_value<  6,  2, uint32_t> repeat_indicator = 0;
 	bitset_value<  8, 30, uint32_t> mmsi = 0;
@@ -65,6 +71,9 @@ private:
 	bitset_value<146,  3, uint32_t> timeout_4 = 0;
 	bitset_value<149, 11, uint32_t> increment_4 = 0;
 	// clang-format on
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }

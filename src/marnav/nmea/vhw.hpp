@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -28,7 +30,7 @@ namespace nmea
 /// 7. Kilometers per hour (speed of vessel relative to the water)
 /// 8. K = Kilometers per hour
 ///
-class vhw : public sentence
+class MARNAV_EXPORT vhw : public sentence
 {
 	friend class detail::factory;
 
@@ -47,6 +49,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<char> heading_empty_; // heading (empty)
 	utils::optional<reference> degrees_true_; // T:true
 	utils::optional<double> heading_; // heading in degrees, 0..359
@@ -55,6 +61,9 @@ private:
 	utils::optional<unit::velocity> speed_knots_unit_; // N:knots
 	utils::optional<double> speed_kmh_; // speed in kilometers per hour
 	utils::optional<unit::velocity> speed_kmh_unit_; // K:kmh
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(heading_empty_) get_heading_empty() const { return heading_empty_; }

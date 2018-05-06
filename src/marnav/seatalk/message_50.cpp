@@ -42,7 +42,7 @@ raw message_50::get_data() const
 {
 	uint16_t m = 0;
 	m += lat_.minutes() * 100;
-	m += (lat_.seconds() * 100) / 60;
+	m += static_cast<uint16_t>((lat_.seconds() * 100) / 60);
 	if (lat_.hem() == geo::latitude::hemisphere::south)
 		m |= 0x8000;
 

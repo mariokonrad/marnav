@@ -4,12 +4,14 @@
 #include <marnav/ais/message_04.hpp>
 #include <marnav/geo/angle.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace ais
 {
 /// @brief UTC/Date Response
-class message_11 : public message_04
+class MARNAV_EXPORT message_11 : public message_04
 {
 	friend class detail::factory;
 

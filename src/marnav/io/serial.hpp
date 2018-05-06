@@ -4,6 +4,14 @@
 #include <string>
 #include <marnav/io/device.hpp>
 
+#include <marnav/marnav_export.h>
+
+#ifdef _MSC_VER
+typedef void* SERIAL_DEVICE_HANDLE_T;
+#else
+typedef int SERIAL_DEVICE_HANDLE_T;
+#endif
+
 namespace marnav
 {
 namespace io
@@ -12,7 +20,7 @@ namespace io
 /// communication.
 ///
 /// Since this is termios based, it is platform dependent.
-class serial : public device
+class MARNAV_EXPORT serial : public device
 {
 public:
 	enum class baud {
@@ -50,10 +58,17 @@ public:
 	virtual int write(const char * buffer, uint32_t size) override;
 
 protected:
-	int fd; ///< File descriptor for serial device communication.
+	SERIAL_DEVICE_HANDLE_T fd; ///< File descriptor for serial device communication.
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	std::string dev_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 	baud baud_rate_;
 	databits data_bits_;
 	stopbits stop_bits_;

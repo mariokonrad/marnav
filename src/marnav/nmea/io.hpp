@@ -7,6 +7,8 @@
 #include <marnav/nmea/string.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 
@@ -29,7 +31,7 @@ class time; // forward declaration
 class duration; // forward declaration
 class waypoint; // forward declaration
 
-enum class data_format { none, dec, hex };
+enum class MARNAV_EXPORT data_format { none, dec, hex };
 
 /// @{
 
@@ -40,7 +42,7 @@ enum class data_format { none, dec, hex };
 /// @param[in] f Base of the data to be rendered in
 /// @exception std::invalid_argument Parameter width is too large for the implementation.
 ///   This is necessary to avoid heap operations and VLA.
-std::string format(int32_t data, unsigned int width, data_format f = data_format::dec);
+MARNAV_EXPORT std::string format(int32_t data, unsigned int width, data_format f = data_format::dec);
 
 /// Returns the data as formatted string.
 ///
@@ -49,7 +51,7 @@ std::string format(int32_t data, unsigned int width, data_format f = data_format
 /// @param[in] f Base of the data to be rendered in
 /// @exception std::invalid_argument Parameter width is too large for the implementation.
 ///   This is necessary to avoid heap operations and VLA.
-std::string format(uint64_t data, unsigned int width, data_format f = data_format::dec);
+MARNAV_EXPORT std::string format(uint64_t data, unsigned int width, data_format f = data_format::dec);
 
 /// Returns the data as formatted string.
 ///
@@ -58,7 +60,7 @@ std::string format(uint64_t data, unsigned int width, data_format f = data_forma
 /// @param[in] f Base of the data to be rendered in
 /// @exception std::invalid_argument Parameter width is too large for the implementation.
 ///   This is necessary to avoid heap operations and VLA.
-std::string format(uint32_t data, unsigned int width, data_format f = data_format::dec);
+MARNAV_EXPORT std::string format(uint32_t data, unsigned int width, data_format f = data_format::dec);
 
 /// Returns the data as formatted string.
 ///
@@ -67,7 +69,7 @@ std::string format(uint32_t data, unsigned int width, data_format f = data_forma
 /// @param[in] f Base of the data to be rendered in
 /// @exception std::invalid_argument Parameter width is too large for the implementation.
 ///   This is necessary to avoid heap operations and VLA.
-std::string format(double data, unsigned int width, data_format f = data_format::none);
+MARNAV_EXPORT std::string format(double data, unsigned int width, data_format f = data_format::none);
 
 /// Generic version of the format function, handling the possibility of utils::optional
 /// to be not set and returning an empty string. The rendering of the contained type
@@ -94,35 +96,35 @@ inline std::string format(
 
 /// @{
 
-void read(const std::string & s, geo::latitude & value, data_format fmt = data_format::none);
-void read(const std::string & s, geo::longitude & value, data_format fmt = data_format::none);
-void read(const std::string & s, date & value, data_format fmt = data_format::none);
-void read(const std::string & s, time & value, data_format fmt = data_format::none);
-void read(const std::string & s, duration & value, data_format fmt = data_format::none);
-void read(const std::string & s, char & value, data_format fmt = data_format::none);
-void read(const std::string & s, uint64_t & value, data_format fmt = data_format::dec);
-void read(const std::string & s, uint32_t & value, data_format fmt = data_format::dec);
-void read(const std::string & s, int32_t & value, data_format fmt = data_format::dec);
-void read(const std::string & s, double & value, data_format fmt = data_format::none);
-void read(const std::string & s, std::string & value, data_format fmt = data_format::none);
-void read(const std::string & s, side & value, data_format fmt = data_format::none);
-void read(const std::string & s, route & value, data_format fmt = data_format::none);
-void read(const std::string & s, selection_mode & value, data_format fmt = data_format::none);
-void read(const std::string & s, ais_channel & value, data_format fmt = data_format::none);
-void read(const std::string & s, type_of_point & value, data_format fmt = data_format::none);
-void read(const std::string & s, direction & value, data_format fmt = data_format::none);
-void read(const std::string & s, reference & value, data_format fmt = data_format::none);
-void read(const std::string & s, mode_indicator & value, data_format fmt = data_format::none);
-void read(const std::string & s, status & value, data_format fmt = data_format::none);
-void read(const std::string & s, quality & value, data_format fmt = data_format::none);
-void read(const std::string & s, target_status & value, data_format fmt = data_format::none);
-void read(const std::string & s, unit::distance & value, data_format fmt = data_format::none);
-void read(const std::string & s, unit::velocity & value, data_format fmt = data_format::none);
-void read(
+MARNAV_EXPORT void read(const std::string & s, geo::latitude & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, geo::longitude & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, date & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, time & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, duration & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, char & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, uint64_t & value, data_format fmt = data_format::dec);
+MARNAV_EXPORT void read(const std::string & s, uint32_t & value, data_format fmt = data_format::dec);
+MARNAV_EXPORT void read(const std::string & s, int32_t & value, data_format fmt = data_format::dec);
+MARNAV_EXPORT void read(const std::string & s, double & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, std::string & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, side & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, route & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, selection_mode & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, ais_channel & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, type_of_point & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, direction & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, reference & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, mode_indicator & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, status & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, quality & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, target_status & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, unit::distance & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, unit::velocity & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(
 	const std::string & s, unit::temperature & value, data_format fmt = data_format::none);
-void read(const std::string & s, unit::pressure & value, data_format fmt = data_format::none);
-void read(const std::string & s, utils::mmsi & value, data_format fmt = data_format::none);
-void read(const std::string & s, waypoint & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, unit::pressure & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, utils::mmsi & value, data_format fmt = data_format::none);
+MARNAV_EXPORT void read(const std::string & s, waypoint & value, data_format fmt = data_format::none);
 
 template <class T>
 inline void read(

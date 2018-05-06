@@ -6,6 +6,8 @@
 #include <marnav/nmea/time.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -36,7 +38,7 @@ namespace nmea
 ///
 /// The order of satellites the same as those in the last GSA.
 ///
-class grs : public sentence
+class MARNAV_EXPORT grs : public sentence
 {
 	friend class detail::factory;
 
@@ -78,7 +80,7 @@ public:
 	void set_sat_residual(int index, double value);
 };
 
-std::string to_string(grs::residual_usage value);
+MARNAV_EXPORT std::string to_string(grs::residual_usage value);
 }
 }
 

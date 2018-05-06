@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -29,7 +31,7 @@ namespace nmea
 /// 6. Depth Fathoms
 ///    - F = Fathoms
 ///
-class dbk : public sentence
+class MARNAV_EXPORT dbk : public sentence
 {
 	friend class detail::factory;
 
@@ -48,12 +50,19 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> depth_feet_;
 	utils::optional<unit::distance> depth_feet_unit_;
 	utils::optional<double> depth_meter_;
 	utils::optional<unit::distance> depth_meter_unit_;
 	utils::optional<double> depth_fathom_;
 	utils::optional<unit::distance> depth_fathom_unit_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(depth_feet_) get_depth_feet() const { return depth_feet_; }

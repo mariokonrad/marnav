@@ -5,6 +5,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -24,7 +26,7 @@ namespace nmea
 /// 4. time difference
 /// 5. time difference
 ///
-class gtd : public sentence
+class MARNAV_EXPORT gtd : public sentence
 {
 	friend class detail::factory;
 

@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <algorithm>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -16,15 +18,15 @@ namespace nmea
 class checksum_error : public std::exception
 {
 public:
-	checksum_error() = delete;
-	explicit checksum_error(uint8_t exp, uint8_t act);
-	checksum_error(const checksum_error &) = default;
-	checksum_error(checksum_error &&) = default;
+	MARNAV_EXPORT checksum_error() = delete;
+	MARNAV_EXPORT explicit checksum_error(uint8_t exp, uint8_t act);
+	MARNAV_EXPORT checksum_error(const checksum_error &) = default;
+	MARNAV_EXPORT checksum_error(checksum_error &&) = default;
 
-	checksum_error & operator=(const checksum_error &) = default;
-	checksum_error & operator=(checksum_error &&) = default;
+	MARNAV_EXPORT checksum_error & operator=(const checksum_error &) = default;
+	MARNAV_EXPORT checksum_error & operator=(checksum_error &&) = default;
 
-	virtual const char * what() const noexcept override { return text_; }
+	MARNAV_EXPORT virtual const char * what() const noexcept override { return text_; }
 
 	const uint8_t expected;
 	const uint8_t actual;
@@ -47,7 +49,7 @@ template <class Iterator> uint8_t checksum(Iterator a, Iterator b) noexcept
 	return sum;
 }
 
-std::string checksum_to_string(uint8_t sum);
+MARNAV_EXPORT std::string checksum_to_string(uint8_t sum);
 }
 }
 

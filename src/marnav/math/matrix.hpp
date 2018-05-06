@@ -219,13 +219,33 @@ public:
 		return vector2<T>{x[col], x[col + 2]};
 	}
 
-	friend matrix2 operator*(value_type f, const matrix2 & m) { return matrix2{m} *= f; }
+	friend matrix2 operator*(value_type f, const matrix2 & m)
+	{
+		matrix2 r{m};
+		r *= f;
+		return r;
+	}
 
-	friend matrix2 operator+(const matrix2 & a, const matrix2 & b) { return matrix2{a} += b; }
+	friend matrix2 operator+(const matrix2 & a, const matrix2 & b)
+	{
+		matrix2 r{a};
+		r += b;
+		return r;
+	}
 
-	friend matrix2 operator-(const matrix2 & a, const matrix2 & b) { return matrix2{a} -= b; }
+	friend matrix2 operator-(const matrix2 & a, const matrix2 & b)
+	{
+		matrix2 r{a};
+		r -= b;
+		return r;
+	}
 
-	friend matrix2 operator*(const matrix2 & a, const matrix2 & b) { return matrix2{a} *= b; }
+	friend matrix2 operator*(const matrix2 & a, const matrix2 & b)
+	{
+		matrix2 r{a};
+		r *= b;
+		return r;
+	}
 
 	friend matrix2 operator*(const vector2<T> & v, const matrix2 & m)
 	{
@@ -343,13 +363,33 @@ public:
 
 	inline matrix3 inv() const { return detail::inverse_matrix_nxn(*this); }
 
-	friend matrix3 operator*(value_type f, const matrix3 & m) { return matrix3{m} *= f; }
+	friend matrix3 operator*(value_type f, const matrix3 & m)
+	{
+		matrix3 r{m};
+		r *= f;
+		return r;
+	}
 
-	friend matrix3 operator+(const matrix3 & a, const matrix3 & b) { return matrix3{a} += b; }
+	friend matrix3 operator+(const matrix3 & a, const matrix3 & b)
+	{
+		matrix3 r{a};
+		r += b;
+		return r;
+	}
 
-	friend matrix3 operator-(const matrix3 & a, const matrix3 & b) { return matrix3{a} -= b; }
+	friend matrix3 operator-(const matrix3 & a, const matrix3 & b)
+	{
+		matrix3 r{a};
+		r -= b;
+		return r;
+	}
 
-	friend matrix3 operator*(const matrix3 & a, const matrix3 & b) { return matrix3{a} *= b; }
+	friend matrix3 operator*(const matrix3 & a, const matrix3 & b)
+	{
+		matrix3 r{a};
+		r *= b;
+		return r;
+	}
 
 	friend matrix3 operator*(const vector3<T> & v, const matrix3 & m)
 	{
@@ -481,13 +521,33 @@ public:
 
 	inline matrix4 inv() const { return detail::inverse_matrix_nxn(*this); }
 
-	friend matrix4 operator*(value_type f, const matrix4 & m) { return matrix4{m} *= f; }
+	friend matrix4 operator*(value_type f, const matrix4 & m)
+	{
+		matrix4 r{m};
+		r *= f;
+		return r;
+	}
 
-	friend matrix4 operator+(const matrix4 & a, const matrix4 & b) { return matrix4{a} += b; }
+	friend matrix4 operator+(const matrix4 & a, const matrix4 & b)
+	{
+		matrix4 r{a};
+		r += b;
+		return r;
+	}
 
-	friend matrix4 operator-(const matrix4 & a, const matrix4 & b) { return matrix4{a} -= b; }
+	friend matrix4 operator-(const matrix4 & a, const matrix4 & b)
+	{
+		matrix4 r{a};
+		r -= b;
+		return r;
+	}
 
-	friend matrix4 operator*(const matrix4 & a, const matrix4 & b) { return matrix4{a} *= b; }
+	friend matrix4 operator*(const matrix4 & a, const matrix4 & b)
+	{
+		matrix4 r{a};
+		r *= b;
+		return r;
+	}
 
 	friend matrix4 operator*(const vector4<T> & v, const matrix4 & m)
 	{
@@ -495,17 +555,17 @@ public:
 		const value_type c2 = m.x[1] + m.x[5] + m.x[9] + m.x[13];
 		const value_type c3 = m.x[2] + m.x[6] + m.x[10] + m.x[14];
 		const value_type c4 = m.x[3] + m.x[7] + m.x[11] + m.x[15];
-		return matrix4(v[0] * c1, v[0] * c2, v[0] * c3, v[0] * c4, v[1] * c1, v[1] * c2,
+		return matrix4{v[0] * c1, v[0] * c2, v[0] * c3, v[0] * c4, v[1] * c1, v[1] * c2,
 			v[1] * c3, v[1] * c4, v[2] * c1, v[2] * c2, v[2] * c3, v[2] * c4, v[3] * c1,
-			v[3] * c2, v[3] * c3, v[3] * c4);
+			v[3] * c2, v[3] * c3, v[3] * c4};
 	}
 
 	friend vector4<T> operator*(const matrix4 & m, const vector4<T> & v)
 	{
-		return vec4(m.x[0] * v[0] + m.x[1] * v[1] + m.x[2] * v[2] + m.x[3] * v[3],
+		return vec4{m.x[0] * v[0] + m.x[1] * v[1] + m.x[2] * v[2] + m.x[3] * v[3],
 			m.x[4] * v[0] + m.x[5] * v[1] + m.x[6] * v[2] + m.x[7] * v[3],
 			m.x[8] * v[0] + m.x[9] * v[1] + m.x[10] * v[2] + m.x[11] * v[3],
-			m.x[12] * v[0] + m.x[13] * v[1] + m.x[14] * v[2] + m.x[15] * v[3]);
+			m.x[12] * v[0] + m.x[13] * v[1] + m.x[14] * v[2] + m.x[15] * v[3]};
 	}
 
 private:
@@ -646,21 +706,32 @@ public:
 		return v;
 	}
 
-	friend matrix_n operator*(value_type f, const matrix_n & m) { return matrix_n{m} *= f; }
+	friend matrix_n operator*(value_type f, const matrix_n & m)
+	{
+		matrix_n r{m};
+		r *= f;
+		return r;
+	}
 
 	friend matrix_n<N, T> operator+(const matrix_n & a, const matrix_n & b)
 	{
-		return matrix_n{a} += b;
+		matrix_n r{a};
+		r += b;
+		return r;
 	}
 
 	friend matrix_n<N, T> operator-(const matrix_n & a, const matrix_n & b)
 	{
-		return matrix_n{a} -= b;
+		matrix_n r{a};
+		r -= b;
+		return r;
 	}
 
 	friend matrix_n<N, T> operator*(const matrix_n & a, const matrix_n & b)
 	{
-		return matrix_n{a} *= b;
+		matrix_n r{a};
+		r *= b;
+		return r;
 	}
 
 	friend matrix_n<N, T> operator*(const vector_n<N, T> & v, const matrix_n & m)

@@ -5,13 +5,15 @@
 #include <marnav/geo/position.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace ais
 {
 /// @brief Meteorological and Hydrological Data (IMO236).
 ///
-class binary_001_11 final : public binary_data
+class MARNAV_EXPORT binary_001_11 final : public binary_data
 {
 public:
 	/// This offset is the size of the header of the binary message 08,
@@ -72,6 +74,10 @@ public:
 	void write_to(raw & payload) const;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	// clang-format off
 	bitset_value< 56 - MSG08_HEAD, 24, uint32_t     > lat = lat_not_available;
 	bitset_value< 80 - MSG08_HEAD, 25, uint32_t     > lon = lon_not_available;
@@ -110,6 +116,9 @@ private:
 	bitset_value<335 - MSG08_HEAD,  9, uint32_t     > sailinity = salinity_not_available;
 	bitset_value<344 - MSG08_HEAD,  2, ice          > ice_info = ice::not_available;
 	// clang-format on
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	utils::optional<geo::position> get_position() const;

@@ -5,6 +5,8 @@
 #include <marnav/nmea/time.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -27,7 +29,7 @@ namespace nmea
 /// 7. Standard deviation (meters) of longitude error
 /// 8. Standard deviation (meters) of altitude error
 ///
-class gst : public sentence
+class MARNAV_EXPORT gst : public sentence
 {
 	friend class detail::factory;
 

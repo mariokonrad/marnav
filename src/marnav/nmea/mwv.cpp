@@ -28,7 +28,7 @@ mwv::mwv(talker talk, fields::const_iterator first, fields::const_iterator last)
 
 void mwv::set_angle(double deg, reference ref)
 {
-	check_value(ref, {reference::TRUE, reference::RELATIVE}, "angle_ref");
+	check_value(ref, {reference::TRUE_NORTH, reference::RELATIVE_NORTH}, "angle_ref");
 	angle_ = deg;
 	angle_ref_ = ref;
 }

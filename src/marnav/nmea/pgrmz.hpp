@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -27,7 +29,7 @@ namespace nmea
 ///
 /// Example: <tt>$PGRMZ,1494,f,*10</tt>
 ///
-class pgrmz : public sentence
+class MARNAV_EXPORT pgrmz : public sentence
 {
 	friend class detail::factory;
 
@@ -52,9 +54,16 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	double altitude_ = 0.0;
 	unit::distance altitude_unit_ = unit::distance::feet;
 	utils::optional<fix_type> fix_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(altitude_) get_altitude() const { return altitude_; }
@@ -69,7 +78,7 @@ public:
 	void set_fix(fix_type t) noexcept { fix_ = t; }
 };
 
-std::string to_string(pgrmz::fix_type value);
+MARNAV_EXPORT std::string to_string(pgrmz::fix_type value);
 }
 }
 

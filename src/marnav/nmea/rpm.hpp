@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -26,7 +28,7 @@ namespace nmea
 /// 5. Status
 ///    - A = data is valid
 ///
-class rpm : public sentence
+class MARNAV_EXPORT rpm : public sentence
 {
 	friend class detail::factory;
 
@@ -50,11 +52,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<source_id> source_;
 	utils::optional<uint32_t> source_number_;
 	utils::optional<double> revolutions_;
 	utils::optional<double> propeller_pitch_;
 	utils::optional<status> data_valid_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(source_) get_source() const { return source_; }
@@ -69,7 +78,7 @@ public:
 	void set_data_valid(status t) noexcept { data_valid_ = t; }
 };
 
-std::string to_string(rpm::source_id value);
+MARNAV_EXPORT std::string to_string(rpm::source_id value);
 }
 }
 

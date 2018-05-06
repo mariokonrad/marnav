@@ -11,12 +11,14 @@
 #include <marnav/nmea/sentence_id.hpp>
 #include <marnav/nmea/detail.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
 {
 /// @brief This is the base class for all sentences.
-class sentence
+class MARNAV_EXPORT sentence
 {
 public:
 	/// Type for fields to process while reading data from raw sentences.
@@ -71,7 +73,7 @@ public:
 	/// at the moment, its handling is separated, @see tag_block.
 	const std::string & get_tag_block() const { return tag_block_; }
 
-	friend std::string to_string(const sentence &);
+	friend MARNAV_EXPORT std::string to_string(const sentence &);
 
 protected:
 	sentence(sentence_id id, const std::string & tag, talker t);
@@ -96,10 +98,17 @@ protected:
 	static void append(std::string & s, const char t);
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable:4251)
+#endif
 	const sentence_id id_;
 	const std::string tag_;
 	talker talker_;
 	std::string tag_block_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 };
 
 // Class `sentence` must be an abstract class, this protectes
@@ -110,7 +119,7 @@ static_assert(std::is_abstract<sentence>::value, "");
 /// Renders the specified sentence into a string.
 ///
 /// If the sentence is invalid, the returning string will be empty.
-std::string to_string(const sentence & s);
+MARNAV_EXPORT std::string to_string(const sentence & s);
 
 /// @cond DEV
 namespace detail

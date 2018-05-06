@@ -143,17 +143,17 @@ TEST_F(Test_geo_region, construction_point_delta)
 {
 	{
 		const auto reg = region{{0.0, 0.0}, 10.0, 5.0};
-		EXPECT_EQ(latitude{0.0}, reg.top());
-		EXPECT_EQ(latitude{-10.0}, reg.bottom());
-		EXPECT_EQ(longitude{0.0}, reg.left());
-		EXPECT_EQ(longitude{5.0}, reg.right());
+		EXPECT_DOUBLE_EQ(latitude{0.0}, reg.top());
+		EXPECT_DOUBLE_EQ(latitude{-10.0}, reg.bottom());
+		EXPECT_DOUBLE_EQ(longitude{0.0}, reg.left());
+		EXPECT_DOUBLE_EQ(longitude{5.0}, reg.right());
 	}
 	{
 		const auto reg = region{{38.0, 21.0}, 1.0, 2.0};
-		EXPECT_EQ(latitude{38.0}, reg.top());
-		EXPECT_EQ(latitude{37.0}, reg.bottom());
-		EXPECT_EQ(longitude{21.0}, reg.left());
-		EXPECT_EQ(longitude{23.0}, reg.right());
+		EXPECT_DOUBLE_EQ(latitude{38.0}, reg.top());
+		EXPECT_DOUBLE_EQ(latitude{37.0}, reg.bottom());
+		EXPECT_DOUBLE_EQ(longitude{21.0}, reg.left());
+		EXPECT_DOUBLE_EQ(longitude{23.0}, reg.right());
 	}
 }
 
@@ -161,10 +161,10 @@ TEST_F(Test_geo_region, construction_point_delta_date_line)
 {
 	const auto reg = region{{0.0, 178.0}, 10.0, 5.0}; // wrap arround E->W at date line
 
-	EXPECT_EQ(latitude{0.0}, reg.top());
-	EXPECT_EQ(latitude{-10.0}, reg.bottom());
-	EXPECT_EQ(longitude{178.0}, reg.left());
-	EXPECT_EQ(longitude{-177.0}, reg.right());
+	EXPECT_DOUBLE_EQ(latitude{0.0}, reg.top());
+	EXPECT_DOUBLE_EQ(latitude{-10.0}, reg.bottom());
+	EXPECT_DOUBLE_EQ(longitude{178.0}, reg.left());
+	EXPECT_DOUBLE_EQ(longitude{-177.0}, reg.right());
 }
 
 TEST_F(Test_geo_region, inside_arround_zero)

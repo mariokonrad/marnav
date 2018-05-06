@@ -325,13 +325,13 @@ void read(const std::string & s, reference & value, data_format fmt)
 	read(s, t, fmt);
 	switch (t) {
 		case 'T':
-			value = reference::TRUE;
+			value = reference::TRUE_NORTH;
 			break;
 		case 'M':
 			value = reference::MAGNETIC;
 			break;
 		case 'R':
-			value = reference::RELATIVE;
+			value = reference::RELATIVE_NORTH;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/reference"};
@@ -498,7 +498,7 @@ void read(const std::string & s, unit::pressure & value, data_format fmt)
 			value = unit::pressure::bar;
 			break;
 		case 'P':
-			value = unit::pressure::pascal;
+			value = unit::pressure::Pa;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/unit/pressure"};

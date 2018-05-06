@@ -3,6 +3,8 @@
 
 #include <array>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk

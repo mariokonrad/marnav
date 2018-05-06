@@ -7,6 +7,8 @@
 #include <marnav/geo/angle.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -39,7 +41,7 @@ namespace nmea
 ///    - R
 ///    - null/empty
 ///
-class tll : public sentence
+class MARNAV_EXPORT tll : public sentence
 {
 	friend class detail::factory;
 
@@ -58,6 +60,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	uint32_t number_ = 0;
 	geo::latitude lat_;
 	direction lat_hem_ = direction::north;
@@ -67,6 +73,9 @@ private:
 	nmea::time time_utc_;
 	target_status status_ = target_status::tracking;
 	utils::optional<char> reference_target_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(number_) get_number() const { return number_; }

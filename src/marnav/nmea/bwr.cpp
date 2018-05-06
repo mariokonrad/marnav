@@ -66,7 +66,7 @@ void bwr::set_lon(const geo::longitude & t)
 void bwr::set_bearing_true(double t) noexcept
 {
 	bearing_true_ = t;
-	bearing_true_ref_ = reference::TRUE;
+	bearing_true_ref_ = reference::TRUE_NORTH;
 }
 
 void bwr::set_bearing_mag(double t) noexcept

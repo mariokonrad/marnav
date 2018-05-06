@@ -3,13 +3,15 @@
 
 #include <string>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
 {
 /// This structure holds all possible data, specified by a tag block,
 /// preceeding a NMEA sentence.
-class tag_block
+class MARNAV_EXPORT tag_block
 {
 public:
 	constexpr static char end_token = '*';
@@ -67,6 +69,10 @@ public:
 	void set_text(const std::string & t);
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	/// Unix time stamp.
 	/// Integral value greater than zero.
 	int64_t unix_time_ = 0;
@@ -86,11 +92,14 @@ private:
 
 	/// Text string, max. 15 characters.
 	std::string text_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 };
 
-tag_block make_tag_block(const std::string & s);
-std::string to_string(const tag_block::sentence_group & g);
-std::string to_string(const tag_block & b);
+MARNAV_EXPORT tag_block make_tag_block(const std::string & s);
+MARNAV_EXPORT std::string to_string(const tag_block::sentence_group & g);
+MARNAV_EXPORT std::string to_string(const tag_block & b);
 }
 }
 

@@ -3,6 +3,8 @@
 
 #include <marnav/geo/position.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace geo
@@ -55,7 +57,7 @@ namespace geo
 ///
 /// @endcode
 ///
-class region
+class MARNAV_EXPORT region
 {
 public:
 	region() = delete;

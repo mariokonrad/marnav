@@ -1,6 +1,8 @@
 #ifndef MARNAV__NMEA__SENTENCE_ID__HPP
 #define MARNAV__NMEA__SENTENCE_ID__HPP
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -8,7 +10,7 @@ namespace nmea
 /// Enumeration of NMEA-0183 sentence IDs.
 ///
 /// @note Not all are currently supported.
-enum class sentence_id : uint32_t {
+enum class MARNAV_EXPORT sentence_id : uint32_t {
 	NONE = 0,
 
 	// standard sentences

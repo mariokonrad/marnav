@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -10,7 +12,7 @@ namespace nmea
 /// This represents a waypoint ID. They must be at least 1 character,
 /// but can only be 8 long.
 ///
-class waypoint
+class MARNAV_EXPORT waypoint
 {
 public:
 	using value_type = std::string;
@@ -36,7 +38,14 @@ public:
 	bool empty() const { return id_.empty(); }
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	value_type id_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 };
 }
 }

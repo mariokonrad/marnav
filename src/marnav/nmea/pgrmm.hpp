@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -22,7 +24,7 @@ namespace nmea
 ///
 /// Example: <tt>$PGRMM,WGS 84*06</tt>
 ///
-class pgrmm : public sentence
+class MARNAV_EXPORT pgrmm : public sentence
 {
 	friend class detail::factory;
 
@@ -41,7 +43,14 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	std::string map_datum_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(map_datum_) get_map_datum() const { return map_datum_; }

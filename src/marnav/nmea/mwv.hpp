@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -30,7 +32,7 @@ namespace nmea
 ///    - A = Data Valid
 //     - V = Invalid
 ///
-class mwv : public sentence
+class MARNAV_EXPORT mwv : public sentence
 {
 	friend class detail::factory;
 
@@ -49,11 +51,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> angle_; // wind angle, 0..359 right of bow
 	utils::optional<reference> angle_ref_; // R:relative, T:true
 	utils::optional<double> speed_; // wind speed
 	utils::optional<unit::velocity> speed_unit_; // wind speed unit, K:knots, M:mph
 	utils::optional<status> data_valid_; // status, A:valid
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(angle_) get_angle() const { return angle_; }

@@ -7,6 +7,8 @@
 #include <marnav/nmea/sentence_id.hpp>
 #include <marnav/nmea/checksum_enum.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 /// @brief Contains everything to encode and decode NMEA sentences.
@@ -65,15 +67,15 @@ public:
 
 class sentence; // forward declaration
 
-std::unique_ptr<sentence> make_sentence(
+MARNAV_EXPORT std::unique_ptr<sentence> make_sentence(
 	const std::string & s, checksum_handling chksum = checksum_handling::check);
 
-sentence_id extract_id(const std::string & s);
+MARNAV_EXPORT sentence_id extract_id(const std::string & s);
 
-std::vector<std::string> get_supported_sentences_str();
-std::vector<sentence_id> get_supported_sentences_id();
-std::string to_string(sentence_id id);
-sentence_id tag_to_id(const std::string & tag);
+MARNAV_EXPORT std::vector<std::string> get_supported_sentences_str();
+MARNAV_EXPORT std::vector<sentence_id> get_supported_sentences_id();
+MARNAV_EXPORT std::string to_string(sentence_id id);
+MARNAV_EXPORT sentence_id tag_to_id(const std::string & tag);
 }
 }
 

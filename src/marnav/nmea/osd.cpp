@@ -32,7 +32,7 @@ osd::osd(talker talk, fields::const_iterator first, fields::const_iterator last)
 void osd::set_course(double t) noexcept
 {
 	course_ = t;
-	course_ref_ = reference::TRUE;
+	course_ref_ = reference::TRUE_NORTH;
 }
 
 void osd::set_speed(double t, unit::velocity u) noexcept

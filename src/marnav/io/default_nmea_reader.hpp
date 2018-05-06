@@ -3,6 +3,8 @@
 
 #include <marnav/io/nmea_reader.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace io
@@ -11,7 +13,7 @@ namespace io
 /// and single threaded reading from a serial port or a device.
 ///
 /// @example nmea_multiplexer.cpp
-class default_nmea_reader : public nmea_reader
+class MARNAV_EXPORT default_nmea_reader : public nmea_reader
 {
 public:
 	virtual ~default_nmea_reader();
@@ -31,7 +33,14 @@ protected:
 
 private:
 	bool received_;
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	std::string sentence_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 };
 }
 }

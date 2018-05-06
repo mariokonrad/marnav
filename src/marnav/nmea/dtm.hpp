@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -34,7 +36,7 @@ namespace nmea
 ///
 /// @note Datum code, subcode and datum name are truncated to 5 characters.
 ///
-class dtm : public sentence
+class MARNAV_EXPORT dtm : public sentence
 {
 	friend class detail::factory;
 
@@ -53,6 +55,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	std::string ref_ = "W84";
 	utils::optional<std::string> subcode_;
 	double lat_offset_ = 0.0;
@@ -61,6 +67,9 @@ private:
 	direction lon_hem_ = direction::east;
 	double altitude_ = 0.0;
 	std::string name_ = "W84";
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(ref_) get_ref() const { return ref_; }

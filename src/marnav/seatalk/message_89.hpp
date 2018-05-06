@@ -3,6 +3,8 @@
 
 #include <marnav/seatalk/message.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -22,7 +24,7 @@ namespace seatalk
 /// The meaning of XY and Z is unknown.
 /// @endcode
 ///
-class message_89 : public message
+class MARNAV_EXPORT message_89 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::st40_compass_heading;

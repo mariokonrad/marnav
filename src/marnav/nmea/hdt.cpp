@@ -25,7 +25,7 @@ hdt::hdt(talker talk, fields::const_iterator first, fields::const_iterator last)
 void hdt::set_heading(double t) noexcept
 {
 	heading_ = t;
-	heading_true_ = reference::TRUE;
+	heading_true_ = reference::TRUE_NORTH;
 }
 
 void hdt::append_data_to(std::string & s) const

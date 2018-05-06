@@ -3,6 +3,8 @@
 
 #include <marnav/nmea/vdm.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -12,7 +14,7 @@ namespace nmea
 /// This sentence is basically the same as marnav::nmea::vdm, it just indicates the source
 /// of the information, not the information itself.
 ///
-class vdo : public vdm
+class MARNAV_EXPORT vdo : public vdm
 {
 	friend class detail::factory;
 

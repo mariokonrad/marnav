@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -32,7 +34,7 @@ namespace nmea
 /// 8. Wind speed unit
 ///    - M = Meters per Second
 ///
-class mwd : public sentence
+class MARNAV_EXPORT mwd : public sentence
 {
 	friend class detail::factory;
 
@@ -51,6 +53,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> direction_true_;
 	utils::optional<reference> direction_true_ref_;
 	utils::optional<double> direction_mag_;
@@ -59,6 +65,9 @@ private:
 	utils::optional<unit::velocity> speed_kn_unit_;
 	utils::optional<double> speed_ms_;
 	utils::optional<unit::velocity> speed_ms_unit_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(direction_true_) get_direction_true() const { return direction_true_; }

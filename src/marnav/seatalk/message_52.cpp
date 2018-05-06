@@ -45,7 +45,7 @@ double message_52::get_sog() const noexcept
 /// Sets the speed over ground in knots.
 void message_52::set_sog(double t) noexcept
 {
-	sog_ = std::floor(t * 10.0);
+	sog_ = static_cast<uint16_t>(std::floor(t * 10.0));
 }
 }
 }

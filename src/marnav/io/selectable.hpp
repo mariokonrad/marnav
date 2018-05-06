@@ -1,6 +1,8 @@
 #ifndef MARNAV__IO__SELECTABLE__HPP
 #define MARNAV__IO__SELECTABLE__HPP
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace io
@@ -9,7 +11,7 @@ namespace io
 /// the file descriptor.
 ///
 /// @example select.cpp
-class selectable
+class MARNAV_EXPORT selectable
 {
 public:
 	virtual ~selectable() {}

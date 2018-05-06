@@ -4,6 +4,8 @@
 #include <marnav/seatalk/message.hpp>
 #include <marnav/seatalk/equipment.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -23,7 +25,7 @@ namespace seatalk
 /// 6C 05 F3 18 00 26 2D 2D : ST80 Masterview
 /// @endcode
 ///
-class message_6c : public message
+class MARNAV_EXPORT message_6c : public message
 {
 public:
 	constexpr static const message_id ID = message_id::equipment_id_2;

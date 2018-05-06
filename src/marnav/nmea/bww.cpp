@@ -29,7 +29,7 @@ bww::bww(talker talk, fields::const_iterator first, fields::const_iterator last)
 void bww::set_bearing_true(double t) noexcept
 {
 	bearing_true_ = t;
-	bearing_true_ref_ = reference::TRUE;
+	bearing_true_ref_ = reference::TRUE_NORTH;
 }
 
 void bww::set_bearing_mag(double t) noexcept

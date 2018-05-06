@@ -4,6 +4,8 @@
 #include <marnav/ais/message.hpp>
 #include <marnav/utils/mmsi.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace ais
@@ -12,7 +14,7 @@ class binary_001_11; // forward
 class binary_200_10; // forward
 
 /// @brief Binary Broadcast Message
-class message_08 : public message
+class MARNAV_EXPORT message_08 : public message
 {
 	friend class detail::factory;
 
@@ -33,6 +35,10 @@ protected:
 	virtual raw get_data() const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	// clang-format off
 	bitset_value< 6,  2, uint32_t> repeat_indicator = 0;
 	bitset_value< 8, 30, uint32_t> mmsi = 0;
@@ -43,6 +49,9 @@ private:
 	// unfortuanately std::variant is C++17, therefore we need to store
 	// the binary payload and parse it later.
 	raw payload;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }

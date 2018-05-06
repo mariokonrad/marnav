@@ -5,6 +5,8 @@
 #include <marnav/geo/angle.hpp>
 #include <marnav/utils/mmsi.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace ais
@@ -17,7 +19,7 @@ namespace ais
 ///       on other attributes. Since this is not the single true OO design (tm),
 ///       this implementation is intentional and serves the purpose well enough,
 ///       without further complication of the design.
-class message_24 : public message
+class MARNAV_EXPORT message_24 : public message
 {
 	friend class detail::factory;
 
@@ -43,6 +45,10 @@ private:
 	virtual raw get_data() const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	// clang-format off
 	bitset_value< 6,  2, uint32_t> repeat_indicator = 0;
 	bitset_value< 8, 30, uint32_t> mmsi = 0;
@@ -67,6 +73,9 @@ private:
 	// part B specific (auxiliary)
 	bitset_value<132, 30, uint32_t> mothership_mmsi = 0;
 	// clang-format on
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }

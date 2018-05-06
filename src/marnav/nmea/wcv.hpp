@@ -5,6 +5,8 @@
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -23,7 +25,7 @@ namespace nmea
 ///    - N = knots
 /// 3. Waypoint ID
 ///
-class wcv : public sentence
+class MARNAV_EXPORT wcv : public sentence
 {
 	friend class detail::factory;
 
@@ -42,9 +44,16 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> speed_;
 	utils::optional<unit::velocity> speed_unit_;
 	utils::optional<waypoint> waypoint_id_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(speed_) get_speed() const { return speed_; }

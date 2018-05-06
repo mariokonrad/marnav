@@ -3,13 +3,15 @@
 
 #include <string>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
 {
 /// This class represents a talker. Its purpose is to have a strong
 /// type for talkers, instead of simply representing it with a string.
-class talker
+class MARNAV_EXPORT talker
 {
 public:
 	explicit constexpr talker(const char * id)
@@ -38,7 +40,7 @@ private:
 	const char * id_;
 };
 
-talker make_talker(const std::string & s);
+MARNAV_EXPORT talker make_talker(const std::string & s);
 
 /// Namespace contains all defined talkers. For a more descriptive documentation
 /// of all entries, see to_name(talker).

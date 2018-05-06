@@ -63,7 +63,7 @@ class vector2
 {
 public:
 	using value_type = T;
-	using size_type = unsigned int;
+	using size_type = int;
 
 	constexpr static const size_type dimension = 2;
 
@@ -122,7 +122,9 @@ public:
 	/// Normalizes the vector to a specific length.
 	inline vector2 normalize(value_type len = 1.0) const
 	{
-		return vector2{*this}.normalize(len);
+		vector2 r{*this};
+		r.normalize(len);
+		return r;
 	}
 
 	inline value_type x() const { return a[0]; }
@@ -162,13 +164,13 @@ public:
 		return *this;
 	}
 
-	friend vector2 operator+(const vector2 & w, const vector2 & v) { return vector2{w} += v; }
+	friend vector2 operator+(const vector2 & w, const vector2 & v) { return vector2{w.a[0] + v.a[0], w.a[1] + v.a[1]}; }
 
-	friend vector2 operator-(const vector2 & w, const vector2 & v) { return vector2{w} -= v; }
+	friend vector2 operator-(const vector2 & w, const vector2 & v) { return vector2{w.a[0] - v.a[0], w.a[1] - v.a[1]}; }
 
-	friend vector2 operator*(const vector2 & v, value_type f) { return vector2{v} *= f; }
+	friend vector2 operator*(const vector2 & v, value_type f) { return f * v; }
 
-	friend vector2 operator*(value_type f, const vector2 & v) { return vector2{v} *= f; }
+	friend vector2 operator*(value_type f, const vector2 & v) { return vector2{v.a[0] * f, v.a[1] * f}; }
 
 	friend value_type operator*(const vector2 & a, const vector2 & b) { return a.dot(b); }
 
@@ -186,7 +188,7 @@ class vector3
 {
 public:
 	using value_type = T;
-	using size_type = unsigned int;
+	using size_type = int;
 
 	constexpr static const size_type dimension = 3;
 
@@ -237,7 +239,9 @@ public:
 	/// Normalizes the vector to a specific length.
 	inline vector3 normalize(value_type len = 1.0) const
 	{
-		return vector3{*this}.normalize(len);
+		vector3 r{*this};
+		r.normalize(len);
+		return r;
 	}
 
 	inline value_type get_sphere_r() const { return length(); }
@@ -299,13 +303,13 @@ public:
 		return *this;
 	}
 
-	friend vector3 operator+(const vector3 & w, const vector3 & v) { return vector3{w} += v; }
+	friend vector3 operator+(const vector3 & w, const vector3 & v) { return vector3{w[0] + v[0], w[1] + v[1], w[2] + v[2]}; }
 
-	friend vector3 operator-(const vector3 & w, const vector3 & v) { return vector3{w} -= v; }
+	friend vector3 operator-(const vector3 & w, const vector3 & v) { return vector3{w[0] - v[0], w[1] - v[1], w[2] - v[2]}; }
 
-	friend vector3 operator*(const vector3 & v, value_type f) { return vector3{v} *= f; }
+	friend vector3 operator*(const vector3 & v, value_type f) { return f * v; }
 
-	friend vector3 operator*(value_type f, const vector3 & v) { return vector3{v} *= f; }
+	friend vector3 operator*(value_type f, const vector3 & v) { return vector3{v[0] * f, v[1] * f, v[2] * f}; }
 
 	friend value_type operator*(const vector3 & a, const vector3 & b) { return a.dot(b); }
 
@@ -323,7 +327,7 @@ class vector4
 {
 public:
 	using value_type = T;
-	using size_type = unsigned int;
+	using size_type = int;
 
 	constexpr static const size_type dimension = 4;
 
@@ -355,7 +359,9 @@ public:
 	/// Normalizes the vector to a specific length.
 	inline vector4 normalize(value_type len = 1.0) const
 	{
-		return vector4{*this}.normalize(len);
+		vector4 r{*this};
+		r.normalize(len);
+		return r;
 	}
 
 	inline value_type operator[](size_type idx) const { return a[idx]; }
@@ -391,13 +397,13 @@ public:
 		return *this;
 	}
 
-	friend vector4 operator+(const vector4 & w, const vector4 & v) { return vector4{w} += v; }
+	friend vector4 operator+(const vector4 & w, const vector4 & v) { return vector4{w[0] + v[0], w[1] + v[1], w[2] + v[2], w[3] + v[3]}; }
 
-	friend vector4 operator-(const vector4 & w, const vector4 & v) { return vector4{w} -= v; }
+	friend vector4 operator-(const vector4 & w, const vector4 & v) { return vector4{w[0] - v[0], w[1] - v[1], w[2] - v[2], w[3] - v[3]}; }
 
-	friend vector4 operator*(const vector4 & v, value_type f) { return vector4{v} *= f; }
+	friend vector4 operator*(const vector4 & v, value_type f) { return f * v; }
 
-	friend vector4 operator*(value_type f, const vector4 & v) { return vector4{v} *= f; }
+	friend vector4 operator*(value_type f, const vector4 & v) { return vector4{v[0] * f, v[1] * f, v[2] * f, v[3] * f}; }
 
 	friend value_type operator*(const vector4 & a, const vector4 & b) { return a.dot(b); }
 
@@ -455,7 +461,9 @@ public:
 	/// Normalizes the vector to a specific length.
 	inline vector_n normalize(value_type len = 1.0) const
 	{
-		return vector_n{*this}.normalize(len);
+		vector_n r{*this};
+		r.normalize(len);
+		return r;
 	}
 
 	inline value_type operator[](size_type idx) const { return a[idx]; }
@@ -493,17 +501,26 @@ public:
 
 	friend vector_n operator+(const vector_n & w, const vector_n & v)
 	{
-		return vector_n{w} += v;
+		vector_n r{w};
+		r += v;
+		return r;
 	}
 
 	friend vector_n operator-(const vector_n & w, const vector_n & v)
 	{
-		return vector_n{w} -= v;
+		vector_n r{w};
+		r -= v;
+		return r;
 	}
 
-	friend vector_n operator*(const vector_n & v, value_type f) { return vector_n{v} *= f; }
+	friend vector_n operator*(const vector_n & v, value_type f) { return f * v; }
 
-	friend vector_n operator*(value_type f, const vector_n & v) { return vector_n{v} *= f; }
+	friend vector_n operator*(value_type f, const vector_n & v)
+	{
+		vector_n r{v};
+		r *= f;
+		return r;
+	}
 
 	friend value_type operator*(const vector_n & a, const vector_n & b) { return a.dot(b); }
 

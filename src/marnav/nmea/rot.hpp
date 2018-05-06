@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -22,7 +24,7 @@ namespace nmea
 ///    - A = data is valid
 ///    - V = invalid
 ///
-class rot : public sentence
+class MARNAV_EXPORT rot : public sentence
 {
 	friend class detail::factory;
 
@@ -41,8 +43,15 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> deg_per_minute_;
 	utils::optional<status> data_valid_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(deg_per_minute_) get_deg_per_minute() const { return deg_per_minute_; }

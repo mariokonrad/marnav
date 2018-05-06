@@ -3,12 +3,14 @@
 
 #include <marnav/ais/message_01.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace ais
 {
 /// @brief Position Report Class A (assigned schedule)
-class message_02 : public message_01
+class MARNAV_EXPORT message_02 : public message_01
 {
 	friend class detail::factory;
 

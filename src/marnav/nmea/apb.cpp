@@ -43,7 +43,7 @@ apb::apb(talker talk, fields::const_iterator first, fields::const_iterator last)
 
 void apb::set_bearing_origin_to_destination(double t, reference ref)
 {
-	check_value(bearing_origin_to_destination_ref_, {reference::TRUE, reference::MAGNETIC},
+	check_value(bearing_origin_to_destination_ref_, {reference::TRUE_NORTH, reference::MAGNETIC},
 		"bearing_origin_to_destination_ref");
 	bearing_origin_to_destination_ = t;
 	bearing_origin_to_destination_ref_ = ref;
@@ -51,7 +51,7 @@ void apb::set_bearing_origin_to_destination(double t, reference ref)
 
 void apb::set_bearing_pos_to_destination(double t, reference ref)
 {
-	check_value(bearing_pos_to_destination_ref_, {reference::TRUE, reference::MAGNETIC},
+	check_value(bearing_pos_to_destination_ref_, {reference::TRUE_NORTH, reference::MAGNETIC},
 		"bearing_pos_to_destination_ref");
 	bearing_pos_to_destination_ = t;
 	bearing_pos_to_destination_ref_ = ref;
@@ -59,7 +59,7 @@ void apb::set_bearing_pos_to_destination(double t, reference ref)
 
 void apb::set_heading_to_steer_to_destination(double t, reference ref)
 {
-	check_value(heading_to_steer_to_destination_ref_, {reference::TRUE, reference::MAGNETIC},
+	check_value(heading_to_steer_to_destination_ref_, {reference::TRUE_NORTH, reference::MAGNETIC},
 		"heading_to_steer_to_destination_ref");
 	heading_to_steer_to_destination_ = t;
 	heading_to_steer_to_destination_ref_ = ref;
@@ -85,17 +85,17 @@ void apb::check() const
 
 	if (bearing_origin_to_destination_ && !bearing_origin_to_destination_ref_)
 		throw std::invalid_argument{"missing bearing_origin_to_destination_ref"};
-	check_value(bearing_origin_to_destination_ref_, {reference::TRUE, reference::MAGNETIC},
+	check_value(bearing_origin_to_destination_ref_, {reference::TRUE_NORTH, reference::MAGNETIC},
 		"bearing_origin_to_destination_ref");
 
 	if (bearing_pos_to_destination_ && !bearing_pos_to_destination_ref_)
 		throw std::invalid_argument{"missing bearing_pos_to_destination_ref"};
-	check_value(bearing_pos_to_destination_ref_, {reference::TRUE, reference::MAGNETIC},
+	check_value(bearing_pos_to_destination_ref_, {reference::TRUE_NORTH, reference::MAGNETIC},
 		"bearing_pos_to_destination_ref");
 
 	if (heading_to_steer_to_destination_ && !heading_to_steer_to_destination_ref_)
 		throw std::invalid_argument{"missing heading_to_steer_to_destination_ref"};
-	check_value(heading_to_steer_to_destination_ref_, {reference::TRUE, reference::MAGNETIC},
+	check_value(heading_to_steer_to_destination_ref_, {reference::TRUE_NORTH, reference::MAGNETIC},
 		"heading_to_steer_to_destination_ref");
 
 	check_value(mode_ind_,

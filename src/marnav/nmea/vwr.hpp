@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -31,7 +33,7 @@ namespace nmea
 /// 8. Speed kilometers per hour unit
 ///    - K = Kilometers Per Hour
 ///
-class vwr : public sentence
+class MARNAV_EXPORT vwr : public sentence
 {
 	friend class detail::factory;
 
@@ -50,6 +52,10 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> angle_; // wind angle, 0..180
 	utils::optional<side> angle_side_; // side of vessel, R:right, L:left
 	utils::optional<double> speed_knots_; // wind speed in knots
@@ -58,6 +64,9 @@ private:
 	utils::optional<unit::velocity> speed_mps_unit_; // M:mps
 	utils::optional<double> speed_kmh_; // wind speed in kilometers per hour
 	utils::optional<unit::velocity> speed_kmh_unit_; // K:kmh
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(angle_) get_angle() const { return angle_; }

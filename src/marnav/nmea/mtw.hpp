@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -21,7 +23,7 @@ namespace nmea
 /// 2. Unit of Measurement
 ///    - C = Celcius
 ///
-class mtw : public sentence
+class MARNAV_EXPORT mtw : public sentence
 {
 	friend class detail::factory;
 
@@ -40,8 +42,15 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	utils::optional<double> temperature_; // water temperature
 	utils::optional<unit::temperature> temperature_unit_; // unit degrees, C:celcius
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(temperature_) get_temperature() const { return temperature_; }

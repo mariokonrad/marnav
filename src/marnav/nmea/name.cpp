@@ -414,9 +414,9 @@ std::string to_name(quality t)
 std::string to_name(reference t)
 {
 	switch (t) {
-		case reference::RELATIVE:
+		case reference::RELATIVE_NORTH:
 			return "relative";
-		case reference::TRUE:
+		case reference::TRUE_NORTH:
 			return "true";
 		case reference::MAGNETIC:
 			return "magnetic";

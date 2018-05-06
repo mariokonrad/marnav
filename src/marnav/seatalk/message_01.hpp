@@ -4,6 +4,8 @@
 #include <marnav/seatalk/message.hpp>
 #include <marnav/seatalk/equipment.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace seatalk
@@ -24,7 +26,7 @@ namespace seatalk
 /// 01 05 FF FF FF D0 00 00 : Smart Controller Remote Control Handset
 /// @endcode
 ///
-class message_01 : public message
+class MARNAV_EXPORT message_01 : public message
 {
 public:
 	constexpr static const message_id ID = message_id::equipment_id;

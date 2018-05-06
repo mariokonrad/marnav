@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -26,7 +28,7 @@ namespace nmea
 /// 5. Payload, 6-bit encoded content, max. 63 characters
 /// 6. Number of fill bits (0..5)
 ///
-class vdm : public sentence
+class MARNAV_EXPORT vdm : public sentence
 {
 	friend class detail::factory;
 
@@ -50,12 +52,19 @@ protected:
 	void read_fields(fields::const_iterator first);
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	uint32_t n_fragments_ = 0;
 	uint32_t fragment_ = 0;
 	utils::optional<uint32_t> seq_msg_id_;
 	utils::optional<ais_channel> radio_channel_; // A = 161.975MHz (87B), B = 162.025MHz (88B)
 	std::string payload_; // 6bit encoded content
 	uint32_t n_fill_bits_ = 0; // 0..5
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(n_fragments_) get_n_fragments() const { return n_fragments_; }

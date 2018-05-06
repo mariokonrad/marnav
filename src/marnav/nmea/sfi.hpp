@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -22,7 +24,7 @@ namespace nmea
 /// 3. Frequency 1
 /// 4. Mode 1
 ///
-class sfi : public sentence
+class MARNAV_EXPORT sfi : public sentence
 {
 	friend class detail::factory;
 
@@ -47,9 +49,16 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	uint32_t number_of_messages_ = 0;
 	uint32_t message_number_ = 0;
 	std::vector<scanning_frequency> frequencies_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(number_of_messages_) get_n_messages() const { return number_of_messages_; }

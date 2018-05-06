@@ -3,13 +3,15 @@
 
 #include <string>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
 {
 
 /// Enumeration of all months of a year.
-enum class month : uint32_t {
+enum class MARNAV_EXPORT month : uint32_t {
 	january = 1,
 	february,
 	march,
@@ -26,7 +28,7 @@ enum class month : uint32_t {
 
 /// This class represents a date, suitable to be used in NMEA sentences.
 ///
-class date
+class MARNAV_EXPORT date
 {
 public:
 	date();
@@ -41,7 +43,7 @@ public:
 	/// Returns the day component.
 	uint32_t day() const noexcept;
 
-	friend bool operator==(const date & a, const date & b) noexcept;
+	friend MARNAV_EXPORT bool operator==(const date & a, const date & b) noexcept;
 
 	/// Parses the date within the specified string.
 	/// The date to be parsed must be in the form: "DDMMYY"
@@ -65,8 +67,8 @@ private:
 	uint32_t d_; // day: 1..31
 };
 
-bool operator==(const date & a, const date & b) noexcept;
-std::string to_string(const date & d);
+MARNAV_EXPORT bool operator==(const date & a, const date & b) noexcept;
+MARNAV_EXPORT std::string to_string(const date & d);
 }
 }
 

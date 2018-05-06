@@ -4,6 +4,8 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace nmea
@@ -27,7 +29,7 @@ namespace nmea
 ///    - M = manual
 /// 5. Frequency for MSS message status (null for no status)
 ///
-class msk : public sentence
+class MARNAV_EXPORT msk : public sentence
 {
 	friend class detail::factory;
 
@@ -46,11 +48,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	uint32_t frequency_ = 0;
 	selection_mode frequency_mode_ = selection_mode::automatic;
 	uint32_t bitrate_ = 0;
 	selection_mode bitrate_mode_ = selection_mode::automatic;
 	utils::optional<uint32_t> frequency_mss_status_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 public:
 	decltype(frequency_) get_frequency() const { return frequency_; }

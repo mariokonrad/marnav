@@ -3,12 +3,14 @@
 
 #include <marnav/io/seatalk_reader.hpp>
 
+#include <marnav/marnav_export.h>
+
 namespace marnav
 {
 namespace io
 {
 /// Default implementation of a SeaTalk reader.
-class default_seatalk_reader : public seatalk_reader
+class MARNAV_EXPORT default_seatalk_reader : public seatalk_reader
 {
 public:
 	default_seatalk_reader() = delete;
@@ -27,8 +29,15 @@ protected:
 	virtual void process_message(const seatalk::raw & msg) override;
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 	bool message_received_;
 	seatalk::raw message_;
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 };
 }
 }
