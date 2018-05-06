@@ -234,7 +234,7 @@ private:
 	{
 		assert(bits > 0);
 		size_type n_blocks = (pos + bits + bits_per_block - 1) / bits_per_block;
-		if (n_blocks > data.capacity()) {
+		if (n_blocks > data.size()) {
 			data.reserve(n_blocks);
 			while (bits > capacity() - pos) {
 				data.push_back(block_type{});
