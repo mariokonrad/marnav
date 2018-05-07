@@ -66,8 +66,7 @@ TEST_F(Test_ais_message_11, get_latitude)
 	const geo::latitude expected{12.34};
 	const geo::latitude decoded = *m->get_latitude();
 
-	EXPECT_DOUBLE_EQ(expected, decoded) << "expected value:" << static_cast<double>(expected)
-								 << ", decoded value:" << static_cast<double>(decoded);
+	EXPECT_DOUBLE_EQ(expected, decoded);
 }
 
 TEST_F(Test_ais_message_11, set_longitude)
@@ -96,7 +95,6 @@ TEST_F(Test_ais_message_11, get_longitude)
 	const geo::longitude expected{123.45};
 	const geo::longitude decoded = *m->get_longitude();
 
-	EXPECT_DOUBLE_EQ(expected, decoded) << "expected value:" << static_cast<double>(expected)
-								 << ", decoded value:" << static_cast<double>(decoded);
+	EXPECT_DOUBLE_EQ(expected, decoded);
 }
 }
