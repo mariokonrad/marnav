@@ -60,7 +60,7 @@ TEST_F(Test_nmea_tll, get_latitude_north)
 	const auto tll = nmea::sentence_cast<nmea::tll>(
 		nmea::make_sentence("$GPTLL,00,1220.4000,N,00000.0000,E,,000000,T,*05"));
 
-	EXPECT_EQ(geo::latitude{12.34}, tll->get_latitude());
+	EXPECT_DOUBLE_EQ(geo::latitude{12.34}, tll->get_latitude());
 }
 
 TEST_F(Test_nmea_tll, set_lat_south)
@@ -77,7 +77,7 @@ TEST_F(Test_nmea_tll, get_latitude_south)
 	const auto tll = nmea::sentence_cast<nmea::tll>(
 		nmea::make_sentence("$GPTLL,00,1220.4000,S,00000.0000,E,,000000,T,*18"));
 
-	EXPECT_EQ(geo::latitude{-12.34}, tll->get_latitude());
+	EXPECT_DOUBLE_EQ(geo::latitude{-12.34}, tll->get_latitude());
 }
 
 TEST_F(Test_nmea_tll, set_lon_west)
@@ -94,7 +94,7 @@ TEST_F(Test_nmea_tll, get_longitude_west)
 	const auto tll = nmea::sentence_cast<nmea::tll>(
 		nmea::make_sentence("$GPTLL,00,0000.0000,N,12327.0000,W,,000000,T,*17"));
 
-	EXPECT_EQ(geo::longitude{-123.45}, tll->get_longitude());
+	EXPECT_DOUBLE_EQ(geo::longitude{-123.45}, tll->get_longitude());
 }
 
 TEST_F(Test_nmea_tll, set_lon_east)
@@ -111,7 +111,7 @@ TEST_F(Test_nmea_tll, get_longitude_east)
 	const auto tll = nmea::sentence_cast<nmea::tll>(
 		nmea::make_sentence("$GPTLL,00,0000.0000,N,12327.0000,E,,000000,T,*05"));
 
-	EXPECT_EQ(geo::longitude{123.45}, tll->get_longitude());
+	EXPECT_DOUBLE_EQ(geo::longitude{123.45}, tll->get_longitude());
 }
 
 TEST_F(Test_nmea_tll, set_status)
