@@ -7,6 +7,11 @@ namespace marnav
 namespace nmea
 {
 constexpr int sentence::max_length;
+constexpr char sentence::start_token;
+constexpr char sentence::start_token_ais;
+constexpr char sentence::end_token;
+constexpr char sentence::field_delimiter;
+constexpr char sentence::tag_block_token;
 
 /// This protected constructor is used to construct an object
 /// by through its subclasses.

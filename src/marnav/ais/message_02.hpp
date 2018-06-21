@@ -13,8 +13,7 @@ class message_02 : public message_01
 	friend class detail::factory;
 
 public:
-	constexpr static const message_id ID
-		= message_id::position_report_class_a_assigned_schedule;
+	constexpr static message_id ID = message_id::position_report_class_a_assigned_schedule;
 
 	message_02();
 	message_02(const message_02 &) = default;

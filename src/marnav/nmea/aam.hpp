@@ -42,7 +42,7 @@ class aam : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::AAM;
+	constexpr static sentence_id ID = sentence_id::AAM;
 	constexpr static const char * TAG = "AAM";
 
 	aam();

@@ -15,7 +15,7 @@ namespace
 {
 static tag_block::sentence_group extract_group(const std::string & s)
 {
-	static constexpr char DELIMITER = '-';
+	constexpr static char DELIMITER = '-';
 
 	tag_block::sentence_group group;
 
@@ -51,6 +51,8 @@ static int extract_int(const std::string & s)
 /// @endcond
 
 static_assert(std::is_default_constructible<tag_block>::value, "");
+
+constexpr char tag_block::end_token;
 
 tag_block::tag_block(const std::string & s)
 {

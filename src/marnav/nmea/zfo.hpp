@@ -28,7 +28,7 @@ class zfo : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::ZFO;
+	constexpr static sentence_id ID = sentence_id::ZFO;
 	constexpr static const char * TAG = "ZFO";
 
 	zfo();

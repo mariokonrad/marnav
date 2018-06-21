@@ -63,19 +63,19 @@ region::region(const position & a, double d_lat, double d_lon)
 	d_lon = std::abs(d_lon);
 
 	double t_lat = p0_.lat() - d_lat;
-	if (t_lat < latitude::min) {
-		t_lat += (latitude::max - latitude::min);
+	if (t_lat < latitude::min()) {
+		t_lat += (latitude::max() - latitude::min());
 	}
-	if (t_lat > latitude::max) {
-		t_lat -= (latitude::max - latitude::min);
+	if (t_lat > latitude::max()) {
+		t_lat -= (latitude::max() - latitude::min());
 	}
 
 	double t_lon = p0_.lon() + d_lon;
-	if (t_lon < longitude::min) {
-		t_lon += (longitude::max - longitude::min);
+	if (t_lon < longitude::min()) {
+		t_lon += (longitude::max() - longitude::min());
 	}
-	if (t_lon > longitude::max) {
-		t_lon -= (longitude::max - longitude::min);
+	if (t_lon > longitude::max()) {
+		t_lon -= (longitude::max() - longitude::min());
 	}
 
 	p1_ = position{t_lat, t_lon};

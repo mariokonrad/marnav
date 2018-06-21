@@ -32,7 +32,7 @@ class zda : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::ZDA;
+	constexpr static sentence_id ID = sentence_id::ZDA;
 	constexpr static const char * TAG = "ZDA";
 
 	zda();

@@ -44,7 +44,7 @@ class tll : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::TLL;
+	constexpr static sentence_id ID = sentence_id::TLL;
 	constexpr static const char * TAG = "TLL";
 
 	tll();

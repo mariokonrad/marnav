@@ -41,10 +41,10 @@ class gsa : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::GSA;
+	constexpr static sentence_id ID = sentence_id::GSA;
 	constexpr static const char * TAG = "GSA";
 
-	constexpr static const int max_satellite_ids = 12;
+	constexpr static int max_satellite_ids = 12;
 
 	gsa();
 	gsa(const gsa &) = default;

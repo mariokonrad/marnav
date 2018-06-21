@@ -32,7 +32,7 @@ class hdm : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::HDM;
+	constexpr static sentence_id ID = sentence_id::HDM;
 	constexpr static const char * TAG = "HDM";
 
 	hdm();

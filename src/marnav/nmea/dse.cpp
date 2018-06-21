@@ -77,6 +77,7 @@ std::string to_string(dse::code_id value)
 	throw std::invalid_argument{"invaild value for conversion of dse::code_id"};
 }
 
+constexpr sentence_id dse::ID;
 constexpr const char * dse::TAG;
 
 dse::dse()

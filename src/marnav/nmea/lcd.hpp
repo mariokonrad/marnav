@@ -37,10 +37,10 @@ class lcd : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::LCD;
+	constexpr static sentence_id ID = sentence_id::LCD;
 	constexpr static const char * TAG = "LCD";
 
-	static constexpr const int max_differences = 5;
+	constexpr static int max_differences = 5;
 
 	struct time_difference {
 		int32_t snr;

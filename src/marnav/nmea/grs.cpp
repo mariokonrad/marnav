@@ -39,7 +39,10 @@ std::string to_string(grs::residual_usage value)
 	throw std::invalid_argument{"invaild value for conversion of grs::residual_usage"};
 }
 
+constexpr sentence_id grs::ID;
 constexpr const char * grs::TAG;
+
+constexpr int grs::num_satellite_residuals;
 
 grs::grs()
 	: sentence(ID, TAG, talker_id::global_positioning_system)

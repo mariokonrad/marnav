@@ -26,9 +26,9 @@ class r00 : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::R00;
+	constexpr static sentence_id ID = sentence_id::R00;
 	constexpr static const char * TAG = "R00";
-	constexpr static const int max_waypoint_ids = 14;
+	constexpr static int max_waypoint_ids = 14;
 
 	r00();
 	r00(const r00 &) = default;

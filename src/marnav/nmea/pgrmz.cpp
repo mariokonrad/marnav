@@ -44,6 +44,7 @@ std::string to_string(pgrmz::fix_type value)
 	throw std::invalid_argument{"invaild value for conversion of pgrmz::fix_type"};
 }
 
+constexpr sentence_id pgrmz::ID;
 constexpr const char * pgrmz::TAG;
 
 pgrmz::pgrmz()

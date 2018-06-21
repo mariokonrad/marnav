@@ -41,7 +41,9 @@ std::string to_string(tfi::state value)
 	throw std::invalid_argument{"invaild value for conversion of tfi::state"};
 }
 
+constexpr sentence_id tfi::ID;
 constexpr const char * tfi::TAG;
+constexpr const int tfi::num_sensors;
 
 tfi::tfi()
 	: sentence(ID, TAG, talker_id::global_positioning_system)

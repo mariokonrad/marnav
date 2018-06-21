@@ -6,6 +6,9 @@ namespace marnav
 {
 namespace ais
 {
+constexpr message_id message_01::ID;
+constexpr std::size_t message_01::SIZE_BITS;
+
 message_01::message_01()
 	: message_01(ID)
 {

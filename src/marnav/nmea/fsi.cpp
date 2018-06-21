@@ -6,6 +6,7 @@ namespace marnav
 {
 namespace nmea
 {
+constexpr sentence_id fsi::ID;
 constexpr const char * fsi::TAG;
 
 fsi::fsi()

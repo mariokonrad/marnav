@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+constexpr sentence_id vbw::ID;
 constexpr const char * vbw::TAG;
 
 vbw::vbw()

@@ -28,7 +28,7 @@ class mss : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::MSS;
+	constexpr static sentence_id ID = sentence_id::MSS;
 	constexpr static const char * TAG = "MSS";
 
 	mss();

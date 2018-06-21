@@ -5,6 +5,7 @@ namespace marnav
 {
 namespace nmea
 {
+constexpr sentence_id rot::ID;
 constexpr const char * rot::TAG;
 
 rot::rot()

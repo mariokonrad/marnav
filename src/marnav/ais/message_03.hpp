@@ -13,7 +13,7 @@ class message_03 : public message_01
 	friend class detail::factory;
 
 public:
-	constexpr static const message_id ID
+	constexpr static message_id ID
 		= message_id::position_report_class_a_response_to_interrogation;
 
 	message_03();

@@ -4,6 +4,8 @@ namespace marnav
 {
 namespace ais
 {
+constexpr message_id message_03::ID;
+
 message_03::message_03()
 	: message_01(ID)
 {

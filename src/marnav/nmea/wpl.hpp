@@ -34,7 +34,7 @@ class wpl : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::WPL;
+	constexpr static sentence_id ID = sentence_id::WPL;
 	constexpr static const char * TAG = "WPL";
 
 	wpl();

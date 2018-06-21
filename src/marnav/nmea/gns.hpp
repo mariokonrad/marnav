@@ -41,7 +41,7 @@ class gns : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::GNS;
+	constexpr static sentence_id ID = sentence_id::GNS;
 	constexpr static const char * TAG = "GNS";
 
 	gns();

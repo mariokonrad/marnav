@@ -51,7 +51,7 @@ public:
 		uint32_t snr;
 	};
 
-	constexpr static const sentence_id ID = sentence_id::GSV;
+	constexpr static sentence_id ID = sentence_id::GSV;
 	constexpr static const char * TAG = "GSV";
 
 	gsv();

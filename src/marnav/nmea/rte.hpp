@@ -33,7 +33,7 @@ class rte : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::RTE;
+	constexpr static sentence_id ID = sentence_id::RTE;
 	constexpr static const char * TAG = "RTE";
 
 	constexpr static int max_waypoints = 10;

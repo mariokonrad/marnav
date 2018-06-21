@@ -29,7 +29,7 @@ class hfb : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::HFB;
+	constexpr static sentence_id ID = sentence_id::HFB;
 	constexpr static const char * TAG = "HFB";
 
 	hfb();

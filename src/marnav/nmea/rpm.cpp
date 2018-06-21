@@ -38,6 +38,7 @@ std::string to_string(rpm::source_id value)
 	throw std::invalid_argument{"invaild value for conversion of rpm::source_id"};
 }
 
+constexpr sentence_id rpm::ID;
 constexpr const char * rpm::TAG;
 
 rpm::rpm()

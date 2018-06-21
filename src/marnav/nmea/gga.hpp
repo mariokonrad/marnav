@@ -62,7 +62,7 @@ class gga : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::GGA;
+	constexpr static sentence_id ID = sentence_id::GGA;
 	constexpr static const char * TAG = "GGA";
 
 	gga();

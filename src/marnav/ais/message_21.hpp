@@ -16,9 +16,9 @@ class message_21 : public message
 	friend class detail::factory;
 
 public:
-	constexpr static const message_id ID = message_id::aid_to_navigation_report;
-	constexpr static const int SIZE_BITS_MIN = 272;
-	constexpr static const int SIZE_BITS_MAX = 360;
+	constexpr static message_id ID = message_id::aid_to_navigation_report;
+	constexpr static std::size_t SIZE_BITS_MIN = 272u;
+	constexpr static std::size_t SIZE_BITS_MAX = 360u;
 
 	message_21();
 	message_21(const message_21 &) = default;

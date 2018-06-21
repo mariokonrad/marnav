@@ -39,7 +39,7 @@ class dse : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::DSE;
+	constexpr static sentence_id ID = sentence_id::DSE;
 	constexpr static const char * TAG = "DSE";
 
 	enum class query_flag : char { query, reply, a };

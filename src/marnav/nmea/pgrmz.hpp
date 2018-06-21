@@ -32,7 +32,7 @@ class pgrmz : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::PGRMZ;
+	constexpr static sentence_id ID = sentence_id::PGRMZ;
 	constexpr static const char * TAG = "PGRMZ";
 
 	enum class fix_type : char {

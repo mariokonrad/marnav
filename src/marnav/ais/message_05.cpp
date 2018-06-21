@@ -4,6 +4,15 @@ namespace marnav
 {
 namespace ais
 {
+constexpr message_id message_05::ID;
+constexpr std::size_t message_05::SIZE_BITS;
+constexpr std::size_t message_05::SIZE_BITS_MIN;
+
+constexpr uint32_t message_05::eta_month_not_available;
+constexpr uint32_t message_05::eta_day_not_available;
+constexpr uint32_t message_05::eta_hour_not_available;
+constexpr uint32_t message_05::eta_minute_not_available;
+
 message_05::message_05()
 	: message(ID)
 	, callsign("@@@@@@@")

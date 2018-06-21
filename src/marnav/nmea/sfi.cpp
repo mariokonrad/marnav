@@ -5,7 +5,9 @@ namespace marnav
 {
 namespace nmea
 {
+constexpr sentence_id sfi::ID;
 constexpr const char * sfi::TAG;
+constexpr int sfi::max_number_of_frequencies;
 
 sfi::sfi()
 	: sentence(ID, TAG, talker_id::global_positioning_system)

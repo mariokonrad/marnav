@@ -16,10 +16,10 @@ class message_09 : public message
 	friend class detail::factory;
 
 public:
-	constexpr static const message_id ID = message_id::standard_sar_aircraft_position_report;
-	constexpr static const int SIZE_BITS = 168;
+	constexpr static message_id ID = message_id::standard_sar_aircraft_position_report;
+	constexpr static std::size_t SIZE_BITS = 168u;
 
-	constexpr static const uint32_t altitude_not_available = 4095;
+	constexpr static uint32_t altitude_not_available = 4095;
 
 	message_09();
 	message_09(const message_09 &) = default;

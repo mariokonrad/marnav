@@ -91,7 +91,7 @@ date date::parse(const std::string & str)
 		if (pos != str.size())
 			throw std::invalid_argument{"invalid format for date"};
 		return date{t % 100, static_cast<month>((t / 100) % 100), (t / 10000) % 100};
-	} catch (std::invalid_argument) {
+	} catch (std::invalid_argument &) {
 		throw std::invalid_argument{"invalid date format, 'DDMMYY' expected"};
 	}
 }

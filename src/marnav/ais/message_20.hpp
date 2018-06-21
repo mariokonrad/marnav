@@ -29,9 +29,9 @@ public:
 		}
 	};
 
-	constexpr static const message_id ID = message_id::data_link_management;
-	constexpr static const std::size_t SIZE_BITS_MIN = 70u;
-	constexpr static const std::size_t SIZE_BITS_MAX = 160u;
+	constexpr static message_id ID = message_id::data_link_management;
+	constexpr static std::size_t SIZE_BITS_MIN = 70u;
+	constexpr static std::size_t SIZE_BITS_MAX = 160u;
 
 	message_20();
 	message_20(const message_20 &) = default;

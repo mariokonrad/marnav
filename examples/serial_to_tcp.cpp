@@ -104,7 +104,7 @@ int main(int, char **)
 
 			// valid sentence was received, forward it
 			output.write(data.c_str(), data.size());
-		} catch (std::exception e) {
+		} catch (std::exception & e) {
 			// ignore unknown sentences and other stuff
 		}
 	}

@@ -22,7 +22,7 @@ uint32_t angle::minutes() const noexcept
 	auto a = std::abs(get());
 	a -= std::floor(a);
 	a *= 60.0;
-	a += epsilon;
+	a += epsilon();
 	return static_cast<uint32_t>(a);
 }
 
@@ -32,7 +32,7 @@ double angle::seconds() const noexcept
 	auto a = std::abs(get());
 	a -= std::floor(a);
 	a *= 60.0;
-	a += epsilon;
+	a += epsilon();
 	a -= std::floor(a);
 	a *= 60.0;
 	return a;
@@ -45,7 +45,7 @@ void swap(angle & a, angle & b) noexcept
 
 bool operator==(const angle & a, const angle & b) noexcept
 {
-	return (&a == &b) || math::is_same(a.get(), b.get(), angle::epsilon);
+	return (&a == &b) || math::is_same(a.get(), b.get(), angle::epsilon());
 }
 
 bool operator!=(const angle & a, const angle & b) noexcept
@@ -92,7 +92,7 @@ latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
 
 bool operator==(const latitude & a, const latitude & b) noexcept
 {
-	return (&a == &b) || math::is_same(a.get(), b.get(), angle::epsilon);
+	return (&a == &b) || math::is_same(a.get(), b.get(), angle::epsilon());
 }
 
 bool operator!=(const latitude & a, const latitude & b) noexcept
@@ -102,7 +102,7 @@ bool operator!=(const latitude & a, const latitude & b) noexcept
 
 void latitude::check(double a)
 {
-	if ((a < min) || (a > max))
+	if ((a < min()) || (a > max()))
 		throw std::invalid_argument{
 			"invalid value for geo::latitude (" + std::to_string(a) + ')'};
 }
@@ -157,7 +157,7 @@ longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
 
 bool operator==(const longitude & a, const longitude & b) noexcept
 {
-	return (&a == &b) || math::is_same(a.get(), b.get(), angle::epsilon);
+	return (&a == &b) || math::is_same(a.get(), b.get(), angle::epsilon());
 }
 
 bool operator!=(const longitude & a, const longitude & b) noexcept
@@ -167,7 +167,7 @@ bool operator!=(const longitude & a, const longitude & b) noexcept
 
 void longitude::check(double a)
 {
-	if ((a < min) || (a > max))
+	if ((a < min()) || (a > max()))
 		throw std::invalid_argument{
 			"invalid value for geo::longitude (" + std::to_string(a) + ')'};
 }

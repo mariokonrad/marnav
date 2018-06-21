@@ -14,7 +14,7 @@ class message_11 : public message_04
 	friend class detail::factory;
 
 public:
-	constexpr static const message_id ID = message_id::utc_and_date_response;
+	constexpr static message_id ID = message_id::utc_and_date_response;
 
 	message_11();
 	message_11(const message_11 &) = default;

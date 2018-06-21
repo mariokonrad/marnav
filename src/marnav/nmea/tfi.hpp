@@ -27,10 +27,10 @@ class tfi : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::TFI;
+	constexpr static sentence_id ID = sentence_id::TFI;
 	constexpr static const char * TAG = "TFI";
 
-	static constexpr const int num_sensors = 3;
+	constexpr static const int num_sensors = 3;
 
 	enum class state : uint32_t {
 		off, ///< NMEA representation: 0

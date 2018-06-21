@@ -16,9 +16,9 @@ class message_17 : public message
 	friend class detail::factory;
 
 public:
-	constexpr static const message_id ID = message_id::dgnss_binary_broadcast_message;
-	constexpr static const std::size_t SIZE_BITS_MIN = 80;
-	constexpr static const std::size_t SIZE_BITS_MAX = 816;
+	constexpr static message_id ID = message_id::dgnss_binary_broadcast_message;
+	constexpr static std::size_t SIZE_BITS_MIN = 80u;
+	constexpr static std::size_t SIZE_BITS_MAX = 816u;
 
 	message_17();
 	message_17(const message_17 &) = default;

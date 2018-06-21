@@ -5,6 +5,10 @@ namespace marnav
 {
 namespace ais
 {
+constexpr message_id message_24::ID;
+constexpr std::size_t message_24::SIZE_BITS;
+constexpr std::size_t message_24::SIZE_BITS_IGNORED_SPARES_OF_TYPE_A;
+
 message_24::message_24()
 	: message_24(ID)
 {

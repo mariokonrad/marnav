@@ -6,6 +6,10 @@ namespace marnav
 {
 namespace ais
 {
+constexpr message_id message_21::ID;
+constexpr std::size_t message_21::SIZE_BITS_MIN;
+constexpr std::size_t message_21::SIZE_BITS_MAX;
+
 message_21::message_21()
 	: message(ID)
 	, name("@@@@@@@@@@@@@@@@@@@@")
@@ -42,7 +46,7 @@ void message_21::read_data(const raw & bits)
 	get(bits, virtual_aid_flag);
 	get(bits, assigned);
 
-	auto rest = static_cast<decltype(SIZE_BITS_MAX)>(bits.size()) - SIZE_BITS_MIN;
+	auto rest = bits.size() - SIZE_BITS_MIN;
 	if (rest > 0) {
 		rest = std::min(rest, SIZE_BITS_MAX - SIZE_BITS_MIN);
 		name_extension = read_string(bits, 272, rest / 6);

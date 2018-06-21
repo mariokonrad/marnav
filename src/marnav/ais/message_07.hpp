@@ -14,9 +14,9 @@ class message_07 : public message
 	friend class detail::factory;
 
 public:
-	constexpr static const message_id ID = message_id::binary_acknowledge;
-	constexpr static const int SIZE_BITS_MIN = 72;
-	constexpr static const int SIZE_BITS_MAX = 168;
+	constexpr static message_id ID = message_id::binary_acknowledge;
+	constexpr static std::size_t SIZE_BITS_MIN = 72u;
+	constexpr static std::size_t SIZE_BITS_MAX = 168u;
 
 	message_07();
 	message_07(const message_07 &) = default;

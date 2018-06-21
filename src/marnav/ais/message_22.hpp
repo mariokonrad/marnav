@@ -19,8 +19,8 @@ class message_22 : public message
 	friend class detail::factory;
 
 public:
-	constexpr static const message_id ID = message_id::channel_management;
-	constexpr static const int SIZE_BITS = 168;
+	constexpr static message_id ID = message_id::channel_management;
+	constexpr static std::size_t SIZE_BITS = 168u;
 
 	message_22();
 	message_22(const message_22 &) = default;

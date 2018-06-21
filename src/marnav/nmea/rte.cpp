@@ -5,7 +5,9 @@ namespace marnav
 {
 namespace nmea
 {
+constexpr sentence_id rte::ID;
 constexpr const char * rte::TAG;
+constexpr int rte::max_waypoints;
 
 rte::rte()
 	: sentence(ID, TAG, talker_id::global_positioning_system)

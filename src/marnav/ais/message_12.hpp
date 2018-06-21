@@ -15,8 +15,8 @@ class message_12 : public message
 
 public:
 	constexpr static message_id ID = message_id::addressed_safety_related_message;
-	constexpr static int SIZE_BITS_HEAD = 72;
-	constexpr static int SIZE_BITS_MAX = 1008;
+	constexpr static std::size_t SIZE_BITS_HEAD = 72u;
+	constexpr static std::size_t SIZE_BITS_MAX = 1008u;
 	constexpr static std::size_t SIZE_TEXT_MAX = 156u;
 
 	message_12();

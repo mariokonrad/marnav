@@ -34,7 +34,7 @@ class gbs : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::GBS;
+	constexpr static sentence_id ID = sentence_id::GBS;
 	constexpr static const char * TAG = "GBS";
 
 	gbs();

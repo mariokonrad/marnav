@@ -22,9 +22,9 @@ class message_24 : public message
 	friend class detail::factory;
 
 public:
-	constexpr static const message_id ID = message_id::static_data_report;
-	constexpr static const int SIZE_BITS = 168;
-	constexpr static const int SIZE_BITS_IGNORED_SPARES_OF_TYPE_A = 160;
+	constexpr static message_id ID = message_id::static_data_report;
+	constexpr static std::size_t SIZE_BITS = 168u;
+	constexpr static std::size_t SIZE_BITS_IGNORED_SPARES_OF_TYPE_A = 160u;
 
 	enum class part : uint32_t { A = 0, B = 1 };
 

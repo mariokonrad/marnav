@@ -19,7 +19,9 @@ inline std::string to_string(const utils::optional<xdr::transducer_info> & data)
 }
 }
 
+constexpr sentence_id xdr::ID;
 constexpr const char * xdr::TAG;
+constexpr int xdr::max_transducer_info;
 
 xdr::xdr()
 	: sentence(ID, TAG, talker_id::transducer)

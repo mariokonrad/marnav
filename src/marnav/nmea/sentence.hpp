@@ -53,9 +53,9 @@ public:
 	sentence(sentence &&) = default;
 	sentence & operator=(sentence &&) = default;
 
-	sentence_id id() const { return id_; }
+	sentence_id id() const noexcept { return id_; }
 	std::string tag() const { return tag_; }
-	talker get_talker() const { return talker_; }
+	talker get_talker() const noexcept { return talker_; }
 
 	/// Sets the talker of the sentence.
 	///

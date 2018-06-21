@@ -13,7 +13,7 @@ namespace geo
 class angle
 {
 public:
-	static constexpr double epsilon = 1.0e-8;
+	constexpr static double epsilon() noexcept { return 1.0e-8; }
 
 	angle(const angle &) = default;
 	angle(angle &&) noexcept = default;
@@ -66,8 +66,9 @@ class latitude : public angle
 {
 public:
 	enum class hemisphere { north, south };
-	constexpr static const double min = -90.0;
-	constexpr static const double max = +90.0;
+
+	constexpr static double min() noexcept { return -90.0; }
+	constexpr static double max() noexcept { return +90.0; }
 
 	constexpr latitude() noexcept
 		: angle(0.0)
@@ -131,8 +132,9 @@ class longitude : public angle
 {
 public:
 	enum class hemisphere { east, west };
-	constexpr static const double min = -180.0;
-	constexpr static const double max = +180.0;
+
+	constexpr static double min() noexcept { return -180.0; }
+	constexpr static double max() noexcept { return +180.0; }
 
 	constexpr longitude() noexcept
 		: angle(0.0)

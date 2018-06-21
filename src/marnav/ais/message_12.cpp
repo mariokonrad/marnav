@@ -4,6 +4,9 @@ namespace marnav
 {
 namespace ais
 {
+constexpr message_id message_12::ID;
+constexpr std::size_t message_12::SIZE_BITS_HEAD;
+constexpr std::size_t message_12::SIZE_BITS_MAX;
 constexpr std::size_t message_12::SIZE_TEXT_MAX;
 
 message_12::message_12()
@@ -27,7 +30,7 @@ void message_12::read_data(const raw & bits)
 	get(bits, dest_mmsi);
 	get(bits, retransmit);
 
-	auto rest = static_cast<decltype(SIZE_BITS_MAX)>(bits.size()) - SIZE_BITS_HEAD;
+	auto rest = bits.size() - SIZE_BITS_HEAD;
 	if (rest > 0) {
 		rest = std::min(rest, SIZE_BITS_MAX - SIZE_BITS_HEAD);
 		text = read_string(bits, 72, rest / 6);

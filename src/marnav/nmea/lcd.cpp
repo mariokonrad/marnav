@@ -5,7 +5,10 @@ namespace marnav
 {
 namespace nmea
 {
+constexpr sentence_id lcd::ID;
 constexpr const char * lcd::TAG;
+
+constexpr int lcd::max_differences;
 
 lcd::lcd()
 	: sentence(ID, TAG, talker_id::global_positioning_system)

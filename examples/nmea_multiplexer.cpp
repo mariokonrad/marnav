@@ -36,7 +36,7 @@ int main(int, char **)
 			for (auto & destination : destinations) {
 				destination->write(data.c_str(), data.size());
 			}
-		} catch (nmea::checksum_error) {
+		} catch (nmea::checksum_error &) {
 			// let's just ignore them
 		}
 	}

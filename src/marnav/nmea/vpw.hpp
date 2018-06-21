@@ -30,7 +30,7 @@ class vpw : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::VPW;
+	constexpr static sentence_id ID = sentence_id::VPW;
 	constexpr static const char * TAG = "VPW";
 
 	vpw();

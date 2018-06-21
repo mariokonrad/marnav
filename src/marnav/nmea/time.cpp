@@ -22,7 +22,7 @@ template <class T> static T parse_time(const std::string & str)
 		const uint32_t s = static_cast<uint32_t>(t) % 100;
 		const uint32_t ms = static_cast<uint32_t>(t * 1000) % 1000;
 		return T{h, m, s, ms};
-	} catch (std::invalid_argument) {
+	} catch (std::invalid_argument &) {
 		throw std::invalid_argument{"invalid format, 'HHMMSS[.mmm]' expected"};
 	}
 }

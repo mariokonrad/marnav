@@ -37,10 +37,10 @@ public:
 		std::string name;
 	};
 
-	constexpr static const sentence_id ID = sentence_id::XDR;
+	constexpr static sentence_id ID = sentence_id::XDR;
 	constexpr static const char * TAG = "XDR";
 
-	constexpr static const int max_transducer_info = 10;
+	constexpr static int max_transducer_info = 10;
 
 	xdr();
 	xdr(const xdr &) = default;

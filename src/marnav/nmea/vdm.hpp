@@ -31,7 +31,7 @@ class vdm : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::VDM;
+	constexpr static sentence_id ID = sentence_id::VDM;
 	constexpr static const char * TAG = "VDM";
 
 	vdm();

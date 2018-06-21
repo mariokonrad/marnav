@@ -16,9 +16,8 @@ class message_19 : public message
 	friend class detail::factory;
 
 public:
-	constexpr static const message_id ID
-		= message_id::extended_class_b_equipment_position_report;
-	constexpr static const int SIZE_BITS = 312;
+	constexpr static message_id ID = message_id::extended_class_b_equipment_position_report;
+	constexpr static std::size_t SIZE_BITS = 312u;
 
 	message_19();
 	message_19(const message_19 &) = default;

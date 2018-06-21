@@ -31,7 +31,7 @@ class rpm : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::RPM;
+	constexpr static sentence_id ID = sentence_id::RPM;
 	constexpr static const char * TAG = "RPM";
 
 	enum class source_id : char {

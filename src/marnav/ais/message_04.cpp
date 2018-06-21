@@ -5,6 +5,14 @@ namespace marnav
 {
 namespace ais
 {
+constexpr message_id message_04::ID;
+constexpr std::size_t message_04::SIZE_BITS;
+
+constexpr uint32_t message_04::eta_month_not_available;
+constexpr uint32_t message_04::eta_day_not_available;
+constexpr uint32_t message_04::eta_hour_not_available;
+constexpr uint32_t message_04::eta_minute_not_available;
+
 message_04::message_04()
 	: message_04(ID)
 {

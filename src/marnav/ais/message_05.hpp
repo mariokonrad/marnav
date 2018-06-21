@@ -19,14 +19,14 @@ class message_05 : public message
 	friend class detail::factory;
 
 public:
-	constexpr static const message_id ID = message_id::static_and_voyage_related_data;
-	constexpr static const int SIZE_BITS = 424;
-	constexpr static const int SIZE_BITS_MIN = 422;
+	constexpr static message_id ID = message_id::static_and_voyage_related_data;
+	constexpr static std::size_t SIZE_BITS = 424u;
+	constexpr static std::size_t SIZE_BITS_MIN = 422u;
 
-	constexpr static const uint32_t eta_month_not_available = 0;
-	constexpr static const uint32_t eta_day_not_available = 0;
-	constexpr static const uint32_t eta_hour_not_available = 24;
-	constexpr static const uint32_t eta_minute_not_available = 60;
+	constexpr static uint32_t eta_month_not_available = 0;
+	constexpr static uint32_t eta_day_not_available = 0;
+	constexpr static uint32_t eta_hour_not_available = 24;
+	constexpr static uint32_t eta_minute_not_available = 60;
 
 	message_05();
 	message_05(const message_05 &) = default;

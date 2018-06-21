@@ -17,8 +17,8 @@ class message_23 : public message
 	friend class detail::factory;
 
 public:
-	constexpr static const message_id ID = message_id::group_assignment_command;
-	constexpr static const int SIZE_BITS = 160;
+	constexpr static message_id ID = message_id::group_assignment_command;
+	constexpr static std::size_t SIZE_BITS = 160u;
 
 	enum class report_interval : uint8_t {
 		autonomous_mode = 0,

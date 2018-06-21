@@ -41,7 +41,7 @@ class grs : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::GRS;
+	constexpr static sentence_id ID = sentence_id::GRS;
 	constexpr static const char * TAG = "GRS";
 
 	constexpr static int num_satellite_residuals = 12;

@@ -156,6 +156,7 @@ std::string to_string(dsc::extension_indicator value)
 	throw std::invalid_argument{"invaild value for conversion of dsc::extension_indicator"};
 }
 
+constexpr sentence_id dsc::ID;
 constexpr const char * dsc::TAG;
 
 dsc::dsc()

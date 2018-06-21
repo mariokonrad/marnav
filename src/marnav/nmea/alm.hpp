@@ -45,7 +45,7 @@ class alm : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::ALM;
+	constexpr static sentence_id ID = sentence_id::ALM;
 	constexpr static const char * TAG = "ALM";
 
 	alm();

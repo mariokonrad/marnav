@@ -29,10 +29,10 @@ class gtd : public sentence
 	friend class detail::factory;
 
 public:
-	constexpr static const sentence_id ID = sentence_id::GTD;
+	constexpr static sentence_id ID = sentence_id::GTD;
 	constexpr static const char * TAG = "GTD";
 
-	constexpr static const int max_time_diffs = 5;
+	constexpr static int max_time_diffs = 5;
 
 	gtd();
 	gtd(const gtd &) = default;
