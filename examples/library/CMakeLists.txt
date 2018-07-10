@@ -1,12 +1,11 @@
-cmake_minimum_required(VERSION 3.0)
-project(foobar)
+cmake_minimum_required(VERSION 3.2)
+project(foobar LANGUAGES CXX VERSION 0.0.0)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(marnav REQUIRED)
 
-include_directories("${marnav_INCLUDE_DIR}")
 add_executable(foobar foobar.cpp)
-target_link_libraries(foobar ${marnav_LIBRARIES})
-
-set_property(TARGET foobar PROPERTY CXX_EXTENSIONS OFF)
-set_property(TARGET foobar PROPERTY CXX_STANDARD 11)
-
+target_link_libraries(foobar marnav::marnav)

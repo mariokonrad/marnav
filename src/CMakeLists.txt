@@ -20,15 +20,19 @@ configure_file(
 	${CMAKE_CURRENT_BINARY_DIR}/marnav/version.hpp
 	)
 
+install(
+	FILES ${CMAKE_CURRENT_BINARY_DIR}/marnav/version.hpp
+	DESTINATION include/marnav
+	)
+
 add_library(marnav ${LIBRARY_TYPE})
 
 target_sources(marnav
-	PUBLIC
-		${CMAKE_CURRENT_SOURCE_DIR}/marnav/math/floatingpoint.hpp
-		${CMAKE_CURRENT_SOURCE_DIR}/marnav/math/vector.hpp
-		${CMAKE_CURRENT_SOURCE_DIR}/marnav/math/matrix.hpp
-		${CMAKE_CURRENT_SOURCE_DIR}/marnav/math/quaternion.hpp
 	PRIVATE
+		marnav/math/floatingpoint.hpp
+		marnav/math/vector.hpp
+		marnav/math/matrix.hpp
+		marnav/math/quaternion.hpp
 		marnav/utils/mmsi.cpp
 		marnav/utils/mmsi_country.cpp
 		marnav/geo/angle.cpp
@@ -447,8 +451,8 @@ endif()
 
 target_include_directories(marnav
 	PRIVATE
-		${CMAKE_CURRENT_SOURCE_DIR}
-		${CMAKE_CURRENT_BINARY_DIR}
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
 	)
 
 target_compile_options(marnav
@@ -460,18 +464,21 @@ target_compile_options(marnav
 		-pedantic-errors
 		-Wold-style-cast
 	)
+
 if(ENABLE_PROFILING)
 	target_compile_options(marnav
 		PRIVATE
 			-pg
 		)
 endif()
+
 if(ENABLE_BENCHMARK)
 	target_compile_options(marnav
 		PRIVATE
 			-fno-omit-frame-pointer
 		)
 endif()
+
 if(ENABLE_WARNING_HELL)
 	message(STATUS "Behold: entering the hell of extended warnings")
 	target_compile_options(marnav
@@ -551,34 +558,39 @@ set_target_properties(marnav
 	SOVERSION "${PROJECT_VERSION}"
 	)
 
-install(
-	TARGETS marnav
-	LIBRARY DESTINATION lib
-	ARCHIVE DESTINATION lib
-	RUNTIME DESTINATION bin
-	)
-
-install(
-	FILES
-		${CMAKE_CURRENT_BINARY_DIR}/marnav/version.hpp
-	DESTINATION include/marnav
-	)
-
-
 # stuff for the config and config-version files
 set(INCLUDE_INSTALL_DIR include)
 set(LIB_INSTALL_DIR lib)
 include(CMakePackageConfigHelpers)
+
+set(targets_export_name ${PROJECT_NAME}-targets)
+
+install(
+	TARGETS marnav
+	EXPORT ${targets_export_name}
+	LIBRARY DESTINATION ${LIB_INSTALL_DIR}
+	ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
+	RUNTIME DESTINATION bin
+	INCLUDES DESTINATION ${INCLUDE_INSTALL_DIR}
+	)
+
 configure_package_config_file(
 	config.cmake.in
 	"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
 	INSTALL_DESTINATION "${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME}"
 	PATH_VARS INCLUDE_INSTALL_DIR
 	)
+
+install(
+	EXPORT ${targets_export_name}
+	NAMESPACE "${PROJECT_NAME}::"
+	DESTINATION "${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME}"
+	)
+
 write_basic_package_version_file(
 	"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
-	VERSION "${PROJECT_VERSION}"
-	COMPATIBILITY SameMajorVersion)
+	VERSION "${PROJECT_VERSION}" COMPATIBILITY SameMajorVersion)
+
 install(
 	FILES
 		"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
@@ -595,7 +607,10 @@ if(ENABLE_TOOLS)
 		nmeasum.cpp
 		)
 
-	target_include_directories(nmeasum PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+	target_include_directories(nmeasum
+		PRIVATE
+			${CMAKE_CURRENT_SOURCE_DIR}
+		)
 
 	target_compile_options(nmeasum
 		PRIVATE

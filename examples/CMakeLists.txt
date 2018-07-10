@@ -1,6 +1,4 @@
-find_package(Boost 1.53.0
-	COMPONENTS system
-	)
+find_package(Boost 1.53.0 COMPONENTS system)
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 include_directories(${CMAKE_BINARY_DIR}/src)
