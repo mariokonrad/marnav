@@ -5,6 +5,7 @@
 #include <cassert>
 #include <marnav/math/vector.hpp>
 #include <marnav/math/floatingpoint.hpp>
+#include <marnav/math/constants.hpp>
 
 namespace marnav
 {
@@ -49,7 +50,7 @@ public:
 		assert(!is_zero(d));
 
 		// conversion deg -> rad
-		angle *= M_PI / 180.0;
+		angle *= pi / 180.0;
 
 		// sin(phi / 2) with normalization
 		value_type s = sin(angle * 0.5) / d;
@@ -74,9 +75,9 @@ public:
 
 	quaternion & euler(value_type yaw, value_type pitch, value_type roll)
 	{
-		yaw *= (M_PI / 180.0) / 2.0;
-		pitch *= (M_PI / 180.0) / 2.0;
-		roll *= (M_PI / 180.0) / 2.0;
+		yaw *= (pi / 180.0) / 2.0;
+		pitch *= (pi / 180.0) / 2.0;
+		roll *= (pi / 180.0) / 2.0;
 		const value_type c_yaw = cos(yaw);
 		const value_type s_yaw = sin(yaw);
 		const value_type c_pitch = cos(pitch);
@@ -226,7 +227,7 @@ public:
 	{
 		const vector3<T> f = from.normalize();
 		const vector3<T> t = to.normalize();
-		const value_type angle = acos(f.dot(t)) * 180.0 / M_PI;
+		const value_type angle = acos(f.dot(t)) * 180.0 / pi;
 		return quaternion{angle, f.cross(t)}.normalize();
 	}
 

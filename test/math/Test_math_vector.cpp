@@ -98,8 +98,8 @@ TEST_F(Test_math_vector, vec2_make_from_polar)
 	for (auto test : TESTS) {
 		vec2 v = vec2::make_from_polar(1.0, test);
 
-		EXPECT_NEAR(cos(test * M_PI / 180.0), v[0], 1e-9);
-		EXPECT_NEAR(sin(test * M_PI / 180.0), v[1], 1e-9);
+		EXPECT_NEAR(cos(test * pi / 180.0), v[0], 1e-9);
+		EXPECT_NEAR(sin(test * pi / 180.0), v[1], 1e-9);
 	}
 }
 
@@ -110,7 +110,7 @@ TEST_F(Test_math_vector, vec2_phi)
 
 	for (auto test : TESTS) {
 		const vec2 v = vec2::make_from_polar(1.0, test);
-		EXPECT_NEAR(test * M_PI / 180.0, v.phi(), 1e-7) << "test:" << test << ", v=(" << v[0]
+		EXPECT_NEAR(test * pi / 180.0, v.phi(), 1e-7) << "test:" << test << ", v=(" << v[0]
 														<< ", " << v[1] << ")";
 	}
 }

@@ -1,7 +1,10 @@
 #ifndef MARNAV__MATH__VECTOR__HPP
 #define MARNAV__MATH__VECTOR__HPP
 
+#include <initializer_list>
+#include <type_traits>
 #include <marnav/math/floatingpoint.hpp>
+#include <marnav/math/constants.hpp>
 
 namespace marnav
 {
@@ -85,7 +88,7 @@ public:
 	/// @return A 2D vector.
 	static inline vector2 make_from_polar(value_type radius, value_type phi_deg)
 	{
-		const value_type phi = phi_deg * M_PI / 180.0;
+		const value_type phi = phi_deg * pi / 180.0;
 		return vector2{radius * cos(phi), radius * sin(phi)};
 	}
 
@@ -94,12 +97,12 @@ public:
 	{
 		value_type p = atan2(a[1], a[0]);
 		if (p < 0)
-			p += 2.0 * M_PI;
+			p += 2.0 * pi;
 		return p;
 	}
 
 	/// Returns the angle of polar coordinate in the interval 0..2pi in degrees
-	inline value_type phi_deg() const { return phi() * 180.0 / M_PI; }
+	inline value_type phi_deg() const { return phi() * 180.0 / pi; }
 
 	/// Calculates the dot product.
 	inline value_type dot(const vector2 & v) const { return detail::dot_vector(*this, v); }
@@ -210,8 +213,8 @@ public:
 	static inline vector3 make_from_sphere(
 		value_type radius, value_type theta_deg, value_type phi_deg)
 	{
-		const value_type phi = phi_deg * M_PI / 180.0;
-		const value_type theta = theta_deg * M_PI / 180.0;
+		const value_type phi = phi_deg * pi / 180.0;
+		const value_type theta = theta_deg * pi / 180.0;
 		return vector3{radius * std::sin(theta) * std::cos(phi),
 			radius * std::sin(theta) * std::sin(phi), radius * std::cos(theta)};
 	}
@@ -247,15 +250,15 @@ public:
 		const value_type len = length();
 		if (is_zero(len))
 			return 0.0;
-		return std::acos(a[2] / len) * 180.0 / M_PI;
+		return std::acos(a[2] / len) * 180.0 / pi;
 	}
 
 	inline value_type get_sphere_phi() const
 	{
 		value_type b = std::atan2(a[1], a[0]);
 		if (b < 0.0)
-			b += 2.0 * M_PI;
-		return b * 180.0 / M_PI;
+			b += 2.0 * pi;
+		return b * 180.0 / pi;
 	}
 
 	inline value_type x() const { return a[0]; }

@@ -1,10 +1,11 @@
 #include <gtest/gtest.h>
 #include <marnav/geo/geodesic.hpp>
-#include <cmath>
+#include <marnav/math/constants.hpp>
 
 namespace
 {
 using namespace marnav;
+using marnav::math::pi;
 
 class Test_geo_geodesic : public ::testing::Test
 {
@@ -29,11 +30,11 @@ TEST_F(Test_geo_geodesic, central_spherical_angle)
 	};
 
 	static const test_data DATA[] = {
-		{{0.0, 0.0}, {0.0, 0.0}, 0.0 * M_PI / 180.0},
-		{{45.0, 0.0}, {0.0, 0.0}, 45.0 * M_PI / 180.0},
-		{{0.0, 45.0}, {0.0, 0.0}, 45.0 * M_PI / 180.0},
-		{{0.0, 0.0}, {45.0, 0.0}, 45.0 * M_PI / 180.0},
-		{{0.0, 0.0}, {0.0, 45.0}, 45.0 * M_PI / 180.0},
+		{{0.0, 0.0}, {0.0, 0.0}, 0.0 * pi / 180.0},
+		{{45.0, 0.0}, {0.0, 0.0}, 45.0 * pi / 180.0},
+		{{0.0, 45.0}, {0.0, 0.0}, 45.0 * pi / 180.0},
+		{{0.0, 0.0}, {45.0, 0.0}, 45.0 * pi / 180.0},
+		{{0.0, 0.0}, {0.0, 45.0}, 45.0 * pi / 180.0},
 	};
 
 	for (auto const & item : DATA) {
@@ -94,8 +95,8 @@ TEST_F(Test_geo_geodesic, point_ellipsoid_vincenty)
 	};
 
 	static const test_data DATA[] = {
-		{{0.0, 0.0}, 0.0 * M_PI / 180.0, 60 * 1852.0, {1.0049343, 0.0}},
-		{{0.0, 0.0}, 90.0 * M_PI / 180.0, 60 * 1852.0, {0.0, 0.99820794}},
+		{{0.0, 0.0}, 0.0 * pi / 180.0, 60 * 1852.0, {1.0049343, 0.0}},
+		{{0.0, 0.0}, 90.0 * pi / 180.0, 60 * 1852.0, {0.0, 0.99820794}},
 	};
 
 	for (auto const & item : DATA) {

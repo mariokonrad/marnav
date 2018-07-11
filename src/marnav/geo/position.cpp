@@ -1,11 +1,10 @@
 #include "position.hpp"
-#include <cmath>
+#include <marnav/math/constants.hpp>
 
 namespace marnav
 {
 namespace geo
 {
-
 position::position(const latitude & la, const longitude & lo)
 	: lat_(la)
 	, lon_(lo)
@@ -19,12 +18,12 @@ bool position::operator==(const position & other) const
 
 position deg2rad(const position & p)
 {
-	return {M_PI / 180.0 * p.lat(), M_PI / 180.0 * p.lon()};
+	return {math::pi / 180.0 * p.lat(), math::pi / 180.0 * p.lon()};
 }
 
 position rad2deg(const position & p)
 {
-	return {p.lat() / M_PI * 180.0, p.lon() / M_PI * 180.0};
+	return {p.lat() / math::pi * 180.0, p.lon() / math::pi * 180.0};
 }
 }
 }
