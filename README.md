@@ -351,7 +351,7 @@ Compiler:
 - Clang 6.0
 
 Tools needed to build the library:
-- cmake 3.2 or newer
+- cmake 3.11 or newer
 
 Tools needed to develop the library:
 - git

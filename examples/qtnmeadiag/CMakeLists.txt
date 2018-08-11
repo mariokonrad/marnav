@@ -10,10 +10,6 @@ if(${Qt5Core_FOUND})
 	message(STATUS "  ${Qt5Widgets_LIBRARIES}")
 	message(STATUS "  ${Qt5SerialPort_LIBRARIES}")
 
-	include_directories(${Qt5Core_INCLUDE_DIRS})
-	include_directories(${Qt5Widgets_INCLUDE_DIRS})
-	include_directories(${Qt5SerialPort_INCLUDE_DIRS})
-
 	set(CMAKE_AUTOMOC ON)
 
 	add_executable(qtnmeadiag
@@ -21,14 +17,7 @@ if(${Qt5Core_FOUND})
 		main.cpp
 		)
 
-	target_link_libraries(qtnmeadiag
-		${Qt5SerialPort_LIBRARIES}
-		${Qt5Widgets_LIBRARIES}
-		${Qt5Core_LIBRARIES}
-		marnav
-		)
-
-	qt5_use_modules(qtnmeadiag Core Widgets SerialPort)
+	target_link_libraries(qtnmeadiag Qt5::SerialPort Qt5::Widgets Qt5::Core marnav)
 
 else()
 	message(STATUS "Qt5 not found")
