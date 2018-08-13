@@ -342,6 +342,7 @@ Compiler:
 - GCC 5
 - GCC 6
 - GCC 7
+- GCC 8
 - Clang 3.6
 - Clang 3.7
 - Clang 3.8
