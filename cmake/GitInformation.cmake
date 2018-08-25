@@ -1,7 +1,24 @@
 find_package(Git)
 if (GIT_FOUND)
 
+	# checks the current source directory for the presence of
+	# a git repository.
+	#
+	# usage:
+	#
+	#    git_check_repository(GIT_REPO_FOUND)
+	#
+	function(git_check_repository found)
+		if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git)
+			set(${found} TRUE  PARENT_SCOPE)
+		else()
+			set(${found} FALSE PARENT_SCOPE)
+		endif()
+	endfunction()
+
 	# get commit hash of HEAD
+	#
+	# This function assumes to have a git repository present.
 	#
 	# usage:
 	#
@@ -15,6 +32,7 @@ if (GIT_FOUND)
 	function(git_commit_hash hash)
 		if(${ARGC} GREATER 2)
 			message(FATAL "too many arugments for `git_commit_hash`")
+			return()
 		endif()
 
 		execute_process(
@@ -33,6 +51,8 @@ if (GIT_FOUND)
 
 	# get branch name
 	#
+	# This function assumes to have a git repository present.
+	#
 	# usage:
 	#
 	#    git_branch_name(GIT_BRANCH)
@@ -48,6 +68,8 @@ if (GIT_FOUND)
 	endfunction()
 
 	# generate list of authors
+	#
+	# This function assumes to have a git repository present.
 	#
 	# usage:
 	#

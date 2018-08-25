@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.11)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-include(GitInformation)
 
 project(marnav VERSION 0.8.0 LANGUAGES CXX C)
 
@@ -15,20 +14,32 @@ else()
 	message(FATAL_ERROR "Unsupported compiler detected: ${CMAKE_CXX_COMPILER_ID}")
 endif()
 
+# C++11, no compiler extensions
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-git_commit_hash(GIT_COMMIT_HASH GIT_COMMIT_HASH_SHORT)
-git_branch_name(GIT_BRANCH)
+### check for repository
+include(GitInformation)
+if(GIT_FOUND)
+	git_check_repository(GIT_REPO_FOUND)
+	if(GIT_REPO_FOUND)
+		git_commit_hash(GIT_COMMIT_HASH GIT_COMMIT_HASH_SHORT)
+		git_branch_name(GIT_BRANCH)
+		message(STATUS "git branch: ${GIT_BRANCH}")
+		message(STATUS "git commit hash: ${GIT_COMMIT_HASH}")
 
-message(STATUS "git branch: ${GIT_BRANCH}")
-message(STATUS "git commit hash: ${GIT_COMMIT_HASH}")
-
-### version handling
-if(NOT ("${CMAKE_BUILD_TYPE}" MATCHES "Release"))
-	set(PROJECT_VERSION "${PROJECT_VERSION}-${GIT_COMMIT_HASH_SHORT}")
+		# version handling if repository information is available
+		if(NOT ("${CMAKE_BUILD_TYPE}" MATCHES "Release"))
+			set(PROJECT_VERSION "${PROJECT_VERSION}-${GIT_COMMIT_HASH_SHORT}")
+		endif()
+	else()
+		message(STATUS "no git repository found, no further version info available")
+	endif()
+else()
+	message(STATUS "git not found, no further version info available")
 endif()
+
 message(STATUS "Project Vesion: ${PROJECT_VERSION}")
 
 ### external projects
@@ -74,7 +85,12 @@ endif()
 ### documentation
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
-	git_authors(GIT_AUTHORS AUTHOR_LIST)
+	if(GIT_REPO_FOUND)
+		git_authors(GIT_AUTHORS AUTHOR_LIST)
+	else()
+		message(STATUS "no git repository found, using default authors list")
+		set(AUTHOR_LIST "Mario Konrad, with help from others")
+	endif()
 	configure_file(
 		${CMAKE_CURRENT_SOURCE_DIR}/doc/main.dox.in
 		${CMAKE_CURRENT_BINARY_DIR}/doc/main.dox
