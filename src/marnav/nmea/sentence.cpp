@@ -39,7 +39,7 @@ std::string to_string(const sentence & s)
 		result.reserve(sentence::max_length);
 	}
 	result += s.get_start_token();
-	result += s.get_talker().str();
+	result += to_string(s.get_talker());
 	result += s.tag();
 	s.append_data_to(result);
 	result += s.get_end_token();

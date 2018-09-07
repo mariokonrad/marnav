@@ -1,6 +1,4 @@
 #include "name.hpp"
-#include <algorithm>
-#include <array>
 
 namespace marnav
 {
@@ -261,81 +259,139 @@ std::string to_name(sentence_id t)
 
 std::string to_name(talker t)
 {
-	using entry = std::pair<talker, const char *>;
-	static constexpr const std::array<entry, talker_id::num_talkers> talkers = {{
-		{talker_id::none, "used for vendor extensions"},
-		{talker_id::autopilot_general, "Autopilot (General)"},
-		{talker_id::autopilot_magnetic, "Autopilot (Magnetic)"},
-		{talker_id::beidou_2, "Beidou (China)"},
-		{talker_id::computer_calculator, "programmed calculator (obsolete)"},
-		{talker_id::communications_dsc, "digital selective calling (DSC)"},
-		{talker_id::computer_memory, "memory data (obsolete)"},
-		{talker_id::communications_satellite, "Satellite Telephone"},
-		{talker_id::communications_mfhf, "Radio-Telephone (MF/HF)"},
-		{talker_id::communications_vhf, "Radio-Telephone (VHF)"},
-		{talker_id::communications_scanning_receiver, "Scanning Receiver"},
-		{talker_id::decca_navigation, "DECCA Navigation (obsolete)"},
-		{talker_id::direction_finder, "Direction Finder"},
-		{talker_id::electronic_chart_display,
-			"Electronic Chart Display & Information System (ECDIS)"},
-		{talker_id::emergency_position_indicating_beacon,
-			"Emergency Position Indicating Beacon (EPIRB)"},
-		{talker_id::engine_room_monitoring_systems, "Engine Room Monitoring Systems"},
-		{talker_id::galileo, "Galileo (Europe)"}, {talker_id::beidou_1, "Beidou (China)"},
-		{talker_id::global_positioning_system, "Global Positioning System (GPS)"},
-		{talker_id::glonass, "GLONASS"},
-		{talker_id::mixed_gps_glonass, "Mixed GPS and GLONASS"},
-		{talker_id::magnetic_compass, "Heading - Magnetic Compass"},
-		{talker_id::north_seeking_gyro, "Heading - North Seeking Gyro"},
-		{talker_id::non_north_seeking_gyro, "Heading - Non North Seeking Gyro"},
-		{talker_id::integrated_instrumentation, "Integrated Instrumentation"},
-		{talker_id::integrated_navigation, "Integrated Navigation"},
-		{talker_id::loran_a, "Loran A (obsolete)"}, {talker_id::loran_c, "Loran C (obsolete)"},
-		{talker_id::microwave_positioning_system, "Microwave Positioning System (obsolete)"},
-		{talker_id::omega_navigation_system, "OMEGA Navigation System (obsolete)"},
-		{talker_id::distress_alarm_system, "Distress Alarm System (obsolete)"},
-		{talker_id::qzss_gps_augmentation_system, "QZSS GPS augmentation system (Japan)"},
-		{talker_id::radar, "RADAR and/or ARPA"}, {talker_id::sounder_depth, "Sounder, Depth"},
-		{talker_id::electronic_positioning_system,
-			"Electronic Positioning System, other/general"},
-		{talker_id::sounder_scanning, "Sounder, Scanning"},
-		{talker_id::turn_rate_indicator, "Turn Rate Indicator"},
-		{talker_id::transit_navigation_system, "TRANSIT Navigation System"},
-		{talker_id::velocity_sensor_doppler, "Velocity Sensor, Doppler, other/general"},
-		{talker_id::velocity_sensor_water_magnetic,
-			"Velocity Sensor, Speed Log, Water, Magnetic"},
-		{talker_id::velocity_sensor_water_mechanical,
-			"Velocity Sensor, Speed Log, Water, Mechanical"},
-		{talker_id::weather_instruments, "Weather Instruments"},
-		{talker_id::transducer_temperature, "Transducer - Temperature (obsolete)"},
-		{talker_id::transducer_displacement,
-			"Transducer - Displacement, Angular or Linear (obsolete)"},
-		{talker_id::transducer_frequency, "Transducer - Frequency (obsolete)"},
-		{talker_id::transducer_level, "Transducer - Level (obsolete)"},
-		{talker_id::transducer_pressure, "Transducer - Pressure (obsolete)"},
-		{talker_id::transducer_flow_rate, "Transducer - Flow Rate (obsolete)"},
-		{talker_id::transducer_tachometer, "Transducer - Tachometer (obsolete)"},
-		{talker_id::transducer_volume, "Transducer - Volume (obsolete)"},
-		{talker_id::transducer, "Transducer"},
-		{talker_id::timekeeper_atomic_clock, "Timekeeper - Atomic Clock"},
-		{talker_id::timekeeper_chronometer, "Timekeeper - Chronometer"},
-		{talker_id::timekeeper_quartz, "Timekeeper - Quartz"},
-		{talker_id::timekeeper_radio_update, "Timekeeper - Radio Update, WWV or WWVH"},
-		{talker_id::ais_base_station, "NMEA 4.0 Base AIS station"},
-		{talker_id::ais_dependent_base_station, "MMEA 4.0 Dependent AIS Base Station"},
-		{talker_id::ais_mobile_station, "Mobile AIS station"},
-		{talker_id::ais_aid_to_navigation_station, "NMEA 4.0 Aid to Navigation AIS station"},
-		{talker_id::ais_receiving_station, "NMEA 4.0 AIS Receiving Station"},
-		{talker_id::ais_limited_base_station, "NMEA 4.0 Limited Base Station"},
-		{talker_id::ais_transmitting_station, "NMEA 4.0 AIS Transmitting Station"},
-		{talker_id::ais_repeater_ais_station, "NMEA 4.0 Repeater AIS station"},
-		{talker_id::ais_base_station_obsolete, "Base AIS station (deprecated in NMEA 4.0)"},
-		{talker_id::ais_physical_shore_station, "NMEA 4.0 Physical Shore AIS Station"},
-	}};
-
-	const auto i = std::find_if(
-		std::begin(talkers), std::end(talkers), [&](const entry & e) { return e.first == t; });
-	return (i == std::end(talkers)) ? "-" : i->second;
+	switch (t) {
+		case talker::none:
+			return "<none>";
+		case talker::autopilot_general:
+			return "Autopilot (General)";
+		case talker::autopilot_magnetic:
+			return "Autopilot (Magnetic)";
+		case talker::beidou_2:
+			return "Beidou (China)";
+		case talker::computer_calculator:
+			return "programmed calculator (obsolete)";
+		case talker::communications_dsc:
+			return "digital selective calling (DSC)";
+		case talker::computer_memory:
+			return "memory data (obsolete)";
+		case talker::communications_satellite:
+			return "Satellite Telephone";
+		case talker::communications_mfhf:
+			return "Radio-Telephone (MF/HF)";
+		case talker::communications_vhf:
+			return "Radio-Telephone (VHF)";
+		case talker::communications_scanning_receiver:
+			return "Scanning Receiver";
+		case talker::decca_navigation:
+			return "DECCA Navigation (obsolete)";
+		case talker::direction_finder:
+			return "Direction Finder";
+		case talker::electronic_chart_display:
+			return "Electronic Chart Display & Information System (ECDIS)";
+		case talker::emergency_position_indicating_beacon:
+			return "Emergency Position Indicating Beacon (EPIRB)";
+		case talker::engine_room_monitoring_systems:
+			return "Engine Room Monitoring Systems";
+		case talker::galileo:
+			return "Galileo (Europe)";
+		case talker::beidou_1:
+			return "Beidou (China)";
+		case talker::global_positioning_system:
+			return "Global Positioning System (GPS)";
+		case talker::glonass:
+			return "GLONASS";
+		case talker::mixed_gps_glonass:
+			return "Mixed GPS and GLONASS";
+		case talker::magnetic_compass:
+			return "Heading - Magnetic Compass";
+		case talker::north_seeking_gyro:
+			return "Heading - North Seeking Gyro";
+		case talker::non_north_seeking_gyro:
+			return "Heading - Non North Seeking Gyro";
+		case talker::integrated_instrumentation:
+			return "Integrated Instrumentation";
+		case talker::integrated_navigation:
+			return "Integrated Navigation";
+		case talker::loran_a:
+			return "Loran A (obsolete)";
+		case talker::loran_c:
+			return "Loran C (obsolete)";
+		case talker::microwave_positioning_system:
+			return "Microwave Positioning System (obsolete)";
+		case talker::omega_navigation_system:
+			return "OMEGA Navigation System (obsolete)";
+		case talker::distress_alarm_system:
+			return "Distress Alarm System (obsolete)";
+		case talker::qzss_gps_augmentation_system:
+			return "QZSS GPS augmentation system (Japan)";
+		case talker::radar:
+			return "RADAR and/or ARPA";
+		case talker::sounder_depth:
+			return "Sounder, Depth";
+		case talker::electronic_positioning_system:
+			return "Electronic Positioning System, other/general";
+		case talker::sounder_scanning:
+			return "Sounder, Scanning";
+		case talker::turn_rate_indicator:
+			return "Turn Rate Indicator";
+		case talker::transit_navigation_system:
+			return "TRANSIT Navigation System";
+		case talker::velocity_sensor_doppler:
+			return "Velocity Sensor, Doppler, other/general";
+		case talker::velocity_sensor_water_magnetic:
+			return "Velocity Sensor, Speed Log, Water, Magnetic";
+		case talker::velocity_sensor_water_mechanical:
+			return "Velocity Sensor, Speed Log, Water, Mechanical";
+		case talker::weather_instruments:
+			return "Weather Instruments";
+		case talker::transducer_temperature:
+			return "Transducer - Temperature (obsolete)";
+		case talker::transducer_displacement:
+			return "Transducer - Displacement, Angular or Linear (obsolete)";
+		case talker::transducer_frequency:
+			return "Transducer - Frequency (obsolete)";
+		case talker::transducer_level:
+			return "Transducer - Level (obsolete)";
+		case talker::transducer_pressure:
+			return "Transducer - Pressure (obsolete)";
+		case talker::transducer_flow_rate:
+			return "Transducer - Flow Rate (obsolete)";
+		case talker::transducer_tachometer:
+			return "Transducer - Tachometer (obsolete)";
+		case talker::transducer_volume:
+			return "Transducer - Volume (obsolete)";
+		case talker::transducer:
+			return "Transducer";
+		case talker::timekeeper_atomic_clock:
+			return "Timekeeper - Atomic Clock";
+		case talker::timekeeper_chronometer:
+			return "Timekeeper - Chronometer";
+		case talker::timekeeper_quartz:
+			return "Timekeeper - Quartz";
+		case talker::timekeeper_radio_update:
+			return "Timekeeper - Radio Update, WWV or WWVH";
+		case talker::ais_base_station:
+			return "NMEA 4.0 Base AIS station";
+		case talker::ais_dependent_base_station:
+			return "MMEA 4.0 Dependent AIS Base Station";
+		case talker::ais_mobile_station:
+			return "Mobile AIS station";
+		case talker::ais_aid_to_navigation_station:
+			return "NMEA 4.0 Aid to Navigation AIS station";
+		case talker::ais_receiving_station:
+			return "NMEA 4.0 AIS Receiving Station";
+		case talker::ais_limited_base_station:
+			return "NMEA 4.0 Limited Base Station";
+		case talker::ais_transmitting_station:
+			return "NMEA 4.0 AIS Transmitting Station";
+		case talker::ais_repeater_ais_station:
+			return "NMEA 4.0 Repeater AIS station";
+		case talker::ais_base_station_obsolete:
+			return "Base AIS station (deprecated in NMEA 4.0)";
+		case talker::ais_physical_shore_station:
+			return "NMEA 4.0 Physical Shore AIS Station";
+	}
+	return "-";
 }
 
 std::string to_name(selection_mode t)

@@ -554,7 +554,7 @@ void MainWindow::on_sentence_selection()
 		auto s = marnav::nmea::make_sentence(item->text().toStdString());
 		sentence_desc->setText(QString{"Tag: %1\nTalker: %2\n\n%3\n"}
 								   .arg(s->tag().c_str())
-								   .arg(s->get_talker().str())
+								   .arg(to_string(s->get_talker()).c_str())
 								   .arg(get_details(s.get())));
 	} catch (marnav::nmea::unknown_sentence &) {
 		sentence_desc->setText("Unknown Sentence");

@@ -493,7 +493,6 @@ if(ENABLE_WARNING_HELL)
 			-Wformat-y2k
 			-Wimport
 			-Winit-self
-			-Winline
 			-Wmissing-field-initializers
 			-Wmissing-format-attribute
 			-Wmissing-include-dirs
@@ -511,6 +510,7 @@ if(ENABLE_WARNING_HELL)
 			-Wvariadic-macros
 			-Wwrite-strings
 			# explicitly disabled on purpose:
+			-Wno-inline
 			-Wno-conversion
 			-Wno-shadow
 			-Wno-sign-conversion
