@@ -10,6 +10,8 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 	message(STATUS "Compiler: GNU")
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 	message(STATUS "Compiler: Clang")
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+	message(STATUS "Compiler: AppleClang")
 else()
 	message(FATAL_ERROR "Unsupported compiler detected: ${CMAKE_CXX_COMPILER_ID}")
 endif()
@@ -102,7 +104,7 @@ if(DOXYGEN_FOUND)
 	add_custom_target(doc
 		COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/doxygen.conf
 		)
-	add_dependencies(doc tags)
+#	add_dependencies(doc tags)
 endif()
 
 ### cppcheck

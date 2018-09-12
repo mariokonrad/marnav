@@ -6,6 +6,7 @@
 #include <string>
 #include <type_traits>
 #include <vector>
+#include <array>
 #include <marnav/nmea/constants.hpp>
 #include <marnav/nmea/talker_id.hpp>
 #include <marnav/nmea/sentence_id.hpp>

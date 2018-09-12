@@ -3,6 +3,8 @@
 
 #include <cstdint>
 
+#undef TRUE
+
 namespace marnav
 {
 namespace nmea

@@ -12,42 +12,42 @@ class Test_utils_bitset : public ::testing::Test
 
 TEST_F(Test_utils_bitset, to_string)
 {
-	EXPECT_STREQ("0000", to_string(bitset<uint8_t>(4)).c_str());
-	EXPECT_STREQ("00000000", to_string(bitset<uint8_t>(8)).c_str());
-	EXPECT_STREQ("0000000000000", to_string(bitset<uint8_t>(13)).c_str());
-	EXPECT_STREQ("0000000000000000", to_string(bitset<uint8_t>(16)).c_str());
-	EXPECT_STREQ("00000000000000000000000000000000", to_string(bitset<uint8_t>(32)).c_str());
+	EXPECT_STREQ("0000", to_string(marnav::utils::bitset<uint8_t>(4)).c_str());
+	EXPECT_STREQ("00000000", to_string(marnav::utils::bitset<uint8_t>(8)).c_str());
+	EXPECT_STREQ("0000000000000", to_string(marnav::utils::bitset<uint8_t>(13)).c_str());
+	EXPECT_STREQ("0000000000000000", to_string(marnav::utils::bitset<uint8_t>(16)).c_str());
+	EXPECT_STREQ("00000000000000000000000000000000", to_string(marnav::utils::bitset<uint8_t>(32)).c_str());
 }
 
 TEST_F(Test_utils_bitset, to_string_pack)
 {
-	EXPECT_STREQ("00000000", to_string(bitset<uint8_t>(8), 0).c_str());
-	EXPECT_STREQ("0 0 0 0 0 0 0 0", to_string(bitset<uint8_t>(8), 1).c_str());
-	EXPECT_STREQ("00 00 00 00", to_string(bitset<uint8_t>(8), 2).c_str());
-	EXPECT_STREQ("000 000 00", to_string(bitset<uint8_t>(8), 3).c_str());
-	EXPECT_STREQ("0000 0000", to_string(bitset<uint8_t>(8), 4).c_str());
-	EXPECT_STREQ("00000 000", to_string(bitset<uint8_t>(8), 5).c_str());
-	EXPECT_STREQ("000000 00", to_string(bitset<uint8_t>(8), 6).c_str());
-	EXPECT_STREQ("0000000 0", to_string(bitset<uint8_t>(8), 7).c_str());
-	EXPECT_STREQ("00000000", to_string(bitset<uint8_t>(8), 8).c_str());
-	EXPECT_STREQ("00000000", to_string(bitset<uint8_t>(8), 9).c_str());
+	EXPECT_STREQ("00000000", to_string(marnav::utils::bitset<uint8_t>(8), 0).c_str());
+	EXPECT_STREQ("0 0 0 0 0 0 0 0", to_string(marnav::utils::bitset<uint8_t>(8), 1).c_str());
+	EXPECT_STREQ("00 00 00 00", to_string(marnav::utils::bitset<uint8_t>(8), 2).c_str());
+	EXPECT_STREQ("000 000 00", to_string(marnav::utils::bitset<uint8_t>(8), 3).c_str());
+	EXPECT_STREQ("0000 0000", to_string(marnav::utils::bitset<uint8_t>(8), 4).c_str());
+	EXPECT_STREQ("00000 000", to_string(marnav::utils::bitset<uint8_t>(8), 5).c_str());
+	EXPECT_STREQ("000000 00", to_string(marnav::utils::bitset<uint8_t>(8), 6).c_str());
+	EXPECT_STREQ("0000000 0", to_string(marnav::utils::bitset<uint8_t>(8), 7).c_str());
+	EXPECT_STREQ("00000000", to_string(marnav::utils::bitset<uint8_t>(8), 8).c_str());
+	EXPECT_STREQ("00000000", to_string(marnav::utils::bitset<uint8_t>(8), 9).c_str());
 
-	EXPECT_STREQ("0000 0000 0000", to_string(bitset<uint8_t>(12), 4).c_str());
-	EXPECT_STREQ("0000 0000 0000 0000", to_string(bitset<uint8_t>(16), 4).c_str());
-	EXPECT_STREQ("0000 0000 0000 0000 0000", to_string(bitset<uint8_t>(20), 4).c_str());
-	EXPECT_STREQ("0000 0000 0000 0000 0000 0000", to_string(bitset<uint8_t>(24), 4).c_str());
+	EXPECT_STREQ("0000 0000 0000", to_string(marnav::utils::bitset<uint8_t>(12), 4).c_str());
+	EXPECT_STREQ("0000 0000 0000 0000", to_string(marnav::utils::bitset<uint8_t>(16), 4).c_str());
+	EXPECT_STREQ("0000 0000 0000 0000 0000", to_string(marnav::utils::bitset<uint8_t>(20), 4).c_str());
+	EXPECT_STREQ("0000 0000 0000 0000 0000 0000", to_string(marnav::utils::bitset<uint8_t>(24), 4).c_str());
 
-	EXPECT_STREQ("000000000000", to_string(bitset<uint8_t>(12), 0, ':').c_str());
-	EXPECT_STREQ("0000:0000:0000", to_string(bitset<uint8_t>(12), 4, ':').c_str());
-	EXPECT_STREQ("0000:0000:0000:0000", to_string(bitset<uint8_t>(16), 4, ':').c_str());
-	EXPECT_STREQ("0000:0000:0000:0000:0000", to_string(bitset<uint8_t>(20), 4, ':').c_str());
+	EXPECT_STREQ("000000000000", to_string(marnav::utils::bitset<uint8_t>(12), 0, ':').c_str());
+	EXPECT_STREQ("0000:0000:0000", to_string(marnav::utils::bitset<uint8_t>(12), 4, ':').c_str());
+	EXPECT_STREQ("0000:0000:0000:0000", to_string(marnav::utils::bitset<uint8_t>(16), 4, ':').c_str());
+	EXPECT_STREQ("0000:0000:0000:0000:0000", to_string(marnav::utils::bitset<uint8_t>(20), 4, ':').c_str());
 	EXPECT_STREQ(
-		"0000:0000:0000:0000:0000:0000", to_string(bitset<uint8_t>(24), 4, ':').c_str());
+		"0000:0000:0000:0000:0000:0000", to_string(marnav::utils::bitset<uint8_t>(24), 4, ':').c_str());
 }
 
 TEST_F(Test_utils_bitset, uint8__construction_bit_size)
 {
-	bitset<uint8_t> b(16);
+	marnav::utils::bitset<uint8_t> b(16);
 
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -59,7 +59,7 @@ TEST_F(Test_utils_bitset, uint8__construction_container_iterator)
 	using namespace std;
 
 	vector<uint8_t> v{0xaa, 0x55};
-	bitset<uint8_t> b(begin(v), end(v));
+	marnav::utils::bitset<uint8_t> b(begin(v), end(v));
 
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -68,7 +68,7 @@ TEST_F(Test_utils_bitset, uint8__construction_container_iterator)
 
 TEST_F(Test_utils_bitset, uint8__construction_container_move)
 {
-	bitset<uint8_t> b(std::vector<uint8_t>{0xaa, 0x55});
+	marnav::utils::bitset<uint8_t> b(std::vector<uint8_t>{0xaa, 0x55});
 
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -77,10 +77,10 @@ TEST_F(Test_utils_bitset, uint8__construction_container_move)
 
 TEST_F(Test_utils_bitset, uint8__construction_bitset_move)
 {
-	bitset<uint8_t> t;
+	marnav::utils::bitset<uint8_t> t;
 	t.append(0xaa55, 16);
 
-	bitset<uint8_t> b(std::move(t));
+	marnav::utils::bitset<uint8_t> b(std::move(t));
 
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -89,55 +89,55 @@ TEST_F(Test_utils_bitset, uint8__construction_bitset_move)
 
 TEST_F(Test_utils_bitset, uint8__construction_range)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xf0f0, 16);
 	ASSERT_STREQ("1111000011110000", to_string(b).c_str());
 
-	bitset<uint8_t> c{b.begin() + 4, b.end() - 4};
+	marnav::utils::bitset<uint8_t> c{b.begin() + 4, b.end() - 4};
 	EXPECT_STREQ("00001111", to_string(c).c_str());
 }
 
 TEST_F(Test_utils_bitset, uint8__construction_reverse_range)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xf0f0, 16);
 	ASSERT_STREQ("1111000011110000", to_string(b).c_str());
 
-	bitset<uint8_t> c{b.end(), b.begin() + 4};
+	marnav::utils::bitset<uint8_t> c{b.end(), b.begin() + 4};
 	EXPECT_EQ(0u, c.size());
 }
 
 TEST_F(Test_utils_bitset, uint8__construction_range_invalid_iterator)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xf0f0, 16);
 	ASSERT_STREQ("1111000011110000", to_string(b).c_str());
 
-	bitset<uint8_t> c{bitset<uint8_t>::const_iterator(), b.end()};
+	marnav::utils::bitset<uint8_t> c{marnav::utils::bitset<uint8_t>::const_iterator(), b.end()};
 	EXPECT_EQ(0u, c.size());
 }
 
 TEST_F(Test_utils_bitset, uint8__construction_initializer_list)
 {
-	bitset<uint8_t> b{0xaa, 0x55, 0xaa, 0x55};
+	marnav::utils::bitset<uint8_t> b{0xaa, 0x55, 0xaa, 0x55};
 	EXPECT_STREQ("10101010010101011010101001010101", to_string(b).c_str());
 }
 
 TEST_F(Test_utils_bitset, uint8__reserve)
 {
-	bitset<uint8_t>::container c;
+	marnav::utils::bitset<uint8_t>::container c;
 	c.reserve(1);
 
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 
 	EXPECT_EQ(0u, b.capacity());
 	b.reserve(1);
-	EXPECT_EQ(c.capacity() * bitset<uint8_t>::bits_per_block, b.capacity());
+	EXPECT_EQ(c.capacity() * marnav::utils::bitset<uint8_t>::bits_per_block, b.capacity());
 }
 
 TEST_F(Test_utils_bitset, uint8__clear)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaa, 8);
 
 	ASSERT_STREQ("10101010", to_string(b).c_str());
@@ -148,7 +148,7 @@ TEST_F(Test_utils_bitset, uint8__clear)
 
 TEST_F(Test_utils_bitset, uint8__append_to_self)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaa, 8);
 
 	ASSERT_STREQ("10101010", to_string(b).c_str());
@@ -158,7 +158,7 @@ TEST_F(Test_utils_bitset, uint8__append_to_self)
 
 TEST_F(Test_utils_bitset, uint8__append_zero_bits)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	ASSERT_STREQ("", to_string(b).c_str());
 	b.append(0xaa, 0);
 	EXPECT_STREQ("", to_string(b).c_str());
@@ -166,7 +166,7 @@ TEST_F(Test_utils_bitset, uint8__append_zero_bits)
 
 TEST_F(Test_utils_bitset, uint8__set_into_self)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaa, 8);
 
 	ASSERT_STREQ("10101010", to_string(b).c_str());
@@ -176,7 +176,7 @@ TEST_F(Test_utils_bitset, uint8__set_into_self)
 
 TEST_F(Test_utils_bitset, uint8__test_bit)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 
 	b.append(0xaa, 8);
 	ASSERT_STREQ("10101010", to_string(b).c_str());
@@ -193,7 +193,7 @@ TEST_F(Test_utils_bitset, uint8__test_bit)
 
 TEST_F(Test_utils_bitset, uint8__get)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 
 	b.append(0xaa, 8);
 	ASSERT_STREQ("10101010", to_string(b).c_str());
@@ -212,7 +212,7 @@ TEST_F(Test_utils_bitset, uint8__get_enum)
 {
 	enum foo { abc = 0, bcd = 1, cde = 2 };
 
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 
 	b.append(abc, 8);
 
@@ -221,7 +221,7 @@ TEST_F(Test_utils_bitset, uint8__get_enum)
 
 TEST_F(Test_utils_bitset, uint8__index_operator)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 
 	b.append(0xaa, 8);
 	ASSERT_STREQ("10101010", to_string(b).c_str());
@@ -238,34 +238,34 @@ TEST_F(Test_utils_bitset, uint8__index_operator)
 
 TEST_F(Test_utils_bitset, const_iterator__default_construction)
 {
-	bitset<uint8_t>::const_iterator i;
+	marnav::utils::bitset<uint8_t>::const_iterator i;
 
 	EXPECT_EQ(0u, i.get_pos());
 }
 
 TEST_F(Test_utils_bitset, const_iterator_begin)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaa, 8);
 
-	const bitset<uint8_t> & c = b;
+	const marnav::utils::bitset<uint8_t> & c = b;
 
 	EXPECT_EQ(c.begin(), b.cbegin());
 }
 
 TEST_F(Test_utils_bitset, const_iterator_end)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaa, 8);
 
-	const bitset<uint8_t> & c = b;
+	const marnav::utils::bitset<uint8_t> & c = b;
 
 	EXPECT_EQ(c.end(), b.cend());
 }
 
 TEST_F(Test_utils_bitset, const_iterator_comparison_less)
 {
-	bitset<uint8_t> b(16);
+	marnav::utils::bitset<uint8_t> b(16);
 
 	auto i = b.begin();
 	auto j = b.begin();
@@ -278,7 +278,7 @@ TEST_F(Test_utils_bitset, const_iterator_comparison_less)
 
 TEST_F(Test_utils_bitset, const_iterator_comparison_less_or_equal)
 {
-	bitset<uint8_t> b(16);
+	marnav::utils::bitset<uint8_t> b(16);
 
 	auto i = b.begin();
 	auto j = b.begin();
@@ -291,7 +291,7 @@ TEST_F(Test_utils_bitset, const_iterator_comparison_less_or_equal)
 
 TEST_F(Test_utils_bitset, const_iterator_comparison_greater)
 {
-	bitset<uint8_t> b(16);
+	marnav::utils::bitset<uint8_t> b(16);
 
 	auto i = b.begin();
 	auto j = b.begin();
@@ -304,7 +304,7 @@ TEST_F(Test_utils_bitset, const_iterator_comparison_greater)
 
 TEST_F(Test_utils_bitset, const_iterator_comparison_greater_or_equal)
 {
-	bitset<uint8_t> b(16);
+	marnav::utils::bitset<uint8_t> b(16);
 
 	auto i = b.begin();
 	auto j = b.begin();
@@ -318,14 +318,14 @@ TEST_F(Test_utils_bitset, const_iterator_comparison_greater_or_equal)
 TEST_F(Test_utils_bitset, uint8__append_single_bits)
 {
 	{
-		bitset<uint8_t> bits;
+		marnav::utils::bitset<uint8_t> bits;
 		bits.append(1, 1);
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
 		EXPECT_STREQ("1", to_string(bits).c_str());
 	}
 	{
-		bitset<uint8_t> bits;
+		marnav::utils::bitset<uint8_t> bits;
 		bits.append(1, 1);
 		bits.append(0, 1);
 		bits.append(0, 1);
@@ -335,7 +335,7 @@ TEST_F(Test_utils_bitset, uint8__append_single_bits)
 		EXPECT_STREQ("1001", to_string(bits).c_str());
 	}
 	{
-		bitset<uint8_t> bits(8);
+		marnav::utils::bitset<uint8_t> bits(8);
 		bits.append(1, 1);
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -345,7 +345,7 @@ TEST_F(Test_utils_bitset, uint8__append_single_bits)
 
 TEST_F(Test_utils_bitset, uint8__append_block_size_plus_one)
 {
-	bitset<uint8_t> bits;
+	marnav::utils::bitset<uint8_t> bits;
 	bits.append(0x00000001, 9);
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -355,14 +355,14 @@ TEST_F(Test_utils_bitset, uint8__append_block_size_plus_one)
 TEST_F(Test_utils_bitset, uint8__append_multiple_bits)
 {
 	{
-		bitset<uint8_t> bits;
+		marnav::utils::bitset<uint8_t> bits;
 		bits.append(0x00000001, 2);
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
 		EXPECT_STREQ("01", to_string(bits).c_str());
 	}
 	{
-		bitset<uint8_t> bits;
+		marnav::utils::bitset<uint8_t> bits;
 		bits.append(0x00000001, 1);
 		bits.append(0x00000001, 2);
 		bits.append(0x00000001, 3);
@@ -379,7 +379,7 @@ TEST_F(Test_utils_bitset, uint8__append_multiple_bits)
 			"1010010001000010000010000001000000010000000010000000001", to_string(bits).c_str());
 	}
 	{
-		bitset<uint8_t> bits;
+		marnav::utils::bitset<uint8_t> bits;
 
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -393,7 +393,7 @@ TEST_F(Test_utils_bitset, uint8__append_multiple_bits)
 		EXPECT_STREQ("00111010011110101011001111111111", to_string(bits).c_str());
 	}
 	{
-		bitset<uint8_t> bits;
+		marnav::utils::bitset<uint8_t> bits;
 
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -411,7 +411,7 @@ TEST_F(Test_utils_bitset, uint8__append_multiple_bits)
 TEST_F(Test_utils_bitset, uint8__set_single_bits)
 {
 	{
-		bitset<uint8_t> bits(64);
+		marnav::utils::bitset<uint8_t> bits(64);
 		bits.set(1, 0, 1);
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -419,7 +419,7 @@ TEST_F(Test_utils_bitset, uint8__set_single_bits)
 			to_string(bits).c_str());
 	}
 	{
-		bitset<uint8_t> bits(64);
+		marnav::utils::bitset<uint8_t> bits(64);
 		bits.set(1, 1, 1);
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -427,7 +427,7 @@ TEST_F(Test_utils_bitset, uint8__set_single_bits)
 			to_string(bits).c_str());
 	}
 	{
-		bitset<uint8_t> bits(64);
+		marnav::utils::bitset<uint8_t> bits(64);
 		bits.set(1, 15, 1);
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -435,7 +435,7 @@ TEST_F(Test_utils_bitset, uint8__set_single_bits)
 			to_string(bits).c_str());
 	}
 	{
-		bitset<uint8_t> bits(64);
+		marnav::utils::bitset<uint8_t> bits(64);
 		bits.set(1, 16, 1);
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -446,7 +446,7 @@ TEST_F(Test_utils_bitset, uint8__set_single_bits)
 
 TEST_F(Test_utils_bitset, uint8__set_block_size_plus_one)
 {
-	bitset<uint8_t> bits(32);
+	marnav::utils::bitset<uint8_t> bits(32);
 	bits.set(0x00000001, 0, 9);
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -456,7 +456,7 @@ TEST_F(Test_utils_bitset, uint8__set_block_size_plus_one)
 TEST_F(Test_utils_bitset, uint8__set_multiple_bits)
 {
 	{
-		bitset<uint8_t> bits(64);
+		marnav::utils::bitset<uint8_t> bits(64);
 		bits.set(0x00000001, 0, 2);
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -464,7 +464,7 @@ TEST_F(Test_utils_bitset, uint8__set_multiple_bits)
 			to_string(bits).c_str());
 	}
 	{
-		bitset<uint8_t> bits(64);
+		marnav::utils::bitset<uint8_t> bits(64);
 		bits.set(0x00000001, 1, 2);
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -472,7 +472,7 @@ TEST_F(Test_utils_bitset, uint8__set_multiple_bits)
 			to_string(bits).c_str());
 	}
 	{
-		bitset<uint8_t> bits(64);
+		marnav::utils::bitset<uint8_t> bits(64);
 		bits.set(0x00000001, 15, 2);
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -480,7 +480,7 @@ TEST_F(Test_utils_bitset, uint8__set_multiple_bits)
 			to_string(bits).c_str());
 	}
 	{
-		bitset<uint8_t> bits(64);
+		marnav::utils::bitset<uint8_t> bits(64);
 		bits.set(0x00000001, 16, 2);
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -488,7 +488,7 @@ TEST_F(Test_utils_bitset, uint8__set_multiple_bits)
 			to_string(bits).c_str());
 	}
 	{
-		bitset<uint8_t> bits(64);
+		marnav::utils::bitset<uint8_t> bits(64);
 
 		//            0       8       16      24      32      40      48      56
 		//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -505,7 +505,7 @@ TEST_F(Test_utils_bitset, uint8__set_multiple_bits)
 
 TEST_F(Test_utils_bitset, uint8__get_multiple_bits_ending_on_block_boundary)
 {
-	bitset<uint8_t> bits(64);
+	marnav::utils::bitset<uint8_t> bits(64);
 	bits.set(0x7, 5, 3);
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -519,7 +519,7 @@ TEST_F(Test_utils_bitset, uint8__get_multiple_bits_ending_on_block_boundary)
 
 TEST_F(Test_utils_bitset, uint8__get_multiple_bits_completely_within_block)
 {
-	bitset<uint8_t> bits(64);
+	marnav::utils::bitset<uint8_t> bits(64);
 	bits.set(0xff, 4, 3);
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -533,7 +533,7 @@ TEST_F(Test_utils_bitset, uint8__get_multiple_bits_completely_within_block)
 
 TEST_F(Test_utils_bitset, uint8__get_multiple_bits_fractions_of_two_blocks)
 {
-	bitset<uint8_t> bits(64);
+	marnav::utils::bitset<uint8_t> bits(64);
 	bits.set(0xff, 4, 6);
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -547,7 +547,7 @@ TEST_F(Test_utils_bitset, uint8__get_multiple_bits_fractions_of_two_blocks)
 
 TEST_F(Test_utils_bitset, uint8__get_multiple_bits_using_three_blocks)
 {
-	bitset<uint8_t> bits(64);
+	marnav::utils::bitset<uint8_t> bits(64);
 	bits.set(0xffff, 4, 14);
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -563,7 +563,7 @@ TEST_F(Test_utils_bitset, uint8__set_enum)
 {
 	enum class ids : uint8_t { A = 1, B, C };
 
-	bitset<uint8_t> bits(64);
+	marnav::utils::bitset<uint8_t> bits(64);
 	bits.set(ids::A, 4, 6);
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -573,7 +573,7 @@ TEST_F(Test_utils_bitset, uint8__set_enum)
 
 TEST_F(Test_utils_bitset, uint16__get_multiple_bits_ending_on_block_boundary)
 {
-	bitset<uint16_t> bits(64);
+	marnav::utils::bitset<uint16_t> bits(64);
 	bits.set(0xff, 13, 3);
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -587,7 +587,7 @@ TEST_F(Test_utils_bitset, uint16__get_multiple_bits_ending_on_block_boundary)
 
 TEST_F(Test_utils_bitset, uint16__get_multiple_bits_completely_within_block)
 {
-	bitset<uint16_t> bits(64);
+	marnav::utils::bitset<uint16_t> bits(64);
 	bits.set(0x7, 4, 3);
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -601,7 +601,7 @@ TEST_F(Test_utils_bitset, uint16__get_multiple_bits_completely_within_block)
 
 TEST_F(Test_utils_bitset, uint16__get_multiple_bits_fractions_of_two_blocks)
 {
-	bitset<uint16_t> bits(64);
+	marnav::utils::bitset<uint16_t> bits(64);
 	bits.set(0xffff, 4, 6);
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -615,7 +615,7 @@ TEST_F(Test_utils_bitset, uint16__get_multiple_bits_fractions_of_two_blocks)
 
 TEST_F(Test_utils_bitset, uint16__get_multiple_bits_using_three_blocks)
 {
-	bitset<uint16_t> bits(64);
+	marnav::utils::bitset<uint16_t> bits(64);
 	uint64_t val = -1;
 	bits.set(val, 4, 40);
 	//            0       8       16      24      32      40      48      56
@@ -630,10 +630,10 @@ TEST_F(Test_utils_bitset, uint16__get_multiple_bits_using_three_blocks)
 
 TEST_F(Test_utils_bitset, uint8__copy_constructor)
 {
-	bitset<uint8_t> bits(32);
+	marnav::utils::bitset<uint8_t> bits(32);
 	bits.set(1, 0, 6);
 
-	bitset<uint8_t> copy(bits);
+	marnav::utils::bitset<uint8_t> copy(bits);
 
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+
@@ -643,10 +643,10 @@ TEST_F(Test_utils_bitset, uint8__copy_constructor)
 
 TEST_F(Test_utils_bitset, uint8__assignment)
 {
-	bitset<uint8_t> bits(32);
+	marnav::utils::bitset<uint8_t> bits(32);
 	bits.set(1, 0, 6);
 
-	bitset<uint8_t> copy(16);
+	marnav::utils::bitset<uint8_t> copy(16);
 	ASSERT_STREQ("0000000000000000", to_string(copy).c_str());
 	copy = bits;
 
@@ -656,9 +656,9 @@ TEST_F(Test_utils_bitset, uint8__assignment)
 	EXPECT_STREQ("00000100000000000000000000000000", to_string(copy).c_str());
 }
 
-template <class T> bitset<uint8_t> get_test_data(unsigned int size)
+template <class T> marnav::utils::bitset<uint8_t> get_test_data(unsigned int size)
 {
-	bitset<T> result(size);
+	marnav::utils::bitset<T> result(size);
 
 	result.set(1, 0, 6);
 
@@ -688,7 +688,7 @@ TEST_F(Test_utils_bitset, uint8__as_return_value_medium)
 
 TEST_F(Test_utils_bitset, uint8__set_multiple_values)
 {
-	bitset<uint8_t> bits(64);
+	marnav::utils::bitset<uint8_t> bits(64);
 
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -712,7 +712,7 @@ TEST_F(Test_utils_bitset, uint8__set_multiple_values)
 
 TEST_F(Test_utils_bitset, uint8__flip)
 {
-	bitset<uint8_t> bits(64);
+	marnav::utils::bitset<uint8_t> bits(64);
 
 	//            0       8       16      24      32      40      48      56
 	//            +-------+-------+-------+-------+-------+-------+-------+-------
@@ -740,8 +740,8 @@ TEST_F(Test_utils_bitset, uint8__flip)
 
 TEST_F(Test_utils_bitset, uint8__append_bitset_to_empty_bitset)
 {
-	bitset<uint8_t> b0;
-	bitset<uint8_t> b1;
+	marnav::utils::bitset<uint8_t> b0;
+	marnav::utils::bitset<uint8_t> b1;
 
 	b0.append(0x55, 8);
 	b1.append(b0);
@@ -754,8 +754,8 @@ TEST_F(Test_utils_bitset, uint8__append_bitset_to_empty_bitset)
 
 TEST_F(Test_utils_bitset, uint8__append_bitset_to_nonempty_bitset)
 {
-	bitset<uint8_t> b0;
-	bitset<uint8_t> b1;
+	marnav::utils::bitset<uint8_t> b0;
+	marnav::utils::bitset<uint8_t> b1;
 
 	b0.append(0x55, 8);
 	b1.append(0xaa, 8);
@@ -769,8 +769,8 @@ TEST_F(Test_utils_bitset, uint8__append_bitset_to_nonempty_bitset)
 
 TEST_F(Test_utils_bitset, uint8__set_bitset_to_empty_bitset)
 {
-	bitset<uint8_t> b0;
-	bitset<uint8_t> b1;
+	marnav::utils::bitset<uint8_t> b0;
+	marnav::utils::bitset<uint8_t> b1;
 
 	b0.append(0x55, 8);
 	b1.set(b0, 0);
@@ -783,8 +783,8 @@ TEST_F(Test_utils_bitset, uint8__set_bitset_to_empty_bitset)
 
 TEST_F(Test_utils_bitset, uint8__set_bitset_to_empty_bitset_mixed_type_bitsets_8_to_16)
 {
-	bitset<uint8_t> b0;
-	bitset<uint16_t> b1;
+	marnav::utils::bitset<uint8_t> b0;
+	marnav::utils::bitset<uint16_t> b1;
 
 	b0.append(0x55, 8);
 	b1.set(b0, 0);
@@ -797,8 +797,8 @@ TEST_F(Test_utils_bitset, uint8__set_bitset_to_empty_bitset_mixed_type_bitsets_8
 
 TEST_F(Test_utils_bitset, uint8__set_bitset_to_empty_bitset_mixed_type_bitsets_16_to_8)
 {
-	bitset<uint16_t> b0;
-	bitset<uint8_t> b1;
+	marnav::utils::bitset<uint16_t> b0;
+	marnav::utils::bitset<uint8_t> b1;
 
 	b0.append(0x55, 8);
 	b1.set(b0, 0);
@@ -811,8 +811,8 @@ TEST_F(Test_utils_bitset, uint8__set_bitset_to_empty_bitset_mixed_type_bitsets_1
 
 TEST_F(Test_utils_bitset, uint8__set_bitset_to_nonempty_bitset)
 {
-	bitset<uint8_t> b0;
-	bitset<uint8_t> b1;
+	marnav::utils::bitset<uint8_t> b0;
+	marnav::utils::bitset<uint8_t> b1;
 
 	b0.append(0x55, 8);
 	b1.append(0xaa, 8);
@@ -826,7 +826,7 @@ TEST_F(Test_utils_bitset, uint8__set_bitset_to_nonempty_bitset)
 
 TEST_F(Test_utils_bitset, uint8__set_bit)
 {
-	bitset<uint8_t> b(8);
+	marnav::utils::bitset<uint8_t> b(8);
 
 	EXPECT_STREQ("00000000", to_string(b).c_str());
 	b.set_bit(0, true);
@@ -841,7 +841,7 @@ TEST_F(Test_utils_bitset, uint8__set_bit)
 
 TEST_F(Test_utils_bitset, uint8__reset_all)
 {
-	bitset<uint8_t> b(8);
+	marnav::utils::bitset<uint8_t> b(8);
 	b.set(0xaa, 0, 8);
 
 	EXPECT_STREQ("10101010", to_string(b).c_str());
@@ -851,7 +851,7 @@ TEST_F(Test_utils_bitset, uint8__reset_all)
 
 TEST_F(Test_utils_bitset, uint8__reset__invalid_index)
 {
-	bitset<uint8_t> b(8);
+	marnav::utils::bitset<uint8_t> b(8);
 	b.set(0xff, 0, 8);
 
 	EXPECT_ANY_THROW(b.reset(8));
@@ -859,7 +859,7 @@ TEST_F(Test_utils_bitset, uint8__reset__invalid_index)
 
 TEST_F(Test_utils_bitset, uint8__reset)
 {
-	bitset<uint8_t> b(8);
+	marnav::utils::bitset<uint8_t> b(8);
 	b.set(0xff, 0, 8);
 
 	EXPECT_STREQ("11111111", to_string(b).c_str());
@@ -884,21 +884,21 @@ TEST_F(Test_utils_bitset, uint8__reset)
 TEST_F(Test_utils_bitset, uint8__all)
 {
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		EXPECT_FALSE(b.all());
 	}
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		b.set(0xaa, 0, 8);
 		EXPECT_FALSE(b.all());
 	}
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		b.set(1, 0, 8);
 		EXPECT_FALSE(b.all());
 	}
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		b.set(0xff, 0, 8);
 		EXPECT_TRUE(b.all());
 	}
@@ -907,21 +907,21 @@ TEST_F(Test_utils_bitset, uint8__all)
 TEST_F(Test_utils_bitset, uint8__any)
 {
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		EXPECT_FALSE(b.any());
 	}
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		b.set(0xaa, 0, 8);
 		EXPECT_TRUE(b.any());
 	}
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		b.set(1, 0, 8);
 		EXPECT_TRUE(b.any());
 	}
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		b.set(0xff, 0, 8);
 		EXPECT_TRUE(b.any());
 	}
@@ -929,7 +929,7 @@ TEST_F(Test_utils_bitset, uint8__any)
 
 TEST_F(Test_utils_bitset, uint8__count__between)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0x55aa, 16);
 
 	EXPECT_EQ(b.count(), b.count(b.begin(), b.end()));
@@ -944,21 +944,21 @@ TEST_F(Test_utils_bitset, uint8__count__between)
 TEST_F(Test_utils_bitset, uint8__none)
 {
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		EXPECT_TRUE(b.none());
 	}
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		b.set(0xaa, 0, 8);
 		EXPECT_FALSE(b.none());
 	}
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		b.set(1, 0, 8);
 		EXPECT_FALSE(b.none());
 	}
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		b.set(0xff, 0, 8);
 		EXPECT_FALSE(b.none());
 	}
@@ -967,21 +967,21 @@ TEST_F(Test_utils_bitset, uint8__none)
 TEST_F(Test_utils_bitset, uint8__count)
 {
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		EXPECT_EQ(0u, b.count());
 	}
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		b.set(0xaa, 0, 8);
 		EXPECT_EQ(4u, b.count());
 	}
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		b.set(1, 0, 8);
 		EXPECT_EQ(1u, b.count());
 	}
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 		b.set(0xff, 0, 8);
 		EXPECT_EQ(8u, b.count());
 	}
@@ -989,9 +989,9 @@ TEST_F(Test_utils_bitset, uint8__count)
 
 TEST_F(Test_utils_bitset, uint8__comparison_equal)
 {
-	bitset<uint8_t> a;
-	bitset<uint8_t> b;
-	bitset<uint8_t> c;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> c;
 
 	a.append(0xaa, 8);
 	b.append(0xaa, 8);
@@ -1012,10 +1012,10 @@ TEST_F(Test_utils_bitset, uint8__comparison_equal)
 
 TEST_F(Test_utils_bitset, uint8__uint16__comparison_equal)
 {
-	bitset<uint8_t> a;
-	bitset<uint16_t> b;
-	bitset<uint16_t> c;
-	bitset<uint16_t> d;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint16_t> b;
+	marnav::utils::bitset<uint16_t> c;
+	marnav::utils::bitset<uint16_t> d;
 
 	a.append(0xaa, 8);
 	b.append(0xaa, 8);
@@ -1039,9 +1039,9 @@ TEST_F(Test_utils_bitset, uint8__uint16__comparison_equal)
 
 TEST_F(Test_utils_bitset, uint8__comparison_not_equal)
 {
-	bitset<uint8_t> a;
-	bitset<uint8_t> b;
-	bitset<uint8_t> c;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> c;
 
 	a.append(0xaa, 8);
 	b.append(0xaa, 8);
@@ -1062,9 +1062,9 @@ TEST_F(Test_utils_bitset, uint8__comparison_not_equal)
 
 TEST_F(Test_utils_bitset, uint8__uint16__comparison_not_equal)
 {
-	bitset<uint8_t> a;
-	bitset<uint16_t> b;
-	bitset<uint16_t> c;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint16_t> b;
+	marnav::utils::bitset<uint16_t> c;
 
 	a.append(0xaa, 8);
 	b.append(0xaa, 8);
@@ -1085,10 +1085,10 @@ TEST_F(Test_utils_bitset, uint8__uint16__comparison_not_equal)
 
 TEST_F(Test_utils_bitset, uint8__comparison_less)
 {
-	bitset<uint8_t> a;
-	bitset<uint8_t> b;
-	bitset<uint8_t> c;
-	bitset<uint8_t> d;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> c;
+	marnav::utils::bitset<uint8_t> d;
 
 	a.append(0xaa, 8);
 	b.append(0xaa, 8);
@@ -1118,10 +1118,10 @@ TEST_F(Test_utils_bitset, uint8__comparison_less)
 
 TEST_F(Test_utils_bitset, uint8__comparison_less_or_equal)
 {
-	bitset<uint8_t> a;
-	bitset<uint8_t> b;
-	bitset<uint8_t> c;
-	bitset<uint8_t> d;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> c;
+	marnav::utils::bitset<uint8_t> d;
 
 	a.append(0xaa, 8);
 	b.append(0xaa, 8);
@@ -1151,10 +1151,10 @@ TEST_F(Test_utils_bitset, uint8__comparison_less_or_equal)
 
 TEST_F(Test_utils_bitset, uint8__comparison_greater)
 {
-	bitset<uint8_t> a;
-	bitset<uint8_t> b;
-	bitset<uint8_t> c;
-	bitset<uint8_t> d;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> c;
+	marnav::utils::bitset<uint8_t> d;
 
 	a.append(0xaa, 8);
 	b.append(0xaa, 8);
@@ -1184,10 +1184,10 @@ TEST_F(Test_utils_bitset, uint8__comparison_greater)
 
 TEST_F(Test_utils_bitset, uint8__comparison_greater_or_equal)
 {
-	bitset<uint8_t> a;
-	bitset<uint8_t> b;
-	bitset<uint8_t> c;
-	bitset<uint8_t> d;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> c;
+	marnav::utils::bitset<uint8_t> d;
 
 	a.append(0xaa, 8);
 	b.append(0xaa, 8);
@@ -1217,21 +1217,21 @@ TEST_F(Test_utils_bitset, uint8__comparison_greater_or_equal)
 
 TEST_F(Test_utils_bitset, uint8__append_bits_exceeds_type)
 {
-	bitset<uint8_t> b(32);
+	marnav::utils::bitset<uint8_t> b(32);
 	const uint8_t data = 0xff;
 	EXPECT_ANY_THROW(b.append(data, 16));
 }
 
 TEST_F(Test_utils_bitset, uint8__set_bits_exceeds_type)
 {
-	bitset<uint8_t> b(32);
+	marnav::utils::bitset<uint8_t> b(32);
 	const uint8_t data = 0xff;
 	EXPECT_ANY_THROW(b.set(data, 0, 16));
 }
 
 TEST_F(Test_utils_bitset, uint8__get_bits_out_of_range)
 {
-	bitset<uint8_t> b(32);
+	marnav::utils::bitset<uint8_t> b(32);
 	uint8_t data;
 	EXPECT_ANY_THROW(b.get(data, 0, 16));
 	EXPECT_ANY_THROW(b.get(data, 28, 8));
@@ -1240,7 +1240,7 @@ TEST_F(Test_utils_bitset, uint8__get_bits_out_of_range)
 
 TEST_F(Test_utils_bitset, uint8__get_uint32)
 {
-	bitset<uint8_t> b(64);
+	marnav::utils::bitset<uint8_t> b(64);
 	b.set(0xaaaaaaaa, 0, 32);
 	b.set(0xaaaaaaaa, 32, 32);
 	const uint32_t expected = 0xaaaaaaaa;
@@ -1251,21 +1251,21 @@ TEST_F(Test_utils_bitset, uint8__get_uint32)
 
 TEST_F(Test_utils_bitset, uint8__get_bit_out_of_range)
 {
-	bitset<uint8_t> b(32);
+	marnav::utils::bitset<uint8_t> b(32);
 
 	EXPECT_ANY_THROW(b.get_bit(64));
 }
 
 TEST_F(Test_utils_bitset, uint8__set_bit_out_of_range)
 {
-	bitset<uint8_t> b(32);
+	marnav::utils::bitset<uint8_t> b(32);
 
 	EXPECT_ANY_THROW(b.set_bit(64, 1));
 }
 
 TEST_F(Test_utils_bitset, uint8__const_iterator__plus_equal)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaaaaaaaa, 32);
 
 	auto i = b.begin();
@@ -1290,7 +1290,7 @@ TEST_F(Test_utils_bitset, uint8__const_iterator__plus_equal)
 
 TEST_F(Test_utils_bitset, uint8__const_iterator__increment)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaaaaaaaa, 32);
 
 	auto i = b.begin();
@@ -1308,7 +1308,7 @@ TEST_F(Test_utils_bitset, uint8__const_iterator__increment)
 
 TEST_F(Test_utils_bitset, uint8__const_iterator__plus)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaaaaaaaa, 32);
 
 	auto i = b.begin();
@@ -1325,7 +1325,7 @@ TEST_F(Test_utils_bitset, uint8__const_iterator__plus)
 
 TEST_F(Test_utils_bitset, uint8__const_iterator__minus_equal)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaaaaaaaa, 32);
 
 	auto i = b.end();
@@ -1347,7 +1347,7 @@ TEST_F(Test_utils_bitset, uint8__const_iterator__minus_equal)
 
 TEST_F(Test_utils_bitset, uint8__const_iterator__decrement)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaaaaaaaa, 32);
 
 	auto i = b.end();
@@ -1365,7 +1365,7 @@ TEST_F(Test_utils_bitset, uint8__const_iterator__decrement)
 
 TEST_F(Test_utils_bitset, uint8__const_iterator__minus)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaaaaaaaa, 32);
 
 	auto i = b.end();
@@ -1382,7 +1382,7 @@ TEST_F(Test_utils_bitset, uint8__const_iterator__minus)
 
 TEST_F(Test_utils_bitset, uint8__const_iterator__read)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaa, 8);
 
 	uint8_t v;
@@ -1401,7 +1401,7 @@ TEST_F(Test_utils_bitset, uint8__const_iterator__read)
 
 TEST_F(Test_utils_bitset, uint8__const_iterator__peek)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaa, 8);
 
 	auto i = b.begin();
@@ -1426,7 +1426,7 @@ TEST_F(Test_utils_bitset, uint8__const_iterator__peek)
 
 TEST_F(Test_utils_bitset, uint8__const_iterator__peek_no_bitset)
 {
-	bitset<uint8_t>::const_iterator i;
+	marnav::utils::bitset<uint8_t>::const_iterator i;
 
 	uint8_t v = 0xff;
 	i.peek(v);
@@ -1436,7 +1436,7 @@ TEST_F(Test_utils_bitset, uint8__const_iterator__peek_no_bitset)
 
 TEST_F(Test_utils_bitset, uint8__const_iterator__peek_to_large)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 	b.append(0xaa, 8);
 
 	auto i = b.begin();
@@ -1447,9 +1447,9 @@ TEST_F(Test_utils_bitset, uint8__const_iterator__peek_to_large)
 
 TEST_F(Test_utils_bitset, uint8__logic_xor_assign)
 {
-	bitset<uint8_t> a;
-	bitset<uint8_t> b;
-	bitset<uint8_t> c;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> c;
 
 	a.append(0x0aaa, 16);
 	b.append(0xaaa0, 16);
@@ -1461,9 +1461,9 @@ TEST_F(Test_utils_bitset, uint8__logic_xor_assign)
 
 TEST_F(Test_utils_bitset, uint8__logic_xor_assign__different_size)
 {
-	bitset<uint8_t> a;
-	bitset<uint8_t> b;
-	bitset<uint8_t> c;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> c;
 
 	a.append(0x0a, 8);
 	b.append(0xaaa0, 16);
@@ -1478,8 +1478,8 @@ TEST_F(Test_utils_bitset, uint8__logic_xor_assign__different_size)
 
 TEST_F(Test_utils_bitset, uint8__logic_xor)
 {
-	bitset<uint8_t> a;
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint8_t> b;
 	a.append(0xaa, 8);
 	b.append(0x55, 8);
 
@@ -1490,9 +1490,9 @@ TEST_F(Test_utils_bitset, uint8__logic_xor)
 
 TEST_F(Test_utils_bitset, uint8__logic_or_assign)
 {
-	bitset<uint8_t> a;
-	bitset<uint8_t> b;
-	bitset<uint8_t> c;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> c;
 
 	a.append(0x00aa, 16);
 	b.append(0xaa00, 16);
@@ -1507,8 +1507,8 @@ TEST_F(Test_utils_bitset, uint8__logic_or_assign)
 
 TEST_F(Test_utils_bitset, uint8__logic_or)
 {
-	bitset<uint8_t> a;
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint8_t> b;
 	a.append(0xaa, 8);
 	b.append(0x55, 8);
 
@@ -1520,9 +1520,9 @@ TEST_F(Test_utils_bitset, uint8__logic_or)
 TEST_F(Test_utils_bitset, uint8__logic_and_assign)
 {
 	{
-		bitset<uint8_t> a;
-		bitset<uint8_t> b;
-		bitset<uint8_t> c;
+		marnav::utils::bitset<uint8_t> a;
+		marnav::utils::bitset<uint8_t> b;
+		marnav::utils::bitset<uint8_t> c;
 
 		a.append(0x00aa, 16);
 		b.append(0xaa00, 16);
@@ -1535,8 +1535,8 @@ TEST_F(Test_utils_bitset, uint8__logic_and_assign)
 		EXPECT_EQ(0xaa, c.get<uint16_t>(0, 8));
 	}
 	{
-		bitset<uint8_t> bs1;
-		bitset<uint8_t> bs2;
+		marnav::utils::bitset<uint8_t> bs1;
+		marnav::utils::bitset<uint8_t> bs2;
 
 		bs1.append(7, 4); //  0111
 		bs2.append(25, 5); // 11001
@@ -1546,8 +1546,8 @@ TEST_F(Test_utils_bitset, uint8__logic_and_assign)
 		EXPECT_EQ(4u, bs1.get<uint8_t>(0, 4));
 	}
 	{
-		bitset<uint8_t> bs1;
-		bitset<uint8_t> bs2;
+		marnav::utils::bitset<uint8_t> bs1;
+		marnav::utils::bitset<uint8_t> bs2;
 
 		bs1.append(25, 5); // 11001
 		bs2.append(7, 4); //  0111
@@ -1560,8 +1560,8 @@ TEST_F(Test_utils_bitset, uint8__logic_and_assign)
 
 TEST_F(Test_utils_bitset, uint8__logic_and)
 {
-	bitset<uint8_t> a;
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> a;
+	marnav::utils::bitset<uint8_t> b;
 	a.append(0xa5, 8);
 	b.append(0x55, 8);
 
@@ -1572,7 +1572,7 @@ TEST_F(Test_utils_bitset, uint8__logic_and)
 
 TEST_F(Test_utils_bitset, error_get_block)
 {
-	bitset<uint8_t> bs1;
+	marnav::utils::bitset<uint8_t> bs1;
 	bs1.append(3, 4); // 0011
 
 	const auto result = bs1.get<uint8_t>(0, 4);
@@ -1583,7 +1583,7 @@ TEST_F(Test_utils_bitset, error_get_block)
 TEST_F(Test_utils_bitset, uint8__arithmetic__increment)
 {
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 
 		EXPECT_STREQ("00000000", to_string(b).c_str());
 		++b;
@@ -1602,7 +1602,7 @@ TEST_F(Test_utils_bitset, uint8__arithmetic__increment)
 		EXPECT_STREQ("00000000", to_string(b).c_str());
 	}
 	{
-		bitset<uint8_t> b(4);
+		marnav::utils::bitset<uint8_t> b(4);
 
 		b.set(0xf, 0, 4);
 		EXPECT_STREQ("1111", to_string(b).c_str());
@@ -1614,7 +1614,7 @@ TEST_F(Test_utils_bitset, uint8__arithmetic__increment)
 		EXPECT_STREQ("0010", to_string(b).c_str());
 	}
 	{
-		bitset<uint8_t> b;
+		marnav::utils::bitset<uint8_t> b;
 		b.append(0xf, 20);
 		ASSERT_STREQ("00000000000000001111", to_string(b).c_str());
 
@@ -1626,7 +1626,7 @@ TEST_F(Test_utils_bitset, uint8__arithmetic__increment)
 TEST_F(Test_utils_bitset, uint8__arithmetic__decrement)
 {
 	{
-		bitset<uint8_t> b(8);
+		marnav::utils::bitset<uint8_t> b(8);
 
 		b.set(0xff, 0, 8);
 		EXPECT_STREQ("11111111", to_string(b).c_str());
@@ -1646,7 +1646,7 @@ TEST_F(Test_utils_bitset, uint8__arithmetic__decrement)
 		EXPECT_STREQ("11111111", to_string(b).c_str());
 	}
 	{
-		bitset<uint8_t> b(4);
+		marnav::utils::bitset<uint8_t> b(4);
 
 		EXPECT_STREQ("0000", to_string(b).c_str());
 		--b;
@@ -1660,7 +1660,7 @@ TEST_F(Test_utils_bitset, uint8__arithmetic__decrement)
 
 TEST_F(Test_utils_bitset, uint8__arithmetic__increment_empty)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 
 	ASSERT_EQ(0u, b.size());
 	++b;
@@ -1669,7 +1669,7 @@ TEST_F(Test_utils_bitset, uint8__arithmetic__increment_empty)
 
 TEST_F(Test_utils_bitset, uint8__arithmetic__decrement_empty)
 {
-	bitset<uint8_t> b;
+	marnav::utils::bitset<uint8_t> b;
 
 	ASSERT_EQ(0u, b.size());
 	--b;
@@ -1679,7 +1679,7 @@ TEST_F(Test_utils_bitset, uint8__arithmetic__decrement_empty)
 TEST_F(Test_utils_bitset, uint8__shift_left)
 {
 	{
-		bitset<uint8_t> b;
+		marnav::utils::bitset<uint8_t> b;
 		b.append(0xaa, 8);
 		b.append(0x55, 8);
 		b.append(0x0f, 8);
@@ -1690,7 +1690,7 @@ TEST_F(Test_utils_bitset, uint8__shift_left)
 		EXPECT_STREQ("01010101000011111111000000000000", to_string(b).c_str());
 	}
 	{
-		bitset<uint8_t> b;
+		marnav::utils::bitset<uint8_t> b;
 		b.append(5, 5);
 		ASSERT_STREQ("00101", to_string(b).c_str());
 
@@ -1704,14 +1704,14 @@ TEST_F(Test_utils_bitset, uint8__shift_left)
 		EXPECT_STREQ("00000", to_string(b).c_str());
 	}
 	{
-		bitset<uint8_t> b;
+		marnav::utils::bitset<uint8_t> b;
 		b.append(5, 5);
 		ASSERT_STREQ("00101", to_string(b).c_str());
 		b <<= 2;
 		EXPECT_STREQ("10100", to_string(b).c_str());
 	}
 	{
-		bitset<uint8_t> b;
+		marnav::utils::bitset<uint8_t> b;
 		b.append(5, 5);
 		ASSERT_STREQ("00101", to_string(b).c_str());
 		auto t = b << 2;
@@ -1722,14 +1722,14 @@ TEST_F(Test_utils_bitset, uint8__shift_left)
 TEST_F(Test_utils_bitset, uint8__shift_right)
 {
 	{
-		bitset<uint8_t> b;
+		marnav::utils::bitset<uint8_t> b;
 		b.append(0xffff, 12);
 		ASSERT_STREQ("111111111111", to_string(b).c_str());
 		b.shr(5);
 		EXPECT_STREQ("000001111111", to_string(b).c_str());
 	}
 	{
-		bitset<uint8_t> b;
+		marnav::utils::bitset<uint8_t> b;
 		b.append(0xf0, 8);
 		b.append(0x0f, 8);
 		b.append(0x0f, 8);
@@ -1740,7 +1740,7 @@ TEST_F(Test_utils_bitset, uint8__shift_right)
 		EXPECT_STREQ("00000000111100000000111100001111", to_string(b).c_str());
 	}
 	{
-		bitset<uint8_t> b;
+		marnav::utils::bitset<uint8_t> b;
 		b.append(5, 5);
 		ASSERT_STREQ("00101", to_string(b).c_str());
 
@@ -1754,21 +1754,21 @@ TEST_F(Test_utils_bitset, uint8__shift_right)
 		EXPECT_STREQ("00000", to_string(b).c_str());
 	}
 	{
-		bitset<uint8_t> b;
+		marnav::utils::bitset<uint8_t> b;
 		b.append(5, 5);
 		ASSERT_STREQ("00101", to_string(b).c_str());
 		b >>= 1;
 		EXPECT_STREQ("00010", to_string(b).c_str());
 	}
 	{
-		bitset<uint8_t> b;
+		marnav::utils::bitset<uint8_t> b;
 		b.append(5, 5);
 		ASSERT_STREQ("00101", to_string(b).c_str());
 		auto t = b >> 1;
 		EXPECT_STREQ("00010", to_string(t).c_str());
 	}
 	{
-		bitset<uint8_t> b;
+		marnav::utils::bitset<uint8_t> b;
 		b.append(0xaa, 8);
 		ASSERT_STREQ("10101010", to_string(b).c_str());
 		b.shr(1);
