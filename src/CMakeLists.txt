@@ -136,6 +136,7 @@ target_sources(marnav
 		marnav/nmea/pgrme.cpp
 		marnav/nmea/pgrmm.cpp
 		marnav/nmea/pgrmz.cpp
+		marnav/nmea/stalk.cpp
 	)
 
 install(
@@ -235,6 +236,7 @@ install(
 		marnav/nmea/zfo.hpp
 		marnav/nmea/ztg.hpp
 		marnav/nmea/pgrme.hpp
+		marnav/nmea/stalk.hpp
 	DESTINATION include/marnav/nmea
 	)
 

@@ -130,9 +130,10 @@ enum class sentence_id : uint32_t {
 	STR, ///< Tracking Reference
 	SYS, ///< Hybrid System Configuration
 	VWT, ///< True Wind Speed and Angle
-
+	
 	// vendor extensions
 
+	STALK,
 	PGRME, ///< Estimated Error Information (Garmin Extension)
 	PGRMM, ///< Map Datum (Garmin Extension)
 	PGRMZ, ///< Altitude (Garmin Extension)

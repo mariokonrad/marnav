@@ -85,6 +85,7 @@
 #include <marnav/nmea/pgrme.hpp>
 #include <marnav/nmea/pgrmm.hpp>
 #include <marnav/nmea/pgrmz.hpp>
+#include <marnav/nmea/stalk.hpp>
 
 /// @example parse_nmea.cpp
 /// This is an example on how to parse and handle NMEA sentences from a string.
@@ -136,7 +137,7 @@ static const std::vector<entry> known_sentences = {
 	REGISTER_SENTENCE(zdl), REGISTER_SENTENCE(zfo), REGISTER_SENTENCE(ztg),
 
 	// vendor extensions
-	REGISTER_SENTENCE(pgrme), REGISTER_SENTENCE(pgrmm), REGISTER_SENTENCE(pgrmz)};
+	REGISTER_SENTENCE(pgrme), REGISTER_SENTENCE(pgrmm), REGISTER_SENTENCE(pgrmz), REGISTER_SENTENCE(stalk)};
 #undef REGISTER_SENTENCE
 }
 
@@ -174,7 +175,7 @@ static bool is_proprietary(const std::string & s)
 {
 	if (s.size() < 1)
 		return false;
-	return s[0] == 'P';
+	return s[0] == 'P' || s[0] == 'S';
 }
 
 /// Checks if the address field of the specified sentence is a vendor extension or

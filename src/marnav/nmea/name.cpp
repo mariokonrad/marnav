@@ -7,6 +7,8 @@ namespace nmea
 std::string to_name(sentence_id t)
 {
 	switch (t) {
+		case sentence_id::STALK:
+			return "Seatalk over NMEA sentence";
 		case sentence_id::NONE:
 			return "<none>";
 		case sentence_id::AAM:
