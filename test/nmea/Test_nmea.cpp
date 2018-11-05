@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <marnav/nmea/checksum.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/detail.hpp>
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/vwr.hpp>
 
@@ -59,7 +60,7 @@ TEST_F(Test_nmea, make_sentence_minimal_possible_sentence)
 	try {
 		nmea::make_sentence("$IIYYY*59");
 	} catch (std::exception & e) {
-		EXPECT_STREQ("unknown sentence in nmea/find_parse_func: YYY", e.what());
+		EXPECT_STREQ("unknown regular tag in address: [IIYYY]", e.what());
 	}
 }
 
@@ -68,7 +69,7 @@ TEST_F(Test_nmea, make_sentence_vendor_extension)
 	try {
 		nmea::make_sentence("$PXXX*08");
 	} catch (std::exception & e) {
-		EXPECT_STREQ("unknown sentence in nmea/find_parse_func: PXXX", e.what());
+		EXPECT_STREQ("unknown or malformed address field: [PXXX]", e.what());
 	}
 }
 
@@ -157,6 +158,8 @@ TEST_F(Test_nmea, extract_id)
 	EXPECT_NO_THROW(nmea::extract_id("!GPBOD,,T,,M,,*XX"));
 	EXPECT_NO_THROW(nmea::extract_id("$GPBOD,"));
 	EXPECT_ANY_THROW(nmea::extract_id("$GPBOD"));
+	EXPECT_ANY_THROW(nmea::extract_id("$TMVTD"));
+	EXPECT_ANY_THROW(nmea::extract_id("$TMVTD,,T,,M,,*47"));
 }
 
 TEST_F(Test_nmea, extract_id_tag_block)
@@ -179,5 +182,68 @@ TEST_F(Test_nmea, make_sentence_tag_block)
 	EXPECT_TRUE(!s->get_tag_block().empty());
 	EXPECT_STREQ(
 		"g:1-2-73874,n:157036,s:r003669945,c:1241544035*4A", s->get_tag_block().c_str());
+}
+
+TEST_F(Test_nmea, parse_address_empty_string)
+{
+	EXPECT_ANY_THROW(nmea::detail::parse_address(std::string{}));
+}
+
+TEST_F(Test_nmea, parse_address_regular)
+{
+	EXPECT_NO_THROW(nmea::detail::parse_address("GPAAM"));
+}
+
+TEST_F(Test_nmea, parse_address_proprietary)
+{
+	{
+		const auto result = nmea::detail::parse_address("PGRMZ");
+		EXPECT_EQ(nmea::talker::none, std::get<0>(result));
+		EXPECT_STREQ("PGRMZ", std::get<1>(result).c_str());
+	}
+	{
+		const auto result = nmea::detail::parse_address("PGRMM");
+		EXPECT_EQ(nmea::talker::none, std::get<0>(result));
+		EXPECT_STREQ("PGRMM", std::get<1>(result).c_str());
+	}
+	{
+		EXPECT_ANY_THROW(nmea::detail::parse_address("TMVTD"));
+	}
+	{
+		EXPECT_ANY_THROW(nmea::detail::parse_address("XXYYY"));
+	}
+}
+
+TEST_F(Test_nmea, parse_address_proprietary_unknown)
+{
+	try {
+		nmea::detail::parse_address("PFOOBAR");
+	} catch (std::invalid_argument & e) {
+		EXPECT_STREQ("unknown or malformed address field: [PFOOBAR]", e.what());
+	}
+}
+
+TEST_F(Test_nmea, parse_address_regular_invalid_length)
+{
+	try {
+		nmea::detail::parse_address("GPFOOBAR");
+	} catch (std::invalid_argument & e) {
+		EXPECT_STREQ("unknown or malformed address field: [GPFOOBAR]", e.what());
+	}
+
+	try {
+		nmea::detail::parse_address("GPRMZFOO");
+	} catch (std::invalid_argument & e) {
+		EXPECT_STREQ("unknown or malformed address field: [GPRMZFOO]", e.what());
+	}
+}
+
+TEST_F(Test_nmea, parse_address_regular_unknown)
+{
+	try {
+		nmea::detail::parse_address("GPXXX");
+	} catch (std::invalid_argument & e) {
+		EXPECT_STREQ("unknown regular tag in address: [GPXXX]", e.what());
+	}
 }
 }

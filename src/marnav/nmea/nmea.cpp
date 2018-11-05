@@ -148,7 +148,7 @@ namespace detail
 /// Searches in the known sentences for the entry carrying the specified tag.
 static std::vector<entry>::const_iterator find_tag(const std::string & tag)
 {
-	return std::find_if(begin(known_sentences), end(known_sentences),
+	return std::find_if(std::begin(known_sentences), std::end(known_sentences),
 		[tag](const entry & e) { return e.TAG == tag; });
 }
 
@@ -169,21 +169,10 @@ static sentence::parse_function find_parse_func(const std::string & tag)
 	return i->parse;
 }
 
-/// Returns true of the speficied address string indicates a proprietary sentence.
-static bool is_proprietary(const std::string & s)
-{
-	if (s.size() < 1)
-		return false;
-	return s[0] == 'P';
-}
-
 /// Checks if the address field of the specified sentence is a vendor extension or
 /// a regular sentence. It returns the talker ID and tag accordingly.
 ///
 /// @param[in] address The address field of a sentence.
-/// @param[in] ignore_unknown Flag to ignore unknown sentences. This prevents
-///   the function to search through all known sentences, which is not always
-///   necessary, depending on the context.
 /// @return The tuple contains talker ID and tag. In case of a vendor extension,
 ///   the talker ID may be empty.
 /// @exception std::invalid_argument The specified address was probably malformed or
@@ -192,29 +181,24 @@ static bool is_proprietary(const std::string & s)
 /// @note This function must be defined here, not in the file detail.cpp,
 ///       because it needs access to the known sentences, which the other file
 ///       does not, nor should have.
-std::tuple<talker, std::string> parse_address(const std::string & address, bool ignore_unknown)
+std::tuple<talker, std::string> parse_address(const std::string & address)
 {
 	if (address.empty())
 		throw std::invalid_argument{"invalid/malformed address in nmea/parse_address"};
 
-	// check for proprietary extension / vendor extension
-	if (is_proprietary(address))
+	// if the address is found as-is, it's a proprietary sentence, respectively
+	// an address without a talker.
+	if (find_tag(address) != std::end(known_sentences))
 		return make_tuple(talker_id::none, address);
 
-	if (!ignore_unknown) {
-		// search in all known sentences for 'long' tags. this is a special case
-		// and if the long address (not proprietary, this is covered above) doesn't exist,
-		// it must be an error.
-		if (find_tag(address) != std::end(known_sentences))
-			throw std::invalid_argument{
-				"invalid address (" + address + ") in nmea/parse_address"};
-	}
-
-	// found regular sentence
-	if (address.size() != 5) // talker ID:2 + tag:3
+	// if the address looks like a regular address, we search for it, if not, it's an error
+	if (address.size() != 5u) // talker ID:2 + tag:3
 		throw std::invalid_argument{"unknown or malformed address field: [" + address + "]"};
 
-	return make_tuple(make_talker(address.substr(0, 2)), address.substr(2, 3));
+	const auto tag = address.substr(2, 3);
+	if (find_tag(tag) == std::end(known_sentences))
+		throw std::invalid_argument("unknown regular tag in address: [" + address + "]");
+	return make_tuple(make_talker(address.substr(0, 2)), tag);
 }
 
 /// Computes and checks the checksum of the specified sentence against the
@@ -367,8 +351,7 @@ sentence_id extract_id(const std::string & s)
 
 	talker talk{talker_id::none};
 	std::string tag;
-	std::tie(talk, tag)
-		= detail::parse_address(s.substr(search_pos + 1, pos - search_pos - 1), true);
+	std::tie(talk, tag) = detail::parse_address(s.substr(search_pos + 1, pos - search_pos - 1));
 
 	return tag_to_id(tag);
 }

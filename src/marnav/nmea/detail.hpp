@@ -17,8 +17,7 @@ class sentence; // forward declaration
 
 namespace detail
 {
-std::tuple<talker, std::string> parse_address(
-	const std::string & address, bool ignore_unknown = false);
+std::tuple<talker, std::string> parse_address(const std::string & address);
 
 void ensure_checksum(
 	const std::string & s, const std::string & expected, std::string::size_type start_pos);
