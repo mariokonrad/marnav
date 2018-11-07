@@ -102,6 +102,7 @@ void read(const std::string & s, duration & value, data_format fmt = data_format
 void read(const std::string & s, char & value, data_format fmt = data_format::none);
 void read(const std::string & s, uint64_t & value, data_format fmt = data_format::dec);
 void read(const std::string & s, uint32_t & value, data_format fmt = data_format::dec);
+void read(const std::string & s, uint8_t & value, data_format fmt = data_format::dec);
 void read(const std::string & s, int32_t & value, data_format fmt = data_format::dec);
 void read(const std::string & s, double & value, data_format fmt = data_format::none);
 void read(const std::string & s, std::string & value, data_format fmt = data_format::none);

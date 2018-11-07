@@ -171,7 +171,7 @@ void read_integer(const std::string & s, T & value, data_format fmt)
 	std::size_t pos = 0;
 	value = sto<T>(s, &pos, (fmt == data_format::hex) ? 16 : 10);
 	if (pos != s.size())
-		throw std::runtime_error{"invalid string to convert to number"};
+		throw std::runtime_error{"invalid string to convert to number: [" + s + "]"};
 }
 }
 
@@ -187,6 +187,13 @@ void read(const std::string & s, uint32_t & value, data_format fmt)
 	detail::read_integer(s, value, fmt);
 }
 
+void read(const std::string & s, uint8_t & value, data_format fmt)
+{
+	uint32_t tmp;
+	detail::read_integer(s, tmp, fmt);
+	value = tmp;
+}
+
 void read(const std::string & s, int32_t & value, data_format fmt)
 {
 	detail::read_integer(s, value, fmt);
@@ -200,7 +207,7 @@ void read(const std::string & s, double & value, data_format fmt)
 	std::size_t pos = 0;
 	value = std::stod(s, &pos);
 	if (pos != s.size())
-		throw std::runtime_error{"invalid string to convert to double"};
+		throw std::runtime_error{"invalid string to convert to double: [" + s + "]"};
 }
 
 void read(const std::string & s, std::string & value, data_format fmt)

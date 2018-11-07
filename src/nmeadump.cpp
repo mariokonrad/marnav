@@ -115,6 +115,7 @@
 #include <marnav/nmea/pgrme.hpp>
 #include <marnav/nmea/pgrmm.hpp>
 #include <marnav/nmea/pgrmz.hpp>
+#include <marnav/nmea/stalk.hpp>
 
 #include <marnav/ais/ais.hpp>
 #include <marnav/ais/name.hpp>
@@ -560,6 +561,15 @@ static std::string render(const marnav::nmea::waypoint & t)
 static std::string render(const marnav::nmea::mode_indicator t)
 {
 	return marnav::nmea::to_name(t);
+}
+
+static std::string render(const std::vector<uint8_t> & t)
+{
+	std::string s;
+	s.reserve(t.size() * 3 - 1);
+	for (auto i = begin(t); i != end(t); ++i)
+		s.append(fmt::sprintf(((i == begin(t)) ? "%02x" : " %02x"), *i));
+	return s;
 }
 
 template <typename T> static std::string render(const marnav::utils::optional<T> & t)
@@ -1241,6 +1251,12 @@ static void print_detail_pgrmz(const marnav::nmea::sentence * s)
 	print("Fix Type", render(t->get_fix()));
 }
 
+static void print_detail_stalk(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::stalk>(s);
+	print("Data", render(t->get_data()));
+}
+
 static void print_detail_vwr(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vwr>(s);
@@ -1794,7 +1810,8 @@ static void dump_nmea(const std::string & line)
 		// proprietary
 		ADD_SENTENCE(pgrme),
 		ADD_SENTENCE(pgrmm),
-		ADD_SENTENCE(pgrmz)
+		ADD_SENTENCE(pgrmz),
+		ADD_SENTENCE(stalk)
 	};
 // clang-format on
 #undef ADD_SENTENCE

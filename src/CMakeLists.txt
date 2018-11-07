@@ -56,6 +56,7 @@ target_sources(marnav
 		marnav/nmea/checksum.cpp
 		marnav/nmea/sentence.cpp
 		marnav/nmea/detail.cpp
+		marnav/nmea/hex_digit.hpp
 		marnav/nmea/ais_helper.cpp
 		marnav/nmea/nmea.cpp
 		marnav/nmea/aam.cpp
@@ -136,6 +137,7 @@ target_sources(marnav
 		marnav/nmea/pgrme.cpp
 		marnav/nmea/pgrmm.cpp
 		marnav/nmea/pgrmz.cpp
+		marnav/nmea/stalk.cpp
 	)
 
 install(

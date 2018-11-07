@@ -106,6 +106,7 @@ target_sources(testrunner
 		nmea/Test_nmea_pgrme.cpp
 		nmea/Test_nmea_pgrmm.cpp
 		nmea/Test_nmea_pgrmz.cpp
+		nmea/Test_nmea_stalk.cpp
 	)
 
 if(ENABLE_AIS)

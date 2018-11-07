@@ -1,7 +1,7 @@
 marnav
 ======
 
-Copyright (c) 2017 Mario Konrad (mario.konrad@gmx.net)
+Copyright (c) 2018 Mario Konrad (mario.konrad@gmx.net)
 
 ---
 
@@ -125,6 +125,7 @@ Vendor Extensions:
 - PGRME: Garmin Estimated Error
 - PGRMM: Garmin Map Datum
 - PGRMZ: Garmin Altitude Information
+- STALK: SeaTalk Raw Format
 
 Miscellaneous:
 - Tag Block Support (generic for all sentences)

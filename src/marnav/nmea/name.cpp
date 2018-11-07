@@ -253,6 +253,8 @@ std::string to_name(sentence_id t)
 			return "u-blox (misc formats, depending on first field)";
 		case sentence_id::TMVTD:
 			return "Transas VTS / SML tracking system report";
+		case sentence_id::STALK:
+			return "SeaTalk raw data over NMEA";
 	}
 	return "-";
 }

@@ -1,4 +1,5 @@
 #include "checksum.hpp"
+#include "hex_digit.hpp"
 
 namespace marnav
 {
@@ -11,16 +12,6 @@ checksum_error::checksum_error(uint8_t exp, uint8_t act)
 	snprintf(
 		text_, sizeof(text_), "checksum error (actual:%02X, expected:%02X)", actual, expected);
 }
-
-/// @cond DEV
-namespace detail
-{
-static constexpr char hex_digit(unsigned int t) noexcept
-{
-	return "0123456789ABCDEF"[t & 0xf];
-}
-}
-/// @endcond
 
 /// Returns the specified checksum as string.
 ///
