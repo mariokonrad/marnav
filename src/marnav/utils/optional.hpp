@@ -103,7 +103,7 @@ public:
 
 	T & value() & { return data_; }
 
-	T && value() && { return data_; }
+	T && value() && { return std::move(data_); }
 
 	/* disabling c++14 extensions for now
 	template <class U> constexpr T value_or(U && value) const &
