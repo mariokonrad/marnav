@@ -19,6 +19,9 @@ namespace utils
 ///   optional type. This, of course, limits the application of this type, which is fine
 ///   for what it is used within this library.
 ///
+/// @note There is no support for exceptions on access to empty optional. Accessing
+///   an optional not carrying a value is undefined.
+///
 /// This is (somewhat) necessary, because optional is not part of the standard and may change
 /// its interface in the future.
 ///

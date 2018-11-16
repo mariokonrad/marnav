@@ -71,10 +71,21 @@
 #
 
 # Check prereqs
-FIND_PROGRAM( GCOV_PATH gcov )
-FIND_PROGRAM( LCOV_PATH lcov )
-FIND_PROGRAM( GENHTML_PATH genhtml )
-FIND_PROGRAM( GCOVR_PATH gcovr PATHS ${CMAKE_SOURCE_DIR}/tests)
+if(NOT GCOV_PATH)
+	FIND_PROGRAM(GCOV_PATH gcov)
+endif()
+if(NOT LCOV_PATH)
+	FIND_PROGRAM(LCOV_PATH lcov)
+endif()
+
+get_filename_component(__lcov_dir ${LCOV_PATH} DIRECTORY)
+FIND_PROGRAM(GENHTML_PATH genhtml PATHS ${__lcov_dir})
+
+FIND_PROGRAM(GCOVR_PATH gcovr PATHS ${CMAKE_SOURCE_DIR}/tests)
+
+message(STATUS "Found gcov: ${GCOV_PATH}")
+message(STATUS "Found lcov: ${LCOV_PATH}")
+message(STATUS "Found genhtml: ${GENHTML_PATH}")
 
 IF(NOT GCOV_PATH)
 	MESSAGE(FATAL_ERROR "gcov not found! Aborting...")
@@ -137,14 +148,14 @@ FUNCTION(SETUP_TARGET_FOR_COVERAGE _targetname _testrunner _outputname)
 	# Setup target
 	ADD_CUSTOM_TARGET(${_targetname}
 		# Cleanup lcov
-		${LCOV_PATH} --rc lcov_branch_coverage=1 --directory . --zerocounters
+		${LCOV_PATH} --gcov-tool ${GCOV_PATH} --rc lcov_branch_coverage=1 --directory . --zerocounters
 
 		# Run tests
 		COMMAND ${_testrunner} ${ARGV3}
 
 		# Capturing lcov counters and generating report
-		COMMAND ${LCOV_PATH} --rc lcov_branch_coverage=1 --directory . --capture --output-file ${_outputname}.info
-		COMMAND ${LCOV_PATH} --rc lcov_branch_coverage=1 --remove ${_outputname}.info '/usr/*' 'local/*' 'test/*' --output-file ${_outputname}.info.cleaned
+		COMMAND ${LCOV_PATH} --gcov-tool ${GCOV_PATH} --rc lcov_branch_coverage=1 --directory . --capture --output-file ${_outputname}.info
+		COMMAND ${LCOV_PATH} --gcov-tool ${GCOV_PATH} --rc lcov_branch_coverage=1 --remove ${_outputname}.info '/usr/*' 'local/*' 'test/*' 'build/*' --output-file ${_outputname}.info.cleaned
 		COMMAND ${GENHTML_PATH} --branch-coverage --demangle-cpp -o ${_outputname} ${_outputname}.info.cleaned
 		COMMAND ${CMAKE_COMMAND} -E remove ${_outputname}.info ${_outputname}.info.cleaned
 
