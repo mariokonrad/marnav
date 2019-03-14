@@ -249,6 +249,7 @@ install(
 		marnav/utils/optional.hpp
 		marnav/utils/mmsi.hpp
 		marnav/utils/mmsi_country.hpp
+		marnav/utils/clamp.hpp
 	DESTINATION include/marnav/utils
 	)
 

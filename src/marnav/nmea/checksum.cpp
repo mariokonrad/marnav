@@ -6,11 +6,11 @@ namespace marnav
 namespace nmea
 {
 checksum_error::checksum_error(uint8_t exp, uint8_t act)
-	: expected(exp)
-	, actual(act)
+	: expected_(exp)
+	, actual_(act)
 {
-	snprintf(
-		text_, sizeof(text_), "checksum error (actual:%02X, expected:%02X)", actual, expected);
+	snprintf(text_, sizeof(text_), "checksum error (actual:%02X, expected:%02X)", actual_,
+		expected_);
 }
 
 /// Returns the specified checksum as string.

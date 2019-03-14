@@ -189,7 +189,7 @@ void read(const std::string & s, uint32_t & value, data_format fmt)
 
 void read(const std::string & s, uint8_t & value, data_format fmt)
 {
-	uint32_t tmp;
+	uint32_t tmp = {};
 	detail::read_integer(s, tmp, fmt);
 	value = tmp;
 }

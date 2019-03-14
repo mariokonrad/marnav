@@ -96,8 +96,8 @@ protected:
 	static void append(std::string & s, const char t);
 
 private:
-	const sentence_id id_;
-	const std::string tag_;
+	sentence_id id_;
+	std::string tag_;
 	talker talker_;
 	std::string tag_block_;
 };

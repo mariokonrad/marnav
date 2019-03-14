@@ -26,10 +26,12 @@ public:
 
 	virtual const char * what() const noexcept override { return text_; }
 
-	const uint8_t expected;
-	const uint8_t actual;
+	uint8_t expected() const noexcept { return expected_; }
+	uint8_t actual() const noexcept { return actual_; }
 
 private:
+	uint8_t expected_ = 0u;
+	uint8_t actual_ = 0u;
 	char text_[64];
 };
 

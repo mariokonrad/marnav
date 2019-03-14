@@ -1,4 +1,5 @@
 #include "binary_200_10.hpp"
+#include <marnav/utils/clamp.hpp>
 #include <algorithm>
 #include <cmath>
 
@@ -65,7 +66,7 @@ double binary_200_10::get_length() const
 
 void binary_200_10::set_length(double t)
 {
-	length = std::max(0u, std::min(8000u, static_cast<uint32_t>(std::round(10.0 * t))));
+	length = utils::clamp(static_cast<uint32_t>(std::round(10.0 * t)), 0u, 8000u);
 }
 
 /// Returns the beam in meters.
@@ -76,7 +77,7 @@ double binary_200_10::get_beam() const
 
 void binary_200_10::set_beam(double t)
 {
-	beam = std::max(0u, std::min(1000u, static_cast<uint32_t>(std::round(10.0 * t))));
+	beam = utils::clamp(static_cast<uint32_t>(std::round(10.0 * t)), 0u, 1000u);
 }
 
 /// Returns the draught in meters.
@@ -87,7 +88,7 @@ double binary_200_10::get_draught() const
 
 void binary_200_10::set_draught(double t)
 {
-	draught = std::max(0u, std::min(200u, static_cast<uint32_t>(std::round(100.0 * t))));
+	draught = utils::clamp(static_cast<uint32_t>(std::round(100.0 * t)), 0u, 200u);
 }
 }
 }
