@@ -26,6 +26,7 @@ install(
 	)
 
 add_library(marnav ${LIBRARY_TYPE})
+add_library(marnav::marnav ALIAS marnav)
 
 target_sources(marnav
 	PRIVATE

@@ -197,15 +197,15 @@ target_include_directories(testrunner
 	)
 
 target_link_libraries(testrunner
-	marnav
-	gmock
+	marnav::marnav
+	gmock::gmock
 	pthread
 	)
 
 add_test(
 	NAME unittest-testrunner
 	COMMAND testrunner
-	WORKING_DIRECTOR "${CMAKE_CURRENT_BINARY_DIR}"
+	WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
 	)
 run_unittest(testrunner)
 
@@ -225,13 +225,13 @@ if(ENABLE_AIS)
 		)
 
 	target_link_libraries(test-ais-sample
-		marnav
+		marnav::marnav
 		)
 
 	add_test(
 		NAME integrationtest-test-ais-sample
 		COMMAND test-ais-sample
-		WORKING_DIRECTOR "${CMAKE_CURRENT_BINARY_DIR}"
+		WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
 		)
 endif()
 
@@ -250,7 +250,7 @@ target_include_directories(test-nmea-sample
 	)
 
 target_link_libraries(test-nmea-sample
-	marnav
+	marnav::marnav
 	)
 
 add_test(
@@ -264,7 +264,7 @@ if(NOT build_type_lower MATCHES coverage)
 	macro(setup_benchmark NAME SOURCE)
 		add_executable(${NAME} ${SOURCE})
 		target_include_directories(${NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../src)
-		target_link_libraries(${NAME} marnav benchmark pthread)
+		target_link_libraries(${NAME} marnav::marnav benchmark::benchmark pthread)
 	endmacro()
 
 	setup_benchmark(benchmark_nmea_split nmea/Benchmark_nmea_split.cpp)

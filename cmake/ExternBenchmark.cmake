@@ -17,12 +17,13 @@ ExternalProject_Add(extern_benchmark
 	INSTALL_DIR ${benchmark_INSTALL_DIR}
 	)
 
-add_library(benchmark STATIC IMPORTED)
-set_target_properties(benchmark
+add_library(benchmark::benchmark STATIC IMPORTED)
+set_target_properties(benchmark::benchmark
 	PROPERTIES
 		IMPORTED_LOCATION
 			${benchmark_LIBRARY_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}benchmark${CMAKE_STATIC_LIBRARY_SUFFIX}
+		INTERFACE_INCLUDE_DIRECTORIES
+			${benchmark_INCLUDE_DIR}
 	)
-add_dependencies(benchmark extern_benchmark)
-include_directories(${benchmark_INCLUDE_DIR})
+add_dependencies(benchmark::benchmark extern_benchmark)
 

@@ -17,12 +17,13 @@ ExternalProject_Add(extern_gmock
 	INSTALL_DIR ${gmock_INSTALL_DIR}
 	)
 
-add_library(gmock STATIC IMPORTED)
-set_target_properties(gmock
+add_library(gmock::gmock STATIC IMPORTED)
+set_target_properties(gmock::gmock
 	PROPERTIES
 		IMPORTED_LOCATION
 			${gmock_LIBRARY_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}gmock${CMAKE_STATIC_LIBRARY_SUFFIX}
+		INTERFACE_INCLUDE_DIRECTORIES
+			${gmock_INCLUDE_DIR}
 	)
-add_dependencies(gmock extern_gmock)
-include_directories(${gmock_INCLUDE_DIR})
+add_dependencies(gmock::gmock extern_gmock)
 

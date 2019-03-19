@@ -17,7 +17,7 @@ if(${Qt5Core_FOUND})
 		main.cpp
 		)
 
-	target_link_libraries(qtnmeadiag Qt5::SerialPort Qt5::Widgets Qt5::Core marnav)
+	target_link_libraries(qtnmeadiag Qt5::SerialPort Qt5::Widgets Qt5::Core marnav::marnav)
 
 else()
 	message(STATUS "Qt5 not found")

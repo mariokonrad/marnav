@@ -14,15 +14,17 @@ ExternalProject_Add(extern_marnav
 	INSTALL_DIR ${LOCAL_INSTALL_PREFIX}
 	)
 
-add_library(marnav STATIC IMPORTED)
+add_library(marnav::marnav STATIC IMPORTED)
 
-set_target_properties(marnav
+set_target_properties(marnav::marnav
 	PROPERTIES
 		IMPORTED_LOCATION
 			${LOCAL_INSTALL_PREFIX}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}marnav${CMAKE_STATIC_LIBRARY_SUFFIX}
+		INTERFACE_INCLUDE_DIRECTORIES
+			${LOCAL_INSTALL_PREFIX}/include
 	)
 
 set(marnav_INCLUDE_DIR "${LOCAL_INSTALL_PREFIX}/include")
 set(marnav_LIBRARIES "marnav")
 
-add_dependencies(marnav extern_marnav)
+add_dependencies(marnav::marnav extern_marnav)
