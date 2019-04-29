@@ -79,8 +79,8 @@ double distance_sphere(const position & start, const position & destination)
 /// @param[in] start Start point.
 /// @param[in] destination Destination point.
 /// @param[out] alpha1 Azimuth
-/// @param[out] alpha2
-/// @return Distance in meters.
+/// @param[out] alpha2 Reverse Azimuth
+/// @return Distance in meters. NAN if formula failed to converge.
 double distance_ellipsoid_vincenty(
 	const position & start, const position & destination, double & alpha1, double & alpha2)
 {
@@ -98,65 +98,73 @@ double distance_ellipsoid_vincenty(
 	const double U1 = atan((1.0 - f) * tan(p0.lat()));
 	const double U2 = atan((1.0 - f) * tan(p1.lat()));
 
-	double lambda = L;
-	double d_lambda = std::abs(lambda);
+	double lambda = L; // first approximation
 
 	const double sin_U1 = sin(U1);
 	const double sin_U2 = sin(U2);
 	const double cos_U1 = cos(U1);
 	const double cos_U2 = cos(U2);
 
-	double sin_lambda = 0.0;
-	double cos_lambda = 0.0;
 	double sigma = 0.0;
-	double sin_sqr_sigma = 0.0;
-	double sin_sigma = 0.0;
-	double cos_sigma = 0.0;
+	double sin_sigma = sin(sigma);
+	double cos_sigma = cos(sigma);
 	double cos_sqr_alpha = 0.0;
 	double cos_2_sigma_m = 0.0;
-	double cos_sqr_2_sigma_m = 0.0;
-	double u_sqr = 0.0;
-	double A = 0.0;
-	double B = 0.0;
-	double d_sigma = 0.0;
-	double s = 0.0;
+	double sin_lambda = sin(lambda);
+	double cos_lambda = cos(lambda);
 
-	for (int iteration = 0; (iteration < 200) && (d_lambda > 1.0e-12); ++iteration) {
+	double d_lambda = 0.0;
+
+	int iteration = 200;
+	do {
 		sin_lambda = sin(lambda);
 		cos_lambda = cos(lambda);
 
-		sin_sqr_sigma = sqr(cos_U2 * sin_lambda)
-			+ sqr(cos_U1 * sin_U2 - sin_U1 * cos_U2 * cos_lambda); // eq 14
-		sin_sigma = sqrt(sin_sqr_sigma); // aquire sin(sigma)
+		sin_sigma = sqrt(sqr(cos_U2 * sin_lambda)
+			+ sqr(cos_U1 * sin_U2 - sin_U1 * cos_U2 * cos_lambda)); // eq 14
+
 		cos_sigma = sin_U1 * sin_U2 + cos_U1 * cos_U2 * cos_lambda; // eq 15
-		sigma = atan(sin_sigma / cos_sigma); // aquire sigma
+
+		sigma = atan2(sin_sigma, cos_sigma); // eq 16
+
 		double sin_alpha = cos_U1 * cos_U2 * sin_lambda / sin_sigma; // eq 17
-		cos_sqr_alpha = 1.0 - sqr(sin_alpha); // aquire cos^2(alpha), prevent numerical problems
-		cos_2_sigma_m = cos_sigma - (2.0 * sin_U1 * sin_U2) / cos_sqr_alpha; // eq 18
-		cos_sqr_2_sigma_m = sqr(cos_2_sigma_m);
+
+		cos_sqr_alpha = 1.0 - sqr(sin_alpha); // cos^2(alpha) = 1-sin^2(alpha)
+
+		cos_2_sigma_m = cos_sigma - 2.0 * sin_U1 * sin_U2 / cos_sqr_alpha; // eq 18
+		if (std::isnan(cos_2_sigma_m))
+			cos_2_sigma_m = 0.0; // equatorial line
+
 		double C = f / 16.0 * cos_sqr_alpha * (4.0 + f * (4.0 - 3.0 * cos_sqr_alpha)); // eq 10
-		double old_lambda = lambda; // save current lambda to calc d_lambda
+
+		double old_lambda = lambda; // save current lambda to calc delta lambda
 		lambda = L
 			+ (1.0 - C) * f * sin_alpha
 				* (sigma
 					  + C * sin_sigma
 						  * (cos_2_sigma_m
-								+ C * cos_sigma * (-1.0 + 2.0 * cos_sqr_2_sigma_m))); // eq 11
-		d_lambda = std::abs(old_lambda - lambda);
-	}
+								+ C * cos_sigma * (-1.0 + 2.0 * sqr(cos_2_sigma_m)))); // eq 11
 
-	u_sqr = cos_sqr_alpha * (sqr(a) - sqr(b)) / sqr(b);
-	A = 1.0
+		d_lambda = std::abs(old_lambda - lambda);
+	} while ((--iteration > 0) && (d_lambda > 1.0e-12));
+
+	if (iteration <= 0)
+		return NAN;
+
+	double u_sqr = cos_sqr_alpha * (sqr(a) - sqr(b)) / sqr(b);
+	double A = 1.0
 		+ u_sqr / 16384.0
 			* (4096.0 + u_sqr * (-768.0 + u_sqr * (320.0 - 175.0 * u_sqr))); // eq 3
-	B = u_sqr / 1024.0 * (256.0 + u_sqr * (-128.0 + u_sqr * (74.0 - 47.0 * u_sqr))); // eq 4
-	d_sigma = B * sin_sigma
-		* (cos_2_sigma_m + B / 4.0 * (cos_sigma * (-1.0 + 2.0 * cos_sqr_2_sigma_m))
-			  - B / 6.0 * cos_2_sigma_m * (-3.0 + 4.0 * sin_sqr_sigma)
-				  * (-3.0 + 4.0 * cos_sqr_2_sigma_m)); // eq 6
-	s = A * b * (sigma - d_sigma); // eq 7
-	alpha1 = atan((cos_U2 * sin_lambda) / (cos_U1 * sin_U2 - sin_U1 * cos_U2 * cos_lambda));
-	alpha2 = atan((cos_U1 * sin_lambda) / (-sin_U1 * cos_U2 + cos_U1 * sin_U2 * cos_lambda));
+	double B
+		= u_sqr / 1024.0 * (256.0 + u_sqr * (-128.0 + u_sqr * (74.0 - 47.0 * u_sqr))); // eq 4
+	double d_sigma = B * sin_sigma
+		* (cos_2_sigma_m + B / 4.0 * (cos_sigma * (-1.0 + 2.0 * sqr(cos_2_sigma_m)))
+			  - B / 6.0 * cos_2_sigma_m * (-3.0 + 4.0 * sqr(sin_sigma))
+				  * (-3.0 + 4.0 * sqr(cos_2_sigma_m))); // eq 6
+	double s = A * b * (sigma - d_sigma); // eq 19
+
+	alpha1 = atan2(cos_U2 * sin_lambda, cos_U1 * sin_U2 - sin_U1 * cos_U2 * cos_lambda);
+	alpha2 = atan2(cos_U1 * sin_lambda, -sin_U1 * cos_U2 + cos_U1 * sin_U2 * cos_lambda);
 
 	return s;
 }
@@ -194,7 +202,7 @@ position point_ellipsoid_vincenty(
 	const double sin_U1 = sin(U1);
 	const double cos_U1 = cos(U1);
 
-	const double sigma1 = atan(tan_U1 / cos_alpha1);
+	const double sigma1 = atan2(tan_U1, cos_alpha1);
 
 	const double sin_alpha = cos(U1) * sin_alpha1;
 	const double sin_sqr_alpha = sqr(sin_alpha);
@@ -223,7 +231,7 @@ position point_ellipsoid_vincenty(
 	double C = 0.0;
 	double L = 0.0;
 
-	for (int iteration = 0; (iteration < 200) && (d_sigma > 1.0e-12); ++iteration) {
+	do {
 		cos_2_sigma_m = cos(2.0 * sigma1 + sigma);
 		cos_sqr_2_sigma_m = sqr(cos_2_sigma_m);
 		cos_sigma = cos(sigma);
@@ -237,21 +245,20 @@ position point_ellipsoid_vincenty(
 		double old_sigma = sigma;
 		sigma = sigma_0 + delta_sigma;
 		d_sigma = std::abs(old_sigma - sigma);
-	}
+	} while (d_sigma > 1.0e-12);
 
-	latitude lat = atan((sin_U1 * cos_sigma + cos_U1 * sin_sigma * cos_alpha1)
-		/ ((1.0 - f) * sqrt(sin_sqr_alpha
-						   + sqr(sin_U1 * sin_sigma - cos_U1 * cos_sigma * cos_alpha1))));
+	latitude lat = atan2(sin_U1 * cos_sigma + cos_U1 * sin_sigma * cos_alpha1, (1.0 - f)
+			* sqrt(sin_sqr_alpha + sqr(sin_U1 * sin_sigma - cos_U1 * cos_sigma * cos_alpha1)));
 	C = (f / 16.0) * cos_sqr_alpha * (4.0 + f * (4.0 - 3.0 * cos_sqr_alpha));
-	lambda = atan(
-		(sin_sigma * sin_alpha1) / (cos_U1 * cos_sigma - sin_U1 * sin_sigma * cos_alpha1));
+	lambda
+		= atan2(sin_sigma * sin_alpha1, cos_U1 * cos_sigma - sin_U1 * sin_sigma * cos_alpha1);
 	L = lambda
 		- (1.0 - C) * f * sin_alpha
 			* (sigma
 				  + C * sin_sigma
 					  * (cos_2_sigma_m + C * cos_sigma * (-1.0 + 2.0 * cos_sqr_2_sigma_m)));
 	longitude lon = p0.lon() + L;
-	alpha2 = atan(sin_alpha / (-sin_U1 * sin_sigma + cos_U1 * cos_sigma * cos_alpha1));
+	alpha2 = atan2(sin_alpha, -sin_U1 * sin_sigma + cos_U1 * cos_sigma * cos_alpha1);
 
 	return rad2deg(position{lat, lon});
 }

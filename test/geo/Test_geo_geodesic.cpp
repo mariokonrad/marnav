@@ -56,7 +56,7 @@ TEST_F(Test_geo_geodesic, distance_sphere)
 	EXPECT_NEAR(expected, d, 1e-3);
 }
 
-TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty)
+TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_BNA_LAX)
 {
 	const geo::position BNA = {36.12, -86.67};
 	const geo::position LAX = {33.94, -118.40};
@@ -70,6 +70,38 @@ TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty)
 	double d = geo::distance_ellipsoid_vincenty(BNA, LAX, alpha1, alpha2);
 
 	EXPECT_NEAR(expected, d, 1e-3);
+}
+
+TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_same_longitude)
+{
+	const geo::position p1 = {00.0, 0.0};
+	const geo::position p2 = {30.0, 0.0};
+
+	// test value computed using: http://www.ga.gov.au/geodesy/datums/vincenty_inverse.jsp
+	const double expected = 3320113.398; // [m]
+
+	double alpha1 = 0.0;
+	double alpha2 = 0.0;
+
+	double d = geo::distance_ellipsoid_vincenty(p1, p2, alpha1, alpha2);
+
+	EXPECT_NEAR(expected, d, 0.1);
+}
+
+TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_same_latitude)
+{
+	const geo::position p1 = {0.0, 0.0};
+	const geo::position p2 = {0.0, 30.0};
+
+	// test value computed using: http://www.ga.gov.au/geodesy/datums/vincenty_inverse.jsp
+	const double expected = 3339584.724; // [m]
+
+	double alpha1 = 0.0;
+	double alpha2 = 0.0;
+
+	double d = geo::distance_ellipsoid_vincenty(p1, p2, alpha1, alpha2);
+
+	EXPECT_NEAR(expected, d, 0.1);
 }
 
 TEST_F(Test_geo_geodesic, distance_ellipsoid_lambert)
