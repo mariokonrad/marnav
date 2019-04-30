@@ -51,9 +51,9 @@ TEST_F(Test_geo_geodesic, distance_sphere)
 	const double expected = 2889615.861940;
 	// exact would be     : 2892777.232346 m
 
-	double d = geo::distance_sphere(BNA, LAX);
+	auto result = geo::distance_sphere(BNA, LAX);
 
-	EXPECT_NEAR(expected, d, 1e-3);
+	EXPECT_NEAR(expected, result.distance, 1e-3);
 }
 
 TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_BNA_LAX)
@@ -64,12 +64,9 @@ TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_BNA_LAX)
 	const double expected = 2892777.2323462227;
 	// exact would be     : 2892777.232346 m
 
-	double alpha1 = 0.0;
-	double alpha2 = 0.0;
+	auto result = geo::distance_ellipsoid_vincenty(BNA, LAX);
 
-	double d = geo::distance_ellipsoid_vincenty(BNA, LAX, alpha1, alpha2);
-
-	EXPECT_NEAR(expected, d, 1e-3);
+	EXPECT_NEAR(expected, result.distance, 1e-3);
 }
 
 TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_same_longitude)
@@ -80,12 +77,9 @@ TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_same_longitude)
 	// test value computed using: http://www.ga.gov.au/geodesy/datums/vincenty_inverse.jsp
 	const double expected = 3320113.398; // [m]
 
-	double alpha1 = 0.0;
-	double alpha2 = 0.0;
+	auto result = geo::distance_ellipsoid_vincenty(p1, p2);
 
-	double d = geo::distance_ellipsoid_vincenty(p1, p2, alpha1, alpha2);
-
-	EXPECT_NEAR(expected, d, 0.1);
+	EXPECT_NEAR(expected, result.distance, 0.1);
 }
 
 TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_same_latitude)
@@ -96,12 +90,9 @@ TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_same_latitude)
 	// test value computed using: http://www.ga.gov.au/geodesy/datums/vincenty_inverse.jsp
 	const double expected = 3339584.724; // [m]
 
-	double alpha1 = 0.0;
-	double alpha2 = 0.0;
+	auto result = geo::distance_ellipsoid_vincenty(p1, p2);
 
-	double d = geo::distance_ellipsoid_vincenty(p1, p2, alpha1, alpha2);
-
-	EXPECT_NEAR(expected, d, 0.1);
+	EXPECT_NEAR(expected, result.distance, 0.1);
 }
 
 TEST_F(Test_geo_geodesic, distance_ellipsoid_lambert)
@@ -112,9 +103,9 @@ TEST_F(Test_geo_geodesic, distance_ellipsoid_lambert)
 	const double expected = 3013798.3235893762;
 	// exact would be     : 2892777.232346 m
 
-	double d = geo::distance_ellipsoid_lambert(BNA, LAX);
+	auto result = geo::distance_ellipsoid_lambert(BNA, LAX);
 
-	EXPECT_NEAR(expected, d, 1e-3);
+	EXPECT_NEAR(expected, result.distance, 1e-3);
 }
 
 TEST_F(Test_geo_geodesic, point_ellipsoid_vincenty)

@@ -47,7 +47,8 @@ TEST_F(Test_nmea_stalk, parse_minimum_bytes)
 
 TEST_F(Test_nmea_stalk, parse_maximum_bytes)
 {
-	auto s = nmea::make_sentence("$STALK,00,01,02,03,04,05,06,07,08,09,0a,0b,0c,0d,0e,0f,10,11,12,13,14,15,16,17*47");
+	auto s = nmea::make_sentence(
+		"$STALK,00,01,02,03,04,05,06,07,08,09,0a,0b,0c,0d,0e,0f,10,11,12,13,14,15,16,17*47");
 	ASSERT_NE(nullptr, s);
 
 	auto stalk = nmea::sentence_cast<nmea::stalk>(s);
@@ -64,7 +65,8 @@ TEST_F(Test_nmea_stalk, parse_less_than_minimum_bytes)
 
 TEST_F(Test_nmea_stalk, parse_more_than_maximum_bytes)
 {
-	EXPECT_ANY_THROW(nmea::make_sentence("$STALK,00,01,02,03,04,05,06,07,08,09,0a,0b,0c,0d,0e,0f,10,11,12,13,14,15,16,17,18*7E"));
+	EXPECT_ANY_THROW(nmea::make_sentence("$STALK,00,01,02,03,04,05,06,07,08,09,0a,0b,0c,0d,0e,"
+										 "0f,10,11,12,13,14,15,16,17,18*7E"));
 }
 
 TEST_F(Test_nmea_stalk, invalid_data_bytes)
@@ -99,6 +101,8 @@ TEST_F(Test_nmea_stalk, maximum_data_to_string)
 		data.push_back(i);
 	s.set_data(data);
 
-	EXPECT_STREQ("$STALK,00,01,02,03,04,05,06,07,08,09,0a,0b,0c,0d,0e,0f,10,11,12,13,14,15,16,17*47", nmea::to_string(s).c_str());
+	EXPECT_STREQ(
+		"$STALK,00,01,02,03,04,05,06,07,08,09,0a,0b,0c,0d,0e,0f,10,11,12,13,14,15,16,17*47",
+		nmea::to_string(s).c_str());
 }
 }

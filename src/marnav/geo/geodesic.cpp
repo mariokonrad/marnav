@@ -45,6 +45,11 @@ static double central_spherical_angle_rad(
 			+ sqr(cos(p0_lat) * sin(p1_lat) - sin(p0_lat) * cos(p1_lat) * cos(p1_lon - p0_lon)))
 		/ (sin(p0_lat) * sin(p1_lat) + cos(p0_lat) * cos(p1_lat) * cos(p1_lon - p0_lon)));
 }
+
+static double central_spherical_angle_rad(const position & p0, const position & p1)
+{
+	return central_spherical_angle_rad(p0.lat(), p0.lon(), p1.lat(), p1.lon());
+}
 }
 
 /// Returns the spherical angle between the two specified position in rad.
@@ -54,19 +59,17 @@ static double central_spherical_angle_rad(
 /// @return Spherical angle inbetweenn in rad.
 double central_spherical_angle(const position & start, const position & destination)
 {
-	const auto p0 = deg2rad(start);
-	const auto p1 = deg2rad(destination);
-	return central_spherical_angle_rad(p0.lat(), p0.lon(), p1.lat(), p1.lon());
+	return central_spherical_angle_rad(deg2rad(start), deg2rad(destination));
 }
 
 /// Calculates distance of two points on earth, approximated as sphere.
 ///
 /// @param[in] start Start point.
 /// @param[in] destination Destination point.
-/// @return The distance in meters.
-double distance_sphere(const position & start, const position & destination)
+/// @return Distance.
+distance_result distance_sphere(const position & start, const position & destination)
 {
-	return earth_radius * central_spherical_angle(start, destination);
+	return distance_result{earth_radius * central_spherical_angle(start, destination)};
 }
 
 /// Calculates the distance on an ellipsoid between start and destination points.
@@ -78,14 +81,12 @@ double distance_sphere(const position & start, const position & destination)
 ///
 /// @param[in] start Start point.
 /// @param[in] destination Destination point.
-/// @param[out] alpha1 Azimuth
-/// @param[out] alpha2 Reverse Azimuth
-/// @return Distance in meters. NAN if formula failed to converge.
-double distance_ellipsoid_vincenty(
-	const position & start, const position & destination, double & alpha1, double & alpha2)
+/// @return Distance.
+distance_result distance_ellipsoid_vincenty(
+	const position & start, const position & destination)
 {
 	if (start == destination)
-		return 0.0;
+		return {};
 
 	const position p0 = deg2rad(start);
 	const position p1 = deg2rad(destination);
@@ -149,7 +150,7 @@ double distance_ellipsoid_vincenty(
 	} while ((--iteration > 0) && (d_lambda > 1.0e-12));
 
 	if (iteration <= 0)
-		return NAN;
+		return distance_result{NAN};
 
 	double u_sqr = cos_sqr_alpha * (sqr(a) - sqr(b)) / sqr(b);
 	double A = 1.0
@@ -163,10 +164,10 @@ double distance_ellipsoid_vincenty(
 				  * (-3.0 + 4.0 * sqr(cos_2_sigma_m))); // eq 6
 	double s = A * b * (sigma - d_sigma); // eq 19
 
-	alpha1 = atan2(cos_U2 * sin_lambda, cos_U1 * sin_U2 - sin_U1 * cos_U2 * cos_lambda);
-	alpha2 = atan2(cos_U1 * sin_lambda, -sin_U1 * cos_U2 + cos_U1 * sin_U2 * cos_lambda);
+	double alpha1 = atan2(cos_U2 * sin_lambda, cos_U1 * sin_U2 - sin_U1 * cos_U2 * cos_lambda);
+	double alpha2 = atan2(cos_U1 * sin_lambda, -sin_U1 * cos_U2 + cos_U1 * sin_U2 * cos_lambda);
 
-	return s;
+	return {s, alpha1, alpha2};
 }
 
 /// Calculates a position from a starting point in a direction and of a certain distance.
@@ -269,8 +270,8 @@ position point_ellipsoid_vincenty(
 ///
 /// @param[in] start Start point.
 /// @param[in] destination Destination point.
-/// @return Distance in meters.
-double distance_ellipsoid_lambert(const position & start, const position & destination)
+/// @return Distance.
+distance_result distance_ellipsoid_lambert(const position & start, const position & destination)
 {
 	const position p0 = deg2rad(start);
 	const position p1 = deg2rad(destination);
@@ -288,7 +289,7 @@ double distance_ellipsoid_lambert(const position & start, const position & desti
 	const double X = (sigma - sin(sigma)) * (sqr(sin(P)) * sqr(cos(Q))) / sqr(cos(sigma / 2.0));
 	const double Y = (sigma + sin(sigma)) * (sqr(cos(P)) * sqr(sin(Q))) / sqr(sin(sigma / 2.0));
 
-	return earth_radius * (sigma - (X + Y) / (2.0 * r));
+	return distance_result{earth_radius * (sigma - (X + Y) / (2.0 * r))};
 }
 }
 }
