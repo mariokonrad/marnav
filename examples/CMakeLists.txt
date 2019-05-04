@@ -1,9 +1,11 @@
 find_package(Boost 1.53.0 COMPONENTS system)
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
-include_directories(${CMAKE_BINARY_DIR}/src)
+set_property(DIRECTORY PROPERTY INCLUDE_DIRECTORIES
+	${CMAKE_SOURCE_DIR}/src
+	${CMAKE_BINARY_DIR}/src
+	)
 
-add_compile_options(
+set_property(DIRECTORY PROPERTY COMPILE_OPTIONS
 	-pipe
 	-ggdb
 	-Wall
@@ -62,6 +64,7 @@ if(Boost_FOUND AND ENABLE_IO)
 	target_link_libraries(read_nmea_boostasio
 		marnav::marnav
 		${Boost_LIBRARIES}
+		pthread
 		)
 
 	if(ENABLE_SEATALK)
@@ -71,6 +74,7 @@ if(Boost_FOUND AND ENABLE_IO)
 		target_link_libraries(seatalk_nmea_converter
 			marnav::marnav
 			${Boost_LIBRARIES}
+			pthread
 			)
 	endif()
 

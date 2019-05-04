@@ -2,3 +2,4 @@ build
 .ycm_extra_conf.pyc
 tmp
 .gdbinit
+.bash_history
