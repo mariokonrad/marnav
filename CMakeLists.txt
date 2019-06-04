@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.11)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-project(marnav VERSION 0.8.1 LANGUAGES CXX C)
+project(marnav VERSION 0.9.0 LANGUAGES CXX C)
 
 ### compiler check
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")

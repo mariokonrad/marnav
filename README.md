@@ -1,7 +1,7 @@
 marnav
 ======
 
-Copyright (c) 2018 Mario Konrad (mario.konrad@gmx.net)
+Copyright (c) 2019 Mario Konrad (mario.konrad@gmx.net)
 
 ---
 
@@ -344,6 +344,7 @@ Compiler:
 - GCC 6
 - GCC 7
 - GCC 8
+- GCC 9
 - Clang 3.6
 - Clang 3.7
 - Clang 3.8
