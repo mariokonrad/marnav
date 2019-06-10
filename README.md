@@ -398,8 +398,6 @@ The following build types `-DCMAKE_BUILD_TYPE=x` are possible:
 Build options:
 - `ENABLE_STATIC` : enables static build, if `OFF`, a shared library is being built.
   Default: `ON`
-- `ENABLE_WARNING_HELL` : enables _much_ more warnings, used for development purposes.
-  Currently implemented only for GCC.  Default is `OFF`
 - `ENABLE_PROFILING` : enables profiling for `gprof`
 - `ENABLE_BENCHMARK` : enables benchmarking (disables some optimization)
 - `ENABLE_SANITIZER` : enables address and undefined sanitizers
@@ -445,7 +443,7 @@ or individual package types:
 
 	mkdir build
 	cd build
-	cmake -DCMAKE_BUILD_TYPE=Coverage -DENABLE_WARNING_HELL=YES ..
+	cmake -DCMAKE_BUILD_TYPE=Coverage ..
 	make -j 8
 	make coverage doc cppcheck
 

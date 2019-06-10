@@ -2,25 +2,34 @@
 
 SCRIPT_BASE=$(dirname `readlink -f $0`)
 
-supported_gcc_versions=("5.5.0" "6.5.0" "7.4.0" "8.3.0" "9.1.0")
-name=marnav
+supported_compilers=(
+	"gcc-5.5.0"
+	"gcc-6.5.0"
+	"gcc-7.4.0"
+	"gcc-8.3.0"
+	"gcc-9.1.0"
+	)
 
-function build_gcc_image()
+name=marnav
+account=mariokonrad/
+
+function build_image()
 {
-	version=$1
+	compiler=$1
+	version=${compiler#gcc-}
 
 	docker build \
 		--build-arg gcc_version=${version} \
-		--tag ${name}:gcc-${version} \
+		--tag ${account}${name}:${compiler} \
 		${SCRIPT_BASE}/docker
 }
 
 function usage()
 {
-	echo "usage: $(basename $0) gcc-version"
+	echo "usage: $(basename $0) compiler"
 	echo ""
-	echo "  supported gcc versions:"
-	for v in ${supported_gcc_versions[@]} ; do
+	echo "  supported compilers:"
+	for v in ${supported_compilers[@]} ; do
 		echo "   - $v"
 	done
 	echo ""
@@ -31,12 +40,12 @@ if [ $# -ne 1 ] ; then
 	exit 1
 fi
 
-for v in ${supported_gcc_versions[@]} ; do
+for v in ${supported_compilers[@]} ; do
 	if [ "${v}" == "$1" ] ; then
-		build_gcc_image $1
+		build_image $1
 		exit 1
 	fi
 done
-echo "error: specified version not supported: $1"
+echo "error: specified compiler not supported: $1"
 exit 1
 

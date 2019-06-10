@@ -149,19 +149,12 @@ TEST_F(Test_math_vector, vec2_length2)
 
 TEST_F(Test_math_vector, vecn_initializer_list)
 {
-	{
-		vector_n<5, double> v{1, 2, 3, 4, 5};
-		EXPECT_NEAR(1.0, v[0], 1e-8);
-		EXPECT_NEAR(2.0, v[1], 1e-8);
-		EXPECT_NEAR(3.0, v[2], 1e-8);
-		EXPECT_NEAR(4.0, v[3], 1e-8);
-		EXPECT_NEAR(5.0, v[4], 1e-8);
-	}
-#if !defined(NDEBUG)
-	{
-		EXPECT_DEATH((vector_n<5, double>{1, 2, 3, 4}), ".*");
-	}
-#endif
+	vector_n<5, double> v{1.0, 2.0, 3.0, 4.0, 5.0};
+	EXPECT_NEAR(1.0, v[0], 1e-8);
+	EXPECT_NEAR(2.0, v[1], 1e-8);
+	EXPECT_NEAR(3.0, v[2], 1e-8);
+	EXPECT_NEAR(4.0, v[3], 1e-8);
+	EXPECT_NEAR(5.0, v[4], 1e-8);
 }
 
 TEST_F(Test_math_vector, nullify)

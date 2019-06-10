@@ -1,19 +1,12 @@
 cmake_minimum_required(VERSION 3.11)
 
-option(ENABLE_STATIC "Enable static library" ON)
-
 ### lib: marnav
 
-if(${ENABLE_STATIC})
-	set(LIBRARY_TYPE "STATIC")
-else()
-	set(LIBRARY_TYPE "SHARED")
-endif()
-message(STATUS "Build library type: ${LIBRARY_TYPE}")
-
+message(STATUS "Build shared library : ${BUILD_SHARED_LIBS}")
 message(STATUS "Build AIS support    : ${ENABLE_AIS}")
 message(STATUS "Build SeaTalk support: ${ENABLE_SEATALK}")
 message(STATUS "Build IO support     : ${ENABLE_IO}")
+message(STATUS "Build Tools          : ${ENABLE_TOOLS}")
 
 configure_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/marnav/version.hpp.in
@@ -28,12 +21,18 @@ install(
 add_library(marnav ${LIBRARY_TYPE})
 add_library(marnav::marnav ALIAS marnav)
 
+target_compile_features(marnav
+	PRIVATE
+		cxx_std_11
+	)
+
 target_sources(marnav
 	PRIVATE
 		marnav/math/floatingpoint.hpp
 		marnav/math/vector.hpp
 		marnav/math/matrix.hpp
 		marnav/math/quaternion.hpp
+		marnav/math/type_traits.hpp
 		marnav/utils/mmsi.cpp
 		marnav/utils/mmsi_country.cpp
 		marnav/geo/angle.cpp
@@ -260,6 +259,7 @@ install(
 		marnav/math/vector.hpp
 		marnav/math/matrix.hpp
 		marnav/math/quaternion.hpp
+		marnav/math/type_traits.hpp
 	DESTINATION include/marnav/math
 	)
 
@@ -467,6 +467,46 @@ target_compile_options(marnav
 		-Wextra
 		-pedantic-errors
 		-Wold-style-cast
+		-Wcast-align
+		-Wcast-qual
+		-Werror
+		-Wdisabled-optimization
+		-Wfloat-equal
+		-Wformat=2
+		-Wformat-security
+		-Wformat-y2k
+		-Wimport
+		-Winit-self
+		-Wmissing-field-initializers
+		-Wmissing-format-attribute
+		-Wmissing-include-dirs
+		-Wmissing-noreturn
+		-Wnon-virtual-dtor
+		-Woverloaded-virtual
+		-Wpacked
+		-Wpointer-arith
+		-Wredundant-decls
+		-Wstrict-aliasing=2
+		-Wswitch
+		-Wunreachable-code
+		-Wunused
+		-Wunused-parameter
+		-Wvariadic-macros
+		-Wwrite-strings
+		# explicitly disabled on purpose:
+		-Wno-inline
+		-Wno-conversion
+		-Wno-shadow
+		-Wno-sign-conversion
+		-Wno-stack-protector
+		-Wno-effc++
+		-Wno-padded
+		-Wno-long-long
+		-Wno-unused-function
+		-Wno-comment
+		-Wno-format-nonliteral
+		-Wno-switch-enum
+		-Wno-switch-default
 	)
 
 if(ENABLE_PROFILING)
@@ -480,53 +520,6 @@ if(ENABLE_BENCHMARK)
 	target_compile_options(marnav
 		PRIVATE
 			-fno-omit-frame-pointer
-		)
-endif()
-
-if(ENABLE_WARNING_HELL)
-	message(STATUS "Behold: entering the hell of extended warnings")
-	target_compile_options(marnav
-		PRIVATE
-			-Wcast-align
-			-Wcast-qual
-			-Werror
-			-Wdisabled-optimization
-			-Wfloat-equal
-			-Wformat=2
-			-Wformat-security
-			-Wformat-y2k
-			-Wimport
-			-Winit-self
-			-Wmissing-field-initializers
-			-Wmissing-format-attribute
-			-Wmissing-include-dirs
-			-Wmissing-noreturn
-			-Wnon-virtual-dtor
-			-Woverloaded-virtual
-			-Wpacked
-			-Wpointer-arith
-			-Wredundant-decls
-			-Wstrict-aliasing=2
-			-Wswitch
-			-Wunreachable-code
-			-Wunused
-			-Wunused-parameter
-			-Wvariadic-macros
-			-Wwrite-strings
-			# explicitly disabled on purpose:
-			-Wno-inline
-			-Wno-conversion
-			-Wno-shadow
-			-Wno-sign-conversion
-			-Wno-stack-protector
-			-Wno-effc++
-			-Wno-padded
-			-Wno-long-long
-			-Wno-unused-function
-			-Wno-comment
-			-Wno-format-nonliteral
-			-Wno-switch-enum
-			-Wno-switch-default
 		)
 endif()
 
@@ -544,7 +537,7 @@ if(ENABLE_SANITIZER)
 		)
 endif()
 
-if(build_type_lower MATCHES coverage)
+if(CMAKE_BUILD_TYPE MATCHES Coverage)
 	message(STATUS "Coverage: enabled")
 	target_compile_options(marnav
 		PRIVATE
@@ -604,11 +597,13 @@ install(
 	)
 
 
-message(STATUS "Build Tools: ${ENABLE_TOOLS}")
 if(ENABLE_TOOLS)
 	### bin: nmeasum
-	add_executable(nmeasum
-		nmeasum.cpp
+	add_executable(nmeasum)
+
+	target_sources(nmeasum
+		PRIVATE
+			nmeasum.cpp
 		)
 
 	target_include_directories(nmeasum
@@ -627,8 +622,11 @@ if(ENABLE_TOOLS)
 
 	### bin: nmeadump
 	if(ENABLE_AIS AND ENABLE_IO)
-		add_executable(nmeadump
-			nmeadump.cpp
+		add_executable(nmeadump)
+
+		target_sources(nmeadump
+			PRIVATE
+				nmeadump.cpp
 			)
 
 		target_include_directories(nmeadump
@@ -647,7 +645,8 @@ if(ENABLE_TOOLS)
 			)
 
 		target_link_libraries(nmeadump
-			marnav
+			PRIVATE
+				marnav
 			)
 	endif()
 endif()

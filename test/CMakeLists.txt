@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 
+add_custom_target(unittest)
 add_executable(testrunner)
 
 target_sources(testrunner
@@ -207,7 +208,14 @@ add_test(
 	COMMAND testrunner
 	WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
 	)
-run_unittest(testrunner)
+
+add_custom_target(testrunner_runtest
+	COMMAND testrunner --gtest_shuffle
+	DEPENDS testrunner
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+	)
+
+add_dependencies(unittest testrunner_runtest)
 
 if(ENABLE_AIS)
 	execute_process(
@@ -260,7 +268,7 @@ add_test(
 	)
 
 # excluded with coverage builds, does not make sense otherwise
-if(NOT build_type_lower MATCHES coverage)
+if(NOT CMAKE_BUILD_TYPE MATCHES Coverage)
 	macro(setup_benchmark NAME SOURCE)
 		add_executable(${NAME} ${SOURCE})
 		target_include_directories(${NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../src)

@@ -9,25 +9,62 @@ export BUILD=${BASE}/build
 # ask system about number of processors, accept already specified number
 export NUM_PROC=${NUM_PROC:-$(cat /proc/cpuinfo | grep -E "^processor" | wc -l)}
 
-# prepare master build directory
-if [ -d ${BUILD} ] ; then
-	rm -fr ${BUILD}
-fi
-mkdir -p ${BUILD}
 
-# execute builds
-for cfg in $(${SCRIPT_BASE}/bld --list | grep -E "clang[0-9]+|gcc[0-9]+") ; do
-	echo -n "target: ${cfg} "
-	printf '%*s' $((40 - ${#cfg})) "" | tr ' ' '.'
-	set +e
-	BUILD_DIR=${BUILD}/${cfg} ${SCRIPT_BASE}/bld ${cfg} >&${BUILD}/${cfg}.log
-	if [ $? -eq 0 ] ; then
-		echo "SUCCESS" >> ${BUILD}/${cfg}.log
+function prepare_build_dir()
+{
+	if [ -d ${BUILD} ] ; then
+		rm -fr ${BUILD}
+	fi
+	mkdir -p ${BUILD}
+}
+
+function log_result()
+{
+	result=$1
+	logfile=$2
+	if [ ${result} -eq 0 ] ; then
+		echo "SUCCESS" >> ${logfile}
 		echo -e " \033[32mSUCCESS\033[0m"
 	else
-		echo "FAILURE" >> ${BUILD}/${cfg}.log
+		echo "FAILURE" >> ${logfile}
 		echo -e " \033[31mFAILURE\033[0m"
 	fi
-	set -e
-	rm -fr ${BUILD}/${cfg}
-done
+}
+
+function build_with_local_installation()
+{
+	for cfg in $(${SCRIPT_BASE}/bld --list | grep -E "clang[0-9]+|gcc[0-9]+") ; do
+		echo -n "target: ${cfg} "
+		printf '%*s' $((40 - ${#cfg})) "" | tr ' ' '.'
+		set +e
+		BUILD_DIR=${BUILD}/${cfg} ${SCRIPT_BASE}/bld ${cfg} >&${BUILD}/${cfg}.log
+		log_result $? ${BUILD}/${cfg}.log
+		set -e
+		rm -fr ${BUILD}/${cfg}
+	done
+}
+
+function build_with_docker()
+{
+	name=marnav
+	account=mariokonrad/
+
+	for di in $(docker images -q ${account}${name}) ; do
+		for build_type in Debug Release ; do
+			dockerid=$(docker inspect --format='{{index .RepoTags 0}}' $di)
+			cfg=$(echo "${dockerid}_${build_type}" | tr '/:' '__')
+
+			echo -n "target: ${cfg} "
+			printf '%*s' $((40 - ${#cfg})) "" | tr ' ' '.'
+			set +e
+			BUILD_DIR=${BUILD}/${cfg} ${SCRIPT_BASE}/docker-build.sh "$(echo ${dockerid} | sed "s@${account}${name}:@@")" ${build_type} >&${BUILD}/${cfg}.log
+			log_result $? ${BUILD}/${cfg}.log
+			set -e
+			rm -fr ${BUILD}/${cfg}
+		done
+	done
+}
+
+prepare_build_dir
+build_with_local_installation
+build_with_docker

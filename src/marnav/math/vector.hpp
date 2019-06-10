@@ -1,10 +1,10 @@
 #ifndef MARNAV__MATH__VECTOR__HPP
 #define MARNAV__MATH__VECTOR__HPP
 
-#include <initializer_list>
 #include <type_traits>
 #include <marnav/math/floatingpoint.hpp>
 #include <marnav/math/constants.hpp>
+#include <marnav/math/type_traits.hpp>
 
 namespace marnav
 {
@@ -435,12 +435,12 @@ public:
 
 	vector_n(vector_n &&) noexcept = default;
 
-	vector_n(std::initializer_list<T> v)
+	template <typename ... Args>
+	vector_n(Args ... args) noexcept
+		: a{args...}
 	{
-		assert(v.size() == N);
-		size_type i = 0;
-		for (auto j = begin(v); j != end(v); ++i, ++j)
-			a[i] = *j;
+		static_assert(sizeof...(args) == N, "invalid number of arguments");
+		static_assert(all_same_type<T, Args...>::value, "invalid type detected");
 	}
 
 	inline value_type dot(const vector_n & v) const { return detail::dot_vector(*this, v); }
