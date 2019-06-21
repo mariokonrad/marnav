@@ -1,4 +1,4 @@
-#include "gst.hpp"
+#include <marnav/nmea/gst.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

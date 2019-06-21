@@ -1,4 +1,4 @@
-#include "checksum.hpp"
+#include <marnav/nmea/checksum.hpp>
 #include "hex_digit.hpp"
 
 namespace marnav

@@ -39,13 +39,16 @@ if(CTAGS_PATH AND CSCOPE_PATH)
 	set_source_files_properties(tags PROPERTIES GENERATED true)
 
 	function(setup_ctags_target sources)
-		file(GLOB_RECURSE SOURCE_FILES "${sources}")
-		string(REPLACE ";" "\n" SOURCE_FILES "${SOURCE_FILES}")
-		file(WRITE "${CMAKE_BINARY_DIR}/cscope.files.in" "${SOURCE_FILES}")
+		foreach(directory IN LISTS sources)
+			file(GLOB_RECURSE files "${directory}")
+			list(APPEND source_files ${files})
+		endforeach()
+		string(REPLACE ";" "\n" source_files "${source_files}")
+		file(WRITE "${CMAKE_BINARY_DIR}/cscope.files.in" "${source_files}")
 		configure_file("${CMAKE_BINARY_DIR}/cscope.files.in" "${CMAKE_BINARY_DIR}/cscope.files" COPYONLY)
 
 		add_custom_target(tags
-			COMMAND ${CTAGS_PATH} --c++-kinds=+p --fields=+iaS --extra=+q -L ${CMAKE_BINARY_DIR}/cscope.files
+			COMMAND ${CTAGS_PATH} --c++-kinds=+p --fields=+iaS --extras=+q -L ${CMAKE_BINARY_DIR}/cscope.files
 			COMMAND ${CSCOPE_PATH} -b
 			WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 			)

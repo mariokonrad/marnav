@@ -1,4 +1,4 @@
-#include "pgrmz.hpp"
+#include <marnav/nmea/pgrmz.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

@@ -1,4 +1,4 @@
-#include "xte.hpp"
+#include <marnav/nmea/xte.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

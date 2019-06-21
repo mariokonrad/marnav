@@ -1,4 +1,4 @@
-#include "serial.hpp"
+#include <marnav/io/serial.hpp>
 #include <stdexcept>
 #include <cstdio>
 #include <cstring>

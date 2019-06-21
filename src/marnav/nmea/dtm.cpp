@@ -1,5 +1,5 @@
-#include "dtm.hpp"
-#include <marnav/nmea/checks.hpp>
+#include <marnav/nmea/dtm.hpp>
+#include "checks.hpp"
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

@@ -1,4 +1,4 @@
-#include "vbw.hpp"
+#include <marnav/nmea/vbw.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

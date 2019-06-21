@@ -3,8 +3,6 @@ cmake_minimum_required(VERSION 3.11)
 ### lib: marnav
 
 message(STATUS "Build shared library : ${BUILD_SHARED_LIBS}")
-message(STATUS "Build AIS support    : ${ENABLE_AIS}")
-message(STATUS "Build SeaTalk support: ${ENABLE_SEATALK}")
 message(STATUS "Build IO support     : ${ENABLE_IO}")
 message(STATUS "Build Tools          : ${ENABLE_TOOLS}")
 
@@ -28,47 +26,57 @@ target_compile_features(marnav
 
 target_sources(marnav
 	PRIVATE
-		marnav/math/floatingpoint.hpp
-		marnav/math/vector.hpp
-		marnav/math/matrix.hpp
-		marnav/math/quaternion.hpp
-		marnav/math/type_traits.hpp
-		marnav/utils/mmsi.cpp
-		marnav/utils/mmsi_country.cpp
+		marnav/ais/ais.cpp
+		marnav/ais/angle.cpp
+		marnav/ais/binary_001_11.cpp
+		marnav/ais/binary_200_10.cpp
+		marnav/ais/binary_data.cpp
+		marnav/ais/message_01.cpp
+		marnav/ais/message_02.cpp
+		marnav/ais/message_03.cpp
+		marnav/ais/message_04.cpp
+		marnav/ais/message_05.cpp
+		marnav/ais/message_06.cpp
+		marnav/ais/message_07.cpp
+		marnav/ais/message_08.cpp
+		marnav/ais/message_09.cpp
+		marnav/ais/message_10.cpp
+		marnav/ais/message_11.cpp
+		marnav/ais/message_12.cpp
+		marnav/ais/message_13.cpp
+		marnav/ais/message_14.cpp
+		marnav/ais/message_17.cpp
+		marnav/ais/message_18.cpp
+		marnav/ais/message_19.cpp
+		marnav/ais/message_20.cpp
+		marnav/ais/message_21.cpp
+		marnav/ais/message_22.cpp
+		marnav/ais/message_23.cpp
+		marnav/ais/message_24.cpp
+		marnav/ais/name.cpp
+		marnav/ais/rate_of_turn.cpp
 		marnav/geo/angle.cpp
-		marnav/geo/position.cpp
-		marnav/geo/region.cpp
 		marnav/geo/cpa.cpp
 		marnav/geo/geodesic.cpp
-		marnav/nmea/waypoint.cpp
-		marnav/nmea/tag_block.cpp
-		marnav/nmea/talker_id.cpp
-		marnav/nmea/convert.cpp
-		marnav/nmea/manufacturer.cpp
-		marnav/nmea/checks.cpp
-		marnav/nmea/split.cpp
-		marnav/nmea/angle.cpp
-		marnav/nmea/string.cpp
-		marnav/nmea/name.cpp
-		marnav/nmea/io.cpp
-		marnav/nmea/date.cpp
-		marnav/nmea/time.cpp
-		marnav/nmea/checksum.cpp
-		marnav/nmea/sentence.cpp
-		marnav/nmea/detail.cpp
-		marnav/nmea/hex_digit.hpp
-		marnav/nmea/ais_helper.cpp
-		marnav/nmea/nmea.cpp
+		marnav/geo/position.cpp
+		marnav/geo/region.cpp
 		marnav/nmea/aam.cpp
+		marnav/nmea/ais_helper.cpp
 		marnav/nmea/alm.cpp
+		marnav/nmea/angle.cpp
 		marnav/nmea/apa.cpp
 		marnav/nmea/apb.cpp
 		marnav/nmea/bod.cpp
 		marnav/nmea/bwc.cpp
-		marnav/nmea/bww.cpp
 		marnav/nmea/bwr.cpp
+		marnav/nmea/bww.cpp
+		marnav/nmea/checks.cpp
+		marnav/nmea/checksum.cpp
+		marnav/nmea/convert.cpp
+		marnav/nmea/date.cpp
 		marnav/nmea/dbk.cpp
 		marnav/nmea/dbt.cpp
+		marnav/nmea/detail.cpp
 		marnav/nmea/dpt.cpp
 		marnav/nmea/dsc.cpp
 		marnav/nmea/dse.cpp
@@ -85,18 +93,26 @@ target_sources(marnav
 		marnav/nmea/gsv.cpp
 		marnav/nmea/gtd.cpp
 		marnav/nmea/hdg.cpp
-		marnav/nmea/hfb.cpp
 		marnav/nmea/hdm.cpp
 		marnav/nmea/hdt.cpp
+		marnav/nmea/hex_digit.hpp
+		marnav/nmea/hfb.cpp
 		marnav/nmea/hsc.cpp
+		marnav/nmea/io.cpp
 		marnav/nmea/its.cpp
 		marnav/nmea/lcd.cpp
+		marnav/nmea/manufacturer.cpp
 		marnav/nmea/msk.cpp
 		marnav/nmea/mss.cpp
 		marnav/nmea/mtw.cpp
 		marnav/nmea/mwd.cpp
 		marnav/nmea/mwv.cpp
+		marnav/nmea/name.cpp
+		marnav/nmea/nmea.cpp
 		marnav/nmea/osd.cpp
+		marnav/nmea/pgrme.cpp
+		marnav/nmea/pgrmm.cpp
+		marnav/nmea/pgrmz.cpp
 		marnav/nmea/r00.cpp
 		marnav/nmea/rma.cpp
 		marnav/nmea/rmb.cpp
@@ -106,10 +122,17 @@ target_sources(marnav
 		marnav/nmea/rsa.cpp
 		marnav/nmea/rsd.cpp
 		marnav/nmea/rte.cpp
+		marnav/nmea/sentence.cpp
 		marnav/nmea/sfi.cpp
+		marnav/nmea/split.cpp
+		marnav/nmea/stalk.cpp
 		marnav/nmea/stn.cpp
+		marnav/nmea/string.cpp
+		marnav/nmea/tag_block.cpp
+		marnav/nmea/talker_id.cpp
 		marnav/nmea/tds.cpp
 		marnav/nmea/tfi.cpp
+		marnav/nmea/time.cpp
 		marnav/nmea/tll.cpp
 		marnav/nmea/tpc.cpp
 		marnav/nmea/tpr.cpp
@@ -124,6 +147,7 @@ target_sources(marnav
 		marnav/nmea/vpw.cpp
 		marnav/nmea/vtg.cpp
 		marnav/nmea/vwr.cpp
+		marnav/nmea/waypoint.cpp
 		marnav/nmea/wcv.cpp
 		marnav/nmea/wnc.cpp
 		marnav/nmea/wpl.cpp
@@ -134,291 +158,52 @@ target_sources(marnav
 		marnav/nmea/zdl.cpp
 		marnav/nmea/zfo.cpp
 		marnav/nmea/ztg.cpp
-		marnav/nmea/pgrme.cpp
-		marnav/nmea/pgrmm.cpp
-		marnav/nmea/pgrmz.cpp
-		marnav/nmea/stalk.cpp
+		marnav/seatalk/message.cpp
+		marnav/seatalk/message_00.cpp
+		marnav/seatalk/message_01.cpp
+		marnav/seatalk/message_05.cpp
+		marnav/seatalk/message_10.cpp
+		marnav/seatalk/message_11.cpp
+		marnav/seatalk/message_20.cpp
+		marnav/seatalk/message_21.cpp
+		marnav/seatalk/message_22.cpp
+		marnav/seatalk/message_23.cpp
+		marnav/seatalk/message_24.cpp
+		marnav/seatalk/message_25.cpp
+		marnav/seatalk/message_26.cpp
+		marnav/seatalk/message_27.cpp
+		marnav/seatalk/message_30.cpp
+		marnav/seatalk/message_36.cpp
+		marnav/seatalk/message_38.cpp
+		marnav/seatalk/message_50.cpp
+		marnav/seatalk/message_51.cpp
+		marnav/seatalk/message_52.cpp
+		marnav/seatalk/message_53.cpp
+		marnav/seatalk/message_54.cpp
+		marnav/seatalk/message_56.cpp
+		marnav/seatalk/message_58.cpp
+		marnav/seatalk/message_59.cpp
+		marnav/seatalk/message_65.cpp
+		marnav/seatalk/message_66.cpp
+		marnav/seatalk/message_6c.cpp
+		marnav/seatalk/message_86.cpp
+		marnav/seatalk/message_87.cpp
+		marnav/seatalk/message_89.cpp
+		marnav/seatalk/seatalk.cpp
+		marnav/utils/mmsi.cpp
+		marnav/utils/mmsi_country.cpp
 	)
 
 install(
-	FILES
-		marnav/nmea/constants.hpp
-		marnav/nmea/tag_block.hpp
-		marnav/nmea/talker_id.hpp
-		marnav/nmea/sentence_id.hpp
-		marnav/nmea/convert.hpp
-		marnav/nmea/waypoint.hpp
-		marnav/nmea/manufacturer.hpp
-		marnav/nmea/angle.hpp
-		marnav/nmea/string.hpp
-		marnav/nmea/name.hpp
-		marnav/nmea/io.hpp
-		marnav/nmea/date.hpp
-		marnav/nmea/time.hpp
-		marnav/nmea/checksum.hpp
-		marnav/nmea/checksum_enum.hpp
-		marnav/nmea/sentence.hpp
-		marnav/nmea/detail.hpp
-		marnav/nmea/ais_helper.hpp
-		marnav/nmea/nmea.hpp
-		marnav/nmea/aam.hpp
-		marnav/nmea/alm.hpp
-		marnav/nmea/apa.hpp
-		marnav/nmea/apb.hpp
-		marnav/nmea/bod.hpp
-		marnav/nmea/bwc.hpp
-		marnav/nmea/bww.hpp
-		marnav/nmea/bwr.hpp
-		marnav/nmea/dbk.hpp
-		marnav/nmea/dbt.hpp
-		marnav/nmea/dpt.hpp
-		marnav/nmea/dsc.hpp
-		marnav/nmea/dse.hpp
-		marnav/nmea/dtm.hpp
-		marnav/nmea/fsi.hpp
-		marnav/nmea/gbs.hpp
-		marnav/nmea/gga.hpp
-		marnav/nmea/glc.hpp
-		marnav/nmea/gll.hpp
-		marnav/nmea/gns.hpp
-		marnav/nmea/grs.hpp
-		marnav/nmea/gsa.hpp
-		marnav/nmea/gst.hpp
-		marnav/nmea/gsv.hpp
-		marnav/nmea/gtd.hpp
-		marnav/nmea/hdg.hpp
-		marnav/nmea/hfb.hpp
-		marnav/nmea/hdm.hpp
-		marnav/nmea/hdt.hpp
-		marnav/nmea/hsc.hpp
-		marnav/nmea/its.hpp
-		marnav/nmea/lcd.hpp
-		marnav/nmea/msk.hpp
-		marnav/nmea/mss.hpp
-		marnav/nmea/mtw.hpp
-		marnav/nmea/mwd.hpp
-		marnav/nmea/mwv.hpp
-		marnav/nmea/osd.hpp
-		marnav/nmea/r00.hpp
-		marnav/nmea/rma.hpp
-		marnav/nmea/rmb.hpp
-		marnav/nmea/rmc.hpp
-		marnav/nmea/rot.hpp
-		marnav/nmea/rpm.hpp
-		marnav/nmea/rsa.hpp
-		marnav/nmea/rsd.hpp
-		marnav/nmea/rte.hpp
-		marnav/nmea/sfi.hpp
-		marnav/nmea/stn.hpp
-		marnav/nmea/tds.hpp
-		marnav/nmea/tfi.hpp
-		marnav/nmea/tll.hpp
-		marnav/nmea/tpc.hpp
-		marnav/nmea/tpr.hpp
-		marnav/nmea/tpt.hpp
-		marnav/nmea/ttm.hpp
-		marnav/nmea/vbw.hpp
-		marnav/nmea/vdm.hpp
-		marnav/nmea/vdo.hpp
-		marnav/nmea/vdr.hpp
-		marnav/nmea/vhw.hpp
-		marnav/nmea/vlw.hpp
-		marnav/nmea/vpw.hpp
-		marnav/nmea/vtg.hpp
-		marnav/nmea/vwr.hpp
-		marnav/nmea/wcv.hpp
-		marnav/nmea/wnc.hpp
-		marnav/nmea/wpl.hpp
-		marnav/nmea/xdr.hpp
-		marnav/nmea/xte.hpp
-		marnav/nmea/xtr.hpp
-		marnav/nmea/zda.hpp
-		marnav/nmea/zdl.hpp
-		marnav/nmea/zfo.hpp
-		marnav/nmea/ztg.hpp
-		marnav/nmea/pgrme.hpp
-	DESTINATION include/marnav/nmea
+	DIRECTORY
+		${PROJECT_SOURCE_DIR}/include/marnav/ais
+		${PROJECT_SOURCE_DIR}/include/marnav/geo
+		${PROJECT_SOURCE_DIR}/include/marnav/math
+		${PROJECT_SOURCE_DIR}/include/marnav/nmea
+		${PROJECT_SOURCE_DIR}/include/marnav/seatalk
+		${PROJECT_SOURCE_DIR}/include/marnav/utils
+	DESTINATION include/marnav
 	)
-
-install(
-	FILES
-		marnav/utils/unused.hpp
-		marnav/utils/unique.hpp
-		marnav/utils/bitset.hpp
-		marnav/utils/bitset_string.hpp
-		marnav/utils/optional.hpp
-		marnav/utils/mmsi.hpp
-		marnav/utils/mmsi_country.hpp
-		marnav/utils/clamp.hpp
-	DESTINATION include/marnav/utils
-	)
-
-install(
-	FILES
-		marnav/math/floatingpoint.hpp
-		marnav/math/vector.hpp
-		marnav/math/matrix.hpp
-		marnav/math/quaternion.hpp
-		marnav/math/type_traits.hpp
-	DESTINATION include/marnav/math
-	)
-
-install(
-	FILES
-		marnav/geo/angle.hpp
-		marnav/geo/position.hpp
-		marnav/geo/region.hpp
-		marnav/geo/cpa.hpp
-		marnav/geo/geodesic.hpp
-	DESTINATION include/marnav/geo
-	)
-
-if(ENABLE_SEATALK)
-	target_sources(marnav
-		PRIVATE
-			marnav/seatalk/seatalk.cpp
-			marnav/seatalk/message.cpp
-			marnav/seatalk/message_00.cpp
-			marnav/seatalk/message_01.cpp
-			marnav/seatalk/message_05.cpp
-			marnav/seatalk/message_10.cpp
-			marnav/seatalk/message_11.cpp
-			marnav/seatalk/message_20.cpp
-			marnav/seatalk/message_21.cpp
-			marnav/seatalk/message_22.cpp
-			marnav/seatalk/message_23.cpp
-			marnav/seatalk/message_24.cpp
-			marnav/seatalk/message_25.cpp
-			marnav/seatalk/message_26.cpp
-			marnav/seatalk/message_27.cpp
-			marnav/seatalk/message_30.cpp
-			marnav/seatalk/message_36.cpp
-			marnav/seatalk/message_38.cpp
-			marnav/seatalk/message_50.cpp
-			marnav/seatalk/message_51.cpp
-			marnav/seatalk/message_52.cpp
-			marnav/seatalk/message_53.cpp
-			marnav/seatalk/message_54.cpp
-			marnav/seatalk/message_56.cpp
-			marnav/seatalk/message_58.cpp
-			marnav/seatalk/message_59.cpp
-			marnav/seatalk/message_65.cpp
-			marnav/seatalk/message_66.cpp
-			marnav/seatalk/message_6c.cpp
-			marnav/seatalk/message_86.cpp
-			marnav/seatalk/message_87.cpp
-			marnav/seatalk/message_89.cpp
-		)
-
-	install(
-		FILES
-			marnav/seatalk/key.hpp
-			marnav/seatalk/equipment.hpp
-			marnav/seatalk/seatalk.hpp
-			marnav/seatalk/message.hpp
-			marnav/seatalk/message_00.hpp
-			marnav/seatalk/message_01.hpp
-			marnav/seatalk/message_05.hpp
-			marnav/seatalk/message_10.hpp
-			marnav/seatalk/message_11.hpp
-			marnav/seatalk/message_20.hpp
-			marnav/seatalk/message_21.hpp
-			marnav/seatalk/message_22.hpp
-			marnav/seatalk/message_23.hpp
-			marnav/seatalk/message_24.hpp
-			marnav/seatalk/message_25.hpp
-			marnav/seatalk/message_26.hpp
-			marnav/seatalk/message_27.hpp
-			marnav/seatalk/message_30.hpp
-			marnav/seatalk/message_36.hpp
-			marnav/seatalk/message_38.hpp
-			marnav/seatalk/message_50.hpp
-			marnav/seatalk/message_51.hpp
-			marnav/seatalk/message_52.hpp
-			marnav/seatalk/message_53.hpp
-			marnav/seatalk/message_54.hpp
-			marnav/seatalk/message_56.hpp
-			marnav/seatalk/message_58.hpp
-			marnav/seatalk/message_59.hpp
-			marnav/seatalk/message_65.hpp
-			marnav/seatalk/message_66.hpp
-			marnav/seatalk/message_6c.hpp
-			marnav/seatalk/message_86.hpp
-			marnav/seatalk/message_87.hpp
-			marnav/seatalk/message_89.hpp
-		DESTINATION include/marnav/seatalk
-		)
-endif()
-
-if(ENABLE_AIS)
-	target_sources(marnav
-		PRIVATE
-			marnav/ais/ais.cpp
-			marnav/ais/angle.cpp
-			marnav/ais/rate_of_turn.cpp
-			marnav/ais/name.cpp
-			marnav/ais/binary_data.cpp
-			marnav/ais/binary_001_11.cpp
-			marnav/ais/binary_200_10.cpp
-			marnav/ais/message_01.cpp
-			marnav/ais/message_02.cpp
-			marnav/ais/message_03.cpp
-			marnav/ais/message_04.cpp
-			marnav/ais/message_05.cpp
-			marnav/ais/message_06.cpp
-			marnav/ais/message_07.cpp
-			marnav/ais/message_08.cpp
-			marnav/ais/message_09.cpp
-			marnav/ais/message_10.cpp
-			marnav/ais/message_11.cpp
-			marnav/ais/message_12.cpp
-			marnav/ais/message_13.cpp
-			marnav/ais/message_14.cpp
-			marnav/ais/message_17.cpp
-			marnav/ais/message_18.cpp
-			marnav/ais/message_19.cpp
-			marnav/ais/message_20.cpp
-			marnav/ais/message_21.cpp
-			marnav/ais/message_22.cpp
-			marnav/ais/message_23.cpp
-			marnav/ais/message_24.cpp
-		)
-
-	install(
-		FILES
-			marnav/ais/ais.hpp
-			marnav/ais/angle.hpp
-			marnav/ais/rate_of_turn.hpp
-			marnav/ais/name.hpp
-			marnav/ais/binary_data.hpp
-			marnav/ais/binary_001_11.hpp
-			marnav/ais/binary_200_10.hpp
-			marnav/ais/message.hpp
-			marnav/ais/message_01.hpp
-			marnav/ais/message_02.hpp
-			marnav/ais/message_03.hpp
-			marnav/ais/message_04.hpp
-			marnav/ais/message_05.hpp
-			marnav/ais/message_06.hpp
-			marnav/ais/message_07.hpp
-			marnav/ais/message_08.hpp
-			marnav/ais/message_09.hpp
-			marnav/ais/message_10.hpp
-			marnav/ais/message_11.hpp
-			marnav/ais/message_12.hpp
-			marnav/ais/message_13.hpp
-			marnav/ais/message_14.hpp
-			marnav/ais/message_17.hpp
-			marnav/ais/message_18.hpp
-			marnav/ais/message_19.hpp
-			marnav/ais/message_20.hpp
-			marnav/ais/message_21.hpp
-			marnav/ais/message_22.hpp
-			marnav/ais/message_23.hpp
-			marnav/ais/message_24.hpp
-		DESTINATION include/marnav/ais
-		)
-endif()
 
 if(ENABLE_IO)
 	target_sources(marnav
@@ -426,37 +211,22 @@ if(ENABLE_IO)
 			marnav/io/serial.cpp
 			marnav/io/nmea_reader.cpp
 			marnav/io/default_nmea_reader.cpp
+			marnav/io/seatalk_reader.cpp
+			marnav/io/default_seatalk_reader.cpp
 		)
 	install(
-		FILES
-			marnav/io/device.hpp
-			marnav/io/serial.hpp
-			marnav/io/nmea_reader.hpp
-			marnav/io/default_nmea_reader.hpp
-			marnav/io/default_nmea_serial.hpp
-		DESTINATION include/marnav/io
+		DIRECTORY ${PROJECT_SOURCE_DIR}/include/marnav/io
+		DESTINATION include/marnav
 		)
-
-	if(ENABLE_SEATALK)
-		target_sources(marnav
-			PRIVATE
-				marnav/io/seatalk_reader.cpp
-				marnav/io/default_seatalk_reader.cpp
-			)
-		install(
-			FILES
-				marnav/io/seatalk_reader.hpp
-				marnav/io/default_seatalk_reader.hpp
-				marnav/io/default_seatalk_serial.hpp
-			DESTINATION include/marnav/io
-			)
-	endif()
 endif()
 
 target_include_directories(marnav
 	PRIVATE
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+	PUBLIC
+		$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+		$<INSTALL_INTERFACE:include>
 	)
 
 target_compile_options(marnav
@@ -600,16 +370,8 @@ install(
 if(ENABLE_TOOLS)
 	### bin: nmeasum
 	add_executable(nmeasum)
-
-	target_sources(nmeasum
-		PRIVATE
-			nmeasum.cpp
-		)
-
-	target_include_directories(nmeasum
-		PRIVATE
-			${CMAKE_CURRENT_SOURCE_DIR}
-		)
+	target_sources(nmeasum PRIVATE nmeasum.cpp)
+	target_link_libraries(nmeasum PRIVATE marnav::marnav)
 
 	target_compile_options(nmeasum
 		PRIVATE
@@ -621,14 +383,9 @@ if(ENABLE_TOOLS)
 		)
 
 	### bin: nmeadump
-	if(ENABLE_AIS AND ENABLE_IO)
+	if(ENABLE_IO)
 		add_executable(nmeadump)
-
-		target_sources(nmeadump
-			PRIVATE
-				nmeadump.cpp
-			)
-
+		target_sources(nmeadump PRIVATE nmeadump.cpp)
 		target_include_directories(nmeadump
 			PRIVATE
 				${CMAKE_CURRENT_SOURCE_DIR}
@@ -644,9 +401,6 @@ if(ENABLE_TOOLS)
 				-pedantic-errors
 			)
 
-		target_link_libraries(nmeadump
-			PRIVATE
-				marnav
-			)
+		target_link_libraries(nmeadump PRIVATE marnav::marnav)
 	endif()
 endif()

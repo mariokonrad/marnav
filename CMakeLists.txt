@@ -4,7 +4,11 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-project(marnav VERSION 0.9.0 LANGUAGES CXX C)
+project(marnav
+	VERSION 0.9.0
+	LANGUAGES CXX C
+	DESCRIPTION "Library for maritime navigation."
+	)
 
 ### compiler check
 if(${CMAKE_CXX_COMPILER_ID} MATCHES "GNU|Clang")
@@ -24,8 +28,6 @@ option(ENABLE_STATIC "Enable static library" ON)
 option(ENABLE_PROFILING "Enable Profiling" OFF)
 option(ENABLE_BENCHMARK "Enable Benchmark" OFF)
 option(ENABLE_SANITIZER "Enable Sanitizing (address, undefined)" OFF)
-option(ENABLE_AIS "Enable AIS support" ON)
-option(ENABLE_SEATALK "Enable SeaTalk support" ON)
 option(ENABLE_IO "Enable IO support" ON)
 option(ENABLE_EXAMPLES "Enable Examples" ON)
 option(ENABLE_TESTS "Enable Tests" ON)
@@ -63,7 +65,7 @@ endif()
 ### ctags / cscope
 include(CTags)
 if(CTAGS_PATH AND CSCOPE_PATH)
-	setup_ctags_target("${CMAKE_CURRENT_SOURCE_DIR}/src/*.?pp")
+	setup_ctags_target("${CMAKE_CURRENT_SOURCE_DIR}/src/*.?pp;${CMAKE_CURRENT_SOURCE_DIR}/include/*.?pp")
 endif()
 
 ### testing

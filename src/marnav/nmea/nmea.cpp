@@ -1,6 +1,4 @@
-#include "nmea.hpp"
-#include <algorithm>
-#include <string>
+#include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/checksum.hpp>
 #include <marnav/nmea/date.hpp>
@@ -86,6 +84,8 @@
 #include <marnav/nmea/pgrmm.hpp>
 #include <marnav/nmea/pgrmz.hpp>
 #include <marnav/nmea/stalk.hpp>
+#include <algorithm>
+#include <string>
 
 /// @example parse_nmea.cpp
 /// This is an example on how to parse and handle NMEA sentences from a string.

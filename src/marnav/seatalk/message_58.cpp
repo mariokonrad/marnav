@@ -1,4 +1,4 @@
-#include "message_58.hpp"
+#include <marnav/seatalk/message_58.hpp>
 #include <limits>
 #include <cmath>
 

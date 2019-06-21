@@ -1,4 +1,4 @@
-#include "binary_200_10.hpp"
+#include <marnav/ais/binary_200_10.hpp>
 #include <marnav/utils/clamp.hpp>
 #include <algorithm>
 #include <cmath>

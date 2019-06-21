@@ -17,7 +17,10 @@ function exec_file()
 	${CLANG_TIDY_BIN} $1 \
 		-checks=cppcoreguidelines-*,modernize-*,readability-*,misc-*,clang-analyzer-*,-readability-braces-around-statements \
 		-p ${BASE}/build \
-		-- -I${BASE}/src -std=c++11
+		-- \
+		-I${BASE}/src \
+		-I${BASE}/include \
+		-std=c++11
 }
 
 function exec_directory()
@@ -37,7 +40,7 @@ if [ $# -gt 1 ] ; then
 	echo ""
 	echo "usage: $0 [directory|filename]"
 	echo ""
-	echo "  if no direcory of filename is specified, the directory 'src' with all files"
+	echo "  if no direcory of filename is specified, the directory 'src' 'include' with all files"
 	echo "  matching '*.[ch]pp' is assumed."
 	echo ""
 	exit -1
@@ -45,6 +48,7 @@ fi
 
 if [ $# -eq 0 ] ; then
 	exec_directory ${BASE}/src
+	exec_directory ${BASE}/src/include
 else
 	if [ -d $1 ] ; then
 		exec_directory $1

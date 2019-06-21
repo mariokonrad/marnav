@@ -1,4 +1,4 @@
-#include "gtd.hpp"
+#include <marnav/nmea/gtd.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

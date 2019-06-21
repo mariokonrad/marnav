@@ -1,4 +1,4 @@
-#include "ztg.hpp"
+#include <marnav/nmea/ztg.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

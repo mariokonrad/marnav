@@ -1,4 +1,4 @@
-#include "message_24.hpp"
+#include <marnav/ais/message_24.hpp>
 #include <marnav/utils/mmsi.hpp>
 
 namespace marnav

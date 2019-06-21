@@ -1,4 +1,4 @@
-#include "angle.hpp"
+#include <marnav/ais/angle.hpp>
 #include <limits>
 #include <cmath>
 #include <cassert>

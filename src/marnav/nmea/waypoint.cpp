@@ -1,4 +1,4 @@
-#include "waypoint.hpp"
+#include <marnav/nmea/waypoint.hpp>
 #include <stdexcept>
 
 namespace marnav

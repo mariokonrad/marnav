@@ -1,10 +1,10 @@
-#include "tag_block.hpp"
+#include <marnav/nmea/tag_block.hpp>
+#include "split.hpp"
+#include <marnav/nmea/checksum.hpp>
+#include <marnav/nmea/detail.hpp>
 #include <algorithm>
 #include <stdexcept>
 #include <type_traits>
-#include <marnav/nmea/checksum.hpp>
-#include <marnav/nmea/detail.hpp>
-#include <marnav/nmea/split.hpp>
 
 namespace marnav
 {

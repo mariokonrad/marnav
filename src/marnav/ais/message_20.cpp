@@ -1,4 +1,4 @@
-#include "message_20.hpp"
+#include <marnav/ais/message_20.hpp>
 #include <stdexcept>
 
 namespace marnav

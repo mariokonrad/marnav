@@ -1,6 +1,6 @@
-#include "wpl.hpp"
+#include <marnav/nmea/wpl.hpp>
+#include "convert.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/nmea/convert.hpp>
 
 namespace marnav
 {

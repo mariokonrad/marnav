@@ -1,4 +1,4 @@
-#include "lcd.hpp"
+#include <marnav/nmea/lcd.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

@@ -1,4 +1,4 @@
-#include "message_54.hpp"
+#include <marnav/seatalk/message_54.hpp>
 #include <cmath>
 
 namespace marnav

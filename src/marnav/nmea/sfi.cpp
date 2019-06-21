@@ -1,4 +1,4 @@
-#include "sfi.hpp"
+#include <marnav/nmea/sfi.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

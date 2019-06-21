@@ -1,4 +1,4 @@
-#include "position.hpp"
+#include <marnav/geo/position.hpp>
 #include <marnav/math/constants.hpp>
 
 namespace marnav

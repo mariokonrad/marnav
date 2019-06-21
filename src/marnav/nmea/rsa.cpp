@@ -1,4 +1,4 @@
-#include "rsa.hpp"
+#include <marnav/nmea/rsa.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

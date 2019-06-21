@@ -1,7 +1,7 @@
-#include "tll.hpp"
+#include <marnav/nmea/tll.hpp>
+#include "convert.hpp"
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/io.hpp>
-#include <marnav/nmea/convert.hpp>
 
 namespace marnav
 {

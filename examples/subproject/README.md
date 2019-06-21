@@ -36,6 +36,9 @@ with
 - `extern` the place where submodules are being kept.
 - `src`    the source of the demo project.
 
+For easier demonstration and testing purposes, the environment variable
+`MARNAV_SOURCE_DIR` needs to be set accordingly.
+
 
 Test
 ----
@@ -62,6 +65,7 @@ git submodule add ${PATH_TO_MARNAV} /tmp/subproject/extern/marnav
 Build the library and demo:
 
 ```bash
+export MARNAV_SOURCE_DIR=/tmp/subproject/extern/marnav
 cmake -H. -Bbuild
 cmake --build build
 ```

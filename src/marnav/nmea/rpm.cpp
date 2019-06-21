@@ -1,4 +1,4 @@
-#include "rpm.hpp"
+#include <marnav/nmea/rpm.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

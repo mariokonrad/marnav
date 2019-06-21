@@ -1,4 +1,4 @@
-#include "ais_helper.hpp"
+#include <marnav/nmea/ais_helper.hpp>
 #include <marnav/utils/unique.hpp>
 
 namespace marnav

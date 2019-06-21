@@ -1,6 +1,6 @@
-#include "gsa.hpp"
-#include <limits>
+#include <marnav/nmea/gsa.hpp>
 #include <marnav/nmea/io.hpp>
+#include <limits>
 
 namespace marnav
 {

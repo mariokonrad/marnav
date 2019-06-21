@@ -1,4 +1,4 @@
-#include "message_21.hpp"
+#include <marnav/seatalk/message_21.hpp>
 
 namespace marnav
 {

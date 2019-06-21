@@ -1,4 +1,4 @@
-#include "rsd.hpp"
+#include <marnav/nmea/rsd.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

@@ -1,4 +1,4 @@
-#include "tpr.hpp"
+#include <marnav/nmea/tpr.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

@@ -1,4 +1,4 @@
-#include "hdm.hpp"
+#include <marnav/nmea/hdm.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

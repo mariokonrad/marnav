@@ -403,8 +403,6 @@ Build options:
 - `ENABLE_SANITIZER` : enables address and undefined sanitizers
 
 Features:
-- `ENABLE_AIS ` : enables AIS support. Default: `ON`
-- `ENABLE_SEATALK` : enables SeaTalk support. Default: `ON`
 - `ENABLE_IO` : enables IO support. Default: `ON`
 
 Components:

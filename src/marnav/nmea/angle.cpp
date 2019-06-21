@@ -1,4 +1,4 @@
-#include "angle.hpp"
+#include <marnav/nmea/angle.hpp>
 #include <stdexcept>
 #include <cmath>
 

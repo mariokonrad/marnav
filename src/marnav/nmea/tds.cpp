@@ -1,4 +1,4 @@
-#include "tds.hpp"
+#include <marnav/nmea/tds.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

@@ -13,7 +13,7 @@ fi
 # performing checks
 cd ${BASE}
 FILES=()
-for fn in $(find src test examples -type f -name "*.[ch]pp") ; do
+for fn in $(find src include test examples -type f -name "*.[ch]pp") ; do
 	if [ "$(${CLANG_FORMAT_BIN} "$fn" | diff "$fn" -)" ] ; then
 		FILES+=($fn)
 	fi

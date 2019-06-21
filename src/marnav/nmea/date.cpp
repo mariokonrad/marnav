@@ -1,4 +1,4 @@
-#include "date.hpp"
+#include <marnav/nmea/date.hpp>
 #include <stdexcept>
 
 namespace marnav

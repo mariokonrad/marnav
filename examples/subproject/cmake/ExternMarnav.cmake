@@ -1,6 +1,7 @@
+include(ExternalProject)
 ExternalProject_Add(extern_marnav
 	PREFIX "${CMAKE_CURRENT_BINARY_DIR}/marnav"
-	SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/extern/marnav"
+	SOURCE_DIR "${MARNAV_SOURCE_DIR}"
 	# configure
 	CMAKE_ARGS
 		-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
@@ -15,7 +16,7 @@ ExternalProject_Add(extern_marnav
 	)
 
 add_library(marnav::marnav STATIC IMPORTED)
-
+file(MAKE_DIRECTORY ${LOCAL_INSTALL_PREFIX}/include)
 set_target_properties(marnav::marnav
 	PROPERTIES
 		IMPORTED_LOCATION
@@ -23,8 +24,5 @@ set_target_properties(marnav::marnav
 		INTERFACE_INCLUDE_DIRECTORIES
 			${LOCAL_INSTALL_PREFIX}/include
 	)
-
-set(marnav_INCLUDE_DIR "${LOCAL_INSTALL_PREFIX}/include")
-set(marnav_LIBRARIES "marnav")
 
 add_dependencies(marnav::marnav extern_marnav)

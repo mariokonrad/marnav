@@ -1,4 +1,4 @@
-#include "dbt.hpp"
+#include <marnav/nmea/dbt.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

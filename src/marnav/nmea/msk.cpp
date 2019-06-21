@@ -1,4 +1,4 @@
-#include "msk.hpp"
+#include <marnav/nmea/msk.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

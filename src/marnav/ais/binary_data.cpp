@@ -1,4 +1,4 @@
-#include "binary_data.hpp"
+#include <marnav/ais/binary_data.hpp>
 #include <algorithm>
 
 namespace marnav

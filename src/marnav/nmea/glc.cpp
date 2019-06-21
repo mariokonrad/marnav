@@ -1,4 +1,4 @@
-#include "glc.hpp"
+#include <marnav/nmea/glc.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

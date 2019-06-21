@@ -14,6 +14,9 @@ root
 +- doc
 +- examples
 +- extern
++- include
+|  +- marnav
+|     +- ...
 +- src
 |  +- marnav
 |     +- ais
@@ -33,24 +36,23 @@ root
                 This examples use the library to demonstrate its usage.
 - \c extern   : External projects and resources used by the library.
 - \c test     : All tests
-- \c src      : Complete source of the library, source and header files.
+- \c include  : Public headers
+- \c src      : Complete source of the library, source and private header files.
                 Packages are grouped in their own subdirectory, named
                 accordingly (e.g. \c marnav/nmea).
 
-                \b Note: both, private and public headers of the library are
-                located here.
-
-   - \c ais     : all AIS related stuff. Note that despite the AIS builds on
-                  the NMEA protocol (VDM, VDO sentences), the package does not
-                  have any dependencies to the \c nmea package.
-   - \c geo     : collection of geographic and geodesic functions
-   - \c io      : input output stuff, mainly for NMEA and SeaTalk. Please note,
-                  that this package is not mandatory. It is perfectly fine
-                  to use the \c nmea package without \c io.
-   - \c math    : generic math stuff
-   - \c nmea    : everything NMEA-0183 related
-   - \c seatalk : everything SeaTalk related, except IO.
-   - \c utils   : common utils
+In the directories `src` and `include`:
+- \c ais     : all AIS related stuff. Note that despite the AIS builds on
+               the NMEA protocol (VDM, VDO sentences), the package does not
+               have any dependencies to the \c nmea package.
+- \c geo     : collection of geographic and geodesic functions
+- \c io      : input output stuff, mainly for NMEA and SeaTalk. Please note,
+               that this package is not mandatory. It is perfectly fine
+               to use the \c nmea package without \c io.
+- \c math    : generic math stuff
+- \c nmea    : everything NMEA-0183 related
+- \c seatalk : everything SeaTalk related, except IO.
+- \c utils   : common utils
 
 
 \subsection subsec_overview_package_dependencies Package dependencies

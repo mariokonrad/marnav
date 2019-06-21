@@ -1,5 +1,5 @@
-#include "dsc.hpp"
-#include <marnav/nmea/checks.hpp>
+#include <marnav/nmea/dsc.hpp>
+#include "checks.hpp"
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

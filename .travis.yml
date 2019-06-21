@@ -86,32 +86,6 @@ matrix:
           - libboost1.55-all-dev
 
     - os: linux
-      env: COMPILER=g++-4.9 CMAKE_BUILD_TYPE=Debug ENABLE_SEATALK=NO
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          packages:
-          - gcc-4.9
-          - g++-4.9
-          - libboost1.55-all-dev
-
-    - os: linux
-      env: COMPILER=g++-4.9 CMAKE_BUILD_TYPE=Debug ENABLE_AIS=NO
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          packages:
-          - gcc-4.9
-          - g++-4.9
-          - libboost1.55-all-dev
-
-    - os: linux
       env: COMPILER=g++-4.9 CMAKE_BUILD_TYPE=Debug ENABLE_IO=NO
       compiler: gcc
       addons:

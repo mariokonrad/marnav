@@ -1,6 +1,6 @@
-#include "cpa.hpp"
-#include <cmath>
+#include <marnav/geo/cpa.hpp>
 #include <marnav/math/vector.hpp>
+#include <cmath>
 
 namespace marnav
 {

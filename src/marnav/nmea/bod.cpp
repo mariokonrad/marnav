@@ -1,4 +1,4 @@
-#include "bod.hpp"
+#include <marnav/nmea/bod.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

@@ -1,12 +1,12 @@
 #ifndef MARNAV__NMEA__CHECKS__HPP
 #define MARNAV__NMEA__CHECKS__HPP
 
-#include <algorithm>
-#include <stdexcept>
-#include <string>
 #include <marnav/nmea/constants.hpp>
 #include <marnav/nmea/string.hpp>
 #include <marnav/utils/optional.hpp>
+#include <algorithm>
+#include <stdexcept>
+#include <string>
 
 namespace marnav
 {

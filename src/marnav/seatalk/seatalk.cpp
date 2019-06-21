@@ -1,7 +1,4 @@
-#include "seatalk.hpp"
-
-#include <algorithm>
-
+#include <marnav/seatalk/seatalk.hpp>
 #include <marnav/seatalk/message_00.hpp>
 #include <marnav/seatalk/message_01.hpp>
 #include <marnav/seatalk/message_05.hpp>
@@ -32,6 +29,8 @@
 #include <marnav/seatalk/message_86.hpp>
 #include <marnav/seatalk/message_87.hpp>
 #include <marnav/seatalk/message_89.hpp>
+
+#include <algorithm>
 
 namespace marnav
 {

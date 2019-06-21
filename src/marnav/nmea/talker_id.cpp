@@ -1,4 +1,4 @@
-#include "talker_id.hpp"
+#include <marnav/nmea/talker_id.hpp>
 #include <algorithm>
 #include <stdexcept>
 

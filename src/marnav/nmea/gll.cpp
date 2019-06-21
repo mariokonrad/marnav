@@ -1,7 +1,7 @@
-#include "gll.hpp"
-#include <marnav/nmea/checks.hpp>
+#include <marnav/nmea/gll.hpp>
+#include "checks.hpp"
+#include "convert.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/nmea/convert.hpp>
 
 namespace marnav
 {

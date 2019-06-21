@@ -1,4 +1,4 @@
-#include "rate_of_turn.hpp"
+#include <marnav/ais/rate_of_turn.hpp>
 #include <limits>
 #include <stdexcept>
 #include <cmath>

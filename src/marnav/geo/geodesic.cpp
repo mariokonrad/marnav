@@ -1,4 +1,4 @@
-#include "geodesic.hpp"
+#include <marnav/geo/geodesic.hpp>
 #include <cmath>
 
 namespace marnav

@@ -23,8 +23,12 @@ Everything that is not in the README.md or generated from sources.
 repository.
 
 
+\dir include
+\brief Public header files.
+
+
 \dir src
-\brief Contains the entire source of the library.
+\brief Contains the source of the library.
 
 
 \dir src/marnav/ais

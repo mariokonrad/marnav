@@ -1,4 +1,4 @@
-#include "vdo.hpp"
+#include <marnav/nmea/vdo.hpp>
 
 namespace marnav
 {

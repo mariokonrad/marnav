@@ -1,4 +1,4 @@
-#include "xtr.hpp"
+#include <marnav/nmea/xtr.hpp>
 #include <marnav/nmea/io.hpp>
 
 namespace marnav

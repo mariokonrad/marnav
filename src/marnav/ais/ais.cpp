@@ -1,8 +1,4 @@
-#include "ais.hpp"
-
-#include <algorithm>
-#include <functional>
-
+#include <marnav/ais/ais.hpp>
 #include <marnav/ais/message_01.hpp>
 #include <marnav/ais/message_02.hpp>
 #include <marnav/ais/message_03.hpp>
@@ -25,6 +21,9 @@
 #include <marnav/ais/message_22.hpp>
 #include <marnav/ais/message_23.hpp>
 #include <marnav/ais/message_24.hpp>
+
+#include <algorithm>
+#include <functional>
 
 /// @example parse_ais.cpp
 /// This example shows how to parse AIS messages from NMEA sentences.

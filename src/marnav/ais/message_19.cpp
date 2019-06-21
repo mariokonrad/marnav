@@ -1,4 +1,4 @@
-#include "message_19.hpp"
+#include <marnav/ais/message_19.hpp>
 #include <marnav/ais/angle.hpp>
 
 namespace marnav

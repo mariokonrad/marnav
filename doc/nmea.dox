@@ -89,6 +89,10 @@ Vendor Extensions:
 - \link marnav::nmea::pgrmm \c PGRMM \endlink : Garmin Map Datum
 - \link marnav::nmea::pgrmz \c PGRMZ \endlink : Garmin Altitude Information
 
+Misc Extensions:
+
+- \link marnav::nmea::stalk \c STALK \endlink : SeaTalk over NMEA
+
 Miscellaneous:
 
 - Tag Block Support (generic for all sentences)

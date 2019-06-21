@@ -1,6 +1,6 @@
-#include "bwc.hpp"
+#include <marnav/nmea/bwc.hpp>
+#include "convert.hpp"
 #include <marnav/nmea/io.hpp>
-#include <marnav/nmea/convert.hpp>
 
 namespace marnav
 {

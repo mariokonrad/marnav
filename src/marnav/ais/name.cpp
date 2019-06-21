@@ -1,4 +1,4 @@
-#include "name.hpp"
+#include <marnav/ais/name.hpp>
 
 namespace marnav
 {

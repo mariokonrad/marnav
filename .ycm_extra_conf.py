@@ -10,6 +10,7 @@ flags = [
 	'-std=c++11',
 	'-I.',
 	'-Isrc',
+	'-Iinclude',
 	'-isystem', '/usr/include',
 	'-isystem', '/usr/local/include',
 ]

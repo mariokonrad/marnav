@@ -1,4 +1,4 @@
-#include "message_02.hpp"
+#include <marnav/ais/message_02.hpp>
 
 namespace marnav
 {

@@ -1,7 +1,7 @@
-#include "vdm.hpp"
-#include <string>
+#include <marnav/nmea/vdm.hpp>
 #include <marnav/nmea/io.hpp>
 #include <marnav/utils/unique.hpp>
+#include <string>
 
 namespace marnav
 {
