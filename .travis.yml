@@ -177,21 +177,23 @@ matrix:
     #      - libboost1.55-all-dev
 
 install:
-  - CMAKE_VERSION="cmake-3.11.4-Linux-x86_64"
-  - curl -O https://cmake.org/files/v3.11/${CMAKE_VERSION}.tar.gz
-  - tar -xf ${CMAKE_VERSION}.tar.gz
-  - rm -f ${CMAKE_VERSION}.tar.gz
-  - export PATH=${PWD}/${CMAKE_VERSION}/bin:${PATH}
+  - mkdir -p local/cmake
+  - curl -o local/cmake.tar.gz https://cmake.org/files/v3.11/cmake-3.11.4-Linux-x86_64.tar.gz
+  - tar --strip-components=1 -xf local/cmake.tar.gz -C local/cmake
+  - rm -f local/cmake.tar.gz
+  - export PATH=${PWD}/local/cmake/bin:${PATH}
 
 before_script:
-  - mkdir build
-  - cd build
   - cmake --version
   - ${COMPILER} --version
-  - cmake -DCMAKE_CXX_COMPILER=${COMPILER} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} ..
+  - mkdir build
+  - pushd build
+  - cmake .. -DCMAKE_CXX_COMPILER=${COMPILER} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+  - popd
 
 script:
-  - make
-  - make unittest
-  - make test
+  - cmake --build build
+  - cmake --build build --target unittest
+  - cmake --build build --target test
+  - bin/test-library.sh
 

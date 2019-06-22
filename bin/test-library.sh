@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 # builds the marnav library and tests if it is usable as library in
 # various ways.
@@ -7,7 +7,18 @@ export SCRIPT_BASE=$(dirname `readlink -f $0`)
 export BASE=${SCRIPT_BASE}/..
 export BUILD=${BASE}/build
 
-export NUM_PROC=${NUM_PROC:-$(nproc --all --ignore=2)}
+# TODO: activate this code after upgrading to cmake version > 3.11
+#if [ `which nproc` ] ; then
+#	export NUM_PROC_ARG="-j ${NUM_PROC:-$(nproc --all --ignore=2)}"
+#else
+#	num_proc=${NUM_PROC:-$(($(cat /proc/cpuinfo | grep -E "^processor" | wc -l) - 2))}
+#	if [ ${num_proc} -gt 0 ] ; then
+#		export NUM_PROC_ARG="-j ${num_proc}"
+#	else
+#		export NUM_PROC_ARG="-j 1"
+#	fi
+#fi
+export NUM_PROC_ARG=""
 
 function prepare_dir()
 {
@@ -36,7 +47,7 @@ function build_library()
 		-DENABLE_TESTS=OFF \
 		-DENABLE_TOOLS=OFF \
 		${BASE}
-	cmake --build . -j ${NUM_PROC}
+	cmake --build . ${NUM_PROC_ARG}
 	cmake --build . --target install
 	cpack -G TGZ
 	mv marnav-*.tar.gz ${tarballs_install}
@@ -54,7 +65,7 @@ function test_example_use_installation()
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_PREFIX_PATH=${install_prefix} \
 		${BASE}/examples/library
-	cmake --build . -j ${NUM_PROC}
+	cmake --build . ${NUM_PROC_ARG}
 	./foobar
 	popd
 }
@@ -73,7 +84,7 @@ function test_example_use_tarball()
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_PREFIX_PATH=${unpackdir} \
 		${BASE}/examples/library
-	cmake --build . -j ${NUM_PROC}
+	cmake --build . ${NUM_PROC_ARG}
 	./foobar
 	popd
 }
@@ -88,7 +99,7 @@ function test_example_use_externalproject_import()
 		-DCMAKE_BUILD_TYPE=Release \
 		-DMARNAV_SOURCE_DIR=${BASE} \
 		${BASE}/examples/subproject
-	cmake --build . -j ${NUM_PROC}
+	cmake --build . ${NUM_PROC_ARG}
 	./src/marnav-demo
 	popd
 }
@@ -103,7 +114,7 @@ function test_example_use_subdirectory()
 		-DCMAKE_BUILD_TYPE=Release \
 		-DMARNAV_SOURCE_DIR=${BASE} \
 		${BASE}/examples/subdirectory
-	cmake --build . -j ${NUM_PROC}
+	cmake --build . ${NUM_PROC_ARG}
 	./foobar
 	popd
 }
