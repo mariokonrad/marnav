@@ -56,9 +56,7 @@ TEST_F(Test_utils_bitset, uint8__construction_bit_size)
 
 TEST_F(Test_utils_bitset, uint8__construction_container_iterator)
 {
-	using namespace std;
-
-	vector<uint8_t> v{0xaa, 0x55};
+	std::vector<uint8_t> v{0xaa, 0x55};
 	bitset<uint8_t> b(begin(v), end(v));
 
 	//            0       8       16      24      32      40      48      56

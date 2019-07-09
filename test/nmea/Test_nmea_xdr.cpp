@@ -33,8 +33,11 @@ TEST_F(Test_nmea_xdr, parse)
 
 TEST_F(Test_nmea_xdr, parse_invalid_number_of_arguments)
 {
-	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::xdr>(nmea::talker_id::none, {0, "@"}));
+	// explicit qualify nmea::sentence::fields, otherwise libc++ has segfault,
+	// but only in the case with `count` of `0`.
+	EXPECT_ANY_THROW(nmea::detail::factory::sentence_parse<nmea::xdr>(
+		nmea::talker_id::none, nmea::sentence::fields(0, "@")));
+
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::xdr>(nmea::talker_id::none, {41, "@"}));
 	EXPECT_ANY_THROW(

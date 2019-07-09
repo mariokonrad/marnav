@@ -3,3 +3,4 @@ build
 tmp
 .gdbinit
 .bash_history
+CMakeLists.txt.user

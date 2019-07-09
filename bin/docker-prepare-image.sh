@@ -8,6 +8,24 @@ supported_compilers=(
 	"gcc-7.4.0"
 	"gcc-8.3.0"
 	"gcc-9.1.0"
+#	"clang-3.6.1"
+#	"clang-3.6.2"
+#	"clang-3.7.0"
+#	"clang-3.7.1"
+#	"clang-3.8.1"
+#	"clang-3.9.0"
+	"clang-3.9.1"
+#	"clang-4.0.0"
+#	"clang-4.0.1"
+#	"clang-5.0.0"
+#	"clang-5.0.1"
+#	"clang-5.0.2"
+	"clang-6.0.0"
+#	"clang-6.0.1"
+#	"clang-7.0.0"
+#	"clang-7.0.1"
+	"clang-7.1.0"
+	"clang-8.0.0"
 	)
 
 name=marnav
@@ -16,11 +34,14 @@ account=mariokonrad/
 function build_image()
 {
 	compiler=$1
-	version=${compiler#gcc-}
+	compiler_name=${compiler%-*}
+	compiler_version=${compiler#${compiler_name}-}
 
 	docker build \
-		--build-arg gcc_version=${version} \
+		--force-rm \
+		--build-arg compiler_version=${compiler_version} \
 		--tag ${account}${name}:${compiler} \
+		--file ${SCRIPT_BASE}/docker/Dockerfile.${compiler_name} \
 		${SCRIPT_BASE}/docker
 }
 
