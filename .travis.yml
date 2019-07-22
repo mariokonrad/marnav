@@ -1,199 +1,45 @@
+dist: bionic
 language: c++
-sudo: false
+sudo: true
 
 git:
   depth: 10
   submodules: false
 
+services:
+  - docker
+
 matrix:
   include:
-    - os: linux
-      env: COMPILER=g++-4.9 CMAKE_BUILD_TYPE=Debug
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          packages:
-          - gcc-4.9
-          - g++-4.9
-          - libboost1.55-all-dev
-
-    - os: linux
-      env: COMPILER=g++-5 CMAKE_BUILD_TYPE=Debug
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          packages:
-          - gcc-5
-          - g++-5
-          - libboost1.55-all-dev
-
-    - os: linux
-      env: COMPILER=g++-6 CMAKE_BUILD_TYPE=Debug
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          packages:
-          - gcc-6
-          - g++-6
-          - libboost1.55-all-dev
-
-    - os: linux
-      env: COMPILER=g++-7 CMAKE_BUILD_TYPE=Debug
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          packages:
-          - gcc-7
-          - g++-7
-          - libboost1.55-all-dev
-
-    - os: linux
-      env: COMPILER=g++-8 CMAKE_BUILD_TYPE=Debug
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          packages:
-          - gcc-8
-          - g++-8
-          - libboost1.55-all-dev
-
-    - os: linux
-      env: COMPILER=g++-4.9 CMAKE_BUILD_TYPE=Release
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          packages:
-          - gcc-4.9
-          - g++-4.9
-          - libboost1.55-all-dev
-
-    - os: linux
-      env: COMPILER=g++-4.9 CMAKE_BUILD_TYPE=Debug ENABLE_IO=NO
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          packages:
-          - gcc-4.9
-          - g++-4.9
-          - libboost1.55-all-dev
-
-    - os: linux
-      env: COMPILER=clang++-3.6 CMAKE_BUILD_TYPE=Debug
-      compiler: clang
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          - llvm-toolchain-precise-3.6
-          packages:
-          - clang-3.6
-          - libboost1.55-all-dev
-
-    - os: linux
-      env: COMPILER=clang++-3.7 CMAKE_BUILD_TYPE=Debug
-      compiler: clang
-      addons:
-        apt:
-          sources:
-          - boost-latest
-          - ubuntu-toolchain-r-test
-          - llvm-toolchain-precise-3.7
-          packages:
-          - clang-3.7
-          - libboost1.55-all-dev
+    - env: COMPILER=gcc-4.9.4   BUILD_TYPE=Release
+    - env: COMPILER=gcc-5.5.0   BUILD_TYPE=Release
+    - env: COMPILER=gcc-6.5.0   BUILD_TYPE=Release
+    - env: COMPILER=gcc-7.4.0   BUILD_TYPE=Release
+    - env: COMPILER=gcc-8.3.0   BUILD_TYPE=Release
+    - env: COMPILER=gcc-9.1.0   BUILD_TYPE=Release
+    - env: COMPILER=clang-3.9.1 BUILD_TYPE=Release
+    - env: COMPILER=clang-6.0.0 BUILD_TYPE=Release
+    - env: COMPILER=clang-7.1.0 BUILD_TYPE=Release
+    - env: COMPILER=clang-8.0.0 BUILD_TYPE=Release
+    - env: COMPILER=gcc-9.1.0   BUILD_TYPE=Debug
 
     #- os: linux
-    #  env: COMPILER=clang++-3.8 CMAKE_BUILD_TYPE=Debug
-    #  compiler: clang
+    #  env: COMPILER=g++-4.9 CMAKE_BUILD_TYPE=Debug ENABLE_IO=NO
+    #  compiler: gcc
     #  addons:
     #    apt:
     #      sources:
     #      - boost-latest
     #      - ubuntu-toolchain-r-test
-    #      - llvm-toolchain-precise-3.8
     #      packages:
-    #      - clang-3.8
+    #      - gcc-4.9
+    #      - g++-4.9
     #      - libboost1.55-all-dev
 
-    #- os: linux
-    #  env: COMPILER=clang++-3.9 CMAKE_BUILD_TYPE=Debug
-    #  compiler: clang
-    #  addons:
-    #    apt:
-    #      sources:
-    #      - boost-latest
-    #      - ubuntu-toolchain-r-test
-    #      - llvm-toolchain-precise-3.9
-    #      packages:
-    #      - clang-3.9
-    #      - libboost1.55-all-dev
-
-    #- os: linux
-    #  env: COMPILER=clang++-3.9 CMAKE_BUILD_TYPE=Release
-    #  compiler: clang
-    #  addons:
-    #    apt:
-    #      sources:
-    #      - boost-latest
-    #      - ubuntu-toolchain-r-test
-    #      - llvm-toolchain-precise-3.9
-    #      packages:
-    #      - clang-3.9
-    #      - libboost1.55-all-dev
-
-    #- os: linux
-    #  env: COMPILER=clang++-4.0 CMAKE_BUILD_TYPE=Debug
-    #  compiler: clang
-    #  addons:
-    #    apt:
-    #      sources:
-    #      - boost-latest
-    #      - ubuntu-toolchain-r-test
-    #      - llvm-toolchain-precise-4.0
-    #      packages:
-    #      - clang-4.0
-    #      - libboost1.55-all-dev
-
-install:
-  - mkdir -p local/cmake
-  - curl -o local/cmake.tar.gz https://cmake.org/files/v3.11/cmake-3.11.4-Linux-x86_64.tar.gz
-  - tar --strip-components=1 -xf local/cmake.tar.gz -C local/cmake
-  - rm -f local/cmake.tar.gz
-  - export PATH=${PWD}/local/cmake/bin:${PATH}
-
-before_script:
-  - cmake --version
-  - ${COMPILER} --version
-  - mkdir build
-  - pushd build
-  - cmake .. -DCMAKE_CXX_COMPILER=${COMPILER} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-  - popd
+before_install:
+  - docker pull mariokonrad/marnav:${COMPILER}
 
 script:
-  - cmake --build build
-  - cmake --build build --target unittest
-  - cmake --build build --target test
-  - bin/test-library.sh
+  - bin/docker-build.sh ${COMPILER} ${BUILD_TYPE}
+  - bin/docker-run.sh mariokonrad/marnav:${COMPILER} bin/test-library.sh
 

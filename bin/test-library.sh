@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 # builds the marnav library and tests if it is usable as library in
 # various ways.
