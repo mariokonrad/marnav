@@ -5,6 +5,7 @@ export BASE=${SCRIPT_BASE}/..
 export BUILD=${BASE}/build
 
 supported_compilers=(
+	"gcc-4.9.4"
 	"gcc-5.5.0"
 	"gcc-6.5.0"
 	"gcc-7.4.0"
