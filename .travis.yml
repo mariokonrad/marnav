@@ -18,23 +18,11 @@ matrix:
     - env: COMPILER=gcc-8.3.0   BUILD_TYPE=Release
     - env: COMPILER=gcc-9.1.0   BUILD_TYPE=Release
     - env: COMPILER=clang-3.9.1 BUILD_TYPE=Release
+    - env: COMPILER=clang-5.0.2 BUILD_TYPE=Release
     - env: COMPILER=clang-6.0.0 BUILD_TYPE=Release
     - env: COMPILER=clang-7.1.0 BUILD_TYPE=Release
     - env: COMPILER=clang-8.0.0 BUILD_TYPE=Release
     - env: COMPILER=gcc-9.1.0   BUILD_TYPE=Debug
-
-    #- os: linux
-    #  env: COMPILER=g++-4.9 CMAKE_BUILD_TYPE=Debug ENABLE_IO=NO
-    #  compiler: gcc
-    #  addons:
-    #    apt:
-    #      sources:
-    #      - boost-latest
-    #      - ubuntu-toolchain-r-test
-    #      packages:
-    #      - gcc-4.9
-    #      - g++-4.9
-    #      - libboost1.55-all-dev
 
 before_install:
   - docker pull mariokonrad/marnav:${COMPILER}

@@ -20,7 +20,7 @@ supported_compilers=(
 #	"clang-4.0.1"
 #	"clang-5.0.0"
 #	"clang-5.0.1"
-#	"clang-5.0.2"
+	"clang-5.0.2"
 	"clang-6.0.0"
 #	"clang-6.0.1"
 #	"clang-7.0.0"
