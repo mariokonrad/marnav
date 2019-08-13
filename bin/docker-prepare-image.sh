@@ -9,6 +9,7 @@ supported_compilers=(
 	"gcc-7.4.0"
 	"gcc-8.3.0"
 	"gcc-9.1.0"
+	"gcc-9.2.0"
 #	"clang-3.6.1"
 #	"clang-3.6.2"
 #	"clang-3.7.0"
