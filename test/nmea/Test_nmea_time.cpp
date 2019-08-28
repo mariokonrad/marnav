@@ -59,13 +59,23 @@ TEST_F(Test_nmea_time, invalid_format_for_double)
 	EXPECT_ANY_THROW(nmea::time::parse("123.455.6"));
 }
 
-TEST_F(Test_nmea_time, to_string)
+TEST_F(Test_nmea_time, to_string_no_ms)
+{
+	nmea::time t{1, 2, 3, 0};
+
+	using namespace marnav::nmea;
+	const std::string s = to_string(t);
+
+	EXPECT_STREQ("010203", s.c_str());
+}
+
+TEST_F(Test_nmea_time, to_string_with_ms)
 {
 	nmea::time t{1, 2, 3, 4};
 
 	using namespace marnav::nmea;
 	const std::string s = to_string(t);
 
-	EXPECT_STREQ("010203", s.c_str());
+	EXPECT_STREQ("010203.004", s.c_str());
 }
 }

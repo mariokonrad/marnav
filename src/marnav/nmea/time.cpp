@@ -69,11 +69,17 @@ time time::parse(const std::string & str)
 	return parse_time<time>(str);
 }
 
-/// Returns a string representation in the form 'hhmmss', does not render fractions of seconds.
+/// Returns a string representation in the form 'hhmmss', or ir the specified time has
+/// milliseconds other than 0, is provides the form 'hhmmss.sss`.
 std::string to_string(const time & t)
 {
-	char buf[7];
-	snprintf(buf, sizeof(buf), "%02u%02u%02u", t.hour(), t.minutes(), t.seconds());
+	char buf[16];
+	if (t.milliseconds()) {
+		snprintf(buf, sizeof(buf), "%02u%02u%02u.%03u", t.hour(), t.minutes(), t.seconds(),
+			t.milliseconds());
+	} else {
+		snprintf(buf, sizeof(buf), "%02u%02u%02u", t.hour(), t.minutes(), t.seconds());
+	}
 	return buf;
 }
 
