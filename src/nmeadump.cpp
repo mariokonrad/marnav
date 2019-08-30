@@ -70,6 +70,7 @@
 #include <marnav/nmea/hsc.hpp>
 #include <marnav/nmea/its.hpp>
 #include <marnav/nmea/lcd.hpp>
+#include <marnav/nmea/mob.hpp>
 #include <marnav/nmea/msk.hpp>
 #include <marnav/nmea/mss.hpp>
 #include <marnav/nmea/mtw.hpp>
@@ -481,6 +482,53 @@ static std::string render(const marnav::ais::navigation_status t)
 	return marnav::ais::to_name(t);
 }
 
+static std::string render(const marnav::nmea::mob::mob_status t)
+{
+	switch (t) {
+		case marnav::nmea::mob::mob_status::mob_activated:
+			return "mob activated";
+		case marnav::nmea::mob::mob_status::test_mode:
+			return "test mode";
+		case marnav::nmea::mob::mob_status::manual_button:
+			return "manual button";
+		case marnav::nmea::mob::mob_status::mob_not_in_use:
+			return "mob not in use";
+		case marnav::nmea::mob::mob_status::error:
+			return "error";
+	}
+	return "-";
+}
+
+static std::string render(const marnav::nmea::mob::mob_position_source t)
+{
+	switch (t) {
+		case marnav::nmea::mob::mob_position_source::position_estimated:
+			return "position estimated";
+		case marnav::nmea::mob::mob_position_source::position_reported:
+			return "position reported";
+		case marnav::nmea::mob::mob_position_source::reserved:
+			return "reserved";
+		case marnav::nmea::mob::mob_position_source::error:
+			return "error";
+	}
+	return "-";
+}
+
+static std::string render(const marnav::nmea::mob::battery_status t)
+{
+	switch (t) {
+		case marnav::nmea::mob::battery_status::good:
+			return "good";
+		case marnav::nmea::mob::battery_status::low:
+			return "low";
+		case marnav::nmea::mob::battery_status::reserved:
+			return "reserved";
+		case marnav::nmea::mob::battery_status::error:
+			return "error";
+	}
+	return "-";
+}
+
 static std::string render(const marnav::nmea::tfi::state t)
 {
 	switch (t) {
@@ -644,6 +692,23 @@ static void print_detail_lcd(const marnav::nmea::sentence * s)
 				fmt::sprintf("SNR:%d  ECD:%d", diff->snr, diff->ecd));
 		}
 	}
+}
+
+static void print_detail_mob(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::mob>(s);
+	print("MOB Emitter ID", render(t->get_emitter_id()));
+	print("MOB Status", render(t->get_mob_status()));
+	print("MOB Time UTC", render(t->get_mob_activation_utc()));
+	print("MOB Position Source", render(t->get_mob_position_source()));
+	print("Date of Position", render(t->get_position_date()));
+	print("Time of Position", render(t->get_position_time()));
+	print("Latitude", render(t->get_latitude()));
+	print("Longitude", render(t->get_longitude()));
+	print("COG", render(t->get_cog()));
+	print("SOG", render(t->get_sog()));
+	print("MMSI", render(t->get_mmsi()));
+	print("Battery Status", render(t->get_battery_status()));
 }
 
 static void print_detail_msk(const marnav::nmea::sentence * s)
@@ -1777,6 +1842,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(hsc),
 		ADD_SENTENCE(its),
 		ADD_SENTENCE(lcd),
+		ADD_SENTENCE(mob),
 		ADD_SENTENCE(msk),
 		ADD_SENTENCE(mss),
 		ADD_SENTENCE(mtw),

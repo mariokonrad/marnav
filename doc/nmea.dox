@@ -35,6 +35,7 @@ Supported sentences for NMEA-0183 (read and write):
 - \link marnav::nmea::hsc \c HSC \endlink : Heading Steering Command
 - \link marnav::nmea::its \c ITS \endlink : Trawl Door Spread 2 Distance
 - \link marnav::nmea::lcd \c LCD \endlink : Loran-C Signal Data
+- \link marnav::nmea::msk \c MOB \endlink : Man over Board
 - \link marnav::nmea::msk \c MSK \endlink : Control for a Beacon Receiver
 - \link marnav::nmea::mss \c MSS \endlink : Beacon Receiver Status
 - \link marnav::nmea::mtw \c MTW \endlink : Mean Temperature of Water

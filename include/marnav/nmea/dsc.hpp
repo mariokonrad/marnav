@@ -133,6 +133,8 @@ public:
 	geo::region get_geographical_area() const;
 	decltype(ack_) get_ack() const { return ack_; }
 	decltype(extension_) get_extension() const { return extension_; }
+
+	// TODO: implemente setters
 };
 
 std::string to_string(dsc::format_specifier value);

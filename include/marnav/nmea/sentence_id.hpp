@@ -42,6 +42,7 @@ enum class sentence_id : uint32_t {
 	HSC, ///< Heading Steering Command
 	ITS, ///< Trawl Door Spread 2 Distance
 	LCD, ///< Loran-C Signal Data
+	MOB, ///< Man over Board
 	MSK, ///< Control for a Beacon Receiver
 	MSS, ///< Beacon Receiver Status
 	MWD, ///< Wind Directinon and Speed

@@ -69,6 +69,8 @@ std::string to_name(sentence_id t)
 			return "Trawl Door Spread 2 Distance";
 		case sentence_id::LCD:
 			return "Loran-C Signal Data";
+		case sentence_id::MOB:
+			return "Man over Board";
 		case sentence_id::MSK:
 			return "Control for a Beacon Receiver";
 		case sentence_id::MSS:

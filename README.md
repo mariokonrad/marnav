@@ -74,6 +74,7 @@ Supported sentences for NMEA-0183 (read and write):
 - HSC: Heading Steering Command
 - ITS: Trawl Door Spread 2 Distance
 - LCD: Loran-C Signal Data
+- MOB: Man over Board
 - MSK: Control for a Beacon Receiver
 - MSS: Beacon Receiver Status
 - MTW: Mean Temperature of Water

@@ -80,6 +80,7 @@ target_sources(testrunner
 		nmea/Test_nmea_its.cpp
 		nmea/Test_nmea_lcd.cpp
 		nmea/Test_nmea_manufacturer.cpp
+		nmea/Test_nmea_mob.cpp
 		nmea/Test_nmea_msk.cpp
 		nmea/Test_nmea_mss.cpp
 		nmea/Test_nmea_mtw.cpp
