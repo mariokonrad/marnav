@@ -3,8 +3,6 @@
 
 int main(int, char **)
 {
-	using namespace marnav;
-
-	std::cout << version_major << "." << version_minor << "." << version_patch << "\n";
+	std::cout << "project version: " << marnav::project_version << '\n';
 	return 0;
 }

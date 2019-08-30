@@ -104,4 +104,20 @@ if (GIT_FOUND)
 			set(${ARGV1} ${GIT_AUTHORS_LIST} PARENT_SCOPE)
 		endif()
 	endfunction()
+
+	# returns the tag that points at HEAD, empty if none
+	#
+	# usage:
+	#
+	#    git_head_tag(TAG)
+	#
+	function(git_head_tag tag)
+		execute_process(
+			COMMAND ${GIT_EXECUTABLE} tag --points-at HEAD
+			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+			OUTPUT_VARIABLE head_tag
+			OUTPUT_STRIP_TRAILING_WHITESPACE
+			)
+		set(${tag} ${head_tag} PARENT_SCOPE)
+	endfunction()
 endif()
