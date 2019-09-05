@@ -16,7 +16,7 @@ cd /tmp
 tar -xf boost.tar.bz2
 rm -f boost.tar.bz2
 cd boost_${boost_file}
-./bootstrap.sh --with-toolset=${toolset} --prefix=${prefix} --with-libraries=system
+./bootstrap.sh --with-toolset=${toolset} --prefix=${prefix} --with-libraries=system,program_options,thread
 ./b2 -j3 --prefix=${prefix} \
 	toolset=${toolset} \
 	${arg_cxxflags} \

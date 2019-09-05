@@ -2,8 +2,8 @@ FROM debian:stretch
 LABEL maintainer="Mario Konrad <mario.konrad@gmx.net>"
 
 ARG compiler_version=3.9.1
-ARG cmake_version=3.13.4
-ARG boost_version=1.69.0
+ARG cmake_version=3.15.3
+ARG boost_version=1.71.0
 
 RUN apt-get update \
  && apt-get install -y \
