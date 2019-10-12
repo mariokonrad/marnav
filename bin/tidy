@@ -4,7 +4,8 @@ export SCRIPT_BASE=$(dirname `readlink -f $0`)
 export BASE=${SCRIPT_BASE}/..
 
 # search for a suitable clang-tidy version
-CLANG_TIDY_BIN=`which clang-tidy-3.9`
+CLANG_TIDY=${CLANG_TIDY:-clang-tidy-3.9}
+CLANG_TIDY_BIN=`which ${CLANG_TIDY}`
 if [ ! -x ${CLANG_TIDY_BIN} ] ; then
 	echo "error: clang-tidy not found. abort."
 	exit 1
@@ -12,15 +13,31 @@ fi
 
 function exec_file()
 {
+	# -cppcoreguidelines-pro-bounds-array-to-pointer-decay
+	#    necessary because of warnings about the `assert` macro, not part of this codebase
+	# -clang-analyzer-alpha.deadcode.UnreachableCode
+	#    added to ignore warnings about functions returning non-void containing switches with
+	#    a complete set of cases
+	# -cppcoreguidelines-avoid-magic-numbers
+	#    otherwise it is a bit excessive
+	# -readability-magic-numbers
+	#    good intentions, but no
+	# -modernize-use-trailing-return-type
+	#    does not fit the style
+
 	echo -n "--- $1 "
 	printf '%*s\n' $((`tput cols` - 10 - ${#1})) "" | tr ' ' '-'
 	${CLANG_TIDY_BIN} $1 \
-		-checks=cppcoreguidelines-*,modernize-*,readability-*,misc-*,clang-analyzer-*,-readability-braces-around-statements \
+		-checks=cppcoreguidelines-*,modernize-*,readability-*,misc-*,clang-analyzer-*,-readability-braces-around-statements,-readability-static-definition-in-anonymous-namespace,-clang-analyzer-alpha.deadcode.UnreachableCode,-readability-named-parameter,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-cppcoreguidelines-avoid-magic-numbers,-modernize-use-trailing-return-type,-readability-magic-numbers \
 		-p ${BASE}/build \
 		-- \
 		-I${BASE}/src \
 		-I${BASE}/include \
 		-std=c++11
+
+# for suppressing errors about not found `stddef.h`
+#		-isystem /usr/lib/gcc/x86_64-linux-gnu/9/include
+#
 }
 
 function exec_directory()
@@ -48,7 +65,7 @@ fi
 
 if [ $# -eq 0 ] ; then
 	exec_directory ${BASE}/src
-	exec_directory ${BASE}/src/include
+	exec_directory ${BASE}/include
 else
 	if [ -d $1 ] ; then
 		exec_directory $1
