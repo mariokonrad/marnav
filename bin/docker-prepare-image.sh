@@ -28,6 +28,7 @@ supported_compilers=(
 #	"clang-7.0.1"
 	"clang-7.1.0"
 	"clang-8.0.0"
+	"clang-9.0.0"
 	)
 
 name=marnav
@@ -66,7 +67,7 @@ fi
 for v in ${supported_compilers[@]} ; do
 	if [ "${v}" == "$1" ] ; then
 		build_image $1
-		exit 1
+		exit 0
 	fi
 done
 echo "error: specified compiler not supported: $1"

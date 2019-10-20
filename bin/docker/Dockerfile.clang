@@ -2,8 +2,8 @@ FROM debian:stretch
 LABEL maintainer="Mario Konrad <mario.konrad@gmx.net>"
 
 ARG compiler_version=3.9.1
-ARG cmake_version=3.15.3
-ARG boost_version=1.71.0
+ARG cmake_version=3.15.4
+ARG boost_version=1.70.0
 
 RUN apt-get update \
  && apt-get install -y \
@@ -21,6 +21,10 @@ RUN mkdir -p /opt
 # install clang
 COPY install-clang.sh /tmp/
 RUN /tmp/install-clang.sh "${compiler_version}"
+ENV CXX=/usr/bin/clang++
+ENV CC=/usr/bin/clang
+ENV CXXFLAGS=-stdlib=libc++
+ENV LDFLAGS=-stdlib=libc++
 
 # install cmake
 COPY install-cmake.sh /tmp/
@@ -35,8 +39,3 @@ ENV BOOST_ROOT=/opt/local
 # add user
 RUN useradd --groups users -M --uid 1000 user
 USER user
-ENV LD_LIBRARY_PATH=/usr/local/lib
-ENV CXXFLAGS=-stdlib=libc++
-ENV LDFLAGS=-stdlib=libc++
-ENV CXX=clang++
-ENV CC=clang
