@@ -4,3 +4,5 @@ tmp
 .gdbinit
 .bash_history
 CMakeLists.txt.user
+tags
+cscope.out
