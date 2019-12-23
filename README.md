@@ -47,6 +47,7 @@ Supported sentences for NMEA-0183 (read and write):
 - ALM: GPS Almanac Data
 - APA: Autopilot Sentence "A"
 - APB: Autopilot Sentence "B"
+- BEC: Bearing and Distance to Waypoint
 - BOD: Bearing - Waypoint to Waypoint
 - BWC: Bearing & Distance to Waypoint - Geat Circle
 - BWR: Bearing and Distance to Waypoint - Rhumb Line

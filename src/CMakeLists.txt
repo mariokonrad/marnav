@@ -66,6 +66,7 @@ target_sources(marnav
 		marnav/nmea/angle.cpp
 		marnav/nmea/apa.cpp
 		marnav/nmea/apb.cpp
+		marnav/nmea/bec.cpp
 		marnav/nmea/bod.cpp
 		marnav/nmea/bwc.cpp
 		marnav/nmea/bwr.cpp

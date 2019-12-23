@@ -42,6 +42,7 @@
 #include <marnav/nmea/alm.hpp>
 #include <marnav/nmea/apa.hpp>
 #include <marnav/nmea/apb.hpp>
+#include <marnav/nmea/bec.hpp>
 #include <marnav/nmea/bod.hpp>
 #include <marnav/nmea/bwc.hpp>
 #include <marnav/nmea/bwr.hpp>
@@ -765,6 +766,16 @@ static void print_detail_grs(const marnav::nmea::sentence * s)
 		if (residual)
 			print(fmt::sprintf("Sat %02d Residual [m]", i), render(*residual));
 	}
+}
+
+static void print_detail_bec(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::bec>(s);
+	print("Time UTC", render(t->get_time_utc()));
+	print("Bearing True", render(t->get_bearing_true()));
+	print("Bearing Magn", render(t->get_bearing_magn()));
+	print("Distance [nm]", render(t->get_distance()));
+	print("Waypoint", render(t->get_waypoint()));
 }
 
 static void print_detail_bod(const marnav::nmea::sentence * s)
@@ -1740,6 +1751,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(alm),
 		ADD_SENTENCE(apa),
 		ADD_SENTENCE(apb),
+		ADD_SENTENCE(bec),
 		ADD_SENTENCE(bod),
 		ADD_SENTENCE(bwc),
 		ADD_SENTENCE(bwr),

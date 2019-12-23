@@ -8,6 +8,7 @@ Supported sentences for NMEA-0183 (read and write):
 - \link marnav::nmea::alm \c ALM \endlink : GPS Almanac Data
 - \link marnav::nmea::apa \c APA \endlink : Autopilot Sentence "A"
 - \link marnav::nmea::apb \c APB \endlink : Autopilot Sentence "B"
+- \link marnav::nmea::bec \c BEC \endlink : Bearing and Distance to Waypoint
 - \link marnav::nmea::bod \c BOD \endlink : Bearing - Waypoint to Waypoint
 - \link marnav::nmea::bwc \c BWC \endlink : Bearing & Distance to Waypoint - Geat Circle
 - \link marnav::nmea::bwr \c BWR \endlink : Bearing and Distance to Waypoint - Rhumb Line

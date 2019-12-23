@@ -46,6 +46,7 @@ target_sources(testrunner
 		nmea/Test_nmea_angle.cpp
 		nmea/Test_nmea_apa.cpp
 		nmea/Test_nmea_apb.cpp
+		nmea/Test_nmea_bec.cpp
 		nmea/Test_nmea_bod.cpp
 		nmea/Test_nmea_bwc.cpp
 		nmea/Test_nmea_bwr.cpp

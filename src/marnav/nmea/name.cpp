@@ -15,6 +15,8 @@ std::string to_name(sentence_id t)
 			return "GPS Almanac Data";
 		case sentence_id::APB:
 			return "Autopilot Sentence 'B'";
+		case sentence_id::BEC:
+			return "Bearing and Distance to Waypoint - Dead Reckoning";
 		case sentence_id::BOD:
 			return "Bearing - Waypoint to Waypoint";
 		case sentence_id::BWC:
