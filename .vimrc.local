@@ -12,7 +12,7 @@ map <leader>fm ggVG :pyf /usr/share/vim/addons/syntax/clang-format-3.9.py<CR>
 map <F4> :grep -Ernw --include=*.c* --include=*.h* <cword> src include test <Bar> cw<CR>
 
 " tags
-set tags+=tags,build/tags
+set tags+=.ctags/tags,build/tags
 
 " cctree command
 command! CTL silent CCTreeLoadDB build/cscope.out
@@ -28,3 +28,32 @@ let g:syntastic_enable_signs=1
 " gutentatgs
 let g:gutentags_enabled = 1
 let g:gutentags_modules = ['ctags', 'cscope']
+let g:gutentags_project_root = ['.git']
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_ctags_extra_args = [
+	\'--c++-kinds=+p',
+	\'--tag-relative=yes',
+	\'--fields=+ailmnS'
+	\]
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 1
+let g:gutentags_ctags_exclude = [
+	\'build/**',
+	\'extern/**',
+	\'cmake/**',
+	\'bin/**',
+	\'.git',
+	\'CMakeLists.txt',
+	\'tags',
+	\'*cscope*',
+	\'*.cmake',
+	\'*.md',
+	\'*.tar.gz',
+	\'*.in'
+	\'*.py'
+	\]
+let g:gutentags_cache_dir = expand('%:p:h') .'/.ctags'
+let g:gutentags_ctags_tagfile = expand('%:p:h') .'/.ctags/tags'
+let g:gutentags_scopefile = expand('%:p:h') .'/.ctags/cscope.out'
