@@ -51,10 +51,10 @@ public:
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
 	void set_payload(const raw & p);
 
-	utils::optional<geo::longitude> get_longitude() const;
-	utils::optional<geo::latitude> get_latitude() const;
-	void set_longitude(const utils::optional<geo::longitude> & t);
-	void set_latitude(const utils::optional<geo::latitude> & t);
+	utils::optional<geo::longitude> get_lon() const;
+	utils::optional<geo::latitude> get_lat() const;
+	void set_lon(const utils::optional<geo::longitude> & t);
+	void set_lat(const utils::optional<geo::latitude> & t);
 };
 }
 }

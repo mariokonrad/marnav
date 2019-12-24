@@ -158,8 +158,8 @@ static QString details_rmb(const marnav::nmea::sentence * s)
 	result += "\nCross Track Error: " + render(t->get_cross_track_error());
 	result += "\nWaypoint To      : " + render(t->get_waypoint_to());
 	result += "\nWaypoint From    : " + render(t->get_waypoint_from());
-	result += "\nLatitude         : " + render(t->get_latitude());
-	result += "\nLongitude        : " + render(t->get_longitude());
+	result += "\nLatitude         : " + render(t->get_lat());
+	result += "\nLongitude        : " + render(t->get_lon());
 	result += "\nRange            : " + render(t->get_range());
 	result += "\nBearing          : " + render(t->get_bearing());
 	result += "\nDest. Velocity   : " + render(t->get_dst_velocity());
@@ -174,8 +174,8 @@ static QString details_rmc(const marnav::nmea::sentence * s)
 	QString result;
 	result += "\nTime UTC : " + render(t->get_time_utc());
 	result += "\nStatus   : " + render(t->get_status());
-	result += "\nLatitude : " + render(t->get_latitude());
-	result += "\nLongitude: " + render(t->get_longitude());
+	result += "\nLatitude : " + render(t->get_lat());
+	result += "\nLongitude: " + render(t->get_lon());
 	result += "\nSOG      : " + render(t->get_sog());
 	result += "\nHeading  : " + render(t->get_heading());
 	result += "\nDate     : " + render(t->get_date());
@@ -202,8 +202,8 @@ static QString details_gga(const marnav::nmea::sentence * s)
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gga>(s);
 	QString result;
 	result += "\nTime            : " + render(t->get_time());
-	result += "\nLatitude        : " + render(t->get_latitude());
-	result += "\nLongitude       : " + render(t->get_longitude());
+	result += "\nLatitude        : " + render(t->get_lat());
+	result += "\nLongitude       : " + render(t->get_lon());
 	result += "\nQuality Ind     : " + render(t->get_quality_indicator());
 	result += "\nNum Satellites  : " + render(t->get_n_satellites());
 	result += "\nHoriz Dilution  : " + render(t->get_hor_dilution());
@@ -255,8 +255,8 @@ static QString details_gll(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gll>(s);
 	QString result;
-	result += "\nLatitude      : " + render(t->get_latitude());
-	result += "\nLongitude     : " + render(t->get_longitude());
+	result += "\nLatitude      : " + render(t->get_lat());
+	result += "\nLongitude     : " + render(t->get_lon());
 	result += "\nTime UTC      : " + render(t->get_time_utc());
 	result += "\nStatus        : " + render(t->get_data_valid());
 	result += "\nMode Indicator: " + render(t->get_mode_ind());

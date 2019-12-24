@@ -27,10 +27,10 @@ TEST_F(Test_ais_message_01, parse)
 	EXPECT_FALSE(m->get_rot().available());
 	EXPECT_NEAR(0.0, *m->get_sog(), 1e-4);
 	EXPECT_EQ(true, m->get_position_accuracy());
-	auto lon = m->get_longitude();
+	auto lon = m->get_lon();
 	EXPECT_TRUE(!!lon);
 	EXPECT_NEAR(4.40705, lon.value(), 4e-5);
-	auto lat = m->get_latitude();
+	auto lat = m->get_lat();
 	EXPECT_TRUE(!!lat);
 	EXPECT_NEAR(51.2296, lat.value(), 4e-5);
 	EXPECT_NEAR(110.7, *m->get_cog(), 1e-5);
@@ -58,10 +58,10 @@ TEST_F(Test_ais_message_01, encode_default_values)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_01, set_latitude)
+TEST_F(Test_ais_message_01, set_lat)
 {
 	ais::message_01 m;
-	m.set_latitude(geo::latitude{12.34});
+	m.set_lat(geo::latitude{12.34});
 
 	auto v = ais::encode_message(m);
 
@@ -70,10 +70,10 @@ TEST_F(Test_ais_message_01, set_latitude)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_01, set_longitude)
+TEST_F(Test_ais_message_01, set_lon)
 {
 	ais::message_01 m;
-	m.set_longitude(geo::longitude{123.45});
+	m.set_lon(geo::longitude{123.45});
 
 	auto v = ais::encode_message(m);
 
@@ -93,8 +93,8 @@ TEST_F(Test_ais_message_01, github_issue_2)
 	const auto m = ais::message_cast<ais::message_01>(result);
 	ASSERT_TRUE(m != nullptr);
 
-	EXPECT_NEAR(-123.3954, *m->get_longitude(), 1e-4);
-	EXPECT_NEAR(48.3816, *m->get_latitude(), 1e-4);
+	EXPECT_NEAR(-123.3954, *m->get_lon(), 1e-4);
+	EXPECT_NEAR(48.3816, *m->get_lat(), 1e-4);
 }
 
 TEST_F(Test_ais_message_01, error_bit_length)

@@ -60,7 +60,7 @@ TEST_F(Test_nmea_rmc, get_lat_north)
 	auto rmc = nmea::sentence_cast<nmea::rmc>(s);
 	ASSERT_NE(nullptr, rmc);
 
-	const auto lat = *rmc->get_latitude();
+	const auto lat = *rmc->get_lat();
 	EXPECT_NEAR(12.5822, lat.get(), 1e-4);
 	EXPECT_EQ(12u, lat.degrees());
 	EXPECT_EQ(34u, lat.minutes());
@@ -84,7 +84,7 @@ TEST_F(Test_nmea_rmc, get_lat_south)
 	auto rmc = nmea::sentence_cast<nmea::rmc>(s);
 	ASSERT_NE(nullptr, rmc);
 
-	const auto lat = *rmc->get_latitude();
+	const auto lat = *rmc->get_lat();
 	EXPECT_NEAR(-12.5822, lat.get(), 1e-4);
 	EXPECT_EQ(12u, lat.degrees());
 	EXPECT_EQ(34u, lat.minutes());
@@ -108,7 +108,7 @@ TEST_F(Test_nmea_rmc, get_lon_east)
 	auto rmc = nmea::sentence_cast<nmea::rmc>(s);
 	ASSERT_NE(nullptr, rmc);
 
-	const auto lon = *rmc->get_longitude();
+	const auto lon = *rmc->get_lon();
 	EXPECT_NEAR(123.7656, lon.get(), 1e-4);
 	EXPECT_EQ(123u, lon.degrees());
 	EXPECT_EQ(45u, lon.minutes());
@@ -132,7 +132,7 @@ TEST_F(Test_nmea_rmc, get_lon_west)
 	auto rmc = nmea::sentence_cast<nmea::rmc>(s);
 	ASSERT_NE(nullptr, rmc);
 
-	const auto lon = *rmc->get_longitude();
+	const auto lon = *rmc->get_lon();
 	EXPECT_NEAR(-123.7656, lon.get(), 1e-4);
 	EXPECT_EQ(123u, lon.degrees());
 	EXPECT_EQ(45u, lon.minutes());

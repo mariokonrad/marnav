@@ -44,12 +44,12 @@ rmc::rmc(talker talk, fields::const_iterator first, fields::const_iterator last)
 	lon_ = correct_hemisphere(lon_, lon_hem_);
 }
 
-utils::optional<geo::longitude> rmc::get_longitude() const
+utils::optional<geo::longitude> rmc::get_lon() const
 {
 	return (lon_ && lon_hem_) ? lon_ : utils::optional<geo::longitude>{};
 }
 
-utils::optional<geo::latitude> rmc::get_latitude() const
+utils::optional<geo::latitude> rmc::get_lat() const
 {
 	return (lat_ && lat_hem_) ? lat_ : utils::optional<geo::latitude>{};
 }

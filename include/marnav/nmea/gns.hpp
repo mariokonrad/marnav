@@ -87,8 +87,8 @@ public:
 		return differential_ref_station_id_;
 	}
 
-	utils::optional<geo::longitude> get_longitude() const;
-	utils::optional<geo::latitude> get_latitude() const;
+	utils::optional<geo::longitude> get_lon() const;
+	utils::optional<geo::latitude> get_lat() const;
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
 	void set_lat(const geo::latitude & t);

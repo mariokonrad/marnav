@@ -73,8 +73,8 @@ public:
 	decltype(bearing_magn_) get_bearing_magn() const { return bearing_magn_; }
 	decltype(distance_) get_distance() const { return distance_; }
 	decltype(waypoint_id_) get_waypoint() const { return waypoint_id_; }
-	geo::latitude get_latitude() const;
-	geo::longitude get_longitude() const;
+	geo::latitude get_lat() const;
+	geo::longitude get_lon() const;
 
 	void set_time_utc(const nmea::time & t);
 	void set_lat(const geo::latitude & t);

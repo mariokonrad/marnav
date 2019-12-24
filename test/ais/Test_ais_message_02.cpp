@@ -26,10 +26,10 @@ TEST_F(Test_ais_message_02, parse)
 	EXPECT_FALSE(m->get_rot().available());
 	EXPECT_NEAR(0.0, *m->get_sog(), 1e-4);
 	EXPECT_EQ(true, m->get_position_accuracy());
-	const auto lon = m->get_longitude();
+	const auto lon = m->get_lon();
 	EXPECT_TRUE(!!lon);
 	EXPECT_NEAR(4.40705, lon.value(), 4e-5);
-	const auto lat = m->get_latitude();
+	const auto lat = m->get_lat();
 	EXPECT_TRUE(!!lat);
 	EXPECT_NEAR(51.2296, lat.value(), 4e-5);
 	EXPECT_NEAR(110.7, *m->get_cog(), 1e-5);

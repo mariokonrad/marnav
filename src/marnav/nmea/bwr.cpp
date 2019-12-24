@@ -42,12 +42,12 @@ bwr::bwr(talker talk, fields::const_iterator first, fields::const_iterator last)
 	lon_ = correct_hemisphere(lon_, lon_hem_);
 }
 
-utils::optional<geo::longitude> bwr::get_longitude() const
+utils::optional<geo::longitude> bwr::get_lon() const
 {
 	return (lon_ && lon_hem_) ? lon_ : utils::optional<geo::longitude>{};
 }
 
-utils::optional<geo::latitude> bwr::get_latitude() const
+utils::optional<geo::latitude> bwr::get_lat() const
 {
 	return (lat_ && lat_hem_) ? lat_ : utils::optional<geo::latitude>{};
 }

@@ -26,10 +26,10 @@ TEST_F(Test_ais_message_17, parse)
 	EXPECT_EQ(2734450u, m->get_mmsi());
 
 	// Longitude: 17478
-	EXPECT_NEAR(29.13, *m->get_longitude(), 1e-4);
+	EXPECT_NEAR(29.13, *m->get_lon(), 1e-4);
 
 	// Latitude: 35992
-	EXPECT_NEAR(59.98666667, *m->get_latitude(), 1e-4);
+	EXPECT_NEAR(59.98666667, *m->get_lat(), 1e-4);
 
 	// DGNSS data:
 	// 376:7c0556c07031febbf52924fe33fa2933ffa0fd2932fdb7062922fe3809292afde9122929fcf7002923ffd20c29aaaa
@@ -51,10 +51,10 @@ TEST_F(Test_ais_message_17, parse_negative_latitude)
 	EXPECT_EQ(804870766u, m->get_mmsi());
 
 	// Longitude: 80669
-	EXPECT_NEAR(134.44833, *m->get_longitude(), 1e-4);
+	EXPECT_NEAR(134.44833, *m->get_lon(), 1e-4);
 
 	// Latitude:-26818
-	EXPECT_NEAR(-44.69666667, *m->get_latitude(), 1e-4);
+	EXPECT_NEAR(-44.69666667, *m->get_lat(), 1e-4);
 
 	// DGNSS data: 272:7f7f6289c1838dbd78cc7bb8b17163c7dd0631b93feefe7ba7977f972be85d6e506f
 	EXPECT_EQ(272u, m->get_payload().size());

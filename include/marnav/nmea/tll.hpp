@@ -75,8 +75,8 @@ public:
 	decltype(status_) get_status() const { return status_; }
 	decltype(reference_target_) get_reference_target() const { return reference_target_; }
 
-	geo::longitude get_longitude() const;
-	geo::latitude get_latitude() const;
+	geo::longitude get_lon() const;
+	geo::latitude get_lat() const;
 
 	void set_number(uint32_t t) noexcept { number_ = t; }
 	void set_lat(const geo::latitude & t);

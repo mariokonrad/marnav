@@ -98,8 +98,8 @@ public:
 	decltype(arrival_status_) get_arrival_status() const { return arrival_status_; }
 	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
 
-	utils::optional<geo::longitude> get_longitude() const;
-	utils::optional<geo::latitude> get_latitude() const;
+	utils::optional<geo::longitude> get_lon() const;
+	utils::optional<geo::latitude> get_lat() const;
 
 	void set_active(status t) noexcept { active_ = t; }
 	void set_cross_track_error(double t) noexcept { cross_track_error_ = t; }

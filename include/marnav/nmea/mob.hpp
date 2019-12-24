@@ -121,8 +121,8 @@ public:
 	mob_position_source get_mob_position_source() const { return mob_position_source_; }
 	decltype(position_date_) get_position_date() const { return position_date_; }
 	decltype(position_utc_) get_position_time() const { return position_utc_; }
-	geo::latitude get_latitude() const;
-	geo::longitude get_longitude() const;
+	geo::latitude get_lat() const;
+	geo::longitude get_lon() const;
 	decltype(cog_) get_cog() const { return cog_; }
 	decltype(sog_) get_sog() const { return sog_; }
 	utils::mmsi get_mmsi() const;
@@ -134,8 +134,8 @@ public:
 	void set_mob_position_source(mob_position_source t) noexcept { mob_position_source_ = t; }
 	void set_position_date(const nmea::date & t) noexcept { position_date_ = t; }
 	void set_position_time(const nmea::time & t) noexcept { position_utc_ = t; }
-	void set_latitude(const geo::latitude &);
-	void set_longitude(const geo::longitude &);
+	void set_lat(const geo::latitude &);
+	void set_lon(const geo::longitude &);
 	void set_cog(double t) noexcept { cog_ = t; }
 	void set_sog(double t) noexcept { sog_ = t; }
 	void set_mmsi(const utils::mmsi &);

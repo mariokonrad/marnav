@@ -54,28 +54,28 @@ raw message_17::get_data() const
 	return bits;
 }
 
-utils::optional<geo::longitude> message_17::get_longitude() const
+utils::optional<geo::longitude> message_17::get_lon() const
 {
 	if (longitude_minutes == longitude_not_available_short)
 		return utils::make_optional<geo::longitude>();
 	return to_geo_longitude(longitude_minutes, longitude_minutes.count, angle_scale::I1);
 }
 
-utils::optional<geo::latitude> message_17::get_latitude() const
+utils::optional<geo::latitude> message_17::get_lat() const
 {
 	if (latitude_minutes == latitude_not_available_short)
 		return utils::make_optional<geo::latitude>();
 	return to_geo_latitude(latitude_minutes, latitude_minutes.count, angle_scale::I1);
 }
 
-void message_17::set_longitude(const utils::optional<geo::longitude> & t)
+void message_17::set_lon(const utils::optional<geo::longitude> & t)
 {
 	longitude_minutes = t
 		? to_longitude_minutes(t.value(), longitude_minutes.count, angle_scale::I1)
 		: longitude_not_available_short;
 }
 
-void message_17::set_latitude(const utils::optional<geo::latitude> & t)
+void message_17::set_lat(const utils::optional<geo::latitude> & t)
 {
 	latitude_minutes = t
 		? to_latitude_minutes(t.value(), latitude_minutes.count, angle_scale::I1)

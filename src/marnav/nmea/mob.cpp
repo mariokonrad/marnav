@@ -165,12 +165,12 @@ void mob::append_data_to(std::string & s) const
 	append(s, to_string(battery_status_));
 }
 
-geo::latitude mob::get_latitude() const
+geo::latitude mob::get_lat() const
 {
 	return lat_;
 }
 
-geo::longitude mob::get_longitude() const
+geo::longitude mob::get_lon() const
 {
 	return lon_;
 }
@@ -197,13 +197,13 @@ void mob::set_emitter_id(const std::string & t)
 		[](std::string::value_type c) -> std::string::value_type { return std::toupper(c); });
 }
 
-void mob::set_latitude(const geo::latitude & t)
+void mob::set_lat(const geo::latitude & t)
 {
 	lat_ = t;
 	lat_hem_ = convert_hemisphere(t);
 }
 
-void mob::set_longitude(const geo::longitude & t)
+void mob::set_lon(const geo::longitude & t)
 {
 	lon_ = t;
 	lon_hem_ = convert_hemisphere(t);

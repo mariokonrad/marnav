@@ -57,8 +57,8 @@ private:
 public:
 	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }
 
-	utils::optional<geo::longitude> get_longitude() const;
-	utils::optional<geo::latitude> get_latitude() const;
+	utils::optional<geo::longitude> get_lon() const;
+	utils::optional<geo::latitude> get_lat() const;
 
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);

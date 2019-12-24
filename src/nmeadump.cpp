@@ -703,8 +703,8 @@ static void print_detail_mob(const marnav::nmea::sentence * s)
 	print("MOB Position Source", render(t->get_mob_position_source()));
 	print("Date of Position", render(t->get_position_date()));
 	print("Time of Position", render(t->get_position_time()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("COG", render(t->get_cog()));
 	print("SOG", render(t->get_sog()));
 	print("MMSI", render(t->get_mmsi()));
@@ -728,8 +728,8 @@ static void print_detail_rmb(const marnav::nmea::sentence * s)
 	print("Cross Track Error", render(t->get_cross_track_error()));
 	print("Waypoint To", render(t->get_waypoint_to()));
 	print("Waypoint From", render(t->get_waypoint_from()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("Range", render(t->get_range()));
 	print("Bearing", render(t->get_bearing()));
 	print("Dest. Velocity", render(t->get_dst_velocity()));
@@ -742,8 +742,8 @@ static void print_detail_rmc(const marnav::nmea::sentence * s)
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rmc>(s);
 	print("Time UTC", render(t->get_time_utc()));
 	print("Status", render(t->get_status()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("SOG", render(t->get_sog()));
 	print("Heading", render(t->get_heading()));
 	print("Date", render(t->get_date()));
@@ -799,8 +799,8 @@ static void print_detail_vtg(const marnav::nmea::sentence * s)
 static void print_detail_gll(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gll>(s);
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("Time UTC", render(t->get_time_utc()));
 	print("Status", render(t->get_data_valid()));
 	print("Mode Indicator", render(t->get_mode_ind()));
@@ -810,8 +810,8 @@ static void print_detail_gns(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gns>(s);
 	print("Time UTC", render(t->get_time_utc()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("Mode Indicator", render(t->get_mode_ind()));
 	print("Number of Satellites", render(t->get_number_of_satellites()));
 	print("HDROP", render(t->get_hdrop()));
@@ -868,8 +868,8 @@ static void print_detail_bwr(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::bwr>(s);
 	print("Time UTC", render(t->get_time_utc()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("Bearing True", render(t->get_bearing_true()));
 	print("Bearing Magnetic", render(t->get_bearing_mag()));
 	print("Distance NM", render(t->get_distance()));
@@ -931,8 +931,8 @@ static void print_detail_gga(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gga>(s);
 	print("Time", render(t->get_time()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("Quality Ind", render(t->get_quality_indicator()));
 	print("Num Satellites", render(t->get_n_satellites()));
 	print("Horiz Dilution", render(t->get_hor_dilution()));
@@ -972,8 +972,8 @@ static void print_detail_rma(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rma>(s);
 	print("Blink Warning", render(t->get_blink_warning()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("Time Diff A", render(t->get_time_diff_a()));
 	print("Time Diff B", render(t->get_time_diff_b()));
 	print("SOG [kn]", render(t->get_sog()));
@@ -1174,8 +1174,8 @@ static void print_detail_tll(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::tll>(s);
 	print("Target Number", render(t->get_number()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("Target Name", render(t->get_name()));
 	print("Time UTC", render(t->get_time_utc()));
 	print("Target Status", render(t->get_status()));
@@ -1361,8 +1361,8 @@ static void print_detail_wnc(const marnav::nmea::sentence * s)
 static void print_detail_wpl(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::wpl>(s);
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("Waypoint", render(t->get_waypoint_id()));
 }
 
@@ -1427,8 +1427,8 @@ static void print_detail_message_01_common(const marnav::ais::message_01 * t)
 	print("ROT", render(t->get_rot()));
 	print("SOG", render(t->get_sog()));
 	print("Pos Accuracy", render(t->get_position_accuracy()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("COG", render(t->get_cog()));
 	print("HDG", render(t->get_hdg()));
 	print("Time Stamp", render(t->get_timestamp()));
@@ -1463,8 +1463,8 @@ static void print_detail_message_04_common(const marnav::ais::message_04 * t)
 	print("Minute", render(t->get_minute()));
 	print("Second", render(t->get_second()));
 	print("Pos Accuracy", render(t->get_position_accuracy()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("EPFD Fix", render(t->get_epfd_fix()));
 	print("RAIM", render(t->get_raim()));
 	print("Radio Status", render(t->get_radio_status()));
@@ -1655,8 +1655,8 @@ static void print_detail_message_17(const marnav::ais::message * m)
 	const auto t = marnav::ais::message_cast<marnav::ais::message_17>(m);
 	print("Repeat Indicator", render(t->get_repeat_indicator()));
 	print("MMSI", render(t->get_mmsi()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 
 	// TODO: print payload as hex string
 }
@@ -1668,8 +1668,8 @@ static void print_detail_message_18(const marnav::ais::message * m)
 	print("MMSI", render(t->get_mmsi()));
 	print("SOG", render(t->get_sog()));
 	print("Pos Accuracy", render(t->get_position_accuracy()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("COG", render(t->get_cog()));
 	print("HDG", render(t->get_hdg()));
 	print("Time Stamp", render(t->get_timestamp()));
@@ -1690,8 +1690,8 @@ static void print_detail_message_19(const marnav::ais::message * m)
 	print("MMSI", render(t->get_mmsi()));
 	print("SOG", render(t->get_sog()));
 	print("Pos Accuracy", render(t->get_position_accuracy()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("COG", render(t->get_cog()));
 	print("HDG", render(t->get_hdg()));
 	print("Time Stamp", render(t->get_timestamp()));
@@ -1726,8 +1726,8 @@ static void print_detail_message_21(const marnav::ais::message * m)
 	print("Aid Type", render(t->get_aid_type()));
 	print("Name", render(t->get_name()));
 	print("Pos Accuracy", render(t->get_position_accuracy()));
-	print("Latitude", render(t->get_latitude()));
-	print("Longitude", render(t->get_longitude()));
+	print("Latitude", render(t->get_lat()));
+	print("Longitude", render(t->get_lon()));
 	print("Length", render(t->get_to_bow() + t->get_to_stern()));
 	print("Width", render(t->get_to_port() + t->get_to_starboard()));
 	print("EPFD Fix", render(t->get_epfd_fix()));

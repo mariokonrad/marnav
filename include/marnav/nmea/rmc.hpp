@@ -86,8 +86,8 @@ public:
 	decltype(mag_hem_) get_mag_hem() const { return mag_hem_; }
 	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
 
-	utils::optional<geo::longitude> get_longitude() const;
-	utils::optional<geo::latitude> get_latitude() const;
+	utils::optional<geo::longitude> get_lon() const;
+	utils::optional<geo::latitude> get_lat() const;
 
 	void set_time_utc(const time & t) noexcept { time_utc_ = t; }
 	void set_status(char t) noexcept { status_ = t; }

@@ -47,12 +47,12 @@ bec::bec(talker talk, fields::const_iterator first, fields::const_iterator last)
 	check_value(distance_unit, {unit::distance::nm}, "distance_unit");
 }
 
-geo::latitude bec::get_latitude() const
+geo::latitude bec::get_lat() const
 {
 	return lat_;
 }
 
-geo::longitude bec::get_longitude() const
+geo::longitude bec::get_lon() const
 {
 	return lon_;
 }

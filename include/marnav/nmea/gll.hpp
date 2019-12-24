@@ -68,8 +68,8 @@ public:
 	decltype(data_valid_) get_data_valid() const { return data_valid_; }
 	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
 
-	utils::optional<geo::longitude> get_longitude() const;
-	utils::optional<geo::latitude> get_latitude() const;
+	utils::optional<geo::longitude> get_lon() const;
+	utils::optional<geo::latitude> get_lat() const;
 
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);

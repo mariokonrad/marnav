@@ -96,8 +96,8 @@ public:
 	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }
 	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
 
-	utils::optional<geo::longitude> get_longitude() const;
-	utils::optional<geo::latitude> get_latitude() const;
+	utils::optional<geo::longitude> get_lon() const;
+	utils::optional<geo::latitude> get_lat() const;
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
 	void set_lat(const geo::latitude & t);

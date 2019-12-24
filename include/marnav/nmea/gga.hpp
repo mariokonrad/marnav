@@ -107,8 +107,8 @@ public:
 	decltype(dgps_age_) get_dgps_age() const { return dgps_age_; }
 	decltype(dgps_ref_) get_dgps_ref() const { return dgps_ref_; }
 
-	utils::optional<geo::longitude> get_longitude() const;
-	utils::optional<geo::latitude> get_latitude() const;
+	utils::optional<geo::longitude> get_lon() const;
+	utils::optional<geo::latitude> get_lat() const;
 
 	void set_time(const nmea::time & t) noexcept { time_ = t; }
 	void set_lat(const geo::latitude & t);

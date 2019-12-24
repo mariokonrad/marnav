@@ -77,8 +77,8 @@ public:
 	decltype(magnetic_var_) get_magnetic_var() const { return magnetic_var_; }
 	decltype(magnetic_var_hem_) get_magnetic_var_hem() const { return magnetic_var_hem_; }
 
-	utils::optional<geo::longitude> get_longitude() const;
-	utils::optional<geo::latitude> get_latitude() const;
+	utils::optional<geo::longitude> get_lon() const;
+	utils::optional<geo::latitude> get_lat() const;
 
 	void set_blink_warning(char t) noexcept { blink_warning_ = t; }
 	void set_lat(const geo::latitude & t);

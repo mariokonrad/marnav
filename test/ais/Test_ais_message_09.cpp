@@ -40,10 +40,10 @@ TEST_F(Test_ais_message_09, encode_default_values)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_09, set_latitude)
+TEST_F(Test_ais_message_09, set_lat)
 {
 	ais::message_09 m;
-	m.set_latitude(geo::latitude{12.34});
+	m.set_lat(geo::latitude{12.34});
 
 	auto v = ais::encode_message(m);
 
@@ -52,7 +52,7 @@ TEST_F(Test_ais_message_09, set_latitude)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_09, get_latitude)
+TEST_F(Test_ais_message_09, get_lat)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("900000?www<tSF073qp>4?000000", 0));
@@ -64,15 +64,15 @@ TEST_F(Test_ais_message_09, get_latitude)
 	ASSERT_TRUE(m != nullptr);
 
 	const geo::latitude expected{12.34};
-	const geo::latitude decoded = *m->get_latitude();
+	const geo::latitude decoded = *m->get_lat();
 
 	EXPECT_DOUBLE_EQ(expected, decoded);
 }
 
-TEST_F(Test_ais_message_09, set_longitude)
+TEST_F(Test_ais_message_09, set_lon)
 {
 	ais::message_09 m;
-	m.set_longitude(geo::longitude{123.45});
+	m.set_lon(geo::longitude{123.45});
 
 	auto v = ais::encode_message(m);
 
@@ -81,7 +81,7 @@ TEST_F(Test_ais_message_09, set_longitude)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_09, get_longitude)
+TEST_F(Test_ais_message_09, get_lon)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
 	v.push_back(std::make_pair("900000?www8m6wPl4Q@00?000000", 0));
@@ -93,7 +93,7 @@ TEST_F(Test_ais_message_09, get_longitude)
 	ASSERT_TRUE(m != nullptr);
 
 	const geo::longitude expected{123.45};
-	const geo::longitude decoded = *m->get_longitude();
+	const geo::longitude decoded = *m->get_lon();
 
 	EXPECT_DOUBLE_EQ(expected, decoded);
 }

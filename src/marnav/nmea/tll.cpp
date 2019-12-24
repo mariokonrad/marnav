@@ -36,12 +36,12 @@ tll::tll(talker talk, fields::const_iterator first, fields::const_iterator last)
 	lon_ = correct_hemisphere(lon_, lon_hem_);
 }
 
-geo::longitude tll::get_longitude() const
+geo::longitude tll::get_lon() const
 {
 	return lon_;
 }
 
-geo::latitude tll::get_latitude() const
+geo::latitude tll::get_lat() const
 {
 	return lat_;
 }
