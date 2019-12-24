@@ -27,7 +27,7 @@ let g:syntastic_enable_signs=1
 
 " gutentatgs
 let g:gutentags_enabled = 1
-let g:gutentags_modules = ['ctags', 'cscope']
+let g:gutentags_modules = ['ctags']
 let g:gutentags_project_root = ['.git']
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_ctags_extra_args = [
@@ -56,4 +56,4 @@ let g:gutentags_ctags_exclude = [
 	\]
 let g:gutentags_cache_dir = expand('%:p:h') .'/.ctags'
 let g:gutentags_ctags_tagfile = expand('%:p:h') .'/.ctags/tags'
-let g:gutentags_scopefile = expand('%:p:h') .'/.ctags/cscope.out'
+"let g:gutentags_scopefile = expand('%:p:h') .'/.ctags/cscope.out'
