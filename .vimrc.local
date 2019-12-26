@@ -54,6 +54,6 @@ let g:gutentags_ctags_exclude = [
 	\'*.in'
 	\'*.py'
 	\]
-let g:gutentags_cache_dir = expand('%:p:h') .'/.ctags'
-let g:gutentags_ctags_tagfile = expand('%:p:h') .'/.ctags/tags'
-"let g:gutentags_scopefile = expand('%:p:h') .'/.ctags/cscope.out'
+let g:gutentags_cache_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h') .'/.ctags'
+let g:gutentags_ctags_tagfile = fnamemodify(resolve(expand('<sfile>:p')), ':h') .'/.ctags/tags'
+"let g:gutentags_scopefile = fnamemodify(resolve(expand('<sfile>:p')), ':h') .'/.ctags/cscope.out'
