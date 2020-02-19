@@ -57,7 +57,7 @@ TEST_F(Test_nmea_zda, set_time_utc)
 TEST_F(Test_nmea_zda, set_date)
 {
 	nmea::zda zda;
-	zda.set_date(2015, 6, 28);
+	zda.set_date(nmea::date{2015, nmea::month::june, 28});
 
 	EXPECT_STREQ("$GPZDA,,28,06,2015,,*42", nmea::to_string(zda).c_str());
 }

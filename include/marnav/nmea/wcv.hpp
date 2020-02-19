@@ -1,8 +1,9 @@
-#ifndef MARNAV__NMEA__WCV__HPP
-#define MARNAV__NMEA__WCV__HPP
+#ifndef MARNAV_NMEA_WCV_HPP
+#define MARNAV_NMEA_WCV_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -42,16 +43,14 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> speed_;
-	utils::optional<unit::velocity> speed_unit_;
+	utils::optional<units::knots> speed_;
 	utils::optional<waypoint> waypoint_id_;
 
 public:
-	decltype(speed_) get_speed() const { return speed_; }
-	decltype(speed_unit_) get_speed_unit() const { return speed_unit_; }
-	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }
+	utils::optional<units::velocity> get_speed() const;
+	utils::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
 
-	void set_speed(double t) noexcept;
+	void set_speed(units::velocity t) noexcept;
 	void set_waypoint(const waypoint & id) { waypoint_id_ = id; }
 };
 }

@@ -1,10 +1,11 @@
-#ifndef MARNAV__NMEA__RMC__HPP
-#define MARNAV__NMEA__RMC__HPP
+#ifndef MARNAV_NMEA_RMC_HPP
+#define MARNAV_NMEA_RMC_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/date.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/angle.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -15,8 +16,8 @@ namespace nmea
 ///
 /// @code
 ///                                                            12
-///        1         2 3       4 5        6  7   8   9    10 11|
-///        |         | |       | |        |  |   |   |    |  | |
+///        1         2 3       4 5        6 7   8   9    10  11|
+///        |         | |       | |        | |   |   |    |   | |
 /// $--RMC,hhmmss.ss,A,llll.ll,a,yyyyy.yy,a,x.x,x.x,xxxx,x.x,a,m,*hh<CR><LF>
 /// @endcode
 ///
@@ -69,7 +70,7 @@ private:
 	utils::optional<direction> lat_hem_;
 	utils::optional<geo::longitude> lon_;
 	utils::optional<direction> lon_hem_;
-	utils::optional<double> sog_;
+	utils::optional<units::knots> sog_;
 	utils::optional<double> heading_;
 	utils::optional<nmea::date> date_;
 	utils::optional<double> mag_;
@@ -77,14 +78,14 @@ private:
 	utils::optional<mode_indicator> mode_ind_;
 
 public:
-	decltype(time_utc_) get_time_utc() const { return time_utc_; }
-	decltype(status_) get_status() const { return status_; }
-	decltype(sog_) get_sog() const { return sog_; }
-	decltype(heading_) get_heading() const { return heading_; }
-	decltype(date_) get_date() const { return date_; }
-	decltype(mag_) get_mag() const { return mag_; }
-	decltype(mag_hem_) get_mag_hem() const { return mag_hem_; }
-	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
+	utils::optional<nmea::time> get_time_utc() const { return time_utc_; }
+	utils::optional<char> get_status() const { return status_; }
+	utils::optional<units::velocity> get_sog() const;
+	utils::optional<double> get_heading() const { return heading_; }
+	utils::optional<nmea::date> get_date() const { return date_; }
+	utils::optional<double> get_mag() const { return mag_; }
+	utils::optional<direction> get_mag_hem() const { return mag_hem_; }
+	utils::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
 
 	utils::optional<geo::longitude> get_lon() const;
 	utils::optional<geo::latitude> get_lat() const;
@@ -93,7 +94,7 @@ public:
 	void set_status(char t) noexcept { status_ = t; }
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);
-	void set_sog(double t) noexcept { sog_ = t; }
+	void set_sog(units::velocity t);
 	void set_heading(double t) noexcept { heading_ = t; }
 	void set_date(const nmea::date & t) noexcept { date_ = t; }
 	void set_mag(double t, direction h);

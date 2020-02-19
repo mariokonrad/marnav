@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__MWV__HPP
-#define MARNAV__NMEA__MWV__HPP
+#ifndef MARNAV_NMEA_MWV_HPP
+#define MARNAV_NMEA_MWV_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -23,9 +24,9 @@ namespace nmea
 ///    - T = True
 /// 3. Wind Speed
 /// 4. Wind Speed Unit
-///    - K
-///    - M
-///    - N
+///    - K = kilometers per hour
+///    - M = meters per second
+///    - N = knots
 /// 5. Status
 ///    - A = Data Valid
 //     - V = Invalid
@@ -52,18 +53,21 @@ private:
 	utils::optional<double> angle_; // wind angle, 0..359 right of bow
 	utils::optional<reference> angle_ref_; // R:relative, T:true
 	utils::optional<double> speed_; // wind speed
-	utils::optional<unit::velocity> speed_unit_; // wind speed unit, K:knots, M:mph
+	utils::optional<unit::velocity> speed_unit_; // wind speed unit
 	utils::optional<status> data_valid_; // status, A:valid
 
 public:
-	decltype(angle_) get_angle() const { return angle_; }
-	decltype(angle_ref_) get_angle_ref() const { return angle_ref_; }
-	decltype(speed_) get_speed() const { return speed_; }
-	decltype(speed_unit_) get_speed_unit() const { return speed_unit_; }
-	decltype(data_valid_) get_data_valid() const { return data_valid_; }
+	utils::optional<double> get_angle() const { return angle_; }
+	utils::optional<reference> get_angle_ref() const { return angle_ref_; }
+	utils::optional<units::velocity> get_speed() const;
+	utils::optional<unit::velocity> get_speed_unit() const { return speed_unit_; }
+	utils::optional<status> get_data_valid() const { return data_valid_; }
 
 	void set_angle(double deg, reference ref);
-	void set_speed(double speed, unit::velocity u) noexcept;
+	void set_speed(units::velocity speed, unit::velocity u) noexcept;
+	void set_speed(units::knots speed) noexcept;
+	void set_speed(units::kilometers_per_hour speed) noexcept;
+	void set_speed(units::meters_per_second speed) noexcept;
 	void set_data_valid(status t) noexcept { data_valid_ = t; }
 };
 }

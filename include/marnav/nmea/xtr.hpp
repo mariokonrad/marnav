@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__XTR__HPP
-#define MARNAV__NMEA__XTR__HPP
+#ifndef MARNAV_NMEA_XTR_HPP
+#define MARNAV_NMEA_XTR_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -48,12 +48,12 @@ private:
 	utils::optional<unit::distance> cross_track_unit_;
 
 public:
-	decltype(cross_track_error_magnitude_) get_cross_track_error_magnitude() const
+	utils::optional<double> get_cross_track_error_magnitude() const
 	{
 		return cross_track_error_magnitude_;
 	}
-	decltype(direction_to_steer_) get_direction_to_steer() const { return direction_to_steer_; }
-	decltype(cross_track_unit_) get_cross_track_unit() const { return cross_track_unit_; }
+	utils::optional<side> get_direction_to_steer() const { return direction_to_steer_; }
+	utils::optional<unit::distance> get_cross_track_unit() const { return cross_track_unit_; }
 
 	void set_cross_track_error_magnitude(double t) noexcept
 	{

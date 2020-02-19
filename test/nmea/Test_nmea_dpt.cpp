@@ -58,7 +58,7 @@ TEST_F(Test_nmea_dpt, empty_to_string)
 TEST_F(Test_nmea_dpt, set_depth_feet)
 {
 	nmea::dpt dpt;
-	dpt.set_depth_meter(12.5);
+	dpt.set_depth_meter(units::meters{12.5});
 
 	EXPECT_STREQ("$IIDPT,12.5,0,*44", nmea::to_string(dpt).c_str());
 }
@@ -66,7 +66,7 @@ TEST_F(Test_nmea_dpt, set_depth_feet)
 TEST_F(Test_nmea_dpt, set_transducer_offset)
 {
 	nmea::dpt dpt;
-	dpt.set_transducer_offset(12.5);
+	dpt.set_transducer_offset(units::meters{12.5});
 
 	EXPECT_STREQ("$IIDPT,0,12.5,*44", nmea::to_string(dpt).c_str());
 }
@@ -74,7 +74,7 @@ TEST_F(Test_nmea_dpt, set_transducer_offset)
 TEST_F(Test_nmea_dpt, set_max_depth)
 {
 	nmea::dpt dpt;
-	dpt.set_max_depth(2.5);
+	dpt.set_max_depth(units::meters{2.5});
 
 	EXPECT_STREQ("$IIDPT,0,0,2.5*45", nmea::to_string(dpt).c_str());
 }

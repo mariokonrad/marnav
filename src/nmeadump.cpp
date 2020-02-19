@@ -150,6 +150,8 @@
 #include <marnav/io/default_nmea_reader.hpp>
 #include <marnav/io/serial.hpp>
 
+#include <marnav/units/units.hpp>
+
 #include <marnav/utils/unique.hpp>
 #include <marnav/utils/mmsi_country.hpp>
 
@@ -621,6 +623,56 @@ static std::string render(const std::vector<uint8_t> & t)
 	return s;
 }
 
+static std::string render(const marnav::units::nautical_miles & t)
+{
+	return fmt::sprintf("%s %s", render(t.value()), render(marnav::nmea::unit::distance::nm));
+}
+
+static std::string render(const marnav::units::knots & t)
+{
+	return fmt::sprintf("%s %s", render(t.value()), render(marnav::nmea::unit::velocity::knot));
+}
+
+static std::string render(const marnav::units::meters & t)
+{
+	return fmt::sprintf(
+		"%s %s", render(t.value()), render(marnav::nmea::unit::distance::meter));
+}
+
+static std::string render(const marnav::units::feet & t)
+{
+	return fmt::sprintf("%s %s", render(t.value()), render(marnav::nmea::unit::distance::feet));
+}
+
+static std::string render(const marnav::units::meters_per_second & t)
+{
+	return fmt::sprintf("%s %s", render(t.value()), render(marnav::nmea::unit::velocity::mps));
+}
+
+static std::string render(const marnav::units::celsius & t)
+{
+	return fmt::sprintf(
+		"%s %s", render(t.value()), render(marnav::nmea::unit::temperature::celsius));
+}
+
+static std::string render(const marnav::units::length & t)
+{
+	// all lengths are rendered in meters by default
+	return render(t.get<marnav::units::meters>());
+}
+
+static std::string render(const marnav::units::velocity & t)
+{
+	// all velocities are rendered in knots by default
+	return render(t.get<marnav::units::knots>());
+}
+
+static std::string render(const marnav::units::temperature & t)
+{
+	// all temperatures are rendered in celsius by default
+	return render(t.get<marnav::units::celsius>());
+}
+
 template <typename T> static std::string render(const marnav::utils::optional<T> & t)
 {
 	if (!t)
@@ -816,7 +868,7 @@ static void print_detail_gns(const marnav::nmea::sentence * s)
 	print("Number of Satellites", render(t->get_number_of_satellites()));
 	print("HDROP", render(t->get_hdrop()));
 	print("Antenna Altitude [m]", render(t->get_antenna_altitude()));
-	print("Geoidal Separation [m]", render(t->get_geodial_sepration()));
+	print("Geoidal Separation [m]", render(t->get_geodial_separation()));
 	print("Age of differential Data", render(t->get_age_of_differential_data()));
 	print("Differential Ref Station ID", render(t->get_differential_ref_station_id()));
 }
@@ -839,7 +891,7 @@ static void print_detail_bec(const marnav::nmea::sentence * s)
 	print("Time UTC", render(t->get_time_utc()));
 	print("Bearing True", render(t->get_bearing_true()));
 	print("Bearing Magn", render(t->get_bearing_magn()));
-	print("Distance [nm]", render(t->get_distance()));
+	print("Distance [nm]", render(t->get_distance().get<marnav::units::nautical_miles>()));
 	print("Waypoint", render(t->get_waypoint()));
 }
 
@@ -858,8 +910,8 @@ static void print_detail_bwc(const marnav::nmea::sentence * s)
 	print("Time UTC", render(t->get_time_utc()));
 	print("Bearing True", render(t->get_bearing_true()));
 	print("Bearing Magnetic", render(t->get_bearing_mag()));
-	print("Distance",
-		fmt::sprintf("%s %s", render(t->get_distance()), render(t->get_distance_unit())));
+	print("Distance", fmt::sprintf("%s %s", render(t->get_distance()),
+						  render(marnav::nmea::unit::distance::nm)));
 	print("Waypoint", render(t->get_waypoint_id()));
 	print("Mode Indicator", render(t->get_mode_ind()));
 }
@@ -881,7 +933,7 @@ static void print_detail_bww(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::bww>(s);
 	print("Bearing True", render(t->get_bearing_true()));
-	print("Bearing Magnetic", render(t->get_bearing_mag()));
+	print("Bearing Magnetic", render(t->get_bearing_magn()));
 	print("Waypoint To", render(t->get_waypoint_to()));
 	print("Waypoint From", render(t->get_waypoint_from()));
 }
@@ -936,10 +988,8 @@ static void print_detail_gga(const marnav::nmea::sentence * s)
 	print("Quality Ind", render(t->get_quality_indicator()));
 	print("Num Satellites", render(t->get_n_satellites()));
 	print("Horiz Dilution", render(t->get_hor_dilution()));
-	print("Altitude",
-		fmt::sprintf("%s %s", render(t->get_altitude()), render(t->get_altitude_unit())));
-	print("Geodial Sep", fmt::sprintf("%s %s", render(t->get_geodial_separation()),
-							 render(t->get_geodial_separation_unit())));
+	print("Altitude", render(t->get_altitude()));
+	print("Geodial Sep", render(t->get_geodial_separation()));
 	print("DGPS Age", render(t->get_dgps_age()));
 	print("DGPS Ref", render(t->get_dgps_ref()));
 }
@@ -953,8 +1003,8 @@ static void print_detail_osd(const marnav::nmea::sentence * s)
 	print("Vessel Speed",
 		fmt::sprintf("%s %s", render(t->get_speed()), render(t->get_speed_unit())));
 	print("Vessel Set", render(t->get_vessel_set()));
-	print("Vessel Drift", fmt::sprintf("%s %s", render(t->get_vessel_drift()),
-							  render(t->get_vessel_drift_unit())));
+	print("Vessel Drift",
+		fmt::sprintf("%s %s", render(t->get_vessel_drift()), render(t->get_speed_unit())));
 }
 
 static void print_detail_r00(const marnav::nmea::sentence * s)
@@ -1016,9 +1066,7 @@ static void print_detail_zda(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::zda>(s);
 	print("Time UTC", render(t->get_time_utc()));
-	print("Day", render(t->get_day()));
-	print("Month", render(t->get_month()));
-	print("Year", render(t->get_year()));
+	print("Date", render(t->get_date()));
 	print("Local Zone Hours", render(t->get_local_zone_hours()));
 	print("Local Zone Min", render(t->get_local_zone_minutes()));
 }
@@ -1056,7 +1104,7 @@ static void print_detail_dtm(const marnav::nmea::sentence * s)
 	print("Latitude Hem", render(t->get_lat_hem()));
 	print("Longitude Offset", render(t->get_lon_offset()));
 	print("Longitude Hem", render(t->get_lon_hem()));
-	print("Altitude", render(t->get_altitude()));
+	print("Altitude", render(t->get_altitude().get<marnav::units::meters>()));
 	print("Name", render(t->get_name()));
 }
 
@@ -1074,12 +1122,12 @@ static void print_detail_gbs(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::gbs>(s);
 	print("Time UTC", render(t->get_time_utc()));
-	print("Error Latitude", render(t->get_err_lat()));
-	print("Error Longitude", render(t->get_err_lon()));
-	print("Error Altitude", render(t->get_err_alt()));
+	print("Error Latitude", render(t->get_err_lat().get<marnav::units::meters>()));
+	print("Error Longitude", render(t->get_err_lon().get<marnav::units::meters>()));
+	print("Error Altitude", render(t->get_err_alt().get<marnav::units::meters>()));
 	print("Satellite PRN", render(t->get_satellite()));
 	print("Probability", render(t->get_probability()));
-	print("Bias in Meters", render(t->get_bias()));
+	print("Bias", render(t->get_bias().get<marnav::units::meters>()));
 	print("Standard Deviation of bias", render(t->get_bias_dev()));
 }
 
@@ -1088,8 +1136,8 @@ static void print_detail_aam(const marnav::nmea::sentence * s)
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::aam>(s);
 	print("Arrival Circle Entred", render(t->get_arrival_circle_entered()));
 	print("Perpendicular Passed", render(t->get_perpendicualar_passed()));
-	print("Arrival Circle Radius", fmt::sprintf("%s %s", render(t->get_arrival_circle_radius()),
-									   render(t->get_arrival_circle_radius_unit())));
+	print("Arrival Circle Radius",
+		render(t->get_arrival_circle_radius().get<marnav::units::nautical_miles>()));
 	print("Waypoint", render(t->get_waypoint_id()));
 }
 
@@ -1239,7 +1287,7 @@ static void print_detail_vdr(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vdr>(s);
 	print("Degrees True", render(t->get_degrees_true()));
-	print("Degrees Magnetic", render(t->get_degrees_mag()));
+	print("Degrees Magnetic", render(t->get_degrees_magn()));
 	print("Speed of Current", render(t->get_speed()));
 }
 
@@ -1256,8 +1304,7 @@ static void print_detail_mss(const marnav::nmea::sentence * s)
 static void print_detail_mtw(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::mtw>(s);
-	print("Water Temperature",
-		fmt::sprintf("%s %s", render(t->get_temperature()), render(t->get_temperature_unit())));
+	print("Water Temperature", render(t->get_temperature()));
 }
 
 static void print_detail_mwd(const marnav::nmea::sentence * s)
@@ -1280,8 +1327,9 @@ static void print_detail_dbt(const marnav::nmea::sentence * s)
 static void print_detail_dpt(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::dpt>(s);
-	print("Depth Meter", render(t->get_depth_meter()));
-	print("Offset from Transducer", render(t->get_transducer_offset()));
+	print("Depth", render(t->get_depth_meter().get<marnav::units::meters>()));
+	print("Offset from Transducer",
+		render(t->get_transducer_offset().get<marnav::units::meters>()));
 	print("Max Depth", render(t->get_max_depth()));
 }
 
@@ -1322,8 +1370,7 @@ static void print_detail_pgrmm(const marnav::nmea::sentence * s)
 static void print_detail_pgrmz(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::pgrmz>(s);
-	print("Altitude",
-		fmt::sprintf("%s %s", render(t->get_altitude()), render(t->get_altitude_unit())));
+	print("Altitude", render(t->get_altitude()));
 	print("Fix Type", render(t->get_fix()));
 }
 
@@ -1413,8 +1460,8 @@ static void print_detail_vpw(const marnav::nmea::sentence * s)
 static void print_detail_vhw(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vhw>(s);
-	print("Heading True", render(t->get_heading_empty()));
-	print("Heading Magn", render(t->get_heading()));
+	print("Heading True", render(t->get_heading_true()));
+	print("Heading Magn", render(t->get_heading_magn()));
 	print("Speed kn", render(t->get_speed_knots()));
 	print("Speed km/h", render(t->get_speed_kmh()));
 }

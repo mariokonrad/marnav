@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__XTE__HPP
-#define MARNAV__NMEA__XTE__HPP
+#ifndef MARNAV_NMEA_XTE_HPP
+#define MARNAV_NMEA_XTE_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -60,15 +61,15 @@ private:
 	utils::optional<mode_indicator> mode_ind_;
 
 public:
-	decltype(status1_) get_status1() const { return status1_; }
-	decltype(status2_) get_status2() const { return status2_; }
-	decltype(cross_track_error_magnitude_) get_cross_track_error_magnitude() const
+	utils::optional<status> get_status1() const { return status1_; }
+	utils::optional<status> get_status2() const { return status2_; }
+	utils::optional<double> get_cross_track_error_magnitude() const
 	{
 		return cross_track_error_magnitude_;
 	}
-	decltype(direction_to_steer_) get_direction_to_steer() const { return direction_to_steer_; }
-	decltype(cross_track_unit_) get_cross_track_unit() const { return cross_track_unit_; }
-	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
+	utils::optional<side> get_direction_to_steer() const { return direction_to_steer_; }
+	utils::optional<unit::distance> get_cross_track_unit() const { return cross_track_unit_; }
+	utils::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
 
 	void set_status1(status t) noexcept { status1_ = t; }
 	void set_status2(status t) noexcept { status2_ = t; }

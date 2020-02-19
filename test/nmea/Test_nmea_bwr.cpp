@@ -100,7 +100,7 @@ TEST_F(Test_nmea_bwr, set_bearing_mag)
 TEST_F(Test_nmea_bwr, set_distance)
 {
 	nmea::bwr bwr;
-	bwr.set_distance(100);
+	bwr.set_distance(units::nautical_miles{100});
 
 	EXPECT_STREQ("$GPBWR,,,,,,,,,,100,N,,*03", nmea::to_string(bwr).c_str());
 }

@@ -5,7 +5,6 @@
 
 namespace
 {
-
 using namespace marnav;
 
 class Test_nmea_vdr : public ::testing::Test
@@ -57,7 +56,7 @@ TEST_F(Test_nmea_vdr, set_degrees_true)
 TEST_F(Test_nmea_vdr, set_degrees_mag)
 {
 	nmea::vdr vdr;
-	vdr.set_degrees_mag(13.5);
+	vdr.set_degrees_magn(13.5);
 
 	EXPECT_STREQ("$IIVDR,,,13.5,M,,*14", nmea::to_string(vdr).c_str());
 }
@@ -65,7 +64,7 @@ TEST_F(Test_nmea_vdr, set_degrees_mag)
 TEST_F(Test_nmea_vdr, set_speed)
 {
 	nmea::vdr vdr;
-	vdr.set_speed(12.5);
+	vdr.set_speed(units::knots{12.5});
 
 	EXPECT_STREQ("$IIVDR,,,,,12.5,N*16", nmea::to_string(vdr).c_str());
 }

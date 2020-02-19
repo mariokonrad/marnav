@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__VDR__HPP
-#define MARNAV__NMEA__VDR__HPP
+#ifndef MARNAV_NMEA_VDR_HPP
+#define MARNAV_NMEA_VDR_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -47,23 +48,17 @@ protected:
 
 private:
 	utils::optional<double> degrees_true_;
-	utils::optional<reference> degrees_true_ref_; // T:true
-	utils::optional<double> degrees_mag_;
-	utils::optional<reference> degrees_mag_ref_; // M:magnetic
-	utils::optional<double> speed_;
-	utils::optional<unit::velocity> speed_unit_; // N:knots
+	utils::optional<double> degrees_magn_;
+	utils::optional<units::knots> speed_;
 
 public:
-	decltype(degrees_true_) get_degrees_true() const { return degrees_true_; }
-	decltype(degrees_true_ref_) get_degrees_true_ref() const { return degrees_true_ref_; }
-	decltype(degrees_mag_) get_degrees_mag() const { return degrees_mag_; }
-	decltype(degrees_mag_ref_) get_degrees_mag_ref() const { return degrees_mag_ref_; }
-	decltype(speed_) get_speed() const { return speed_; }
-	decltype(speed_unit_) get_speed_unit() const { return speed_unit_; }
+	utils::optional<double> get_degrees_true() const { return degrees_true_; }
+	utils::optional<double> get_degrees_magn() const { return degrees_magn_; }
+	utils::optional<units::velocity> get_speed() const;
 
 	void set_degrees_true(double t) noexcept;
-	void set_degrees_mag(double t) noexcept;
-	void set_speed(double t) noexcept;
+	void set_degrees_magn(double t) noexcept;
+	void set_speed(units::velocity t) noexcept;
 };
 }
 }

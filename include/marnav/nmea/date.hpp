@@ -9,6 +9,8 @@ namespace nmea
 {
 
 /// Enumeration of all months of a year.
+///
+/// Numeric value: implementation specific.
 enum class month : uint32_t {
 	january = 1,
 	february,
@@ -23,6 +25,10 @@ enum class month : uint32_t {
 	november,
 	december
 };
+
+/// Returns the numer of the month, range 1..12
+uint32_t to_numeric(month m) noexcept;
+month to_month(uint32_t m) noexcept;
 
 /// This class represents a date, suitable to be used in NMEA sentences.
 ///
@@ -42,6 +48,7 @@ public:
 	uint32_t day() const noexcept;
 
 	friend bool operator==(const date & a, const date & b) noexcept;
+	friend bool operator!=(const date & a, const date & b) noexcept;
 
 	/// Parses the date within the specified string.
 	/// The date to be parsed must be in the form: "DDMMYY"
@@ -65,7 +72,6 @@ private:
 	uint32_t d_; // day: 1..31
 };
 
-bool operator==(const date & a, const date & b) noexcept;
 std::string to_string(const date & d);
 }
 }

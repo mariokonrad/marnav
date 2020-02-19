@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__RTE__HPP
-#define MARNAV__NMEA__RTE__HPP
+#ifndef MARNAV_NMEA_RTE_HPP
+#define MARNAV_NMEA_RTE_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
@@ -56,9 +56,9 @@ private:
 		waypoint_id_[max_waypoints]; // names or numbers of the active route
 
 public:
-	decltype(n_messages_) get_n_messages() const { return n_messages_; }
-	decltype(message_number_) get_message_number() const { return message_number_; }
-	decltype(message_mode_) get_message_mode() const { return message_mode_; }
+	uint32_t get_n_messages() const { return n_messages_; }
+	uint32_t get_message_number() const { return message_number_; }
+	route get_message_mode() const { return message_mode_; }
 	utils::optional<waypoint> get_waypoint_id(int index) const;
 
 	void set_n_messages(uint32_t t) noexcept { n_messages_ = t; }

@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__ALM__HPP
-#define MARNAV__NMEA__ALM__HPP
+#ifndef MARNAV_NMEA_ALM_HPP
+#define MARNAV_NMEA_ALM_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -78,36 +78,21 @@ private:
 	void check() const;
 
 public:
-	decltype(number_of_messages_) get_number_of_messages() const { return number_of_messages_; }
-	decltype(message_number_) get_message_number() const { return message_number_; }
-	decltype(satellite_prn_) get_satellite_prn() const { return satellite_prn_; }
-	decltype(gps_week_number_) get_gps_week_number() const { return gps_week_number_; }
-	decltype(sv_health_) get_sv_health() const { return sv_health_; }
-	decltype(eccentricity_) get_eccentricity() const { return eccentricity_; }
-	decltype(almanac_reference_time_) get_almanac_reference_time() const
-	{
-		return almanac_reference_time_;
-	}
-	decltype(inclination_angle_) get_inclination_angle() const { return inclination_angle_; }
-	decltype(rate_of_right_ascension_) get_rate_of_right_ascension() const
-	{
-		return rate_of_right_ascension_;
-	}
-	decltype(root_of_semimajor_axis_) get_root_of_semimajor_axis() const
-	{
-		return root_of_semimajor_axis_;
-	}
-	decltype(argument_of_perigee_) get_argument_of_perigee() const
-	{
-		return argument_of_perigee_;
-	}
-	decltype(longitude_of_ascension_node_) get_longitude_of_ascension_node() const
-	{
-		return longitude_of_ascension_node_;
-	}
-	decltype(mean_anomaly_) get_mean_anomaly() const { return mean_anomaly_; }
-	decltype(f0_clock_parameter_) get_f0_clock_parameter() const { return f0_clock_parameter_; }
-	decltype(f1_clock_parameter_) get_f1_clock_parameter() const { return f1_clock_parameter_; }
+	uint32_t get_number_of_messages() const { return number_of_messages_; }
+	uint32_t get_message_number() const { return message_number_; }
+	uint32_t get_satellite_prn() const { return satellite_prn_; }
+	uint32_t get_gps_week_number() const { return gps_week_number_; }
+	uint32_t get_sv_health() const { return sv_health_; }
+	uint32_t get_eccentricity() const { return eccentricity_; }
+	uint32_t get_almanac_reference_time() const { return almanac_reference_time_; }
+	uint32_t get_inclination_angle() const { return inclination_angle_; }
+	uint32_t get_rate_of_right_ascension() const { return rate_of_right_ascension_; }
+	uint32_t get_root_of_semimajor_axis() const { return root_of_semimajor_axis_; }
+	uint32_t get_argument_of_perigee() const { return argument_of_perigee_; }
+	uint32_t get_longitude_of_ascension_node() const { return longitude_of_ascension_node_; }
+	uint32_t get_mean_anomaly() const { return mean_anomaly_; }
+	uint32_t get_f0_clock_parameter() const { return f0_clock_parameter_; }
+	uint32_t get_f1_clock_parameter() const { return f1_clock_parameter_; }
 
 	void set_number_of_messages(uint32_t t) noexcept { number_of_messages_ = t; }
 	void set_message_number(uint32_t t) noexcept { message_number_ = t; }

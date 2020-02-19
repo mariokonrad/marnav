@@ -1,9 +1,9 @@
-#ifndef MARNAV__NMEA__TFI__HPP
-#define MARNAV__NMEA__TFI__HPP
+#ifndef MARNAV_NMEA_TFI_HPP
+#define MARNAV_NMEA_TFI_HPP
 
-#include <array>
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
+#include <array>
 
 namespace marnav
 {

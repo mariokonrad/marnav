@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__XDR__HPP
-#define MARNAV__NMEA__XDR__HPP
+#ifndef MARNAV_NMEA_XDR_HPP
+#define MARNAV_NMEA_XDR_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>

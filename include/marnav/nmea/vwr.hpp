@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__VWR__HPP
-#define MARNAV__NMEA__VWR__HPP
+#ifndef MARNAV_NMEA_VWR_HPP
+#define MARNAV_NMEA_VWR_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -52,27 +53,21 @@ protected:
 private:
 	utils::optional<double> angle_; // wind angle, 0..180
 	utils::optional<side> angle_side_; // side of vessel, R:right, L:left
-	utils::optional<double> speed_knots_; // wind speed in knots
-	utils::optional<unit::velocity> speed_knots_unit_; // N:knots
-	utils::optional<double> speed_mps_; // wind speed in meters per second
-	utils::optional<unit::velocity> speed_mps_unit_; // M:mps
-	utils::optional<double> speed_kmh_; // wind speed in kilometers per hour
-	utils::optional<unit::velocity> speed_kmh_unit_; // K:kmh
+	utils::optional<units::knots> speed_knots_;
+	utils::optional<units::meters_per_second> speed_mps_;
+	utils::optional<units::kilometers_per_hour> speed_kmh_;
 
 public:
-	decltype(angle_) get_angle() const { return angle_; }
-	decltype(angle_side_) get_angle_side() const { return angle_side_; }
-	decltype(speed_knots_) get_speed_knots() const { return speed_knots_; }
-	decltype(speed_knots_unit_) get_speed_knots_unit() const { return speed_knots_unit_; }
-	decltype(speed_mps_) get_speed_mps() const { return speed_mps_; }
-	decltype(speed_mps_unit_) get_speed_mps_unit() const { return speed_mps_unit_; }
-	decltype(speed_kmh_) get_speed_kmh() const { return speed_kmh_; }
-	decltype(speed_kmh_unit_) get_speed_kmh_unit() const { return speed_kmh_unit_; }
+	utils::optional<double> get_angle() const { return angle_; }
+	utils::optional<side> get_angle_side() const { return angle_side_; }
+	utils::optional<units::velocity> get_speed_knots() const;
+	utils::optional<units::velocity> get_speed_mps() const;
+	utils::optional<units::velocity> get_speed_kmh() const;
 
 	void set_angle(double angle, side s) noexcept;
-	void set_speed_knots(double t) noexcept;
-	void set_speed_mps(double t) noexcept;
-	void set_speed_kmh(double t) noexcept;
+	void set_speed_knots(units::velocity t) noexcept;
+	void set_speed_mps(units::velocity t) noexcept;
+	void set_speed_kmh(units::velocity t) noexcept;
 };
 }
 }

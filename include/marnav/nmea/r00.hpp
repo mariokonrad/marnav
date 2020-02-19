@@ -1,10 +1,10 @@
-#ifndef MARNAV__NMEA__R00__HPP
-#define MARNAV__NMEA__R00__HPP
+#ifndef MARNAV_NMEA_R00_HPP
+#define MARNAV_NMEA_R00_HPP
 
-#include <array>
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
+#include <array>
 
 namespace marnav
 {

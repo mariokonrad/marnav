@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__DTM__HPP
-#define MARNAV__NMEA__DTM__HPP
+#ifndef MARNAV_NMEA_DTM_HPP
+#define MARNAV_NMEA_DTM_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -59,24 +60,24 @@ private:
 	direction lat_hem_ = direction::north;
 	double lon_offset_ = 0.0;
 	direction lon_hem_ = direction::east;
-	double altitude_ = 0.0;
+	units::meters altitude_;
 	std::string name_ = "W84";
 
 public:
-	decltype(ref_) get_ref() const { return ref_; }
-	decltype(subcode_) get_subcode() const { return subcode_; }
-	decltype(lat_offset_) get_lat_offset() const { return lat_offset_; }
-	decltype(lat_hem_) get_lat_hem() const { return lat_hem_; }
-	decltype(lon_offset_) get_lon_offset() const { return lon_offset_; }
-	decltype(lon_hem_) get_lon_hem() const { return lon_hem_; }
-	decltype(altitude_) get_altitude() const { return altitude_; }
-	decltype(name_) get_name() const { return name_; }
+	const std::string & get_ref() const { return ref_; }
+	utils::optional<std::string> get_subcode() const { return subcode_; }
+	double get_lat_offset() const { return lat_offset_; }
+	direction get_lat_hem() const { return lat_hem_; }
+	double get_lon_offset() const { return lon_offset_; }
+	direction get_lon_hem() const { return lon_hem_; }
+	units::length get_altitude() const { return {altitude_}; }
+	const std::string & get_name() const { return name_; }
 
 	void set_ref(const std::string & t) noexcept;
 	void set_subcode(const std::string & t) noexcept;
 	void set_lat_offset(double t, direction h);
 	void set_lon_offset(double t, direction h);
-	void set_altitude(double t) { altitude_ = t; }
+	void set_altitude(units::length t) { altitude_ = t.get<units::meters>(); }
 	void set_name(const std::string & t) noexcept;
 };
 }

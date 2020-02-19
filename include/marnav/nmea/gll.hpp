@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__GLL__HPP
-#define MARNAV__NMEA__GLL__HPP
+#ifndef MARNAV_NMEA_GLL_HPP
+#define MARNAV_NMEA_GLL_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/angle.hpp>
@@ -64,9 +64,9 @@ private:
 	utils::optional<mode_indicator> mode_ind_;
 
 public:
-	decltype(time_utc_) get_time_utc() const { return time_utc_; }
-	decltype(data_valid_) get_data_valid() const { return data_valid_; }
-	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
+	utils::optional<nmea::time> get_time_utc() const { return time_utc_; }
+	utils::optional<status> get_data_valid() const { return data_valid_; }
+	utils::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
 
 	utils::optional<geo::longitude> get_lon() const;
 	utils::optional<geo::latitude> get_lat() const;

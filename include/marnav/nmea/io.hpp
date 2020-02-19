@@ -5,6 +5,7 @@
 #include <functional>
 #include <marnav/nmea/constants.hpp>
 #include <marnav/nmea/string.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -69,6 +70,18 @@ std::string format(uint32_t data, unsigned int width, data_format f = data_forma
 ///   This is necessary to avoid heap operations and VLA.
 std::string format(double data, unsigned int width, data_format f = data_format::none);
 
+/// Generic version of the format function, handling units::basic_unit types.
+///
+/// @param[in] data Data to be rendered.
+/// @param[in] width Formatting information.
+/// @param[in] f Number base information.
+template <typename U, typename R>
+inline std::string format(
+	const units::basic_unit<U, R> & data, unsigned int width, data_format f = data_format::dec)
+{
+	return format(data.value(), width, f);
+}
+
 /// Generic version of the format function, handling the possibility of utils::optional
 /// to be not set and returning an empty string. The rendering of the contained type
 /// is one of the overloaded funtions of 'format'.
@@ -125,6 +138,22 @@ void read(const std::string & s, unit::pressure & value, data_format fmt = data_
 void read(const std::string & s, utils::mmsi & value, data_format fmt = data_format::none);
 void read(const std::string & s, waypoint & value, data_format fmt = data_format::none);
 
+/// Variant of `read` for units.
+template <class Unit, class Ratio>
+inline void read(const std::string & s, units::basic_unit<Unit, Ratio> & value,
+	data_format fmt = data_format::dec)
+{
+	if (s.empty()) {
+		value = units::basic_unit<Unit, Ratio>();
+		return;
+	}
+
+	typename units::basic_unit<Unit, Ratio>::value_type tmp;
+	read(s, tmp, fmt);
+	value = units::basic_unit<Unit, Ratio>(tmp);
+}
+
+/// Variant of `read` for optionals.
 template <class T>
 inline void read(
 	const std::string & s, utils::optional<T> & value, data_format fmt = data_format::dec)

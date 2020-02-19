@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__VLW__HPP
-#define MARNAV__NMEA__VLW__HPP
+#ifndef MARNAV_NMEA_VLW_HPP
+#define MARNAV_NMEA_VLW_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -43,22 +44,15 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> distance_cum_; // total cumulative distance
-	utils::optional<unit::distance> distance_cum_unit_; // N:nautical miles
-	utils::optional<double> distance_reset_; // distance since reset
-	utils::optional<unit::distance> distance_reset_unit_; // N:nautical miles
+	utils::optional<units::nautical_miles> distance_cum_; // total cumulative distance
+	utils::optional<units::nautical_miles> distance_reset_; // distance since reset
 
 public:
-	decltype(distance_cum_) get_distance_cum() const { return distance_cum_; }
-	decltype(distance_cum_unit_) get_distance_cum_unit() const { return distance_cum_unit_; }
-	decltype(distance_reset_) get_distance_reset() const { return distance_reset_; }
-	decltype(distance_reset_unit_) get_distance_reset_unit() const
-	{
-		return distance_reset_unit_;
-	}
+	utils::optional<units::length> get_distance_cum() const;
+	utils::optional<units::length> get_distance_reset() const;
 
-	void set_distance_cum_nm(double t) noexcept;
-	void set_distance_reset_nm(double t) noexcept;
+	void set_distance_cum_nm(units::length t) noexcept;
+	void set_distance_reset_nm(units::length t) noexcept;
 };
 }
 }

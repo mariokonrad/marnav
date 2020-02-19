@@ -1,8 +1,9 @@
-#ifndef MARNAV__NMEA__GST__HPP
-#define MARNAV__NMEA__GST__HPP
+#ifndef MARNAV_NMEA_GST_HPP
+#define MARNAV_NMEA_GST_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -48,31 +49,37 @@ protected:
 private:
 	nmea::time time_utc_;
 	double total_rms_ = 0.0;
-	double dev_semi_major_ = 0.0;
-	double dev_semi_minor_ = 0.0;
+	units::meters dev_semi_major_;
+	units::meters dev_semi_minor_;
 	double orientation_ = 0.0;
-	double dev_lat_ = 0.0;
-	double dev_lon_ = 0.0;
-	double dev_alt_ = 0.0;
+	units::meters dev_lat_;
+	units::meters dev_lon_;
+	units::meters dev_alt_;
 
 public:
-	decltype(time_utc_) get_time_utc() const { return time_utc_; }
-	decltype(total_rms_) get_total_rms() const { return total_rms_; }
-	decltype(dev_semi_major_) get_dev_semi_major() const { return dev_semi_major_; }
-	decltype(dev_semi_minor_) get_dev_semi_minor() const { return dev_semi_minor_; }
-	decltype(orientation_) get_orientation() const { return orientation_; }
-	decltype(dev_lat_) get_dev_lat() const { return dev_lat_; }
-	decltype(dev_lon_) get_dev_lon() const { return dev_lon_; }
-	decltype(dev_alt_) get_dev_alt() const { return dev_alt_; }
+	nmea::time get_time_utc() const { return time_utc_; }
+	double get_total_rms() const { return total_rms_; }
+	units::length get_dev_semi_major() const { return {dev_semi_major_}; }
+	units::length get_dev_semi_minor() const { return {dev_semi_minor_}; }
+	double get_orientation() const { return orientation_; }
+	units::length get_dev_lat() const { return {dev_lat_}; }
+	units::length get_dev_lon() const { return {dev_lon_}; }
+	units::length get_dev_alt() const { return {dev_alt_}; }
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
 	void set_total_rms(double t) noexcept { total_rms_ = t; }
-	void set_dev_semi_major(double t) noexcept { dev_semi_major_ = t; }
-	void set_dev_semi_minor(double t) noexcept { dev_semi_minor_ = t; }
+	void set_dev_semi_major(units::length t) noexcept
+	{
+		dev_semi_major_ = t.get<units::meters>();
+	}
+	void set_dev_semi_minor(units::length t) noexcept
+	{
+		dev_semi_minor_ = t.get<units::meters>();
+	}
 	void set_orientation(double t) noexcept { orientation_ = t; }
-	void set_dev_lat(double t) noexcept { dev_lat_ = t; }
-	void set_dev_lon(double t) noexcept { dev_lon_ = t; }
-	void set_dev_alt(double t) noexcept { dev_alt_ = t; }
+	void set_dev_lat(units::length t) noexcept { dev_lat_ = t.get<units::meters>(); }
+	void set_dev_lon(units::length t) noexcept { dev_lon_ = t.get<units::meters>(); }
+	void set_dev_alt(units::length t) noexcept { dev_alt_ = t.get<units::meters>(); }
 };
 }
 }

@@ -1,6 +1,9 @@
 TODO
 ====
 
+@todo Abstract magnetic information into its own class (see HDG)
+@todo Abstract heading/bearing information into its own class (see HDG)
+
 @todo Investigate library bloat (optional? bitset?)
 @todo Deal with units (velocity, depth, temperatures, etc)
 

@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__DBK__HPP
-#define MARNAV__NMEA__DBK__HPP
+#ifndef MARNAV_NMEA_DBK_HPP
+#define MARNAV_NMEA_DBK_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -10,7 +11,7 @@ namespace nmea
 {
 /// @brief DBK - Depth Below Keel
 ///
-/// @note This sentence appears to be deprected, use @ref marnav::nmea::dpt "DPT" instead.
+/// @note This sentence appears to be deprecated, use @ref marnav::nmea::dpt "DPT" instead.
 ///
 /// @code
 ///        1   2 3   4 5   6
@@ -48,24 +49,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> depth_feet_;
-	utils::optional<unit::distance> depth_feet_unit_;
-	utils::optional<double> depth_meter_;
-	utils::optional<unit::distance> depth_meter_unit_;
-	utils::optional<double> depth_fathom_;
-	utils::optional<unit::distance> depth_fathom_unit_;
+	utils::optional<units::feet> depth_feet_;
+	utils::optional<units::meters> depth_meter_;
+	utils::optional<units::fathoms> depth_fathom_;
 
 public:
-	decltype(depth_feet_) get_depth_feet() const { return depth_feet_; }
-	decltype(depth_feet_unit_) get_depth_feet_unit() const { return depth_feet_unit_; }
-	decltype(depth_meter_) get_depth_meter() const { return depth_meter_; }
-	decltype(depth_meter_unit_) get_depth_meter_unit() const { return depth_meter_unit_; }
-	decltype(depth_fathom_) get_depth_fathom() const { return depth_fathom_; }
-	decltype(depth_fathom_unit_) get_depth_fathom_unit() const { return depth_fathom_unit_; }
+	utils::optional<units::length> get_depth_feet() const;
+	utils::optional<units::length> get_depth_meter() const;
+	utils::optional<units::length> get_depth_fathom() const;
 
-	void set_depth_feet(double t) noexcept;
-	void set_depth_meter(double t) noexcept;
-	void set_depth_fathom(double t) noexcept;
+	void set_depth_feet(units::length t) noexcept;
+	void set_depth_meter(units::length t) noexcept;
+	void set_depth_fathom(units::length t) noexcept;
 };
 }
 }

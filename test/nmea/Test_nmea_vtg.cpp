@@ -49,7 +49,7 @@ TEST_F(Test_nmea_vtg, empty_to_string)
 TEST_F(Test_nmea_vtg, set_speed_kn)
 {
 	nmea::vtg vtg;
-	vtg.set_speed_kn(12.5);
+	vtg.set_speed_kn(units::knots{12.5});
 
 	EXPECT_STREQ("$GPVTG,,,,,12.5,N,,,*28", nmea::to_string(vtg).c_str());
 }
@@ -57,7 +57,7 @@ TEST_F(Test_nmea_vtg, set_speed_kn)
 TEST_F(Test_nmea_vtg, set_speed_kmh)
 {
 	nmea::vtg vtg;
-	vtg.set_speed_kmh(22.5);
+	vtg.set_speed_kmh(units::kilometers_per_hour{22.5});
 
 	EXPECT_STREQ("$GPVTG,,,,,,,22.5,K,*2E", nmea::to_string(vtg).c_str());
 }

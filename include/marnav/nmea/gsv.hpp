@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__GSV__HPP
-#define MARNAV__NMEA__GSV__HPP
+#ifndef MARNAV_NMEA_GSV_HPP
+#define MARNAV_NMEA_GSV_HPP
 
 #include <array>
 #include <marnav/nmea/sentence.hpp>
@@ -15,8 +15,8 @@ namespace nmea
 /// shipped in a group of 2 or 3.
 ///
 /// @code
-///        1 2 3 4 5 6 7
-///        | | | | | | |
+///        1 2 3 4 5 6 7     8
+///        | | | | | | |     |
 /// $--GSV,x,x,x,x,x,x,x,...*hh<CR><LF>
 /// @endcode
 ///
@@ -28,7 +28,7 @@ namespace nmea
 /// 5. elevation in degrees (00-90) (leading zeros sent)
 /// 6. azimuth in degrees to true north (000-359) (leading zeros sent)
 /// 7. SNR in dB (00-99) (leading zeros sent) more satellite info quadruples like 4-7 n)
-/// checksum
+/// 8. checksum
 ///
 /// Example:
 /// @code
@@ -73,12 +73,9 @@ private:
 	void check_index(int index) const;
 
 public:
-	decltype(n_messages_) get_n_messages() const { return n_messages_; }
-	decltype(message_number_) get_message_number() const { return message_number_; }
-	decltype(n_satellites_in_view_) get_n_satellites_in_view() const
-	{
-		return n_satellites_in_view_;
-	}
+	uint32_t get_n_messages() const { return n_messages_; }
+	uint32_t get_message_number() const { return message_number_; }
+	uint32_t get_n_satellites_in_view() const { return n_satellites_in_view_; }
 	utils::optional<satellite_info> get_sat(int index) const;
 
 	void set_n_messages(uint32_t t);

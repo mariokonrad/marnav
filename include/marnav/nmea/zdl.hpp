@@ -1,8 +1,9 @@
-#ifndef MARNAV__NMEA__ZDL__HPP
-#define MARNAV__NMEA__ZDL__HPP
+#ifndef MARNAV_NMEA_ZDL_HPP
+#define MARNAV_NMEA_ZDL_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -48,16 +49,16 @@ protected:
 
 private:
 	duration time_to_point_;
-	double distance_ = 0.0;
+	units::nautical_miles distance_;
 	type_of_point type_point_ = type_of_point::reference;
 
 public:
-	decltype(time_to_point_) get_time_to_point() const { return time_to_point_; }
-	decltype(distance_) get_distance() const { return distance_; }
-	decltype(type_point_) get_type_point() const { return type_point_; }
+	duration get_time_to_point() const { return time_to_point_; }
+	units::length get_distance() const { return {distance_}; }
+	type_of_point get_type_point() const { return type_point_; }
 
 	void set_time_to_point(const duration & t) noexcept { time_to_point_ = t; }
-	void set_distance(double t) noexcept { distance_ = t; }
+	void set_distance(units::length t) noexcept { distance_ = t.get<units::nautical_miles>(); }
 	void set_type_point(type_of_point t) noexcept { type_point_ = t; }
 };
 }

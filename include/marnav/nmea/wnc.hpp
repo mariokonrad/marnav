@@ -1,8 +1,9 @@
-#ifndef MARNAV__NMEA__WNC__HPP
-#define MARNAV__NMEA__WNC__HPP
+#ifndef MARNAV_NMEA_WNC_HPP
+#define MARNAV_NMEA_WNC_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -46,23 +47,19 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> distance_nm_;
-	utils::optional<unit::distance> distance_nm_unit_;
-	utils::optional<double> distance_km_;
-	utils::optional<unit::distance> distance_km_unit_;
+	utils::optional<units::nautical_miles> distance_nm_;
+	utils::optional<units::kilometers> distance_km_;
 	utils::optional<waypoint> waypoint_to_;
 	utils::optional<waypoint> waypoint_from_;
 
 public:
-	decltype(distance_nm_) get_distance_nm() const { return distance_nm_; }
-	decltype(distance_nm_unit_) get_distance_nm_unit() const { return distance_nm_unit_; }
-	decltype(distance_km_) get_distance_km() const { return distance_km_; }
-	decltype(distance_km_unit_) get_distance_km_unit() const { return distance_km_unit_; }
-	decltype(waypoint_to_) get_waypoint_to() const { return waypoint_to_; }
-	decltype(waypoint_from_) get_waypoint_from() const { return waypoint_from_; }
+	utils::optional<units::length> get_distance_nm() const;
+	utils::optional<units::length> get_distance_km() const;
+	utils::optional<waypoint> get_waypoint_to() const { return waypoint_to_; }
+	utils::optional<waypoint> get_waypoint_from() const { return waypoint_from_; }
 
-	void set_distance_nm(double t) noexcept;
-	void set_distance_km(double t) noexcept;
+	void set_distance_nm(units::length t) noexcept;
+	void set_distance_km(units::length t) noexcept;
 	void set_waypoint_to(const waypoint & id) { waypoint_to_ = id; }
 	void set_waypoint_from(const waypoint & id) { waypoint_from_ = id; }
 };

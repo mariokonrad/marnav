@@ -43,6 +43,6 @@ TEST_F(Test_nmea_rsd, empty_to_string)
 {
 	nmea::rsd rsd;
 
-	EXPECT_STREQ("$IIRSD,0,0,0,0,0,0,0,0,0,0,0,V,V*59", nmea::to_string(rsd).c_str());
+	EXPECT_STREQ("$IIRSD,0,0,0,0,0,0,0,0,0,0,0,V,C*4C", nmea::to_string(rsd).c_str());
 }
 }

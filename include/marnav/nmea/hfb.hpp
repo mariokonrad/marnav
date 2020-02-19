@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__HFB__HPP
-#define MARNAV__NMEA__HFB__HPP
+#ifndef MARNAV_NMEA_HFB_HPP
+#define MARNAV_NMEA_HFB_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -43,36 +44,22 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	double distance_head_foot_ = 0.0;
-	unit::distance distance_head_foot_unit_ = unit::distance::meter;
-	double distance_head_bottom_ = 0.0;
-	unit::distance distance_head_bottom_unit_ = unit::distance::meter;
+	units::meters distance_head_foot_;
+	units::meters distance_head_bottom_;
 
 public:
-	decltype(distance_head_foot_) get_distance_head_foot() const { return distance_head_foot_; }
-	decltype(distance_head_foot_unit_) get_distance_head_foot_unit() const
+	units::length get_distance_head_foot() const { return {distance_head_foot_}; }
+	units::length get_distance_head_bottom() const { return {distance_head_bottom_}; }
+
+	void set_head_foot(units::length t) noexcept
 	{
-		return distance_head_foot_unit_;
-	}
-	decltype(distance_head_bottom_) get_distance_head_bottom() const
-	{
-		return distance_head_bottom_;
-	}
-	decltype(distance_head_bottom_unit_) get_distance_head_bottom_unit() const
-	{
-		return distance_head_bottom_unit_;
+		distance_head_foot_ = t.get<units::meters>();
 	}
 
-	void set_head_foot(double t) noexcept
+	void set_head_bottom(units::length t) noexcept
 	{
-		distance_head_foot_ = t;
-		distance_head_foot_unit_ = unit::distance::meter;
-	};
-	void set_head_bottom(double t) noexcept
-	{
-		distance_head_bottom_ = t;
-		distance_head_bottom_unit_ = unit::distance::meter;
-	};
+		distance_head_bottom_ = t.get<units::meters>();
+	}
 };
 }
 }

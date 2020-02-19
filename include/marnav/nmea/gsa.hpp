@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__GSA__HPP
-#define MARNAV__NMEA__GSA__HPP
+#ifndef MARNAV_NMEA_GSA_HPP
+#define MARNAV_NMEA_GSA_HPP
 
 #include <array>
 #include <marnav/nmea/sentence.hpp>
@@ -60,19 +60,19 @@ private:
 	utils::optional<selection_mode> sel_mode_; // A:automatic 2D/3D, M:manual
 	utils::optional<uint32_t> mode_; // 1 = no fix, 2 = 2D fix, 3 = 3D fix, TODO: enum
 	std::array<utils::optional<uint32_t>, max_satellite_ids> satellite_id_;
-	utils::optional<double> pdop_;
-	utils::optional<double> hdop_;
-	utils::optional<double> vdop_;
+	utils::optional<double> pdop_; // positional dilution of precision
+	utils::optional<double> hdop_; // horizontal dilution of precision
+	utils::optional<double> vdop_; // vertical dilution of precision
 
 	void check_index(int index) const;
 
 public:
-	decltype(sel_mode_) get_sel_mode() const { return sel_mode_; }
-	decltype(mode_) get_mode() const { return mode_; }
+	utils::optional<selection_mode> get_sel_mode() const { return sel_mode_; }
+	utils::optional<uint32_t> get_mode() const { return mode_; }
 	utils::optional<uint32_t> get_satellite_id(int index) const;
-	decltype(pdop_) get_pdop() const { return pdop_; }
-	decltype(hdop_) get_hdop() const { return hdop_; }
-	decltype(vdop_) get_vdop() const { return vdop_; }
+	utils::optional<double> get_pdop() const { return pdop_; }
+	utils::optional<double> get_hdop() const { return hdop_; }
+	utils::optional<double> get_vdop() const { return vdop_; }
 
 	void set_sel_mode(selection_mode t) noexcept { sel_mode_ = t; }
 	void set_mode(uint32_t t) noexcept { mode_ = t; }

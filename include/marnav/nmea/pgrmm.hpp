@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__PGRMM__HPP
-#define MARNAV__NMEA__PGRMM__HPP
+#ifndef MARNAV_NMEA_PGRMM_HPP
+#define MARNAV_NMEA_PGRMM_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -44,7 +44,7 @@ private:
 	std::string map_datum_;
 
 public:
-	decltype(map_datum_) get_map_datum() const { return map_datum_; }
+	const std::string & get_map_datum() const { return map_datum_; }
 
 	void set_map_datum(const std::string & t) noexcept;
 };

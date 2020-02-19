@@ -85,4 +85,36 @@ TEST_F(Test_nmea_rmb, set_lon_east)
 
 	EXPECT_STREQ("$GPRMB,,,,,,,,00220.4000,E,,,,,*15", nmea::to_string(rmb).c_str());
 }
+
+TEST_F(Test_nmea_rmb, set_dst_velocity)
+{
+	nmea::rmb rmb;
+	rmb.set_dst_velocity(units::knots{2.0});
+
+	EXPECT_STREQ("$GPRMB,,,,,,,,,,,,2,,*78", nmea::to_string(rmb).c_str());
+}
+
+TEST_F(Test_nmea_rmb, set_dst_velocity_different_unit)
+{
+	nmea::rmb rmb;
+	rmb.set_dst_velocity(units::meters_per_second{1.02889});
+
+	EXPECT_STREQ("$GPRMB,,,,,,,,,,,,2,,*78", nmea::to_string(rmb).c_str());
+}
+
+TEST_F(Test_nmea_rmb, set_range)
+{
+	nmea::rmb rmb;
+	rmb.set_range(units::nautical_miles{2.0});
+
+	EXPECT_STREQ("$GPRMB,,,,,,,,,,2,,,,*78", nmea::to_string(rmb).c_str());
+}
+
+TEST_F(Test_nmea_rmb, set_range_different_unit)
+{
+	nmea::rmb rmb;
+	rmb.set_range(units::kilometers{3.704});
+
+	EXPECT_STREQ("$GPRMB,,,,,,,,,,2,,,,*78", nmea::to_string(rmb).c_str());
+}
 }

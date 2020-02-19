@@ -1,5 +1,6 @@
 #include <marnav/nmea/bwc.hpp>
 #include "convert.hpp"
+#include "checks.hpp"
 #include <marnav/nmea/io.hpp>
 
 namespace marnav
@@ -21,6 +22,8 @@ bwc::bwc(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if ((size != 12) && (size != 13))
 		throw std::invalid_argument{"invalid number of fields in bwc"};
 
+	utils::optional<unit::distance> distance_unit;
+
 	read(*(first + 0), time_utc_);
 	read(*(first + 1), lat_);
 	read(*(first + 2), lat_hem_);
@@ -31,7 +34,7 @@ bwc::bwc(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 7), bearing_mag_);
 	read(*(first + 8), bearing_mag_ref_);
 	read(*(first + 9), distance_);
-	read(*(first + 10), distance_unit_);
+	read(*(first + 10), distance_unit);
 	read(*(first + 11), waypoint_id_);
 
 	if (size == 13)
@@ -40,6 +43,8 @@ bwc::bwc(talker talk, fields::const_iterator first, fields::const_iterator last)
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
 	lat_ = correct_hemisphere(lat_, lat_hem_);
 	lon_ = correct_hemisphere(lon_, lon_hem_);
+
+	check_value(distance_unit, {unit::distance::nm}, "distance nautical miles unit");
 }
 
 utils::optional<geo::longitude> bwc::get_lon() const
@@ -76,10 +81,18 @@ void bwc::set_bearing_mag(double t) noexcept
 	bearing_mag_ref_ = reference::MAGNETIC;
 }
 
-void bwc::set_distance(double t) noexcept
+utils::optional<units::length> bwc::get_distance() const
 {
-	distance_ = t;
-	distance_unit_ = unit::distance::nm;
+	if (!distance_)
+		return {};
+	return {*distance_};
+}
+
+void bwc::set_distance(units::length t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"invalid argument, distance less than zero"};
+	distance_ = t.get<units::nautical_miles>();
 }
 
 void bwc::append_data_to(std::string & s) const
@@ -94,7 +107,7 @@ void bwc::append_data_to(std::string & s) const
 	append(s, to_string(bearing_mag_));
 	append(s, to_string(bearing_mag_ref_));
 	append(s, to_string(distance_));
-	append(s, to_string(distance_unit_));
+	append(s, to_string_if(unit::distance::nm, distance_));
 	append(s, to_string(waypoint_id_));
 	append(s, to_string(mode_ind_));
 }

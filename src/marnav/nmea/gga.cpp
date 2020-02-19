@@ -21,6 +21,9 @@ gga::gga(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 14)
 		throw std::invalid_argument{"invalid number of fields in gga"};
 
+	utils::optional<unit::distance> altitude_unit;
+	utils::optional<unit::distance> geodial_separation_unit;
+
 	read(*(first + 0), time_);
 	read(*(first + 1), lat_);
 	read(*(first + 2), lat_hem_);
@@ -30,11 +33,14 @@ gga::gga(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 6), n_satellites_);
 	read(*(first + 7), hor_dilution_);
 	read(*(first + 8), altitude_);
-	read(*(first + 9), altitude_unit_);
+	read(*(first + 9), altitude_unit);
 	read(*(first + 10), geodial_separation_);
-	read(*(first + 11), geodial_separation_unit_);
+	read(*(first + 11), geodial_separation_unit);
 	read(*(first + 12), dgps_age_);
 	read(*(first + 13), dgps_ref_);
+
+	check_value(altitude_unit, {unit::distance::meter}, "altitude unit");
+	check_value(geodial_separation_unit, {unit::distance::meter}, "geodial separation unit");
 
 	// instead of reading data into temporary lat/lon, let's correct values afterwards
 	lat_ = correct_hemisphere(lat_, lat_hem_);
@@ -63,6 +69,20 @@ void gga::set_lon(const geo::longitude & t)
 	lon_hem_ = convert_hemisphere(t);
 }
 
+utils::optional<units::length> gga::get_altitude() const
+{
+	if (!altitude_)
+		return {};
+	return {*altitude_};
+}
+
+utils::optional<units::length> gga::get_geodial_separation() const
+{
+	if (!geodial_separation_)
+		return {};
+	return {*geodial_separation_};
+}
+
 void gga::append_data_to(std::string & s) const
 {
 	append(s, to_string(time_));
@@ -74,9 +94,9 @@ void gga::append_data_to(std::string & s) const
 	append(s, to_string(n_satellites_));
 	append(s, to_string(hor_dilution_));
 	append(s, to_string(altitude_));
-	append(s, to_string(altitude_unit_));
+	append(s, to_string_if(unit::distance::meter, altitude_));
 	append(s, to_string(geodial_separation_));
-	append(s, to_string(geodial_separation_unit_));
+	append(s, to_string_if(unit::distance::meter, geodial_separation_));
 	append(s, to_string(dgps_age_));
 	append(s, to_string(dgps_ref_));
 }

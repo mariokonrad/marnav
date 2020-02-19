@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__BWW__HPP
-#define MARNAV__NMEA__BWW__HPP
+#ifndef MARNAV_NMEA_BWW_HPP
+#define MARNAV_NMEA_BWW_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
@@ -47,19 +47,15 @@ protected:
 
 private:
 	utils::optional<double> bearing_true_;
-	utils::optional<reference> bearing_true_ref_;
-	utils::optional<double> bearing_mag_;
-	utils::optional<reference> bearing_mag_ref_;
+	utils::optional<double> bearing_magn_;
 	utils::optional<waypoint> waypoint_to_;
 	utils::optional<waypoint> waypoint_from_;
 
 public:
-	decltype(bearing_true_) get_bearing_true() const { return bearing_true_; }
-	decltype(bearing_true_ref_) get_bearing_true_ref() const { return bearing_true_ref_; }
-	decltype(bearing_mag_) get_bearing_mag() const { return bearing_mag_; }
-	decltype(bearing_mag_ref_) get_bearing_mag_ref() const { return bearing_mag_ref_; }
-	decltype(waypoint_to_) get_waypoint_to() const { return waypoint_to_; }
-	decltype(waypoint_from_) get_waypoint_from() const { return waypoint_from_; }
+	utils::optional<double> get_bearing_true() const { return bearing_true_; }
+	utils::optional<double> get_bearing_magn() const { return bearing_magn_; }
+	utils::optional<waypoint> get_waypoint_to() const { return waypoint_to_; }
+	utils::optional<waypoint> get_waypoint_from() const { return waypoint_from_; }
 
 	void set_bearing_true(double t) noexcept;
 	void set_bearing_mag(double t) noexcept;

@@ -5,6 +5,15 @@ namespace marnav
 {
 namespace nmea
 {
+uint32_t to_numeric(month m) noexcept
+{
+	return static_cast<uint32_t>(m);
+}
+
+month to_month(uint32_t m) noexcept
+{
+	return static_cast<month>(m);
+}
 
 date::date()
 	: y_(0)
@@ -73,6 +82,11 @@ uint32_t date::day() const noexcept
 bool operator==(const date & a, const date & b) noexcept
 {
 	return (&a == &b) || ((a.y_ == b.y_) && (a.m_ == b.m_) && (a.d_ == b.d_));
+}
+
+bool operator!=(const date & a, const date & b) noexcept
+{
+	return !(a == b);
 }
 
 std::string to_string(const date & d)

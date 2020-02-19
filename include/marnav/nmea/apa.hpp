@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__APA__HPP
-#define MARNAV__NMEA__APA__HPP
+#ifndef MARNAV_NMEA_APA_HPP
+#define MARNAV_NMEA_APA_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
@@ -85,34 +85,31 @@ private:
 	void check() const;
 
 public:
-	decltype(loran_c_blink_warning_) get_loran_c_blink_warning() const
-	{
-		return loran_c_blink_warning_;
-	}
-	decltype(loran_c_cycle_lock_warning_) get_loran_c_cycle_lock_warning() const
+	utils::optional<status> get_loran_c_blink_warning() const { return loran_c_blink_warning_; }
+	utils::optional<status> get_loran_c_cycle_lock_warning() const
 	{
 		return loran_c_cycle_lock_warning_;
 	}
-	decltype(cross_track_error_magnitude_) get_cross_track_error_magnitude() const
+	utils::optional<double> get_cross_track_error_magnitude() const
 	{
 		return cross_track_error_magnitude_;
 	}
-	decltype(direction_to_steer_) get_direction_to_steer() const { return direction_to_steer_; }
-	decltype(cross_track_unit_) get_cross_track_unit() const { return cross_track_unit_; }
-	decltype(status_arrival_) get_status_arrival() const { return status_arrival_; }
-	decltype(status_perpendicular_passing_) get_status_perpendicular_passing() const
+	utils::optional<side> get_direction_to_steer() const { return direction_to_steer_; }
+	utils::optional<unit::distance> get_cross_track_unit() const { return cross_track_unit_; }
+	utils::optional<status> get_status_arrival() const { return status_arrival_; }
+	utils::optional<status> get_status_perpendicular_passing() const
 	{
 		return status_perpendicular_passing_;
 	}
-	decltype(bearing_origin_to_destination_) get_bearing_origin_to_destination() const
+	utils::optional<double> get_bearing_origin_to_destination() const
 	{
 		return bearing_origin_to_destination_;
 	}
-	decltype(bearing_origin_to_destination_ref_) get_bearing_origin_to_destination_ref() const
+	utils::optional<reference> get_bearing_origin_to_destination_ref() const
 	{
 		return bearing_origin_to_destination_ref_;
 	}
-	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }
+	utils::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
 
 	void set_loran_c_blink_warning(status t) noexcept { loran_c_blink_warning_ = t; }
 	void set_loran_c_cycle_lock_warning(status t) noexcept { loran_c_cycle_lock_warning_ = t; }

@@ -49,7 +49,7 @@ TEST_F(Test_nmea_pgrmz, empty_to_string)
 TEST_F(Test_nmea_pgrmz, set_altitude)
 {
 	nmea::pgrmz pgrmz;
-	pgrmz.set_altitude(100);
+	pgrmz.set_altitude(units::feet{100});
 
 	EXPECT_STREQ("$PGRMZ,100,f,*29", nmea::to_string(pgrmz).c_str());
 }

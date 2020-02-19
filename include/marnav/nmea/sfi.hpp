@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__SFI__HPP
-#define MARNAV__NMEA__SFI__HPP
+#ifndef MARNAV_NMEA_SFI_HPP
+#define MARNAV_NMEA_SFI_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -52,9 +52,9 @@ private:
 	std::vector<scanning_frequency> frequencies_;
 
 public:
-	decltype(number_of_messages_) get_n_messages() const { return number_of_messages_; }
-	decltype(message_number_) get_message_number() const { return message_number_; }
-	decltype(frequencies_) get_frequencies() const { return frequencies_; }
+	uint32_t get_n_messages() const { return number_of_messages_; }
+	uint32_t get_message_number() const { return message_number_; }
+	const std::vector<scanning_frequency> & get_frequencies() const { return frequencies_; }
 
 	void set_number_of_messages(uint32_t t) noexcept { number_of_messages_ = t; }
 	void set_message_number(uint32_t t) noexcept { message_number_ = t; }

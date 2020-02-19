@@ -1,8 +1,9 @@
-#ifndef MARNAV__NMEA__GBS__HPP
-#define MARNAV__NMEA__GBS__HPP
+#ifndef MARNAV_NMEA_GBS_HPP
+#define MARNAV_NMEA_GBS_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -49,31 +50,31 @@ protected:
 
 private:
 	nmea::time time_utc_;
-	double err_lat_ = 0.0;
-	double err_lon_ = 0.0;
-	double err_alt_ = 0.0;
+	units::meters err_lat_;
+	units::meters err_lon_;
+	units::meters err_alt_;
 	uint32_t satellite_ = 0;
 	double probability_ = 0.0;
-	double bias_ = 0.0;
+	units::meters bias_;
 	double bias_dev_ = 0.0;
 
 public:
-	decltype(time_utc_) get_time_utc() const { return time_utc_; }
-	decltype(err_lat_) get_err_lat() const { return err_lat_; }
-	decltype(err_lon_) get_err_lon() const { return err_lon_; }
-	decltype(err_alt_) get_err_alt() const { return err_alt_; }
-	decltype(satellite_) get_satellite() const { return satellite_; }
-	decltype(probability_) get_probability() const { return probability_; }
-	decltype(bias_) get_bias() const { return bias_; }
-	decltype(bias_dev_) get_bias_dev() const { return bias_dev_; }
+	nmea::time get_time_utc() const { return time_utc_; }
+	units::length get_err_lat() const { return {err_lat_}; }
+	units::length get_err_lon() const { return {err_lon_}; }
+	units::length get_err_alt() const { return {err_alt_}; }
+	uint32_t get_satellite() const { return satellite_; }
+	double get_probability() const { return probability_; }
+	units::length get_bias() const { return {bias_}; }
+	double get_bias_dev() const { return bias_dev_; }
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
-	void set_err_lat(double t) noexcept { err_lat_ = t; }
-	void set_err_lon(double t) noexcept { err_lon_ = t; }
-	void set_err_alt(double t) noexcept { err_alt_ = t; }
+	void set_err_lat(units::length t) noexcept { err_lat_ = t.get<units::meters>(); }
+	void set_err_lon(units::length t) noexcept { err_lon_ = t.get<units::meters>(); }
+	void set_err_alt(units::length t) noexcept { err_alt_ = t.get<units::meters>(); }
 	void set_satellite(uint32_t t) noexcept { satellite_ = t; }
 	void set_probability(double t) noexcept { probability_ = t; }
-	void set_bias(double t) noexcept { bias_ = t; }
+	void set_bias(units::length t) noexcept { bias_ = t.get<units::meters>(); }
 	void set_bias_dev(double t) noexcept { bias_dev_ = t; }
 };
 }

@@ -43,8 +43,7 @@ TEST_F(Test_nmea_mob, empty_to_string)
 {
 	nmea::mob mob;
 
-	EXPECT_STREQ(
-		"$INMOB,,E,000000,6,010100,000000,0000.0000,N,00000.0000,E,0,0,000000000,6*09",
+	EXPECT_STREQ("$INMOB,,E,000000,6,010100,000000,0000.0000,N,00000.0000,E,0,0,000000000,6*09",
 		nmea::to_string(mob).c_str());
 }
 

@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__STALK__HPP
-#define MARNAV__NMEA__STALK__HPP
+#ifndef MARNAV_NMEA_STALK_HPP
+#define MARNAV_NMEA_STALK_HPP
 
 #include <marnav/nmea/sentence.hpp>
 

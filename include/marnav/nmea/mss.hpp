@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__MSS__HPP
-#define MARNAV__NMEA__MSS__HPP
+#ifndef MARNAV_NMEA_MSS_HPP
+#define MARNAV_NMEA_MSS_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -49,14 +49,11 @@ private:
 	int32_t unknown_ = 0;
 
 public:
-	decltype(signal_strength_) get_signal_strength() const { return signal_strength_; }
-	decltype(signal_to_noise_ratio_) get_signal_to_noise_ratio() const
-	{
-		return signal_to_noise_ratio_;
-	}
-	decltype(beacon_frequency_) get_beacon_frequency() const { return beacon_frequency_; }
-	decltype(beacon_datarate_) get_beacon_datarate() const { return beacon_datarate_; }
-	decltype(unknown_) get_unknown() const { return unknown_; }
+	uint32_t get_signal_strength() const { return signal_strength_; }
+	uint32_t get_signal_to_noise_ratio() const { return signal_to_noise_ratio_; }
+	uint32_t get_beacon_frequency() const { return beacon_frequency_; }
+	uint32_t get_beacon_datarate() const { return beacon_datarate_; }
+	int32_t get_unknown() const { return unknown_; }
 
 	void set_signal_strength(uint32_t t) noexcept { signal_strength_ = t; }
 	void set_signal_to_noise_ratio(uint32_t t) noexcept { signal_to_noise_ratio_ = t; }

@@ -1,9 +1,10 @@
-#ifndef MARNAV__NMEA__GGA__HPP
-#define MARNAV__NMEA__GGA__HPP
+#ifndef MARNAV_NMEA_GGA_HPP
+#define MARNAV_NMEA_GGA_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/time.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -84,28 +85,20 @@ private:
 	utils::optional<quality> quality_indicator_;
 	utils::optional<uint32_t> n_satellites_;
 	utils::optional<double> hor_dilution_; // horizontal dilution of precision
-	utils::optional<double> altitude_;
-	utils::optional<unit::distance> altitude_unit_; // M:meter
-	utils::optional<double>
-		geodial_separation_; // geodial separation, sea level below the ellipsoid
-	utils::optional<unit::distance> geodial_separation_unit_; // M:meter
+	utils::optional<units::meters> altitude_;
+	utils::optional<units::meters> geodial_separation_; // sea level below the ellipsoid
 	utils::optional<double> dgps_age_; // age of dgps data
 	utils::optional<uint32_t> dgps_ref_; // dgps reference station 0000..1023
 
 public:
-	decltype(time_) get_time() const { return time_; }
-	decltype(quality_indicator_) get_quality_indicator() const { return quality_indicator_; }
-	decltype(n_satellites_) get_n_satellites() const { return n_satellites_; }
-	decltype(hor_dilution_) get_hor_dilution() const { return hor_dilution_; }
-	decltype(altitude_) get_altitude() const { return altitude_; }
-	decltype(altitude_unit_) get_altitude_unit() const { return altitude_unit_; }
-	decltype(geodial_separation_) get_geodial_separation() const { return geodial_separation_; }
-	decltype(geodial_separation_unit_) get_geodial_separation_unit() const
-	{
-		return geodial_separation_unit_;
-	}
-	decltype(dgps_age_) get_dgps_age() const { return dgps_age_; }
-	decltype(dgps_ref_) get_dgps_ref() const { return dgps_ref_; }
+	utils::optional<nmea::time> get_time() const { return time_; }
+	utils::optional<quality> get_quality_indicator() const { return quality_indicator_; }
+	utils::optional<uint32_t> get_n_satellites() const { return n_satellites_; }
+	utils::optional<double> get_hor_dilution() const { return hor_dilution_; }
+	utils::optional<units::length> get_altitude() const;
+	utils::optional<units::length> get_geodial_separation() const;
+	utils::optional<double> get_dgps_age() const { return dgps_age_; }
+	utils::optional<uint32_t> get_dgps_ref() const { return dgps_ref_; }
 
 	utils::optional<geo::longitude> get_lon() const;
 	utils::optional<geo::latitude> get_lat() const;
@@ -116,15 +109,10 @@ public:
 	void set_quality(quality t) noexcept { quality_indicator_ = t; }
 	void set_n_satellites(uint32_t t) noexcept { n_satellites_ = t; }
 	void set_hor_dilution(double t) noexcept { hor_dilution_ = t; }
-	void set_altitude(double t) noexcept
+	void set_altitude(units::length t) noexcept { altitude_ = t.get<units::meters>(); }
+	void set_geodial_separation(units::length t) noexcept
 	{
-		altitude_ = t;
-		altitude_unit_ = unit::distance::meter;
-	}
-	void set_geodial_separation(double t) noexcept
-	{
-		geodial_separation_ = t;
-		geodial_separation_unit_ = unit::distance::meter;
+		geodial_separation_ = t.get<units::meters>();
 	}
 	void set_dgps_age(double t) noexcept { dgps_age_ = t; }
 	void set_dgps_ref(uint32_t t) noexcept { dgps_ref_ = t; }

@@ -73,6 +73,20 @@ void rmc::set_mag(double t, direction h)
 	mag_hem_ = h;
 }
 
+utils::optional<units::velocity> rmc::get_sog() const
+{
+	if (!sog_)
+		return {};
+	return {*sog_};
+}
+
+void rmc::set_sog(units::velocity t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"invalid argument, SOG less than zero"};
+	sog_ = t.get<units::knots>();
+}
+
 void rmc::append_data_to(std::string & s) const
 {
 	append(s, to_string(time_utc_));

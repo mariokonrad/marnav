@@ -56,8 +56,8 @@ TEST_F(Test_nmea_bec, empty_to_string)
 {
 	nmea::bec bec;
 
-	EXPECT_STREQ("$GPBEC,000000,0000.0000,N,00000.0000,E,0,T,0,M,0,N,*0F",
-		nmea::to_string(bec).c_str());
+	EXPECT_STREQ(
+		"$GPBEC,000000,0000.0000,N,00000.0000,E,0,T,0,M,0,N,*0F", nmea::to_string(bec).c_str());
 }
 
 TEST_F(Test_nmea_bec, set_bearing_true)
@@ -102,7 +102,25 @@ TEST_F(Test_nmea_bec, set_position)
 	bec.set_lat(geo::latitude{12.34});
 	bec.set_lon(geo::longitude{123.45});
 
-	EXPECT_STREQ("$GPBEC,000000,1220.4000,N,12327.0000,E,0,T,0,M,0,N,*0F",
-		nmea::to_string(bec).c_str());
+	EXPECT_STREQ(
+		"$GPBEC,000000,1220.4000,N,12327.0000,E,0,T,0,M,0,N,*0F", nmea::to_string(bec).c_str());
+}
+
+TEST_F(Test_nmea_bec, set_distance)
+{
+	nmea::bec bec;
+	bec.set_distance(units::nautical_miles{2.0});
+
+	EXPECT_STREQ(
+		"$GPBEC,000000,0000.0000,N,00000.0000,E,0,T,0,M,2,N,*0D", nmea::to_string(bec).c_str());
+}
+
+TEST_F(Test_nmea_bec, set_distance_different_unit)
+{
+	nmea::bec bec;
+	bec.set_distance(units::meters{2 * 1852.0});
+
+	EXPECT_STREQ(
+		"$GPBEC,000000,0000.0000,N,00000.0000,E,0,T,0,M,2,N,*0D", nmea::to_string(bec).c_str());
 }
 }

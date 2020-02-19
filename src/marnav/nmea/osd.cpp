@@ -24,10 +24,10 @@ osd::osd(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 2), course_);
 	read(*(first + 3), course_ref_);
 	read(*(first + 4), speed_);
-	read(*(first + 5), speed_unit_);
+	read(*(first + 5), speed_ref_);
 	read(*(first + 6), vessel_set_);
 	read(*(first + 7), vessel_drift_);
-	read(*(first + 8), vessel_drift_unit_);
+	read(*(first + 8), speed_unit_);
 }
 
 void osd::set_course(double t) noexcept
@@ -36,16 +36,19 @@ void osd::set_course(double t) noexcept
 	course_ref_ = reference::TRUE;
 }
 
-void osd::set_speed(double t, unit::velocity u) noexcept
+void osd::set_speed(double t) noexcept
 {
 	speed_ = t;
-	speed_unit_ = u;
 }
 
-void osd::set_drift(double t, unit::velocity u) noexcept
+void osd::set_drift(double t) noexcept
 {
 	vessel_drift_ = t;
-	vessel_drift_unit_ = u;
+}
+
+void osd::set_speed_unit(unit::velocity u) noexcept
+{
+	speed_unit_ = u;
 }
 
 void osd::append_data_to(std::string & s) const
@@ -55,10 +58,10 @@ void osd::append_data_to(std::string & s) const
 	append(s, to_string(course_));
 	append(s, to_string(course_ref_));
 	append(s, to_string(speed_));
-	append(s, to_string(speed_unit_));
+	append(s, to_string(speed_ref_));
 	append(s, to_string(vessel_set_));
 	append(s, to_string(vessel_drift_));
-	append(s, to_string(vessel_drift_unit_));
+	append(s, to_string(speed_unit_));
 }
 }
 }

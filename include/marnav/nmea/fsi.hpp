@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__FSI__HPP
-#define MARNAV__NMEA__FSI__HPP
+#ifndef MARNAV_NMEA_FSI_HPP
+#define MARNAV_NMEA_FSI_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -53,14 +53,11 @@ private:
 	utils::optional<char> sentence_status_;
 
 public:
-	decltype(tx_frequency_) get_tx_frequency() const { return tx_frequency_; }
-	decltype(rx_frequency_) get_rx_frequency() const { return rx_frequency_; }
-	decltype(communications_mode_) get_communications_mode() const
-	{
-		return communications_mode_;
-	}
-	decltype(power_level_) get_power_level() const { return power_level_; }
-	decltype(sentence_status_) get_sentence_status() const { return sentence_status_; }
+	utils::optional<uint32_t> get_tx_frequency() const { return tx_frequency_; }
+	utils::optional<uint32_t> get_rx_frequency() const { return rx_frequency_; }
+	utils::optional<char> get_communications_mode() const { return communications_mode_; }
+	utils::optional<uint32_t> get_power_level() const { return power_level_; }
+	utils::optional<char> get_sentence_status() const { return sentence_status_; }
 
 	void set_tx_frequency(uint32_t t) noexcept { tx_frequency_ = t; }
 	void set_rx_frequency(uint32_t t) noexcept { rx_frequency_ = t; }

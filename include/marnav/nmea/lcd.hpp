@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__LCD__HPP
-#define MARNAV__NMEA__LCD__HPP
+#ifndef MARNAV_NMEA_LCD_HPP
+#define MARNAV_NMEA_LCD_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -66,8 +66,8 @@ private:
 	void check_index(int index) const;
 
 public:
-	decltype(gri_) get_gri() const { return gri_; }
-	decltype(master_) get_master() const { return master_; }
+	uint32_t get_gri() const { return gri_; }
+	time_difference get_master() const { return master_; }
 	utils::optional<time_difference> get_time_diff(int index) const;
 
 	void set_gri(uint32_t t) noexcept { gri_ = t; }

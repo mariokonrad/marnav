@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__PGRMZ__HPP
-#define MARNAV__NMEA__PGRMZ__HPP
+#ifndef MARNAV_NMEA_PGRMZ_HPP
+#define MARNAV_NMEA_PGRMZ_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -19,7 +20,8 @@ namespace nmea
 /// Field Number:
 ///
 /// 1. Altitude
-/// 2. f=feet
+/// 2. Altitude Unit
+///    - f = feet
 /// 3. Fix Type
 ///    - 1 = no fix
 ///    - 2 = 2D fix
@@ -52,20 +54,14 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	double altitude_ = 0.0;
-	unit::distance altitude_unit_ = unit::distance::feet;
+	units::feet altitude_;
 	utils::optional<fix_type> fix_;
 
 public:
-	decltype(altitude_) get_altitude() const { return altitude_; }
-	decltype(altitude_unit_) get_altitude_unit() const { return altitude_unit_; }
-	decltype(fix_) get_fix() const { return fix_; }
+	units::length get_altitude() const { return {altitude_}; }
+	utils::optional<fix_type> get_fix() const { return fix_; }
 
-	void set_altitude(double t) noexcept
-	{
-		altitude_ = t;
-		altitude_unit_ = unit::distance::feet;
-	}
+	void set_altitude(units::length t) noexcept { altitude_ = t.get<units::feet>(); }
 	void set_fix(fix_type t) noexcept { fix_ = t; }
 };
 

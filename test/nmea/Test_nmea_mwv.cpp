@@ -36,7 +36,7 @@ TEST_F(Test_nmea_mwv, parse)
 
 	auto speed = mwv->get_speed();
 	ASSERT_TRUE(speed.available());
-	EXPECT_NEAR(10.4, speed.value(), 1e-8);
+	EXPECT_NEAR(10.4, speed->get<units::knots>().value(), 1e-8);
 }
 
 TEST_F(Test_nmea_mwv, parse_invalid_number_of_arguments)
@@ -62,10 +62,18 @@ TEST_F(Test_nmea_mwv, set_angle)
 	EXPECT_STREQ("$IIMWV,12.5,R,,,*2A", nmea::to_string(mwv).c_str());
 }
 
-TEST_F(Test_nmea_mwv, set_speed)
+TEST_F(Test_nmea_mwv, set_speed_knots_explicit)
 {
 	nmea::mwv mwv;
-	mwv.set_speed(22.5, nmea::unit::velocity::knot);
+	mwv.set_speed(units::knots{22.5}, nmea::unit::velocity::knot);
+
+	EXPECT_STREQ("$IIMWV,,,22.5,N,*35", nmea::to_string(mwv).c_str());
+}
+
+TEST_F(Test_nmea_mwv, set_speed_knots_implicit)
+{
+	nmea::mwv mwv;
+	mwv.set_speed(units::knots{22.5});
 
 	EXPECT_STREQ("$IIMWV,,,22.5,N,*35", nmea::to_string(mwv).c_str());
 }

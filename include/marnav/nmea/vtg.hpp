@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__VTG__HPP
-#define MARNAV__NMEA__VTG__HPP
+#ifndef MARNAV_NMEA_VTG_HPP
+#define MARNAV_NMEA_VTG_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -51,30 +52,22 @@ protected:
 
 private:
 	utils::optional<double> track_true_;
-	utils::optional<reference> type_true_; // T:true
 	utils::optional<double> track_magn_;
-	utils::optional<reference> type_magn_; // M:magnetic
-	utils::optional<double> speed_kn_;
-	utils::optional<unit::velocity> speed_kn_unit_; // N:knots
-	utils::optional<double> speed_kmh_;
-	utils::optional<unit::velocity> speed_kmh_unit_; // K:kilometers per hour
+	utils::optional<units::knots> speed_kn_;
+	utils::optional<units::kilometers_per_hour> speed_kmh_;
 	utils::optional<mode_indicator> mode_ind_; // NMEA 2.3 or newer
 
 public:
-	decltype(track_true_) get_track_true() const { return track_true_; }
-	decltype(type_true_) get_type_true() const { return type_true_; }
-	decltype(track_magn_) get_track_magn() const { return track_magn_; }
-	decltype(type_magn_) get_type_magn() const { return type_magn_; }
-	decltype(speed_kn_) get_speed_kn() const { return speed_kn_; }
-	decltype(speed_kn_unit_) get_speed_kn_unit() const { return speed_kn_unit_; }
-	decltype(speed_kmh_) get_speed_kmh() const { return speed_kmh_; }
-	decltype(speed_kmh_unit_) get_speed_kmh_unit() const { return speed_kmh_unit_; }
-	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
+	utils::optional<double> get_track_true() const { return track_true_; }
+	utils::optional<double> get_track_magn() const { return track_magn_; }
+	utils::optional<units::knots> get_speed_kn() const;
+	utils::optional<units::kilometers_per_hour> get_speed_kmh() const;
+	utils::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
 
 	void set_track_true(double t) noexcept;
 	void set_track_magn(double t) noexcept;
-	void set_speed_kn(double t) noexcept;
-	void set_speed_kmh(double t) noexcept;
+	void set_speed_kn(units::velocity t) noexcept;
+	void set_speed_kmh(units::velocity t) noexcept;
 	void set_mode_indicator(mode_indicator t) noexcept { mode_ind_ = t; }
 };
 }

@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__ZFO__HPP
-#define MARNAV__NMEA__ZFO__HPP
+#ifndef MARNAV_NMEA_ZFO_HPP
+#define MARNAV_NMEA_ZFO_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
@@ -47,9 +47,9 @@ private:
 	utils::optional<waypoint> waypoint_id_;
 
 public:
-	decltype(time_utc_) get_time_utc() const { return time_utc_; }
-	decltype(time_elapsed_) get_time_elapsed() const { return time_elapsed_; }
-	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }
+	utils::optional<nmea::time> get_time_utc() const { return time_utc_; }
+	utils::optional<nmea::duration> get_time_elapsed() const { return time_elapsed_; }
+	utils::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
 	void set_time_elapsed(const nmea::duration & t) noexcept { time_elapsed_ = t; }

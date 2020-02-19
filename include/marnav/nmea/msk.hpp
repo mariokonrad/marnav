@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__MSK__HPP
-#define MARNAV__NMEA__MSK__HPP
+#ifndef MARNAV_NMEA_MSK_HPP
+#define MARNAV_NMEA_MSK_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -53,14 +53,11 @@ private:
 	utils::optional<uint32_t> frequency_mss_status_;
 
 public:
-	decltype(frequency_) get_frequency() const { return frequency_; }
-	decltype(frequency_mode_) get_frequency_mode() const { return frequency_mode_; }
-	decltype(bitrate_) get_bitrate() const { return bitrate_; }
-	decltype(bitrate_mode_) get_bitrate_mode() const { return bitrate_mode_; }
-	decltype(frequency_mss_status_) get_frequency_mss_status() const
-	{
-		return frequency_mss_status_;
-	}
+	uint32_t get_frequency() const { return frequency_; }
+	selection_mode get_frequency_mode() const { return frequency_mode_; }
+	uint32_t get_bitrate() const { return bitrate_; }
+	selection_mode get_bitrate_mode() const { return bitrate_mode_; }
+	utils::optional<uint32_t> get_frequency_mss_status() const { return frequency_mss_status_; }
 
 	void set_frequency(uint32_t f, selection_mode mode) noexcept;
 	void set_bitrate(uint32_t rate, selection_mode mode) noexcept;

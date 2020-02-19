@@ -27,18 +27,46 @@ vbw::vbw(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 5), water_speed_status_);
 }
 
-void vbw::set_water_speed(double l, double t, status s) noexcept
+void vbw::set_water_speed(units::velocity l, units::velocity t, status s)
 {
-	water_speed_longitudinal_ = l;
-	water_speed_transveral_ = t;
+	water_speed_longitudinal_ = l.get<units::knots>();
+	water_speed_transveral_ = t.get<units::knots>();
 	water_speed_status_ = s;
 }
 
-void vbw::set_ground_speed(double l, double t, status s) noexcept
+void vbw::set_ground_speed(units::velocity l, units::velocity t, status s)
 {
-	ground_speed_longitudinal_ = l;
-	ground_speed_transveral_ = t;
+	ground_speed_longitudinal_ = l.get<units::knots>();
+	ground_speed_transveral_ = t.get<units::knots>();
 	ground_speed_status_ = s;
+}
+
+utils::optional<units::velocity> vbw::get_water_speed_longitudinal() const
+{
+	if (ground_speed_longitudinal_)
+		return {};
+	return {*ground_speed_longitudinal_};
+}
+
+utils::optional<units::velocity> vbw::get_water_speed_transveral() const
+{
+	if (water_speed_transveral_)
+		return {};
+	return {*water_speed_transveral_};
+}
+
+utils::optional<units::velocity> vbw::get_ground_speed_longitudinal() const
+{
+	if (ground_speed_longitudinal_)
+		return {};
+	return {*ground_speed_longitudinal_};
+}
+
+utils::optional<units::velocity> vbw::get_ground_speed_transveral() const
+{
+	if (ground_speed_transveral_)
+		return {};
+	return {*ground_speed_transveral_};
 }
 
 void vbw::append_data_to(std::string & s) const

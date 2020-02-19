@@ -49,7 +49,7 @@ TEST_F(Test_nmea_wnc, empty_to_string)
 TEST_F(Test_nmea_wnc, set_distance_nm)
 {
 	nmea::wnc wnc;
-	wnc.set_distance_nm(12.5);
+	wnc.set_distance_nm(units::nautical_miles{12.5});
 
 	EXPECT_STREQ("$GPWNC,12.5,N,,,,*1B", nmea::to_string(wnc).c_str());
 }
@@ -57,7 +57,7 @@ TEST_F(Test_nmea_wnc, set_distance_nm)
 TEST_F(Test_nmea_wnc, set_distance_km)
 {
 	nmea::wnc wnc;
-	wnc.set_distance_km(12.5);
+	wnc.set_distance_km(units::kilometers{12.5});
 
 	EXPECT_STREQ("$GPWNC,,,12.5,K,,*1E", nmea::to_string(wnc).c_str());
 }

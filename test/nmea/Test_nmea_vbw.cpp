@@ -5,7 +5,6 @@
 
 namespace
 {
-
 using namespace marnav;
 
 class Test_nmea_vbw : public ::testing::Test
@@ -49,7 +48,7 @@ TEST_F(Test_nmea_vbw, empty_to_string)
 TEST_F(Test_nmea_vbw, set_water_speed)
 {
 	nmea::vbw vbw;
-	vbw.set_water_speed(1.0, 2.0, nmea::status::ok);
+	vbw.set_water_speed(units::knots{1.0}, units::knots{2.0}, nmea::status::ok);
 
 	EXPECT_STREQ("$IIVBW,1.0,2.0,A,,,*01", nmea::to_string(vbw).c_str());
 }
@@ -57,7 +56,7 @@ TEST_F(Test_nmea_vbw, set_water_speed)
 TEST_F(Test_nmea_vbw, set_water_speed_negative)
 {
 	nmea::vbw vbw;
-	vbw.set_water_speed(-1.0, -2.0, nmea::status::ok);
+	vbw.set_water_speed(units::knots{-1.0}, units::knots{-2.0}, nmea::status::ok);
 
 	EXPECT_STREQ("$IIVBW,-1.0,-2.0,A,,,*01", nmea::to_string(vbw).c_str());
 }
@@ -65,7 +64,7 @@ TEST_F(Test_nmea_vbw, set_water_speed_negative)
 TEST_F(Test_nmea_vbw, set_ground_speed)
 {
 	nmea::vbw vbw;
-	vbw.set_ground_speed(1.0, 2.0, nmea::status::ok);
+	vbw.set_ground_speed(units::knots{1.0}, units::knots{2.0}, nmea::status::ok);
 
 	EXPECT_STREQ("$IIVBW,,,,1.0,2.0,A*01", nmea::to_string(vbw).c_str());
 }
@@ -73,7 +72,7 @@ TEST_F(Test_nmea_vbw, set_ground_speed)
 TEST_F(Test_nmea_vbw, set_ground_speed_negative)
 {
 	nmea::vbw vbw;
-	vbw.set_ground_speed(-1.0, -2.0, nmea::status::ok);
+	vbw.set_ground_speed(units::knots{-1.0}, units::knots{-2.0}, nmea::status::ok);
 
 	EXPECT_STREQ("$IIVBW,,,,-1.0,-2.0,A*01", nmea::to_string(vbw).c_str());
 }

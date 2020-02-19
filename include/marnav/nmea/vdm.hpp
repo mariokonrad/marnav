@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__VDM__HPP
-#define MARNAV__NMEA__VDM__HPP
+#ifndef MARNAV_NMEA_VDM_HPP
+#define MARNAV_NMEA_VDM_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -58,12 +58,12 @@ private:
 	uint32_t n_fill_bits_ = 0; // 0..5
 
 public:
-	decltype(n_fragments_) get_n_fragments() const { return n_fragments_; }
-	decltype(fragment_) get_fragment() const { return fragment_; }
-	decltype(seq_msg_id_) get_seq_msg_id() const { return seq_msg_id_; }
-	decltype(radio_channel_) get_radio_channel() const { return radio_channel_; }
-	decltype(payload_) get_payload() const { return payload_; }
-	decltype(n_fill_bits_) get_n_fill_bits() const { return n_fill_bits_; }
+	uint32_t get_n_fragments() const { return n_fragments_; }
+	uint32_t get_fragment() const { return fragment_; }
+	utils::optional<uint32_t> get_seq_msg_id() const { return seq_msg_id_; }
+	utils::optional<ais_channel> get_radio_channel() const { return radio_channel_; }
+	const std::string & get_payload() const { return payload_; }
+	uint32_t get_n_fill_bits() const { return n_fill_bits_; }
 
 	void set_n_fragments(uint32_t t) noexcept { n_fragments_ = t; }
 	void set_fragment(uint32_t t) noexcept { fragment_ = t; }

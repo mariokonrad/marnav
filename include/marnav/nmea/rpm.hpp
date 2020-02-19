@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__RPM__HPP
-#define MARNAV__NMEA__RPM__HPP
+#ifndef MARNAV_NMEA_RPM_HPP
+#define MARNAV_NMEA_RPM_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -57,11 +57,11 @@ private:
 	utils::optional<status> data_valid_;
 
 public:
-	decltype(source_) get_source() const { return source_; }
-	decltype(source_number_) get_source_number() const { return source_number_; }
-	decltype(revolutions_) get_revolutions() const { return revolutions_; }
-	decltype(propeller_pitch_) get_propeller_pitch() const { return propeller_pitch_; }
-	decltype(data_valid_) get_data_valid() const { return data_valid_; }
+	utils::optional<source_id> get_source() const { return source_; }
+	utils::optional<uint32_t> get_source_number() const { return source_number_; }
+	utils::optional<double> get_revolutions() const { return revolutions_; }
+	utils::optional<double> get_propeller_pitch() const { return propeller_pitch_; }
+	utils::optional<status> get_data_valid() const { return data_valid_; }
 
 	void set_source(source_id id, uint32_t num);
 	void set_revolutions(double t) noexcept { revolutions_ = t; }

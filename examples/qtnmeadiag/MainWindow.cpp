@@ -37,11 +37,44 @@ namespace marnav_example
 /// @cond DEV
 namespace detail
 {
-template <typename T> static QString render(const marnav::utils::optional<T> & t)
+static QString render(const marnav::nmea::status & t)
 {
-	if (!t)
-		return "-";
-	return marnav::nmea::to_string(*t).c_str();
+	return marnav::nmea::to_string(t).c_str();
+}
+
+static QString render(const marnav::nmea::direction & t)
+{
+	return marnav::nmea::to_string(t).c_str();
+}
+
+static QString render(const marnav::nmea::reference & t)
+{
+	return marnav::nmea::to_string(t).c_str();
+}
+
+static QString render(const marnav::nmea::date & t)
+{
+	return marnav::nmea::to_string(t).c_str();
+}
+
+static QString render(const marnav::nmea::quality & t)
+{
+	return marnav::nmea::to_string(t).c_str();
+}
+
+static QString render(const marnav::nmea::pgrmz::fix_type & t)
+{
+	return marnav::nmea::to_string(t).c_str();
+}
+
+static QString render(const marnav::nmea::unit::distance & t)
+{
+	return marnav::nmea::to_string(t).c_str();
+}
+
+static QString render(const marnav::nmea::unit::velocity & t)
+{
+	return marnav::nmea::to_string(t).c_str();
 }
 
 static QString render(uint32_t t)
@@ -54,43 +87,35 @@ static QString render(const std::string & t)
 	return QString{t.c_str()};
 }
 
-static QString render(const marnav::utils::optional<marnav::nmea::time> & t)
+static QString render(const marnav::nmea::time & t)
 {
-	if (!t)
-		return "-";
 	return QString{"%1:%2:%3"}
-		.arg(t->hour(), 2, 10, QLatin1Char('0'))
-		.arg(t->minutes(), 2, 10, QLatin1Char('0'))
-		.arg(t->seconds(), 2, 10, QLatin1Char('0'));
+		.arg(t.hour(), 2, 10, QLatin1Char('0'))
+		.arg(t.minutes(), 2, 10, QLatin1Char('0'))
+		.arg(t.seconds(), 2, 10, QLatin1Char('0'));
 }
 
-static QString render(const marnav::utils::optional<marnav::geo::latitude> & t)
+static QString render(const marnav::geo::latitude & t)
 {
-	if (!t)
-		return "-";
 	return QString{" %1°%2'%3%4"}
-		.arg(t->degrees(), 2, 10, QLatin1Char('0'))
-		.arg(t->minutes(), 2, 10, QLatin1Char('0'))
-		.arg(t->seconds(), 2, 'f', 1, QLatin1Char('0'))
-		.arg(to_string(t->hem()).c_str());
+		.arg(t.degrees(), 2, 10, QLatin1Char('0'))
+		.arg(t.minutes(), 2, 10, QLatin1Char('0'))
+		.arg(t.seconds(), 2, 'f', 1, QLatin1Char('0'))
+		.arg(to_string(t.hem()).c_str());
 }
 
-static QString render(const marnav::utils::optional<marnav::geo::longitude> & t)
+static QString render(const marnav::geo::longitude & t)
 {
-	if (!t)
-		return "-";
 	return QString{"%1°%2'%3%4"}
-		.arg(t->degrees(), 3, 10, QLatin1Char('0'))
-		.arg(t->minutes(), 2, 10, QLatin1Char('0'))
-		.arg(t->seconds(), 2, 'f', 1, QLatin1Char('0'))
-		.arg(to_string(t->hem()).c_str());
+		.arg(t.degrees(), 3, 10, QLatin1Char('0'))
+		.arg(t.minutes(), 2, 10, QLatin1Char('0'))
+		.arg(t.seconds(), 2, 'f', 1, QLatin1Char('0'))
+		.arg(to_string(t.hem()).c_str());
 }
 
-static QString render(const marnav::utils::optional<marnav::nmea::selection_mode> & t)
+static QString render(const marnav::nmea::selection_mode & t)
 {
-	if (!t)
-		return "-";
-	switch (*t) {
+	switch (t) {
 		case marnav::nmea::selection_mode::manual:
 			return QString{"manual"};
 		case marnav::nmea::selection_mode::automatic:
@@ -101,11 +126,9 @@ static QString render(const marnav::utils::optional<marnav::nmea::selection_mode
 	return "-";
 }
 
-static QString render(const marnav::utils::optional<marnav::nmea::route> & t)
+static QString render(const marnav::nmea::route & t)
 {
-	if (!t)
-		return "-";
-	switch (*t) {
+	switch (t) {
 		case marnav::nmea::route::complete:
 			return QString{"complete"};
 		case marnav::nmea::route::working:
@@ -116,18 +139,14 @@ static QString render(const marnav::utils::optional<marnav::nmea::route> & t)
 	return "-";
 }
 
-static QString render(const marnav::utils::optional<marnav::nmea::waypoint> & t)
+static QString render(const marnav::nmea::waypoint & t)
 {
-	if (!t)
-		return "-";
-	return t->c_str();
+	return t.c_str();
 }
 
-static QString render(const marnav::utils::optional<marnav::nmea::mode_indicator> & t)
+static QString render(const marnav::nmea::mode_indicator & t)
 {
-	if (!t)
-		return "-";
-	switch (*t) {
+	switch (t) {
 		case marnav::nmea::mode_indicator::invalid:
 			return QString{"invalid"};
 		case marnav::nmea::mode_indicator::autonomous:
@@ -148,6 +167,23 @@ static QString render(const marnav::utils::optional<marnav::nmea::mode_indicator
 			break;
 	}
 	return "-";
+}
+
+static QString render(const marnav::units::length & t)
+{
+	return QString{"%1 NM"}.arg(t.get<marnav::units::nautical_miles>().value());
+}
+
+static QString render(const marnav::units::velocity & t)
+{
+	return QString{"%1 knots"}.arg(t.get<marnav::units::knots>().value());
+}
+
+template <typename T> static QString render(const marnav::utils::optional<T> & t)
+{
+	if (!t)
+		return "-";
+	return render(*t);
 }
 
 static QString details_rmb(const marnav::nmea::sentence * s)
@@ -208,9 +244,7 @@ static QString details_gga(const marnav::nmea::sentence * s)
 	result += "\nNum Satellites  : " + render(t->get_n_satellites());
 	result += "\nHoriz Dilution  : " + render(t->get_hor_dilution());
 	result += "\nAltitude        : " + render(t->get_altitude());
-	result += "\nAltitude Unit   : " + render(t->get_altitude_unit());
 	result += "\nGeodial Sep     : " + render(t->get_geodial_separation());
-	result += "\nGeodial Sep Unit: " + render(t->get_geodial_separation_unit());
 	result += "\nDGPS Age        : " + render(t->get_dgps_age());
 	result += "\nDGPS Ref        : " + render(t->get_dgps_ref());
 	return result;

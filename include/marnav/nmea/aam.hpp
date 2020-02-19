@@ -1,8 +1,9 @@
-#ifndef MARNAV__NMEA__AAM__HPP
-#define MARNAV__NMEA__AAM__HPP
+#ifndef MARNAV_NMEA_AAM_HPP
+#define MARNAV_NMEA_AAM_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -56,36 +57,20 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<status> arrival_circle_entered_;
-	utils::optional<status> perpendicualar_passed_;
-	utils::optional<double> arrival_circle_radius_;
-	utils::optional<unit::distance> arrival_circle_radius_unit_;
-	utils::optional<waypoint> waypoint_id_;
-
-	void check() const;
+	status arrival_circle_entered_ = status::warning;
+	status perpendicualar_passed_ = status::warning;
+	units::nautical_miles arrival_circle_radius_;
+	waypoint waypoint_id_;
 
 public:
-	decltype(arrival_circle_entered_) get_arrival_circle_entered() const
-	{
-		return arrival_circle_entered_;
-	}
-	decltype(perpendicualar_passed_) get_perpendicualar_passed() const
-	{
-		return perpendicualar_passed_;
-	}
-	decltype(arrival_circle_radius_) get_arrival_circle_radius() const
-	{
-		return arrival_circle_radius_;
-	}
-	decltype(arrival_circle_radius_unit_) get_arrival_circle_radius_unit() const
-	{
-		return arrival_circle_radius_unit_;
-	}
-	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }
+	status get_arrival_circle_entered() const { return arrival_circle_entered_; }
+	status get_perpendicualar_passed() const { return perpendicualar_passed_; }
+	units::length get_arrival_circle_radius() const { return arrival_circle_radius_; }
+	waypoint get_waypoint_id() const { return waypoint_id_; }
 
 	void set_arrival_circle_entered(status s);
 	void set_perpendicular_passed(status s);
-	void set_arrival_circle_radius(double t);
+	void set_arrival_circle_radius(units::length t);
 	void set_waypoint_id(const waypoint & id) { waypoint_id_ = id; }
 };
 }

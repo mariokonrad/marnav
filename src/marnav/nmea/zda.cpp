@@ -19,20 +19,37 @@ zda::zda(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in zda"};
 
+	utils::optional<uint32_t> d;
+	utils::optional<uint32_t> m;
+	utils::optional<uint32_t> y;
+
 	read(*(first + 0), time_utc_);
-	read(*(first + 1), day_);
-	read(*(first + 2), month_);
-	read(*(first + 3), year_);
+	read(*(first + 1), d);
+	read(*(first + 2), m);
+	read(*(first + 3), y);
 	read(*(first + 4), local_zone_hours_);
 	read(*(first + 5), local_zone_minutes_);
+
+	if (d && m && y)
+		date_ = nmea::date{*y, to_month(*m), *d};
 }
 
 void zda::append_data_to(std::string & s) const
 {
+	utils::optional<uint32_t> d;
+	utils::optional<uint32_t> m;
+	utils::optional<uint32_t> y;
+
+	if (date_) {
+		d = date_->day();
+		m = to_numeric(date_->mon());
+		y = date_->year();
+	}
+
 	append(s, to_string(time_utc_));
-	append(s, format(day_, 2));
-	append(s, format(month_, 2));
-	append(s, format(year_, 4));
+	append(s, format(d, 2));
+	append(s, format(m, 2));
+	append(s, format(y, 4));
 	append(s, format(local_zone_hours_, 2));
 	append(s, format(local_zone_minutes_, 2));
 }

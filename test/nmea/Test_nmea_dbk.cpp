@@ -49,7 +49,7 @@ TEST_F(Test_nmea_dbk, empty_to_string)
 TEST_F(Test_nmea_dbk, set_depth_feet)
 {
 	nmea::dbk dbk;
-	dbk.set_depth_feet(12.5);
+	dbk.set_depth_feet(units::feet{12.5});
 
 	EXPECT_STREQ("$IIDBK,12.5,f,,,,*33", nmea::to_string(dbk).c_str());
 }
@@ -57,7 +57,7 @@ TEST_F(Test_nmea_dbk, set_depth_feet)
 TEST_F(Test_nmea_dbk, set_depth_meter)
 {
 	nmea::dbk dbk;
-	dbk.set_depth_meter(12.5);
+	dbk.set_depth_meter(units::meters{12.5});
 
 	EXPECT_STREQ("$IIDBK,,,12.5,M,,*18", nmea::to_string(dbk).c_str());
 }
@@ -65,7 +65,7 @@ TEST_F(Test_nmea_dbk, set_depth_meter)
 TEST_F(Test_nmea_dbk, set_depth_fathom)
 {
 	nmea::dbk dbk;
-	dbk.set_depth_fathom(12.5);
+	dbk.set_depth_fathom(units::fathoms{12.5});
 
 	EXPECT_STREQ("$IIDBK,,,,,12.5,F*13", nmea::to_string(dbk).c_str());
 }

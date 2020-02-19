@@ -34,10 +34,54 @@ void mwv::set_angle(double deg, reference ref)
 	angle_ref_ = ref;
 }
 
-void mwv::set_speed(double speed, unit::velocity u) noexcept
+void mwv::set_speed(units::velocity speed, unit::velocity u) noexcept
 {
-	speed_ = speed;
-	speed_unit_ = u;
+	switch (u) {
+		case unit::velocity::knot:
+			set_speed(speed.get<units::knots>());
+			break;
+		case unit::velocity::kmh:
+			set_speed(speed.get<units::kilometers_per_hour>());
+			break;
+		case unit::velocity::mps:
+			set_speed(speed.get<units::meters_per_second>());
+			break;
+	}
+}
+
+void mwv::set_speed(units::knots speed) noexcept
+{
+	speed_ = speed.value();
+	speed_unit_ = unit::velocity::knot;
+}
+
+void mwv::set_speed(units::kilometers_per_hour speed) noexcept
+{
+	speed_ = speed.value();
+	speed_unit_ = unit::velocity::mps;
+}
+
+void mwv::set_speed(units::meters_per_second speed) noexcept
+{
+	speed_ = speed.value();
+	speed_unit_ = unit::velocity::mps;
+}
+
+utils::optional<units::velocity> mwv::get_speed() const
+{
+	if (!speed_ || !speed_unit_)
+		return {};
+
+	switch (*speed_unit_) {
+		case unit::velocity::knot:
+			return {units::knots{*speed_}};
+		case unit::velocity::kmh:
+			return {units::kilometers_per_hour{*speed_}};
+		case unit::velocity::mps:
+			return {units::meters_per_second{*speed_}};
+	}
+
+	return {};
 }
 
 void mwv::append_data_to(std::string & s) const

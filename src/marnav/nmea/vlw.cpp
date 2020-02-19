@@ -1,5 +1,6 @@
 #include <marnav/nmea/vlw.hpp>
 #include <marnav/nmea/io.hpp>
+#include "checks.hpp"
 
 namespace marnav
 {
@@ -19,30 +20,48 @@ vlw::vlw(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 4)
 		throw std::invalid_argument{"invalid number of fields in vlw"};
 
+	utils::optional<unit::distance> distance_cum_unit;
+	utils::optional<unit::distance> distance_reset_unit;
+
 	read(*(first + 0), distance_cum_);
-	read(*(first + 1), distance_cum_unit_);
+	read(*(first + 1), distance_cum_unit);
 	read(*(first + 2), distance_reset_);
-	read(*(first + 3), distance_reset_unit_);
+	read(*(first + 3), distance_reset_unit);
+
+	check_value(distance_cum_unit, {unit::distance::nm}, "distance_cum_unit");
+	check_value(distance_reset_unit, {unit::distance::nm}, "distance_reset_unit");
 }
 
-void vlw::set_distance_cum_nm(double t) noexcept
+void vlw::set_distance_cum_nm(units::length t) noexcept
 {
-	distance_cum_ = t;
-	distance_cum_unit_ = unit::distance::nm;
+	distance_cum_ = t.get<units::nautical_miles>();
 }
 
-void vlw::set_distance_reset_nm(double t) noexcept
+void vlw::set_distance_reset_nm(units::length t) noexcept
 {
-	distance_reset_ = t;
-	distance_reset_unit_ = unit::distance::nm;
+	distance_reset_ = t.get<units::nautical_miles>();
+}
+
+utils::optional<units::length> vlw::get_distance_cum() const
+{
+	if (!distance_cum_)
+		return {};
+	return {*distance_cum_};
+}
+
+utils::optional<units::length> vlw::get_distance_reset() const
+{
+	if (!distance_reset_)
+		return {};
+	return {*distance_reset_};
 }
 
 void vlw::append_data_to(std::string & s) const
 {
 	append(s, to_string(distance_cum_));
-	append(s, to_string(distance_cum_unit_));
+	append(s, to_string_if(unit::distance::nm, distance_cum_));
 	append(s, to_string(distance_reset_));
-	append(s, to_string(distance_reset_unit_));
+	append(s, to_string_if(unit::distance::nm, distance_reset_));
 }
 }
 }

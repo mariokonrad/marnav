@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__ROT__HPP
-#define MARNAV__NMEA__ROT__HPP
+#ifndef MARNAV_NMEA_ROT_HPP
+#define MARNAV_NMEA_ROT_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -45,8 +45,8 @@ private:
 	utils::optional<status> data_valid_;
 
 public:
-	decltype(deg_per_minute_) get_deg_per_minute() const { return deg_per_minute_; }
-	decltype(data_valid_) get_data_valid() const { return data_valid_; }
+	utils::optional<double> get_deg_per_minute() const { return deg_per_minute_; }
+	utils::optional<status> get_data_valid() const { return data_valid_; }
 
 	void set_deg_per_minute(double t) noexcept { deg_per_minute_ = t; }
 	void set_data_valid(status t) noexcept { data_valid_ = t; }

@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__DSE__HPP
-#define MARNAV__NMEA__DSE__HPP
+#ifndef MARNAV_NMEA_DSE_HPP
+#define MARNAV_NMEA_DSE_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -76,9 +76,9 @@ private:
 	uint64_t address_ = 0;
 
 public:
-	decltype(number_of_messages_) get_number_of_messages() const { return number_of_messages_; }
-	decltype(sentence_number_) get_sentence_number() const { return sentence_number_; }
-	decltype(flag_) get_flag() const { return flag_; }
+	uint32_t get_number_of_messages() const { return number_of_messages_; }
+	uint32_t get_sentence_number() const { return sentence_number_; }
+	query_flag get_flag() const { return flag_; }
 	utils::mmsi get_mmsi() const;
 
 	void set_number_of_messages(uint32_t t) noexcept { number_of_messages_ = t; }

@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__VDO__HPP
-#define MARNAV__NMEA__VDO__HPP
+#ifndef MARNAV_NMEA_VDO_HPP
+#define MARNAV_NMEA_VDO_HPP
 
 #include <marnav/nmea/vdm.hpp>
 

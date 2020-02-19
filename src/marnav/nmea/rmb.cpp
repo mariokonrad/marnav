@@ -67,6 +67,48 @@ void rmb::set_lon(const geo::longitude & t)
 	lon_hem_ = convert_hemisphere(t);
 }
 
+utils::optional<units::velocity> rmb::get_dst_velocity() const
+{
+	if (!dst_velocity_)
+		return {};
+	return {*dst_velocity_};
+}
+
+void rmb::set_dst_velocity(units::velocity t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"invalid argument, destination velocity less than zero"};
+	dst_velocity_ = t.get<units::knots>();
+}
+
+utils::optional<units::length> rmb::get_range() const
+{
+	if (!range_)
+		return {};
+	return {*range_};
+}
+
+void rmb::set_range(units::length t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"invalid argument, range less than zero"};
+	range_ = t.get<units::nautical_miles>();
+}
+
+utils::optional<units::length> rmb::get_cross_track_error() const
+{
+	if (!cross_track_error_)
+		return {};
+	return {*cross_track_error_};
+}
+
+void rmb::set_cross_track_error(units::length t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"invalid argument, cross track error less than zero"};
+	cross_track_error_ = t.get<units::nautical_miles>();
+}
+
 void rmb::append_data_to(std::string & s) const
 {
 	append(s, to_string(active_));

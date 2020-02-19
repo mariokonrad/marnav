@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__VBW__HPP
-#define MARNAV__NMEA__VBW__HPP
+#ifndef MARNAV_NMEA_VBW_HPP
+#define MARNAV_NMEA_VBW_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -17,13 +18,13 @@ namespace nmea
 /// @endcode
 ///
 /// Field Number:
-/// 1. Longitudinal water speed, "-" means astern
-/// 2. Transverse water speed, "-" means port
+/// 1. Longitudinal water speed, "-" means astern, knots
+/// 2. Transverse water speed, "-" means port, knots
 /// 3. Status, A = Data Valid
 ///    - A = Data Valid
 ///    - V = Invalid
-/// 4. Longitudinal ground speed, "-" means astern
-/// 5. Transverse ground speed, "-" means port
+/// 4. Longitudinal ground speed, "-" means astern, knots
+/// 5. Transverse ground speed, "-" means port, knots
 /// 6. Status
 ///    - A = Data Valid
 ///    - V = Invalid
@@ -47,38 +48,23 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> water_speed_longitudinal_;
-	utils::optional<double> water_speed_transveral_;
+	utils::optional<units::knots> water_speed_longitudinal_;
+	utils::optional<units::knots> water_speed_transveral_;
 	utils::optional<status> water_speed_status_;
-	utils::optional<double> ground_speed_longitudinal_;
-	utils::optional<double> ground_speed_transveral_;
+	utils::optional<units::knots> ground_speed_longitudinal_;
+	utils::optional<units::knots> ground_speed_transveral_;
 	utils::optional<status> ground_speed_status_;
 
 public:
-	decltype(water_speed_longitudinal_) get_water_speed_longitudinal() const
-	{
-		return water_speed_longitudinal_;
-	}
-	decltype(water_speed_transveral_) get_water_speed_transveral() const
-	{
-		return water_speed_transveral_;
-	}
-	decltype(water_speed_status_) get_water_speed_status() const { return water_speed_status_; }
-	decltype(ground_speed_longitudinal_) get_ground_speed_longitudinal() const
-	{
-		return ground_speed_longitudinal_;
-	}
-	decltype(ground_speed_transveral_) get_ground_speed_transveral() const
-	{
-		return ground_speed_transveral_;
-	}
-	decltype(ground_speed_status_) get_ground_speed_status() const
-	{
-		return ground_speed_status_;
-	}
+	utils::optional<units::velocity> get_water_speed_longitudinal() const;
+	utils::optional<units::velocity> get_water_speed_transveral() const;
+	utils::optional<status> get_water_speed_status() const { return water_speed_status_; }
+	utils::optional<units::velocity> get_ground_speed_longitudinal() const;
+	utils::optional<units::velocity> get_ground_speed_transveral() const;
+	utils::optional<status> get_ground_speed_status() const { return ground_speed_status_; }
 
-	void set_water_speed(double l, double t, status s) noexcept;
-	void set_ground_speed(double l, double t, status s) noexcept;
+	void set_water_speed(units::velocity l, units::velocity t, status s);
+	void set_ground_speed(units::velocity l, units::velocity t, status s);
 };
 }
 }

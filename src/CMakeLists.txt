@@ -216,6 +216,7 @@ install(
 		${PROJECT_SOURCE_DIR}/include/marnav/math
 		${PROJECT_SOURCE_DIR}/include/marnav/nmea
 		${PROJECT_SOURCE_DIR}/include/marnav/seatalk
+		${PROJECT_SOURCE_DIR}/include/marnav/units
 		${PROJECT_SOURCE_DIR}/include/marnav/utils
 	DESTINATION include/marnav
 	)

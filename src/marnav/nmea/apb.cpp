@@ -80,7 +80,7 @@ void apb::check() const
 	check_status(loran_c_cycle_lock_warning_, "loran_c_cycle_lock_warning");
 
 	check_value(direction_to_steer_, {side::left, side::right}, "direction_to_steer");
-	check_value(cross_track_unit_, {unit::distance::nm}, "cross_talk_unit");
+	check_value(cross_track_unit_, {unit::distance::nm, unit::distance::km}, "cross_talk_unit");
 	check_status(status_arrival_, "status_arrival");
 	check_status(status_perpendicular_passing_, "status_perpendicular_passing");
 

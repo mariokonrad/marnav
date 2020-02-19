@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__STN__HPP
-#define MARNAV__NMEA__STN__HPP
+#ifndef MARNAV_NMEA_STN_HPP
+#define MARNAV_NMEA_STN_HPP
 
 #include <marnav/nmea/sentence.hpp>
 
@@ -40,7 +40,7 @@ private:
 	uint32_t number_ = 0;
 
 public:
-	decltype(number_) get_number() const { return number_; }
+	uint32_t get_number() const { return number_; }
 
 	void set_number(uint32_t t) noexcept { number_ = t; }
 };

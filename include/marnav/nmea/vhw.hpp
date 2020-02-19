@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__VHW__HPP
-#define MARNAV__NMEA__VHW__HPP
+#ifndef MARNAV_NMEA_VHW_HPP
+#define MARNAV_NMEA_VHW_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -17,16 +18,18 @@ namespace nmea
 /// @endcode
 ///
 /// Field Number:
-/// 1. Degress True
-/// 2. Degress True reference
+/// 1. Heading Degress True
+/// 2. Heading Degress True reference
 ///    - T = True
-/// 3. Degrees Magnetic
-/// 4. Degrees Magnetic reference
+/// 3. Heading Degrees Magnetic
+/// 4. Heading Degrees Magnetic reference
 ///    - M = Magnetic
-/// 5. Knots (speed of vessel relative to the water)
-/// 6. N = Knots
-/// 7. Kilometers per hour (speed of vessel relative to the water)
-/// 8. K = Kilometers per hour
+/// 5. Speed of vessel relative to the water
+/// 6. Speed of vessel relative to the water unit
+///    - N = Knots
+/// 7. Speed of vessel relative to the water
+/// 8. Speed of vessel relative to the water unit
+///    - K = Kilometers per hour
 ///
 class vhw : public sentence
 {
@@ -47,28 +50,21 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<char> heading_empty_; // heading (empty)
-	utils::optional<reference> degrees_true_; // T:true
-	utils::optional<double> heading_; // heading in degrees, 0..359
-	utils::optional<reference> degrees_mag_; // M:magnetic
-	utils::optional<double> speed_knots_; // speed in knots
-	utils::optional<unit::velocity> speed_knots_unit_; // N:knots
-	utils::optional<double> speed_kmh_; // speed in kilometers per hour
-	utils::optional<unit::velocity> speed_kmh_unit_; // K:kmh
+	utils::optional<double> heading_true_; // 0..359
+	utils::optional<double> heading_magn_; // 0..359
+	utils::optional<units::knots> speed_knots_;
+	utils::optional<units::kilometers_per_hour> speed_kmh_;
 
 public:
-	decltype(heading_empty_) get_heading_empty() const { return heading_empty_; }
-	decltype(degrees_true_) get_degrees_true() const { return degrees_true_; }
-	decltype(heading_) get_heading() const { return heading_; }
-	decltype(degrees_mag_) get_degrees_mag() const { return degrees_mag_; }
-	decltype(speed_knots_) get_speed_knots() const { return speed_knots_; }
-	decltype(speed_knots_unit_) get_speed_knots_unit() const { return speed_knots_unit_; }
-	decltype(speed_kmh_) get_speed_kmh() const { return speed_kmh_; }
-	decltype(speed_kmh_unit_) get_speed_kmh_unit() const { return speed_kmh_unit_; }
+	utils::optional<double> get_heading_true() const { return heading_true_; }
+	utils::optional<double> get_heading_magn() const { return heading_magn_; }
+	utils::optional<units::knots> get_speed_knots() const { return speed_knots_; }
+	utils::optional<units::kilometers_per_hour> get_speed_kmh() const { return speed_kmh_; }
 
-	void set_heading(double t) noexcept;
-	void set_speed_knots(double t) noexcept;
-	void set_speed_kmh(double t) noexcept;
+	void set_heading_true(double t) noexcept;
+	void set_heading_magn(double t) noexcept;
+	void set_speed_knots(units::velocity t) noexcept;
+	void set_speed_kmh(units::velocity t) noexcept;
 };
 }
 }

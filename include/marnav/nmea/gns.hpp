@@ -1,9 +1,10 @@
-#ifndef MARNAV__NMEA__GNS__HPP
-#define MARNAV__NMEA__GNS__HPP
+#ifndef MARNAV_NMEA_GNS_HPP
+#define MARNAV_NMEA_GNS_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/angle.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -62,27 +63,24 @@ private:
 	utils::optional<direction> lon_hem_;
 	std::string mode_ind_ = "AA";
 	utils::optional<uint32_t> number_of_satellites_;
-	utils::optional<double> hdrop_;
-	utils::optional<double> antenna_altitude_; // meters
-	utils::optional<double> geodial_sepration_; // meters
+	utils::optional<double> hdrop_; // horizontal dilution of precision
+	utils::optional<units::meters> antenna_altitude_;
+	utils::optional<units::meters> geodial_separation_;
 	utils::optional<double> age_of_differential_data_;
 	utils::optional<double> differential_ref_station_id_;
 
 public:
-	decltype(time_utc_) get_time_utc() const { return time_utc_; }
-	decltype(mode_ind_) get_mode_ind() const { return mode_ind_; }
-	decltype(number_of_satellites_) get_number_of_satellites() const
-	{
-		return number_of_satellites_;
-	}
-	decltype(hdrop_) get_hdrop() const { return hdrop_; }
-	decltype(antenna_altitude_) get_antenna_altitude() const { return antenna_altitude_; }
-	decltype(geodial_sepration_) get_geodial_sepration() const { return geodial_sepration_; }
-	decltype(age_of_differential_data_) get_age_of_differential_data() const
+	utils::optional<nmea::time> get_time_utc() const { return time_utc_; }
+	const std::string & get_mode_ind() const { return mode_ind_; }
+	utils::optional<uint32_t> get_number_of_satellites() const { return number_of_satellites_; }
+	utils::optional<double> get_hdrop() const { return hdrop_; }
+	utils::optional<units::length> get_antenna_altitude() const;
+	utils::optional<units::length> get_geodial_separation() const;
+	utils::optional<double> get_age_of_differential_data() const
 	{
 		return age_of_differential_data_;
 	}
-	decltype(differential_ref_station_id_) get_differential_ref_station_id() const
+	utils::optional<double> get_differential_ref_station_id() const
 	{
 		return differential_ref_station_id_;
 	}
@@ -96,8 +94,14 @@ public:
 	void set_mode_indicator(const std::string & t);
 	void set_number_of_satellites(uint32_t t) noexcept { number_of_satellites_ = t; }
 	void set_hdrop(double t) noexcept { hdrop_ = t; }
-	void set_antenna_altitude(double t) noexcept { antenna_altitude_ = t; }
-	void set_geodial_sepration(double t) noexcept { geodial_sepration_ = t; }
+	void set_antenna_altitude(units::length t) noexcept
+	{
+		antenna_altitude_ = t.get<units::meters>();
+	}
+	void set_geodial_separation(units::length t) noexcept
+	{
+		geodial_separation_ = t.get<units::meters>();
+	}
 	void set_age_of_differential_data(double t) noexcept { age_of_differential_data_ = t; }
 	void set_differential_ref_station_id(double t) noexcept
 	{

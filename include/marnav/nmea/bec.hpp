@@ -1,10 +1,11 @@
-#ifndef MARNAV__NMEA__BEC__HPP
-#define MARNAV__NMEA__BEC__HPP
+#ifndef MARNAV_NMEA_BEC_HPP
+#define MARNAV_NMEA_BEC_HPP
 
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/waypoint.hpp>
+#include <marnav/units/units.hpp>
 
 namespace marnav
 {
@@ -64,15 +65,15 @@ private:
 	direction lon_hem_ = direction::east;
 	double bearing_true_ = {};
 	double bearing_magn_ = {};
-	double distance_ = {};
+	units::nautical_miles distance_ = {};
 	waypoint waypoint_id_;
 
 public:
-	decltype(time_utc_) get_time_utc() const { return time_utc_; }
-	decltype(bearing_true_) get_bearing_true() const { return bearing_true_; }
-	decltype(bearing_magn_) get_bearing_magn() const { return bearing_magn_; }
-	decltype(distance_) get_distance() const { return distance_; }
-	decltype(waypoint_id_) get_waypoint() const { return waypoint_id_; }
+	nmea::time get_time_utc() const { return time_utc_; }
+	double get_bearing_true() const { return bearing_true_; }
+	double get_bearing_magn() const { return bearing_magn_; }
+	units::length get_distance() const { return {distance_}; }
+	waypoint get_waypoint() const { return waypoint_id_; }
 	geo::latitude get_lat() const;
 	geo::longitude get_lon() const;
 
@@ -81,7 +82,7 @@ public:
 	void set_lon(const geo::longitude & t);
 	void set_bearing_true(double t);
 	void set_bearing_magn(double t);
-	void set_distance(double t);
+	void set_distance(units::length t);
 	void set_waypoint(const waypoint & id) { waypoint_id_ = id; }
 };
 }

@@ -61,9 +61,9 @@ TI ulps_distance(const TF a, const TF b)
 }
 }
 
-template <class TF, class TI = corresponding_integer_t<TF>>
+template <class TF, class TI = detail::corresponding_integer_t<TF>>
 bool nearly_equal(TF a, TF b, TF fixed_epsilon = std::numeric_limits<TF>::epsilon(),
-	TI ulps_epsilon = default_ulps<TF>::value)
+	TI ulps_epsilon = detail::default_ulps<TF>::value)
 {
 	const auto difference = std::abs(a - b);
 	if (difference <= fixed_epsilon)

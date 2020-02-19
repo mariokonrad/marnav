@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__PGRME__HPP
-#define MARNAV__NMEA__PGRME__HPP
+#ifndef MARNAV_NMEA_PGRME_HPP
+#define MARNAV_NMEA_PGRME_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -19,11 +20,14 @@ namespace nmea
 /// Field Number:
 ///
 /// 1. Estimated horizontal position error (HPE)
-/// 2. M=meters
+/// 2. HPE Unit
+///    - M = meters
 /// 3. Estimated vertical position error (VPE)
-/// 4. M=meters
+/// 4. VPE Unit
+///    - M = meters
 /// 5. Overall spherical equivalent position error
-/// 6. M=meters
+/// 6. Spherical equivalent position error unit
+///    - M = meters
 /// 7. Checksum
 ///
 /// Example: <tt>$PGRME,15.0,M,45.0,M,25.0,M*22</tt>
@@ -47,46 +51,28 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> horizontal_position_error_;
-	unit::distance horizontal_position_error_unit_ = unit::distance::meter;
-	utils::optional<double> vertical_position_error_;
-	unit::distance vertical_position_error_unit_ = unit::distance::meter;
-	utils::optional<double> overall_spherical_equiv_position_error_;
-	unit::distance overall_spherical_equiv_position_error_unit_ = unit::distance::meter;
+	utils::optional<units::meters> horizontal_position_error_;
+	utils::optional<units::meters> vertical_position_error_;
+	utils::optional<units::meters> overall_spherical_equiv_position_error_;
 
 public:
-	decltype(horizontal_position_error_) get_horizontal_position_error() const
+	utils::optional<units::length> get_horizontal_position_error() const;
+	utils::optional<units::length> get_vertical_position_error() const;
+	utils::optional<units::length> get_overall_spherical_equiv_position_error() const;
+
+	void set_horizontal_position_error(units::length t) noexcept
 	{
-		return horizontal_position_error_;
-	}
-	decltype(horizontal_position_error_unit_) get_horizontal_position_error_unit() const
-	{
-		return horizontal_position_error_unit_;
-	}
-	decltype(vertical_position_error_) get_vertical_position_error() const
-	{
-		return vertical_position_error_;
-	}
-	decltype(vertical_position_error_unit_) get_vertical_position_error_unit() const
-	{
-		return vertical_position_error_unit_;
-	}
-	decltype(overall_spherical_equiv_position_error_)
-	get_overall_spherical_equiv_position_error() const
-	{
-		return overall_spherical_equiv_position_error_;
-	}
-	decltype(overall_spherical_equiv_position_error_unit_)
-	get_overall_spherical_equiv_position_error_unit() const
-	{
-		return overall_spherical_equiv_position_error_unit_;
+		horizontal_position_error_ = t.get<units::meters>();
 	}
 
-	void set_horizontal_position_error(double t) noexcept { horizontal_position_error_ = t; }
-	void set_vertical_position_error(double t) noexcept { vertical_position_error_ = t; }
-	void set_overall_spherical_equiv_position_error(double t) noexcept
+	void set_vertical_position_error(units::length t) noexcept
 	{
-		overall_spherical_equiv_position_error_ = t;
+		vertical_position_error_ = t.get<units::meters>();
+	}
+
+	void set_overall_spherical_equiv_position_error(units::length t) noexcept
+	{
+		overall_spherical_equiv_position_error_ = t.get<units::meters>();
 	}
 };
 }

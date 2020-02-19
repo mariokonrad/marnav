@@ -1,5 +1,6 @@
 #include <marnav/nmea/bww.hpp>
 #include <marnav/nmea/io.hpp>
+#include "checks.hpp"
 
 namespace marnav
 {
@@ -19,32 +20,36 @@ bww::bww(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in bww"};
 
+	utils::optional<reference> bearing_true_ref;
+	utils::optional<reference> bearing_mag_ref;
+
 	read(*(first + 0), bearing_true_);
-	read(*(first + 1), bearing_true_ref_);
-	read(*(first + 2), bearing_mag_);
-	read(*(first + 3), bearing_mag_ref_);
+	read(*(first + 1), bearing_true_ref);
+	read(*(first + 2), bearing_magn_);
+	read(*(first + 3), bearing_mag_ref);
 	read(*(first + 4), waypoint_to_);
 	read(*(first + 5), waypoint_from_);
+
+	check_value(bearing_true_ref, {reference::TRUE}, "");
+	check_value(bearing_mag_ref, {reference::MAGNETIC}, "");
 }
 
 void bww::set_bearing_true(double t) noexcept
 {
 	bearing_true_ = t;
-	bearing_true_ref_ = reference::TRUE;
 }
 
 void bww::set_bearing_mag(double t) noexcept
 {
-	bearing_mag_ = t;
-	bearing_mag_ref_ = reference::MAGNETIC;
+	bearing_magn_ = t;
 }
 
 void bww::append_data_to(std::string & s) const
 {
 	append(s, to_string(bearing_true_));
-	append(s, to_string(bearing_true_ref_));
-	append(s, to_string(bearing_mag_));
-	append(s, to_string(bearing_mag_ref_));
+	append(s, to_string_if(reference::TRUE, bearing_true_));
+	append(s, to_string(bearing_magn_));
+	append(s, to_string_if(reference::MAGNETIC, bearing_magn_));
 	append(s, to_string(waypoint_to_));
 	append(s, to_string(waypoint_from_));
 }

@@ -1,10 +1,11 @@
-#ifndef MARNAV__NMEA__MOB__HPP
-#define MARNAV__NMEA__MOB__HPP
+#ifndef MARNAV_NMEA_MOB_HPP
+#define MARNAV_NMEA_MOB_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/date.hpp>
 #include <marnav/nmea/time.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/mmsi.hpp>
 #include <marnav/utils/optional.hpp>
 
@@ -54,7 +55,8 @@ namespace nmea
 ///     - 2..5 = Reserved
 ///     - 6 = Error
 ///
-/// Source: https://www.nmea.org/Assets/21030814%20nmea%200183_man%20overboard%20notification_mob_sentence%20amendment.pdf
+/// Source:
+/// https://www.nmea.org/Assets/21030814%20nmea%200183_man%20overboard%20notification_mob_sentence%20amendment.pdf
 ///
 class mob : public sentence
 {
@@ -110,21 +112,21 @@ private:
 	geo::longitude lon_;
 	direction lon_hem_ = direction::east;
 	double cog_ = 0.0; // degrees true
-	double sog_ = 0.0;
+	units::knots sog_;
 	uint64_t mmsi_ = 0u;
 	battery_status battery_status_ = battery_status::error;
 
 public:
-	decltype(emitter_id_) get_emitter_id() const { return emitter_id_; }
+	utils::optional<std::string> get_emitter_id() const { return emitter_id_; }
 	mob_status get_mob_status() const { return mob_status_; }
-	decltype(mob_activation_utc_) get_mob_activation_utc() const { return mob_activation_utc_; }
+	nmea::time get_mob_activation_utc() const { return mob_activation_utc_; }
 	mob_position_source get_mob_position_source() const { return mob_position_source_; }
-	decltype(position_date_) get_position_date() const { return position_date_; }
-	decltype(position_utc_) get_position_time() const { return position_utc_; }
+	nmea::date get_position_date() const { return position_date_; }
+	nmea::time get_position_time() const { return position_utc_; }
 	geo::latitude get_lat() const;
 	geo::longitude get_lon() const;
-	decltype(cog_) get_cog() const { return cog_; }
-	decltype(sog_) get_sog() const { return sog_; }
+	double get_cog() const { return cog_; }
+	units::velocity get_sog() const { return {sog_}; }
 	utils::mmsi get_mmsi() const;
 	battery_status get_battery_status() const { return battery_status_; }
 
@@ -137,7 +139,7 @@ public:
 	void set_lat(const geo::latitude &);
 	void set_lon(const geo::longitude &);
 	void set_cog(double t) noexcept { cog_ = t; }
-	void set_sog(double t) noexcept { sog_ = t; }
+	void set_sog(units::velocity t) noexcept { sog_ = t.get<units::knots>(); }
 	void set_mmsi(const utils::mmsi &);
 	void set_battery_status(battery_status t) noexcept { battery_status_ = t; }
 };

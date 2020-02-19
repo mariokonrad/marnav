@@ -49,7 +49,7 @@ TEST_F(Test_nmea_wcv, empty_to_string)
 TEST_F(Test_nmea_wcv, set_speed)
 {
 	nmea::wcv wcv;
-	wcv.set_speed(12.3);
+	wcv.set_speed(units::knots{12.3});
 
 	EXPECT_STREQ("$GPWCV,12.3,N,*29", nmea::to_string(wcv).c_str());
 }

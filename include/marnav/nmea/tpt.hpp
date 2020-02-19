@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__TPT__HPP
-#define MARNAV__NMEA__TPT__HPP
+#ifndef MARNAV_NMEA_TPT_HPP
+#define MARNAV_NMEA_TPT_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -45,30 +46,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	double range_ = 0.0;
-	unit::distance range_unit_ = unit::distance::meter;
+	units::meters range_;
 	double bearing_ = 0.0;
-	double depth_ = 0.0;
-	unit::distance depth_unit_ = unit::distance::meter;
+	units::meters depth_;
 
 public:
-	decltype(range_) get_range() const { return range_; }
-	decltype(range_unit_) get_range_unit() const { return range_unit_; }
-	decltype(bearing_) get_bearing() const { return bearing_; }
-	decltype(depth_) get_depth() const { return depth_; }
-	decltype(depth_unit_) get_depth_unit() const { return depth_unit_; }
+	units::length get_range() const { return range_; }
+	double get_bearing() const { return bearing_; }
+	units::length get_depth() const { return depth_; }
 
-	void set_range(double t) noexcept
-	{
-		range_ = t;
-		range_unit_ = unit::distance::meter;
-	}
+	void set_range(units::length t) noexcept { range_ = t.get<units::meters>(); }
 	void set_bearing(double t) noexcept { bearing_ = t; }
-	void set_depth(double t) noexcept
-	{
-		depth_ = t;
-		range_unit_ = unit::distance::meter;
-	}
+	void set_depth(units::length t) noexcept { depth_ = t.get<units::meters>(); }
 };
 }
 }

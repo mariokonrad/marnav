@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__MWD__HPP
-#define MARNAV__NMEA__MWD__HPP
+#ifndef MARNAV_NMEA_MWD_HPP
+#define MARNAV_NMEA_MWD_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -52,28 +53,20 @@ protected:
 
 private:
 	utils::optional<double> direction_true_;
-	utils::optional<reference> direction_true_ref_;
 	utils::optional<double> direction_mag_;
-	utils::optional<reference> direction_mag_ref_;
-	utils::optional<double> speed_kn_;
-	utils::optional<unit::velocity> speed_kn_unit_;
-	utils::optional<double> speed_ms_;
-	utils::optional<unit::velocity> speed_ms_unit_;
+	utils::optional<units::knots> speed_kn_;
+	utils::optional<units::meters_per_second> speed_ms_;
 
 public:
-	decltype(direction_true_) get_direction_true() const { return direction_true_; }
-	decltype(direction_true_ref_) get_direction_true_ref() const { return direction_true_ref_; }
-	decltype(direction_mag_) get_direction_mag() const { return direction_mag_; }
-	decltype(direction_mag_ref_) get_direction_mag_ref() const { return direction_mag_ref_; }
-	decltype(speed_kn_) get_speed_kn() const { return speed_kn_; }
-	decltype(speed_kn_unit_) get_speed_kn_unit() const { return speed_kn_unit_; }
-	decltype(speed_ms_) get_speed_ms() const { return speed_ms_; }
-	decltype(speed_ms_unit_) get_speed_ms_unit() const { return speed_ms_unit_; }
+	utils::optional<double> get_direction_true() const { return direction_true_; }
+	utils::optional<double> get_direction_mag() const { return direction_mag_; }
+	utils::optional<units::velocity> get_speed_kn() const;
+	utils::optional<units::velocity> get_speed_ms() const;
 
 	void set_direction_true(double t) noexcept;
 	void set_direction_mag(double t) noexcept;
-	void set_speed_knots(double t) noexcept;
-	void set_speed_mps(double t) noexcept;
+	void set_speed_knots(units::velocity t) noexcept;
+	void set_speed_mps(units::velocity t) noexcept;
 };
 }
 }

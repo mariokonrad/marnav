@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__WPL__HPP
-#define MARNAV__NMEA__WPL__HPP
+#ifndef MARNAV_NMEA_WPL_HPP
+#define MARNAV_NMEA_WPL_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/angle.hpp>
@@ -55,7 +55,7 @@ private:
 	utils::optional<waypoint> waypoint_id_;
 
 public:
-	decltype(waypoint_id_) get_waypoint_id() const { return waypoint_id_; }
+	utils::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
 
 	utils::optional<geo::longitude> get_lon() const;
 	utils::optional<geo::latitude> get_lat() const;

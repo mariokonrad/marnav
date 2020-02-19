@@ -49,7 +49,7 @@ TEST_F(Test_nmea_pgrme, empty_to_string)
 TEST_F(Test_nmea_pgrme, set_horizontal_position_error)
 {
 	nmea::pgrme pgrme;
-	pgrme.set_horizontal_position_error(1.1);
+	pgrme.set_horizontal_position_error(units::meters{1.1});
 
 	EXPECT_STREQ("$PGRME,1.1,M,,M,,M*2E", nmea::to_string(pgrme).c_str());
 }
@@ -57,7 +57,7 @@ TEST_F(Test_nmea_pgrme, set_horizontal_position_error)
 TEST_F(Test_nmea_pgrme, set_vertical_position_error)
 {
 	nmea::pgrme pgrme;
-	pgrme.set_vertical_position_error(2.2);
+	pgrme.set_vertical_position_error(units::meters{2.2});
 
 	EXPECT_STREQ("$PGRME,,M,2.2,M,,M*2E", nmea::to_string(pgrme).c_str());
 }
@@ -65,7 +65,7 @@ TEST_F(Test_nmea_pgrme, set_vertical_position_error)
 TEST_F(Test_nmea_pgrme, set_overall_spherical_equiv_position_error)
 {
 	nmea::pgrme pgrme;
-	pgrme.set_overall_spherical_equiv_position_error(3.3);
+	pgrme.set_overall_spherical_equiv_position_error(units::meters{3.3});
 
 	EXPECT_STREQ("$PGRME,,M,,M,3.3,M*2E", nmea::to_string(pgrme).c_str());
 }

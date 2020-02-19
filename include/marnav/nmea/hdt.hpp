@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__HDT__HPP
-#define MARNAV__NMEA__HDT__HPP
+#ifndef MARNAV_NMEA_HDT_HPP
+#define MARNAV_NMEA_HDT_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -47,8 +47,8 @@ private:
 	utils::optional<reference> heading_true_;
 
 public:
-	decltype(heading_) get_heading() const { return heading_; }
-	decltype(heading_true_) get_heading_true() const { return heading_true_; }
+	utils::optional<double> get_heading() const { return heading_; }
+	utils::optional<reference> get_heading_true() const { return heading_true_; }
 
 	void set_heading(double t) noexcept;
 };

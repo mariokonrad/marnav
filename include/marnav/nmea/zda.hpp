@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__ZDA__HPP
-#define MARNAV__NMEA__ZDA__HPP
+#ifndef MARNAV_NMEA_ZDA_HPP
+#define MARNAV_NMEA_ZDA_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/date.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/utils/optional.hpp>
 
@@ -47,27 +48,19 @@ protected:
 
 private:
 	utils::optional<nmea::time> time_utc_;
-	utils::optional<uint32_t> day_;
-	utils::optional<uint32_t> month_;
-	utils::optional<uint32_t> year_;
+	utils::optional<nmea::date> date_;
 	utils::optional<int32_t> local_zone_hours_;
 	utils::optional<int32_t> local_zone_minutes_;
 
 public:
-	decltype(time_utc_) get_time_utc() const { return time_utc_; }
-	decltype(day_) get_day() const { return day_; }
-	decltype(month_) get_month() const { return month_; }
-	decltype(year_) get_year() const { return year_; }
-	decltype(local_zone_hours_) get_local_zone_hours() const { return local_zone_hours_; }
-	decltype(local_zone_minutes_) get_local_zone_minutes() const { return local_zone_minutes_; }
+	utils::optional<nmea::time> get_time_utc() const { return time_utc_; }
+	utils::optional<nmea::date> get_date() const { return date_; }
+	utils::optional<int32_t> get_local_zone_hours() const { return local_zone_hours_; }
+	utils::optional<int32_t> get_local_zone_minutes() const { return local_zone_minutes_; }
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
-	void set_date(uint32_t y, uint32_t m, uint32_t d) noexcept
-	{
-		year_ = y;
-		month_ = m;
-		day_ = d;
-	}
+	void set_date(const nmea::date & d) noexcept { date_ = d; }
+
 	void set_local_zone(int32_t h, int32_t m) noexcept
 	{
 		local_zone_hours_ = h;

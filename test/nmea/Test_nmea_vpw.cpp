@@ -5,7 +5,6 @@
 
 namespace
 {
-
 using namespace marnav;
 
 class Test_nmea_vpw : public ::testing::Test
@@ -49,7 +48,7 @@ TEST_F(Test_nmea_vpw, empty_to_string)
 TEST_F(Test_nmea_vpw, set_speed_knots)
 {
 	nmea::vpw vpw;
-	vpw.set_speed_knots(4.5);
+	vpw.set_speed_knots(units::knots{4.5});
 
 	EXPECT_STREQ("$IIVPW,4.5,N,,*30", nmea::to_string(vpw).c_str());
 }
@@ -57,7 +56,7 @@ TEST_F(Test_nmea_vpw, set_speed_knots)
 TEST_F(Test_nmea_vpw, set_speed_mps)
 {
 	nmea::vpw vpw;
-	vpw.set_speed_mps(4.5);
+	vpw.set_speed_mps(units::meters_per_second{4.5});
 
 	EXPECT_STREQ("$IIVPW,,,4.5,M*33", nmea::to_string(vpw).c_str());
 }

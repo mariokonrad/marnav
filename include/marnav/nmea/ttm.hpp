@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__TTM__HPP
-#define MARNAV__NMEA__TTM__HPP
+#ifndef MARNAV_NMEA_TTM_HPP
+#define MARNAV_NMEA_TTM_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -74,25 +74,22 @@ private:
 	utils::optional<char> reference_target_;
 
 public:
-	decltype(target_number_) get_target_number() const { return target_number_; }
-	decltype(target_distance_) get_target_distance() const { return target_distance_; }
-	decltype(bearing_from_ownship_) get_bearing_from_ownship() const
-	{
-		return bearing_from_ownship_;
-	}
-	decltype(bearing_from_ownship_ref_) get_bearing_from_ownship_ref() const
+	utils::optional<uint32_t> get_target_number() const { return target_number_; }
+	utils::optional<double> get_target_distance() const { return target_distance_; }
+	utils::optional<double> get_bearing_from_ownship() const { return bearing_from_ownship_; }
+	utils::optional<reference> get_bearing_from_ownship_ref() const
 	{
 		return bearing_from_ownship_ref_;
 	}
-	decltype(target_speed_) get_target_speed() const { return target_speed_; }
-	decltype(target_course_) get_target_course() const { return target_course_; }
-	decltype(target_course_ref_) get_target_course_ref() const { return target_course_ref_; }
-	decltype(distance_cpa_) get_distance_cpa() const { return distance_cpa_; }
-	decltype(tcpa_) get_tcpa() const { return tcpa_; }
-	decltype(unknown_) get_unknown() const { return unknown_; }
-	decltype(target_name_) get_target_name() const { return target_name_; }
-	decltype(target_status_) get_target_status() const { return target_status_; }
-	decltype(reference_target_) get_reference_target() const { return reference_target_; }
+	utils::optional<double> get_target_speed() const { return target_speed_; }
+	utils::optional<double> get_target_course() const { return target_course_; }
+	utils::optional<reference> get_target_course_ref() const { return target_course_ref_; }
+	utils::optional<double> get_distance_cpa() const { return distance_cpa_; }
+	utils::optional<double> get_tcpa() const { return tcpa_; }
+	utils::optional<char> get_unknown() const { return unknown_; }
+	utils::optional<std::string> get_target_name() const { return target_name_; }
+	utils::optional<char> get_target_status() const { return target_status_; }
+	utils::optional<char> get_reference_target() const { return reference_target_; }
 
 	void set_target_number(uint32_t t) noexcept { target_number_ = t; }
 	void set_target_distance(double t) noexcept { target_distance_ = t; }

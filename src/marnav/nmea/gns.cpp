@@ -29,7 +29,7 @@ gns::gns(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 6), number_of_satellites_);
 	read(*(first + 7), hdrop_);
 	read(*(first + 8), antenna_altitude_);
-	read(*(first + 9), geodial_sepration_);
+	read(*(first + 9), geodial_separation_);
 	read(*(first + 10), age_of_differential_data_);
 	read(*(first + 11), differential_ref_station_id_);
 
@@ -67,6 +67,20 @@ void gns::set_mode_indicator(const std::string & t)
 	mode_ind_ = t;
 }
 
+utils::optional<units::length> gns::get_antenna_altitude() const
+{
+	if (!antenna_altitude_)
+		return {};
+	return {*antenna_altitude_};
+}
+
+utils::optional<units::length> gns::get_geodial_separation() const
+{
+	if (!geodial_separation_)
+		return {};
+	return {*geodial_separation_};
+}
+
 void gns::append_data_to(std::string & s) const
 {
 	append(s, to_string(time_utc_));
@@ -78,7 +92,7 @@ void gns::append_data_to(std::string & s) const
 	append(s, to_string(number_of_satellites_));
 	append(s, to_string(hdrop_));
 	append(s, to_string(antenna_altitude_));
-	append(s, to_string(geodial_sepration_));
+	append(s, to_string(geodial_separation_));
 	append(s, to_string(age_of_differential_data_));
 	append(s, to_string(differential_ref_station_id_));
 }

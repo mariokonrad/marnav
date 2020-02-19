@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__HDG__HPP
-#define MARNAV__NMEA__HDG__HPP
+#ifndef MARNAV_NMEA_HDG_HPP
+#define MARNAV_NMEA_HDG_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -53,11 +53,11 @@ private:
 	utils::optional<direction> magn_var_hem_; // E:east, W:west
 
 public:
-	decltype(heading_) get_heading() const { return heading_; }
-	decltype(magn_dev_) get_magn_dev() const { return magn_dev_; }
-	decltype(magn_dev_hem_) get_magn_dev_hem() const { return magn_dev_hem_; }
-	decltype(magn_var_) get_magn_var() const { return magn_var_; }
-	decltype(magn_var_hem_) get_magn_var_hem() const { return magn_var_hem_; }
+	utils::optional<double> get_heading() const { return heading_; }
+	utils::optional<double> get_magn_dev() const { return magn_dev_; }
+	utils::optional<direction> get_magn_dev_hem() const { return magn_dev_hem_; }
+	utils::optional<double> get_magn_var() const { return magn_var_; }
+	utils::optional<direction> get_magn_var_hem() const { return magn_var_hem_; }
 
 	void set_heading(double t) noexcept { heading_ = t; }
 	void set_magn_dev(double deg, direction hem);

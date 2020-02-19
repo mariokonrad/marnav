@@ -65,7 +65,7 @@ TEST_F(Test_nmea_mwd, set_direction_mag)
 TEST_F(Test_nmea_mwd, set_speed_knot)
 {
 	nmea::mwd mwd;
-	mwd.set_speed_knots(12.3);
+	mwd.set_speed_knots(marnav::units::knots{12.3});
 
 	EXPECT_STREQ("$WIMWD,,,,,12.3,N,,*10", nmea::to_string(mwd).c_str());
 }
@@ -73,7 +73,7 @@ TEST_F(Test_nmea_mwd, set_speed_knot)
 TEST_F(Test_nmea_mwd, set_speed_mps)
 {
 	nmea::mwd mwd;
-	mwd.set_speed_mps(12.3);
+	mwd.set_speed_mps(marnav::units::meters_per_second{12.3});
 
 	EXPECT_STREQ("$WIMWD,,,,,,,12.3,M*13", nmea::to_string(mwd).c_str());
 }

@@ -147,4 +147,34 @@ TEST_F(Test_nmea_rmc, set_lon_west)
 
 	EXPECT_STREQ("$GPRMC,,,,,12345.9333,W,,,,,,*09", nmea::to_string(rmc).c_str());
 }
+
+TEST_F(Test_nmea_rmc, set_sog)
+{
+	{
+		nmea::rmc rmc;
+		rmc.set_sog(marnav::units::knots{4});
+
+		EXPECT_STREQ("$GPRMC,,,,,,,4,,,,,*7F", nmea::to_string(rmc).c_str());
+	}
+	{
+		nmea::rmc rmc;
+		rmc.set_sog(marnav::units::knots{4.5});
+
+		EXPECT_STREQ("$GPRMC,,,,,,,4.5,,,,,*64", nmea::to_string(rmc).c_str());
+	}
+}
+
+TEST_F(Test_nmea_rmc, get_sog)
+{
+	auto s = nmea::make_sentence("$GPRMC,,,,,,,4.5,,,,,*64");
+	ASSERT_NE(nullptr, s);
+
+	auto rmc = nmea::sentence_cast<nmea::rmc>(s);
+	ASSERT_NE(nullptr, rmc);
+
+	auto sog = rmc->get_sog();
+	ASSERT_TRUE(sog.available());
+
+	EXPECT_NEAR(4.5, sog->get<marnav::units::knots>().value(), 1e-8);
+}
 }

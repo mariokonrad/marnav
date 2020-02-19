@@ -18,6 +18,5 @@ int main(int, char **)
 	std::cout << "time     :        " << to_string(rmc->get_time_utc()) << "\n";
 	std::cout << "status   :               " << to_string(rmc->get_status()) << "\n";
 	std::cout << "latitude :                 " << to_string(rmc->get_lat()) << "\n";
-	std::cout << "longitude:                             " << to_string(rmc->get_lon())
-			  << "\n";
+	std::cout << "longitude:                             " << to_string(rmc->get_lon()) << "\n";
 }

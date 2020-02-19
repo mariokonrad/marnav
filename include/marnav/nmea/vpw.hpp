@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__VPW__HPP
-#define MARNAV__NMEA__VPW__HPP
+#ifndef MARNAV_NMEA_VPW_HPP
+#define MARNAV_NMEA_VPW_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -44,25 +45,15 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> speed_knots_; // negative means downwind
-	utils::optional<unit::velocity> speed_knots_unit_;
-	utils::optional<double> speed_meters_per_second_; // negative means downwind
-	utils::optional<unit::velocity> speed_meters_per_second_unit_;
+	utils::optional<units::knots> speed_knots_; // negative means downwind
+	utils::optional<units::meters_per_second> speed_mps_; // negative means downwind
 
 public:
-	decltype(speed_knots_) get_speed_knots() const { return speed_knots_; }
-	decltype(speed_knots_unit_) get_speed_knots_unit() const { return speed_knots_unit_; }
-	decltype(speed_meters_per_second_) get_speed_meters_per_second() const
-	{
-		return speed_meters_per_second_;
-	}
-	decltype(speed_meters_per_second_unit_) get_speed_meters_per_second_unit() const
-	{
-		return speed_meters_per_second_unit_;
-	}
+	utils::optional<units::knots> get_speed_knots() const;
+	utils::optional<units::meters_per_second> get_speed_meters_per_second() const;
 
-	void set_speed_knots(double t) noexcept;
-	void set_speed_mps(double t) noexcept;
+	void set_speed_knots(units::velocity t) noexcept;
+	void set_speed_mps(units::velocity t) noexcept;
 };
 }
 }

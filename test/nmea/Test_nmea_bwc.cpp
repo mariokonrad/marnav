@@ -100,7 +100,15 @@ TEST_F(Test_nmea_bwc, set_bearing_mag)
 TEST_F(Test_nmea_bwc, set_distance)
 {
 	nmea::bwc bwc;
-	bwc.set_distance(100);
+	bwc.set_distance(units::nautical_miles{100});
+
+	EXPECT_STREQ("$GPBWC,,,,,,,,,,100,N,,*12", nmea::to_string(bwc).c_str());
+}
+
+TEST_F(Test_nmea_bwc, set_distance_different_unit)
+{
+	nmea::bwc bwc;
+	bwc.set_distance(units::meters{100 * 1852.0});
 
 	EXPECT_STREQ("$GPBWC,,,,,,,,,,100,N,,*12", nmea::to_string(bwc).c_str());
 }

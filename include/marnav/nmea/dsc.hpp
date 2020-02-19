@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__DSC__HPP
-#define MARNAV__NMEA__DSC__HPP
+#ifndef MARNAV_NMEA_DSC_HPP
+#define MARNAV_NMEA_DSC_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/utils/optional.hpp>
@@ -127,12 +127,12 @@ private:
 	extension_indicator extension_ = extension_indicator::none;
 
 public:
-	decltype(fmt_spec_) get_fmt_spec() const { return fmt_spec_; }
-	decltype(cat_) get_cat() const { return cat_; }
+	format_specifier get_fmt_spec() const { return fmt_spec_; }
+	category get_cat() const { return cat_; }
 	utils::mmsi get_mmsi() const;
 	geo::region get_geographical_area() const;
-	decltype(ack_) get_ack() const { return ack_; }
-	decltype(extension_) get_extension() const { return extension_; }
+	acknowledgement get_ack() const { return ack_; }
+	extension_indicator get_extension() const { return extension_; }
 
 	// TODO: implemente setters
 };

@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__DPT__HPP
-#define MARNAV__NMEA__DPT__HPP
+#ifndef MARNAV_NMEA_DPT_HPP
+#define MARNAV_NMEA_DPT_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -45,21 +46,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	double depth_meter_ = 0.0;
-	double transducer_offset_ = 0.0;
-	utils::optional<double> max_depth_;
+	units::meters depth_meter_ = units::meters{0.0};
+	units::meters transducer_offset_ = units::meters{0.0};
+	utils::optional<units::meters> max_depth_;
 
 public:
-	decltype(depth_meter_) get_depth_meter() const noexcept { return depth_meter_; }
-	decltype(transducer_offset_) get_transducer_offset() const noexcept
-	{
-		return transducer_offset_;
-	}
-	decltype(max_depth_) get_max_depth() const noexcept { return max_depth_; }
+	units::length get_depth_meter() const noexcept { return {depth_meter_}; }
+	units::length get_transducer_offset() const noexcept { return {transducer_offset_}; }
+	utils::optional<units::length> get_max_depth() const noexcept;
 
-	void set_depth_meter(double t) noexcept { depth_meter_ = t; }
-	void set_transducer_offset(double t) noexcept { transducer_offset_ = t; }
-	void set_max_depth(double t) noexcept { max_depth_ = t; }
+	void set_depth_meter(units::length t);
+	void set_transducer_offset(units::length t);
+	void set_max_depth(units::length t);
 };
 }
 }

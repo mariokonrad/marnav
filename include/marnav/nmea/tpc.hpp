@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__TPC__HPP
-#define MARNAV__NMEA__TPC__HPP
+#ifndef MARNAV_NMEA_TPC_HPP
+#define MARNAV_NMEA_TPC_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -48,48 +49,26 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	double distance_centerline_ = 0.0;
-	unit::distance distance_centerline_unit_ = unit::distance::meter;
-	double distance_transducer_ = 0.0;
-	unit::distance distance_transducer_unit_ = unit::distance::meter;
-	double depth_ = 0.0;
-	unit::distance depth_unit_ = unit::distance::meter;
+	units::meters distance_centerline_;
+	units::meters distance_transducer_;
+	units::meters depth_;
 
 public:
-	decltype(distance_centerline_) get_distance_centerline() const
-	{
-		return distance_centerline_;
-	}
-	decltype(distance_centerline_unit_) get_distance_centerline_unit() const
-	{
-		return distance_centerline_unit_;
-	}
-	decltype(distance_transducer_) get_distance_transducer() const
-	{
-		return distance_transducer_;
-	}
-	decltype(distance_transducer_unit_) get_distance_transducer_unit() const
-	{
-		return distance_transducer_unit_;
-	}
-	decltype(depth_) get_depth() const { return depth_; }
-	decltype(depth_unit_) get_depth_unit() const { return depth_unit_; }
+	units::length get_distance_centerline() const { return {distance_centerline_}; }
+	units::length get_distance_transducer() const { return {distance_transducer_}; }
+	units::length get_depth() const { return {depth_}; }
 
-	void set_distance_centerline(double t) noexcept
+	void set_distance_centerline(units::length t) noexcept
 	{
-		distance_centerline_ = t;
-		distance_centerline_unit_ = unit::distance::meter;
+		distance_centerline_ = t.get<units::meters>();
 	}
-	void set_distance_transducer(double t) noexcept
+
+	void set_distance_transducer(units::length t) noexcept
 	{
-		distance_transducer_ = t;
-		distance_centerline_unit_ = unit::distance::meter;
+		distance_transducer_ = t.get<units::meters>();
 	}
-	void set_depth(double t) noexcept
-	{
-		depth_ = t;
-		distance_centerline_unit_ = unit::distance::meter;
-	}
+
+	void set_depth(units::length t) noexcept { depth_ = t.get<units::meters>(); }
 };
 }
 }

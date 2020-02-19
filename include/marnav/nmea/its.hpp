@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__ITS__HPP
-#define MARNAV__NMEA__ITS__HPP
+#ifndef MARNAV_NMEA_ITS_HPP
+#define MARNAV_NMEA_ITS_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -40,18 +41,12 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	double distance_ = 0.0;
-	unit::distance distance_unit_ = unit::distance::meter;
+	units::meters distance_;
 
 public:
-	decltype(distance_) get_distance() const { return distance_; }
-	decltype(distance_unit_) get_distance_unit() const { return distance_unit_; }
+	units::length get_distance() const { return {distance_}; }
 
-	void set_distance(double t) noexcept
-	{
-		distance_ = t;
-		distance_unit_ = unit::distance::meter;
-	};
+	void set_distance(units::length t) noexcept { distance_ = t.get<units::meters>(); };
 };
 }
 }

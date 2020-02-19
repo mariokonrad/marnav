@@ -18,8 +18,9 @@ static std::string conv_depth_below_transducer(const seatalk::message & msg)
 	const auto & m = message_cast<message_00>(msg);
 
 	nmea::dpt dpt;
-	dpt.set_depth_meter(m.get_depth_meters());
-	dpt.set_transducer_offset(0.0);
+	// TODO: explicit type unnecessary once seatalk is also using units
+	dpt.set_depth_meter(units::meters{m.get_depth_meters()});
+	dpt.set_transducer_offset(units::meters{0.0});
 	return nmea::to_string(dpt);
 }
 }

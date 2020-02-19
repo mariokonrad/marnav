@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__OSD__HPP
-#define MARNAV__NMEA__OSD__HPP
+#ifndef MARNAV_NMEA_OSD_HPP
+#define MARNAV_NMEA_OSD_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -23,12 +24,23 @@ namespace nmea
 ///    - V = Invalid
 /// 3. Vessel Course, degrees True
 /// 4. Course Reference
-///    - T = True
+///    - B
+///    - M
+///    - W
+///    - R
+///    - P
 /// 5. Vessel Speed
-/// 6. Speed Unit
+/// 6. Speed Reference
+///    - B
+///    - M
+///    - W
+///    - R
+///    - P
 /// 7. Vessel Set, degrees True
-/// 8. Vessel drift (speed)
+/// 8. Vessel drift speed
 /// 9. Speed Units
+///    - K = Kilometers per hour
+///    - N = Knots
 ///
 class osd : public sentence
 {
@@ -54,28 +66,30 @@ private:
 	utils::optional<double> course_; // degrees true
 	utils::optional<reference> course_ref_;
 	utils::optional<double> speed_;
-	utils::optional<unit::velocity> speed_unit_;
+	utils::optional<char> speed_ref_;
 	utils::optional<double> vessel_set_; // degrees true
 	utils::optional<double> vessel_drift_; // (speed)
-	utils::optional<unit::velocity> vessel_drift_unit_;
+	utils::optional<unit::velocity> speed_unit_;
 
 public:
-	decltype(heading_) get_heading() const { return heading_; }
-	decltype(data_valid_) get_data_valid() const { return data_valid_; }
-	decltype(course_) get_course() const { return course_; }
-	decltype(course_ref_) get_course_ref() const { return course_ref_; }
-	decltype(speed_) get_speed() const { return speed_; }
-	decltype(speed_unit_) get_speed_unit() const { return speed_unit_; }
-	decltype(vessel_set_) get_vessel_set() const { return vessel_set_; }
-	decltype(vessel_drift_) get_vessel_drift() const { return vessel_drift_; }
-	decltype(vessel_drift_unit_) get_vessel_drift_unit() const { return vessel_drift_unit_; }
+	utils::optional<double> get_heading() const { return heading_; }
+	utils::optional<status> get_data_valid() const { return data_valid_; }
+	utils::optional<double> get_course() const { return course_; }
+	utils::optional<reference> get_course_ref() const { return course_ref_; }
+	utils::optional<double> get_speed() const { return speed_; }
+	utils::optional<char> get_speed_ref() const { return speed_ref_; }
+	utils::optional<double> get_vessel_set() const { return vessel_set_; }
+	utils::optional<double> get_vessel_drift() const { return vessel_drift_; }
+	utils::optional<unit::velocity> get_speed_unit() const { return speed_unit_; }
 
 	void set_heading(double t) noexcept { heading_ = t; }
 	void set_data_valid(status t) noexcept { data_valid_ = t; }
 	void set_course(double t) noexcept;
-	void set_speed(double t, unit::velocity u) noexcept;
+	void set_speed(double t) noexcept;
+	void set_speed_ref(char t) noexcept { speed_ref_ = t; }
 	void set_vessel_set(double t) noexcept { vessel_set_ = t; }
-	void set_drift(double t, unit::velocity u) noexcept;
+	void set_drift(double t) noexcept;
+	void set_speed_unit(unit::velocity u) noexcept;
 };
 }
 }

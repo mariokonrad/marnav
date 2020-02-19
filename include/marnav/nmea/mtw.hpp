@@ -1,7 +1,8 @@
-#ifndef MARNAV__NMEA__MTW__HPP
-#define MARNAV__NMEA__MTW__HPP
+#ifndef MARNAV_NMEA_MTW_HPP
+#define MARNAV_NMEA_MTW_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
 
 namespace marnav
@@ -40,14 +41,12 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> temperature_; // water temperature
-	utils::optional<unit::temperature> temperature_unit_; // unit degrees, C:celcius
+	units::celsius temperature_; // water temperature
 
 public:
-	decltype(temperature_) get_temperature() const { return temperature_; }
-	decltype(temperature_unit_) get_temperature_unit() const { return temperature_unit_; }
+	units::temperature get_temperature() const { return {temperature_}; }
 
-	void set_temperature(double t) noexcept;
+	void set_temperature(units::temperature t) noexcept;
 };
 }
 }

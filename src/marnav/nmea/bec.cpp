@@ -84,11 +84,11 @@ void bec::set_bearing_magn(double t)
 	bearing_magn_ = t;
 }
 
-void bec::set_distance(double t)
+void bec::set_distance(units::length t)
 {
-	if (t < 0.0)
+	if (t.value() < 0.0)
 		throw std::invalid_argument{"distance less than zero"};
-	distance_ = t;
+	distance_ = t.get<units::nautical_miles>();
 }
 
 void bec::append_data_to(std::string & s) const

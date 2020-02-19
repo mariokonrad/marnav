@@ -36,6 +36,8 @@ target_sources(testrunner
 		geo/Test_geo_cpa.cpp
 		geo/Test_geo_geodesic.cpp
 		geo/Test_geo_region.cpp
+		math/floatingpoint.cpp
+		math/floatingpoint_ulps.cpp
 		math/Test_math_floatingpoint.cpp
 		math/Test_math_matrix.cpp
 		math/Test_math_quaternion.cpp
@@ -164,6 +166,19 @@ target_sources(testrunner
 		seatalk/Test_seatalk_message_86.cpp
 		seatalk/Test_seatalk_message_87.cpp
 		seatalk/Test_seatalk_message_89.cpp
+		units/detail/basic_quantity_cmp.cpp
+		units/detail/basic_quantity.cpp
+		units/detail/basic_quantity_fnc.cpp
+		units/detail/basic_quantity_ops.cpp
+		units/detail/basic_unit_cmp.cpp
+		units/detail/basic_unit.cpp
+		units/detail/basic_unit_fnc.cpp
+		units/detail/basic_unit_ops.cpp
+		units/detail/dimension.cpp
+		units/detail/units.cpp
+		units/Test_basic_unit.cpp
+		units/Test_basic_quantity.cpp
+		units/Test_custom_numeric_type.cpp
 		utils/Test_utils_bitset.cpp
 		utils/Test_utils_mmsi.cpp
 		utils/Test_utils_mmsi_country.cpp
@@ -182,7 +197,7 @@ target_include_directories(testrunner
 	PRIVATE
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/../src>
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../src>
+		$<BUILD_INTERFACE:${CMAKE_HOME_DIRECTORY}/src>
 	)
 
 target_link_libraries(testrunner
@@ -216,7 +231,7 @@ add_executable(test-ais-sample
 	)
 
 target_include_directories(test-ais-sample
-	PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../src>)
+	PRIVATE $<BUILD_INTERFACE:${CMAKE_HOME_DIRECTORY}/src>)
 
 target_link_libraries(test-ais-sample PRIVATE marnav::marnav)
 
@@ -234,7 +249,7 @@ execute_process(
 add_executable(test-nmea-sample test-nmea-sample.cpp)
 
 target_include_directories(test-nmea-sample
-	PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../src>)
+	PRIVATE $<BUILD_INTERFACE:${CMAKE_HOME_DIRECTORY}/src>)
 
 target_link_libraries(test-nmea-sample PRIVATE marnav::marnav)
 

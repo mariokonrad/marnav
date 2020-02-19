@@ -14,6 +14,9 @@ map <F4> :grep -Ernw --include=*.c* --include=*.h* <cword> src include test <Bar
 " tags
 set tags+=.ctags/tags,build/tags
 
+" path
+set path+=**
+
 " cctree command
 command! CTL silent CCTreeLoadDB build/cscope.out
 

@@ -30,13 +30,8 @@ TEST_F(Test_nmea_mtw, parse)
 	auto mtw = nmea::sentence_cast<nmea::mtw>(s);
 	ASSERT_NE(nullptr, mtw);
 
-	auto temperature = mtw->get_temperature();
-	ASSERT_TRUE(temperature.available());
+	auto temperature = mtw->get_temperature().get<marnav::units::celsius>();
 	EXPECT_NEAR(9.5, temperature.value(), 1e-8);
-
-	auto unit = mtw->get_temperature_unit();
-	ASSERT_TRUE(unit.available());
-	EXPECT_EQ(nmea::unit::temperature::celsius, unit.value());
 }
 
 TEST_F(Test_nmea_mtw, parse_invalid_number_of_arguments)
@@ -51,13 +46,13 @@ TEST_F(Test_nmea_mtw, empty_to_string)
 {
 	nmea::mtw mtw;
 
-	EXPECT_STREQ("$IIMTW,,*4E", nmea::to_string(mtw).c_str());
+	EXPECT_STREQ("$IIMTW,0,C*3D", nmea::to_string(mtw).c_str());
 }
 
 TEST_F(Test_nmea_mtw, set_temperature_to_string)
 {
 	nmea::mtw mtw;
-	mtw.set_temperature(22.5);
+	mtw.set_temperature(units::celsius{22.5});
 
 	EXPECT_STREQ("$IIMTW,22.5,C*16", nmea::to_string(mtw).c_str());
 }

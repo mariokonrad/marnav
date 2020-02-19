@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__GRS__HPP
-#define MARNAV__NMEA__GRS__HPP
+#ifndef MARNAV_NMEA_GRS_HPP
+#define MARNAV_NMEA_GRS_HPP
 
 #include <array>
 #include <marnav/nmea/sentence.hpp>
@@ -69,8 +69,8 @@ private:
 	void check_index(int index) const;
 
 public:
-	decltype(time_utc_) get_time_utc() const { return time_utc_; }
-	decltype(usage_) get_usage() const { return usage_; }
+	nmea::time get_time_utc() const { return time_utc_; }
+	residual_usage get_usage() const { return usage_; }
 	utils::optional<double> get_sat_residual(int index) const;
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }

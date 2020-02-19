@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__TLL__HPP
-#define MARNAV__NMEA__TLL__HPP
+#ifndef MARNAV_NMEA_TLL_HPP
+#define MARNAV_NMEA_TLL_HPP
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
@@ -69,11 +69,11 @@ private:
 	utils::optional<char> reference_target_;
 
 public:
-	decltype(number_) get_number() const { return number_; }
-	decltype(name_) get_name() const { return name_; }
-	decltype(time_utc_) get_time_utc() const { return time_utc_; }
-	decltype(status_) get_status() const { return status_; }
-	decltype(reference_target_) get_reference_target() const { return reference_target_; }
+	uint32_t get_number() const { return number_; }
+	waypoint get_name() const { return name_; }
+	nmea::time get_time_utc() const { return time_utc_; }
+	target_status get_status() const { return status_; }
+	utils::optional<char> get_reference_target() const { return reference_target_; }
 
 	geo::longitude get_lon() const;
 	geo::latitude get_lat() const;

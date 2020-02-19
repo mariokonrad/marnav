@@ -5,7 +5,6 @@
 
 namespace
 {
-
 using namespace marnav;
 
 class Test_nmea_vlw : public ::testing::Test
@@ -32,7 +31,7 @@ TEST_F(Test_nmea_vlw, parse)
 
 	auto distance = vlw->get_distance_cum();
 	EXPECT_TRUE(distance.available());
-	EXPECT_NEAR(7803.2, distance.value(), 1e-8);
+	EXPECT_NEAR(7803.2, distance->get<units::nautical_miles>().value(), 1e-8);
 }
 
 TEST_F(Test_nmea_vlw, parse_invalid_number_of_arguments)
@@ -53,7 +52,7 @@ TEST_F(Test_nmea_vlw, empty_to_string)
 TEST_F(Test_nmea_vlw, set_distance_cum_nm)
 {
 	nmea::vlw vlw;
-	vlw.set_distance_cum_nm(123.4);
+	vlw.set_distance_cum_nm(units::nautical_miles{123.4});
 
 	EXPECT_STREQ("$IIVLW,123.4,N,,*29", nmea::to_string(vlw).c_str());
 }
@@ -61,7 +60,7 @@ TEST_F(Test_nmea_vlw, set_distance_cum_nm)
 TEST_F(Test_nmea_vlw, set_distance_reset_nm)
 {
 	nmea::vlw vlw;
-	vlw.set_distance_reset_nm(12.4);
+	vlw.set_distance_reset_nm(units::nautical_miles{12.4});
 
 	EXPECT_STREQ("$IIVLW,,,12.4,N*1A", nmea::to_string(vlw).c_str());
 }
