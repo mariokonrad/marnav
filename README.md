@@ -347,10 +347,6 @@ Compiler:
 - GCC 7
 - GCC 8
 - GCC 9
-- Clang 3.6
-- Clang 3.7
-- Clang 3.8
-- Clang 3.9
 - Clang 4.0
 - Clang 5.0
 - Clang 6.0
@@ -373,7 +369,7 @@ Tools needed to build the documentation:
 Optional used for development:
 - lcov / genhtml, c++filt
 - cppcheck
-- clang-analyze 3.9
+- clang-tools (analyzer)
 - ctags, cscope
 - perf
 
@@ -450,15 +446,8 @@ or individual package types:
 
 ### Static Analysis with Clang
 
-There is a script ```bin/static-analysis-clang``` for doing this, or do it manually:
-
-	mkdir build
-	cd build
-	cmake -DCMAKE_CXX_COMPILER=/usr/share/clang/scan-build-3.9/libexec/c++-analyzer ..
-	scan-build-3.9 -o doc/analysis --use-analyzer=/usr/bin/clang++-3.9 make
-
-After the build, ```scan-build``` will tell you what to do in order to inspect
-the findings.
+There is a script ```bin/static-analysis-clang``` for doing this, there is not yet
+an integration of clang-tidy in the cmake build.
 
 
 ### Perform Benchmarks

@@ -4,7 +4,7 @@ export SCRIPT_BASE=$(dirname `readlink -f $0`)
 export BASE=${SCRIPT_BASE}/..
 export BUILD=${BASE}/build
 
-CLANG_VERSION=3.9
+CLANG_VERSION=9
 CLANG_ANALYZER=/usr/share/clang/scan-build-${CLANG_VERSION}/libexec/c++-analyzer
 CLANG_SCAN_BUILD=/usr/share/clang/scan-build-${CLANG_VERSION}/bin/scan-build
 CLANG_COMPILER=/usr/bin/clang++-${CLANG_VERSION}

@@ -14,10 +14,6 @@ Compiler supported (older/others may work, but not tested):
 - GCC 7
 - GCC 8
 - GCC 9
-- Clang 3.6
-- Clang 3.7
-- Clang 3.8
-- Clang 3.9
 - Clang 4.0
 - Clang 5.0
 - Clang 6.0
@@ -40,7 +36,7 @@ Tools needed to build the documentation:
 optional (used for development only):
 - lcov / genhtml, c++filt
 - cppcheck
-- clang-analyze 3.9
+- clang-tools (analyzer)
 - ctags, cscope
 - perf
 
