@@ -27,7 +27,7 @@ let g:syntastic_enable_signs=1
 
 " gutentatgs
 let g:gutentags_enabled = 1
-let g:gutentags_modules = ['ctags']
+let g:gutentags_modules = ['ctags'] "['ctags', 'cscope']
 let g:gutentags_project_root = ['.git']
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_ctags_extra_args = [
@@ -44,7 +44,8 @@ let g:gutentags_ctags_exclude = [
 	\'extern/**',
 	\'cmake/**',
 	\'bin/**',
-	\'.git',
+	\'.git/**',
+	\'.ctags/**',
 	\'CMakeLists.txt',
 	\'tags',
 	\'*cscope*',
@@ -54,6 +55,8 @@ let g:gutentags_ctags_exclude = [
 	\'*.in'
 	\'*.py'
 	\]
+let g:gutentags_auto_add_cscope = 1
+let g:gutentags_cscope_build_inverted_index = 1
 let g:gutentags_cache_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h') .'/.ctags'
 let g:gutentags_ctags_tagfile = fnamemodify(resolve(expand('<sfile>:p')), ':h') .'/.ctags/tags'
-"let g:gutentags_scopefile = fnamemodify(resolve(expand('<sfile>:p')), ':h') .'/.ctags/cscope.out'
+let g:gutentags_scopefile = fnamemodify(resolve(expand('<sfile>:p')), ':h') .'/.ctags/cscope.out'
