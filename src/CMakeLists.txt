@@ -196,6 +196,19 @@ target_sources(marnav
 		marnav/utils/mmsi_country.cpp
 	)
 
+include(CheckSymbolExists)
+if(APPLE)
+	check_symbol_exists(strtod_l xlocale.h HAVE_STRTOD_L)
+else()
+	check_symbol_exists(strtod_l stdlib.h HAVE_STRTOD_L)
+endif()
+
+if(DEFINED HAVE_STRTOD_L)
+	target_sources(marnav PRIVATE marnav/nmea/io_double_strtodl.cpp)
+else()
+	target_sources(marnav PRIVATE marnav/nmea/io_double_strstream.cpp)
+endif()
+
 install(
 	DIRECTORY
 		${PROJECT_SOURCE_DIR}/include/marnav/ais

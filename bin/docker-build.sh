@@ -17,6 +17,7 @@ supported_compilers=(
 	"clang-6.0.0"
 	"clang-7.1.0"
 	"clang-8.0.0"
+	"clang-9.0.0"
 	)
 supported_build_types=("Debug" "Release")
 name=marnav

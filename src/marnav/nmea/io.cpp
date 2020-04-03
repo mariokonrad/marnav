@@ -6,6 +6,10 @@
 #include <marnav/utils/mmsi.hpp>
 #include <marnav/utils/unused.hpp>
 
+#include <locale>
+#include <sstream>
+#include <iomanip>
+
 namespace marnav
 {
 namespace nmea
@@ -80,16 +84,12 @@ std::string format(double data, unsigned int width, data_format f)
 {
 	utils::unused(f);
 
-	// buffer to hold the resulting string with a static size.
-	// this construct prevents VLA, and should be replaced with C++14 dynarray
-	char buf[32];
-	if (width >= sizeof(buf))
-		throw std::invalid_argument{"width too large in nmea::format"};
-
-	char fmt[8];
-	snprintf(fmt, sizeof(fmt), "%%.%uf", width);
-	snprintf(buf, sizeof(buf), fmt, data);
-	return buf;
+	std::ostringstream os;
+	os.imbue(std::locale::classic());
+	os << std::setiosflags(std::ios::dec | std::ios::fixed);
+	os << std::setprecision(width);
+	os << data;
+	return os.str();
 }
 
 void read(const std::string & s, geo::latitude & value, data_format fmt)
@@ -197,17 +197,6 @@ void read(const std::string & s, uint8_t & value, data_format fmt)
 void read(const std::string & s, int32_t & value, data_format fmt)
 {
 	detail::read_integer(s, value, fmt);
-}
-
-void read(const std::string & s, double & value, data_format fmt)
-{
-	utils::unused(fmt);
-	if (s.empty())
-		return;
-	std::size_t pos = 0;
-	value = std::stod(s, &pos);
-	if (pos != s.size())
-		throw std::runtime_error{"invalid string to convert to double: [" + s + "]"};
 }
 
 void read(const std::string & s, std::string & value, data_format fmt)

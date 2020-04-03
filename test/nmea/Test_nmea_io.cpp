@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <marnav/nmea/io.hpp>
 #include <marnav/nmea/angle.hpp>
+#include <locale>
 
 namespace
 {
@@ -69,5 +70,78 @@ TEST_F(Test_nmea_io, format_uint32_none)
 	auto s = nmea::format(val, 1, nmea::data_format::none);
 
 	EXPECT_STREQ("10", s.c_str());
+}
+
+TEST_F(Test_nmea_io, read_double_classic_locale)
+{
+	auto old_locale = std::locale::global(std::locale::classic());
+
+	double result = 0.0;
+	marnav::nmea::read("3.14159", result);
+
+	EXPECT_DOUBLE_EQ(3.14159, result);
+
+	std::locale::global(old_locale);
+}
+
+TEST_F(Test_nmea_io, read_double_french_locale)
+{
+	std::locale old_locale;
+
+	try {
+		old_locale = std::locale::global(std::locale("fr_FR.UTF-8"));
+	} catch (...) {
+		// locale not supported, disabling the test
+
+		// locale needs to be supported by the system, example for ubuntu:
+		// $ sudo locale-gen fr_FR.UTF-8
+
+		return; // TODO: use GTEST_SKIP() after upgrade to googletest >= 1.10.0
+	}
+
+	double result = 0.0;
+	marnav::nmea::read("3.14159", result);
+
+	EXPECT_DOUBLE_EQ(3.14159, result);
+
+	std::locale::global(old_locale);
+}
+
+TEST_F(Test_nmea_io, format_double_classic_locale)
+{
+	auto old_locale = std::locale::global(std::locale::classic());
+
+	EXPECT_STREQ("3.142", marnav::nmea::format(3.14159, 3).c_str());
+	EXPECT_STREQ("3.1416", marnav::nmea::format(3.14159, 4).c_str());
+	EXPECT_STREQ("3.14159", marnav::nmea::format(3.14159, 5).c_str());
+	EXPECT_STREQ("33.66", marnav::nmea::format(33.66, 2).c_str());
+	EXPECT_STREQ("33.660", marnav::nmea::format(33.66, 3).c_str());
+
+	std::locale::global(old_locale);
+}
+
+TEST_F(Test_nmea_io, format_double_french_locale)
+{
+	std::locale old_locale;
+
+	try {
+		old_locale = std::locale::global(std::locale("fr_FR.UTF-8"));
+	} catch (...) {
+		// locale not supported, disabling the test
+
+		// locale needs to be supported by the system, example for ubuntu:
+		// $ sudo locale-gen fr_FR.UTF-8
+
+		return; // TODO: use GTEST_SKIP() after upgrade to googletest >= 1.10.0
+	}
+
+	EXPECT_STREQ("3.142", marnav::nmea::format(3.14159, 3).c_str());
+	EXPECT_STREQ("3.1416", marnav::nmea::format(3.14159, 4).c_str());
+	EXPECT_STREQ("3.14159", marnav::nmea::format(3.14159, 5).c_str());
+	EXPECT_STREQ("33.66", marnav::nmea::format(33.66, 2).c_str());
+	EXPECT_STREQ("33.660", marnav::nmea::format(33.66, 3).c_str());
+
+	std::locale::global(old_locale);
+	std::locale::global(old_locale);
 }
 }

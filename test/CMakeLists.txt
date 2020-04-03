@@ -253,6 +253,7 @@ if(NOT CMAKE_BUILD_TYPE MATCHES Coverage)
 		target_link_libraries(${NAME} marnav::marnav benchmark::benchmark pthread)
 	endmacro()
 
+	setup_benchmark(benchmark_nmea_io nmea/Benchmark_nmea_io.cpp)
 	setup_benchmark(benchmark_nmea_split nmea/Benchmark_nmea_split.cpp)
 	setup_benchmark(benchmark_nmea_checksum nmea/Benchmark_nmea_checksum.cpp)
 	setup_benchmark(benchmark_nmea_manufacturer nmea/Benchmark_nmea_manufacturer.cpp)
