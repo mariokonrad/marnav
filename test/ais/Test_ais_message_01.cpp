@@ -25,7 +25,7 @@ TEST_F(Test_ais_message_01, parse)
 	EXPECT_EQ(0u, m->get_repeat_indicator());
 	EXPECT_EQ(205344990u, m->get_mmsi());
 	EXPECT_FALSE(m->get_rot().available());
-	EXPECT_NEAR(0.0, *m->get_sog(), 1e-4);
+	EXPECT_NEAR(0.0, m->get_sog()->value(), 1e-4);
 	EXPECT_EQ(true, m->get_position_accuracy());
 	auto lon = m->get_lon();
 	EXPECT_TRUE(!!lon);
@@ -105,5 +105,51 @@ TEST_F(Test_ais_message_01, error_bit_length)
 	v.push_back(std::make_pair("13miaA70120H5DvQlv5IRWeF05ItGbgv>1", 0));
 
 	EXPECT_ANY_THROW(ais::make_message(v));
+}
+
+TEST_F(Test_ais_message_01, set_invalid_sog)
+{
+	ais::message_01 m;
+
+	EXPECT_ANY_THROW(m.set_sog(units::knots{-1.0}));
+}
+
+TEST_F(Test_ais_message_01, set_get_sog)
+{
+	ais::message_01 m;
+
+	m.set_sog(units::knots{4.5});
+
+	EXPECT_NEAR(4.5, m.get_sog()->value(), 1e-6);
+	EXPECT_EQ(marnav::units::knots{4.5}, *m.get_sog());
+}
+
+TEST_F(Test_ais_message_01, sog_max_value)
+{
+	ais::message_01 m;
+
+	m.set_sog(units::knots{10000.0}); // over SOG max value
+
+	EXPECT_TRUE(m.get_sog().has_value());
+	EXPECT_EQ(marnav::units::knots{102.2}, *m.get_sog());
+}
+
+TEST_F(Test_ais_message_01, sog_not_available)
+{
+	ais::message_01 m;
+
+	EXPECT_FALSE(m.get_sog().has_value());
+
+	m.set_sog(units::knots{4.5});
+
+	EXPECT_TRUE(m.get_sog().has_value());
+
+	m.set_sog({});
+
+	EXPECT_TRUE(m.get_sog().has_value());
+
+	m.set_sog();
+
+	EXPECT_FALSE(m.get_sog().has_value());
 }
 }

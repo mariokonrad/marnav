@@ -23,7 +23,8 @@ name=marnav
 account=mariokonrad/
 
 # ask system about number of processors, accept already specified number
-export NUM_PROC=${NUM_PROC:-$(cat /proc/cpuinfo | grep -E "^processor" | wc -l)}
+#export NUM_PROC=${NUM_PROC:-$(cat /proc/cpuinfo | grep -E "^processor" | wc -l)}
+export NUM_PROC=${NUM_PROC:-$(nproc --ignore=2)}
 
 
 function build()

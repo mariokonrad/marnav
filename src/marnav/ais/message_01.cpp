@@ -56,16 +56,27 @@ void message_01::set_lat(const utils::optional<geo::latitude> & t)
 }
 
 /// Returns speed in knots.
-utils::optional<double> message_01::get_sog() const noexcept
+utils::optional<units::knots> message_01::get_sog() const noexcept
 {
+	// ignores special value of 1022 = 102.2 knots or faster
+
 	if (sog == sog_not_available)
 		return {};
-	return 0.1 * sog;
+	return units::knots{0.1 * sog};
 }
 
-void message_01::set_sog(utils::optional<double> t) noexcept
+void message_01::set_sog()
 {
-	sog = !t ? sog_not_available : static_cast<uint32_t>(std::round(*t / 0.1));
+	sog = sog_not_available;
+}
+
+void message_01::set_sog(units::velocity t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"SOG less than zero"};
+
+	const auto v = t.get<units::knots>();
+	sog = std::min(sog_max, static_cast<uint32_t>(round(v * 10).value()));
 }
 
 /// Returns course over ground in degrees true north.

@@ -57,6 +57,13 @@ protected:
 
 		value_type get() const { return value; }
 
+		template <typename U,
+			typename = typename std::enable_if<std::is_convertible<value_type, U>::value>::type>
+		U as() const noexcept
+		{
+			return static_cast<U>(get());
+		}
+
 		operator value_type() const { return value; }
 
 		bitset_value & operator=(value_type t)

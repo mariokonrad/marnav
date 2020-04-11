@@ -97,4 +97,44 @@ TEST_F(Test_ais_message_09, get_lon)
 
 	EXPECT_DOUBLE_EQ(expected, decoded);
 }
+
+TEST_F(Test_ais_message_09, set_get_altitude)
+{
+	ais::message_09 m;
+
+	m.set_altitude(units::meters{123});
+
+	EXPECT_NEAR(123, m.get_altitude()->value(), 1e-6);
+	EXPECT_EQ(marnav::units::meters{123}, *m.get_altitude());
+}
+
+TEST_F(Test_ais_message_09, altitude_max_value)
+{
+	ais::message_09 m;
+
+	m.set_altitude(units::meters{10000.0}); // over altitude max value
+
+	EXPECT_TRUE(m.get_altitude().has_value());
+	EXPECT_EQ(marnav::units::meters{4094}, *m.get_altitude());
+}
+
+TEST_F(Test_ais_message_09, set_get_sog)
+{
+	ais::message_09 m;
+
+	m.set_speed(units::knots{45});
+
+	EXPECT_NEAR(45, m.get_speed()->value(), 1e-6);
+	EXPECT_EQ(marnav::units::knots{45}, *m.get_speed());
+}
+
+TEST_F(Test_ais_message_09, sog_max_value)
+{
+	ais::message_09 m;
+
+	m.set_speed(units::knots{10000.0}); // over SOG max value
+
+	EXPECT_TRUE(m.get_speed().has_value());
+	EXPECT_EQ(marnav::units::knots{1022}, *m.get_speed());
+}
 }

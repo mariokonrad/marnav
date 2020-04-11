@@ -268,6 +268,9 @@ constexpr static const uint32_t latitude_not_available_short = 0xd548;
 /// Value for a speed over ground that is not specified.
 constexpr static const uint32_t sog_not_available = 1023;
 
+/// Value for a speed over ground that marks the maximum value.
+constexpr static const uint32_t sog_max = 1022;
+
 /// Value for a course over ground that is not specified.
 constexpr static const uint32_t cog_not_available = 3600;
 

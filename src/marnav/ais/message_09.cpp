@@ -9,6 +9,7 @@ constexpr message_id message_09::ID;
 constexpr std::size_t message_09::SIZE_BITS;
 
 constexpr uint32_t message_09::altitude_not_available;
+constexpr uint32_t message_09::altitude_max;
 
 message_09::message_09()
 	: message(ID)
@@ -90,6 +91,52 @@ void message_09::set_lat(const utils::optional<geo::latitude> & t)
 	latitude_minutes = t
 		? to_latitude_minutes(t.value(), latitude_minutes.count, angle_scale::I4)
 		: latitude_not_available;
+}
+
+utils::optional<units::meters> message_09::get_altitude() const noexcept
+{
+	// ignores special value is in meter 4094 = 4094 meters or higher
+
+	if (speed == altitude_not_available)
+		return {};
+	return units::meters{altitude.as<units::meters::value_type>()};
+}
+
+void message_09::set_altitude()
+{
+	altitude = altitude_not_available;
+}
+
+void message_09::set_altitude(units::length t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"altitude less than zero"};
+
+	const auto m = t.get<units::meters>();
+	altitude = std::min(altitude_max, static_cast<uint32_t>(round(m).value()));
+}
+
+utils::optional<units::knots> message_09::get_speed() const noexcept
+{
+	// ignores special value of 1022 = 102.2 knots or faster
+
+	if (speed == sog_not_available)
+		return {};
+	return units::knots{speed.as<units::knots::value_type>()};
+}
+
+void message_09::set_speed()
+{
+	speed = sog_not_available;
+}
+
+void message_09::set_speed(units::velocity t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"SOG less than zero"};
+
+	const auto v = t.get<units::knots>();
+	speed = std::min(sog_max, static_cast<uint32_t>(round(v).value()));
 }
 }
 }

@@ -1,7 +1,8 @@
-#ifndef MARNAV__AIS__MESSAGE_05__HPP
-#define MARNAV__AIS__MESSAGE_05__HPP
+#ifndef MARNAV_AIS_MESSAGE_05_HPP
+#define MARNAV_AIS_MESSAGE_05_HPP
 
 #include <marnav/ais/message.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/mmsi.hpp>
 
 namespace marnav
@@ -70,16 +71,16 @@ public:
 	std::string get_callsign() const;
 	std::string get_shipname() const;
 	ship_type get_shiptype() const noexcept { return shiptype; }
-	uint32_t get_to_bow() const noexcept { return to_bow; }
-	uint32_t get_to_stern() const noexcept { return to_stern; }
-	uint32_t get_to_port() const noexcept { return to_port; }
-	uint32_t get_to_starboard() const noexcept { return to_starboard; }
+	units::meters get_to_bow() const noexcept;
+	units::meters get_to_stern() const noexcept;
+	units::meters get_to_port() const noexcept;
+	units::meters get_to_starboard() const noexcept;
 	epfd_fix_type get_epfd_fix() const noexcept { return epfd_fix; }
 	uint32_t get_eta_month() const noexcept { return eta_month; }
 	uint32_t get_eta_day() const noexcept { return eta_day; }
 	uint32_t get_eta_hour() const noexcept { return eta_hour; }
 	uint32_t get_eta_minute() const noexcept { return eta_minute; }
-	uint32_t get_draught() const noexcept { return draught; }
+	units::meters get_draught() const noexcept;
 	std::string get_destination() const;
 	data_terminal get_dte() const noexcept { return dte; }
 
@@ -90,16 +91,32 @@ public:
 	void set_callsign(const std::string & t);
 	void set_shipname(const std::string & t);
 	void set_shiptype(ship_type t) noexcept { shiptype = t; }
-	void set_to_bow(uint32_t t) noexcept { to_bow = t; }
-	void set_to_stern(uint32_t t) noexcept { to_stern = t; }
-	void set_to_port(uint32_t t) noexcept { to_port = t; }
-	void set_to_starboard(uint32_t t) noexcept { to_starboard = t; }
+
+	// Resolution of length is 1m, specified value is rounded.
+	void set_to_bow(units::length t);
+
+	// Resolution of length is 1m, specified value is rounded.
+	void set_to_stern(units::length t);
+
+	// Resolution of length is 1m, specified value is rounded.
+	void set_to_port(units::length t);
+
+	// Resolution of length is 1m, specified value is rounded.
+	void set_to_starboard(units::length t);
+
 	void set_epfd_fix(epfd_fix_type t) noexcept { epfd_fix = t; }
 	void set_eta_month(uint32_t t) noexcept { eta_month = t; }
 	void set_eta_day(uint32_t t) noexcept { eta_day = t; }
 	void set_eta_hour(uint32_t t) noexcept { eta_hour = t; }
 	void set_eta_minute(uint32_t t) noexcept { eta_minute = t; }
-	void set_draught(uint32_t t) noexcept { draught = t; }
+
+	// The resolution of the draught is in 0.1m. For safety reasons, the value
+	// is ceiled within the resolution of 0.1m.
+	// Example:
+	//   set_draught(units::meters{1.5})  => stored draught 1.5
+	//   set_draught(units::meters{1.51}) => stored draught 1.6
+	void set_draught(units::length t);
+
 	void set_destination(const std::string & t);
 	void set_dte(data_terminal t) noexcept { dte = t; }
 };

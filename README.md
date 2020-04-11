@@ -1,7 +1,7 @@
 marnav
 ======
 
-Copyright (c) 2019 Mario Konrad (mario.konrad@gmx.net)
+Copyright (c) 2020 Mario Konrad (mario.konrad@gmx.net)
 
 ---
 
@@ -249,7 +249,7 @@ std::cout << "longitude: " << nmea::to_string(rmc.get_longitude()) << "\n";
 
 ~~~~~~~~~~~~~{.cpp}
 nmea::mtw mtw;
-mtw.set_temperature(22.5);
+mtw.set_temperature(units::celsius{22.5});
 std::string data = nmea::to_string(mtw);
 ~~~~~~~~~~~~~
 
@@ -289,7 +289,7 @@ using namespace marnav;
 
 // prepare AIS data
 ais::message_01 pos_report;
-pos_report.set_sog(82);
+pos_report.set_sog(units::knots{8.2});
 // ... most data not shown here
 
 // create payload
@@ -316,7 +316,7 @@ using namespace marnav;
 
 // prepare AIS data
 ais::message_01 pos_report;
-pos_report.set_sog(82);
+pos_report.set_sog(units::knots{8.2});
 // ... most data not shown here
 
 // create payload
@@ -536,7 +536,7 @@ See also [LICENSE](LICENSE)
 (BSD)
 
 ```
-Copyright (c) 2016, Mario Konrad
+Copyright (c) 2020, Mario Konrad
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

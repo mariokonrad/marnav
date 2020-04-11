@@ -1,4 +1,5 @@
 #include <marnav/ais/message_05.hpp>
+#include <iostream>
 
 namespace marnav
 {
@@ -125,6 +126,66 @@ void message_05::set_destination(const std::string & t)
 	} else {
 		destination = t;
 	}
+}
+
+units::meters message_05::get_to_bow() const noexcept
+{
+	return units::meters{to_bow.as<units::meters::value_type>()};
+}
+
+units::meters message_05::get_to_stern() const noexcept
+{
+	return units::meters{to_stern.as<units::meters::value_type>()};
+}
+
+units::meters message_05::get_to_port() const noexcept
+{
+	return units::meters{to_port.as<units::meters::value_type>()};
+}
+
+units::meters message_05::get_to_starboard() const noexcept
+{
+	return units::meters{to_starboard.as<units::meters::value_type>()};
+}
+
+void message_05::set_to_bow(units::length t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"length less than zero"};
+	to_bow = round(t.get<units::meters>()).value();
+}
+
+void message_05::set_to_stern(units::length t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"length less than zero"};
+	to_stern = round(t.get<units::meters>()).value();
+}
+
+void message_05::set_to_port(units::length t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"length less than zero"};
+	to_port = round(t.get<units::meters>()).value();
+}
+
+void message_05::set_to_starboard(units::length t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"length less than zero"};
+	to_starboard = round(t.get<units::meters>()).value();
+}
+
+units::meters message_05::get_draught() const noexcept
+{
+	return units::meters{0.1 * draught.as<units::meters::value_type>()};
+}
+
+void message_05::set_draught(units::length t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"length less than zero"};
+	draught = ceil((10.0 * t).get<units::meters>()).value();
 }
 }
 }

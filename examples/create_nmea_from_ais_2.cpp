@@ -9,7 +9,7 @@ int main(int, char **)
 
 	// prepare AIS data
 	ais::message_01 pos_report;
-	pos_report.set_sog(82);
+	pos_report.set_sog(marnav::units::knots{8.2});
 	// ... most data not shown here
 
 	// create payload

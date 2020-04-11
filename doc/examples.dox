@@ -31,7 +31,7 @@ Create a specific sentence directly:
 \subsection subsec_examples_nmea_write Write a NMEA sentence
 \code{.cpp}
 	nmea::mtw mtw;
-	mtw.set_temperature(22.5);
+	mtw.set_temperature(units::celsius{22.5});
 	std::string data = nmea::to_string(mtw);
 \endcode
 

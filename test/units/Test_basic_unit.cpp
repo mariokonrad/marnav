@@ -120,6 +120,46 @@ TEST(basic_unit, scaling_with_convertible_value_type)
 	}
 }
 
+TEST(basic_unit, add)
+{
+	{
+		const auto l1 = meters{1.0};
+		const auto l2 = meters{1.0};
+
+		const auto result = l1 + l2;
+
+		EXPECT_EQ(2.0, result.value());
+	}
+	{
+		const auto l1 = meters{1.0};
+		const auto l2 = feet{1.0};
+
+		const auto result = l1 + l2;
+
+		EXPECT_EQ(1.3048, result.value());
+	}
+}
+
+TEST(basic_unit, sub)
+{
+	{
+		const auto l1 = meters{2.0};
+		const auto l2 = meters{1.0};
+
+		const auto result = l1 - l2;
+
+		EXPECT_EQ(1.0, result.value());
+	}
+	{
+		const auto l1 = meters{1.0};
+		const auto l2 = feet{1.0};
+
+		const auto result = l1 - l2;
+
+		EXPECT_NEAR(0.6952, result.value(), 1e-7);
+	}
+}
+
 TEST(basic_unit, add_or_sub_same_unit_to_itself)
 {
 	{

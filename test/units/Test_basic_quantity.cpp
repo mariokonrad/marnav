@@ -133,12 +133,32 @@ TEST(basic_quantity, add)
 	EXPECT_EQ(2.3048, q.value());
 }
 
+TEST(basic_quantity, add_units_resulting_quanity)
+{
+	const auto l1 = meters{2};
+	const auto l2 = feet{1};
+
+	const length q = l1 + l2;
+
+	EXPECT_EQ(2.3048, q.value());
+}
+
 TEST(basic_quantity, sub)
 {
 	const length q1{meters{2}};
 	const length q2{feet{1}};
 
 	const length q = q1 - q2;
+
+	EXPECT_EQ(1.6952, q.value());
+}
+
+TEST(basic_quantity, sub_units_resulting_quantity)
+{
+	const auto l1 = meters{2};
+	const auto l2 = feet{1};
+
+	const length q = l1 - l2;
 
 	EXPECT_EQ(1.6952, q.value());
 }

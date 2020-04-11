@@ -24,7 +24,7 @@ TEST_F(Test_ais_message_02, parse)
 	EXPECT_EQ(0u, m->get_repeat_indicator());
 	EXPECT_EQ(205344990u, m->get_mmsi());
 	EXPECT_FALSE(m->get_rot().available());
-	EXPECT_NEAR(0.0, *m->get_sog(), 1e-4);
+	EXPECT_NEAR(0.0, m->get_sog()->value(), 1e-4);
 	EXPECT_EQ(true, m->get_position_accuracy());
 	const auto lon = m->get_lon();
 	EXPECT_TRUE(!!lon);

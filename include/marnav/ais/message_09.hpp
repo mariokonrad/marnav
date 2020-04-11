@@ -1,8 +1,9 @@
-#ifndef MARNAV__AIS__MESSAGE_09__HPP
-#define MARNAV__AIS__MESSAGE_09__HPP
+#ifndef MARNAV_AIS_MESSAGE_09_HPP
+#define MARNAV_AIS_MESSAGE_09_HPP
 
 #include <marnav/ais/message.hpp>
 #include <marnav/geo/angle.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/mmsi.hpp>
 #include <marnav/utils/optional.hpp>
 
@@ -20,6 +21,7 @@ public:
 	constexpr static std::size_t SIZE_BITS = 168u;
 
 	constexpr static uint32_t altitude_not_available = 4095;
+	constexpr static uint32_t altitude_max = 4094;
 
 	message_09();
 	message_09(const message_09 &) = default;
@@ -53,8 +55,8 @@ private:
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
-	uint32_t get_altitude() const noexcept { return altitude; }
-	uint32_t get_speed() const noexcept { return speed; }
+	utils::optional<units::meters> get_altitude() const noexcept;
+	utils::optional<units::knots> get_speed() const noexcept;
 	bool get_position_accuracy() const noexcept { return position_accuracy; }
 	uint32_t get_course() const noexcept { return course; }
 	uint32_t get_utc_second() const noexcept { return utc_second; }
@@ -65,8 +67,13 @@ public:
 
 	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
-	void set_altitude(uint32_t t) noexcept { altitude = t; }
-	void set_speed(uint32_t t) noexcept { speed = t; }
+
+	void set_altitude();
+	void set_altitude(units::length t);
+
+	void set_speed();
+	void set_speed(units::velocity t);
+
 	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
 	void set_course(uint32_t t) noexcept { course = t; }
 	void set_utc_second(uint32_t t) noexcept { utc_second = t; }

@@ -1,9 +1,10 @@
-#ifndef MARNAV__AIS__MESSAGE_01__HPP
-#define MARNAV__AIS__MESSAGE_01__HPP
+#ifndef MARNAV_AIS_MESSAGE_01_HPP
+#define MARNAV_AIS_MESSAGE_01_HPP
 
 #include <marnav/ais/message.hpp>
 #include <marnav/ais/rate_of_turn.hpp>
 #include <marnav/geo/angle.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/mmsi.hpp>
 #include <marnav/utils/optional.hpp>
 
@@ -55,7 +56,7 @@ public:
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
 	navigation_status get_nav_status() const noexcept { return nav_status; }
 	rate_of_turn get_rot() const noexcept;
-	utils::optional<double> get_sog() const noexcept;
+	utils::optional<units::knots> get_sog() const noexcept;
 	bool get_position_accuracy() const noexcept { return position_accuracy; }
 	utils::optional<double> get_cog() const noexcept;
 	utils::optional<uint32_t> get_hdg() const noexcept;
@@ -71,7 +72,10 @@ public:
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
 	void set_nav_status(navigation_status t) noexcept { nav_status = t; }
 	void set_rot(rate_of_turn t) noexcept;
-	void set_sog(utils::optional<double> t) noexcept;
+
+	void set_sog();
+	void set_sog(units::velocity t);
+
 	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
 	void set_cog(utils::optional<double> t) noexcept;
 	void set_hdg(utils::optional<uint32_t> t) noexcept;
