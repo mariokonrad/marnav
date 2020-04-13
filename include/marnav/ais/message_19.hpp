@@ -2,7 +2,9 @@
 #define MARNAV_AIS_MESSAGE_19_HPP
 
 #include <marnav/ais/message.hpp>
+#include <marnav/ais/vessel_dimension.hpp>
 #include <marnav/geo/angle.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/mmsi.hpp>
 #include <marnav/utils/optional.hpp>
 
@@ -57,17 +59,14 @@ private:
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
-	uint32_t get_sog() const noexcept { return sog; }
+	utils::optional<units::knots> get_sog() const noexcept;
 	bool get_position_accuracy() const noexcept { return position_accuracy; }
 	uint32_t get_cog() const noexcept { return cog; }
 	uint32_t get_hdg() const noexcept { return hdg; }
 	uint32_t get_timestamp() const noexcept { return timestamp; }
 	std::string get_shipname() const { return shipname; }
 	ship_type get_shiptype() const noexcept { return shiptype; }
-	uint32_t get_to_bow() const noexcept { return to_bow; }
-	uint32_t get_to_stern() const noexcept { return to_stern; }
-	uint32_t get_to_port() const noexcept { return to_port; }
-	uint32_t get_to_starboard() const noexcept { return to_starboard; }
+	vessel_dimension get_vessel_dimension() const noexcept;
 	epfd_fix_type get_epfd_fix() const noexcept { return epfd_fix; }
 	bool get_raim() const noexcept { return raim; }
 	data_terminal get_dte() const noexcept { return dte; }
@@ -75,17 +74,17 @@ public:
 
 	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
-	void set_sog(uint32_t t) noexcept { sog = t; } // TODO: units
+
+	void set_sog_unavailable();
+	void set_sog(units::velocity t);
+
 	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
 	void set_cog(uint32_t t) noexcept { cog = t; }
 	void set_hdg(uint32_t t) noexcept { hdg = t; }
 	void set_timestamp(uint32_t t) noexcept { timestamp = t; }
 	void set_shipname(const std::string & t);
 	void set_shiptype(ship_type t) noexcept { shiptype = t; }
-	void set_to_bow(uint32_t t) noexcept { to_bow = t; }
-	void set_to_stern(uint32_t t) noexcept { to_stern = t; }
-	void set_to_port(uint32_t t) noexcept { to_port = t; }
-	void set_to_starboard(uint32_t t) noexcept { to_starboard = t; }
+	void set_vessel_dimension(const vessel_dimension & t);
 	void set_epfd_fix(epfd_fix_type t) noexcept { epfd_fix = t; }
 	void set_raim(bool t) noexcept { raim = t; }
 	void set_dte(data_terminal t) noexcept { dte = t; }

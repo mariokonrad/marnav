@@ -120,5 +120,41 @@ void message_19::set_shipname(const std::string & t)
 		shipname = t;
 	}
 }
+
+utils::optional<units::knots> message_19::get_sog() const noexcept
+{
+	// ignores special value of 1022 = 102.2 knots or faster
+
+	if (sog == sog_not_available)
+		return {};
+	return units::knots{0.1 * sog};
+}
+
+void message_19::set_sog_unavailable()
+{
+	sog = sog_not_available;
+}
+
+void message_19::set_sog(units::velocity t)
+{
+	if (t.value() < 0.0)
+		throw std::invalid_argument{"SOG less than zero"};
+
+	const auto v = t.get<units::knots>();
+	sog = std::min(sog_max, static_cast<uint32_t>(round(v * 10).value()));
+}
+
+vessel_dimension message_19::get_vessel_dimension() const noexcept
+{
+	return vessel_dimension(to_bow, to_stern, to_port, to_starboard);
+}
+
+void message_19::set_vessel_dimension(const vessel_dimension & t)
+{
+	to_bow = t.get_raw_to_bow();
+	to_stern = t.get_raw_to_stern();
+	to_port = t.get_raw_to_port();
+	to_starboard = t.get_raw_to_starboard();
+}
 }
 }

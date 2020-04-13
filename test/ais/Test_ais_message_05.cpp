@@ -23,6 +23,8 @@ TEST_F(Test_ais_message_05, parse)
 	auto m = ais::message_cast<ais::message_05>(result);
 	ASSERT_TRUE(m != nullptr);
 
+	const auto dim = m->get_vessel_dimension();
+
 	EXPECT_EQ(0u, m->get_repeat_indicator());
 	EXPECT_EQ(369190000u, m->get_mmsi());
 	EXPECT_EQ(0u, m->get_ais_version());
@@ -30,10 +32,10 @@ TEST_F(Test_ais_message_05, parse)
 	EXPECT_STREQ("WDA9674", m->get_callsign().c_str());
 	EXPECT_STREQ("MT.MITCHELL", m->get_shipname().c_str());
 	EXPECT_EQ(ais::ship_type::other_no_info, m->get_shiptype());
-	EXPECT_EQ(units::meters{90}, m->get_to_bow());
-	EXPECT_EQ(units::meters{90}, m->get_to_stern());
-	EXPECT_EQ(units::meters{10}, m->get_to_port());
-	EXPECT_EQ(units::meters{10}, m->get_to_starboard());
+	EXPECT_EQ(units::meters{90}, dim.get_to_bow());
+	EXPECT_EQ(units::meters{90}, dim.get_to_stern());
+	EXPECT_EQ(units::meters{10}, dim.get_to_port());
+	EXPECT_EQ(units::meters{10}, dim.get_to_starboard());
 	EXPECT_EQ(ais::epfd_fix_type::gps, m->get_epfd_fix());
 	EXPECT_EQ(1u, m->get_eta_month());
 	EXPECT_EQ(2u, m->get_eta_day());
@@ -56,6 +58,8 @@ TEST_F(Test_ais_message_05, parse_422)
 	auto m = ais::message_cast<ais::message_05>(result);
 	ASSERT_TRUE(m != nullptr);
 
+	const auto dim = m->get_vessel_dimension();
+
 	EXPECT_EQ(0u, m->get_repeat_indicator());
 	EXPECT_EQ(369190000u, m->get_mmsi());
 	EXPECT_EQ(0u, m->get_ais_version());
@@ -63,10 +67,10 @@ TEST_F(Test_ais_message_05, parse_422)
 	EXPECT_STREQ("WDA9674", m->get_callsign().c_str());
 	EXPECT_STREQ("MT.MITCHELL", m->get_shipname().c_str());
 	EXPECT_EQ(ais::ship_type::other_no_info, m->get_shiptype());
-	EXPECT_EQ(units::meters{90}, m->get_to_bow());
-	EXPECT_EQ(units::meters{90}, m->get_to_stern());
-	EXPECT_EQ(units::meters{10}, m->get_to_port());
-	EXPECT_EQ(units::meters{10}, m->get_to_starboard());
+	EXPECT_EQ(units::meters{90}, dim.get_to_bow());
+	EXPECT_EQ(units::meters{90}, dim.get_to_stern());
+	EXPECT_EQ(units::meters{10}, dim.get_to_port());
+	EXPECT_EQ(units::meters{10}, dim.get_to_starboard());
 	EXPECT_EQ(ais::epfd_fix_type::gps, m->get_epfd_fix());
 	EXPECT_EQ(1u, m->get_eta_month());
 	EXPECT_EQ(2u, m->get_eta_day());
@@ -164,26 +168,29 @@ TEST_F(Test_ais_message_05, set_destination_too_large)
 
 TEST_F(Test_ais_message_05, set_to_bow_exact)
 {
+	const ais::vessel_dimension d(units::meters{4.0}, {}, {}, {});
 	ais::message_05 m;
 
-	EXPECT_NO_THROW(m.set_to_bow(units::meters{4.0}));
-	EXPECT_EQ(units::meters{4.0}, m.get_to_bow());
+	EXPECT_NO_THROW(m.set_vessel_dimension(d));
+	EXPECT_EQ(units::meters{4.0}, m.get_vessel_dimension().get_to_bow());
 }
 
 TEST_F(Test_ais_message_05, set_to_bow_rounded_up)
 {
+	const ais::vessel_dimension d(units::meters{4.6}, {}, {}, {});
 	ais::message_05 m;
 
-	EXPECT_NO_THROW(m.set_to_bow(units::meters{4.6}));
-	EXPECT_EQ(units::meters{5.0}, m.get_to_bow());
+	EXPECT_NO_THROW(m.set_vessel_dimension(d));
+	EXPECT_EQ(units::meters{5.0}, m.get_vessel_dimension().get_to_bow());
 }
 
 TEST_F(Test_ais_message_05, set_to_bow_rounded_down)
 {
+	const ais::vessel_dimension d(units::meters{4.1}, {}, {}, {});
 	ais::message_05 m;
 
-	EXPECT_NO_THROW(m.set_to_bow(units::meters{4.1}));
-	EXPECT_EQ(units::meters{4.0}, m.get_to_bow());
+	EXPECT_NO_THROW(m.set_vessel_dimension(d));
+	EXPECT_EQ(units::meters{4.0}, m.get_vessel_dimension().get_to_bow());
 }
 
 TEST_F(Test_ais_message_05, set_get_drought_meters)

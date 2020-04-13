@@ -1567,8 +1567,8 @@ static void print_detail_message_05(const marnav::ais::message * m)
 	print("Callsign", render(t->get_callsign()));
 	print("Shipname", render(t->get_shipname()));
 	print("Shiptype", render(t->get_shiptype()));
-	print("Length", render(t->get_to_bow() + t->get_to_stern()));
-	print("Width", render(t->get_to_port() + t->get_to_starboard()));
+	print("Length", render(t->get_vessel_dimension().length()));
+	print("Width", render(t->get_vessel_dimension().width()));
 	print("Draught", render(t->get_draught()));
 	print("EPFD Fix", render(t->get_epfd_fix()));
 	print("ETA Month", render(t->get_eta_month()));
@@ -1744,8 +1744,8 @@ static void print_detail_message_19(const marnav::ais::message * m)
 	print("Time Stamp", render(t->get_timestamp()));
 	print("Ship Name", render(t->get_shipname()));
 	print("Ship Type", render(t->get_shiptype()));
-	print("Length", render(t->get_to_bow() + t->get_to_stern()));
-	print("Width", render(t->get_to_port() + t->get_to_starboard()));
+	print("Length", render(t->get_vessel_dimension().length()));
+	print("Width", render(t->get_vessel_dimension().width()));
 	print("EPFD Fix", render(t->get_epfd_fix()));
 	print("RAIM", render(t->get_raim()));
 	print("DTE", render(t->get_dte()));
@@ -1775,8 +1775,8 @@ static void print_detail_message_21(const marnav::ais::message * m)
 	print("Pos Accuracy", render(t->get_position_accuracy()));
 	print("Latitude", render(t->get_lat()));
 	print("Longitude", render(t->get_lon()));
-	print("Length", render(t->get_to_bow() + t->get_to_stern()));
-	print("Width", render(t->get_to_port() + t->get_to_starboard()));
+	print("Length", render(t->get_vessel_dimension().length()));
+	print("Width", render(t->get_vessel_dimension().width()));
 	print("EPFD Fix", render(t->get_epfd_fix()));
 	print("UTC Second", render(t->get_utc_second()));
 	print("Off Pos Indicator", render(t->get_off_position()));
@@ -1837,8 +1837,8 @@ static void print_detail_message_24(const marnav::ais::message * m)
 		if (t->is_auxiliary_vessel()) {
 			print("Mothership MMSI", render(t->get_mothership_mmsi()));
 		} else {
-			print("Length", render(t->get_to_bow() + t->get_to_stern()));
-			print("Width", render(t->get_to_port() + t->get_to_starboard()));
+			print("Length", render(t->get_vessel_dimension().length()));
+			print("Width", render(t->get_vessel_dimension().width()));
 		}
 	}
 }

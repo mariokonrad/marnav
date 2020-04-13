@@ -55,6 +55,7 @@ target_sources(marnav
 		marnav/ais/message_24.cpp
 		marnav/ais/name.cpp
 		marnav/ais/rate_of_turn.cpp
+		marnav/ais/vessel_dimension.cpp
 		marnav/geo/angle.cpp
 		marnav/geo/cpa.cpp
 		marnav/geo/geodesic.cpp

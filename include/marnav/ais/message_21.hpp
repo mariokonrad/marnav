@@ -2,6 +2,7 @@
 #define MARNAV_AIS_MESSAGE_21_HPP
 
 #include <marnav/ais/message.hpp>
+#include <marnav/ais/vessel_dimension.hpp>
 #include <marnav/geo/angle.hpp>
 #include <marnav/utils/mmsi.hpp>
 #include <marnav/utils/optional.hpp>
@@ -60,10 +61,7 @@ public:
 	aid_type_id get_aid_type() const noexcept { return aid_type; }
 	std::string get_name() const;
 	bool get_position_accuracy() const noexcept { return position_accuracy; }
-	uint32_t get_to_bow() const noexcept { return to_bow; }
-	uint32_t get_to_stern() const noexcept { return to_stern; }
-	uint32_t get_to_port() const noexcept { return to_port; }
-	uint32_t get_to_starboard() const noexcept { return to_starboard; }
+	vessel_dimension get_vessel_dimension() const noexcept;
 	epfd_fix_type get_epfd_fix() const noexcept { return epfd_fix; }
 	uint32_t get_utc_second() const noexcept { return utc_second; }
 	off_position_indicator get_off_position() const noexcept { return off_position; }
@@ -78,10 +76,7 @@ public:
 	void set_aid_type(aid_type_id t) noexcept { aid_type = t; }
 	void set_name(const std::string & t);
 	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
-	void set_to_bow(uint32_t t) noexcept { to_bow = t; } // TODO: units
-	void set_to_stern(uint32_t t) noexcept { to_stern = t; } // TODO: units
-	void set_to_port(uint32_t t) noexcept { to_port = t; } // TODO: units
-	void set_to_starboard(uint32_t t) noexcept { to_starboard = t; } // TODO: units
+	void set_vessel_dimension(const vessel_dimension & t);
 	void set_epfd_fix(epfd_fix_type t) noexcept { epfd_fix = t; }
 	void set_utc_second(uint32_t t) noexcept { utc_second = t; }
 	void set_off_position(off_position_indicator t) noexcept { off_position = t; }

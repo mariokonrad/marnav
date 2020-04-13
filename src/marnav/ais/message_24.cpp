@@ -135,5 +135,18 @@ void message_24::set_callsign(const std::string & t)
 		callsign = t;
 	}
 }
+
+vessel_dimension message_24::get_vessel_dimension() const noexcept
+{
+	return vessel_dimension(to_bow, to_stern, to_port, to_starboard);
+}
+
+void message_24::set_vessel_dimension(const vessel_dimension & t)
+{
+	to_bow = t.get_raw_to_bow();
+	to_stern = t.get_raw_to_stern();
+	to_port = t.get_raw_to_port();
+	to_starboard = t.get_raw_to_starboard();
+}
 }
 }

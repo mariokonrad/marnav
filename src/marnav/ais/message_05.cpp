@@ -128,52 +128,17 @@ void message_05::set_destination(const std::string & t)
 	}
 }
 
-units::meters message_05::get_to_bow() const noexcept
+vessel_dimension message_05::get_vessel_dimension() const noexcept
 {
-	return units::meters{to_bow.as<units::meters::value_type>()};
+	return vessel_dimension(to_bow, to_stern, to_port, to_starboard);
 }
 
-units::meters message_05::get_to_stern() const noexcept
+void message_05::set_vessel_dimension(const vessel_dimension & t)
 {
-	return units::meters{to_stern.as<units::meters::value_type>()};
-}
-
-units::meters message_05::get_to_port() const noexcept
-{
-	return units::meters{to_port.as<units::meters::value_type>()};
-}
-
-units::meters message_05::get_to_starboard() const noexcept
-{
-	return units::meters{to_starboard.as<units::meters::value_type>()};
-}
-
-void message_05::set_to_bow(units::length t)
-{
-	if (t.value() < 0.0)
-		throw std::invalid_argument{"length less than zero"};
-	to_bow = round(t.get<units::meters>()).value();
-}
-
-void message_05::set_to_stern(units::length t)
-{
-	if (t.value() < 0.0)
-		throw std::invalid_argument{"length less than zero"};
-	to_stern = round(t.get<units::meters>()).value();
-}
-
-void message_05::set_to_port(units::length t)
-{
-	if (t.value() < 0.0)
-		throw std::invalid_argument{"length less than zero"};
-	to_port = round(t.get<units::meters>()).value();
-}
-
-void message_05::set_to_starboard(units::length t)
-{
-	if (t.value() < 0.0)
-		throw std::invalid_argument{"length less than zero"};
-	to_starboard = round(t.get<units::meters>()).value();
+	to_bow = t.get_raw_to_bow();
+	to_stern = t.get_raw_to_stern();
+	to_port = t.get_raw_to_port();
+	to_starboard = t.get_raw_to_starboard();
 }
 
 units::meters message_05::get_draught() const noexcept

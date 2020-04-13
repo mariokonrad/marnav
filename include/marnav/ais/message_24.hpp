@@ -2,6 +2,7 @@
 #define MARNAV_AIS_MESSAGE_24_HPP
 
 #include <marnav/ais/message.hpp>
+#include <marnav/ais/vessel_dimension.hpp>
 #include <marnav/geo/angle.hpp>
 #include <marnav/utils/mmsi.hpp>
 
@@ -84,10 +85,7 @@ public:
 	std::string get_callsign() const;
 
 	// part B specific (normal)
-	uint32_t get_to_bow() const noexcept { return to_bow; }
-	uint32_t get_to_stern() const noexcept { return to_stern; }
-	uint32_t get_to_port() const noexcept { return to_port; }
-	uint32_t get_to_starboard() const noexcept { return to_starboard; }
+	vessel_dimension get_vessel_dimension() const noexcept;
 
 	// part B specific (auxiliary)
 	utils::mmsi get_mothership_mmsi() const noexcept { return utils::mmsi{mothership_mmsi}; }
@@ -107,10 +105,7 @@ public:
 	void set_callsign(const std::string & t);
 
 	// part B specific (normal)
-	void set_to_bow(uint32_t t) noexcept { to_bow = t; } // TODO: units
-	void set_to_stern(uint32_t t) noexcept { to_stern = t; } // TODO: units
-	void set_to_port(uint32_t t) noexcept { to_port = t; } // TODO: units
-	void set_to_starboard(uint32_t t) noexcept { to_starboard = t; } // TODO: units
+	void set_vessel_dimension(const vessel_dimension & t);
 
 	// part B specific (auxiliary)
 	void set_mothership_mmsi(const utils::mmsi & t) noexcept { mothership_mmsi = t; }

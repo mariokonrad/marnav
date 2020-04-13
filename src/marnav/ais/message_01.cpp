@@ -61,7 +61,6 @@ void message_01::set_lat(const geo::latitude & t)
 	latitude_minutes = to_latitude_minutes(t, latitude_minutes.count, angle_scale::I4);
 }
 
-/// Returns speed in knots.
 utils::optional<units::knots> message_01::get_sog() const noexcept
 {
 	// ignores special value of 1022 = 102.2 knots or faster

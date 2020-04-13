@@ -156,5 +156,18 @@ void message_21::set_lat(const geo::latitude & t)
 {
 	latitude_minutes = to_latitude_minutes(t, latitude_minutes.count, angle_scale::I4);
 }
+
+vessel_dimension message_21::get_vessel_dimension() const noexcept
+{
+	return vessel_dimension(to_bow, to_stern, to_port, to_starboard);
+}
+
+void message_21::set_vessel_dimension(const vessel_dimension & t)
+{
+	to_bow = t.get_raw_to_bow();
+	to_stern = t.get_raw_to_stern();
+	to_port = t.get_raw_to_port();
+	to_starboard = t.get_raw_to_starboard();
+}
 }
 }

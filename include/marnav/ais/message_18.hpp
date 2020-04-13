@@ -3,6 +3,7 @@
 
 #include <marnav/ais/message.hpp>
 #include <marnav/geo/angle.hpp>
+#include <marnav/units/units.hpp>
 #include <marnav/utils/mmsi.hpp>
 #include <marnav/utils/optional.hpp>
 
@@ -55,7 +56,7 @@ private:
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
-	utils::optional<double> get_sog() const noexcept;
+	utils::optional<units::knots> get_sog() const noexcept;
 	bool get_position_accuracy() const noexcept { return position_accuracy; }
 	utils::optional<double> get_cog() const noexcept;
 	utils::optional<uint32_t> get_hdg() const noexcept;
@@ -71,7 +72,10 @@ public:
 
 	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
-	void set_sog(utils::optional<double> t) noexcept; // TODO: units
+
+	void set_sog_unavailable();
+	void set_sog(units::velocity t);
+
 	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
 	void set_cog(utils::optional<double> t) noexcept;
 	void set_hdg(utils::optional<uint32_t> t) noexcept;
