@@ -1,5 +1,5 @@
-#ifndef MARNAV__AIS__MESSAGE_18__HPP
-#define MARNAV__AIS__MESSAGE_18__HPP
+#ifndef MARNAV_AIS_MESSAGE_18_HPP
+#define MARNAV_AIS_MESSAGE_18_HPP
 
 #include <marnav/ais/message.hpp>
 #include <marnav/geo/angle.hpp>
@@ -71,7 +71,7 @@ public:
 
 	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
-	void set_sog(utils::optional<double> t) noexcept;
+	void set_sog(utils::optional<double> t) noexcept; // TODO: units
 	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
 	void set_cog(utils::optional<double> t) noexcept;
 	void set_hdg(utils::optional<uint32_t> t) noexcept;
@@ -87,8 +87,10 @@ public:
 
 	utils::optional<geo::longitude> get_lon() const;
 	utils::optional<geo::latitude> get_lat() const;
-	void set_lon(const utils::optional<geo::longitude> & t);
-	void set_lat(const utils::optional<geo::latitude> & t);
+	void set_lon_unavailable();
+	void set_lat_unavailable();
+	void set_lon(const geo::longitude & t);
+	void set_lat(const geo::latitude & t);
 };
 }
 }

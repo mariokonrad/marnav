@@ -1,5 +1,5 @@
-#ifndef MARNAV__AIS__MESSAGE_24__HPP
-#define MARNAV__AIS__MESSAGE_24__HPP
+#ifndef MARNAV_AIS_MESSAGE_24_HPP
+#define MARNAV_AIS_MESSAGE_24_HPP
 
 #include <marnav/ais/message.hpp>
 #include <marnav/geo/angle.hpp>
@@ -107,10 +107,10 @@ public:
 	void set_callsign(const std::string & t);
 
 	// part B specific (normal)
-	void set_to_bow(uint32_t t) noexcept { to_bow = t; }
-	void set_to_stern(uint32_t t) noexcept { to_stern = t; }
-	void set_to_port(uint32_t t) noexcept { to_port = t; }
-	void set_to_starboard(uint32_t t) noexcept { to_starboard = t; }
+	void set_to_bow(uint32_t t) noexcept { to_bow = t; } // TODO: units
+	void set_to_stern(uint32_t t) noexcept { to_stern = t; } // TODO: units
+	void set_to_port(uint32_t t) noexcept { to_port = t; } // TODO: units
+	void set_to_starboard(uint32_t t) noexcept { to_starboard = t; } // TODO: units
 
 	// part B specific (auxiliary)
 	void set_mothership_mmsi(const utils::mmsi & t) noexcept { mothership_mmsi = t; }

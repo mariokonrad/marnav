@@ -1,5 +1,5 @@
-#ifndef MARNAV__AIS__MESSAGE_21__HPP
-#define MARNAV__AIS__MESSAGE_21__HPP
+#ifndef MARNAV_AIS_MESSAGE_21_HPP
+#define MARNAV_AIS_MESSAGE_21_HPP
 
 #include <marnav/ais/message.hpp>
 #include <marnav/geo/angle.hpp>
@@ -78,10 +78,10 @@ public:
 	void set_aid_type(aid_type_id t) noexcept { aid_type = t; }
 	void set_name(const std::string & t);
 	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
-	void set_to_bow(uint32_t t) noexcept { to_bow = t; }
-	void set_to_stern(uint32_t t) noexcept { to_stern = t; }
-	void set_to_port(uint32_t t) noexcept { to_port = t; }
-	void set_to_starboard(uint32_t t) noexcept { to_starboard = t; }
+	void set_to_bow(uint32_t t) noexcept { to_bow = t; } // TODO: units
+	void set_to_stern(uint32_t t) noexcept { to_stern = t; } // TODO: units
+	void set_to_port(uint32_t t) noexcept { to_port = t; } // TODO: units
+	void set_to_starboard(uint32_t t) noexcept { to_starboard = t; } // TODO: units
 	void set_epfd_fix(epfd_fix_type t) noexcept { epfd_fix = t; }
 	void set_utc_second(uint32_t t) noexcept { utc_second = t; }
 	void set_off_position(off_position_indicator t) noexcept { off_position = t; }
@@ -93,8 +93,10 @@ public:
 
 	utils::optional<geo::longitude> get_lon() const;
 	utils::optional<geo::latitude> get_lat() const;
-	void set_lon(const utils::optional<geo::longitude> & t);
-	void set_lat(const utils::optional<geo::latitude> & t);
+	void set_lon_unavailable();
+	void set_lat_unavailable();
+	void set_lon(const geo::longitude & t);
+	void set_lat(const geo::latitude & t);
 };
 }
 }

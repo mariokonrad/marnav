@@ -79,18 +79,24 @@ utils::optional<geo::latitude> message_09::get_lat() const
 	return to_geo_latitude(latitude_minutes, latitude_minutes.count, angle_scale::I4);
 }
 
-void message_09::set_lon(const utils::optional<geo::longitude> & t)
+void message_09::set_lon_unavailable()
 {
-	longitude_minutes = t
-		? to_longitude_minutes(t.value(), longitude_minutes.count, angle_scale::I4)
-		: longitude_not_available;
+	longitude_minutes = longitude_not_available;
 }
 
-void message_09::set_lat(const utils::optional<geo::latitude> & t)
+void message_09::set_lat_unavailable()
 {
-	latitude_minutes = t
-		? to_latitude_minutes(t.value(), latitude_minutes.count, angle_scale::I4)
-		: latitude_not_available;
+	latitude_minutes = latitude_not_available;
+}
+
+void message_09::set_lon(const geo::longitude & t)
+{
+	longitude_minutes = to_longitude_minutes(t, longitude_minutes.count, angle_scale::I4);
+}
+
+void message_09::set_lat(const geo::latitude & t)
+{
+	latitude_minutes = to_latitude_minutes(t, latitude_minutes.count, angle_scale::I4);
 }
 
 utils::optional<units::meters> message_09::get_altitude() const noexcept
@@ -102,7 +108,7 @@ utils::optional<units::meters> message_09::get_altitude() const noexcept
 	return units::meters{altitude.as<units::meters::value_type>()};
 }
 
-void message_09::set_altitude()
+void message_09::set_altitude_unavailable()
 {
 	altitude = altitude_not_available;
 }
@@ -125,7 +131,7 @@ utils::optional<units::knots> message_09::get_speed() const noexcept
 	return units::knots{speed.as<units::knots::value_type>()};
 }
 
-void message_09::set_speed()
+void message_09::set_speed_unavailable()
 {
 	speed = sog_not_available;
 }

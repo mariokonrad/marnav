@@ -73,7 +73,7 @@ public:
 	void set_nav_status(navigation_status t) noexcept { nav_status = t; }
 	void set_rot(rate_of_turn t) noexcept;
 
-	void set_sog();
+	void set_sog_unavailable();
 	void set_sog(units::velocity t);
 
 	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
@@ -86,8 +86,10 @@ public:
 
 	utils::optional<geo::longitude> get_lon() const;
 	utils::optional<geo::latitude> get_lat() const;
-	void set_lon(const utils::optional<geo::longitude> & t);
-	void set_lat(const utils::optional<geo::latitude> & t);
+	void set_lon_unavailable();
+	void set_lat_unavailable();
+	void set_lon(const geo::longitude & t);
+	void set_lat(const geo::latitude & t);
 };
 }
 }

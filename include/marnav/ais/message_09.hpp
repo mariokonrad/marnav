@@ -68,10 +68,10 @@ public:
 	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
 	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
 
-	void set_altitude();
+	void set_altitude_unavailable();
 	void set_altitude(units::length t);
 
-	void set_speed();
+	void set_speed_unavailable();
 	void set_speed(units::velocity t);
 
 	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
@@ -84,8 +84,10 @@ public:
 
 	utils::optional<geo::longitude> get_lon() const;
 	utils::optional<geo::latitude> get_lat() const;
-	void set_lon(const utils::optional<geo::longitude> & t);
-	void set_lat(const utils::optional<geo::latitude> & t);
+	void set_lon_unavailable();
+	void set_lat_unavailable();
+	void set_lon(const geo::longitude & t);
+	void set_lat(const geo::latitude & t);
 };
 }
 }

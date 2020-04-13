@@ -1,5 +1,5 @@
-#ifndef MARNAV__AIS__MESSAGE_17__HPP
-#define MARNAV__AIS__MESSAGE_17__HPP
+#ifndef MARNAV_AIS_MESSAGE_17_HPP
+#define MARNAV_AIS_MESSAGE_17_HPP
 
 #include <marnav/ais/message.hpp>
 #include <marnav/geo/angle.hpp>
@@ -53,8 +53,10 @@ public:
 
 	utils::optional<geo::longitude> get_lon() const;
 	utils::optional<geo::latitude> get_lat() const;
-	void set_lon(const utils::optional<geo::longitude> & t);
-	void set_lat(const utils::optional<geo::latitude> & t);
+	void set_lon_unavailable();
+	void set_lat_unavailable();
+	void set_lon(const geo::longitude & t);
+	void set_lat(const geo::latitude & t);
 };
 }
 }

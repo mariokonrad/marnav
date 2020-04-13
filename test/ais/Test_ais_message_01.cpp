@@ -148,7 +148,7 @@ TEST_F(Test_ais_message_01, sog_not_available)
 
 	EXPECT_TRUE(m.get_sog().has_value());
 
-	m.set_sog();
+	m.set_sog_unavailable();
 
 	EXPECT_FALSE(m.get_sog().has_value());
 }

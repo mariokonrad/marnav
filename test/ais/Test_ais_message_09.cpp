@@ -4,7 +4,6 @@
 
 namespace
 {
-
 using namespace marnav;
 
 class Test_ais_message_09 : public ::testing::Test

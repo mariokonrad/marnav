@@ -68,18 +68,24 @@ utils::optional<geo::latitude> message_17::get_lat() const
 	return to_geo_latitude(latitude_minutes, latitude_minutes.count, angle_scale::I1);
 }
 
-void message_17::set_lon(const utils::optional<geo::longitude> & t)
+void message_17::set_lon_unavailable()
 {
-	longitude_minutes = t
-		? to_longitude_minutes(t.value(), longitude_minutes.count, angle_scale::I1)
-		: longitude_not_available_short;
+	longitude_minutes = longitude_not_available_short;
 }
 
-void message_17::set_lat(const utils::optional<geo::latitude> & t)
+void message_17::set_lat_unavailable()
 {
-	latitude_minutes = t
-		? to_latitude_minutes(t.value(), latitude_minutes.count, angle_scale::I1)
-		: latitude_not_available_short;
+	latitude_minutes = latitude_not_available_short;
+}
+
+void message_17::set_lon(const geo::longitude & t)
+{
+	longitude_minutes = to_longitude_minutes(t, longitude_minutes.count, angle_scale::I1);
+}
+
+void message_17::set_lat(const geo::latitude & t)
+{
+	latitude_minutes = to_latitude_minutes(t, latitude_minutes.count, angle_scale::I1);
 }
 
 void message_17::set_payload(const raw & p)
