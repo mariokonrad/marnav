@@ -10,6 +10,7 @@ supported_compilers=(
 	"gcc-8.3.0"
 	"gcc-9.1.0"
 	"gcc-9.2.0"
+	"gcc-9.3.0"
 #	"clang-3.6.1"
 #	"clang-3.6.2"
 #	"clang-3.7.0"
@@ -29,6 +30,7 @@ supported_compilers=(
 	"clang-7.1.0"
 	"clang-8.0.0"
 	"clang-9.0.0"
+#	"clang-10.0.0"
 	)
 
 name=marnav

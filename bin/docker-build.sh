@@ -12,6 +12,7 @@ supported_compilers=(
 	"gcc-8.3.0"
 	"gcc-9.1.0"
 	"gcc-9.2.0"
+	"gcc-9.3.0"
 	"clang-5.0.2"
 	"clang-6.0.0"
 	"clang-7.1.0"
@@ -22,8 +23,6 @@ supported_build_types=("Debug" "Release")
 name=marnav
 account=mariokonrad/
 
-# ask system about number of processors, accept already specified number
-#export NUM_PROC=${NUM_PROC:-$(cat /proc/cpuinfo | grep -E "^processor" | wc -l)}
 export NUM_PROC=${NUM_PROC:-$(nproc --ignore=2)}
 
 
