@@ -1,6 +1,7 @@
 #include <marnav/nmea/gns.hpp>
 #include "convert.hpp"
 #include <marnav/nmea/io.hpp>
+#include <stdexcept>
 
 namespace marnav
 {

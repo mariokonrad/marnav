@@ -10,7 +10,7 @@ int main(int, char **)
 	bits.append(0x55, 8);
 
 	// iterate through all bits and print them to stdout
-	for (auto const & bit : bits)
+	for (auto const && bit : bits)
 		std::cout << bit;
 	std::cout << "\n";
 }

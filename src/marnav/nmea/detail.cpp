@@ -1,6 +1,7 @@
 #include <marnav/nmea/detail.hpp>
 #include "split.hpp"
 #include <marnav/nmea/sentence.hpp>
+#include <stdexcept>
 
 namespace marnav
 {

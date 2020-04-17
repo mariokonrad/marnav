@@ -1,5 +1,6 @@
 #include <marnav/io/seatalk_reader.hpp>
 #include <algorithm>
+#include <stdexcept>
 
 namespace marnav
 {

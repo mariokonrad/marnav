@@ -1,5 +1,7 @@
-#ifndef MARNAV__NMEA__SENTENCE_ID__HPP
-#define MARNAV__NMEA__SENTENCE_ID__HPP
+#ifndef MARNAV_NMEA_SENTENCE_ID_HPP
+#define MARNAV_NMEA_SENTENCE_ID_HPP
+
+#include <cstdint>
 
 namespace marnav
 {

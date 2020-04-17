@@ -1,6 +1,7 @@
 #include <marnav/nmea/gsa.hpp>
 #include <marnav/nmea/io.hpp>
 #include <limits>
+#include <stdexcept>
 
 namespace marnav
 {

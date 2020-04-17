@@ -1,5 +1,6 @@
 #include <marnav/nmea/xtr.hpp>
 #include <marnav/nmea/io.hpp>
+#include <stdexcept>
 
 namespace marnav
 {

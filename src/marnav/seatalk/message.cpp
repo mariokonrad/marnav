@@ -1,4 +1,5 @@
 #include <marnav/seatalk/message.hpp>
+#include <stdexcept>
 #include <cassert>
 
 namespace marnav

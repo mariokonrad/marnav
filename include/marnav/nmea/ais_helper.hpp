@@ -1,9 +1,10 @@
-#ifndef MARNAV__NMEA__AIS_HELPER__HPP
-#define MARNAV__NMEA__AIS_HELPER__HPP
+#ifndef MARNAV_NMEA_AIS_HELPER_HPP
+#define MARNAV_NMEA_AIS_HELPER_HPP
 
-#include <vector>
 #include <marnav/nmea/vdm.hpp>
 #include <marnav/nmea/vdo.hpp>
+#include <stdexcept>
+#include <vector>
 
 namespace marnav
 {

@@ -1,11 +1,12 @@
-#ifndef MARNAV__NMEA__NMEA__HPP
-#define MARNAV__NMEA__NMEA__HPP
+#ifndef MARNAV_NMEA_NMEA_HPP
+#define MARNAV_NMEA_NMEA_HPP
 
-#include <memory>
-#include <string>
-#include <vector>
 #include <marnav/nmea/sentence_id.hpp>
 #include <marnav/nmea/checksum_enum.hpp>
+#include <memory>
+#include <string>
+#include <stdexcept>
+#include <vector>
 
 namespace marnav
 {

@@ -1,4 +1,5 @@
 #include <marnav/seatalk/message_86.hpp>
+#include <stdexcept>
 
 namespace marnav
 {

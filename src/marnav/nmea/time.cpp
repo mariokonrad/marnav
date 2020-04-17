@@ -73,7 +73,7 @@ time time::parse(const std::string & str)
 /// milliseconds other than 0, is provides the form 'hhmmss.sss`.
 std::string to_string(const time & t)
 {
-	char buf[16];
+	char buf[32];
 	if (t.milliseconds()) {
 		snprintf(buf, sizeof(buf), "%02u%02u%02u.%03u", t.hour(), t.minutes(), t.seconds(),
 			t.milliseconds());

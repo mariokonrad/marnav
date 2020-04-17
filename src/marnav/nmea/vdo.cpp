@@ -1,4 +1,5 @@
 #include <marnav/nmea/vdo.hpp>
+#include <stdexcept>
 
 namespace marnav
 {

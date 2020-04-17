@@ -1,5 +1,6 @@
 #include <marnav/nmea/zda.hpp>
 #include <marnav/nmea/io.hpp>
+#include <stdexcept>
 
 namespace marnav
 {

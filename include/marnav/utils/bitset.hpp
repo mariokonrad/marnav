@@ -529,7 +529,7 @@ public: // append
 	{
 		if (reinterpret_cast<const void *>(this) == reinterpret_cast<const void *>(&bs))
 			return;
-		for (const auto & bit : bs)
+		for (const auto && bit : bs)
 			append(bit, 1);
 	}
 

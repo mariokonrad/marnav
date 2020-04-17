@@ -1,6 +1,7 @@
 #include <marnav/nmea/io.hpp>
 #include <marnav/utils/unused.hpp>
 #include <clocale>
+#include <stdexcept>
 
 #if defined(__APPLE__)
 #include <xlocale.h>

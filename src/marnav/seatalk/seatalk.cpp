@@ -29,8 +29,8 @@
 #include <marnav/seatalk/message_86.hpp>
 #include <marnav/seatalk/message_87.hpp>
 #include <marnav/seatalk/message_89.hpp>
-
 #include <algorithm>
+#include <stdexcept>
 
 namespace marnav
 {

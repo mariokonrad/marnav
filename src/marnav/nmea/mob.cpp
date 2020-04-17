@@ -2,6 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include "convert.hpp"
 #include <algorithm>
+#include <stdexcept>
 
 namespace marnav
 {
