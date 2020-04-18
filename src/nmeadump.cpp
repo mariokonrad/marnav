@@ -21,15 +21,6 @@
 //   cat logged-data.txt | nmeadump
 //
 
-#include <fstream>
-#include <iostream>
-#include <vector>
-
-#include <cxxopts/cxxopts.hpp>
-
-#define FMT_HEADER_ONLY
-#include <fmt/format.h>
-
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/ais_helper.hpp>
 #include <marnav/nmea/checksum.hpp>
@@ -154,6 +145,15 @@
 
 #include <marnav/utils/unique.hpp>
 #include <marnav/utils/mmsi_country.hpp>
+
+#include <cxxopts/cxxopts.hpp>
+
+#include <fmt/format.h>
+#include <fmt/printf.h>
+
+#include <fstream>
+#include <iostream>
+#include <vector>
 
 namespace nmeadump
 {

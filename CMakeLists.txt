@@ -45,6 +45,11 @@ include(Documentation)
 include(CppCheck)
 include(ExternalProject)
 
+if(ENABLE_TOOLS)
+	include(ExternCxxopts)
+	include(ExternFmt)
+endif()
+
 ### common
 message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
 file(MAKE_DIRECTORY

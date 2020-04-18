@@ -50,8 +50,8 @@ License: (https://github.com/jarro2783/cxxopts/LICENSE)
 Homepage: https://github.com/jarro2783/cxxopts
 
 
-fmt - 0d25f6fcbbf0a867b939a5501965ee4462b21ee6
-----------------------------------------------
+fmt - 6.2.0 - 9bdd1596cef1b57b9556f8bef32dc4a32322ef3e
+------------------------------------------------------
 
 License: (https://github.com/fmtlib/fmt/LICENSE.rst)
 

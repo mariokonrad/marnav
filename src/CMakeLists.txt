@@ -406,7 +406,6 @@ if(ENABLE_TOOLS)
 		target_include_directories(nmeadump
 			PRIVATE
 				${CMAKE_CURRENT_SOURCE_DIR}
-				${CMAKE_CURRENT_SOURCE_DIR}/../extern
 			)
 
 		target_compile_options(nmeadump
@@ -418,6 +417,11 @@ if(ENABLE_TOOLS)
 				-pedantic-errors
 			)
 
-		target_link_libraries(nmeadump PRIVATE marnav::marnav)
+		target_link_libraries(nmeadump
+			PRIVATE
+				marnav::marnav
+				cxxopts::cxxopts
+				fmt::fmt
+			)
 	endif()
 endif()
