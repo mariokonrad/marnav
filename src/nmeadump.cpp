@@ -146,7 +146,7 @@
 #include <marnav/utils/unique.hpp>
 #include <marnav/utils/mmsi_country.hpp>
 
-#include <cxxopts/cxxopts.hpp>
+#include <cxxopts.hpp>
 
 #include <fmt/format.h>
 #include <fmt/printf.h>
@@ -210,9 +210,9 @@ static bool parse_options(int argc, char ** argv)
 		;
 	// clang-format on
 
-	options.parse(argc, argv);
+	const auto args = options.parse(argc, argv);
 
-	if (options.count("help")) {
+	if (args.count("help")) {
 		fmt::printf("%s\n", options.help());
 		fmt::printf("If no file or port is specified, stdin is used to read data from.\n\n");
 		return true;
@@ -222,9 +222,9 @@ static bool parse_options(int argc, char ** argv)
 
 	static const std::vector<uint32_t> valid_port_speeds = {4800, 38400};
 
-	if (options.count("port") && options.count("file"))
+	if (args.count("port") && args.count("file"))
 		throw std::runtime_error{"specifying port and file is illegal"};
-	if (options.count("port") && !contains(valid_port_speeds, port_speed))
+	if (args.count("port") && !contains(valid_port_speeds, port_speed))
 		throw std::runtime_error{"invalid port speed"};
 
 	switch (port_speed) {

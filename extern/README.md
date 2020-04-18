@@ -42,8 +42,8 @@ License: Apache 2.0 (http://www.apache.org/licences)
 Homepage: https://github.com/google/benchmark
 
 
-cxxopts - c45bcc385870b8707ef5475cdd7c14b1ce7fc4a1
---------------------------------------------------
+cxxopts - v2.2.0 - e6858d3429e0ba5fe6f42ce2018069ce992f3d26
+-----------------------------------------------------------
 
 License: (https://github.com/jarro2783/cxxopts/LICENSE)
 

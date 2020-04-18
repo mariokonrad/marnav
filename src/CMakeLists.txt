@@ -403,10 +403,6 @@ if(ENABLE_TOOLS)
 	if(ENABLE_IO)
 		add_executable(nmeadump)
 		target_sources(nmeadump PRIVATE nmeadump.cpp)
-		target_include_directories(nmeadump
-			PRIVATE
-				${CMAKE_CURRENT_SOURCE_DIR}
-			)
 
 		target_compile_options(nmeadump
 			PRIVATE
