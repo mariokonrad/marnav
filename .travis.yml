@@ -11,18 +11,19 @@ services:
 
 matrix:
   include:
-    - env: COMPILER=gcc-4.9.4   BUILD_TYPE=Release
-    - env: COMPILER=gcc-5.5.0   BUILD_TYPE=Release
-    - env: COMPILER=gcc-6.5.0   BUILD_TYPE=Release
-    - env: COMPILER=gcc-7.4.0   BUILD_TYPE=Release
-    - env: COMPILER=gcc-8.3.0   BUILD_TYPE=Release
-    - env: COMPILER=gcc-9.3.0   BUILD_TYPE=Release
-    - env: COMPILER=clang-5.0.2 BUILD_TYPE=Release
-    - env: COMPILER=clang-6.0.0 BUILD_TYPE=Release
-    - env: COMPILER=clang-7.1.0 BUILD_TYPE=Release
-    - env: COMPILER=clang-8.0.0 BUILD_TYPE=Release
-    - env: COMPILER=clang-9.0.0 BUILD_TYPE=Release
-    - env: COMPILER=gcc-9.3.0   BUILD_TYPE=Debug
+    - env: COMPILER=gcc-4.9.4    BUILD_TYPE=Release
+    - env: COMPILER=gcc-5.5.0    BUILD_TYPE=Release
+    - env: COMPILER=gcc-6.5.0    BUILD_TYPE=Release
+    - env: COMPILER=gcc-7.4.0    BUILD_TYPE=Release
+    - env: COMPILER=gcc-8.3.0    BUILD_TYPE=Release
+    - env: COMPILER=gcc-9.3.0    BUILD_TYPE=Release
+    - env: COMPILER=clang-5.0.2  BUILD_TYPE=Release
+    - env: COMPILER=clang-6.0.0  BUILD_TYPE=Release
+    - env: COMPILER=clang-7.1.0  BUILD_TYPE=Release
+    - env: COMPILER=clang-8.0.0  BUILD_TYPE=Release
+    - env: COMPILER=clang-9.0.0  BUILD_TYPE=Release
+    - env: COMPILER=clang-10.0.0 BUILD_TYPE=Release
+    - env: COMPILER=gcc-9.3.0    BUILD_TYPE=Debug
 
 before_install:
   - docker pull mariokonrad/marnav:${COMPILER}

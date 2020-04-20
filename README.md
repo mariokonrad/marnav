@@ -347,12 +347,13 @@ Compiler:
 - GCC 7
 - GCC 8
 - GCC 9
-- Clang 4.0
-- Clang 5.0
-- Clang 6.0
-- Clang 7.0
-- Clang 8.0
-- Clang 9.0
+- Clang 4
+- Clang 5
+- Clang 6
+- Clang 7
+- Clang 8
+- Clang 9
+- Clang 10
 
 Tools needed to build the library:
 - cmake 3.11 or newer
