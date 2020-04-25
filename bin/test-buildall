@@ -35,7 +35,7 @@ function build_with_local_installation()
 {
 	for cfg in $(${SCRIPT_BASE}/bld --list | grep -E "clang[0-9]+|gcc[0-9]+") ; do
 		echo -n "target: ${cfg} "
-		printf '%*s' $((40 - ${#cfg})) "" | tr ' ' '.'
+		printf '%*s' $((45 - ${#cfg})) "" | tr ' ' '.'
 		set +e
 		BUILD_DIR=${BUILD}/${cfg} ${SCRIPT_BASE}/bld ${cfg} >&${BUILD}/${cfg}.log
 		log_result $? ${BUILD}/${cfg}.log
@@ -55,7 +55,7 @@ function build_with_docker()
 			cfg=$(echo "${dockerid}_${build_type}" | tr '/:' '__')
 
 			echo -n "target: ${cfg} "
-			printf '%*s' $((40 - ${#cfg})) "" | tr ' ' '.'
+			printf '%*s' $((45 - ${#cfg})) "" | tr ' ' '.'
 			set +e
 			BUILD_DIR=${BUILD}/${cfg} ${SCRIPT_BASE}/docker-build.sh "$(echo ${dockerid} | sed "s@${account}${name}:@@")" ${build_type} >&${BUILD}/${cfg}.log
 			log_result $? ${BUILD}/${cfg}.log

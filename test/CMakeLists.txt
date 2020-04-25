@@ -202,7 +202,10 @@ target_include_directories(testrunner
 
 target_link_libraries(testrunner
 	marnav::marnav
-	gmock::gmock
+	googletest::gtest
+	googletest::gmock
+	googletest::gtest_main
+	googletest::gmock_main
 	pthread
 	)
 
