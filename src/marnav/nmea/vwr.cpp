@@ -10,7 +10,7 @@ constexpr sentence_id vwr::ID;
 constexpr const char * vwr::TAG;
 
 vwr::vwr()
-	: sentence(ID, TAG, talker_id::integrated_instrumentation)
+	: sentence(ID, TAG, talker::integrated_instrumentation)
 {
 }
 

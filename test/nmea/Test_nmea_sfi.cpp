@@ -34,13 +34,13 @@ TEST_F(Test_nmea_sfi, parse)
 TEST_F(Test_nmea_sfi, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::sfi>(nmea::talker_id::none, {1, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::sfi>(nmea::talker::none, {1, "@"}));
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::sfi>(nmea::talker_id::none, {3, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::sfi>(nmea::talker::none, {3, "@"}));
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::sfi>(nmea::talker_id::none, {23, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::sfi>(nmea::talker::none, {23, "@"}));
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::sfi>(nmea::talker_id::none, {24, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::sfi>(nmea::talker::none, {24, "@"}));
 }
 
 TEST_F(Test_nmea_sfi, empty_to_string)

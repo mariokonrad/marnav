@@ -10,7 +10,7 @@ constexpr sentence_id zdl::ID;
 constexpr const char * zdl::TAG;
 
 zdl::zdl()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

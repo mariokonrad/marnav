@@ -1,10 +1,10 @@
-#ifndef MARNAV__NMEA__NAME__HPP
-#define MARNAV__NMEA__NAME__HPP
+#ifndef MARNAV_NMEA_NAME_HPP
+#define MARNAV_NMEA_NAME_HPP
 
-#include <string>
-#include <marnav/nmea/sentence_id.hpp>
 #include <marnav/nmea/constants.hpp>
+#include <marnav/nmea/sentence_id.hpp>
 #include <marnav/nmea/talker_id.hpp>
+#include <string>
 
 namespace marnav
 {

@@ -10,7 +10,7 @@ constexpr sentence_id wcv::ID;
 constexpr const char * wcv::TAG;
 
 wcv::wcv()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

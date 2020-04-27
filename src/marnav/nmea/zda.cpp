@@ -10,7 +10,7 @@ constexpr sentence_id zda::ID;
 constexpr const char * zda::TAG;
 
 zda::zda()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

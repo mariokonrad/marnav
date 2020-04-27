@@ -194,7 +194,7 @@ std::tuple<talker, std::string> parse_address(const std::string & address)
 	// if the address is found as-is, it's a proprietary sentence, respectively
 	// an address without a talker.
 	if (find_tag(address) != std::end(known_sentences))
-		return make_tuple(talker_id::none, address);
+		return make_tuple(talker::none, address);
 
 	// if the address looks like a regular address, we search for it, if not, it's an error
 	if (address.size() != 5u) // talker ID:2 + tag:3
@@ -318,7 +318,7 @@ sentence_id tag_to_id(const std::string & tag)
 /// @endcode
 std::unique_ptr<sentence> make_sentence(const std::string & s, checksum_handling chksum)
 {
-	talker talk{talker_id::none};
+	talker talk{talker::none};
 	std::string tag;
 	std::string tag_block;
 	std::vector<std::string> fields;
@@ -354,7 +354,7 @@ sentence_id extract_id(const std::string & s)
 	if (pos == std::string::npos)
 		throw std::invalid_argument{"malformed sentence in extract_id"};
 
-	talker talk{talker_id::none};
+	talker talk{talker::none};
 	std::string tag;
 	std::tie(talk, tag) = detail::parse_address(s.substr(search_pos + 1, pos - search_pos - 1));
 

@@ -10,7 +10,7 @@ constexpr sentence_id rsa::ID;
 constexpr const char * rsa::TAG;
 
 rsa::rsa()
-	: sentence(ID, TAG, talker_id::integrated_instrumentation)
+	: sentence(ID, TAG, talker::integrated_instrumentation)
 {
 }
 

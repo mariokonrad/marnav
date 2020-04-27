@@ -11,7 +11,7 @@ constexpr sentence_id gns::ID;
 constexpr const char * gns::TAG;
 
 gns::gns()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

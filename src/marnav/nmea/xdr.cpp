@@ -25,7 +25,7 @@ constexpr const char * xdr::TAG;
 constexpr int xdr::max_transducer_info;
 
 xdr::xdr()
-	: sentence(ID, TAG, talker_id::transducer)
+	: sentence(ID, TAG, talker::transducer)
 {
 }
 

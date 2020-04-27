@@ -11,7 +11,7 @@ constexpr sentence_id hfb::ID;
 constexpr const char * hfb::TAG;
 
 hfb::hfb()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

@@ -11,7 +11,7 @@ constexpr const char * rte::TAG;
 constexpr int rte::max_waypoints;
 
 rte::rte()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

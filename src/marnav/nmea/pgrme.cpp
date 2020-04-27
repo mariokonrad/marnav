@@ -10,7 +10,7 @@ constexpr sentence_id pgrme::ID;
 constexpr const char * pgrme::TAG;
 
 pgrme::pgrme()
-	: sentence(ID, TAG, talker_id::none)
+	: sentence(ID, TAG, talker::none)
 {
 }
 

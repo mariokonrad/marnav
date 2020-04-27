@@ -13,7 +13,7 @@ constexpr const char * gsa::TAG;
 constexpr int gsa::max_satellite_ids;
 
 gsa::gsa()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

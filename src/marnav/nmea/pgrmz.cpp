@@ -49,7 +49,7 @@ constexpr sentence_id pgrmz::ID;
 constexpr const char * pgrmz::TAG;
 
 pgrmz::pgrmz()
-	: sentence(ID, TAG, talker_id::none)
+	: sentence(ID, TAG, talker::none)
 {
 }
 

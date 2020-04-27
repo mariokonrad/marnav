@@ -52,9 +52,9 @@ TEST_F(Test_nmea_gga, parse_failure)
 TEST_F(Test_nmea_gga, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::gga>(nmea::talker_id::none, {13, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::gga>(nmea::talker::none, {13, "@"}));
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::gga>(nmea::talker_id::none, {15, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::gga>(nmea::talker::none, {15, "@"}));
 }
 
 TEST_F(Test_nmea_gga, empty_to_string)

@@ -10,7 +10,7 @@ constexpr sentence_id dpt::ID;
 constexpr const char * dpt::TAG;
 
 dpt::dpt()
-	: dpt(talker_id::integrated_instrumentation)
+	: dpt(talker::integrated_instrumentation)
 {
 }
 

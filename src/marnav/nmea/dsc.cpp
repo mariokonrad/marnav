@@ -160,7 +160,7 @@ constexpr sentence_id dsc::ID;
 constexpr const char * dsc::TAG;
 
 dsc::dsc()
-	: sentence(ID, TAG, talker_id::communications_dsc)
+	: sentence(ID, TAG, talker::communications_dsc)
 {
 }
 

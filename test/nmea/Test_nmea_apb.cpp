@@ -34,9 +34,9 @@ TEST_F(Test_nmea_apb, parse)
 TEST_F(Test_nmea_apb, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::apb>(nmea::talker_id::none, {13, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::apb>(nmea::talker::none, {13, "@"}));
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::apb>(nmea::talker_id::none, {16, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::apb>(nmea::talker::none, {16, "@"}));
 }
 
 TEST_F(Test_nmea_apb, empty_to_string)

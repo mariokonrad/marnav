@@ -10,7 +10,7 @@ constexpr sentence_id glc::ID;
 constexpr const char * glc::TAG;
 
 glc::glc()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 	, master_({0, nmea::status::warning})
 {
 }

@@ -10,7 +10,7 @@ constexpr sentence_id hdt::ID;
 constexpr const char * hdt::TAG;
 
 hdt::hdt()
-	: sentence(ID, TAG, talker_id::integrated_instrumentation)
+	: sentence(ID, TAG, talker::integrated_instrumentation)
 {
 }
 

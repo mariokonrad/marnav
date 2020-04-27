@@ -12,7 +12,7 @@ constexpr const char * gtd::TAG;
 constexpr int gtd::max_time_diffs;
 
 gtd::gtd()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 	, time_diffs_({{0.0, 0.0, 0.0, 0.0, 0.0}})
 {
 }

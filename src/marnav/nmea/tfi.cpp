@@ -47,7 +47,7 @@ constexpr const char * tfi::TAG;
 constexpr const int tfi::num_sensors;
 
 tfi::tfi()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 	for (auto & t : sensors_)
 		t = state::no_answer;

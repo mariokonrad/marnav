@@ -43,7 +43,7 @@ constexpr sentence_id rpm::ID;
 constexpr const char * rpm::TAG;
 
 rpm::rpm()
-	: sentence(ID, TAG, talker_id::integrated_instrumentation)
+	: sentence(ID, TAG, talker::integrated_instrumentation)
 {
 }
 

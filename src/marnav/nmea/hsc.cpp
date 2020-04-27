@@ -10,7 +10,7 @@ constexpr sentence_id hsc::ID;
 constexpr const char * hsc::TAG;
 
 hsc::hsc()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

@@ -80,8 +80,6 @@ enum class talker {
 	ais_physical_shore_station
 };
 
-using talker_id = talker; // deprecated
-
 std::string to_string(talker t);
 talker make_talker(const std::string & s);
 }

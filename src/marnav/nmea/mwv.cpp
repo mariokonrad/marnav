@@ -10,7 +10,7 @@ constexpr sentence_id mwv::ID;
 constexpr const char * mwv::TAG;
 
 mwv::mwv()
-	: sentence(ID, TAG, talker_id::integrated_instrumentation)
+	: sentence(ID, TAG, talker::integrated_instrumentation)
 {
 }
 

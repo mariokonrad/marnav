@@ -10,7 +10,7 @@ constexpr sentence_id dbk::ID;
 constexpr const char * dbk::TAG;
 
 dbk::dbk()
-	: sentence(ID, TAG, talker_id::integrated_instrumentation)
+	: sentence(ID, TAG, talker::integrated_instrumentation)
 {
 }
 

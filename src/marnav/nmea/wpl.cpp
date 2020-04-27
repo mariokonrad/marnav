@@ -11,7 +11,7 @@ constexpr sentence_id wpl::ID;
 constexpr const char * wpl::TAG;
 
 wpl::wpl()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

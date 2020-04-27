@@ -11,7 +11,7 @@ constexpr sentence_id bec::ID;
 constexpr const char * bec::TAG;
 
 bec::bec()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

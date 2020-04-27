@@ -42,9 +42,9 @@ TEST_F(Test_nmea_mwv, parse)
 TEST_F(Test_nmea_mwv, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::mwv>(nmea::talker_id::none, {4, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::mwv>(nmea::talker::none, {4, "@"}));
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::mwv>(nmea::talker_id::none, {6, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::mwv>(nmea::talker::none, {6, "@"}));
 }
 
 TEST_F(Test_nmea_mwv, empty_to_string)

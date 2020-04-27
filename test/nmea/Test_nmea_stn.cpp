@@ -46,7 +46,7 @@ TEST_F(Test_nmea_stn, create_sentence_exception)
 TEST_F(Test_nmea_stn, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::stn>(nmea::talker_id::none, {2, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::stn>(nmea::talker::none, {2, "@"}));
 }
 
 TEST_F(Test_nmea_stn, empty_to_string)

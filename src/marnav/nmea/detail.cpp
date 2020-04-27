@@ -53,7 +53,7 @@ extract_sentence_information(const std::string & s, checksum_handling chksum)
 	// extract address and posibly talker_id and tag.
 	// check for vendor extension is necessary because the address field of this extensions
 	// to not follow the pattern talker_id/tag
-	talker talk{talker_id::none};
+	talker talk{talker::none};
 	std::string tag;
 	std::tie(talk, tag) = detail::parse_address(fields.front());
 

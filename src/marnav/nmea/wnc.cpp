@@ -10,7 +10,7 @@ constexpr sentence_id wnc::ID;
 constexpr const char * wnc::TAG;
 
 wnc::wnc()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

@@ -11,7 +11,7 @@ constexpr sentence_id gll::ID;
 constexpr const char * gll::TAG;
 
 gll::gll()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 	, mode_ind_(mode_indicator::invalid)
 {
 }

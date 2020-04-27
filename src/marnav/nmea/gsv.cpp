@@ -23,7 +23,7 @@ constexpr sentence_id gsv::ID;
 constexpr const char * gsv::TAG;
 
 gsv::gsv()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

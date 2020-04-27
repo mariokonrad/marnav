@@ -12,7 +12,7 @@ constexpr sentence_id vdm::ID;
 constexpr const char * vdm::TAG;
 
 vdm::vdm()
-	: sentence(ID, TAG, talker_id::ais_mobile_station)
+	: sentence(ID, TAG, talker::ais_mobile_station)
 {
 }
 

@@ -10,7 +10,7 @@ constexpr sentence_id msk::ID;
 constexpr const char * msk::TAG;
 
 msk::msk()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

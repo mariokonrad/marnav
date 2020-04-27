@@ -12,7 +12,7 @@ constexpr sentence_id rmc::ID;
 constexpr const char * rmc::TAG;
 
 rmc::rmc()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

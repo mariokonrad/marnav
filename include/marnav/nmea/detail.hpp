@@ -1,12 +1,12 @@
-#ifndef MARNAV__NMEA__DETAIL__HPP
-#define MARNAV__NMEA__DETAIL__HPP
+#ifndef MARNAV_NMEA_DETAIL_HPP
+#define MARNAV_NMEA_DETAIL_HPP
 
+#include <marnav/nmea/checksum_enum.hpp>
+#include <marnav/nmea/talker_id.hpp>
 #include <string>
 #include <tuple>
 #include <type_traits>
 #include <vector>
-#include <marnav/nmea/talker_id.hpp>
-#include <marnav/nmea/checksum_enum.hpp>
 
 namespace marnav
 {

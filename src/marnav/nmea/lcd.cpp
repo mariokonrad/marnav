@@ -12,7 +12,7 @@ constexpr const char * lcd::TAG;
 constexpr int lcd::max_differences;
 
 lcd::lcd()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 	, master_({0, 0})
 {
 }

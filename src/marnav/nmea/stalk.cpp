@@ -13,7 +13,7 @@ constexpr int stalk::MIN_FIELDS;
 constexpr int stalk::MAX_FIELDS;
 
 stalk::stalk()
-	: sentence(ID, TAG, talker_id::none)
+	: sentence(ID, TAG, talker::none)
 {
 }
 

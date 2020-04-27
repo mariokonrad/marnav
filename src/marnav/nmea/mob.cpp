@@ -118,7 +118,7 @@ constexpr sentence_id mob::ID;
 constexpr const char * mob::TAG;
 
 mob::mob()
-	: sentence(ID, TAG, talker_id::integrated_navigation)
+	: sentence(ID, TAG, talker::integrated_navigation)
 {
 }
 

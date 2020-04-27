@@ -11,7 +11,7 @@ constexpr sentence_id gga::ID;
 constexpr const char * gga::TAG;
 
 gga::gga()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

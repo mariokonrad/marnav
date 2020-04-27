@@ -10,7 +10,7 @@ constexpr sentence_id apa::ID;
 constexpr const char * apa::TAG;
 
 apa::apa()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

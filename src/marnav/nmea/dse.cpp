@@ -81,7 +81,7 @@ constexpr sentence_id dse::ID;
 constexpr const char * dse::TAG;
 
 dse::dse()
-	: sentence(ID, TAG, talker_id::communications_dsc)
+	: sentence(ID, TAG, talker::communications_dsc)
 {
 }
 

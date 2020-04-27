@@ -37,9 +37,9 @@ TEST_F(Test_nmea_vhw, parse)
 TEST_F(Test_nmea_vhw, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::vhw>(nmea::talker_id::none, {7, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::vhw>(nmea::talker::none, {7, "@"}));
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::vhw>(nmea::talker_id::none, {9, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::vhw>(nmea::talker::none, {9, "@"}));
 }
 
 TEST_F(Test_nmea_vhw, empty_to_string)

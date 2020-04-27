@@ -10,7 +10,7 @@ constexpr sentence_id osd::ID;
 constexpr const char * osd::TAG;
 
 osd::osd()
-	: sentence(ID, TAG, talker_id::integrated_instrumentation)
+	: sentence(ID, TAG, talker::integrated_instrumentation)
 {
 }
 

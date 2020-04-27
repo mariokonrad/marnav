@@ -11,7 +11,7 @@ constexpr sentence_id rma::ID;
 constexpr const char * rma::TAG;
 
 rma::rma()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

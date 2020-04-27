@@ -10,7 +10,7 @@ constexpr sentence_id gst::ID;
 constexpr const char * gst::TAG;
 
 gst::gst()
-	: sentence(ID, TAG, talker_id::global_positioning_system)
+	: sentence(ID, TAG, talker::global_positioning_system)
 {
 }
 

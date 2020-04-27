@@ -1,15 +1,15 @@
-#ifndef MARNAV__NMEA__SENTENCE__HPP
-#define MARNAV__NMEA__SENTENCE__HPP
+#ifndef MARNAV_NMEA_SENTENCE_HPP
+#define MARNAV_NMEA_SENTENCE_HPP
 
+#include <marnav/nmea/constants.hpp>
+#include <marnav/nmea/talker_id.hpp>
+#include <marnav/nmea/sentence_id.hpp>
+#include <marnav/nmea/detail.hpp>
 #include <functional>
 #include <memory>
 #include <string>
 #include <type_traits>
 #include <vector>
-#include <marnav/nmea/constants.hpp>
-#include <marnav/nmea/talker_id.hpp>
-#include <marnav/nmea/sentence_id.hpp>
-#include <marnav/nmea/detail.hpp>
 
 namespace marnav
 {
@@ -168,7 +168,7 @@ public:
 		typename std::enable_if<std::is_base_of<sentence, T>::value, int>::type = 0>
 	static T create_sentence(const std::string & s)
 	{
-		talker talk{talker_id::none};
+		talker talk{talker::none};
 		std::string tag;
 		std::string tag_block;
 		std::vector<std::string> fields;
