@@ -46,18 +46,18 @@ TEST_F(Test_nmea_rmb, empty_to_string)
 	EXPECT_STREQ("$GPRMB,,,,,,,,,,,,,,*4A", nmea::to_string(rmb).c_str());
 }
 
-TEST_F(Test_nmea_rmb, set_waypoint_from)
-{
-	nmea::rmb rmb;
-	rmb.set_waypoint_from(nmea::waypoint{"POINT1"});
-
-	EXPECT_STREQ("$GPRMB,,,,,POINT1,,,,,,,,,*37", nmea::to_string(rmb).c_str());
-}
-
 TEST_F(Test_nmea_rmb, set_waypoint_to)
 {
 	nmea::rmb rmb;
 	rmb.set_waypoint_to(nmea::waypoint{"POINT1"});
+
+	EXPECT_STREQ("$GPRMB,,,,,POINT1,,,,,,,,,*37", nmea::to_string(rmb).c_str());
+}
+
+TEST_F(Test_nmea_rmb, set_waypoint_from)
+{
+	nmea::rmb rmb;
+	rmb.set_waypoint_from(nmea::waypoint{"POINT1"});
 
 	EXPECT_STREQ("$GPRMB,,,,POINT1,,,,,,,,,,*37", nmea::to_string(rmb).c_str());
 }

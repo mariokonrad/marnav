@@ -192,8 +192,8 @@ static QString details_rmb(const marnav::nmea::sentence * s)
 	QString result;
 	result += "\nActive           : " + render(t->get_active());
 	result += "\nCross Track Error: " + render(t->get_cross_track_error());
-	result += "\nWaypoint To      : " + render(t->get_waypoint_to());
 	result += "\nWaypoint From    : " + render(t->get_waypoint_from());
+	result += "\nWaypoint To      : " + render(t->get_waypoint_to());
 	result += "\nLatitude         : " + render(t->get_lat());
 	result += "\nLongitude        : " + render(t->get_lon());
 	result += "\nRange            : " + render(t->get_range());

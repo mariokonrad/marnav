@@ -30,8 +30,8 @@ namespace nmea
 /// 3.  Direction to Steer
 ///     - L = Left
 ///     - R = Right
-/// 4.  TO Waypoint ID
-/// 5.  FROM Waypoint ID
+/// 4.  Origin Waypoint ID
+/// 5.  Destination Waypoint ID
 /// 6.  Destination Waypoint Latitude
 /// 7.  Destination Waypoint Latitude hemisphere
 ///     - N = North
@@ -76,8 +76,8 @@ private:
 	utils::optional<units::nautical_miles>
 		cross_track_error_; // cross track error in nautical miles
 	utils::optional<side> steer_dir_; // direction to steer, left or right
-	utils::optional<waypoint> waypoint_to_; // TO waypoint ID
-	utils::optional<waypoint> waypoint_from_; // FROM waypoint ID
+	utils::optional<waypoint> waypoint_from_; // Origin waypoint ID
+	utils::optional<waypoint> waypoint_to_; // Destination waypoint ID
 	utils::optional<geo::latitude> lat_; // destination waypoint latitude
 	utils::optional<direction> lat_hem_; // destination waypoint latitude dir, N:north, S:south
 	utils::optional<geo::longitude> lon_; // destination waypoint longitude

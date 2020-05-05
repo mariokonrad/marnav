@@ -26,8 +26,8 @@ rmb::rmb(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 0), active_);
 	read(*(first + 1), cross_track_error_);
 	read(*(first + 2), steer_dir_);
-	read(*(first + 3), waypoint_to_);
-	read(*(first + 4), waypoint_from_);
+	read(*(first + 3), waypoint_from_);
+	read(*(first + 4), waypoint_to_);
 	read(*(first + 5), lat_);
 	read(*(first + 6), lat_hem_);
 	read(*(first + 7), lon_);
@@ -115,8 +115,8 @@ void rmb::append_data_to(std::string & s) const
 	append(s, to_string(active_));
 	append(s, to_string(cross_track_error_));
 	append(s, to_string(steer_dir_));
-	append(s, to_string(waypoint_to_));
 	append(s, to_string(waypoint_from_));
+	append(s, to_string(waypoint_to_));
 	append(s, to_string(lat_));
 	append(s, to_string(lat_hem_));
 	append(s, to_string(lon_));

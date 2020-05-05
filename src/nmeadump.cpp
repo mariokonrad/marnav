@@ -778,8 +778,8 @@ static void print_detail_rmb(const marnav::nmea::sentence * s)
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::rmb>(s);
 	print("Active", render(t->get_active()));
 	print("Cross Track Error", render(t->get_cross_track_error()));
-	print("Waypoint To", render(t->get_waypoint_to()));
 	print("Waypoint From", render(t->get_waypoint_from()));
+	print("Waypoint To", render(t->get_waypoint_to()));
 	print("Latitude", render(t->get_lat()));
 	print("Longitude", render(t->get_lon()));
 	print("Range", render(t->get_range()));
