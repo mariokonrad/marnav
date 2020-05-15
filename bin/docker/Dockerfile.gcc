@@ -3,7 +3,7 @@ ARG compiler_version=9.3.0
 FROM gcc:${compiler_version}
 LABEL maintainer="Mario Konrad <mario.konrad@gmx.net>"
 
-ARG cmake_version=3.17.1
+ARG cmake_version=3.17.2
 ARG boost_version=1.72.0
 
 USER root
