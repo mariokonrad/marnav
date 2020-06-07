@@ -5,3 +5,4 @@ tmp
 .bash_history
 CMakeLists.txt.user
 .ctags
+.clangd
