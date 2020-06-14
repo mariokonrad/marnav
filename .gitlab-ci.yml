@@ -1,0 +1,22 @@
+.build_template: &build_definition
+  script:
+    - cmake -B      build -DCMAKE_BUILD_TYPE=${BUILD_TYPE} .
+    - cmake --build build -j
+    - cmake --build build --target unittest
+    - cmake --build build --target test
+    - bin/test-library.sh
+
+build:gcc-10.1.0:
+  variables:
+    COMPILER: gcc-10.1.0
+    BUILD_TYPE: Release
+  image: mariokonrad/marnav:${COMPILER}
+  <<: *build_definition
+
+build:clang-10.0.0:
+  variables:
+    COMPILER: clang-10.0.0
+    BUILD_TYPE: Release
+  image: mariokonrad/marnav:${COMPILER}
+  <<: *build_definition
+
