@@ -219,7 +219,7 @@ Basic geodesic functions, suitable for martime navigation.
 Examples
 --------
 
-More examples [here](doc/examples.md).
+More examples [here](examples/README.md).
 
 ### Parse NMEA Sentence
 
