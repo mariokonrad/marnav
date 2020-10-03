@@ -3,7 +3,6 @@
 
 namespace
 {
-
 using marnav::utils::mmsi;
 
 class Test_utils_mmsi : public ::testing::Test
@@ -51,6 +50,10 @@ TEST_F(Test_utils_mmsi, regular)
 	EXPECT_FALSE(m.is_mob());
 	EXPECT_FALSE(m.is_epirb_ais());
 
+	EXPECT_EQ(269u, m.mid());
+	EXPECT_EQ(263111u, m.id());
+	EXPECT_EQ(0u, m.man());
+
 	EXPECT_EQ(269u, m.regular_mid());
 	EXPECT_EQ(263111u, m.regular_id());
 	EXPECT_EQ(0u, m.group_mid());
@@ -59,9 +62,16 @@ TEST_F(Test_utils_mmsi, regular)
 	EXPECT_EQ(0u, m.auxiliary_id());
 	EXPECT_EQ(0u, m.coastal_mid());
 	EXPECT_EQ(0u, m.coastal_id());
-	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
 	EXPECT_EQ(0u, m.sar_mid());
+	EXPECT_EQ(0u, m.sar_id());
+	EXPECT_EQ(0u, m.sart_id());
+	EXPECT_EQ(0u, m.epirb_ais_id());
+	EXPECT_EQ(0u, m.ais_aids_id());
+
+	EXPECT_EQ(0u, m.sart_man());
+	EXPECT_EQ(0u, m.mob_man());
+	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
 TEST_F(Test_utils_mmsi, group)
@@ -77,6 +87,10 @@ TEST_F(Test_utils_mmsi, group)
 	EXPECT_FALSE(m.is_mob());
 	EXPECT_FALSE(m.is_epirb_ais());
 
+	EXPECT_EQ(269u, m.mid());
+	EXPECT_EQ(11111u, m.id());
+	EXPECT_EQ(0u, m.man());
+
 	EXPECT_EQ(0u, m.regular_mid());
 	EXPECT_EQ(0u, m.regular_id());
 	EXPECT_EQ(269u, m.group_mid());
@@ -85,9 +99,16 @@ TEST_F(Test_utils_mmsi, group)
 	EXPECT_EQ(0u, m.auxiliary_id());
 	EXPECT_EQ(0u, m.coastal_mid());
 	EXPECT_EQ(0u, m.coastal_id());
-	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
 	EXPECT_EQ(0u, m.sar_mid());
+	EXPECT_EQ(0u, m.sar_id());
+	EXPECT_EQ(0u, m.sart_id());
+	EXPECT_EQ(0u, m.epirb_ais_id());
+	EXPECT_EQ(0u, m.ais_aids_id());
+
+	EXPECT_EQ(0u, m.sart_man());
+	EXPECT_EQ(0u, m.mob_man());
+	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
 TEST_F(Test_utils_mmsi, auxiliary)
@@ -103,6 +124,10 @@ TEST_F(Test_utils_mmsi, auxiliary)
 	EXPECT_FALSE(m.is_mob());
 	EXPECT_FALSE(m.is_epirb_ais());
 
+	EXPECT_EQ(269u, m.mid());
+	EXPECT_EQ(1111u, m.id());
+	EXPECT_EQ(0u, m.man());
+
 	EXPECT_EQ(0u, m.regular_mid());
 	EXPECT_EQ(0u, m.regular_id());
 	EXPECT_EQ(0u, m.group_mid());
@@ -111,9 +136,16 @@ TEST_F(Test_utils_mmsi, auxiliary)
 	EXPECT_EQ(1111u, m.auxiliary_id());
 	EXPECT_EQ(0u, m.coastal_mid());
 	EXPECT_EQ(0u, m.coastal_id());
-	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
 	EXPECT_EQ(0u, m.sar_mid());
+	EXPECT_EQ(0u, m.sar_id());
+	EXPECT_EQ(0u, m.sart_id());
+	EXPECT_EQ(0u, m.epirb_ais_id());
+	EXPECT_EQ(0u, m.ais_aids_id());
+
+	EXPECT_EQ(0u, m.sart_man());
+	EXPECT_EQ(0u, m.mob_man());
+	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
 TEST_F(Test_utils_mmsi, ais_aids)
@@ -129,6 +161,10 @@ TEST_F(Test_utils_mmsi, ais_aids)
 	EXPECT_FALSE(m.is_mob());
 	EXPECT_FALSE(m.is_epirb_ais());
 
+	EXPECT_EQ(0u, m.mid());
+	EXPECT_EQ(1111u, m.id());
+	EXPECT_EQ(0u, m.man());
+
 	EXPECT_EQ(0u, m.regular_mid());
 	EXPECT_EQ(0u, m.regular_id());
 	EXPECT_EQ(0u, m.group_mid());
@@ -137,9 +173,16 @@ TEST_F(Test_utils_mmsi, ais_aids)
 	EXPECT_EQ(0u, m.auxiliary_id());
 	EXPECT_EQ(0u, m.coastal_mid());
 	EXPECT_EQ(0u, m.coastal_id());
-	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
 	EXPECT_EQ(0u, m.sar_mid());
+	EXPECT_EQ(0u, m.sar_id());
+	EXPECT_EQ(0u, m.sart_id());
+	EXPECT_EQ(0u, m.epirb_ais_id());
+	EXPECT_EQ(1111u, m.ais_aids_id());
+
+	EXPECT_EQ(0u, m.sart_man());
+	EXPECT_EQ(0u, m.mob_man());
+	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
 TEST_F(Test_utils_mmsi, coastal)
@@ -157,6 +200,10 @@ TEST_F(Test_utils_mmsi, coastal)
 	EXPECT_FALSE(m.is_mob());
 	EXPECT_FALSE(m.is_epirb_ais());
 
+	EXPECT_EQ(269u, m.mid());
+	EXPECT_EQ(1111u, m.id());
+	EXPECT_EQ(0u, m.man());
+
 	EXPECT_EQ(0u, m.regular_mid());
 	EXPECT_EQ(0u, m.regular_id());
 	EXPECT_EQ(0u, m.group_mid());
@@ -165,9 +212,16 @@ TEST_F(Test_utils_mmsi, coastal)
 	EXPECT_EQ(0u, m.auxiliary_id());
 	EXPECT_EQ(269u, m.coastal_mid());
 	EXPECT_EQ(1111u, m.coastal_id());
-	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
 	EXPECT_EQ(0u, m.sar_mid());
+	EXPECT_EQ(0u, m.sar_id());
+	EXPECT_EQ(0u, m.sart_id());
+	EXPECT_EQ(0u, m.epirb_ais_id());
+	EXPECT_EQ(0u, m.ais_aids_id());
+
+	EXPECT_EQ(0u, m.sart_man());
+	EXPECT_EQ(0u, m.mob_man());
+	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
 TEST_F(Test_utils_mmsi, coastal_all)
@@ -216,6 +270,10 @@ TEST_F(Test_utils_mmsi, sar_aircraft)
 	EXPECT_FALSE(m.is_mob());
 	EXPECT_FALSE(m.is_epirb_ais());
 
+	EXPECT_EQ(269u, m.mid());
+	EXPECT_EQ(123u, m.id());
+	EXPECT_EQ(0u, m.man());
+
 	EXPECT_EQ(0u, m.regular_mid());
 	EXPECT_EQ(0u, m.regular_id());
 	EXPECT_EQ(0u, m.group_mid());
@@ -224,9 +282,16 @@ TEST_F(Test_utils_mmsi, sar_aircraft)
 	EXPECT_EQ(0u, m.auxiliary_id());
 	EXPECT_EQ(0u, m.coastal_mid());
 	EXPECT_EQ(0u, m.coastal_id());
-	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
 	EXPECT_EQ(269u, m.sar_mid());
+	EXPECT_EQ(123u, m.sar_id());
+	EXPECT_EQ(0u, m.sart_id());
+	EXPECT_EQ(0u, m.epirb_ais_id());
+	EXPECT_EQ(0u, m.ais_aids_id());
+
+	EXPECT_EQ(0u, m.sart_man());
+	EXPECT_EQ(0u, m.mob_man());
+	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
 TEST_F(Test_utils_mmsi, sart)
@@ -243,6 +308,10 @@ TEST_F(Test_utils_mmsi, sart)
 	EXPECT_FALSE(m.is_mob());
 	EXPECT_FALSE(m.is_epirb_ais());
 
+	EXPECT_EQ(0u, m.mid());
+	EXPECT_EQ(9123u, m.id());
+	EXPECT_EQ(26u, m.man());
+
 	EXPECT_EQ(0u, m.regular_mid());
 	EXPECT_EQ(0u, m.regular_id());
 	EXPECT_EQ(0u, m.group_mid());
@@ -251,9 +320,16 @@ TEST_F(Test_utils_mmsi, sart)
 	EXPECT_EQ(0u, m.auxiliary_id());
 	EXPECT_EQ(0u, m.coastal_mid());
 	EXPECT_EQ(0u, m.coastal_id());
-	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
 	EXPECT_EQ(0u, m.sar_mid());
+	EXPECT_EQ(0u, m.sar_id());
+	EXPECT_EQ(9123u, m.sart_id());
+	EXPECT_EQ(0u, m.epirb_ais_id());
+	EXPECT_EQ(0u, m.ais_aids_id());
+
+	EXPECT_EQ(26u, m.sart_man());
+	EXPECT_EQ(0u, m.mob_man());
+	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
 TEST_F(Test_utils_mmsi, mob)
@@ -270,6 +346,10 @@ TEST_F(Test_utils_mmsi, mob)
 	EXPECT_TRUE(m.is_mob());
 	EXPECT_FALSE(m.is_epirb_ais());
 
+	EXPECT_EQ(0u, m.mid());
+	EXPECT_EQ(9123u, m.id());
+	EXPECT_EQ(26u, m.man());
+
 	EXPECT_EQ(0u, m.regular_mid());
 	EXPECT_EQ(0u, m.regular_id());
 	EXPECT_EQ(0u, m.group_mid());
@@ -278,9 +358,16 @@ TEST_F(Test_utils_mmsi, mob)
 	EXPECT_EQ(0u, m.auxiliary_id());
 	EXPECT_EQ(0u, m.coastal_mid());
 	EXPECT_EQ(0u, m.coastal_id());
-	EXPECT_EQ(269u, m.mob_mid());
-	EXPECT_EQ(123u, m.mob_id());
+	EXPECT_EQ(9123u, m.mob_id());
 	EXPECT_EQ(0u, m.sar_mid());
+	EXPECT_EQ(0u, m.sar_id());
+	EXPECT_EQ(0u, m.sart_id());
+	EXPECT_EQ(0u, m.epirb_ais_id());
+	EXPECT_EQ(0u, m.ais_aids_id());
+
+	EXPECT_EQ(0u, m.sart_man());
+	EXPECT_EQ(26u, m.mob_man());
+	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
 TEST_F(Test_utils_mmsi, eprib_ais)
@@ -297,6 +384,10 @@ TEST_F(Test_utils_mmsi, eprib_ais)
 	EXPECT_FALSE(m.is_mob());
 	EXPECT_TRUE(m.is_epirb_ais());
 
+	EXPECT_EQ(0u, m.mid());
+	EXPECT_EQ(9123u, m.id());
+	EXPECT_EQ(26u, m.man());
+
 	EXPECT_EQ(0u, m.regular_mid());
 	EXPECT_EQ(0u, m.regular_id());
 	EXPECT_EQ(0u, m.group_mid());
@@ -305,8 +396,15 @@ TEST_F(Test_utils_mmsi, eprib_ais)
 	EXPECT_EQ(0u, m.auxiliary_id());
 	EXPECT_EQ(0u, m.coastal_mid());
 	EXPECT_EQ(0u, m.coastal_id());
-	EXPECT_EQ(0u, m.mob_mid());
 	EXPECT_EQ(0u, m.mob_id());
 	EXPECT_EQ(0u, m.sar_mid());
+	EXPECT_EQ(0u, m.sar_id());
+	EXPECT_EQ(0u, m.sart_id());
+	EXPECT_EQ(9123u, m.epirb_ais_id());
+	EXPECT_EQ(0u, m.ais_aids_id());
+
+	EXPECT_EQ(0u, m.sart_man());
+	EXPECT_EQ(0u, m.mob_man());
+	EXPECT_EQ(26u, m.epirb_ais_man());
 }
 }

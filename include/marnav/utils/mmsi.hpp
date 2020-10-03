@@ -11,6 +11,7 @@ namespace utils
 /// @brief Represents a MMSI (Maritime Mobile Service Identiy).
 ///
 /// @see http://www.navcen.uscg.gov/?pageName=mtMmsi
+/// @see https://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.585-8-201910-I!!PDF-E.pdf
 ///
 /// @note Not all variations and criterias are implemented.
 ///
@@ -38,7 +39,9 @@ public:
 
 	operator value_type() const { return value_; }
 
+	value_type id() const;
 	value_type mid() const;
+	value_type man() const;
 
 	value_type regular_mid() const;
 	value_type regular_id() const;
@@ -48,9 +51,16 @@ public:
 	value_type coastal_id() const;
 	value_type auxiliary_mid() const;
 	value_type auxiliary_id() const;
-	value_type mob_mid() const;
 	value_type mob_id() const;
 	value_type sar_mid() const;
+	value_type sar_id() const;
+	value_type sart_id() const;
+	value_type epirb_ais_id() const;
+	value_type ais_aids_id() const;
+
+	value_type sart_man() const;
+	value_type mob_man() const;
+	value_type epirb_ais_man() const;
 
 	bool is_regular() const;
 	bool is_group() const;
