@@ -121,33 +121,82 @@ TEST_F(Test_nmea_gsv, get_sat)
 	auto gsv = nmea::sentence_cast<nmea::gsv>(s);
 	ASSERT_NE(nullptr, gsv);
 
+	EXPECT_EQ(3u, gsv->get_n_messages());
+	EXPECT_EQ(1u, gsv->get_message_number());
+	EXPECT_EQ(11u, gsv->get_n_satellites_in_view());
+
 	{
-		auto sat = *gsv->get_sat(0);
-		EXPECT_EQ(3u, sat.id);
+		const auto sat = *gsv->get_sat(0);
+		EXPECT_EQ(3u, sat.prn);
 		EXPECT_EQ(3u, sat.elevation);
 		EXPECT_EQ(111u, sat.azimuth);
-		EXPECT_EQ(0u, sat.snr);
+		EXPECT_EQ(0u, *sat.snr);
 	}
 	{
-		auto sat = *gsv->get_sat(1);
-		EXPECT_EQ(4u, sat.id);
+		const auto sat = *gsv->get_sat(1);
+		EXPECT_EQ(4u, sat.prn);
 		EXPECT_EQ(15u, sat.elevation);
 		EXPECT_EQ(270u, sat.azimuth);
-		EXPECT_EQ(0u, sat.snr);
+		EXPECT_EQ(0u, *sat.snr);
 	}
 	{
-		auto sat = *gsv->get_sat(2);
-		EXPECT_EQ(6u, sat.id);
+		const auto sat = *gsv->get_sat(2);
+		EXPECT_EQ(6u, sat.prn);
 		EXPECT_EQ(1u, sat.elevation);
 		EXPECT_EQ(10u, sat.azimuth);
-		EXPECT_EQ(0u, sat.snr);
+		EXPECT_EQ(0u, *sat.snr);
 	}
 	{
-		auto sat = *gsv->get_sat(3);
-		EXPECT_EQ(13u, sat.id);
+		const auto sat = *gsv->get_sat(3);
+		EXPECT_EQ(13u, sat.prn);
 		EXPECT_EQ(6u, sat.elevation);
 		EXPECT_EQ(292u, sat.azimuth);
-		EXPECT_EQ(0u, sat.snr);
+		EXPECT_EQ(0u, *sat.snr);
+	}
+}
+
+TEST_F(Test_nmea_gsv, get_sat_missing_snr_github_issue_35)
+{
+	// thanks to github.com/norton-dev for providing this example
+
+	auto s = nmea::make_sentence(
+		"$GPGSV,3,1,09,09,74,265,,04,63,066,14,06,50,261,,03,32,123,31*7B");
+	ASSERT_NE(nullptr, s);
+
+	auto gsv = nmea::sentence_cast<nmea::gsv>(s);
+	ASSERT_NE(nullptr, gsv);
+
+	EXPECT_EQ(3u, gsv->get_n_messages());
+	EXPECT_EQ(1u, gsv->get_message_number());
+	EXPECT_EQ(9u, gsv->get_n_satellites_in_view());
+
+	{
+		const auto sat = *gsv->get_sat(0);
+		EXPECT_EQ(9u, sat.prn);
+		EXPECT_EQ(74u, sat.elevation);
+		EXPECT_EQ(265u, sat.azimuth);
+		EXPECT_FALSE(sat.snr);
+	}
+	{
+		const auto sat = *gsv->get_sat(1);
+		EXPECT_EQ(4u, sat.prn);
+		EXPECT_EQ(63u, sat.elevation);
+		EXPECT_EQ(66u, sat.azimuth);
+		EXPECT_EQ(14u, *sat.snr);
+	}
+	{
+		const auto sat = *gsv->get_sat(2);
+		EXPECT_EQ(6u, sat.prn);
+		EXPECT_EQ(50u, sat.elevation);
+		EXPECT_EQ(261u, sat.azimuth);
+		EXPECT_FALSE(sat.snr);
+	}
+	{
+		const auto sat = *gsv->get_sat(3);
+		EXPECT_EQ(3u, sat.prn);
+		EXPECT_EQ(32u, sat.elevation);
+		EXPECT_EQ(123u, sat.azimuth);
+		EXPECT_EQ(31u, *sat.snr);
 	}
 }
 }

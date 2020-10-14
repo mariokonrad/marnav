@@ -14,7 +14,7 @@ inline std::string to_string(const utils::optional<gsv::satellite_info> & data)
 	if (!data)
 		return std::string{",,,"};
 	auto const & value = data.value();
-	return format(value.id, 2) + "," + format(value.elevation, 2) + ","
+	return format(value.prn, 2) + "," + format(value.elevation, 2) + ","
 		+ format(value.azimuth, 3) + "," + format(value.snr, 2);
 }
 }
@@ -47,13 +47,13 @@ gsv::gsv(talker talk, fields::const_iterator first, fields::const_iterator last)
 
 	const int num_satellite_info = std::min(4, static_cast<int>((size - 3) / 4));
 	int index = 3;
-	for (int id = 0; id < num_satellite_info; ++id, index += 4) {
+	for (int i = 0; i < num_satellite_info; ++i, index += 4) {
 		satellite_info info;
-		read(*(first + index + 0), info.id);
+		read(*(first + index + 0), info.prn);
 		read(*(first + index + 1), info.elevation);
 		read(*(first + index + 2), info.azimuth);
 		read(*(first + index + 3), info.snr);
-		set_sat(id, info);
+		set_sat(i, info);
 	}
 }
 
@@ -74,7 +74,7 @@ void gsv::set_message_number(uint32_t t)
 void gsv::check_index(int index) const
 {
 	if ((index < 0) || (index > 3)) {
-		throw std::out_of_range{"satellite id out of range"};
+		throw std::out_of_range{"satellite index out of range"};
 	}
 }
 

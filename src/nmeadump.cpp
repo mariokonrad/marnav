@@ -152,6 +152,7 @@
 #include <fmt/printf.h>
 
 #include <fstream>
+#include <sstream>
 #include <iostream>
 #include <vector>
 
@@ -186,6 +187,7 @@ static struct {
 		std::string port;
 		marnav::io::serial::baud speed;
 		std::string file;
+		std::string input_string;
 	} config;
 } global;
 
@@ -207,6 +209,9 @@ static bool parse_options(int argc, char ** argv)
 		("f,file",
 			"Specifies the file to use.",
 			cxxopts::value<std::string>(global.config.file))
+		("i,input",
+			"String to parse",
+			cxxopts::value<std::string>(global.config.input_string))
 		;
 	// clang-format on
 
@@ -1049,8 +1054,8 @@ static void print_detail_gsv(const marnav::nmea::sentence * s)
 	for (int i = 0; i < 4; ++i) {
 		const auto sat = t->get_sat(i);
 		if (sat) {
-			print("Sat", fmt::sprintf("ID:%02u ELEV:%02u AZIMUTH:%03u SNR:%02u", sat->id,
-							 sat->elevation, sat->azimuth, sat->snr));
+			print("Sat", fmt::sprintf("PRN:%02u ELEV:%02u AZIMUTH:%03u SNR:%s", sat->prn,
+							 sat->elevation, sat->azimuth, render(sat->snr)));
 		}
 	}
 }
@@ -2109,6 +2114,9 @@ int main(int argc, char ** argv)
 			utils::make_unique<serial>(global.config.port, global.config.speed,
 				serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none)};
 		process([&](std::string & line) { return source.read_sentence(line); });
+	} else if (!global.config.input_string.empty()) {
+		std::istringstream is(global.config.input_string);
+		process([&](std::string & line){ return !!std::getline(is, line); });
 	} else {
 		std::cin.sync_with_stdio(false);
 		process([&](std::string & line) { return !!std::getline(std::cin, line); });

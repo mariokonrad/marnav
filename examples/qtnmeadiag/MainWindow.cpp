@@ -260,8 +260,8 @@ static QString details_gsv(const marnav::nmea::sentence * s)
 	for (int i = 0; i < 4; ++i) {
 		const auto sat = t->get_sat(i);
 		if (sat) {
-			result += QString{"\nSat: ID:%1  ELEV:%2  AZIMUTH:%3  SNR:%4"}
-						  .arg(render(sat->id), 2)
+			result += QString{"\nSat: PRN:%1  ELEV:%2  AZIMUTH:%3  SNR:%4"}
+						  .arg(render(sat->prn), 2)
 						  .arg(render(sat->elevation), 2)
 						  .arg(render(sat->azimuth), 3)
 						  .arg(render(sat->snr), 2);

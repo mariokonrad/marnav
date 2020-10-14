@@ -21,14 +21,17 @@ namespace nmea
 /// @endcode
 ///
 /// Field Number:
-/// 1. total number of GSV messages to be transmitted in this group
+/// 1. Total number of GSV messages to be transmitted in this group
 /// 2. 1-origin number of this GSV message within current group
-/// 3. total number of satellites in view (leading zeros sent)
-/// 4. satellite PRN number (leading zeros sent)
-/// 5. elevation in degrees (00-90) (leading zeros sent)
-/// 6. azimuth in degrees to true north (000-359) (leading zeros sent)
-/// 7. SNR in dB (00-99) (leading zeros sent) more satellite info quadruples like 4-7 n)
+/// 3. Total number of satellites in view (leading zeros sent)
+/// 4. Satellite PRN (pseudo random noise) number (leading zeros sent)
+/// 5. Elevation in degrees (00-90) (leading zeros sent)
+/// 6. Azimuth in degrees to true north (000-359) (leading zeros sent)
+/// 7. SNR (signal to noise ratio) in dB (00-99) (leading zeros sent),
+///    apparently this may be not defined.
 /// 8. checksum
+///
+/// after 7: more satellite info quadruples like 4-7
 ///
 /// Example:
 /// @code
@@ -45,10 +48,10 @@ class gsv : public sentence
 
 public:
 	struct satellite_info {
-		uint32_t id;
+		uint32_t prn;
 		uint32_t elevation;
 		uint32_t azimuth; // azimuth against true
-		uint32_t snr;
+		utils::optional<uint32_t> snr;
 	};
 
 	constexpr static sentence_id ID = sentence_id::GSV;
