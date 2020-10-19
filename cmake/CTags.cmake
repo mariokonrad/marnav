@@ -38,6 +38,23 @@ if(CTAGS_PATH AND CSCOPE_PATH)
 	set_source_files_properties(cscope.out PROPERTIES GENERATED true)
 	set_source_files_properties(tags PROPERTIES GENERATED true)
 
+	function(determine_ctags_argument_extra arg_extra)
+		file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/ctags-check.cpp "void f(){}")
+		execute_process(
+			COMMAND ${CTAGS_PATH} --extra=+q ${CMAKE_CURRENT_BINARY_DIR}/ctags-check.cpp
+			ERROR_VARIABLE error
+			OUTPUT_QUIET
+			ERROR_STRIP_TRAILING_WHITESPACE
+			)
+		if(error MATCHES "^.*--extras instead.*$")
+			set(arg_extra "--extras" PARENT_SCOPE)
+		else()
+			set(arg_extra "--extra" PARENT_SCOPE)
+		endif()
+	endfunction()
+
+	determine_ctags_argument_extra(arg_extra)
+
 	function(setup_ctags_target sources)
 		foreach(directory IN LISTS sources)
 			file(GLOB_RECURSE files "${directory}")
@@ -48,7 +65,7 @@ if(CTAGS_PATH AND CSCOPE_PATH)
 		configure_file("${CMAKE_BINARY_DIR}/cscope.files.in" "${CMAKE_BINARY_DIR}/cscope.files" COPYONLY)
 
 		add_custom_target(tags
-			COMMAND ${CTAGS_PATH} --c++-kinds=+p --fields=+iaS --extras=+q -L ${CMAKE_BINARY_DIR}/cscope.files
+			COMMAND ${CTAGS_PATH} --c++-kinds=+p --fields=+iaS ${arg_extra}=+q -L ${CMAKE_BINARY_DIR}/cscope.files
 			COMMAND ${CSCOPE_PATH} -b
 			WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 			)
