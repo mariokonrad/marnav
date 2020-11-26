@@ -1,4 +1,5 @@
 #include <marnav/seatalk/message_51.hpp>
+#include <marnav/math/floatingpoint.hpp>
 
 namespace marnav
 {
@@ -42,7 +43,7 @@ raw message_51::get_data() const
 {
 	uint16_t m = 0;
 	m += lon_.minutes() * 100;
-	m += (lon_.seconds() * 100) / 60;
+	m += math::float_cast<decltype(m)>((lon_.seconds() * 100) / 60);
 	if (lon_.hem() == geo::longitude::hemisphere::east)
 		m |= 0x8000;
 

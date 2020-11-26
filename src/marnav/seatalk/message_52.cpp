@@ -1,4 +1,5 @@
 #include <marnav/seatalk/message_52.hpp>
+#include <marnav/math/floatingpoint.hpp>
 #include <cmath>
 
 namespace marnav
@@ -45,7 +46,7 @@ double message_52::get_sog() const noexcept
 /// Sets the speed over ground in knots.
 void message_52::set_sog(double t) noexcept
 {
-	sog_ = std::floor(t * 10.0);
+	sog_ = math::float_cast<decltype(sog_)>(std::floor(t * 10.0));
 }
 }
 }

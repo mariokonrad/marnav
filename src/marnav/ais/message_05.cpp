@@ -1,4 +1,5 @@
 #include <marnav/ais/message_05.hpp>
+#include <marnav/math/floatingpoint.hpp>
 #include <iostream>
 
 namespace marnav
@@ -150,7 +151,7 @@ void message_05::set_draught(units::length t)
 {
 	if (t.value() < 0.0)
 		throw std::invalid_argument{"length less than zero"};
-	draught = ceil((10.0 * t).get<units::meters>()).value();
+	draught = math::float_cast<uint32_t>(ceil((10.0 * t).get<units::meters>()).value());
 }
 }
 }

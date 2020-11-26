@@ -258,6 +258,7 @@ target_compile_options(marnav
 		-Wcast-qual
 		-Werror
 		-Wdisabled-optimization
+		-Wfloat-conversion
 		-Wfloat-equal
 		-Wformat=2
 		-Wformat-security

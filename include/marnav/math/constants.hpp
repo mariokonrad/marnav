@@ -11,7 +11,7 @@ namespace math
 /// `std::atan(-1.0)*4` or `std::acos(-1.0)`.
 ///
 /// @todo This should be a variable template (>=C++14)
-constexpr double pi = 3.141592653589793238463L;
+constexpr double pi = 3.141592653589793238463;
 }
 }
 
