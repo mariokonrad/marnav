@@ -49,7 +49,19 @@ gsv::gsv(talker talk, fields::const_iterator first, fields::const_iterator last)
 	int index = 3;
 	for (int i = 0; i < num_satellite_info; ++i, index += 4) {
 		satellite_info info;
-		read(*(first + index + 0), info.prn);
+
+		// test PRN field whether it is empty or not,
+		// the satellite info is invalid/non-present if ther is no PRN
+		//
+		// this might not be the desired solution, looks clunky.
+		// maybe the `nmea::read()` functions should be refactored.
+		//
+		utils::optional<decltype(info.prn)> prn;
+		read(*(first + index + 0), prn);
+		if (!prn)
+			continue;
+		info.prn = *prn;
+
 		read(*(first + index + 1), info.elevation);
 		read(*(first + index + 2), info.azimuth);
 		read(*(first + index + 3), info.snr);

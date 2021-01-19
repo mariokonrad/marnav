@@ -199,4 +199,57 @@ TEST_F(Test_nmea_gsv, get_sat_missing_snr_github_issue_35)
 		EXPECT_EQ(31u, *sat.snr);
 	}
 }
+
+TEST_F(Test_nmea_gsv, get_satinfo_missing_github_issue_37)
+{
+	// thanks to github.com/norton-dev for providing this example
+
+	auto sentence = nmea::make_sentence(
+		"$GLGSV,3,3,10,83,11,003,,83,11,003,,,,,,,,,*64");
+	auto gsv = nmea::sentence_cast<nmea::gsv>(sentence);
+
+	EXPECT_EQ(3u, gsv->get_n_messages());
+	EXPECT_EQ(3u, gsv->get_message_number());
+	EXPECT_EQ(10u, gsv->get_n_satellites_in_view());
+
+	{
+		const auto sat = *gsv->get_sat(0);
+		EXPECT_EQ(83u, sat.prn);
+		EXPECT_EQ(11u, sat.elevation);
+		EXPECT_EQ(3u, sat.azimuth);
+		EXPECT_FALSE(sat.snr);
+	}
+	{
+		const auto sat = *gsv->get_sat(1);
+		EXPECT_EQ(83u, sat.prn);
+		EXPECT_EQ(11u, sat.elevation);
+		EXPECT_EQ(3u, sat.azimuth);
+		EXPECT_FALSE(sat.snr);
+	}
+	{
+		const auto sat = gsv->get_sat(2);
+		EXPECT_FALSE(sat.has_value());
+	}
+	{
+		const auto sat = gsv->get_sat(3);
+		EXPECT_FALSE(sat.has_value());
+	}
 }
+
+TEST_F(Test_nmea_gsv, get_satinfo_missing_github_to_string_issue_37)
+{
+	nmea::gsv gsv;
+
+	gsv.set_talker(nmea::talker::glonass);
+	gsv.set_n_messages(3u);
+	gsv.set_message_number(3u);
+	gsv.set_n_satellites_in_view(10u);
+	gsv.set_sat(0, { 83, 11, 3, {}});
+	gsv.set_sat(1, { 83, 11, 3, {}});
+
+	const auto s = to_string(gsv);
+
+	EXPECT_STREQ("$GLGSV,3,3,10,83,11,003,,83,11,003,,,,,,,,,*64", s.c_str());
+}
+}
+
