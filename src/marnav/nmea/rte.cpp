@@ -19,15 +19,16 @@ rte::rte(talker talk, fields::const_iterator first, fields::const_iterator last)
 	: sentence(ID, TAG, talk)
 {
 	const auto size = std::distance(first, last);
-	if ((size < 3) || (size > max_waypoints + 3))
+	if ((size < 4) || (size > max_waypoints + 4))
 		throw std::invalid_argument{"invalid number of fields in rte"};
 
 	read(*(first + 0), n_messages_);
 	read(*(first + 1), message_number_);
 	read(*(first + 2), message_mode_);
+	read(*(first + 3), route_id_);
 
-	for (auto i = 0; (i < max_waypoints) && (i < (size - 3)); ++i) {
-		read(*(first + i + 3), waypoint_id_[i]);
+	for (auto i = 0; (i < max_waypoints) && (i < (size - 4)); ++i) {
+		read(*(first + i + 4), waypoint_id_[i]);
 	}
 }
 
@@ -55,9 +56,10 @@ void rte::append_data_to(std::string & s) const
 	append(s, to_string(n_messages_));
 	append(s, to_string(message_number_));
 	append(s, to_string(message_mode_));
+	append(s, to_string(route_id_));
 
 	if (n_messages_) {
-		for (uint32_t i = 0; (i < n_messages_) && (i < max_waypoints); ++i) {
+		for (uint32_t i = 0; i < max_waypoints; ++i) {
 			append(s, waypoint_id_[i].value());
 		}
 	}
