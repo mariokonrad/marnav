@@ -355,6 +355,8 @@ Compiler:
 - Clang 8
 - Clang 9
 - Clang 10
+- Clang 11
+- Clang 12
 
 Tools needed to build the library:
 - cmake 3.11 or newer
