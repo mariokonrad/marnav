@@ -95,7 +95,7 @@ enum class side : char {
 };
 
 /// Status of routes.
-enum class route : char {
+enum class route_mode : char {
 	complete, ///< NMEA representation: 'c'
 	working ///< NMEA representation: 'w'
 };

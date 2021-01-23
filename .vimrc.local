@@ -9,7 +9,7 @@ imap <C-f> <ESC>:pyf /usr/share/vim/addons/syntax/clang-format-3.9.py<CR>i
 map <leader>fm ggVG :pyf /usr/share/vim/addons/syntax/clang-format-3.9.py<CR>
 
 " grepping
-map <F4> :grep -Ernw --include=*.c* --include=*.h* <cword> src include test <Bar> cw<CR>
+map <F4> :grep -Ernw --include=*.c* --include=*.h* <cword> src include test examples <Bar> cw<CR>
 
 " tags
 set tags+=.ctags/tags,build/tags

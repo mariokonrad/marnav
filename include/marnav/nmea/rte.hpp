@@ -2,8 +2,10 @@
 #define MARNAV_NMEA_RTE_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/route.hpp>
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/optional.hpp>
+#include <vector>
 
 namespace marnav
 {
@@ -22,7 +24,8 @@ namespace nmea
 /// 2. Message Number
 /// 3. Message mode c = complete route, all waypoints w = working route, the waypoint
 ///    you just left, the waypoint you’re heading to, then all the rest
-/// 4. Waypoint ID
+/// 4. Route ID
+/// 5. Waypoint ID
 ///
 /// More waypoints follow. Last field is a checksum as usual.
 ///
@@ -51,20 +54,24 @@ protected:
 private:
 	uint32_t n_messages_ = 1;
 	uint32_t message_number_ = 1;
-	route message_mode_ = route::complete; // C:complete route, W:working route
-	utils::optional<waypoint>
-		waypoint_id_[max_waypoints]; // names or numbers of the active route
+	route_mode message_mode_ = route_mode::complete; // C:complete route, W:working route
+	utils::optional<route> route_id_;
+	std::vector<utils::optional<waypoint>> waypoint_id_; // names or numbers of the active route
 
 public:
 	uint32_t get_n_messages() const { return n_messages_; }
 	uint32_t get_message_number() const { return message_number_; }
-	route get_message_mode() const { return message_mode_; }
+	route_mode get_message_mode() const { return message_mode_; }
+	utils::optional<route> get_route_id() const { return route_id_; }
 	utils::optional<waypoint> get_waypoint_id(int index) const;
+	int get_n_waypoints() const;
 
 	void set_n_messages(uint32_t t) noexcept { n_messages_ = t; }
 	void set_message_number(uint32_t t) noexcept { message_number_ = t; }
-	void set_message_mode(route t) noexcept { message_mode_ = t; }
-	void set_waypoint_id(int index, const waypoint & id);
+	void set_message_mode(route_mode t) noexcept { message_mode_ = t; }
+	void set_route_id(const route & id) { route_id_ = id; }
+	void add_waypoint_id(const waypoint & id);
+	void clear_waypoint_id();
 };
 }
 }

@@ -24,7 +24,7 @@ std::string to_string(int32_t data);
 std::string to_string(double data);
 std::string to_string(const std::string & data);
 std::string to_string(side t);
-std::string to_string(route t);
+std::string to_string(route_mode t);
 std::string to_string(selection_mode t);
 std::string to_string(ais_channel t);
 std::string to_string(type_of_point t);

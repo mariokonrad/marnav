@@ -50,12 +50,12 @@ std::string to_string(side t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
-std::string to_string(route t)
+std::string to_string(route_mode t)
 {
 	switch (t) {
-		case route::complete:
+		case route_mode::complete:
 			return "c";
-		case route::working:
+		case route_mode::working:
 			return "w";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning

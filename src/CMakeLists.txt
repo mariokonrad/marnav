@@ -121,6 +121,7 @@ target_sources(marnav
 		marnav/nmea/rmb.cpp
 		marnav/nmea/rmc.cpp
 		marnav/nmea/rot.cpp
+		marnav/nmea/route.cpp
 		marnav/nmea/rpm.cpp
 		marnav/nmea/rsa.cpp
 		marnav/nmea/rsd.cpp

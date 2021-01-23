@@ -1,6 +1,7 @@
 #include <marnav/nmea/io.hpp>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/date.hpp>
+#include <marnav/nmea/route.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/utils/mmsi.hpp>
@@ -221,19 +222,19 @@ void read(const std::string & s, side & value, data_format fmt)
 	}
 }
 
-void read(const std::string & s, route & value, data_format fmt)
+void read(const std::string & s, route_mode & value, data_format fmt)
 {
-	typename std::underlying_type<route>::type t;
+	typename std::underlying_type<route_mode>::type t;
 	read(s, t, fmt);
 	switch (t) {
 		case 'c':
-			value = route::complete;
+			value = route_mode::complete;
 			break;
 		case 'w':
-			value = route::working;
+			value = route_mode::working;
 			break;
 		default:
-			throw std::runtime_error{"invalid data for nmea/route"};
+			throw std::runtime_error{"invalid data for nmea/route_mode"};
 	}
 }
 
@@ -506,6 +507,13 @@ void read(const std::string & s, utils::mmsi & value, data_format fmt)
 	typename utils::mmsi::value_type t = utils::mmsi::initial_value;
 	read(s, t, fmt);
 	value = utils::mmsi{t};
+}
+
+void read(const std::string & s, route & value, data_format fmt)
+{
+	typename route::value_type t;
+	read(s, t, fmt);
+	value = route{t};
 }
 
 void read(const std::string & s, waypoint & value, data_format fmt)

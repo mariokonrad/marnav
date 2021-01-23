@@ -21,13 +21,14 @@
 //   cat logged-data.txt | nmeadump
 //
 
-#include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/ais_helper.hpp>
 #include <marnav/nmea/checksum.hpp>
-#include <marnav/nmea/sentence.hpp>
-#include <marnav/nmea/waypoint.hpp>
 #include <marnav/nmea/name.hpp>
+#include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/route.hpp>
+#include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/string.hpp>
+#include <marnav/nmea/waypoint.hpp>
 
 #include <marnav/nmea/aam.hpp>
 #include <marnav/nmea/alm.hpp>
@@ -604,9 +605,14 @@ static std::string render(const marnav::nmea::status t)
 	return marnav::nmea::to_name(t);
 }
 
-static std::string render(const marnav::nmea::route t)
+static std::string render(const marnav::nmea::route_mode t)
 {
 	return marnav::nmea::to_name(t);
+}
+
+static std::string render(const marnav::nmea::route & t)
+{
+	return t.c_str();
 }
 
 static std::string render(const marnav::nmea::waypoint & t)

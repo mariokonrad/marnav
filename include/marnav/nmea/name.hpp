@@ -20,7 +20,7 @@ std::string to_name(sentence_id t);
 std::string to_name(talker t);
 std::string to_name(selection_mode t);
 std::string to_name(status t);
-std::string to_name(route t);
+std::string to_name(route_mode t);
 std::string to_name(mode_indicator t);
 std::string to_name(quality t);
 std::string to_name(reference t);

@@ -19,35 +19,50 @@ rte::rte(talker talk, fields::const_iterator first, fields::const_iterator last)
 	: sentence(ID, TAG, talk)
 {
 	const auto size = std::distance(first, last);
-	if ((size < 3) || (size > max_waypoints + 3))
-		throw std::invalid_argument{"invalid number of fields in rte"};
+	if ((size < 4) || (size > (max_waypoints + 4)))
+		throw std::invalid_argument {"invalid number of fields in rte"};
 
 	read(*(first + 0), n_messages_);
 	read(*(first + 1), message_number_);
 	read(*(first + 2), message_mode_);
+	read(*(first + 3), route_id_);
 
-	for (auto i = 0; (i < max_waypoints) && (i < (size - 3)); ++i) {
-		read(*(first + i + 3), waypoint_id_[i]);
+	waypoint_id_.reserve(max_waypoints);
+	for (auto i = 0; (i < max_waypoints) && (i < (size - 4)); ++i) {
+		utils::optional<waypoint> wp;
+		read(*(first + i + 4), wp);
+		if (wp)
+			waypoint_id_.push_back(wp);
 	}
 }
 
 utils::optional<waypoint> rte::get_waypoint_id(int index) const
 {
-	if ((index < 0) || (index >= max_waypoints))
-		throw std::out_of_range{"get_waypoint_id"};
+	if (index < 0)
+		throw std::out_of_range {"get_waypoint_id"};
+
+	if (index >= get_n_waypoints())
+		return {};
 
 	return waypoint_id_[index];
 }
 
-void rte::set_waypoint_id(int index, const waypoint & id)
+int rte::get_n_waypoints() const
 {
-	if ((index < 0) || (index >= max_waypoints))
-		throw std::out_of_range{"set_waypoint_id"};
+	return static_cast<int>(waypoint_id_.size());
+}
 
-	if (id.size() > 8)
-		throw std::invalid_argument{"string size to large, only 8 characters allowed for id"};
+void rte::add_waypoint_id(const waypoint & id)
+{
+	if (get_n_waypoints() >= max_waypoints)
+		throw std::runtime_error {"to many waypoints"};
 
-	waypoint_id_[index] = id;
+	waypoint_id_.push_back(id);
+}
+
+void rte::clear_waypoint_id()
+{
+	waypoint_id_.clear();
 }
 
 void rte::append_data_to(std::string & s) const
@@ -55,12 +70,10 @@ void rte::append_data_to(std::string & s) const
 	append(s, to_string(n_messages_));
 	append(s, to_string(message_number_));
 	append(s, to_string(message_mode_));
+	append(s, to_string(route_id_));
 
-	if (n_messages_) {
-		for (uint32_t i = 0; (i < n_messages_) && (i < max_waypoints); ++i) {
-			append(s, waypoint_id_[i].value());
-		}
-	}
+	for (const auto & wp : waypoint_id_)
+		append(s, wp.value());
 }
 }
 }

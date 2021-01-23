@@ -422,12 +422,12 @@ std::string to_name(status t)
 	return "-";
 }
 
-std::string to_name(route t)
+std::string to_name(route_mode t)
 {
 	switch (t) {
-		case route::complete:
+		case route_mode::complete:
 			return "complete";
-		case route::working:
+		case route_mode::working:
 			return "working";
 	}
 	return "-";

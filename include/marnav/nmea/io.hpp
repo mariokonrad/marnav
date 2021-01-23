@@ -1,12 +1,12 @@
-#ifndef MARNAV__NMEA__IO__HPP
-#define MARNAV__NMEA__IO__HPP
+#ifndef MARNAV_NMEA_IO_HPP
+#define MARNAV_NMEA_IO_HPP
 
-#include <string>
-#include <functional>
 #include <marnav/nmea/constants.hpp>
 #include <marnav/nmea/string.hpp>
 #include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
+#include <functional>
+#include <string>
 
 namespace marnav
 {
@@ -28,6 +28,7 @@ namespace nmea
 class date; // forward declaration
 class time; // forward declaration
 class duration; // forward declaration
+class route; // forward declaration
 class waypoint; // forward declaration
 
 enum class data_format { none, dec, hex };
@@ -120,7 +121,7 @@ void read(const std::string & s, int32_t & value, data_format fmt = data_format:
 void read(const std::string & s, double & value, data_format fmt = data_format::none);
 void read(const std::string & s, std::string & value, data_format fmt = data_format::none);
 void read(const std::string & s, side & value, data_format fmt = data_format::none);
-void read(const std::string & s, route & value, data_format fmt = data_format::none);
+void read(const std::string & s, route_mode & value, data_format fmt = data_format::none);
 void read(const std::string & s, selection_mode & value, data_format fmt = data_format::none);
 void read(const std::string & s, ais_channel & value, data_format fmt = data_format::none);
 void read(const std::string & s, type_of_point & value, data_format fmt = data_format::none);
@@ -136,6 +137,7 @@ void read(
 	const std::string & s, unit::temperature & value, data_format fmt = data_format::none);
 void read(const std::string & s, unit::pressure & value, data_format fmt = data_format::none);
 void read(const std::string & s, utils::mmsi & value, data_format fmt = data_format::none);
+void read(const std::string & s, route & value, data_format fmt = data_format::none);
 void read(const std::string & s, waypoint & value, data_format fmt = data_format::none);
 
 /// Variant of `read` for units.

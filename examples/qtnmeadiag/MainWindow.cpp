@@ -1,5 +1,25 @@
 #include "MainWindow.hpp"
-#include <vector>
+
+#include <marnav/nmea/bod.hpp>
+#include <marnav/nmea/checksum.hpp>
+#include <marnav/nmea/gga.hpp>
+#include <marnav/nmea/gll.hpp>
+#include <marnav/nmea/gsa.hpp>
+#include <marnav/nmea/gsv.hpp>
+#include <marnav/nmea/hdg.hpp>
+#include <marnav/nmea/mwv.hpp>
+#include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/pgrme.hpp>
+#include <marnav/nmea/pgrmm.hpp>
+#include <marnav/nmea/pgrmz.hpp>
+#include <marnav/nmea/rmb.hpp>
+#include <marnav/nmea/rmc.hpp>
+#include <marnav/nmea/route.hpp>
+#include <marnav/nmea/rte.hpp>
+#include <marnav/nmea/string.hpp>
+#include <marnav/nmea/vtg.hpp>
+#include <marnav/nmea/waypoint.hpp>
+
 #include <QComboBox>
 #include <QCoreApplication>
 #include <QFileDialog>
@@ -14,23 +34,8 @@
 #include <QSerialPort>
 #include <QTextStream>
 #include <QToolBar>
-#include <marnav/nmea/checksum.hpp>
-#include <marnav/nmea/nmea.hpp>
-#include <marnav/nmea/bod.hpp>
-#include <marnav/nmea/gga.hpp>
-#include <marnav/nmea/gll.hpp>
-#include <marnav/nmea/gsa.hpp>
-#include <marnav/nmea/gsv.hpp>
-#include <marnav/nmea/hdg.hpp>
-#include <marnav/nmea/mwv.hpp>
-#include <marnav/nmea/rmb.hpp>
-#include <marnav/nmea/rmc.hpp>
-#include <marnav/nmea/rte.hpp>
-#include <marnav/nmea/vtg.hpp>
-#include <marnav/nmea/pgrme.hpp>
-#include <marnav/nmea/pgrmm.hpp>
-#include <marnav/nmea/pgrmz.hpp>
-#include <marnav/nmea/string.hpp>
+
+#include <vector>
 
 namespace marnav_example
 {
@@ -126,17 +131,22 @@ static QString render(const marnav::nmea::selection_mode & t)
 	return "-";
 }
 
-static QString render(const marnav::nmea::route & t)
+static QString render(const marnav::nmea::route_mode & t)
 {
 	switch (t) {
-		case marnav::nmea::route::complete:
+		case marnav::nmea::route_mode::complete:
 			return QString{"complete"};
-		case marnav::nmea::route::working:
+		case marnav::nmea::route_mode::working:
 			return QString{"working"};
 		default:
 			break;
 	}
 	return "-";
+}
+
+static QString render(const marnav::nmea::route & t)
+{
+	return t.c_str();
 }
 
 static QString render(const marnav::nmea::waypoint & t)
