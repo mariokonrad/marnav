@@ -4,7 +4,7 @@
 namespace
 {
 // Baseline implementation.
-static std::string checksum_to_string__v0(uint8_t sum)
+static std::string checksum_to_string_v0(uint8_t sum)
 {
 	char buf[8];
 	snprintf(buf, sizeof(buf), "%02X", sum);
@@ -16,7 +16,7 @@ static void Benchmark_nmea_checksum_to_string_v0(benchmark::State & state)
 {
 	std::string result;
 	while (state.KeepRunning()) {
-		result = checksum_to_string__v0(state.range(0));
+		result = checksum_to_string_v0(state.range(0));
 		benchmark::DoNotOptimize(result);
 	}
 }

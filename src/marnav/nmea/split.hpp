@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__SPLIT__HPP
-#define MARNAV__NMEA__SPLIT__HPP
+#ifndef MARNAV_NMEA_SPLIT_HPP
+#define MARNAV_NMEA_SPLIT_HPP
 
 #include <string>
 #include <vector>

@@ -1,5 +1,5 @@
-#ifndef MARNAV__IO__DEFAULT_NMEA_SERIAL__HPP
-#define MARNAV__IO__DEFAULT_NMEA_SERIAL__HPP
+#ifndef MARNAV_IO_DEFAULT_NMEA_SERIAL_HPP
+#define MARNAV_IO_DEFAULT_NMEA_SERIAL_HPP
 
 #include <marnav/io/serial.hpp>
 #include <marnav/utils/unique.hpp>

@@ -1,5 +1,5 @@
-#ifndef MARNAV__MATH__FLOATINGPOINT__HPP
-#define MARNAV__MATH__FLOATINGPOINT__HPP
+#ifndef MARNAV_MATH_FLOATINGPOINT_HPP
+#define MARNAV_MATH_FLOATINGPOINT_HPP
 
 #include <cmath>
 #include <limits>

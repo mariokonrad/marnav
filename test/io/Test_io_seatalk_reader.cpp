@@ -207,7 +207,7 @@ TEST_F(Test_io_seatalk_reader, read_message)
 	EXPECT_EQ(9, num_messages);
 }
 
-TEST_F(Test_io_seatalk_reader, read_first_message__depth)
+TEST_F(Test_io_seatalk_reader, read_first_message_depth)
 {
 	message_reader dev;
 	seatalk::raw msg;
@@ -221,7 +221,7 @@ TEST_F(Test_io_seatalk_reader, read_first_message__depth)
 	EXPECT_EQ(0x00u, msg[4]);
 }
 
-TEST_F(Test_io_seatalk_reader, read_third_message__water_temperature)
+TEST_F(Test_io_seatalk_reader, read_third_message_water_temperature)
 {
 	message_reader dev;
 	seatalk::raw msg;

@@ -1,5 +1,5 @@
-#ifndef MARNAV__UTILS__CLAMP__HPP
-#define MARNAV__UTILS__CLAMP__HPP
+#ifndef MARNAV_UTILS_CLAMP_HPP
+#define MARNAV_UTILS_CLAMP_HPP
 
 #include <algorithm>
 

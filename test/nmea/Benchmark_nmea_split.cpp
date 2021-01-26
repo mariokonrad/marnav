@@ -13,7 +13,7 @@ static const std::vector<std::string> SENTENCES = {
 // clang-format on
 
 // Baseline implementation.
-static std::vector<std::string> parse_fields__v0(const std::string & s)
+static std::vector<std::string> parse_fields_v0(const std::string & s)
 {
 	if (s.size() < 1)
 		return std::vector<std::string>{};
@@ -25,7 +25,7 @@ static std::vector<std::string> parse_fields__v0(const std::string & s)
 }
 
 // Improved implementation, reducing instantiation of regex parser.
-static std::vector<std::string> parse_fields__v1(const std::string & s)
+static std::vector<std::string> parse_fields_v1(const std::string & s)
 {
 	if (s.size() < 1)
 		return std::vector<std::string>{};
@@ -37,7 +37,7 @@ static std::vector<std::string> parse_fields__v1(const std::string & s)
 }
 
 // No regex anymore, simple string handling
-static std::vector<std::string> parse_fields__v2(const std::string & s)
+static std::vector<std::string> parse_fields_v2(const std::string & s)
 {
 	if (s.size() < 1)
 		return std::vector<std::string>{};
@@ -58,7 +58,7 @@ static std::vector<std::string> parse_fields__v2(const std::string & s)
 
 // No regex anymore, simple string handling, reallocating string vector for
 // 14 elements (number of fields in RMC)
-static std::vector<std::string> parse_fields__v3(const std::string & s)
+static std::vector<std::string> parse_fields_v3(const std::string & s)
 {
 	if (s.size() < 1)
 		return std::vector<std::string>{};
@@ -78,7 +78,7 @@ static std::vector<std::string> parse_fields__v3(const std::string & s)
 	return result;
 }
 
-static std::vector<std::string> parse_fields__v4(const std::string & s)
+static std::vector<std::string> parse_fields_v4(const std::string & s)
 {
 	if (s.size() < 1)
 		return std::vector<std::string>{};
@@ -101,7 +101,7 @@ static void Benchmark_nmea_split_v0(benchmark::State & state)
 	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
 	while (state.KeepRunning()) {
-		result = parse_fields__v0(sentence);
+		result = parse_fields_v0(sentence);
 		benchmark::DoNotOptimize(result);
 	}
 }
@@ -113,7 +113,7 @@ static void Benchmark_nmea_split_v1(benchmark::State & state)
 	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
 	while (state.KeepRunning()) {
-		result = parse_fields__v1(sentence);
+		result = parse_fields_v1(sentence);
 		benchmark::DoNotOptimize(result);
 	}
 }
@@ -125,7 +125,7 @@ static void Benchmark_nmea_split_v2(benchmark::State & state)
 	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
 	while (state.KeepRunning()) {
-		result = parse_fields__v2(sentence);
+		result = parse_fields_v2(sentence);
 		benchmark::DoNotOptimize(result);
 	}
 }
@@ -137,7 +137,7 @@ static void Benchmark_nmea_split_v3(benchmark::State & state)
 	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
 	while (state.KeepRunning()) {
-		result = parse_fields__v3(sentence);
+		result = parse_fields_v3(sentence);
 		benchmark::DoNotOptimize(result);
 	}
 }
@@ -149,7 +149,7 @@ static void Benchmark_nmea_split_v4(benchmark::State & state)
 	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
 	while (state.KeepRunning()) {
-		result = parse_fields__v4(sentence);
+		result = parse_fields_v4(sentence);
 		benchmark::DoNotOptimize(result);
 	}
 }

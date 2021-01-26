@@ -1,5 +1,5 @@
-#ifndef MARNAV__AIS__MESSAGE_10__HPP
-#define MARNAV__AIS__MESSAGE_10__HPP
+#ifndef MARNAV_AIS_MESSAGE_10_HPP
+#define MARNAV_AIS_MESSAGE_10_HPP
 
 #include <marnav/ais/message.hpp>
 #include <marnav/geo/angle.hpp>

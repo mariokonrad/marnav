@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__CONSTANTS__HPP
-#define MARNAV__NMEA__CONSTANTS__HPP
+#ifndef MARNAV_NMEA_CONSTANTS_HPP
+#define MARNAV_NMEA_CONSTANTS_HPP
 
 #include <cstdint>
 

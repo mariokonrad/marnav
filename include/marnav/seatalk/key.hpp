@@ -1,5 +1,5 @@
-#ifndef MARNAV__SEATALK__KEY__HPP
-#define MARNAV__SEATALK__KEY__HPP
+#ifndef MARNAV_SEATALK_KEY_HPP
+#define MARNAV_SEATALK_KEY_HPP
 
 #include <cstdint>
 

@@ -1,5 +1,5 @@
-#ifndef MARNAV__SEATALK__MESSAGE_58__HPP
-#define MARNAV__SEATALK__MESSAGE_58__HPP
+#ifndef MARNAV_SEATALK_MESSAGE_58_HPP
+#define MARNAV_SEATALK_MESSAGE_58_HPP
 
 #include <marnav/seatalk/message.hpp>
 #include <marnav/geo/position.hpp>

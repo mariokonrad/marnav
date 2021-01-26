@@ -1,5 +1,5 @@
-#ifndef MARNAV__UTILS__OPTIONAL__HPP
-#define MARNAV__UTILS__OPTIONAL__HPP
+#ifndef MARNAV_UTILS_OPTIONAL_HPP
+#define MARNAV_UTILS_OPTIONAL_HPP
 
 #include <utility>
 

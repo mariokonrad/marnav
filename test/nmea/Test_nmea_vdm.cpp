@@ -130,7 +130,7 @@ TEST_F(Test_nmea_vdm, collect_payload_pointers_begin_end)
 	ASSERT_EQ(3u, result.size());
 }
 
-TEST_F(Test_nmea_vdm, make_vdms__1)
+TEST_F(Test_nmea_vdm, make_vdms_1)
 {
 	const std::vector<std::pair<std::string, uint32_t>> payload = {
 		{"177KQJ5000G?tO`K>RA1wUbN0TKH", 0},
@@ -148,7 +148,7 @@ TEST_F(Test_nmea_vdm, make_vdms__1)
 	EXPECT_STREQ(expected, result.c_str());
 }
 
-TEST_F(Test_nmea_vdm, make_vdms__2)
+TEST_F(Test_nmea_vdm, make_vdms_2)
 {
 	const std::vector<std::pair<std::string, uint32_t>> payload
 		= {{"55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53", 0},

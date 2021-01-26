@@ -1,5 +1,5 @@
-#ifndef MARNAV__IO__NMEA_READER__HPP
-#define MARNAV__IO__NMEA_READER__HPP
+#ifndef MARNAV_IO_NMEA_READER_HPP
+#define MARNAV_IO_NMEA_READER_HPP
 
 #include <marnav/io/device.hpp>
 #include <marnav/nmea/sentence.hpp>

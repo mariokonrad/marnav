@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__TALKER_ID__HPP
-#define MARNAV__NMEA__TALKER_ID__HPP
+#ifndef MARNAV_NMEA_TALKER_ID_HPP
+#define MARNAV_NMEA_TALKER_ID_HPP
 
 #include <string>
 

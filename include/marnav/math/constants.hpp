@@ -1,5 +1,5 @@
-#ifndef MARNAV__MATH__CONSTATNS__HPP
-#define MARNAV__MATH__CONSTATNS__HPP
+#ifndef MARNAV_MATH_CONSTATNS_HPP
+#define MARNAV_MATH_CONSTATNS_HPP
 
 namespace marnav
 {

@@ -1,5 +1,5 @@
-#ifndef MARNAV__MATH__VECTOR__HPP
-#define MARNAV__MATH__VECTOR__HPP
+#ifndef MARNAV_MATH_VECTOR_HPP
+#define MARNAV_MATH_VECTOR_HPP
 
 #include <type_traits>
 #include <marnav/math/floatingpoint.hpp>

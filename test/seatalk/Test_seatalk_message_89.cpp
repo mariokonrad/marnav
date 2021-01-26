@@ -117,7 +117,7 @@ TEST_F(Test_seatalk_message_89, set_heading_get_data)
 	}
 }
 
-TEST_F(Test_seatalk_message_89, set_heading__interval)
+TEST_F(Test_seatalk_message_89, set_heading_interval)
 {
 	{
 		message_89 m;

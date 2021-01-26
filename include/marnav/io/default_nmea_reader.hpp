@@ -1,5 +1,5 @@
-#ifndef MARNAV__IO__DEFAULT_NMEA_READER__HPP
-#define MARNAV__IO__DEFAULT_NMEA_READER__HPP
+#ifndef MARNAV_IO_DEFAULT_NMEA_READER_HPP
+#define MARNAV_IO_DEFAULT_NMEA_READER_HPP
 
 #include <marnav/io/nmea_reader.hpp>
 

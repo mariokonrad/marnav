@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__CONVERT__HPP
-#define MARNAV__NMEA__CONVERT__HPP
+#ifndef MARNAV_NMEA_CONVERT_HPP
+#define MARNAV_NMEA_CONVERT_HPP
 
 #include <marnav/nmea/constants.hpp>
 #include <marnav/geo/angle.hpp>

@@ -1,5 +1,5 @@
-#ifndef MARNAV__AIS__MESSAGE_22__HPP
-#define MARNAV__AIS__MESSAGE_22__HPP
+#ifndef MARNAV_AIS_MESSAGE_22_HPP
+#define MARNAV_AIS_MESSAGE_22_HPP
 
 #include <marnav/ais/message.hpp>
 #include <marnav/geo/position.hpp>

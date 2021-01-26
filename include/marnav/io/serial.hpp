@@ -1,5 +1,5 @@
-#ifndef MARNAV__IO__SERIAL__HPP
-#define MARNAV__IO__SERIAL__HPP
+#ifndef MARNAV_IO_SERIAL_HPP
+#define MARNAV_IO_SERIAL_HPP
 
 #include <string>
 #include <marnav/io/device.hpp>

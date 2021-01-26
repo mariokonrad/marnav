@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__STRING__HPP
-#define MARNAV__NMEA__STRING__HPP
+#ifndef MARNAV_NMEA_STRING_HPP
+#define MARNAV_NMEA_STRING_HPP
 
 #include <string>
 #include <marnav/nmea/constants.hpp>

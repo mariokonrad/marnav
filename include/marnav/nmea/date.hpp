@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__DATE__HPP
-#define MARNAV__NMEA__DATE__HPP
+#ifndef MARNAV_NMEA_DATE_HPP
+#define MARNAV_NMEA_DATE_HPP
 
 #include <string>
 

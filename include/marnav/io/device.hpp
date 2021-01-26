@@ -1,5 +1,5 @@
-#ifndef MARNAV__IO__DEVICE__HPP
-#define MARNAV__IO__DEVICE__HPP
+#ifndef MARNAV_IO_DEVICE_HPP
+#define MARNAV_IO_DEVICE_HPP
 
 #include <cstdint>
 

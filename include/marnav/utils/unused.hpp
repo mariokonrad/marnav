@@ -1,5 +1,5 @@
-#ifndef MARNAV__UTILS__UNUSED__HPP
-#define MARNAV__UTILS__UNUSED__HPP
+#ifndef MARNAV_UTILS_UNUSED_HPP
+#define MARNAV_UTILS_UNUSED_HPP
 
 namespace marnav
 {

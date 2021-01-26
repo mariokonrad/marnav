@@ -1,5 +1,5 @@
-#ifndef MARNAV__SEATALK__MESSAGE_51__HPP
-#define MARNAV__SEATALK__MESSAGE_51__HPP
+#ifndef MARNAV_SEATALK_MESSAGE_51_HPP
+#define MARNAV_SEATALK_MESSAGE_51_HPP
 
 #include <marnav/seatalk/message.hpp>
 #include <marnav/geo/angle.hpp>

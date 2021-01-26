@@ -1,5 +1,5 @@
-#ifndef MARNAV__AIS__RATE_OF_TURN__HPP
-#define MARNAV__AIS__RATE_OF_TURN__HPP
+#ifndef MARNAV_AIS_RATE_OF_TURN_HPP
+#define MARNAV_AIS_RATE_OF_TURN_HPP
 
 #include <cstdint>
 

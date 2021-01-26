@@ -1,5 +1,5 @@
-#ifndef MARNAV__MATH__TYPE_TRAITS__HPP
-#define MARNAV__MATH__TYPE_TRAITS__HPP
+#ifndef MARNAV_MATH_TYPE_TRAITS_HPP
+#define MARNAV_MATH_TYPE_TRAITS_HPP
 
 #include <type_traits>
 

@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__MANUFACTURER__HPP
-#define MARNAV__NMEA__MANUFACTURER__HPP
+#ifndef MARNAV_NMEA_MANUFACTURER_HPP
+#define MARNAV_NMEA_MANUFACTURER_HPP
 
 #include <string>
 #include <vector>

@@ -1,5 +1,5 @@
-#ifndef MARNAV__IO__SEATALK_READER__HPP
-#define MARNAV__IO__SEATALK_READER__HPP
+#ifndef MARNAV_IO_SEATALK_READER_HPP
+#define MARNAV_IO_SEATALK_READER_HPP
 
 #include <marnav/io/device.hpp>
 #include <marnav/seatalk/message.hpp>

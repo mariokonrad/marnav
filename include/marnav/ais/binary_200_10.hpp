@@ -1,5 +1,5 @@
-#ifndef MARNAV__AIS__BINARY_200_10__HPP
-#define MARNAV__AIS__BINARY_200_10__HPP
+#ifndef MARNAV_AIS_BINARY_200_10_HPP
+#define MARNAV_AIS_BINARY_200_10_HPP
 
 #include <marnav/ais/binary_data.hpp>
 

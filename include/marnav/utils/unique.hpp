@@ -1,5 +1,5 @@
-#ifndef MARNAV__UTILS__UNIQUE__HPP
-#define MARNAV__UTILS__UNIQUE__HPP
+#ifndef MARNAV_UTILS_UNIQUE_HPP
+#define MARNAV_UTILS_UNIQUE_HPP
 
 #include <memory>
 

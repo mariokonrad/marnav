@@ -1,5 +1,5 @@
-#ifndef MARNAV__NMEA__HEX_DIGIT__HPP
-#define MARNAV__NMEA__HEX_DIGIT__HPP
+#ifndef MARNAV_NMEA_HEX_DIGIT_HPP
+#define MARNAV_NMEA_HEX_DIGIT_HPP
 
 namespace marnav
 {

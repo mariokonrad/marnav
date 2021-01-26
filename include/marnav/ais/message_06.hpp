@@ -1,5 +1,5 @@
-#ifndef MARNAV__AIS__MESSAGE_06__HPP
-#define MARNAV__AIS__MESSAGE_06__HPP
+#ifndef MARNAV_AIS_MESSAGE_06_HPP
+#define MARNAV_AIS_MESSAGE_06_HPP
 
 #include <marnav/ais/message.hpp>
 #include <marnav/utils/mmsi.hpp>

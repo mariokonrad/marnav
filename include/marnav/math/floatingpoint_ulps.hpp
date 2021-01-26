@@ -1,5 +1,5 @@
-#ifndef MARNAV__MATH__FLOATINGPONIT_ULPS__HPP
-#define MARNAV__MATH__FLOATINGPONIT_ULPS__HPP
+#ifndef MARNAV_MATH_FLOATINGPONIT_ULPS_HPP
+#define MARNAV_MATH_FLOATINGPONIT_ULPS_HPP
 
 // implementation based on https://bitbashing.io/comparing-floats.html
 // by matt <at> bitbashing.io
