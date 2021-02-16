@@ -32,6 +32,22 @@ account=mariokonrad/
 export NUM_PROC=${NUM_PROC:-$(nproc --ignore=2)}
 
 
+function docker_run()
+{
+	dockerid=$1
+	cmd="$2"
+
+	docker run \
+		--rm \
+		--read-only \
+		--volume $(pwd):$(pwd) \
+		--workdir $(pwd) \
+		--env HOME=$(pwd) \
+		--user $(id -u):$(id -g) \
+		${dockerid} \
+		bash -c "${cmd}"
+}
+
 function build()
 {
 	compiler=$1
@@ -43,11 +59,10 @@ function build()
 		mkdir -p ${builddir}
 	fi
 
-	# TODO: support configurations
-	${SCRIPT_BASE}/docker-run.sh ${dockerid} "cmake -B ${builddir} -DCMAKE_BUILD_TYPE=${build_type} ${BASE}"
-	${SCRIPT_BASE}/docker-run.sh ${dockerid} "cmake --build ${builddir} -j ${NUM_PROC}"
-	${SCRIPT_BASE}/docker-run.sh ${dockerid} "cmake --build ${builddir} --target unittest"
-	${SCRIPT_BASE}/docker-run.sh ${dockerid} "cmake --build ${builddir} --target test"
+	docker_run ${dockerid} "cmake -B ${builddir} -DCMAKE_BUILD_TYPE=${build_type} ${BASE}"
+	docker_run ${dockerid} "cmake --build ${builddir} -j ${NUM_PROC}"
+	docker_run ${dockerid} "cmake --build ${builddir} --target unittest"
+	docker_run ${dockerid} "cmake --build ${builddir} --target test"
 }
 
 function usage()

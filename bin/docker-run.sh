@@ -16,5 +16,7 @@ docker run \
 	--workdir $(pwd) \
 	--env HOME=$(pwd) \
 	--user $(id -u):$(id -g) \
+	--volume /etc/passwd:/etc/passwd \
+	--volume /etc/group:/etc/group \
 	${1} \
 	bash ${arg} "${@:2}"
