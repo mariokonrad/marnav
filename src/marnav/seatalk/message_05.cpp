@@ -48,7 +48,7 @@ std::unique_ptr<message> message_05::parse(const raw & data)
 {
 	check_size(data, SIZE);
 
-	std::unique_ptr<message> result = utils::make_unique<message_05>();
+	std::unique_ptr<message> result = std::make_unique<message_05>();
 	message_05 & msg = static_cast<message_05 &>(*result);
 
 	msg.side_ = conv(data[2]);

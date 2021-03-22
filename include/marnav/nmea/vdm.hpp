@@ -2,7 +2,7 @@
 #define MARNAV_NMEA_VDM_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -52,16 +52,16 @@ protected:
 private:
 	uint32_t n_fragments_ = 0;
 	uint32_t fragment_ = 0;
-	utils::optional<uint32_t> seq_msg_id_;
-	utils::optional<ais_channel> radio_channel_; // A = 161.975MHz (87B), B = 162.025MHz (88B)
+	std::optional<uint32_t> seq_msg_id_;
+	std::optional<ais_channel> radio_channel_; // A = 161.975MHz (87B), B = 162.025MHz (88B)
 	std::string payload_; // 6bit encoded content
 	uint32_t n_fill_bits_ = 0; // 0..5
 
 public:
 	uint32_t get_n_fragments() const { return n_fragments_; }
 	uint32_t get_fragment() const { return fragment_; }
-	utils::optional<uint32_t> get_seq_msg_id() const { return seq_msg_id_; }
-	utils::optional<ais_channel> get_radio_channel() const { return radio_channel_; }
+	std::optional<uint32_t> get_seq_msg_id() const { return seq_msg_id_; }
+	std::optional<ais_channel> get_radio_channel() const { return radio_channel_; }
 	const std::string & get_payload() const { return payload_; }
 	uint32_t get_n_fill_bits() const { return n_fill_bits_; }
 

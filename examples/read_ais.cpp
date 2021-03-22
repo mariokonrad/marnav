@@ -9,7 +9,6 @@
 #include <marnav/ais/message_05.hpp>
 #include <marnav/io/device.hpp>
 #include <marnav/io/default_nmea_reader.hpp>
-#include <marnav/utils/unique.hpp>
 #include <iostream>
 
 namespace marnav_example
@@ -61,7 +60,7 @@ class sentence_reader : public marnav::io::default_nmea_reader
 {
 public:
 	sentence_reader()
-		: default_nmea_reader(marnav::utils::make_unique<dummy_device>())
+		: default_nmea_reader(std::make_unique<dummy_device>())
 	{
 	}
 };

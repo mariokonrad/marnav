@@ -123,17 +123,17 @@ void message_21::set_name_extension(const std::string & t)
 	}
 }
 
-utils::optional<geo::longitude> message_21::get_lon() const
+std::optional<geo::longitude> message_21::get_lon() const
 {
 	if (longitude_minutes == longitude_not_available)
-		return utils::make_optional<geo::longitude>();
+		return std::make_optional<geo::longitude>();
 	return to_geo_longitude(longitude_minutes, longitude_minutes.count, angle_scale::I4);
 }
 
-utils::optional<geo::latitude> message_21::get_lat() const
+std::optional<geo::latitude> message_21::get_lat() const
 {
 	if (latitude_minutes == latitude_not_available)
-		return utils::make_optional<geo::latitude>();
+		return std::make_optional<geo::latitude>();
 	return to_geo_latitude(latitude_minutes, latitude_minutes.count, angle_scale::I4);
 }
 

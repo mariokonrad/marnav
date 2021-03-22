@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -61,26 +61,26 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> heading_; // degrees true
-	utils::optional<status> data_valid_;
-	utils::optional<double> course_; // degrees true
-	utils::optional<reference> course_ref_;
-	utils::optional<double> speed_;
-	utils::optional<char> speed_ref_;
-	utils::optional<double> vessel_set_; // degrees true
-	utils::optional<double> vessel_drift_; // (speed)
-	utils::optional<unit::velocity> speed_unit_;
+	std::optional<double> heading_; // degrees true
+	std::optional<status> data_valid_;
+	std::optional<double> course_; // degrees true
+	std::optional<reference> course_ref_;
+	std::optional<double> speed_;
+	std::optional<char> speed_ref_;
+	std::optional<double> vessel_set_; // degrees true
+	std::optional<double> vessel_drift_; // (speed)
+	std::optional<unit::velocity> speed_unit_;
 
 public:
-	utils::optional<double> get_heading() const { return heading_; }
-	utils::optional<status> get_data_valid() const { return data_valid_; }
-	utils::optional<double> get_course() const { return course_; }
-	utils::optional<reference> get_course_ref() const { return course_ref_; }
-	utils::optional<double> get_speed() const { return speed_; }
-	utils::optional<char> get_speed_ref() const { return speed_ref_; }
-	utils::optional<double> get_vessel_set() const { return vessel_set_; }
-	utils::optional<double> get_vessel_drift() const { return vessel_drift_; }
-	utils::optional<unit::velocity> get_speed_unit() const { return speed_unit_; }
+	std::optional<double> get_heading() const { return heading_; }
+	std::optional<status> get_data_valid() const { return data_valid_; }
+	std::optional<double> get_course() const { return course_; }
+	std::optional<reference> get_course_ref() const { return course_ref_; }
+	std::optional<double> get_speed() const { return speed_; }
+	std::optional<char> get_speed_ref() const { return speed_ref_; }
+	std::optional<double> get_vessel_set() const { return vessel_set_; }
+	std::optional<double> get_vessel_drift() const { return vessel_drift_; }
+	std::optional<unit::velocity> get_speed_unit() const { return speed_unit_; }
 
 	void set_heading(double t) noexcept { heading_ = t; }
 	void set_data_valid(status t) noexcept { data_valid_ = t; }

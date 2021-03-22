@@ -22,10 +22,10 @@ vtg::vtg(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if ((size < 8) || (size > 9))
 		throw std::invalid_argument{"invalid number of fields in vtg"};
 
-	utils::optional<reference> track_true_ref;
-	utils::optional<reference> track_magn_ref;
-	utils::optional<unit::velocity> speed_kn_unit;
-	utils::optional<unit::velocity> speed_kmh_unit;
+	std::optional<reference> track_true_ref;
+	std::optional<reference> track_magn_ref;
+	std::optional<unit::velocity> speed_kn_unit;
+	std::optional<unit::velocity> speed_kmh_unit;
 
 	read(*(first + 0), track_true_);
 	read(*(first + 1), track_true_ref);
@@ -66,14 +66,14 @@ void vtg::set_track_true(double t) noexcept
 	track_true_ = t;
 }
 
-utils::optional<units::knots> vtg::get_speed_kn() const
+std::optional<units::knots> vtg::get_speed_kn() const
 {
 	if (!speed_kn_)
 		return {};
 	return {*speed_kn_};
 }
 
-utils::optional<units::kilometers_per_hour> vtg::get_speed_kmh() const
+std::optional<units::kilometers_per_hour> vtg::get_speed_kmh() const
 {
 	if (!speed_kmh_)
 		return {};

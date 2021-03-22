@@ -2,7 +2,7 @@
 #define MARNAV_NMEA_RPM_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -50,18 +50,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<source_id> source_;
-	utils::optional<uint32_t> source_number_;
-	utils::optional<double> revolutions_;
-	utils::optional<double> propeller_pitch_;
-	utils::optional<status> data_valid_;
+	std::optional<source_id> source_;
+	std::optional<uint32_t> source_number_;
+	std::optional<double> revolutions_;
+	std::optional<double> propeller_pitch_;
+	std::optional<status> data_valid_;
 
 public:
-	utils::optional<source_id> get_source() const { return source_; }
-	utils::optional<uint32_t> get_source_number() const { return source_number_; }
-	utils::optional<double> get_revolutions() const { return revolutions_; }
-	utils::optional<double> get_propeller_pitch() const { return propeller_pitch_; }
-	utils::optional<status> get_data_valid() const { return data_valid_; }
+	std::optional<source_id> get_source() const { return source_; }
+	std::optional<uint32_t> get_source_number() const { return source_number_; }
+	std::optional<double> get_revolutions() const { return revolutions_; }
+	std::optional<double> get_propeller_pitch() const { return propeller_pitch_; }
+	std::optional<status> get_data_valid() const { return data_valid_; }
 
 	void set_source(source_id id, uint32_t num);
 	void set_revolutions(double t) noexcept { revolutions_ = t; }

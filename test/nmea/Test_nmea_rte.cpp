@@ -206,7 +206,7 @@ TEST_F(Test_nmea_rte, get_waypoint_id)
 
 	auto wp = rte.get_waypoint_id(0);
 
-	EXPECT_TRUE(wp.available());
+	EXPECT_TRUE(wp.has_value());
 	EXPECT_STREQ("POINT1", wp.value().c_str());
 }
 
@@ -216,7 +216,7 @@ TEST_F(Test_nmea_rte, get_non_existing_waypoint)
 
 	auto wp = rte.get_waypoint_id(0);
 
-	EXPECT_FALSE(wp.available());
+	EXPECT_FALSE(wp.has_value());
 }
 
 TEST_F(Test_nmea_rte, get_waypoint_id_invaild_index)

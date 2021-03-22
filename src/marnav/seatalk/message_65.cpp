@@ -13,7 +13,7 @@ std::unique_ptr<message> message_65::parse(const raw & data)
 {
 	check_size(data, SIZE);
 
-	std::unique_ptr<message> result = utils::make_unique<message_65>();
+	std::unique_ptr<message> result = std::make_unique<message_65>();
 
 	return result;
 }

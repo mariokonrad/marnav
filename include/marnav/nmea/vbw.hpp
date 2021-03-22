@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -48,20 +48,20 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<units::knots> water_speed_longitudinal_;
-	utils::optional<units::knots> water_speed_transveral_;
-	utils::optional<status> water_speed_status_;
-	utils::optional<units::knots> ground_speed_longitudinal_;
-	utils::optional<units::knots> ground_speed_transveral_;
-	utils::optional<status> ground_speed_status_;
+	std::optional<units::knots> water_speed_longitudinal_;
+	std::optional<units::knots> water_speed_transveral_;
+	std::optional<status> water_speed_status_;
+	std::optional<units::knots> ground_speed_longitudinal_;
+	std::optional<units::knots> ground_speed_transveral_;
+	std::optional<status> ground_speed_status_;
 
 public:
-	utils::optional<units::velocity> get_water_speed_longitudinal() const;
-	utils::optional<units::velocity> get_water_speed_transveral() const;
-	utils::optional<status> get_water_speed_status() const { return water_speed_status_; }
-	utils::optional<units::velocity> get_ground_speed_longitudinal() const;
-	utils::optional<units::velocity> get_ground_speed_transveral() const;
-	utils::optional<status> get_ground_speed_status() const { return ground_speed_status_; }
+	std::optional<units::velocity> get_water_speed_longitudinal() const;
+	std::optional<units::velocity> get_water_speed_transveral() const;
+	std::optional<status> get_water_speed_status() const { return water_speed_status_; }
+	std::optional<units::velocity> get_ground_speed_longitudinal() const;
+	std::optional<units::velocity> get_ground_speed_transveral() const;
+	std::optional<status> get_ground_speed_status() const { return ground_speed_status_; }
 
 	void set_water_speed(units::velocity l, units::velocity t, status s);
 	void set_ground_speed(units::velocity l, units::velocity t, status s);

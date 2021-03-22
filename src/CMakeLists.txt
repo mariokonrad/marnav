@@ -21,7 +21,7 @@ add_library(marnav::marnav ALIAS marnav)
 
 target_compile_features(marnav
 	PRIVATE
-		cxx_std_11
+		cxx_std_17
 	)
 
 target_sources(marnav

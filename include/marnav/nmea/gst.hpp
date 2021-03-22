@@ -4,7 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {

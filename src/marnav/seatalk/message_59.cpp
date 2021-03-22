@@ -29,7 +29,7 @@ std::unique_ptr<message> message_59::parse(const raw & data)
 {
 	check_size(data, SIZE);
 
-	std::unique_ptr<message> result = utils::make_unique<message_59>();
+	std::unique_ptr<message> result = std::make_unique<message_59>();
 	message_59 & msg = static_cast<message_59 &>(*result);
 
 	//  59 22 SS MM XH

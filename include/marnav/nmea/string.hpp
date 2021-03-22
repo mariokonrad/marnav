@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/constants.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 #include <string>
 
 namespace marnav
@@ -47,8 +47,7 @@ std::string to_string(const units::basic_unit<U, R> & data)
 	return to_string(data.value());
 }
 
-template <class T>
-std::string to_string(const utils::optional<T> & data)
+template <class T> std::string to_string(const std::optional<T> & data)
 {
 	if (!data)
 		return std::string{};
@@ -64,7 +63,7 @@ std::string to_string_if(const T & data, const Predicate & p)
 }
 
 template <class T, class Predicate>
-std::string to_string_if(const utils::optional<T> & data, const Predicate & p)
+std::string to_string_if(const std::optional<T> & data, const Predicate & p)
 {
 	return (p) ? to_string(data.value()) : std::string{};
 }

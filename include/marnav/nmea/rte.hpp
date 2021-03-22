@@ -4,7 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/route.hpp>
 #include <marnav/nmea/waypoint.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 #include <vector>
 
 namespace marnav
@@ -55,15 +55,15 @@ private:
 	uint32_t n_messages_ = 1;
 	uint32_t message_number_ = 1;
 	route_mode message_mode_ = route_mode::complete; // C:complete route, W:working route
-	utils::optional<route> route_id_;
-	std::vector<utils::optional<waypoint>> waypoint_id_; // names or numbers of the active route
+	std::optional<route> route_id_;
+	std::vector<std::optional<waypoint>> waypoint_id_; // names or numbers of the active route
 
 public:
 	uint32_t get_n_messages() const { return n_messages_; }
 	uint32_t get_message_number() const { return message_number_; }
 	route_mode get_message_mode() const { return message_mode_; }
-	utils::optional<route> get_route_id() const { return route_id_; }
-	utils::optional<waypoint> get_waypoint_id(int index) const;
+	std::optional<route> get_route_id() const { return route_id_; }
+	std::optional<waypoint> get_waypoint_id(int index) const;
 	int get_n_waypoints() const;
 
 	void set_n_messages(uint32_t t) noexcept { n_messages_ = t; }

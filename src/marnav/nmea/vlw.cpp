@@ -20,8 +20,8 @@ vlw::vlw(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 4)
 		throw std::invalid_argument{"invalid number of fields in vlw"};
 
-	utils::optional<unit::distance> distance_cum_unit;
-	utils::optional<unit::distance> distance_reset_unit;
+	std::optional<unit::distance> distance_cum_unit;
+	std::optional<unit::distance> distance_reset_unit;
 
 	read(*(first + 0), distance_cum_);
 	read(*(first + 1), distance_cum_unit);
@@ -42,14 +42,14 @@ void vlw::set_distance_reset_nm(units::length t) noexcept
 	distance_reset_ = t.get<units::nautical_miles>();
 }
 
-utils::optional<units::length> vlw::get_distance_cum() const
+std::optional<units::length> vlw::get_distance_cum() const
 {
 	if (!distance_cum_)
 		return {};
 	return {*distance_cum_};
 }
 
-utils::optional<units::length> vlw::get_distance_reset() const
+std::optional<units::length> vlw::get_distance_reset() const
 {
 	if (!distance_reset_)
 		return {};

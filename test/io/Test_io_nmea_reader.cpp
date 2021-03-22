@@ -1,6 +1,5 @@
 #include <marnav/io/nmea_reader.hpp>
 #include <marnav/io/device.hpp>
-#include <marnav/utils/unique.hpp>
 #include <gtest/gtest.h>
 #include <vector>
 
@@ -79,7 +78,7 @@ class dummy_reader : public ::io::nmea_reader
 {
 public:
 	dummy_reader(const std::string & data)
-		: nmea_reader(utils::make_unique<dummy_device>(data))
+		: nmea_reader(std::make_unique<dummy_device>(data))
 		, num_sentences(0)
 	{
 	}
@@ -110,7 +109,7 @@ class message_reader : public ::io::nmea_reader
 {
 public:
 	message_reader(const std::string & data)
-		: nmea_reader(utils::make_unique<dummy_device>(data))
+		: nmea_reader(std::make_unique<dummy_device>(data))
 		, sentence_received(false)
 	{
 	}

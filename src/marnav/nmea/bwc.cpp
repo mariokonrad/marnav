@@ -22,7 +22,7 @@ bwc::bwc(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if ((size != 12) && (size != 13))
 		throw std::invalid_argument{"invalid number of fields in bwc"};
 
-	utils::optional<unit::distance> distance_unit;
+	std::optional<unit::distance> distance_unit;
 
 	read(*(first + 0), time_utc_);
 	read(*(first + 1), lat_);
@@ -47,14 +47,14 @@ bwc::bwc(talker talk, fields::const_iterator first, fields::const_iterator last)
 	check_value(distance_unit, {unit::distance::nm}, "distance nautical miles unit");
 }
 
-utils::optional<geo::longitude> bwc::get_lon() const
+std::optional<geo::longitude> bwc::get_lon() const
 {
-	return (lon_ && lon_hem_) ? lon_ : utils::optional<geo::longitude>{};
+	return (lon_ && lon_hem_) ? lon_ : std::optional<geo::longitude>{};
 }
 
-utils::optional<geo::latitude> bwc::get_lat() const
+std::optional<geo::latitude> bwc::get_lat() const
 {
-	return (lat_ && lat_hem_) ? lat_ : utils::optional<geo::latitude>{};
+	return (lat_ && lat_hem_) ? lat_ : std::optional<geo::latitude>{};
 }
 
 void bwc::set_lat(const geo::latitude & t)
@@ -81,7 +81,7 @@ void bwc::set_bearing_mag(double t) noexcept
 	bearing_mag_ref_ = reference::MAGNETIC;
 }
 
-utils::optional<units::length> bwc::get_distance() const
+std::optional<units::length> bwc::get_distance() const
 {
 	if (!distance_)
 		return {};

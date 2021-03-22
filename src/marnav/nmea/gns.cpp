@@ -39,14 +39,14 @@ gns::gns(talker talk, fields::const_iterator first, fields::const_iterator last)
 	lon_ = correct_hemisphere(lon_, lon_hem_);
 }
 
-utils::optional<geo::longitude> gns::get_lon() const
+std::optional<geo::longitude> gns::get_lon() const
 {
-	return (lon_ && lon_hem_) ? lon_ : utils::optional<geo::longitude>{};
+	return (lon_ && lon_hem_) ? lon_ : std::optional<geo::longitude>{};
 }
 
-utils::optional<geo::latitude> gns::get_lat() const
+std::optional<geo::latitude> gns::get_lat() const
 {
-	return (lat_ && lat_hem_) ? lat_ : utils::optional<geo::latitude>{};
+	return (lat_ && lat_hem_) ? lat_ : std::optional<geo::latitude>{};
 }
 
 void gns::set_lat(const geo::latitude & t)
@@ -68,14 +68,14 @@ void gns::set_mode_indicator(const std::string & t)
 	mode_ind_ = t;
 }
 
-utils::optional<units::length> gns::get_antenna_altitude() const
+std::optional<units::length> gns::get_antenna_altitude() const
 {
 	if (!antenna_altitude_)
 		return {};
 	return {*antenna_altitude_};
 }
 
-utils::optional<units::length> gns::get_geodial_separation() const
+std::optional<units::length> gns::get_geodial_separation() const
 {
 	if (!geodial_separation_)
 		return {};

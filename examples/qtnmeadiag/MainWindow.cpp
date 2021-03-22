@@ -189,8 +189,7 @@ static QString render(const marnav::units::velocity & t)
 	return QString{"%1 knots"}.arg(t.get<marnav::units::knots>().value());
 }
 
-template <typename T>
-static QString render(const marnav::utils::optional<T> & t)
+template <typename T> static QString render(const std::optional<T> & t)
 {
 	if (!t)
 		return "-";

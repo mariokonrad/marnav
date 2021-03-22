@@ -45,14 +45,14 @@ rmc::rmc(talker talk, fields::const_iterator first, fields::const_iterator last)
 	lon_ = correct_hemisphere(lon_, lon_hem_);
 }
 
-utils::optional<geo::longitude> rmc::get_lon() const
+std::optional<geo::longitude> rmc::get_lon() const
 {
-	return (lon_ && lon_hem_) ? lon_ : utils::optional<geo::longitude>{};
+	return (lon_ && lon_hem_) ? lon_ : std::optional<geo::longitude>{};
 }
 
-utils::optional<geo::latitude> rmc::get_lat() const
+std::optional<geo::latitude> rmc::get_lat() const
 {
-	return (lat_ && lat_hem_) ? lat_ : utils::optional<geo::latitude>{};
+	return (lat_ && lat_hem_) ? lat_ : std::optional<geo::latitude>{};
 }
 
 void rmc::set_lat(const geo::latitude & t)
@@ -74,7 +74,7 @@ void rmc::set_mag(double t, direction h)
 	mag_hem_ = h;
 }
 
-utils::optional<units::velocity> rmc::get_sog() const
+std::optional<units::velocity> rmc::get_sog() const
 {
 	if (!sog_)
 		return {};

@@ -2,7 +2,7 @@
 #define MARNAV_NMEA_MSK_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -50,14 +50,14 @@ private:
 	selection_mode frequency_mode_ = selection_mode::automatic;
 	uint32_t bitrate_ = 0;
 	selection_mode bitrate_mode_ = selection_mode::automatic;
-	utils::optional<uint32_t> frequency_mss_status_;
+	std::optional<uint32_t> frequency_mss_status_;
 
 public:
 	uint32_t get_frequency() const { return frequency_; }
 	selection_mode get_frequency_mode() const { return frequency_mode_; }
 	uint32_t get_bitrate() const { return bitrate_; }
 	selection_mode get_bitrate_mode() const { return bitrate_mode_; }
-	utils::optional<uint32_t> get_frequency_mss_status() const { return frequency_mss_status_; }
+	std::optional<uint32_t> get_frequency_mss_status() const { return frequency_mss_status_; }
 
 	void set_frequency(uint32_t f, selection_mode mode) noexcept;
 	void set_bitrate(uint32_t rate, selection_mode mode) noexcept;

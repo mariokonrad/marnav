@@ -8,7 +8,7 @@ namespace nmea
 {
 namespace
 {
-inline std::string to_string(const utils::optional<xdr::transducer_info> & data)
+inline std::string to_string(const std::optional<xdr::transducer_info> & data)
 {
 	if (!data)
 		return std::string{};
@@ -63,7 +63,7 @@ void xdr::set_info(int index, const transducer_info & info)
 	transducer_data_[index] = info;
 }
 
-utils::optional<xdr::transducer_info> xdr::get_info(int index) const
+std::optional<xdr::transducer_info> xdr::get_info(int index) const
 {
 	check_index(index);
 	return transducer_data_[index];

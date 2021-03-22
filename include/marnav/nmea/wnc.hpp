@@ -4,7 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -47,16 +47,16 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<units::nautical_miles> distance_nm_;
-	utils::optional<units::kilometers> distance_km_;
-	utils::optional<waypoint> waypoint_to_;
-	utils::optional<waypoint> waypoint_from_;
+	std::optional<units::nautical_miles> distance_nm_;
+	std::optional<units::kilometers> distance_km_;
+	std::optional<waypoint> waypoint_to_;
+	std::optional<waypoint> waypoint_from_;
 
 public:
-	utils::optional<units::length> get_distance_nm() const;
-	utils::optional<units::length> get_distance_km() const;
-	utils::optional<waypoint> get_waypoint_to() const { return waypoint_to_; }
-	utils::optional<waypoint> get_waypoint_from() const { return waypoint_from_; }
+	std::optional<units::length> get_distance_nm() const;
+	std::optional<units::length> get_distance_km() const;
+	std::optional<waypoint> get_waypoint_to() const { return waypoint_to_; }
+	std::optional<waypoint> get_waypoint_from() const { return waypoint_from_; }
 
 	void set_distance_nm(units::length t) noexcept;
 	void set_distance_km(units::length t) noexcept;

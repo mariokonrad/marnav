@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -44,12 +44,12 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<units::nautical_miles> distance_cum_; // total cumulative distance
-	utils::optional<units::nautical_miles> distance_reset_; // distance since reset
+	std::optional<units::nautical_miles> distance_cum_; // total cumulative distance
+	std::optional<units::nautical_miles> distance_reset_; // distance since reset
 
 public:
-	utils::optional<units::length> get_distance_cum() const;
-	utils::optional<units::length> get_distance_reset() const;
+	std::optional<units::length> get_distance_cum() const;
+	std::optional<units::length> get_distance_reset() const;
 
 	void set_distance_cum_nm(units::length t) noexcept;
 	void set_distance_reset_nm(units::length t) noexcept;

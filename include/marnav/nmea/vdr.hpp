@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -47,14 +47,14 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> degrees_true_;
-	utils::optional<double> degrees_magn_;
-	utils::optional<units::knots> speed_;
+	std::optional<double> degrees_true_;
+	std::optional<double> degrees_magn_;
+	std::optional<units::knots> speed_;
 
 public:
-	utils::optional<double> get_degrees_true() const { return degrees_true_; }
-	utils::optional<double> get_degrees_magn() const { return degrees_magn_; }
-	utils::optional<units::velocity> get_speed() const;
+	std::optional<double> get_degrees_true() const { return degrees_true_; }
+	std::optional<double> get_degrees_magn() const { return degrees_magn_; }
+	std::optional<units::velocity> get_speed() const;
 
 	void set_degrees_true(double t) noexcept;
 	void set_degrees_magn(double t) noexcept;

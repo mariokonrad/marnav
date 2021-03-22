@@ -20,9 +20,9 @@ dbt::dbt(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in dbt"};
 
-	utils::optional<unit::distance> depth_feet_unit;
-	utils::optional<unit::distance> depth_meter_unit;
-	utils::optional<unit::distance> depth_fathom_unit;
+	std::optional<unit::distance> depth_feet_unit;
+	std::optional<unit::distance> depth_meter_unit;
+	std::optional<unit::distance> depth_fathom_unit;
 
 	read(*(first + 0), depth_feet_);
 	read(*(first + 1), depth_feet_unit);
@@ -36,21 +36,21 @@ dbt::dbt(talker talk, fields::const_iterator first, fields::const_iterator last)
 	check_value(depth_fathom_unit, {unit::distance::fathom}, "depth_fathom_unit");
 }
 
-utils::optional<units::length> dbt::get_depth_feet() const
+std::optional<units::length> dbt::get_depth_feet() const
 {
 	if (!depth_feet_)
 		return {};
 	return {*depth_feet_};
 }
 
-utils::optional<units::length> dbt::get_depth_meter() const
+std::optional<units::length> dbt::get_depth_meter() const
 {
 	if (!depth_meter_)
 		return {};
 	return {*depth_meter_};
 }
 
-utils::optional<units::length> dbt::get_depth_fathom() const
+std::optional<units::length> dbt::get_depth_fathom() const
 {
 	if (!depth_fathom_)
 		return {};

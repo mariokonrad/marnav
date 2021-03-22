@@ -5,7 +5,6 @@
 
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/io/default_nmea_reader.hpp>
-#include <marnav/utils/unique.hpp>
 #include <boost/asio.hpp>
 
 namespace marnav_example
@@ -87,7 +86,7 @@ int main(int, char **)
 	using namespace marnav_example;
 
 	// open input port and reader
-	io::default_nmea_reader input{utils::make_unique<boost_asio_serial>("/dev/ttyUSB0", 38400)};
+	io::default_nmea_reader input{std::make_unique<boost_asio_serial>("/dev/ttyUSB0", 38400)};
 
 	// open output port (TCP client), default port of certain navigational software
 	boost_asio_tcp_client output{"127.0.0.1", "2947"};

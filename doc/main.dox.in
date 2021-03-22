@@ -16,7 +16,7 @@
 - \ref technical_overview
 
 \section abstract Abstract
-This is a C++11 library for maritime navigation purposes.
+This is a C++17 library for maritime navigation purposes.
 It supports (partially):
 - \ref features_nmea
 - \ref features_ais

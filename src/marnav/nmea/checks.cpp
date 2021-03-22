@@ -20,7 +20,7 @@ void check_status(status value, const char * name)
 /// @param[in] value The value to check.
 /// @param[in] name Optional name, will be included in the exception if the check fails.
 /// @exception std::invalid_argument The specified value was invalid.
-void check_status(const utils::optional<status> & value, const char * name)
+void check_status(const std::optional<status> & value, const char * name)
 {
 	if (value)
 		check_status(value.value(), name);

@@ -29,14 +29,14 @@ rte::rte(talker talk, fields::const_iterator first, fields::const_iterator last)
 
 	waypoint_id_.reserve(max_waypoints);
 	for (auto i = 0; (i < max_waypoints) && (i < (size - 4)); ++i) {
-		utils::optional<waypoint> wp;
+		std::optional<waypoint> wp;
 		read(*(first + i + 4), wp);
 		if (wp)
 			waypoint_id_.push_back(wp);
 	}
 }
 
-utils::optional<waypoint> rte::get_waypoint_id(int index) const
+std::optional<waypoint> rte::get_waypoint_id(int index) const
 {
 	if (index < 0)
 		throw std::out_of_range{"get_waypoint_id"};

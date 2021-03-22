@@ -16,7 +16,7 @@ std::unique_ptr<message> message_89::parse(const raw & data)
 {
 	check_size(data, SIZE);
 
-	std::unique_ptr<message> result = utils::make_unique<message_89>();
+	std::unique_ptr<message> result = std::make_unique<message_89>();
 	message_89 & msg = static_cast<message_89 &>(*result);
 
 	//  89 U2 VW XY 2Z

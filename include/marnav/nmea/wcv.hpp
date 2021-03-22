@@ -4,7 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -43,12 +43,12 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<units::knots> speed_;
-	utils::optional<waypoint> waypoint_id_;
+	std::optional<units::knots> speed_;
+	std::optional<waypoint> waypoint_id_;
 
 public:
-	utils::optional<units::velocity> get_speed() const;
-	utils::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
+	std::optional<units::velocity> get_speed() const;
+	std::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
 
 	void set_speed(units::velocity t) noexcept;
 	void set_waypoint(const waypoint & id) { waypoint_id_ = id; }

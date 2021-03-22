@@ -17,7 +17,7 @@ std::unique_ptr<message> message_23::parse(const raw & data)
 {
 	check_size(data, SIZE);
 
-	std::unique_ptr<message> result = utils::make_unique<message_23>();
+	std::unique_ptr<message> result = std::make_unique<message_23>();
 	message_23 & msg = static_cast<message_23 &>(*result);
 
 	msg.sensor_defective_ = (data[1] & 0x40) != 0;

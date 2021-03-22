@@ -78,17 +78,17 @@ raw message_19::get_data() const
 	return bits;
 }
 
-utils::optional<geo::longitude> message_19::get_lon() const
+std::optional<geo::longitude> message_19::get_lon() const
 {
 	if (longitude_minutes == longitude_not_available)
-		return utils::make_optional<geo::longitude>();
+		return std::make_optional<geo::longitude>();
 	return to_geo_longitude(longitude_minutes, longitude_minutes.count, angle_scale::I4);
 }
 
-utils::optional<geo::latitude> message_19::get_lat() const
+std::optional<geo::latitude> message_19::get_lat() const
 {
 	if (latitude_minutes == latitude_not_available)
-		return utils::make_optional<geo::latitude>();
+		return std::make_optional<geo::latitude>();
 	return to_geo_latitude(latitude_minutes, latitude_minutes.count, angle_scale::I4);
 }
 
@@ -121,7 +121,7 @@ void message_19::set_shipname(const std::string & t)
 	}
 }
 
-utils::optional<units::knots> message_19::get_sog() const noexcept
+std::optional<units::knots> message_19::get_sog() const noexcept
 {
 	// ignores special value of 1022 = 102.2 knots or faster
 

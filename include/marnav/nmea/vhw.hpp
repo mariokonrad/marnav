@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -50,16 +50,16 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> heading_true_; // 0..359
-	utils::optional<double> heading_magn_; // 0..359
-	utils::optional<units::knots> speed_knots_;
-	utils::optional<units::kilometers_per_hour> speed_kmh_;
+	std::optional<double> heading_true_; // 0..359
+	std::optional<double> heading_magn_; // 0..359
+	std::optional<units::knots> speed_knots_;
+	std::optional<units::kilometers_per_hour> speed_kmh_;
 
 public:
-	utils::optional<double> get_heading_true() const { return heading_true_; }
-	utils::optional<double> get_heading_magn() const { return heading_magn_; }
-	utils::optional<units::knots> get_speed_knots() const { return speed_knots_; }
-	utils::optional<units::kilometers_per_hour> get_speed_kmh() const { return speed_kmh_; }
+	std::optional<double> get_heading_true() const { return heading_true_; }
+	std::optional<double> get_heading_magn() const { return heading_magn_; }
+	std::optional<units::knots> get_speed_knots() const { return speed_knots_; }
+	std::optional<units::kilometers_per_hour> get_speed_kmh() const { return speed_kmh_; }
 
 	void set_heading_true(double t) noexcept;
 	void set_heading_magn(double t) noexcept;

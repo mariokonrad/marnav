@@ -2,7 +2,7 @@
 #define MARNAV_NMEA_HSC_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -43,16 +43,16 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> heading_true_;
-	utils::optional<reference> heading_true_ref_;
-	utils::optional<double> heading_mag_;
-	utils::optional<reference> heading_mag_ref_;
+	std::optional<double> heading_true_;
+	std::optional<reference> heading_true_ref_;
+	std::optional<double> heading_mag_;
+	std::optional<reference> heading_mag_ref_;
 
 public:
-	utils::optional<double> get_heading_true() const { return heading_true_; }
-	utils::optional<reference> get_heading_true_ref() const { return heading_true_ref_; }
-	utils::optional<double> get_heading_mag() const { return heading_mag_; }
-	utils::optional<reference> get_heading_mag_ref() const { return heading_mag_ref_; }
+	std::optional<double> get_heading_true() const { return heading_true_; }
+	std::optional<reference> get_heading_true_ref() const { return heading_true_ref_; }
+	std::optional<double> get_heading_mag() const { return heading_mag_; }
+	std::optional<reference> get_heading_mag_ref() const { return heading_mag_ref_; }
 
 	void set_heading_true(double t) noexcept;
 	void set_heading_mag(double t) noexcept;

@@ -20,8 +20,8 @@ wnc::wnc(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in wnc"};
 
-	utils::optional<unit::distance> distance_nm_unit;
-	utils::optional<unit::distance> distance_km_unit;
+	std::optional<unit::distance> distance_nm_unit;
+	std::optional<unit::distance> distance_km_unit;
 
 	read(*(first + 0), distance_nm_);
 	read(*(first + 1), distance_nm_unit);
@@ -44,14 +44,14 @@ void wnc::set_distance_km(units::length t) noexcept
 	distance_km_ = t.get<units::kilometers>();
 }
 
-utils::optional<units::length> wnc::get_distance_nm() const
+std::optional<units::length> wnc::get_distance_nm() const
 {
 	if (!distance_nm_)
 		return {};
 	return {*distance_nm_};
 }
 
-utils::optional<units::length> wnc::get_distance_km() const
+std::optional<units::length> wnc::get_distance_km() const
 {
 	if (!distance_km_)
 		return {};

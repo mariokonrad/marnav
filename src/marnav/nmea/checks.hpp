@@ -3,9 +3,9 @@
 
 #include <marnav/nmea/constants.hpp>
 #include <marnav/nmea/string.hpp>
-#include <marnav/utils/optional.hpp>
 #include <algorithm>
 #include <initializer_list>
+#include <optional>
 #include <stdexcept>
 #include <string>
 
@@ -60,7 +60,7 @@ void check_value(T value, std::initializer_list<T> options, const char * name = 
 }
 
 template <class T>
-void check_value(const utils::optional<T> & value, std::initializer_list<T> options,
+void check_value(const std::optional<T> & value, std::initializer_list<T> options,
 	const char * name = nullptr)
 {
 	if (value)
@@ -69,7 +69,7 @@ void check_value(const utils::optional<T> & value, std::initializer_list<T> opti
 
 void check_status(status value, const char * name = nullptr);
 
-void check_status(const utils::optional<status> & value, const char * name = nullptr);
+void check_status(const std::optional<status> & value, const char * name = nullptr);
 }
 }
 

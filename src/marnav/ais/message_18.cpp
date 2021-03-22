@@ -74,17 +74,17 @@ raw message_18::get_data() const
 	return bits;
 }
 
-utils::optional<geo::longitude> message_18::get_lon() const
+std::optional<geo::longitude> message_18::get_lon() const
 {
 	if (longitude_minutes == longitude_not_available)
-		return utils::make_optional<geo::longitude>();
+		return std::make_optional<geo::longitude>();
 	return to_geo_longitude(longitude_minutes, longitude_minutes.count, angle_scale::I4);
 }
 
-utils::optional<geo::latitude> message_18::get_lat() const
+std::optional<geo::latitude> message_18::get_lat() const
 {
 	if (latitude_minutes == latitude_not_available)
-		return utils::make_optional<geo::latitude>();
+		return std::make_optional<geo::latitude>();
 	return to_geo_latitude(latitude_minutes, latitude_minutes.count, angle_scale::I4);
 }
 
@@ -108,7 +108,7 @@ void message_18::set_lat(const geo::latitude & t)
 	latitude_minutes = to_latitude_minutes(t, latitude_minutes.count, angle_scale::I4);
 }
 
-utils::optional<units::knots> message_18::get_sog() const noexcept
+std::optional<units::knots> message_18::get_sog() const noexcept
 {
 	// ignores special value of 1022 = 102.2 knots or faster
 
@@ -132,27 +132,27 @@ void message_18::set_sog(units::velocity t)
 }
 
 /// Returns course over ground in degrees true north.
-utils::optional<double> message_18::get_cog() const noexcept
+std::optional<double> message_18::get_cog() const noexcept
 {
 	if (cog == cog_not_available)
 		return {};
 	return 0.1 * cog;
 }
 
-void message_18::set_cog(utils::optional<double> t) noexcept
+void message_18::set_cog(std::optional<double> t) noexcept
 {
 	cog = !t ? cog_not_available : static_cast<uint32_t>(std::round(*t / 0.1));
 }
 
 /// Returns heading in degrees.
-utils::optional<uint32_t> message_18::get_hdg() const noexcept
+std::optional<uint32_t> message_18::get_hdg() const noexcept
 {
 	if (hdg == hdg_not_available)
 		return {};
 	return {hdg};
 }
 
-void message_18::set_hdg(utils::optional<uint32_t> t) noexcept
+void message_18::set_hdg(std::optional<uint32_t> t) noexcept
 {
 	hdg = !t ? hdg_not_available : *t;
 }

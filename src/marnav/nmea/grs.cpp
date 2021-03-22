@@ -73,7 +73,7 @@ void grs::check_index(int index) const
 	}
 }
 
-utils::optional<double> grs::get_sat_residual(int index) const
+std::optional<double> grs::get_sat_residual(int index) const
 {
 	check_index(index);
 	return sat_residual_[index];

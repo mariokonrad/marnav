@@ -6,7 +6,7 @@
 #include <marnav/geo/angle.hpp>
 #include <marnav/units/units.hpp>
 #include <marnav/utils/mmsi.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -59,7 +59,7 @@ private:
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
-	utils::optional<units::knots> get_sog() const noexcept;
+	std::optional<units::knots> get_sog() const noexcept;
 	bool get_position_accuracy() const noexcept { return position_accuracy; }
 	uint32_t get_cog() const noexcept { return cog; }
 	uint32_t get_hdg() const noexcept { return hdg; }
@@ -90,8 +90,8 @@ public:
 	void set_dte(data_terminal t) noexcept { dte = t; }
 	void set_assigned(bool t) noexcept { assigned = t; }
 
-	utils::optional<geo::longitude> get_lon() const;
-	utils::optional<geo::latitude> get_lat() const;
+	std::optional<geo::longitude> get_lon() const;
+	std::optional<geo::latitude> get_lat() const;
 	void set_lon_unavailable();
 	void set_lat_unavailable();
 	void set_lon(const geo::longitude & t);

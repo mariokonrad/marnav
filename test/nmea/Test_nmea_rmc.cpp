@@ -31,7 +31,7 @@ TEST_F(Test_nmea_rmc, parse)
 	ASSERT_NE(nullptr, rmc);
 
 	auto date = rmc->get_date();
-	EXPECT_TRUE(date.available());
+	EXPECT_TRUE(date.has_value());
 	EXPECT_EQ(10u, date.value().year());
 	EXPECT_EQ(nmea::month::may, date.value().mon());
 	EXPECT_EQ(30u, date.value().day());
@@ -173,7 +173,7 @@ TEST_F(Test_nmea_rmc, get_sog)
 	ASSERT_NE(nullptr, rmc);
 
 	auto sog = rmc->get_sog();
-	ASSERT_TRUE(sog.available());
+	ASSERT_TRUE(sog.has_value());
 
 	EXPECT_NEAR(4.5, sog->get<marnav::units::knots>().value(), 1e-8);
 }

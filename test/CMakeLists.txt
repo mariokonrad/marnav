@@ -195,7 +195,6 @@ target_sources(testrunner
 		utils/Test_utils_bitset.cpp
 		utils/Test_utils_mmsi.cpp
 		utils/Test_utils_mmsi_country.cpp
-		utils/Test_utils_optional.cpp
 	)
 
 if(ENABLE_IO)

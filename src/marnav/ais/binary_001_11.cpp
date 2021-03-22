@@ -92,7 +92,7 @@ void binary_001_11::write_to(raw & payload) const
 	set(payload, ice_info);
 }
 
-utils::optional<geo::position> binary_001_11::get_position() const
+std::optional<geo::position> binary_001_11::get_position() const
 {
 	if ((lat == lat_not_available) || (lon == lon_not_available))
 		return {};
@@ -100,49 +100,49 @@ utils::optional<geo::position> binary_001_11::get_position() const
 		to_geo_longitude(lon, lon.count, angle_scale::I3)}};
 }
 
-utils::optional<uint32_t> binary_001_11::get_day() const
+std::optional<uint32_t> binary_001_11::get_day() const
 {
 	if (day == day_not_available)
 		return {};
 	return {day};
 }
 
-utils::optional<uint32_t> binary_001_11::get_hour() const
+std::optional<uint32_t> binary_001_11::get_hour() const
 {
 	if (hour == hour_not_available)
 		return {};
 	return {hour};
 }
 
-utils::optional<uint32_t> binary_001_11::get_minute() const
+std::optional<uint32_t> binary_001_11::get_minute() const
 {
 	if (minute == minute_not_available)
 		return {};
 	return {minute};
 }
 
-utils::optional<uint32_t> binary_001_11::get_wind_speed_avg() const
+std::optional<uint32_t> binary_001_11::get_wind_speed_avg() const
 {
 	if (wind_speed_avg == wind_speed_avg_not_available)
 		return {};
 	return {wind_speed_avg};
 }
 
-utils::optional<uint32_t> binary_001_11::get_wind_gust() const
+std::optional<uint32_t> binary_001_11::get_wind_gust() const
 {
 	if (wind_gust == wind_gust_not_available)
 		return {};
 	return {wind_gust};
 }
 
-utils::optional<uint32_t> binary_001_11::get_wind_direction() const
+std::optional<uint32_t> binary_001_11::get_wind_direction() const
 {
 	if (wind_direction == wind_direction_not_available)
 		return {};
 	return {wind_direction};
 }
 
-utils::optional<uint32_t> binary_001_11::get_wind_gust_direction() const
+std::optional<uint32_t> binary_001_11::get_wind_gust_direction() const
 {
 	if (wind_gust_direction == wind_gust_direction_not_available)
 		return {};
@@ -150,14 +150,14 @@ utils::optional<uint32_t> binary_001_11::get_wind_gust_direction() const
 }
 
 /// Returns the temperature in degrees Celsius between `-60.0` and `+60.0`.
-utils::optional<double> binary_001_11::get_temperature() const
+std::optional<double> binary_001_11::get_temperature() const
 {
 	if (temperature == temperature_not_available)
 		return {};
 	return -60.0 + 0.1 * temperature;
 }
 
-utils::optional<uint32_t> binary_001_11::get_humidity() const
+std::optional<uint32_t> binary_001_11::get_humidity() const
 {
 	if (humidity == humidity_not_available)
 		return {};
@@ -165,7 +165,7 @@ utils::optional<uint32_t> binary_001_11::get_humidity() const
 }
 
 /// Returns in degrees Celsius between `-20.0` and `+50.0`.
-utils::optional<double> binary_001_11::get_dew_point() const
+std::optional<double> binary_001_11::get_dew_point() const
 {
 	if (dew_point == dew_point_not_available)
 		return {};
@@ -173,14 +173,14 @@ utils::optional<double> binary_001_11::get_dew_point() const
 }
 
 /// Returns the pressure in `hPa` between `800` and `1200`.
-utils::optional<uint32_t> binary_001_11::get_pressure() const
+std::optional<uint32_t> binary_001_11::get_pressure() const
 {
 	if (pressure == pressure_not_available)
 		return {};
 	return {800 + pressure};
 }
 
-utils::optional<binary_001_11::trend> binary_001_11::get_pressure_trend() const
+std::optional<binary_001_11::trend> binary_001_11::get_pressure_trend() const
 {
 	if (pressure_trend == trend::not_available)
 		return {};
@@ -188,7 +188,7 @@ utils::optional<binary_001_11::trend> binary_001_11::get_pressure_trend() const
 }
 
 /// Returns the visibility in nautical miles.
-utils::optional<double> binary_001_11::get_visibility() const
+std::optional<double> binary_001_11::get_visibility() const
 {
 	if (visibility == visibility_not_available)
 		return {};
@@ -196,14 +196,14 @@ utils::optional<double> binary_001_11::get_visibility() const
 }
 
 /// Returns the water level in meters between `-10.0` and `+30.0`.
-utils::optional<double> binary_001_11::get_water_level() const
+std::optional<double> binary_001_11::get_water_level() const
 {
 	if (water_level == water_level_not_available)
 		return {};
 	return -10.0 + 0.1 * water_level;
 }
 
-utils::optional<binary_001_11::trend> binary_001_11::get_water_level_trend() const
+std::optional<binary_001_11::trend> binary_001_11::get_water_level_trend() const
 {
 	if (water_level_trend == trend::not_available)
 		return {};
@@ -211,14 +211,14 @@ utils::optional<binary_001_11::trend> binary_001_11::get_water_level_trend() con
 }
 
 /// Returns the speed in knots.
-utils::optional<double> binary_001_11::get_surface_current_speed() const
+std::optional<double> binary_001_11::get_surface_current_speed() const
 {
 	if (surface_current_speed == current_speed_not_available)
 		return {};
 	return 0.1 * surface_current_speed;
 }
 
-utils::optional<uint32_t> binary_001_11::get_surface_current_direction() const
+std::optional<uint32_t> binary_001_11::get_surface_current_direction() const
 {
 	if (surface_current_direction == current_direction_not_available)
 		return {};
@@ -226,21 +226,21 @@ utils::optional<uint32_t> binary_001_11::get_surface_current_direction() const
 }
 
 /// Returns the speed in knots.
-utils::optional<double> binary_001_11::get_current_2_speed() const
+std::optional<double> binary_001_11::get_current_2_speed() const
 {
 	if (current_2_speed == current_speed_not_available)
 		return {};
 	return 0.1 * current_2_speed;
 }
 
-utils::optional<uint32_t> binary_001_11::get_current_2_direction() const
+std::optional<uint32_t> binary_001_11::get_current_2_direction() const
 {
 	if (current_2_direction == current_direction_not_available)
 		return {};
 	return {current_2_direction};
 }
 
-utils::optional<uint32_t> binary_001_11::get_current_2_depth() const
+std::optional<uint32_t> binary_001_11::get_current_2_depth() const
 {
 	if (current_2_depth == current_depth_not_available)
 		return {};
@@ -248,21 +248,21 @@ utils::optional<uint32_t> binary_001_11::get_current_2_depth() const
 }
 
 /// Returns the speed in knots.
-utils::optional<double> binary_001_11::get_current_3_speed() const
+std::optional<double> binary_001_11::get_current_3_speed() const
 {
 	if (current_3_speed == current_speed_not_available)
 		return {};
 	return 0.1 * current_3_speed;
 }
 
-utils::optional<uint32_t> binary_001_11::get_current_3_direction() const
+std::optional<uint32_t> binary_001_11::get_current_3_direction() const
 {
 	if (current_3_direction == current_direction_not_available)
 		return {};
 	return {current_3_direction};
 }
 
-utils::optional<uint32_t> binary_001_11::get_current_3_depth() const
+std::optional<uint32_t> binary_001_11::get_current_3_depth() const
 {
 	if (current_3_depth == current_depth_not_available)
 		return {};
@@ -270,21 +270,21 @@ utils::optional<uint32_t> binary_001_11::get_current_3_depth() const
 }
 
 /// Returns the wave height in meters.
-utils::optional<double> binary_001_11::get_wave_height() const
+std::optional<double> binary_001_11::get_wave_height() const
 {
 	if (wave_height == wave_height_not_available)
 		return {};
 	return 0.1 * wave_height;
 }
 
-utils::optional<uint32_t> binary_001_11::get_wave_period() const
+std::optional<uint32_t> binary_001_11::get_wave_period() const
 {
 	if (wave_period == wave_period_not_available)
 		return {};
 	return {wave_period};
 }
 
-utils::optional<uint32_t> binary_001_11::get_wave_direction() const
+std::optional<uint32_t> binary_001_11::get_wave_direction() const
 {
 	if (wave_direction == wave_direction_not_available)
 		return {};
@@ -292,28 +292,28 @@ utils::optional<uint32_t> binary_001_11::get_wave_direction() const
 }
 
 /// Returns the swell height in meters.
-utils::optional<double> binary_001_11::get_swell_height() const
+std::optional<double> binary_001_11::get_swell_height() const
 {
 	if (swell_height == wave_height_not_available)
 		return {};
 	return 0.1 * swell_height;
 }
 
-utils::optional<uint32_t> binary_001_11::get_swell_period() const
+std::optional<uint32_t> binary_001_11::get_swell_period() const
 {
 	if (swell_period == wave_period_not_available)
 		return {};
 	return {swell_period};
 }
 
-utils::optional<uint32_t> binary_001_11::get_swell_direction() const
+std::optional<uint32_t> binary_001_11::get_swell_direction() const
 {
 	if (swell_direction == wave_direction_not_available)
 		return {};
 	return {swell_direction};
 }
 
-utils::optional<uint32_t> binary_001_11::get_sea_state() const
+std::optional<uint32_t> binary_001_11::get_sea_state() const
 {
 	if (sea_state == sea_state_not_available)
 		return {};
@@ -321,14 +321,14 @@ utils::optional<uint32_t> binary_001_11::get_sea_state() const
 }
 
 /// Returns the water temperature in degrees Celsius between `-10.0` and `+50.0`.
-utils::optional<double> binary_001_11::get_water_temperature() const
+std::optional<double> binary_001_11::get_water_temperature() const
 {
 	if (water_temperature == water_temperature_not_available)
 		return {};
 	return -10.0 + 0.1 * water_temperature;
 }
 
-utils::optional<binary_001_11::precipitation> binary_001_11::get_precipitation() const
+std::optional<binary_001_11::precipitation> binary_001_11::get_precipitation() const
 {
 	if (precipitation_type == precipitation::not_available)
 		return {};
@@ -336,21 +336,21 @@ utils::optional<binary_001_11::precipitation> binary_001_11::get_precipitation()
 }
 
 /// Returns the sailinity in percent.
-utils::optional<double> binary_001_11::get_salinity() const
+std::optional<double> binary_001_11::get_salinity() const
 {
 	if (sailinity == salinity_not_available)
 		return {};
 	return 0.1 * sailinity;
 }
 
-utils::optional<binary_001_11::ice> binary_001_11::get_ice() const
+std::optional<binary_001_11::ice> binary_001_11::get_ice() const
 {
 	if (ice_info == ice::not_available)
 		return {};
 	return {ice_info};
 }
 
-void binary_001_11::set_position(utils::optional<geo::position> t)
+void binary_001_11::set_position(std::optional<geo::position> t)
 {
 	if (!t) {
 		lat = lat_not_available;
@@ -363,183 +363,183 @@ void binary_001_11::set_position(utils::optional<geo::position> t)
 
 /// Sets the day. Value must be either empty optional or a value between `1` and `31`.
 /// A value out of range is treated the same as an empty optional.
-void binary_001_11::set_day(utils::optional<uint32_t> t)
+void binary_001_11::set_day(std::optional<uint32_t> t)
 {
 	day = (!t || *t >= 31) ? day_not_available : *t;
 }
 
 /// Sets the hour. Value must be either empty optional or a value between `0` and `23`.
 /// A value out of range is treated the same as an empty optional.
-void binary_001_11::set_hour(utils::optional<uint32_t> t)
+void binary_001_11::set_hour(std::optional<uint32_t> t)
 {
 	hour = (!t || *t >= 24) ? hour_not_available : *t;
 }
 
 /// Sets the minute. Value must be either empty optional or a value between `0` and `59`.
 /// A value out of range is treated the same as an empty optional.
-void binary_001_11::set_minute(utils::optional<uint32_t> t)
+void binary_001_11::set_minute(std::optional<uint32_t> t)
 {
 	minute = (!t || *t > 59u) ? minute_not_available : *t;
 }
 
-void binary_001_11::set_wind_speed_avg(utils::optional<uint32_t> t)
+void binary_001_11::set_wind_speed_avg(std::optional<uint32_t> t)
 {
 	wind_speed_avg = !t ? wind_speed_avg_not_available : *t;
 }
 
-void binary_001_11::set_wind_gust(utils::optional<uint32_t> t)
+void binary_001_11::set_wind_gust(std::optional<uint32_t> t)
 {
 	wind_gust = !t ? wind_gust_not_available : *t;
 }
 
-void binary_001_11::set_wind_direction(utils::optional<uint32_t> t)
+void binary_001_11::set_wind_direction(std::optional<uint32_t> t)
 {
 	wind_direction = !t ? wind_direction_not_available : *t;
 }
 
-void binary_001_11::set_wind_gust_direction(utils::optional<uint32_t> t)
+void binary_001_11::set_wind_gust_direction(std::optional<uint32_t> t)
 {
 	wind_gust_direction = !t ? wind_gust_direction_not_available : *t;
 }
 
-void binary_001_11::set_temperature(utils::optional<double> t)
+void binary_001_11::set_temperature(std::optional<double> t)
 {
 	temperature
 		= !t ? temperature_not_available : static_cast<uint32_t>(std::round(*t / 0.1 + 60.0));
 }
 
-void binary_001_11::set_humidity(utils::optional<uint32_t> t)
+void binary_001_11::set_humidity(std::optional<uint32_t> t)
 {
 	humidity = !t ? humidity_not_available : *t;
 }
 
-void binary_001_11::set_dew_point(utils::optional<double> t)
+void binary_001_11::set_dew_point(std::optional<double> t)
 {
 	dew_point
 		= !t ? dew_point_not_available : static_cast<uint32_t>(std::round(*t / 0.1 + 20.0));
 }
 
-void binary_001_11::set_pressure(utils::optional<uint32_t> t)
+void binary_001_11::set_pressure(std::optional<uint32_t> t)
 {
 	pressure = !t ? pressure_not_available : *t - 800;
 }
 
-void binary_001_11::set_pressure_trend(utils::optional<binary_001_11::trend> t)
+void binary_001_11::set_pressure_trend(std::optional<binary_001_11::trend> t)
 {
 	pressure_trend = !t ? trend::not_available : *t;
 }
 
-void binary_001_11::set_visibility(utils::optional<double> t)
+void binary_001_11::set_visibility(std::optional<double> t)
 {
 	visibility = !t ? visibility_not_available : static_cast<uint32_t>(std::round(*t / 0.1));
 }
 
-void binary_001_11::set_water_level(utils::optional<double> t)
+void binary_001_11::set_water_level(std::optional<double> t)
 {
 	water_level
 		= !t ? water_level_not_available : static_cast<uint32_t>(std::round(*t / 0.1 + 10.0));
 }
 
-void binary_001_11::set_water_level_trend(utils::optional<binary_001_11::trend> t)
+void binary_001_11::set_water_level_trend(std::optional<binary_001_11::trend> t)
 {
 	water_level_trend = !t ? trend::not_available : *t;
 }
 
-void binary_001_11::set_surface_current_speed(utils::optional<double> t)
+void binary_001_11::set_surface_current_speed(std::optional<double> t)
 {
 	surface_current_speed
 		= !t ? current_speed_not_available : static_cast<uint32_t>(std::round(*t / 0.1));
 }
 
-void binary_001_11::set_surface_current_direction(utils::optional<uint32_t> t)
+void binary_001_11::set_surface_current_direction(std::optional<uint32_t> t)
 {
 	surface_current_direction = !t ? current_direction_not_available : *t;
 }
 
-void binary_001_11::set_current_2_speed(utils::optional<double> t)
+void binary_001_11::set_current_2_speed(std::optional<double> t)
 {
 	current_2_speed
 		= !t ? current_speed_not_available : static_cast<uint32_t>(std::round(*t / 0.1));
 }
 
-void binary_001_11::set_current_2_direction(utils::optional<uint32_t> t)
+void binary_001_11::set_current_2_direction(std::optional<uint32_t> t)
 {
 	current_2_direction = !t ? current_direction_not_available : *t;
 }
 
-void binary_001_11::set_current_2_depth(utils::optional<uint32_t> t)
+void binary_001_11::set_current_2_depth(std::optional<uint32_t> t)
 {
 	current_2_depth = !t ? current_depth_not_available : *t;
 }
 
-void binary_001_11::set_current_3_speed(utils::optional<double> t)
+void binary_001_11::set_current_3_speed(std::optional<double> t)
 {
 	current_3_speed
 		= !t ? current_speed_not_available : static_cast<uint32_t>(std::round(*t / 0.1));
 }
 
-void binary_001_11::set_current_3_direction(utils::optional<uint32_t> t)
+void binary_001_11::set_current_3_direction(std::optional<uint32_t> t)
 {
 	current_3_direction = !t ? current_direction_not_available : *t;
 }
 
-void binary_001_11::set_current_3_depth(utils::optional<uint32_t> t)
+void binary_001_11::set_current_3_depth(std::optional<uint32_t> t)
 {
 	current_3_depth = !t ? current_depth_not_available : *t;
 }
 
-void binary_001_11::set_wave_height(utils::optional<double> t)
+void binary_001_11::set_wave_height(std::optional<double> t)
 {
 	wave_height = !t ? wave_height_not_available : static_cast<uint32_t>(std::round(*t / 0.1));
 }
 
-void binary_001_11::set_wave_period(utils::optional<uint32_t> t)
+void binary_001_11::set_wave_period(std::optional<uint32_t> t)
 {
 	wave_period = !t ? wave_period_not_available : *t;
 }
 
-void binary_001_11::set_wave_direction(utils::optional<uint32_t> t)
+void binary_001_11::set_wave_direction(std::optional<uint32_t> t)
 {
 	wave_direction = !t ? wave_direction_not_available : *t;
 }
 
-void binary_001_11::set_swell_height(utils::optional<double> t)
+void binary_001_11::set_swell_height(std::optional<double> t)
 {
 	swell_height = !t ? wave_height_not_available : static_cast<uint32_t>(std::round(*t / 0.1));
 }
 
-void binary_001_11::set_swell_period(utils::optional<uint32_t> t)
+void binary_001_11::set_swell_period(std::optional<uint32_t> t)
 {
 	swell_period = !t ? wave_period_not_available : *t;
 }
 
-void binary_001_11::set_swell_direction(utils::optional<uint32_t> t)
+void binary_001_11::set_swell_direction(std::optional<uint32_t> t)
 {
 	swell_direction = !t ? wave_direction_not_available : *t;
 }
 
-void binary_001_11::set_sea_state(utils::optional<uint32_t> t)
+void binary_001_11::set_sea_state(std::optional<uint32_t> t)
 {
 	sea_state = !t ? sea_state_not_available : *t;
 }
 
-void binary_001_11::set_water_temperature(utils::optional<double> t)
+void binary_001_11::set_water_temperature(std::optional<double> t)
 {
 	water_temperature = !t ? water_temperature_not_available
 						   : static_cast<uint32_t>(std::round(*t / 0.1 + 10.0));
 }
 
-void binary_001_11::set_precipitation(utils::optional<binary_001_11::precipitation> t)
+void binary_001_11::set_precipitation(std::optional<binary_001_11::precipitation> t)
 {
 	precipitation_type = !t ? precipitation::not_available : *t;
 }
 
-void binary_001_11::set_salinity(utils::optional<double> t)
+void binary_001_11::set_salinity(std::optional<double> t)
 {
 	sailinity = !t ? salinity_not_available : static_cast<uint32_t>(std::round(*t / 0.1));
 }
 
-void binary_001_11::set_ice(utils::optional<binary_001_11::ice> t)
+void binary_001_11::set_ice(std::optional<binary_001_11::ice> t)
 {
 	ice_info = !t ? ice::not_available : *t;
 }

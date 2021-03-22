@@ -46,14 +46,14 @@ rmb::rmb(talker talk, fields::const_iterator first, fields::const_iterator last)
 	lon_ = correct_hemisphere(lon_, lon_hem_);
 }
 
-utils::optional<geo::longitude> rmb::get_lon() const
+std::optional<geo::longitude> rmb::get_lon() const
 {
-	return (lon_ && lon_hem_) ? lon_ : utils::optional<geo::longitude>{};
+	return (lon_ && lon_hem_) ? lon_ : std::optional<geo::longitude>{};
 }
 
-utils::optional<geo::latitude> rmb::get_lat() const
+std::optional<geo::latitude> rmb::get_lat() const
 {
-	return (lat_ && lat_hem_) ? lat_ : utils::optional<geo::latitude>{};
+	return (lat_ && lat_hem_) ? lat_ : std::optional<geo::latitude>{};
 }
 
 void rmb::set_lat(const geo::latitude & t)
@@ -68,7 +68,7 @@ void rmb::set_lon(const geo::longitude & t)
 	lon_hem_ = convert_hemisphere(t);
 }
 
-utils::optional<units::velocity> rmb::get_dst_velocity() const
+std::optional<units::velocity> rmb::get_dst_velocity() const
 {
 	if (!dst_velocity_)
 		return {};
@@ -82,7 +82,7 @@ void rmb::set_dst_velocity(units::velocity t)
 	dst_velocity_ = t.get<units::knots>();
 }
 
-utils::optional<units::length> rmb::get_range() const
+std::optional<units::length> rmb::get_range() const
 {
 	if (!range_)
 		return {};
@@ -96,7 +96,7 @@ void rmb::set_range(units::length t)
 	range_ = t.get<units::nautical_miles>();
 }
 
-utils::optional<units::length> rmb::get_cross_track_error() const
+std::optional<units::length> rmb::get_cross_track_error() const
 {
 	if (!cross_track_error_)
 		return {};

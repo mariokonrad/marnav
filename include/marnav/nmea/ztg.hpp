@@ -4,7 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/waypoint.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -42,14 +42,14 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<nmea::time> time_utc_;
-	utils::optional<nmea::time> time_remaining_;
-	utils::optional<waypoint> waypoint_id_;
+	std::optional<nmea::time> time_utc_;
+	std::optional<nmea::time> time_remaining_;
+	std::optional<waypoint> waypoint_id_;
 
 public:
-	utils::optional<nmea::time> get_time_utc() const { return time_utc_; }
-	utils::optional<nmea::time> get_time_remaining() const { return time_remaining_; }
-	utils::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
+	std::optional<nmea::time> get_time_utc() const { return time_utc_; }
+	std::optional<nmea::time> get_time_remaining() const { return time_remaining_; }
+	std::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
 	void set_time_remaining(const nmea::time & t) noexcept { time_remaining_ = t; }

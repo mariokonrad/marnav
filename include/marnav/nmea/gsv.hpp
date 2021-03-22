@@ -2,8 +2,8 @@
 #define MARNAV_NMEA_GSV_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
 #include <array>
+#include <optional>
 
 namespace marnav
 {
@@ -51,7 +51,7 @@ public:
 		uint32_t prn;
 		uint32_t elevation;
 		uint32_t azimuth; // azimuth against true
-		utils::optional<uint32_t> snr;
+		std::optional<uint32_t> snr;
 	};
 
 	constexpr static sentence_id ID = sentence_id::GSV;
@@ -71,7 +71,7 @@ private:
 	uint32_t n_messages_ = 1;
 	uint32_t message_number_ = 1;
 	uint32_t n_satellites_in_view_ = 0;
-	std::array<utils::optional<satellite_info>, 4> sat_;
+	std::array<std::optional<satellite_info>, 4> sat_;
 
 	void check_index(int index) const;
 
@@ -79,7 +79,7 @@ public:
 	uint32_t get_n_messages() const { return n_messages_; }
 	uint32_t get_message_number() const { return message_number_; }
 	uint32_t get_n_satellites_in_view() const { return n_satellites_in_view_; }
-	utils::optional<satellite_info> get_sat(int index) const;
+	std::optional<satellite_info> get_sat(int index) const;
 
 	void set_n_messages(uint32_t t);
 	void set_message_number(uint32_t t);

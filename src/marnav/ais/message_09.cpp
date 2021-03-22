@@ -65,17 +65,17 @@ raw message_09::get_data() const
 	return bits;
 }
 
-utils::optional<geo::longitude> message_09::get_lon() const
+std::optional<geo::longitude> message_09::get_lon() const
 {
 	if (longitude_minutes == longitude_not_available)
-		return utils::make_optional<geo::longitude>();
+		return std::make_optional<geo::longitude>();
 	return to_geo_longitude(longitude_minutes, longitude_minutes.count, angle_scale::I4);
 }
 
-utils::optional<geo::latitude> message_09::get_lat() const
+std::optional<geo::latitude> message_09::get_lat() const
 {
 	if (latitude_minutes == latitude_not_available)
-		return utils::make_optional<geo::latitude>();
+		return std::make_optional<geo::latitude>();
 	return to_geo_latitude(latitude_minutes, latitude_minutes.count, angle_scale::I4);
 }
 
@@ -99,7 +99,7 @@ void message_09::set_lat(const geo::latitude & t)
 	latitude_minutes = to_latitude_minutes(t, latitude_minutes.count, angle_scale::I4);
 }
 
-utils::optional<units::meters> message_09::get_altitude() const noexcept
+std::optional<units::meters> message_09::get_altitude() const noexcept
 {
 	// ignores special value is in meter 4094 = 4094 meters or higher
 
@@ -122,7 +122,7 @@ void message_09::set_altitude(units::length t)
 	altitude = std::min(altitude_max, static_cast<uint32_t>(round(m).value()));
 }
 
-utils::optional<units::knots> message_09::get_speed() const noexcept
+std::optional<units::knots> message_09::get_speed() const noexcept
 {
 	// ignores special value of 1022 = 102.2 knots or faster
 

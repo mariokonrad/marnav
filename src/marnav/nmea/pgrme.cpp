@@ -39,21 +39,21 @@ pgrme::pgrme(talker talk, fields::const_iterator first, fields::const_iterator l
 		"overall_spherical_equiv_position_error_unit");
 }
 
-utils::optional<units::length> pgrme::get_horizontal_position_error() const
+std::optional<units::length> pgrme::get_horizontal_position_error() const
 {
 	if (!horizontal_position_error_)
 		return {};
 	return {*horizontal_position_error_};
 }
 
-utils::optional<units::length> pgrme::get_vertical_position_error() const
+std::optional<units::length> pgrme::get_vertical_position_error() const
 {
 	if (!vertical_position_error_)
 		return {};
 	return {*vertical_position_error_};
 }
 
-utils::optional<units::length> pgrme::get_overall_spherical_equiv_position_error() const
+std::optional<units::length> pgrme::get_overall_spherical_equiv_position_error() const
 {
 	if (!overall_spherical_equiv_position_error_)
 		return {};

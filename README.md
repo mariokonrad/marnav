@@ -359,8 +359,6 @@ Tools and their versions are listed below, newer/older/other tools
 (i.e. compilers, etc.) may work, but not tested.
 
 Compiler:
-- GCC 5
-- GCC 6
 - GCC 7
 - GCC 8
 - GCC 9
@@ -378,7 +376,7 @@ Compiler:
 - Clang 13
 
 Tools needed to build the library:
-- cmake 3.11 or newer
+- cmake 3.19 or newer
 
 Tools needed to develop the library:
 - git
@@ -403,7 +401,7 @@ Optional (no core dependency):
 Opeating system:
 - Linux
 
-There are no other dependencies despite the standard library (C++11)
+There are no other dependencies despite the standard library (C++17)
 to build this library.
 
 ---

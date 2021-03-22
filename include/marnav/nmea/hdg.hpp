@@ -2,7 +2,7 @@
 #define MARNAV_NMEA_HDG_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -46,18 +46,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> heading_; // magnetic sensor heading in deg
-	utils::optional<double> magn_dev_; // magnetic deviation in deg
-	utils::optional<direction> magn_dev_hem_; // E:east, W:west
-	utils::optional<double> magn_var_; // magnetic variation in deg
-	utils::optional<direction> magn_var_hem_; // E:east, W:west
+	std::optional<double> heading_; // magnetic sensor heading in deg
+	std::optional<double> magn_dev_; // magnetic deviation in deg
+	std::optional<direction> magn_dev_hem_; // E:east, W:west
+	std::optional<double> magn_var_; // magnetic variation in deg
+	std::optional<direction> magn_var_hem_; // E:east, W:west
 
 public:
-	utils::optional<double> get_heading() const { return heading_; }
-	utils::optional<double> get_magn_dev() const { return magn_dev_; }
-	utils::optional<direction> get_magn_dev_hem() const { return magn_dev_hem_; }
-	utils::optional<double> get_magn_var() const { return magn_var_; }
-	utils::optional<direction> get_magn_var_hem() const { return magn_var_hem_; }
+	std::optional<double> get_heading() const { return heading_; }
+	std::optional<double> get_magn_dev() const { return magn_dev_; }
+	std::optional<direction> get_magn_dev_hem() const { return magn_dev_hem_; }
+	std::optional<double> get_magn_var() const { return magn_var_; }
+	std::optional<direction> get_magn_var_hem() const { return magn_var_hem_; }
 
 	void set_heading(double t) noexcept { heading_ = t; }
 	void set_magn_dev(double deg, direction hem);

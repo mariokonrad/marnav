@@ -21,8 +21,8 @@ gga::gga(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 14)
 		throw std::invalid_argument{"invalid number of fields in gga"};
 
-	utils::optional<unit::distance> altitude_unit;
-	utils::optional<unit::distance> geodial_separation_unit;
+	std::optional<unit::distance> altitude_unit;
+	std::optional<unit::distance> geodial_separation_unit;
 
 	read(*(first + 0), time_);
 	read(*(first + 1), lat_);
@@ -47,14 +47,14 @@ gga::gga(talker talk, fields::const_iterator first, fields::const_iterator last)
 	lon_ = correct_hemisphere(lon_, lon_hem_);
 }
 
-utils::optional<geo::longitude> gga::get_lon() const
+std::optional<geo::longitude> gga::get_lon() const
 {
-	return (lon_ && lon_hem_) ? lon_ : utils::optional<geo::longitude>{};
+	return (lon_ && lon_hem_) ? lon_ : std::optional<geo::longitude>{};
 }
 
-utils::optional<geo::latitude> gga::get_lat() const
+std::optional<geo::latitude> gga::get_lat() const
 {
-	return (lat_ && lat_hem_) ? lat_ : utils::optional<geo::latitude>{};
+	return (lat_ && lat_hem_) ? lat_ : std::optional<geo::latitude>{};
 }
 
 void gga::set_lat(const geo::latitude & t)
@@ -69,14 +69,14 @@ void gga::set_lon(const geo::longitude & t)
 	lon_hem_ = convert_hemisphere(t);
 }
 
-utils::optional<units::length> gga::get_altitude() const
+std::optional<units::length> gga::get_altitude() const
 {
 	if (!altitude_)
 		return {};
 	return {*altitude_};
 }
 
-utils::optional<units::length> gga::get_geodial_separation() const
+std::optional<units::length> gga::get_geodial_separation() const
 {
 	if (!geodial_separation_)
 		return {};

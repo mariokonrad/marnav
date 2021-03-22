@@ -2,7 +2,7 @@
 #define MARNAV_NMEA_FSI_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -46,18 +46,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<uint32_t> tx_frequency_;
-	utils::optional<uint32_t> rx_frequency_;
-	utils::optional<char> communications_mode_;
-	utils::optional<uint32_t> power_level_;
-	utils::optional<char> sentence_status_;
+	std::optional<uint32_t> tx_frequency_;
+	std::optional<uint32_t> rx_frequency_;
+	std::optional<char> communications_mode_;
+	std::optional<uint32_t> power_level_;
+	std::optional<char> sentence_status_;
 
 public:
-	utils::optional<uint32_t> get_tx_frequency() const { return tx_frequency_; }
-	utils::optional<uint32_t> get_rx_frequency() const { return rx_frequency_; }
-	utils::optional<char> get_communications_mode() const { return communications_mode_; }
-	utils::optional<uint32_t> get_power_level() const { return power_level_; }
-	utils::optional<char> get_sentence_status() const { return sentence_status_; }
+	std::optional<uint32_t> get_tx_frequency() const { return tx_frequency_; }
+	std::optional<uint32_t> get_rx_frequency() const { return rx_frequency_; }
+	std::optional<char> get_communications_mode() const { return communications_mode_; }
+	std::optional<uint32_t> get_power_level() const { return power_level_; }
+	std::optional<char> get_sentence_status() const { return sentence_status_; }
 
 	void set_tx_frequency(uint32_t t) noexcept { tx_frequency_ = t; }
 	void set_rx_frequency(uint32_t t) noexcept { rx_frequency_ = t; }

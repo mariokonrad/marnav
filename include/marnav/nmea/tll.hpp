@@ -5,7 +5,7 @@
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/geo/angle.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -66,14 +66,14 @@ private:
 	waypoint name_;
 	nmea::time time_utc_;
 	target_status status_ = target_status::tracking;
-	utils::optional<char> reference_target_;
+	std::optional<char> reference_target_;
 
 public:
 	uint32_t get_number() const { return number_; }
 	waypoint get_name() const { return name_; }
 	nmea::time get_time_utc() const { return time_utc_; }
 	target_status get_status() const { return status_; }
-	utils::optional<char> get_reference_target() const { return reference_target_; }
+	std::optional<char> get_reference_target() const { return reference_target_; }
 
 	geo::longitude get_lon() const;
 	geo::latitude get_lat() const;

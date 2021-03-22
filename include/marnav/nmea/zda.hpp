@@ -4,7 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/date.hpp>
 #include <marnav/nmea/time.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -47,16 +47,16 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<nmea::time> time_utc_;
-	utils::optional<nmea::date> date_;
-	utils::optional<int32_t> local_zone_hours_;
-	utils::optional<int32_t> local_zone_minutes_;
+	std::optional<nmea::time> time_utc_;
+	std::optional<nmea::date> date_;
+	std::optional<int32_t> local_zone_hours_;
+	std::optional<int32_t> local_zone_minutes_;
 
 public:
-	utils::optional<nmea::time> get_time_utc() const { return time_utc_; }
-	utils::optional<nmea::date> get_date() const { return date_; }
-	utils::optional<int32_t> get_local_zone_hours() const { return local_zone_hours_; }
-	utils::optional<int32_t> get_local_zone_minutes() const { return local_zone_minutes_; }
+	std::optional<nmea::time> get_time_utc() const { return time_utc_; }
+	std::optional<nmea::date> get_date() const { return date_; }
+	std::optional<int32_t> get_local_zone_hours() const { return local_zone_hours_; }
+	std::optional<int32_t> get_local_zone_minutes() const { return local_zone_minutes_; }
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
 	void set_date(const nmea::date & d) noexcept { date_ = d; }

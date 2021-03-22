@@ -25,12 +25,12 @@ glc::glc(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 1), master_.diff);
 	read(*(first + 2), master_.status);
 	for (int i = 0; i < max_differences; ++i) {
-		utils::optional<double> diff;
-		utils::optional<nmea::status> status;
+		std::optional<double> diff;
+		std::optional<nmea::status> status;
 		read(*(first + (i * 2) + 3 + 0), diff);
 		read(*(first + (i * 2) + 3 + 1), status);
 		if (diff && status) {
-			time_diffs_[i] = utils::make_optional<time_difference>(*diff, *status);
+			time_diffs_[i] = time_difference{*diff, *status};
 		}
 	}
 }
@@ -42,7 +42,7 @@ void glc::check_index(int index) const
 	}
 }
 
-utils::optional<glc::time_difference> glc::get_time_diff(int index) const
+std::optional<glc::time_difference> glc::get_time_diff(int index) const
 {
 	check_index(index);
 	return time_diffs_[index];

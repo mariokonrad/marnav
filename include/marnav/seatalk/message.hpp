@@ -1,10 +1,11 @@
 #ifndef MARNAV_SEATALK_MESSAGE_HPP
 #define MARNAV_SEATALK_MESSAGE_HPP
 
-#include <marnav/utils/unique.hpp>
 #include <functional>
+#include <memory>
 #include <typeinfo>
 #include <vector>
+#include <cstdint>
 
 namespace marnav
 {

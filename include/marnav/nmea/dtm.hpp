@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -55,7 +55,7 @@ protected:
 
 private:
 	std::string ref_ = "W84";
-	utils::optional<std::string> subcode_;
+	std::optional<std::string> subcode_;
 	double lat_offset_ = 0.0;
 	direction lat_hem_ = direction::north;
 	double lon_offset_ = 0.0;
@@ -65,7 +65,7 @@ private:
 
 public:
 	const std::string & get_ref() const { return ref_; }
-	utils::optional<std::string> get_subcode() const { return subcode_; }
+	std::optional<std::string> get_subcode() const { return subcode_; }
 	double get_lat_offset() const { return lat_offset_; }
 	direction get_lat_hem() const { return lat_hem_; }
 	double get_lon_offset() const { return lon_offset_; }

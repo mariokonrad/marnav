@@ -6,7 +6,7 @@
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -64,31 +64,31 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<nmea::time> time_utc_;
-	utils::optional<char> status_;
-	utils::optional<geo::latitude> lat_;
-	utils::optional<direction> lat_hem_;
-	utils::optional<geo::longitude> lon_;
-	utils::optional<direction> lon_hem_;
-	utils::optional<units::knots> sog_;
-	utils::optional<double> heading_;
-	utils::optional<nmea::date> date_;
-	utils::optional<double> mag_;
-	utils::optional<direction> mag_hem_;
-	utils::optional<mode_indicator> mode_ind_;
+	std::optional<nmea::time> time_utc_;
+	std::optional<char> status_;
+	std::optional<geo::latitude> lat_;
+	std::optional<direction> lat_hem_;
+	std::optional<geo::longitude> lon_;
+	std::optional<direction> lon_hem_;
+	std::optional<units::knots> sog_;
+	std::optional<double> heading_;
+	std::optional<nmea::date> date_;
+	std::optional<double> mag_;
+	std::optional<direction> mag_hem_;
+	std::optional<mode_indicator> mode_ind_;
 
 public:
-	utils::optional<nmea::time> get_time_utc() const { return time_utc_; }
-	utils::optional<char> get_status() const { return status_; }
-	utils::optional<units::velocity> get_sog() const;
-	utils::optional<double> get_heading() const { return heading_; }
-	utils::optional<nmea::date> get_date() const { return date_; }
-	utils::optional<double> get_mag() const { return mag_; }
-	utils::optional<direction> get_mag_hem() const { return mag_hem_; }
-	utils::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
+	std::optional<nmea::time> get_time_utc() const { return time_utc_; }
+	std::optional<char> get_status() const { return status_; }
+	std::optional<units::velocity> get_sog() const;
+	std::optional<double> get_heading() const { return heading_; }
+	std::optional<nmea::date> get_date() const { return date_; }
+	std::optional<double> get_mag() const { return mag_; }
+	std::optional<direction> get_mag_hem() const { return mag_hem_; }
+	std::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
 
-	utils::optional<geo::longitude> get_lon() const;
-	utils::optional<geo::latitude> get_lat() const;
+	std::optional<geo::longitude> get_lon() const;
+	std::optional<geo::latitude> get_lat() const;
 
 	void set_time_utc(const time & t) noexcept { time_utc_ = t; }
 	void set_status(char t) noexcept { status_ = t; }

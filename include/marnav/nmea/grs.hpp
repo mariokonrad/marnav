@@ -3,8 +3,8 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
-#include <marnav/utils/optional.hpp>
 #include <array>
+#include <optional>
 
 namespace marnav
 {
@@ -64,14 +64,14 @@ protected:
 private:
 	nmea::time time_utc_;
 	residual_usage usage_;
-	std::array<utils::optional<double>, num_satellite_residuals> sat_residual_;
+	std::array<std::optional<double>, num_satellite_residuals> sat_residual_;
 
 	void check_index(int index) const;
 
 public:
 	nmea::time get_time_utc() const { return time_utc_; }
 	residual_usage get_usage() const { return usage_; }
-	utils::optional<double> get_sat_residual(int index) const;
+	std::optional<double> get_sat_residual(int index) const;
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
 	void set_usage(residual_usage t) noexcept { usage_ = t; }

@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -71,45 +71,45 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<status> loran_c_blink_warning_;
-	utils::optional<status> loran_c_cycle_lock_warning_;
-	utils::optional<double> cross_track_error_magnitude_;
-	utils::optional<side> direction_to_steer_;
-	utils::optional<unit::distance> cross_track_unit_;
-	utils::optional<status> status_arrival_;
-	utils::optional<status> status_perpendicular_passing_;
-	utils::optional<double> bearing_origin_to_destination_;
-	utils::optional<reference> bearing_origin_to_destination_ref_;
-	utils::optional<waypoint> waypoint_id_;
+	std::optional<status> loran_c_blink_warning_;
+	std::optional<status> loran_c_cycle_lock_warning_;
+	std::optional<double> cross_track_error_magnitude_;
+	std::optional<side> direction_to_steer_;
+	std::optional<unit::distance> cross_track_unit_;
+	std::optional<status> status_arrival_;
+	std::optional<status> status_perpendicular_passing_;
+	std::optional<double> bearing_origin_to_destination_;
+	std::optional<reference> bearing_origin_to_destination_ref_;
+	std::optional<waypoint> waypoint_id_;
 
 	void check() const;
 
 public:
-	utils::optional<status> get_loran_c_blink_warning() const { return loran_c_blink_warning_; }
-	utils::optional<status> get_loran_c_cycle_lock_warning() const
+	std::optional<status> get_loran_c_blink_warning() const { return loran_c_blink_warning_; }
+	std::optional<status> get_loran_c_cycle_lock_warning() const
 	{
 		return loran_c_cycle_lock_warning_;
 	}
-	utils::optional<double> get_cross_track_error_magnitude() const
+	std::optional<double> get_cross_track_error_magnitude() const
 	{
 		return cross_track_error_magnitude_;
 	}
-	utils::optional<side> get_direction_to_steer() const { return direction_to_steer_; }
-	utils::optional<unit::distance> get_cross_track_unit() const { return cross_track_unit_; }
-	utils::optional<status> get_status_arrival() const { return status_arrival_; }
-	utils::optional<status> get_status_perpendicular_passing() const
+	std::optional<side> get_direction_to_steer() const { return direction_to_steer_; }
+	std::optional<unit::distance> get_cross_track_unit() const { return cross_track_unit_; }
+	std::optional<status> get_status_arrival() const { return status_arrival_; }
+	std::optional<status> get_status_perpendicular_passing() const
 	{
 		return status_perpendicular_passing_;
 	}
-	utils::optional<double> get_bearing_origin_to_destination() const
+	std::optional<double> get_bearing_origin_to_destination() const
 	{
 		return bearing_origin_to_destination_;
 	}
-	utils::optional<reference> get_bearing_origin_to_destination_ref() const
+	std::optional<reference> get_bearing_origin_to_destination_ref() const
 	{
 		return bearing_origin_to_destination_ref_;
 	}
-	utils::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
+	std::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
 
 	void set_loran_c_blink_warning(status t) noexcept { loran_c_blink_warning_ = t; }
 	void set_loran_c_cycle_lock_warning(status t) noexcept { loran_c_cycle_lock_warning_ = t; }

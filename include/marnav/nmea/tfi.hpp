@@ -2,8 +2,8 @@
 #define MARNAV_NMEA_TFI_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
 #include <array>
+#include <optional>
 
 namespace marnav
 {

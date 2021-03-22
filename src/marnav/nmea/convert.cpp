@@ -91,8 +91,8 @@ geo::latitude correct_hemisphere(const geo::latitude & v, const direction & d)
 
 /// The optional version of the latitude conversion.
 /// @see correct_hemisphere
-utils::optional<geo::latitude> correct_hemisphere(
-	const utils::optional<geo::latitude> & v, const utils::optional<direction> & d)
+std::optional<geo::latitude> correct_hemisphere(
+	const std::optional<geo::latitude> & v, const std::optional<direction> & d)
 {
 	if (v && d)
 		return correct_hemisphere(v.value(), d.value());
@@ -117,8 +117,8 @@ geo::longitude correct_hemisphere(const geo::longitude & v, const direction & d)
 
 /// The optional version of the longitude conversion.
 /// @see correct_hemisphere
-utils::optional<geo::longitude> correct_hemisphere(
-	const utils::optional<geo::longitude> & v, const utils::optional<direction> & d)
+std::optional<geo::longitude> correct_hemisphere(
+	const std::optional<geo::longitude> & v, const std::optional<direction> & d)
 {
 	if (v && d)
 		return correct_hemisphere(v.value(), d.value());

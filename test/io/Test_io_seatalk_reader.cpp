@@ -130,7 +130,7 @@ class dummy_reader : public ::io::seatalk_reader
 {
 public:
 	dummy_reader()
-		: seatalk_reader(utils::make_unique<dummy_device>())
+		: seatalk_reader(std::make_unique<dummy_device>())
 		, num_messages(0)
 	{
 	}
@@ -149,7 +149,7 @@ class message_reader : public ::io::seatalk_reader
 {
 public:
 	message_reader()
-		: seatalk_reader(utils::make_unique<dummy_device>())
+		: seatalk_reader(std::make_unique<dummy_device>())
 		, message_received(false)
 	{
 	}

@@ -5,7 +5,7 @@
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -56,37 +56,37 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<nmea::time> time_utc_;
-	utils::optional<geo::latitude> lat_;
-	utils::optional<direction> lat_hem_;
-	utils::optional<geo::longitude> lon_;
-	utils::optional<direction> lon_hem_;
+	std::optional<nmea::time> time_utc_;
+	std::optional<geo::latitude> lat_;
+	std::optional<direction> lat_hem_;
+	std::optional<geo::longitude> lon_;
+	std::optional<direction> lon_hem_;
 	std::string mode_ind_ = "AA";
-	utils::optional<uint32_t> number_of_satellites_;
-	utils::optional<double> hdrop_; // horizontal dilution of precision
-	utils::optional<units::meters> antenna_altitude_;
-	utils::optional<units::meters> geodial_separation_;
-	utils::optional<double> age_of_differential_data_;
-	utils::optional<double> differential_ref_station_id_;
+	std::optional<uint32_t> number_of_satellites_;
+	std::optional<double> hdrop_; // horizontal dilution of precision
+	std::optional<units::meters> antenna_altitude_;
+	std::optional<units::meters> geodial_separation_;
+	std::optional<double> age_of_differential_data_;
+	std::optional<double> differential_ref_station_id_;
 
 public:
-	utils::optional<nmea::time> get_time_utc() const { return time_utc_; }
+	std::optional<nmea::time> get_time_utc() const { return time_utc_; }
 	const std::string & get_mode_ind() const { return mode_ind_; }
-	utils::optional<uint32_t> get_number_of_satellites() const { return number_of_satellites_; }
-	utils::optional<double> get_hdrop() const { return hdrop_; }
-	utils::optional<units::length> get_antenna_altitude() const;
-	utils::optional<units::length> get_geodial_separation() const;
-	utils::optional<double> get_age_of_differential_data() const
+	std::optional<uint32_t> get_number_of_satellites() const { return number_of_satellites_; }
+	std::optional<double> get_hdrop() const { return hdrop_; }
+	std::optional<units::length> get_antenna_altitude() const;
+	std::optional<units::length> get_geodial_separation() const;
+	std::optional<double> get_age_of_differential_data() const
 	{
 		return age_of_differential_data_;
 	}
-	utils::optional<double> get_differential_ref_station_id() const
+	std::optional<double> get_differential_ref_station_id() const
 	{
 		return differential_ref_station_id_;
 	}
 
-	utils::optional<geo::longitude> get_lon() const;
-	utils::optional<geo::latitude> get_lat() const;
+	std::optional<geo::longitude> get_lon() const;
+	std::optional<geo::latitude> get_lat() const;
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
 	void set_lat(const geo::latitude & t);

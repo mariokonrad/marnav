@@ -3,7 +3,7 @@
 
 #include <marnav/ais/binary_data.hpp>
 #include <marnav/geo/position.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -112,77 +112,77 @@ private:
 	// clang-format on
 
 public:
-	utils::optional<geo::position> get_position() const;
-	utils::optional<uint32_t> get_day() const;
-	utils::optional<uint32_t> get_hour() const;
-	utils::optional<uint32_t> get_minute() const;
-	utils::optional<uint32_t> get_wind_speed_avg() const;
-	utils::optional<uint32_t> get_wind_gust() const;
-	utils::optional<uint32_t> get_wind_direction() const;
-	utils::optional<uint32_t> get_wind_gust_direction() const;
-	utils::optional<double> get_temperature() const;
-	utils::optional<uint32_t> get_humidity() const;
-	utils::optional<double> get_dew_point() const;
-	utils::optional<uint32_t> get_pressure() const;
-	utils::optional<trend> get_pressure_trend() const;
-	utils::optional<double> get_visibility() const;
-	utils::optional<double> get_water_level() const;
-	utils::optional<trend> get_water_level_trend() const;
-	utils::optional<double> get_surface_current_speed() const;
-	utils::optional<uint32_t> get_surface_current_direction() const;
-	utils::optional<double> get_current_2_speed() const;
-	utils::optional<uint32_t> get_current_2_direction() const;
-	utils::optional<uint32_t> get_current_2_depth() const;
-	utils::optional<double> get_current_3_speed() const;
-	utils::optional<uint32_t> get_current_3_direction() const;
-	utils::optional<uint32_t> get_current_3_depth() const;
-	utils::optional<double> get_wave_height() const;
-	utils::optional<uint32_t> get_wave_period() const;
-	utils::optional<uint32_t> get_wave_direction() const;
-	utils::optional<double> get_swell_height() const;
-	utils::optional<uint32_t> get_swell_period() const;
-	utils::optional<uint32_t> get_swell_direction() const;
-	utils::optional<uint32_t> get_sea_state() const;
-	utils::optional<double> get_water_temperature() const;
-	utils::optional<precipitation> get_precipitation() const;
-	utils::optional<double> get_salinity() const;
-	utils::optional<ice> get_ice() const;
+	std::optional<geo::position> get_position() const;
+	std::optional<uint32_t> get_day() const;
+	std::optional<uint32_t> get_hour() const;
+	std::optional<uint32_t> get_minute() const;
+	std::optional<uint32_t> get_wind_speed_avg() const;
+	std::optional<uint32_t> get_wind_gust() const;
+	std::optional<uint32_t> get_wind_direction() const;
+	std::optional<uint32_t> get_wind_gust_direction() const;
+	std::optional<double> get_temperature() const;
+	std::optional<uint32_t> get_humidity() const;
+	std::optional<double> get_dew_point() const;
+	std::optional<uint32_t> get_pressure() const;
+	std::optional<trend> get_pressure_trend() const;
+	std::optional<double> get_visibility() const;
+	std::optional<double> get_water_level() const;
+	std::optional<trend> get_water_level_trend() const;
+	std::optional<double> get_surface_current_speed() const;
+	std::optional<uint32_t> get_surface_current_direction() const;
+	std::optional<double> get_current_2_speed() const;
+	std::optional<uint32_t> get_current_2_direction() const;
+	std::optional<uint32_t> get_current_2_depth() const;
+	std::optional<double> get_current_3_speed() const;
+	std::optional<uint32_t> get_current_3_direction() const;
+	std::optional<uint32_t> get_current_3_depth() const;
+	std::optional<double> get_wave_height() const;
+	std::optional<uint32_t> get_wave_period() const;
+	std::optional<uint32_t> get_wave_direction() const;
+	std::optional<double> get_swell_height() const;
+	std::optional<uint32_t> get_swell_period() const;
+	std::optional<uint32_t> get_swell_direction() const;
+	std::optional<uint32_t> get_sea_state() const;
+	std::optional<double> get_water_temperature() const;
+	std::optional<precipitation> get_precipitation() const;
+	std::optional<double> get_salinity() const;
+	std::optional<ice> get_ice() const;
 
-	void set_position(utils::optional<geo::position> t);
-	void set_day(utils::optional<uint32_t> t);
-	void set_hour(utils::optional<uint32_t> t);
-	void set_minute(utils::optional<uint32_t> t);
-	void set_wind_speed_avg(utils::optional<uint32_t> t);
-	void set_wind_gust(utils::optional<uint32_t> t);
-	void set_wind_direction(utils::optional<uint32_t> t);
-	void set_wind_gust_direction(utils::optional<uint32_t> t);
-	void set_temperature(utils::optional<double> t);
-	void set_humidity(utils::optional<uint32_t> t);
-	void set_dew_point(utils::optional<double> t);
-	void set_pressure(utils::optional<uint32_t> t);
-	void set_pressure_trend(utils::optional<trend> t);
-	void set_visibility(utils::optional<double> t);
-	void set_water_level(utils::optional<double> t);
-	void set_water_level_trend(utils::optional<trend> t);
-	void set_surface_current_speed(utils::optional<double> t);
-	void set_surface_current_direction(utils::optional<uint32_t> t);
-	void set_current_2_speed(utils::optional<double> t);
-	void set_current_2_direction(utils::optional<uint32_t> t);
-	void set_current_2_depth(utils::optional<uint32_t> t);
-	void set_current_3_speed(utils::optional<double> t);
-	void set_current_3_direction(utils::optional<uint32_t> t);
-	void set_current_3_depth(utils::optional<uint32_t> t);
-	void set_wave_height(utils::optional<double> t);
-	void set_wave_period(utils::optional<uint32_t> t);
-	void set_wave_direction(utils::optional<uint32_t> t);
-	void set_swell_height(utils::optional<double> t);
-	void set_swell_period(utils::optional<uint32_t> t);
-	void set_swell_direction(utils::optional<uint32_t> t);
-	void set_sea_state(utils::optional<uint32_t> t);
-	void set_water_temperature(utils::optional<double> t);
-	void set_precipitation(utils::optional<precipitation> t);
-	void set_salinity(utils::optional<double> t);
-	void set_ice(utils::optional<ice> t);
+	void set_position(std::optional<geo::position> t);
+	void set_day(std::optional<uint32_t> t);
+	void set_hour(std::optional<uint32_t> t);
+	void set_minute(std::optional<uint32_t> t);
+	void set_wind_speed_avg(std::optional<uint32_t> t);
+	void set_wind_gust(std::optional<uint32_t> t);
+	void set_wind_direction(std::optional<uint32_t> t);
+	void set_wind_gust_direction(std::optional<uint32_t> t);
+	void set_temperature(std::optional<double> t);
+	void set_humidity(std::optional<uint32_t> t);
+	void set_dew_point(std::optional<double> t);
+	void set_pressure(std::optional<uint32_t> t);
+	void set_pressure_trend(std::optional<trend> t);
+	void set_visibility(std::optional<double> t);
+	void set_water_level(std::optional<double> t);
+	void set_water_level_trend(std::optional<trend> t);
+	void set_surface_current_speed(std::optional<double> t);
+	void set_surface_current_direction(std::optional<uint32_t> t);
+	void set_current_2_speed(std::optional<double> t);
+	void set_current_2_direction(std::optional<uint32_t> t);
+	void set_current_2_depth(std::optional<uint32_t> t);
+	void set_current_3_speed(std::optional<double> t);
+	void set_current_3_direction(std::optional<uint32_t> t);
+	void set_current_3_depth(std::optional<uint32_t> t);
+	void set_wave_height(std::optional<double> t);
+	void set_wave_period(std::optional<uint32_t> t);
+	void set_wave_direction(std::optional<uint32_t> t);
+	void set_swell_height(std::optional<double> t);
+	void set_swell_period(std::optional<uint32_t> t);
+	void set_swell_direction(std::optional<uint32_t> t);
+	void set_sea_state(std::optional<uint32_t> t);
+	void set_water_temperature(std::optional<double> t);
+	void set_precipitation(std::optional<precipitation> t);
+	void set_salinity(std::optional<double> t);
+	void set_ice(std::optional<ice> t);
 };
 }
 }

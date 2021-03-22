@@ -5,7 +5,7 @@
 #include <marnav/geo/angle.hpp>
 #include <marnav/units/units.hpp>
 #include <marnav/utils/mmsi.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -55,8 +55,8 @@ private:
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
-	utils::optional<units::meters> get_altitude() const noexcept;
-	utils::optional<units::knots> get_speed() const noexcept;
+	std::optional<units::meters> get_altitude() const noexcept;
+	std::optional<units::knots> get_speed() const noexcept;
 	bool get_position_accuracy() const noexcept { return position_accuracy; }
 	uint32_t get_course() const noexcept { return course; }
 	uint32_t get_utc_second() const noexcept { return utc_second; }
@@ -82,8 +82,8 @@ public:
 	void set_raim(bool t) noexcept { raim = t; }
 	void set_radio_status(uint32_t t) noexcept { radio_status = t; }
 
-	utils::optional<geo::longitude> get_lon() const;
-	utils::optional<geo::latitude> get_lat() const;
+	std::optional<geo::longitude> get_lon() const;
+	std::optional<geo::latitude> get_lat() const;
 	void set_lon_unavailable();
 	void set_lat_unavailable();
 	void set_lon(const geo::longitude & t);

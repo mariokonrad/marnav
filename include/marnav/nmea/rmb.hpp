@@ -5,7 +5,7 @@
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -72,36 +72,36 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<status> active_; // V:warning
-	utils::optional<units::nautical_miles>
+	std::optional<status> active_; // V:warning
+	std::optional<units::nautical_miles>
 		cross_track_error_; // cross track error in nautical miles
-	utils::optional<side> steer_dir_; // direction to steer, left or right
-	utils::optional<waypoint> waypoint_from_; // Origin waypoint ID
-	utils::optional<waypoint> waypoint_to_; // Destination waypoint ID
-	utils::optional<geo::latitude> lat_; // destination waypoint latitude
-	utils::optional<direction> lat_hem_; // destination waypoint latitude dir, N:north, S:south
-	utils::optional<geo::longitude> lon_; // destination waypoint longitude
-	utils::optional<direction> lon_hem_; // destination waypoint longitude dir, E:east, W:west
-	utils::optional<units::nautical_miles> range_; // range to destination in nautical miles
-	utils::optional<double> bearing_; // bearing to destination in degrees to true
-	utils::optional<units::knots> dst_velocity_; // destination closing velocity in knots
-	utils::optional<status> arrival_status_; // arrival status, A:arrival circle entered
-	utils::optional<mode_indicator> mode_ind_;
+	std::optional<side> steer_dir_; // direction to steer, left or right
+	std::optional<waypoint> waypoint_from_; // Origin waypoint ID
+	std::optional<waypoint> waypoint_to_; // Destination waypoint ID
+	std::optional<geo::latitude> lat_; // destination waypoint latitude
+	std::optional<direction> lat_hem_; // destination waypoint latitude dir, N:north, S:south
+	std::optional<geo::longitude> lon_; // destination waypoint longitude
+	std::optional<direction> lon_hem_; // destination waypoint longitude dir, E:east, W:west
+	std::optional<units::nautical_miles> range_; // range to destination in nautical miles
+	std::optional<double> bearing_; // bearing to destination in degrees to true
+	std::optional<units::knots> dst_velocity_; // destination closing velocity in knots
+	std::optional<status> arrival_status_; // arrival status, A:arrival circle entered
+	std::optional<mode_indicator> mode_ind_;
 
 public:
-	utils::optional<status> get_active() const { return active_; }
-	utils::optional<units::length> get_cross_track_error() const;
-	utils::optional<side> get_steer_dir() const { return steer_dir_; }
-	utils::optional<waypoint> get_waypoint_to() const { return waypoint_to_; }
-	utils::optional<waypoint> get_waypoint_from() const { return waypoint_from_; }
-	utils::optional<units::length> get_range() const;
-	utils::optional<double> get_bearing() const { return bearing_; }
-	utils::optional<units::velocity> get_dst_velocity() const;
-	utils::optional<status> get_arrival_status() const { return arrival_status_; }
-	utils::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
+	std::optional<status> get_active() const { return active_; }
+	std::optional<units::length> get_cross_track_error() const;
+	std::optional<side> get_steer_dir() const { return steer_dir_; }
+	std::optional<waypoint> get_waypoint_to() const { return waypoint_to_; }
+	std::optional<waypoint> get_waypoint_from() const { return waypoint_from_; }
+	std::optional<units::length> get_range() const;
+	std::optional<double> get_bearing() const { return bearing_; }
+	std::optional<units::velocity> get_dst_velocity() const;
+	std::optional<status> get_arrival_status() const { return arrival_status_; }
+	std::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
 
-	utils::optional<geo::longitude> get_lon() const;
-	utils::optional<geo::latitude> get_lat() const;
+	std::optional<geo::longitude> get_lon() const;
+	std::optional<geo::latitude> get_lat() const;
 
 	void set_active(status t) noexcept { active_ = t; }
 	void set_cross_track_error(units::length t);

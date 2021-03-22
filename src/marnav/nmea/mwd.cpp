@@ -20,10 +20,10 @@ mwd::mwd(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 8)
 		throw std::invalid_argument{"invalid number of fields in mwd"};
 
-	utils::optional<reference> direction_true_ref;
-	utils::optional<reference> direction_mag_ref;
-	utils::optional<unit::velocity> speed_kn_unit;
-	utils::optional<unit::velocity> speed_ms_unit;
+	std::optional<reference> direction_true_ref;
+	std::optional<reference> direction_mag_ref;
+	std::optional<unit::velocity> speed_kn_unit;
+	std::optional<unit::velocity> speed_ms_unit;
 
 	read(*(first + 0), direction_true_);
 	read(*(first + 1), direction_true_ref);
@@ -60,14 +60,14 @@ void mwd::set_speed_mps(units::velocity t) noexcept
 	speed_ms_ = t.get<units::meters_per_second>();
 }
 
-utils::optional<units::velocity> mwd::get_speed_kn() const
+std::optional<units::velocity> mwd::get_speed_kn() const
 {
 	if (!speed_kn_)
 		return {};
 	return {*speed_kn_};
 }
 
-utils::optional<units::velocity> mwd::get_speed_ms() const
+std::optional<units::velocity> mwd::get_speed_ms() const
 {
 	if (!speed_ms_)
 		return {};

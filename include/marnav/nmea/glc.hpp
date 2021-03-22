@@ -2,8 +2,8 @@
 #define MARNAV_NMEA_GLC_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
 #include <array>
+#include <optional>
 
 namespace marnav
 {
@@ -61,14 +61,14 @@ protected:
 private:
 	uint32_t gri_ = 0; ///< unit: 0.1 microseconds
 	time_difference master_;
-	std::array<utils::optional<time_difference>, max_differences> time_diffs_;
+	std::array<std::optional<time_difference>, max_differences> time_diffs_;
 
 	void check_index(int index) const;
 
 public:
 	uint32_t get_gri() const { return gri_; }
 	time_difference get_master() const { return master_; }
-	utils::optional<time_difference> get_time_diff(int index) const;
+	std::optional<time_difference> get_time_diff(int index) const;
 
 	void set_gri(uint32_t t) noexcept { gri_ = t; }
 	void set_master(time_difference t) noexcept { master_ = t; }
