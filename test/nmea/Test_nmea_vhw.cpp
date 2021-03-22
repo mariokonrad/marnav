@@ -30,7 +30,7 @@ TEST_F(Test_nmea_vhw, parse)
 	ASSERT_NE(nullptr, vhw);
 
 	auto heading = vhw->get_heading_magn();
-	EXPECT_TRUE(heading.available());
+	EXPECT_TRUE(heading.has_value());
 	EXPECT_NEAR(211.0, heading.value(), 1e-8);
 }
 

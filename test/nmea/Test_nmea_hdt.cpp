@@ -31,7 +31,7 @@ TEST_F(Test_nmea_hdt, parse)
 	ASSERT_NE(nullptr, hdt);
 
 	auto heading = hdt->get_heading();
-	EXPECT_TRUE(heading.available());
+	EXPECT_TRUE(heading.has_value());
 	EXPECT_NEAR(45.8, heading.value(), 1e-8);
 }
 

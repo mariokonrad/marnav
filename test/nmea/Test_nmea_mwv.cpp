@@ -31,11 +31,11 @@ TEST_F(Test_nmea_mwv, parse)
 	ASSERT_NE(nullptr, mwv);
 
 	auto angle = mwv->get_angle();
-	ASSERT_TRUE(angle.available());
+	ASSERT_TRUE(angle.has_value());
 	EXPECT_NEAR(84.0, angle.value(), 1e-8);
 
 	auto speed = mwv->get_speed();
-	ASSERT_TRUE(speed.available());
+	ASSERT_TRUE(speed.has_value());
 	EXPECT_NEAR(10.4, speed->get<units::knots>().value(), 1e-8);
 }
 

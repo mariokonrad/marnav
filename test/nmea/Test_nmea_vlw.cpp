@@ -30,7 +30,7 @@ TEST_F(Test_nmea_vlw, parse)
 	ASSERT_NE(nullptr, vlw);
 
 	auto distance = vlw->get_distance_cum();
-	EXPECT_TRUE(distance.available());
+	EXPECT_TRUE(distance.has_value());
 	EXPECT_NEAR(7803.2, distance->get<units::nautical_miles>().value(), 1e-8);
 }
 

@@ -11,9 +11,6 @@ services:
 
 matrix:
   include:
-    - env: COMPILER=gcc-4.9.4    BUILD_TYPE=Release
-    - env: COMPILER=gcc-5.5.0    BUILD_TYPE=Release
-    - env: COMPILER=gcc-6.5.0    BUILD_TYPE=Release
     - env: COMPILER=gcc-7.4.0    BUILD_TYPE=Release
     - env: COMPILER=gcc-8.3.0    BUILD_TYPE=Release
     - env: COMPILER=gcc-9.3.0    BUILD_TYPE=Release

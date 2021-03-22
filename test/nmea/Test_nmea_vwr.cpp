@@ -31,11 +31,11 @@ TEST_F(Test_nmea_vwr, parse)
 	ASSERT_NE(nullptr, vwr);
 
 	auto angle = vwr->get_angle();
-	EXPECT_TRUE(angle.available());
+	EXPECT_TRUE(angle.has_value());
 	EXPECT_NEAR(84.0, angle.value(), 1e-8);
 
 	auto side = vwr->get_angle_side();
-	EXPECT_TRUE(side.available());
+	EXPECT_TRUE(side.has_value());
 	EXPECT_EQ(nmea::side::right, side.value());
 }
 

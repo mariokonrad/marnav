@@ -146,18 +146,16 @@ TEST_F(Test_utils_optional, reset_non_initialized)
 	EXPECT_FALSE(opt.has_value());
 }
 
-TEST_F(Test_utils_optional, available)
+TEST_F(Test_utils_optional, has_value)
 {
 	auto opt = utils::optional<struc>(99);
 	ASSERT_TRUE(opt.has_value());
-	EXPECT_TRUE(opt.available());
 }
 
 TEST_F(Test_utils_optional, available_non_intialized)
 {
 	auto opt = utils::optional<struc>();
 	ASSERT_FALSE(opt.has_value());
-	EXPECT_FALSE(opt.available());
 }
 
 TEST_F(Test_utils_optional, dereference)
@@ -217,10 +215,17 @@ TEST_F(Test_utils_optional, direct_access_to_value_const)
 TEST_F(Test_utils_optional, direct_access_to_value_invalid)
 {
 	auto a = A{};
+
+#if __cplusplus >= 201703L
+	EXPECT_ANY_THROW(a.get().value());
+	EXPECT_ANY_THROW(a.get_ref().value());
+	EXPECT_ANY_THROW(a.get_const_ref().value());
+#else
 	const auto expected = A::value_type{};
 
 	EXPECT_EQ(expected, a.get().value());
 	EXPECT_EQ(expected, a.get_ref().value());
 	EXPECT_EQ(expected, a.get_const_ref().value());
+#endif
 }
 }

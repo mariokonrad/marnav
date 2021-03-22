@@ -341,9 +341,6 @@ Tools and their versions are listed below, newer/older/other tools
 (i.e. compilers, etc.) may work, but not tested.
 
 Compiler:
-- GCC 4.9
-- GCC 5
-- GCC 6
 - GCC 7
 - GCC 8
 - GCC 9
@@ -385,7 +382,7 @@ Optional (no core dependency):
 Opeating system:
 - Linux
 
-There are no other dependencies despite the standard library (C++11)
+There are no other dependencies despite the standard library (C++17)
 to build this library.
 
 ---

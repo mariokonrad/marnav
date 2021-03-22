@@ -1,12 +1,19 @@
 #ifndef MARNAV_UTILS_OPTIONAL_HPP
 #define MARNAV_UTILS_OPTIONAL_HPP
 
+#if __cplusplus >= 201703L
+	#include <optional>
+#endif
+
 #include <utility>
 
 namespace marnav
 {
 namespace utils
 {
+#if __cplusplus >= 201703L
+template <typename T> using optional = std::optional<T>;
+#else
 /// @brief Carries an optional value.
 ///
 /// This is a somewhat compatible implementation of std::experimental::optional (as by 2015).
@@ -96,8 +103,6 @@ public:
 
 	T & operator*() { return data_; }
 
-	bool available() const { return flag_; }
-
 	constexpr explicit operator bool() const { return flag_; }
 
 	constexpr bool has_value() const { return flag_; }
@@ -111,14 +116,14 @@ public:
 	/* disabling c++14 extensions for now
 	template <class U> constexpr T value_or(U && value) const &
 	{
-		if (available())
+		if (has_value())
 			return data;
 		return value;
 	}
 
 	template <class U> T value_or(U && value) &&
 	{
-		if (available())
+		if (has_value())
 			return data;
 		return value;
 	}
@@ -138,6 +143,7 @@ private:
 	bool flag_;
 	T data_;
 };
+#endif
 
 /// @brief Creates and returns an optioal of type T, initialized with the specified
 /// arguments.
