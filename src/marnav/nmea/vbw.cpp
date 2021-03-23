@@ -42,28 +42,28 @@ void vbw::set_ground_speed(units::velocity l, units::velocity t, status s)
 	ground_speed_status_ = s;
 }
 
-utils::optional<units::velocity> vbw::get_water_speed_longitudinal() const
+std::optional<units::velocity> vbw::get_water_speed_longitudinal() const
 {
 	if (!water_speed_longitudinal_)
 		return {};
 	return {*water_speed_longitudinal_};
 }
 
-utils::optional<units::velocity> vbw::get_water_speed_transveral() const
+std::optional<units::velocity> vbw::get_water_speed_transveral() const
 {
 	if (!water_speed_transveral_)
 		return {};
 	return {*water_speed_transveral_};
 }
 
-utils::optional<units::velocity> vbw::get_ground_speed_longitudinal() const
+std::optional<units::velocity> vbw::get_ground_speed_longitudinal() const
 {
 	if (!ground_speed_longitudinal_)
 		return {};
 	return {*ground_speed_longitudinal_};
 }
 
-utils::optional<units::velocity> vbw::get_ground_speed_transveral() const
+std::optional<units::velocity> vbw::get_ground_speed_transveral() const
 {
 	if (!ground_speed_transveral_)
 		return {};

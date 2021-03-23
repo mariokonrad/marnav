@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -46,16 +46,16 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> bearing_true_;
-	utils::optional<double> bearing_magn_;
-	utils::optional<waypoint> waypoint_to_;
-	utils::optional<waypoint> waypoint_from_;
+	std::optional<double> bearing_true_;
+	std::optional<double> bearing_magn_;
+	std::optional<waypoint> waypoint_to_;
+	std::optional<waypoint> waypoint_from_;
 
 public:
-	utils::optional<double> get_bearing_true() const { return bearing_true_; }
-	utils::optional<double> get_bearing_magn() const { return bearing_magn_; }
-	utils::optional<waypoint> get_waypoint_to() const { return waypoint_to_; }
-	utils::optional<waypoint> get_waypoint_from() const { return waypoint_from_; }
+	std::optional<double> get_bearing_true() const { return bearing_true_; }
+	std::optional<double> get_bearing_magn() const { return bearing_magn_; }
+	std::optional<waypoint> get_waypoint_to() const { return waypoint_to_; }
+	std::optional<waypoint> get_waypoint_from() const { return waypoint_from_; }
 
 	void set_bearing_true(double t) noexcept;
 	void set_bearing_mag(double t) noexcept;

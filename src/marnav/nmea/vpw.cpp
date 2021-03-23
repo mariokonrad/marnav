@@ -42,14 +42,14 @@ void vpw::set_speed_mps(units::velocity t) noexcept
 	speed_mps_ = t.get<units::meters_per_second>();
 }
 
-utils::optional<units::knots> vpw::get_speed_knots() const
+std::optional<units::knots> vpw::get_speed_knots() const
 {
 	if (!speed_knots_)
 		return {};
 	return {*speed_knots_};
 }
 
-utils::optional<units::meters_per_second> vpw::get_speed_meters_per_second() const
+std::optional<units::meters_per_second> vpw::get_speed_meters_per_second() const
 {
 	if (!speed_mps_)
 		return {};

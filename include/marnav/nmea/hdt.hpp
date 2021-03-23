@@ -2,7 +2,7 @@
 #define MARNAV_NMEA_HDT_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -43,12 +43,12 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> heading_;
-	utils::optional<reference> heading_true_;
+	std::optional<double> heading_;
+	std::optional<reference> heading_true_;
 
 public:
-	utils::optional<double> get_heading() const { return heading_; }
-	utils::optional<reference> get_heading_true() const { return heading_true_; }
+	std::optional<double> get_heading() const { return heading_; }
+	std::optional<reference> get_heading_true() const { return heading_true_; }
 
 	void set_heading(double t) noexcept;
 };

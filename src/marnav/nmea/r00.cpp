@@ -45,7 +45,7 @@ void r00::check_index(int index) const
 		throw std::out_of_range{"waypoint ID out of range"};
 }
 
-utils::optional<waypoint> r00::get_waypoint_id(int index) const
+std::optional<waypoint> r00::get_waypoint_id(int index) const
 {
 	check_index(index);
 	return waypoint_id_[index];

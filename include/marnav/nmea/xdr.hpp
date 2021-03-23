@@ -2,8 +2,8 @@
 #define MARNAV_NMEA_XDR_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
 #include <array>
+#include <optional>
 
 namespace marnav
 {
@@ -54,12 +54,12 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	std::array<utils::optional<transducer_info>, max_transducer_info> transducer_data_;
+	std::array<std::optional<transducer_info>, max_transducer_info> transducer_data_;
 
 	void check_index(int index) const;
 
 public:
-	utils::optional<transducer_info> get_info(int index) const;
+	std::optional<transducer_info> get_info(int index) const;
 
 	void set_info(int index, const transducer_info & info);
 };

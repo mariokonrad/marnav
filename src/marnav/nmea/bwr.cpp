@@ -22,9 +22,9 @@ bwr::bwr(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if ((n < 12) || (n > 13))
 		throw std::invalid_argument{"invalid number of fields in bwr"};
 
-	utils::optional<reference> bearing_true_ref;
-	utils::optional<reference> bearing_magn_ref;
-	utils::optional<unit::distance> distance_unit;
+	std::optional<reference> bearing_true_ref;
+	std::optional<reference> bearing_magn_ref;
+	std::optional<unit::distance> distance_unit;
 
 	read(*(first + 0), time_utc_);
 	read(*(first + 1), lat_);
@@ -51,14 +51,14 @@ bwr::bwr(talker talk, fields::const_iterator first, fields::const_iterator last)
 	check_value(distance_unit, {unit::distance::nm}, "distance unit");
 }
 
-utils::optional<geo::longitude> bwr::get_lon() const
+std::optional<geo::longitude> bwr::get_lon() const
 {
-	return (lon_ && lon_hem_) ? lon_ : utils::optional<geo::longitude>{};
+	return (lon_ && lon_hem_) ? lon_ : std::optional<geo::longitude>{};
 }
 
-utils::optional<geo::latitude> bwr::get_lat() const
+std::optional<geo::latitude> bwr::get_lat() const
 {
-	return (lat_ && lat_hem_) ? lat_ : utils::optional<geo::latitude>{};
+	return (lat_ && lat_hem_) ? lat_ : std::optional<geo::latitude>{};
 }
 
 void bwr::set_lat(const geo::latitude & t)
@@ -90,7 +90,7 @@ void bwr::set_distance(units::length t)
 	distance_ = t.get<units::nautical_miles>();
 }
 
-utils::optional<units::length> bwr::get_distance() const
+std::optional<units::length> bwr::get_distance() const
 {
 	if (!distance_)
 		return {};

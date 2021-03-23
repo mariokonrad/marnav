@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -53,23 +53,23 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<status> status1_;
-	utils::optional<status> status2_;
-	utils::optional<double> cross_track_error_magnitude_;
-	utils::optional<side> direction_to_steer_;
-	utils::optional<unit::distance> cross_track_unit_;
-	utils::optional<mode_indicator> mode_ind_;
+	std::optional<status> status1_;
+	std::optional<status> status2_;
+	std::optional<double> cross_track_error_magnitude_;
+	std::optional<side> direction_to_steer_;
+	std::optional<unit::distance> cross_track_unit_;
+	std::optional<mode_indicator> mode_ind_;
 
 public:
-	utils::optional<status> get_status1() const { return status1_; }
-	utils::optional<status> get_status2() const { return status2_; }
-	utils::optional<double> get_cross_track_error_magnitude() const
+	std::optional<status> get_status1() const { return status1_; }
+	std::optional<status> get_status2() const { return status2_; }
+	std::optional<double> get_cross_track_error_magnitude() const
 	{
 		return cross_track_error_magnitude_;
 	}
-	utils::optional<side> get_direction_to_steer() const { return direction_to_steer_; }
-	utils::optional<unit::distance> get_cross_track_unit() const { return cross_track_unit_; }
-	utils::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
+	std::optional<side> get_direction_to_steer() const { return direction_to_steer_; }
+	std::optional<unit::distance> get_cross_track_unit() const { return cross_track_unit_; }
+	std::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
 
 	void set_status1(status t) noexcept { status1_ = t; }
 	void set_status2(status t) noexcept { status2_ = t; }

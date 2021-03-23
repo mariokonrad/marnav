@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -45,12 +45,12 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<units::knots> speed_knots_; // negative means downwind
-	utils::optional<units::meters_per_second> speed_mps_; // negative means downwind
+	std::optional<units::knots> speed_knots_; // negative means downwind
+	std::optional<units::meters_per_second> speed_mps_; // negative means downwind
 
 public:
-	utils::optional<units::knots> get_speed_knots() const;
-	utils::optional<units::meters_per_second> get_speed_meters_per_second() const;
+	std::optional<units::knots> get_speed_knots() const;
+	std::optional<units::meters_per_second> get_speed_meters_per_second() const;
 
 	void set_speed_knots(units::velocity t) noexcept;
 	void set_speed_mps(units::velocity t) noexcept;

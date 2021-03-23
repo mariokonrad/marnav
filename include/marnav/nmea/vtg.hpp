@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -51,18 +51,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> track_true_;
-	utils::optional<double> track_magn_;
-	utils::optional<units::knots> speed_kn_;
-	utils::optional<units::kilometers_per_hour> speed_kmh_;
-	utils::optional<mode_indicator> mode_ind_; // NMEA 2.3 or newer
+	std::optional<double> track_true_;
+	std::optional<double> track_magn_;
+	std::optional<units::knots> speed_kn_;
+	std::optional<units::kilometers_per_hour> speed_kmh_;
+	std::optional<mode_indicator> mode_ind_; // NMEA 2.3 or newer
 
 public:
-	utils::optional<double> get_track_true() const { return track_true_; }
-	utils::optional<double> get_track_magn() const { return track_magn_; }
-	utils::optional<units::knots> get_speed_kn() const;
-	utils::optional<units::kilometers_per_hour> get_speed_kmh() const;
-	utils::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
+	std::optional<double> get_track_true() const { return track_true_; }
+	std::optional<double> get_track_magn() const { return track_magn_; }
+	std::optional<units::knots> get_speed_kn() const;
+	std::optional<units::kilometers_per_hour> get_speed_kmh() const;
+	std::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
 
 	void set_track_true(double t) noexcept;
 	void set_track_magn(double t) noexcept;

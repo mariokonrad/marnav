@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -51,14 +51,14 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<units::meters> horizontal_position_error_;
-	utils::optional<units::meters> vertical_position_error_;
-	utils::optional<units::meters> overall_spherical_equiv_position_error_;
+	std::optional<units::meters> horizontal_position_error_;
+	std::optional<units::meters> vertical_position_error_;
+	std::optional<units::meters> overall_spherical_equiv_position_error_;
 
 public:
-	utils::optional<units::length> get_horizontal_position_error() const;
-	utils::optional<units::length> get_vertical_position_error() const;
-	utils::optional<units::length> get_overall_spherical_equiv_position_error() const;
+	std::optional<units::length> get_horizontal_position_error() const;
+	std::optional<units::length> get_vertical_position_error() const;
+	std::optional<units::length> get_overall_spherical_equiv_position_error() const;
 
 	void set_horizontal_position_error(units::length t) noexcept
 	{

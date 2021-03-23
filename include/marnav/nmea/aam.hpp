@@ -4,7 +4,6 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
 
 namespace marnav
 {

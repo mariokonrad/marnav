@@ -684,7 +684,7 @@ static std::string render(const marnav::units::temperature & t)
 	return render(t.get<marnav::units::celsius>());
 }
 
-template <typename T> static std::string render(const marnav::utils::optional<T> & t)
+template <typename T> static std::string render(const std::optional<T> & t)
 {
 	if (!t)
 		return "-";

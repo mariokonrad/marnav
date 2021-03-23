@@ -2,7 +2,7 @@
 #define MARNAV_NMEA_TTM_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -59,37 +59,37 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<uint32_t> target_number_;
-	utils::optional<double> target_distance_;
-	utils::optional<double> bearing_from_ownship_;
-	utils::optional<reference> bearing_from_ownship_ref_;
-	utils::optional<double> target_speed_;
-	utils::optional<double> target_course_;
-	utils::optional<reference> target_course_ref_;
-	utils::optional<double> distance_cpa_; ///< Distance to closest point of approach
-	utils::optional<double> tcpa_;
-	utils::optional<char> unknown_;
-	utils::optional<std::string> target_name_;
-	utils::optional<char> target_status_;
-	utils::optional<char> reference_target_;
+	std::optional<uint32_t> target_number_;
+	std::optional<double> target_distance_;
+	std::optional<double> bearing_from_ownship_;
+	std::optional<reference> bearing_from_ownship_ref_;
+	std::optional<double> target_speed_;
+	std::optional<double> target_course_;
+	std::optional<reference> target_course_ref_;
+	std::optional<double> distance_cpa_; ///< Distance to closest point of approach
+	std::optional<double> tcpa_;
+	std::optional<char> unknown_;
+	std::optional<std::string> target_name_;
+	std::optional<char> target_status_;
+	std::optional<char> reference_target_;
 
 public:
-	utils::optional<uint32_t> get_target_number() const { return target_number_; }
-	utils::optional<double> get_target_distance() const { return target_distance_; }
-	utils::optional<double> get_bearing_from_ownship() const { return bearing_from_ownship_; }
-	utils::optional<reference> get_bearing_from_ownship_ref() const
+	std::optional<uint32_t> get_target_number() const { return target_number_; }
+	std::optional<double> get_target_distance() const { return target_distance_; }
+	std::optional<double> get_bearing_from_ownship() const { return bearing_from_ownship_; }
+	std::optional<reference> get_bearing_from_ownship_ref() const
 	{
 		return bearing_from_ownship_ref_;
 	}
-	utils::optional<double> get_target_speed() const { return target_speed_; }
-	utils::optional<double> get_target_course() const { return target_course_; }
-	utils::optional<reference> get_target_course_ref() const { return target_course_ref_; }
-	utils::optional<double> get_distance_cpa() const { return distance_cpa_; }
-	utils::optional<double> get_tcpa() const { return tcpa_; }
-	utils::optional<char> get_unknown() const { return unknown_; }
-	utils::optional<std::string> get_target_name() const { return target_name_; }
-	utils::optional<char> get_target_status() const { return target_status_; }
-	utils::optional<char> get_reference_target() const { return reference_target_; }
+	std::optional<double> get_target_speed() const { return target_speed_; }
+	std::optional<double> get_target_course() const { return target_course_; }
+	std::optional<reference> get_target_course_ref() const { return target_course_ref_; }
+	std::optional<double> get_distance_cpa() const { return distance_cpa_; }
+	std::optional<double> get_tcpa() const { return tcpa_; }
+	std::optional<char> get_unknown() const { return unknown_; }
+	std::optional<std::string> get_target_name() const { return target_name_; }
+	std::optional<char> get_target_status() const { return target_status_; }
+	std::optional<char> get_reference_target() const { return reference_target_; }
 
 	void set_target_number(uint32_t t) noexcept { target_number_ = t; }
 	void set_target_distance(double t) noexcept { target_distance_ = t; }

@@ -4,7 +4,7 @@
 #include <marnav/ais/message.hpp>
 #include <marnav/geo/position.hpp>
 #include <marnav/utils/mmsi.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -70,8 +70,8 @@ public:
 	uint32_t get_zone_size() const noexcept { return zone_size; }
 
 	// broadcast
-	utils::optional<geo::position> get_position_ne() const;
-	utils::optional<geo::position> get_position_sw() const;
+	std::optional<geo::position> get_position_ne() const;
+	std::optional<geo::position> get_position_sw() const;
 
 	// addressed
 	utils::mmsi get_mmsi_1() const noexcept { return utils::mmsi{mmsi_1}; }

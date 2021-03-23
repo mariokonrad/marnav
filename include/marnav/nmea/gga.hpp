@@ -5,7 +5,7 @@
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -77,31 +77,31 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<nmea::time> time_;
-	utils::optional<geo::latitude> lat_;
-	utils::optional<direction> lat_hem_; // N:north, S:south
-	utils::optional<geo::longitude> lon_;
-	utils::optional<direction> lon_hem_; // E:east, W:west
-	utils::optional<quality> quality_indicator_;
-	utils::optional<uint32_t> n_satellites_;
-	utils::optional<double> hor_dilution_; // horizontal dilution of precision
-	utils::optional<units::meters> altitude_;
-	utils::optional<units::meters> geodial_separation_; // sea level below the ellipsoid
-	utils::optional<double> dgps_age_; // age of dgps data
-	utils::optional<uint32_t> dgps_ref_; // dgps reference station 0000..1023
+	std::optional<nmea::time> time_;
+	std::optional<geo::latitude> lat_;
+	std::optional<direction> lat_hem_; // N:north, S:south
+	std::optional<geo::longitude> lon_;
+	std::optional<direction> lon_hem_; // E:east, W:west
+	std::optional<quality> quality_indicator_;
+	std::optional<uint32_t> n_satellites_;
+	std::optional<double> hor_dilution_; // horizontal dilution of precision
+	std::optional<units::meters> altitude_;
+	std::optional<units::meters> geodial_separation_; // sea level below the ellipsoid
+	std::optional<double> dgps_age_; // age of dgps data
+	std::optional<uint32_t> dgps_ref_; // dgps reference station 0000..1023
 
 public:
-	utils::optional<nmea::time> get_time() const { return time_; }
-	utils::optional<quality> get_quality_indicator() const { return quality_indicator_; }
-	utils::optional<uint32_t> get_n_satellites() const { return n_satellites_; }
-	utils::optional<double> get_hor_dilution() const { return hor_dilution_; }
-	utils::optional<units::length> get_altitude() const;
-	utils::optional<units::length> get_geodial_separation() const;
-	utils::optional<double> get_dgps_age() const { return dgps_age_; }
-	utils::optional<uint32_t> get_dgps_ref() const { return dgps_ref_; }
+	std::optional<nmea::time> get_time() const { return time_; }
+	std::optional<quality> get_quality_indicator() const { return quality_indicator_; }
+	std::optional<uint32_t> get_n_satellites() const { return n_satellites_; }
+	std::optional<double> get_hor_dilution() const { return hor_dilution_; }
+	std::optional<units::length> get_altitude() const;
+	std::optional<units::length> get_geodial_separation() const;
+	std::optional<double> get_dgps_age() const { return dgps_age_; }
+	std::optional<uint32_t> get_dgps_ref() const { return dgps_ref_; }
 
-	utils::optional<geo::longitude> get_lon() const;
-	utils::optional<geo::latitude> get_lat() const;
+	std::optional<geo::longitude> get_lon() const;
+	std::optional<geo::latitude> get_lat() const;
 
 	void set_time(const nmea::time & t) noexcept { time_ = t; }
 	void set_lat(const geo::latitude & t);

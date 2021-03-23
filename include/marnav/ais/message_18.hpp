@@ -5,7 +5,7 @@
 #include <marnav/geo/angle.hpp>
 #include <marnav/units/units.hpp>
 #include <marnav/utils/mmsi.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -56,10 +56,10 @@ private:
 public:
 	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
 	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
-	utils::optional<units::knots> get_sog() const noexcept;
+	std::optional<units::knots> get_sog() const noexcept;
 	bool get_position_accuracy() const noexcept { return position_accuracy; }
-	utils::optional<double> get_cog() const noexcept;
-	utils::optional<uint32_t> get_hdg() const noexcept;
+	std::optional<double> get_cog() const noexcept;
+	std::optional<uint32_t> get_hdg() const noexcept;
 	uint32_t get_timestamp() const noexcept { return timestamp; }
 	bool get_cs_unit() const noexcept { return cs_unit; }
 	bool get_display_flag() const noexcept { return display_flag; }
@@ -77,8 +77,8 @@ public:
 	void set_sog(units::velocity t);
 
 	void set_position_accuracy(bool t) noexcept { position_accuracy = t; }
-	void set_cog(utils::optional<double> t) noexcept;
-	void set_hdg(utils::optional<uint32_t> t) noexcept;
+	void set_cog(std::optional<double> t) noexcept;
+	void set_hdg(std::optional<uint32_t> t) noexcept;
 	void set_timestamp(uint32_t t) noexcept { timestamp = t; }
 	void set_cs_unit(bool t) noexcept { cs_unit = t; }
 	void set_display_flag(bool t) noexcept { display_flag = t; }
@@ -89,8 +89,8 @@ public:
 	void set_raim(bool t) noexcept { raim = t; }
 	void set_radio_status(uint32_t t) noexcept { radio_status = t; }
 
-	utils::optional<geo::longitude> get_lon() const;
-	utils::optional<geo::latitude> get_lat() const;
+	std::optional<geo::longitude> get_lon() const;
+	std::optional<geo::latitude> get_lat() const;
 	void set_lon_unavailable();
 	void set_lat_unavailable();
 	void set_lon(const geo::longitude & t);

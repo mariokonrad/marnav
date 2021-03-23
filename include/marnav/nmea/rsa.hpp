@@ -2,7 +2,7 @@
 #define MARNAV_NMEA_RSA_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -45,16 +45,16 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> rudder1_;
-	utils::optional<status> rudder1_valid_;
-	utils::optional<double> rudder2_;
-	utils::optional<status> rudder2_valid_;
+	std::optional<double> rudder1_;
+	std::optional<status> rudder1_valid_;
+	std::optional<double> rudder2_;
+	std::optional<status> rudder2_valid_;
 
 public:
-	utils::optional<double> get_rudder1() const { return rudder1_; }
-	utils::optional<status> get_rudder1_valid() const { return rudder1_valid_; }
-	utils::optional<double> get_rudder2() const { return rudder2_; }
-	utils::optional<status> get_rudder2_valid() const { return rudder2_valid_; }
+	std::optional<double> get_rudder1() const { return rudder1_; }
+	std::optional<status> get_rudder1_valid() const { return rudder1_valid_; }
+	std::optional<double> get_rudder2() const { return rudder2_; }
+	std::optional<status> get_rudder2_valid() const { return rudder2_valid_; }
 
 	void set_rudder1(double t) noexcept;
 	void set_rudder2(double t) noexcept;

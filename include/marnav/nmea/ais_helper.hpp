@@ -113,7 +113,7 @@ std::vector<std::pair<std::string, uint32_t>> collect_payload(InputIt begin, Inp
 
 std::vector<std::unique_ptr<nmea::sentence>> make_vdms(
 	const std::vector<std::pair<std::string, uint32_t>> & payload,
-	utils::optional<uint32_t> seq_msg_id = utils::optional<uint32_t>{},
+	std::optional<uint32_t> seq_msg_id = std::optional<uint32_t>{},
 	ais_channel radio_channel = ais_channel::B);
 }
 }

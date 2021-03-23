@@ -2,7 +2,7 @@
 #define MARNAV_NMEA_ROT_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -41,12 +41,12 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> deg_per_minute_;
-	utils::optional<status> data_valid_;
+	std::optional<double> deg_per_minute_;
+	std::optional<status> data_valid_;
 
 public:
-	utils::optional<double> get_deg_per_minute() const { return deg_per_minute_; }
-	utils::optional<status> get_data_valid() const { return data_valid_; }
+	std::optional<double> get_deg_per_minute() const { return deg_per_minute_; }
+	std::optional<status> get_data_valid() const { return data_valid_; }
 
 	void set_deg_per_minute(double t) noexcept { deg_per_minute_ = t; }
 	void set_data_valid(status t) noexcept { data_valid_ = t; }

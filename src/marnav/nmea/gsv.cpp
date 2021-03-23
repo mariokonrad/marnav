@@ -9,7 +9,7 @@ namespace nmea
 {
 namespace
 {
-inline std::string to_string(const utils::optional<gsv::satellite_info> & data)
+inline std::string to_string(const std::optional<gsv::satellite_info> & data)
 {
 	if (!data)
 		return std::string{",,,"};
@@ -56,7 +56,7 @@ gsv::gsv(talker talk, fields::const_iterator first, fields::const_iterator last)
 		// this might not be the desired solution, looks clunky.
 		// maybe the `nmea::read()` functions should be refactored.
 		//
-		utils::optional<decltype(info.prn)> prn;
+		std::optional<decltype(info.prn)> prn;
 		read(*(first + index + 0), prn);
 		if (!prn)
 			continue;
@@ -96,7 +96,7 @@ void gsv::set_sat(int index, const satellite_info & info)
 	sat_[index] = info;
 }
 
-utils::optional<gsv::satellite_info> gsv::get_sat(int index) const
+std::optional<gsv::satellite_info> gsv::get_sat(int index) const
 {
 	check_index(index);
 	return sat_[index];

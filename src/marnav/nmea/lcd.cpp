@@ -27,12 +27,12 @@ lcd::lcd(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 1), master_.snr);
 	read(*(first + 2), master_.ecd);
 	for (int i = 0; i < max_differences; ++i) {
-		utils::optional<decltype(time_difference::snr)> snr;
-		utils::optional<decltype(time_difference::ecd)> ecd;
+		std::optional<decltype(time_difference::snr)> snr;
+		std::optional<decltype(time_difference::ecd)> ecd;
 		read(*(first + (i * 2) + 3 + 0), snr);
 		read(*(first + (i * 2) + 3 + 1), ecd);
 		if (snr && ecd) {
-			time_diffs_[i] = utils::make_optional<time_difference>(*snr, *ecd);
+			time_diffs_[i] = time_difference{*snr, *ecd};
 		}
 	}
 }
@@ -44,7 +44,7 @@ void lcd::check_index(int index) const
 	}
 }
 
-utils::optional<lcd::time_difference> lcd::get_time_diff(int index) const
+std::optional<lcd::time_difference> lcd::get_time_diff(int index) const
 {
 	check_index(index);
 	return time_diffs_[index];

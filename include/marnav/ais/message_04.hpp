@@ -4,7 +4,7 @@
 #include <marnav/ais/message.hpp>
 #include <marnav/geo/angle.hpp>
 #include <marnav/utils/mmsi.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -81,10 +81,10 @@ public:
 	void set_raim(bool t) noexcept { raim = t; }
 	void set_radio_status(uint32_t t) noexcept { radio_status = t; }
 
-	utils::optional<geo::longitude> get_lon() const;
-	utils::optional<geo::latitude> get_lat() const;
-	void set_lon(const utils::optional<geo::longitude> & t);
-	void set_lat(const utils::optional<geo::latitude> & t);
+	std::optional<geo::longitude> get_lon() const;
+	std::optional<geo::latitude> get_lat() const;
+	void set_lon(const std::optional<geo::longitude> & t);
+	void set_lat(const std::optional<geo::latitude> & t);
 };
 }
 }

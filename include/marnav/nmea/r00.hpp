@@ -3,8 +3,8 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/waypoint.hpp>
-#include <marnav/utils/optional.hpp>
 #include <array>
+#include <optional>
 
 namespace marnav
 {
@@ -41,12 +41,12 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	std::array<utils::optional<waypoint>, max_waypoint_ids> waypoint_id_;
+	std::array<std::optional<waypoint>, max_waypoint_ids> waypoint_id_;
 
 	void check_index(int index) const;
 
 public:
-	utils::optional<waypoint> get_waypoint_id(int index) const;
+	std::optional<waypoint> get_waypoint_id(int index) const;
 
 	void set_waypoint_id(int index, const waypoint & id);
 };

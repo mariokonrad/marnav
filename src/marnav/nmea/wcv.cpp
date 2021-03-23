@@ -20,7 +20,7 @@ wcv::wcv(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 3)
 		throw std::invalid_argument{"invalid number of fields in wcv"};
 
-	utils::optional<unit::velocity> speed_unit;
+	std::optional<unit::velocity> speed_unit;
 
 	read(*(first + 0), speed_);
 	read(*(first + 1), speed_unit);
@@ -34,7 +34,7 @@ void wcv::set_speed(units::velocity t) noexcept
 	speed_ = t.get<units::knots>();
 }
 
-utils::optional<units::velocity> wcv::get_speed() const
+std::optional<units::velocity> wcv::get_speed() const
 {
 	if (!speed_)
 		return {};

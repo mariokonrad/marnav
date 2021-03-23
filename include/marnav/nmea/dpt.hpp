@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -48,12 +48,12 @@ protected:
 private:
 	units::meters depth_meter_ = units::meters{0.0};
 	units::meters transducer_offset_ = units::meters{0.0};
-	utils::optional<units::meters> max_depth_;
+	std::optional<units::meters> max_depth_;
 
 public:
 	units::length get_depth_meter() const noexcept { return {depth_meter_}; }
 	units::length get_transducer_offset() const noexcept { return {transducer_offset_}; }
-	utils::optional<units::length> get_max_depth() const noexcept;
+	std::optional<units::length> get_max_depth() const noexcept;
 
 	void set_depth_meter(units::length t);
 	void set_transducer_offset(units::length t);

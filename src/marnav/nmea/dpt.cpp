@@ -54,7 +54,7 @@ void dpt::set_max_depth(units::length t)
 	max_depth_ = t.get<units::meters>();
 }
 
-utils::optional<units::length> dpt::get_max_depth() const noexcept
+std::optional<units::length> dpt::get_max_depth() const noexcept
 {
 	if (!max_depth_)
 		return {};

@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -50,18 +50,18 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> angle_; // wind angle, 0..359 right of bow
-	utils::optional<reference> angle_ref_; // R:relative, T:true
-	utils::optional<double> speed_; // wind speed
-	utils::optional<unit::velocity> speed_unit_; // wind speed unit
-	utils::optional<status> data_valid_; // status, A:valid
+	std::optional<double> angle_; // wind angle, 0..359 right of bow
+	std::optional<reference> angle_ref_; // R:relative, T:true
+	std::optional<double> speed_; // wind speed
+	std::optional<unit::velocity> speed_unit_; // wind speed unit
+	std::optional<status> data_valid_; // status, A:valid
 
 public:
-	utils::optional<double> get_angle() const { return angle_; }
-	utils::optional<reference> get_angle_ref() const { return angle_ref_; }
-	utils::optional<units::velocity> get_speed() const;
-	utils::optional<unit::velocity> get_speed_unit() const { return speed_unit_; }
-	utils::optional<status> get_data_valid() const { return data_valid_; }
+	std::optional<double> get_angle() const { return angle_; }
+	std::optional<reference> get_angle_ref() const { return angle_ref_; }
+	std::optional<units::velocity> get_speed() const;
+	std::optional<unit::velocity> get_speed_unit() const { return speed_unit_; }
+	std::optional<status> get_data_valid() const { return data_valid_; }
 
 	void set_angle(double deg, reference ref);
 	void set_speed(units::velocity speed, unit::velocity u) noexcept;

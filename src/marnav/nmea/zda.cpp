@@ -20,9 +20,9 @@ zda::zda(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in zda"};
 
-	utils::optional<uint32_t> d;
-	utils::optional<uint32_t> m;
-	utils::optional<uint32_t> y;
+	std::optional<uint32_t> d;
+	std::optional<uint32_t> m;
+	std::optional<uint32_t> y;
 
 	read(*(first + 0), time_utc_);
 	read(*(first + 1), d);
@@ -37,9 +37,9 @@ zda::zda(talker talk, fields::const_iterator first, fields::const_iterator last)
 
 void zda::append_data_to(std::string & s) const
 {
-	utils::optional<uint32_t> d;
-	utils::optional<uint32_t> m;
-	utils::optional<uint32_t> y;
+	std::optional<uint32_t> d;
+	std::optional<uint32_t> m;
+	std::optional<uint32_t> y;
 
 	if (date_) {
 		d = date_->day();

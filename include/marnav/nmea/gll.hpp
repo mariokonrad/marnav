@@ -4,7 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/time.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -55,21 +55,21 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<geo::latitude> lat_;
-	utils::optional<direction> lat_hem_;
-	utils::optional<geo::longitude> lon_;
-	utils::optional<direction> lon_hem_;
-	utils::optional<nmea::time> time_utc_;
-	utils::optional<status> data_valid_;
-	utils::optional<mode_indicator> mode_ind_;
+	std::optional<geo::latitude> lat_;
+	std::optional<direction> lat_hem_;
+	std::optional<geo::longitude> lon_;
+	std::optional<direction> lon_hem_;
+	std::optional<nmea::time> time_utc_;
+	std::optional<status> data_valid_;
+	std::optional<mode_indicator> mode_ind_;
 
 public:
-	utils::optional<nmea::time> get_time_utc() const { return time_utc_; }
-	utils::optional<status> get_data_valid() const { return data_valid_; }
-	utils::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
+	std::optional<nmea::time> get_time_utc() const { return time_utc_; }
+	std::optional<status> get_data_valid() const { return data_valid_; }
+	std::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
 
-	utils::optional<geo::longitude> get_lon() const;
-	utils::optional<geo::latitude> get_lat() const;
+	std::optional<geo::longitude> get_lon() const;
+	std::optional<geo::latitude> get_lat() const;
 
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);

@@ -7,7 +7,7 @@
 #include <marnav/nmea/time.hpp>
 #include <marnav/units/units.hpp>
 #include <marnav/utils/mmsi.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -101,7 +101,7 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<std::string> emitter_id_;
+	std::optional<std::string> emitter_id_;
 	mob_status mob_status_ = mob_status::error;
 	nmea::time mob_activation_utc_;
 	mob_position_source mob_position_source_ = mob_position_source::error;
@@ -117,7 +117,7 @@ private:
 	battery_status battery_status_ = battery_status::error;
 
 public:
-	utils::optional<std::string> get_emitter_id() const { return emitter_id_; }
+	std::optional<std::string> get_emitter_id() const { return emitter_id_; }
 	mob_status get_mob_status() const { return mob_status_; }
 	nmea::time get_mob_activation_utc() const { return mob_activation_utc_; }
 	mob_position_source get_mob_position_source() const { return mob_position_source_; }

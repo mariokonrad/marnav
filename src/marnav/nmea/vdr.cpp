@@ -49,7 +49,7 @@ void vdr::set_speed(units::velocity t) noexcept
 	speed_ = t.get<units::knots>();
 }
 
-utils::optional<units::velocity> vdr::get_speed() const
+std::optional<units::velocity> vdr::get_speed() const
 {
 	if (!speed_)
 		return {};

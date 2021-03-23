@@ -16,7 +16,7 @@ namespace nmea
 /// @return Container of NMEA sentences containing VDM sentences.
 std::vector<std::unique_ptr<nmea::sentence>> make_vdms(
 	const std::vector<std::pair<std::string, uint32_t>> & payload,
-	utils::optional<uint32_t> seq_msg_id, ais_channel radio_channel)
+	std::optional<uint32_t> seq_msg_id, ais_channel radio_channel)
 {
 	std::vector<std::unique_ptr<nmea::sentence>> sentences;
 

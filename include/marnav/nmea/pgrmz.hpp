@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -55,11 +55,11 @@ protected:
 
 private:
 	units::feet altitude_;
-	utils::optional<fix_type> fix_;
+	std::optional<fix_type> fix_;
 
 public:
 	units::length get_altitude() const { return {altitude_}; }
-	utils::optional<fix_type> get_fix() const { return fix_; }
+	std::optional<fix_type> get_fix() const { return fix_; }
 
 	void set_altitude(units::length t) noexcept { altitude_ = t.get<units::feet>(); }
 	void set_fix(fix_type t) noexcept { fix_ = t; }

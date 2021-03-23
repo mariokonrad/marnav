@@ -2,8 +2,8 @@
 #define MARNAV_NMEA_GSA_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
 #include <array>
+#include <optional>
 
 namespace marnav
 {
@@ -57,22 +57,22 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<selection_mode> sel_mode_; // A:automatic 2D/3D, M:manual
-	utils::optional<uint32_t> mode_; // 1 = no fix, 2 = 2D fix, 3 = 3D fix, TODO: enum
-	std::array<utils::optional<uint32_t>, max_satellite_ids> satellite_id_;
-	utils::optional<double> pdop_; // positional dilution of precision
-	utils::optional<double> hdop_; // horizontal dilution of precision
-	utils::optional<double> vdop_; // vertical dilution of precision
+	std::optional<selection_mode> sel_mode_; // A:automatic 2D/3D, M:manual
+	std::optional<uint32_t> mode_; // 1 = no fix, 2 = 2D fix, 3 = 3D fix, TODO: enum
+	std::array<std::optional<uint32_t>, max_satellite_ids> satellite_id_;
+	std::optional<double> pdop_; // positional dilution of precision
+	std::optional<double> hdop_; // horizontal dilution of precision
+	std::optional<double> vdop_; // vertical dilution of precision
 
 	void check_index(int index) const;
 
 public:
-	utils::optional<selection_mode> get_sel_mode() const { return sel_mode_; }
-	utils::optional<uint32_t> get_mode() const { return mode_; }
-	utils::optional<uint32_t> get_satellite_id(int index) const;
-	utils::optional<double> get_pdop() const { return pdop_; }
-	utils::optional<double> get_hdop() const { return hdop_; }
-	utils::optional<double> get_vdop() const { return vdop_; }
+	std::optional<selection_mode> get_sel_mode() const { return sel_mode_; }
+	std::optional<uint32_t> get_mode() const { return mode_; }
+	std::optional<uint32_t> get_satellite_id(int index) const;
+	std::optional<double> get_pdop() const { return pdop_; }
+	std::optional<double> get_hdop() const { return hdop_; }
+	std::optional<double> get_vdop() const { return vdop_; }
 
 	void set_sel_mode(selection_mode t) noexcept { sel_mode_ = t; }
 	void set_mode(uint32_t t) noexcept { mode_ = t; }

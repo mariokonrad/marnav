@@ -53,7 +53,7 @@ void gsa::set_satellite_id(int index, uint32_t t)
 	satellite_id_[index] = t;
 }
 
-utils::optional<uint32_t> gsa::get_satellite_id(int index) const
+std::optional<uint32_t> gsa::get_satellite_id(int index) const
 {
 	check_index(index);
 	return satellite_id_[index];

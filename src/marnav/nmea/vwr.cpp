@@ -20,9 +20,9 @@ vwr::vwr(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 8)
 		throw std::invalid_argument{"invalid number of fields in vwr"};
 
-	utils::optional<unit::velocity> speed_knots_unit;
-	utils::optional<unit::velocity> speed_mps_unit;
-	utils::optional<unit::velocity> speed_kmh_unit;
+	std::optional<unit::velocity> speed_knots_unit;
+	std::optional<unit::velocity> speed_mps_unit;
+	std::optional<unit::velocity> speed_kmh_unit;
 
 	read(*(first + 0), angle_);
 	read(*(first + 1), angle_side_);
@@ -59,21 +59,21 @@ void vwr::set_speed_kmh(units::velocity t) noexcept
 	speed_kmh_ = t.get<units::kilometers_per_hour>();
 }
 
-utils::optional<units::velocity> vwr::get_speed_knots() const
+std::optional<units::velocity> vwr::get_speed_knots() const
 {
 	if (!speed_knots_)
 		return {};
 	return {*speed_knots_};
 }
 
-utils::optional<units::velocity> vwr::get_speed_mps() const
+std::optional<units::velocity> vwr::get_speed_mps() const
 {
 	if (!speed_mps_)
 		return {};
 	return {*speed_mps_};
 }
 
-utils::optional<units::velocity> vwr::get_speed_kmh() const
+std::optional<units::velocity> vwr::get_speed_kmh() const
 {
 	if (!speed_kmh_)
 		return {};

@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -50,14 +50,14 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<units::feet> depth_feet_;
-	utils::optional<units::meters> depth_meter_;
-	utils::optional<units::fathoms> depth_fathom_;
+	std::optional<units::feet> depth_feet_;
+	std::optional<units::meters> depth_meter_;
+	std::optional<units::fathoms> depth_fathom_;
 
 public:
-	utils::optional<units::length> get_depth_feet() const;
-	utils::optional<units::length> get_depth_meter() const;
-	utils::optional<units::length> get_depth_fathom() const;
+	std::optional<units::length> get_depth_feet() const;
+	std::optional<units::length> get_depth_meter() const;
+	std::optional<units::length> get_depth_fathom() const;
 
 	void set_depth_feet(units::length t);
 	void set_depth_meter(units::length t);

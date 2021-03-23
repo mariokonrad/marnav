@@ -20,8 +20,8 @@ bww::bww(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 6)
 		throw std::invalid_argument{"invalid number of fields in bww"};
 
-	utils::optional<reference> bearing_true_ref;
-	utils::optional<reference> bearing_mag_ref;
+	std::optional<reference> bearing_true_ref;
+	std::optional<reference> bearing_mag_ref;
 
 	read(*(first + 0), bearing_true_);
 	read(*(first + 1), bearing_true_ref);

@@ -4,8 +4,8 @@
 #include <marnav/nmea/constants.hpp>
 #include <marnav/nmea/string.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
 #include <functional>
+#include <optional>
 #include <string>
 
 namespace marnav
@@ -83,7 +83,7 @@ inline std::string format(
 	return format(data.value(), width, f);
 }
 
-/// Generic version of the format function, handling the possibility of utils::optional
+/// Generic version of the format function, handling the possibility of std::optional
 /// to be not set and returning an empty string. The rendering of the contained type
 /// is one of the overloaded funtions of 'format'.
 ///
@@ -97,7 +97,7 @@ inline std::string format(
 ///   This is necessary to avoid heap operations and VLA.
 template <typename T>
 inline std::string format(
-	const utils::optional<T> & data, unsigned int width, data_format f = data_format::dec)
+	const std::optional<T> & data, unsigned int width, data_format f = data_format::dec)
 {
 	if (!data)
 		return std::string{};
@@ -158,7 +158,7 @@ inline void read(const std::string & s, units::basic_unit<Unit, Ratio> & value,
 /// Variant of `read` for optionals.
 template <class T>
 inline void read(
-	const std::string & s, utils::optional<T> & value, data_format fmt = data_format::dec)
+	const std::string & s, std::optional<T> & value, data_format fmt = data_format::dec)
 {
 	if (s.empty()) {
 		value.reset();
@@ -195,7 +195,7 @@ inline void read(
 }
 
 /// This variant of read enums from the string using a mapping function. This function
-/// applies if the specified value is wrapped in a utils::optional.
+/// applies if the specified value is wrapped in a std::optional.
 ///
 /// @tparam T Enumeration to be read
 /// @tparam Map Mapping function to map from enumeatiors underlying type to the enumeration.
@@ -205,9 +205,9 @@ inline void read(
 /// @param[in] mapping_func The mapping function for the enumerator.
 /// @param[in] fmt Format specifier
 template <class T, typename Map,
-	typename = typename std::enable_if<std::is_class<utils::optional<T>>::value, T>::type,
+	typename = typename std::enable_if<std::is_class<std::optional<T>>::value, T>::type,
 	typename = typename std::enable_if<std::is_enum<T>::value, T>::type>
-inline void read(const std::string & s, utils::optional<T> & value, Map mapping_func,
+inline void read(const std::string & s, std::optional<T> & value, Map mapping_func,
 	data_format fmt = data_format::dec)
 {
 	if (s.empty()) {

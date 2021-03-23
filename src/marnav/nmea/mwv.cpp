@@ -67,7 +67,7 @@ void mwv::set_speed(units::meters_per_second speed) noexcept
 	speed_unit_ = unit::velocity::mps;
 }
 
-utils::optional<units::velocity> mwv::get_speed() const
+std::optional<units::velocity> mwv::get_speed() const
 {
 	if (!speed_ || !speed_unit_)
 		return {};

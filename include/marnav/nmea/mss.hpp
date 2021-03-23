@@ -2,7 +2,7 @@
 #define MARNAV_NMEA_MSS_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {

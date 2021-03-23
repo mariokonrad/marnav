@@ -2,9 +2,9 @@
 #define MARNAV_NMEA_DSC_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
 #include <marnav/utils/mmsi.hpp>
 #include <marnav/geo/region.hpp>
+#include <optional>
 
 namespace marnav
 {

@@ -4,7 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -56,30 +56,29 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<char> blink_warning_;
-	utils::optional<geo::latitude> lat_;
-	utils::optional<direction> lat_hem_; // latitude dir, N:north, S:south
-	utils::optional<geo::longitude> lon_;
-	utils::optional<direction> lon_hem_; // longitude dir, E:east, W:west
-	utils::optional<double> time_diff_a_; // time difference A in microseconds
-	utils::optional<double> time_diff_b_; // time difference B in microseconds
-	utils::optional<units::knots> sog_; // speed over ground in knots
-	utils::optional<double> track_; // track made good, degrees
-	utils::optional<double> magnetic_var_; // magnetic variation in degrees
-	utils::optional<direction>
-		magnetic_var_hem_; // magnetic variation hemisphere, E:east, W:west
+	std::optional<char> blink_warning_;
+	std::optional<geo::latitude> lat_;
+	std::optional<direction> lat_hem_; // latitude dir, N:north, S:south
+	std::optional<geo::longitude> lon_;
+	std::optional<direction> lon_hem_; // longitude dir, E:east, W:west
+	std::optional<double> time_diff_a_; // time difference A in microseconds
+	std::optional<double> time_diff_b_; // time difference B in microseconds
+	std::optional<units::knots> sog_; // speed over ground in knots
+	std::optional<double> track_; // track made good, degrees
+	std::optional<double> magnetic_var_; // magnetic variation in degrees
+	std::optional<direction> magnetic_var_hem_; // magnetic variation hemisphere, E:east, W:west
 
 public:
-	utils::optional<char> get_blink_warning() const { return blink_warning_; }
-	utils::optional<double> get_time_diff_a() const { return time_diff_a_; }
-	utils::optional<double> get_time_diff_b() const { return time_diff_b_; }
-	utils::optional<units::velocity> get_sog() const;
-	utils::optional<double> get_track() const { return track_; }
-	utils::optional<double> get_magnetic_var() const { return magnetic_var_; }
-	utils::optional<direction> get_magnetic_var_hem() const { return magnetic_var_hem_; }
+	std::optional<char> get_blink_warning() const { return blink_warning_; }
+	std::optional<double> get_time_diff_a() const { return time_diff_a_; }
+	std::optional<double> get_time_diff_b() const { return time_diff_b_; }
+	std::optional<units::velocity> get_sog() const;
+	std::optional<double> get_track() const { return track_; }
+	std::optional<double> get_magnetic_var() const { return magnetic_var_; }
+	std::optional<direction> get_magnetic_var_hem() const { return magnetic_var_hem_; }
 
-	utils::optional<geo::longitude> get_lon() const;
-	utils::optional<geo::latitude> get_lat() const;
+	std::optional<geo::longitude> get_lon() const;
+	std::optional<geo::latitude> get_lat() const;
 
 	void set_blink_warning(char t) noexcept { blink_warning_ = t; }
 	void set_lat(const geo::latitude & t);

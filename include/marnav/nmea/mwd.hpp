@@ -3,7 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -52,16 +52,16 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> direction_true_;
-	utils::optional<double> direction_mag_;
-	utils::optional<units::knots> speed_kn_;
-	utils::optional<units::meters_per_second> speed_ms_;
+	std::optional<double> direction_true_;
+	std::optional<double> direction_mag_;
+	std::optional<units::knots> speed_kn_;
+	std::optional<units::meters_per_second> speed_ms_;
 
 public:
-	utils::optional<double> get_direction_true() const { return direction_true_; }
-	utils::optional<double> get_direction_mag() const { return direction_mag_; }
-	utils::optional<units::velocity> get_speed_kn() const;
-	utils::optional<units::velocity> get_speed_ms() const;
+	std::optional<double> get_direction_true() const { return direction_true_; }
+	std::optional<double> get_direction_mag() const { return direction_mag_; }
+	std::optional<units::velocity> get_speed_kn() const;
+	std::optional<units::velocity> get_speed_ms() const;
 
 	void set_direction_true(double t) noexcept;
 	void set_direction_mag(double t) noexcept;

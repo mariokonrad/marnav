@@ -6,7 +6,7 @@
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -72,31 +72,31 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<nmea::time> time_utc_;
-	utils::optional<geo::latitude> lat_;
-	utils::optional<direction> lat_hem_;
-	utils::optional<geo::longitude> lon_;
-	utils::optional<direction> lon_hem_;
-	utils::optional<double> bearing_true_;
-	utils::optional<reference> bearing_true_ref_;
-	utils::optional<double> bearing_mag_;
-	utils::optional<reference> bearing_mag_ref_;
-	utils::optional<units::nautical_miles> distance_;
-	utils::optional<waypoint> waypoint_id_;
-	utils::optional<mode_indicator> mode_ind_; // NMEA 2.3 and later
+	std::optional<nmea::time> time_utc_;
+	std::optional<geo::latitude> lat_;
+	std::optional<direction> lat_hem_;
+	std::optional<geo::longitude> lon_;
+	std::optional<direction> lon_hem_;
+	std::optional<double> bearing_true_;
+	std::optional<reference> bearing_true_ref_;
+	std::optional<double> bearing_mag_;
+	std::optional<reference> bearing_mag_ref_;
+	std::optional<units::nautical_miles> distance_;
+	std::optional<waypoint> waypoint_id_;
+	std::optional<mode_indicator> mode_ind_; // NMEA 2.3 and later
 
 public:
-	utils::optional<nmea::time> get_time_utc() const { return time_utc_; }
-	utils::optional<double> get_bearing_true() const { return bearing_true_; }
-	utils::optional<reference> get_bearing_true_ref() const { return bearing_true_ref_; }
-	utils::optional<double> get_bearing_mag() const { return bearing_mag_; }
-	utils::optional<reference> get_bearing_mag_ref() const { return bearing_mag_ref_; }
-	utils::optional<units::length> get_distance() const;
-	utils::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
-	utils::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
+	std::optional<nmea::time> get_time_utc() const { return time_utc_; }
+	std::optional<double> get_bearing_true() const { return bearing_true_; }
+	std::optional<reference> get_bearing_true_ref() const { return bearing_true_ref_; }
+	std::optional<double> get_bearing_mag() const { return bearing_mag_; }
+	std::optional<reference> get_bearing_mag_ref() const { return bearing_mag_ref_; }
+	std::optional<units::length> get_distance() const;
+	std::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
+	std::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
 
-	utils::optional<geo::longitude> get_lon() const;
-	utils::optional<geo::latitude> get_lat() const;
+	std::optional<geo::longitude> get_lon() const;
+	std::optional<geo::latitude> get_lat() const;
 
 	void set_time_utc(const nmea::time & t) noexcept { time_utc_ = t; }
 	void set_lat(const geo::latitude & t);

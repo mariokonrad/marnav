@@ -2,7 +2,7 @@
 #define MARNAV_NMEA_XTR_HPP
 
 #include <marnav/nmea/sentence.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -43,17 +43,17 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<double> cross_track_error_magnitude_;
-	utils::optional<side> direction_to_steer_;
-	utils::optional<unit::distance> cross_track_unit_;
+	std::optional<double> cross_track_error_magnitude_;
+	std::optional<side> direction_to_steer_;
+	std::optional<unit::distance> cross_track_unit_;
 
 public:
-	utils::optional<double> get_cross_track_error_magnitude() const
+	std::optional<double> get_cross_track_error_magnitude() const
 	{
 		return cross_track_error_magnitude_;
 	}
-	utils::optional<side> get_direction_to_steer() const { return direction_to_steer_; }
-	utils::optional<unit::distance> get_cross_track_unit() const { return cross_track_unit_; }
+	std::optional<side> get_direction_to_steer() const { return direction_to_steer_; }
+	std::optional<unit::distance> get_cross_track_unit() const { return cross_track_unit_; }
 
 	void set_cross_track_error_magnitude(double t) noexcept
 	{

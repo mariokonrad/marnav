@@ -4,7 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/angle.hpp>
 #include <marnav/nmea/waypoint.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -48,17 +48,17 @@ protected:
 	virtual void append_data_to(std::string &) const override;
 
 private:
-	utils::optional<geo::latitude> lat_;
-	utils::optional<direction> lat_hem_; // latitude hemisphere (N or S)
-	utils::optional<geo::longitude> lon_;
-	utils::optional<direction> lon_hem_; // longitude hemisphere (E or W)
-	utils::optional<waypoint> waypoint_id_;
+	std::optional<geo::latitude> lat_;
+	std::optional<direction> lat_hem_; // latitude hemisphere (N or S)
+	std::optional<geo::longitude> lon_;
+	std::optional<direction> lon_hem_; // longitude hemisphere (E or W)
+	std::optional<waypoint> waypoint_id_;
 
 public:
-	utils::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
+	std::optional<waypoint> get_waypoint_id() const { return waypoint_id_; }
 
-	utils::optional<geo::longitude> get_lon() const;
-	utils::optional<geo::latitude> get_lat() const;
+	std::optional<geo::longitude> get_lon() const;
+	std::optional<geo::latitude> get_lat() const;
 
 	void set_lat(const geo::latitude & t);
 	void set_lon(const geo::longitude & t);

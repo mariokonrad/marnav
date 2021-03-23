@@ -20,10 +20,10 @@ vhw::vhw(talker talk, fields::const_iterator first, fields::const_iterator last)
 	if (std::distance(first, last) != 8)
 		throw std::invalid_argument{"invalid number of fields in vhw"};
 
-	utils::optional<reference> heading_true_ref;
-	utils::optional<reference> heading_magn_ref;
-	utils::optional<unit::velocity> speed_knots_unit;
-	utils::optional<unit::velocity> speed_kmh_unit;
+	std::optional<reference> heading_true_ref;
+	std::optional<reference> heading_magn_ref;
+	std::optional<unit::velocity> speed_knots_unit;
+	std::optional<unit::velocity> speed_kmh_unit;
 
 	read(*(first + 0), heading_true_);
 	read(*(first + 1), heading_true_ref);

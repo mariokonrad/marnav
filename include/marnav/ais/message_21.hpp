@@ -5,7 +5,7 @@
 #include <marnav/ais/vessel_dimension.hpp>
 #include <marnav/geo/angle.hpp>
 #include <marnav/utils/mmsi.hpp>
-#include <marnav/utils/optional.hpp>
+#include <optional>
 
 namespace marnav
 {
@@ -86,8 +86,8 @@ public:
 	void set_assigned(bool t) noexcept { assigned = t; }
 	void set_name_extension(const std::string & t);
 
-	utils::optional<geo::longitude> get_lon() const;
-	utils::optional<geo::latitude> get_lat() const;
+	std::optional<geo::longitude> get_lon() const;
+	std::optional<geo::latitude> get_lat() const;
 	void set_lon_unavailable();
 	void set_lat_unavailable();
 	void set_lon(const geo::longitude & t);
