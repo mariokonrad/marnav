@@ -25,7 +25,7 @@ vbw::vbw(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 2), water_speed_status_);
 	read(*(first + 3), ground_speed_longitudinal_);
 	read(*(first + 4), ground_speed_transveral_);
-	read(*(first + 5), water_speed_status_);
+	read(*(first + 5), ground_speed_status_);
 }
 
 void vbw::set_water_speed(units::velocity l, units::velocity t, status s)
@@ -44,28 +44,28 @@ void vbw::set_ground_speed(units::velocity l, units::velocity t, status s)
 
 utils::optional<units::velocity> vbw::get_water_speed_longitudinal() const
 {
-	if (ground_speed_longitudinal_)
+	if (!water_speed_longitudinal_)
 		return {};
-	return {*ground_speed_longitudinal_};
+	return {*water_speed_longitudinal_};
 }
 
 utils::optional<units::velocity> vbw::get_water_speed_transveral() const
 {
-	if (water_speed_transveral_)
+	if (!water_speed_transveral_)
 		return {};
 	return {*water_speed_transveral_};
 }
 
 utils::optional<units::velocity> vbw::get_ground_speed_longitudinal() const
 {
-	if (ground_speed_longitudinal_)
+	if (!ground_speed_longitudinal_)
 		return {};
 	return {*ground_speed_longitudinal_};
 }
 
 utils::optional<units::velocity> vbw::get_ground_speed_transveral() const
 {
-	if (ground_speed_transveral_)
+	if (!ground_speed_transveral_)
 		return {};
 	return {*ground_speed_transveral_};
 }
