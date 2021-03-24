@@ -1,7 +1,7 @@
-#include <gtest/gtest.h>
 #include <marnav/io/nmea_reader.hpp>
 #include <marnav/io/device.hpp>
 #include <marnav/utils/unique.hpp>
+#include <gtest/gtest.h>
 #include <vector>
 
 namespace

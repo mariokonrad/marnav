@@ -1,10 +1,10 @@
 #ifndef MARNAV_MATH_VECTOR_HPP
 #define MARNAV_MATH_VECTOR_HPP
 
-#include <type_traits>
-#include <marnav/math/floatingpoint.hpp>
 #include <marnav/math/constants.hpp>
+#include <marnav/math/floatingpoint.hpp>
 #include <marnav/math/type_traits.hpp>
+#include <type_traits>
 
 namespace marnav
 {

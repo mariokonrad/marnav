@@ -1,10 +1,10 @@
 #ifndef MARNAV_NMEA_GRS_HPP
 #define MARNAV_NMEA_GRS_HPP
 
-#include <array>
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
 #include <marnav/utils/optional.hpp>
+#include <array>
 
 namespace marnav
 {

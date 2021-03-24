@@ -1,8 +1,8 @@
 #ifndef MARNAV_AIS_BINARY_DATA_HPP
 #define MARNAV_AIS_BINARY_DATA_HPP
 
-#include <string>
 #include <marnav/utils/bitset.hpp>
+#include <string>
 
 namespace marnav
 {

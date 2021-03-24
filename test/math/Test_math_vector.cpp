@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include <marnav/math/vector.hpp>
+#include <gtest/gtest.h>
 
 using namespace marnav::math;
 

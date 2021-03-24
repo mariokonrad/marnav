@@ -1,6 +1,3 @@
-#include <benchmark/benchmark.h>
-#include <algorithm>
-#include <typeindex>
 #include <marnav/nmea/aam.hpp>
 #include <marnav/nmea/alm.hpp>
 #include <marnav/nmea/apb.hpp>
@@ -26,8 +23,8 @@
 #include <marnav/nmea/gsv.hpp>
 #include <marnav/nmea/gtd.hpp>
 #include <marnav/nmea/hdg.hpp>
-#include <marnav/nmea/hfb.hpp>
 #include <marnav/nmea/hdm.hpp>
+#include <marnav/nmea/hfb.hpp>
 #include <marnav/nmea/hsc.hpp>
 #include <marnav/nmea/its.hpp>
 #include <marnav/nmea/lcd.hpp>
@@ -36,7 +33,9 @@
 #include <marnav/nmea/mtw.hpp>
 #include <marnav/nmea/mwd.hpp>
 #include <marnav/nmea/mwv.hpp>
+#include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/osd.hpp>
+#include <marnav/nmea/pgrme.hpp>
 #include <marnav/nmea/r00.hpp>
 #include <marnav/nmea/rma.hpp>
 #include <marnav/nmea/rmb.hpp>
@@ -74,8 +73,9 @@
 #include <marnav/nmea/zdl.hpp>
 #include <marnav/nmea/zfo.hpp>
 #include <marnav/nmea/ztg.hpp>
-#include <marnav/nmea/pgrme.hpp>
-#include <marnav/nmea/nmea.hpp>
+#include <benchmark/benchmark.h>
+#include <algorithm>
+#include <typeindex>
 
 using namespace marnav;
 

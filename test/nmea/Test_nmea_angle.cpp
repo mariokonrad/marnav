@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include <marnav/nmea/angle.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

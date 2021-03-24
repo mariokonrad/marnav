@@ -1,7 +1,7 @@
-#include <gtest/gtest.h>
 #include <marnav/nmea/tag_block.hpp>
 #include <marnav/nmea/bod.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

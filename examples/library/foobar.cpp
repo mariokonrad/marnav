@@ -1,5 +1,5 @@
-#include <iostream>
 #include <marnav/version.hpp>
+#include <iostream>
 
 int main(int, char **)
 {

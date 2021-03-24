@@ -1,6 +1,6 @@
-#include <gtest/gtest.h>
 #include <marnav/utils/bitset.hpp>
 #include <marnav/utils/bitset_string.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

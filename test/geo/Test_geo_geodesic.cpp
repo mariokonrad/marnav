@@ -1,6 +1,6 @@
-#include <gtest/gtest.h>
 #include <marnav/geo/geodesic.hpp>
 #include <marnav/math/constants.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

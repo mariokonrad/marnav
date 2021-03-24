@@ -4,8 +4,10 @@
 /// Copyright (c) 2017 Mario Konrad <mario.konrad@gmx.net>
 /// The code is licensed under the BSD License (see file LICENSE)
 
+#include <initializer_list>
 #include <limits>
 #include <stdexcept>
+#include <string>
 #include <type_traits>
 #include <vector>
 #include <cassert>

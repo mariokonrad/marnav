@@ -1,12 +1,12 @@
 /// This example shows how to use Boost.ASIO in order to read synchronously
 /// NMEA data from a serial port.
 
-#include <iostream>
-#include <boost/asio.hpp>
 #include <marnav/io/default_nmea_reader.hpp>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/rmc.hpp>
 #include <marnav/nmea/io.hpp>
+#include <boost/asio.hpp>
+#include <iostream>
 
 namespace marnav_example
 {

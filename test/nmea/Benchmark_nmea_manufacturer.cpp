@@ -1,5 +1,5 @@
-#include <benchmark/benchmark.h>
 #include <marnav/nmea/manufacturer.hpp>
+#include <benchmark/benchmark.h>
 
 static void benchmark_get_manufacturer_name_from_id(benchmark::State & state)
 {

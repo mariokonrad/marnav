@@ -1,7 +1,7 @@
-#include <gtest/gtest.h>
 #include <marnav/nmea/r00.hpp>
-#include <marnav/nmea/nmea.hpp>
 #include "type_traits_helper.hpp"
+#include <marnav/nmea/nmea.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

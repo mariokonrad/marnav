@@ -1,7 +1,7 @@
-#include <iostream>
 #include <marnav/ais/message_01.hpp>
 #include <marnav/ais/ais.hpp>
 #include <marnav/nmea/vdm.hpp>
+#include <iostream>
 
 int main(int, char **)
 {

@@ -1,9 +1,9 @@
-#include <gtest/gtest.h>
-#include <marnav/nmea/checksum.hpp>
 #include <marnav/nmea/nmea.hpp>
+#include <marnav/nmea/checksum.hpp>
 #include <marnav/nmea/detail.hpp>
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/vwr.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

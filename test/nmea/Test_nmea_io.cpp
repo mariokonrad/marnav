@@ -1,6 +1,6 @@
-#include <gtest/gtest.h>
 #include <marnav/nmea/io.hpp>
 #include <marnav/nmea/angle.hpp>
+#include <gtest/gtest.h>
 #include <locale>
 
 namespace

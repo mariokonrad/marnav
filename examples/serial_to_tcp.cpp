@@ -3,10 +3,10 @@
 //
 // Boost.ASIO is used for both, serial and TCP connections.
 
-#include <boost/asio.hpp>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/io/default_nmea_reader.hpp>
 #include <marnav/utils/unique.hpp>
+#include <boost/asio.hpp>
 
 namespace marnav_example
 {

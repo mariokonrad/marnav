@@ -1,8 +1,8 @@
+#include "MainWindow.hpp"
+#include <marnav/version.hpp>
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QFileInfo>
-#include "MainWindow.hpp"
-#include <marnav/version.hpp>
 
 int main(int argc, char ** argv)
 {

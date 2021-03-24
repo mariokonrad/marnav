@@ -1,8 +1,8 @@
 #ifndef MARNAV_GEO_ANGLE_HPP
 #define MARNAV_GEO_ANGLE_HPP
 
-#include <cstdint>
 #include <string>
+#include <cstdint>
 
 namespace marnav
 {

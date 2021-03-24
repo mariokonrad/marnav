@@ -1,9 +1,9 @@
 #ifndef MARNAV_AIS_MESSAGE_HPP
 #define MARNAV_AIS_MESSAGE_HPP
 
+#include <marnav/ais/binary_data.hpp>
 #include <memory>
 #include <string>
-#include <marnav/ais/binary_data.hpp>
 
 namespace marnav
 {

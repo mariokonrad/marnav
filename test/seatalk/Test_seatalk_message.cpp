@@ -1,7 +1,7 @@
-#include <gtest/gtest.h>
 #include <marnav/seatalk/seatalk.hpp>
 #include <marnav/seatalk/message_00.hpp>
 #include <marnav/seatalk/message_01.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

@@ -1,8 +1,8 @@
 #ifndef TEST_TYPE_TRAITS_HELPER_HPP
 #define TEST_TYPE_TRAITS_HELPER_HPP
 
-#include <type_traits>
 #include <gtest/gtest.h>
+#include <type_traits>
 
 namespace
 {

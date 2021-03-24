@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include <marnav/math/quaternion.hpp>
+#include <gtest/gtest.h>
 #include <vector>
 
 using namespace marnav::math;

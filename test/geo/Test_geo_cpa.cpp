@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include <marnav/geo/cpa.hpp>
+#include <gtest/gtest.h>
 
 using namespace marnav::geo;
 

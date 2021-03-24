@@ -1,5 +1,5 @@
-#include <benchmark/benchmark.h>
 #include <marnav/nmea/split.hpp>
+#include <benchmark/benchmark.h>
 #include <regex>
 
 namespace

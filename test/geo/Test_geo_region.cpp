@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include <marnav/geo/region.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

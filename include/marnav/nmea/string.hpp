@@ -1,10 +1,10 @@
 #ifndef MARNAV_NMEA_STRING_HPP
 #define MARNAV_NMEA_STRING_HPP
 
-#include <string>
 #include <marnav/nmea/constants.hpp>
 #include <marnav/units/units.hpp>
 #include <marnav/utils/optional.hpp>
+#include <string>
 
 namespace marnav
 {

@@ -1,12 +1,12 @@
+#include <marnav/io/device.hpp>
+#include <marnav/io/selectable.hpp>
 #include <memory>
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <marnav/io/device.hpp>
-#include <marnav/io/selectable.hpp>
 
 namespace marnav_example
 {

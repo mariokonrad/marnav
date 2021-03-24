@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include <marnav/ais/binary_001_11.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

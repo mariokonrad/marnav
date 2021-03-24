@@ -1,5 +1,5 @@
-#include <benchmark/benchmark.h>
 #include <marnav/nmea/checksum.hpp>
+#include <benchmark/benchmark.h>
 
 namespace
 {

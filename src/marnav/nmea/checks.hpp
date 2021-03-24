@@ -5,6 +5,7 @@
 #include <marnav/nmea/string.hpp>
 #include <marnav/utils/optional.hpp>
 #include <algorithm>
+#include <initializer_list>
 #include <stdexcept>
 #include <string>
 

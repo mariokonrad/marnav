@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include <marnav/utils/optional.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

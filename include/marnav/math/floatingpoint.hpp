@@ -1,10 +1,10 @@
 #ifndef MARNAV_MATH_FLOATINGPOINT_HPP
 #define MARNAV_MATH_FLOATINGPOINT_HPP
 
-#include <cmath>
 #include <limits>
 #include <stdexcept>
 #include <type_traits>
+#include <cmath>
 
 namespace marnav
 {

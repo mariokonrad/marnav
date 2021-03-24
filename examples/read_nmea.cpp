@@ -1,10 +1,10 @@
-#include <iostream>
 #include <marnav/io/default_nmea_reader.hpp>
 #include <marnav/io/default_nmea_serial.hpp>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/rmc.hpp>
 #include <marnav/nmea/io.hpp>
 #include <marnav/utils/unique.hpp>
+#include <iostream>
 
 int main(int, char **)
 {

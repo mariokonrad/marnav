@@ -1,8 +1,8 @@
+#include <marnav/version.hpp>
+#include <marnav/nmea/nmea.hpp>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <marnav/version.hpp>
-#include <marnav/nmea/nmea.hpp>
 
 int main(int, char **)
 {

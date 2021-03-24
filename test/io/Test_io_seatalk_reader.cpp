@@ -1,6 +1,6 @@
-#include <gtest/gtest.h>
 #include <marnav/io/seatalk_reader.hpp>
 #include <marnav/io/device.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

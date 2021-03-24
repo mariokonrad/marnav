@@ -1,7 +1,7 @@
+#include <marnav/math/matrix.hpp>
 #include <gtest/gtest.h>
 #include <iostream>
 #include <cmath>
-#include <marnav/math/matrix.hpp>
 
 using namespace marnav::math;
 

@@ -1,5 +1,5 @@
-#include <iostream>
 #include <marnav/utils/bitset.hpp>
+#include <iostream>
 
 int main(int, char **)
 {

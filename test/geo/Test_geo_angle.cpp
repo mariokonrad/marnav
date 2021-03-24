@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include <marnav/geo/angle.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

@@ -3,6 +3,8 @@
 
 #include <marnav/math/vector.hpp>
 #include <marnav/math/floatingpoint.hpp>
+#include <initializer_list>
+#include <cassert>
 
 namespace marnav
 {

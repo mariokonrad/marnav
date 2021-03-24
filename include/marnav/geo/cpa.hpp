@@ -1,9 +1,9 @@
 #ifndef MARNAV_GEO_CPA_HPP
 #define MARNAV_GEO_CPA_HPP
 
+#include <marnav/geo/position.hpp>
 #include <chrono>
 #include <tuple>
-#include <marnav/geo/position.hpp>
 
 namespace marnav
 {

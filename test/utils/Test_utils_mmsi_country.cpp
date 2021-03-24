@@ -1,6 +1,6 @@
-#include <gtest/gtest.h>
 #include <marnav/utils/mmsi_country.hpp>
 #include <marnav/utils/mmsi.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

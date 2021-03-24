@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include <marnav/nmea/split.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

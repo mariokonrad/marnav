@@ -2,7 +2,6 @@
 // It does not read directly from a specific device, it provides data
 // as a demonstration.
 
-#include <iostream>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/ais_helper.hpp>
 #include <marnav/ais/ais.hpp>
@@ -11,6 +10,7 @@
 #include <marnav/io/device.hpp>
 #include <marnav/io/default_nmea_reader.hpp>
 #include <marnav/utils/unique.hpp>
+#include <iostream>
 
 namespace marnav_example
 {

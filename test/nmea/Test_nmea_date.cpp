@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include <marnav/nmea/date.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

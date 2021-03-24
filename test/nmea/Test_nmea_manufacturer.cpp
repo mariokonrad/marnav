@@ -1,7 +1,7 @@
-#include <gtest/gtest.h>
 #include <marnav/nmea/manufacturer.hpp>
-#include <marnav/nmea/rmc.hpp>
 #include <marnav/nmea/pgrme.hpp>
+#include <marnav/nmea/rmc.hpp>
+#include <gtest/gtest.h>
 
 namespace
 {

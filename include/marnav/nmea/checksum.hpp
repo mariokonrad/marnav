@@ -1,9 +1,9 @@
 #ifndef MARNAV_NMEA_CHECKSUM_HPP
 #define MARNAV_NMEA_CHECKSUM_HPP
 
-#include <string>
-#include <stdexcept>
 #include <algorithm>
+#include <stdexcept>
+#include <string>
 
 namespace marnav
 {
