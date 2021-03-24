@@ -15,7 +15,7 @@ std::unique_ptr<message> message_10::parse(const raw & data)
 {
 	check_size(data, SIZE);
 
-	std::unique_ptr<message> result = utils::make_unique<message_10>();
+	std::unique_ptr<message> result = std::make_unique<message_10>();
 	message_10 & msg = static_cast<message_10 &>(*result);
 
 	msg.angle_ = 0;

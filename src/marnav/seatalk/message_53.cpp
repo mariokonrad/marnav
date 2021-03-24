@@ -16,7 +16,7 @@ std::unique_ptr<message> message_53::parse(const raw & data)
 {
 	check_size(data, SIZE);
 
-	std::unique_ptr<message> result = utils::make_unique<message_53>();
+	std::unique_ptr<message> result = std::make_unique<message_53>();
 	message_53 & msg = static_cast<message_53 &>(*result);
 
 	//  53  U0 VW

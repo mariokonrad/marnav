@@ -144,7 +144,6 @@
 
 #include <marnav/units/units.hpp>
 
-#include <marnav/utils/unique.hpp>
 #include <marnav/utils/mmsi_country.hpp>
 
 #include <cxxopts.hpp>
@@ -2117,7 +2116,7 @@ int main(int argc, char ** argv)
 		using namespace marnav;
 		using namespace marnav::io;
 		default_nmea_reader source{
-			utils::make_unique<serial>(global.config.port, global.config.speed,
+			std::make_unique<serial>(global.config.port, global.config.speed,
 				serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none)};
 		process([&](std::string & line) { return source.read_sentence(line); });
 	} else if (!global.config.input_string.empty()) {

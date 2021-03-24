@@ -1,6 +1,5 @@
 #include <marnav/nmea/vdm.hpp>
 #include <marnav/nmea/io.hpp>
-#include <marnav/utils/unique.hpp>
 #include <stdexcept>
 #include <string>
 

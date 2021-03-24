@@ -6,7 +6,6 @@
 #include <marnav/nmea/checksum.hpp>
 #include <marnav/io/default_nmea_reader.hpp>
 #include <marnav/io/serial.hpp>
-#include <marnav/utils/unique.hpp>
 #include <vector>
 
 int main(int, char **)
@@ -16,14 +15,14 @@ int main(int, char **)
 
 	// prepare destinations
 	std::vector<std::unique_ptr<serial>> destinations;
-	destinations.push_back(utils::make_unique<serial>("dev/ttyUSB1", serial::baud::baud_4800,
+	destinations.push_back(std::make_unique<serial>("dev/ttyUSB1", serial::baud::baud_4800,
 		serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none));
-	destinations.push_back(utils::make_unique<serial>("dev/ttyUSB2", serial::baud::baud_4800,
+	destinations.push_back(std::make_unique<serial>("dev/ttyUSB2", serial::baud::baud_4800,
 		serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none));
 
 	// open source device
 	default_nmea_reader source{
-		utils::make_unique<serial>("/dev/ttyUSB0", serial::baud::baud_4800,
+		std::make_unique<serial>("/dev/ttyUSB0", serial::baud::baud_4800,
 			serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none)};
 
 	std::string data;

@@ -14,7 +14,7 @@ std::unique_ptr<message> message_38::parse(const raw & data)
 {
 	check_size(data, SIZE);
 
-	return utils::make_unique<message_38>();
+	return std::make_unique<message_38>();
 }
 
 raw message_38::get_data() const

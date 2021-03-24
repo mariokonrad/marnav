@@ -15,7 +15,7 @@ std::unique_ptr<message> message_21::parse(const raw & data)
 {
 	check_size(data, SIZE);
 
-	std::unique_ptr<message> result = utils::make_unique<message_21>();
+	std::unique_ptr<message> result = std::make_unique<message_21>();
 	message_21 & msg = static_cast<message_21 &>(*result);
 
 	msg.distance_ = 0;

@@ -15,7 +15,7 @@ std::unique_ptr<message> message_24::parse(const raw & data)
 {
 	check_size(data, SIZE);
 
-	std::unique_ptr<message> result = utils::make_unique<message_24>();
+	std::unique_ptr<message> result = std::make_unique<message_24>();
 	message_24 & msg = static_cast<message_24 &>(*result);
 
 	msg.unit_ = static_cast<unit_type>(data[4]);

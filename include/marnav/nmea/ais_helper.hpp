@@ -3,6 +3,7 @@
 
 #include <marnav/nmea/vdm.hpp>
 #include <marnav/nmea/vdo.hpp>
+#include <optional>
 #include <stdexcept>
 #include <vector>
 
