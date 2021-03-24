@@ -1,6 +1,6 @@
 #!/bin/sh
 
-tag_last=`git tag | grep -E "[0-9]+\.[0-9]+\.[0-9]+" | tail -n 1`
+tag_last=`git tag --list --sort="version:refname" | tail -n 1`
 
 if [ $# -eq 0 ] ; then
 	echo ""
@@ -18,7 +18,7 @@ while true ; do
 			echo ""
 			echo "Commits between tags: ${tag_second_last} .. ${tag_last}"
 			echo ""
-			tag_second_last=`git tag | grep -E "[0-9]+\.[0-9]+\.[0-9]+" | tail -n 2 | head -n 1`
+			tag_second_last=`git tag --list --sort="version:refname" | tail -n 2 | head -n 1`
 			git log ${tag_second_last}..${tag_last} --pretty=format:"%s" | sort
 			shift
 			;;
