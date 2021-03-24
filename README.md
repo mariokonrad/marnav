@@ -1,7 +1,7 @@
 marnav
 ======
 
-Copyright (c) 2020 Mario Konrad (mario.konrad@gmx.net)
+Copyright (c) 2021 Mario Konrad (mario.konrad@gmx.net)
 
 ---
 
@@ -540,7 +540,7 @@ See also [LICENSE](LICENSE)
 (BSD)
 
 ```
-Copyright (c) 2020, Mario Konrad
+Copyright (c) 2021, Mario Konrad
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
