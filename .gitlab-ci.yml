@@ -6,9 +6,9 @@
     - cmake --build build --target test
     - bin/test-library.sh
 
-build:gcc-10.1.0:
+build:gcc-10.3.0:
   variables:
-    COMPILER: gcc-10.1.0
+    COMPILER: gcc-10.3.0
     BUILD_TYPE: Release
   image: mariokonrad/marnav:${COMPILER}
   <<: *build_definition
