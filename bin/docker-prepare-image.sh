@@ -3,41 +3,41 @@
 SCRIPT_BASE=$(dirname `readlink -f $0`)
 
 supported_compilers=(
-	"gcc-4.9.4"
-	"gcc-5.5.0"
-	"gcc-6.5.0"
-	"gcc-7.4.0"
-	"gcc-8.3.0"
-	"gcc-8.4.0"
-	"gcc-9.1.0"
-	"gcc-9.2.0"
-	"gcc-9.3.0"
-	"gcc-10.1.0"
-	"gcc-10.2.0"
-	"gcc-10.3.0"
-	"gcc-11.1.0"
-#	"clang-3.6.1"
-#	"clang-3.6.2"
-#	"clang-3.7.0"
-#	"clang-3.7.1"
-#	"clang-3.8.1"
-#	"clang-3.9.0"
-#	"clang-3.9.1"
-#	"clang-4.0.0"
-#	"clang-4.0.1"
-#	"clang-5.0.0"
-#	"clang-5.0.1"
-	"clang-5.0.2"
-	"clang-6.0.0"
-#	"clang-6.0.1"
-#	"clang-7.0.0"
-#	"clang-7.0.1"
-	"clang-7.1.0"
-	"clang-8.0.0"
-	"clang-9.0.0"
-	"clang-10.0.0"
-#	"clang-11.0.0"
-#	"clang-12.0.0"
+	"gcc-4.9.4;gcc:4.9.4"
+	"gcc-5.5.0;gcc:5.5.0"
+	"gcc-6.5.0;gcc:6.5.0"
+	"gcc-7.4.0;gcc:7.4.0"
+	"gcc-8.3.0;gcc:8.3.0"
+	"gcc-8.4.0;gcc:8.4.0"
+	"gcc-9.1.0;gcc:9.1.0"
+	"gcc-9.2.0;gcc:9.2.0"
+	"gcc-9.3.0;gcc:9.3.0"
+	"gcc-10.1.0;gcc:10.1.0"
+	"gcc-10.2.0;gcc:10.2.0"
+	"gcc-10.3.0;gcc:10.3.0"
+	"gcc-11.1.0;gcc:11.1.0"
+#	"clang-3.6.1;debian:buster"
+#	"clang-3.6.2;debian:buster"
+#	"clang-3.7.0;debian:buster"
+#	"clang-3.7.1;debian:buster"
+#	"clang-3.8.1;debian:buster"
+#	"clang-3.9.0;debian:buster"
+#	"clang-3.9.1;debian:buster"
+#	"clang-4.0.0;debian:buster"
+#	"clang-4.0.1;debian:buster"
+#	"clang-5.0.0;debian:buster"
+#	"clang-5.0.1;debian:buster"
+	"clang-5.0.2;debian:buster"
+	"clang-6.0.0;debian:buster"
+#	"clang-6.0.1;debian:buster"
+#	"clang-7.0.0;debian:buster"
+#	"clang-7.0.1;debian:buster"
+	"clang-7.1.0;debian:buster"
+	"clang-8.0.0;debian:buster"
+	"clang-9.0.0;debian:buster"
+	"clang-10.0.0;debian:buster"
+	"clang-11.0.0;ubuntu:20.04"
+	"clang-12.0.0;ubuntu:20.04"
 	)
 
 name=marnav
@@ -46,12 +46,14 @@ account=mariokonrad/
 function build_image()
 {
 	compiler=$1
+	base_image=$2
 	compiler_name=${compiler%-*}
 	compiler_version=${compiler#${compiler_name}-}
 
 	docker build \
 		--force-rm \
 		--build-arg compiler_version=${compiler_version} \
+		--build-arg base_image=${base_image} \
 		--tag ${account}${name}:${compiler} \
 		--file ${SCRIPT_BASE}/docker/Dockerfile.${compiler_name} \
 		${SCRIPT_BASE}/docker
@@ -63,7 +65,11 @@ function usage()
 	echo ""
 	echo "  supported compilers:"
 	for v in ${supported_compilers[@]} ; do
-		echo "   - $v"
+		IFS=";" read -r -a vec <<< "${v}"
+		local comp="${vec[0]}"
+		local dist="${vec[1]}"
+
+		echo "   - ${comp}  (${dist})"
 	done
 	echo ""
 }
@@ -74,8 +80,12 @@ if [ $# -ne 1 ] ; then
 fi
 
 for v in ${supported_compilers[@]} ; do
-	if [ "${v}" == "$1" ] ; then
-		build_image $1
+	IFS=";" read -r -a vec <<< "${v}"
+	comp="${vec[0]}"
+	dist="${vec[1]}"
+
+	if [ "${comp}" == "$1" ] ; then
+		build_image ${comp} ${dist}
 		exit 0
 	fi
 done

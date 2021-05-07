@@ -25,6 +25,8 @@ matrix:
     - env: COMPILER=clang-8.0.0  BUILD_TYPE=Release
     - env: COMPILER=clang-9.0.0  BUILD_TYPE=Release
     - env: COMPILER=clang-10.0.0 BUILD_TYPE=Release
+    - env: COMPILER=clang-11.0.0 BUILD_TYPE=Release
+    - env: COMPILER=clang-12.0.0 BUILD_TYPE=Release
     - env: COMPILER=gcc-10.3.0   BUILD_TYPE=Debug
 
 before_install:

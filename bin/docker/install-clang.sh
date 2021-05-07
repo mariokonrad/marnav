@@ -18,7 +18,7 @@ function get_url()
 		"10.0.0")
 			echo "${github_base_url}/llvmorg-${compiler_version}/clang+llvm-${compiler_version}-x86_64-linux-gnu-ubuntu-18.04.tar.xz"
 			;;
-		"11.0.0")
+		"11.0.0"|"12.0.0")
 			echo "${github_base_url}/llvmorg-${compiler_version}/clang+llvm-${compiler_version}-x86_64-linux-gnu-ubuntu-20.04.tar.xz"
 			;;
 		*)

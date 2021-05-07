@@ -1,4 +1,6 @@
-FROM debian:buster
+ARG base_image=debian:buster
+
+FROM ${base_image}
 LABEL maintainer="Mario Konrad <mario.konrad@gmx.net>"
 
 ARG compiler_version=9.0.0

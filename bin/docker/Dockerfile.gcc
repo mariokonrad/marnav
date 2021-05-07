@@ -1,6 +1,7 @@
 ARG compiler_version=9.3.0
+ARG base_image=gcc:${compiler_version}
 
-FROM gcc:${compiler_version}
+FROM ${base_image}
 LABEL maintainer="Mario Konrad <mario.konrad@gmx.net>"
 
 ARG cmake_version=3.18.1
