@@ -16,6 +16,7 @@ supported_compilers=(
 	"gcc-10.1.0"
 	"gcc-10.2.0"
 	"gcc-10.3.0"
+	"gcc-11.1.0"
 	"clang-5.0.2"
 	"clang-6.0.0"
 	"clang-7.1.0"

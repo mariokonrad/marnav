@@ -348,6 +348,7 @@ Compiler:
 - GCC 8
 - GCC 9
 - GCC 10
+- GCC 11
 - Clang 4
 - Clang 5
 - Clang 6
