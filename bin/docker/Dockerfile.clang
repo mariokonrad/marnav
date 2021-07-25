@@ -4,7 +4,7 @@ FROM ${base_image}
 LABEL maintainer="Mario Konrad <mario.konrad@gmx.net>"
 
 ARG compiler_version=9.0.0
-ARG cmake_version=3.18.1
+ARG cmake_version=3.21.0
 ARG boost_version=1.72.0
 
 RUN apt-get update \

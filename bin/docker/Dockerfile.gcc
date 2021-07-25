@@ -4,8 +4,8 @@ ARG base_image=gcc:${compiler_version}
 FROM ${base_image}
 LABEL maintainer="Mario Konrad <mario.konrad@gmx.net>"
 
-ARG cmake_version=3.18.1
-ARG boost_version=1.72.0
+ARG cmake_version=3.21.0
+ARG boost_version=1.75.0
 
 USER root
 RUN apt-get update \
