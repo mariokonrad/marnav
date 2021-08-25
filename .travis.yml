@@ -18,7 +18,7 @@ matrix:
     - env: COMPILER=gcc-8.3.0    BUILD_TYPE=Release
     - env: COMPILER=gcc-9.3.0    BUILD_TYPE=Release
     - env: COMPILER=gcc-10.3.0   BUILD_TYPE=Release
-    - env: COMPILER=gcc-11.1.0   BUILD_TYPE=Release
+    - env: COMPILER=gcc-11.2.0   BUILD_TYPE=Release
     - env: COMPILER=clang-5.0.2  BUILD_TYPE=Release
     - env: COMPILER=clang-6.0.0  BUILD_TYPE=Release
     - env: COMPILER=clang-7.1.0  BUILD_TYPE=Release
