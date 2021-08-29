@@ -10,8 +10,39 @@ TODO
 @todo Consider using std::chrono in nmea/time
 @todo Implement additional checks in NMEA sentences, wheather or not the received data is correct.
 @todo Implement NMEA sentence: ASD: Autopilot System Data
-@todo Implement NMEA sentence: DSI: DSC Transponder Initiate
-@todo Implement NMEA sentence: DSR: DSC Transponder Response
+@todo Implement NMEA sentence: DSI: DSC Transponder Initiate, same as DSC?
+@todo Implement NMEA sentence: DSR: DSC Transponder Response, same as DSC?
+@todo Implement NMEA sentence: DCN
+@todo Implement NMEA sentence: GDA
+@todo Implement NMEA sentence: GDF
+@todo Implement NMEA sentence: GLA
+@todo Implement NMEA sentence: GLF
+@todo Implement NMEA sentence: GLP
+@todo Implement NMEA sentence: GOA
+@todo Implement NMEA sentence: GOF
+@todo Implement NMEA sentence: GOP
+@todo Implement NMEA sentence: GXA
+@todo Implement NMEA sentence: GXF
+@todo Implement NMEA sentence: GXP
+@todo Implement NMEA sentence: HCC
+@todo Implement NMEA sentence: HEX
+@todo Implement NMEA sentence: IMA
+@todo Implement NMEA sentence: MHU
+@todo Implement NMEA sentence: MTA
+@todo Implement NMEA sentence: OLN
+@todo Implement NMEA sentence: TEP
+@todo Implement NMEA sentence: TRF
+@todo Implement NMEA sentence: VWE
+@todo Implement NMEA sentence: WDC
+@todo Implement NMEA sentence: WDR
+@todo Implement NMEA sentence: ZFI
+@todo Implement NMEA sentence: ZLZ
+@todo Implement NMEA sentence: ZPI
+@todo Implement NMEA sentence: ZTA
+@todo Implement NMEA sentence: ZTE
+@todo Implement NMEA sentence: ZTI
+@todo Implement NMEA sentence: ZWP
+@todo Implement NMEA sentence: ZZU
 @todo Implement comparison operators for NMEA sentences
 
 @todo Implement AIS message: Type 15: Interrogation
@@ -35,4 +66,7 @@ TODO
 @todo Implement SeaTalk message: Type 84: Compass heading Autopilot course and rudder position
 @todo Implement SeaTalk message: Type 85: navigation to waypoint information
 @todo Implement SeaTalk message: Type 88: Autopilot Parameter
+
+
+@todo Check https://www.nmea.org/Assets/100108_nmea_0183_sentences_not_recommended_for_new_designs.pdf
 
