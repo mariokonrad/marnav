@@ -1,21 +1,14 @@
 cmake_minimum_required(VERSION 3.11)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 project(marnav
 	VERSION 0.11.1
 	LANGUAGES CXX C
 	DESCRIPTION "Library for maritime navigation."
 	)
 
-### compiler check
-if(${CMAKE_CXX_COMPILER_ID} MATCHES "GNU|Clang")
-	message(STATUS "Compiler: ${CMAKE_CXX_COMPILER_ID}")
-else()
-	message(FATAL_ERROR "Unsupported compiler detected: ${CMAKE_CXX_COMPILER_ID}")
-endif()
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # compilation traits
 set(CMAKE_CXX_STANDARD 11)
@@ -33,10 +26,12 @@ option(ENABLE_EXAMPLES "Enable Examples" ON)
 option(ENABLE_TESTS "Enable Tests" ON)
 option(ENABLE_TOOLS "Enable Tools" ON)
 
-if(${ENABLE_STATIC})
-	set(BUILD_SHARED_LIBS FALSE)
-else()
-	set(BUILD_SHARED_LIBS TRUE)
+if(NOT DEFINED BUILD_SHARED_LIBS)
+	if(ENABLE_STATIC)
+		set(BUILD_SHARED_LIBS FALSE)
+	else()
+		set(BUILD_SHARED_LIBS TRUE)
+	endif()
 endif()
 
 # misc
