@@ -1,29 +1,30 @@
-#
-# this configuration requires clang-format 3.8 or higher
-#
-
-BasedOnStyle: Webkit
-
-# language
-Language: Cpp
-Standard: Cpp11
-Cpp11BracedListStyle: true
-
-# braces and indentation
-BreakBeforeBraces: Linux
-UseTab: Always
-TabWidth: 4
-IndentWidth: 4
-IndentCaseLabels: true
-NamespaceIndentation: None
-
-# pointer alignment
-DerivePointerAlignment: false
-PointerAlignment: Middle
-
-# misc
-ColumnLimit: 96
-MaxEmptyLinesToKeep: 1
-AlignEscapedNewlinesLeft: true
+﻿# clang-format-10
+---
+AccessModifierOffset: '-4'
+AlignAfterOpenBracket: DontAlign
+AlignEscapedNewlines: Left
+AlignOperands: 'false'
+AlignTrailingComments: 'false'
 AllowShortFunctionsOnASingleLine: Inline
-SortIncludes: false
+AllowShortLambdasOnASingleLine: All
+AlwaysBreakTemplateDeclarations: 'Yes'
+BreakBeforeBinaryOperators: All
+BreakBeforeBraces: Linux
+BreakConstructorInitializers: BeforeComma
+ColumnLimit: '96'
+Cpp11BracedListStyle: 'true'
+DerivePointerAlignment: 'false'
+FixNamespaceComments: 'false'
+IndentCaseLabels: 'true'
+IndentWidth: '4'
+Language: Cpp
+MaxEmptyLinesToKeep: '1'
+NamespaceIndentation: None
+PointerAlignment: Middle
+ReflowComments: 'false'
+SortIncludes: 'false'
+Standard: Cpp11
+TabWidth: '4'
+UseTab: Always
+
+...

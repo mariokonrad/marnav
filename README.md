@@ -364,7 +364,7 @@ Tools needed to build the library:
 
 Tools needed to develop the library:
 - git
-- clang-format 3.9
+- clang-format 10
 
 Tools needed to build the documentation:
 - doxygen

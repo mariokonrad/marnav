@@ -4,7 +4,7 @@ export SCRIPT_BASE=$(dirname `readlink -f $0`)
 export BASE=${SCRIPT_BASE}/..
 
 # search for a suitable clang-format version
-CLANG_FORMAT_BIN=`which clang-format-3.9`
+CLANG_FORMAT_BIN=`which clang-format-10`
 if [ ! -x ${CLANG_FORMAT_BIN} ] ; then
 	echo "error: clang-format not found. abort."
 	exit 1
