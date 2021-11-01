@@ -28,7 +28,6 @@ TODO
 @todo Implement NMEA sentence: HEX
 @todo Implement NMEA sentence: IMA
 @todo Implement NMEA sentence: MHU
-@todo Implement NMEA sentence: MTA
 @todo Implement NMEA sentence: OLN
 @todo Implement NMEA sentence: TEP
 @todo Implement NMEA sentence: TRF

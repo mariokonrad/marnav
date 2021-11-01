@@ -77,6 +77,7 @@ Supported sentences for NMEA-0183 (read and write):
 - MOB: Man over Board
 - MSK: Control for a Beacon Receiver
 - MSS: Beacon Receiver Status
+- MTA: Air Temperature
 - MTW: Mean Temperature of Water
 - MWD: Wind Direction and Speed
 - MWV: Wind Speed and Angle
@@ -523,6 +524,8 @@ A (non-complete) collection of resources from where information was gathered.
 - [GPS Forums](http://www.gps-forums.net)
 - [NMEA Datensaetze](http://www.nmea.de/nmea0183datensaetze.html)
 - [AIS VDM & VDO Message Decoder](http://www.maritec.co.za/tools/aisvdmvdodecoding/)
+- [AIS VDM & VDO Message Decoder](http://www.maritec.co.za/tools/aisvdmvdodecoding/)
+- [Code comments from library NMEA0183](https://github.com/SammyB428/NMEA0183)
 
 ---
 

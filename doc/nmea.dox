@@ -38,6 +38,7 @@ Supported sentences for NMEA-0183 (read and write):
 - \link marnav::nmea::msk \c MOB \endlink : Man over Board
 - \link marnav::nmea::msk \c MSK \endlink : Control for a Beacon Receiver
 - \link marnav::nmea::mss \c MSS \endlink : Beacon Receiver Status
+- \link marnav::nmea::mta \c MTA \endlink : Air Temperature
 - \link marnav::nmea::mtw \c MTW \endlink : Mean Temperature of Water
 - \link marnav::nmea::mwd \c MWD \endlink : Wind Direction and Speed
 - \link marnav::nmea::mwv \c MWV \endlink : Wind Speed and Angle

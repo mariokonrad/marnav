@@ -1,8 +1,8 @@
-#include <fstream>
-#include <string>
-#include <iostream>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/sentence.hpp>
+#include <fstream>
+#include <iostream>
+#include <string>
 
 namespace stackoverflow
 {
@@ -57,6 +57,7 @@ void process_nmea_sentence(
 	using namespace marnav;
 	using namespace std;
 
+	// TODO: use `to_name()`
 	switch (sentence->id()) {
 		case nmea::sentence_id::AAM:
 			cout << "AAM - Waypoint Arrival Alarm";
@@ -165,6 +166,9 @@ void process_nmea_sentence(
 			break;
 		case nmea::sentence_id::MWD:
 			cout << "MWD - Wind Directinon and Speed";
+			break;
+		case nmea::sentence_id::MTA:
+			cout << "MTA - Air Temperature";
 			break;
 		case nmea::sentence_id::MTW:
 			cout << "MTW - Mean Temperature of Water (II)";

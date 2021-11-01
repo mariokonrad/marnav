@@ -65,6 +65,7 @@
 #include <marnav/nmea/mob.hpp>
 #include <marnav/nmea/msk.hpp>
 #include <marnav/nmea/mss.hpp>
+#include <marnav/nmea/mta.hpp>
 #include <marnav/nmea/mtw.hpp>
 #include <marnav/nmea/mwd.hpp>
 #include <marnav/nmea/mwv.hpp>
@@ -258,7 +259,8 @@ static std::string trim(const std::string & s)
 /// @cond DEV
 namespace detail
 {
-template <typename T> static std::string render(const T & t)
+template <typename T>
+static std::string render(const T & t)
 {
 	return marnav::nmea::to_string(t);
 }
@@ -684,7 +686,8 @@ static std::string render(const marnav::units::temperature & t)
 	return render(t.get<marnav::units::celsius>());
 }
 
-template <typename T> static std::string render(const marnav::utils::optional<T> & t)
+template <typename T>
+static std::string render(const marnav::utils::optional<T> & t)
 {
 	if (!t)
 		return "-";
@@ -921,8 +924,9 @@ static void print_detail_bwc(const marnav::nmea::sentence * s)
 	print("Time UTC", render(t->get_time_utc()));
 	print("Bearing True", render(t->get_bearing_true()));
 	print("Bearing Magnetic", render(t->get_bearing_mag()));
-	print("Distance", fmt::sprintf("%s %s", render(t->get_distance()),
-						  render(marnav::nmea::unit::distance::nm)));
+	print("Distance",
+		fmt::sprintf(
+			"%s %s", render(t->get_distance()), render(marnav::nmea::unit::distance::nm)));
 	print("Waypoint", render(t->get_waypoint_id()));
 	print("Mode Indicator", render(t->get_mode_ind()));
 }
@@ -979,8 +983,9 @@ static void print_detail_glc(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::glc>(s);
 	print("GRI", render(t->get_gri()));
-	print("Master TOA", fmt::sprintf("DIFF:%s STATUS:%s", render(t->get_master().diff),
-							render(t->get_master().status)));
+	print("Master TOA",
+		fmt::sprintf(
+			"DIFF:%s STATUS:%s", render(t->get_master().diff), render(t->get_master().status)));
 	for (int i = 0; i < marnav::nmea::glc::max_differences; ++i) {
 		const auto & td = t->get_time_diff(i);
 		if (td) {
@@ -1039,8 +1044,9 @@ static void print_detail_rma(const marnav::nmea::sentence * s)
 	print("Time Diff B", render(t->get_time_diff_b()));
 	print("SOG [kn]", render(t->get_sog()));
 	print("Track made good", render(t->get_track()));
-	print("Magnetic Variation", fmt::sprintf("%s %s", render(t->get_magnetic_var()),
-									render(t->get_magnetic_var_hem())));
+	print("Magnetic Variation",
+		fmt::sprintf(
+			"%s %s", render(t->get_magnetic_var()), render(t->get_magnetic_var_hem())));
 }
 
 static void print_detail_mwv(const marnav::nmea::sentence * s)
@@ -1060,8 +1066,9 @@ static void print_detail_gsv(const marnav::nmea::sentence * s)
 	for (int i = 0; i < 4; ++i) {
 		const auto sat = t->get_sat(i);
 		if (sat) {
-			print("Sat", fmt::sprintf("PRN:%02u ELEV:%02u AZIMUTH:%03u SNR:%s", sat->prn,
-							 sat->elevation, sat->azimuth, render(sat->snr)));
+			print("Sat",
+				fmt::sprintf("PRN:%02u ELEV:%02u AZIMUTH:%03u SNR:%s", sat->prn, sat->elevation,
+					sat->azimuth, render(sat->snr)));
 		}
 	}
 }
@@ -1310,6 +1317,12 @@ static void print_detail_mss(const marnav::nmea::sentence * s)
 	print("Beacon Frequency [kHz]", render(t->get_beacon_frequency()));
 	print("Beacon Data Rate BPS", render(t->get_beacon_datarate()));
 	print("unknown", render(t->get_unknown()));
+}
+
+static void print_detail_mta(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::mta>(s);
+	print("Air Temperature", render(t->get_temperature()));
 }
 
 static void print_detail_mtw(const marnav::nmea::sentence * s)
@@ -1903,6 +1916,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(mob),
 		ADD_SENTENCE(msk),
 		ADD_SENTENCE(mss),
+		ADD_SENTENCE(mta),
 		ADD_SENTENCE(mtw),
 		ADD_SENTENCE(mwd),
 		ADD_SENTENCE(mwv),
@@ -2122,7 +2136,7 @@ int main(int argc, char ** argv)
 		process([&](std::string & line) { return source.read_sentence(line); });
 	} else if (!global.config.input_string.empty()) {
 		std::istringstream is(global.config.input_string);
-		process([&](std::string & line){ return !!std::getline(is, line); });
+		process([&](std::string & line) { return !!std::getline(is, line); });
 	} else {
 		std::cin.sync_with_stdio(false);
 		process([&](std::string & line) { return !!std::getline(std::cin, line); });

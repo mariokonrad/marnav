@@ -107,6 +107,7 @@ target_sources(marnav
 		marnav/nmea/mob.cpp
 		marnav/nmea/msk.cpp
 		marnav/nmea/mss.cpp
+		marnav/nmea/mta.cpp
 		marnav/nmea/mtw.cpp
 		marnav/nmea/mwd.cpp
 		marnav/nmea/mwv.cpp
