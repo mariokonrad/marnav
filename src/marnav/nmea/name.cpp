@@ -261,6 +261,8 @@ std::string to_name(sentence_id t)
 			return "SeaTalk raw data over NMEA";
 		case sentence_id::WDR:
 			return "Distance to Waypoint, Rumb line";
+		case sentence_id::WDC:
+			return "Distance to Waypoint";
 	}
 	return "-";
 }

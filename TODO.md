@@ -32,7 +32,6 @@ TODO
 @todo Implement NMEA sentence: TEP
 @todo Implement NMEA sentence: TRF
 @todo Implement NMEA sentence: VWE
-@todo Implement NMEA sentence: WDC
 @todo Implement NMEA sentence: ZFI
 @todo Implement NMEA sentence: ZLZ
 @todo Implement NMEA sentence: ZPI

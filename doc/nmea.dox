@@ -70,6 +70,7 @@ Supported sentences for NMEA-0183 (read and write):
 - \link marnav::nmea::vwr \c VWR \endlink : Relative Wind Speed and Angle.
 - \link marnav::nmea::vpw \c VPW \endlink : Speed - Measured Parallel to Wind
 - \link marnav::nmea::wcv \c WCV \endlink : Waypoint Closure Velocity
+- \link marnav::nmea::wdc \c WDC \endlink : Distance to Waypoint
 - \link marnav::nmea::wdr \c WDR \endlink : Distance to Waypoint, Rumb line
 - \link marnav::nmea::wnc \c WNC \endlink : Distance - Waypoint to Waypoint
 - \link marnav::nmea::wpl \c WPL \endlink : Waypoint Location
