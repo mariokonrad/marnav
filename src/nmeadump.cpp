@@ -98,6 +98,7 @@
 #include <marnav/nmea/vtg.hpp>
 #include <marnav/nmea/vwr.hpp>
 #include <marnav/nmea/wcv.hpp>
+#include <marnav/nmea/wdr.hpp>
 #include <marnav/nmea/wnc.hpp>
 #include <marnav/nmea/wpl.hpp>
 #include <marnav/nmea/xdr.hpp>
@@ -1420,6 +1421,13 @@ static void print_detail_wcv(const marnav::nmea::sentence * s)
 	print("Waypoint", render(t->get_waypoint_id()));
 }
 
+static void print_detail_wdr(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::wdr>(s);
+	print("Distance NM", render(t->get_distance()));
+	print("Waypoint", render(t->get_waypoint_id()));
+}
+
 static void print_detail_wnc(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::wnc>(s);
@@ -1947,6 +1955,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(vtg),
 		ADD_SENTENCE(vwr),
 		ADD_SENTENCE(wcv),
+		ADD_SENTENCE(wdr),
 		ADD_SENTENCE(wnc),
 		ADD_SENTENCE(wpl),
 		ADD_SENTENCE(xdr),

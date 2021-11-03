@@ -133,6 +133,7 @@ enum class sentence_id : uint32_t {
 	STC, ///< Time Constant
 	STR, ///< Tracking Reference
 	SYS, ///< Hybrid System Configuration
+	WDR, ///< Distance to Waypoint, Rumb line
 	VWT, ///< True Wind Speed and Angle
 
 	// vendor extensions

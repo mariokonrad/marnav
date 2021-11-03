@@ -154,6 +154,7 @@ target_sources(marnav
 		marnav/nmea/vwr.cpp
 		marnav/nmea/waypoint.cpp
 		marnav/nmea/wcv.cpp
+		marnav/nmea/wdr.cpp
 		marnav/nmea/wnc.cpp
 		marnav/nmea/wpl.cpp
 		marnav/nmea/xdr.cpp

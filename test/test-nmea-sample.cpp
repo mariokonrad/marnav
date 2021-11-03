@@ -260,6 +260,9 @@ void process_nmea_sentence(
 		case nmea::sentence_id::WCV:
 			cout << "WCV - Waypoint Closure Velocity";
 			break;
+		case nmea::sentence_id::WDR:
+			cout << "WDR - Distance to Waypoint, Rumb line";
+			break;
 		case nmea::sentence_id::WNC:
 			cout << "WNC - Distance - Waypoint to Waypoint";
 			break;

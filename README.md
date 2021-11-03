@@ -109,6 +109,7 @@ Supported sentences for NMEA-0183 (read and write):
 - VWR: Relative Wind Speed and Angle.
 - VPW: Speed - Measured Parallel to Wind
 - WCV: Waypoint Closure Velocity
+- WDR: Distance to Waypoint, Rumb line
 - WNC: Distance - Waypoint to Waypoint
 - WPL: Waypoint Location
 - XDR: Transducer Measurement
