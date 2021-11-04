@@ -105,9 +105,10 @@ Supported sentences for NMEA-0183 (read and write):
 - VDR: Set and Drift
 - VHW: Water speed and heading
 - VLW: Distance Traveled through Water
-- VTG: Track made good and Ground speed
-- VWR: Relative Wind Speed and Angle.
 - VPW: Speed - Measured Parallel to Wind
+- VTG: Track made good and Ground speed
+- VWE: Wind Track Efficiency
+- VWR: Relative Wind Speed and Angle.
 - WCV: Waypoint Closure Velocity
 - WDC: Distance to Waypoint
 - WDR: Distance to Waypoint, Rumb line

@@ -72,6 +72,7 @@
 #include <marnav/nmea/vlw.hpp>
 #include <marnav/nmea/vpw.hpp>
 #include <marnav/nmea/vtg.hpp>
+#include <marnav/nmea/vwe.hpp>
 #include <marnav/nmea/vwr.hpp>
 #include <marnav/nmea/wcv.hpp>
 #include <marnav/nmea/wdc.hpp>
@@ -137,11 +138,11 @@ static const std::vector<entry> known_sentences = {
 	REGISTER_SENTENCE(tpt), REGISTER_SENTENCE(ttm), REGISTER_SENTENCE(vbw),
 	REGISTER_SENTENCE(vdm), REGISTER_SENTENCE(vdo), REGISTER_SENTENCE(vdr),
 	REGISTER_SENTENCE(vhw), REGISTER_SENTENCE(vlw), REGISTER_SENTENCE(vpw),
-	REGISTER_SENTENCE(vtg), REGISTER_SENTENCE(vwr), REGISTER_SENTENCE(wcv),
-	REGISTER_SENTENCE(wdc), REGISTER_SENTENCE(wdr), REGISTER_SENTENCE(wnc),
-	REGISTER_SENTENCE(wpl), REGISTER_SENTENCE(xdr), REGISTER_SENTENCE(xte),
-	REGISTER_SENTENCE(xtr), REGISTER_SENTENCE(zda), REGISTER_SENTENCE(zdl),
-	REGISTER_SENTENCE(zfo), REGISTER_SENTENCE(ztg),
+	REGISTER_SENTENCE(vtg), REGISTER_SENTENCE(vwe), REGISTER_SENTENCE(vwr),
+	REGISTER_SENTENCE(wcv), REGISTER_SENTENCE(wdc), REGISTER_SENTENCE(wdr),
+	REGISTER_SENTENCE(wnc), REGISTER_SENTENCE(wpl), REGISTER_SENTENCE(xdr),
+	REGISTER_SENTENCE(xte), REGISTER_SENTENCE(xtr), REGISTER_SENTENCE(zda),
+	REGISTER_SENTENCE(zdl), REGISTER_SENTENCE(zfo), REGISTER_SENTENCE(ztg),
 
 	// vendor extensions
 	REGISTER_SENTENCE(pgrme), REGISTER_SENTENCE(pgrmm), REGISTER_SENTENCE(pgrmz),

@@ -125,6 +125,7 @@ target_sources(testrunner
 		nmea/Test_nmea_vlw.cpp
 		nmea/Test_nmea_vpw.cpp
 		nmea/Test_nmea_vtg.cpp
+		nmea/Test_nmea_vwe.cpp
 		nmea/Test_nmea_vwr.cpp
 		nmea/Test_nmea_waypoint.cpp
 		nmea/Test_nmea_wcv.cpp

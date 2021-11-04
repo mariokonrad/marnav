@@ -135,6 +135,8 @@ std::string to_name(sentence_id t)
 			return "Speed - Measured Parallel to Wind";
 		case sentence_id::VTG:
 			return "Track made good and Ground speed";
+		case sentence_id::VWE:
+			return "Wind track Efficiency";
 		case sentence_id::VWR:
 			return "Relative Wind Speed and Angle (II)";
 		case sentence_id::WCV:

@@ -67,6 +67,7 @@ Supported sentences for NMEA-0183 (read and write):
 - \link marnav::nmea::vhw \c VHW \endlink : Water speed and heading
 - \link marnav::nmea::vlw \c VLW \endlink : Distance Traveled through Water
 - \link marnav::nmea::vtg \c VTG \endlink : Track made good and Ground speed
+- \link marnav::nmea::vwe \c VWE \endlink : Wind Track Efficiency
 - \link marnav::nmea::vwr \c VWR \endlink : Relative Wind Speed and Angle.
 - \link marnav::nmea::vpw \c VPW \endlink : Speed - Measured Parallel to Wind
 - \link marnav::nmea::wcv \c WCV \endlink : Waypoint Closure Velocity

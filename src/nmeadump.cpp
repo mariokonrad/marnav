@@ -96,6 +96,7 @@
 #include <marnav/nmea/vlw.hpp>
 #include <marnav/nmea/vpw.hpp>
 #include <marnav/nmea/vtg.hpp>
+#include <marnav/nmea/vwe.hpp>
 #include <marnav/nmea/vwr.hpp>
 #include <marnav/nmea/wcv.hpp>
 #include <marnav/nmea/wdc.hpp>
@@ -1406,6 +1407,12 @@ static void print_detail_stalk(const marnav::nmea::sentence * s)
 	print("Data", render(t->get_data()));
 }
 
+static void print_detail_vwe(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vwe>(s);
+	print("Efficiency", render(t->get_efficiency()));
+}
+
 static void print_detail_vwr(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::vwr>(s);
@@ -1961,6 +1968,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(vlw),
 		ADD_SENTENCE(vpw),
 		ADD_SENTENCE(vtg),
+		ADD_SENTENCE(vwe),
 		ADD_SENTENCE(vwr),
 		ADD_SENTENCE(wcv),
 		ADD_SENTENCE(wdc),

@@ -302,6 +302,9 @@ void process_nmea_sentence(
 		case nmea::sentence_id::VWT:
 			cout << "VWT - wind true";
 			break;
+		case nmea::sentence_id::VWE:
+			cout << "VWE - Wind track Efficiency";
+			break;
 		case nmea::sentence_id::VDM:
 			cout << "VDM - AIS";
 			break;
