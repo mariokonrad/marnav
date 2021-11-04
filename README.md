@@ -43,9 +43,9 @@ Features
 ### NMEA-0183
 
 Supported sentences for NMEA-0183 (read and write):
+
 - AAM: Waypoint Arrival Alarm
 - ALM: GPS Almanac Data
-- APA: Autopilot Sentence "A"
 - APB: Autopilot Sentence "B"
 - BEC: Bearing and Distance to Waypoint
 - BOD: Bearing - Waypoint to Waypoint
@@ -67,7 +67,6 @@ Supported sentences for NMEA-0183 (read and write):
 - GSA: Geographic Position - Latitude/Longitude
 - GST: GPS Pseudorange Noise Statistics
 - GSV: Satellites in view
-- GTD: Geographic Location in Time Differences
 - HDG: Heading - Deviation & Variation
 - HDT: Heading - True
 - HFB: Trawl Headrope to Footrope and Bottom
@@ -77,7 +76,6 @@ Supported sentences for NMEA-0183 (read and write):
 - MOB: Man over Board
 - MSK: Control for a Beacon Receiver
 - MSS: Beacon Receiver Status
-- MTA: Air Temperature
 - MTW: Mean Temperature of Water
 - MWD: Wind Direction and Speed
 - MWV: Wind Speed and Angle
@@ -107,8 +105,6 @@ Supported sentences for NMEA-0183 (read and write):
 - VLW: Distance Traveled through Water
 - VPW: Speed - Measured Parallel to Wind
 - VTG: Track made good and Ground speed
-- VWE: Wind Track Efficiency
-- VWR: Relative Wind Speed and Angle.
 - WCV: Waypoint Closure Velocity
 - WDC: Distance to Waypoint
 - WDR: Distance to Waypoint, Rumb line
@@ -122,24 +118,34 @@ Supported sentences for NMEA-0183 (read and write):
 - ZFO: UTC & Time from origin Waypoint
 - ZTG: UTC & Time to Destination Waypoint
 
-Obsolete (according to the standard) but implemented:
+Obsolete (according to [NMEA Revealed]) but implemented:
+
+- APA: Autopilot Sentence "A"
 - DBK: Depth Below Keel
+- GTD: Geographic Location in Time Differences
 - HDM: Heading - Magnetic (obsolete as of 2009)
+- MTA: Air Temperature
 - R00: Waypoints in active route
+- VWE: Wind Track Efficiency
+- VWR: Relative Wind Speed and Angle.
+- ZFI: Elapsed time since point of interest
 
 Vendor Extensions:
+
 - PGRME: Garmin Estimated Error
 - PGRMM: Garmin Map Datum
 - PGRMZ: Garmin Altitude Information
 - STALK: SeaTalk Raw Format
 
 Miscellaneous:
+
 - Tag Block Support (generic for all sentences)
 
 
 ### AIS
 
 Supported messages for AIS (decode and encode):
+
 - Type 01: Position Report Class A
 - Type 02: Position Report Class A (Assigned Schedule)
 - Type 03: Position Report Class A (Response to Interrogation)
@@ -170,6 +176,7 @@ Supported payload of binary message 08:
 ### SeaTalk
 
 Suported messages for SeaTalk (decode and encode):
+
 - Type 00: depth below transducer
 - Type 01: equipment id
 - Type 05: Engine RPM and PITCH

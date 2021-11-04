@@ -108,6 +108,7 @@
 #include <marnav/nmea/xtr.hpp>
 #include <marnav/nmea/zda.hpp>
 #include <marnav/nmea/zdl.hpp>
+#include <marnav/nmea/zfi.hpp>
 #include <marnav/nmea/zfo.hpp>
 #include <marnav/nmea/ztg.hpp>
 #include <marnav/nmea/pgrme.hpp>
@@ -1100,6 +1101,14 @@ static void print_detail_zdl(const marnav::nmea::sentence * s)
 	print("Type of Point", render(t->get_type_point()));
 }
 
+static void print_detail_zfi(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::zfi>(s);
+	print("Time UTC", render(t->get_time_utc()));
+	print("Elapsed Time", render(t->get_time_elapsed()));
+	print("Origin Waypoint", render(t->get_waypoint_id()));
+}
+
 static void print_detail_zfo(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::zfo>(s);
@@ -1980,6 +1989,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(xtr),
 		ADD_SENTENCE(zda),
 		ADD_SENTENCE(zdl),
+		ADD_SENTENCE(zfi),
 		ADD_SENTENCE(zfo),
 		ADD_SENTENCE(ztg),
 

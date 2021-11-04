@@ -138,6 +138,7 @@ target_sources(testrunner
 		nmea/Test_nmea_xtr.cpp
 		nmea/Test_nmea_zda.cpp
 		nmea/Test_nmea_zdl.cpp
+		nmea/Test_nmea_zfi.cpp
 		nmea/Test_nmea_zfo.cpp
 		nmea/Test_nmea_ztg.cpp
 		seatalk/Test_seatalk_message.cpp

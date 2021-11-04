@@ -164,6 +164,7 @@ target_sources(marnav
 		marnav/nmea/xtr.cpp
 		marnav/nmea/zda.cpp
 		marnav/nmea/zdl.cpp
+		marnav/nmea/zfi.cpp
 		marnav/nmea/zfo.cpp
 		marnav/nmea/ztg.cpp
 		marnav/seatalk/message.cpp

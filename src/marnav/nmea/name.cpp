@@ -265,6 +265,8 @@ std::string to_name(sentence_id t)
 			return "Distance to Waypoint, Rumb line";
 		case sentence_id::WDC:
 			return "Distance to Waypoint";
+		case sentence_id::ZFI:
+			return "Elapsed time since point of interest";
 	}
 	return "-";
 }
