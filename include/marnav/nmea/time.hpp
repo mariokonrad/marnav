@@ -9,7 +9,8 @@ namespace nmea
 {
 
 /// Base class for time related classes.
-template <class Traits> class time_base
+template <class Traits>
+class time_base
 {
 public:
 	time_base(const time_base &) = default;
@@ -34,10 +35,17 @@ public:
 	/// Returns the milliseconds component.
 	uint32_t milliseconds() const { return ms_; }
 
-	template <class T> bool operator==(const time_base<T> & other) noexcept
+	template <class T>
+	bool operator==(const time_base<T> & other) const noexcept
 	{
 		return (this == &other)
 			|| ((h_ == other.h_) && (m_ == other.m_) && (s_ == other.s_) && (ms_ == other.ms_));
+	}
+
+	template <class T>
+	bool operator!=(const time_base<T> & other) const noexcept
+	{
+		return !(*this == other);
 	}
 
 private:

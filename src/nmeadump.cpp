@@ -110,6 +110,7 @@
 #include <marnav/nmea/zdl.hpp>
 #include <marnav/nmea/zfi.hpp>
 #include <marnav/nmea/zfo.hpp>
+#include <marnav/nmea/zte.hpp>
 #include <marnav/nmea/ztg.hpp>
 #include <marnav/nmea/pgrme.hpp>
 #include <marnav/nmea/pgrmm.hpp>
@@ -1117,6 +1118,14 @@ static void print_detail_zfo(const marnav::nmea::sentence * s)
 	print("Origin Waypoint", render(t->get_waypoint_id()));
 }
 
+static void print_detail_zte(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::zte>(s);
+	print("Time UTC", render(t->get_time_utc()));
+	print("Time Remaining", render(t->get_time_remaining()));
+	print("Destination Waypoint", render(t->get_waypoint_id()));
+}
+
 static void print_detail_ztg(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::ztg>(s);
@@ -1991,6 +2000,7 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(zdl),
 		ADD_SENTENCE(zfi),
 		ADD_SENTENCE(zfo),
+		ADD_SENTENCE(zte),
 		ADD_SENTENCE(ztg),
 
 		// proprietary

@@ -129,6 +129,7 @@ Obsolete (according to [NMEA Revealed]) but implemented:
 - VWE: Wind Track Efficiency
 - VWR: Relative Wind Speed and Angle.
 - ZFI: Elapsed time since point of interest
+- ZTE: UTC & Estimated time to event
 
 Vendor Extensions:
 
