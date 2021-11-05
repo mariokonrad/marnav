@@ -33,7 +33,6 @@ TODO
 @todo Implement NMEA sentence: TRF
 @todo Implement NMEA sentence: ZLZ
 @todo Implement NMEA sentence: ZPI
-@todo Implement NMEA sentence: ZTA
 @todo Implement NMEA sentence: ZTI
 @todo Implement NMEA sentence: ZWP
 @todo Implement NMEA sentence: ZZU

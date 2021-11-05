@@ -138,7 +138,8 @@ enum class sentence_id : uint32_t {
 	WDR, ///< Distance to Waypoint, Rumb line
 	VWT, ///< True Wind Speed and Angle
 	ZFI, ///< Elapsed time from point of interest
-	ZTE, ///< Estimated time to event
+	ZTA, ///< Estimated arrival time at point of interest
+	ZTE, ///< Estimated remaining time to event
 
 	// vendor extensions
 

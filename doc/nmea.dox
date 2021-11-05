@@ -82,7 +82,8 @@ Supported sentences for NMEA-0183 (read and write):
 - \link marnav::nmea::zdl \c ZDL \endlink : Time and Distance to Variable Point
 - \link marnav::nmea::zfi \c ZFI \endlink : Elapsed time from point of interest
 - \link marnav::nmea::zfo \c ZFO \endlink : UTC & Time from origin Waypoint
-- \link marnav::nmea::zte \c ZTE \endlink : UTC & Estimated time to event
+- \link marnav::nmea::zta \c ZTA \endlink : UTC & Estimated arrival at point of interest
+- \link marnav::nmea::zte \c ZTE \endlink : UTC & Estimated remaining time to event
 - \link marnav::nmea::ztg \c ZTG \endlink : UTC & Time to Destination Waypoint
 
 Obsolete (according to the standard) but implemented:
