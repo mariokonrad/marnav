@@ -39,6 +39,7 @@ supported_compilers=(
 	"clang-10.0.0;debian:buster"
 	"clang-11.0.0;ubuntu:20.04"
 	"clang-12.0.0;ubuntu:20.04"
+	"clang-13.0.0;ubuntu:20.04"
 	)
 
 name=marnav
