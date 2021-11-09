@@ -3,7 +3,6 @@
 
 namespace
 {
-
 using namespace marnav;
 
 class Test_nmea_time : public ::testing::Test
@@ -16,6 +15,27 @@ TEST_F(Test_nmea_time, explicit_construction)
 	EXPECT_ANY_THROW((nmea::time{0, 60, 0, 0}));
 	EXPECT_ANY_THROW((nmea::time{0, 0, 60, 0}));
 	EXPECT_ANY_THROW((nmea::time{0, 0, 0, 1000}));
+}
+
+TEST_F(Test_nmea_time, copy_construction)
+{
+	const auto t = nmea::time{12, 34, 56};
+
+	const auto v = nmea::time(t);
+
+	EXPECT_EQ(t, v);
+}
+
+TEST_F(Test_nmea_time, move_construction)
+{
+	const auto v = nmea::time(std::move(nmea::time{12, 34, 56}));
+
+	EXPECT_EQ(nmea::time(12, 34, 56), v);
+}
+
+TEST_F(Test_nmea_time, default_construction)
+{
+	EXPECT_EQ(nmea::time(0, 0, 0, 0), nmea::time{});
 }
 
 TEST_F(Test_nmea_time, hour)

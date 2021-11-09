@@ -14,6 +14,11 @@ class time_base
 {
 public:
 	time_base(const time_base &) = default;
+	time_base & operator=(const time_base &) = default;
+
+	time_base(time_base &&) = default;
+	time_base & operator=(time_base &&) = default;
+
 	explicit time_base(uint32_t h = 0, uint32_t m = 0, uint32_t s = 0, uint32_t ms = 0)
 		: h_(h)
 		, m_(m)
@@ -24,16 +29,16 @@ public:
 	}
 
 	/// Returns the hour component.
-	uint32_t hour() const { return h_; }
+	uint32_t hour() const noexcept { return h_; }
 
 	/// Returns the minutes component.
-	uint32_t minutes() const { return m_; }
+	uint32_t minutes() const noexcept { return m_; }
 
 	/// Returns the seconds component.
-	uint32_t seconds() const { return s_; }
+	uint32_t seconds() const noexcept { return s_; }
 
 	/// Returns the milliseconds component.
-	uint32_t milliseconds() const { return ms_; }
+	uint32_t milliseconds() const noexcept { return ms_; }
 
 	template <class T>
 	bool operator==(const time_base<T> & other) const noexcept
@@ -49,10 +54,10 @@ public:
 	}
 
 private:
-	uint32_t h_; // hour: 0..23
-	uint32_t m_; // minute: 0..59
-	uint32_t s_; // second: 0..59
-	uint32_t ms_; // millisecond: 0..999
+	uint32_t h_ = 0; // hour: 0..23
+	uint32_t m_ = 0; // minute: 0..59
+	uint32_t s_ = 0; // second: 0..59
+	uint32_t ms_ = 0; // millisecond: 0..999
 };
 
 /// Traits to check for the correctness of time.
@@ -81,13 +86,6 @@ class time : public time_base<trait_time>
 public:
 	using time_base::time_base;
 
-	time()
-		: time_base(0, 0, 0, 0)
-	{
-	}
-
-	time(const time &) = default;
-
 	static time parse(const std::string & str);
 };
 
@@ -105,13 +103,6 @@ class duration : public time_base<trait_duration>
 {
 public:
 	using time_base::time_base;
-
-	duration()
-		: time_base(0, 0, 0, 0)
-	{
-	}
-
-	duration(const duration &) = default;
 
 	static duration parse(const std::string & str);
 };
