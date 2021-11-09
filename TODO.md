@@ -31,7 +31,6 @@ TODO
 @todo Implement NMEA sentence: OLN
 @todo Implement NMEA sentence: TEP
 @todo Implement NMEA sentence: TRF
-@todo Implement NMEA sentence: ZLZ
 @todo Implement NMEA sentence: ZTI
 @todo Implement NMEA sentence: ZWP
 @todo Implement NMEA sentence: ZZU

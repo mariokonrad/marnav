@@ -125,11 +125,12 @@ Obsolete (according to [NMEA Revealed]) but implemented:
 - HDM: Heading - Magnetic (obsolete as of 2009)
 - MTA: Air Temperature
 - R00: Waypoints in active route
-- WDC: Distance to Waypoint
-- WDR: Distance to Waypoint, Rumb line
 - VWE: Wind Track Efficiency
 - VWR: Relative Wind Speed and Angle.
+- WDC: Distance to Waypoint
+- WDR: Distance to Waypoint, Rumb line
 - ZFI: Elapsed time since point of interest
+- ZLZ: Time of Day
 - ZTA: UTC & Estimated arrival time at point of interest
 - ZTE: UTC & Estimated remaining time to event
 

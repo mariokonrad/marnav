@@ -5,7 +5,6 @@
 
 namespace
 {
-
 using namespace marnav;
 
 class Test_nmea_zpi : public ::testing::Test
@@ -54,7 +53,7 @@ TEST_F(Test_nmea_zpi, set_time_utc)
 	EXPECT_STREQ("$GPZPI,123456,000000,*7F", nmea::to_string(zpi).c_str());
 }
 
-TEST_F(Test_nmea_zpi, set_time_remaining)
+TEST_F(Test_nmea_zpi, set_time_arrival)
 {
 	nmea::zpi zpi;
 	zpi.set_time_arrival(nmea::time{12, 34, 56});
@@ -70,4 +69,3 @@ TEST_F(Test_nmea_zpi, set_waypoint_id)
 	EXPECT_STREQ("$GPZPI,000000,000000,POINT1*05", nmea::to_string(zpi).c_str());
 }
 }
-

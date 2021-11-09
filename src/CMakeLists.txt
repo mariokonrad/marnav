@@ -166,6 +166,7 @@ target_sources(marnav
 		marnav/nmea/zdl.cpp
 		marnav/nmea/zfi.cpp
 		marnav/nmea/zfo.cpp
+		marnav/nmea/zlz.cpp
 		marnav/nmea/zpi.cpp
 		marnav/nmea/zta.cpp
 		marnav/nmea/zte.cpp

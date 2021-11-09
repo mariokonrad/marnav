@@ -90,6 +90,7 @@ Obsolete but implemented:
 - \link marnav::nmea::wdc \c WDC \endlink : Distance to Waypoint
 - \link marnav::nmea::wdr \c WDR \endlink : Distance to Waypoint, Rumb line
 - \link marnav::nmea::zfi \c ZFI \endlink : Elapsed time from point of interest
+- \link marnav::nmea::zlz \c ZLZ \endlink : Time of Day
 - \link marnav::nmea::zta \c ZTA \endlink : UTC & Estimated arrival at point of interest
 - \link marnav::nmea::zte \c ZTE \endlink : UTC & Estimated remaining time to event
 

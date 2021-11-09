@@ -273,6 +273,8 @@ std::string to_name(sentence_id t)
 			return "Estimated arrival time at point of interest";
 		case sentence_id::ZPI:
 			return "Arrival time at point of interest";
+		case sentence_id::ZLZ:
+			return "Time of Day";
 	}
 	return "-";
 }

@@ -140,6 +140,7 @@ target_sources(testrunner
 		nmea/Test_nmea_zdl.cpp
 		nmea/Test_nmea_zfi.cpp
 		nmea/Test_nmea_zfo.cpp
+		nmea/Test_nmea_zlz.cpp
 		nmea/Test_nmea_zpi.cpp
 		nmea/Test_nmea_zta.cpp
 		nmea/Test_nmea_zte.cpp
