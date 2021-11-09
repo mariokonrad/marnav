@@ -17,7 +17,7 @@ namespace io
 class seatalk_reader
 {
 public:
-	virtual ~seatalk_reader();
+	virtual ~seatalk_reader() = default;
 
 	seatalk_reader() = delete;
 	seatalk_reader(std::unique_ptr<device> &&);

@@ -55,7 +55,7 @@ inline IntType float_cast(FloatType value)
 	if ((std::numeric_limits<IntType>::digits < std::numeric_limits<FloatType>::digits)
 		&& (value > static_cast<FloatType>(std::numeric_limits<IntType>::max())
 			|| value < static_cast<FloatType>(std::numeric_limits<IntType>::min())))
-		throw std::range_error {"invalid conversion from floating point to integral type"};
+		throw std::range_error{"invalid conversion from floating point to integral type"};
 
 	return static_cast<IntType>(value);
 }

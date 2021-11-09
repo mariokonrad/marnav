@@ -110,8 +110,8 @@ TEST_F(Test_math_vector, vec2_phi)
 
 	for (auto test : TESTS) {
 		const vec2 v = vec2::make_from_polar(1.0, test);
-		EXPECT_NEAR(test * pi / 180.0, v.phi(), 1e-7) << "test:" << test << ", v=(" << v[0]
-													  << ", " << v[1] << ")";
+		EXPECT_NEAR(test * pi / 180.0, v.phi(), 1e-7)
+			<< "test:" << test << ", v=(" << v[0] << ", " << v[1] << ")";
 	}
 }
 
@@ -122,8 +122,8 @@ TEST_F(Test_math_vector, vec2_phi_deg)
 
 	for (auto test : TESTS) {
 		const vec2 v = vec2::make_from_polar(1.0, test);
-		EXPECT_NEAR(test, v.phi_deg(), 1e-7) << "test:" << test << ", v=(" << v[0] << ", "
-											 << v[1] << ")";
+		EXPECT_NEAR(test, v.phi_deg(), 1e-7)
+			<< "test:" << test << ", v=(" << v[0] << ", " << v[1] << ")";
 	}
 }
 

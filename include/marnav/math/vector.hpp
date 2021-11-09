@@ -16,7 +16,8 @@ namespace detail
 {
 
 /// Returns the dot product for the specified vector.
-template <typename T, typename
+template <typename T,
+	typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
 typename T::value_type dot_vector(const T & a, const T & b)
 {
@@ -29,7 +30,8 @@ typename T::value_type dot_vector(const T & a, const T & b)
 }
 
 /// Returns true if both vectors are the same.
-template <typename T, typename
+template <typename T,
+	typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
 bool equal_vector(const T & a, const T & b)
 {
@@ -45,7 +47,8 @@ bool equal_vector(const T & a, const T & b)
 }
 
 /// Normalizes the specified vector the desired length.
-template <typename T, typename
+template <typename T,
+	typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
 void normalize_vector(T & a, typename T::value_type len)
 {
@@ -435,8 +438,8 @@ public:
 
 	vector_n(vector_n &&) noexcept = default;
 
-	template <typename ... Args>
-	vector_n(Args ... args) noexcept
+	template <typename... Args>
+	vector_n(Args... args) noexcept
 		: a{args...}
 	{
 		static_assert(sizeof...(args) == N, "invalid number of arguments");
@@ -521,12 +524,14 @@ using vec4 = vector4<double>;
 /// @{
 /// Returns the angle between the two specified vectors in degrees.
 
-template <typename T> T angle_between(const vector2<T> & v0, const vector2<T> & v1)
+template <typename T>
+T angle_between(const vector2<T> & v0, const vector2<T> & v1)
 {
 	return acos(v0.dot(v1) / (v0.length() * v1.length()));
 }
 
-template <typename T> T angle_between(const vector3<T> & p0, const vector3<T> & p1)
+template <typename T>
+T angle_between(const vector3<T> & p0, const vector3<T> & p1)
 {
 	return acos(p0.dot(p1) / (p0.length() * p1.length()));
 }
@@ -536,7 +541,8 @@ template <typename T> T angle_between(const vector3<T> & p0, const vector3<T> & 
 /// @{
 /// Returns a newly constructed vector which is a projection of \c v0 onto \c v1.
 
-template <typename T> vector2<T> project_onto(const vector2<T> & v0, const vector2<T> & v1)
+template <typename T>
+vector2<T> project_onto(const vector2<T> & v0, const vector2<T> & v1)
 {
 	typename vector2<T>::value_type len = v1.length2();
 	if (is_zero(len))
@@ -544,7 +550,8 @@ template <typename T> vector2<T> project_onto(const vector2<T> & v0, const vecto
 	return ((v0 * v1) / len) * v1;
 }
 
-template <typename T> vector3<T> project_onto(const vector3<T> & v0, const vector3<T> & v1)
+template <typename T>
+vector3<T> project_onto(const vector3<T> & v0, const vector3<T> & v1)
 {
 	typename vector3<T>::value_type len = v1.length2();
 	if (is_zero(len))
@@ -561,7 +568,8 @@ template <typename T> vector3<T> project_onto(const vector3<T> & v0, const vecto
 /// @param[inout] v The vector to nullify
 /// @return The nullified vector
 ///
-template <typename T, typename
+template <typename T,
+	typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
 T & nullify(T & v)
 {
@@ -577,7 +585,8 @@ T & nullify(T & v)
 /// @param[in] v The vector to nullify, will not be modified
 /// @return A nullified vector
 ///
-template <typename T, typename
+template <typename T,
+	typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
 T nullify(const T & v)
 {

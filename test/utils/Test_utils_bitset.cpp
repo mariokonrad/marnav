@@ -654,7 +654,8 @@ TEST_F(Test_utils_bitset, uint8_assignment)
 	EXPECT_STREQ("00000100000000000000000000000000", to_string(copy).c_str());
 }
 
-template <class T> bitset<uint8_t> get_test_data(unsigned int size)
+template <class T>
+bitset<uint8_t> get_test_data(unsigned int size)
 {
 	bitset<T> result(size);
 

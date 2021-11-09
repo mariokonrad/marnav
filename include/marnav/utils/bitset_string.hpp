@@ -15,7 +15,8 @@ namespace utils
 ///
 /// @param[in] bits The bits to render.
 /// @return String representing the bitset as continous stream of '0' and '1'.
-template <class T> std::string to_string(const bitset<T> & bits)
+template <class T>
+std::string to_string(const bitset<T> & bits)
 {
 	std::string result;
 	result.reserve(bits.size());

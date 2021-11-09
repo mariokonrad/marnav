@@ -19,9 +19,9 @@ constexpr bool operator==(
 	return v1.value() == v2.value();
 }
 
-template <class T, class VT, typename std::enable_if<std::is_floating_point<VT>::value
-									 && !std::numeric_limits<VT>::is_iec559,
-								 int>::type
+template <class T, class VT,
+	typename std::enable_if<
+		std::is_floating_point<VT>::value && !std::numeric_limits<VT>::is_iec559, int>::type
 	= 0>
 constexpr bool operator==(
 	const basic_quantity<T, VT> & v1, const basic_quantity<T, VT> & v2) noexcept
@@ -29,9 +29,9 @@ constexpr bool operator==(
 	return math::is_same(v1.value(), v2.value());
 }
 
-template <class T, class VT, typename std::enable_if<std::is_floating_point<VT>::value
-									 && std::numeric_limits<VT>::is_iec559,
-								 int>::type
+template <class T, class VT,
+	typename std::enable_if<
+		std::is_floating_point<VT>::value && std::numeric_limits<VT>::is_iec559, int>::type
 	= 0>
 constexpr bool operator==(
 	const basic_quantity<T, VT> & v1, const basic_quantity<T, VT> & v2) noexcept

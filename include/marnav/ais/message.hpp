@@ -332,7 +332,8 @@ namespace detail
 {
 /// Checks if the specified cast is valid, throws `bad_cast` if not.
 /// If the pointer is `nullptr`, false returns.
-template <class T> bool check_cast(const message * s)
+template <class T>
+bool check_cast(const message * s)
 {
 	if (!s)
 		return false;
@@ -373,7 +374,8 @@ std::unique_ptr<message> message_parse(const raw & bits)
 /// @retval nullptr The specified message is invalid.
 /// @return The converted message.
 /// @exception std::bad_cast The specified message has the wrong ID.
-template <class T> T * message_cast(message * s)
+template <class T>
+T * message_cast(message * s)
 {
 	return detail::check_cast<T>(s) ? static_cast<T *>(s) : nullptr;
 }
@@ -381,7 +383,8 @@ template <class T> T * message_cast(message * s)
 /// Raw pointer const variant.
 ///
 /// @see message_cast(message * s)
-template <class T> const T * message_cast(const message * s)
+template <class T>
+const T * message_cast(const message * s)
 {
 	return detail::check_cast<T>(s) ? static_cast<const T *>(s) : nullptr;
 }
@@ -396,7 +399,8 @@ template <class T> const T * message_cast(const message * s)
 /// @exception bad_cast This exception is thrown if the specified message is
 ///   not castable into the destination type `T`.
 ///
-template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message> & s)
+template <class T>
+std::unique_ptr<T> message_cast(std::unique_ptr<message> & s)
 {
 	return detail::check_cast<T>(s.get()) ? std::unique_ptr<T>(static_cast<T *>(s.release()))
 										  : nullptr;
@@ -405,7 +409,8 @@ template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message> & s)
 /// `unique_ptr` ref ref variant.
 ///
 /// @see message_cast(std::unique_ptr<message> & s)
-template <class T> std::unique_ptr<T> message_cast(std::unique_ptr<message> && s)
+template <class T>
+std::unique_ptr<T> message_cast(std::unique_ptr<message> && s)
 {
 	return detail::check_cast<T>(s.get()) ? std::unique_ptr<T>(static_cast<T *>(s.release()))
 										  : nullptr;

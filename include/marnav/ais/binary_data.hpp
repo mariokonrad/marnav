@@ -36,7 +36,8 @@ protected:
 	/// @tparam Offset The offset of the value within the bitset.
 	/// @tparam Count Number of bits of the value within the bitset.
 	/// @tparam T Data type to be used.
-	template <std::size_t Offset, std::size_t Count, typename T> struct bitset_value final {
+	template <std::size_t Offset, std::size_t Count, typename T>
+	struct bitset_value final {
 		friend class binary_data;
 
 	public:
@@ -116,10 +117,11 @@ protected:
 
 	/// The non `enum` and non `string` variant of `get`.
 	/// @see get
-	template <typename T, typename std::enable_if<!std::is_enum<typename T::value_type>::value
-								  && !std::is_same<typename T::value_type, bool>::value
-								  && !std::is_same<typename T::value_type, std::string>::value,
-							  int>::type
+	template <typename T,
+		typename std::enable_if<!std::is_enum<typename T::value_type>::value
+				&& !std::is_same<typename T::value_type, bool>::value
+				&& !std::is_same<typename T::value_type, std::string>::value,
+			int>::type
 		= 0>
 	static void get(const raw & bits, T & t)
 	{
@@ -128,10 +130,11 @@ protected:
 
 	/// The `string` variant of `get`.
 	/// @see get
-	template <typename T, typename std::enable_if<!std::is_enum<typename T::value_type>::value
-								  && !std::is_same<typename T::value_type, bool>::value
-								  && std::is_same<typename T::value_type, std::string>::value,
-							  int>::type
+	template <typename T,
+		typename std::enable_if<!std::is_enum<typename T::value_type>::value
+				&& !std::is_same<typename T::value_type, bool>::value
+				&& std::is_same<typename T::value_type, std::string>::value,
+			int>::type
 		= 0>
 	static void get(const raw & bits, T & t)
 	{
@@ -170,10 +173,11 @@ protected:
 
 	/// The non `enum` and non `string` variant of `set`.
 	/// @see set
-	template <typename T, typename std::enable_if<!std::is_enum<typename T::value_type>::value
-								  && !std::is_same<typename T::value_type, bool>::value
-								  && !std::is_same<typename T::value_type, std::string>::value,
-							  int>::type
+	template <typename T,
+		typename std::enable_if<!std::is_enum<typename T::value_type>::value
+				&& !std::is_same<typename T::value_type, bool>::value
+				&& !std::is_same<typename T::value_type, std::string>::value,
+			int>::type
 		= 0>
 	static void set(raw & bits, const T & t)
 	{
@@ -182,10 +186,11 @@ protected:
 
 	/// The `string` variant of `set`.
 	/// @see set
-	template <typename T, typename std::enable_if<!std::is_enum<typename T::value_type>::value
-								  && !std::is_same<typename T::value_type, bool>::value
-								  && std::is_same<typename T::value_type, std::string>::value,
-							  int>::type
+	template <typename T,
+		typename std::enable_if<!std::is_enum<typename T::value_type>::value
+				&& !std::is_same<typename T::value_type, bool>::value
+				&& std::is_same<typename T::value_type, std::string>::value,
+			int>::type
 		= 0>
 	static void set(raw & bits, const T & t)
 	{

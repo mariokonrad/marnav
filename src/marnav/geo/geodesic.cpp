@@ -21,7 +21,8 @@ static constexpr const double earth_semi_major_axis = 6378137.0; // [m]
 static constexpr const double earth_flattening = 1.0 / 298.257223563;
 
 /// Computes the square of the specified value.
-template <typename T> static T sqr(const T & a)
+template <typename T>
+static T sqr(const T & a)
 {
 	return a * a;
 }
@@ -142,9 +143,9 @@ distance_result distance_ellipsoid_vincenty(
 		lambda = L
 			+ (1.0 - C) * f * sin_alpha
 				* (sigma
-					  + C * sin_sigma
-						  * (cos_2_sigma_m
-								+ C * cos_sigma * (-1.0 + 2.0 * sqr(cos_2_sigma_m)))); // eq 11
+					+ C * sin_sigma
+						* (cos_2_sigma_m
+							+ C * cos_sigma * (-1.0 + 2.0 * sqr(cos_2_sigma_m)))); // eq 11
 
 		d_lambda = std::abs(old_lambda - lambda);
 	} while ((--iteration > 0) && (d_lambda > 1.0e-12));
@@ -160,8 +161,8 @@ distance_result distance_ellipsoid_vincenty(
 		= u_sqr / 1024.0 * (256.0 + u_sqr * (-128.0 + u_sqr * (74.0 - 47.0 * u_sqr))); // eq 4
 	double d_sigma = B * sin_sigma
 		* (cos_2_sigma_m + B / 4.0 * (cos_sigma * (-1.0 + 2.0 * sqr(cos_2_sigma_m)))
-			  - B / 6.0 * cos_2_sigma_m * (-3.0 + 4.0 * sqr(sin_sigma))
-				  * (-3.0 + 4.0 * sqr(cos_2_sigma_m))); // eq 6
+			- B / 6.0 * cos_2_sigma_m * (-3.0 + 4.0 * sqr(sin_sigma))
+				* (-3.0 + 4.0 * sqr(cos_2_sigma_m))); // eq 6
 	double s = A * b * (sigma - d_sigma); // eq 19
 
 	double alpha1 = atan2(cos_U2 * sin_lambda, cos_U1 * sin_U2 - sin_U1 * cos_U2 * cos_lambda);
@@ -239,16 +240,18 @@ position point_ellipsoid_vincenty(
 		sin_sigma = sin(sigma);
 		double delta_sigma = B * sin_sigma
 			* (cos_2_sigma_m
-				  + B / 4.0 * (cos_sigma * (-1.0 + 2.0 * cos_sqr_2_sigma_m)
-								  - B / 6.0 * cos_2_sigma_m * (-3.0 + 4.0 * sqr(sin_sigma))
-									  * (-3.0 + 4.0 * cos_sqr_2_sigma_m)));
+				+ B / 4.0
+					* (cos_sigma * (-1.0 + 2.0 * cos_sqr_2_sigma_m)
+						- B / 6.0 * cos_2_sigma_m * (-3.0 + 4.0 * sqr(sin_sigma))
+							* (-3.0 + 4.0 * cos_sqr_2_sigma_m)));
 
 		double old_sigma = sigma;
 		sigma = sigma_0 + delta_sigma;
 		d_sigma = std::abs(old_sigma - sigma);
 	} while (d_sigma > 1.0e-12);
 
-	latitude lat = atan2(sin_U1 * cos_sigma + cos_U1 * sin_sigma * cos_alpha1, (1.0 - f)
+	latitude lat = atan2(sin_U1 * cos_sigma + cos_U1 * sin_sigma * cos_alpha1,
+		(1.0 - f)
 			* sqrt(sin_sqr_alpha + sqr(sin_U1 * sin_sigma - cos_U1 * cos_sigma * cos_alpha1)));
 	C = (f / 16.0) * cos_sqr_alpha * (4.0 + f * (4.0 - 3.0 * cos_sqr_alpha));
 	lambda
@@ -256,8 +259,8 @@ position point_ellipsoid_vincenty(
 	L = lambda
 		- (1.0 - C) * f * sin_alpha
 			* (sigma
-				  + C * sin_sigma
-					  * (cos_2_sigma_m + C * cos_sigma * (-1.0 + 2.0 * cos_sqr_2_sigma_m)));
+				+ C * sin_sigma
+					* (cos_2_sigma_m + C * cos_sigma * (-1.0 + 2.0 * cos_sqr_2_sigma_m)));
 	longitude lon = p0.lon() + L;
 	alpha2 = atan2(sin_alpha, -sin_U1 * sin_sigma + cos_U1 * cos_sigma * cos_alpha1);
 

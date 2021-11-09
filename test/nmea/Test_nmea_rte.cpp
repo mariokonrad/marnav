@@ -136,7 +136,7 @@ TEST_F(Test_nmea_rte, set_message_mode_working)
 TEST_F(Test_nmea_rte, set_route_id)
 {
 	nmea::rte rte;
-	rte.set_route_id(nmea::route {"ROUTE1"});
+	rte.set_route_id(nmea::route{"ROUTE1"});
 
 	EXPECT_STREQ("$GPRTE,1,1,c,ROUTE1*5F", nmea::to_string(rte).c_str());
 }
@@ -144,7 +144,7 @@ TEST_F(Test_nmea_rte, set_route_id)
 TEST_F(Test_nmea_rte, add_waypoint_id)
 {
 	nmea::rte rte;
-	rte.add_waypoint_id(nmea::waypoint {"POINT1"});
+	rte.add_waypoint_id(nmea::waypoint{"POINT1"});
 
 	EXPECT_STREQ("$GPRTE,1,1,c,,POINT1*66", nmea::to_string(rte).c_str());
 }
@@ -152,8 +152,8 @@ TEST_F(Test_nmea_rte, add_waypoint_id)
 TEST_F(Test_nmea_rte, add_multiple_waypoint_ids_no_route_id)
 {
 	nmea::rte rte;
-	rte.add_waypoint_id(nmea::waypoint {"POINT1"});
-	rte.add_waypoint_id(nmea::waypoint {"POINT2"});
+	rte.add_waypoint_id(nmea::waypoint{"POINT1"});
+	rte.add_waypoint_id(nmea::waypoint{"POINT2"});
 
 	EXPECT_STREQ("$GPRTE,1,1,c,,POINT1,POINT2*34", nmea::to_string(rte).c_str());
 }
@@ -161,9 +161,9 @@ TEST_F(Test_nmea_rte, add_multiple_waypoint_ids_no_route_id)
 TEST_F(Test_nmea_rte, add_multiple_waypoint_ids_with_route_id)
 {
 	nmea::rte rte;
-	rte.set_route_id(nmea::route {"0"});
-	rte.add_waypoint_id(nmea::waypoint {"POINT1"});
-	rte.add_waypoint_id(nmea::waypoint {"POINT2"});
+	rte.set_route_id(nmea::route{"0"});
+	rte.add_waypoint_id(nmea::waypoint{"POINT1"});
+	rte.add_waypoint_id(nmea::waypoint{"POINT2"});
 
 	EXPECT_STREQ("$GPRTE,1,1,c,0,POINT1,POINT2*04", nmea::to_string(rte).c_str());
 }
@@ -171,26 +171,26 @@ TEST_F(Test_nmea_rte, add_multiple_waypoint_ids_with_route_id)
 TEST_F(Test_nmea_rte, add_to_many_waypoints)
 {
 	nmea::rte rte;
-	rte.add_waypoint_id(nmea::waypoint {"P0"});
-	rte.add_waypoint_id(nmea::waypoint {"P1"});
-	rte.add_waypoint_id(nmea::waypoint {"P2"});
-	rte.add_waypoint_id(nmea::waypoint {"P3"});
-	rte.add_waypoint_id(nmea::waypoint {"P4"});
-	rte.add_waypoint_id(nmea::waypoint {"P5"});
-	rte.add_waypoint_id(nmea::waypoint {"P6"});
-	rte.add_waypoint_id(nmea::waypoint {"P7"});
-	rte.add_waypoint_id(nmea::waypoint {"P8"});
-	rte.add_waypoint_id(nmea::waypoint {"P9"});
+	rte.add_waypoint_id(nmea::waypoint{"P0"});
+	rte.add_waypoint_id(nmea::waypoint{"P1"});
+	rte.add_waypoint_id(nmea::waypoint{"P2"});
+	rte.add_waypoint_id(nmea::waypoint{"P3"});
+	rte.add_waypoint_id(nmea::waypoint{"P4"});
+	rte.add_waypoint_id(nmea::waypoint{"P5"});
+	rte.add_waypoint_id(nmea::waypoint{"P6"});
+	rte.add_waypoint_id(nmea::waypoint{"P7"});
+	rte.add_waypoint_id(nmea::waypoint{"P8"});
+	rte.add_waypoint_id(nmea::waypoint{"P9"});
 
-	EXPECT_ANY_THROW(rte.add_waypoint_id(nmea::waypoint {"P10"}));
+	EXPECT_ANY_THROW(rte.add_waypoint_id(nmea::waypoint{"P10"}));
 }
 
 TEST_F(Test_nmea_rte, add_to_waypoints_then_clear)
 {
 	nmea::rte rte;
-	rte.add_waypoint_id(nmea::waypoint {"P0"});
-	rte.add_waypoint_id(nmea::waypoint {"P1"});
-	rte.add_waypoint_id(nmea::waypoint {"P2"});
+	rte.add_waypoint_id(nmea::waypoint{"P0"});
+	rte.add_waypoint_id(nmea::waypoint{"P1"});
+	rte.add_waypoint_id(nmea::waypoint{"P2"});
 
 	EXPECT_EQ(3, rte.get_n_waypoints());
 
@@ -202,7 +202,7 @@ TEST_F(Test_nmea_rte, add_to_waypoints_then_clear)
 TEST_F(Test_nmea_rte, get_waypoint_id)
 {
 	nmea::rte rte;
-	rte.add_waypoint_id(nmea::waypoint {"POINT1"});
+	rte.add_waypoint_id(nmea::waypoint{"POINT1"});
 
 	auto wp = rte.get_waypoint_id(0);
 

@@ -25,7 +25,8 @@ namespace utils
 /// This is (somewhat) necessary, because optional is not part of the standard and may change
 /// its interface in the future.
 ///
-template <class T> class optional
+template <class T>
+class optional
 {
 public:
 	using value_type = T;
@@ -79,7 +80,8 @@ public:
 		return *this;
 	}
 
-	template <class U> optional & operator=(U && data)
+	template <class U>
+	optional & operator=(U && data)
 	{
 		this->data_ = std::move(data);
 		flag_ = true;
@@ -146,7 +148,8 @@ private:
 /// @tparam Args Types of arguments to initialize the value
 /// @param[in] args The arguments to initialize the value
 /// @return the optional of type T
-template <class T, class... Args> optional<T> make_optional(Args &&... args)
+template <class T, class... Args>
+optional<T> make_optional(Args &&... args)
 {
 	return optional<T>(T{std::forward<Args>(args)...});
 }
@@ -156,7 +159,8 @@ template <class T, class... Args> optional<T> make_optional(Args &&... args)
 ///
 /// @tparam T The optional type
 /// @return the optional of type T
-template <class T> optional<T> make_optional()
+template <class T>
+optional<T> make_optional()
 {
 	return optional<T>();
 }

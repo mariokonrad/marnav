@@ -6,10 +6,6 @@ namespace marnav
 {
 namespace io
 {
-seatalk_reader::~seatalk_reader()
-{
-}
-
 seatalk_reader::seatalk_reader(std::unique_ptr<device> && dv)
 	: dev_(std::move(dv))
 {

@@ -191,7 +191,8 @@ static void all_sentences(benchmark::internal::Benchmark * b)
 	}
 }
 
-template <class T> static void specific(benchmark::internal::Benchmark * b)
+template <class T>
+static void specific(benchmark::internal::Benchmark * b)
 {
 	const auto i = std::find_if(sentences.begin(), sentences.end(),
 		[](const std::vector<sentence_data>::value_type & v) { return T::TAG == v.tag; });
@@ -225,7 +226,8 @@ static void Benchmark_sentence_to_string(benchmark::State & state)
 
 BENCHMARK(Benchmark_sentence_to_string)->Apply(all_sentences);
 
-template <class T> static void Benchmark_create_sentence(benchmark::State & state)
+template <class T>
+static void Benchmark_create_sentence(benchmark::State & state)
 {
 	state.SetLabel(sentences[state.range(0)].tag);
 	while (state.KeepRunning()) {

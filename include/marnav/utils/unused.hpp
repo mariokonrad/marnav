@@ -36,7 +36,8 @@ namespace utils
 ///
 /// @note This results in not being code in the binary.
 ///
-template <typename... Args> void unused(Args &&...)
+template <typename... Args>
+void unused(Args &&...)
 {
 }
 }

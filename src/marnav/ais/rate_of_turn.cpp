@@ -9,12 +9,14 @@ namespace ais
 {
 namespace
 {
-template <class T> constexpr T sqr(T x)
+template <class T>
+constexpr T sqr(T x)
 {
 	return x * x;
 }
 
-template <class T> constexpr int sign(T x)
+template <class T>
+constexpr int sign(T x)
 {
 	return (x < 0) ? -1 : +1;
 }

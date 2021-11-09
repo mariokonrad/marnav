@@ -33,4 +33,3 @@ void zte::append_data_to(std::string & s) const
 }
 }
 }
-

@@ -3,7 +3,8 @@
 
 namespace
 {
-template <class T> constexpr T sqr(T x)
+template <class T>
+constexpr T sqr(T x)
 {
 	return x * x;
 }

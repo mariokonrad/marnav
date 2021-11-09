@@ -42,7 +42,8 @@ private:
 /// @param[in] b The ending point (exclusive) to compute the checksum.
 /// @return The computed checksum.
 ///
-template <class Iterator> uint8_t checksum(Iterator a, Iterator b) noexcept
+template <class Iterator>
+uint8_t checksum(Iterator a, Iterator b) noexcept
 {
 	uint8_t sum = 0x00;
 	std::for_each(a, b, [&sum](char c) { sum ^= static_cast<uint8_t>(c); });

@@ -4,7 +4,8 @@
 
 namespace custom
 {
-template <class T> class basic_number
+template <class T>
+class basic_number
 {
 public:
 	using value_type = T;
@@ -95,22 +96,26 @@ constexpr bool operator>=(const basic_number<U> & a, const basic_number<U> & b) 
 	return !(a < b);
 }
 
-template <class U> constexpr basic_number<U> floor(const basic_number<U> & n) noexcept
+template <class U>
+constexpr basic_number<U> floor(const basic_number<U> & n) noexcept
 {
 	return basic_number<U>(::floor(n.value_));
 }
 
-template <class U> constexpr basic_number<U> ceil(const basic_number<U> & n) noexcept
+template <class U>
+constexpr basic_number<U> ceil(const basic_number<U> & n) noexcept
 {
 	return basic_number<U>(::ceil(n.value_));
 }
 
-template <class U> constexpr basic_number<U> round(const basic_number<U> & n) noexcept
+template <class U>
+constexpr basic_number<U> round(const basic_number<U> & n) noexcept
 {
 	return basic_number<U>(::round(n.value_));
 }
 
-template <class U> constexpr basic_number<U> abs(const basic_number<U> & n) noexcept
+template <class U>
+constexpr basic_number<U> abs(const basic_number<U> & n) noexcept
 {
 	return basic_number<U>(std::abs(n.value_));
 }

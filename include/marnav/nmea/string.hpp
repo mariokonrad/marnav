@@ -40,13 +40,15 @@ std::string to_string(unit::temperature t);
 std::string to_string(unit::pressure t);
 std::string to_string(const utils::mmsi & t);
 
-template <class U, class R> std::string to_string(const units::basic_unit<U, R> & data)
+template <class U, class R>
+std::string to_string(const units::basic_unit<U, R> & data)
 {
 	using namespace std;
 	return to_string(data.value());
 }
 
-template <class T> std::string to_string(const utils::optional<T> & data)
+template <class T>
+std::string to_string(const utils::optional<T> & data)
 {
 	if (!data)
 		return std::string{};

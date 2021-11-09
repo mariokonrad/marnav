@@ -189,7 +189,8 @@ static QString render(const marnav::units::velocity & t)
 	return QString{"%1 knots"}.arg(t.get<marnav::units::knots>().value());
 }
 
-template <typename T> static QString render(const marnav::utils::optional<T> & t)
+template <typename T>
+static QString render(const marnav::utils::optional<T> & t)
 {
 	if (!t)
 		return "-";
@@ -402,12 +403,22 @@ static QString get_details(const marnav::nmea::sentence * s)
 	using container = std::vector<entry>;
 	static const container details = {
 		// common
-		ADD_SENTENCE(bod), ADD_SENTENCE(gga), ADD_SENTENCE(gsa), ADD_SENTENCE(gll),
-		ADD_SENTENCE(gsv), ADD_SENTENCE(hdg), ADD_SENTENCE(mwv), ADD_SENTENCE(rmb),
-		ADD_SENTENCE(rmc), ADD_SENTENCE(rte), ADD_SENTENCE(vtg),
+		ADD_SENTENCE(bod),
+		ADD_SENTENCE(gga),
+		ADD_SENTENCE(gsa),
+		ADD_SENTENCE(gll),
+		ADD_SENTENCE(gsv),
+		ADD_SENTENCE(hdg),
+		ADD_SENTENCE(mwv),
+		ADD_SENTENCE(rmb),
+		ADD_SENTENCE(rmc),
+		ADD_SENTENCE(rte),
+		ADD_SENTENCE(vtg),
 
 		// vendor specific
-		ADD_SENTENCE(pgrme), ADD_SENTENCE(pgrmm), ADD_SENTENCE(pgrmz),
+		ADD_SENTENCE(pgrme),
+		ADD_SENTENCE(pgrmm),
+		ADD_SENTENCE(pgrmz),
 	};
 #undef ADD_SENTENCE
 
@@ -576,9 +587,9 @@ void MainWindow::add_item(QString raw_sentence)
 void MainWindow::on_about()
 {
 	QCoreApplication * app = QCoreApplication::instance();
-	QMessageBox::about(this, app->applicationName(), app->applicationName()
-			+ ": example of Qt using marnav\n\nVersion: " + app->applicationVersion()
-			+ "\n\nSee file: LICENSE");
+	QMessageBox::about(this, app->applicationName(),
+		app->applicationName() + ": example of Qt using marnav\n\nVersion: "
+			+ app->applicationVersion() + "\n\nSee file: LICENSE");
 }
 
 void MainWindow::on_about_qt()

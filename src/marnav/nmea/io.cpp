@@ -147,19 +147,23 @@ void read(const std::string & s, char & value, data_format fmt)
 
 namespace detail
 {
-template <typename T> T sto(const std::string &, std::size_t *, int);
+template <typename T>
+T sto(const std::string &, std::size_t *, int);
 
-template <> uint64_t sto(const std::string & s, std::size_t * pos, int base)
+template <>
+uint64_t sto(const std::string & s, std::size_t * pos, int base)
 {
 	return std::stoull(s, pos, base);
 }
 
-template <> uint32_t sto(const std::string & s, std::size_t * pos, int base)
+template <>
+uint32_t sto(const std::string & s, std::size_t * pos, int base)
 {
 	return std::stoul(s, pos, base);
 }
 
-template <> int32_t sto(const std::string & s, std::size_t * pos, int base)
+template <>
+int32_t sto(const std::string & s, std::size_t * pos, int base)
 {
 	return std::stol(s, pos, base);
 }

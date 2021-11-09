@@ -38,7 +38,8 @@ public:
 		const utils::optional<value_type> & get_const_ref() const { return data; }
 	};
 
-	template <class T> void test()
+	template <class T>
+	void test()
 	{
 		using opt = utils::optional<T>;
 

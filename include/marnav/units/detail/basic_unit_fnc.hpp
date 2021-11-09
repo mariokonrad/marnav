@@ -15,7 +15,8 @@ constexpr basic_unit<U, R> floor(const basic_unit<U, R> & v) noexcept
 	return basic_unit<U, R>(floor(v.value()));
 }
 
-template <class U, class R> constexpr basic_unit<U, R> ceil(const basic_unit<U, R> & v) noexcept
+template <class U, class R>
+constexpr basic_unit<U, R> ceil(const basic_unit<U, R> & v) noexcept
 {
 	using std::ceil;
 	return basic_unit<U, R>(ceil(v.value()));
@@ -28,7 +29,8 @@ constexpr basic_unit<U, R> round(const basic_unit<U, R> & v) noexcept
 	return basic_unit<U, R>(round(v.value()));
 }
 
-template <class U, class R> constexpr basic_unit<U, R> abs(const basic_unit<U, R> & v) noexcept
+template <class U, class R>
+constexpr basic_unit<U, R> abs(const basic_unit<U, R> & v) noexcept
 {
 	using std::abs;
 	return basic_unit<U, R>(abs(v.value()));

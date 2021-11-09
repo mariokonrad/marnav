@@ -69,7 +69,8 @@ void vessel_dimension::set_to_starboard(units::length t)
 {
 	if (t.value() < 0.0)
 		throw std::invalid_argument{"length less than zero"};
-	to_starboard_ = math::float_cast<decltype(to_starboard_)>(round(t.get<units::meters>()).value());
+	to_starboard_
+		= math::float_cast<decltype(to_starboard_)>(round(t.get<units::meters>()).value());
 }
 }
 }

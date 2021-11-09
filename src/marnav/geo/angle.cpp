@@ -85,7 +85,7 @@ latitude::latitude(double degrees, hemisphere h)
 latitude::latitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
 	: angle((static_cast<double>(d) + static_cast<double>(m) / 60.0
 				+ static_cast<double>(s) / 3600.0)
-		  * ((h == hemisphere::south) ? -1.0 : 1.0))
+		* ((h == hemisphere::south) ? -1.0 : 1.0))
 {
 	check(get());
 }
@@ -150,7 +150,7 @@ longitude::longitude(double degrees, hemisphere h)
 longitude::longitude(uint32_t d, uint32_t m, uint32_t s, hemisphere h)
 	: angle((static_cast<double>(d) + static_cast<double>(m) / 60.0
 				+ static_cast<double>(s) / 3600.0)
-		  * ((h == hemisphere::east) ? +1.0 : -1.0))
+		* ((h == hemisphere::east) ? +1.0 : -1.0))
 {
 	check(get());
 }

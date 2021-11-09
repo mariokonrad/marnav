@@ -117,7 +117,8 @@ namespace detail
 {
 /// Checks if the specified cast is valid, throws `std::bad_cast` if not.
 /// If the pointer is `nullptr`, false returns.
-template <class T> bool check_cast(const sentence * s)
+template <class T>
+bool check_cast(const sentence * s)
 {
 	if (!s)
 		return false;
@@ -227,7 +228,8 @@ T create_sentence(const std::string & s)
 ///   auto s = nmea::make_sentence("$IIMTW,9.5,C*2F");
 ///   auto rmc = nmea::sentence_cast<nmea::rmc>(s); // Error, throws std::bad_cast
 /// @endcode
-template <class T> T * sentence_cast(sentence * s)
+template <class T>
+T * sentence_cast(sentence * s)
 {
 	return detail::check_cast<T>(s) ? static_cast<T *>(s) : nullptr;
 }
@@ -235,7 +237,8 @@ template <class T> T * sentence_cast(sentence * s)
 /// Raw pointer const variant.
 ///
 /// @see sentence_cast(sentence * s)
-template <class T> const T * sentence_cast(const sentence * s)
+template <class T>
+const T * sentence_cast(const sentence * s)
 {
 	return detail::check_cast<T>(s) ? static_cast<const T *>(s) : nullptr;
 }
@@ -271,7 +274,8 @@ template <class T> const T * sentence_cast(const sentence * s)
 /// @exception std::bad_cast This exception is thrown if the specified sentence is
 ///   not castable into the destination type `T`.
 ///
-template <class T> std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence> & s)
+template <class T>
+std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence> & s)
 {
 	return detail::check_cast<T>(s.get()) ? std::unique_ptr<T>(static_cast<T *>(s.release()))
 										  : nullptr;
@@ -280,7 +284,8 @@ template <class T> std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence> & 
 /// `unique_ptr` ref ref variant.
 ///
 /// @see sentence_cast(std::unique_ptr<sentence> & s)
-template <class T> std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence> && s)
+template <class T>
+std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence> && s)
 {
 	return detail::check_cast<T>(s.get()) ? std::unique_ptr<T>(static_cast<T *>(s.release()))
 										  : nullptr;

@@ -189,7 +189,11 @@ TEST_F(Test_seatalk_message_00, get_depth_meters)
 	};
 
 	std::vector<test_case> cases{
-		{0, 0.0000}, {1, 0.03048}, {10, 0.3048}, {20, 0.6096}, {100, 3.048},
+		{0, 0.0000},
+		{1, 0.03048},
+		{10, 0.3048},
+		{20, 0.6096},
+		{100, 3.048},
 	};
 
 	for (auto test : cases) {
@@ -207,7 +211,11 @@ TEST_F(Test_seatalk_message_00, set_depth_meters)
 	};
 
 	std::vector<test_case> cases{
-		{0, 0.0000}, {1, 0.03048}, {10, 0.3048}, {20, 0.6096}, {100, 3.048},
+		{0, 0.0000},
+		{1, 0.03048},
+		{10, 0.3048},
+		{20, 0.6096},
+		{100, 3.048},
 	};
 
 	for (auto test : cases) {

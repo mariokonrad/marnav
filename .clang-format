@@ -5,7 +5,7 @@ AlignAfterOpenBracket: DontAlign
 AlignEscapedNewlines: Left
 AlignOperands: 'false'
 AlignTrailingComments: 'false'
-AllowShortFunctionsOnASingleLine: Inline
+AllowShortFunctionsOnASingleLine: InlineOnly
 AllowShortLambdasOnASingleLine: All
 AlwaysBreakTemplateDeclarations: 'Yes'
 BreakBeforeBinaryOperators: All

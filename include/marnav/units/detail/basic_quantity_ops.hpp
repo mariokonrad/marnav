@@ -40,8 +40,8 @@ constexpr basic_quantity<T, VT> operator-(
 template <class Unit1, class Ratio1, class Unit2, class Ratio2,
 	class ResultDim = dim_result_add<typename Unit1::dimension, typename Unit2::dimension>,
 	class ResultValueType = typename Unit1::value_type,
-	typename = typename std::enable_if<std::is_same<typename Unit1::value_type,
-		typename Unit2::value_type>::value>::type>
+	typename = typename std::enable_if<
+		std::is_same<typename Unit1::value_type, typename Unit2::value_type>::value>::type>
 constexpr basic_quantity<ResultDim, ResultValueType> operator*(
 	const basic_unit<Unit1, Ratio1> & u1, const basic_unit<Unit2, Ratio2> & u2) noexcept
 {
@@ -53,8 +53,8 @@ constexpr basic_quantity<ResultDim, ResultValueType> operator*(
 template <class Unit1, class Ratio1, class Unit2, class Ratio2,
 	class ResultDim = dim_result_sub<typename Unit1::dimension, typename Unit2::dimension>,
 	class ResultValueType = typename Unit1::value_type,
-	typename = typename std::enable_if<std::is_same<typename Unit1::value_type,
-		typename Unit2::value_type>::value>::type>
+	typename = typename std::enable_if<
+		std::is_same<typename Unit1::value_type, typename Unit2::value_type>::value>::type>
 constexpr basic_quantity<ResultDim, ResultValueType> operator/(
 	const basic_unit<Unit1, Ratio1> & u1, const basic_unit<Unit2, Ratio2> & u2) noexcept
 {

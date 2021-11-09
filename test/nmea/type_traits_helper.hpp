@@ -6,7 +6,8 @@
 
 namespace
 {
-template <class T> void nmea_sentence_traits()
+template <class T>
+void nmea_sentence_traits()
 {
 	using type = T;
 

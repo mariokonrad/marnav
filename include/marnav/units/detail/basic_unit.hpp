@@ -14,7 +14,8 @@ namespace marnav
 {
 namespace units
 {
-template <class R> struct ratio_inv {
+template <class R>
+struct ratio_inv {
 	static constexpr const auto num = R::den;
 	static constexpr const auto den = R::num;
 };
@@ -28,7 +29,8 @@ constexpr ValueType scale(const ValueType & value) noexcept
 }
 }
 
-template <class Unit, class Ratio = std::ratio<1>> class basic_unit
+template <class Unit, class Ratio = std::ratio<1>>
+class basic_unit
 {
 public:
 	using value_type = typename Unit::value_type;
@@ -51,11 +53,12 @@ public:
 
 	// Conversion of one basic unit into another, as long as they
 	// are compatible, i.e. have the same dimension.
-	template <class U, class R, typename
+	template <class U, class R,
+		typename
 		= typename std::enable_if<std::is_same<dimension, typename U::dimension>::value>::type>
 	constexpr explicit basic_unit(const basic_unit<U, R> & other) noexcept
 		: value_(detail::scale<ratio_inv<ratio>>(
-			  unit_type::from_base(detail::scale<R>(U::to_base(other.value())))))
+			unit_type::from_base(detail::scale<R>(U::to_base(other.value())))))
 	{
 	}
 
@@ -74,16 +77,18 @@ public: // scaling
 		return *this;
 	}
 
-	template <class VT, typename = typename std::enable_if<!std::is_same<VT, value_type>::value
-							&& std::is_convertible<VT, value_type>::value>::type>
+	template <class VT,
+		typename = typename std::enable_if<!std::is_same<VT, value_type>::value
+			&& std::is_convertible<VT, value_type>::value>::type>
 	basic_unit & operator*=(const VT & s) noexcept
 	{
 		value_ *= s;
 		return *this;
 	}
 
-	template <class VT, typename = typename std::enable_if<!std::is_same<VT, value_type>::value
-							&& std::is_convertible<VT, value_type>::value>::type>
+	template <class VT,
+		typename = typename std::enable_if<!std::is_same<VT, value_type>::value
+			&& std::is_convertible<VT, value_type>::value>::type>
 	basic_unit & operator/=(const VT & s) noexcept
 	{
 		value_ /= s;

@@ -207,7 +207,8 @@ public:
 		}
 
 		/// Peeks from the bitset, but does not advance the iterator.
-		template <typename T> void peek(T & v, size_type bits = sizeof(T) * bits_per_byte) const
+		template <typename T>
+		void peek(T & v, size_type bits = sizeof(T) * bits_per_byte) const
 		{
 			if (bs == nullptr)
 				return;
@@ -218,7 +219,8 @@ public:
 		}
 
 		/// Reads from the bitset and advances the iterator the number of read bits.
-		template <typename T> void read(T & v, size_type bits = sizeof(T) * bits_per_byte)
+		template <typename T>
+		void read(T & v, size_type bits = sizeof(T) * bits_per_byte)
 		{
 			peek(v, bits);
 			*this += bits;
@@ -348,12 +350,14 @@ private:
 		}
 	}
 
-	template <typename T> void set_dispatch(T v, size_type ofs, size_type bits, std::true_type)
+	template <typename T>
+	void set_dispatch(T v, size_type ofs, size_type bits, std::true_type)
 	{
 		set_impl(v, ofs, bits);
 	}
 
-	template <typename T> void set_dispatch(T v, size_type ofs, size_type bits, std::false_type)
+	template <typename T>
+	void set_dispatch(T v, size_type ofs, size_type bits, std::false_type)
 	{
 		set_impl(static_cast<typename std::underlying_type<T>::type>(v), ofs, bits);
 	}
@@ -527,7 +531,8 @@ public: // append
 	///
 	/// @note It is not allowed to append a bitself to itself.
 	/// @note This algorithm is not efficient.
-	template <class U> void append(const bitset<U> & bs)
+	template <class U>
+	void append(const bitset<U> & bs)
 	{
 		if (reinterpret_cast<const void *>(this) == reinterpret_cast<const void *>(&bs))
 			return;
@@ -548,7 +553,8 @@ public: // append
 	/// @exception std::invalid_argument Number of bites exceed the number of
 	///            bit provided by the parameter v. padding is not implemented.
 	///            Example: type of v is uint32_t, bits is 40.
-	template <typename T> void append(T v, size_type bits = sizeof(T) * bits_per_byte)
+	template <typename T>
+	void append(T v, size_type bits = sizeof(T) * bits_per_byte)
 	{
 		if (bits <= 0)
 			return;
@@ -573,7 +579,8 @@ public: // set
 	///
 	/// @note It is not allowed to set a bitself to itself.
 	/// @note This algorithm is not efficient.
-	template <class U> void set(const bitset<U> & bs, size_type ofs)
+	template <class U>
+	void set(const bitset<U> & bs, size_type ofs)
 	{
 		if (reinterpret_cast<const void *>(this) == reinterpret_cast<const void *>(&bs))
 			return;

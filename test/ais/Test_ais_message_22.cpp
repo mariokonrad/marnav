@@ -13,7 +13,8 @@ class Test_ais_message_22 : public ::testing::Test
 TEST_F(Test_ais_message_22, parse)
 {
 	static const std::vector<std::vector<std::pair<std::string, uint32_t>>> TESTS = {
-		{{"F000000000000000000000000000", 0}}, {{"F0000000000000000000000@0000", 0}},
+		{{"F000000000000000000000000000", 0}},
+		{{"F0000000000000000000000@0000", 0}},
 	};
 
 	for (const auto & test : TESTS) {

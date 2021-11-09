@@ -16,7 +16,8 @@ namespace detail
 {
 
 /// Returns true if both matrices are the same.
-template <typename T, typename
+template <typename T,
+	typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
 bool equal_matrix_nxn(const T & a, const T & b)
 {
@@ -32,7 +33,8 @@ bool equal_matrix_nxn(const T & a, const T & b)
 }
 
 /// Multiplication of a matrix with a scalar
-template <typename T, typename
+template <typename T,
+	typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
 T & scale_matrix_nxn(T & a, typename T::value_type s)
 {
@@ -45,7 +47,8 @@ T & scale_matrix_nxn(T & a, typename T::value_type s)
 }
 
 /// Adds the second matrix to the first one.
-template <typename T, typename
+template <typename T,
+	typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
 T & add_matrix_nxn(T & a, const T & b)
 {
@@ -58,7 +61,8 @@ T & add_matrix_nxn(T & a, const T & b)
 }
 
 /// Adds the second matrix to the first one.
-template <typename T, typename
+template <typename T,
+	typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
 T & sub_matrix_nxn(T & a, const T & b)
 {
@@ -74,7 +78,8 @@ T & sub_matrix_nxn(T & a, const T & b)
 /// is returned.
 ///
 /// @param[in] a The matrix to compute the inverse from.
-template <typename T, typename
+template <typename T,
+	typename
 	= typename std::enable_if<std::is_floating_point<typename T::value_type>::value, T>::type>
 T inverse_matrix_nxn(const T & a)
 {

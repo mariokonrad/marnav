@@ -9,7 +9,8 @@ namespace nmea
 /// @cond DEV
 namespace
 {
-template <class T> static T parse_time(const std::string & str)
+template <class T>
+static T parse_time(const std::string & str)
 {
 	try {
 		std::size_t pos = 0;

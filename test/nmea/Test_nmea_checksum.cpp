@@ -22,7 +22,8 @@ TEST_F(Test_nmea_checksum, checksum_compute_sum)
 	};
 
 	const std::vector<test_case> cases{
-		{0x01u, "0123456789"}, {0x1bu, "abcdefghijklmnopqrstuvwxyz"},
+		{0x01u, "0123456789"},
+		{0x1bu, "abcdefghijklmnopqrstuvwxyz"},
 		{0x1bu, "ABCDEFGHIJKLMNOPQRSTUVWXYZ"},
 	};
 

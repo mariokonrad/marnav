@@ -8,7 +8,8 @@ namespace marnav
 {
 namespace units
 {
-template <class Dimension, class ValueType> class basic_quantity
+template <class Dimension, class ValueType>
+class basic_quantity
 {
 public:
 	using value_type = ValueType;
@@ -23,7 +24,8 @@ public:
 	basic_quantity & operator=(basic_quantity &&) noexcept = default;
 
 	// Construction from basic_unit, possible only if dimension and value type match.
-	template <class Unit, class Ratio, typename
+	template <class Unit, class Ratio,
+		typename
 		= typename std::enable_if<std::is_same<dimension, typename Unit::dimension>::value
 			&& std::is_same<value_type, typename Unit::value_type>::value>::type>
 	constexpr basic_quantity(const basic_unit<Unit, Ratio> & u)
@@ -34,7 +36,8 @@ public:
 	// getters
 	constexpr const value_type & value() const noexcept { return value_; }
 
-	template <class BasicUnit, typename
+	template <class BasicUnit,
+		typename
 		= typename std::enable_if<std::is_same<dimension, typename BasicUnit::dimension>::value
 			&& std::is_same<value_type, typename BasicUnit::value_type>::value>::type>
 	constexpr BasicUnit get() const noexcept

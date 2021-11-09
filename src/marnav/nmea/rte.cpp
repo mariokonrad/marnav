@@ -20,7 +20,7 @@ rte::rte(talker talk, fields::const_iterator first, fields::const_iterator last)
 {
 	const auto size = std::distance(first, last);
 	if ((size < 4) || (size > (max_waypoints + 4)))
-		throw std::invalid_argument {"invalid number of fields in rte"};
+		throw std::invalid_argument{"invalid number of fields in rte"};
 
 	read(*(first + 0), n_messages_);
 	read(*(first + 1), message_number_);
@@ -39,7 +39,7 @@ rte::rte(talker talk, fields::const_iterator first, fields::const_iterator last)
 utils::optional<waypoint> rte::get_waypoint_id(int index) const
 {
 	if (index < 0)
-		throw std::out_of_range {"get_waypoint_id"};
+		throw std::out_of_range{"get_waypoint_id"};
 
 	if (index >= get_n_waypoints())
 		return {};
@@ -55,7 +55,7 @@ int rte::get_n_waypoints() const
 void rte::add_waypoint_id(const waypoint & id)
 {
 	if (get_n_waypoints() >= max_waypoints)
-		throw std::runtime_error {"to many waypoints"};
+		throw std::runtime_error{"to many waypoints"};
 
 	waypoint_id_.push_back(id);
 }

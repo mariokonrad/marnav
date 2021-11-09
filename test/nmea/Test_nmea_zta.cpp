@@ -73,4 +73,3 @@ TEST_F(Test_nmea_zta, set_waypoint_id)
 	EXPECT_STREQ("$GPZTA,000000,000000,POINT1*09", nmea::to_string(zta).c_str());
 }
 }
-

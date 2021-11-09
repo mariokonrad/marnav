@@ -49,9 +49,15 @@ TEST_F(Test_nmea_fsi, empty_to_string)
 TEST_F(Test_nmea_fsi, set_power_level)
 {
 	std::vector<std::pair<uint32_t, std::string>> TEST = {
-		{0, "$GPFSI,,,,0,*57"}, {1, "$GPFSI,,,,1,*56"}, {2, "$GPFSI,,,,2,*55"},
-		{3, "$GPFSI,,,,3,*54"}, {4, "$GPFSI,,,,4,*53"}, {5, "$GPFSI,,,,5,*52"},
-		{6, "$GPFSI,,,,6,*51"}, {7, "$GPFSI,,,,7,*50"}, {8, "$GPFSI,,,,8,*5F"},
+		{0, "$GPFSI,,,,0,*57"},
+		{1, "$GPFSI,,,,1,*56"},
+		{2, "$GPFSI,,,,2,*55"},
+		{3, "$GPFSI,,,,3,*54"},
+		{4, "$GPFSI,,,,4,*53"},
+		{5, "$GPFSI,,,,5,*52"},
+		{6, "$GPFSI,,,,6,*51"},
+		{7, "$GPFSI,,,,7,*50"},
+		{8, "$GPFSI,,,,8,*5F"},
 		{9, "$GPFSI,,,,9,*5E"},
 	};
 
