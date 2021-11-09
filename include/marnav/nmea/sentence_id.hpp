@@ -36,8 +36,8 @@ enum class sentence_id : uint32_t {
 	GLL, ///< Geographic Position - Latitude/Longitude
 	GNS, ///< Fix data
 	GRS, ///< GPS Range Residuals
-	GST, ///< GPS Pseudorange Noise Statistics
 	GSA, ///< GPS DOP and active satellites
+	GST, ///< GPS Pseudorange Noise Statistics
 	GSV, ///< Satellites in view
 	HDG, ///< Heading - Deviation & Variation (vendor extension)
 	HFB, ///< Trawl Headrope to Footrope and Bottom
@@ -47,8 +47,8 @@ enum class sentence_id : uint32_t {
 	MOB, ///< Man over Board
 	MSK, ///< Control for a Beacon Receiver
 	MSS, ///< Beacon Receiver Status
-	MWD, ///< Wind Directinon and Speed
 	MTW, ///< Mean Temperature of Water (II)
+	MWD, ///< Wind Directinon and Speed
 	MWV, ///< Wind Speed and Angle (II)
 	OSD, ///< Own Ship Data
 	RMA, ///< Recommended Minimum Navigation Information
@@ -63,11 +63,11 @@ enum class sentence_id : uint32_t {
 	STN, ///< Multiple Data ID
 	TDS, ///< Trawl Door Spread Distance
 	TFI, ///< Trawl Filling Indicator
+	TLL, ///< Target latitude and longitude
 	TPC, ///< Trawl Position Cartesian Coordinates
 	TPR, ///< Trawl Position Relative Vessel
 	TPT, ///< Trawl Position True
 	TRF, ///< TRANSIT Fix Data
-	TLL, ///< Target latitude and longitude
 	TTM, ///< Tracked Target Message
 	VBW, ///< Dual Ground/Water Speed
 	VDM, ///< AIS
@@ -77,7 +77,6 @@ enum class sentence_id : uint32_t {
 	VLW, ///< Distance Traveled through Water (II)
 	VPW, ///< Speed - Measured Parallel to Wind
 	VTG, ///< Track made good and Ground speed
-	VWR, ///< Relative Wind Speed and Angle (II)
 	WCV, ///< Waypoint Closure Velocity
 	WNC, ///< Distance - Waypoint to Waypoint
 	WPL, ///< Waypoint Location
@@ -87,6 +86,7 @@ enum class sentence_id : uint32_t {
 	ZDA, ///< Time & Date - UTC, day, month, year and local time zone
 	ZDL, ///< Time and Distance to Variable Point
 	ZFO, ///< UTC & Time from origin Waypoint
+	ZPI, ///< Arrival time at point of interest
 	ZTG, ///< UTC & Time to Destination Waypoint
 
 	// obsolete sentences
@@ -119,8 +119,8 @@ enum class sentence_id : uint32_t {
 	OLN, ///< Omega Lane Numbers
 	R00, ///< (Rnn) Waypoints in active route
 	SBK, ///< Loran-C Blink Status
-	SCY, ///< Loran-C Cycle Lock Status
 	SCD, ///< Loran-C ECDs
+	SCY, ///< Loran-C Cycle Lock Status
 	SDB, ///< Loran-C Signal Strength
 	SGD, ///< Position Accuracy Estimate
 	SGR, ///< Loran-C Chain Identifier
@@ -134,9 +134,10 @@ enum class sentence_id : uint32_t {
 	STR, ///< Tracking Reference
 	SYS, ///< Hybrid System Configuration
 	VWE, ///< Wind Track Efficiency
+	VWR, ///< Relative Wind Speed and Angle (II)
+	VWT, ///< True Wind Speed and Angle
 	WDC, ///< Distance to Waypoint
 	WDR, ///< Distance to Waypoint, Rumb line
-	VWT, ///< True Wind Speed and Angle
 	ZFI, ///< Elapsed time from point of interest
 	ZTA, ///< Estimated arrival time at point of interest
 	ZTE, ///< Estimated remaining time to event

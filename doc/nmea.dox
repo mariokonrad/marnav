@@ -74,6 +74,7 @@ Supported sentences for NMEA-0183 (read and write):
 - \link marnav::nmea::zda \c ZDA \endlink : Time & Date - UTC, day, month, year and local time zone
 - \link marnav::nmea::zdl \c ZDL \endlink : Time and Distance to Variable Point
 - \link marnav::nmea::zfo \c ZFO \endlink : UTC & Time from origin Waypoint
+- \link marnav::nmea::zpi \c ZPI \endlink : Arrival time at point of interest
 - \link marnav::nmea::ztg \c ZTG \endlink : UTC & Time to Destination Waypoint
 
 Obsolete but implemented:

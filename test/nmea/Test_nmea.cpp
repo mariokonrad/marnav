@@ -7,12 +7,13 @@
 
 namespace
 {
-
 using namespace marnav;
 
 class Test_nmea : public ::testing::Test
 {
 };
+
+static constexpr std::size_t num_supported_sentences = 89u;
 
 TEST_F(Test_nmea, checksum_to_string)
 {
@@ -114,14 +115,14 @@ TEST_F(Test_nmea, get_supported_sentences_str)
 {
 	auto v = nmea::get_supported_sentences_str();
 
-	EXPECT_EQ(88u, v.size());
+	EXPECT_EQ(num_supported_sentences, v.size());
 }
 
 TEST_F(Test_nmea, get_supported_sentences_id)
 {
 	auto v = nmea::get_supported_sentences_id();
 
-	EXPECT_EQ(88u, v.size());
+	EXPECT_EQ(num_supported_sentences, v.size());
 }
 
 TEST_F(Test_nmea, tag_to_id)

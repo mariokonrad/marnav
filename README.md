@@ -114,6 +114,7 @@ Supported sentences for NMEA-0183 (read and write):
 - ZDA: Time & Date - UTC, day, month, year and local time zone
 - ZDL: Time and Distance to Variable Point
 - ZFO: UTC & Time from origin Waypoint
+- ZPI - Arrival time at point of interest
 - ZTG: UTC & Time to Destination Waypoint
 
 Obsolete (according to [NMEA Revealed]) but implemented:

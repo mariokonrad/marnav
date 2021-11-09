@@ -271,6 +271,8 @@ std::string to_name(sentence_id t)
 			return "Estimated remaining time to event";
 		case sentence_id::ZTA:
 			return "Estimated arrival time at point of interest";
+		case sentence_id::ZPI:
+			return "Arrival time at point of interest";
 	}
 	return "-";
 }
