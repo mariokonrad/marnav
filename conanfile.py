@@ -17,9 +17,13 @@ class Package(ConanFile):
         'CMakeLists.txt',
         'Packaging.cmake',
         'README.md',
+        'doxygen.conf.in',
+        'doc/*',
         'include/*',
         'src/*',
         'cmake/*'
+        #'test/*'
+        #'extern/*'
         ]
 
     __cmake = None
@@ -54,6 +58,7 @@ class Package(ConanFile):
         cmake = self.__setup_cmake()
         cmake.configure()
         cmake.build()
+        #cmake.test(target="unittest")
 
     def package(self):
         cmake = self.__setup_cmake()
