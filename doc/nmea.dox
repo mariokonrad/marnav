@@ -6,7 +6,6 @@ Supported sentences for NMEA-0183 (read and write):
 
 - \link marnav::nmea::aam \c AAM \endlink : Waypoint Arrival Alarm
 - \link marnav::nmea::alm \c ALM \endlink : GPS Almanac Data
-- \link marnav::nmea::apa \c APA \endlink : Autopilot Sentence "A"
 - \link marnav::nmea::apb \c APB \endlink : Autopilot Sentence "B"
 - \link marnav::nmea::bec \c BEC \endlink : Bearing and Distance to Waypoint
 - \link marnav::nmea::bod \c BOD \endlink : Bearing - Waypoint to Waypoint
@@ -28,7 +27,6 @@ Supported sentences for NMEA-0183 (read and write):
 - \link marnav::nmea::gsa \c GSA \endlink : Geographic Position - Latitude/Longitude
 - \link marnav::nmea::gst \c GST \endlink : GPS Pseudorange Noise Statistics
 - \link marnav::nmea::gsv \c GSV \endlink : Satellites in view
-- \link marnav::nmea::gtd \c GTD \endlink : Geographic Location in Time Differences
 - \link marnav::nmea::hdg \c HDG \endlink : Heading - Deviation & Variation
 - \link marnav::nmea::hdt \c HDT \endlink : Heading - True
 - \link marnav::nmea::hfb \c HFB \endlink : Trawl Headrope to Footrope and Bottom
@@ -38,7 +36,6 @@ Supported sentences for NMEA-0183 (read and write):
 - \link marnav::nmea::msk \c MOB \endlink : Man over Board
 - \link marnav::nmea::msk \c MSK \endlink : Control for a Beacon Receiver
 - \link marnav::nmea::mss \c MSS \endlink : Beacon Receiver Status
-- \link marnav::nmea::mta \c MTA \endlink : Air Temperature
 - \link marnav::nmea::mtw \c MTW \endlink : Mean Temperature of Water
 - \link marnav::nmea::mwd \c MWD \endlink : Wind Direction and Speed
 - \link marnav::nmea::mwv \c MWV \endlink : Wind Speed and Angle
@@ -66,13 +63,9 @@ Supported sentences for NMEA-0183 (read and write):
 - \link marnav::nmea::vdr \c VDR \endlink : Set and Drift
 - \link marnav::nmea::vhw \c VHW \endlink : Water speed and heading
 - \link marnav::nmea::vlw \c VLW \endlink : Distance Traveled through Water
-- \link marnav::nmea::vtg \c VTG \endlink : Track made good and Ground speed
-- \link marnav::nmea::vwe \c VWE \endlink : Wind Track Efficiency
-- \link marnav::nmea::vwr \c VWR \endlink : Relative Wind Speed and Angle.
 - \link marnav::nmea::vpw \c VPW \endlink : Speed - Measured Parallel to Wind
+- \link marnav::nmea::vtg \c VTG \endlink : Track made good and Ground speed
 - \link marnav::nmea::wcv \c WCV \endlink : Waypoint Closure Velocity
-- \link marnav::nmea::wdc \c WDC \endlink : Distance to Waypoint
-- \link marnav::nmea::wdr \c WDR \endlink : Distance to Waypoint, Rumb line
 - \link marnav::nmea::wnc \c WNC \endlink : Distance - Waypoint to Waypoint
 - \link marnav::nmea::wpl \c WPL \endlink : Waypoint Location
 - \link marnav::nmea::xdr \c XDR \endlink : Transducer Measurement
@@ -80,17 +73,24 @@ Supported sentences for NMEA-0183 (read and write):
 - \link marnav::nmea::xtr \c XTR \endlink : Cross Track Error - Dead Reckoning
 - \link marnav::nmea::zda \c ZDA \endlink : Time & Date - UTC, day, month, year and local time zone
 - \link marnav::nmea::zdl \c ZDL \endlink : Time and Distance to Variable Point
-- \link marnav::nmea::zfi \c ZFI \endlink : Elapsed time from point of interest
 - \link marnav::nmea::zfo \c ZFO \endlink : UTC & Time from origin Waypoint
-- \link marnav::nmea::zta \c ZTA \endlink : UTC & Estimated arrival at point of interest
-- \link marnav::nmea::zte \c ZTE \endlink : UTC & Estimated remaining time to event
 - \link marnav::nmea::ztg \c ZTG \endlink : UTC & Time to Destination Waypoint
 
-Obsolete (according to the standard) but implemented:
+Obsolete but implemented:
 
+- \link marnav::nmea::apa \c APA \endlink : Autopilot Sentence "A"
 - \link marnav::nmea::dbk \c DBK \endlink : Depth Below Keel
+- \link marnav::nmea::gtd \c GTD \endlink : Geographic Location in Time Differences
 - \link marnav::nmea::hdm \c HDM \endlink : Heading - Magnetic (obsolete as of 2009)
+- \link marnav::nmea::mta \c MTA \endlink : Air Temperature
 - \link marnav::nmea::r00 \c R00 \endlink : Waypoints in active route
+- \link marnav::nmea::vwe \c VWE \endlink : Wind Track Efficiency
+- \link marnav::nmea::vwr \c VWR \endlink : Relative Wind Speed and Angle.
+- \link marnav::nmea::wdc \c WDC \endlink : Distance to Waypoint
+- \link marnav::nmea::wdr \c WDR \endlink : Distance to Waypoint, Rumb line
+- \link marnav::nmea::zfi \c ZFI \endlink : Elapsed time from point of interest
+- \link marnav::nmea::zta \c ZTA \endlink : UTC & Estimated arrival at point of interest
+- \link marnav::nmea::zte \c ZTE \endlink : UTC & Estimated remaining time to event
 
 Vendor Extensions:
 

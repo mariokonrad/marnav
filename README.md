@@ -106,8 +106,6 @@ Supported sentences for NMEA-0183 (read and write):
 - VPW: Speed - Measured Parallel to Wind
 - VTG: Track made good and Ground speed
 - WCV: Waypoint Closure Velocity
-- WDC: Distance to Waypoint
-- WDR: Distance to Waypoint, Rumb line
 - WNC: Distance - Waypoint to Waypoint
 - WPL: Waypoint Location
 - XDR: Transducer Measurement
@@ -126,6 +124,8 @@ Obsolete (according to [NMEA Revealed]) but implemented:
 - HDM: Heading - Magnetic (obsolete as of 2009)
 - MTA: Air Temperature
 - R00: Waypoints in active route
+- WDC: Distance to Waypoint
+- WDR: Distance to Waypoint, Rumb line
 - VWE: Wind Track Efficiency
 - VWR: Relative Wind Speed and Angle.
 - ZFI: Elapsed time since point of interest
