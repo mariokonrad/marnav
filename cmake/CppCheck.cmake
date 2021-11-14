@@ -3,7 +3,7 @@ if(CPPCHECK_PATH)
 	message(STATUS "cppcheck: ${CPPCHECK_PATH}")
 	add_custom_target(cppcheck
 		COMMAND ${CPPCHECK_PATH}
-			--suppressions-list=${CMAKE_CURRENT_SOURCE_DIR}/cppcheck-suppress.txt
+			--suppressions-list=${CMAKE_CURRENT_SOURCE_DIR}/src/cppcheck-suppress.txt
 			--std=c++11
 			--platform=unix32
 			-v

@@ -11,7 +11,7 @@ if(DOXYGEN_FOUND)
 		${CMAKE_CURRENT_BINARY_DIR}/doc/main.dox
 		)
 	configure_file(
-		${CMAKE_CURRENT_SOURCE_DIR}/doxygen.conf.in
+		${CMAKE_CURRENT_SOURCE_DIR}/src/doxygen.conf.in
 		${CMAKE_CURRENT_BINARY_DIR}/doxygen.conf
 		)
 	add_custom_target(doc
