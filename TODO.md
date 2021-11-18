@@ -5,9 +5,7 @@ TODO
 @todo Abstract heading/bearing information into its own class (see HDG)
 
 @todo Investigate library bloat (optional? bitset?)
-@todo Deal with units (velocity, depth, temperatures, etc)
 
-@todo Consider using std::chrono in nmea/time
 @todo Implement additional checks in NMEA sentences, wheather or not the received data is correct.
 @todo Implement NMEA sentence: ASD: Autopilot System Data
 @todo Implement NMEA sentence: DSI: DSC Transponder Initiate, same as DSC?

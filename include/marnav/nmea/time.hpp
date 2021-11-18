@@ -1,6 +1,7 @@
 #ifndef MARNAV_NMEA_TIME_HPP
 #define MARNAV_NMEA_TIME_HPP
 
+#include <chrono>
 #include <string>
 
 namespace marnav
@@ -104,10 +105,29 @@ class duration : public time_base<trait_duration>
 public:
 	using time_base::time_base;
 
+	duration()
+		: time_base(0, 0, 0, 0)
+	{
+	}
+
+	duration(std::chrono::milliseconds d);
+
+	std::chrono::milliseconds chrono() const;
+
 	static duration parse(const std::string & str);
 };
 
 std::string to_string(const duration & d);
+
+/// Duration cast from nmea::duration to std::chrono::duration.
+///
+/// @parma[in] d Duration to convert.
+/// @return The std::chrono::duration specified by the template parameter.
+template <class ToDuration>
+constexpr ToDuration duration_cast(const duration & d)
+{
+	return std::chrono::duration_cast<ToDuration>(d.chrono());
+}
 }
 }
 

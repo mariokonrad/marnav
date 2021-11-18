@@ -108,6 +108,50 @@ std::string format(const nmea::time & t, unsigned int width)
 	return buf;
 }
 
+namespace
+{
+static constexpr uint32_t to_hours(std::chrono::milliseconds & d) noexcept
+{
+	return std::chrono::duration_cast<std::chrono::hours>(d).count();
+}
+
+static constexpr uint32_t to_minutes(std::chrono::milliseconds d) noexcept
+{
+	return (std::chrono::duration_cast<std::chrono::minutes>(d)
+		% std::chrono::duration_cast<std::chrono::minutes>(std::chrono::hours{1}).count())
+		.count();
+}
+
+static constexpr uint32_t to_seconds(std::chrono::milliseconds d) noexcept
+{
+	return (std::chrono::duration_cast<std::chrono::seconds>(d)
+		% std::chrono::duration_cast<std::chrono::seconds>(std::chrono::minutes{1}).count())
+		.count();
+}
+
+static constexpr uint32_t to_milliseconds(std::chrono::milliseconds d) noexcept
+{
+	return (std::chrono::duration_cast<std::chrono::milliseconds>(d)
+		% std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::seconds{1})
+			  .count())
+		.count();
+}
+}
+
+/// Initialization through conversion from std::chrono.
+///
+/// Implicit conversion from std::chrono::duration.
+duration::duration(std::chrono::milliseconds d)
+	: time_base(to_hours(d), to_minutes(d), to_seconds(d), to_milliseconds(d))
+{
+}
+
+std::chrono::milliseconds duration::chrono() const
+{
+	return std::chrono::hours(hour()) + std::chrono::minutes(minutes())
+		+ std::chrono::seconds(seconds()) + std::chrono::milliseconds(milliseconds());
+}
+
 /// Parses the duration information within the specified string (start and end of string).
 /// If the string is empty, the result will be initialized to zero.
 /// The duration to be parsed must  be in the form: "HHMMSS.mmm" (milliseconds are optional).
