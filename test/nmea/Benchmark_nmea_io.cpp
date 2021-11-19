@@ -145,4 +145,4 @@ static void Benchmark_nmea_format_double_v1(benchmark::State & state)
 
 BENCHMARK(Benchmark_nmea_format_double_v1);
 
-BENCHMARK_MAIN()
+BENCHMARK_MAIN();

@@ -48,4 +48,4 @@ static void Benchmark_make_message(benchmark::State & state)
 
 BENCHMARK(Benchmark_make_message)->Apply(all_messages);
 
-BENCHMARK_MAIN()
+BENCHMARK_MAIN();

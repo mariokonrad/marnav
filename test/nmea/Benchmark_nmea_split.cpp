@@ -168,4 +168,4 @@ static void Benchmark_nmea_split(benchmark::State & state)
 
 BENCHMARK(Benchmark_nmea_split)->Range(0, 2);
 
-BENCHMARK_MAIN()
+BENCHMARK_MAIN();

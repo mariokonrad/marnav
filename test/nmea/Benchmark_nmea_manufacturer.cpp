@@ -29,4 +29,4 @@ static void benchmark_get_supported_manufacturer_id(benchmark::State & state)
 
 BENCHMARK(benchmark_get_supported_manufacturer_id);
 
-BENCHMARK_MAIN()
+BENCHMARK_MAIN();

@@ -322,4 +322,4 @@ static void Benchmark_extract_id(benchmark::State & state)
 
 BENCHMARK(Benchmark_extract_id)->Apply(all_sentences);
 
-BENCHMARK_MAIN()
+BENCHMARK_MAIN();
