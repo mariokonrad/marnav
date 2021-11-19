@@ -9,6 +9,16 @@ External sources should remain as unpatched as possible, outside the
 projects own source.
 
 
+googletest-1.11.0
+-----------------
+
+License: BSD (http://opensource.org/licenses/BSD-3-Clause)
+
+Homepage: https://github.com/google/googletest
+
+Download: https://github.com/google/googletest/archive/release-1.11.0.tar.gz
+
+
 googletest-1.10.0
 -----------------
 
@@ -28,6 +38,14 @@ Homepage: https://github.com/google/benchmark
 
 
 benchmark-1.2.0
+---------------
+
+License: Apache 2.0 (http://www.apache.org/licences)
+
+Homepage: https://github.com/google/benchmark
+
+
+benchmark-1.6.0
 ---------------
 
 License: Apache 2.0 (http://www.apache.org/licences)

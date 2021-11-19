@@ -1,4 +1,4 @@
-message(STATUS "Extern: googletest 1.10.0")
+message(STATUS "Extern: googletest 1.11.0")
 
 set(googletest_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/local")
 set(googletest_INCLUDE_DIR "${googletest_INSTALL_DIR}/include")
@@ -6,7 +6,7 @@ set(googletest_LIBRARY_DIR "${googletest_INSTALL_DIR}/lib")
 
 ExternalProject_Add(extern-googletest
 	PREFIX "${CMAKE_CURRENT_BINARY_DIR}/googletest"
-	SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/extern/googletest-1.10.0"
+	SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/extern/googletest-1.11.0"
 	# configure
 	CMAKE_ARGS
 		-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}

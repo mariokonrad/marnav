@@ -359,7 +359,6 @@ Tools and their versions are listed below, newer/older/other tools
 (i.e. compilers, etc.) may work, but not tested.
 
 Compiler:
-- GCC 4.9
 - GCC 5
 - GCC 6
 - GCC 7
@@ -376,6 +375,7 @@ Compiler:
 - Clang 10
 - Clang 11
 - Clang 12
+- Clang 13
 
 Tools needed to build the library:
 - cmake 3.11 or newer
