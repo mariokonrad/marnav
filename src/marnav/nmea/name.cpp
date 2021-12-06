@@ -13,6 +13,8 @@ std::string to_name(sentence_id t)
 			return "Waypoint Arrival Alarm";
 		case sentence_id::ALM:
 			return "GPS Almanac Data";
+		case sentence_id::ALR:
+			return "Set Alarm State";
 		case sentence_id::APB:
 			return "Autopilot Sentence 'B'";
 		case sentence_id::BEC:

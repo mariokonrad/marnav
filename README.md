@@ -46,6 +46,7 @@ Supported sentences for NMEA-0183 (read and write):
 
 - AAM: Waypoint Arrival Alarm
 - ALM: GPS Almanac Data
+- ALR: Set Alarm State
 - APB: Autopilot Sentence "B"
 - BEC: Bearing and Distance to Waypoint
 - BOD: Bearing - Waypoint to Waypoint
@@ -533,6 +534,7 @@ A (non-complete) collection of resources from where information was gathered.
 - [AIVDM/AIVDO Protocol decoding](http://www.catb.org/gpsd/AIVDM.html) (by Eric S. Raymond)
 - [DSC Position Request](http://www.thehulltruth.com/marine-electronics-forum/43945-dsc-position-request.html)
 - [NMEA-0183 Sentences DSC,DSE](http://www.cruisersforum.com/forums/f13/nmea-0183-sentences-dsc-dse-124887.html)
+- [NMEA-0183 Sentence ALR](https://www.cruisersforum.com/forums/f134/opencpn-and-external-nmea0183-alarms-81396.html)
 - [SerialMon - NMEA 0183 Protocol](http://www.serialmon.com/protocols/nmea0183.html)
 - [SeaTalk Reference](http://thomasknauf.de/seatalk.htm) (by Thomas Knauf)
 - [Navigation Center - AIS Standard Class B Equipment Position Report](http://www.navcen.uscg.gov/?pageName=AISMessagesB)

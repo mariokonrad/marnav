@@ -32,6 +32,7 @@
 
 #include <marnav/nmea/aam.hpp>
 #include <marnav/nmea/alm.hpp>
+#include <marnav/nmea/alr.hpp>
 #include <marnav/nmea/apa.hpp>
 #include <marnav/nmea/apb.hpp>
 #include <marnav/nmea/bec.hpp>
@@ -607,6 +608,16 @@ static std::string render(const marnav::nmea::dse::query_flag t)
 }
 
 static std::string render(const marnav::nmea::dse::code_id t)
+{
+	return marnav::nmea::to_name(t);
+}
+
+static std::string render(const marnav::nmea::alr::condition t)
+{
+	return marnav::nmea::to_name(t);
+}
+
+static std::string render(const marnav::nmea::alr::acknowledge t)
 {
 	return marnav::nmea::to_name(t);
 }
@@ -1207,6 +1218,16 @@ static void print_detail_alm(const marnav::nmea::sentence * s)
 	print("Mean Anomaly", render(t->get_mean_anomaly()));
 	print("F0 clock parameter", render(t->get_f0_clock_parameter()));
 	print("F1 clock parameter", render(t->get_f1_clock_parameter()));
+}
+
+static void print_detail_alr(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::alr>(s);
+	print("Time UTC", render(t->get_time_utc()));
+	print("Alarm Number", render(t->get_number()));
+	print("Alarm Condition", render(t->get_condition()));
+	print("Alarm Acknowledge", render(t->get_acknowledge()));
+	print("Alarm Text", render(t->get_text()));
 }
 
 static void print_detail_apa(const marnav::nmea::sentence * s)
@@ -1964,6 +1985,7 @@ static const std::vector<nmea_entry> & nmea_sentences()
 		// standard
 		ADD_SENTENCE(aam),
 		ADD_SENTENCE(alm),
+		ADD_SENTENCE(alr),
 		ADD_SENTENCE(apa),
 		ADD_SENTENCE(apb),
 		ADD_SENTENCE(bec),

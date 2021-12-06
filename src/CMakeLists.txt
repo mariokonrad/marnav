@@ -64,6 +64,7 @@ target_sources(marnav
 		marnav/nmea/aam.cpp
 		marnav/nmea/ais_helper.cpp
 		marnav/nmea/alm.cpp
+		marnav/nmea/alr.cpp
 		marnav/nmea/angle.cpp
 		marnav/nmea/apa.cpp
 		marnav/nmea/apb.cpp

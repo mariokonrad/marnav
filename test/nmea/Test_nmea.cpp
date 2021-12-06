@@ -13,7 +13,7 @@ class Test_nmea : public ::testing::Test
 {
 };
 
-static constexpr std::size_t num_supported_sentences = 90u;
+static constexpr std::size_t num_supported_sentences = 91u;
 
 TEST_F(Test_nmea, checksum_to_string)
 {

@@ -1,5 +1,6 @@
 #include <marnav/nmea/aam.hpp>
 #include <marnav/nmea/alm.hpp>
+#include <marnav/nmea/alr.hpp>
 #include <marnav/nmea/apb.hpp>
 #include <marnav/nmea/bod.hpp>
 #include <marnav/nmea/bwc.hpp>
@@ -96,6 +97,7 @@ struct sentence_data {
 static std::vector<sentence_data> sentences = {
 	INFO(aam, "$GPAAM,A,A,0.5,N,POINT1*6E"),
 	INFO(alm, "$GPALM,1,1,15,1159,00,441d,4e,16be,fd5e,a10c9f,4a2da4,686e81,58cbe1,0a4,001*77"),
+	INFO(alr, "$IIALR,,,,,*73"),
 	INFO(apb, "$GPAPB,A,A,0.10,R,N,V,V,011,M,DEST,011,M,011,M*3C"),
 	INFO(bod, "$GPBOD,12.5,T,,,,*12"),
 	INFO(bwc, "$GPBWC,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM,A*4C"),
@@ -238,6 +240,7 @@ static void Benchmark_create_sentence(benchmark::State & state)
 
 BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::aam)->Apply(specific<nmea::aam>);
 BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::alm)->Apply(specific<nmea::alm>);
+BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::alr)->Apply(specific<nmea::alr>);
 BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::apb)->Apply(specific<nmea::apb>);
 BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::bod)->Apply(specific<nmea::bod>);
 BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::bwc)->Apply(specific<nmea::bwc>);
