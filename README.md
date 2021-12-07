@@ -425,8 +425,9 @@ Features:
 
 Components:
 - `ENABLE_EXAMPLES`: enables examples. Default: `ON`
-- `ENABLE_TESTS`: enables unit tests, integration tests and benchmarks. Default: `ON`
 - `ENABLE_TOOLS`: enables tools. Default: `ON`
+- `ENABLE_TESTS`: enables unit tests, integration tests and benchmarks. Default: `ON`
+- `ENABLE_TESTS_BENCHMARK`: enables benchmark tests, enabled only if `ENABLE_TESTS` is also enabled. Default: `ON`
 
 
 ### Library

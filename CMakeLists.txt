@@ -24,6 +24,7 @@ option(ENABLE_SANITIZER "Enable Sanitizing (address, undefined)" OFF)
 option(ENABLE_IO "Enable IO support" ON)
 option(ENABLE_EXAMPLES "Enable Examples" ON)
 option(ENABLE_TESTS "Enable Tests" ON)
+option(ENABLE_TESTS_BENCHMARK "Enable Test Benchmarks" ON)
 option(ENABLE_TOOLS "Enable Tools" ON)
 
 if(NOT DEFINED BUILD_SHARED_LIBS)
@@ -70,10 +71,15 @@ endif()
 
 ### testing
 message(STATUS "Build Tests: ${ENABLE_TESTS}")
+message(STATUS "Build Tests Benchmark: ${ENABLE_TESTS_BENCHMARK}")
 if(ENABLE_TESTS)
 	enable_testing()
 	include(ExternGoogletest)
-	include(ExternBenchmark)
+
+	if(ENABLE_TESTS_BENCHMARK)
+		include(ExternBenchmark)
+	endif()
+
 	add_subdirectory(test)
 endif()
 

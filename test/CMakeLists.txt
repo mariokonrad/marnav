@@ -273,7 +273,7 @@ add_test(
 	)
 
 # excluded with coverage builds, does not make sense otherwise
-if(NOT CMAKE_BUILD_TYPE MATCHES Coverage)
+if(NOT CMAKE_BUILD_TYPE MATCHES Coverage AND ENABLE_TESTS_BENCHMARK)
 	macro(setup_benchmark NAME SOURCE)
 		add_executable(${NAME} ${SOURCE})
 		target_include_directories(${NAME}
