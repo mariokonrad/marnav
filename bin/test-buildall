@@ -33,11 +33,11 @@ function log_result()
 
 function build_with_local_installation()
 {
-	for cfg in $(${SCRIPT_BASE}/bld --list | grep -E "clang[0-9]+|gcc[0-9]+") ; do
+	for cfg in $(cmake --list-presets | grep "^\s*\"" | tr -d '"') ; do
 		echo -n "target: ${cfg} "
 		printf '%*s' $((45 - ${#cfg})) "" | tr ' ' '.'
 		set +e
-		BUILD_DIR=${BUILD}/${cfg} ${SCRIPT_BASE}/bld ${cfg} >&${BUILD}/${cfg}.log
+		cmake --preset ${cfg} &>${BUILD}/${cfg}.log && cmake --build --preset ${cfg} &>>${BUILD}/${cfg}.log
 		log_result $? ${BUILD}/${cfg}.log
 		set -e
 		rm -fr ${BUILD}/${cfg}

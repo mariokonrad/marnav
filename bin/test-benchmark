@@ -35,7 +35,7 @@ for branch in $* ; do
 
 	# build
 	set +e
-	BUILD_DIR=${BUILD}/${branch} ${SCRIPT_BASE}/bld gcc-bench >&${logfile}
+	(cmake --preset gcc-bench && cmake --build --preset gcc-bench) >&${logfile}
 	if [ $? -eq 0 ] ; then
 		echo "SUCCESS" >> ${logfile}
 		echo -n -e " \033[32mSUCCESS\033[0m"
