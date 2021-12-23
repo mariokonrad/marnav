@@ -156,6 +156,60 @@ std::string to_string(dsc::extension_indicator value)
 	throw std::invalid_argument{"invaild value for conversion of dsc::extension_indicator"};
 }
 
+std::string to_name(dsc::format_specifier value)
+{
+	switch (value) {
+		case dsc::format_specifier::geographical_area:
+			return "Geographical Area";
+		case dsc::format_specifier::distress:
+			return "Distress";
+		case dsc::format_specifier::all_ships:
+			return "All Ships";
+		case dsc::format_specifier::individual_station:
+			return "Individual Station";
+	}
+	throw std::invalid_argument{"invaild value for conversion of dsc::format_specifier"};
+}
+
+std::string to_name(dsc::category value)
+{
+	switch (value) {
+		case dsc::category::routine:
+			return "Routine";
+		case dsc::category::safety:
+			return "Safety";
+		case dsc::category::urgency:
+			return "Urgency";
+		case dsc::category::distress:
+			return "Distress";
+	}
+	throw std::invalid_argument{"invaild value for conversion of dsc::category"};
+}
+
+std::string to_name(dsc::acknowledgement value)
+{
+	switch (value) {
+		case dsc::acknowledgement::B:
+			return "B";
+		case dsc::acknowledgement::R:
+			return "R";
+		case dsc::acknowledgement::end_of_sequence:
+			return "End of Sequence";
+	}
+	throw std::invalid_argument{"invaild value for conversion of dsc::acknowledgement"};
+}
+
+std::string to_name(dsc::extension_indicator value)
+{
+	switch (value) {
+		case dsc::extension_indicator::none:
+			return "None";
+		case dsc::extension_indicator::extension_follows:
+			return "Extension Follows";
+	}
+	throw std::invalid_argument{"invaild value for conversion of dsc::extension_indicator"};
+}
+
 constexpr sentence_id dsc::ID;
 constexpr const char * dsc::TAG;
 

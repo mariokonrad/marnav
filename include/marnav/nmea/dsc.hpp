@@ -141,6 +141,11 @@ std::string to_string(dsc::format_specifier value);
 std::string to_string(dsc::category value);
 std::string to_string(dsc::acknowledgement value);
 std::string to_string(dsc::extension_indicator value);
+
+std::string to_name(dsc::format_specifier value);
+std::string to_name(dsc::category value);
+std::string to_name(dsc::acknowledgement value);
+std::string to_name(dsc::extension_indicator value);
 }
 }
 

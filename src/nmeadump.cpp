@@ -39,10 +39,11 @@
 #include <marnav/nmea/bwc.hpp>
 #include <marnav/nmea/bwr.hpp>
 #include <marnav/nmea/bww.hpp>
+#include <marnav/nmea/dbk.hpp>
 #include <marnav/nmea/dbt.hpp>
 #include <marnav/nmea/dpt.hpp>
-//#include <marnav/nmea/dsc.hpp>
-//#include <marnav/nmea/dse.hpp>
+#include <marnav/nmea/dsc.hpp>
+#include <marnav/nmea/dse.hpp>
 #include <marnav/nmea/dtm.hpp>
 #include <marnav/nmea/fsi.hpp>
 #include <marnav/nmea/gbs.hpp>
@@ -200,61 +201,6 @@ static struct {
 		std::string input_string;
 	} config;
 } global;
-
-static bool parse_options(int argc, char ** argv)
-{
-	uint32_t port_speed = 0;
-
-	// clang-format off
-	cxxopts::Options options{argv[0], "NMEA Dump"};
-	options.add_options()
-		("h,help",
-			"Shows help information.")
-		("p,port",
-			"Specifies the port to use.",
-			cxxopts::value<std::string>(global.config.port))
-		("s,speed",
-			"Specifies the port speed. Valid values: 4800, 38400",
-			cxxopts::value<uint32_t>(port_speed))
-		("f,file",
-			"Specifies the file to use.",
-			cxxopts::value<std::string>(global.config.file))
-		("i,input",
-			"String to parse",
-			cxxopts::value<std::string>(global.config.input_string))
-		;
-	// clang-format on
-
-	const auto args = options.parse(argc, argv);
-
-	if (args.count("help")) {
-		fmt::printf("%s\n", options.help());
-		fmt::printf("If no file or port is specified, stdin is used to read data from.\n\n");
-		return true;
-	}
-
-	// validation
-
-	static const std::vector<uint32_t> valid_port_speeds = {4800, 38400};
-
-	if (args.count("port") && args.count("file"))
-		throw std::runtime_error{"specifying port and file is illegal"};
-	if (args.count("port") && !contains(valid_port_speeds, port_speed))
-		throw std::runtime_error{"invalid port speed"};
-
-	switch (port_speed) {
-		case 4800:
-			global.config.speed = marnav::io::serial::baud::baud_4800;
-			break;
-		case 38400:
-			global.config.speed = marnav::io::serial::baud::baud_38400;
-			break;
-		default:
-			break;
-	}
-
-	return false;
-}
 
 static std::string trim(const std::string & s)
 {
@@ -635,6 +581,36 @@ static std::string render(const marnav::nmea::mode_indicator t)
 	return marnav::nmea::to_name(t);
 }
 
+static std::string render(const marnav::nmea::dsc::format_specifier t)
+{
+	return marnav::nmea::to_name(t);
+}
+
+static std::string render(const marnav::nmea::dsc::category t)
+{
+	return marnav::nmea::to_name(t);
+}
+
+static std::string render(const marnav::nmea::dsc::acknowledgement t)
+{
+	return marnav::nmea::to_name(t);
+}
+
+static std::string render(const marnav::nmea::dsc::extension_indicator t)
+{
+	return marnav::nmea::to_name(t);
+}
+
+static std::string render(const marnav::nmea::dse::query_flag t)
+{
+	return marnav::nmea::to_name(t);
+}
+
+static std::string render(const marnav::nmea::dse::code_id t)
+{
+	return marnav::nmea::to_name(t);
+}
+
 static std::string render(const std::vector<uint8_t> & t)
 {
 	std::string s;
@@ -692,6 +668,12 @@ static std::string render(const marnav::units::temperature & t)
 {
 	// all temperatures are rendered in celsius by default
 	return render(t.get<marnav::units::celsius>());
+}
+
+static std::string render(const marnav::geo::region & t)
+{
+	return fmt::sprintf("%s/%s - %s/%s", render(t.top()), render(t.left()), render(t.bottom()),
+		render(t.right()));
 }
 
 template <typename T>
@@ -1388,6 +1370,14 @@ static void print_detail_mwd(const marnav::nmea::sentence * s)
 	print("Speed m/s", render(t->get_speed_ms()));
 }
 
+static void print_detail_dbk(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::dbk>(s);
+	print("Depth Feet", render(t->get_depth_feet()));
+	print("Depth Meter", render(t->get_depth_meter()));
+	print("Depth Fathom", render(t->get_depth_fathom()));
+}
+
 static void print_detail_dbt(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::dbt>(s);
@@ -1403,6 +1393,26 @@ static void print_detail_dpt(const marnav::nmea::sentence * s)
 	print("Offset from Transducer",
 		render(t->get_transducer_offset().get<marnav::units::meters>()));
 	print("Max Depth", render(t->get_max_depth()));
+}
+
+static void print_detail_dsc(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::dsc>(s);
+	print("Format Specificer", render(t->get_fmt_spec()));
+	print("Category", render(t->get_cat()));
+	print("MMSI", render(t->get_mmsi()));
+	print("Geographical Area", render(t->get_geographical_area()));
+	print("Acklowledgement", render(t->get_ack()));
+	print("Extension Indicator", render(t->get_extension()));
+}
+
+static void print_detail_dse(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::dse>(s);
+	print("Number of Messages", render(t->get_number_of_messages()));
+	print("Sentence Number", render(t->get_sentence_number()));
+	print("Query Flag", render(t->get_flag()));
+	print("MMSI", render(t->get_mmsi()));
 }
 
 static void print_detail_apb(const marnav::nmea::sentence * s)
@@ -1937,17 +1947,18 @@ static void print_detail_message_24(const marnav::ais::message * m)
 }
 /// @endcond
 
-static void dump_nmea(const std::string & line)
+struct nmea_entry {
+	marnav::nmea::sentence_id id;
+	std::function<void(const marnav::nmea::sentence *)> func;
+};
+
+static const std::vector<nmea_entry> & nmea_sentences()
 {
 #define ADD_SENTENCE(s)                               \
 	{                                                 \
 		marnav::nmea::s::ID, detail::print_detail_##s \
 	}
-	struct entry {
-		marnav::nmea::sentence_id id;
-		std::function<void(const marnav::nmea::sentence *)> func;
-	};
-	using container = std::vector<entry>;
+	using container = std::vector<nmea_entry>;
 	// clang-format off
 	static const container sentences = {
 		// standard
@@ -1960,8 +1971,11 @@ static void dump_nmea(const std::string & line)
 		ADD_SENTENCE(bwc),
 		ADD_SENTENCE(bwr),
 		ADD_SENTENCE(bww),
+		ADD_SENTENCE(dbk),
 		ADD_SENTENCE(dbt),
 		ADD_SENTENCE(dpt),
+		ADD_SENTENCE(dsc),
+		ADD_SENTENCE(dse),
 		ADD_SENTENCE(dtm),
 		ADD_SENTENCE(fsi),
 		ADD_SENTENCE(gbs),
@@ -2041,13 +2055,18 @@ static void dump_nmea(const std::string & line)
 	};
 // clang-format on
 #undef ADD_SENTENCE
+	return sentences;
+}
 
+static int dump_nmea(const std::string & line)
+{
 	using namespace marnav;
 
 	try {
+		const auto & sentences = nmea_sentences();
 		auto s = nmea::make_sentence(line);
 		auto i = std::find_if(std::begin(sentences), std::end(sentences),
-			[&s](const container::value_type & item) { return item.id == s->id(); });
+			[&s](const nmea_entry & item) { return item.id == s->id(); });
 		if (i == std::end(sentences)) {
 			fmt::printf("\t%s\n", detail::render(s->id()));
 			fmt::printf(
@@ -2058,6 +2077,7 @@ static void dump_nmea(const std::string & line)
 			fmt::printf("\tTalker: %s\n", detail::render(s->get_talker()));
 			i->func(s.get());
 			fmt::printf("\n");
+			return 0;
 		}
 	} catch (nmea::unknown_sentence & error) {
 		fmt::printf("%s%s%s\n\terror: unknown sentence: %s\n\n", terminal::red, line,
@@ -2069,9 +2089,10 @@ static void dump_nmea(const std::string & line)
 		fmt::printf(
 			"%s%s%s\n\terror: %s\n\n", terminal::red, line, terminal::normal, error.what());
 	}
+	return -1;
 }
 
-static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> & sentences)
+static int dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> & sentences)
 {
 #define ADD_MESSAGE(m)                               \
 	{                                                \
@@ -2124,18 +2145,22 @@ static void dump_ais(const std::vector<std::unique_ptr<marnav::nmea::sentence>> 
 			fmt::printf("\t%s\n", detail::render(m->type()));
 			i->func(m.get());
 			fmt::printf("\n");
+			return 0;
 		}
 	} catch (std::exception & error) {
 		fmt::printf("\t%serror:%s %s\n\n", terminal::red, terminal::normal, error.what());
 	}
+	return -1;
 }
 
-static void process(std::function<bool(std::string &)> source)
+static int process(std::function<bool(std::string &)> source)
 {
 	using namespace marnav;
 
 	std::string line;
 	std::vector<std::unique_ptr<nmea::sentence>> sentences;
+
+	int result = 0;
 
 	while (source(line)) {
 		line = trim(line);
@@ -2145,7 +2170,7 @@ static void process(std::function<bool(std::string &)> source)
 			continue;
 
 		if (line[0] == nmea::sentence::start_token) {
-			dump_nmea(line);
+			result += dump_nmea(line);
 		} else if (line[0] == nmea::sentence::start_token_ais) {
 			fmt::printf("%s%s%s\n", terminal::blue, line, terminal::normal);
 			auto s = nmea::make_sentence(line);
@@ -2161,6 +2186,7 @@ static void process(std::function<bool(std::string &)> source)
 				fmt::printf("%s%s%s\n\terror: ignoring AIS sentence, dropping collection.\n\n",
 					terminal::red, line, terminal::normal);
 				sentences.clear();
+				--result;
 				continue;
 			}
 
@@ -2182,7 +2208,7 @@ static void process(std::function<bool(std::string &)> source)
 
 			sentences.push_back(std::move(s));
 			if (fragment == n_fragments) {
-				dump_ais(sentences);
+				result += dump_ais(sentences);
 				sentences.clear();
 			}
 		} else {
@@ -2190,6 +2216,85 @@ static void process(std::function<bool(std::string &)> source)
 				terminal::normal);
 		}
 	}
+
+	return result;
+}
+
+static bool parse_options(int argc, char ** argv)
+{
+	uint32_t port_speed = 0;
+
+	// clang-format off
+	cxxopts::Options options{argv[0], "NMEA Dump"};
+	options.add_options()
+		("h,help",
+			"Shows help information.")
+		("help-nmea-list",
+			"Shows a list of supported NMEA sentences.")
+		("p,port",
+			"Specifies the port to use.",
+			cxxopts::value<std::string>(global.config.port))
+		("s,speed",
+			"Specifies the port speed. Valid values: 4800, 38400",
+			cxxopts::value<uint32_t>(port_speed))
+		("f,file",
+			"Specifies the file to use.",
+			cxxopts::value<std::string>(global.config.file))
+		("i,input",
+			"String to parse",
+			cxxopts::value<std::string>(global.config.input_string))
+		;
+	// clang-format on
+
+	const auto args = options.parse(argc, argv);
+
+	if (args.count("help")) {
+		fmt::printf("%s\n", options.help());
+		fmt::printf("If no file or port is specified, stdin is used to read data from.\n\n");
+		return true;
+	}
+
+	using namespace marnav;
+
+	if (args.count("help-nmea-list")) {
+		const auto is_impl = [](nmea::sentence_id id) {
+			return std::find_if(begin(nmea_sentences()), end(nmea_sentences()),
+					   [id](const nmea_entry & entry) {
+						   return id == entry.id
+							   // AIS data carrying NMEA sentences are decoded as AIS messages
+							   || id == nmea::sentence_id::VDM || id == nmea::sentence_id::VDO;
+					   })
+				!= end(nmea_sentences());
+		};
+
+		for (const auto id : nmea::get_supported_sentences_id()) {
+			fmt::printf("%c %s  %s\n", is_impl(id) ? '-' : '*', to_string(id), to_name(id));
+		}
+
+		return true;
+	}
+
+	// validation
+
+	static const std::vector<uint32_t> valid_port_speeds = {4800, 38400};
+
+	if (args.count("port") && args.count("file"))
+		throw std::runtime_error{"specifying port and file is illegal"};
+	if (args.count("port") && !contains(valid_port_speeds, port_speed))
+		throw std::runtime_error{"invalid port speed"};
+
+	switch (port_speed) {
+		case 4800:
+			global.config.speed = io::serial::baud::baud_4800;
+			break;
+		case 38400:
+			global.config.speed = io::serial::baud::baud_38400;
+			break;
+		default:
+			break;
+	}
+
+	return false;
 }
 }
 
@@ -2200,23 +2305,24 @@ int main(int argc, char ** argv)
 	if (parse_options(argc, argv))
 		return EXIT_SUCCESS;
 
+	int result = 0;
 	if (!global.config.file.empty()) {
 		std::ifstream ifs{global.config.file.c_str()};
-		process([&](std::string & line) { return !!std::getline(ifs, line); });
+		result = process([&](std::string & line) { return !!std::getline(ifs, line); });
 	} else if (!global.config.port.empty()) {
 		using namespace marnav;
 		using namespace marnav::io;
 		default_nmea_reader source{
 			utils::make_unique<serial>(global.config.port, global.config.speed,
 				serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none)};
-		process([&](std::string & line) { return source.read_sentence(line); });
+		result = process([&](std::string & line) { return source.read_sentence(line); });
 	} else if (!global.config.input_string.empty()) {
 		std::istringstream is(global.config.input_string);
-		process([&](std::string & line) { return !!std::getline(is, line); });
+		result = process([&](std::string & line) { return !!std::getline(is, line); });
 	} else {
 		std::cin.sync_with_stdio(false);
-		process([&](std::string & line) { return !!std::getline(std::cin, line); });
+		result = process([&](std::string & line) { return !!std::getline(std::cin, line); });
 	}
 
-	return EXIT_SUCCESS;
+	return result;
 }

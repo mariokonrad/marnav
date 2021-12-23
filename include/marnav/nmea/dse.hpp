@@ -89,6 +89,9 @@ public:
 
 std::string to_string(dse::query_flag value);
 std::string to_string(dse::code_id value);
+
+std::string to_name(dse::query_flag value);
+std::string to_name(dse::code_id value);
 }
 }
 

@@ -77,6 +77,40 @@ std::string to_string(dse::code_id value)
 	throw std::invalid_argument{"invaild value for conversion of dse::code_id"};
 }
 
+std::string to_name(dse::query_flag value)
+{
+	switch (value) {
+		case dse::query_flag::query:
+			return "Query";
+		case dse::query_flag::reply:
+			return "Reply";
+		case dse::query_flag::a:
+			return "A";
+	}
+	throw std::invalid_argument{"invaild value for conversion of dse::query_flag"};
+}
+
+std::string to_name(dse::code_id value)
+{
+	switch (value) {
+		case dse::code_id::enhanced_position_resolution:
+			return "Enhanced Position Resolution";
+		case dse::code_id::source_and_data_of_position:
+			return "Source and Data of Position";
+		case dse::code_id::current_speed_of_vessel:
+			return "Current Speed of Vessel";
+		case dse::code_id::current_course_of_vessel:
+			return "Current Course of Vessel";
+		case dse::code_id::additional_station_identification:
+			return "Additional Station Identification";
+		case dse::code_id::enhanced_geographic_area:
+			return "Enhanced Geographic Area";
+		case dse::code_id::number_of_persons_on_board:
+			return "Number of Persons on Board";
+	}
+	throw std::invalid_argument{"invaild value for conversion of dse::code_id"};
+}
+
 constexpr sentence_id dse::ID;
 constexpr const char * dse::TAG;
 

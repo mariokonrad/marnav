@@ -430,5 +430,16 @@ if(ENABLE_TOOLS)
 				cxxopts::cxxopts
 				fmt::fmt
 			)
+
+		if(ENABLE_TESTS)
+			enable_testing()
+			add_test(NAME nmeadump-completeness
+				COMMAND $<TARGET_FILE:nmeadump> --help-nmea-list
+				)
+			set_tests_properties(nmeadump-completeness
+				PROPERTIES
+					FAIL_REGULAR_EXPRESSION "\\* [A-Z]+"
+			)
+		endif()
 	endif()
 endif()
