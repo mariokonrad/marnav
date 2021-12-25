@@ -5,6 +5,7 @@
 Supported sentences for NMEA-0183 (read and write):
 
 - \link marnav::nmea::aam \c AAM \endlink : Waypoint Arrival Alarm
+- \link marnav::nmea::ack \c ACK \endlink : Acknowledge Alarm
 - \link marnav::nmea::alm \c ALM \endlink : GPS Almanac Data
 - \link marnav::nmea::alr \c ALR \endlink : Set Alarm State
 - \link marnav::nmea::apb \c APB \endlink : Autopilot Sentence "B"

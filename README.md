@@ -45,6 +45,7 @@ Features
 Supported sentences for NMEA-0183 (read and write):
 
 - AAM: Waypoint Arrival Alarm
+- ACK: Acknowledge Alarm
 - ALM: GPS Almanac Data
 - ALR: Set Alarm State
 - APB: Autopilot Sentence "B"

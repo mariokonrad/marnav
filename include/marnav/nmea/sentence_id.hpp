@@ -15,6 +15,7 @@ enum class sentence_id : uint32_t {
 
 	// standard sentences
 	AAM, ///< Waypoint Arrival Alarm
+	ACK, ///< Alarm Acknowledge
 	ALM, ///< GPS Almanac Data
 	ALR, ///< Set Alarm State
 	APB, ///< Autopilot Sentence "B"

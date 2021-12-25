@@ -62,6 +62,7 @@ target_sources(marnav
 		marnav/geo/position.cpp
 		marnav/geo/region.cpp
 		marnav/nmea/aam.cpp
+		marnav/nmea/ack.cpp
 		marnav/nmea/ais_helper.cpp
 		marnav/nmea/alm.cpp
 		marnav/nmea/alr.cpp

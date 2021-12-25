@@ -31,6 +31,7 @@
 #include <marnav/nmea/waypoint.hpp>
 
 #include <marnav/nmea/aam.hpp>
+#include <marnav/nmea/ack.hpp>
 #include <marnav/nmea/alm.hpp>
 #include <marnav/nmea/alr.hpp>
 #include <marnav/nmea/apa.hpp>
@@ -1220,6 +1221,12 @@ static void print_detail_alm(const marnav::nmea::sentence * s)
 	print("F1 clock parameter", render(t->get_f1_clock_parameter()));
 }
 
+static void print_detail_ack(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::ack>(s);
+	print("Alarm Number", render(t->get_number()));
+}
+
 static void print_detail_alr(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::alr>(s);
@@ -1984,6 +1991,7 @@ static const std::vector<nmea_entry> & nmea_sentences()
 	static const container sentences = {
 		// standard
 		ADD_SENTENCE(aam),
+		ADD_SENTENCE(ack),
 		ADD_SENTENCE(alm),
 		ADD_SENTENCE(alr),
 		ADD_SENTENCE(apa),
