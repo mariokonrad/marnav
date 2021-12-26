@@ -85,6 +85,7 @@
 #include <marnav/nmea/sfi.hpp>
 #include <marnav/nmea/stn.hpp>
 #include <marnav/nmea/tds.hpp>
+#include <marnav/nmea/tep.hpp>
 #include <marnav/nmea/tfi.hpp>
 #include <marnav/nmea/tll.hpp>
 #include <marnav/nmea/tpc.hpp>
@@ -1286,6 +1287,12 @@ static void print_detail_tds(const marnav::nmea::sentence * s)
 	print("Distance [m]", render(t->get_distance()));
 }
 
+static void print_detail_tep(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::tep>(s);
+	print("Elevation [Deg]", render(t->get_elevation()));
+}
+
 static void print_detail_tfi(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::tfi>(s);
@@ -2045,6 +2052,7 @@ static const std::vector<nmea_entry> & nmea_sentences()
 		ADD_SENTENCE(sfi),
 		ADD_SENTENCE(stn),
 		ADD_SENTENCE(tds),
+		ADD_SENTENCE(tep),
 		ADD_SENTENCE(tfi),
 		ADD_SENTENCE(tll),
 		ADD_SENTENCE(tpc),

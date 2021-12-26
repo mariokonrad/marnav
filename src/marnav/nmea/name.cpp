@@ -279,6 +279,8 @@ std::string to_name(sentence_id t)
 			return "Arrival time at point of interest";
 		case sentence_id::ZLZ:
 			return "Time of Day";
+		case sentence_id::TEP:
+			return "Transit Satellite Predicated Elevation";
 	}
 	return "-";
 }

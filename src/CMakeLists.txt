@@ -138,6 +138,7 @@ target_sources(marnav
 		marnav/nmea/tag_block.cpp
 		marnav/nmea/talker_id.cpp
 		marnav/nmea/tds.cpp
+		marnav/nmea/tep.cpp
 		marnav/nmea/tfi.cpp
 		marnav/nmea/time.cpp
 		marnav/nmea/tll.cpp

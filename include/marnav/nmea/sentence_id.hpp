@@ -135,6 +135,7 @@ enum class sentence_id : uint32_t {
 	STC, ///< Time Constant
 	STR, ///< Tracking Reference
 	SYS, ///< Hybrid System Configuration
+	TEP, ///< Transit Satellite Predicated Elevation
 	VWE, ///< Wind Track Efficiency
 	VWR, ///< Relative Wind Speed and Angle (II)
 	VWT, ///< True Wind Speed and Angle

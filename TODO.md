@@ -27,7 +27,6 @@ TODO
 @todo Implement NMEA sentence: IMA
 @todo Implement NMEA sentence: MHU
 @todo Implement NMEA sentence: OLN
-@todo Implement NMEA sentence: TEP
 @todo Implement NMEA sentence: TRF
 @todo Implement NMEA sentence: ZTI
 @todo Implement NMEA sentence: ZWP

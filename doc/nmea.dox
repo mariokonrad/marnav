@@ -53,6 +53,7 @@ Supported sentences for NMEA-0183 (read and write):
 - \link marnav::nmea::sfi \c SFI \endlink : Scanning Frequency Information
 - \link marnav::nmea::stn \c STN \endlink : Multiple Data ID
 - \link marnav::nmea::tds \c TDS \endlink : Trawl Door Spread Distance
+- \link marnav::nmea::tep \c TEP \endlink : Transit Satellite Predicted Elevation
 - \link marnav::nmea::tfi \c TFI \endlink : Trawl Filling Indicator
 - \link marnav::nmea::tll \c TLL \endlink : Target Latitude and Longitude
 - \link marnav::nmea::tpc \c TPC \endlink : Trawl Position Cartesian Coordinates

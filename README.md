@@ -93,6 +93,7 @@ Supported sentences for NMEA-0183 (read and write):
 - SFI: Scanning Frequency Information
 - STN: Multiple Data ID
 - TDS: Trawl Door Spread Distance
+- TEP: Transit Satellite Predicted Elevation
 - TFI: Trawl Filling Indicator
 - TLL: Target Latitude and Longitude
 - TPC: Trawl Position Cartesian Coordinates
