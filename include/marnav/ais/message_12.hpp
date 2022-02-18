@@ -3,6 +3,7 @@
 
 #include <marnav/ais/message.hpp>
 #include <marnav/utils/mmsi.hpp>
+#include <string>
 
 namespace marnav
 {

@@ -2,9 +2,11 @@
 #define MARNAV_NMEA_AAM_HPP
 
 #include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/sentence_id.hpp>
+#include <marnav/nmea/talker_id.hpp>
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/units/units.hpp>
-#include <marnav/utils/optional.hpp>
+#include <string>
 
 namespace marnav
 {

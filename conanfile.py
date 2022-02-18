@@ -44,6 +44,7 @@ class Package(ConanFile):
             self.__cmake.definitions['ENABLE_EXAMPLES'] = "FALSE"
             self.__cmake.definitions['ENABLE_TESTS'] = "FALSE"
             self.__cmake.definitions['ENABLE_TOOLS'] = "FALSE"
+            self.__cmake.definitions['ENABLE_IWYU'] = "FALSE"
         return self.__cmake
 
     def set_name(self):

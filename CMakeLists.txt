@@ -26,6 +26,7 @@ option(ENABLE_EXAMPLES "Enable Examples" ON)
 option(ENABLE_TESTS "Enable Tests" ON)
 option(ENABLE_TESTS_BENCHMARK "Enable Test Benchmarks" ON)
 option(ENABLE_TOOLS "Enable Tools" ON)
+option(ENABLE_IWYU "Enable include-what-you-use" OFF)
 
 if(NOT DEFINED BUILD_SHARED_LIBS)
 	if(ENABLE_STATIC)

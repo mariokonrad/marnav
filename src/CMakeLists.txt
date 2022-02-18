@@ -338,6 +338,22 @@ if(ENABLE_SANITIZER)
 		)
 endif()
 
+if(ENABLE_IWYU)
+	find_program(iwyu_bin NAMES iwyu include-what-you-use REQUIRED)
+	if(iwyu_bin)
+		message(STATUS "Found iwyu: ${iwyu_bin}")
+		set(iwyu_args
+			${iwyu_bin}
+			-Xiwyu
+			--no_comments
+			-I${PROJECT_SOURCE_DIR}/include
+			)
+		set_property(TARGET marnav
+			PROPERTY CXX_INCLUDE_WHAT_YOU_USE ${iwyu_args})
+	endif()
+endif()
+
+
 if(CMAKE_BUILD_TYPE MATCHES Coverage)
 	message(STATUS "Coverage: enabled")
 	target_compile_options(marnav
