@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 
 project(marnav
-	VERSION 0.12.0
+	VERSION 0.13.0
 	LANGUAGES CXX C
 	DESCRIPTION "Library for maritime navigation."
 	)
