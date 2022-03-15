@@ -27,8 +27,8 @@ supported_compilers=(
 	"clang-13.0.0"
 	)
 supported_build_types=("Debug" "Release")
-name=marnav
-account=mariokonrad/
+repository=${DOCKER_REPOSITORY:-marnav}
+account=${DOCKER_ACCOUNT:-mariokonrad}
 
 export NUM_PROC=${NUM_PROC:-$(nproc --ignore=2)}
 
@@ -53,7 +53,7 @@ function build()
 {
 	compiler=$1
 	build_type=$2
-	dockerid=${account}${name}:${compiler}
+	dockerid=${account}/${repository}:${compiler}
 	builddir=${BUILD_DIR:-${BUILD}/$(echo "${dockerid}_${build_type}" | tr '/:' '__')}
 
 	if [ ! -d ${builddir} ] ; then

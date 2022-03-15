@@ -42,8 +42,13 @@ supported_compilers=(
 	"clang-13.0.0;ubuntu:20.04"
 	)
 
-name=marnav
-account=mariokonrad/
+repository=${DOCKER_REPOSITORY:-marnav}
+account=${DOCKER_ACCOUNT:-mariokonrad}
+
+# Note: rename image name:
+#
+#   docker tag "old-repo":"old-version" "new-repo":"new-version"
+#
 
 function build_image()
 {
@@ -54,11 +59,11 @@ function build_image()
 
 	docker build \
 		--force-rm \
-		--build-arg compiler_version=${compiler_version} \
-		--build-arg base_image=${base_image} \
-		--tag ${account}${name}:${compiler} \
-		--file ${SCRIPT_BASE}/docker/Dockerfile.${compiler_name} \
-		${SCRIPT_BASE}/docker
+		--build-arg compiler_version="${compiler_version}" \
+		--build-arg base_image="${base_image}" \
+		--tag "${account}/${repository}:${compiler}" \
+		--file "${SCRIPT_BASE}/docker/Dockerfile.${compiler_name}" \
+		"${SCRIPT_BASE}/docker"
 }
 
 function usage()
