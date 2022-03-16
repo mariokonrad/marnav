@@ -5,7 +5,6 @@
 
 namespace
 {
-
 using namespace marnav;
 
 class Test_nmea_hdg : public ::testing::Test
@@ -61,7 +60,7 @@ TEST_F(Test_nmea_hdg, set_heading)
 TEST_F(Test_nmea_hdg, set_magn_dev)
 {
 	nmea::hdg hdg;
-	hdg.set_magn_dev(5.8, nmea::direction::west);
+	hdg.set_magn_dev(nmea::magnetic(5.8, nmea::direction::west));
 
 	EXPECT_STREQ("$HCHDG,,5.8,W,,*18", nmea::to_string(hdg).c_str());
 }
@@ -69,7 +68,7 @@ TEST_F(Test_nmea_hdg, set_magn_dev)
 TEST_F(Test_nmea_hdg, set_magn_var)
 {
 	nmea::hdg hdg;
-	hdg.set_magn_var(5.8, nmea::direction::west);
+	hdg.set_magn_var(nmea::magnetic(5.8, nmea::direction::west));
 
 	EXPECT_STREQ("$HCHDG,,,,5.8,W*18", nmea::to_string(hdg).c_str());
 }
@@ -78,7 +77,7 @@ TEST_F(Test_nmea_hdg, set_magn_dev_wrong_hemisphere)
 {
 	nmea::hdg hdg;
 
-	EXPECT_ANY_THROW(hdg.set_magn_dev(5.8, nmea::direction::north));
-	EXPECT_ANY_THROW(hdg.set_magn_dev(5.8, nmea::direction::south));
+	EXPECT_ANY_THROW(hdg.set_magn_dev(nmea::magnetic(5.8, nmea::direction::north)));
+	EXPECT_ANY_THROW(hdg.set_magn_dev(nmea::magnetic(5.8, nmea::direction::south)));
 }
 }

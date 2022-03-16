@@ -21,9 +21,8 @@ int main(int, char **)
 		serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none));
 
 	// open source device
-	default_nmea_reader source{
-		std::make_unique<serial>("/dev/ttyUSB0", serial::baud::baud_4800,
-			serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none)};
+	default_nmea_reader source{std::make_unique<serial>("/dev/ttyUSB0", serial::baud::baud_4800,
+		serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none)};
 
 	std::string data;
 	while (source.read_sentence(data)) {

@@ -1,11 +1,8 @@
 #include <marnav/nmea/hdg.hpp>
-#include "checks.hpp"
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id hdg::ID;
 constexpr const char * hdg::TAG;
@@ -28,20 +25,6 @@ hdg::hdg(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 4), magn_var_hem_);
 }
 
-void hdg::set_magn_dev(double deg, direction hem)
-{
-	check_value(hem, {direction::east, direction::west}, "magn_dev hemisphere");
-	magn_dev_ = deg;
-	magn_dev_hem_ = hem;
-}
-
-void hdg::set_magn_var(double deg, direction hem)
-{
-	check_value(hem, {direction::east, direction::west}, "magn_var hemisphere");
-	magn_var_ = deg;
-	magn_var_hem_ = hem;
-}
-
 void hdg::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(heading_));
@@ -50,5 +33,28 @@ void hdg::append_data_to(std::string & s, const version &) const
 	append(s, to_string(magn_var_));
 	append(s, to_string(magn_var_hem_));
 }
+
+std::optional<magnetic> hdg::get_magn_dev() const
+{
+	return (magn_dev_ && magn_dev_hem_) ? magnetic(*magn_dev_, *magn_dev_hem_)
+										: std::optional<magnetic>{};
+}
+
+std::optional<magnetic> hdg::get_magn_var() const
+{
+	return (magn_var_ && magn_var_hem_) ? magnetic(*magn_var_, *magn_var_hem_)
+										: std::optional<magnetic>{};
+}
+
+void hdg::set_magn_dev(const magnetic & t)
+{
+	magn_dev_ = t.angle();
+	magn_dev_hem_ = t.hemisphere();
+}
+
+void hdg::set_magn_var(const magnetic & t)
+{
+	magn_var_ = t.angle();
+	magn_var_hem_ = t.hemisphere();
 }
 }

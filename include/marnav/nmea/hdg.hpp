@@ -1,12 +1,11 @@
 #ifndef MARNAV_NMEA_HDG_HPP
 #define MARNAV_NMEA_HDG_HPP
 
+#include <marnav/nmea/magnetic.hpp>
 #include <marnav/nmea/sentence.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief HDG - Heading - Deviation & Variation
 ///
@@ -54,16 +53,13 @@ private:
 
 public:
 	std::optional<double> get_heading() const { return heading_; }
-	std::optional<double> get_magn_dev() const { return magn_dev_; }
-	std::optional<direction> get_magn_dev_hem() const { return magn_dev_hem_; }
-	std::optional<double> get_magn_var() const { return magn_var_; }
-	std::optional<direction> get_magn_var_hem() const { return magn_var_hem_; }
+	std::optional<magnetic> get_magn_dev() const;
+	std::optional<magnetic> get_magn_var() const;
 
 	void set_heading(double t) noexcept { heading_ = t; }
-	void set_magn_dev(double deg, direction hem);
-	void set_magn_var(double deg, direction hem);
+	void set_magn_dev(const magnetic & t);
+	void set_magn_var(const magnetic & t);
 };
-}
 }
 
 #endif

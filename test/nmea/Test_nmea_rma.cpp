@@ -5,7 +5,6 @@
 
 namespace
 {
-
 using namespace marnav;
 
 class Test_nmea_rma : public ::testing::Test
@@ -76,5 +75,28 @@ TEST_F(Test_nmea_rma, set_lon_west)
 	rma.set_lon(geo::longitude{123, 45, 56, geo::longitude::hemisphere::west});
 
 	EXPECT_STREQ("$GPRMA,,,,12345.9333,W,,,,,,*27", nmea::to_string(rma).c_str());
+}
+
+TEST_F(Test_nmea_rma, set_mag)
+{
+	nmea::rma rma;
+	rma.set_magnetic_var(nmea::magnetic(12.5, nmea::direction::west));
+
+	EXPECT_STREQ("$GPRMA,,,,,,,,,,12.5,W*2A", nmea::to_string(rma).c_str());
+}
+
+TEST_F(Test_nmea_rma, get_mag)
+{
+	auto s = nmea::make_sentence("$GPRMA,,,,,,,,,,12.5,E*38");
+	ASSERT_NE(nullptr, s);
+
+	auto rma = nmea::sentence_cast<nmea::rma>(s);
+	ASSERT_NE(nullptr, rma);
+
+	auto magn = rma->get_magnetic_var();
+	ASSERT_TRUE(magn.has_value());
+
+	EXPECT_NEAR(12.5, magn->angle(), 1e-8);
+	EXPECT_EQ(nmea::direction::east, magn->hemisphere());
 }
 }

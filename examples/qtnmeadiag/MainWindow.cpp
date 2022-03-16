@@ -7,6 +7,7 @@
 #include <marnav/nmea/gsa.hpp>
 #include <marnav/nmea/gsv.hpp>
 #include <marnav/nmea/hdg.hpp>
+#include <marnav/nmea/magnetic.hpp>
 #include <marnav/nmea/mwv.hpp>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/pgrme.hpp>
@@ -42,6 +43,11 @@ namespace marnav_example
 /// @cond DEV
 namespace detail
 {
+static QString render(const marnav::nmea::magnetic & t)
+{
+	return marnav::nmea::to_string(t).c_str();
+}
+
 static QString render(const marnav::nmea::status & t)
 {
 	return marnav::nmea::to_string(t).c_str();
@@ -189,7 +195,8 @@ static QString render(const marnav::units::velocity & t)
 	return QString{"%1 knots"}.arg(t.get<marnav::units::knots>().value());
 }
 
-template <typename T> static QString render(const std::optional<T> & t)
+template <typename T>
+static QString render(const std::optional<T> & t)
 {
 	if (!t)
 		return "-";
@@ -226,7 +233,6 @@ static QString details_rmc(const marnav::nmea::sentence * s)
 	result += "\nHeading  : " + render(t->get_heading());
 	result += "\nDate     : " + render(t->get_date());
 	result += "\nMagn Dev : " + render(t->get_mag());
-	result += "\nMagn Hem : " + render(t->get_mag_hem());
 	result += "\nMode Ind : " + render(t->get_mode_ind());
 	return result;
 }
@@ -363,10 +369,8 @@ static QString details_hdg(const marnav::nmea::sentence * s)
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::hdg>(s);
 	QString result;
 	result += "\nHeading       : " + render(t->get_heading());
-	result += "\nMagn Deviation: " + render(t->get_magn_dev()) + " "
-		+ render(t->get_magn_dev_hem());
-	result += "\nMagn Variation: " + render(t->get_magn_var()) + " "
-		+ render(t->get_magn_var_hem());
+	result += "\nMagn Deviation: " + render(t->get_magn_dev());
+	result += "\nMagn Variation: " + render(t->get_magn_var());
 	return result;
 }
 

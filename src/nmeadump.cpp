@@ -712,10 +712,8 @@ static void print_detail_hdg(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::hdg>(s);
 	print("Heading", render(t->get_heading()));
-	print("Magn Deviation",
-		fmt::sprintf("%s %s", render(t->get_magn_dev()), render(t->get_magn_dev_hem())));
-	print("Magn Variation",
-		fmt::sprintf("%s %s", render(t->get_magn_var()), render(t->get_magn_var_hem())));
+	print("Magn Deviation", render(t->get_magn_dev()));
+	print("Magn Variation", render(t->get_magn_var()));
 }
 
 static void print_detail_hfb(const marnav::nmea::sentence * s)
@@ -817,7 +815,7 @@ static void print_detail_rmc(const marnav::nmea::sentence * s)
 	print("SOG", render(t->get_sog()));
 	print("Heading", render(t->get_heading()));
 	print("Date", render(t->get_date()));
-	print("Magn Dev", fmt::sprintf("%s %s", render(t->get_mag()), render(t->get_mag_hem())));
+	print("Magn Dev", render(t->get_mag()));
 	print("Mode Ind ", render(t->get_mode_ind()));
 }
 
@@ -1048,9 +1046,7 @@ static void print_detail_rma(const marnav::nmea::sentence * s)
 	print("Time Diff B", render(t->get_time_diff_b()));
 	print("SOG [kn]", render(t->get_sog()));
 	print("Track made good", render(t->get_track()));
-	print("Magnetic Variation",
-		fmt::sprintf(
-			"%s %s", render(t->get_magnetic_var()), render(t->get_magnetic_var_hem())));
+	print("Magnetic Variation", render(t->get_magnetic_var()));
 }
 
 static void print_detail_mwv(const marnav::nmea::sentence * s)

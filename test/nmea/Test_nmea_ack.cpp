@@ -62,4 +62,3 @@ TEST_F(Test_nmea_ack, get_number)
 	EXPECT_EQ(123u, ack->get_number());
 }
 }
-

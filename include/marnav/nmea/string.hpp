@@ -12,6 +12,10 @@ namespace utils
 {
 class mmsi; // forward declaration
 }
+namespace nmea
+{
+class magnetic; // forward declaration
+}
 
 namespace nmea
 {
@@ -39,6 +43,7 @@ std::string to_string(unit::velocity t);
 std::string to_string(unit::temperature t);
 std::string to_string(unit::pressure t);
 std::string to_string(const utils::mmsi & t);
+std::string to_string(const magnetic & t);
 
 template <class U, class R>
 std::string to_string(const units::basic_unit<U, R> & data)
@@ -47,7 +52,8 @@ std::string to_string(const units::basic_unit<U, R> & data)
 	return to_string(data.value());
 }
 
-template <class T> std::string to_string(const std::optional<T> & data)
+template <class T>
+std::string to_string(const std::optional<T> & data)
 {
 	if (!data)
 		return std::string{};

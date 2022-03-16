@@ -1,11 +1,8 @@
 #include <marnav/nmea/rma.hpp>
-#include "checks.hpp"
 #include "convert.hpp"
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id rma::ID;
 constexpr const char * rma::TAG;
@@ -48,6 +45,12 @@ std::optional<geo::latitude> rma::get_lat() const
 	return (lat_ && lat_hem_) ? lat_ : std::optional<geo::latitude>{};
 }
 
+std::optional<magnetic> rma::get_magnetic_var() const
+{
+	return (magnetic_var_ && magnetic_var_hem_) ? magnetic(*magnetic_var_, *magnetic_var_hem_)
+												: std::optional<magnetic>{};
+}
+
 void rma::set_lat(const geo::latitude & t)
 {
 	lat_ = t;
@@ -60,11 +63,10 @@ void rma::set_lon(const geo::longitude & t)
 	lon_hem_ = convert_hemisphere(t);
 }
 
-void rma::set_magnetic_var(double t, direction h)
+void rma::set_magnetic_var(const magnetic & m)
 {
-	check_value(h, {direction::east, direction::west}, "mag var hemisphere");
-	magnetic_var_ = t;
-	magnetic_var_hem_ = h;
+	magnetic_var_ = m.angle();
+	magnetic_var_hem_ = m.hemisphere();
 }
 
 std::optional<units::velocity> rma::get_sog() const
@@ -94,6 +96,5 @@ void rma::append_data_to(std::string & s, const version &) const
 	append(s, to_string(track_));
 	append(s, to_string(magnetic_var_));
 	append(s, to_string(magnetic_var_hem_));
-}
 }
 }

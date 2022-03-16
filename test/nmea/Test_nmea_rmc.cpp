@@ -177,4 +177,27 @@ TEST_F(Test_nmea_rmc, get_sog)
 
 	EXPECT_NEAR(4.5, sog->get<marnav::units::knots>().value(), 1e-8);
 }
+
+TEST_F(Test_nmea_rmc, set_mag)
+{
+	nmea::rmc rmc;
+	rmc.set_mag(nmea::magnetic(12.5, nmea::direction::west));
+
+	EXPECT_STREQ("$GPRMC,,,,,,,,,,12.5,W,*04", nmea::to_string(rmc).c_str());
+}
+
+TEST_F(Test_nmea_rmc, get_mag)
+{
+	auto s = nmea::make_sentence("$GPRMC,,,,,,,,,,12.5,E,*16");
+	ASSERT_NE(nullptr, s);
+
+	auto rmc = nmea::sentence_cast<nmea::rmc>(s);
+	ASSERT_NE(nullptr, rmc);
+
+	auto magn = rmc->get_mag();
+	ASSERT_TRUE(magn.has_value());
+
+	EXPECT_NEAR(12.5, magn->angle(), 1e-8);
+	EXPECT_EQ(nmea::direction::east, magn->hemisphere());
+}
 }

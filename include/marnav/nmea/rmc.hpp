@@ -1,16 +1,15 @@
 #ifndef MARNAV_NMEA_RMC_HPP
 #define MARNAV_NMEA_RMC_HPP
 
-#include <marnav/nmea/sentence.hpp>
-#include <marnav/nmea/date.hpp>
-#include <marnav/nmea/time.hpp>
 #include <marnav/nmea/angle.hpp>
+#include <marnav/nmea/date.hpp>
+#include <marnav/nmea/magnetic.hpp>
+#include <marnav/nmea/sentence.hpp>
+#include <marnav/nmea/time.hpp>
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief RMC - Recommended Minimum Navigation Information
 ///
@@ -83,8 +82,7 @@ public:
 	std::optional<units::velocity> get_sog() const;
 	std::optional<double> get_heading() const { return heading_; }
 	std::optional<nmea::date> get_date() const { return date_; }
-	std::optional<double> get_mag() const { return mag_; }
-	std::optional<direction> get_mag_hem() const { return mag_hem_; }
+	std::optional<magnetic> get_mag() const;
 	std::optional<mode_indicator> get_mode_ind() const { return mode_ind_; }
 
 	std::optional<geo::longitude> get_lon() const;
@@ -97,10 +95,9 @@ public:
 	void set_sog(units::velocity t);
 	void set_heading(double t) noexcept { heading_ = t; }
 	void set_date(const nmea::date & t) noexcept { date_ = t; }
-	void set_mag(double t, direction h);
+	void set_mag(const magnetic & m);
 	void set_mode_indicator(mode_indicator t) noexcept { mode_ind_ = t; }
 };
-}
 }
 
 #endif

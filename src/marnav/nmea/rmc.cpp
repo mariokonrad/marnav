@@ -4,9 +4,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id rmc::ID;
 constexpr const char * rmc::TAG;
@@ -55,6 +53,11 @@ std::optional<geo::latitude> rmc::get_lat() const
 	return (lat_ && lat_hem_) ? lat_ : std::optional<geo::latitude>{};
 }
 
+std::optional<magnetic> rmc::get_mag() const
+{
+	return (mag_ && mag_hem_) ? magnetic(*mag_, *mag_hem_) : std::optional<magnetic>{};
+}
+
 void rmc::set_lat(const geo::latitude & t)
 {
 	lat_ = t;
@@ -67,11 +70,10 @@ void rmc::set_lon(const geo::longitude & t)
 	lon_hem_ = convert_hemisphere(t);
 }
 
-void rmc::set_mag(double t, direction h)
+void rmc::set_mag(const magnetic & m)
 {
-	check_value(h, {direction::east, direction::west}, "mag var hemisphere");
-	mag_ = t;
-	mag_hem_ = h;
+	mag_ = m.angle();
+	mag_hem_ = m.hemisphere();
 }
 
 std::optional<units::velocity> rmc::get_sog() const
@@ -102,6 +104,5 @@ void rmc::append_data_to(std::string & s, const version &) const
 	append(s, to_string(mag_));
 	append(s, to_string(mag_hem_));
 	append(s, to_string(mode_ind_));
-}
 }
 }

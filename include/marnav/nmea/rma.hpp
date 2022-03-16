@@ -1,14 +1,13 @@
 #ifndef MARNAV_NMEA_RMA_HPP
 #define MARNAV_NMEA_RMA_HPP
 
-#include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/angle.hpp>
+#include <marnav/nmea/magnetic.hpp>
+#include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief RMA - Recommended Minimum Navigation Information
 ///
@@ -74,8 +73,7 @@ public:
 	std::optional<double> get_time_diff_b() const { return time_diff_b_; }
 	std::optional<units::velocity> get_sog() const;
 	std::optional<double> get_track() const { return track_; }
-	std::optional<double> get_magnetic_var() const { return magnetic_var_; }
-	std::optional<direction> get_magnetic_var_hem() const { return magnetic_var_hem_; }
+	std::optional<magnetic> get_magnetic_var() const;
 
 	std::optional<geo::longitude> get_lon() const;
 	std::optional<geo::latitude> get_lat() const;
@@ -87,9 +85,8 @@ public:
 	void set_time_diff_b(double t) noexcept { time_diff_b_ = t; }
 	void set_sog(units::velocity t);
 	void set_track(double t) noexcept { track_ = t; }
-	void set_magnetic_var(double t, direction h);
+	void set_magnetic_var(const magnetic & m);
 };
-}
 }
 
 #endif

@@ -1,9 +1,8 @@
 #include <marnav/nmea/string.hpp>
+#include <marnav/nmea/magnetic.hpp>
 #include <marnav/utils/mmsi.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 std::string to_string(char data)
 {
@@ -248,5 +247,9 @@ std::string to_string(const utils::mmsi & t)
 	snprintf(buf, sizeof(buf), "%09u", static_cast<uint32_t>(t));
 	return buf;
 }
+
+std::string to_string(const magnetic & t)
+{
+	return to_string(t.angle()) + " " + to_string(t.hemisphere());
 }
 }

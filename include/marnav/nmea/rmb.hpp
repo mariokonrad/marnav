@@ -7,9 +7,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief RMB - Recommended Minimum Navigation Information
 ///
@@ -116,7 +114,6 @@ public:
 	void set_arrival_status(status t) noexcept { arrival_status_ = t; }
 	void set_mode_indicator(mode_indicator t) noexcept { mode_ind_ = t; }
 };
-}
 }
 
 #endif

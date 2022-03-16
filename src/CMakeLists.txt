@@ -275,7 +275,6 @@ target_compile_options(marnav
 		-Werror
 		-Wdisabled-optimization
 		-Wfloat-conversion
-		-Wfloat-equal
 		-Wformat=2
 		-Wformat-security
 		-Wformat-y2k
