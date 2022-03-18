@@ -14,7 +14,7 @@ RUN apt-get update \
 		bzip2 xz-utils \
 		tar \
 		binutils \
-		make \
+		make ninja-build \
 		git-core \
 		libc-dev libgcc1 libgcc-7-dev \
 		libtinfo5 \
