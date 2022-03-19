@@ -7,7 +7,6 @@ set(benchmark_LIBRARY_DIR "${benchmark_INSTALL_DIR}/lib")
 ExternalProject_Add(extern_benchmark
 	PREFIX "${CMAKE_CURRENT_BINARY_DIR}/benchmark"
 	SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/extern/benchmark-1.6.0"
-	# configure
 	CMAKE_ARGS
 		-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
 		-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
@@ -15,8 +14,9 @@ ExternalProject_Add(extern_benchmark
 		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 		-DBENCHMARK_ENABLE_TESTING=FALSE
 		-DBENCHMARK_ENABLE_GTEST_TESTS=FALSE
-	# install
 	INSTALL_DIR ${benchmark_INSTALL_DIR}
+	BUILD_BYPRODUCTS
+		${benchmark_LIBRARY_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}benchmark${CMAKE_STATIC_LIBRARY_SUFFIX}
 	)
 
 add_library(benchmark::benchmark STATIC IMPORTED)
