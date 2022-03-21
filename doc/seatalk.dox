@@ -30,7 +30,7 @@ Suported messages for SeaTalk-1 (decode and encode):
 - \link marnav::seatalk::message_59 Type 59 \endlink : Set Count Down Timer (sent by ST60)
 - \link marnav::seatalk::message_65 Type 65 \endlink : Select Fathom display unit for depth display (see message 00)
 - \link marnav::seatalk::message_66 Type 66 \endlink : Wind Alarm
-- \link marnav::seatalk::message_6C Type 6C \endlink : Second equipment-ID
+- \link marnav::seatalk::message_6c Type 6C \endlink : Second equipment-ID
 - \link marnav::seatalk::message_86 Type 86 \endlink : Keystroke
 - \link marnav::seatalk::message_87 Type 87 \endlink : Response Level
 - \link marnav::seatalk::message_89 Type 89 \endlink : Compass heading (sent by ST40 compass instrument)

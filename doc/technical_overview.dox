@@ -4,7 +4,7 @@
 
 \tableofcontents
 
-\subsection subsec_overview_directory Directory Overview
+\section sec_overview_directory Directory Overview
 This section explains the directory structure.
 
 \verbatim
@@ -55,7 +55,7 @@ In the directories `src` and `include`:
 - \c utils   : common utils
 
 
-\subsection subsec_overview_package_dependencies Package dependencies
+\section sec_overview_package_dependencies Package dependencies
 The directory structure underneath \c src reflects the packages.
 Every package has its own namespace.
 
@@ -77,14 +77,14 @@ Not shown in the picture:
 - Examples (some of them use boost.asio or Qt5)
 
 
-\subsection subsec_overview_general General Stuff
+\section sec_overview_general General Stuff
 
 The code of the library is quite defensive. This should usually not
 be a problem, because the (usual) environment of a library as this
 is not high performance. Some additional checks will not hurt too much.
 
 
-\subsection subsec_overview_naming Naming Conventions
+\section sec_overview_naming Naming Conventions
 
 Everything is in small case (types, classes, structs, member functions,
 member data, etc.) with underscores (snakes).
@@ -97,13 +97,13 @@ Reason:
 - I like it this way
 
 
-\subsection subsec_overview_formatting Formatting
+\section sec_overview_formatting Formatting
 
 Code formatting is done using \c clang-format, using the provided
 configuration file (\c .clang-format)
 
 
-\subsection subsec_overview_header_inclusion Order of Header inclusion
+\section sec_overview_header_inclusion Order of Header inclusion
 
 In general the order is from system headers to project headers. The
 more private, the later the inclusion.

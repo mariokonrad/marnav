@@ -4,9 +4,10 @@
 
 \tableofcontents
 
+\section sec_devenv_intro Introduction
 This page describes the requirements in order to build the library.
 
-\subsection subsec_devenv_requirements Requirements
+\section sec_devenv_requirements Requirements
 Compiler supported (older/others may work, but not tested):
 - GCC 7
 - GCC 8
@@ -51,7 +52,7 @@ There are no other dependencies despite the standard library (C++17) to build th
 
 Other compilers may work, however untested.
 
-\subsection subsec_devenv_build Build
+\section sec_devenv_build Build
 For normal, debug and release builds use the standard cmake CMAKE_BUILD_TYPE variable.
 For example a debug build:
 
@@ -107,7 +108,7 @@ After proper building and execution:
 - [Doxygen Warnings](../doxygen-warnings.txt)
 
 
-\subsection subsec_devenv_buildoptions Build Options
+\section sec_devenv_buildoptions Build Options
 The following build types (-DCMAKE_BUILD_TYPE=x) are possible:
 - Debug
 - Release
@@ -130,7 +131,7 @@ Components:
 - `ENABLE_TESTS_BENCHMARK`: enables benchmark tests, enabled only if `ENABLE_TESTS` is also enabled. Default: `ON`
 
 
-\subsection subsec_devenv_clang_static_analysis Static Analysis with Clang
+\section sec_devenv_clang_static_analysis Static Analysis with Clang
 There is a script ```bin/static-analysis-clang``` for doing this, or do it manually:
 \code
 	mkdir build
@@ -143,7 +144,7 @@ After the build, ```scan-build``` will tell you what to do in order to inspect
 the findings.
 
 
-\subsection subsec_devenv_benchmarks Perform Benchmarks
+\section sec_devenv_benchmarks Perform Benchmarks
 Build in ```Release``` mode, perform individual benchmarks:
 \code
 	mkdir build

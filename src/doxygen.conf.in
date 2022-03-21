@@ -96,6 +96,7 @@ WARN_LOGFILE           = @CMAKE_CURRENT_BINARY_DIR@/doc/doxygen-warnings.txt
 INPUT                  = \
                          @CMAKE_CURRENT_SOURCE_DIR@/doc \
                          @CMAKE_CURRENT_SOURCE_DIR@/TODO.md \
+                         @CMAKE_CURRENT_SOURCE_DIR@/include \
                          @CMAKE_CURRENT_SOURCE_DIR@/src \
                          @CMAKE_CURRENT_SOURCE_DIR@/examples \
                          @CMAKE_CURRENT_BINARY_DIR@/doc/main.dox
@@ -151,6 +152,8 @@ EXT_LINKS_IN_WINDOW    = NO
 SEARCHENGINE           = YES
 SERVER_BASED_SEARCH    = NO
 
+GENERATE_XML           = YES
+
 GENERATE_LATEX         = NO
 
 FORMULA_FONTSIZE       = 10
@@ -169,7 +172,7 @@ PREDEFINED             =
 EXPAND_AS_DEFINED      =
 SKIP_FUNCTION_MACROS   = YES
 
-TAGFILES               = @CMAKE_BINARY_DIR@/tags
+TAGFILES               =
 GENERATE_TAGFILE       =
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = YES

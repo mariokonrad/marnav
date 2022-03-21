@@ -17,5 +17,4 @@ if(DOXYGEN_FOUND)
 	add_custom_target(doc
 		COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/doxygen.conf
 		)
-	add_dependencies(doc tags)
 endif()

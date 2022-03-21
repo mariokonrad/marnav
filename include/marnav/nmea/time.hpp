@@ -121,7 +121,7 @@ std::string to_string(const duration & d);
 
 /// Duration cast from nmea::duration to std::chrono::duration.
 ///
-/// @parma[in] d Duration to convert.
+/// @param[in] d Duration to convert.
 /// @return The std::chrono::duration specified by the template parameter.
 template <class ToDuration>
 constexpr ToDuration duration_cast(const duration & d)

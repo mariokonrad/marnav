@@ -34,17 +34,20 @@ if(CTAGS_PATH AND CSCOPE_PATH)
 	message(STATUS "Found ctags: ${CTAGS_PATH}")
 	message(STATUS "Found cscope: ${CSCOPE_PATH}")
 
-	set_source_files_properties(cscope.files PROPERTIES GENERATED true)
-	set_source_files_properties(cscope.out PROPERTIES GENERATED true)
-	set_source_files_properties(tags PROPERTIES GENERATED true)
+	set_source_files_properties(${CMAKE_BINARY_DIR}/cscope.files PROPERTIES GENERATED TRUE)
+	set_source_files_properties(${CMAKE_BINARY_DIR}/cscope.out PROPERTIES GENERATED TRUE)
+	set_source_files_properties(${CMAKE_BINARY_DIR}/tags PROPERTIES GENERATED TRUE)
 
 	function(determine_ctags_argument_extra arg_extra)
-		file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/ctags-check.cpp "void f(){}")
+		set(check_dir ${CMAKE_BINARY_DIR}/ctags-check)
+		file(MAKE_DIRECTORY ${check_dir})
+		file(WRITE ${check_dir}/ctags-check.cpp "void f(){}")
 		execute_process(
-			COMMAND ${CTAGS_PATH} --extra=+q ${CMAKE_CURRENT_BINARY_DIR}/ctags-check.cpp
+			COMMAND ${CTAGS_PATH} --extra=+q ${check_dir}/ctags-check.cpp
 			ERROR_VARIABLE error
 			OUTPUT_QUIET
 			ERROR_STRIP_TRAILING_WHITESPACE
+			WORKING_DIRECTORY ${check_dir}
 			)
 		if(error MATCHES "^.*--extras instead.*$")
 			set(arg_extra "--extras" PARENT_SCOPE)
