@@ -10,6 +10,7 @@ supported_compilers=(
 	"gcc-9.1.0"
 	"gcc-9.2.0"
 	"gcc-9.3.0"
+	"gcc-9.4.0"
 	"gcc-10.1.0"
 	"gcc-10.2.0"
 	"gcc-10.3.0"
