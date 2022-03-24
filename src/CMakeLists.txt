@@ -7,16 +7,12 @@ message(STATUS "Build IO support     : ${ENABLE_IO}")
 message(STATUS "Build Tools          : ${ENABLE_TOOLS}")
 
 configure_file(
-	${CMAKE_CURRENT_SOURCE_DIR}/marnav/version.hpp.in
-	${CMAKE_CURRENT_BINARY_DIR}/marnav/version.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/marnav/version.cpp.in
+	${CMAKE_CURRENT_BINARY_DIR}/src/marnav/version.cpp
+	@ONLY
 	)
 
-install(
-	FILES ${CMAKE_CURRENT_BINARY_DIR}/marnav/version.hpp
-	DESTINATION include/marnav
-	)
-
-add_library(marnav ${LIBRARY_TYPE})
+add_library(marnav)
 add_library(marnav::marnav ALIAS marnav)
 
 target_compile_features(marnav
@@ -26,6 +22,7 @@ target_compile_features(marnav
 
 target_sources(marnav
 	PRIVATE
+		${CMAKE_CURRENT_BINARY_DIR}/src/marnav/version.cpp
 		marnav/ais/ais.cpp
 		marnav/ais/angle.cpp
 		marnav/ais/binary_001_11.cpp
@@ -235,6 +232,11 @@ install(
 	DESTINATION include/marnav
 	)
 
+install(
+	FILES marnav/version.hpp
+	DESTINATION include/marnav
+	)
+
 if(ENABLE_IO)
 	target_sources(marnav
 		PRIVATE
@@ -255,7 +257,6 @@ target_include_directories(marnav
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
 	PUBLIC
 		$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
 		$<INSTALL_INTERFACE:include>
 	)
 

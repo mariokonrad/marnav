@@ -1,0 +1,17 @@
+#include <marnav/version.hpp>
+
+namespace marnav
+{
+meta get_meta() noexcept
+{
+	// clang-format off
+	return {
+		"@PROJECT_VERSION_MAJOR@",
+		"@PROJECT_VERSION_MINOR@",
+		"@PROJECT_VERSION_PATCH@",
+		"@PROJECT_VERSION@",
+		"@PROJECT_NAME@"
+		};
+	// clang-format on
+}
+}

@@ -159,6 +159,8 @@
 
 #include <marnav/utils/mmsi_country.hpp>
 
+#include <marnav/version.hpp>
+
 #include <cxxopts.hpp>
 
 #include <fmt/format.h>
@@ -688,7 +690,8 @@ static std::string render(const marnav::geo::region & t)
 		render(t.right()));
 }
 
-template <typename T> static std::string render(const std::optional<T> & t)
+template <typename T>
+static std::string render(const std::optional<T> & t)
 {
 	if (!t)
 		return "-";
@@ -2265,6 +2268,8 @@ static bool parse_options(int argc, char ** argv)
 	options.add_options()
 		("h,help",
 			"Shows help information.")
+		("v,version",
+			"Shows version information.")
 		("help-nmea-list",
 			"Shows a list of supported NMEA sentences.")
 		("p,port",
@@ -2287,6 +2292,12 @@ static bool parse_options(int argc, char ** argv)
 	if (args.count("help")) {
 		fmt::printf("%s\n", options.help());
 		fmt::printf("If no file or port is specified, stdin is used to read data from.\n\n");
+		return true;
+	}
+
+	if (args.count("version")) {
+		const auto meta = marnav::get_meta();
+		fmt::printf("%s %s\n", meta.project_name, meta.project_version);
 		return true;
 	}
 

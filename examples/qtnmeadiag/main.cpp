@@ -8,10 +8,12 @@ int main(int argc, char ** argv)
 {
 	QApplication app{argc, argv};
 	app.setApplicationName("qtnmeadiag");
+
+	const auto meta = marnav::get_meta();
 	app.setApplicationVersion(QString("%1.%2.%3")
-								  .arg(marnav::version_major)
-								  .arg(marnav::version_minor)
-								  .arg(marnav::version_patch));
+								  .arg(meta.version_major)
+								  .arg(meta.version_minor)
+								  .arg(meta.version_patch));
 
 	QCommandLineParser parser;
 	parser.setApplicationDescription("NMEA Browser and Diagnostics Tool");
