@@ -36,7 +36,7 @@ stalk::stalk(talker talk, fields::const_iterator first, fields::const_iterator l
 	}
 }
 
-void stalk::append_data_to(std::string & s) const
+void stalk::append_data_to(std::string & s, const version &) const
 {
 	if (data_.empty())
 		throw std::runtime_error{"invalid number of bytes in data"};

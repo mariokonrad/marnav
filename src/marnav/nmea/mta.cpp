@@ -33,7 +33,7 @@ void mta::set_temperature(units::temperature t) noexcept
 	temperature_ = t.get<units::celsius>();
 }
 
-void mta::append_data_to(std::string & s) const
+void mta::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(temperature_, 1));
 	append(s, to_string(unit::temperature::celsius));

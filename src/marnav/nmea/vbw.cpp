@@ -70,7 +70,7 @@ std::optional<units::velocity> vbw::get_ground_speed_transveral() const
 	return {*ground_speed_transveral_};
 }
 
-void vbw::append_data_to(std::string & s) const
+void vbw::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(water_speed_longitudinal_, 1));
 	append(s, format(water_speed_transveral_, 1));

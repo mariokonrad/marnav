@@ -56,7 +56,7 @@ std::optional<units::length> vlw::get_distance_reset() const
 	return {*distance_reset_};
 }
 
-void vlw::append_data_to(std::string & s) const
+void vlw::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(distance_cum_));
 	append(s, to_string_if(unit::distance::nm, distance_cum_));

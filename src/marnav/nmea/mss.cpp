@@ -27,7 +27,7 @@ mss::mss(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 4), unknown_);
 }
 
-void mss::append_data_to(std::string & s) const
+void mss::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(signal_strength_, 2));
 	append(s, format(signal_to_noise_ratio_, 2));

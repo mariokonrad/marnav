@@ -44,7 +44,7 @@ protected:
 	vdm(sentence_id id, const std::string & tag, talker talk);
 	vdm(talker talk, fields::const_iterator first, fields::const_iterator last);
 
-	virtual void append_data_to(std::string &) const override;
+	virtual void append_data_to(std::string &, const version &) const override;
 	virtual char get_start_token() const override { return start_token_ais; }
 
 	void read_fields(fields::const_iterator first);

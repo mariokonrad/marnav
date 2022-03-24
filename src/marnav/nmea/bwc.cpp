@@ -95,7 +95,7 @@ void bwc::set_distance(units::length t)
 	distance_ = t.get<units::nautical_miles>();
 }
 
-void bwc::append_data_to(std::string & s) const
+void bwc::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(time_utc_));
 	append(s, to_string(lat_));

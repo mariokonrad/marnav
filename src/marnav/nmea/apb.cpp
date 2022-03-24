@@ -105,7 +105,7 @@ void apb::check() const
 		"mode_indicator");
 }
 
-void apb::append_data_to(std::string & s) const
+void apb::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(loran_c_blink_warning_));
 	append(s, to_string(loran_c_cycle_lock_warning_));

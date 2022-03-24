@@ -28,7 +28,7 @@ tep::tep(talker talk, fields::const_iterator first, fields::const_iterator last)
 	check_value(degrees, {'D'}, "elevation_unit");
 }
 
-void tep::append_data_to(std::string & s) const
+void tep::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(elevation_, 1));
 	append(s, 'D');

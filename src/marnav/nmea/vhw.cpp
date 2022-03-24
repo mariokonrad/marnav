@@ -60,7 +60,7 @@ void vhw::set_speed_kmh(units::velocity t) noexcept
 	speed_kmh_ = t.get<units::kilometers_per_hour>();
 }
 
-void vhw::append_data_to(std::string & s) const
+void vhw::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(heading_true_));
 	append(s, to_string_if(reference::TRUE, heading_true_));

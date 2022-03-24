@@ -26,7 +26,7 @@ sentence::sentence(sentence_id id, const std::string & tag, talker t)
 ///
 /// If the sentence contains a tag block, it will be inserted in front
 /// of the raw NMEA string.
-std::string to_string(const sentence & s)
+std::string to_string(const sentence & s, const version & v)
 {
 	std::string result;
 	const std::string block = s.get_tag_block();
@@ -41,7 +41,7 @@ std::string to_string(const sentence & s)
 	result += s.get_start_token();
 	result += to_string(s.get_talker());
 	result += s.tag();
-	s.append_data_to(result);
+	s.append_data_to(result, v);
 	result += s.get_end_token();
 	result += checksum_to_string(
 		checksum(std::next(std::begin(result)), std::prev(std::end(result))));

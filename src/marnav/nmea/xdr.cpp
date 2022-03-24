@@ -69,7 +69,7 @@ std::optional<xdr::transducer_info> xdr::get_info(int index) const
 	return transducer_data_[index];
 }
 
-void xdr::append_data_to(std::string & s) const
+void xdr::append_data_to(std::string & s, const version &) const
 {
 	for (const auto & data : transducer_data_) {
 		auto t = to_string(data);

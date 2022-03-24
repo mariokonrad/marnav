@@ -43,7 +43,7 @@ public:
 
 protected:
 	msk(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &) const override;
+	virtual void append_data_to(std::string &, const version &) const override;
 
 private:
 	uint32_t frequency_ = 0;

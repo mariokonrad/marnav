@@ -85,7 +85,7 @@ void grs::set_sat_residual(int index, double value)
 	sat_residual_[index] = value;
 }
 
-void grs::append_data_to(std::string & s) const
+void grs::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(time_utc_, 2));
 	append(s, to_string(usage_));

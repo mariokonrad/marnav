@@ -25,7 +25,7 @@ xtr::xtr(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 2), cross_track_unit_);
 }
 
-void xtr::append_data_to(std::string & s) const
+void xtr::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(cross_track_error_magnitude_));
 	append(s, to_string(direction_to_steer_));

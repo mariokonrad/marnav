@@ -147,6 +147,7 @@ target_sources(marnav
 		marnav/nmea/vdm.cpp
 		marnav/nmea/vdo.cpp
 		marnav/nmea/vdr.cpp
+		marnav/nmea/version.cpp
 		marnav/nmea/vhw.cpp
 		marnav/nmea/vlw.cpp
 		marnav/nmea/vpw.cpp

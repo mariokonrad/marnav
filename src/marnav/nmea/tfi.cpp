@@ -82,7 +82,7 @@ void tfi::set_sensor(int index, state t)
 	sensors_[index] = t;
 }
 
-void tfi::append_data_to(std::string & s) const
+void tfi::append_data_to(std::string & s, const version &) const
 {
 	for (auto const & t : sensors_)
 		append(s, to_string(t));

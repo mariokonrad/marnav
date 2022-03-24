@@ -74,7 +74,7 @@ std::optional<units::velocity> mwd::get_speed_ms() const
 	return {*speed_ms_};
 }
 
-void mwd::append_data_to(std::string & s) const
+void mwd::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(direction_true_, 1));
 	append(s, to_string_if(reference::TRUE, direction_true_));

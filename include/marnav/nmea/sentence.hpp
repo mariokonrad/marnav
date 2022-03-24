@@ -2,9 +2,10 @@
 #define MARNAV_NMEA_SENTENCE_HPP
 
 #include <marnav/nmea/constants.hpp>
-#include <marnav/nmea/talker_id.hpp>
-#include <marnav/nmea/sentence_id.hpp>
 #include <marnav/nmea/detail.hpp>
+#include <marnav/nmea/sentence_id.hpp>
+#include <marnav/nmea/talker_id.hpp>
+#include <marnav/nmea/version.hpp>
 #include <functional>
 #include <memory>
 #include <string>
@@ -71,7 +72,7 @@ public:
 	/// at the moment, its handling is separated, @see tag_block.
 	const std::string & get_tag_block() const { return tag_block_; }
 
-	friend std::string to_string(const sentence &);
+	friend std::string to_string(const sentence &, const version &);
 
 protected:
 	sentence(sentence_id id, const std::string & tag, talker t);
@@ -90,7 +91,7 @@ protected:
 	///       to append data to the string. This functions take care
 	///       of field delimiters automatically.
 	///
-	virtual void append_data_to(std::string &) const = 0;
+	virtual void append_data_to(std::string &, const version &) const = 0;
 
 	static void append(std::string & s, const std::string & t);
 	static void append(std::string & s, const char t);
@@ -109,8 +110,17 @@ static_assert(std::is_abstract<sentence>::value, "");
 
 /// Renders the specified sentence into a string.
 ///
+/// If the version is not specified, the sentences can decide
+/// which one to use. To support versions, is up to the
+/// individual sentence.
+/// Stating a version means up to this version. To always get
+/// the highest version available, use `version::latest()`.
+/// Example: render senctence up to NMEA version 3.0:
+///
+///     auto s = to_string(some_sentence, nmea::version{3, 0});
+///
 /// If the sentence is invalid, the returning string will be empty.
-std::string to_string(const sentence & s);
+std::string to_string(const sentence & s, const version & v = version{});
 
 /// @cond DEV
 namespace detail

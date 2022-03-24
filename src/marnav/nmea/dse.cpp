@@ -144,7 +144,7 @@ void dse::set_mmsi(const utils::mmsi & t) noexcept
 	address_ *= 10;
 }
 
-void dse::append_data_to(std::string & s) const
+void dse::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(number_of_messages_));
 	append(s, to_string(sentence_number_));

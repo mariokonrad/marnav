@@ -63,7 +63,7 @@ void rsd::set_2(double range, double bearing, double var_range_marker, double be
 	bearing_line_2 = bearing_line;
 }
 
-void rsd::append_data_to(std::string & s) const
+void rsd::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(origin_range_1));
 	append(s, to_string(origin_bearing_1));

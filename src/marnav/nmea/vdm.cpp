@@ -39,7 +39,7 @@ void vdm::read_fields(fields::const_iterator first)
 	read(*(first + 5), n_fill_bits_);
 }
 
-void vdm::append_data_to(std::string & s) const
+void vdm::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(n_fragments_));
 	append(s, to_string(fragment_));

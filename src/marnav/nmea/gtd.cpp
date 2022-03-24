@@ -46,7 +46,7 @@ void gtd::set_time_diff(int index, double value)
 	time_diffs_[index] = value;
 }
 
-void gtd::append_data_to(std::string & s) const
+void gtd::append_data_to(std::string & s, const version &) const
 {
 	for (auto const & t : time_diffs_)
 		append(s, to_string(t));

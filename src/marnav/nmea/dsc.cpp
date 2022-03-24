@@ -297,7 +297,7 @@ geo::region dsc::get_geographical_area() const
 
 /// @todo Implementation
 ///
-void dsc::append_data_to(std::string & s) const
+void dsc::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(fmt_spec_));
 	append(s, format(address_, 10));

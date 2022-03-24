@@ -32,7 +32,7 @@ void vwe::set_efficiency(double t)
 	efficiency_ = t;
 }
 
-void vwe::append_data_to(std::string & s) const
+void vwe::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(efficiency_, 1));
 }

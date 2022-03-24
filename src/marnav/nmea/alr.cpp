@@ -104,7 +104,7 @@ alr::alr(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 4), text_);
 }
 
-void alr::append_data_to(std::string & s) const
+void alr::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(time_utc_));
 	append(s, to_string(number_));

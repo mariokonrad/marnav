@@ -25,7 +25,7 @@ zte::zte(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 2), waypoint_id_);
 }
 
-void zte::append_data_to(std::string & s) const
+void zte::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(time_utc_));
 	append(s, to_string(time_remaining_));

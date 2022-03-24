@@ -52,7 +52,7 @@ void osd::set_speed_unit(unit::velocity u) noexcept
 	speed_unit_ = u;
 }
 
-void osd::append_data_to(std::string & s) const
+void osd::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(heading_));
 	append(s, to_string(data_valid_));

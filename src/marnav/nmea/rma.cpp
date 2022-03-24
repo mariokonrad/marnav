@@ -81,7 +81,7 @@ void rma::set_sog(units::velocity t)
 	sog_ = t.get<units::knots>();
 }
 
-void rma::append_data_to(std::string & s) const
+void rma::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(blink_warning_));
 	append(s, to_string(lat_));

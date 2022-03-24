@@ -40,7 +40,7 @@ void fsi::set_sentence_status(char t)
 	sentence_status_ = t;
 }
 
-void fsi::append_data_to(std::string & s) const
+void fsi::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(tx_frequency_));
 	append(s, to_string(rx_frequency_));

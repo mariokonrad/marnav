@@ -31,7 +31,7 @@ xte::xte(talker talk, fields::const_iterator first, fields::const_iterator last)
 		read(*(first + 5), mode_ind_);
 }
 
-void xte::append_data_to(std::string & s) const
+void xte::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(status1_));
 	append(s, to_string(status2_));

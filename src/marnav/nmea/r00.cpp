@@ -28,7 +28,7 @@ r00::r00(talker talk, fields::const_iterator first, fields::const_iterator last)
 	}
 }
 
-void r00::append_data_to(std::string & s) const
+void r00::append_data_to(std::string & s, const version &) const
 {
 	for (auto i = 0; i < max_waypoint_ids; ++i) {
 		if (waypoint_id_[i]) {

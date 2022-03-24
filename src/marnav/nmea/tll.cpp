@@ -59,7 +59,7 @@ void tll::set_lon(const geo::longitude & t)
 	lon_hem_ = convert_hemisphere(t);
 }
 
-void tll::append_data_to(std::string & s) const
+void tll::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(number_, 2));
 	append(s, to_string(lat_));

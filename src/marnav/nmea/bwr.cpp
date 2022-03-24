@@ -97,7 +97,7 @@ std::optional<units::length> bwr::get_distance() const
 	return {*distance_};
 }
 
-void bwr::append_data_to(std::string & s) const
+void bwr::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(time_utc_));
 	append(s, to_string(lat_));

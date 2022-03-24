@@ -80,7 +80,7 @@ std::optional<units::kilometers_per_hour> vtg::get_speed_kmh() const
 	return {*speed_kmh_};
 }
 
-void vtg::append_data_to(std::string & s) const
+void vtg::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(track_true_));
 	append(s, to_string_if(reference::TRUE, track_true_));

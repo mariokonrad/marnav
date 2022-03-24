@@ -42,7 +42,7 @@ void hdg::set_magn_var(double deg, direction hem)
 	magn_var_hem_ = hem;
 }
 
-void hdg::append_data_to(std::string & s) const
+void hdg::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(heading_));
 	append(s, to_string(magn_dev_));

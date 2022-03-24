@@ -25,7 +25,7 @@ zlz::zlz(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 2), local_zone_description_);
 }
 
-void zlz::append_data_to(std::string & s) const
+void zlz::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(time_utc_));
 	append(s, to_string(time_local_));

@@ -83,7 +83,7 @@ std::optional<units::length> gga::get_geodial_separation() const
 	return {*geodial_separation_};
 }
 
-void gga::append_data_to(std::string & s) const
+void gga::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(time_));
 	append(s, to_string(lat_));

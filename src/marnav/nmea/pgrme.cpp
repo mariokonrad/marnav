@@ -60,7 +60,7 @@ std::optional<units::length> pgrme::get_overall_spherical_equiv_position_error()
 	return {*overall_spherical_equiv_position_error_};
 }
 
-void pgrme::append_data_to(std::string & s) const
+void pgrme::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(horizontal_position_error_));
 	append(s, to_string(unit::distance::meter));

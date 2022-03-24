@@ -56,7 +56,7 @@ void lcd::set_time_diff(int index, time_difference t)
 	time_diffs_[index] = t;
 }
 
-void lcd::append_data_to(std::string & s) const
+void lcd::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(gri_));
 	append(s, format(master_.snr, 3));

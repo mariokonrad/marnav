@@ -36,7 +36,7 @@ public:
 
 protected:
 	tep(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &) const override;
+	virtual void append_data_to(std::string &, const version &) const override;
 
 private:
 	double elevation_ = 0.0;

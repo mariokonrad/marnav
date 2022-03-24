@@ -61,7 +61,7 @@ std::optional<units::length> dpt::get_max_depth() const noexcept
 	return {*max_depth_};
 }
 
-void dpt::append_data_to(std::string & s) const
+void dpt::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(depth_meter_));
 	append(s, to_string(transducer_offset_));

@@ -56,7 +56,7 @@ std::optional<units::meters_per_second> vpw::get_speed_meters_per_second() const
 	return {*speed_mps_};
 }
 
-void vpw::append_data_to(std::string & s) const
+void vpw::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(speed_knots_));
 	append(s, to_string_if(unit::velocity::knot, speed_knots_));

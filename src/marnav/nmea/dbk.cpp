@@ -72,7 +72,7 @@ std::optional<units::length> dbk::get_depth_fathom() const
 	return {*depth_fathom_};
 }
 
-void dbk::append_data_to(std::string & s) const
+void dbk::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(depth_feet_));
 	append(s, to_string_if(unit::distance::feet, depth_feet_));

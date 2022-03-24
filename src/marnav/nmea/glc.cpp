@@ -54,7 +54,7 @@ void glc::set_time_diff(int index, time_difference t)
 	time_diffs_[index] = t;
 }
 
-void glc::append_data_to(std::string & s) const
+void glc::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(gri_));
 	append(s, to_string(master_.diff));

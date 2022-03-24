@@ -82,7 +82,7 @@ std::optional<units::length> gns::get_geodial_separation() const
 	return {*geodial_separation_};
 }
 
-void gns::append_data_to(std::string & s) const
+void gns::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(time_utc_));
 	append(s, to_string(lat_));

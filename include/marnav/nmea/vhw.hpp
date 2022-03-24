@@ -47,7 +47,7 @@ public:
 
 protected:
 	vhw(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &) const override;
+	virtual void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<double> heading_true_; // 0..359

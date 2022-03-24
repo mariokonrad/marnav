@@ -66,7 +66,7 @@ void rpm::set_source(source_id id, uint32_t num)
 	source_number_ = num;
 }
 
-void rpm::append_data_to(std::string & s) const
+void rpm::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(source_));
 	append(s, to_string(source_number_));

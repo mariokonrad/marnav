@@ -38,7 +38,7 @@ void hsc::set_heading_mag(double t) noexcept
 	heading_mag_ref_ = reference::MAGNETIC;
 }
 
-void hsc::append_data_to(std::string & s) const
+void hsc::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(heading_true_));
 	append(s, to_string(heading_true_ref_));

@@ -91,7 +91,7 @@ void bec::set_distance(units::length t)
 	distance_ = t.get<units::nautical_miles>();
 }
 
-void bec::append_data_to(std::string & s) const
+void bec::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(time_utc_));
 	append(s, to_string(lat_));

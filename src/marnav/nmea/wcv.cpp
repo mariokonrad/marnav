@@ -41,7 +41,7 @@ std::optional<units::velocity> wcv::get_speed() const
 	return {*speed_};
 }
 
-void wcv::append_data_to(std::string & s) const
+void wcv::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(speed_, 1));
 	append(s, to_string_if(unit::velocity::knot, speed_));

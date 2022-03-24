@@ -30,7 +30,7 @@ gst::gst(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 7), dev_alt_);
 }
 
-void gst::append_data_to(std::string & s) const
+void gst::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(time_utc_, 2));
 	append(s, to_string(total_rms_));

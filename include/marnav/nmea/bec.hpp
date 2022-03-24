@@ -55,7 +55,7 @@ public:
 
 protected:
 	bec(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &) const override;
+	virtual void append_data_to(std::string &, const version &) const override;
 
 private:
 	nmea::time time_utc_;

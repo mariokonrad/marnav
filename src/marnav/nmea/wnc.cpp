@@ -58,7 +58,7 @@ std::optional<units::length> wnc::get_distance_km() const
 	return {*distance_km_};
 }
 
-void wnc::append_data_to(std::string & s) const
+void wnc::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(distance_nm_));
 	append(s, to_string_if(unit::distance::nm, distance_nm_));

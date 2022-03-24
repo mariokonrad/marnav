@@ -59,7 +59,7 @@ std::optional<uint32_t> gsa::get_satellite_id(int index) const
 	return satellite_id_[index];
 }
 
-void gsa::append_data_to(std::string & s) const
+void gsa::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(sel_mode_));
 	append(s, to_string(mode_));

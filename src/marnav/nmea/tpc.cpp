@@ -36,7 +36,7 @@ tpc::tpc(talker talk, fields::const_iterator first, fields::const_iterator last)
 	check_value(depth_unit, {unit::distance::meter}, "depth_unit");
 }
 
-void tpc::append_data_to(std::string & s) const
+void tpc::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(distance_centerline_));
 	append(s, to_string(unit::distance::meter));

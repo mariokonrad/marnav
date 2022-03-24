@@ -44,7 +44,7 @@ void bww::set_bearing_mag(double t) noexcept
 	bearing_magn_ = t;
 }
 
-void bww::append_data_to(std::string & s) const
+void bww::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(bearing_true_));
 	append(s, to_string_if(reference::TRUE, bearing_true_));

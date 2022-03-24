@@ -44,7 +44,7 @@ void bod::set_bearing_magn(double t) noexcept
 	bearing_magn_ = t;
 }
 
-void bod::append_data_to(std::string & s) const
+void bod::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(bearing_true_));
 	append(s, to_string_if(reference::TRUE, bearing_true_));

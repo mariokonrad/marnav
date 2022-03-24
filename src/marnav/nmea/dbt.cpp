@@ -78,7 +78,7 @@ void dbt::set_depth_fathom(units::length t)
 	depth_fathom_ = t.get<units::fathoms>();
 }
 
-void dbt::append_data_to(std::string & s) const
+void dbt::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(depth_feet_));
 	append(s, to_string_if(unit::distance::feet, depth_feet_));

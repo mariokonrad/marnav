@@ -110,7 +110,7 @@ void rmb::set_cross_track_error(units::length t)
 	cross_track_error_ = t.get<units::nautical_miles>();
 }
 
-void rmb::append_data_to(std::string & s) const
+void rmb::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(active_));
 	append(s, to_string(cross_track_error_));

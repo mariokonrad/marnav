@@ -54,7 +54,7 @@ void wpl::set_lon(const geo::longitude & t)
 	lon_hem_ = convert_hemisphere(t);
 }
 
-void wpl::append_data_to(std::string & s) const
+void wpl::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(lat_));
 	append(s, to_string(lat_hem_));

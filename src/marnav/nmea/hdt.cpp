@@ -30,7 +30,7 @@ void hdt::set_heading(double t) noexcept
 	heading_true_ = reference::TRUE;
 }
 
-void hdt::append_data_to(std::string & s) const
+void hdt::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(heading_));
 	append(s, to_string(heading_true_));

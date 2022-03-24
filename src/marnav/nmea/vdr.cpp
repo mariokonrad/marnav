@@ -56,7 +56,7 @@ std::optional<units::velocity> vdr::get_speed() const
 	return {*speed_};
 }
 
-void vdr::append_data_to(std::string & s) const
+void vdr::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(degrees_true_));
 	append(s, to_string_if(reference::TRUE, degrees_true_));

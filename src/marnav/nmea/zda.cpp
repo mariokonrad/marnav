@@ -35,7 +35,7 @@ zda::zda(talker talk, fields::const_iterator first, fields::const_iterator last)
 		date_ = nmea::date{*y, to_month(*m), *d};
 }
 
-void zda::append_data_to(std::string & s) const
+void zda::append_data_to(std::string & s, const version &) const
 {
 	std::optional<uint32_t> d;
 	std::optional<uint32_t> m;

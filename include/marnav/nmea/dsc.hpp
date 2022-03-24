@@ -116,7 +116,7 @@ public:
 
 protected:
 	dsc(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &) const override;
+	virtual void append_data_to(std::string &, const version &) const override;
 
 private:
 	format_specifier fmt_spec_ = format_specifier::distress;

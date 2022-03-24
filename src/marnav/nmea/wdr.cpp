@@ -37,7 +37,7 @@ void wdr::set_distance(units::length t)
 		throw std::runtime_error{"negative distance"};
 }
 
-void wdr::append_data_to(std::string & s) const
+void wdr::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(distance_, 1));
 	append(s, to_string(unit::distance::nm));

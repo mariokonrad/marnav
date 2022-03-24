@@ -65,7 +65,7 @@ void rte::clear_waypoint_id()
 	waypoint_id_.clear();
 }
 
-void rte::append_data_to(std::string & s) const
+void rte::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(n_messages_));
 	append(s, to_string(message_number_));

@@ -88,7 +88,7 @@ void rmc::set_sog(units::velocity t)
 	sog_ = t.get<units::knots>();
 }
 
-void rmc::append_data_to(std::string & s) const
+void rmc::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(time_utc_));
 	append(s, to_string(status_));

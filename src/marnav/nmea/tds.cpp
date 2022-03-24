@@ -28,7 +28,7 @@ tds::tds(talker talk, fields::const_iterator first, fields::const_iterator last)
 	check_value(distance_unit, {unit::distance::meter}, "distance_unit");
 }
 
-void tds::append_data_to(std::string & s) const
+void tds::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(distance_));
 	append(s, to_string(unit::distance::meter));

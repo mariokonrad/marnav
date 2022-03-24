@@ -68,7 +68,7 @@ pgrmz::pgrmz(talker talk, fields::const_iterator first, fields::const_iterator l
 	check_value(altitude_unit, {unit::distance::feet}, "altitude unit");
 }
 
-void pgrmz::append_data_to(std::string & s) const
+void pgrmz::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(altitude_));
 	append(s, to_string(unit::distance::feet));

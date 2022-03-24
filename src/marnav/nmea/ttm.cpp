@@ -40,7 +40,7 @@ ttm::ttm(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 12), reference_target_);
 }
 
-void ttm::append_data_to(std::string & s) const
+void ttm::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(target_number_, 2));
 	append(s, to_string(target_distance_));

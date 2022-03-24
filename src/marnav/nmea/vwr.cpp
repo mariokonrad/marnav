@@ -80,7 +80,7 @@ std::optional<units::velocity> vwr::get_speed_kmh() const
 	return {*speed_kmh_};
 }
 
-void vwr::append_data_to(std::string & s) const
+void vwr::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(angle_));
 	append(s, to_string(angle_side_));

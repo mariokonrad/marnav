@@ -23,7 +23,7 @@ pgrmm::pgrmm(talker talk, fields::const_iterator first, fields::const_iterator l
 	read(*(first + 0), map_datum_);
 }
 
-void pgrmm::append_data_to(std::string & s) const
+void pgrmm::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(map_datum_));
 }

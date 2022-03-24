@@ -53,7 +53,7 @@ void aam::set_arrival_circle_radius(units::length t)
 	arrival_circle_radius_ = t.get<units::nautical_miles>();
 }
 
-void aam::append_data_to(std::string & s) const
+void aam::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(arrival_circle_entered_));
 	append(s, to_string(perpendicualar_passed_));

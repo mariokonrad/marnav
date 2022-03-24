@@ -84,7 +84,7 @@ std::optional<units::velocity> mwv::get_speed() const
 	return {};
 }
 
-void mwv::append_data_to(std::string & s) const
+void mwv::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(angle_));
 	append(s, to_string(angle_ref_));

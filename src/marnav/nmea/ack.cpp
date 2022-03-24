@@ -27,7 +27,7 @@ ack::ack(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 0), number_);
 }
 
-void ack::append_data_to(std::string & s) const
+void ack::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(number_));
 }
