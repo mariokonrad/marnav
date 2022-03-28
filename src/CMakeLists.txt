@@ -234,7 +234,8 @@ install(
 	)
 
 install(
-	FILES marnav/version.hpp
+	FILES
+		${PROJECT_SOURCE_DIR}/include/marnav/version.hpp
 	DESTINATION include/marnav
 	)
 
