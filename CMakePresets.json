@@ -206,6 +206,24 @@
 			}
 		},
 		{
+			"name": "clang14-release",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "clang++-14",
+				"CMAKE_C_COMPILER": "clang-14",
+				"CMAKE_BUILD_TYPE": "Release"
+			}
+		},
+		{
+			"name": "clang14-debug",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "clang++-14",
+				"CMAKE_C_COMPILER": "clang-14",
+				"CMAKE_BUILD_TYPE": "Debug"
+			}
+		},
+		{
 			"name": "clang13-release",
 			"binaryDir": "${sourceDir}/build/${presetName}",
 			"cacheVariables": {

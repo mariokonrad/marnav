@@ -26,6 +26,7 @@ supported_compilers=(
 	"clang-11.0.0"
 	"clang-12.0.0"
 	"clang-13.0.0"
+	"clang-14.0.0"
 	)
 supported_build_types=("Debug" "Release")
 repository=${DOCKER_REPOSITORY:-marnav}

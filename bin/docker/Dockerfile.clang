@@ -28,6 +28,7 @@ ENV CXX=/usr/bin/clang++
 ENV CC=/usr/bin/clang
 ENV CXXFLAGS=-stdlib=libc++
 ENV LDFLAGS=-stdlib=libc++
+ENV LD_LIBRARY_PATH=/usr/lib/x86_64-unknown-linux-gnu
 
 # install cmake
 COPY install-cmake.sh /tmp/
