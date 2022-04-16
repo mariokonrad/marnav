@@ -431,12 +431,12 @@ if(ENABLE_TOOLS)
 			-pedantic-errors
 		)
 
-	### bin: nmeadump
+	### bin: nmeatool
 	if(ENABLE_IO)
-		add_executable(nmeadump)
-		target_sources(nmeadump PRIVATE nmeadump.cpp)
+		add_executable(nmeatool)
+		target_sources(nmeatool PRIVATE nmeatool.cpp)
 
-		target_compile_options(nmeadump
+		target_compile_options(nmeatool
 			PRIVATE
 				-pipe
 				-ggdb
@@ -445,7 +445,7 @@ if(ENABLE_TOOLS)
 				-pedantic-errors
 			)
 
-		target_link_libraries(nmeadump
+		target_link_libraries(nmeatool
 			PRIVATE
 				marnav::marnav
 				cxxopts::cxxopts
@@ -454,10 +454,10 @@ if(ENABLE_TOOLS)
 
 		if(ENABLE_TESTS)
 			enable_testing()
-			add_test(NAME nmeadump-completeness
-				COMMAND $<TARGET_FILE:nmeadump> --help-nmea-list
+			add_test(NAME nmeatool-completeness
+				COMMAND $<TARGET_FILE:nmeatool> --help-nmea-list
 				)
-			set_tests_properties(nmeadump-completeness
+			set_tests_properties(nmeatool-completeness
 				PROPERTIES
 					FAIL_REGULAR_EXPRESSION "\\* [A-Z]+"
 			)

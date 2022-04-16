@@ -6,19 +6,19 @@
 //
 // Usage, read from file:
 //
-//   nmeadump -f logged-data.txt
+//   nmeatool -f logged-data.txt
 //
 // Usage, read from NMEA-0183 port:
 //
-//   nmeadump -p /dev/ttyUSB0 -s 4800
+//   nmeatool -p /dev/ttyUSB0 -s 4800
 //
 // Usage, read from NMEA-0183-HS port:
 //
-//   nmeadump -p /dev/ttyUSB0 -s 38400
+//   nmeatool -p /dev/ttyUSB0 -s 38400
 //
 // Usage, read from stdin:
 //
-//   cat logged-data.txt | nmeadump
+//   cat logged-data.txt | nmeatool
 //
 
 #include <marnav/nmea/ais_helper.hpp>
@@ -171,7 +171,7 @@
 #include <iostream>
 #include <vector>
 
-namespace nmeadump
+namespace nmeatool
 {
 namespace terminal
 {
@@ -2255,6 +2255,25 @@ static int process(std::function<bool(std::string &)> source)
 	return result;
 }
 
+static void print_nmea_sentence_list()
+{
+	using namespace marnav;
+
+	const auto is_impl = [](nmea::sentence_id id) {
+		return std::find_if(begin(nmea_sentences()), end(nmea_sentences()),
+				   [id](const nmea_entry & entry) {
+					   return id == entry.id
+						   // AIS data carrying NMEA sentences are decoded as AIS messages
+						   || id == nmea::sentence_id::VDM || id == nmea::sentence_id::VDO;
+				   })
+			!= end(nmea_sentences());
+	};
+
+	for (const auto id : nmea::get_supported_sentences_id()) {
+		fmt::printf("%c %s  %s\n", is_impl(id) ? '-' : '*', to_string(id), to_name(id));
+	}
+}
+
 static bool parse_options(int argc, char ** argv)
 {
 	uint32_t port_speed = 0;
@@ -2297,23 +2316,8 @@ static bool parse_options(int argc, char ** argv)
 		return true;
 	}
 
-	using namespace marnav;
-
 	if (args.count("help-nmea-list")) {
-		const auto is_impl = [](nmea::sentence_id id) {
-			return std::find_if(begin(nmea_sentences()), end(nmea_sentences()),
-					   [id](const nmea_entry & entry) {
-						   return id == entry.id
-							   // AIS data carrying NMEA sentences are decoded as AIS messages
-							   || id == nmea::sentence_id::VDM || id == nmea::sentence_id::VDO;
-					   })
-				!= end(nmea_sentences());
-		};
-
-		for (const auto id : nmea::get_supported_sentences_id()) {
-			fmt::printf("%c %s  %s\n", is_impl(id) ? '-' : '*', to_string(id), to_name(id));
-		}
-
+		print_nmea_sentence_list();
 		return true;
 	}
 
@@ -2328,10 +2332,10 @@ static bool parse_options(int argc, char ** argv)
 
 	switch (port_speed) {
 		case 4800:
-			global.config.speed = io::serial::baud::baud_4800;
+			global.config.speed = marnav::io::serial::baud::baud_4800;
 			break;
 		case 38400:
-			global.config.speed = io::serial::baud::baud_38400;
+			global.config.speed = marnav::io::serial::baud::baud_38400;
 			break;
 		default:
 			break;
@@ -2343,7 +2347,7 @@ static bool parse_options(int argc, char ** argv)
 
 int main(int argc, char ** argv)
 {
-	using namespace nmeadump;
+	using namespace nmeatool;
 
 	if (parse_options(argc, argv))
 		return EXIT_SUCCESS;
