@@ -13,9 +13,9 @@ build:gcc-11.2.0:
   image: mariokonrad/marnav:${COMPILER}
   <<: *build_definition
 
-build:clang-10.0.0:
+build:clang-13.0.0:
   variables:
-    COMPILER: clang-10.0.0
+    COMPILER: clang-13.0.0
     BUILD_TYPE: Release
   image: mariokonrad/marnav:${COMPILER}
   <<: *build_definition
