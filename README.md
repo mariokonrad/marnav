@@ -14,8 +14,9 @@ It supports (partially):
 - NMEA-0183
 - AIS
 - SeaTalk (Raymarine device communication)
-- Reading data from serial ports (NMEA, SeaTalk)
 - Basic geodesic functions, suitable for martime navigation.
+- Reading data from serial ports (NMEA, SeaTalk). This is a separate library,
+  available only if required environment is present, typically a Linux system.
 
 See chapter _Features_ for a complete and detailed list.
 
@@ -218,7 +219,9 @@ Suported messages for SeaTalk (decode and encode):
 
 ### IO
 
-- Reading data from serial ports (NMEA, SeaTalk)
+- Reading data from serial ports (NMEA, SeaTalk).
+  Available only if the environment supports the implementation,
+  typically a Linux system.
 
 
 ### Geodesic Functions
@@ -420,9 +423,6 @@ Build options:
 - `ENABLE_PROFILING` : enables profiling for `gprof`
 - `ENABLE_BENCHMARK` : enables benchmarking (disables some optimization)
 - `ENABLE_SANITIZER` : enables address and undefined sanitizers
-
-Features:
-- `ENABLE_IO` : enables IO support. Default: `ON`
 
 Components:
 - `ENABLE_EXAMPLES`: enables examples. Default: `ON`

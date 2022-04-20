@@ -1,5 +1,5 @@
-#include <marnav/io/device.hpp>
-#include <marnav/io/selectable.hpp>
+#include <marnav-io/device.hpp>
+#include <marnav-io/selectable.hpp>
 #include <memory>
 #include <iostream>
 #include <vector>

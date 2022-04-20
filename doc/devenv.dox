@@ -121,9 +121,6 @@ Build options:
 - `ENABLE_BENCHMARK` : enables benchmarking (disables some optimization)
 - `ENABLE_SANITIZER` : enables address and undefined sanitizers
 
-Features:
-- `ENABLE_IO` : enables IO support. Default: `ON`
-
 Components:
 - `ENABLE_EXAMPLES`: enables examples. Default: `ON`
 - `ENABLE_TOOLS`: enables tools. Default: `ON`

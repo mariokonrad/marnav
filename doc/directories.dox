@@ -43,14 +43,6 @@ have any dependencies to the `nmea` package.
 \brief Collection of geographic and geodesic functions.
 
 
-\dir src/marnav/io
-\brief Input/Output stuff to communicate with the outside world.
-
-Input output stuff, mainly for NMEA and SeaTalk. Please note,
-that this package is not mandatory. It is perfectly fine
-to use the `nmea` package without `io`.
-
-
 \dir src/marnav/math
 \brief Generic math stuff.
 
@@ -65,6 +57,14 @@ to use the `nmea` package without `io`.
 
 \dir src/marnav/utils
 \brief Common utilities.
+
+
+\dir src/marnav-io
+\brief Input/Output stuff to communicate with the outside world.
+
+Input output stuff, mainly for NMEA and SeaTalk. Please note,
+that this package is not mandatory. It is perfectly fine
+to use the `nmea` package without `io`.
 
 
 \dir test

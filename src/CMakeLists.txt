@@ -1,10 +1,78 @@
 cmake_minimum_required(VERSION 3.19)
 
+include(GNUInstallDirs)
+
+if(UNIX)
+	set(CMAKE_SKIP_BUILD_RPATH false)
+	set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}:$ORIGIN/../${CMAKE_INSTALL_LIBDIR}:$$ORIGIN/../${CMAKE_INSTALL_LIBDIR}:$ORIGIN/..:$$ORIGIN/..")
+	set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+endif()
+
+file(WRITE ${CMAKE_BINARY_DIR}/io-test.cpp [[
+#include <fcntl.h>
+#include <termios.h>
+#include <unistd.h>
+int main() {}
+]])
+try_compile(support_for_io ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/io-test.cpp)
+
 ### lib: marnav
 
 message(STATUS "Build shared library : ${BUILD_SHARED_LIBS}")
-message(STATUS "Build IO support     : ${ENABLE_IO}")
 message(STATUS "Build Tools          : ${ENABLE_TOOLS}")
+message(STATUS "Build IO support     : ${support_for_io}")
+
+set(common_compile_options
+	-pipe
+	-ggdb
+	-Wall
+	-Wextra
+	-pedantic-errors
+	-Wold-style-cast
+	-Wcast-align
+	-Wcast-qual
+	-Werror
+	-Wdisabled-optimization
+	-Wfloat-conversion
+	-Wformat=2
+	-Wformat-security
+	-Wformat-y2k
+	-Wimport
+	-Winit-self
+	-Wmissing-field-initializers
+	-Wmissing-format-attribute
+	-Wmissing-include-dirs
+	-Wmissing-noreturn
+	-Wnon-virtual-dtor
+	-Woverloaded-virtual
+	-Wpacked
+	-Wpointer-arith
+	-Wredundant-decls
+	-Wstrict-aliasing=2
+	-Wswitch
+	-Wunreachable-code
+	-Wunused
+	-Wunused-parameter
+	-Wvariadic-macros
+	-Wwrite-strings
+	# explicitly disabled on purpose:
+	-Wno-inline
+	-Wno-conversion
+	-Wno-shadow
+	-Wno-sign-conversion
+	-Wno-stack-protector
+	-Wno-effc++
+	-Wno-padded
+	-Wno-long-long
+	-Wno-unused-function
+	-Wno-comment
+	-Wno-format-nonliteral
+	-Wno-switch-enum
+	-Wno-switch-default
+
+	$<$<BOOL:ENABLE_PROFILING>:-pg>
+	$<$<BOOL:ENABLE_BENCHMARK>:-fno-omit-frame-pointer>
+	)
 
 configure_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/marnav/version.cpp.in
@@ -208,6 +276,19 @@ target_sources(marnav
 		marnav/utils/mmsi_country.cpp
 	)
 
+target_include_directories(marnav
+	PRIVATE
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+	PUBLIC
+		$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+		$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+	)
+
+target_compile_options(marnav
+	PRIVATE
+		${common_compile_options}
+	)
+
 include(CheckSymbolExists)
 if(APPLE)
 	check_symbol_exists(strtod_l xlocale.h HAVE_STRTOD_L)
@@ -222,107 +303,54 @@ else()
 endif()
 
 install(
-	DIRECTORY
-		${PROJECT_SOURCE_DIR}/include/marnav/ais
-		${PROJECT_SOURCE_DIR}/include/marnav/geo
-		${PROJECT_SOURCE_DIR}/include/marnav/math
-		${PROJECT_SOURCE_DIR}/include/marnav/nmea
-		${PROJECT_SOURCE_DIR}/include/marnav/seatalk
-		${PROJECT_SOURCE_DIR}/include/marnav/units
-		${PROJECT_SOURCE_DIR}/include/marnav/utils
-	DESTINATION include/marnav
+	DIRECTORY ${PROJECT_SOURCE_DIR}/include/marnav
+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/
 	)
 
-install(
-	FILES
-		${PROJECT_SOURCE_DIR}/include/marnav/version.hpp
-	DESTINATION include/marnav
+set_target_properties(marnav
+	PROPERTIES VERSION "${PROJECT_VERSION}"
+	SOVERSION "${PROJECT_VERSION}"
 	)
 
-if(ENABLE_IO)
-	target_sources(marnav
+if(support_for_io)
+	add_library(marnav-io)
+	add_library(marnav::marnav-io ALIAS marnav-io)
+
+	target_compile_features(marnav-io
 		PRIVATE
-			marnav/io/serial.cpp
-			marnav/io/nmea_reader.cpp
-			marnav/io/default_nmea_reader.cpp
-			marnav/io/seatalk_reader.cpp
-			marnav/io/default_seatalk_reader.cpp
+			cxx_std_17
 		)
+
+	target_sources(marnav-io
+		PRIVATE
+			marnav-io/serial.cpp
+			marnav-io/nmea_reader.cpp
+			marnav-io/default_nmea_reader.cpp
+			marnav-io/seatalk_reader.cpp
+			marnav-io/default_seatalk_reader.cpp
+		)
+
+	target_compile_options(marnav-io
+		PRIVATE
+			${common_compile_options}
+		)
+
+	target_include_directories(marnav-io
+		PRIVATE
+			$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+		PUBLIC
+			$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+			$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+		)
+
+	set_target_properties(marnav-io
+		PROPERTIES VERSION "${PROJECT_VERSION}"
+		SOVERSION "${PROJECT_VERSION}"
+		)
+
 	install(
-		DIRECTORY ${PROJECT_SOURCE_DIR}/include/marnav/io
-		DESTINATION include/marnav
-		)
-endif()
-
-target_include_directories(marnav
-	PRIVATE
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-	PUBLIC
-		$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-		$<INSTALL_INTERFACE:include>
-	)
-
-target_compile_options(marnav
-	PRIVATE
-		-pipe
-		-ggdb
-		-Wall
-		-Wextra
-		-pedantic-errors
-		-Wold-style-cast
-		-Wcast-align
-		-Wcast-qual
-		-Werror
-		-Wdisabled-optimization
-		-Wfloat-conversion
-		-Wformat=2
-		-Wformat-security
-		-Wformat-y2k
-		-Wimport
-		-Winit-self
-		-Wmissing-field-initializers
-		-Wmissing-format-attribute
-		-Wmissing-include-dirs
-		-Wmissing-noreturn
-		-Wnon-virtual-dtor
-		-Woverloaded-virtual
-		-Wpacked
-		-Wpointer-arith
-		-Wredundant-decls
-		-Wstrict-aliasing=2
-		-Wswitch
-		-Wunreachable-code
-		-Wunused
-		-Wunused-parameter
-		-Wvariadic-macros
-		-Wwrite-strings
-		# explicitly disabled on purpose:
-		-Wno-inline
-		-Wno-conversion
-		-Wno-shadow
-		-Wno-sign-conversion
-		-Wno-stack-protector
-		-Wno-effc++
-		-Wno-padded
-		-Wno-long-long
-		-Wno-unused-function
-		-Wno-comment
-		-Wno-format-nonliteral
-		-Wno-switch-enum
-		-Wno-switch-default
-	)
-
-if(ENABLE_PROFILING)
-	target_compile_options(marnav
-		PRIVATE
-			-pg
-		)
-endif()
-
-if(ENABLE_BENCHMARK)
-	target_compile_options(marnav
-		PRIVATE
-			-fno-omit-frame-pointer
+		DIRECTORY ${PROJECT_SOURCE_DIR}/include/marnav-io
+		DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/
 		)
 endif()
 
@@ -355,7 +383,6 @@ if(ENABLE_IWYU)
 	endif()
 endif()
 
-
 if(CMAKE_BUILD_TYPE MATCHES Coverage)
 	message(STATUS "Coverage: enabled")
 	target_compile_options(marnav
@@ -369,14 +396,8 @@ if(CMAKE_BUILD_TYPE MATCHES Coverage)
 		)
 endif()
 
-set_target_properties(marnav
-	PROPERTIES VERSION "${PROJECT_VERSION}"
-	SOVERSION "${PROJECT_VERSION}"
-	)
-
 # stuff for the config and config-version files
-set(INCLUDE_INSTALL_DIR include)
-set(LIB_INSTALL_DIR lib)
+set(include_install_dir ${CMAKE_INSTALL_INCLUDEDIR})
 include(CMakePackageConfigHelpers)
 
 set(targets_export_name ${PROJECT_NAME}-targets)
@@ -384,23 +405,34 @@ set(targets_export_name ${PROJECT_NAME}-targets)
 install(
 	TARGETS marnav
 	EXPORT ${targets_export_name}
-	LIBRARY DESTINATION ${LIB_INSTALL_DIR}
-	ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
-	RUNTIME DESTINATION bin
-	INCLUDES DESTINATION ${INCLUDE_INSTALL_DIR}
+	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+	INCLUDES DESTINATION ${include_install_dir}
 	)
+
+if(TARGET marnav-io)
+	install(
+		TARGETS marnav-io
+		EXPORT ${targets_export_name}
+		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+		INCLUDES DESTINATION ${include_install_dir}
+		)
+endif()
 
 configure_package_config_file(
 	config.cmake.in
 	"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
-	INSTALL_DESTINATION "${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME}"
-	PATH_VARS INCLUDE_INSTALL_DIR
+	INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
+	PATH_VARS include_install_dir
 	)
 
 install(
 	EXPORT ${targets_export_name}
 	NAMESPACE "${PROJECT_NAME}::"
-	DESTINATION "${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME}"
+	DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
 	)
 
 write_basic_package_version_file(
@@ -412,7 +444,7 @@ install(
 		"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
 		"${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
 	DESTINATION
-		"${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME}"
+		"${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
 	)
 
 
@@ -421,6 +453,7 @@ if(ENABLE_TOOLS)
 	add_executable(nmeasum)
 	target_sources(nmeasum PRIVATE nmeasum.cpp)
 	target_link_libraries(nmeasum PRIVATE marnav::marnav)
+	target_compile_features(nmeasum PRIVATE cxx_std_17)
 
 	target_compile_options(nmeasum
 		PRIVATE
@@ -434,6 +467,7 @@ if(ENABLE_TOOLS)
 	### bin: nmeatool
 	add_executable(nmeatool)
 	target_sources(nmeatool PRIVATE nmeatool.cpp)
+	target_compile_features(nmeatool PRIVATE cxx_std_17)
 
 	target_compile_options(nmeatool
 		PRIVATE
@@ -446,12 +480,13 @@ if(ENABLE_TOOLS)
 
 	target_compile_definitions(nmeatool
 		PRIVATE
-			$<$<BOOL:ENABLE_IO>:ENABLE_IO>
+			$<$<BOOL:support_for_io>:HAVE_IO>
 		)
 
 	target_link_libraries(nmeatool
 		PRIVATE
 			marnav::marnav
+			$<$<BOOL:support_for_io>:marnav::marnav-io>
 			cxxopts::cxxopts
 			fmt::fmt
 		)
@@ -466,4 +501,13 @@ if(ENABLE_TOOLS)
 				FAIL_REGULAR_EXPRESSION "\\* [A-Z]+"
 		)
 	endif()
+
+	install(
+		TARGETS nmeasum nmeatool
+		EXPORT ${targets_export_name}
+		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+		INCLUDES DESTINATION ${include_install_dir}
+		)
 endif()

@@ -1,7 +1,7 @@
 #ifndef MARNAV_IO_SEATALK_READER_HPP
 #define MARNAV_IO_SEATALK_READER_HPP
 
-#include <marnav/io/device.hpp>
+#include <marnav-io/device.hpp>
 #include <marnav/seatalk/message.hpp>
 
 namespace marnav

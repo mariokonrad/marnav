@@ -1,4 +1,4 @@
-#include <marnav/io/default_nmea_reader.hpp>
+#include <marnav-io/default_nmea_reader.hpp>
 
 /// @example read_nmea.cpp
 /// Shows how to use the marnav::io::default_nmea_reader to read NMEA data from

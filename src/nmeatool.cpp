@@ -153,8 +153,8 @@
 #include <marnav/ais/binary_200_10.hpp>
 
 #if defined(ENABLE_IO)
-	#include <marnav/io/default_nmea_reader.hpp>
-	#include <marnav/io/serial.hpp>
+	#include <marnav-io/default_nmea_reader.hpp>
+	#include <marnav-io/serial.hpp>
 #endif
 
 #include <marnav/units/units.hpp>

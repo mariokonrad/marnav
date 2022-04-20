@@ -1,7 +1,7 @@
 #ifndef MARNAV_IO_NMEA_READER_HPP
 #define MARNAV_IO_NMEA_READER_HPP
 
-#include <marnav/io/device.hpp>
+#include <marnav-io/device.hpp>
 #include <marnav/nmea/sentence.hpp>
 
 namespace marnav

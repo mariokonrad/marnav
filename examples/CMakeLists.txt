@@ -31,16 +31,16 @@ target_link_libraries(bitset_iterate marnav::marnav)
 
 if(ENABLE_IO)
 	add_executable(read_seatalk read_seatalk.cpp)
-	target_link_libraries(read_seatalk marnav::marnav)
+	target_link_libraries(read_seatalk marnav::marnav marnav::marnav-io)
 
 	add_executable(read_ais read_ais.cpp)
-	target_link_libraries(read_ais marnav::marnav)
+	target_link_libraries(read_ais marnav::marnav marnav::marnav-io)
 
 	add_executable(nmea_multiplexer nmea_multiplexer.cpp)
-	target_link_libraries(nmea_multiplexer marnav::marnav)
+	target_link_libraries(nmea_multiplexer marnav::marnav marnav::marnav-io)
 
 	add_executable(read_nmea read_nmea.cpp)
-	target_link_libraries(read_nmea marnav::marnav)
+	target_link_libraries(read_nmea marnav::marnav marnav::marnav-io)
 endif()
 
 if(Boost_FOUND AND ENABLE_IO)
@@ -49,6 +49,7 @@ if(Boost_FOUND AND ENABLE_IO)
 	add_executable(read_nmea_boostasio read_nmea_boostasio.cpp)
 	target_link_libraries(read_nmea_boostasio
 		marnav::marnav
+		marnav::marnav-io
 		${Boost_LIBRARIES}
 		pthread
 		)
@@ -56,6 +57,7 @@ if(Boost_FOUND AND ENABLE_IO)
 	add_executable(seatalk_nmea_converter simple_seatalk_nmea_converter.cpp)
 	target_link_libraries(seatalk_nmea_converter
 		marnav::marnav
+		marnav::marnav-io
 		${Boost_LIBRARIES}
 		pthread
 		)
@@ -63,6 +65,7 @@ if(Boost_FOUND AND ENABLE_IO)
 	add_executable(serial_to_tcp serial_to_tcp.cpp)
 	target_link_libraries(serial_to_tcp
 		marnav::marnav
+		marnav::marnav-io
 		${Boost_LIBRARIES}
 		pthread
 		)

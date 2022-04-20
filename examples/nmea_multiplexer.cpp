@@ -4,8 +4,8 @@
 
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/checksum.hpp>
-#include <marnav/io/default_nmea_reader.hpp>
-#include <marnav/io/serial.hpp>
+#include <marnav-io/default_nmea_reader.hpp>
+#include <marnav-io/serial.hpp>
 #include <vector>
 
 int main(int, char **)

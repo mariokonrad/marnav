@@ -1,7 +1,7 @@
 #ifndef MARNAV_IO_SERIAL_HPP
 #define MARNAV_IO_SERIAL_HPP
 
-#include <marnav/io/device.hpp>
+#include <marnav-io/device.hpp>
 #include <string>
 
 namespace marnav

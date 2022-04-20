@@ -7,12 +7,14 @@
 int main(int, char **)
 {
 	std::cout << "marnav-demo\n";
+
+	const auto meta = marnav::get_meta();
 	// clang-format off
-	std::cout << "project version: " << marnav::project_version << '\n';
+	std::cout << "project version: " << meta.project_version << '\n';
 	std::cout << "marnav version:"
-		<< ' ' << marnav::version_major
-		<< '.' << marnav::version_minor
-		<< '.' << marnav::version_patch
+		<< ' ' << meta.version_major
+		<< '.' << meta.version_minor
+		<< '.' << meta.version_patch
 		<< '\n';
 	// clang-format on
 

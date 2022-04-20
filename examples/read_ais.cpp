@@ -7,8 +7,8 @@
 #include <marnav/ais/ais.hpp>
 #include <marnav/ais/message_01.hpp>
 #include <marnav/ais/message_05.hpp>
-#include <marnav/io/device.hpp>
-#include <marnav/io/default_nmea_reader.hpp>
+#include <marnav-io/device.hpp>
+#include <marnav-io/default_nmea_reader.hpp>
 #include <iostream>
 
 namespace marnav_example

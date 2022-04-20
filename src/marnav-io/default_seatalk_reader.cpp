@@ -1,4 +1,4 @@
-#include <marnav/io/default_seatalk_reader.hpp>
+#include <marnav-io/default_seatalk_reader.hpp>
 
 /// @example simple_seatalk_nmea_converter.cpp
 /// This is a very simplistic conversion from SeaTalk messages to NMEA sentences.

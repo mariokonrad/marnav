@@ -1,7 +1,7 @@
 #ifndef MARNAV_IO_DEFAULT_SEATALK_READER_HPP
 #define MARNAV_IO_DEFAULT_SEATALK_READER_HPP
 
-#include <marnav/io/seatalk_reader.hpp>
+#include <marnav-io/seatalk_reader.hpp>
 
 namespace marnav
 {

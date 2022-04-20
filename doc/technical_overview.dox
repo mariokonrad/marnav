@@ -16,16 +16,18 @@ root
 +- extern
 +- include
 |  +- marnav
+|  |  +- ...
+|  +- marnav-io
 |     +- ...
 +- src
 |  +- marnav
-|     +- ais
-|     +- geo
-|     +- io
-|     +- math
-|     +- nmea
-|     +- seatalk
-|     +- utils
+|  |  +- ais
+|  |  +- geo
+|  |  +- math
+|  |  +- nmea
+|  |  +- seatalk
+|  |  +- utils
+|  +- marnav-io
 +- test
 \endverbatim
 
@@ -46,14 +48,15 @@ In the directories `src` and `include`:
                the NMEA protocol (VDM, VDO sentences), the package does not
                have any dependencies to the \c nmea package.
 - \c geo     : collection of geographic and geodesic functions
-- \c io      : input output stuff, mainly for NMEA and SeaTalk. Please note,
-               that this package is not mandatory. It is perfectly fine
-               to use the \c nmea package without \c io.
 - \c math    : generic math stuff
 - \c nmea    : everything NMEA-0183 related
 - \c seatalk : everything SeaTalk related, except IO.
 - \c utils   : common utils
 
+- \c marnav-ioio : input output stuff, mainly for NMEA and SeaTalk. Please note,
+     that this package is not mandatory. It is perfectly fine
+     to use the \c nmea package without \c io. The IO is built only if the
+     necessary headers are available, typically on a Linux system.
 
 \section sec_overview_package_dependencies Package dependencies
 The directory structure underneath \c src reflects the packages.

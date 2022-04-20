@@ -40,7 +40,6 @@ class Package(ConanFile):
             self.__cmake.definitions['ENABLE_PROFILING'] = "FALSE"
             self.__cmake.definitions['ENABLE_BENCHMARK'] = "FALSE"
             self.__cmake.definitions['ENABLE_SANITIZER'] = "FALSE"
-            self.__cmake.definitions['ENABLE_IO'] = "FALSE"
             self.__cmake.definitions['ENABLE_EXAMPLES'] = "FALSE"
             self.__cmake.definitions['ENABLE_TESTS'] = "FALSE"
             self.__cmake.definitions['ENABLE_TOOLS'] = "FALSE"

@@ -1,4 +1,4 @@
-#include <marnav/io/nmea_reader.hpp>
+#include <marnav-io/nmea_reader.hpp>
 #include <algorithm>
 #include <stdexcept>
 

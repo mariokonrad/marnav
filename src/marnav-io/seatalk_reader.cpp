@@ -1,4 +1,4 @@
-#include <marnav/io/seatalk_reader.hpp>
+#include <marnav-io/seatalk_reader.hpp>
 #include <algorithm>
 #include <stdexcept>
 
