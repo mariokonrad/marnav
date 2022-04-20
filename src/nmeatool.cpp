@@ -152,8 +152,10 @@
 #include <marnav/ais/binary_001_11.hpp>
 #include <marnav/ais/binary_200_10.hpp>
 
-#include <marnav/io/default_nmea_reader.hpp>
-#include <marnav/io/serial.hpp>
+#if defined(ENABLE_IO)
+	#include <marnav/io/default_nmea_reader.hpp>
+	#include <marnav/io/serial.hpp>
+#endif
 
 #include <marnav/units/units.hpp>
 
@@ -199,8 +201,10 @@ static bool contains(
 
 static struct {
 	struct {
+#if defined(ENABLE_IO)
 		std::string port;
 		marnav::io::serial::baud speed;
+#endif
 		std::string file;
 		std::string input_string;
 	} config;
@@ -2287,12 +2291,14 @@ static bool parse_options(int argc, char ** argv)
 			"Shows version information.")
 		("help-nmea-list",
 			"Shows a list of supported NMEA sentences.")
+#if defined(ENABLE_IO)
 		("p,port",
 			"Specifies the port to use.",
 			cxxopts::value<std::string>(global.config.port))
 		("s,speed",
 			"Specifies the port speed. Valid values: 4800, 38400",
 			cxxopts::value<uint32_t>(port_speed))
+#endif
 		("f,file",
 			"Specifies the file to use.",
 			cxxopts::value<std::string>(global.config.file))
@@ -2323,6 +2329,7 @@ static bool parse_options(int argc, char ** argv)
 
 	// validation
 
+#if defined(ENABLE_IO)
 	static const std::vector<uint32_t> valid_port_speeds = {4800, 38400};
 
 	if (args.count("port") && args.count("file"))
@@ -2340,6 +2347,7 @@ static bool parse_options(int argc, char ** argv)
 		default:
 			break;
 	}
+#endif
 
 	return false;
 }
@@ -2352,24 +2360,27 @@ int main(int argc, char ** argv)
 	if (parse_options(argc, argv))
 		return EXIT_SUCCESS;
 
-	int result = 0;
 	if (!global.config.file.empty()) {
 		std::ifstream ifs{global.config.file.c_str()};
-		result = process([&](std::string & line) { return !!std::getline(ifs, line); });
-	} else if (!global.config.port.empty()) {
+		return process([&](std::string & line) { return !!std::getline(ifs, line); });
+	}
+
+#if defined(ENABLE_IO)
+	if (!global.config.port.empty()) {
 		using namespace marnav;
 		using namespace marnav::io;
 		default_nmea_reader source{
 			std::make_unique<serial>(global.config.port, global.config.speed,
 				serial::databits::bit_8, serial::stopbits::bit_1, serial::parity::none)};
-		result = process([&](std::string & line) { return source.read_sentence(line); });
-	} else if (!global.config.input_string.empty()) {
+		return process([&](std::string & line) { return source.read_sentence(line); });
+	}
+#endif
+
+	if (!global.config.input_string.empty()) {
 		std::istringstream is(global.config.input_string);
-		result = process([&](std::string & line) { return !!std::getline(is, line); });
-	} else {
-		std::cin.sync_with_stdio(false);
-		result = process([&](std::string & line) { return !!std::getline(std::cin, line); });
+		return process([&](std::string & line) { return !!std::getline(is, line); });
 	}
 
-	return result;
+	std::cin.sync_with_stdio(false);
+	return process([&](std::string & line) { return !!std::getline(std::cin, line); });
 }

@@ -432,35 +432,38 @@ if(ENABLE_TOOLS)
 		)
 
 	### bin: nmeatool
-	if(ENABLE_IO)
-		add_executable(nmeatool)
-		target_sources(nmeatool PRIVATE nmeatool.cpp)
+	add_executable(nmeatool)
+	target_sources(nmeatool PRIVATE nmeatool.cpp)
 
-		target_compile_options(nmeatool
-			PRIVATE
-				-pipe
-				-ggdb
-				-Wall
-				-Wextra
-				-pedantic-errors
-			)
+	target_compile_options(nmeatool
+		PRIVATE
+			-pipe
+			-ggdb
+			-Wall
+			-Wextra
+			-pedantic-errors
+		)
 
-		target_link_libraries(nmeatool
-			PRIVATE
-				marnav::marnav
-				cxxopts::cxxopts
-				fmt::fmt
-			)
+	target_compile_definitions(nmeatool
+		PRIVATE
+			$<$<BOOL:ENABLE_IO>:ENABLE_IO>
+		)
 
-		if(ENABLE_TESTS)
-			enable_testing()
-			add_test(NAME nmeatool-completeness
-				COMMAND $<TARGET_FILE:nmeatool> --help-nmea-list
-				)
-			set_tests_properties(nmeatool-completeness
-				PROPERTIES
-					FAIL_REGULAR_EXPRESSION "\\* [A-Z]+"
+	target_link_libraries(nmeatool
+		PRIVATE
+			marnav::marnav
+			cxxopts::cxxopts
+			fmt::fmt
+		)
+
+	if(ENABLE_TESTS)
+		enable_testing()
+		add_test(NAME nmeatool-completeness
+			COMMAND $<TARGET_FILE:nmeatool> --help-nmea-list
 			)
-		endif()
+		set_tests_properties(nmeatool-completeness
+			PROPERTIES
+				FAIL_REGULAR_EXPRESSION "\\* [A-Z]+"
+		)
 	endif()
 endif()
