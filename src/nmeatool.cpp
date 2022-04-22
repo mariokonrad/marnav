@@ -152,7 +152,7 @@
 #include <marnav/ais/binary_001_11.hpp>
 #include <marnav/ais/binary_200_10.hpp>
 
-#if defined(ENABLE_IO)
+#if defined(HAVE_IO)
 	#include <marnav-io/default_nmea_reader.hpp>
 	#include <marnav-io/serial.hpp>
 #endif
@@ -201,7 +201,7 @@ static bool contains(
 
 static struct {
 	struct {
-#if defined(ENABLE_IO)
+#if defined(HAVE_IO)
 		std::string port;
 		marnav::io::serial::baud speed;
 #endif
@@ -2291,7 +2291,7 @@ static bool parse_options(int argc, char ** argv)
 			"Shows version information.")
 		("help-nmea-list",
 			"Shows a list of supported NMEA sentences.")
-#if defined(ENABLE_IO)
+#if defined(HAVE_IO)
 		("p,port",
 			"Specifies the port to use.",
 			cxxopts::value<std::string>(global.config.port))
@@ -2329,7 +2329,7 @@ static bool parse_options(int argc, char ** argv)
 
 	// validation
 
-#if defined(ENABLE_IO)
+#if defined(HAVE_IO)
 	static const std::vector<uint32_t> valid_port_speeds = {4800, 38400};
 
 	if (args.count("port") && args.count("file"))
@@ -2365,7 +2365,7 @@ int main(int argc, char ** argv)
 		return process([&](std::string & line) { return !!std::getline(ifs, line); });
 	}
 
-#if defined(ENABLE_IO)
+#if defined(HAVE_IO)
 	if (!global.config.port.empty()) {
 		using namespace marnav;
 		using namespace marnav::io;
