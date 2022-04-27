@@ -308,8 +308,9 @@ install(
 	)
 
 set_target_properties(marnav
-	PROPERTIES VERSION "${PROJECT_VERSION}"
-	SOVERSION "${PROJECT_VERSION}"
+	PROPERTIES
+		VERSION "${PROJECT_VERSION}"
+		SOVERSION "${PROJECT_VERSION}"
 	)
 
 if(support_for_io)
@@ -343,9 +344,15 @@ if(support_for_io)
 			$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 		)
 
+	target_link_libraries(marnav-io
+		PUBLIC
+			marnav::marnav
+		)
+
 	set_target_properties(marnav-io
-		PROPERTIES VERSION "${PROJECT_VERSION}"
-		SOVERSION "${PROJECT_VERSION}"
+		PROPERTIES
+			VERSION "${PROJECT_VERSION}"
+			SOVERSION "${PROJECT_VERSION}"
 		)
 
 	install(

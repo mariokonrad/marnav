@@ -4,9 +4,9 @@
 #include <stdexcept>
 
 #if defined(__APPLE__)
-#include <xlocale.h>
+	#include <xlocale.h>
 #else
-#include <cstdlib>
+	#include <cstdlib>
 #endif
 
 namespace marnav

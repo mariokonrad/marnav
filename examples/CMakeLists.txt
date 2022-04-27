@@ -29,7 +29,7 @@ target_link_libraries(select marnav::marnav)
 add_executable(bitset_iterate bitset_iterate.cpp)
 target_link_libraries(bitset_iterate marnav::marnav)
 
-if(ENABLE_IO)
+if(TARGET marnav::marnav-io)
 	add_executable(read_seatalk read_seatalk.cpp)
 	target_link_libraries(read_seatalk marnav::marnav marnav::marnav-io)
 
@@ -43,7 +43,7 @@ if(ENABLE_IO)
 	target_link_libraries(read_nmea marnav::marnav marnav::marnav-io)
 endif()
 
-if(Boost_FOUND AND ENABLE_IO)
+if(Boost_FOUND AND (TARGET marnav::marnav-io))
 	include_directories(${Boost_INCLUDE_DIRS})
 
 	add_executable(read_nmea_boostasio read_nmea_boostasio.cpp)

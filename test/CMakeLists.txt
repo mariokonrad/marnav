@@ -198,7 +198,7 @@ target_sources(testrunner
 		marnav/utils/Test_utils_mmsi_country.cpp
 	)
 
-if(ENABLE_IO)
+if(TARGET marnav::marnav-io)
 	target_sources(testrunner
 		PRIVATE
 			marnav-io/Test_io_nmea_reader.cpp

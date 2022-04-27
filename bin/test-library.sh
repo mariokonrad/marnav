@@ -7,18 +7,16 @@ export SCRIPT_BASE=$(dirname `readlink -f $0`)
 export BASE=${SCRIPT_BASE}/..
 export BUILD=${BASE}/build
 
-# TODO: activate this code after upgrading to cmake version > 3.11
-#if [ `which nproc` ] ; then
-#	export NUM_PROC_ARG="-j ${NUM_PROC:-$(nproc --all --ignore=2)}"
-#else
-#	num_proc=${NUM_PROC:-$(($(cat /proc/cpuinfo | grep -E "^processor" | wc -l) - 2))}
-#	if [ ${num_proc} -gt 0 ] ; then
-#		export NUM_PROC_ARG="-j ${num_proc}"
-#	else
-#		export NUM_PROC_ARG="-j 1"
-#	fi
-#fi
-export NUM_PROC_ARG=""
+if [ `which nproc` ] ; then
+	export NUM_PROC_ARG="-j ${NUM_PROC:-$(nproc --all --ignore=2)}"
+else
+	num_proc=${NUM_PROC:-$(($(cat /proc/cpuinfo | grep -E "^processor" | wc -l) - 2))}
+	if [ ${num_proc} -gt 0 ] ; then
+		export NUM_PROC_ARG="-j ${num_proc}"
+	else
+		export NUM_PROC_ARG="-j 1"
+	fi
+fi
 
 function prepare_dir()
 {
