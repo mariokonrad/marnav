@@ -215,7 +215,7 @@ target_include_directories(testrunner
 
 target_link_libraries(testrunner
 	marnav::marnav
-	marnav::marnav-io
+	$<$<TARGET_EXISTS:marnav::marnav-io>:marnav::marnav-io>
 	googletest::gtest
 	googletest::gmock
 	googletest::gtest_main

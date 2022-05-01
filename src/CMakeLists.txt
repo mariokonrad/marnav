@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.19)
 include(GNUInstallDirs)
 
 if(UNIX)
-	set(CMAKE_SKIP_BUILD_RPATH false)
+	set(CMAKE_SKIP_BUILD_RPATH FALSE)
 	set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}:$ORIGIN/../${CMAKE_INSTALL_LIBDIR}:$$ORIGIN/../${CMAKE_INSTALL_LIBDIR}:$ORIGIN/..:$$ORIGIN/..")
 	set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 endif()
@@ -21,6 +21,8 @@ try_compile(support_for_io ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/io-test.cpp)
 message(STATUS "Build shared library : ${BUILD_SHARED_LIBS}")
 message(STATUS "Build Tools          : ${ENABLE_TOOLS}")
 message(STATUS "Build IO support     : ${support_for_io}")
+message(STATUS "Build for Profiliing : ${ENABLE_PROFILING}")
+message(STATUS "Build for Benchmark  : ${ENABLE_BENCHMARK}")
 
 set(common_compile_options
 	-pipe
@@ -69,9 +71,6 @@ set(common_compile_options
 	-Wno-format-nonliteral
 	-Wno-switch-enum
 	-Wno-switch-default
-
-	$<$<BOOL:ENABLE_PROFILING>:-pg>
-	$<$<BOOL:ENABLE_BENCHMARK>:-fno-omit-frame-pointer>
 	)
 
 configure_file(
@@ -287,6 +286,8 @@ target_include_directories(marnav
 target_compile_options(marnav
 	PRIVATE
 		${common_compile_options}
+		$<$<BOOL:${ENABLE_PROFILING}>:-pg>
+		$<$<BOOL:${ENABLE_BENCHMARK}>:-fno-omit-frame-pointer>
 	)
 
 include(CheckSymbolExists)
@@ -464,7 +465,6 @@ if(ENABLE_TOOLS)
 
 	target_compile_options(nmeasum
 		PRIVATE
-			-pipe
 			-ggdb
 			-Wall
 			-Wextra
@@ -478,7 +478,6 @@ if(ENABLE_TOOLS)
 
 	target_compile_options(nmeatool
 		PRIVATE
-			-pipe
 			-ggdb
 			-Wall
 			-Wextra
@@ -487,13 +486,13 @@ if(ENABLE_TOOLS)
 
 	target_compile_definitions(nmeatool
 		PRIVATE
-			$<$<BOOL:support_for_io>:HAVE_IO>
+			$<$<BOOL:${support_for_io}>:HAVE_IO>
 		)
 
 	target_link_libraries(nmeatool
 		PRIVATE
 			marnav::marnav
-			$<$<BOOL:support_for_io>:marnav::marnav-io>
+			$<$<BOOL:${support_for_io}>:marnav::marnav-io>
 			cxxopts::cxxopts
 			fmt::fmt
 		)

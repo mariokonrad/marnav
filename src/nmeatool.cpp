@@ -2280,7 +2280,9 @@ static void print_nmea_sentence_list()
 
 static bool parse_options(int argc, char ** argv)
 {
+#if defined(HAVE_IO)
 	uint32_t port_speed = 0;
+#endif
 
 	// clang-format off
 	cxxopts::Options options{argv[0], "NMEA Dump"};
