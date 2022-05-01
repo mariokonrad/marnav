@@ -49,7 +49,6 @@
 				"CMAKE_CXX_COMPILER": "arm-linux-gnueabihf-g++-10",
 				"CMAKE_C_COMPILER": "arm-linux-gnueabihf-gcc-10",
 				"CMAKE_BUILD_TYPE": "Release",
-				"ENABLE_IO": "FALSE",
 				"ENABLE_EXAMPLES": "FALSE",
 				"ENABLE_TESTS": "FALSE",
 				"ENABLE_TOOLS": "FALSE"
@@ -173,6 +172,30 @@
 				"CMAKE_CXX_COMPILER": "g++",
 				"CMAKE_C_COMPILER": "gcc",
 				"CMAKE_BUILD_TYPE": "Debug"
+			}
+		},
+		{
+			"name": "x86-gcc9-release",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "g++-9",
+				"CMAKE_C_COMPILER": "gcc-9",
+				"CMAKE_BUILD_TYPE": "Release",
+				"CMAKE_CXX_FLAGS_INIT": "-m32 -ffloat-store",
+				"ENABLE_EXAMPLES": "FALSE",
+				"ENABLE_TESTS": "TRUE"
+			}
+		},
+		{
+			"name": "x86-gcc10-release",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "g++-10",
+				"CMAKE_C_COMPILER": "gcc-10",
+				"CMAKE_BUILD_TYPE": "Release",
+				"CMAKE_CXX_FLAGS_INIT": "-m32 -ffloat-store",
+				"ENABLE_EXAMPLES": "FALSE",
+				"ENABLE_TESTS": "TRUE"
 			}
 		},
 		{
@@ -441,6 +464,8 @@
 		{ "name": "gcc5-debug",                        "configurePreset": "gcc5-debug"                        },
 		{ "name": "gcc-release",                       "configurePreset": "gcc-release"                       },
 		{ "name": "gcc-debug",                         "configurePreset": "gcc-debug"                         },
+		{ "name": "x86-gcc9-release",                  "configurePreset": "x86-gcc9-release"                  },
+		{ "name": "x86-gcc10-release",                 "configurePreset": "x86-gcc10-release"                 },
 		{ "name": "gcc-bench",                         "configurePreset": "gcc-bench"                         },
 		{ "name": "gcc-sanitize",                      "configurePreset": "gcc-sanitize"                      },
 		{ "name": "gcc-coverage",                      "configurePreset": "gcc-coverage"                      },

@@ -17,6 +17,7 @@ ExternalProject_Add(extern-googletest
 		# Also, the postfix 'd' for output names in debug builds is hardcoded,
 		# in googletest. WTF!?
 		-DCMAKE_BUILD_TYPE=Release
+		-DCMAKE_CXX_FLAGS_INIT=${CMAKE_CXX_FLAGS_INIT}
 	# install
 	INSTALL_DIR ${googletest_INSTALL_DIR}
 	BUILD_BYPRODUCTS

@@ -8,6 +8,7 @@ set_property(DIRECTORY PROPERTY COMPILE_OPTIONS
 	-pedantic-errors
 	)
 
+
 add_executable(parse_nmea parse_nmea.cpp)
 target_link_libraries(parse_nmea marnav::marnav)
 
@@ -44,9 +45,8 @@ if(TARGET marnav::marnav-io)
 endif()
 
 if(Boost_FOUND AND (TARGET marnav::marnav-io))
-	include_directories(${Boost_INCLUDE_DIRS})
-
 	add_executable(read_nmea_boostasio read_nmea_boostasio.cpp)
+	target_include_directories(read_nmea_boostasio PRIVATE ${Boost_INCLUDE_DIRS})
 	target_link_libraries(read_nmea_boostasio
 		marnav::marnav
 		marnav::marnav-io
@@ -55,6 +55,7 @@ if(Boost_FOUND AND (TARGET marnav::marnav-io))
 		)
 
 	add_executable(seatalk_nmea_converter simple_seatalk_nmea_converter.cpp)
+	target_include_directories(seatalk_nmea_converter PRIVATE ${Boost_INCLUDE_DIRS})
 	target_link_libraries(seatalk_nmea_converter
 		marnav::marnav
 		marnav::marnav-io
@@ -63,6 +64,7 @@ if(Boost_FOUND AND (TARGET marnav::marnav-io))
 		)
 
 	add_executable(serial_to_tcp serial_to_tcp.cpp)
+	target_include_directories(serial_to_tcp PRIVATE ${Boost_INCLUDE_DIRS})
 	target_link_libraries(serial_to_tcp
 		marnav::marnav
 		marnav::marnav-io
