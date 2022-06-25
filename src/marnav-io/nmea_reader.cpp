@@ -65,7 +65,7 @@ void nmea_reader::process_nmea()
 			// ignore invalid characters. if this makes the sentence incomplete,
 			// the sentence would have been invalid anyway. the result will be
 			// an invalid sentence or a std::length_error.
-			if ((raw_ <= 32) || (raw_ >= 127))
+			if ((raw_ < 32) || (raw_ >= 127))
 				return;
 
 			if (sentence_.size() > nmea::sentence::max_length)

@@ -235,4 +235,18 @@ TEST_F(Test_io_nmea_reader, read_after_close)
 
 	ASSERT_THROW(dev.read(), std::runtime_error);
 }
+
+TEST_F(Test_io_nmea_reader, read_data_with_spaces)
+{
+	const std::string raw = "$AIALR,000000.00,026,A,V,AIS: no position sensor in use*5D\r\n";
+
+	message_reader dev{raw};
+
+	std::string sentence;
+	bool rc = false;
+
+	ASSERT_NO_THROW(rc = dev.read_sentence(sentence));
+	ASSERT_TRUE(rc);
+	EXPECT_EQ(raw.size() - 2u, sentence.size());
+}
 }
