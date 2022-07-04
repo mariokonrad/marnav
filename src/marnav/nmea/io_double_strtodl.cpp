@@ -13,7 +13,7 @@ namespace marnav
 {
 namespace nmea
 {
-void read(const std::string & s, double & value, data_format fmt)
+inline void read(const std::string & s, double & value, data_format fmt)
 {
 	utils::unused(fmt);
 	if (s.empty())
