@@ -58,7 +58,7 @@ void mwv::set_speed(units::knots speed) noexcept
 void mwv::set_speed(units::kilometers_per_hour speed) noexcept
 {
 	speed_ = speed.value();
-	speed_unit_ = unit::velocity::mps;
+	speed_unit_ = unit::velocity::kmh;
 }
 
 void mwv::set_speed(units::meters_per_second speed) noexcept
