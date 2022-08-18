@@ -367,7 +367,7 @@ Compiler:
 - GCC 9
 - GCC 10
 - GCC 11
-- Clang 4
+- GCC 12
 - Clang 5
 - Clang 6
 - Clang 7
@@ -377,6 +377,7 @@ Compiler:
 - Clang 11
 - Clang 12
 - Clang 13
+- Clang 14
 
 Tools needed to build the library:
 - cmake 3.19 or newer
