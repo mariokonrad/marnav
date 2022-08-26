@@ -35,7 +35,7 @@ TEST_F(Test_ais_message_01, parse)
 	EXPECT_NEAR(51.2296, lat.value(), 4e-5);
 	EXPECT_NEAR(110.7, *m->get_cog(), 1e-5);
 	EXPECT_TRUE(!m->get_hdg());
-	EXPECT_EQ(52u, m->get_timestamp());
+	EXPECT_EQ(40u, m->get_timestamp());
 	EXPECT_EQ(ais::maneuver_indicator_id::not_available, m->get_maneuver_indicator());
 	EXPECT_EQ(true, m->get_raim());
 	EXPECT_EQ(82419u, m->get_radio_status());
@@ -54,7 +54,7 @@ TEST_F(Test_ais_message_01, encode_default_values)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ("100000?P?w<tSF0l4Q@>4?wh0000", v[0].first.c_str());
+	EXPECT_STREQ("100000?P?w<tSF0l4Q@>4?wp0000", v[0].first.c_str());
 	EXPECT_EQ(0u, v[0].second);
 }
 
@@ -66,7 +66,7 @@ TEST_F(Test_ais_message_01, set_lat)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ("100000?P?w<tSF073qp>4?wh0000", v[0].first.c_str());
+	EXPECT_STREQ("100000?P?w<tSF073qp>4?wp0000", v[0].first.c_str());
 	EXPECT_EQ(0u, v[0].second);
 }
 
@@ -78,7 +78,7 @@ TEST_F(Test_ais_message_01, set_lon)
 	auto v = ais::encode_message(m);
 
 	ASSERT_EQ(1u, v.size());
-	EXPECT_STREQ("100000?P?w8m6wPl4Q@>4?wh0000", v[0].first.c_str());
+	EXPECT_STREQ("100000?P?w8m6wPl4Q@>4?wp0000", v[0].first.c_str());
 	EXPECT_EQ(0u, v[0].second);
 }
 
