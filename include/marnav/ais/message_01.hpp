@@ -45,7 +45,7 @@ private:
 	bitset_value< 89, 27, uint32_t             > latitude_minutes = latitude_not_available; // in 10000 minutes
 	bitset_value<116, 12, uint32_t             > cog = cog_not_available;
 	bitset_value<128,  9, uint32_t             > hdg = hdg_not_available;
-	bitset_value<136,  6, uint32_t             > timestamp = timestamp_not_available;
+	bitset_value<137,  6, uint32_t             > timestamp = timestamp_not_available;
 	bitset_value<143,  2, maneuver_indicator_id> maneuver_indicator = maneuver_indicator_id::not_available;
 	bitset_value<148,  1, bool                 > raim = false;
 	bitset_value<149, 19, uint32_t             > radio_status = 0;
