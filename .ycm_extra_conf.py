@@ -17,7 +17,6 @@ flags = [
   '-Werror'
   '-pedantic',
   '-std=c++17',
-  '-I.',
   '-Isrc',
   '-Iinclude',
   '-isystem', '/usr/include',
@@ -31,7 +30,23 @@ if platform.system() != 'Windows':
   flags.append( '-std=c++17' )
 
 
-compilation_database_folder = p.dirname(p.abspath(__file__)) + '/build'
+# Find the first compile database in the build directory
+def FindCompileDatabase():
+    database = 'compile_commands.json'
+    build_path = os.path.dirname(os.path.abspath(__file__)) + '/build'
+    if os.path.exists(os.path.join(build_path, database)):
+        return build_path
+
+    for name in os.listdir(build_path):
+        path = os.path.join(build_path, name)
+        if os.path.isdir(path):
+            if os.path.exists(os.path.join(path, database)):
+                return path
+
+    return build_path
+
+
+compilation_database_folder = FindCompileDatabase()
 
 
 def IsHeaderFile( filename ):
