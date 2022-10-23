@@ -1,4 +1,6 @@
 #include <marnav/nmea/alr.hpp>
+#include "marnav/nmea/checksum.hpp"
+#include "marnav/nmea/checksum_enum.hpp"
 #include "type_traits_helper.hpp"
 #include <marnav/nmea/nmea.hpp>
 #include <gtest/gtest.h>
@@ -150,5 +152,41 @@ TEST_F(Test_nmea_alr, get_number)
 	ASSERT_NE(nullptr, alr);
 
 	EXPECT_EQ(260u, alr->get_number());
+}
+
+TEST_F(Test_nmea_alr, various_alarm_descriptions)
+{
+	// descriptions found: https://www.cruisersforum.com/forums/f134/opencpn-and-external-nmea0183-alarms-81396.html
+	static const std::string preamble = "$IIALR,000000,0,A,A,";
+	// clang-format off
+	static const std::vector<std::pair<std::string, std::string>> descriptions = {
+		{ "AIS: TX malfunction",                     "4C" },
+		{ "AIS: Antenna VSWR exceeds limit",         "61" },
+		{ "AIS: Rx channel 1 malfunction",           "38" },
+		{ "AIS: Rx channel 2 malfunction",           "3B" },
+		{ "AIS: general failure",                    "34" },
+		{ "AIS: no sensor position in use",          "68" },
+		{ "AIS: no valid SOG information",           "62" },
+		{ "AIS: no valid COG information",           "72" },
+		{ "AIS: 12V alarm",                          "04" },
+		{ "AIS: 5V alarm",                           "32" },
+		{ "AIS: Loss of serial interface integrity", "2A" },
+		{ "AIS: Background noise above -77dBm",      "6B" },
+	};
+	// clang-format on
+
+	for (const auto & [d, c] : descriptions) {
+		try {
+			auto s = nmea::make_sentence(preamble + d + '*' + c);
+			ASSERT_NE(nullptr, s) << "desc: " << d;
+
+			auto alr = nmea::sentence_cast<nmea::alr>(s);
+			ASSERT_NE(nullptr, alr);
+
+			EXPECT_STREQ(d.c_str(), alr->get_text().c_str());
+		} catch (nmea::checksum_error & e) {
+			ASSERT_FALSE(true) << e.what() << " for desc: " << d;
+		}
+	}
 }
 }
