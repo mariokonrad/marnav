@@ -5,7 +5,6 @@
 
 namespace
 {
-
 using namespace marnav;
 
 class Test_nmea_dsc : public ::testing::Test
@@ -172,6 +171,22 @@ TEST_F(Test_nmea_dsc, get_extension)
 TEST_F(Test_nmea_dsc, empty_to_string)
 {
 	nmea::dsc dsc;
-	EXPECT_STREQ("$CDDSC,12,0000000000,12,,,,,,,S,*2C", nmea::to_string(dsc).c_str());
+	EXPECT_STREQ("$CDDSC,12,0000000000,12,,,,,,,,*7F", nmea::to_string(dsc).c_str());
+}
+
+TEST_F(Test_nmea_dsc, case_adrianmo_go_nmea_blob_master_dsc_go)
+{
+	// https://github.com/adrianmo/go-nmea/blob/master/dsc.go
+
+	auto s = nmea::sentence_cast<nmea::dsc>(
+		nmea::make_sentence("$CDDSC,20,3380400790,00,21,26,1423108312,2021,,,B,E*73"));
+	ASSERT_NE(nullptr, s);
+
+	EXPECT_EQ(utils::mmsi(338040079), s->get_mmsi());
+	EXPECT_EQ(nmea::dsc::category::routine, s->get_cat());
+	EXPECT_EQ(nmea::dsc::second_telecommand::no_information, s->get_command_2());
+	EXPECT_STREQ("1423108312", s->get_position_or_channel()->c_str());
+	EXPECT_EQ(nmea::dsc::acknowledgement::B, s->get_ack());
+	EXPECT_EQ(nmea::dsc::extension_indicator::extension_follows, s->get_extension());
 }
 }

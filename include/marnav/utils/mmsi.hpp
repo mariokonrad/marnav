@@ -10,7 +10,7 @@ namespace utils
 
 /// @brief Represents a MMSI (Maritime Mobile Service Identiy).
 ///
-/// @see http://www.navcen.uscg.gov/?pageName=mtMmsi
+/// @see https://navcen.uscg.gov/maritime-mobile-service-identity
 /// @see https://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.585-8-201910-I!!PDF-E.pdf
 ///
 /// @note Not all variations and criterias are implemented.
