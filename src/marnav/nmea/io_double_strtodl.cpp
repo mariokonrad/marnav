@@ -9,6 +9,10 @@
 	#include <cstdlib>
 #endif
 
+#ifdef _WIN32
+        #define strtod_l _strtod_l
+#endif
+
 namespace marnav
 {
 namespace nmea
@@ -19,7 +23,12 @@ void read(const std::string & s, double & value, data_format fmt)
 	if (s.empty())
 		return;
 
+#ifndef _WIN32
 	static const locale_t locale = ::newlocale(LC_NUMERIC_MASK, "C", nullptr);
+#else
+        static const _locale_t locale = ::_create_locale(LC_NUMERIC, "C");
+#endif
+
 
 	char * endptr = nullptr;
 	value = ::strtod_l(s.c_str(), &endptr, locale);
