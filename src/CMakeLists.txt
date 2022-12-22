@@ -493,7 +493,7 @@ if(ENABLE_TOOLS)
 		PRIVATE
 			marnav::marnav
 			$<$<BOOL:${support_for_io}>:marnav::marnav-io>
-			cxxopts::cxxopts
+			cxxopts
 			fmt::fmt
 		)
 

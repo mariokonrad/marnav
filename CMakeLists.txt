@@ -40,10 +40,20 @@ include(RepoInformation)
 include(Documentation)
 include(CppCheck)
 include(ExternalProject)
+include(FetchContent)
 
 if(ENABLE_TOOLS)
-	include(ExternCxxopts)
-	include(ExternFmt)
+	set(CXXOPTS_BUILD_EXAMPLES FALSE CACHE BOOL "" FORCE)
+	set(CXXOPTS_BUILD_TESTS FALSE CACHE BOOL "" FORCE)
+	FetchContent_Declare(cxxopts
+		URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/cxxopts"
+		)
+	FetchContent_MakeAvailable(cxxopts)
+
+	FetchContent_Declare(fmt
+		URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/fmt"
+		)
+	FetchContent_MakeAvailable(fmt)
 endif()
 
 ### common
@@ -74,10 +84,19 @@ message(STATUS "Build Tests: ${ENABLE_TESTS}")
 message(STATUS "Build Tests Benchmark: ${ENABLE_TESTS_BENCHMARK}")
 if(ENABLE_TESTS)
 	enable_testing()
-	include(ExternGoogletest)
+
+	FetchContent_Declare(googletest
+		URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/googletest-1.11.0"
+		)
+	FetchContent_MakeAvailable(googletest)
 
 	if(ENABLE_TESTS_BENCHMARK)
-		include(ExternBenchmark)
+		set(BENCHMARK_ENABLE_TESTING FALSE CACHE BOOL "" FORCE)
+		set(BENCHMARK_ENABLE_GTEST_TESTS FALSE CACHE BOOL "" FORCE)
+		FetchContent_Declare(benchmark
+			URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/benchmark-1.6.0"
+			)
+		FetchContent_MakeAvailable(benchmark)
 	endif()
 
 	add_subdirectory(test)
