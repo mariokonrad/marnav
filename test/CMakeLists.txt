@@ -225,12 +225,12 @@ target_link_libraries(testrunner
 
 add_test(
 	NAME unittest-testrunner
-	COMMAND testrunner
+	COMMAND $<TARGET_FILE:testrunner>
 	WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
 	)
 
 add_custom_target(testrunner_runtest
-	COMMAND testrunner --gtest_shuffle
+	COMMAND $<TARGET_FILE:testrunner> --gtest_shuffle
 	DEPENDS testrunner
 	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 	)

@@ -455,61 +455,12 @@ install(
 		"${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
 	)
 
-
 if(ENABLE_TOOLS)
-	### bin: nmeasum
-	add_executable(nmeasum)
-	target_sources(nmeasum PRIVATE nmeasum.cpp)
-	target_link_libraries(nmeasum PRIVATE marnav::marnav)
-	target_compile_features(nmeasum PRIVATE cxx_std_17)
-
-	target_compile_options(nmeasum
-		PRIVATE
-			-ggdb
-			-Wall
-			-Wextra
-			-pedantic-errors
-		)
-
-	### bin: nmeatool
-	add_executable(nmeatool)
-	target_sources(nmeatool PRIVATE nmeatool.cpp)
-	target_compile_features(nmeatool PRIVATE cxx_std_17)
-
-	target_compile_options(nmeatool
-		PRIVATE
-			-ggdb
-			-Wall
-			-Wextra
-			-pedantic-errors
-		)
-
-	target_compile_definitions(nmeatool
-		PRIVATE
-			$<$<BOOL:${support_for_io}>:HAVE_IO>
-		)
-
-	target_link_libraries(nmeatool
-		PRIVATE
-			marnav::marnav
-			$<$<BOOL:${support_for_io}>:marnav::marnav-io>
-			cxxopts
-			fmt::fmt
-		)
-
-	if(ENABLE_TESTS)
-		enable_testing()
-		add_test(NAME nmeatool-completeness
-			COMMAND $<TARGET_FILE:nmeatool> --help-nmea-list
-			)
-		set_tests_properties(nmeatool-completeness
-			PROPERTIES
-				FAIL_REGULAR_EXPRESSION "\\* [A-Z]+"
-		)
-	endif()
+	add_subdirectory(nmeatool)
+	add_subdirectory(nmeasum)
 
 	install(
-		TARGETS nmeasum nmeatool
+		TARGETS nmeatool nmeasum
 		EXPORT ${targets_export_name}
 		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}

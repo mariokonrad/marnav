@@ -42,7 +42,6 @@ optional (used for development only):
 - lcov / genhtml, c++filt
 - cppcheck
 - clang-tools (analyzer)
-- ctags, cscope
 - perf
 
 optional (no core dependency):

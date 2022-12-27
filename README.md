@@ -395,7 +395,6 @@ Optional used for development:
 - lcov / genhtml, c++filt
 - cppcheck
 - clang-tools (analyzer)
-- ctags, cscope
 - perf
 
 Optional (no core dependency):

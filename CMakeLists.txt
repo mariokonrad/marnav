@@ -35,11 +35,17 @@ if(NOT DEFINED BUILD_SHARED_LIBS)
 	endif()
 endif()
 
+if(ENABLE_TESTS)
+	set(BUILD_TESTING TRUE)
+	enable_testing()
+else()
+	set(BUILD_TESTING FALSE)
+endif()
+
 # misc
 include(RepoInformation)
 include(Documentation)
 include(CppCheck)
-include(ExternalProject)
 include(FetchContent)
 
 if(ENABLE_TOOLS)
@@ -64,27 +70,19 @@ file(MAKE_DIRECTORY
 	${CMAKE_CURRENT_BINARY_DIR}/local/include
 	)
 
-### library
+### library and tools
 add_subdirectory(src)
 
 ### examples
-message(STATUS "Build Examples: ${ENABLE_EXAMPLES}")
+message(STATUS "Build Examples       : ${ENABLE_EXAMPLES}")
 if(ENABLE_EXAMPLES)
 	add_subdirectory(examples)
 endif()
 
-### ctags / cscope
-include(CTags)
-if(CTAGS_PATH AND CSCOPE_PATH)
-	setup_ctags_target("${CMAKE_CURRENT_SOURCE_DIR}/src/*.?pp;${CMAKE_CURRENT_SOURCE_DIR}/include/*.?pp")
-endif()
-
 ### testing
-message(STATUS "Build Tests: ${ENABLE_TESTS}")
+message(STATUS "Build Tests          : ${ENABLE_TESTS}")
 message(STATUS "Build Tests Benchmark: ${ENABLE_TESTS_BENCHMARK}")
 if(ENABLE_TESTS)
-	enable_testing()
-
 	FetchContent_Declare(googletest
 		URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/googletest-1.11.0"
 		)
