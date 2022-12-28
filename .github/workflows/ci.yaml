@@ -1,4 +1,4 @@
-name: ghactions-test
+name: marnav CI
 
 on:
   pull_request:
