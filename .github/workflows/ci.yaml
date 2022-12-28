@@ -1,0 +1,41 @@
+name: ghactions-test
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-gcc:
+    runs-on: ubuntu-latest
+    container:
+      image: mariokonrad/marnav:gcc-12.2.0
+
+      # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#docker-container-filesystem=
+      # Quote:
+      # > Note: GitHub Actions must be run by the default Docker user (root).
+      # > Ensure your Dockerfile does not set the USER instruction, otherwise
+      # > you will not be able to access GITHUB_WORKSPACE.
+      options: --user root
+
+    steps:
+      - name: print versions
+        run: |
+          cmake --version
+          echo "--------------------------------------------------------------------------------"
+          ninja --version
+          echo "--------------------------------------------------------------------------------"
+          g++ --version
+
+      - uses: actions/checkout@v3
+
+      - name: configure
+        run: cmake --preset gcc-release -G Ninja
+
+      - name: build
+        run: cmake --build --preset gcc-release -j
+
+      - name: test
+        run: ctest --preset gcc-release
+
