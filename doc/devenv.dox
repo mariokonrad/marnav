@@ -25,6 +25,7 @@ Compiler supported (older/others may work, but not tested):
 - Clang 12
 - Clang 13
 - Clang 14
+- VC++ 14.34 (_MSC_VER=1934, Visual Studio 2022)
 
 Tools needed to build the library:
 - cmake 3.19 or newer
@@ -47,6 +48,10 @@ optional (used for development only):
 optional (no core dependency):
 - Boost.ASIO (used only for some examples)
 - Qt 5 (used only for some examples)
+
+Opeating system:
+- Linux
+- Windows 10
 
 There are no other dependencies despite the standard library (C++17) to build this library.
 

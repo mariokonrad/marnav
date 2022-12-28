@@ -216,11 +216,11 @@ target_include_directories(testrunner
 target_link_libraries(testrunner
 	marnav::marnav
 	$<$<TARGET_EXISTS:marnav::marnav-io>:marnav::marnav-io>
-	GTest::gmock
+	$<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:GTest::gmock>
 	GTest::gtest
-	GTest::gmock_main
+	$<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:GTest::gmock_main>
 	GTest::gtest_main
-	pthread
+	$<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:pthread>
 	)
 
 add_test(

@@ -53,7 +53,7 @@ In the directories `src` and `include`:
 - \c seatalk : everything SeaTalk related, except IO.
 - \c utils   : common utils
 
-- \c marnav-ioio : input output stuff, mainly for NMEA and SeaTalk. Please note,
+- \c marnav-io : input output stuff, mainly for NMEA and SeaTalk. Please note,
      that this package is not mandatory. It is perfectly fine
      to use the \c nmea package without \c io. The IO is built only if the
      necessary headers are available, typically on a Linux system.

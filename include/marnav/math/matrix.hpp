@@ -502,17 +502,17 @@ public:
 		const value_type c2 = m.x[1] + m.x[5] + m.x[9] + m.x[13];
 		const value_type c3 = m.x[2] + m.x[6] + m.x[10] + m.x[14];
 		const value_type c4 = m.x[3] + m.x[7] + m.x[11] + m.x[15];
-		return matrix4(v[0] * c1, v[0] * c2, v[0] * c3, v[0] * c4, v[1] * c1, v[1] * c2,
+		return matrix4{v[0] * c1, v[0] * c2, v[0] * c3, v[0] * c4, v[1] * c1, v[1] * c2,
 			v[1] * c3, v[1] * c4, v[2] * c1, v[2] * c2, v[2] * c3, v[2] * c4, v[3] * c1,
-			v[3] * c2, v[3] * c3, v[3] * c4);
+			v[3] * c2, v[3] * c3, v[3] * c4};
 	}
 
 	friend vector4<T> operator*(const matrix4 & m, const vector4<T> & v)
 	{
-		return vec4(m.x[0] * v[0] + m.x[1] * v[1] + m.x[2] * v[2] + m.x[3] * v[3],
+		return vec4{m.x[0] * v[0] + m.x[1] * v[1] + m.x[2] * v[2] + m.x[3] * v[3],
 			m.x[4] * v[0] + m.x[5] * v[1] + m.x[6] * v[2] + m.x[7] * v[3],
 			m.x[8] * v[0] + m.x[9] * v[1] + m.x[10] * v[2] + m.x[11] * v[3],
-			m.x[12] * v[0] + m.x[13] * v[1] + m.x[14] * v[2] + m.x[15] * v[3]);
+			m.x[12] * v[0] + m.x[13] * v[1] + m.x[14] * v[2] + m.x[15] * v[3]};
 	}
 
 private:

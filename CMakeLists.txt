@@ -18,14 +18,30 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 ### options
 option(ENABLE_STATIC "Enable static library" ON)
-option(ENABLE_PROFILING "Enable Profiling" OFF)
-option(ENABLE_BENCHMARK "Enable Benchmark" OFF)
-option(ENABLE_SANITIZER "Enable Sanitizing (address, undefined)" OFF)
 option(ENABLE_EXAMPLES "Enable Examples" ON)
 option(ENABLE_TESTS "Enable Tests" ON)
-option(ENABLE_TESTS_BENCHMARK "Enable Test Benchmarks" ON)
 option(ENABLE_TOOLS "Enable Tools" ON)
-option(ENABLE_IWYU "Enable include-what-you-use" OFF)
+
+if(MSVC)
+	set(CMAKE_DEBUG_POSTFIX "d")
+
+	set(ENABLE_PROFILING OFF)
+	set(ENABLE_BENCHMARK OFF)
+	set(ENABLE_SANITIZER OFF)
+	set(ENABLE_TESTS_BENCHMARK OFF)
+	set(ENABLE_IWYU OFF)
+
+	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+	set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+	set(CMAKE_PDB_OUTPUT_DIRECTORY     "${CMAKE_BINARY_DIR}/bin")
+else()
+	option(ENABLE_PROFILING "Enable Profiling" OFF)
+	option(ENABLE_BENCHMARK "Enable Benchmark" OFF)
+	option(ENABLE_SANITIZER "Enable Sanitizing (address, undefined)" OFF)
+	option(ENABLE_TESTS_BENCHMARK "Enable Test Benchmarks" ON)
+	option(ENABLE_IWYU "Enable include-what-you-use" OFF)
+endif()
 
 if(NOT DEFINED BUILD_SHARED_LIBS)
 	if(ENABLE_STATIC)
@@ -139,4 +155,3 @@ else()
 endif()
 
 include(CPack)
-

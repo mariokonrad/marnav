@@ -443,6 +443,54 @@
 				"CMAKE_C_COMPILER": "clang",
 				"CMAKE_BUILD_TYPE": "Debug"
 			}
+		},
+		{
+			"name": "vs2022-release-static",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"generator": "Visual Studio 17 2022",
+			"architecture": {
+				"value": "x64"
+			},
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release",
+				"ENABLE_STATIC": "TRUE"
+			}
+		},
+		{
+			"name": "vs2022-debug-static",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"generator": "Visual Studio 17 2022",
+			"architecture": {
+				"value": "x64"
+			},
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug",
+				"ENABLE_STATIC": "TRUE"
+			}
+		},
+		{
+			"name": "vs2022-release-shared",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"generator": "Visual Studio 17 2022",
+			"architecture": {
+				"value": "x64"
+			},
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release",
+				"ENABLE_STATIC": "FALSE"
+			}
+		},
+		{
+			"name": "vs2022-debug-shared",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"generator": "Visual Studio 17 2022",
+			"architecture": {
+				"value": "x64"
+			},
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug",
+				"ENABLE_STATIC": "FALSE"
+			}
 		}
 	],
 	"buildPresets": [
@@ -490,7 +538,11 @@
 		{ "name": "clang40-release",                   "configurePreset": "clang40-release",                   "configuration": "Release" },
 		{ "name": "clang40-debug",                     "configurePreset": "clang40-debug",                     "configuration": "Debug"   },
 		{ "name": "clang-release",                     "configurePreset": "clang-release",                     "configuration": "Release" },
-		{ "name": "clang-debug",                       "configurePreset": "clang-debug",                       "configuration": "Debug"   }
+		{ "name": "clang-debug",                       "configurePreset": "clang-debug",                       "configuration": "Debug"   },
+		{ "name": "vs2022-release-static",             "configurePreset": "vs2022-release-static",             "configuration": "Release" },
+		{ "name": "vs2022-debug-static",               "configurePreset": "vs2022-debug-static",               "configuration": "Debug"   },
+		{ "name": "vs2022-release-shared",             "configurePreset": "vs2022-release-shared",             "configuration": "Release" },
+		{ "name": "vs2022-debug-shared",               "configurePreset": "vs2022-debug-shared",               "configuration": "Debug"   }
 	],
 	"testPresets": [
 		{ "name": "gcc11-release",                     "configurePreset": "gcc11-release",                     "configuration": "Release" },
@@ -533,6 +585,10 @@
 		{ "name": "clang40-release",                   "configurePreset": "clang40-release",                   "configuration": "Release" },
 		{ "name": "clang40-debug",                     "configurePreset": "clang40-debug",                     "configuration": "Debug"   },
 		{ "name": "clang-release",                     "configurePreset": "clang-release",                     "configuration": "Release" },
-		{ "name": "clang-debug",                       "configurePreset": "clang-debug",                       "configuration": "Debug"   }
+		{ "name": "clang-debug",                       "configurePreset": "clang-debug",                       "configuration": "Debug"   },
+		{ "name": "vs2022-release-static",             "configurePreset": "vs2022-release-static",             "configuration": "Release" },
+		{ "name": "vs2022-debug-static",               "configurePreset": "vs2022-debug-static",               "configuration": "Debug"   },
+		{ "name": "vs2022-release-shared",             "configurePreset": "vs2022-release-shared",             "configuration": "Release" },
+		{ "name": "vs2022-debug-shared",               "configurePreset": "vs2022-debug-shared",               "configuration": "Debug"   }
 	]
 }

@@ -1,7 +1,7 @@
 marnav
 ======
 
-Copyright (c) 2021 Mario Konrad (mario.konrad@gmx.net)
+Copyright (c) 2022 Mario Konrad (mario.konrad@gmx.net)
 
 ---
 
@@ -378,6 +378,7 @@ Compiler:
 - Clang 12
 - Clang 13
 - Clang 14
+- VC++ 14.34 (_MSC_VER=1934, Visual Studio 2022)
 
 Tools needed to build the library:
 - cmake 3.19 or newer
@@ -403,6 +404,7 @@ Optional (no core dependency):
 
 Opeating system:
 - Linux
+- Windows 10
 
 There are no other dependencies despite the standard library (C++17)
 to build this library.
@@ -561,7 +563,7 @@ See also [LICENSE](LICENSE)
 (BSD)
 
 ```
-Copyright (c) 2021, Mario Konrad
+Copyright (c) 2022, Mario Konrad
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

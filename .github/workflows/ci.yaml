@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: print versions
         run: |
+          git --version
+          echo "--------------------------------------------------------------------------------"
           cmake --version
           echo "--------------------------------------------------------------------------------"
           ninja --version
@@ -38,4 +40,26 @@ jobs:
 
       - name: test
         run: ctest --preset gcc-release
+
+  # TODO: clang
+
+  build-vs2022:
+    runs-on: windows-2022
+    steps:
+      - name: print versions
+        run: |
+          git --version
+          echo "--------------------------------------------------------------------------------"
+          cmake --version
+
+      - uses: actions/checkout@v3
+
+      - name: configure
+        run: cmake --preset vs2022-release-shared
+
+      - name: build
+        run: cmake --build --preset vs2022-release-shared
+
+      - name: test
+        run: ctest --preset vs2022-release-shared
 

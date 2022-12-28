@@ -10,3 +10,4 @@ CMakeLists.txt.user
 build
 compile_commands.json
 tmp
+extern/fmt/run-msbuild.bat

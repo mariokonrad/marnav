@@ -24,60 +24,72 @@ message(STATUS "Build IO support     : ${support_for_io}")
 message(STATUS "Build for Profiliing : ${ENABLE_PROFILING}")
 message(STATUS "Build for Benchmark  : ${ENABLE_BENCHMARK}")
 
-set(common_compile_options
-	-pipe
-	-ggdb
-	-Wall
-	-Wextra
-	-pedantic-errors
-	-Wold-style-cast
-	-Wcast-align
-	-Wcast-qual
-	-Werror
-	-Wdisabled-optimization
-	-Wfloat-conversion
-	-Wformat=2
-	-Wformat-security
-	-Wformat-y2k
-	-Wimport
-	-Winit-self
-	-Wmissing-field-initializers
-	-Wmissing-format-attribute
-	-Wmissing-include-dirs
-	-Wmissing-noreturn
-	-Wnon-virtual-dtor
-	-Woverloaded-virtual
-	-Wpacked
-	-Wpointer-arith
-	-Wredundant-decls
-	-Wstrict-aliasing=2
-	-Wswitch
-	-Wunreachable-code
-	-Wunused
-	-Wunused-parameter
-	-Wvariadic-macros
-	-Wwrite-strings
-	# explicitly disabled on purpose:
-	-Wno-inline
-	-Wno-conversion
-	-Wno-shadow
-	-Wno-sign-conversion
-	-Wno-stack-protector
-	-Wno-effc++
-	-Wno-padded
-	-Wno-long-long
-	-Wno-unused-function
-	-Wno-comment
-	-Wno-format-nonliteral
-	-Wno-switch-enum
-	-Wno-switch-default
-	)
+if(MSVC)
+	# TODO
+else()
+	set(common_compile_options
+		-pipe
+		-ggdb
+		-Wall
+		-Wextra
+		-pedantic-errors
+		-Wold-style-cast
+		-Wcast-align
+		-Wcast-qual
+		-Werror
+		-Wdisabled-optimization
+		-Wfloat-conversion
+		-Wformat=2
+		-Wformat-security
+		-Wformat-y2k
+		-Wimport
+		-Winit-self
+		-Wmissing-field-initializers
+		-Wmissing-format-attribute
+		-Wmissing-include-dirs
+		-Wmissing-noreturn
+		-Wnon-virtual-dtor
+		-Woverloaded-virtual
+		-Wpacked
+		-Wpointer-arith
+		-Wredundant-decls
+		-Wstrict-aliasing=2
+		-Wswitch
+		-Wunreachable-code
+		-Wunused
+		-Wunused-parameter
+		-Wvariadic-macros
+		-Wwrite-strings
+		# explicitly disabled on purpose:
+		-Wno-inline
+		-Wno-conversion
+		-Wno-shadow
+		-Wno-sign-conversion
+		-Wno-stack-protector
+		-Wno-effc++
+		-Wno-padded
+		-Wno-long-long
+		-Wno-unused-function
+		-Wno-comment
+		-Wno-format-nonliteral
+		-Wno-switch-enum
+		-Wno-switch-default
+		)
+endif()
 
 configure_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/marnav/version.cpp.in
 	${CMAKE_CURRENT_BINARY_DIR}/src/marnav/version.cpp
 	@ONLY
 	)
+
+if(MSVC)
+	configure_file(
+		${CMAKE_CURRENT_SOURCE_DIR}/marnav/resource.rc.in
+		${CMAKE_CURRENT_BINARY_DIR}/src/marnav/resource.rc
+		@ONLY
+		)
+endif()
 
 add_library(marnav)
 add_library(marnav::marnav ALIAS marnav)
@@ -89,6 +101,7 @@ target_compile_features(marnav
 
 target_sources(marnav
 	PRIVATE
+		$<$<AND:$<CXX_COMPILER_ID:MSVC>,$<BOOL:${BUILD_SHARED_LIBS}>>:${CMAKE_CURRENT_BINARY_DIR}/src/marnav/resource.rc>
 		${CMAKE_CURRENT_BINARY_DIR}/src/marnav/version.cpp
 		marnav/ais/ais.cpp
 		marnav/ais/angle.cpp
@@ -297,7 +310,7 @@ else()
 	check_symbol_exists(strtod_l stdlib.h HAVE_STRTOD_L)
 endif()
 
-if(DEFINED HAVE_STRTOD_L)
+if(DEFINED HAVE_STRTOD_L AND NOT MSVC)
 	target_sources(marnav PRIVATE marnav/nmea/io_double_strtodl.cpp)
 else()
 	target_sources(marnav PRIVATE marnav/nmea/io_double_strstream.cpp)
@@ -312,6 +325,7 @@ set_target_properties(marnav
 	PROPERTIES
 		VERSION "${PROJECT_VERSION}"
 		SOVERSION "${PROJECT_VERSION}"
+		WINDOWS_EXPORT_ALL_SYMBOLS TRUE
 	)
 
 if(support_for_io)

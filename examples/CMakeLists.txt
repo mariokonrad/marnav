@@ -1,13 +1,14 @@
 find_package(Boost 1.53.0 COMPONENTS system)
 
-set_property(DIRECTORY PROPERTY COMPILE_OPTIONS
-	-pipe
-	-ggdb
-	-Wall
-	-Wextra
-	-pedantic-errors
-	)
-
+if(NOT MSVC)
+	set_property(DIRECTORY PROPERTY COMPILE_OPTIONS
+		-pipe
+		-ggdb
+		-Wall
+		-Wextra
+		-pedantic-errors
+		)
+endif()
 
 add_executable(parse_nmea parse_nmea.cpp)
 target_link_libraries(parse_nmea marnav::marnav)
@@ -24,8 +25,10 @@ target_link_libraries(create_nmea_from_ais_2 marnav::marnav)
 add_executable(parse_ais parse_ais.cpp)
 target_link_libraries(parse_ais marnav::marnav)
 
-add_executable(select select.cpp)
-target_link_libraries(select marnav::marnav)
+if(NOT MSVC)
+	add_executable(select select.cpp)
+	target_link_libraries(select marnav::marnav)
+endif()
 
 add_executable(bitset_iterate bitset_iterate.cpp)
 target_link_libraries(bitset_iterate marnav::marnav)
