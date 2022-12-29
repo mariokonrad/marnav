@@ -56,6 +56,7 @@ if(ENABLE_TOOLS)
 		)
 	FetchContent_MakeAvailable(cxxopts)
 
+	set(FMT_INSTALL TRUE CACHE BOOL "" FORCE)
 	FetchContent_Declare(fmt
 		URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/fmt"
 		)
