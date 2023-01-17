@@ -213,6 +213,12 @@ target_include_directories(testrunner
 		$<BUILD_INTERFACE:${CMAKE_HOME_DIRECTORY}/src>
 	)
 
+target_link_options(testrunner
+	PRIVATE
+		$<$<STREQUAL:$<UPPER_CASE:${CMAKE_SYSTEM_PROCESSOR}>,ARM>:-static>
+		$<$<STREQUAL:$<UPPER_CASE:${CMAKE_SYSTEM_PROCESSOR}>,AARCH64>:-static>
+	)
+
 target_link_libraries(testrunner
 	marnav::marnav
 	$<$<TARGET_EXISTS:marnav::marnav-io>:marnav::marnav-io>

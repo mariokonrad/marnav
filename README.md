@@ -357,6 +357,10 @@ for (auto const & sentence : sentences) {
 Requirements
 ------------
 
+The primary target architecture is `x86_64`, Linux on ARM is supposed to work
+as well though. It is possible to run unit tests through `qemu-arm` or use `binfmt_misc`
+on Linux hosts.
+
 This chapter describes the requirements in order to build the library.
 Tools and their versions are listed below, newer/older/other tools
 (i.e. compilers, etc.) may work, but not tested.

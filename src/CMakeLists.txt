@@ -18,6 +18,9 @@ try_compile(support_for_io ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/io-test.cpp)
 
 ### lib: marnav
 
+message(STATUS "Target System        : ${CMAKE_SYSTEM_NAME}")
+message(STATUS "Target Architecture  : ${CMAKE_SYSTEM_PROCESSOR}")
+
 message(STATUS "Build shared library : ${BUILD_SHARED_LIBS}")
 message(STATUS "Build Tools          : ${ENABLE_TOOLS}")
 message(STATUS "Build IO support     : ${support_for_io}")

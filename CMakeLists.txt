@@ -100,6 +100,9 @@ endif()
 message(STATUS "Build Tests          : ${ENABLE_TESTS}")
 message(STATUS "Build Tests Benchmark: ${ENABLE_TESTS_BENCHMARK}")
 if(ENABLE_TESTS)
+	if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "^ARM$|^aarch64$")
+		set(gtest_disable_pthreads TRUE CACHE BOOL "" FORCE)
+	endif()
 	FetchContent_Declare(googletest
 		URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/googletest-1.11.0"
 		)

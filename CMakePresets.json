@@ -46,12 +46,30 @@
 			"name": "gcc10-arm-linux-gnueabihf-release",
 			"binaryDir": "${sourceDir}/build/${presetName}",
 			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "arm-linux-gnueabihf-g++-10",
-				"CMAKE_C_COMPILER": "arm-linux-gnueabihf-gcc-10",
+				"CMAKE_TOOLCHAIN_FILE": {
+					"type": "PATH",
+					"value": "${sourceDir}/cmake/toolchain-arm-linux-gnueabihf-gcc10.cmake"
+				},
 				"CMAKE_BUILD_TYPE": "Release",
 				"ENABLE_EXAMPLES": "FALSE",
-				"ENABLE_TESTS": "FALSE",
-				"ENABLE_TOOLS": "FALSE"
+				"ENABLE_TESTS": "TRUE",
+				"ENABLE_TOOLS": "FALSE",
+				"ENABLE_TESTS_BENCHMARK": "FALSE"
+			}
+		},
+		{
+			"name": "gcc10-aarch64-linux-release",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_TOOLCHAIN_FILE": {
+					"type": "PATH",
+					"value": "${sourceDir}/cmake/toolchain-aarch64-linux-gcc10.cmake"
+				},
+				"CMAKE_BUILD_TYPE": "Release",
+				"ENABLE_EXAMPLES": "FALSE",
+				"ENABLE_TESTS": "TRUE",
+				"ENABLE_TOOLS": "FALSE",
+				"ENABLE_TESTS_BENCHMARK": "FALSE"
 			}
 		},
 		{
@@ -499,6 +517,7 @@
 		{ "name": "gcc10-release",                     "configurePreset": "gcc10-release",                     "configuration": "Release" },
 		{ "name": "gcc10-debug",                       "configurePreset": "gcc10-debug",                       "configuration": "Debug"   },
 		{ "name": "gcc10-arm-linux-gnueabihf-release", "configurePreset": "gcc10-arm-linux-gnueabihf-release", "configuration": "Release" },
+		{ "name": "gcc10-aarch64-linux-release",       "configurePreset": "gcc10-aarch64-linux-release",       "configuration": "Release" },
 		{ "name": "gcc9-release",                      "configurePreset": "gcc9-release",                      "configuration": "Release" },
 		{ "name": "gcc9-debug",                        "configurePreset": "gcc9-debug",                        "configuration": "Debug"   },
 		{ "name": "gcc8-release",                      "configurePreset": "gcc8-release",                      "configuration": "Release" },
@@ -549,6 +568,8 @@
 		{ "name": "gcc11-debug",                       "configurePreset": "gcc11-debug",                       "configuration": "Debug"   },
 		{ "name": "gcc10-release",                     "configurePreset": "gcc10-release",                     "configuration": "Release" },
 		{ "name": "gcc10-debug",                       "configurePreset": "gcc10-debug",                       "configuration": "Debug"   },
+		{ "name": "gcc10-arm-linux-gnueabihf-release", "configurePreset": "gcc10-arm-linux-gnueabihf-release", "configuration": "Release" },
+		{ "name": "gcc10-aarch64-linux-release",       "configurePreset": "gcc10-aarch64-linux-release",       "configuration": "Release" },
 		{ "name": "gcc9-release",                      "configurePreset": "gcc9-release",                      "configuration": "Release" },
 		{ "name": "gcc9-debug",                        "configurePreset": "gcc9-debug",                        "configuration": "Debug"   },
 		{ "name": "gcc8-release",                      "configurePreset": "gcc8-release",                      "configuration": "Release" },
