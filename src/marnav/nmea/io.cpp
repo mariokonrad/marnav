@@ -7,14 +7,48 @@
 #include <marnav/utils/mmsi.hpp>
 #include <marnav/utils/unused.hpp>
 
+#include <algorithm>
+#include <iomanip>
+#include <limits>
 #include <locale>
 #include <sstream>
-#include <iomanip>
+#include <type_traits>
 
 namespace marnav
 {
 namespace nmea
 {
+namespace
+{
+// Not using snprintf for unsigned integers anymore. Apparently
+// it causes propblems on 32bit ARM (toolchain gcc-10) on 64bit
+// values.
+// This implementation is also faster, although not O(1).
+//
+// Narrow contract:
+// The function assumes the buffer to be large enough to fit
+// the data. The caller needs to make sure to also initialize
+// the buffer with zeroes.
+//
+template <std::size_t Base, typename T,
+	typename std::enable_if_t<std::is_unsigned_v<T>, void *> = nullptr>
+void format_uint(char * buf, std::size_t w, T data) noexcept
+{
+	static constexpr char tab[] = "0123456789abcdef";
+	static_assert(Base <= sizeof(tab));
+
+	std::size_t i = 0u;
+	do {
+		buf[i] = tab[data % Base];
+		++i;
+		data /= Base;
+	} while (data);
+	for (; i < w; ++i)
+		buf[i] = '0';
+	std::reverse(buf, buf + i);
+}
+}
+
 std::string format(int32_t data, unsigned int width, data_format f)
 {
 	// buffer to hold the resulting string with a static size.
@@ -39,45 +73,40 @@ std::string format(int32_t data, unsigned int width, data_format f)
 
 std::string format(uint64_t data, unsigned int width, data_format f)
 {
-	// buffer to hold the resulting string with a static size.
-	// this construct prevents VLA, and should be replaced with C++14 dynarray
-	char buf[64];
+	char buf[std::numeric_limits<uint64_t>::digits10 + 1u] = {0};
+
 	if (width >= sizeof(buf))
 		throw std::invalid_argument{"width too large in nmea::format"};
 
-	char fmt[8];
 	switch (f) {
 		case data_format::none:
 		case data_format::dec:
-			snprintf(fmt, sizeof(fmt), "%%0%ulu", width);
+			format_uint<10u>(buf, width, data);
 			break;
 		case data_format::hex:
-			snprintf(fmt, sizeof(fmt), "%%0%ulx", width);
+			format_uint<16u>(buf, width, data);
 			break;
 	}
-	snprintf(buf, sizeof(buf), fmt, data);
+
 	return buf;
 }
 
 std::string format(uint32_t data, unsigned int width, data_format f)
 {
-	// buffer to hold the resulting string with a static size.
-	// this construct prevents VLA, and should be replaced with C++14 dynarray
-	char buf[32];
+	char buf[std::numeric_limits<uint32_t>::digits10 + 1u] = {0};
+
 	if (width >= sizeof(buf))
 		throw std::invalid_argument{"width too large in nmea::format"};
 
-	char fmt[8];
 	switch (f) {
 		case data_format::none:
 		case data_format::dec:
-			snprintf(fmt, sizeof(fmt), "%%0%uu", width);
+			format_uint<10u>(buf, width, data);
 			break;
 		case data_format::hex:
-			snprintf(fmt, sizeof(fmt), "%%0%ux", width);
+			format_uint<16u>(buf, width, data);
 			break;
 	}
-	snprintf(buf, sizeof(buf), fmt, data);
 	return buf;
 }
 

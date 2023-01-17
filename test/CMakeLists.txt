@@ -64,6 +64,7 @@ target_sources(testrunner
 		marnav/nmea/Test_nmea_dse.cpp
 		marnav/nmea/Test_nmea_dtm.cpp
 		marnav/nmea/Test_nmea_duration.cpp
+		marnav/nmea/Test_nmea_format.cpp
 		marnav/nmea/Test_nmea_fsi.cpp
 		marnav/nmea/Test_nmea_gbs.cpp
 		marnav/nmea/Test_nmea_gga.cpp
@@ -292,6 +293,7 @@ if(NOT CMAKE_BUILD_TYPE MATCHES Coverage AND ENABLE_TESTS_BENCHMARK)
 	endmacro()
 
 	setup_benchmark(benchmark_nmea_io marnav-io/Benchmark_nmea_io.cpp)
+	setup_benchmark(benchmark_nmea_format marnav/nmea/Benchmark_nmea_format.cpp)
 	setup_benchmark(benchmark_nmea_split marnav/nmea/Benchmark_nmea_split.cpp)
 	setup_benchmark(benchmark_nmea_checksum marnav/nmea/Benchmark_nmea_checksum.cpp)
 	setup_benchmark(benchmark_nmea_manufacturer marnav/nmea/Benchmark_nmea_manufacturer.cpp)
