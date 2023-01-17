@@ -63,7 +63,9 @@ static uint32_t deg_to(double value, std::size_t bits, angle_scale scale)
 
 	uint32_t mask = std::numeric_limits<uint32_t>::max();
 	mask <<= bits;
-	return static_cast<uint32_t>(floor((60.0 * scale_value(scale)) * value)) & ~mask;
+	return static_cast<uint32_t>(
+			   static_cast<int32_t>(floor((60.0 * scale_value(scale)) * value)))
+		& ~mask;
 }
 
 // used only with static constant values, therefore compile time computation.
