@@ -74,7 +74,7 @@ protected:
 		}
 
 	private:
-		value_type value;
+		value_type value = {};
 	};
 
 	/// @{
