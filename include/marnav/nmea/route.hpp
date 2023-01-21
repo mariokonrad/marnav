@@ -3,9 +3,7 @@
 
 #include <string>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// This represents a route ID. They must be at least 1 character,
 /// but can only be 8 long.
@@ -17,7 +15,7 @@ public:
 	using size_type = value_type::size_type;
 
 	/// default constructed, invalid route.
-	route() {}
+	route() = default;
 
 	explicit route(const std::string & id);
 
@@ -38,7 +36,6 @@ public:
 private:
 	value_type id_;
 };
-}
 }
 
 #endif

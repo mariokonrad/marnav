@@ -3,9 +3,7 @@
 
 #include "dimension.hpp"
 
-namespace marnav
-{
-namespace units
+namespace marnav::units
 {
 // clang-format off
 template <class T> struct basic_meter {
@@ -417,7 +415,6 @@ template <class T> struct basic_second {
 	static constexpr value_type from_base(value_type v) noexcept { return v; }
 };
 // clang-format on
-}
 }
 
 #endif

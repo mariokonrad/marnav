@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include "checks.hpp"
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id dbk::ID;
 constexpr const char * dbk::TAG;
@@ -80,6 +78,5 @@ void dbk::append_data_to(std::string & s, const version &) const
 	append(s, to_string_if(unit::distance::meter, depth_meter_));
 	append(s, to_string(depth_fathom_));
 	append(s, to_string_if(unit::distance::fathom, depth_fathom_));
-}
 }
 }

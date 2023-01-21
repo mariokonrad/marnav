@@ -3,9 +3,7 @@
 
 #include <marnav/geo/position.hpp>
 
-namespace marnav
-{
-namespace geo
+namespace marnav::geo
 {
 
 /// @brief This class represents a geographical region, defined
@@ -79,7 +77,6 @@ private:
 	position p0_; // top, left
 	position p1_; // bottom, right
 };
-}
 }
 
 #endif

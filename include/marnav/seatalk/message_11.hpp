@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Apparent Wind Speed
@@ -30,13 +28,13 @@ public:
 	message_11(const message_11 &) = default;
 	message_11 & operator=(const message_11 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
 	uint8_t unit_; // unit of value
-	uint16_t speed_; // wind speed in 1/10th of unit
+	uint16_t speed_{0}; // wind speed in 1/10th of unit
 
 public:
 	uint8_t get_unit() const noexcept { return unit_; }
@@ -45,7 +43,6 @@ public:
 	void set_unit(uint8_t t) noexcept { unit_ = t; }
 	void set_speed(uint16_t t) noexcept { speed_ = t; }
 };
-}
 }
 
 #endif

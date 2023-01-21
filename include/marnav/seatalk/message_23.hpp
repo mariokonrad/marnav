@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Water temperature (ST50)
@@ -29,14 +27,14 @@ public:
 	message_23(const message_23 &) = default;
 	message_23 & operator=(const message_23 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	bool sensor_defective_;
-	uint8_t temperature_celsius_; // degrees celsius
-	uint8_t temperature_fahrenheit_; // degrees fahrenheit
+	bool sensor_defective_{false};
+	uint8_t temperature_celsius_{0}; // degrees celsius
+	uint8_t temperature_fahrenheit_{0}; // degrees fahrenheit
 
 public:
 	bool get_sensor_defective() const noexcept { return sensor_defective_; }
@@ -47,7 +45,6 @@ public:
 	void set_celsius(uint8_t t) noexcept { temperature_celsius_ = t; }
 	void set_fahrenheit(uint8_t t) noexcept { temperature_fahrenheit_ = t; }
 };
-}
 }
 
 #endif

@@ -6,9 +6,7 @@
 #include <marnav/nmea/talker_id.hpp>
 #include <string>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @{
 /// Returns a printable / human readable name for the specified argument.
@@ -31,7 +29,6 @@ std::string to_name(unit::distance t);
 std::string to_name(unit::temperature t);
 std::string to_name(unit::velocity t);
 /// @}
-}
 }
 
 #endif

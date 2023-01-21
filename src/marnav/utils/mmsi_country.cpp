@@ -3,9 +3,7 @@
 #include <algorithm>
 #include <vector>
 
-namespace marnav
-{
-namespace utils
+namespace marnav::utils
 {
 namespace
 {
@@ -321,6 +319,5 @@ mmsi_country_info mmsi_country(const mmsi & m)
 		return {mmsi::initial_value, "", ""};
 
 	return *i;
-}
 }
 }

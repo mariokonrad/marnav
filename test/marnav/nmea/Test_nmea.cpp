@@ -9,13 +9,13 @@ namespace
 {
 using namespace marnav;
 
-class Test_nmea : public ::testing::Test
+class test_nmea : public ::testing::Test
 {
 };
 
 static constexpr std::size_t num_supported_sentences = 93u;
 
-TEST_F(Test_nmea, checksum_to_string)
+TEST_F(test_nmea, checksum_to_string)
 {
 	EXPECT_STREQ("00", nmea::checksum_to_string(0x00).c_str());
 	EXPECT_STREQ("01", nmea::checksum_to_string(0x01).c_str());
@@ -31,32 +31,32 @@ TEST_F(Test_nmea, checksum_to_string)
 	EXPECT_STREQ("FF", nmea::checksum_to_string(0xff).c_str());
 }
 
-TEST_F(Test_nmea, make_sentence_empty_string)
+TEST_F(test_nmea, make_sentence_empty_string)
 {
 	EXPECT_ANY_THROW(nmea::make_sentence(""));
 }
 
-TEST_F(Test_nmea, make_sentence_no_start_token)
+TEST_F(test_nmea, make_sentence_no_start_token)
 {
 	EXPECT_ANY_THROW(nmea::make_sentence("1234567890"));
 }
 
-TEST_F(Test_nmea, make_sentence_to_short)
+TEST_F(test_nmea, make_sentence_to_short)
 {
 	EXPECT_ANY_THROW(nmea::make_sentence("12"));
 }
 
-TEST_F(Test_nmea, make_sentence_no_end_token)
+TEST_F(test_nmea, make_sentence_no_end_token)
 {
 	EXPECT_ANY_THROW(nmea::make_sentence("$GPMTW,,1E"));
 }
 
-TEST_F(Test_nmea, make_sentence_invalid_checksum)
+TEST_F(test_nmea, make_sentence_invalid_checksum)
 {
 	EXPECT_ANY_THROW(nmea::make_sentence("$GPMTW,,*1E"));
 }
 
-TEST_F(Test_nmea, make_sentence_minimal_possible_sentence)
+TEST_F(test_nmea, make_sentence_minimal_possible_sentence)
 {
 	try {
 		nmea::make_sentence("$IIYYY*59");
@@ -65,7 +65,7 @@ TEST_F(Test_nmea, make_sentence_minimal_possible_sentence)
 	}
 }
 
-TEST_F(Test_nmea, make_sentence_vendor_extension)
+TEST_F(test_nmea, make_sentence_vendor_extension)
 {
 	try {
 		nmea::make_sentence("$PXXX*08");
@@ -74,7 +74,7 @@ TEST_F(Test_nmea, make_sentence_vendor_extension)
 	}
 }
 
-TEST_F(Test_nmea, make_sentence_invalid_checksum_what)
+TEST_F(test_nmea, make_sentence_invalid_checksum_what)
 {
 	try {
 		nmea::make_sentence("$GPMTW,,*1E");
@@ -83,12 +83,12 @@ TEST_F(Test_nmea, make_sentence_invalid_checksum_what)
 	}
 }
 
-TEST_F(Test_nmea, make_sentence_unknown_sentence)
+TEST_F(test_nmea, make_sentence_unknown_sentence)
 {
 	EXPECT_ANY_THROW(nmea::make_sentence("$XX???,1,2,3*23"));
 }
 
-TEST_F(Test_nmea, make_sentence_ignoring_checksum_ignored)
+TEST_F(test_nmea, make_sentence_ignoring_checksum_ignored)
 {
 	const std::string raw = "$IIVWR,084.0,R,10.4,N,5.4,M,19.3,K*4A";
 
@@ -98,7 +98,7 @@ TEST_F(Test_nmea, make_sentence_ignoring_checksum_ignored)
 	EXPECT_TRUE(s->tag() == "VWR");
 }
 
-TEST_F(Test_nmea, make_sentence_ignoring_checksum_equal)
+TEST_F(test_nmea, make_sentence_ignoring_checksum_equal)
 {
 	const std::string raw_1 = "$IIVWR,084.0,R,10.4,N,5.4,M,19.3,K*4A";
 	const std::string raw_2 = "$IIVWR,084.0,R,10.4,N,5.4,M,19.3,K*00";
@@ -111,45 +111,45 @@ TEST_F(Test_nmea, make_sentence_ignoring_checksum_equal)
 	EXPECT_TRUE(s1->tag() == s2->tag());
 }
 
-TEST_F(Test_nmea, get_supported_sentences_str)
+TEST_F(test_nmea, get_supported_sentences_str)
 {
 	auto v = nmea::get_supported_sentences_str();
 
 	EXPECT_EQ(num_supported_sentences, v.size());
 }
 
-TEST_F(Test_nmea, get_supported_sentences_id)
+TEST_F(test_nmea, get_supported_sentences_id)
 {
 	auto v = nmea::get_supported_sentences_id();
 
 	EXPECT_EQ(num_supported_sentences, v.size());
 }
 
-TEST_F(Test_nmea, tag_to_id)
+TEST_F(test_nmea, tag_to_id)
 {
 	auto id = nmea::tag_to_id("BOD");
 
 	EXPECT_EQ(nmea::sentence_id::BOD, id);
 }
 
-TEST_F(Test_nmea, tag_to_id_invalid_tag)
+TEST_F(test_nmea, tag_to_id_invalid_tag)
 {
 	EXPECT_ANY_THROW(nmea::tag_to_id("???"));
 }
 
-TEST_F(Test_nmea, to_string_sentence_id)
+TEST_F(test_nmea, to_string_sentence_id)
 {
 	auto tag = nmea::to_string(nmea::sentence_id::BOD);
 
 	EXPECT_STREQ("BOD", tag.c_str());
 }
 
-TEST_F(Test_nmea, to_string_sentence_id_invalid_id)
+TEST_F(test_nmea, to_string_sentence_id_invalid_id)
 {
 	EXPECT_ANY_THROW(nmea::to_string(static_cast<nmea::sentence_id>(-1)));
 }
 
-TEST_F(Test_nmea, extract_id)
+TEST_F(test_nmea, extract_id)
 {
 	EXPECT_EQ(nmea::sentence_id::BOD, nmea::extract_id("$GPBOD,,T,,M,,*47"));
 	EXPECT_ANY_THROW(nmea::extract_id(""));
@@ -163,7 +163,7 @@ TEST_F(Test_nmea, extract_id)
 	EXPECT_ANY_THROW(nmea::extract_id("$TMVTD,,T,,M,,*47"));
 }
 
-TEST_F(Test_nmea, extract_id_tag_block)
+TEST_F(test_nmea, extract_id_tag_block)
 {
 	static const std::string t = "\\g:1-2-73874,n:157036,s:r003669945,c:1241544035*4A\\!AIVDM,"
 								 "1,1,,B,15N4cJ`005Jrek0H@9n`DW5608EP,0*13";
@@ -172,7 +172,7 @@ TEST_F(Test_nmea, extract_id_tag_block)
 	EXPECT_EQ(nmea::sentence_id::VDM, nmea::extract_id(t));
 }
 
-TEST_F(Test_nmea, make_sentence_tag_block)
+TEST_F(test_nmea, make_sentence_tag_block)
 {
 	static const std::string t = "\\g:1-2-73874,n:157036,s:r003669945,c:1241544035*4A\\!AIVDM,"
 								 "1,1,,B,15N4cJ`005Jrek0H@9n`DW5608EP,0*13";
@@ -185,17 +185,17 @@ TEST_F(Test_nmea, make_sentence_tag_block)
 		"g:1-2-73874,n:157036,s:r003669945,c:1241544035*4A", s->get_tag_block().c_str());
 }
 
-TEST_F(Test_nmea, parse_address_empty_string)
+TEST_F(test_nmea, parse_address_empty_string)
 {
 	EXPECT_ANY_THROW(nmea::detail::parse_address(std::string{}));
 }
 
-TEST_F(Test_nmea, parse_address_regular)
+TEST_F(test_nmea, parse_address_regular)
 {
 	EXPECT_NO_THROW(nmea::detail::parse_address("GPAAM"));
 }
 
-TEST_F(Test_nmea, parse_address_proprietary)
+TEST_F(test_nmea, parse_address_proprietary)
 {
 	{
 		const auto result = nmea::detail::parse_address("PGRMZ");
@@ -215,7 +215,7 @@ TEST_F(Test_nmea, parse_address_proprietary)
 	}
 }
 
-TEST_F(Test_nmea, parse_address_proprietary_unknown)
+TEST_F(test_nmea, parse_address_proprietary_unknown)
 {
 	try {
 		nmea::detail::parse_address("PFOOBAR");
@@ -224,7 +224,7 @@ TEST_F(Test_nmea, parse_address_proprietary_unknown)
 	}
 }
 
-TEST_F(Test_nmea, parse_address_regular_invalid_length)
+TEST_F(test_nmea, parse_address_regular_invalid_length)
 {
 	try {
 		nmea::detail::parse_address("GPFOOBAR");
@@ -239,7 +239,7 @@ TEST_F(Test_nmea, parse_address_regular_invalid_length)
 	}
 }
 
-TEST_F(Test_nmea, parse_address_regular_unknown)
+TEST_F(test_nmea, parse_address_regular_unknown)
 {
 	try {
 		nmea::detail::parse_address("GPXXX");

@@ -3,9 +3,7 @@
 
 #include <cstdint>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 class rate_of_turn
 {
@@ -49,7 +47,6 @@ public:
 private:
 	value_type value_ = no_information_available;
 };
-}
 }
 
 #endif

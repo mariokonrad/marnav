@@ -3,9 +3,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id vdm::ID;
 constexpr const char * vdm::TAG;
@@ -47,6 +45,5 @@ void vdm::append_data_to(std::string & s, const version &) const
 	append(s, to_string(radio_channel_));
 	append(s, to_string(payload_));
 	append(s, to_string(n_fill_bits_));
-}
 }
 }

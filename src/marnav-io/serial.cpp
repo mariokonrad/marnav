@@ -6,9 +6,7 @@
 #include <termios.h>
 #include <unistd.h>
 
-namespace marnav
-{
-namespace io
+namespace marnav::io
 {
 
 /// @cond DEV
@@ -193,6 +191,5 @@ int serial::write(const char * buffer, uint32_t size)
 	if (fd < 0)
 		throw std::runtime_error{"device not open"};
 	return ::write(fd, buffer, size);
-}
 }
 }

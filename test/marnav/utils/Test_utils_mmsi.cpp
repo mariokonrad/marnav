@@ -5,11 +5,11 @@ namespace
 {
 using marnav::utils::mmsi;
 
-class Test_utils_mmsi : public ::testing::Test
+class test_utils_mmsi : public ::testing::Test
 {
 };
 
-TEST_F(Test_utils_mmsi, construction_and_get)
+TEST_F(test_utils_mmsi, construction_and_get)
 {
 	const uint32_t expected = 269263111;
 
@@ -19,7 +19,7 @@ TEST_F(Test_utils_mmsi, construction_and_get)
 	EXPECT_EQ(expected, value);
 }
 
-TEST_F(Test_utils_mmsi, copy_constructed)
+TEST_F(test_utils_mmsi, copy_constructed)
 {
 	mmsi m{269263111};
 	mmsi copy = m;
@@ -27,7 +27,7 @@ TEST_F(Test_utils_mmsi, copy_constructed)
 	EXPECT_TRUE(m == copy);
 }
 
-TEST_F(Test_utils_mmsi, copy_assign)
+TEST_F(test_utils_mmsi, copy_assign)
 {
 	mmsi m{269263111};
 	mmsi copy{0};
@@ -37,7 +37,7 @@ TEST_F(Test_utils_mmsi, copy_assign)
 	EXPECT_TRUE(m == copy);
 }
 
-TEST_F(Test_utils_mmsi, regular)
+TEST_F(test_utils_mmsi, regular)
 {
 	const mmsi m{269263111};
 	EXPECT_TRUE(m.is_regular());
@@ -74,7 +74,7 @@ TEST_F(Test_utils_mmsi, regular)
 	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
-TEST_F(Test_utils_mmsi, group)
+TEST_F(test_utils_mmsi, group)
 {
 	const mmsi m{26911111};
 	EXPECT_FALSE(m.is_regular());
@@ -111,7 +111,7 @@ TEST_F(Test_utils_mmsi, group)
 	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
-TEST_F(Test_utils_mmsi, auxiliary)
+TEST_F(test_utils_mmsi, auxiliary)
 {
 	const mmsi m{982691111};
 	EXPECT_FALSE(m.is_regular());
@@ -148,7 +148,7 @@ TEST_F(Test_utils_mmsi, auxiliary)
 	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
-TEST_F(Test_utils_mmsi, ais_aids)
+TEST_F(test_utils_mmsi, ais_aids)
 {
 	const mmsi m{992691111};
 	EXPECT_FALSE(m.is_regular());
@@ -185,7 +185,7 @@ TEST_F(Test_utils_mmsi, ais_aids)
 	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
-TEST_F(Test_utils_mmsi, coastal)
+TEST_F(test_utils_mmsi, coastal)
 {
 	const mmsi m{2691111};
 	EXPECT_FALSE(m.is_regular());
@@ -224,7 +224,7 @@ TEST_F(Test_utils_mmsi, coastal)
 	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
-TEST_F(Test_utils_mmsi, coastal_all)
+TEST_F(test_utils_mmsi, coastal_all)
 {
 	const mmsi m{9990000};
 	EXPECT_FALSE(m.is_regular());
@@ -240,7 +240,7 @@ TEST_F(Test_utils_mmsi, coastal_all)
 	EXPECT_FALSE(m.is_epirb_ais());
 }
 
-TEST_F(Test_utils_mmsi, coastal_all_for_mid)
+TEST_F(test_utils_mmsi, coastal_all_for_mid)
 {
 	const mmsi m{2690000};
 	EXPECT_FALSE(m.is_regular());
@@ -256,7 +256,7 @@ TEST_F(Test_utils_mmsi, coastal_all_for_mid)
 	EXPECT_FALSE(m.is_epirb_ais());
 }
 
-TEST_F(Test_utils_mmsi, sar_aircraft)
+TEST_F(test_utils_mmsi, sar_aircraft)
 {
 	const mmsi m{111269123};
 	EXPECT_FALSE(m.is_regular());
@@ -294,7 +294,7 @@ TEST_F(Test_utils_mmsi, sar_aircraft)
 	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
-TEST_F(Test_utils_mmsi, sart)
+TEST_F(test_utils_mmsi, sart)
 {
 	const mmsi m{970269123};
 	EXPECT_FALSE(m.is_regular());
@@ -332,7 +332,7 @@ TEST_F(Test_utils_mmsi, sart)
 	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
-TEST_F(Test_utils_mmsi, mob)
+TEST_F(test_utils_mmsi, mob)
 {
 	const mmsi m{972269123};
 	EXPECT_FALSE(m.is_regular());
@@ -370,7 +370,7 @@ TEST_F(Test_utils_mmsi, mob)
 	EXPECT_EQ(0u, m.epirb_ais_man());
 }
 
-TEST_F(Test_utils_mmsi, eprib_ais)
+TEST_F(test_utils_mmsi, eprib_ais)
 {
 	const mmsi m{974269123};
 	EXPECT_FALSE(m.is_regular());

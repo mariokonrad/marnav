@@ -5,9 +5,7 @@
 #include <array>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief XDR - Transducer Measurement
 ///
@@ -51,7 +49,7 @@ public:
 
 protected:
 	xdr(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::array<std::optional<transducer_info>, max_transducer_info> transducer_data_;
@@ -63,7 +61,6 @@ public:
 
 	void set_info(int index, const transducer_info & info);
 };
-}
 }
 
 #endif

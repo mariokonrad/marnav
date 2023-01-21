@@ -14,9 +14,7 @@
 #include <sstream>
 #include <type_traits>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 namespace
 {
@@ -554,6 +552,5 @@ void read(const std::string & s, waypoint & value, data_format fmt)
 	typename waypoint::value_type t;
 	read(s, t, fmt);
 	value = waypoint{t};
-}
 }
 }

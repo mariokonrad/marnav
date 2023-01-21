@@ -3,15 +3,12 @@
 
 #include <algorithm>
 
-namespace marnav
-{
-namespace utils
+namespace marnav::utils
 {
 template <class T>
 constexpr T clamp(const T & value, const T & lo, const T & hi)
 {
 	return std::max(lo, std::min(hi, value));
-}
 }
 }
 

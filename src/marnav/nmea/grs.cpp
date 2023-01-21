@@ -2,9 +2,7 @@
 #include "checks.hpp"
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 namespace
 {
@@ -91,6 +89,5 @@ void grs::append_data_to(std::string & s, const version &) const
 	append(s, to_string(usage_));
 	for (auto const & t : sat_residual_)
 		append(s, to_string(t));
-}
 }
 }

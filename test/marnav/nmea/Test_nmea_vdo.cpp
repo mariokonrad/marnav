@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_vdo : public ::testing::Test
+class test_nmea_vdo : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_vdo, contruction)
+TEST_F(test_nmea_vdo, contruction)
 {
 	EXPECT_NO_THROW(nmea::vdo vdo);
 }
 
-TEST_F(Test_nmea_vdo, properties)
+TEST_F(test_nmea_vdo, properties)
 {
 	nmea_sentence_traits<nmea::vdo>();
 }
 
-TEST_F(Test_nmea_vdo, parse)
+TEST_F(test_nmea_vdo, parse)
 {
 	auto s = nmea::make_sentence("!AIVDO,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5E");
 	ASSERT_NE(nullptr, s);
@@ -37,7 +36,7 @@ TEST_F(Test_nmea_vdo, parse)
 	EXPECT_EQ(1u, fragment);
 }
 
-TEST_F(Test_nmea_vdo, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_vdo, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::vdo>(nmea::talker::none, {5, "@"}));

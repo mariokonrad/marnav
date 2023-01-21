@@ -5,9 +5,7 @@
 #include <array>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief GLC - Geographic Position, Loran-C
 ///
@@ -56,7 +54,7 @@ public:
 
 protected:
 	glc(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	uint32_t gri_ = 0; ///< unit: 0.1 microseconds
@@ -74,7 +72,6 @@ public:
 	void set_master(time_difference t) noexcept { master_ = t; }
 	void set_time_diff(int index, time_difference t);
 };
-}
 }
 
 #endif

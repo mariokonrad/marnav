@@ -3,9 +3,7 @@
 #include <algorithm>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 namespace
 {
@@ -111,6 +109,5 @@ void gsv::append_data_to(std::string & s, const version &) const
 	append(s, to_string(sat_[1]));
 	append(s, to_string(sat_[2]));
 	append(s, to_string(sat_[3]));
-}
 }
 }

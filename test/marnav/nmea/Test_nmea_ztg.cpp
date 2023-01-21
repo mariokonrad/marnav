@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_ztg : public ::testing::Test
+class test_nmea_ztg : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_ztg, contruction)
+TEST_F(test_nmea_ztg, contruction)
 {
 	EXPECT_NO_THROW(nmea::ztg ztg);
 }
 
-TEST_F(Test_nmea_ztg, properties)
+TEST_F(test_nmea_ztg, properties)
 {
 	nmea_sentence_traits<nmea::ztg>();
 }
 
-TEST_F(Test_nmea_ztg, parse)
+TEST_F(test_nmea_ztg, parse)
 {
 	auto s = nmea::make_sentence("$GPZTG,123456.1,000010,POINT1*16");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_ztg, parse)
 	ASSERT_NE(nullptr, ztg);
 }
 
-TEST_F(Test_nmea_ztg, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_ztg, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::ztg>(nmea::talker::none, {2, "@"}));
@@ -39,14 +38,14 @@ TEST_F(Test_nmea_ztg, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::ztg>(nmea::talker::none, {4, "@"}));
 }
 
-TEST_F(Test_nmea_ztg, empty_to_string)
+TEST_F(test_nmea_ztg, empty_to_string)
 {
 	nmea::ztg ztg;
 
 	EXPECT_STREQ("$GPZTG,,,*72", nmea::to_string(ztg).c_str());
 }
 
-TEST_F(Test_nmea_ztg, set_time_utc)
+TEST_F(test_nmea_ztg, set_time_utc)
 {
 	nmea::ztg ztg;
 	ztg.set_time_utc(nmea::time{12, 34, 56});
@@ -54,7 +53,7 @@ TEST_F(Test_nmea_ztg, set_time_utc)
 	EXPECT_STREQ("$GPZTG,123456,,*75", nmea::to_string(ztg).c_str());
 }
 
-TEST_F(Test_nmea_ztg, set_time_remaining)
+TEST_F(test_nmea_ztg, set_time_remaining)
 {
 	nmea::ztg ztg;
 	ztg.set_time_remaining(nmea::time{12, 34, 56});
@@ -62,7 +61,7 @@ TEST_F(Test_nmea_ztg, set_time_remaining)
 	EXPECT_STREQ("$GPZTG,,123456,*75", nmea::to_string(ztg).c_str());
 }
 
-TEST_F(Test_nmea_ztg, set_waypoint_id)
+TEST_F(test_nmea_ztg, set_waypoint_id)
 {
 	nmea::ztg ztg;
 	ztg.set_waypoint_id(nmea::waypoint{"POINT1"});

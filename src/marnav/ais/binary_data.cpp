@@ -1,9 +1,7 @@
 #include <marnav/ais/binary_data.hpp>
 #include <algorithm>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 /// @cond DEV
 namespace
@@ -174,6 +172,5 @@ void binary_data::write_string(
 		}
 		bits.set(value, ofs + i * 6, 6);
 	}
-}
 }
 }

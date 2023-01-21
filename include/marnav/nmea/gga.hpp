@@ -7,9 +7,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief GGA - Global Positioning System Fix Data
 ///
@@ -74,7 +72,7 @@ public:
 
 protected:
 	gga(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<nmea::time> time_;
@@ -117,7 +115,6 @@ public:
 	void set_dgps_age(double t) noexcept { dgps_age_ = t; }
 	void set_dgps_ref(uint32_t t) noexcept { dgps_ref_ = t; }
 };
-}
 }
 
 #endif

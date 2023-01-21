@@ -1,9 +1,7 @@
 #include <marnav/ais/message_09.hpp>
 #include <marnav/ais/angle.hpp>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 constexpr message_id message_09::ID;
 constexpr std::size_t message_09::SIZE_BITS;
@@ -26,20 +24,20 @@ message_09::message_09(const raw & bits)
 
 void message_09::read_data(const raw & bits)
 {
-	get(bits, repeat_indicator);
-	get(bits, mmsi);
-	get(bits, altitude);
-	get(bits, speed);
-	get(bits, position_accuracy);
-	get(bits, longitude_minutes);
-	get(bits, latitude_minutes);
-	get(bits, course);
-	get(bits, utc_second);
-	get(bits, reserved);
-	get(bits, dte);
-	get(bits, assigned);
-	get(bits, raim);
-	get(bits, radio_status);
+	get(bits, repeat_indicator_);
+	get(bits, mmsi_);
+	get(bits, altitude_);
+	get(bits, speed_);
+	get(bits, position_accuracy_);
+	get(bits, longitude_minutes_);
+	get(bits, latitude_minutes_);
+	get(bits, course_);
+	get(bits, utc_second_);
+	get(bits, reserved_);
+	get(bits, dte_);
+	get(bits, assigned_);
+	get(bits, raim_);
+	get(bits, radio_status_);
 }
 
 raw message_09::get_data() const
@@ -47,70 +45,70 @@ raw message_09::get_data() const
 	raw bits(SIZE_BITS);
 
 	bits.set(type(), 0, 6);
-	set(bits, repeat_indicator);
-	set(bits, mmsi);
-	set(bits, altitude);
-	set(bits, speed);
-	set(bits, position_accuracy);
-	set(bits, longitude_minutes);
-	set(bits, latitude_minutes);
-	set(bits, course);
-	set(bits, utc_second);
-	set(bits, reserved);
-	set(bits, dte);
-	set(bits, assigned);
-	set(bits, raim);
-	set(bits, radio_status);
+	set(bits, repeat_indicator_);
+	set(bits, mmsi_);
+	set(bits, altitude_);
+	set(bits, speed_);
+	set(bits, position_accuracy_);
+	set(bits, longitude_minutes_);
+	set(bits, latitude_minutes_);
+	set(bits, course_);
+	set(bits, utc_second_);
+	set(bits, reserved_);
+	set(bits, dte_);
+	set(bits, assigned_);
+	set(bits, raim_);
+	set(bits, radio_status_);
 
 	return bits;
 }
 
 std::optional<geo::longitude> message_09::get_lon() const
 {
-	if (longitude_minutes == longitude_not_available)
+	if (longitude_minutes_ == longitude_not_available)
 		return std::make_optional<geo::longitude>();
-	return to_geo_longitude(longitude_minutes, longitude_minutes.count, angle_scale::I4);
+	return to_geo_longitude(longitude_minutes_, longitude_minutes_.count, angle_scale::I4);
 }
 
 std::optional<geo::latitude> message_09::get_lat() const
 {
-	if (latitude_minutes == latitude_not_available)
+	if (latitude_minutes_ == latitude_not_available)
 		return std::make_optional<geo::latitude>();
-	return to_geo_latitude(latitude_minutes, latitude_minutes.count, angle_scale::I4);
+	return to_geo_latitude(latitude_minutes_, latitude_minutes_.count, angle_scale::I4);
 }
 
 void message_09::set_lon_unavailable()
 {
-	longitude_minutes = longitude_not_available;
+	longitude_minutes_ = longitude_not_available;
 }
 
 void message_09::set_lat_unavailable()
 {
-	latitude_minutes = latitude_not_available;
+	latitude_minutes_ = latitude_not_available;
 }
 
 void message_09::set_lon(const geo::longitude & t)
 {
-	longitude_minutes = to_longitude_minutes(t, longitude_minutes.count, angle_scale::I4);
+	longitude_minutes_ = to_longitude_minutes(t, longitude_minutes_.count, angle_scale::I4);
 }
 
 void message_09::set_lat(const geo::latitude & t)
 {
-	latitude_minutes = to_latitude_minutes(t, latitude_minutes.count, angle_scale::I4);
+	latitude_minutes_ = to_latitude_minutes(t, latitude_minutes_.count, angle_scale::I4);
 }
 
 std::optional<units::meters> message_09::get_altitude() const noexcept
 {
 	// ignores special value is in meter 4094 = 4094 meters or higher
 
-	if (speed == altitude_not_available)
+	if (speed_ == altitude_not_available)
 		return {};
-	return units::meters{altitude.as<units::meters::value_type>()};
+	return units::meters{altitude_.as<units::meters::value_type>()};
 }
 
 void message_09::set_altitude_unavailable()
 {
-	altitude = altitude_not_available;
+	altitude_ = altitude_not_available;
 }
 
 void message_09::set_altitude(units::length t)
@@ -119,21 +117,21 @@ void message_09::set_altitude(units::length t)
 		throw std::invalid_argument{"altitude less than zero"};
 
 	const auto m = t.get<units::meters>();
-	altitude = std::min(altitude_max, static_cast<uint32_t>(round(m).value()));
+	altitude_ = std::min(altitude_max, static_cast<uint32_t>(round(m).value()));
 }
 
 std::optional<units::knots> message_09::get_speed() const noexcept
 {
 	// ignores special value of 1022 = 102.2 knots or faster
 
-	if (speed == sog_not_available)
+	if (speed_ == sog_not_available)
 		return {};
-	return units::knots{speed.as<units::knots::value_type>()};
+	return units::knots{speed_.as<units::knots::value_type>()};
 }
 
 void message_09::set_speed_unavailable()
 {
-	speed = sog_not_available;
+	speed_ = sog_not_available;
 }
 
 void message_09::set_speed(units::velocity t)
@@ -142,7 +140,6 @@ void message_09::set_speed(units::velocity t)
 		throw std::invalid_argument{"SOG less than zero"};
 
 	const auto v = t.get<units::knots>();
-	speed = std::min(sog_max, static_cast<uint32_t>(round(v).value()));
-}
+	speed_ = std::min(sog_max, static_cast<uint32_t>(round(v).value()));
 }
 }

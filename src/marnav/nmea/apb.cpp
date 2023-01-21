@@ -3,9 +3,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id apb::ID;
 constexpr const char * apb::TAG;
@@ -122,6 +120,5 @@ void apb::append_data_to(std::string & s, const version &) const
 	append(s, format(heading_to_steer_to_destination_, 1));
 	append(s, to_string(heading_to_steer_to_destination_ref_));
 	append(s, to_string(mode_ind_));
-}
 }
 }

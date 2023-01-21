@@ -4,17 +4,16 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_ais_message_19 : public ::testing::Test
+class test_ais_message_19 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_19, parse)
+TEST_F(test_ais_message_19, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("C000000000H0htY08D41qwv0000000000000000000000000000@", 0));
+	v.emplace_back("C000000000H0htY08D41qwv0000000000000000000000000000@", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -23,13 +22,13 @@ TEST_F(Test_ais_message_19, parse)
 	ASSERT_TRUE(m != nullptr);
 }
 
-TEST_F(Test_ais_message_19, wrong_number_of_bits)
+TEST_F(test_ais_message_19, wrong_number_of_bits)
 {
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_19>(ais::raw(311)));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_19>(ais::raw(313)));
 }
 
-TEST_F(Test_ais_message_19, encode_default_values)
+TEST_F(test_ais_message_19, encode_default_values)
 {
 	ais::message_19 m;
 
@@ -40,7 +39,7 @@ TEST_F(Test_ais_message_19, encode_default_values)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_19, set_lat)
+TEST_F(test_ais_message_19, set_lat)
 {
 	ais::message_19 m;
 	m.set_lat(geo::latitude{12.34});
@@ -52,10 +51,10 @@ TEST_F(Test_ais_message_19, set_lat)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_19, get_lat)
+TEST_F(test_ais_message_19, get_lat)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("C000000003?8mP1hvN3Q3wv00000000000000000000000000000", 0));
+	v.emplace_back("C000000003?8mP1hvN3Q3wv00000000000000000000000000000", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -69,7 +68,7 @@ TEST_F(Test_ais_message_19, get_lat)
 	EXPECT_DOUBLE_EQ(expected, decoded);
 }
 
-TEST_F(Test_ais_message_19, set_lon)
+TEST_F(test_ais_message_19, set_lon)
 {
 	ais::message_19 m;
 	m.set_lon(geo::longitude{123.45});
@@ -81,10 +80,10 @@ TEST_F(Test_ais_message_19, set_lon)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_19, get_lon)
+TEST_F(test_ais_message_19, get_lon)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("C000000002=Agp=18D3Q3wv00000000000000000000000000000", 0));
+	v.emplace_back("C000000002=Agp=18D3Q3wv00000000000000000000000000000", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);

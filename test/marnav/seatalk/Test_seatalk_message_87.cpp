@@ -5,7 +5,7 @@ namespace
 {
 using namespace marnav::seatalk;
 
-class Test_seatalk_message_87 : public ::testing::Test
+class test_seatalk_message_87 : public ::testing::Test
 {
 public:
 	struct test_case {
@@ -20,22 +20,22 @@ public:
 	};
 };
 
-TEST_F(Test_seatalk_message_87, construction)
+TEST_F(test_seatalk_message_87, construction)
 {
 	EXPECT_NO_THROW(message_87 m);
 }
 
-TEST_F(Test_seatalk_message_87, parse_invalid_data_size)
+TEST_F(test_seatalk_message_87, parse_invalid_data_size)
 {
 	EXPECT_ANY_THROW(message_87::parse({1, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_87, parse_invalid_length)
+TEST_F(test_seatalk_message_87, parse_invalid_length)
 {
 	EXPECT_ANY_THROW(message_87::parse({0x87, 0x01, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_87, parse)
+TEST_F(test_seatalk_message_87, parse)
 {
 	for (auto const & t : cases) {
 		auto generic_message = message_87::parse(t.data);
@@ -50,7 +50,7 @@ TEST_F(Test_seatalk_message_87, parse)
 	}
 }
 
-TEST_F(Test_seatalk_message_87, write_default)
+TEST_F(test_seatalk_message_87, write_default)
 {
 	const raw expected{0x87, 0x00, 0x01};
 	message_87 m;

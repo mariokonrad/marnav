@@ -3,9 +3,7 @@
 #include <stdexcept>
 #include <cmath>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 namespace
 {
@@ -38,6 +36,5 @@ double rate_of_turn::value() const
 	if (is_more_5deg30s_right() || is_more_5deg30s_left())
 		throw std::domain_error{"value ambiguous"};
 	return sign(value_) * sqr(static_cast<double>(value_) / 4.733);
-}
 }
 }

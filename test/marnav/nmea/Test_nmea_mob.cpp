@@ -7,21 +7,21 @@ namespace
 {
 using namespace marnav;
 
-class Test_nmea_mob : public ::testing::Test
+class test_nmea_mob : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_mob, construction)
+TEST_F(test_nmea_mob, construction)
 {
 	EXPECT_NO_THROW(nmea::mob mob);
 }
 
-TEST_F(Test_nmea_mob, properties)
+TEST_F(test_nmea_mob, properties)
 {
 	nmea_sentence_traits<nmea::mob>();
 }
 
-TEST_F(Test_nmea_mob, parse)
+TEST_F(test_nmea_mob, parse)
 {
 	auto s = nmea::make_sentence("$INMOB,ABCDE,V,123456.987,0,311219,132456.876,12.34,N,123.45,"
 								 "E,12.34,23.45,269104520,0*53");
@@ -31,7 +31,7 @@ TEST_F(Test_nmea_mob, parse)
 	ASSERT_NE(nullptr, mob);
 }
 
-TEST_F(Test_nmea_mob, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_mob, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::mob>(nmea::talker::none, {13, "@"}));
@@ -39,7 +39,7 @@ TEST_F(Test_nmea_mob, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::mob>(nmea::talker::none, {15, "@"}));
 }
 
-TEST_F(Test_nmea_mob, empty_to_string)
+TEST_F(test_nmea_mob, empty_to_string)
 {
 	nmea::mob mob;
 
@@ -47,12 +47,12 @@ TEST_F(Test_nmea_mob, empty_to_string)
 		nmea::to_string(mob).c_str());
 }
 
-TEST_F(Test_nmea_mob, get_emitter_id_default_value)
+TEST_F(test_nmea_mob, get_emitter_id_default_value)
 {
 	ASSERT_FALSE(nmea::mob{}.get_emitter_id().has_value());
 }
 
-TEST_F(Test_nmea_mob, set_emitter_id_empty_string)
+TEST_F(test_nmea_mob, set_emitter_id_empty_string)
 {
 	nmea::mob mob;
 
@@ -61,14 +61,14 @@ TEST_F(Test_nmea_mob, set_emitter_id_empty_string)
 	ASSERT_FALSE(id.has_value());
 }
 
-TEST_F(Test_nmea_mob, set_emitter_id_large_string)
+TEST_F(test_nmea_mob, set_emitter_id_large_string)
 {
 	nmea::mob mob;
 
 	EXPECT_ANY_THROW(mob.set_emitter_id("012345"));
 }
 
-TEST_F(Test_nmea_mob, set_emitter_id_invalid_string_content)
+TEST_F(test_nmea_mob, set_emitter_id_invalid_string_content)
 {
 	nmea::mob mob;
 
@@ -77,7 +77,7 @@ TEST_F(Test_nmea_mob, set_emitter_id_invalid_string_content)
 	EXPECT_ANY_THROW(mob.set_emitter_id("foobar"));
 }
 
-TEST_F(Test_nmea_mob, set_emitter_id_valid_max_size_string)
+TEST_F(test_nmea_mob, set_emitter_id_valid_max_size_string)
 {
 	nmea::mob mob;
 
@@ -88,7 +88,7 @@ TEST_F(Test_nmea_mob, set_emitter_id_valid_max_size_string)
 	EXPECT_STREQ("FFFFF", id->c_str());
 }
 
-TEST_F(Test_nmea_mob, set_emitter_id_valid_short_string)
+TEST_F(test_nmea_mob, set_emitter_id_valid_short_string)
 {
 	nmea::mob mob;
 
@@ -98,12 +98,12 @@ TEST_F(Test_nmea_mob, set_emitter_id_valid_short_string)
 	EXPECT_STREQ("00FFF", id->c_str());
 }
 
-TEST_F(Test_nmea_mob, mob_status_default)
+TEST_F(test_nmea_mob, mob_status_default)
 {
 	EXPECT_EQ(nmea::mob::mob_status::error, nmea::mob{}.get_mob_status());
 }
 
-TEST_F(Test_nmea_mob, set_and_mob_status)
+TEST_F(test_nmea_mob, set_and_mob_status)
 {
 	{
 		nmea::mob mob;
@@ -142,12 +142,12 @@ TEST_F(Test_nmea_mob, set_and_mob_status)
 	}
 }
 
-TEST_F(Test_nmea_mob, set_mob_position_source_default)
+TEST_F(test_nmea_mob, set_mob_position_source_default)
 {
 	EXPECT_EQ(nmea::mob::mob_position_source::error, nmea::mob{}.get_mob_position_source());
 }
 
-TEST_F(Test_nmea_mob, set_mob_position_source)
+TEST_F(test_nmea_mob, set_mob_position_source)
 {
 	{
 		nmea::mob mob;
@@ -179,7 +179,7 @@ TEST_F(Test_nmea_mob, set_mob_position_source)
 	}
 }
 
-TEST_F(Test_nmea_mob, parse_mob_position_source)
+TEST_F(test_nmea_mob, parse_mob_position_source)
 {
 	{
 		const auto mob
@@ -227,7 +227,7 @@ TEST_F(Test_nmea_mob, parse_mob_position_source)
 	}
 }
 
-TEST_F(Test_nmea_mob, set_mmsi)
+TEST_F(test_nmea_mob, set_mmsi)
 {
 	nmea::mob mob;
 

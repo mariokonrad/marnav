@@ -7,7 +7,7 @@ using namespace marnav::seatalk;
 
 using mode = marnav::seatalk::message_59::mode;
 
-class Test_seatalk_message_59 : public ::testing::Test
+class test_seatalk_message_59 : public ::testing::Test
 {
 public:
 	struct test_case {
@@ -28,24 +28,24 @@ public:
 	};
 };
 
-TEST_F(Test_seatalk_message_59, construction)
+TEST_F(test_seatalk_message_59, construction)
 {
 	EXPECT_NO_THROW(message_59 m);
 }
 
-TEST_F(Test_seatalk_message_59, parse_invalid_data_size)
+TEST_F(test_seatalk_message_59, parse_invalid_data_size)
 {
 	EXPECT_ANY_THROW(message_59::parse({4, 0x00}));
 	EXPECT_ANY_THROW(message_59::parse({6, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_59, parse_invalid_length)
+TEST_F(test_seatalk_message_59, parse_invalid_length)
 {
 	EXPECT_ANY_THROW(message_59::parse({0x59, 0x21, 0x00, 0x00, 0x00}));
 	EXPECT_ANY_THROW(message_59::parse({0x59, 0x23, 0x00, 0x00, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_59, parse)
+TEST_F(test_seatalk_message_59, parse)
 {
 	for (auto const & t : cases) {
 		auto generic_message = message_59::parse(t.data);
@@ -63,7 +63,7 @@ TEST_F(Test_seatalk_message_59, parse)
 	}
 }
 
-TEST_F(Test_seatalk_message_59, write_default)
+TEST_F(test_seatalk_message_59, write_default)
 {
 	const raw expected{0x59, 0x22, 0x00, 0x00, 0x00};
 	message_59 m;
@@ -71,7 +71,7 @@ TEST_F(Test_seatalk_message_59, write_default)
 	EXPECT_EQ(expected, m.get_data());
 }
 
-TEST_F(Test_seatalk_message_59, set_timer)
+TEST_F(test_seatalk_message_59, set_timer)
 {
 	for (auto const & t : cases) {
 		message_59 m;
@@ -81,7 +81,7 @@ TEST_F(Test_seatalk_message_59, set_timer)
 	}
 }
 
-TEST_F(Test_seatalk_message_59, set_timer_boundaries)
+TEST_F(test_seatalk_message_59, set_timer_boundaries)
 {
 	{
 		message_59 m;

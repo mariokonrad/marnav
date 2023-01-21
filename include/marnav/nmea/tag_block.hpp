@@ -3,9 +3,7 @@
 
 #include <string>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// This structure holds all possible data, specified by a tag block,
 /// preceeding a NMEA sentence.
@@ -19,7 +17,7 @@ public:
 		int total_number = 0;
 		int id = 0;
 
-		sentence_group() {}
+		sentence_group() = default;
 
 		constexpr sentence_group(int n, int t, int i) noexcept
 			: number(n)
@@ -91,7 +89,6 @@ private:
 tag_block make_tag_block(const std::string & s);
 std::string to_string(const tag_block::sentence_group & g);
 std::string to_string(const tag_block & b);
-}
 }
 
 #endif

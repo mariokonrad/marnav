@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 /// @brief Compass heading sent by ST40 compass instrument
 ///
@@ -32,12 +30,12 @@ public:
 	message_89(const message_89 &) = default;
 	message_89 & operator=(const message_89 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	double value_;
+	double value_{0.0};
 
 public:
 	/// Returns the heading in degrees, resolution of `0.5` degrees.
@@ -47,7 +45,6 @@ public:
 
 	void set_heading(double t);
 };
-}
 }
 
 #endif

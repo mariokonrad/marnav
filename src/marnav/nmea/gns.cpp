@@ -3,9 +3,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id gns::ID;
 constexpr const char * gns::TAG;
@@ -96,6 +94,5 @@ void gns::append_data_to(std::string & s, const version &) const
 	append(s, to_string(geodial_separation_));
 	append(s, to_string(age_of_differential_data_));
 	append(s, to_string(differential_ref_station_id_));
-}
 }
 }

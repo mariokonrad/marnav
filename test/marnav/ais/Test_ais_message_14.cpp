@@ -6,11 +6,11 @@ namespace
 {
 using namespace marnav;
 
-class Test_ais_message_14 : public ::testing::Test
+class test_ais_message_14 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_14, parse)
+TEST_F(test_ais_message_14, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v{{">5?Per18=HB1U:1@E=B0m<L", 2}};
 
@@ -21,13 +21,13 @@ TEST_F(Test_ais_message_14, parse)
 	ASSERT_TRUE(m != nullptr);
 }
 
-TEST_F(Test_ais_message_14, wrong_number_of_bits)
+TEST_F(test_ais_message_14, wrong_number_of_bits)
 {
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_14>(ais::raw(39)));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_14>(ais::raw(1009)));
 }
 
-TEST_F(Test_ais_message_14, encode_default_values)
+TEST_F(test_ais_message_14, encode_default_values)
 {
 	ais::message_14 m;
 
@@ -38,7 +38,7 @@ TEST_F(Test_ais_message_14, encode_default_values)
 	EXPECT_EQ(2u, v[0].second);
 }
 
-TEST_F(Test_ais_message_14, set_text_too_large)
+TEST_F(test_ais_message_14, set_text_too_large)
 {
 	ais::message_14 m;
 	m.set_text(std::string(ais::message_14::SIZE_TEXT_MAX + 1, '#'));
@@ -55,7 +55,7 @@ static void test_string(
 	EXPECT_STREQ(expected, m->get_text().c_str());
 }
 
-TEST_F(Test_ais_message_14, strings)
+TEST_F(test_ais_message_14, strings)
 {
 	test_string("RCVD YR TEST MSG", {{">5?Per18=HB1U:1@E=B0m<L", 2}});
 

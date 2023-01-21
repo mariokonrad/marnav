@@ -6,11 +6,11 @@ using namespace marnav::geo;
 namespace
 {
 
-class Test_geo_cpa : public ::testing::Test
+class test_geo_cpa : public ::testing::Test
 {
 };
 
-TEST_F(Test_geo_cpa, collision_on_equator_eastwards_westwards)
+TEST_F(test_geo_cpa, collision_on_equator_eastwards_westwards)
 {
 	const vessel vessel1 = {{0.0, 1.0}, 1.0, 90.0}; // being west, going east
 	const vessel vessel2 = {{0.0, -1.0}, 1.0, 270.0}; // being east, going west
@@ -35,7 +35,7 @@ TEST_F(Test_geo_cpa, collision_on_equator_eastwards_westwards)
 	EXPECT_TRUE(cpa_exists);
 }
 
-TEST_F(Test_geo_cpa, collision_on_equator_eastwards_northwards)
+TEST_F(test_geo_cpa, collision_on_equator_eastwards_northwards)
 {
 	const vessel vessel1 = {{0.0, 1.0}, 1.0, 90.0}; // being west, going east
 	const vessel vessel2 = {{-1.0, 0.0}, 1.0, 0.0}; // being south, going north

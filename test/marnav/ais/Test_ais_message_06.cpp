@@ -6,14 +6,14 @@ namespace
 {
 using namespace marnav;
 
-class Test_ais_message_06 : public ::testing::Test
+class test_ais_message_06 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_06, parse)
+TEST_F(test_ais_message_06, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("6h2E:p66B2SR04<0@00000000000", 0));
+	v.emplace_back("6h2E:p66B2SR04<0@00000000000", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -22,7 +22,7 @@ TEST_F(Test_ais_message_06, parse)
 	ASSERT_TRUE(m != nullptr);
 }
 
-TEST_F(Test_ais_message_06, wrong_number_of_bits)
+TEST_F(test_ais_message_06, wrong_number_of_bits)
 {
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_06>(ais::raw(87)));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_06>(ais::raw(1009)));

@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id sfi::ID;
 constexpr const char * sfi::TAG;
@@ -55,6 +53,5 @@ void sfi::append_data_to(std::string & s, const version &) const
 		append(s, to_string(entry.frequency));
 		append(s, to_string(entry.mode));
 	}
-}
 }
 }

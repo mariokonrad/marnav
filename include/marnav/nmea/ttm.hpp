@@ -4,9 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief TTM - Tracked Target Message
 ///
@@ -56,7 +54,7 @@ public:
 
 protected:
 	ttm(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<uint32_t> target_number_;
@@ -111,7 +109,6 @@ public:
 	void set_target_status(char t) noexcept { target_status_ = t; }
 	void set_reference_target(char t) noexcept { reference_target_ = t; }
 };
-}
 }
 
 #endif

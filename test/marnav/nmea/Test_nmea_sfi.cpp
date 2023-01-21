@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_sfi : public ::testing::Test
+class test_nmea_sfi : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_sfi, contruction)
+TEST_F(test_nmea_sfi, contruction)
 {
 	EXPECT_NO_THROW(nmea::sfi sfi);
 }
 
-TEST_F(Test_nmea_sfi, properties)
+TEST_F(test_nmea_sfi, properties)
 {
 	nmea_sentence_traits<nmea::sfi>();
 }
 
-TEST_F(Test_nmea_sfi, parse)
+TEST_F(test_nmea_sfi, parse)
 {
 	auto s = nmea::make_sentence("$GPSFI,1,1,156025,M*03");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_sfi, parse)
 	ASSERT_NE(nullptr, sfi);
 }
 
-TEST_F(Test_nmea_sfi, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_sfi, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::sfi>(nmea::talker::none, {1, "@"}));
@@ -43,7 +42,7 @@ TEST_F(Test_nmea_sfi, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::sfi>(nmea::talker::none, {24, "@"}));
 }
 
-TEST_F(Test_nmea_sfi, empty_to_string)
+TEST_F(test_nmea_sfi, empty_to_string)
 {
 	nmea::sfi sfi;
 

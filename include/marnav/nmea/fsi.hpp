@@ -4,9 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief FSI - Frequency Set Information
 ///
@@ -43,7 +41,7 @@ public:
 
 protected:
 	fsi(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<uint32_t> tx_frequency_;
@@ -65,7 +63,6 @@ public:
 	void set_power_level(uint32_t t);
 	void set_sentence_status(char t);
 };
-}
 }
 
 #endif

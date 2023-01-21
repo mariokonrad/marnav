@@ -6,11 +6,11 @@ namespace
 {
 using namespace marnav;
 
-class Test_ais_message_21 : public ::testing::Test
+class test_ais_message_21 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_21, parse)
+TEST_F(test_ais_message_21, parse)
 {
 	static const std::vector<std::vector<std::pair<std::string, uint32_t>>> TESTS = {
 		{{"E000000000000000000000000000000000000000000000", 0}},
@@ -30,7 +30,7 @@ TEST_F(Test_ais_message_21, parse)
 	}
 }
 
-TEST_F(Test_ais_message_21, encode_default_values)
+TEST_F(test_ais_message_21, encode_default_values)
 {
 	ais::message_21 m;
 
@@ -41,7 +41,7 @@ TEST_F(Test_ais_message_21, encode_default_values)
 	EXPECT_EQ(4u, v[0].second);
 }
 
-TEST_F(Test_ais_message_21, set_name_extension)
+TEST_F(test_ais_message_21, set_name_extension)
 {
 	{
 		ais::message_21 m;

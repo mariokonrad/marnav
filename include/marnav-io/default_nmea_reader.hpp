@@ -3,9 +3,7 @@
 
 #include <marnav-io/nmea_reader.hpp>
 
-namespace marnav
-{
-namespace io
+namespace marnav::io
 {
 /// This is a very simple NMEA sentence reader, meant for synchronous
 /// and single threaded reading from a serial port or a device.
@@ -14,7 +12,7 @@ namespace io
 class default_nmea_reader : public nmea_reader
 {
 public:
-	virtual ~default_nmea_reader();
+	~default_nmea_reader() override = default;
 
 	default_nmea_reader() = delete;
 	default_nmea_reader(std::unique_ptr<device> &&);
@@ -27,13 +25,12 @@ public:
 	bool read_sentence(std::string & s);
 
 protected:
-	virtual void process_sentence(const std::string & s) override;
+	void process_sentence(const std::string & s) override;
 
 private:
 	bool received_;
 	std::string sentence_;
 };
-}
 }
 
 #endif

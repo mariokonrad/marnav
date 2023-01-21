@@ -4,9 +4,7 @@
 #include <string>
 #include <cstdint>
 
-namespace marnav
-{
-namespace geo
+namespace marnav::geo
 {
 
 /// @brief A geographic angle. This is the base class for Latitudes and Longitudes.
@@ -190,7 +188,6 @@ inline longitude operator"" _west(long double value)
 }
 
 /// @}
-}
 }
 
 #endif

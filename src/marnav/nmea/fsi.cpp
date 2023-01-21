@@ -2,9 +2,7 @@
 #include "checks.hpp"
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id fsi::ID;
 constexpr const char * fsi::TAG;
@@ -47,6 +45,5 @@ void fsi::append_data_to(std::string & s, const version &) const
 	append(s, to_string(communications_mode_));
 	append(s, to_string(power_level_));
 	append(s, to_string(sentence_status_));
-}
 }
 }

@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 /// @brief Set Response Level
 ///
@@ -28,19 +26,18 @@ public:
 	message_87(const message_87 &) = default;
 	message_87 & operator=(const message_87 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	response_level level_;
+	response_level level_{response_level::automatic};
 
 public:
 	response_level get_level() const { return level_; }
 
 	void set_level(response_level t) { level_ = t; }
 };
-}
 }
 
 #endif

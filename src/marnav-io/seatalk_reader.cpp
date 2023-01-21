@@ -2,16 +2,14 @@
 #include <algorithm>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace io
+namespace marnav::io
 {
 seatalk_reader::seatalk_reader(std::unique_ptr<device> && dv)
 	: dev_(std::move(dv))
 {
 	std::fill_n(reinterpret_cast<uint8_t *>(&ctx_), sizeof(ctx_), 0);
 
-	ctx_.state = State::READ;
+	ctx_.state = input_state::READ;
 	ctx_.remaining = 255;
 	ctx_.index = 0;
 }
@@ -85,9 +83,9 @@ void seatalk_reader::write_data(uint8_t c)
 void seatalk_reader::process_seatalk()
 {
 	switch (ctx_.state) {
-		case State::READ:
+		case input_state::READ:
 			if (ctx_.raw == 0xff) {
-				ctx_.state = State::ESCAPE;
+				ctx_.state = input_state::ESCAPE;
 			} else {
 				if (parity(ctx_.raw)) {
 					write_cmd(ctx_.raw);
@@ -99,20 +97,20 @@ void seatalk_reader::process_seatalk()
 			}
 			break;
 
-		case State::ESCAPE:
+		case input_state::ESCAPE:
 			if (ctx_.raw == 0x00) {
-				ctx_.state = State::PARITY;
+				ctx_.state = input_state::PARITY;
 			} else if (ctx_.raw == 0xff) {
 				write_data(ctx_.raw);
 				if (ctx_.remaining == 0)
 					emit_message();
-				ctx_.state = State::READ;
+				ctx_.state = input_state::READ;
 			} else {
 				throw std::runtime_error{"SeaTalk bus read error."};
 			}
 			break;
 
-		case State::PARITY:
+		case input_state::PARITY:
 			if (parity(ctx_.raw)) {
 				write_data(ctx_.raw);
 				if (ctx_.remaining == 0)
@@ -120,7 +118,7 @@ void seatalk_reader::process_seatalk()
 			} else {
 				write_cmd(ctx_.raw);
 			}
-			ctx_.state = State::READ;
+			ctx_.state = input_state::READ;
 			break;
 	}
 }
@@ -162,6 +160,5 @@ bool seatalk_reader::read()
 void seatalk_reader::emit_message()
 {
 	process_message(std::vector<uint8_t>{ctx_.data, ctx_.data + ctx_.index});
-}
 }
 }

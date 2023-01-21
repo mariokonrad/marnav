@@ -3,9 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief STALK - SeaTalk over NMEA
 ///
@@ -43,7 +41,7 @@ public:
 
 protected:
 	stalk(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	raw data_;
@@ -53,7 +51,6 @@ public:
 
 	void set_data(const raw & t);
 };
-}
 }
 
 #endif

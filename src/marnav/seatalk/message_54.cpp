@@ -1,16 +1,11 @@
 #include <marnav/seatalk/message_54.hpp>
 #include <cmath>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 message_54::message_54()
 	: message(ID)
-	, hour_(0)
-	, minute_(0)
-	, second_(0)
 {
 }
 
@@ -19,7 +14,7 @@ std::unique_ptr<message> message_54::parse(const raw & data)
 	check_size(data, SIZE);
 
 	std::unique_ptr<message> result = std::make_unique<message_54>();
-	message_54 & msg = static_cast<message_54 &>(*result);
+	auto & msg = static_cast<message_54 &>(*result);
 
 	//  54 T1 RS HH
 	// raw  1  2  3
@@ -51,6 +46,5 @@ void message_54::set_time(uint8_t h, uint8_t m, uint8_t s) noexcept
 	hour_ = h;
 	minute_ = m;
 	second_ = s;
-}
 }
 }

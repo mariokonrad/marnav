@@ -3,10 +3,9 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_ais : public ::testing::Test
+class test_ais : public ::testing::Test
 {
 public:
 	struct entry {
@@ -17,7 +16,7 @@ public:
 	static const std::vector<entry> ARMORING_ENTRIES;
 };
 
-const std::vector<Test_ais::entry> Test_ais::ARMORING_ENTRIES = {
+const std::vector<test_ais::entry> test_ais::ARMORING_ENTRIES = {
 	{0, '0'},
 	{1, '1'},
 	{2, '2'},
@@ -92,10 +91,10 @@ public:
 	{
 	}
 
-	virtual ais::raw get_data() const override { return ais::raw{}; }
+	ais::raw get_data() const override { return ais::raw{}; }
 };
 
-TEST_F(Test_ais, make_message)
+TEST_F(test_ais, make_message)
 {
 	using namespace std;
 
@@ -106,25 +105,25 @@ TEST_F(Test_ais, make_message)
 
 	// v.push_back(make_pair("177KQJ5000G?tO`K>RA1wUbN0TKH", 0));
 
-	v.push_back(make_pair("133m@ogP00PD;88MD5MTDww@2D7k", 0));
+	v.emplace_back("133m@ogP00PD;88MD5MTDww@2D7k", 0);
 
 	auto result = ais::make_message(v);
 }
 
-TEST_F(Test_ais, encode_message_zero_sized_bits)
+TEST_F(test_ais, encode_message_zero_sized_bits)
 {
 	message_zero_bits m;
 	EXPECT_ANY_THROW(ais::encode_message(m));
 }
 
-TEST_F(Test_ais, decode_armoring)
+TEST_F(test_ais, decode_armoring)
 {
 	for (auto const & e : ARMORING_ENTRIES) {
 		EXPECT_EQ(e.value, ais::decode_armoring(e.c));
 	}
 }
 
-TEST_F(Test_ais, encode_armoring)
+TEST_F(test_ais, encode_armoring)
 {
 	for (auto const & e : ARMORING_ENTRIES) {
 		EXPECT_EQ(e.c, ais::encode_armoring(e.value));

@@ -12,9 +12,7 @@
 #include "detail/basic_quantity_cmp.hpp"
 #include "detail/units.hpp"
 
-namespace marnav
-{
-namespace units
+namespace marnav::units
 {
 // clang-format off
 
@@ -129,7 +127,6 @@ using inductance             = basic_quantity<dim_inductance,             double
 using time                   = basic_quantity<dim_time,                   double>;
 
 // clang-format on
-}
 }
 
 #endif

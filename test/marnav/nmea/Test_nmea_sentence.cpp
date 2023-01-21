@@ -5,14 +5,13 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_sentence : public ::testing::Test
+class test_nmea_sentence : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_sentence, sentence_is_null)
+TEST_F(test_nmea_sentence, sentence_is_null)
 {
 	std::unique_ptr<nmea::sentence> p;
 	auto rc = nmea::sentence_cast<nmea::mtw>(p);
@@ -20,7 +19,7 @@ TEST_F(Test_nmea_sentence, sentence_is_null)
 	EXPECT_EQ(nullptr, rc);
 }
 
-TEST_F(Test_nmea_sentence, sentence_wrong_id)
+TEST_F(test_nmea_sentence, sentence_wrong_id)
 {
 	std::unique_ptr<nmea::sentence> p(new nmea::rmc);
 

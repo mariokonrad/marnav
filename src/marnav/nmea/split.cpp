@@ -1,11 +1,6 @@
 #include "split.hpp"
 
-namespace marnav
-{
-namespace nmea
-{
-/// @cond DEV
-namespace detail
+namespace marnav::nmea::detail
 {
 /// Parses the fields from the specified string. Uses ',' and '*' as delimiter.
 ///
@@ -33,8 +28,5 @@ std::vector<std::string> parse_fields(
 			break;
 	}
 	return result;
-}
-}
-/// @endcond
 }
 }

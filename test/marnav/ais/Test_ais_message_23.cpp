@@ -6,11 +6,11 @@ namespace
 {
 using namespace marnav;
 
-class Test_ais_message_23 : public ::testing::Test
+class test_ais_message_23 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_23, parse)
+TEST_F(test_ais_message_23, parse)
 {
 	static const std::vector<std::vector<std::pair<std::string, uint32_t>>> TESTS = {
 		{{"G00000000000000000000000000", 2}},
@@ -26,7 +26,7 @@ TEST_F(Test_ais_message_23, parse)
 	}
 }
 
-TEST_F(Test_ais_message_23, encode_default_values)
+TEST_F(test_ais_message_23, encode_default_values)
 {
 	ais::message_23 m;
 

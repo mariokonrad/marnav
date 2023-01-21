@@ -1,9 +1,7 @@
 #include <marnav/ais/message_20.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 constexpr message_id message_20::ID;
 constexpr std::size_t message_20::SIZE_BITS_MIN;
@@ -24,30 +22,30 @@ message_20::message_20(const raw & bits)
 
 void message_20::read_data(const raw & bits)
 {
-	get(bits, repeat_indicator);
-	get(bits, mmsi);
-	get(bits, offset_number_1);
-	get(bits, reserved_slots_1);
-	get(bits, timeout_1);
-	get(bits, increment_1);
+	get(bits, repeat_indicator_);
+	get(bits, mmsi_);
+	get(bits, offset_number_1_);
+	get(bits, reserved_slots_1_);
+	get(bits, timeout_1_);
+	get(bits, increment_1_);
 
 	if (bits.size() > SIZE_BITS_MIN + 1 * 30) {
-		get(bits, offset_number_2);
-		get(bits, reserved_slots_2);
-		get(bits, timeout_2);
-		get(bits, increment_2);
+		get(bits, offset_number_2_);
+		get(bits, reserved_slots_2_);
+		get(bits, timeout_2_);
+		get(bits, increment_2_);
 	}
 	if (bits.size() > SIZE_BITS_MIN + 2 * 30) {
-		get(bits, offset_number_3);
-		get(bits, reserved_slots_3);
-		get(bits, timeout_3);
-		get(bits, increment_3);
+		get(bits, offset_number_3_);
+		get(bits, reserved_slots_3_);
+		get(bits, timeout_3_);
+		get(bits, increment_3_);
 	}
 	if (bits.size() > SIZE_BITS_MIN + 3 * 30) {
-		get(bits, offset_number_4);
-		get(bits, reserved_slots_4);
-		get(bits, timeout_4);
-		get(bits, increment_4);
+		get(bits, offset_number_4_);
+		get(bits, reserved_slots_4_);
+		get(bits, timeout_4_);
+		get(bits, increment_4_);
 	}
 }
 
@@ -55,29 +53,29 @@ raw message_20::get_data() const
 {
 	raw bits(SIZE_BITS_MIN);
 	bits.set(type(), 0, 6);
-	set(bits, repeat_indicator);
-	set(bits, mmsi);
-	set(bits, offset_number_1);
-	set(bits, reserved_slots_1);
-	set(bits, timeout_1);
-	set(bits, increment_1);
-	if (offset_number_2 != 0) {
-		set(bits, offset_number_2);
-		set(bits, reserved_slots_2);
-		set(bits, timeout_2);
-		set(bits, increment_2);
+	set(bits, repeat_indicator_);
+	set(bits, mmsi_);
+	set(bits, offset_number_1_);
+	set(bits, reserved_slots_1_);
+	set(bits, timeout_1_);
+	set(bits, increment_1_);
+	if (offset_number_2_ != 0) {
+		set(bits, offset_number_2_);
+		set(bits, reserved_slots_2_);
+		set(bits, timeout_2_);
+		set(bits, increment_2_);
 	}
-	if (offset_number_3 != 0) {
-		set(bits, offset_number_3);
-		set(bits, reserved_slots_3);
-		set(bits, timeout_3);
-		set(bits, increment_3);
+	if (offset_number_3_ != 0) {
+		set(bits, offset_number_3_);
+		set(bits, reserved_slots_3_);
+		set(bits, timeout_3_);
+		set(bits, increment_3_);
 	}
-	if (offset_number_4 != 0) {
-		set(bits, offset_number_4);
-		set(bits, reserved_slots_4);
-		set(bits, timeout_4);
-		set(bits, increment_4);
+	if (offset_number_4_ != 0) {
+		set(bits, offset_number_4_);
+		set(bits, reserved_slots_4_);
+		set(bits, timeout_4_);
+		set(bits, increment_4_);
 	}
 	return bits;
 }
@@ -88,13 +86,13 @@ message_20::entry message_20::get_entry(int index) const
 		throw std::out_of_range{"index out of range"};
 	switch (index) {
 		case 0:
-			return {offset_number_1, reserved_slots_1, timeout_1, increment_1};
+			return {offset_number_1_, reserved_slots_1_, timeout_1_, increment_1_};
 		case 1:
-			return {offset_number_2, reserved_slots_2, timeout_2, increment_2};
+			return {offset_number_2_, reserved_slots_2_, timeout_2_, increment_2_};
 		case 2:
-			return {offset_number_3, reserved_slots_3, timeout_3, increment_3};
+			return {offset_number_3_, reserved_slots_3_, timeout_3_, increment_3_};
 		case 3:
-			return {offset_number_4, reserved_slots_4, timeout_4, increment_4};
+			return {offset_number_4_, reserved_slots_4_, timeout_4_, increment_4_};
 	}
 	return {};
 }
@@ -105,30 +103,29 @@ void message_20::set_entry(int index, message_20::entry e)
 		throw std::out_of_range{"index out of range"};
 	switch (index) {
 		case 0:
-			offset_number_1 = e.offset;
-			reserved_slots_1 = e.slots;
-			timeout_1 = e.timeout;
-			increment_1 = e.increment;
+			offset_number_1_ = e.offset;
+			reserved_slots_1_ = e.slots;
+			timeout_1_ = e.timeout;
+			increment_1_ = e.increment;
 			break;
 		case 1:
-			offset_number_2 = e.offset;
-			reserved_slots_2 = e.slots;
-			timeout_2 = e.timeout;
-			increment_2 = e.increment;
+			offset_number_2_ = e.offset;
+			reserved_slots_2_ = e.slots;
+			timeout_2_ = e.timeout;
+			increment_2_ = e.increment;
 			break;
 		case 2:
-			offset_number_3 = e.offset;
-			reserved_slots_3 = e.slots;
-			timeout_3 = e.timeout;
-			increment_3 = e.increment;
+			offset_number_3_ = e.offset;
+			reserved_slots_3_ = e.slots;
+			timeout_3_ = e.timeout;
+			increment_3_ = e.increment;
 			break;
 		case 3:
-			offset_number_4 = e.offset;
-			reserved_slots_4 = e.slots;
-			timeout_4 = e.timeout;
-			increment_4 = e.increment;
+			offset_number_4_ = e.offset;
+			reserved_slots_4_ = e.slots;
+			timeout_4_ = e.timeout;
+			increment_4_ = e.increment;
 			break;
 	}
-}
 }
 }

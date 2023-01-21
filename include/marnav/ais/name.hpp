@@ -3,9 +3,7 @@
 
 #include <marnav/ais/message.hpp>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 std::string to_name(message_id t);
 std::string to_name(ship_type t);
@@ -16,7 +14,6 @@ std::string to_name(off_position_indicator t);
 std::string to_name(aid_type_id t);
 std::string to_name(maneuver_indicator_id t);
 std::string to_name(data_terminal t);
-}
 }
 
 #endif

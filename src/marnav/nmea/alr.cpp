@@ -1,9 +1,7 @@
 #include <marnav/nmea/alr.hpp>
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @cond DEV
 namespace
@@ -120,6 +118,5 @@ void alr::set_text(const std::string & t)
 		throw std::invalid_argument{"alarm text size too large in arl::set_text"};
 
 	text_ = t;
-}
 }
 }

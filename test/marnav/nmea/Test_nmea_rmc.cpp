@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_rmc : public ::testing::Test
+class test_nmea_rmc : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_rmc, contruction)
+TEST_F(test_nmea_rmc, contruction)
 {
 	EXPECT_NO_THROW(nmea::rmc rmc);
 }
 
-TEST_F(Test_nmea_rmc, properties)
+TEST_F(test_nmea_rmc, properties)
 {
 	nmea_sentence_traits<nmea::rmc>();
 }
 
-TEST_F(Test_nmea_rmc, parse)
+TEST_F(test_nmea_rmc, parse)
 {
 	auto s = nmea::make_sentence("$GPRMC,,V,,,,,,,300510,0.6,E,N*39");
 	ASSERT_NE(nullptr, s);
@@ -37,7 +36,7 @@ TEST_F(Test_nmea_rmc, parse)
 	EXPECT_EQ(30u, date.value().day());
 }
 
-TEST_F(Test_nmea_rmc, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_rmc, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::rmc>(nmea::talker::none, {10, "@"}));
@@ -45,14 +44,14 @@ TEST_F(Test_nmea_rmc, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::rmc>(nmea::talker::none, {13, "@"}));
 }
 
-TEST_F(Test_nmea_rmc, empty_to_string)
+TEST_F(test_nmea_rmc, empty_to_string)
 {
 	nmea::rmc rmc;
 
 	EXPECT_STREQ("$GPRMC,,,,,,,,,,,,*4B", nmea::to_string(rmc).c_str());
 }
 
-TEST_F(Test_nmea_rmc, get_lat_north)
+TEST_F(test_nmea_rmc, get_lat_north)
 {
 	auto s = nmea::make_sentence("$GPRMC,,,1234.9333,N,,,,,,,,*25");
 	ASSERT_NE(nullptr, s);
@@ -68,7 +67,7 @@ TEST_F(Test_nmea_rmc, get_lat_north)
 	EXPECT_EQ(geo::latitude::hemisphere::north, lat.hem());
 }
 
-TEST_F(Test_nmea_rmc, set_lat_north)
+TEST_F(test_nmea_rmc, set_lat_north)
 {
 	nmea::rmc rmc;
 	rmc.set_lat(geo::latitude{12, 34, 56, geo::latitude::hemisphere::north});
@@ -76,7 +75,7 @@ TEST_F(Test_nmea_rmc, set_lat_north)
 	EXPECT_STREQ("$GPRMC,,,1234.9333,N,,,,,,,,*25", nmea::to_string(rmc).c_str());
 }
 
-TEST_F(Test_nmea_rmc, get_lat_south)
+TEST_F(test_nmea_rmc, get_lat_south)
 {
 	auto s = nmea::make_sentence("$GPRMC,,,1234.9333,S,,,,,,,,*38");
 	ASSERT_NE(nullptr, s);
@@ -92,7 +91,7 @@ TEST_F(Test_nmea_rmc, get_lat_south)
 	EXPECT_EQ(geo::latitude::hemisphere::south, lat.hem());
 }
 
-TEST_F(Test_nmea_rmc, set_lat_south)
+TEST_F(test_nmea_rmc, set_lat_south)
 {
 	nmea::rmc rmc;
 	rmc.set_lat(geo::latitude{12, 34, 56, geo::latitude::hemisphere::south});
@@ -100,7 +99,7 @@ TEST_F(Test_nmea_rmc, set_lat_south)
 	EXPECT_STREQ("$GPRMC,,,1234.9333,S,,,,,,,,*38", nmea::to_string(rmc).c_str());
 }
 
-TEST_F(Test_nmea_rmc, get_lon_east)
+TEST_F(test_nmea_rmc, get_lon_east)
 {
 	auto s = nmea::make_sentence("$GPRMC,,,,,12345.9333,E,,,,,,*1B");
 	ASSERT_NE(nullptr, s);
@@ -116,7 +115,7 @@ TEST_F(Test_nmea_rmc, get_lon_east)
 	EXPECT_EQ(geo::longitude::hemisphere::east, lon.hem());
 }
 
-TEST_F(Test_nmea_rmc, set_lon_east)
+TEST_F(test_nmea_rmc, set_lon_east)
 {
 	nmea::rmc rmc;
 	rmc.set_lon(geo::longitude{123, 45, 56, geo::longitude::hemisphere::east});
@@ -124,7 +123,7 @@ TEST_F(Test_nmea_rmc, set_lon_east)
 	EXPECT_STREQ("$GPRMC,,,,,12345.9333,E,,,,,,*1B", nmea::to_string(rmc).c_str());
 }
 
-TEST_F(Test_nmea_rmc, get_lon_west)
+TEST_F(test_nmea_rmc, get_lon_west)
 {
 	auto s = nmea::make_sentence("$GPRMC,,,,,12345.9333,W,,,,,,*09");
 	ASSERT_NE(nullptr, s);
@@ -140,7 +139,7 @@ TEST_F(Test_nmea_rmc, get_lon_west)
 	EXPECT_EQ(geo::longitude::hemisphere::west, lon.hem());
 }
 
-TEST_F(Test_nmea_rmc, set_lon_west)
+TEST_F(test_nmea_rmc, set_lon_west)
 {
 	nmea::rmc rmc;
 	rmc.set_lon(geo::longitude{123, 45, 56, geo::longitude::hemisphere::west});
@@ -148,7 +147,7 @@ TEST_F(Test_nmea_rmc, set_lon_west)
 	EXPECT_STREQ("$GPRMC,,,,,12345.9333,W,,,,,,*09", nmea::to_string(rmc).c_str());
 }
 
-TEST_F(Test_nmea_rmc, set_sog)
+TEST_F(test_nmea_rmc, set_sog)
 {
 	{
 		nmea::rmc rmc;
@@ -164,7 +163,7 @@ TEST_F(Test_nmea_rmc, set_sog)
 	}
 }
 
-TEST_F(Test_nmea_rmc, get_sog)
+TEST_F(test_nmea_rmc, get_sog)
 {
 	auto s = nmea::make_sentence("$GPRMC,,,,,,,4.5,,,,,*64");
 	ASSERT_NE(nullptr, s);
@@ -178,7 +177,7 @@ TEST_F(Test_nmea_rmc, get_sog)
 	EXPECT_NEAR(4.5, sog->get<marnav::units::knots>().value(), 1e-8);
 }
 
-TEST_F(Test_nmea_rmc, set_mag)
+TEST_F(test_nmea_rmc, set_mag)
 {
 	nmea::rmc rmc;
 	rmc.set_mag(nmea::magnetic(12.5, nmea::direction::west));
@@ -186,7 +185,7 @@ TEST_F(Test_nmea_rmc, set_mag)
 	EXPECT_STREQ("$GPRMC,,,,,,,,,,12.5,W,*04", nmea::to_string(rmc).c_str());
 }
 
-TEST_F(Test_nmea_rmc, get_mag)
+TEST_F(test_nmea_rmc, get_mag)
 {
 	auto s = nmea::make_sentence("$GPRMC,,,,,,,,,,12.5,E,*16");
 	ASSERT_NE(nullptr, s);

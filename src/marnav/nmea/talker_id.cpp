@@ -2,9 +2,7 @@
 #include <algorithm>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 namespace detail
 {
@@ -105,6 +103,5 @@ talker make_talker(const std::string & s)
 	auto i = std::find_if(std::begin(detail::entries), std::end(detail::entries),
 		[&](const detail::entry & e) { return s == e.id; });
 	return (i == std::end(detail::entries)) ? talker::none : i->t;
-}
 }
 }

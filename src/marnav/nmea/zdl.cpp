@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id zdl::ID;
 constexpr const char * zdl::TAG;
@@ -30,6 +28,5 @@ void zdl::append_data_to(std::string & s, const version &) const
 	append(s, to_string(time_to_point_));
 	append(s, format(distance_, 1));
 	append(s, to_string(type_point_));
-}
 }
 }

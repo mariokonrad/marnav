@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Speed through water
@@ -32,14 +30,14 @@ public:
 	message_26(const message_26 &) = default;
 	message_26 & operator=(const message_26 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint16_t speed1_;
-	uint16_t speed2_;
-	uint8_t status_;
+	uint16_t speed1_{0};
+	uint16_t speed2_{0};
+	uint8_t status_{0};
 
 public:
 	bool is_display_in_mph() const noexcept { return (status_ & 0x02) != 0; }
@@ -60,7 +58,6 @@ public:
 	void set_speed1(double t) noexcept;
 	void set_speed2(double t) noexcept;
 };
-}
 }
 
 #endif

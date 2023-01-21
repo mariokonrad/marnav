@@ -8,9 +8,7 @@
 #include <type_traits>
 #include <vector>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @cond DEV
 class sentence; // forward declaration
@@ -29,7 +27,6 @@ extract_sentence_information(
 	const std::string & s, checksum_handling chksum = checksum_handling::check);
 }
 /// @endcond
-}
 }
 
 #endif

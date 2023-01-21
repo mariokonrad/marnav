@@ -6,9 +6,7 @@
 #include <array>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief GRS - GPS Range Residuals
 ///
@@ -59,7 +57,7 @@ public:
 
 protected:
 	grs(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	nmea::time time_utc_;
@@ -79,7 +77,6 @@ public:
 };
 
 std::string to_string(grs::residual_usage value);
-}
 }
 
 #endif

@@ -5,9 +5,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief DTM - Datum Reference
 ///
@@ -51,7 +49,7 @@ public:
 
 protected:
 	dtm(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::string ref_ = "W84";
@@ -80,7 +78,6 @@ public:
 	void set_altitude(units::length t) { altitude_ = t.get<units::meters>(); }
 	void set_name(const std::string & t) noexcept;
 };
-}
 }
 
 #endif

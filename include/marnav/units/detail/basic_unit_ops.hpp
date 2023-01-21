@@ -3,9 +3,7 @@
 
 #include "basic_unit.hpp"
 
-namespace marnav
-{
-namespace units
+namespace marnav::units
 {
 template <class U, class R, class S>
 constexpr basic_unit<U, R> operator*(const basic_unit<U, R> & v, const S & s) noexcept
@@ -45,7 +43,6 @@ constexpr basic_unit<U1, R1> operator-(
 	const basic_unit<U1, R1> & v1, const basic_unit<U2, R2> & v2) noexcept
 {
 	return basic_unit<U1, R1>(v1) -= basic_unit<U1, R1>(v2);
-}
 }
 }
 

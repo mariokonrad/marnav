@@ -3,9 +3,7 @@
 
 #include <cstdint>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// Enumeration of NMEA-0183 sentence IDs.
 ///
@@ -160,7 +158,6 @@ enum class sentence_id : uint32_t {
 
 	STALK, ///< SeaTalk over NMEA, raw data
 };
-}
 }
 
 #endif

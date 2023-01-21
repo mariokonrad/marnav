@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_dsc : public ::testing::Test
+class test_nmea_dsc : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_dsc, contruction)
+TEST_F(test_nmea_dsc, contruction)
 {
 	EXPECT_NO_THROW(nmea::dsc dsc);
 }
 
-TEST_F(Test_nmea_dsc, properties)
+TEST_F(test_nmea_dsc, properties)
 {
 	nmea_sentence_traits<nmea::dsc>();
 }
 
-TEST_F(Test_nmea_dsc, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_dsc, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::dsc>(nmea::talker::none, {10, "@"}));
@@ -30,7 +29,7 @@ TEST_F(Test_nmea_dsc, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::dsc>(nmea::talker::none, {12, "@"}));
 }
 
-TEST_F(Test_nmea_dsc, parse)
+TEST_F(test_nmea_dsc, parse)
 {
 	static const std::vector<std::string> TESTS
 		= {"$CDDSC,20,3380210040,00,21,26,1394807410,2231,,,B,E*75",
@@ -49,7 +48,7 @@ TEST_F(Test_nmea_dsc, parse)
 	}
 }
 
-TEST_F(Test_nmea_dsc, get_fmt_spec)
+TEST_F(test_nmea_dsc, get_fmt_spec)
 {
 	{
 		auto s = nmea::sentence_cast<nmea::dsc>(
@@ -77,7 +76,7 @@ TEST_F(Test_nmea_dsc, get_fmt_spec)
 	}
 }
 
-TEST_F(Test_nmea_dsc, get_cat)
+TEST_F(test_nmea_dsc, get_cat)
 {
 	{
 		auto s = nmea::sentence_cast<nmea::dsc>(
@@ -105,7 +104,7 @@ TEST_F(Test_nmea_dsc, get_cat)
 	}
 }
 
-TEST_F(Test_nmea_dsc, get_mmsi)
+TEST_F(test_nmea_dsc, get_mmsi)
 {
 	const auto s = nmea::sentence_cast<nmea::dsc>(
 		nmea::make_sentence("$CDDSC,02,3380210040,00,21,26,1394807410,2231,,,B,E*75"));
@@ -113,7 +112,7 @@ TEST_F(Test_nmea_dsc, get_mmsi)
 	EXPECT_EQ(utils::mmsi{338021004}, s->get_mmsi());
 }
 
-TEST_F(Test_nmea_dsc, get_geographical_area_SE)
+TEST_F(test_nmea_dsc, get_geographical_area_SE)
 {
 	auto s = nmea::sentence_cast<nmea::dsc>(
 		nmea::make_sentence("$CDDSC,02,2380210102,00,21,26,1394807410,2231,,,B,E*73"));
@@ -125,7 +124,7 @@ TEST_F(Test_nmea_dsc, get_geographical_area_SE)
 	EXPECT_DOUBLE_EQ((geo::longitude{23, 0, 0, geo::longitude::hemisphere::east}), r.right());
 }
 
-TEST_F(Test_nmea_dsc, get_geographical_area_SW)
+TEST_F(test_nmea_dsc, get_geographical_area_SW)
 {
 	auto s = nmea::sentence_cast<nmea::dsc>(
 		nmea::make_sentence("$CDDSC,02,3380210102,00,21,26,1394807410,2231,,,B,E*72"));
@@ -137,7 +136,7 @@ TEST_F(Test_nmea_dsc, get_geographical_area_SW)
 	EXPECT_DOUBLE_EQ((geo::longitude{19, 0, 0, geo::longitude::hemisphere::west}), r.right());
 }
 
-TEST_F(Test_nmea_dsc, get_ack_B)
+TEST_F(test_nmea_dsc, get_ack_B)
 {
 	auto s = nmea::sentence_cast<nmea::dsc>(
 		nmea::make_sentence("$CDDSC,02,3380210102,00,21,26,1394807410,2231,,,B,E*72"));
@@ -145,7 +144,7 @@ TEST_F(Test_nmea_dsc, get_ack_B)
 	EXPECT_EQ(nmea::dsc::acknowledgement::B, s->get_ack());
 }
 
-TEST_F(Test_nmea_dsc, get_ack_R)
+TEST_F(test_nmea_dsc, get_ack_R)
 {
 	auto s = nmea::sentence_cast<nmea::dsc>(
 		nmea::make_sentence("$CDDSC,02,3380210102,00,21,26,1394807410,2231,,,R,E*62"));
@@ -153,7 +152,7 @@ TEST_F(Test_nmea_dsc, get_ack_R)
 	EXPECT_EQ(nmea::dsc::acknowledgement::R, s->get_ack());
 }
 
-TEST_F(Test_nmea_dsc, get_ack_end_of_sequence)
+TEST_F(test_nmea_dsc, get_ack_end_of_sequence)
 {
 	auto s = nmea::sentence_cast<nmea::dsc>(
 		nmea::make_sentence("$CDDSC,02,3380210102,00,21,26,1394807410,2231,,,S,E*63"));
@@ -161,7 +160,7 @@ TEST_F(Test_nmea_dsc, get_ack_end_of_sequence)
 	EXPECT_EQ(nmea::dsc::acknowledgement::end_of_sequence, s->get_ack());
 }
 
-TEST_F(Test_nmea_dsc, get_extension)
+TEST_F(test_nmea_dsc, get_extension)
 {
 	auto s = nmea::sentence_cast<nmea::dsc>(
 		nmea::make_sentence("$CDDSC,02,3380210102,00,21,26,1394807410,2231,,,B,E*72"));
@@ -169,7 +168,7 @@ TEST_F(Test_nmea_dsc, get_extension)
 	EXPECT_EQ(nmea::dsc::extension_indicator::extension_follows, s->get_extension());
 }
 
-TEST_F(Test_nmea_dsc, empty_to_string)
+TEST_F(test_nmea_dsc, empty_to_string)
 {
 	nmea::dsc dsc;
 	EXPECT_STREQ("$CDDSC,12,0000000000,12,,,,,,,S,*2C", nmea::to_string(dsc).c_str());

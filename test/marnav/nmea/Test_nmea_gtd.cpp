@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_gtd : public ::testing::Test
+class test_nmea_gtd : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_gtd, contruction)
+TEST_F(test_nmea_gtd, contruction)
 {
 	EXPECT_NO_THROW(nmea::gtd gtd);
 }
 
-TEST_F(Test_nmea_gtd, properties)
+TEST_F(test_nmea_gtd, properties)
 {
 	nmea_sentence_traits<nmea::gtd>();
 }
 
-TEST_F(Test_nmea_gtd, parse)
+TEST_F(test_nmea_gtd, parse)
 {
 	auto s = nmea::make_sentence("$GPGTD,1.0,2.0,3.0,4.0,5.0*43");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_gtd, parse)
 	ASSERT_NE(nullptr, gtd);
 }
 
-TEST_F(Test_nmea_gtd, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_gtd, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::gtd>(nmea::talker::none, {4, "@"}));
@@ -39,14 +38,14 @@ TEST_F(Test_nmea_gtd, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::gtd>(nmea::talker::none, {6, "@"}));
 }
 
-TEST_F(Test_nmea_gtd, empty_to_string)
+TEST_F(test_nmea_gtd, empty_to_string)
 {
 	nmea::gtd gtd;
 
 	EXPECT_STREQ("$GPGTD,0,0,0,0,0*5C", nmea::to_string(gtd).c_str());
 }
 
-TEST_F(Test_nmea_gtd, set_time_diff)
+TEST_F(test_nmea_gtd, set_time_diff)
 {
 	nmea::gtd gtd;
 	gtd.set_time_diff(0, 1.0);
@@ -58,7 +57,7 @@ TEST_F(Test_nmea_gtd, set_time_diff)
 	EXPECT_STREQ("$GPGTD,1,2,3,4,5*5D", nmea::to_string(gtd).c_str());
 }
 
-TEST_F(Test_nmea_gtd, set_time_diff_invalid_index)
+TEST_F(test_nmea_gtd, set_time_diff_invalid_index)
 {
 	nmea::gtd gtd;
 
@@ -67,7 +66,7 @@ TEST_F(Test_nmea_gtd, set_time_diff_invalid_index)
 	EXPECT_ANY_THROW(gtd.set_time_diff(nmea::gtd::max_time_diffs, 0.0));
 }
 
-TEST_F(Test_nmea_gtd, get_time_diff)
+TEST_F(test_nmea_gtd, get_time_diff)
 {
 	auto s = nmea::make_sentence("$GPGTD,1.0,2.0,3.0,4.0,5.0*43");
 	ASSERT_NE(nullptr, s);
@@ -82,7 +81,7 @@ TEST_F(Test_nmea_gtd, get_time_diff)
 	EXPECT_NEAR(5.0, gtd->get_time_diff(4), 1e-8);
 }
 
-TEST_F(Test_nmea_gtd, get_time_diff_invalid_index)
+TEST_F(test_nmea_gtd, get_time_diff_invalid_index)
 {
 	nmea::gtd gtd;
 

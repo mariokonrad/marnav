@@ -7,21 +7,21 @@ namespace
 {
 using namespace marnav;
 
-class Test_nmea_gsv : public ::testing::Test
+class test_nmea_gsv : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_gsv, contruction)
+TEST_F(test_nmea_gsv, contruction)
 {
 	EXPECT_NO_THROW(nmea::gsv gsv);
 }
 
-TEST_F(Test_nmea_gsv, properties)
+TEST_F(test_nmea_gsv, properties)
 {
 	nmea_sentence_traits<nmea::gsv>();
 }
 
-TEST_F(Test_nmea_gsv, parse)
+TEST_F(test_nmea_gsv, parse)
 {
 	auto s = nmea::make_sentence(
 		"$GPGSV,3,1,11,03,03,111,00,04,15,270,00,06,01,010,00,13,06,292,00*74");
@@ -31,7 +31,7 @@ TEST_F(Test_nmea_gsv, parse)
 	ASSERT_NE(nullptr, gsv);
 }
 
-TEST_F(Test_nmea_gsv, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_gsv, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::gsv>(nmea::talker::none, {18, "@"}));
@@ -39,14 +39,14 @@ TEST_F(Test_nmea_gsv, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::gsv>(nmea::talker::none, {20, "@"}));
 }
 
-TEST_F(Test_nmea_gsv, empty_to_string)
+TEST_F(test_nmea_gsv, empty_to_string)
 {
 	nmea::gsv gsv;
 
 	EXPECT_STREQ("$GPGSV,1,1,0,,,,,,,,,,,,,,,,*49", nmea::to_string(gsv).c_str());
 }
 
-TEST_F(Test_nmea_gsv, set_message)
+TEST_F(test_nmea_gsv, set_message)
 {
 	nmea::gsv gsv;
 	gsv.set_n_messages(2);
@@ -55,7 +55,7 @@ TEST_F(Test_nmea_gsv, set_message)
 	EXPECT_STREQ("$GPGSV,2,1,0,,,,,,,,,,,,,,,,*4A", nmea::to_string(gsv).c_str());
 }
 
-TEST_F(Test_nmea_gsv, set_n_satellites_in_view)
+TEST_F(test_nmea_gsv, set_n_satellites_in_view)
 {
 	nmea::gsv gsv;
 	gsv.set_n_satellites_in_view(1);
@@ -63,7 +63,7 @@ TEST_F(Test_nmea_gsv, set_n_satellites_in_view)
 	EXPECT_STREQ("$GPGSV,1,1,1,,,,,,,,,,,,,,,,*48", nmea::to_string(gsv).c_str());
 }
 
-TEST_F(Test_nmea_gsv, set_sat_0)
+TEST_F(test_nmea_gsv, set_sat_0)
 {
 	nmea::gsv gsv;
 	gsv.set_sat(0, {1, 2, 3, 4});
@@ -71,7 +71,7 @@ TEST_F(Test_nmea_gsv, set_sat_0)
 	EXPECT_STREQ("$GPGSV,1,1,0,01,02,003,04,,,,,,,,,,,,*7D", nmea::to_string(gsv).c_str());
 }
 
-TEST_F(Test_nmea_gsv, set_sat_1)
+TEST_F(test_nmea_gsv, set_sat_1)
 {
 	nmea::gsv gsv;
 	gsv.set_sat(1, {1, 2, 3, 4});
@@ -79,7 +79,7 @@ TEST_F(Test_nmea_gsv, set_sat_1)
 	EXPECT_STREQ("$GPGSV,1,1,0,,,,,01,02,003,04,,,,,,,,*7D", nmea::to_string(gsv).c_str());
 }
 
-TEST_F(Test_nmea_gsv, set_sat_2)
+TEST_F(test_nmea_gsv, set_sat_2)
 {
 	nmea::gsv gsv;
 	gsv.set_sat(2, {1, 2, 3, 4});
@@ -87,7 +87,7 @@ TEST_F(Test_nmea_gsv, set_sat_2)
 	EXPECT_STREQ("$GPGSV,1,1,0,,,,,,,,,01,02,003,04,,,,*7D", nmea::to_string(gsv).c_str());
 }
 
-TEST_F(Test_nmea_gsv, set_sat_3)
+TEST_F(test_nmea_gsv, set_sat_3)
 {
 	nmea::gsv gsv;
 	gsv.set_sat(3, {1, 2, 3, 4});
@@ -95,7 +95,7 @@ TEST_F(Test_nmea_gsv, set_sat_3)
 	EXPECT_STREQ("$GPGSV,1,1,0,,,,,,,,,,,,,01,02,003,04*7D", nmea::to_string(gsv).c_str());
 }
 
-TEST_F(Test_nmea_gsv, set_sat_invalid_index)
+TEST_F(test_nmea_gsv, set_sat_invalid_index)
 {
 	nmea::gsv gsv;
 
@@ -103,7 +103,7 @@ TEST_F(Test_nmea_gsv, set_sat_invalid_index)
 	EXPECT_ANY_THROW(gsv.set_sat(-1, {1, 2, 3, 4}));
 }
 
-TEST_F(Test_nmea_gsv, get_sat_invalid_index)
+TEST_F(test_nmea_gsv, get_sat_invalid_index)
 {
 	nmea::gsv gsv;
 
@@ -111,7 +111,7 @@ TEST_F(Test_nmea_gsv, get_sat_invalid_index)
 	EXPECT_ANY_THROW(gsv.get_sat(4));
 }
 
-TEST_F(Test_nmea_gsv, get_sat)
+TEST_F(test_nmea_gsv, get_sat)
 {
 	auto s = nmea::make_sentence(
 		"$GPGSV,3,1,11,03,03,111,00,04,15,270,00,06,01,010,00,13,06,292,00*74");
@@ -154,7 +154,7 @@ TEST_F(Test_nmea_gsv, get_sat)
 	}
 }
 
-TEST_F(Test_nmea_gsv, get_sat_missing_snr_github_issue_35)
+TEST_F(test_nmea_gsv, get_sat_missing_snr_github_issue_35)
 {
 	// thanks to github.com/norton-dev for providing this example
 
@@ -199,7 +199,7 @@ TEST_F(Test_nmea_gsv, get_sat_missing_snr_github_issue_35)
 	}
 }
 
-TEST_F(Test_nmea_gsv, get_satinfo_missing_github_issue_37)
+TEST_F(test_nmea_gsv, get_satinfo_missing_github_issue_37)
 {
 	// thanks to github.com/norton-dev for providing this example
 
@@ -234,7 +234,7 @@ TEST_F(Test_nmea_gsv, get_satinfo_missing_github_issue_37)
 	}
 }
 
-TEST_F(Test_nmea_gsv, get_satinfo_missing_github_to_string_issue_37)
+TEST_F(test_nmea_gsv, get_satinfo_missing_github_to_string_issue_37)
 {
 	nmea::gsv gsv;
 

@@ -3,9 +3,7 @@
 #include <limits>
 #include <cmath>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 message_58::message_58()
@@ -18,7 +16,7 @@ std::unique_ptr<message> message_58::parse(const raw & data)
 	check_size(data, SIZE);
 
 	std::unique_ptr<message> result = std::make_unique<message_58>();
-	message_58 & msg = static_cast<message_58 &>(*result);
+	auto & msg = static_cast<message_58 &>(*result);
 
 	//  58 Z5 LA XX YY LO QQ RR
 	// raw  1  2  3  4  5  6  7
@@ -45,14 +43,14 @@ raw message_58::get_data() const
 
 	const auto lat = pos_.lat();
 	const uint8_t la = lat.degrees();
-	const uint32_t la_min = math::float_cast<uint32_t>(
+	const auto la_min = math::float_cast<uint32_t>(
 		std::floor(std::fmod(lat.get(), 1.0) * 60.0 / 100.0 * 100 * 1000.0));
 	if (lat.hem() == geo::latitude::hemisphere::south)
 		z |= 0x10;
 
 	const auto lon = pos_.lon();
 	const uint8_t lo = lon.degrees();
-	const uint32_t lo_min = math::float_cast<uint32_t>(
+	const auto lo_min = math::float_cast<uint32_t>(
 		std::floor(std::fmod(lon.get(), 1.0) * 60.0 / 100.0 * 100.0 * 1000.0));
 	if (lon.hem() == geo::longitude::hemisphere::east)
 		z |= 0x20;
@@ -60,6 +58,5 @@ raw message_58::get_data() const
 	return raw{static_cast<uint8_t>(ID), static_cast<uint8_t>(0x05 | z), la,
 		static_cast<uint8_t>(la_min / 256), static_cast<uint8_t>(la_min % 256), lo,
 		static_cast<uint8_t>(lo_min / 256), static_cast<uint8_t>(lo_min % 256)};
-}
 }
 }

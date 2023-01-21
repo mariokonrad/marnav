@@ -52,7 +52,7 @@ void read_v3(const std::string & s, double & value)
 }
 }
 
-static void Benchmark_nmea_string_to_double_v0(benchmark::State & state)
+static void benchmark_nmea_string_to_double_v0(benchmark::State & state)
 {
 	static const std::string s = "3.14159265";
 	while (state.KeepRunning()) {
@@ -62,9 +62,9 @@ static void Benchmark_nmea_string_to_double_v0(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_nmea_string_to_double_v0);
+BENCHMARK(benchmark_nmea_string_to_double_v0);
 
-static void Benchmark_nmea_string_to_double_v1(benchmark::State & state)
+static void benchmark_nmea_string_to_double_v1(benchmark::State & state)
 {
 	static const std::string s = "3.14159265";
 	while (state.KeepRunning()) {
@@ -74,9 +74,9 @@ static void Benchmark_nmea_string_to_double_v1(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_nmea_string_to_double_v1);
+BENCHMARK(benchmark_nmea_string_to_double_v1);
 
-static void Benchmark_nmea_string_to_double_v2(benchmark::State & state)
+static void benchmark_nmea_string_to_double_v2(benchmark::State & state)
 {
 	static const std::string s = "3.14159265";
 	while (state.KeepRunning()) {
@@ -86,9 +86,9 @@ static void Benchmark_nmea_string_to_double_v2(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_nmea_string_to_double_v2);
+BENCHMARK(benchmark_nmea_string_to_double_v2);
 
-static void Benchmark_nmea_string_to_double_v3(benchmark::State & state)
+static void benchmark_nmea_string_to_double_v3(benchmark::State & state)
 {
 	static const std::string s = "3.14159265";
 	while (state.KeepRunning()) {
@@ -98,7 +98,7 @@ static void Benchmark_nmea_string_to_double_v3(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_nmea_string_to_double_v3);
+BENCHMARK(benchmark_nmea_string_to_double_v3);
 
 // baseline, "old implementation"
 std::string format_double_v0(double data, unsigned int width)
@@ -125,7 +125,7 @@ std::string format_double_v1(double data, unsigned int width)
 	return os.str();
 }
 
-static void Benchmark_nmea_format_double_v0(benchmark::State & state)
+static void benchmark_nmea_format_double_v0(benchmark::State & state)
 {
 	while (state.KeepRunning()) {
 		std::string result = format_double_v0(3.14159, 4);
@@ -133,9 +133,9 @@ static void Benchmark_nmea_format_double_v0(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_nmea_format_double_v0);
+BENCHMARK(benchmark_nmea_format_double_v0);
 
-static void Benchmark_nmea_format_double_v1(benchmark::State & state)
+static void benchmark_nmea_format_double_v1(benchmark::State & state)
 {
 	while (state.KeepRunning()) {
 		std::string result = format_double_v1(3.14159, 4);
@@ -143,6 +143,6 @@ static void Benchmark_nmea_format_double_v1(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_nmea_format_double_v1);
+BENCHMARK(benchmark_nmea_format_double_v1);
 
 BENCHMARK_MAIN();

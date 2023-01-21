@@ -4,9 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief RPM - Revolutions
 ///
@@ -47,7 +45,7 @@ public:
 
 protected:
 	rpm(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<source_id> source_;
@@ -70,7 +68,6 @@ public:
 };
 
 std::string to_string(rpm::source_id value);
-}
 }
 
 #endif

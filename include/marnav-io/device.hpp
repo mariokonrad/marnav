@@ -3,16 +3,14 @@
 
 #include <cstdint>
 
-namespace marnav
-{
-namespace io
+namespace marnav::io
 {
 /// This is the base class for devices needed to perform IO operations.
 /// It is simply an interface, no data members.
 class device
 {
 public:
-	virtual ~device() {}
+	virtual ~device() = default;
 
 	/// Opens the device.
 	///
@@ -40,7 +38,6 @@ public:
 	/// @exception std::runtime_error Probably a read error. This does not include EOF.
 	virtual int write(const char * buffer, uint32_t size) = 0;
 };
-}
 }
 
 #endif

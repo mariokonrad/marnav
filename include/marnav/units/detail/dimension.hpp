@@ -1,9 +1,7 @@
 #ifndef MARNAV_UNITS_DIMENSION_HPP
 #define MARNAV_UNITS_DIMENSION_HPP
 
-namespace marnav
-{
-namespace units
+namespace marnav::units
 {
 // clang-format off
 template <
@@ -71,7 +69,6 @@ using dim_result_sub = basic_dimension<
 	Dimension1::amt - Dimension2::amt,
 	Dimension1::lum - Dimension2::lum>;
 // clang-format on
-}
 }
 
 #endif

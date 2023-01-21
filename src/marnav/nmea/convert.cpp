@@ -2,9 +2,7 @@
 #include <stdexcept>
 #include <cassert>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 direction convert_hemisphere(const geo::latitude & p) noexcept
 {
@@ -126,5 +124,4 @@ std::optional<geo::longitude> correct_hemisphere(
 }
 
 /// @}
-}
 }

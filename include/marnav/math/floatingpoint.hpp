@@ -6,9 +6,7 @@
 #include <type_traits>
 #include <cmath>
 
-namespace marnav
-{
-namespace math
+namespace marnav::math
 {
 /// Returns true if the specified value is epsilon arround zero.
 ///
@@ -58,7 +56,6 @@ inline IntType float_cast(FloatType value)
 		throw std::range_error{"invalid conversion from floating point to integral type"};
 
 	return static_cast<IntType>(value);
-}
 }
 }
 

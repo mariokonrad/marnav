@@ -7,21 +7,21 @@ namespace
 {
 using namespace marnav;
 
-class Test_nmea_ack : public ::testing::Test
+class test_nmea_ack : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_ack, contruction)
+TEST_F(test_nmea_ack, contruction)
 {
 	EXPECT_NO_THROW(nmea::ack ack);
 }
 
-TEST_F(Test_nmea_ack, properties)
+TEST_F(test_nmea_ack, properties)
 {
 	nmea_sentence_traits<nmea::ack>();
 }
 
-TEST_F(Test_nmea_ack, parse)
+TEST_F(test_nmea_ack, parse)
 {
 	auto s = nmea::make_sentence("$INACK,123*52");
 	ASSERT_NE(nullptr, s);
@@ -30,20 +30,20 @@ TEST_F(Test_nmea_ack, parse)
 	ASSERT_NE(nullptr, ack);
 }
 
-TEST_F(Test_nmea_ack, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_ack, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::ack>(nmea::talker::none, {2, "@"}));
 }
 
-TEST_F(Test_nmea_ack, empty_to_string)
+TEST_F(test_nmea_ack, empty_to_string)
 {
 	nmea::ack ack;
 
 	EXPECT_STREQ("$INACK,0*52", nmea::to_string(ack).c_str());
 }
 
-TEST_F(Test_nmea_ack, set_number)
+TEST_F(test_nmea_ack, set_number)
 {
 	nmea::ack ack;
 	ack.set_number(321);
@@ -51,7 +51,7 @@ TEST_F(Test_nmea_ack, set_number)
 	EXPECT_STREQ("$INACK,321*52", nmea::to_string(ack).c_str());
 }
 
-TEST_F(Test_nmea_ack, get_number)
+TEST_F(test_nmea_ack, get_number)
 {
 	auto s = nmea::make_sentence("$INACK,123*52");
 	ASSERT_NE(nullptr, s);

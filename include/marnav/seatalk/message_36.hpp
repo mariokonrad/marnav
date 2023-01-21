@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Cancel MOB (Man Over Board) condition
@@ -24,11 +22,10 @@ public:
 	message_36(const message_36 &) = default;
 	message_36 & operator=(const message_36 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 };
-}
 }
 
 #endif

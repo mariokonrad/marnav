@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_bww : public ::testing::Test
+class test_nmea_bww : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_bww, contruction)
+TEST_F(test_nmea_bww, contruction)
 {
 	EXPECT_NO_THROW(nmea::bww bww);
 }
 
-TEST_F(Test_nmea_bww, properties)
+TEST_F(test_nmea_bww, properties)
 {
 	nmea_sentence_traits<nmea::bww>();
 }
 
-TEST_F(Test_nmea_bww, parse)
+TEST_F(test_nmea_bww, parse)
 {
 	auto s = nmea::make_sentence("$GPBWW,213.8,T,218.0,M,POINT1,POINT2*4C");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_bww, parse)
 	ASSERT_NE(nullptr, bww);
 }
 
-TEST_F(Test_nmea_bww, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_bww, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::bww>(nmea::talker::none, {5, "@"}));
@@ -39,14 +38,14 @@ TEST_F(Test_nmea_bww, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::bww>(nmea::talker::none, {7, "@"}));
 }
 
-TEST_F(Test_nmea_bww, empty_to_string)
+TEST_F(test_nmea_bww, empty_to_string)
 {
 	nmea::bww bww;
 
 	EXPECT_STREQ("$GPBWW,,,,,,*55", nmea::to_string(bww).c_str());
 }
 
-TEST_F(Test_nmea_bww, set_bearing_true)
+TEST_F(test_nmea_bww, set_bearing_true)
 {
 	nmea::bww bww;
 	bww.set_bearing_true(12.3);
@@ -54,7 +53,7 @@ TEST_F(Test_nmea_bww, set_bearing_true)
 	EXPECT_STREQ("$GPBWW,12.3,T,,,,*1F", nmea::to_string(bww).c_str());
 }
 
-TEST_F(Test_nmea_bww, set_bearing_mag)
+TEST_F(test_nmea_bww, set_bearing_mag)
 {
 	nmea::bww bww;
 	bww.set_bearing_mag(12.3);
@@ -62,7 +61,7 @@ TEST_F(Test_nmea_bww, set_bearing_mag)
 	EXPECT_STREQ("$GPBWW,,,12.3,M,,*06", nmea::to_string(bww).c_str());
 }
 
-TEST_F(Test_nmea_bww, set_waypoint_to)
+TEST_F(test_nmea_bww, set_waypoint_to)
 {
 	nmea::bww bww;
 	bww.set_waypoint_to(nmea::waypoint{"POINT1"});
@@ -70,7 +69,7 @@ TEST_F(Test_nmea_bww, set_waypoint_to)
 	EXPECT_STREQ("$GPBWW,,,,,POINT1,*28", nmea::to_string(bww).c_str());
 }
 
-TEST_F(Test_nmea_bww, set_waypoint_from)
+TEST_F(test_nmea_bww, set_waypoint_from)
 {
 	nmea::bww bww;
 	bww.set_waypoint_from(nmea::waypoint{"POINT1"});

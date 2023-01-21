@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Set Lamp Intensity
@@ -33,19 +31,18 @@ public:
 	message_30(const message_30 &) = default;
 	message_30 & operator=(const message_30 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	intensity value_;
+	intensity value_{intensity::L0};
 
 public:
 	intensity get_intensity() const noexcept { return value_; }
 
 	void set_intensity(intensity t) noexcept { value_ = t; }
 };
-}
 }
 
 #endif

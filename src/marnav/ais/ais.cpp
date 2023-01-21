@@ -35,9 +35,7 @@
 /// @example create_nmea_from_ais.cpp
 /// Shows how to create a NMEA sentence or sentences from AIS data.
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 uint8_t decode_armoring(char c)
 {
@@ -151,7 +149,7 @@ static std::function<std::unique_ptr<message>(const raw &)> instantiate_message(
 std::unique_ptr<message> make_message(const std::vector<std::pair<std::string, uint32_t>> & v)
 {
 	auto bits = collect(v);
-	message_id type = static_cast<message_id>(bits.get<uint8_t>(0, 6));
+	auto type = static_cast<message_id>(bits.get<uint8_t>(0, 6));
 	return instantiate_message(type, bits.size())(bits);
 }
 
@@ -198,6 +196,5 @@ std::vector<std::pair<std::string, uint32_t>> encode_message(const message & msg
 	}
 
 	return result;
-}
 }
 }

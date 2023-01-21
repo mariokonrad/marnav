@@ -3,9 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief VWE - Wind Track Efficiency
 ///
@@ -34,7 +32,7 @@ public:
 
 protected:
 	vwe(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	double efficiency_ = 0.0;
@@ -44,7 +42,6 @@ public:
 
 	void set_efficiency(double t);
 };
-}
 }
 
 #endif

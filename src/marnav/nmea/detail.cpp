@@ -3,12 +3,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
-{
-/// @cond DEV
-namespace detail
+namespace marnav::nmea::detail
 {
 /// Performs checks on the specified raw NMEA sentence and extracts
 /// information for further processing.
@@ -58,8 +53,5 @@ extract_sentence_information(const std::string & s, checksum_handling chksum)
 	std::tie(talk, tag) = detail::parse_address(fields.front());
 
 	return std::make_tuple(talk, tag, tag_block, fields);
-}
-}
-/// @endcond
 }
 }

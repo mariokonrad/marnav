@@ -4,9 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief ZLZ - Time of Day
 ///
@@ -38,7 +36,7 @@ public:
 
 protected:
 	zlz(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	nmea::time time_utc_;
@@ -54,7 +52,6 @@ public:
 	void set_time_local(const nmea::time & t) noexcept { time_local_ = t; }
 	void set_local_zone_description(int32_t t);
 };
-}
 }
 
 #endif

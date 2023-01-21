@@ -7,9 +7,7 @@
 #include <marnav/geo/angle.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief TLL - Target latitude and longitude
 ///
@@ -55,7 +53,7 @@ public:
 
 protected:
 	tll(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	uint32_t number_ = 0;
@@ -86,7 +84,6 @@ public:
 	void set_status(target_status t) noexcept { status_ = t; }
 	void set_reference_target(char t) noexcept { reference_target_ = t; }
 };
-}
 }
 
 #endif

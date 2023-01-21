@@ -2,9 +2,7 @@
 #include <stdexcept>
 #include <cmath>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @cond DEV
 namespace
@@ -86,6 +84,5 @@ std::string to_string(const geo::longitude & v)
 	snprintf(buf, sizeof(buf), "%03u%02u.%04u", v.degrees(), v.minutes(),
 		static_cast<uint32_t>(10000 * v.seconds() / 60));
 	return buf;
-}
 }
 }

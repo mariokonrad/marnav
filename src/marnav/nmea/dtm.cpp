@@ -2,9 +2,7 @@
 #include "checks.hpp"
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id dtm::ID;
 constexpr const char * dtm::TAG;
@@ -81,6 +79,5 @@ void dtm::append_data_to(std::string & s, const version &) const
 	append(s, to_string(lon_hem_));
 	append(s, format(altitude_, 1));
 	append(s, to_string(name_));
-}
 }
 }

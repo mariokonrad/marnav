@@ -6,9 +6,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief GST - GPS Pseudorange Noise Statistics
 ///
@@ -44,7 +42,7 @@ public:
 
 protected:
 	gst(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	nmea::time time_utc_;
@@ -81,7 +79,6 @@ public:
 	void set_dev_lon(units::length t) noexcept { dev_lon_ = t.get<units::meters>(); }
 	void set_dev_alt(units::length t) noexcept { dev_alt_ = t.get<units::meters>(); }
 };
-}
 }
 
 #endif

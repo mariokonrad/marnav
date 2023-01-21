@@ -7,21 +7,21 @@ namespace
 {
 using namespace marnav;
 
-class Test_nmea_hdg : public ::testing::Test
+class test_nmea_hdg : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_hdg, contruction)
+TEST_F(test_nmea_hdg, contruction)
 {
 	EXPECT_NO_THROW(nmea::hdg hdg);
 }
 
-TEST_F(Test_nmea_hdg, properties)
+TEST_F(test_nmea_hdg, properties)
 {
 	nmea_sentence_traits<nmea::hdg>();
 }
 
-TEST_F(Test_nmea_hdg, parse)
+TEST_F(test_nmea_hdg, parse)
 {
 	auto s = nmea::make_sentence("$HCHDG,45.8,,,0.6,E*16");
 	ASSERT_NE(nullptr, s);
@@ -34,7 +34,7 @@ TEST_F(Test_nmea_hdg, parse)
 	EXPECT_NEAR(45.8, heading.value(), 1e-8);
 }
 
-TEST_F(Test_nmea_hdg, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_hdg, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::hdg>(nmea::talker::none, {4, "@"}));
@@ -42,14 +42,14 @@ TEST_F(Test_nmea_hdg, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::hdg>(nmea::talker::none, {6, "@"}));
 }
 
-TEST_F(Test_nmea_hdg, empty_to_string)
+TEST_F(test_nmea_hdg, empty_to_string)
 {
 	nmea::hdg hdg;
 
 	EXPECT_STREQ("$HCHDG,,,,,*6C", nmea::to_string(hdg).c_str());
 }
 
-TEST_F(Test_nmea_hdg, set_heading)
+TEST_F(test_nmea_hdg, set_heading)
 {
 	nmea::hdg hdg;
 	hdg.set_heading(45.8);
@@ -57,7 +57,7 @@ TEST_F(Test_nmea_hdg, set_heading)
 	EXPECT_STREQ("$HCHDG,45.8,,,,*7B", nmea::to_string(hdg).c_str());
 }
 
-TEST_F(Test_nmea_hdg, set_magn_dev)
+TEST_F(test_nmea_hdg, set_magn_dev)
 {
 	nmea::hdg hdg;
 	hdg.set_magn_dev(nmea::magnetic(5.8, nmea::direction::west));
@@ -65,7 +65,7 @@ TEST_F(Test_nmea_hdg, set_magn_dev)
 	EXPECT_STREQ("$HCHDG,,5.8,W,,*18", nmea::to_string(hdg).c_str());
 }
 
-TEST_F(Test_nmea_hdg, set_magn_var)
+TEST_F(test_nmea_hdg, set_magn_var)
 {
 	nmea::hdg hdg;
 	hdg.set_magn_var(nmea::magnetic(5.8, nmea::direction::west));
@@ -73,7 +73,7 @@ TEST_F(Test_nmea_hdg, set_magn_var)
 	EXPECT_STREQ("$HCHDG,,,,5.8,W*18", nmea::to_string(hdg).c_str());
 }
 
-TEST_F(Test_nmea_hdg, set_magn_dev_wrong_hemisphere)
+TEST_F(test_nmea_hdg, set_magn_dev_wrong_hemisphere)
 {
 	nmea::hdg hdg;
 

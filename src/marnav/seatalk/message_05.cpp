@@ -1,8 +1,6 @@
 #include <marnav/seatalk/message_05.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 namespace
@@ -38,9 +36,6 @@ static message_05::side_id conv(uint8_t t)
 
 message_05::message_05()
 	: message(ID)
-	, side_(side_id::undefined)
-	, rpm_(0)
-	, percent_pitch_(0)
 {
 }
 
@@ -49,7 +44,7 @@ std::unique_ptr<message> message_05::parse(const raw & data)
 	check_size(data, SIZE);
 
 	std::unique_ptr<message> result = std::make_unique<message_05>();
-	message_05 & msg = static_cast<message_05 &>(*result);
+	auto & msg = static_cast<message_05 &>(*result);
 
 	msg.side_ = conv(data[2]);
 
@@ -68,6 +63,5 @@ raw message_05::get_data() const
 	return raw{static_cast<uint8_t>(ID), 0x03, conv(side_),
 		static_cast<uint8_t>((rpm_ >> 8) & 0xff), static_cast<uint8_t>(rpm_ & 0xff),
 		static_cast<uint8_t>(percent_pitch_)};
-}
 }
 }

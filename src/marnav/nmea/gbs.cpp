@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id gbs::ID;
 constexpr const char * gbs::TAG;
@@ -40,6 +38,5 @@ void gbs::append_data_to(std::string & s, const version &) const
 	append(s, to_string(probability_));
 	append(s, to_string(bias_));
 	append(s, to_string(bias_dev_));
-}
 }
 }

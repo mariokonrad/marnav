@@ -4,9 +4,7 @@
 #include <marnav/ais/message.hpp>
 #include <marnav/utils/mmsi.hpp>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 /// @brief Safety-Related Broadcast Message
 class message_14 : public message
@@ -28,26 +26,25 @@ public:
 protected:
 	message_14(const raw & bits);
 	void read_data(const raw & bits);
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 private:
 	// clang-format off
-	bitset_value< 6,  2, uint32_t> repeat_indicator = 0;
-	bitset_value< 8, 30, uint32_t> mmsi = 0;
+	bitset_value< 6,  2, uint32_t> repeat_indicator_ = 0;
+	bitset_value< 8, 30, uint32_t> mmsi_ = 0;
 	// clang-format on
 
-	std::string text; // bits 72..1008
+	std::string text_; // bits 72..1008
 
 public:
-	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
-	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
-	std::string get_text() const { return text; }
+	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator_; }
+	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi_}; }
+	std::string get_text() const { return text_; }
 
-	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
-	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
+	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator_ = t; }
+	void set_mmsi(const utils::mmsi & t) noexcept { mmsi_ = t; }
 	void set_text(const std::string & t);
 };
-}
 }
 
 #endif

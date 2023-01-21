@@ -5,9 +5,7 @@
 #include <marnav/geo/position.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 /// @brief Meteorological and Hydrological Data (IMO236).
 ///
@@ -73,42 +71,42 @@ public:
 
 private:
 	// clang-format off
-	bitset_value< 56 - MSG08_HEAD, 24, uint32_t     > lat = lat_not_available;
-	bitset_value< 80 - MSG08_HEAD, 25, uint32_t     > lon = lon_not_available;
-	bitset_value<105 - MSG08_HEAD,  5, uint32_t     > day = day_not_available; /// @todo Investigation about range and not_available value, because 31 could be a valid day in the range of 1..31
-	bitset_value<110 - MSG08_HEAD,  5, uint32_t     > hour = hour_not_available;
-	bitset_value<115 - MSG08_HEAD,  6, uint32_t     > minute = minute_not_available;
-	bitset_value<121 - MSG08_HEAD,  7, uint32_t     > wind_speed_avg = wind_speed_avg_not_available;
-	bitset_value<128 - MSG08_HEAD,  7, uint32_t     > wind_gust = wind_gust_not_available;
-	bitset_value<135 - MSG08_HEAD,  9, uint32_t     > wind_direction = wind_direction_not_available;
-	bitset_value<144 - MSG08_HEAD,  9, uint32_t     > wind_gust_direction = wind_gust_direction_not_available;
-	bitset_value<153 - MSG08_HEAD, 11, uint32_t     > temperature = temperature_not_available;
-	bitset_value<164 - MSG08_HEAD,  7, uint32_t     > humidity = humidity_not_available;
-	bitset_value<171 - MSG08_HEAD, 10, uint32_t     > dew_point = dew_point_not_available;
-	bitset_value<181 - MSG08_HEAD,  9, uint32_t     > pressure = pressure_not_available;
-	bitset_value<190 - MSG08_HEAD,  2, trend        > pressure_trend = trend::not_available;
-	bitset_value<192 - MSG08_HEAD,  8, uint32_t     > visibility = visibility_not_available;
-	bitset_value<200 - MSG08_HEAD,  9, uint32_t     > water_level = water_level_not_available;
-	bitset_value<209 - MSG08_HEAD,  2, trend        > water_level_trend = trend::not_available;
-	bitset_value<211 - MSG08_HEAD,  8, uint32_t     > surface_current_speed = current_speed_not_available;
-	bitset_value<219 - MSG08_HEAD,  9, uint32_t     > surface_current_direction = current_direction_not_available;
-	bitset_value<228 - MSG08_HEAD,  8, uint32_t     > current_2_speed = current_speed_not_available;
-	bitset_value<236 - MSG08_HEAD,  9, uint32_t     > current_2_direction = current_direction_not_available;
-	bitset_value<245 - MSG08_HEAD,  5, uint32_t     > current_2_depth = current_depth_not_available;
-	bitset_value<250 - MSG08_HEAD,  8, uint32_t     > current_3_speed = current_speed_not_available;
-	bitset_value<258 - MSG08_HEAD,  9, uint32_t     > current_3_direction = current_direction_not_available;
-	bitset_value<267 - MSG08_HEAD,  5, uint32_t     > current_3_depth = current_depth_not_available;
-	bitset_value<272 - MSG08_HEAD,  8, uint32_t     > wave_height = wave_height_not_available;
-	bitset_value<280 - MSG08_HEAD,  6, uint32_t     > wave_period = wave_period_not_available;
-	bitset_value<286 - MSG08_HEAD,  9, uint32_t     > wave_direction = wave_direction_not_available;
-	bitset_value<295 - MSG08_HEAD,  8, uint32_t     > swell_height = wave_height_not_available;
-	bitset_value<303 - MSG08_HEAD,  6, uint32_t     > swell_period = wave_period_not_available;
-	bitset_value<309 - MSG08_HEAD,  9, uint32_t     > swell_direction = wave_direction_not_available;
-	bitset_value<318 - MSG08_HEAD,  4, uint32_t     > sea_state = sea_state_not_available;
-	bitset_value<322 - MSG08_HEAD, 10, uint32_t     > water_temperature = water_temperature_not_available;
-	bitset_value<332 - MSG08_HEAD,  3, precipitation> precipitation_type = precipitation::not_available;
-	bitset_value<335 - MSG08_HEAD,  9, uint32_t     > sailinity = salinity_not_available;
-	bitset_value<344 - MSG08_HEAD,  2, ice          > ice_info = ice::not_available;
+	bitset_value< 56 - MSG08_HEAD, 24, uint32_t     > lat_ = lat_not_available;
+	bitset_value< 80 - MSG08_HEAD, 25, uint32_t     > lon_ = lon_not_available;
+	bitset_value<105 - MSG08_HEAD,  5, uint32_t     > day_ = day_not_available; /// @todo Investigation about range and not_available value, because 31 could be a valid day in the range of 1..31
+	bitset_value<110 - MSG08_HEAD,  5, uint32_t     > hour_ = hour_not_available;
+	bitset_value<115 - MSG08_HEAD,  6, uint32_t     > minute_ = minute_not_available;
+	bitset_value<121 - MSG08_HEAD,  7, uint32_t     > wind_speed_avg_ = wind_speed_avg_not_available;
+	bitset_value<128 - MSG08_HEAD,  7, uint32_t     > wind_gust_ = wind_gust_not_available;
+	bitset_value<135 - MSG08_HEAD,  9, uint32_t     > wind_direction_ = wind_direction_not_available;
+	bitset_value<144 - MSG08_HEAD,  9, uint32_t     > wind_gust_direction_ = wind_gust_direction_not_available;
+	bitset_value<153 - MSG08_HEAD, 11, uint32_t     > temperature_ = temperature_not_available;
+	bitset_value<164 - MSG08_HEAD,  7, uint32_t     > humidity_ = humidity_not_available;
+	bitset_value<171 - MSG08_HEAD, 10, uint32_t     > dew_point_ = dew_point_not_available;
+	bitset_value<181 - MSG08_HEAD,  9, uint32_t     > pressure_ = pressure_not_available;
+	bitset_value<190 - MSG08_HEAD,  2, trend        > pressure_trend_ = trend::not_available;
+	bitset_value<192 - MSG08_HEAD,  8, uint32_t     > visibility_ = visibility_not_available;
+	bitset_value<200 - MSG08_HEAD,  9, uint32_t     > water_level_ = water_level_not_available;
+	bitset_value<209 - MSG08_HEAD,  2, trend        > water_level_trend_ = trend::not_available;
+	bitset_value<211 - MSG08_HEAD,  8, uint32_t     > surface_current_speed_ = current_speed_not_available;
+	bitset_value<219 - MSG08_HEAD,  9, uint32_t     > surface_current_direction_ = current_direction_not_available;
+	bitset_value<228 - MSG08_HEAD,  8, uint32_t     > current_2_speed_ = current_speed_not_available;
+	bitset_value<236 - MSG08_HEAD,  9, uint32_t     > current_2_direction_ = current_direction_not_available;
+	bitset_value<245 - MSG08_HEAD,  5, uint32_t     > current_2_depth_ = current_depth_not_available;
+	bitset_value<250 - MSG08_HEAD,  8, uint32_t     > current_3_speed_ = current_speed_not_available;
+	bitset_value<258 - MSG08_HEAD,  9, uint32_t     > current_3_direction_ = current_direction_not_available;
+	bitset_value<267 - MSG08_HEAD,  5, uint32_t     > current_3_depth_ = current_depth_not_available;
+	bitset_value<272 - MSG08_HEAD,  8, uint32_t     > wave_height_ = wave_height_not_available;
+	bitset_value<280 - MSG08_HEAD,  6, uint32_t     > wave_period_ = wave_period_not_available;
+	bitset_value<286 - MSG08_HEAD,  9, uint32_t     > wave_direction_ = wave_direction_not_available;
+	bitset_value<295 - MSG08_HEAD,  8, uint32_t     > swell_height_ = wave_height_not_available;
+	bitset_value<303 - MSG08_HEAD,  6, uint32_t     > swell_period_ = wave_period_not_available;
+	bitset_value<309 - MSG08_HEAD,  9, uint32_t     > swell_direction_ = wave_direction_not_available;
+	bitset_value<318 - MSG08_HEAD,  4, uint32_t     > sea_state_ = sea_state_not_available;
+	bitset_value<322 - MSG08_HEAD, 10, uint32_t     > water_temperature_ = water_temperature_not_available;
+	bitset_value<332 - MSG08_HEAD,  3, precipitation> precipitation_type_ = precipitation::not_available;
+	bitset_value<335 - MSG08_HEAD,  9, uint32_t     > sailinity_ = salinity_not_available;
+	bitset_value<344 - MSG08_HEAD,  2, ice          > ice_info_ = ice::not_available;
 	// clang-format on
 
 public:
@@ -184,7 +182,6 @@ public:
 	void set_salinity(std::optional<double> t);
 	void set_ice(std::optional<ice> t);
 };
-}
 }
 
 #endif

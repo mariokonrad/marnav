@@ -3,9 +3,7 @@
 #include <limits>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id gsa::ID;
 constexpr const char * gsa::TAG;
@@ -78,6 +76,5 @@ void gsa::append_data_to(std::string & s, const version &) const
 	append(s, to_string(pdop_));
 	append(s, to_string(hdop_));
 	append(s, to_string(vdop_));
-}
 }
 }

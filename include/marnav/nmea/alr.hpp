@@ -4,9 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/nmea/time.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief ALR - Set Alarm State
 ///
@@ -56,7 +54,7 @@ public:
 
 protected:
 	alr(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	nmea::time time_utc_;
@@ -84,7 +82,6 @@ std::string to_string(alr::acknowledge t);
 
 std::string to_name(alr::condition t);
 std::string to_name(alr::acknowledge t);
-}
 }
 
 #endif

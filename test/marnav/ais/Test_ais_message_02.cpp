@@ -6,14 +6,14 @@ namespace
 {
 using namespace marnav;
 
-class Test_ais_message_02 : public ::testing::Test
+class test_ais_message_02 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_02, parse)
+TEST_F(test_ais_message_02, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("233m@ogP00PD;88MD5MTDww@2D7k", 0));
+	v.emplace_back("233m@ogP00PD;88MD5MTDww@2D7k", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -40,7 +40,7 @@ TEST_F(Test_ais_message_02, parse)
 	EXPECT_EQ(82419u, m->get_radio_status());
 }
 
-TEST_F(Test_ais_message_02, encode_default_values)
+TEST_F(test_ais_message_02, encode_default_values)
 {
 	ais::message_02 m;
 
@@ -51,7 +51,7 @@ TEST_F(Test_ais_message_02, encode_default_values)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_02, wrong_number_of_bits)
+TEST_F(test_ais_message_02, wrong_number_of_bits)
 {
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_02>(ais::raw(167)));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_02>(ais::raw(169)));

@@ -3,9 +3,7 @@
 #include <cmath>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace geo
+namespace marnav::geo
 {
 /// Returns the degrees of this angle. This value is always positive.
 uint32_t angle::degrees() const noexcept
@@ -181,6 +179,5 @@ std::string to_string(longitude::hemisphere h)
 			return "W";
 	}
 	return "?";
-}
 }
 }

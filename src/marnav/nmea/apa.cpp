@@ -2,9 +2,7 @@
 #include "checks.hpp"
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id apa::ID;
 constexpr const char * apa::TAG;
@@ -70,6 +68,5 @@ void apa::append_data_to(std::string & s, const version &) const
 	append(s, format(bearing_origin_to_destination_, 1));
 	append(s, to_string(bearing_origin_to_destination_ref_));
 	append(s, to_string(waypoint_id_));
-}
 }
 }

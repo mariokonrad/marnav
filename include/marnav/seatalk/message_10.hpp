@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Apparent Wind Angle
@@ -29,19 +27,18 @@ public:
 	message_10(const message_10 &) = default;
 	message_10 & operator=(const message_10 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint16_t angle_; // 1/10th of degrees right of bow
+	uint16_t angle_{0}; // 1/10th of degrees right of bow
 
 public:
 	uint16_t get_angle() const noexcept { return angle_; }
 
 	void set_angle(uint16_t t) noexcept { angle_ = t; }
 };
-}
 }
 
 #endif

@@ -3,9 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief STN - Multiple Data ID
 ///
@@ -34,7 +32,7 @@ public:
 
 protected:
 	stn(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	uint32_t number_ = 0;
@@ -44,7 +42,6 @@ public:
 
 	void set_number(uint32_t t) noexcept { number_ = t; }
 };
-}
 }
 
 #endif

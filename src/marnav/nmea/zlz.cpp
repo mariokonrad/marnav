@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id zlz::ID;
 constexpr const char * zlz::TAG;
@@ -37,6 +35,5 @@ void zlz::set_local_zone_description(int32_t t)
 	if ((t < -12) || (t > 12))
 		throw std::invalid_argument{"zone descriptor out of range -12..+12"};
 	local_zone_description_ = t;
-}
 }
 }

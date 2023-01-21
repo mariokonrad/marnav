@@ -1,8 +1,6 @@
 #include <marnav/seatalk/message_38.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 message_38::message_38()
@@ -20,6 +18,5 @@ std::unique_ptr<message> message_38::parse(const raw & data)
 raw message_38::get_data() const
 {
 	return raw{static_cast<uint8_t>(ID), 0x01, 0x00, 0x00};
-}
 }
 }

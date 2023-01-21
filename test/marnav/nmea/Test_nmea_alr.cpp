@@ -9,21 +9,21 @@ namespace
 {
 using namespace marnav;
 
-class Test_nmea_alr : public ::testing::Test
+class test_nmea_alr : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_alr, contruction)
+TEST_F(test_nmea_alr, contruction)
 {
 	EXPECT_NO_THROW(nmea::alr alr);
 }
 
-TEST_F(Test_nmea_alr, properties)
+TEST_F(test_nmea_alr, properties)
 {
 	nmea_sentence_traits<nmea::alr>();
 }
 
-TEST_F(Test_nmea_alr, parse)
+TEST_F(test_nmea_alr, parse)
 {
 	auto s = nmea::make_sentence("$INALR,000000,260,A,V,Emergency Call*1C");
 	ASSERT_NE(nullptr, s);
@@ -32,7 +32,7 @@ TEST_F(Test_nmea_alr, parse)
 	ASSERT_NE(nullptr, alr);
 }
 
-TEST_F(Test_nmea_alr, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_alr, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::alr>(nmea::talker::none, {4, "@"}));
@@ -40,14 +40,14 @@ TEST_F(Test_nmea_alr, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::alr>(nmea::talker::none, {6, "@"}));
 }
 
-TEST_F(Test_nmea_alr, empty_to_string)
+TEST_F(test_nmea_alr, empty_to_string)
 {
 	nmea::alr alr;
 
 	EXPECT_STREQ("$IIALR,000000,0,A,A,*43", nmea::to_string(alr).c_str());
 }
 
-TEST_F(Test_nmea_alr, set_time_utc)
+TEST_F(test_nmea_alr, set_time_utc)
 {
 	nmea::alr alr;
 	alr.set_time_utc(nmea::time{12, 34, 56});
@@ -55,7 +55,7 @@ TEST_F(Test_nmea_alr, set_time_utc)
 	EXPECT_STREQ("$IIALR,123456,0,A,A,*44", nmea::to_string(alr).c_str());
 }
 
-TEST_F(Test_nmea_alr, set_number)
+TEST_F(test_nmea_alr, set_number)
 {
 	nmea::alr alr;
 	alr.set_number(123);
@@ -63,7 +63,7 @@ TEST_F(Test_nmea_alr, set_number)
 	EXPECT_STREQ("$IIALR,000000,123,A,A,*43", nmea::to_string(alr).c_str());
 }
 
-TEST_F(Test_nmea_alr, set_condition_exceeded)
+TEST_F(test_nmea_alr, set_condition_exceeded)
 {
 	nmea::alr alr;
 	alr.set_condition(nmea::alr::condition::threshold_exceeded);
@@ -71,7 +71,7 @@ TEST_F(Test_nmea_alr, set_condition_exceeded)
 	EXPECT_STREQ("$IIALR,000000,0,A,A,*43", nmea::to_string(alr).c_str());
 }
 
-TEST_F(Test_nmea_alr, set_condition_not_exceeded)
+TEST_F(test_nmea_alr, set_condition_not_exceeded)
 {
 	nmea::alr alr;
 	alr.set_condition(nmea::alr::condition::threshold_not_exceeded);
@@ -79,7 +79,7 @@ TEST_F(Test_nmea_alr, set_condition_not_exceeded)
 	EXPECT_STREQ("$IIALR,000000,0,V,A,*54", nmea::to_string(alr).c_str());
 }
 
-TEST_F(Test_nmea_alr, set_acknowledge_acknowledged)
+TEST_F(test_nmea_alr, set_acknowledge_acknowledged)
 {
 	nmea::alr alr;
 	alr.set_acknowledge(nmea::alr::acknowledge::acknowledged);
@@ -87,7 +87,7 @@ TEST_F(Test_nmea_alr, set_acknowledge_acknowledged)
 	EXPECT_STREQ("$IIALR,000000,0,A,A,*43", nmea::to_string(alr).c_str());
 }
 
-TEST_F(Test_nmea_alr, set_acknowledge_not_acknowledged)
+TEST_F(test_nmea_alr, set_acknowledge_not_acknowledged)
 {
 	nmea::alr alr;
 	alr.set_acknowledge(nmea::alr::acknowledge::not_acknowledged);
@@ -95,7 +95,7 @@ TEST_F(Test_nmea_alr, set_acknowledge_not_acknowledged)
 	EXPECT_STREQ("$IIALR,000000,0,A,V,*54", nmea::to_string(alr).c_str());
 }
 
-TEST_F(Test_nmea_alr, set_text)
+TEST_F(test_nmea_alr, set_text)
 {
 	nmea::alr alr;
 	alr.set_text("alarm text");
@@ -103,14 +103,14 @@ TEST_F(Test_nmea_alr, set_text)
 	EXPECT_STREQ("$IIALR,000000,0,A,A,alarm text*0D", nmea::to_string(alr).c_str());
 }
 
-TEST_F(Test_nmea_alr, set_text_too_long)
+TEST_F(test_nmea_alr, set_text_too_long)
 {
 	nmea::alr alr;
 	EXPECT_ANY_THROW(alr.set_text(
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis libero"));
 }
 
-TEST_F(Test_nmea_alr, get_text)
+TEST_F(test_nmea_alr, get_text)
 {
 	auto s = nmea::make_sentence("$INALR,000000,260,A,V,Emergency Call*1C");
 	ASSERT_NE(nullptr, s);
@@ -121,7 +121,7 @@ TEST_F(Test_nmea_alr, get_text)
 	EXPECT_STREQ("Emergency Call", alr->get_text().c_str());
 }
 
-TEST_F(Test_nmea_alr, get_acknowledge)
+TEST_F(test_nmea_alr, get_acknowledge)
 {
 	auto s = nmea::make_sentence("$INALR,000000,260,A,V,Emergency Call*1C");
 	ASSERT_NE(nullptr, s);
@@ -132,7 +132,7 @@ TEST_F(Test_nmea_alr, get_acknowledge)
 	EXPECT_EQ(nmea::alr::acknowledge::not_acknowledged, alr->get_acknowledge());
 }
 
-TEST_F(Test_nmea_alr, get_condition)
+TEST_F(test_nmea_alr, get_condition)
 {
 	auto s = nmea::make_sentence("$INALR,000000,260,A,V,Emergency Call*1C");
 	ASSERT_NE(nullptr, s);
@@ -143,7 +143,7 @@ TEST_F(Test_nmea_alr, get_condition)
 	EXPECT_EQ(nmea::alr::condition::threshold_exceeded, alr->get_condition());
 }
 
-TEST_F(Test_nmea_alr, get_number)
+TEST_F(test_nmea_alr, get_number)
 {
 	auto s = nmea::make_sentence("$INALR,000000,260,A,V,Emergency Call*1C");
 	ASSERT_NE(nullptr, s);
@@ -154,7 +154,7 @@ TEST_F(Test_nmea_alr, get_number)
 	EXPECT_EQ(260u, alr->get_number());
 }
 
-TEST_F(Test_nmea_alr, various_alarm_descriptions)
+TEST_F(test_nmea_alr, various_alarm_descriptions)
 {
 	// descriptions found: https://www.cruisersforum.com/forums/f134/opencpn-and-external-nmea0183-alarms-81396.html
 	static const std::string preamble = "$IIALR,000000,0,A,A,";

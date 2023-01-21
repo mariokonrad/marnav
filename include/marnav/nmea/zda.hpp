@@ -6,9 +6,7 @@
 #include <marnav/nmea/time.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief ZDA - Time & Date - UTC, day, month, year and local time zone
 ///
@@ -44,7 +42,7 @@ public:
 
 protected:
 	zda(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<nmea::time> time_utc_;
@@ -67,7 +65,6 @@ public:
 		local_zone_minutes_ = m;
 	}
 };
-}
 }
 
 #endif

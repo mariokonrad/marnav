@@ -6,14 +6,14 @@ namespace
 {
 using namespace marnav;
 
-class Test_ais_message_12 : public ::testing::Test
+class test_ais_message_12 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_12, parse)
+TEST_F(test_ais_message_12, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("<02:oP0kKcv0@<51C5PB5@?BDPD?P:?2?EB7PDB16693P381>>5<PikP", 0));
+	v.emplace_back("<02:oP0kKcv0@<51C5PB5@?BDPD?P:?2?EB7PDB16693P381>>5<PikP", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -22,13 +22,13 @@ TEST_F(Test_ais_message_12, parse)
 	ASSERT_TRUE(m != nullptr);
 }
 
-TEST_F(Test_ais_message_12, wrong_number_of_bits)
+TEST_F(test_ais_message_12, wrong_number_of_bits)
 {
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_12>(ais::raw(71)));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_12>(ais::raw(1009)));
 }
 
-TEST_F(Test_ais_message_12, encode_default_values)
+TEST_F(test_ais_message_12, encode_default_values)
 {
 	ais::message_12 m;
 
@@ -39,7 +39,7 @@ TEST_F(Test_ais_message_12, encode_default_values)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_12, set_seqno_valid)
+TEST_F(test_ais_message_12, set_seqno_valid)
 {
 	for (auto i = 0u; i < 4u; ++i) {
 		ais::message_12 m;
@@ -48,13 +48,13 @@ TEST_F(Test_ais_message_12, set_seqno_valid)
 	}
 }
 
-TEST_F(Test_ais_message_12, set_seqno_invalid)
+TEST_F(test_ais_message_12, set_seqno_invalid)
 {
 	ais::message_12 m;
 	EXPECT_ANY_THROW(m.set_seqno(4u));
 }
 
-TEST_F(Test_ais_message_12, set_text_too_large)
+TEST_F(test_ais_message_12, set_text_too_large)
 {
 	ais::message_12 m;
 	m.set_text(std::string(ais::message_12::SIZE_TEXT_MAX + 1, '#'));
@@ -71,7 +71,7 @@ static void test_string(
 	EXPECT_STREQ(expected, m->get_text().c_str());
 }
 
-TEST_F(Test_ais_message_12, strings)
+TEST_F(test_ais_message_12, strings)
 {
 	test_string("PLEASE REPORT TO JOBOURG TRAFFIC CHANNEL 13 ",
 		{{"<02:oP0kKcv0@<51C5PB5@?BDPD?P:?2?EB7PDB16693P381>>5<PikP", 0}});

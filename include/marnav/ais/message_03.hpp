@@ -3,9 +3,7 @@
 
 #include <marnav/ais/message_01.hpp>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 /// @brief Position Report Class A (response to interrogation)
 class message_03 : public message_01
@@ -25,7 +23,6 @@ public:
 protected:
 	message_03(const raw & bits);
 };
-}
 }
 
 #endif

@@ -6,9 +6,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief WCV - Waypoint Closure Velocity
 ///
@@ -40,7 +38,7 @@ public:
 
 protected:
 	wcv(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<units::knots> speed_;
@@ -53,7 +51,6 @@ public:
 	void set_speed(units::velocity t) noexcept;
 	void set_waypoint(const waypoint & id) { waypoint_id_ = id; }
 };
-}
 }
 
 #endif

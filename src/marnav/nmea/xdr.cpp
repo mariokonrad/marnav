@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 namespace
 {
@@ -76,6 +74,5 @@ void xdr::append_data_to(std::string & s, const version &) const
 		if (!t.empty())
 			append(s, t);
 	}
-}
 }
 }

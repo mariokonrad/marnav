@@ -5,9 +5,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief VLW - Distance Traveled through Water
 ///
@@ -41,7 +39,7 @@ public:
 
 protected:
 	vlw(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<units::nautical_miles> distance_cum_; // total cumulative distance
@@ -54,7 +52,6 @@ public:
 	void set_distance_cum_nm(units::length t) noexcept;
 	void set_distance_reset_nm(units::length t) noexcept;
 };
-}
 }
 
 #endif

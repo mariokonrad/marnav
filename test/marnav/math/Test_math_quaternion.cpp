@@ -4,23 +4,20 @@
 
 using namespace marnav::math;
 
-namespace marnav
-{
-namespace math
+namespace marnav::math
 {
 // instantiate all of them to achieve the right coverage information.
 template class quaternion<double>;
-}
 }
 
 namespace
 {
 
-class Test_math_quaternion : public ::testing::Test
+class test_math_quaternion : public ::testing::Test
 {
 };
 
-TEST_F(Test_math_quaternion, construction_default)
+TEST_F(test_math_quaternion, construction_default)
 {
 	quat q;
 
@@ -35,7 +32,7 @@ TEST_F(Test_math_quaternion, construction_default)
 	EXPECT_NEAR(0.0, q.z(), 1e-8);
 }
 
-TEST_F(Test_math_quaternion, construction_rotation)
+TEST_F(test_math_quaternion, construction_rotation)
 {
 	const quat q{90.0, {1.0, 0.0, 0.0}}; // rotation arround x-axis
 
@@ -45,7 +42,7 @@ TEST_F(Test_math_quaternion, construction_rotation)
 	EXPECT_TRUE((expected == v));
 }
 
-TEST_F(Test_math_quaternion, rot_to)
+TEST_F(test_math_quaternion, rot_to)
 {
 	// rotation of 90 deg arround z-axis
 	const quaternion<double> q = quaternion<double>::rot_to({1.0, 0.0, 0.0}, {0.0, 1.0, 0.0});

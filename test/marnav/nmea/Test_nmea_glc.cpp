@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_glc : public ::testing::Test
+class test_nmea_glc : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_glc, contruction)
+TEST_F(test_nmea_glc, contruction)
 {
 	EXPECT_NO_THROW(nmea::glc glc);
 }
 
-TEST_F(Test_nmea_glc, properties)
+TEST_F(test_nmea_glc, properties)
 {
 	nmea_sentence_traits<nmea::glc>();
 }
 
-TEST_F(Test_nmea_glc, parse)
+TEST_F(test_nmea_glc, parse)
 {
 	auto s = nmea::make_sentence("$GPGLC,1,1,A,1,A,2,A,3,A,4,V,,*21");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_glc, parse)
 	ASSERT_NE(nullptr, glc);
 }
 
-TEST_F(Test_nmea_glc, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_glc, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::glc>(nmea::talker::none, {12, "@"}));
@@ -39,14 +38,14 @@ TEST_F(Test_nmea_glc, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::glc>(nmea::talker::none, {14, "@"}));
 }
 
-TEST_F(Test_nmea_glc, empty_to_string)
+TEST_F(test_nmea_glc, empty_to_string)
 {
 	nmea::glc glc;
 
 	EXPECT_STREQ("$GPGLC,0,0,V,,,,,,,,,,*25", nmea::to_string(glc).c_str());
 }
 
-TEST_F(Test_nmea_glc, set_time_diff_invalid_index)
+TEST_F(test_nmea_glc, set_time_diff_invalid_index)
 {
 	nmea::glc glc;
 
@@ -54,7 +53,7 @@ TEST_F(Test_nmea_glc, set_time_diff_invalid_index)
 	EXPECT_ANY_THROW(glc.set_time_diff(5, {0.0, nmea::status::ok}));
 }
 
-TEST_F(Test_nmea_glc, get_time_diff_invalid_index)
+TEST_F(test_nmea_glc, get_time_diff_invalid_index)
 {
 	nmea::glc glc;
 
@@ -63,7 +62,7 @@ TEST_F(Test_nmea_glc, get_time_diff_invalid_index)
 	EXPECT_ANY_THROW(glc.get_time_diff(nmea::glc::max_differences));
 }
 
-TEST_F(Test_nmea_glc, set_time_diff)
+TEST_F(test_nmea_glc, set_time_diff)
 {
 	{
 		nmea::glc glc;
@@ -92,7 +91,7 @@ TEST_F(Test_nmea_glc, set_time_diff)
 	}
 }
 
-TEST_F(Test_nmea_glc, get_time_diff)
+TEST_F(test_nmea_glc, get_time_diff)
 {
 	auto s = nmea::make_sentence("$GPGLC,1,1,A,1,A,2,A,3,A,4,V,,*21");
 	ASSERT_NE(nullptr, s);

@@ -3,9 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief RSD - RADAR System Data
 ///
@@ -49,17 +47,17 @@ public:
 
 protected:
 	rsd(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
-	double origin_range_1 = 0.0;
-	double origin_bearing_1 = 0.0;
-	double variable_range_marker_1 = 0.0;
-	double bearing_line_1 = 0.0;
-	double origin_range_2 = 0.0;
-	double origin_bearing_2 = 0.0;
-	double variable_range_marker_2 = 0.0;
-	double bearing_line_2 = 0.0;
+	double origin_range_1_ = 0.0;
+	double origin_bearing_1_ = 0.0;
+	double variable_range_marker_1_ = 0.0;
+	double bearing_line_1_ = 0.0;
+	double origin_range_2_ = 0.0;
+	double origin_bearing_2_ = 0.0;
+	double variable_range_marker_2_ = 0.0;
+	double bearing_line_2_ = 0.0;
 	double cursor_range_ = 0.0;
 	double cursor_bearing_ = 0.0;
 	double range_scale_ = 0.0;
@@ -67,14 +65,14 @@ private:
 	char display_rotation_ = 'C'; // TODO: enum
 
 public:
-	double get_origin_range_1() const { return origin_range_1; }
-	double get_origin_bearing_1() const { return origin_bearing_1; }
-	double get_variable_range_marker_1() const { return variable_range_marker_1; }
-	double get_bearing_line_1() const { return bearing_line_1; }
-	double get_origin_range_2() const { return origin_range_2; }
-	double get_origin_bearing_2() const { return origin_bearing_2; }
-	double get_variable_range_marker_2() const { return variable_range_marker_2; }
-	double get_bearing_line_2() const { return bearing_line_2; }
+	double get_origin_range_1() const { return origin_range_1_; }
+	double get_origin_bearing_1() const { return origin_bearing_1_; }
+	double get_variable_range_marker_1() const { return variable_range_marker_1_; }
+	double get_bearing_line_1() const { return bearing_line_1_; }
+	double get_origin_range_2() const { return origin_range_2_; }
+	double get_origin_bearing_2() const { return origin_bearing_2_; }
+	double get_variable_range_marker_2() const { return variable_range_marker_2_; }
+	double get_bearing_line_2() const { return bearing_line_2_; }
 	double get_cursor_range() const { return cursor_range_; }
 	double get_cursor_bearing() const { return cursor_bearing_; }
 	double get_range_scale() const { return range_scale_; }
@@ -87,7 +85,6 @@ public:
 	void set_range(double scale, char unit) noexcept;
 	void set_display_rotation(char t) noexcept { display_rotation_ = t; }
 };
-}
 }
 
 #endif

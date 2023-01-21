@@ -2,9 +2,7 @@
 #include "checks.hpp"
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 namespace
 {
@@ -287,10 +285,10 @@ geo::region dsc::get_geographical_area() const
 			throw std::invalid_argument{"invalid quadrant"};
 	}
 
-	const uint32_t lat = static_cast<uint32_t>((address_ / 10000000) % 100);
-	const uint32_t lon = static_cast<uint32_t>((address_ / 10000) % 1000);
-	const double d_lat = static_cast<double>((address_ / 100) % 100);
-	const double d_lon = static_cast<double>(address_ % 100);
+	const auto lat = static_cast<uint32_t>((address_ / 10000000) % 100);
+	const auto lon = static_cast<uint32_t>((address_ / 10000) % 1000);
+	const auto d_lat = static_cast<double>((address_ / 100) % 100);
+	const auto d_lon = static_cast<double>(address_ % 100);
 
 	return geo::region{{{lat, 0, 0, lat_hem}, {lon, 0, 0, lon_hem}}, d_lat, d_lon};
 }
@@ -310,6 +308,5 @@ void dsc::append_data_to(std::string & s, const version &) const
 	append(s, "");
 	append(s, to_string(ack_));
 	append(s, to_string(extension_));
-}
 }
 }

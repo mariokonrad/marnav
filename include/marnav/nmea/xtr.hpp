@@ -4,9 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief XTR - Cross Track Error - Dead Reckoning
 ///
@@ -40,7 +38,7 @@ public:
 
 protected:
 	xtr(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<double> cross_track_error_magnitude_;
@@ -62,7 +60,6 @@ public:
 	}
 	void set_direction_to_steer(side t) noexcept { direction_to_steer_ = t; }
 };
-}
 }
 
 #endif

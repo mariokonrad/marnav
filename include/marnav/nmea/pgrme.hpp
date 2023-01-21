@@ -5,9 +5,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief PGRME - Garmin Estimated Error
 ///
@@ -48,7 +46,7 @@ public:
 
 protected:
 	pgrme(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<units::meters> horizontal_position_error_;
@@ -75,7 +73,6 @@ public:
 		overall_spherical_equiv_position_error_ = t.get<units::meters>();
 	}
 };
-}
 }
 
 #endif

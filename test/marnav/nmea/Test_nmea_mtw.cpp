@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_mtw : public ::testing::Test
+class test_nmea_mtw : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_mtw, contruction)
+TEST_F(test_nmea_mtw, contruction)
 {
 	EXPECT_NO_THROW(nmea::mtw mtw);
 }
 
-TEST_F(Test_nmea_mtw, properties)
+TEST_F(test_nmea_mtw, properties)
 {
 	nmea_sentence_traits<nmea::mtw>();
 }
 
-TEST_F(Test_nmea_mtw, parse)
+TEST_F(test_nmea_mtw, parse)
 {
 	auto s = nmea::make_sentence("$IIMTW,9.5,C*2F");
 	ASSERT_NE(nullptr, s);
@@ -34,7 +33,7 @@ TEST_F(Test_nmea_mtw, parse)
 	EXPECT_NEAR(9.5, temperature.value(), 1e-8);
 }
 
-TEST_F(Test_nmea_mtw, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_mtw, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::mtw>(nmea::talker::none, {1, "@"}));
@@ -42,14 +41,14 @@ TEST_F(Test_nmea_mtw, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::mtw>(nmea::talker::none, {3, "@"}));
 }
 
-TEST_F(Test_nmea_mtw, empty_to_string)
+TEST_F(test_nmea_mtw, empty_to_string)
 {
 	nmea::mtw mtw;
 
 	EXPECT_STREQ("$IIMTW,0,C*3D", nmea::to_string(mtw).c_str());
 }
 
-TEST_F(Test_nmea_mtw, set_temperature_to_string)
+TEST_F(test_nmea_mtw, set_temperature_to_string)
 {
 	nmea::mtw mtw;
 	mtw.set_temperature(units::celsius{22.5});

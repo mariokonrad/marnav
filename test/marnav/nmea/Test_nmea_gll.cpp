@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_gll : public ::testing::Test
+class test_nmea_gll : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_gll, contruction)
+TEST_F(test_nmea_gll, contruction)
 {
 	EXPECT_NO_THROW(nmea::gll gll);
 }
 
-TEST_F(Test_nmea_gll, properties)
+TEST_F(test_nmea_gll, properties)
 {
 	nmea_sentence_traits<nmea::gll>();
 }
 
-TEST_F(Test_nmea_gll, parse)
+TEST_F(test_nmea_gll, parse)
 {
 	auto s = nmea::make_sentence("$GPGLL,,,,,,*50");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_gll, parse)
 	ASSERT_NE(nullptr, gll);
 }
 
-TEST_F(Test_nmea_gll, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_gll, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::gll>(nmea::talker::none, {5, "@"}));
@@ -39,14 +38,14 @@ TEST_F(Test_nmea_gll, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::gll>(nmea::talker::none, {8, "@"}));
 }
 
-TEST_F(Test_nmea_gll, empty_to_string)
+TEST_F(test_nmea_gll, empty_to_string)
 {
 	nmea::gll gll;
 
 	EXPECT_STREQ("$GPGLL,,,,,,,V*2A", nmea::to_string(gll).c_str());
 }
 
-TEST_F(Test_nmea_gll, set_lat_north)
+TEST_F(test_nmea_gll, set_lat_north)
 {
 	nmea::gll gll;
 	gll.set_lat(geo::latitude{12.345});
@@ -54,7 +53,7 @@ TEST_F(Test_nmea_gll, set_lat_north)
 	EXPECT_STREQ("$GPGLL,1220.7000,N,,,,,V*4C", nmea::to_string(gll).c_str());
 }
 
-TEST_F(Test_nmea_gll, set_lat_south)
+TEST_F(test_nmea_gll, set_lat_south)
 {
 	nmea::gll gll;
 	gll.set_lat(geo::latitude{-12.345});
@@ -62,7 +61,7 @@ TEST_F(Test_nmea_gll, set_lat_south)
 	EXPECT_STREQ("$GPGLL,1220.7000,S,,,,,V*51", nmea::to_string(gll).c_str());
 }
 
-TEST_F(Test_nmea_gll, set_lon_west)
+TEST_F(test_nmea_gll, set_lon_west)
 {
 	nmea::gll gll;
 	gll.set_lon(geo::longitude{-123.45});
@@ -70,7 +69,7 @@ TEST_F(Test_nmea_gll, set_lon_west)
 	EXPECT_STREQ("$GPGLL,,,12327.0000,W,,,V*66", nmea::to_string(gll).c_str());
 }
 
-TEST_F(Test_nmea_gll, set_lon_east)
+TEST_F(test_nmea_gll, set_lon_east)
 {
 	nmea::gll gll;
 	gll.set_lon(geo::longitude{123.45});

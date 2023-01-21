@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id xtr::ID;
 constexpr const char * xtr::TAG;
@@ -30,6 +28,5 @@ void xtr::append_data_to(std::string & s, const version &) const
 	append(s, to_string(cross_track_error_magnitude_));
 	append(s, to_string(direction_to_steer_));
 	append(s, to_string(cross_track_unit_));
-}
 }
 }

@@ -5,9 +5,7 @@
 #include <memory>
 #include <string>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 
 /// All known AIS message IDs.
@@ -313,18 +311,18 @@ public:
 	message(message &&) = default;
 	message & operator=(message &&) = default;
 
-	message_id type() const { return message_type; }
+	message_id type() const { return message_type_; }
 
 protected:
 	explicit message(message_id type)
-		: message_type(type)
+		: message_type_(type)
 	{
 	}
 
 	virtual raw get_data() const = 0;
 
 private:
-	message_id message_type;
+	message_id message_type_;
 };
 
 /// @cond DEV
@@ -417,7 +415,6 @@ std::unique_ptr<T> message_cast(std::unique_ptr<message> && s)
 }
 
 /// @}
-}
 }
 
 #endif

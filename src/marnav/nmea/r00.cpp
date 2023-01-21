@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id r00::ID;
 constexpr const char * r00::TAG;
@@ -55,6 +53,5 @@ void r00::set_waypoint_id(int index, const waypoint & id)
 {
 	check_index(index);
 	waypoint_id_[index] = id;
-}
 }
 }

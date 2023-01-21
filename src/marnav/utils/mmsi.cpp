@@ -1,8 +1,6 @@
 #include <marnav/utils/mmsi.hpp>
 
-namespace marnav
-{
-namespace utils
+namespace marnav::utils
 {
 bool mmsi::operator==(const mmsi & other) const
 {
@@ -290,6 +288,5 @@ bool mmsi::is_epirb_ais() const
 {
 	const value_type p = (value_ / 1000000u) % 1000u;
 	return p == 974u;
-}
 }
 }

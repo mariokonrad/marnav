@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id zfi::ID;
 constexpr const char * zfi::TAG;
@@ -30,6 +28,5 @@ void zfi::append_data_to(std::string & s, const version &) const
 	append(s, to_string(time_utc_));
 	append(s, to_string(time_elapsed_));
 	append(s, to_string(waypoint_id_));
-}
 }
 }

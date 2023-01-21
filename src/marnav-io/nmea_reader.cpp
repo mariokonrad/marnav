@@ -2,20 +2,13 @@
 #include <algorithm>
 #include <stdexcept>
 
-namespace marnav
+namespace marnav::io
 {
-namespace io
-{
-nmea_reader::~nmea_reader()
-{
-}
-
 /// Initializes the reader, opens the device (if valid).
 ///
 /// @param[in] d The device to read data from, will be opened.
 nmea_reader::nmea_reader(std::unique_ptr<device> && d)
-	: raw_(0)
-	, dev_(std::move(d))
+	: dev_(std::move(d))
 {
 	sentence_.reserve(nmea::sentence::max_length + 1);
 	if (dev_)
@@ -89,6 +82,5 @@ bool nmea_reader::read()
 		return false;
 	process_nmea();
 	return true;
-}
 }
 }

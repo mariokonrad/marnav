@@ -7,9 +7,7 @@
 #include "bitset.hpp"
 #include <string>
 
-namespace marnav
-{
-namespace utils
+namespace marnav::utils
 {
 /// Renders the bitset as string.
 ///
@@ -58,7 +56,6 @@ std::string to_string(const bitset<T> & bits, std::size_t pack, char delm = ' ')
 	}
 
 	return result;
-}
 }
 }
 

@@ -12,9 +12,7 @@
 #include <vector>
 #include <cassert>
 
-namespace marnav
-{
-namespace utils
+namespace marnav::utils
 {
 
 /// This is a dynamically growing bitset (theoretically of arbitrary size).
@@ -84,64 +82,64 @@ public:
 		using iterator_category = std::random_access_iterator_tag;
 
 	private:
-		const bitset * bs; ///< Associated bitset.
-		size_type pos; ///< Position (bit) within the bitset.
+		const bitset * bs_; ///< Associated bitset.
+		size_type pos_; ///< Position (bit) within the bitset.
 
 	private:
 		const_iterator(const bitset * const b, size_type p)
-			: bs(b)
-			, pos(p)
+			: bs_(b)
+			, pos_(p)
 		{
 		}
 
 	public:
 		const_iterator()
-			: bs(nullptr)
-			, pos(0)
+			: bs_(nullptr)
+			, pos_(0)
 		{
 		}
 
 		const_iterator(const const_iterator &) = default;
 		const_iterator(const_iterator &&) noexcept = default;
 
-		size_type get_pos() const { return pos; }
+		size_type get_pos() const { return pos_; }
 
 		const_iterator & operator=(const const_iterator &) = default;
 		const_iterator & operator=(const_iterator &&) noexcept = default;
 
 		bool operator==(const const_iterator & other) const noexcept
 		{
-			return bs == other.bs && pos == other.pos;
+			return bs_ == other.bs_ && pos_ == other.pos_;
 		}
 
 		bool operator!=(const const_iterator & other) const noexcept
 		{
-			return bs != other.bs || pos != other.pos;
+			return bs_ != other.bs_ || pos_ != other.pos_;
 		}
 
 		bool operator<(const const_iterator & other) const noexcept
 		{
-			return bs == other.bs && pos < other.pos;
+			return bs_ == other.bs_ && pos_ < other.pos_;
 		}
 
 		bool operator>(const const_iterator & other) const noexcept
 		{
-			return bs == other.bs && pos > other.pos;
+			return bs_ == other.bs_ && pos_ > other.pos_;
 		}
 
 		bool operator<=(const const_iterator & other) const noexcept
 		{
-			return bs == other.bs && pos <= other.pos;
+			return bs_ == other.bs_ && pos_ <= other.pos_;
 		}
 
 		bool operator>=(const const_iterator & other) const noexcept
 		{
-			return bs == other.bs && pos >= other.pos;
+			return bs_ == other.bs_ && pos_ >= other.pos_;
 		}
 
 		bool operator*() const
 		{
-			return bs != nullptr && pos < bs->size() && bs->get_bit(pos) == true;
+			return bs_ != nullptr && pos_ < bs_->size() && bs_->get_bit(pos_) == true;
 		}
 
 		const_iterator operator+(size_type n) const noexcept
@@ -156,34 +154,34 @@ public:
 
 		const_iterator & operator+=(size_type ofs)
 		{
-			if (bs != nullptr && pos < bs->size()) {
-				pos += ofs;
-				if (pos > bs->size())
-					pos = bs->size();
+			if (bs_ != nullptr && pos_ < bs_->size()) {
+				pos_ += ofs;
+				if (pos_ > bs_->size())
+					pos_ = bs_->size();
 			}
 			return *this;
 		}
 
 		const_iterator & operator-=(size_type ofs)
 		{
-			if (bs != nullptr) {
-				pos = (ofs > pos) ? 0 : pos - ofs;
+			if (bs_ != nullptr) {
+				pos_ = (ofs > pos_) ? 0 : pos_ - ofs;
 			}
 			return *this;
 		}
 
 		const_iterator & operator++() // ++const_iterator
 		{
-			if (bs != nullptr && pos < bs->size()) {
-				++pos;
+			if (bs_ != nullptr && pos_ < bs_->size()) {
+				++pos_;
 			}
 			return *this;
 		}
 
 		const_iterator & operator--() // --const_iterator
 		{
-			if (bs != nullptr && pos > 0) {
-				--pos;
+			if (bs_ != nullptr && pos_ > 0) {
+				--pos_;
 			}
 			return *this;
 		}
@@ -191,8 +189,8 @@ public:
 		const_iterator operator++(int) // const_iterator++
 		{
 			const_iterator res(*this);
-			if (bs != nullptr && pos < bs->size()) {
-				++pos;
+			if (bs_ != nullptr && pos_ < bs_->size()) {
+				++pos_;
 			}
 			return res;
 		}
@@ -200,8 +198,8 @@ public:
 		const_iterator operator--(int) // const_iterator--
 		{
 			const_iterator res(*this);
-			if (bs != nullptr && pos > 0) {
-				--pos;
+			if (bs_ != nullptr && pos_ > 0) {
+				--pos_;
 			}
 			return res;
 		}
@@ -210,12 +208,12 @@ public:
 		template <typename T>
 		void peek(T & v, size_type bits = sizeof(T) * bits_per_byte) const
 		{
-			if (bs == nullptr)
+			if (bs_ == nullptr)
 				return;
-			if (pos + bits > bs->size())
+			if (pos_ + bits > bs_->size())
 				throw std::out_of_range{
 					"out of range, not possible to peek beyond available bits"};
-			bs->get(v, pos, bits);
+			bs_->get(v, pos_, bits);
 		}
 
 		/// Reads from the bitset and advances the iterator the number of read bits.
@@ -228,8 +226,8 @@ public:
 	};
 
 private:
-	size_type pos; // number of bits contained within the set
-	container data;
+	size_type pos_; // number of bits contained within the set
+	container data_;
 
 private:
 	/// Extends the container by the specified number of bits.
@@ -237,11 +235,11 @@ private:
 	void extend(size_type bits)
 	{
 		assert(bits > 0);
-		size_type n_blocks = (pos + bits + bits_per_block - 1) / bits_per_block;
-		if (n_blocks > data.size()) {
-			data.reserve(n_blocks);
-			while (bits > capacity() - pos) {
-				data.push_back(block_type{});
+		size_type n_blocks = (pos_ + bits + bits_per_block - 1) / bits_per_block;
+		if (n_blocks > data_.size()) {
+			data_.reserve(n_blocks);
+			while (bits > capacity() - pos_) {
+				data_.push_back(block_type{});
 			}
 		}
 	}
@@ -257,20 +255,20 @@ private:
 	{
 		assert(bits > 0);
 		extend(bits);
-		size_type i = pos / bits_per_block; // index of current block
+		size_type i = pos_ / bits_per_block; // index of current block
 
 		// number of bits unused within the current block
-		size_type u_bits = bits_per_block - (pos % bits_per_block);
+		size_type u_bits = bits_per_block - (pos_ % bits_per_block);
 
 		if (u_bits >= bits) {
 			// enough room within current block
-			data[i] |= v << (u_bits - bits);
+			data_[i] |= v << (u_bits - bits);
 		} else {
 			// not enough room, split value to current and next block
-			data[i + 0] |= v >> (bits - u_bits);
-			data[i + 1] |= v << (bits_per_block - (bits - u_bits));
+			data_[i + 0] |= v >> (bits - u_bits);
+			data_[i + 1] |= v << (bits_per_block - (bits - u_bits));
 		}
-		pos += bits;
+		pos_ += bits;
 	}
 
 	/// Sets the specified block within the bit set. The bitset is automatically
@@ -303,17 +301,17 @@ private:
 			mask0 |= ~mask1;
 			v <<= u_bits - bits;
 			v &= ~mask0;
-			data[i] = (data[i] & mask0) | v;
+			data_[i] = (data_[i] & mask0) | v;
 		} else {
 			// not enough room, split value to current and next block
 			block_type mask0 = ~((1 << (bits - u_bits)) - 1);
 			block_type mask1 = (1 << (bits_per_block - (bits - u_bits))) - 1;
 
-			data[i + 0] = (data[i + 0] & mask0) | v >> (bits - u_bits);
-			data[i + 1] = (data[i + 1] & mask1) | v << (bits_per_block - (bits - u_bits));
+			data_[i + 0] = (data_[i + 0] & mask0) | v >> (bits - u_bits);
+			data_[i + 1] = (data_[i + 1] & mask1) | v << (bits_per_block - (bits - u_bits));
 		}
-		if (ofs + bits > pos)
-			pos = ofs + bits;
+		if (ofs + bits > pos_)
+			pos_ = ofs + bits;
 	}
 
 	template <typename T>
@@ -383,14 +381,14 @@ private:
 		if (u_bits >= bits) {
 			// desired data fully within the current block
 			block_type mask = (1 << u_bits) - 1;
-			return (data[i] & mask) >> (u_bits - bits);
+			return (data_[i] & mask) >> (u_bits - bits);
 		} else {
 			// desired value is part from current block and part from next
 			block_type mask0 = (1 << u_bits) - 1;
 			block_type mask1 = ((1 << (bits_per_block - (bits - u_bits))) - 1)
 				<< (bits - u_bits);
-			return (data[i + 0] & mask0) << (bits - u_bits)
-				| (data[i + 1] & mask1) >> (bits_per_block - (bits - u_bits));
+			return (data_[i + 0] & mask0) << (bits - u_bits)
+				| (data_[i + 1] & mask1) >> (bits_per_block - (bits - u_bits));
 		}
 	}
 
@@ -417,7 +415,7 @@ public: // constructors
 
 	/// Default construction
 	bitset()
-		: pos(0)
+		: pos_(0)
 	{
 	}
 
@@ -426,10 +424,10 @@ public: // constructors
 	///
 	/// @param[in] bits Number of bits (default initialized to 0) in the bitset.
 	explicit bitset(size_type bits)
-		: pos(0)
+		: pos_(0)
 	{
 		extend(bits);
-		pos = bits;
+		pos_ = bits;
 	}
 
 	/// Construction with content from a specified container.
@@ -437,15 +435,15 @@ public: // constructors
 	/// @param[in] begin Start position of the data (inclusive)
 	/// @param[in] end End position of the data (exclusive)
 	bitset(typename container::const_iterator begin, typename container::const_iterator end)
-		: pos((end - begin) * bits_per_block)
-		, data(begin, end)
+		: pos_((end - begin) * bits_per_block)
+		, data_(begin, end)
 	{
 	}
 
 	/// Construction with move of the container, this does not copy any data.
 	explicit bitset(container && container)
-		: pos(container.size() * bits_per_block)
-		, data(std::move(container))
+		: pos_(container.size() * bits_per_block)
+		, data_(std::move(container))
 	{
 	}
 
@@ -453,47 +451,47 @@ public: // constructors
 	///
 	/// It tries to copy blockwise.
 	bitset(const_iterator first, const_iterator last)
-		: pos(0)
+		: pos_(0)
 	{
 		if (last <= first)
 			return;
-		if (!first.bs)
+		if (!first.bs_)
 			return;
 
-		const size_type distance = last.pos - first.pos;
+		const size_type distance = last.pos_ - first.pos_;
 		const size_type n_blocks = distance / bits_per_block;
 		const size_type u_bits = distance % bits_per_block;
 
 		if (u_bits > 0) {
-			data.reserve(n_blocks + 1);
+			data_.reserve(n_blocks + 1);
 		} else {
-			data.reserve(n_blocks);
+			data_.reserve(n_blocks);
 		}
 
-		size_type r_ofs = first.pos;
+		size_type r_ofs = first.pos_;
 		for (size_type i = 0; i < n_blocks; ++i, r_ofs += bits_per_block)
-			data.push_back(first.bs->get_block(r_ofs, bits_per_block));
-		pos = n_blocks * bits_per_block;
+			data_.push_back(first.bs_->get_block(r_ofs, bits_per_block));
+		pos_ = n_blocks * bits_per_block;
 
 		if (u_bits > 0)
-			append(first.bs->get_block(r_ofs, u_bits), u_bits);
+			append(first.bs_->get_block(r_ofs, u_bits), u_bits);
 	}
 
 	/// Constructs a bitset using the provided blocks.
 	bitset(std::initializer_list<Block> init_list)
-		: pos(0)
+		: pos_(0)
 	{
-		data.assign(init_list);
-		pos = data.size() * bits_per_block;
+		data_.assign(init_list);
+		pos_ = data_.size() * bits_per_block;
 	}
 
 public: // container operations
 	/// Returns the capacity of this bit set. Note: not all bits must have
 	/// been occupied.
-	size_type capacity() const noexcept { return data.size() * bits_per_block; }
+	size_type capacity() const noexcept { return data_.size() * bits_per_block; }
 
 	/// Returns the number of used bits.
-	size_type size() const noexcept { return pos; }
+	size_type size() const noexcept { return pos_; }
 
 	/// Reserves the number of blocks within this set.
 	///
@@ -503,18 +501,18 @@ public: // container operations
 	/// Clears the bit set.
 	void clear()
 	{
-		data.clear();
-		pos = 0;
+		data_.clear();
+		pos_ = 0;
 	}
 
 public: // iterators
 	/// Returns a const iterator to the beginning of the data itself.
 	/// Note: this iterator accesses the data up to capacity(), some bits
 	/// may be unused at the end of the set.
-	data_const_iterator data_begin() const { return data.begin(); }
+	data_const_iterator data_begin() const { return data_.begin(); }
 
 	/// Returns a const iterator to the end of the data itself.
-	data_const_iterator data_end() const { return data.end(); }
+	data_const_iterator data_end() const { return data_.end(); }
 
 	const_iterator begin() const { return const_iterator(this, 0); }
 
@@ -616,7 +614,7 @@ public: // set
 	/// Sets all bits within the bitset to 0.
 	void reset() noexcept
 	{
-		for (auto & block : data)
+		for (auto & block : data_)
 			block = 0;
 	}
 
@@ -633,9 +631,9 @@ public: // set
 		// bit within the block to be read
 		size_type n_bit = bits_per_block - (i % bits_per_block) - 1;
 		if (value) {
-			data[i / bits_per_block] |= (1u << n_bit);
+			data_[i / bits_per_block] |= (1u << n_bit);
 		} else {
-			data[i / bits_per_block] &= ~(1u << n_bit);
+			data_[i / bits_per_block] &= ~(1u << n_bit);
 		}
 	}
 
@@ -651,7 +649,7 @@ public: // get
 
 		// bit within the block to be read
 		size_type n_bit = bits_per_block - (i % bits_per_block) - 1;
-		return ((data[i / bits_per_block] >> n_bit) & 1) ? true : false;
+		return ((data_[i / bits_per_block] >> n_bit) & 1) ? true : false;
 	}
 
 	/// Simply an other name for get_bit.
@@ -683,10 +681,10 @@ public: // get
 			throw std::invalid_argument{"number of bits (" + std::to_string(bits)
 				+ ") exceed number of available bits ("
 				+ std::to_string(sizeof(T) * bits_per_byte) + ")"};
-		if (ofs + bits > pos)
+		if (ofs + bits > pos_)
 			throw std::out_of_range{"offset (" + std::to_string(ofs) + ") and bits ("
 				+ std::to_string(bits) + ") exceed available number of bits ("
-				+ std::to_string(pos) + ")"};
+				+ std::to_string(pos_) + ")"};
 
 		T value = 0;
 
@@ -756,7 +754,10 @@ public: // access operators
 
 public: // comparison operators
 	/// Equality comparison operator for the same bitset type.
-	bool operator==(const bitset & other) const { return this == &other || data == other.data; }
+	bool operator==(const bitset & other) const
+	{
+		return this == &other || data_ == other.data_;
+	}
 
 	/// Inequality comparison operator for the same bitset type.
 	bool operator!=(const bitset & other) const { return !(*this == other); }
@@ -810,7 +811,7 @@ public: // comparison operators
 
 		// check all blocks from the most to the least significant.
 		for (auto i = size() / bits_per_block; i > 0; --i) {
-			if (data[i - 1] < other.data[i - 1])
+			if (data_[i - 1] < other.data_[i - 1])
 				return true;
 		}
 
@@ -832,7 +833,7 @@ public: // comparison operators
 
 		// check all blocks from the most to the least significant.
 		for (auto i = size() / bits_per_block; i > 0; --i) {
-			if (data[i - 1] > other.data[i - 1])
+			if (data_[i - 1] > other.data_[i - 1])
 				return false;
 		}
 
@@ -873,11 +874,11 @@ public: // arithmetic operators
 
 		// full blocks
 		for (size_type i = size() / bits_per_block; i > 0; --i) {
-			if (data[i - 1] < std::numeric_limits<block_type>::max()) {
-				++data[i - 1];
+			if (data_[i - 1] < std::numeric_limits<block_type>::max()) {
+				++data_[i - 1];
 				return *this;
 			}
-			data[i - 1] = block_type{};
+			data_[i - 1] = block_type{};
 		}
 
 		return *this;
@@ -916,11 +917,11 @@ public: // arithmetic operators
 
 		// full blocks
 		for (size_type i = size() / bits_per_block; i > 0; --i) {
-			if (data[i - 1] > 0) {
-				--data[i - 1];
+			if (data_[i - 1] > 0) {
+				--data_[i - 1];
 				return *this;
 			}
-			data[i - 1] = std::numeric_limits<block_type>::max();
+			data_[i - 1] = std::numeric_limits<block_type>::max();
 		}
 
 		return *this;
@@ -1047,11 +1048,11 @@ public: // logic operator
 	{
 		if (size() < other.size()) {
 			extend(other.size() - size());
-			pos = other.size();
+			pos_ = other.size();
 		}
 
-		for (auto i = 0u; i < data.size(); ++i)
-			data[i] |= other.data[i];
+		for (auto i = 0u; i < data_.size(); ++i)
+			data_[i] |= other.data_[i];
 
 		return *this;
 	}
@@ -1066,11 +1067,11 @@ public: // logic operator
 		if (size() > other.size()) {
 			for (auto i = other.size(); i < size(); ++i)
 				reset(i);
-			pos = other.size();
+			pos_ = other.size();
 		}
 
-		for (auto i = 0u; i < data.size(); ++i)
-			data[i] &= other.data[i];
+		for (auto i = 0u; i < data_.size(); ++i)
+			data_[i] &= other.data_[i];
 
 		return *this;
 	}
@@ -1084,11 +1085,11 @@ public: // logic operator
 	{
 		if (size() < other.size()) {
 			extend(other.size() - size());
-			pos = other.size();
+			pos_ = other.size();
 		}
 
-		for (auto i = 0u; i < data.size(); ++i)
-			data[i] ^= other.data[i];
+		for (auto i = 0u; i < data_.size(); ++i)
+			data_[i] ^= other.data_[i];
 
 		return *this;
 	}
@@ -1164,7 +1165,6 @@ public: // other
 		return n;
 	}
 };
-}
 }
 
 #endif

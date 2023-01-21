@@ -5,9 +5,7 @@
 #include <array>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief GSA - GPS DOP and active satellites
 ///
@@ -54,7 +52,7 @@ public:
 
 protected:
 	gsa(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<selection_mode> sel_mode_; // A:automatic 2D/3D, M:manual
@@ -81,7 +79,6 @@ public:
 	void set_hdop(double t) noexcept { hdop_ = t; }
 	void set_vdop(double t) noexcept { vdop_ = t; }
 };
-}
 }
 
 #endif

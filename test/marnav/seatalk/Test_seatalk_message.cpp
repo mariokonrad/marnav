@@ -8,11 +8,11 @@ namespace
 
 using namespace marnav;
 
-class Test_seatalk_message : public ::testing::Test
+class test_seatalk_message : public ::testing::Test
 {
 };
 
-TEST_F(Test_seatalk_message, message_is_null)
+TEST_F(test_seatalk_message, message_is_null)
 {
 	std::unique_ptr<seatalk::message> p;
 	auto rc = seatalk::message_cast<seatalk::message_00>(p);
@@ -20,18 +20,18 @@ TEST_F(Test_seatalk_message, message_is_null)
 	EXPECT_EQ(nullptr, rc);
 }
 
-TEST_F(Test_seatalk_message, message_wrong_id)
+TEST_F(test_seatalk_message, message_wrong_id)
 {
 	std::unique_ptr<seatalk::message> p(new seatalk::message_00);
 	EXPECT_ANY_THROW(seatalk::message_cast<seatalk::message_01>(p));
 }
 
-TEST_F(Test_seatalk_message, message_size)
+TEST_F(test_seatalk_message, message_size)
 {
 	EXPECT_TRUE(seatalk::message_size(seatalk::message_id::depth_below_transducer) != 0u);
 }
 
-TEST_F(Test_seatalk_message, message_size_invalid_message)
+TEST_F(test_seatalk_message, message_size_invalid_message)
 {
 	EXPECT_ANY_THROW(seatalk::message_size(static_cast<seatalk::message_id>(-1)));
 }

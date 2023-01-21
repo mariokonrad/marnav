@@ -7,21 +7,21 @@ namespace
 {
 using namespace marnav;
 
-class Test_nmea_mta : public ::testing::Test
+class test_nmea_mta : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_mta, contruction)
+TEST_F(test_nmea_mta, contruction)
 {
 	EXPECT_NO_THROW(nmea::mta mta);
 }
 
-TEST_F(Test_nmea_mta, properties)
+TEST_F(test_nmea_mta, properties)
 {
 	nmea_sentence_traits<nmea::mta>();
 }
 
-TEST_F(Test_nmea_mta, parse)
+TEST_F(test_nmea_mta, parse)
 {
 	auto s = nmea::make_sentence("$IIMTA,23.4,C*00");
 	ASSERT_NE(nullptr, s);
@@ -33,7 +33,7 @@ TEST_F(Test_nmea_mta, parse)
 	EXPECT_NEAR(23.4, temperature.value(), 1e-8);
 }
 
-TEST_F(Test_nmea_mta, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_mta, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::mta>(nmea::talker::none, {1, "@"}));
@@ -41,14 +41,14 @@ TEST_F(Test_nmea_mta, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::mta>(nmea::talker::none, {3, "@"}));
 }
 
-TEST_F(Test_nmea_mta, empty_to_string)
+TEST_F(test_nmea_mta, empty_to_string)
 {
 	nmea::mta mta;
 
 	EXPECT_STREQ("$IIMTA,0.0,C*35", nmea::to_string(mta).c_str());
 }
 
-TEST_F(Test_nmea_mta, set_temperature)
+TEST_F(test_nmea_mta, set_temperature)
 {
 	{
 		nmea::mta mta;
@@ -72,7 +72,7 @@ TEST_F(Test_nmea_mta, set_temperature)
 	}
 }
 
-TEST_F(Test_nmea_mta, get_temperature)
+TEST_F(test_nmea_mta, get_temperature)
 {
 	{
 		const auto mta = nmea::create_sentence<nmea::mta>("$IIMTA,12.7,C*01");

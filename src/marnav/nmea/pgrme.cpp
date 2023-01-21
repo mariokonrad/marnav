@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include "checks.hpp"
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id pgrme::ID;
 constexpr const char * pgrme::TAG;
@@ -68,6 +66,5 @@ void pgrme::append_data_to(std::string & s, const version &) const
 	append(s, to_string(unit::distance::meter));
 	append(s, to_string(overall_spherical_equiv_position_error_));
 	append(s, to_string(unit::distance::meter));
-}
 }
 }

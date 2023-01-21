@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id vwe::ID;
 constexpr const char * vwe::TAG;
@@ -35,6 +33,5 @@ void vwe::set_efficiency(double t)
 void vwe::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(efficiency_, 1));
-}
 }
 }

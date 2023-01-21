@@ -9,9 +9,7 @@
 /// This example uses the marnav::io::default_seatalk_reader to read SeaTalk
 /// messages and \c boost.asio to send NMEA sentences.
 
-namespace marnav
-{
-namespace io
+namespace marnav::io
 {
 default_seatalk_reader::default_seatalk_reader(std::unique_ptr<device> && dv)
 	: seatalk_reader(std::move(dv))
@@ -49,6 +47,5 @@ void default_seatalk_reader::process_message(const seatalk::raw & msg)
 {
 	message_ = msg;
 	message_received_ = true;
-}
 }
 }

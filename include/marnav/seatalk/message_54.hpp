@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief GMT-Time
@@ -31,14 +29,14 @@ public:
 	message_54(const message_54 &) = default;
 	message_54 & operator=(const message_54 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint8_t hour_;
-	uint8_t minute_;
-	uint8_t second_;
+	uint8_t hour_{0};
+	uint8_t minute_{0};
+	uint8_t second_{0};
 
 public:
 	uint8_t get_hour() const noexcept { return hour_; }
@@ -47,7 +45,6 @@ public:
 
 	void set_time(uint8_t h, uint8_t m, uint8_t s) noexcept;
 };
-}
 }
 
 #endif

@@ -5,9 +5,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief VDR - Set and Drift
 ///
@@ -44,7 +42,7 @@ public:
 
 protected:
 	vdr(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<double> degrees_true_;
@@ -60,7 +58,6 @@ public:
 	void set_degrees_magn(double t) noexcept;
 	void set_speed(units::velocity t) noexcept;
 };
-}
 }
 
 #endif

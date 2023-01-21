@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_hsc : public ::testing::Test
+class test_nmea_hsc : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_hsc, contruction)
+TEST_F(test_nmea_hsc, contruction)
 {
 	EXPECT_NO_THROW(nmea::hsc hsc);
 }
 
-TEST_F(Test_nmea_hsc, properties)
+TEST_F(test_nmea_hsc, properties)
 {
 	nmea_sentence_traits<nmea::hsc>();
 }
 
-TEST_F(Test_nmea_hsc, parse)
+TEST_F(test_nmea_hsc, parse)
 {
 	auto s = nmea::make_sentence("$GPHSC,45.8,T,,*0C");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_hsc, parse)
 	ASSERT_NE(nullptr, hsc);
 }
 
-TEST_F(Test_nmea_hsc, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_hsc, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::hsc>(nmea::talker::none, {3, "@"}));
@@ -39,14 +38,14 @@ TEST_F(Test_nmea_hsc, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::hsc>(nmea::talker::none, {5, "@"}));
 }
 
-TEST_F(Test_nmea_hsc, empty_to_string)
+TEST_F(test_nmea_hsc, empty_to_string)
 {
 	nmea::hsc hsc;
 
 	EXPECT_STREQ("$GPHSC,,,,*4F", nmea::to_string(hsc).c_str());
 }
 
-TEST_F(Test_nmea_hsc, set_heading_true)
+TEST_F(test_nmea_hsc, set_heading_true)
 {
 	nmea::hsc hsc;
 	hsc.set_heading_true(45.8);
@@ -54,7 +53,7 @@ TEST_F(Test_nmea_hsc, set_heading_true)
 	EXPECT_STREQ("$GPHSC,45.8,T,,*0C", nmea::to_string(hsc).c_str());
 }
 
-TEST_F(Test_nmea_hsc, set_heading_mag)
+TEST_F(test_nmea_hsc, set_heading_mag)
 {
 	nmea::hsc hsc;
 	hsc.set_heading_mag(45.8);

@@ -7,11 +7,11 @@ namespace
 {
 using namespace marnav;
 
-class Test_nmea_tag_block : public ::testing::Test
+class test_nmea_tag_block : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_tag_block, default_construction)
+TEST_F(test_nmea_tag_block, default_construction)
 {
 	nmea::tag_block b;
 
@@ -26,22 +26,22 @@ TEST_F(Test_nmea_tag_block, default_construction)
 	EXPECT_TRUE(b.get_text().empty());
 }
 
-TEST_F(Test_nmea_tag_block, empty_string)
+TEST_F(test_nmea_tag_block, empty_string)
 {
 	EXPECT_ANY_THROW(nmea::make_tag_block(""));
 }
 
-TEST_F(Test_nmea_tag_block, checksum_correct)
+TEST_F(test_nmea_tag_block, checksum_correct)
 {
 	EXPECT_NO_THROW(nmea::make_tag_block("g:1-2-73874,n:157036,s:r003669945,c:1241544035*4A"));
 }
 
-TEST_F(Test_nmea_tag_block, invalid_checksum)
+TEST_F(test_nmea_tag_block, invalid_checksum)
 {
 	EXPECT_ANY_THROW(nmea::make_tag_block("g:1-2-73874,n:157036,s:r003669945,c:1241544035*40"));
 }
 
-TEST_F(Test_nmea_tag_block, parse)
+TEST_F(test_nmea_tag_block, parse)
 {
 	const auto b = nmea::make_tag_block("g:1-2-73874,n:157036,s:r003669945,c:1241544035*4A");
 
@@ -56,12 +56,12 @@ TEST_F(Test_nmea_tag_block, parse)
 	EXPECT_TRUE(b.get_text().empty());
 }
 
-TEST_F(Test_nmea_tag_block, parse_invalid_field)
+TEST_F(test_nmea_tag_block, parse_invalid_field)
 {
 	EXPECT_ANY_THROW(nmea::make_tag_block("x:1-2-73874,n:157036,s:r003669945,c:1241544035*4A"));
 }
 
-TEST_F(Test_nmea_tag_block, default_to_string)
+TEST_F(test_nmea_tag_block, default_to_string)
 {
 	nmea::tag_block b;
 
@@ -70,7 +70,7 @@ TEST_F(Test_nmea_tag_block, default_to_string)
 	EXPECT_TRUE(s.empty());
 }
 
-TEST_F(Test_nmea_tag_block, single_data_to_string)
+TEST_F(test_nmea_tag_block, single_data_to_string)
 {
 	{
 		nmea::tag_block b;
@@ -109,7 +109,7 @@ TEST_F(Test_nmea_tag_block, single_data_to_string)
 	}
 }
 
-TEST_F(Test_nmea_tag_block, multiple_data_to_string)
+TEST_F(test_nmea_tag_block, multiple_data_to_string)
 {
 	nmea::tag_block b;
 	b.set_unix_time(1);
@@ -118,7 +118,7 @@ TEST_F(Test_nmea_tag_block, multiple_data_to_string)
 	EXPECT_STREQ("n:2,r:3,c:1*75", to_string(b).c_str());
 }
 
-TEST_F(Test_nmea_tag_block, parse_sentence_with_tag_block)
+TEST_F(test_nmea_tag_block, parse_sentence_with_tag_block)
 {
 	// although tag blocks are mentioned preferrable with VDM, tests
 	// with BOD is are far easier.
@@ -147,7 +147,7 @@ TEST_F(Test_nmea_tag_block, parse_sentence_with_tag_block)
 	EXPECT_EQ(3, t.get_group().id);
 }
 
-TEST_F(Test_nmea_tag_block, write_sentence_with_tag_block)
+TEST_F(test_nmea_tag_block, write_sentence_with_tag_block)
 {
 	// although tag blocks are mentioned preferrable with VDM, tests
 	// with BOD is are far easier.

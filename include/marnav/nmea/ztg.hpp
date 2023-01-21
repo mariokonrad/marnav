@@ -6,9 +6,7 @@
 #include <marnav/nmea/waypoint.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief ZTG - UTC & Time to Destination Waypoint
 ///
@@ -39,7 +37,7 @@ public:
 
 protected:
 	ztg(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<nmea::time> time_utc_;
@@ -55,7 +53,6 @@ public:
 	void set_time_remaining(const nmea::time & t) noexcept { time_remaining_ = t; }
 	void set_waypoint_id(const waypoint & id) { waypoint_id_ = id; }
 };
-}
 }
 
 #endif

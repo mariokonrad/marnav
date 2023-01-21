@@ -1,9 +1,7 @@
 #include <marnav/nmea/date.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 uint32_t to_numeric(month m) noexcept
 {
@@ -108,6 +106,5 @@ date date::parse(const std::string & str)
 	} catch (std::invalid_argument &) {
 		throw std::invalid_argument{"invalid date format, 'DDMMYY' expected"};
 	}
-}
 }
 }

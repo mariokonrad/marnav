@@ -3,9 +3,7 @@
 
 using namespace marnav::math;
 
-namespace marnav
-{
-namespace math
+namespace marnav::math
 {
 // instantiate all of them to achieve the right coverage information.
 template class vector2<double>;
@@ -13,16 +11,15 @@ template class vector3<double>;
 template class vector4<double>;
 template class vector_n<8, double>;
 }
-}
 
 namespace
 {
 
-class Test_math_vector : public ::testing::Test
+class test_math_vector : public ::testing::Test
 {
 };
 
-TEST_F(Test_math_vector, vec2_construction_default)
+TEST_F(test_math_vector, vec2_construction_default)
 {
 	vec2 v;
 
@@ -30,7 +27,7 @@ TEST_F(Test_math_vector, vec2_construction_default)
 	EXPECT_NEAR(0.0, v[1], 1e-8);
 }
 
-TEST_F(Test_math_vector, vec2_construction_uniform)
+TEST_F(test_math_vector, vec2_construction_uniform)
 {
 	vec2 v{1.0, 2.0};
 
@@ -38,7 +35,7 @@ TEST_F(Test_math_vector, vec2_construction_uniform)
 	EXPECT_NEAR(2.0, v[1], 1e-8);
 }
 
-TEST_F(Test_math_vector, vec2_construction_comparison_equal)
+TEST_F(test_math_vector, vec2_construction_comparison_equal)
 {
 	vec2 v0{1.0, 2.0};
 	vec2 v1{1.0, 2.0};
@@ -60,7 +57,7 @@ TEST_F(Test_math_vector, vec2_construction_comparison_equal)
 	EXPECT_TRUE(v3 == v3);
 }
 
-TEST_F(Test_math_vector, vec2_construction_comparison_not_equal)
+TEST_F(test_math_vector, vec2_construction_comparison_not_equal)
 {
 	vec2 v0{1.0, 2.0};
 	vec2 v1{1.0, 2.0};
@@ -82,7 +79,7 @@ TEST_F(Test_math_vector, vec2_construction_comparison_not_equal)
 	EXPECT_FALSE(v3 != v3);
 }
 
-TEST_F(Test_math_vector, vec2_components)
+TEST_F(test_math_vector, vec2_components)
 {
 	vec2 v{1.0, 2.0};
 
@@ -90,7 +87,7 @@ TEST_F(Test_math_vector, vec2_components)
 	EXPECT_NEAR(2.0, v.y(), 1e-8);
 }
 
-TEST_F(Test_math_vector, vec2_make_from_polar)
+TEST_F(test_math_vector, vec2_make_from_polar)
 {
 	static const std::vector<double> TESTS = {0.0, 1.0, 30.0, 45.0, 89.0, 90.0, 91.0, 179.0,
 		180.0, 181.0, 269.0, 270.0, 271.0, 359.0, 360.0};
@@ -103,7 +100,7 @@ TEST_F(Test_math_vector, vec2_make_from_polar)
 	}
 }
 
-TEST_F(Test_math_vector, vec2_phi)
+TEST_F(test_math_vector, vec2_phi)
 {
 	static const std::vector<double> TESTS = {0.0, 1.0, 30.0, 45.0, 89.0, 90.0, 91.0, 179.0,
 		180.0, 181.0, 269.0, 270.0, 271.0, 359.0, 360.0};
@@ -115,7 +112,7 @@ TEST_F(Test_math_vector, vec2_phi)
 	}
 }
 
-TEST_F(Test_math_vector, vec2_phi_deg)
+TEST_F(test_math_vector, vec2_phi_deg)
 {
 	static const std::vector<double> TESTS = {0.0, 1.0, 30.0, 45.0, 89.0, 90.0, 91.0, 179.0,
 		180.0, 181.0, 269.0, 270.0, 271.0, 359.0, 360.0};
@@ -127,7 +124,7 @@ TEST_F(Test_math_vector, vec2_phi_deg)
 	}
 }
 
-TEST_F(Test_math_vector, vec2_length)
+TEST_F(test_math_vector, vec2_length)
 {
 	EXPECT_NEAR(1.0 * sqrt(2.0), (vec2{1.0, 1.0}.length()), 1e-7);
 	EXPECT_NEAR(2.0 * sqrt(2.0), (vec2{2.0, 2.0}.length()), 1e-7);
@@ -137,7 +134,7 @@ TEST_F(Test_math_vector, vec2_length)
 	EXPECT_NEAR(2.0, (vec2{0.0, 2.0}.length()), 1e-7);
 }
 
-TEST_F(Test_math_vector, vec2_length2)
+TEST_F(test_math_vector, vec2_length2)
 {
 	EXPECT_NEAR(2.0, (vec2{1.0, 1.0}.length2()), 1e-7);
 	EXPECT_NEAR(8.0, (vec2{2.0, 2.0}.length2()), 1e-7);
@@ -147,7 +144,7 @@ TEST_F(Test_math_vector, vec2_length2)
 	EXPECT_NEAR(4.0, (vec2{0.0, 2.0}.length2()), 1e-7);
 }
 
-TEST_F(Test_math_vector, vecn_initializer_list)
+TEST_F(test_math_vector, vecn_initializer_list)
 {
 	vector_n<5, double> v{1.0, 2.0, 3.0, 4.0, 5.0};
 	EXPECT_NEAR(1.0, v[0], 1e-8);
@@ -157,7 +154,7 @@ TEST_F(Test_math_vector, vecn_initializer_list)
 	EXPECT_NEAR(5.0, v[4], 1e-8);
 }
 
-TEST_F(Test_math_vector, nullify)
+TEST_F(test_math_vector, nullify)
 {
 	{
 		vector2<double> v{
@@ -227,7 +224,7 @@ TEST_F(Test_math_vector, nullify)
 	}
 }
 
-TEST_F(Test_math_vector, vec2_normalize)
+TEST_F(test_math_vector, vec2_normalize)
 {
 	{
 		const vector2<double> expected{1.0 / std::sqrt(2.0), 1.0 / std::sqrt(2.0)};
@@ -256,7 +253,7 @@ TEST_F(Test_math_vector, vec2_normalize)
 	}
 }
 
-TEST_F(Test_math_vector, vec3_normalize)
+TEST_F(test_math_vector, vec3_normalize)
 {
 	{
 		const vector3<double> expected{
@@ -289,7 +286,7 @@ TEST_F(Test_math_vector, vec3_normalize)
 	}
 }
 
-TEST_F(Test_math_vector, vec3_make_from_sphere)
+TEST_F(test_math_vector, vec3_make_from_sphere)
 {
 	{
 		const auto v = vec3::make_from_sphere(1.0, 0.0, 0.0);
@@ -317,7 +314,7 @@ TEST_F(Test_math_vector, vec3_make_from_sphere)
 	}
 }
 
-TEST_F(Test_math_vector, vec3_get_sphere_r)
+TEST_F(test_math_vector, vec3_get_sphere_r)
 {
 	{
 		const auto v = vec3::make_from_sphere(1.0, 0.0, 0.0);
@@ -341,7 +338,7 @@ TEST_F(Test_math_vector, vec3_get_sphere_r)
 	}
 }
 
-TEST_F(Test_math_vector, vec3_get_sphere_theta)
+TEST_F(test_math_vector, vec3_get_sphere_theta)
 {
 	{
 		const auto v = vec3::make_from_sphere(1.0, 0.0, 0.0);
@@ -365,7 +362,7 @@ TEST_F(Test_math_vector, vec3_get_sphere_theta)
 	}
 }
 
-TEST_F(Test_math_vector, vec3_get_sphere_phi)
+TEST_F(test_math_vector, vec3_get_sphere_phi)
 {
 	{
 		const auto v = vec3::make_from_sphere(1.0, 0.0, 0.0);
@@ -389,7 +386,7 @@ TEST_F(Test_math_vector, vec3_get_sphere_phi)
 	}
 }
 
-TEST_F(Test_math_vector, vec3_operator_plus)
+TEST_F(test_math_vector, vec3_operator_plus)
 {
 	{
 		const vec3 a{0.0, 0.0, 0.0};
@@ -413,7 +410,7 @@ TEST_F(Test_math_vector, vec3_operator_plus)
 	}
 }
 
-TEST_F(Test_math_vector, vec3_operator_minus)
+TEST_F(test_math_vector, vec3_operator_minus)
 {
 	{
 		const vec3 a{0.0, 0.0, 0.0};

@@ -7,21 +7,21 @@ namespace
 {
 using namespace marnav;
 
-class Test_nmea_vwe : public ::testing::Test
+class test_nmea_vwe : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_vwe, contruction)
+TEST_F(test_nmea_vwe, contruction)
 {
 	EXPECT_NO_THROW(nmea::vwe vwe);
 }
 
-TEST_F(Test_nmea_vwe, properties)
+TEST_F(test_nmea_vwe, properties)
 {
 	nmea_sentence_traits<nmea::vwe>();
 }
 
-TEST_F(Test_nmea_vwe, parse)
+TEST_F(test_nmea_vwe, parse)
 {
 	auto s = nmea::make_sentence("$IIVWE,50.0*73");
 	ASSERT_NE(nullptr, s);
@@ -32,20 +32,20 @@ TEST_F(Test_nmea_vwe, parse)
 	EXPECT_NEAR(50.0, vwe->get_efficiency(), 1e-8);
 }
 
-TEST_F(Test_nmea_vwe, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_vwe, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::vwe>(nmea::talker::none, {2, "@"}));
 }
 
-TEST_F(Test_nmea_vwe, empty_to_string)
+TEST_F(test_nmea_vwe, empty_to_string)
 {
 	nmea::vwe vwe;
 
 	EXPECT_STREQ("$IIVWE,0.0*46", nmea::to_string(vwe).c_str());
 }
 
-TEST_F(Test_nmea_vwe, set_efficiency)
+TEST_F(test_nmea_vwe, set_efficiency)
 {
 	{
 		nmea::vwe vwe;
@@ -64,14 +64,14 @@ TEST_F(Test_nmea_vwe, set_efficiency)
 	}
 }
 
-TEST_F(Test_nmea_vwe, set_efficiency_invalid)
+TEST_F(test_nmea_vwe, set_efficiency_invalid)
 {
 	nmea::vwe vwe;
 	EXPECT_ANY_THROW(vwe.set_efficiency(-1.0));
 	EXPECT_ANY_THROW(vwe.set_efficiency(100.1));
 }
 
-TEST_F(Test_nmea_vwe, get_efficiency)
+TEST_F(test_nmea_vwe, get_efficiency)
 {
 	{
 		const auto vwe = nmea::create_sentence<nmea::vwe>("$IIVWE,12.7*72");

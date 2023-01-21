@@ -3,9 +3,7 @@
 
 #include <type_traits>
 
-namespace marnav
-{
-namespace math
+namespace marnav::math
 {
 // compatiblity to C++17
 template <typename...>
@@ -23,7 +21,6 @@ struct conjunction<T1, Tn...> : std::conditional<T1::value, conjunction<Tn...>, 
 // inspired by https://www.fluentcpp.com/2019/01/29/how-to-define-a-variadic-number-of-arguments-of-the-same-type-part-2/
 template <typename T, typename... Args>
 using all_same_type = typename conjunction<std::is_same<Args, T>...>::type;
-}
 }
 
 #endif

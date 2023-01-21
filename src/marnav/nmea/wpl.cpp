@@ -3,9 +3,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id wpl::ID;
 constexpr const char * wpl::TAG;
@@ -61,6 +59,5 @@ void wpl::append_data_to(std::string & s, const version &) const
 	append(s, to_string(lon_));
 	append(s, to_string(lon_hem_));
 	append(s, to_string(waypoint_id_));
-}
 }
 }

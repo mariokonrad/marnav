@@ -3,9 +3,7 @@
 #include "convert.hpp"
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id bec::ID;
 constexpr const char * bec::TAG;
@@ -105,6 +103,5 @@ void bec::append_data_to(std::string & s, const version &) const
 	append(s, to_string(distance_));
 	append(s, to_string(unit::distance::nm));
 	append(s, to_string(waypoint_id_));
-}
 }
 }

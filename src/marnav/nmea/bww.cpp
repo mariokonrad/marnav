@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include "checks.hpp"
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id bww::ID;
 constexpr const char * bww::TAG;
@@ -52,6 +50,5 @@ void bww::append_data_to(std::string & s, const version &) const
 	append(s, to_string_if(reference::MAGNETIC, bearing_magn_));
 	append(s, to_string(waypoint_to_));
 	append(s, to_string(waypoint_from_));
-}
 }
 }

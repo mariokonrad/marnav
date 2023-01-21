@@ -6,9 +6,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief WNC - Distance - Waypoint to Waypoint
 ///
@@ -44,7 +42,7 @@ public:
 
 protected:
 	wnc(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<units::nautical_miles> distance_nm_;
@@ -63,7 +61,6 @@ public:
 	void set_waypoint_to(const waypoint & id) { waypoint_to_ = id; }
 	void set_waypoint_from(const waypoint & id) { waypoint_from_ = id; }
 };
-}
 }
 
 #endif

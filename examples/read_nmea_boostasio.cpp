@@ -16,34 +16,34 @@ class boost_asio_serial : public marnav::io::device
 {
 public:
 	boost_asio_serial(const std::string & port)
-		: io()
-		, serial(io, port)
+		: io_()
+		, serial_(io_, port)
 	{
-		serial.set_option(boost::asio::serial_port_base::baud_rate(4800));
+		serial_.set_option(boost::asio::serial_port_base::baud_rate(4800));
 	}
 
-	virtual void open() override {}
+	void open() override {}
 
-	virtual void close() override { serial.close(); }
+	void close() override { serial_.close(); }
 
-	virtual int read(char * buffer, uint32_t size) override
+	int read(char * buffer, uint32_t size) override
 	{
 		if ((buffer == nullptr) || (size == 0))
 			throw std::invalid_argument{"invalid buffer or size"};
-		if (!serial.is_open())
+		if (!serial_.is_open())
 			throw std::runtime_error{"device not open"};
 
-		return boost::asio::read(serial, boost::asio::buffer(buffer, size));
+		return boost::asio::read(serial_, boost::asio::buffer(buffer, size));
 	}
 
-	virtual int write(const char *, uint32_t) override
+	int write(const char *, uint32_t) override
 	{
 		throw std::runtime_error{"operation not supported"};
 	}
 
 private:
-	boost::asio::io_service io;
-	boost::asio::serial_port serial;
+	boost::asio::io_service io_;
+	boost::asio::serial_port serial_;
 };
 
 /// This subclassing is not really necessary, but hides the instantiation

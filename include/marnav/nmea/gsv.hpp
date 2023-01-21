@@ -5,9 +5,7 @@
 #include <array>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief GSV - Satellites in view
 ///
@@ -65,7 +63,7 @@ public:
 
 protected:
 	gsv(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	uint32_t n_messages_ = 1;
@@ -86,7 +84,6 @@ public:
 	void set_n_satellites_in_view(uint32_t t) noexcept { n_satellites_in_view_ = t; }
 	void set_sat(int index, const satellite_info & info);
 };
-}
 }
 
 #endif

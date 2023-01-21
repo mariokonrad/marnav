@@ -3,9 +3,7 @@
 
 #include <cstdint>
 
-namespace marnav
-{
-namespace utils
+namespace marnav::utils
 {
 
 /// @brief Represents a MMSI (Maritime Mobile Service Identiy).
@@ -22,7 +20,7 @@ public:
 
 	static constexpr value_type initial_value = 0;
 
-	mmsi() noexcept {}
+	mmsi() noexcept = default;
 
 	explicit mmsi(value_type t) noexcept
 		: value_(t)
@@ -77,7 +75,6 @@ public:
 private:
 	value_type value_ = initial_value;
 };
-}
 }
 
 #endif

@@ -6,14 +6,14 @@ namespace
 {
 using namespace marnav;
 
-class Test_ais_message_20 : public ::testing::Test
+class test_ais_message_20 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_20, parse)
+TEST_F(test_ais_message_20, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("D030p8@2tN?b<`O6DmQO6D0", 2));
+	v.emplace_back("D030p8@2tN?b<`O6DmQO6D0", 2);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -22,13 +22,13 @@ TEST_F(Test_ais_message_20, parse)
 	ASSERT_TRUE(m != nullptr);
 }
 
-TEST_F(Test_ais_message_20, wrong_number_of_bits)
+TEST_F(test_ais_message_20, wrong_number_of_bits)
 {
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_20>(ais::raw(69)));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_20>(ais::raw(161)));
 }
 
-TEST_F(Test_ais_message_20, get_entry_invalid_offset)
+TEST_F(test_ais_message_20, get_entry_invalid_offset)
 {
 	ais::message_20 m;
 
@@ -36,7 +36,7 @@ TEST_F(Test_ais_message_20, get_entry_invalid_offset)
 	EXPECT_ANY_THROW(m.get_entry(4));
 }
 
-TEST_F(Test_ais_message_20, set_entry_invalid_offset)
+TEST_F(test_ais_message_20, set_entry_invalid_offset)
 {
 	ais::message_20 m;
 	ais::message_20::entry entry;
@@ -45,12 +45,12 @@ TEST_F(Test_ais_message_20, set_entry_invalid_offset)
 	EXPECT_ANY_THROW(m.set_entry(4, entry));
 }
 
-TEST_F(Test_ais_message_20, read_fields)
+TEST_F(test_ais_message_20, read_fields)
 {
 	// see: https://fossies.org/linux/gpsd/test/sample.aivdm
 
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("D030p8@2tN?b<`O6DmQO6D0", 2));
+	v.emplace_back("D030p8@2tN?b<`O6DmQO6D0", 2);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);

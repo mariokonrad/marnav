@@ -6,28 +6,28 @@ namespace
 
 using namespace marnav;
 
-class Test_seatalk_message_00 : public ::testing::Test
+class test_seatalk_message_00 : public ::testing::Test
 {
 };
 
-TEST_F(Test_seatalk_message_00, construction)
+TEST_F(test_seatalk_message_00, construction)
 {
 	seatalk::message_00 m;
 }
 
-TEST_F(Test_seatalk_message_00, parse_invalid_data_size)
+TEST_F(test_seatalk_message_00, parse_invalid_data_size)
 {
 	EXPECT_ANY_THROW(seatalk::message_00::parse({4, 0x00}));
 	EXPECT_ANY_THROW(seatalk::message_00::parse({6, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_00, parse_invalid_length)
+TEST_F(test_seatalk_message_00, parse_invalid_length)
 {
 	EXPECT_ANY_THROW(seatalk::message_00::parse({0x00, 0x01, 0x00, 0x65, 0x00}));
 	EXPECT_ANY_THROW(seatalk::message_00::parse({0x00, 0x03, 0x00, 0x65, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_00, parse)
+TEST_F(test_seatalk_message_00, parse)
 {
 	struct test_case {
 		seatalk::raw data;
@@ -60,7 +60,7 @@ TEST_F(Test_seatalk_message_00, parse)
 	}
 }
 
-TEST_F(Test_seatalk_message_00, parse_anchor_alarm_active)
+TEST_F(test_seatalk_message_00, parse_anchor_alarm_active)
 {
 	seatalk::raw data{0x00, 0x02, 0x80, 0x00, 0x00};
 
@@ -79,7 +79,7 @@ TEST_F(Test_seatalk_message_00, parse_anchor_alarm_active)
 	EXPECT_EQ(0u, m->get_depth());
 }
 
-TEST_F(Test_seatalk_message_00, parse_metric_display_units)
+TEST_F(test_seatalk_message_00, parse_metric_display_units)
 {
 	seatalk::raw data{0x00, 0x02, 0x40, 0x00, 0x00};
 
@@ -98,7 +98,7 @@ TEST_F(Test_seatalk_message_00, parse_metric_display_units)
 	EXPECT_EQ(0u, m->get_depth());
 }
 
-TEST_F(Test_seatalk_message_00, parse_transducer_defective)
+TEST_F(test_seatalk_message_00, parse_transducer_defective)
 {
 	seatalk::raw data{0x00, 0x02, 0x04, 0x00, 0x00};
 
@@ -117,7 +117,7 @@ TEST_F(Test_seatalk_message_00, parse_transducer_defective)
 	EXPECT_EQ(0u, m->get_depth());
 }
 
-TEST_F(Test_seatalk_message_00, parse_depth_alarm_active)
+TEST_F(test_seatalk_message_00, parse_depth_alarm_active)
 {
 	seatalk::raw data{0x00, 0x02, 0x02, 0x00, 0x00};
 
@@ -136,7 +136,7 @@ TEST_F(Test_seatalk_message_00, parse_depth_alarm_active)
 	EXPECT_EQ(0u, m->get_depth());
 }
 
-TEST_F(Test_seatalk_message_00, parse_shallow_depth_alarm_active)
+TEST_F(test_seatalk_message_00, parse_shallow_depth_alarm_active)
 {
 	seatalk::raw data{0x00, 0x02, 0x01, 0x00, 0x00};
 
@@ -155,7 +155,7 @@ TEST_F(Test_seatalk_message_00, parse_shallow_depth_alarm_active)
 	EXPECT_EQ(0u, m->get_depth());
 }
 
-TEST_F(Test_seatalk_message_00, write_default)
+TEST_F(test_seatalk_message_00, write_default)
 {
 	const seatalk::raw expected{0x00, 0x02, 0x00, 0x00, 0x00};
 	seatalk::message_00 m;
@@ -163,7 +163,7 @@ TEST_F(Test_seatalk_message_00, write_default)
 	EXPECT_EQ(expected, m.get_data());
 }
 
-TEST_F(Test_seatalk_message_00, write_anchor_alarm_active)
+TEST_F(test_seatalk_message_00, write_anchor_alarm_active)
 {
 	const seatalk::raw expected{0x00, 0x02, 0x80, 0x00, 0x00};
 	seatalk::message_00 m;
@@ -172,7 +172,7 @@ TEST_F(Test_seatalk_message_00, write_anchor_alarm_active)
 	EXPECT_EQ(expected, m.get_data());
 }
 
-TEST_F(Test_seatalk_message_00, write_metric_display_units)
+TEST_F(test_seatalk_message_00, write_metric_display_units)
 {
 	const seatalk::raw expected{0x00, 0x02, 0x40, 0x00, 0x00};
 	seatalk::message_00 m;
@@ -181,7 +181,7 @@ TEST_F(Test_seatalk_message_00, write_metric_display_units)
 	EXPECT_EQ(expected, m.get_data());
 }
 
-TEST_F(Test_seatalk_message_00, get_depth_meters)
+TEST_F(test_seatalk_message_00, get_depth_meters)
 {
 	struct test_case {
 		uint16_t depth;
@@ -203,7 +203,7 @@ TEST_F(Test_seatalk_message_00, get_depth_meters)
 	}
 }
 
-TEST_F(Test_seatalk_message_00, set_depth_meters)
+TEST_F(test_seatalk_message_00, set_depth_meters)
 {
 	struct test_case {
 		uint16_t depth;
@@ -225,7 +225,7 @@ TEST_F(Test_seatalk_message_00, set_depth_meters)
 	}
 }
 
-TEST_F(Test_seatalk_message_00, depth_meters_transducer_defective)
+TEST_F(test_seatalk_message_00, depth_meters_transducer_defective)
 {
 	std::vector<uint16_t> cases{0, 1, 10, 20, 100};
 
@@ -237,7 +237,7 @@ TEST_F(Test_seatalk_message_00, depth_meters_transducer_defective)
 	}
 }
 
-TEST_F(Test_seatalk_message_00, set_depth_meters_less_zero)
+TEST_F(test_seatalk_message_00, set_depth_meters_less_zero)
 {
 	seatalk::message_00 msg;
 	msg.set_depth_meters(-3.1);

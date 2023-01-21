@@ -11,14 +11,14 @@ namespace
 {
 using namespace marnav;
 
-class Test_ais_message_01 : public ::testing::Test
+class test_ais_message_01 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_01, parse)
+TEST_F(test_ais_message_01, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("133m@ogP00PD;88MD5MTDww@2D7k", 0));
+	v.emplace_back("133m@ogP00PD;88MD5MTDww@2D7k", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -45,13 +45,13 @@ TEST_F(Test_ais_message_01, parse)
 	EXPECT_EQ(82419u, m->get_radio_status());
 }
 
-TEST_F(Test_ais_message_01, wrong_number_of_bits)
+TEST_F(test_ais_message_01, wrong_number_of_bits)
 {
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_01>(ais::raw(167)));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_01>(ais::raw(169)));
 }
 
-TEST_F(Test_ais_message_01, encode_default_values)
+TEST_F(test_ais_message_01, encode_default_values)
 {
 	ais::message_01 m;
 
@@ -62,7 +62,7 @@ TEST_F(Test_ais_message_01, encode_default_values)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_01, set_lat)
+TEST_F(test_ais_message_01, set_lat)
 {
 	ais::message_01 m;
 	m.set_lat(geo::latitude{12.34});
@@ -74,7 +74,7 @@ TEST_F(Test_ais_message_01, set_lat)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_01, set_lon)
+TEST_F(test_ais_message_01, set_lon)
 {
 	ais::message_01 m;
 	m.set_lon(geo::longitude{123.45});
@@ -86,10 +86,10 @@ TEST_F(Test_ais_message_01, set_lon)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_01, github_issue_2)
+TEST_F(test_ais_message_01, github_issue_2)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("15RTgt0PAso;90TKcjM8h6g208CQ", 0));
+	v.emplace_back("15RTgt0PAso;90TKcjM8h6g208CQ", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -101,10 +101,10 @@ TEST_F(Test_ais_message_01, github_issue_2)
 	EXPECT_NEAR(48.3816, *m->get_lat(), 1e-4);
 }
 
-TEST_F(Test_ais_message_01, github_issue_51_decode)
+TEST_F(test_ais_message_01, github_issue_51_decode)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("15RTgt0PAso;90TKcjM8h6g208CQ", 0));
+	v.emplace_back("15RTgt0PAso;90TKcjM8h6g208CQ", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -128,7 +128,7 @@ TEST_F(Test_ais_message_01, github_issue_51_decode)
 	EXPECT_EQ(34017, m->get_radio_status());
 }
 
-TEST_F(Test_ais_message_01, github_issue_51_encode)
+TEST_F(test_ais_message_01, github_issue_51_encode)
 {
 	ais::message_01 m;
 	m.set_repeat_indicator(0);
@@ -150,27 +150,28 @@ TEST_F(Test_ais_message_01, github_issue_51_encode)
 	const auto sentences = nmea::make_vdms(payload, {}, nmea::ais_channel::A);
 
 	ASSERT_EQ(1u, sentences.size());
-	EXPECT_STREQ("!AIVDM,1,1,,A,15RTgt0PAso;90TKcjH8h6g208CQ,0*4F", nmea::to_string(*sentences.front()).c_str());
+	EXPECT_STREQ("!AIVDM,1,1,,A,15RTgt0PAso;90TKcjH8h6g208CQ,0*4F",
+		nmea::to_string(*sentences.front()).c_str());
 }
 
-TEST_F(Test_ais_message_01, error_bit_length)
+TEST_F(test_ais_message_01, error_bit_length)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
 
 	// message was encountered near Gibraltar in 2016
-	v.push_back(std::make_pair("13miaA70120H5DvQlv5IRWeF05ItGbgv>1", 0));
+	v.emplace_back("13miaA70120H5DvQlv5IRWeF05ItGbgv>1", 0);
 
 	EXPECT_ANY_THROW(ais::make_message(v));
 }
 
-TEST_F(Test_ais_message_01, set_invalid_sog)
+TEST_F(test_ais_message_01, set_invalid_sog)
 {
 	ais::message_01 m;
 
 	EXPECT_ANY_THROW(m.set_sog(units::knots{-1.0}));
 }
 
-TEST_F(Test_ais_message_01, set_get_sog)
+TEST_F(test_ais_message_01, set_get_sog)
 {
 	ais::message_01 m;
 
@@ -180,7 +181,7 @@ TEST_F(Test_ais_message_01, set_get_sog)
 	EXPECT_EQ(marnav::units::knots{4.5}, *m.get_sog());
 }
 
-TEST_F(Test_ais_message_01, sog_max_value)
+TEST_F(test_ais_message_01, sog_max_value)
 {
 	ais::message_01 m;
 
@@ -190,7 +191,7 @@ TEST_F(Test_ais_message_01, sog_max_value)
 	EXPECT_EQ(marnav::units::knots{102.2}, *m.get_sog());
 }
 
-TEST_F(Test_ais_message_01, sog_not_available)
+TEST_F(test_ais_message_01, sog_not_available)
 {
 	ais::message_01 m;
 
@@ -209,7 +210,7 @@ TEST_F(Test_ais_message_01, sog_not_available)
 	EXPECT_FALSE(m.get_sog().has_value());
 }
 
-TEST_F(Test_ais_message_01, github_issue_51_negative_east)
+TEST_F(test_ais_message_01, github_issue_51_negative_east)
 {
 	const auto deg = -3.3118; // negative means western hemisphere
 
@@ -223,7 +224,7 @@ TEST_F(Test_ais_message_01, github_issue_51_negative_east)
 	EXPECT_NEAR(deg, lon->get(), 1e-5);
 }
 
-TEST_F(Test_ais_message_01, github_issue_51_roundtrip_negative_east)
+TEST_F(test_ais_message_01, github_issue_51_roundtrip_negative_east)
 {
 	const auto deg = -3.3118; // negative means western hemisphere
 

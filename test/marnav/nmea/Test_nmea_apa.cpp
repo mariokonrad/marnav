@@ -7,21 +7,21 @@ namespace
 {
 using namespace marnav;
 
-class Test_nmea_apa : public ::testing::Test
+class test_nmea_apa : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_apa, contruction)
+TEST_F(test_nmea_apa, contruction)
 {
 	EXPECT_NO_THROW(nmea::apa apa);
 }
 
-TEST_F(Test_nmea_apa, properties)
+TEST_F(test_nmea_apa, properties)
 {
 	nmea_sentence_traits<nmea::apa>();
 }
 
-TEST_F(Test_nmea_apa, parse)
+TEST_F(test_nmea_apa, parse)
 {
 	auto s = nmea::make_sentence("$GPAPA,A,A,0.10,R,N,V,V,011,M,DEST*3F");
 	ASSERT_NE(nullptr, s);
@@ -30,7 +30,7 @@ TEST_F(Test_nmea_apa, parse)
 	ASSERT_NE(nullptr, apa);
 }
 
-TEST_F(Test_nmea_apa, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_apa, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::apa>(nmea::talker::none, {9, "@"}));
@@ -38,14 +38,14 @@ TEST_F(Test_nmea_apa, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::apa>(nmea::talker::none, {11, "@"}));
 }
 
-TEST_F(Test_nmea_apa, empty_to_string)
+TEST_F(test_nmea_apa, empty_to_string)
 {
 	nmea::apa apa;
 
 	EXPECT_STREQ("$GPAPA,,,,,,,,,,*47", nmea::to_string(apa).c_str());
 }
 
-TEST_F(Test_nmea_apa, set_waypoint)
+TEST_F(test_nmea_apa, set_waypoint)
 {
 	nmea::apa apa;
 	apa.set_waypoint_id(nmea::waypoint{"ABC"});
@@ -53,14 +53,14 @@ TEST_F(Test_nmea_apa, set_waypoint)
 	EXPECT_STREQ("$GPAPA,,,,,,,,,,ABC*07", nmea::to_string(apa).c_str());
 }
 
-TEST_F(Test_nmea_apa, set_bearing_origin_to_destination)
+TEST_F(test_nmea_apa, set_bearing_origin_to_destination)
 {
 	nmea::apa apa;
 	apa.set_bearing_origin_to_destination(11, nmea::reference::MAGNETIC);
 	EXPECT_STREQ("$GPAPA,,,,,,,,11.0,M,*14", nmea::to_string(apa).c_str());
 }
 
-TEST_F(Test_nmea_apa, get_bearing_origin_to_destination)
+TEST_F(test_nmea_apa, get_bearing_origin_to_destination)
 {
 	auto s = nmea::make_sentence("$GPAPA,A,A,0.10,R,N,V,V,011,M,DEST*3F");
 	ASSERT_NE(nullptr, s);

@@ -1,9 +1,7 @@
 #include <marnav/geo/position.hpp>
 #include <marnav/math/constants.hpp>
 
-namespace marnav
-{
-namespace geo
+namespace marnav::geo
 {
 position::position(const latitude & la, const longitude & lo)
 	: lat_(la)
@@ -24,6 +22,5 @@ position deg2rad(const position & p)
 position rad2deg(const position & p)
 {
 	return {p.lat() / math::pi * 180.0, p.lon() / math::pi * 180.0};
-}
 }
 }

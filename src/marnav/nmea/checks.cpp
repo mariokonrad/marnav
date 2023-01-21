@@ -1,8 +1,6 @@
 #include "checks.hpp"
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// Convinience function to check status.
 ///
@@ -24,6 +22,5 @@ void check_status(const std::optional<status> & value, const char * name)
 {
 	if (value)
 		check_status(value.value(), name);
-}
 }
 }

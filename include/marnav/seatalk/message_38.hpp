@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Codelock data
@@ -26,11 +24,10 @@ public:
 	message_38(const message_38 &) = default;
 	message_38 & operator=(const message_38 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 };
-}
 }
 
 #endif

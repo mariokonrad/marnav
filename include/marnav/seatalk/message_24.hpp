@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Display units for Mileage and Speed
@@ -38,19 +36,18 @@ public:
 	message_24(const message_24 &) = default;
 	message_24 & operator=(const message_24 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	unit_type unit_;
+	unit_type unit_{nautical_miles};
 
 public:
 	unit_type get_unit() const noexcept { return unit_; }
 
 	void set_unit(unit_type t) noexcept { unit_ = t; }
 };
-}
 }
 
 #endif

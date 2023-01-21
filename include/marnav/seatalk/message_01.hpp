@@ -4,9 +4,7 @@
 #include <marnav/seatalk/message.hpp>
 #include <marnav/seatalk/equipment.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 /// @brief Equipment ID
 ///
@@ -44,7 +42,7 @@ public:
 	message_01(const message_01 &) = default;
 	message_01 & operator=(const message_01 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
@@ -56,7 +54,6 @@ public:
 
 	void set_equipment_id(const equipment_id & t) noexcept { id_ = t; }
 };
-}
 }
 
 #endif

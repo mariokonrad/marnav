@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 /// @brief Countdown Timer
 ///
@@ -37,15 +35,15 @@ public:
 	message_59(const message_59 &) = default;
 	message_59 & operator=(const message_59 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint8_t hours_;
-	uint8_t minutes_;
-	uint8_t seconds_;
-	mode count_mode_;
+	uint8_t hours_{0};
+	uint8_t minutes_{0};
+	uint8_t seconds_{0};
+	mode count_mode_{mode::up_and_start};
 
 public:
 	uint8_t get_hours() const { return hours_; }
@@ -55,7 +53,6 @@ public:
 
 	void set_timer(uint8_t hours, uint8_t minutes, uint8_t seconds, mode m);
 };
-}
 }
 
 #endif

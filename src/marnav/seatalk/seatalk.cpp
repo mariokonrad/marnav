@@ -32,9 +32,7 @@
 #include <algorithm>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 namespace
@@ -114,7 +112,7 @@ std::unique_ptr<message> make_message(const raw & data)
 {
 	if (data.size() < 1)
 		throw std::invalid_argument{"raw data of insufficient size"};
-	message_id type = static_cast<message_id>(data[0]);
+	auto type = static_cast<message_id>(data[0]);
 	return detail::instantiate_message(type)(data);
 }
 
@@ -146,6 +144,5 @@ size_t message_size(message_id id)
 			"unknown message in message_size: " + std::to_string(static_cast<uint8_t>(id))};
 
 	return i->size;
-}
 }
 }

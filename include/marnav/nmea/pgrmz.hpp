@@ -5,9 +5,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief PGRMZ - Garmin Altitude Information
 ///
@@ -51,7 +49,7 @@ public:
 
 protected:
 	pgrmz(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	units::feet altitude_;
@@ -66,7 +64,6 @@ public:
 };
 
 std::string to_string(pgrmz::fix_type value);
-}
 }
 
 #endif

@@ -1,9 +1,7 @@
 #include <marnav/nmea/checksum.hpp>
 #include "hex_digit.hpp"
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 checksum_error::checksum_error(uint8_t exp, uint8_t act)
 	: expected_(exp)
@@ -22,6 +20,5 @@ std::string checksum_to_string(uint8_t sum)
 {
 	char buf[3]{detail::hex_digit(sum >> 4), detail::hex_digit(sum), '\0'};
 	return buf;
-}
 }
 }

@@ -3,9 +3,7 @@
 #include <stdexcept>
 #include <cmath>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 constexpr message_id message_17::ID;
 constexpr std::size_t message_17::SIZE_BITS_MIN;
@@ -31,12 +29,12 @@ message_17::message_17(const raw & bits)
 
 void message_17::read_data(const raw & bits)
 {
-	get(bits, repeat_indicator);
-	get(bits, mmsi);
-	get(bits, longitude_minutes);
-	get(bits, latitude_minutes);
+	get(bits, repeat_indicator_);
+	get(bits, mmsi_);
+	get(bits, longitude_minutes_);
+	get(bits, latitude_minutes_);
 
-	payload = raw{bits.begin() + SIZE_BITS_MIN, bits.end()};
+	payload_ = raw{bits.begin() + SIZE_BITS_MIN, bits.end()};
 }
 
 raw message_17::get_data() const
@@ -44,55 +42,54 @@ raw message_17::get_data() const
 	raw bits(SIZE_BITS_MIN);
 
 	bits.set(type(), 0, 6);
-	set(bits, repeat_indicator);
-	set(bits, mmsi);
-	set(bits, longitude_minutes);
-	set(bits, latitude_minutes);
+	set(bits, repeat_indicator_);
+	set(bits, mmsi_);
+	set(bits, longitude_minutes_);
+	set(bits, latitude_minutes_);
 
-	bits.append(payload);
+	bits.append(payload_);
 
 	return bits;
 }
 
 std::optional<geo::longitude> message_17::get_lon() const
 {
-	if (longitude_minutes == longitude_not_available_short)
+	if (longitude_minutes_ == longitude_not_available_short)
 		return std::make_optional<geo::longitude>();
-	return to_geo_longitude(longitude_minutes, longitude_minutes.count, angle_scale::I1);
+	return to_geo_longitude(longitude_minutes_, longitude_minutes_.count, angle_scale::I1);
 }
 
 std::optional<geo::latitude> message_17::get_lat() const
 {
-	if (latitude_minutes == latitude_not_available_short)
+	if (latitude_minutes_ == latitude_not_available_short)
 		return std::make_optional<geo::latitude>();
-	return to_geo_latitude(latitude_minutes, latitude_minutes.count, angle_scale::I1);
+	return to_geo_latitude(latitude_minutes_, latitude_minutes_.count, angle_scale::I1);
 }
 
 void message_17::set_lon_unavailable()
 {
-	longitude_minutes = longitude_not_available_short;
+	longitude_minutes_ = longitude_not_available_short;
 }
 
 void message_17::set_lat_unavailable()
 {
-	latitude_minutes = latitude_not_available_short;
+	latitude_minutes_ = latitude_not_available_short;
 }
 
 void message_17::set_lon(const geo::longitude & t)
 {
-	longitude_minutes = to_longitude_minutes(t, longitude_minutes.count, angle_scale::I1);
+	longitude_minutes_ = to_longitude_minutes(t, longitude_minutes_.count, angle_scale::I1);
 }
 
 void message_17::set_lat(const geo::latitude & t)
 {
-	latitude_minutes = to_latitude_minutes(t, latitude_minutes.count, angle_scale::I1);
+	latitude_minutes_ = to_latitude_minutes(t, latitude_minutes_.count, angle_scale::I1);
 }
 
 void message_17::set_payload(const raw & p)
 {
 	if (p.size() > SIZE_BITS_MAX - SIZE_BITS_MIN)
 		throw std::invalid_argument{"invalid size of payload"};
-	payload = p;
-}
+	payload_ = p;
 }
 }

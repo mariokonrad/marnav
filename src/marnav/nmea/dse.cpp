@@ -2,9 +2,7 @@
 #include "checks.hpp"
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 namespace
 {
@@ -152,6 +150,5 @@ void dse::append_data_to(std::string & s, const version &) const
 	append(s, format(address_, 10));
 	append(s, "");
 	append(s, "");
-}
 }
 }

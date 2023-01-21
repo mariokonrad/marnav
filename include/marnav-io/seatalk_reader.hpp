@@ -4,9 +4,7 @@
 #include <marnav-io/device.hpp>
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace io
+namespace marnav::io
 {
 /// This class reads SeaTalk messages from a device. Normally this would
 /// be a serial character device (e.g. /dev/ttyS0 or /dev/ttyUSB0).
@@ -35,10 +33,10 @@ protected:
 	virtual void process_message(const seatalk::raw &) = 0;
 
 private:
-	enum class State { READ, ESCAPE, PARITY };
+	enum class input_state { READ, ESCAPE, PARITY };
 
 	struct context {
-		State state;
+		input_state state;
 		uint8_t index;
 		uint8_t remaining;
 		uint8_t data[seatalk::MAX_MESSAGE_SIZE];
@@ -58,7 +56,6 @@ private:
 	context ctx_;
 	std::unique_ptr<device> dev_; ///< Device to read data from.
 };
-}
 }
 
 #endif

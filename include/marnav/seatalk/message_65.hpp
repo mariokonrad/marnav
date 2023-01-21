@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 /// @brief Select Fathom
 ///
@@ -25,11 +23,10 @@ public:
 	message_65(const message_65 &) = default;
 	message_65 & operator=(const message_65 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 };
-}
 }
 
 #endif

@@ -12,9 +12,7 @@
 #include <cmath>
 #include <cstring>
 
-namespace marnav
-{
-namespace math
+namespace marnav::math
 {
 namespace detail
 {
@@ -69,7 +67,6 @@ bool nearly_equal(TF a, TF b, TF fixed_epsilon = std::numeric_limits<TF>::epsilo
 	if (difference <= fixed_epsilon)
 		return true;
 	return detail::ulps_distance(a, b) <= ulps_epsilon;
-}
 }
 }
 

@@ -6,9 +6,7 @@
 #include <stdexcept>
 #include <type_traits>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @cond DEV
 namespace
@@ -50,7 +48,7 @@ static int extract_int(const std::string & s)
 }
 /// @endcond
 
-static_assert(std::is_default_constructible<tag_block>::value, "");
+static_assert(std::is_default_constructible<tag_block>::value);
 
 constexpr char tag_block::end_token;
 
@@ -177,6 +175,5 @@ std::string to_string(const tag_block & b)
 	}
 
 	return result;
-}
 }
 }

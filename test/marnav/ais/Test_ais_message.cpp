@@ -5,21 +5,20 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_ais_message : public ::testing::Test
+class test_ais_message : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message, message_cast_nullptr)
+TEST_F(test_ais_message, message_cast_nullptr)
 {
 	std::unique_ptr<ais::message> m;
 	auto rc = ais::message_cast<ais::message_01>(m);
 	EXPECT_EQ(nullptr, rc);
 }
 
-TEST_F(Test_ais_message, message_cast_wrong_id)
+TEST_F(test_ais_message, message_cast_wrong_id)
 {
 	std::unique_ptr<ais::message> m(new ais::message_01);
 	EXPECT_ANY_THROW(ais::message_cast<ais::message_05>(m));

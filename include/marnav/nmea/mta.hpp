@@ -4,9 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <marnav/units/units.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief MTA - Air Temperature
 ///
@@ -37,7 +35,7 @@ public:
 
 protected:
 	mta(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	units::celsius temperature_;
@@ -47,7 +45,6 @@ public:
 
 	void set_temperature(units::temperature t) noexcept;
 };
-}
 }
 
 #endif

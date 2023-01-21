@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id lcd::ID;
 constexpr const char * lcd::TAG;
@@ -71,6 +69,5 @@ void lcd::append_data_to(std::string & s, const version &) const
 			append(s, "");
 		}
 	}
-}
 }
 }

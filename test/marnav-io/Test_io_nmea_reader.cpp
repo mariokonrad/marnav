@@ -5,7 +5,6 @@
 
 namespace
 {
-
 using namespace marnav;
 
 static const std::string DATA_COMPLETE
@@ -25,8 +24,7 @@ class dummy_device : public ::io::device
 {
 public:
 	dummy_device(const std::string & data)
-		: index(0)
-		, data(data)
+		: data_(data)
 	{
 	}
 
@@ -34,44 +32,44 @@ public:
 	void close() override {}
 
 	/// Just go through the data once.
-	virtual int read(char * buffer, uint32_t size) override
+	int read(char * buffer, uint32_t size) override
 	{
 		if (size != sizeof(*buffer))
 			throw std::invalid_argument{"buffer type not supported"};
-		if (index >= data.size())
+		if (index_ >= data_.size())
 			return 0; // end of data
-		*buffer = data[index];
-		++index;
+		*buffer = data_[index_];
+		++index_;
 		return 1;
 	}
 
-	virtual int write(const char *, uint32_t) override
+	int write(const char *, uint32_t) override
 	{
 		throw std::runtime_error{"operation not supported"};
 	}
 
 private:
-	std::string::size_type index;
-	std::string data;
+	std::string::size_type index_{0};
+	std::string data_;
 };
 
 class test_device : public ::io::device
 {
 public:
 	test_device(int result)
-		: result(result)
+		: result_(result)
 	{
 	}
 
 	void open() override {}
 	void close() override {}
 
-	virtual int read(char *, uint32_t) override { return result; }
+	int read(char *, uint32_t) override { return result_; }
 
-	virtual int write(const char *, uint32_t) override { return result; }
+	int write(const char *, uint32_t) override { return result_; }
 
 private:
-	int result;
+	int result_;
 };
 
 class dummy_reader : public ::io::nmea_reader
@@ -79,17 +77,16 @@ class dummy_reader : public ::io::nmea_reader
 public:
 	dummy_reader(const std::string & data)
 		: nmea_reader(std::make_unique<dummy_device>(data))
-		, num_sentences(0)
 	{
 	}
 
-	int get_num_sentences() const { return num_sentences; }
+	int get_num_sentences() const { return num_sentences_; }
 
 protected:
-	virtual void process_sentence(const std::string &) override { ++num_sentences; }
+	void process_sentence(const std::string &) override { ++num_sentences_; }
 
 private:
-	int num_sentences;
+	int num_sentences_{0};
 };
 
 class no_device_reader : public ::io::nmea_reader
@@ -101,7 +98,7 @@ public:
 	}
 
 protected:
-	virtual void process_sentence(const std::string &) override {}
+	void process_sentence(const std::string &) override {}
 };
 
 /// Works only in a single threaded context (true for dummuy_device and nmea_reader).
@@ -110,22 +107,22 @@ class message_reader : public ::io::nmea_reader
 public:
 	message_reader(const std::string & data)
 		: nmea_reader(std::make_unique<dummy_device>(data))
-		, sentence_received(false)
+		, sentence_received_(false)
 	{
 	}
 
 	message_reader(std::unique_ptr<::io::device> && dev)
 		: nmea_reader(std::move(dev))
-		, sentence_received(false)
+		, sentence_received_(false)
 	{
 	}
 
 	bool read_sentence(std::string & s)
 	{
 		while (read()) {
-			if (sentence_received) {
+			if (sentence_received_) {
 				s = sentence_;
-				sentence_received = false;
+				sentence_received_ = false;
 				return true;
 			}
 		}
@@ -133,22 +130,22 @@ public:
 	}
 
 protected:
-	virtual void process_sentence(const std::string & s) override
+	void process_sentence(const std::string & s) override
 	{
 		sentence_ = s;
-		sentence_received = true;
+		sentence_received_ = true;
 	}
 
 private:
-	bool sentence_received;
+	bool sentence_received_;
 	std::string sentence_;
 };
 
-class Test_io_nmea_reader : public ::testing::Test
+class test_io_nmea_reader : public ::testing::Test
 {
 };
 
-TEST_F(Test_io_nmea_reader, read_count_sentences)
+TEST_F(test_io_nmea_reader, read_count_sentences)
 {
 	dummy_reader device{DATA_COMPLETE};
 
@@ -158,7 +155,7 @@ TEST_F(Test_io_nmea_reader, read_count_sentences)
 	EXPECT_EQ(3, device.get_num_sentences());
 }
 
-TEST_F(Test_io_nmea_reader, read_sentence)
+TEST_F(test_io_nmea_reader, read_sentence)
 {
 	message_reader dev{DATA_COMPLETE};
 
@@ -170,7 +167,7 @@ TEST_F(Test_io_nmea_reader, read_sentence)
 	EXPECT_EQ(3, num_sentences);
 }
 
-TEST_F(Test_io_nmea_reader, read_first_sentence)
+TEST_F(test_io_nmea_reader, read_first_sentence)
 {
 	message_reader dev{DATA_COMPLETE};
 	std::string sentence;
@@ -181,7 +178,7 @@ TEST_F(Test_io_nmea_reader, read_first_sentence)
 	EXPECT_EQ(68u, sentence.size());
 }
 
-TEST_F(Test_io_nmea_reader, read_synchronization)
+TEST_F(test_io_nmea_reader, read_synchronization)
 {
 	message_reader dev{DATA_INCOMPLETE};
 	std::string sentence;
@@ -196,7 +193,7 @@ TEST_F(Test_io_nmea_reader, read_synchronization)
 	EXPECT_EQ(68u, sentence.size());
 }
 
-TEST_F(Test_io_nmea_reader, sentence_to_large)
+TEST_F(test_io_nmea_reader, sentence_to_large)
 {
 	message_reader dev{DATA_MISSING_EOL};
 	std::string sentence;
@@ -204,28 +201,28 @@ TEST_F(Test_io_nmea_reader, sentence_to_large)
 	ASSERT_THROW(dev.read_sentence(sentence), std::length_error);
 }
 
-TEST_F(Test_io_nmea_reader, no_device)
+TEST_F(test_io_nmea_reader, no_device)
 {
 	no_device_reader dev{};
 
 	ASSERT_THROW(dev.read(), std::runtime_error);
 }
 
-TEST_F(Test_io_nmea_reader, read_negative)
+TEST_F(test_io_nmea_reader, read_negative)
 {
 	message_reader dev{std::unique_ptr<::io::device>(new test_device(-1))};
 
 	ASSERT_THROW(dev.read(), std::runtime_error);
 }
 
-TEST_F(Test_io_nmea_reader, read_invalid_size)
+TEST_F(test_io_nmea_reader, read_invalid_size)
 {
 	message_reader dev{std::unique_ptr<::io::device>(new test_device(12345))};
 
 	ASSERT_THROW(dev.read(), std::runtime_error);
 }
 
-TEST_F(Test_io_nmea_reader, read_after_close)
+TEST_F(test_io_nmea_reader, read_after_close)
 {
 	message_reader dev{DATA_COMPLETE};
 
@@ -236,7 +233,7 @@ TEST_F(Test_io_nmea_reader, read_after_close)
 	ASSERT_THROW(dev.read(), std::runtime_error);
 }
 
-TEST_F(Test_io_nmea_reader, read_data_with_spaces)
+TEST_F(test_io_nmea_reader, read_data_with_spaces)
 {
 	const std::string raw = "$AIALR,000000.00,026,A,V,AIS: no position sensor in use*5D\r\n";
 

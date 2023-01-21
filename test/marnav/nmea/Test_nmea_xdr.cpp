@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_xdr : public ::testing::Test
+class test_nmea_xdr : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_xdr, contruction)
+TEST_F(test_nmea_xdr, contruction)
 {
 	EXPECT_NO_THROW(nmea::xdr xdr);
 }
 
-TEST_F(Test_nmea_xdr, properties)
+TEST_F(test_nmea_xdr, properties)
 {
 	nmea_sentence_traits<nmea::xdr>();
 }
 
-TEST_F(Test_nmea_xdr, parse)
+TEST_F(test_nmea_xdr, parse)
 {
 	auto s = nmea::make_sentence("$YXXDR,a,16.0,M,abc*1A");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_xdr, parse)
 	ASSERT_NE(nullptr, xdr);
 }
 
-TEST_F(Test_nmea_xdr, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_xdr, parse_invalid_number_of_arguments)
 {
 	// explicit qualify nmea::sentence::fields, otherwise libc++ has segfault,
 	// but only in the case with `count` of `0`.
@@ -44,14 +43,14 @@ TEST_F(Test_nmea_xdr, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::xdr>(nmea::talker::none, {3, "@"}));
 }
 
-TEST_F(Test_nmea_xdr, empty_to_string)
+TEST_F(test_nmea_xdr, empty_to_string)
 {
 	nmea::xdr xdr;
 
 	EXPECT_STREQ("$YXXDR*4F", nmea::to_string(xdr).c_str());
 }
 
-TEST_F(Test_nmea_xdr, nonempty_to_string)
+TEST_F(test_nmea_xdr, nonempty_to_string)
 {
 	nmea::xdr xdr;
 	xdr.set_info(0, {'a', 1.678, 'C', "ABC"});
@@ -59,7 +58,7 @@ TEST_F(Test_nmea_xdr, nonempty_to_string)
 	EXPECT_STREQ("$YXXDR,a,1.678,C,ABC*0B", nmea::to_string(xdr).c_str());
 }
 
-TEST_F(Test_nmea_xdr, get_info_invalid_index)
+TEST_F(test_nmea_xdr, get_info_invalid_index)
 {
 	nmea::xdr xdr;
 
@@ -67,7 +66,7 @@ TEST_F(Test_nmea_xdr, get_info_invalid_index)
 	EXPECT_ANY_THROW(xdr.get_info(nmea::xdr::max_length + 1));
 }
 
-TEST_F(Test_nmea_xdr, one_data_point)
+TEST_F(test_nmea_xdr, one_data_point)
 {
 	auto s = nmea::make_sentence("$YXXDR,a,1.0,M,abc*2C");
 	ASSERT_NE(nullptr, s);
@@ -81,7 +80,7 @@ TEST_F(Test_nmea_xdr, one_data_point)
 	EXPECT_STREQ("abc", info.name.c_str());
 }
 
-TEST_F(Test_nmea_xdr, two_data_points)
+TEST_F(test_nmea_xdr, two_data_points)
 {
 	auto s = nmea::make_sentence("$YXXDR,a,1.0,M,abc,b,2.0,M,def*48");
 	ASSERT_NE(nullptr, s);
@@ -104,7 +103,7 @@ TEST_F(Test_nmea_xdr, two_data_points)
 	}
 }
 
-TEST_F(Test_nmea_xdr, recorded)
+TEST_F(test_nmea_xdr, recorded)
 {
 	// found on the internet
 	{

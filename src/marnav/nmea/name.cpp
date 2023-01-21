@@ -1,8 +1,6 @@
 #include <marnav/nmea/name.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 std::string to_name(sentence_id t)
 {
@@ -571,6 +569,5 @@ std::string to_name(unit::velocity t)
 			return "m/s";
 	}
 	return "-";
-}
 }
 }

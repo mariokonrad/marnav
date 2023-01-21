@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id mss::ID;
 constexpr const char * mss::TAG;
@@ -34,6 +32,5 @@ void mss::append_data_to(std::string & s, const version &) const
 	append(s, format(beacon_frequency_, 3));
 	append(s, format(beacon_datarate_, 3));
 	append(s, to_string(unknown_));
-}
 }
 }

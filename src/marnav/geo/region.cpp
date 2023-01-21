@@ -2,9 +2,7 @@
 #include <stdexcept>
 #include <cmath>
 
-namespace marnav
-{
-namespace geo
+namespace marnav::geo
 {
 
 /// Initializes the region by the specified corners
@@ -128,6 +126,5 @@ bool region::inside(const position & p) const
 		return false;
 
 	return true;
-}
 }
 }

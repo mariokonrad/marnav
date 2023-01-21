@@ -4,9 +4,7 @@
 #include <marnav/ais/message_04.hpp>
 #include <marnav/geo/angle.hpp>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 /// @brief UTC/Date Response
 class message_11 : public message_04
@@ -25,7 +23,6 @@ public:
 protected:
 	message_11(const raw & bits);
 };
-}
 }
 
 #endif

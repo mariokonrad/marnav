@@ -5,9 +5,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief DPT - Depth of Water
 ///
@@ -43,7 +41,7 @@ public:
 
 protected:
 	dpt(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	units::meters depth_meter_ = units::meters{0.0};
@@ -59,7 +57,6 @@ public:
 	void set_transducer_offset(units::length t);
 	void set_max_depth(units::length t);
 };
-}
 }
 
 #endif

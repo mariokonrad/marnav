@@ -4,9 +4,7 @@
 #include <marnav-io/device.hpp>
 #include <string>
 
-namespace marnav
-{
-namespace io
+namespace marnav::io
 {
 /// This class is an abstraction for termios based serial
 /// communication.
@@ -35,7 +33,7 @@ public:
 
 	enum class parity { none, even, odd, mark };
 
-	virtual ~serial();
+	~serial() override;
 
 	serial() = delete;
 	serial(const std::string & dv, baud b, databits d, stopbits s, parity p);
@@ -44,10 +42,10 @@ public:
 	serial & operator=(const serial &) noexcept = delete;
 	serial & operator=(serial &&) = default;
 
-	virtual void open() override;
-	virtual void close() override;
-	virtual int read(char * buffer, uint32_t size) override;
-	virtual int write(const char * buffer, uint32_t size) override;
+	void open() override;
+	void close() override;
+	int read(char * buffer, uint32_t size) override;
+	int write(const char * buffer, uint32_t size) override;
 
 protected:
 	int fd; ///< File descriptor for serial device communication.
@@ -59,7 +57,6 @@ private:
 	stopbits stop_bits_;
 	parity par_;
 };
-}
 }
 
 #endif

@@ -4,10 +4,9 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_ais_angle : public ::testing::Test
+class test_ais_angle : public ::testing::Test
 {
 public:
 	struct test_case {
@@ -20,7 +19,7 @@ public:
 };
 
 // clang-format off
-const std::vector<Test_ais_angle::test_case> Test_ais_angle::LATITUDE_CASES = {
+const std::vector<test_ais_angle::test_case> test_ais_angle::LATITUDE_CASES = {
 	{  0.00123,        738},
 	{  0.01234,       7404},
 	{  0.1234,       74040},
@@ -30,7 +29,7 @@ const std::vector<Test_ais_angle::test_case> Test_ais_angle::LATITUDE_CASES = {
 	{-23.395383, 120180498},
 };
 
-const std::vector<Test_ais_angle::test_case> Test_ais_angle::LONGITUDE_CASES = {
+const std::vector<test_ais_angle::test_case> test_ais_angle::LONGITUDE_CASES = {
 	{   0.00123,        738},
 	{   0.01234,       7404},
 	{   0.1234,       74040},
@@ -42,7 +41,7 @@ const std::vector<Test_ais_angle::test_case> Test_ais_angle::LONGITUDE_CASES = {
 };
 // clang-format on
 
-TEST_F(Test_ais_angle, to_geo_latitude)
+TEST_F(test_ais_angle, to_geo_latitude)
 {
 	for (auto const & test : LATITUDE_CASES) {
 		const geo::latitude expected{test.angle};
@@ -52,7 +51,7 @@ TEST_F(Test_ais_angle, to_geo_latitude)
 	}
 }
 
-TEST_F(Test_ais_angle, to_latitude_minutes)
+TEST_F(test_ais_angle, to_latitude_minutes)
 {
 	for (auto const & test : LATITUDE_CASES) {
 		const uint32_t expected{test.angle_minutes};
@@ -62,7 +61,7 @@ TEST_F(Test_ais_angle, to_latitude_minutes)
 	}
 }
 
-TEST_F(Test_ais_angle, to_geo_longitude)
+TEST_F(test_ais_angle, to_geo_longitude)
 {
 	for (auto const & test : LONGITUDE_CASES) {
 		const geo::longitude expected{test.angle};
@@ -72,7 +71,7 @@ TEST_F(Test_ais_angle, to_geo_longitude)
 	}
 }
 
-TEST_F(Test_ais_angle, to_longitude_minutes)
+TEST_F(test_ais_angle, to_longitude_minutes)
 {
 	for (auto const & test : LONGITUDE_CASES) {
 		const uint32_t expected{test.angle_minutes};

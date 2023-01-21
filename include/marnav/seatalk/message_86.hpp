@@ -4,9 +4,7 @@
 #include <marnav/seatalk/message.hpp>
 #include <marnav/seatalk/key.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 /// @brief Keystroke
 ///
@@ -77,13 +75,13 @@ public:
 	message_86(const message_86 &) = default;
 	message_86 & operator=(const message_86 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	origin org_;
-	key k_;
+	origin org_{origin::st1000};
+	key k_{key::key_standby};
 
 public:
 	origin get_org() const { return org_; }
@@ -92,7 +90,6 @@ public:
 	void set_org(origin t) { org_ = t; }
 	void set_key(key t) { k_ = t; }
 };
-}
 }
 
 #endif

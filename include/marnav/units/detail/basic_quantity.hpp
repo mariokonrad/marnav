@@ -4,9 +4,7 @@
 #include "basic_unit.hpp"
 #include <type_traits>
 
-namespace marnav
-{
-namespace units
+namespace marnav::units
 {
 template <class Dimension, class ValueType>
 class basic_quantity
@@ -158,7 +156,6 @@ private:
 	{
 	}
 };
-}
 }
 
 #endif

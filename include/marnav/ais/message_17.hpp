@@ -6,9 +6,7 @@
 #include <marnav/utils/mmsi.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 /// @brief DGNSS Broadcast Binary Message
 class message_17 : public message
@@ -30,25 +28,25 @@ protected:
 	message_17(message_id id);
 	message_17(const raw & bits);
 	void read_data(const raw & bits);
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 private:
 	// clang-format off
-	bitset_value< 6,  2, uint32_t> repeat_indicator = 0;
-	bitset_value< 8, 30, uint32_t> mmsi = 0;
-	bitset_value<40, 18, uint32_t> longitude_minutes = longitude_not_available_short;
-	bitset_value<58, 17, uint32_t> latitude_minutes = latitude_not_available_short;
+	bitset_value< 6,  2, uint32_t> repeat_indicator_ = 0;
+	bitset_value< 8, 30, uint32_t> mmsi_ = 0;
+	bitset_value<40, 18, uint32_t> longitude_minutes_ = longitude_not_available_short;
+	bitset_value<58, 17, uint32_t> latitude_minutes_ = latitude_not_available_short;
 	// clang-format on
 
-	raw payload;
+	raw payload_;
 
 public:
-	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
-	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
-	const raw & get_payload() const { return payload; }
+	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator_; }
+	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi_}; }
+	const raw & get_payload() const { return payload_; }
 
-	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
-	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
+	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator_ = t; }
+	void set_mmsi(const utils::mmsi & t) noexcept { mmsi_ = t; }
 	void set_payload(const raw & p);
 
 	std::optional<geo::longitude> get_lon() const;
@@ -58,7 +56,6 @@ public:
 	void set_lon(const geo::longitude & t);
 	void set_lat(const geo::latitude & t);
 };
-}
 }
 
 #endif

@@ -5,9 +5,7 @@
 #include <marnav/nmea/waypoint.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief APA - Autopilot Sentence "A"
 ///
@@ -68,7 +66,7 @@ public:
 
 protected:
 	apa(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<status> loran_c_blink_warning_;
@@ -127,7 +125,6 @@ public:
 	void set_bearing_origin_to_destination(double t, reference ref);
 	void set_waypoint_id(const waypoint & id) { waypoint_id_ = id; }
 };
-}
 }
 
 #endif

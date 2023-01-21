@@ -5,9 +5,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief VBW - Dual Ground/Water Speed
 ///
@@ -45,7 +43,7 @@ public:
 
 protected:
 	vbw(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<units::knots> water_speed_longitudinal_;
@@ -66,7 +64,6 @@ public:
 	void set_water_speed(units::velocity l, units::velocity t, status s);
 	void set_ground_speed(units::velocity l, units::velocity t, status s);
 };
-}
 }
 
 #endif

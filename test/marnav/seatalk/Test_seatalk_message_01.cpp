@@ -6,28 +6,28 @@ namespace
 using namespace marnav;
 using namespace marnav::seatalk;
 
-class Test_seatalk_message_01 : public ::testing::Test
+class test_seatalk_message_01 : public ::testing::Test
 {
 };
 
-TEST_F(Test_seatalk_message_01, construction)
+TEST_F(test_seatalk_message_01, construction)
 {
 	message_01 m;
 }
 
-TEST_F(Test_seatalk_message_01, parse_invalid_data_size)
+TEST_F(test_seatalk_message_01, parse_invalid_data_size)
 {
 	EXPECT_ANY_THROW(message_01::parse({7, 0x00}));
 	EXPECT_ANY_THROW(message_01::parse({9, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_01, parse_invalid_length)
+TEST_F(test_seatalk_message_01, parse_invalid_length)
 {
 	EXPECT_ANY_THROW(message_01::parse({0x01, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}));
 	EXPECT_ANY_THROW(message_01::parse({0x01, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_01, parse)
+TEST_F(test_seatalk_message_01, parse)
 {
 	struct test_case {
 		seatalk::raw data;
@@ -54,7 +54,7 @@ TEST_F(Test_seatalk_message_01, parse)
 	}
 }
 
-TEST_F(Test_seatalk_message_01, write_default)
+TEST_F(test_seatalk_message_01, write_default)
 {
 	const seatalk::raw expected{0x01, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 	message_01 m;
@@ -62,7 +62,7 @@ TEST_F(Test_seatalk_message_01, write_default)
 	EXPECT_EQ(expected, m.get_data());
 }
 
-TEST_F(Test_seatalk_message_01, write)
+TEST_F(test_seatalk_message_01, write)
 {
 	const seatalk::raw expected{0x01, 0x05, 0x00, 0x00, 0x00, 0x60, 0x01, 0x00};
 	message_01 m;

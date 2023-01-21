@@ -3,9 +3,7 @@
 
 #include <marnav-io/seatalk_reader.hpp>
 
-namespace marnav
-{
-namespace io
+namespace marnav::io
 {
 /// Default implementation of a SeaTalk reader.
 class default_seatalk_reader : public seatalk_reader
@@ -19,18 +17,17 @@ public:
 	default_seatalk_reader & operator=(const default_seatalk_reader &) = delete;
 	default_seatalk_reader & operator=(default_seatalk_reader &&) = default;
 
-	virtual ~default_seatalk_reader() {}
+	~default_seatalk_reader() override = default;
 
 	bool read_message(seatalk::raw & data);
 
 protected:
-	virtual void process_message(const seatalk::raw & msg) override;
+	void process_message(const seatalk::raw & msg) override;
 
 private:
 	bool message_received_;
 	seatalk::raw message_;
 };
-}
 }
 
 #endif

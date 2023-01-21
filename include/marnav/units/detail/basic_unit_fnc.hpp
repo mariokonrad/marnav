@@ -4,9 +4,7 @@
 #include "basic_unit.hpp"
 #include <cmath>
 
-namespace marnav
-{
-namespace units
+namespace marnav::units
 {
 template <class U, class R>
 constexpr basic_unit<U, R> floor(const basic_unit<U, R> & v) noexcept
@@ -34,7 +32,6 @@ constexpr basic_unit<U, R> abs(const basic_unit<U, R> & v) noexcept
 {
 	using std::abs;
 	return basic_unit<U, R>(abs(v.value()));
-}
 }
 }
 

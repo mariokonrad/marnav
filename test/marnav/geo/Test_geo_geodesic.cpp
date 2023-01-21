@@ -7,11 +7,11 @@ namespace
 using namespace marnav;
 using marnav::math::pi;
 
-class Test_geo_geodesic : public ::testing::Test
+class test_geo_geodesic : public ::testing::Test
 {
 };
 
-TEST_F(Test_geo_geodesic, central_spherical_angle_default_constructed)
+TEST_F(test_geo_geodesic, central_spherical_angle_default_constructed)
 {
 	geo::position p0;
 	geo::position p1;
@@ -21,7 +21,7 @@ TEST_F(Test_geo_geodesic, central_spherical_angle_default_constructed)
 	EXPECT_NEAR(d, 0.0, 1e-6);
 }
 
-TEST_F(Test_geo_geodesic, central_spherical_angle)
+TEST_F(test_geo_geodesic, central_spherical_angle)
 {
 	struct test_data {
 		geo::position p0;
@@ -43,7 +43,7 @@ TEST_F(Test_geo_geodesic, central_spherical_angle)
 	}
 }
 
-TEST_F(Test_geo_geodesic, distance_sphere)
+TEST_F(test_geo_geodesic, distance_sphere)
 {
 	const geo::position BNA = {36.12, -86.67};
 	const geo::position LAX = {33.94, -118.40};
@@ -56,7 +56,7 @@ TEST_F(Test_geo_geodesic, distance_sphere)
 	EXPECT_NEAR(expected, result.distance, 1e-3);
 }
 
-TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_BNA_LAX)
+TEST_F(test_geo_geodesic, distance_ellipsoid_vincenty_BNA_LAX)
 {
 	const geo::position BNA = {36.12, -86.67};
 	const geo::position LAX = {33.94, -118.40};
@@ -69,7 +69,7 @@ TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_BNA_LAX)
 	EXPECT_NEAR(expected, result.distance, 1e-3);
 }
 
-TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_same_longitude)
+TEST_F(test_geo_geodesic, distance_ellipsoid_vincenty_same_longitude)
 {
 	const geo::position p1 = {00.0, 0.0};
 	const geo::position p2 = {30.0, 0.0};
@@ -82,7 +82,7 @@ TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_same_longitude)
 	EXPECT_NEAR(expected, result.distance, 0.1);
 }
 
-TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_same_latitude)
+TEST_F(test_geo_geodesic, distance_ellipsoid_vincenty_same_latitude)
 {
 	const geo::position p1 = {0.0, 0.0};
 	const geo::position p2 = {0.0, 30.0};
@@ -95,7 +95,7 @@ TEST_F(Test_geo_geodesic, distance_ellipsoid_vincenty_same_latitude)
 	EXPECT_NEAR(expected, result.distance, 0.1);
 }
 
-TEST_F(Test_geo_geodesic, distance_ellipsoid_lambert)
+TEST_F(test_geo_geodesic, distance_ellipsoid_lambert)
 {
 	const geo::position BNA = {36.12, -86.67};
 	const geo::position LAX = {33.94, -118.40};
@@ -108,7 +108,7 @@ TEST_F(Test_geo_geodesic, distance_ellipsoid_lambert)
 	EXPECT_NEAR(expected, result.distance, 1e-3);
 }
 
-TEST_F(Test_geo_geodesic, point_ellipsoid_vincenty)
+TEST_F(test_geo_geodesic, point_ellipsoid_vincenty)
 {
 	struct test_data {
 		geo::position start;

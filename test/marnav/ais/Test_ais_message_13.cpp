@@ -6,11 +6,11 @@ namespace
 {
 using namespace marnav;
 
-class Test_ais_message_13 : public ::testing::Test
+class test_ais_message_13 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_13, parse)
+TEST_F(test_ais_message_13, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v{{"=39UOj0jFs9R", 0}};
 
@@ -21,13 +21,13 @@ TEST_F(Test_ais_message_13, parse)
 	ASSERT_TRUE(m != nullptr);
 }
 
-TEST_F(Test_ais_message_13, wrong_number_of_bits)
+TEST_F(test_ais_message_13, wrong_number_of_bits)
 {
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_13>(ais::raw(71)));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_13>(ais::raw(169)));
 }
 
-TEST_F(Test_ais_message_13, test_data)
+TEST_F(test_ais_message_13, test_data)
 {
 	// see: https://fossies.org/linux/gpsd/test/sample.aivdm
 

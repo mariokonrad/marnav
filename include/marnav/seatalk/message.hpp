@@ -7,9 +7,7 @@
 #include <vector>
 #include <cstdint>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 constexpr const int MAX_MESSAGE_SIZE = 32;
@@ -78,7 +76,7 @@ class message
 public:
 	using parse_function = std::function<std::unique_ptr<message>(const raw &)>;
 
-	virtual ~message() {}
+	virtual ~message() = default;
 
 	message_id type() const;
 	virtual raw get_data() const = 0;
@@ -178,7 +176,6 @@ std::unique_ptr<T> message_cast(std::unique_ptr<message> && s)
 {
 	return detail::check_cast<T>(s.get()) ? std::unique_ptr<T>(static_cast<T *>(s.release()))
 										  : nullptr;
-}
 }
 }
 

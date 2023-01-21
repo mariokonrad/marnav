@@ -5,9 +5,7 @@
 #include <array>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief TFI - Trawl Filling Indicator
 ///
@@ -46,7 +44,7 @@ public:
 
 protected:
 	tfi(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::array<state, num_sensors> sensors_;
@@ -60,7 +58,6 @@ public:
 };
 
 std::string to_string(tfi::state value);
-}
 }
 
 #endif

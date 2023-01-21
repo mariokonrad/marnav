@@ -4,9 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief RSA - Rudder Sensor Angle
 ///
@@ -42,7 +40,7 @@ public:
 
 protected:
 	rsa(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<double> rudder1_;
@@ -59,7 +57,6 @@ public:
 	void set_rudder1(double t) noexcept;
 	void set_rudder2(double t) noexcept;
 };
-}
 }
 
 #endif

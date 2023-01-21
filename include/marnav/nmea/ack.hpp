@@ -3,9 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief ACK - Acklowledge Alarm
 ///
@@ -35,7 +33,7 @@ public:
 
 protected:
 	ack(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	uint32_t number_ = 0u;
@@ -45,7 +43,6 @@ public:
 
 	void set_number(uint32_t n) { number_ = n; }
 };
-}
 }
 
 #endif

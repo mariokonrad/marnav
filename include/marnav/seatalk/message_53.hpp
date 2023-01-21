@@ -4,9 +4,7 @@
 #include <marnav/seatalk/message.hpp>
 #include <marnav/geo/angle.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Magnetic Course
@@ -36,12 +34,12 @@ public:
 	message_53(const message_53 &) = default;
 	message_53 & operator=(const message_53 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	double cog_;
+	double cog_{0.0};
 
 public:
 	/// Returns the COG in degrees.
@@ -49,7 +47,6 @@ public:
 
 	void set_cog(double t) noexcept;
 };
-}
 }
 
 #endif

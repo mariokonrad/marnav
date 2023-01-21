@@ -3,9 +3,7 @@
 
 #include <string>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// Enumeration of all talkers, i.e. sources of data.
 enum class talker {
@@ -82,7 +80,6 @@ enum class talker {
 
 std::string to_string(talker t);
 talker make_talker(const std::string & s);
-}
 }
 
 #endif

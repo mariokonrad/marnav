@@ -7,21 +7,21 @@ namespace
 {
 using namespace marnav;
 
-class Test_nmea_bec : public ::testing::Test
+class test_nmea_bec : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_bec, contruction)
+TEST_F(test_nmea_bec, contruction)
 {
 	EXPECT_NO_THROW(nmea::bec bec);
 }
 
-TEST_F(Test_nmea_bec, properties)
+TEST_F(test_nmea_bec, properties)
 {
 	nmea_sentence_traits<nmea::bec>();
 }
 
-TEST_F(Test_nmea_bec, parse)
+TEST_F(test_nmea_bec, parse)
 {
 	auto s = nmea::make_sentence(
 		"$GPBEC,123456.78,12.34,N,123.45,E,12.34,T,23.45,M,21.43,N,WAYPNT0*07");
@@ -31,20 +31,20 @@ TEST_F(Test_nmea_bec, parse)
 	ASSERT_NE(nullptr, bec);
 }
 
-TEST_F(Test_nmea_bec, create_sentence)
+TEST_F(test_nmea_bec, create_sentence)
 {
 	const auto s = nmea::create_sentence<nmea::bec>(
 		"$GPBEC,123456.78,12.34,N,123.45,E,12.34,T,23.45,M,21.43,N,WAYPNT0*07");
 	EXPECT_EQ(nmea::sentence_id::BEC, s.id());
 }
 
-TEST_F(Test_nmea_bec, create_sentence_exception)
+TEST_F(test_nmea_bec, create_sentence_exception)
 {
 	EXPECT_ANY_THROW(nmea::create_sentence<nmea::bec>(""));
 	EXPECT_ANY_THROW(nmea::create_sentence<nmea::bec>("$IIMWV,084.0,R,10.4,N,A*04"));
 }
 
-TEST_F(Test_nmea_bec, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_bec, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::bec>(nmea::talker::none, {11, "@"}));
@@ -52,7 +52,7 @@ TEST_F(Test_nmea_bec, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::bec>(nmea::talker::none, {13, "@"}));
 }
 
-TEST_F(Test_nmea_bec, empty_to_string)
+TEST_F(test_nmea_bec, empty_to_string)
 {
 	nmea::bec bec;
 
@@ -60,7 +60,7 @@ TEST_F(Test_nmea_bec, empty_to_string)
 		"$GPBEC,000000,0000.0000,N,00000.0000,E,0,T,0,M,0,N,*0F", nmea::to_string(bec).c_str());
 }
 
-TEST_F(Test_nmea_bec, set_bearing_true)
+TEST_F(test_nmea_bec, set_bearing_true)
 {
 	nmea::bec bec;
 	bec.set_bearing_true(12.5);
@@ -69,7 +69,7 @@ TEST_F(Test_nmea_bec, set_bearing_true)
 		nmea::to_string(bec).c_str());
 }
 
-TEST_F(Test_nmea_bec, set_bearing_magn)
+TEST_F(test_nmea_bec, set_bearing_magn)
 {
 	nmea::bec bec;
 	bec.set_bearing_magn(10.2);
@@ -78,7 +78,7 @@ TEST_F(Test_nmea_bec, set_bearing_magn)
 		nmea::to_string(bec).c_str());
 }
 
-TEST_F(Test_nmea_bec, set_waypoint)
+TEST_F(test_nmea_bec, set_waypoint)
 {
 	nmea::bec bec;
 	bec.set_waypoint(nmea::waypoint{"wpt-to"});
@@ -87,7 +87,7 @@ TEST_F(Test_nmea_bec, set_waypoint)
 		nmea::to_string(bec).c_str());
 }
 
-TEST_F(Test_nmea_bec, set_time_utc)
+TEST_F(test_nmea_bec, set_time_utc)
 {
 	nmea::bec bec;
 	bec.set_time_utc(nmea::time{12, 34, 56, 789});
@@ -96,7 +96,7 @@ TEST_F(Test_nmea_bec, set_time_utc)
 		nmea::to_string(bec).c_str());
 }
 
-TEST_F(Test_nmea_bec, set_position)
+TEST_F(test_nmea_bec, set_position)
 {
 	nmea::bec bec;
 	bec.set_lat(geo::latitude{12.34});
@@ -106,7 +106,7 @@ TEST_F(Test_nmea_bec, set_position)
 		"$GPBEC,000000,1220.4000,N,12327.0000,E,0,T,0,M,0,N,*0F", nmea::to_string(bec).c_str());
 }
 
-TEST_F(Test_nmea_bec, set_distance)
+TEST_F(test_nmea_bec, set_distance)
 {
 	nmea::bec bec;
 	bec.set_distance(units::nautical_miles{2.0});
@@ -115,7 +115,7 @@ TEST_F(Test_nmea_bec, set_distance)
 		"$GPBEC,000000,0000.0000,N,00000.0000,E,0,T,0,M,2,N,*0D", nmea::to_string(bec).c_str());
 }
 
-TEST_F(Test_nmea_bec, set_distance_different_unit)
+TEST_F(test_nmea_bec, set_distance_different_unit)
 {
 	nmea::bec bec;
 	bec.set_distance(units::meters{2 * 1852.0});

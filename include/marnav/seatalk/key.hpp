@@ -3,9 +3,7 @@
 
 #include <cstdint>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 // clang-format off
 
@@ -158,7 +156,6 @@ enum class key : uint8_t {
 };
 
 // clang-format on
-}
 }
 
 #endif

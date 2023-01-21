@@ -7,21 +7,21 @@ namespace
 {
 using namespace marnav;
 
-class Test_nmea_zlz : public ::testing::Test
+class test_nmea_zlz : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_zlz, contruction)
+TEST_F(test_nmea_zlz, contruction)
 {
 	EXPECT_NO_THROW(nmea::zlz zlz);
 }
 
-TEST_F(Test_nmea_zlz, properties)
+TEST_F(test_nmea_zlz, properties)
 {
 	nmea_sentence_traits<nmea::zlz>();
 }
 
-TEST_F(Test_nmea_zlz, parse)
+TEST_F(test_nmea_zlz, parse)
 {
 	auto s = nmea::make_sentence("$GPZLZ,123456.1,133456.1,01*77");
 	ASSERT_NE(nullptr, s);
@@ -34,7 +34,7 @@ TEST_F(Test_nmea_zlz, parse)
 	EXPECT_EQ(1, zlz->get_local_zone_description());
 }
 
-TEST_F(Test_nmea_zlz, parse_large_zone_desc)
+TEST_F(test_nmea_zlz, parse_large_zone_desc)
 {
 	auto s = nmea::make_sentence("$GPZLZ,123456.1,133456.1,09*7F");
 	ASSERT_NE(nullptr, s);
@@ -47,7 +47,7 @@ TEST_F(Test_nmea_zlz, parse_large_zone_desc)
 	EXPECT_EQ(9, zlz->get_local_zone_description());
 }
 
-TEST_F(Test_nmea_zlz, parse_negative_zone_desc)
+TEST_F(test_nmea_zlz, parse_negative_zone_desc)
 {
 	auto s = nmea::make_sentence("$GPZLZ,123456.1,133456.1,-01*5A");
 	ASSERT_NE(nullptr, s);
@@ -60,7 +60,7 @@ TEST_F(Test_nmea_zlz, parse_negative_zone_desc)
 	EXPECT_EQ(-1, zlz->get_local_zone_description());
 }
 
-TEST_F(Test_nmea_zlz, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_zlz, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::zlz>(nmea::talker::none, {2, "@"}));
@@ -68,14 +68,14 @@ TEST_F(Test_nmea_zlz, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::zlz>(nmea::talker::none, {4, "@"}));
 }
 
-TEST_F(Test_nmea_zlz, empty_to_string)
+TEST_F(test_nmea_zlz, empty_to_string)
 {
 	nmea::zlz zlz;
 
 	EXPECT_STREQ("$GPZLZ,000000,000000,00*77", nmea::to_string(zlz).c_str());
 }
 
-TEST_F(Test_nmea_zlz, set_time_utc)
+TEST_F(test_nmea_zlz, set_time_utc)
 {
 	nmea::zlz zlz;
 	zlz.set_time_utc(nmea::time{12, 34, 56});
@@ -83,7 +83,7 @@ TEST_F(Test_nmea_zlz, set_time_utc)
 	EXPECT_STREQ("$GPZLZ,123456,000000,00*70", nmea::to_string(zlz).c_str());
 }
 
-TEST_F(Test_nmea_zlz, set_time_local)
+TEST_F(test_nmea_zlz, set_time_local)
 {
 	nmea::zlz zlz;
 	zlz.set_time_local(nmea::time{12, 34, 56});
@@ -91,7 +91,7 @@ TEST_F(Test_nmea_zlz, set_time_local)
 	EXPECT_STREQ("$GPZLZ,000000,123456,00*70", nmea::to_string(zlz).c_str());
 }
 
-TEST_F(Test_nmea_zlz, set_local_zone_description)
+TEST_F(test_nmea_zlz, set_local_zone_description)
 {
 	{
 		nmea::zlz zlz;
@@ -120,7 +120,7 @@ TEST_F(Test_nmea_zlz, set_local_zone_description)
 	}
 }
 
-TEST_F(Test_nmea_zlz, set_local_zone_description_invalid)
+TEST_F(test_nmea_zlz, set_local_zone_description_invalid)
 {
 	nmea::zlz zlz;
 	EXPECT_ANY_THROW(zlz.set_local_zone_description(-13));

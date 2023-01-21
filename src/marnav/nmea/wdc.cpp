@@ -3,9 +3,7 @@
 #include "checks.hpp"
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id wdc::ID;
 constexpr const char * wdc::TAG;
@@ -42,6 +40,5 @@ void wdc::append_data_to(std::string & s, const version &) const
 	append(s, format(distance_, 1));
 	append(s, to_string(unit::distance::nm));
 	append(s, to_string(waypoint_id_));
-}
 }
 }

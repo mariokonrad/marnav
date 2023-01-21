@@ -4,9 +4,7 @@
 #include <marnav/seatalk/message.hpp>
 #include <marnav/geo/angle.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Speed over Ground
@@ -29,19 +27,18 @@ public:
 	message_52(const message_52 &) = default;
 	message_52 & operator=(const message_52 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint16_t sog_;
+	uint16_t sog_{0};
 
 public:
 	double get_sog() const noexcept;
 
 	void set_sog(double t) noexcept;
 };
-}
 }
 
 #endif

@@ -2,9 +2,7 @@
 #include "checks.hpp"
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id ttm::ID;
 constexpr const char * ttm::TAG;
@@ -55,6 +53,5 @@ void ttm::append_data_to(std::string & s, const version &) const
 	append(s, to_string(target_name_));
 	append(s, to_string(target_status_));
 	append(s, to_string(reference_target_));
-}
 }
 }

@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Date
@@ -28,14 +26,14 @@ public:
 	message_56(const message_56 &) = default;
 	message_56 & operator=(const message_56 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint8_t year_;
-	uint8_t month_;
-	uint8_t day_;
+	uint8_t year_{0};
+	uint8_t month_{0};
+	uint8_t day_{0};
 
 public:
 	uint8_t get_year() const noexcept { return year_; }
@@ -44,7 +42,6 @@ public:
 
 	void set_date(uint8_t y, uint8_t m, uint8_t d) noexcept;
 };
-}
 }
 
 #endif

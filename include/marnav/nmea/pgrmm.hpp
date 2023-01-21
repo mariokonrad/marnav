@@ -4,9 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief PGRMM - Garmin Map Datum
 ///
@@ -38,7 +36,7 @@ public:
 
 protected:
 	pgrmm(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::string map_datum_;
@@ -48,7 +46,6 @@ public:
 
 	void set_map_datum(const std::string & t) noexcept;
 };
-}
 }
 
 #endif

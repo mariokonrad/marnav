@@ -4,9 +4,7 @@
 #include "basic_quantity.hpp"
 #include <cmath>
 
-namespace marnav
-{
-namespace units
+namespace marnav::units
 {
 template <class T, class VT>
 constexpr basic_quantity<T, VT> floor(const basic_quantity<T, VT> & v) noexcept
@@ -34,7 +32,6 @@ constexpr basic_quantity<T, VT> abs(const basic_quantity<T, VT> & v) noexcept
 {
 	using std::abs;
 	return basic_quantity<T, VT>(abs(v.value()));
-}
 }
 }
 

@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include "checks.hpp"
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id vwr::ID;
 constexpr const char * vwr::TAG;
@@ -90,6 +88,5 @@ void vwr::append_data_to(std::string & s, const version &) const
 	append(s, to_string_if(unit::velocity::mps, speed_mps_));
 	append(s, to_string(speed_kmh_));
 	append(s, to_string_if(unit::velocity::kmh, speed_kmh_));
-}
 }
 }

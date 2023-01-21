@@ -4,9 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief MSS - Beacon Receiver Status
 ///
@@ -39,7 +37,7 @@ public:
 
 protected:
 	mss(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	uint32_t signal_strength_ = 0;
@@ -61,7 +59,6 @@ public:
 	void set_beacon_datarate(uint32_t t) noexcept { beacon_datarate_ = t; }
 	void set_unknown(int32_t t) noexcept { unknown_ = t; }
 };
-}
 }
 
 #endif

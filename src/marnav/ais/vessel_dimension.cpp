@@ -1,9 +1,7 @@
 #include <marnav/ais/vessel_dimension.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 vessel_dimension::vessel_dimension(units::meters to_bow, units::meters to_stern,
 	units::meters to_port, units::meters to_starboard)
@@ -71,6 +69,5 @@ void vessel_dimension::set_to_starboard(units::length t)
 		throw std::invalid_argument{"length less than zero"};
 	to_starboard_
 		= math::float_cast<decltype(to_starboard_)>(round(t.get<units::meters>()).value());
-}
 }
 }

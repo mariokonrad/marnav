@@ -3,14 +3,13 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_date : public ::testing::Test
+class test_nmea_date : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_date, invalid_day)
+TEST_F(test_nmea_date, invalid_day)
 {
 	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::january, 32));
 	EXPECT_ANY_THROW(nmea::date(2012, nmea::month::february, 30));
@@ -44,13 +43,13 @@ TEST_F(Test_nmea_date, invalid_day)
 	EXPECT_ANY_THROW(nmea::date(2013, nmea::month::february, 29));
 }
 
-TEST_F(Test_nmea_date, invalid_month)
+TEST_F(test_nmea_date, invalid_month)
 {
 	EXPECT_ANY_THROW(nmea::date(2012, static_cast<nmea::month>(0), 0));
 	EXPECT_ANY_THROW(nmea::date(2012, static_cast<nmea::month>(13), 0));
 }
 
-TEST_F(Test_nmea_date, comparison_equal)
+TEST_F(test_nmea_date, comparison_equal)
 {
 	nmea::date d0{2010, nmea::month::january, 1};
 	nmea::date d1{2010, nmea::month::january, 1};
@@ -58,12 +57,12 @@ TEST_F(Test_nmea_date, comparison_equal)
 	EXPECT_TRUE(d0 == d1);
 }
 
-TEST_F(Test_nmea_date, invalid_format_for_double)
+TEST_F(test_nmea_date, invalid_format_for_double)
 {
 	EXPECT_ANY_THROW(nmea::date::parse("123.455.6"));
 }
 
-TEST_F(Test_nmea_date, to_string)
+TEST_F(test_nmea_date, to_string)
 {
 	nmea::date d{2010, nmea::month::january, 1};
 
@@ -72,7 +71,7 @@ TEST_F(Test_nmea_date, to_string)
 	EXPECT_STREQ("010120", s.c_str());
 }
 
-TEST_F(Test_nmea_date, is_leap_year)
+TEST_F(test_nmea_date, is_leap_year)
 {
 	EXPECT_TRUE(nmea::date::is_leap_year(1980));
 	EXPECT_FALSE(nmea::date::is_leap_year(1981));

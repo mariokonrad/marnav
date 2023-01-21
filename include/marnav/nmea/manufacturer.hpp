@@ -4,9 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// Enumeration of manufacturer IDs.
 enum class manufacturer_id {
@@ -564,7 +562,6 @@ std::string get_manufacturer_tag(manufacturer_id id);
 std::string get_manufacturer_name(manufacturer_id id);
 
 std::vector<manufacturer_id> get_supported_manufacturer_id();
-}
 }
 
 #endif

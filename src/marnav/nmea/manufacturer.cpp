@@ -3,24 +3,18 @@
 #include <algorithm>
 #include <vector>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @cond DEV
 namespace
 {
 struct entry final {
-	~entry() noexcept;
+	~entry() noexcept = default;
 
 	manufacturer_id id;
 	std::string tag;
 	std::string name;
 };
-
-entry::~entry() noexcept
-{
-}
 
 using manufacturer_map = std::vector<entry>;
 
@@ -658,6 +652,5 @@ std::vector<manufacturer_id> get_supported_manufacturer_id()
 	}
 
 	return v;
-}
 }
 }

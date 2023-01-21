@@ -1,9 +1,7 @@
 #include <marnav/nmea/time.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 
 /// @cond DEV
@@ -174,6 +172,5 @@ std::string to_string(const duration & d)
 	char buf[7];
 	snprintf(buf, sizeof(buf), "%02u%02u%02u", d.hour(), d.minutes(), d.seconds());
 	return buf;
-}
 }
 }

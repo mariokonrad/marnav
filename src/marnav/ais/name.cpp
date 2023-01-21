@@ -1,8 +1,6 @@
 #include <marnav/ais/name.hpp>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 std::string to_name(message_id t)
 {
@@ -361,6 +359,5 @@ std::string to_name(data_terminal t)
 			return "not ready";
 	}
 	return "-";
-}
 }
 }

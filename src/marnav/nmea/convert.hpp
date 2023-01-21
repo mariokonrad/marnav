@@ -5,9 +5,7 @@
 #include <marnav/geo/angle.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 direction convert_hemisphere(const geo::latitude & p) noexcept;
 direction convert_hemisphere(const geo::longitude & p) noexcept;
@@ -23,7 +21,6 @@ geo::longitude correct_hemisphere(const geo::longitude & v, const direction & d)
 
 std::optional<geo::longitude> correct_hemisphere(
 	const std::optional<geo::longitude> & v, const std::optional<direction> & d);
-}
 }
 
 #endif

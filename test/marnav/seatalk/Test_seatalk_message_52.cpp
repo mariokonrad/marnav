@@ -6,28 +6,28 @@ namespace
 
 using namespace marnav::seatalk;
 
-class Test_seatalk_message_52 : public ::testing::Test
+class test_seatalk_message_52 : public ::testing::Test
 {
 };
 
-TEST_F(Test_seatalk_message_52, construction)
+TEST_F(test_seatalk_message_52, construction)
 {
 	EXPECT_NO_THROW(message_52 m);
 }
 
-TEST_F(Test_seatalk_message_52, parse_invalid_data_size)
+TEST_F(test_seatalk_message_52, parse_invalid_data_size)
 {
 	EXPECT_ANY_THROW(message_52::parse({3, 0x00}));
 	EXPECT_ANY_THROW(message_52::parse({5, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_52, parse_invalid_length)
+TEST_F(test_seatalk_message_52, parse_invalid_length)
 {
 	EXPECT_ANY_THROW(message_52::parse({0x52, 0x00, 0x00, 0x00}));
 	EXPECT_ANY_THROW(message_52::parse({0x52, 0x02, 0x00, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_52, parse)
+TEST_F(test_seatalk_message_52, parse)
 {
 	struct test_case {
 		raw data;
@@ -54,7 +54,7 @@ TEST_F(Test_seatalk_message_52, parse)
 	}
 }
 
-TEST_F(Test_seatalk_message_52, write_default)
+TEST_F(test_seatalk_message_52, write_default)
 {
 	const raw expected{0x52, 0x01, 0x00, 0x00};
 	message_52 m;

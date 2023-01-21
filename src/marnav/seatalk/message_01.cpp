@@ -1,8 +1,6 @@
 #include <marnav/seatalk/message_01.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 constexpr equipment_id message_01::course_computer_400g;
 constexpr equipment_id message_01::st60_tridata;
@@ -22,7 +20,7 @@ std::unique_ptr<message> message_01::parse(const raw & data)
 	check_size(data, SIZE);
 
 	std::unique_ptr<message> result = std::make_unique<message_01>();
-	message_01 & msg = static_cast<message_01 &>(*result);
+	auto & msg = static_cast<message_01 &>(*result);
 
 	for (auto i = 0; i < 6; ++i)
 		msg.id_[i] = data[i + 2];
@@ -33,6 +31,5 @@ std::unique_ptr<message> message_01::parse(const raw & data)
 raw message_01::get_data() const
 {
 	return raw{static_cast<uint8_t>(ID), 0x05, id_[0], id_[1], id_[2], id_[3], id_[4], id_[5]};
-}
 }
 }

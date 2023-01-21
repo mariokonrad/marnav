@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id vbw::ID;
 constexpr const char * vbw::TAG;
@@ -78,6 +76,5 @@ void vbw::append_data_to(std::string & s, const version &) const
 	append(s, format(ground_speed_longitudinal_, 1));
 	append(s, format(ground_speed_transveral_, 1));
 	append(s, to_string(ground_speed_status_));
-}
 }
 }

@@ -4,9 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief ROT - Rate Of Turn
 ///
@@ -38,7 +36,7 @@ public:
 
 protected:
 	rot(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<double> deg_per_minute_;
@@ -51,7 +49,6 @@ public:
 	void set_deg_per_minute(double t) noexcept { deg_per_minute_ = t; }
 	void set_data_valid(status t) noexcept { data_valid_ = t; }
 };
-}
 }
 
 #endif

@@ -3,9 +3,7 @@
 
 #include <marnav/units/units.hpp>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 class vessel_dimension
 {
@@ -60,7 +58,6 @@ private:
 	uint32_t get_raw_to_port() const noexcept { return to_port_; }
 	uint32_t get_raw_to_starboard() const noexcept { return to_starboard_; }
 };
-}
 }
 
 #endif

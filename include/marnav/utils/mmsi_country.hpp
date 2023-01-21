@@ -3,9 +3,7 @@
 
 #include <string>
 
-namespace marnav
-{
-namespace utils
+namespace marnav::utils
 {
 class mmsi; // forward
 
@@ -16,7 +14,6 @@ struct mmsi_country_info {
 };
 
 mmsi_country_info mmsi_country(const mmsi & m);
-}
 }
 
 #endif

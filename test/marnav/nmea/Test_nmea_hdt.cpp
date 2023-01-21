@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_hdt : public ::testing::Test
+class test_nmea_hdt : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_hdt, contruction)
+TEST_F(test_nmea_hdt, contruction)
 {
 	EXPECT_NO_THROW(nmea::hdt hdt);
 }
 
-TEST_F(Test_nmea_hdt, properties)
+TEST_F(test_nmea_hdt, properties)
 {
 	nmea_sentence_traits<nmea::hdt>();
 }
 
-TEST_F(Test_nmea_hdt, parse)
+TEST_F(test_nmea_hdt, parse)
 {
 	auto s = nmea::make_sentence("$IIHDT,45.8,T*1B");
 	ASSERT_NE(nullptr, s);
@@ -35,7 +34,7 @@ TEST_F(Test_nmea_hdt, parse)
 	EXPECT_NEAR(45.8, heading.value(), 1e-8);
 }
 
-TEST_F(Test_nmea_hdt, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_hdt, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::hdt>(nmea::talker::none, {1, "@"}));
@@ -43,14 +42,14 @@ TEST_F(Test_nmea_hdt, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::hdt>(nmea::talker::none, {3, "@"}));
 }
 
-TEST_F(Test_nmea_hdt, empty_to_string)
+TEST_F(test_nmea_hdt, empty_to_string)
 {
 	nmea::hdt hdt;
 
 	EXPECT_STREQ("$IIHDT,,*58", nmea::to_string(hdt).c_str());
 }
 
-TEST_F(Test_nmea_hdt, set_heading)
+TEST_F(test_nmea_hdt, set_heading)
 {
 	nmea::hdt hdt;
 	hdt.set_heading(45.8);

@@ -5,14 +5,13 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_io : public ::testing::Test
+class test_nmea_io : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_io, read_empty_latitude_string)
+TEST_F(test_nmea_io, read_empty_latitude_string)
 {
 	geo::latitude lat{12.3};
 	nmea::read("", lat);
@@ -20,7 +19,7 @@ TEST_F(Test_nmea_io, read_empty_latitude_string)
 	EXPECT_DOUBLE_EQ(geo::latitude{}, lat);
 }
 
-TEST_F(Test_nmea_io, read_empty_longitude_string)
+TEST_F(test_nmea_io, read_empty_longitude_string)
 {
 	geo::longitude lon{123.4};
 	nmea::read("", lon);
@@ -28,7 +27,7 @@ TEST_F(Test_nmea_io, read_empty_longitude_string)
 	EXPECT_DOUBLE_EQ(geo::longitude{}, lon);
 }
 
-TEST_F(Test_nmea_io, read_int32_positive_hex)
+TEST_F(test_nmea_io, read_int32_positive_hex)
 {
 	const std::string s{"abc"};
 	int32_t val = 0;
@@ -38,7 +37,7 @@ TEST_F(Test_nmea_io, read_int32_positive_hex)
 	EXPECT_EQ(0xabc, val);
 }
 
-TEST_F(Test_nmea_io, read_int32_negative_hex)
+TEST_F(test_nmea_io, read_int32_negative_hex)
 {
 	const std::string s{"-abc"};
 	int32_t val = 0;
@@ -48,7 +47,7 @@ TEST_F(Test_nmea_io, read_int32_negative_hex)
 	EXPECT_EQ(-0xabc, val);
 }
 
-TEST_F(Test_nmea_io, format_int32_hex)
+TEST_F(test_nmea_io, format_int32_hex)
 {
 	const int32_t val = 0xabcd;
 	auto s = nmea::format(val, 1, nmea::data_format::hex);
@@ -56,7 +55,7 @@ TEST_F(Test_nmea_io, format_int32_hex)
 	EXPECT_STREQ("abcd", s.c_str());
 }
 
-TEST_F(Test_nmea_io, format_int32_none)
+TEST_F(test_nmea_io, format_int32_none)
 {
 	const int32_t val = -10;
 	auto s = nmea::format(val, 1, nmea::data_format::none);
@@ -64,7 +63,7 @@ TEST_F(Test_nmea_io, format_int32_none)
 	EXPECT_STREQ("-10", s.c_str());
 }
 
-TEST_F(Test_nmea_io, format_uint32_none)
+TEST_F(test_nmea_io, format_uint32_none)
 {
 	const uint32_t val = 10;
 	auto s = nmea::format(val, 1, nmea::data_format::none);
@@ -72,7 +71,7 @@ TEST_F(Test_nmea_io, format_uint32_none)
 	EXPECT_STREQ("10", s.c_str());
 }
 
-TEST_F(Test_nmea_io, read_double_classic_locale)
+TEST_F(test_nmea_io, read_double_classic_locale)
 {
 	auto old_locale = std::locale::global(std::locale::classic());
 
@@ -84,7 +83,7 @@ TEST_F(Test_nmea_io, read_double_classic_locale)
 	std::locale::global(old_locale);
 }
 
-TEST_F(Test_nmea_io, read_double_french_locale)
+TEST_F(test_nmea_io, read_double_french_locale)
 {
 	std::locale old_locale;
 
@@ -107,7 +106,7 @@ TEST_F(Test_nmea_io, read_double_french_locale)
 	std::locale::global(old_locale);
 }
 
-TEST_F(Test_nmea_io, format_double_classic_locale)
+TEST_F(test_nmea_io, format_double_classic_locale)
 {
 	auto old_locale = std::locale::global(std::locale::classic());
 
@@ -120,7 +119,7 @@ TEST_F(Test_nmea_io, format_double_classic_locale)
 	std::locale::global(old_locale);
 }
 
-TEST_F(Test_nmea_io, format_double_french_locale)
+TEST_F(test_nmea_io, format_double_french_locale)
 {
 	std::locale old_locale;
 

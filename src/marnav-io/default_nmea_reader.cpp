@@ -15,18 +15,12 @@
 /// them to a TCP listener. Only valid NMEA sentences are forwarded, no other filtering
 /// is taking place. This example uses \c boost.asio for both serial and TCP communication.
 
-namespace marnav
-{
-namespace io
+namespace marnav::io
 {
 
 default_nmea_reader::default_nmea_reader(std::unique_ptr<device> && dv)
 	: nmea_reader(std::move(dv))
 	, received_(false)
-{
-}
-
-default_nmea_reader::~default_nmea_reader()
 {
 }
 
@@ -61,6 +55,5 @@ void default_nmea_reader::process_sentence(const std::string & s)
 {
 	sentence_ = s;
 	received_ = true;
-}
 }
 }

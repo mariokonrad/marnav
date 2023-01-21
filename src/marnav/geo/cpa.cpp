@@ -2,9 +2,7 @@
 #include <marnav/math/vector.hpp>
 #include <cmath>
 
-namespace marnav
-{
-namespace geo
+namespace marnav::geo
 {
 
 /// @brief Computes the CPA (closest point of approach)
@@ -128,6 +126,5 @@ std::tuple<position, position, std::chrono::seconds, bool> cpa(
 	return std::make_tuple<position, position, std::chrono::seconds>(
 		position{v1_t[1], -v1_t[0]}, position{v2_t[1], -v2_t[0]},
 		std::chrono::duration_cast<std::chrono::seconds>(t_cpa_seconds), true);
-}
 }
 }

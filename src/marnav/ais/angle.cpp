@@ -3,9 +3,7 @@
 #include <cmath>
 #include <cassert>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 /// @cond DEV
 namespace
@@ -116,6 +114,5 @@ uint32_t to_longitude_minutes(
 	const marnav::geo::longitude & lon, std::size_t bits, angle_scale scale)
 {
 	return deg_to(lon.get(), bits, scale);
-}
 }
 }

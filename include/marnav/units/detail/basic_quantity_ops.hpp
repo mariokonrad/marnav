@@ -5,9 +5,7 @@
 #include "basic_unit.hpp"
 #include "dimension.hpp"
 
-namespace marnav
-{
-namespace units
+namespace marnav::units
 {
 template <class T, class VT>
 constexpr basic_quantity<T, VT> operator*(
@@ -77,7 +75,6 @@ constexpr basic_quantity<ResultDim, VT> operator/(const basic_quantity<Dimension
 	const basic_quantity<Dimension2, VT> & v2) noexcept
 {
 	return basic_quantity<ResultDim, VT>(v1.value() / v2.value());
-}
 }
 }
 

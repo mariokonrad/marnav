@@ -14,11 +14,10 @@ class message_reader : public io::seatalk_reader
 public:
 	message_reader(std::unique_ptr<io::device> && dev)
 		: seatalk_reader(std::move(dev))
-		, message_received(false)
 	{
 	}
 
-	virtual ~message_reader() {}
+	~message_reader() override = default;
 
 	/// Reads synchronously messages from the device.
 	///
@@ -34,7 +33,7 @@ public:
 			// please note: this works only in single threaded environment,
 			// since the 'semaphore' isn't really one.
 			if (message_received) {
-				data = message;
+				data = message_;
 				message_received = false;
 				return true;
 			}
@@ -47,15 +46,15 @@ protected:
 	/// as poor-mans semaphore to signal the receipt.
 	///
 	/// After the reception, the message will be stored temporarily.
-	virtual void process_message(const seatalk::raw & msg) override
+	void process_message(const seatalk::raw & msg) override
 	{
-		message = msg;
+		message_ = msg;
 		message_received = true;
 	}
 
 private:
-	bool message_received;
-	seatalk::raw message;
+	bool message_received{false};
+	seatalk::raw message_;
 };
 
 int main(int, char **)

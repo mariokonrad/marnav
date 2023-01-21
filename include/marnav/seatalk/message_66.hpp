@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Wind Alarm
@@ -47,12 +45,12 @@ public:
 	message_66(const message_66 &) = default;
 	message_66 & operator=(const message_66 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	alarm value_;
+	alarm value_{alarm::no_alarm};
 
 public:
 	alarm get_alarm() const noexcept { return value_; }
@@ -62,7 +60,6 @@ public:
 
 message_66::alarm operator|(message_66::alarm a, message_66::alarm b) noexcept;
 message_66::alarm operator&(message_66::alarm a, message_66::alarm b) noexcept;
-}
 }
 
 #endif

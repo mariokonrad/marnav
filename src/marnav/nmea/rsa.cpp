@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id rsa::ID;
 constexpr const char * rsa::TAG;
@@ -44,6 +42,5 @@ void rsa::append_data_to(std::string & s, const version &) const
 	append(s, to_string(rudder1_valid_));
 	append(s, format(rudder2_, 1));
 	append(s, to_string(rudder2_valid_));
-}
 }
 }

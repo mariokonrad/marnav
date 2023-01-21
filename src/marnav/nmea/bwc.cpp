@@ -3,9 +3,7 @@
 #include "checks.hpp"
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id bwc::ID;
 constexpr const char * bwc::TAG;
@@ -110,6 +108,5 @@ void bwc::append_data_to(std::string & s, const version &) const
 	append(s, to_string_if(unit::distance::nm, distance_));
 	append(s, to_string(waypoint_id_));
 	append(s, to_string(mode_ind_));
-}
 }
 }

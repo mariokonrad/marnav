@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_tpc : public ::testing::Test
+class test_nmea_tpc : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_tpc, contruction)
+TEST_F(test_nmea_tpc, contruction)
 {
 	EXPECT_NO_THROW(nmea::tpc tpc);
 }
 
-TEST_F(Test_nmea_tpc, properties)
+TEST_F(test_nmea_tpc, properties)
 {
 	nmea_sentence_traits<nmea::tpc>();
 }
 
-TEST_F(Test_nmea_tpc, parse)
+TEST_F(test_nmea_tpc, parse)
 {
 	auto s = nmea::make_sentence("$GPTPC,1.0,M,2.0,M,3.0,M*33");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_tpc, parse)
 	ASSERT_NE(nullptr, tpc);
 }
 
-TEST_F(Test_nmea_tpc, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_tpc, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::tpc>(nmea::talker::none, {5, "@"}));
@@ -39,7 +38,7 @@ TEST_F(Test_nmea_tpc, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::tpc>(nmea::talker::none, {7, "@"}));
 }
 
-TEST_F(Test_nmea_tpc, empty_to_string)
+TEST_F(test_nmea_tpc, empty_to_string)
 {
 	nmea::tpc tpc;
 

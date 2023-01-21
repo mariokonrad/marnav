@@ -4,9 +4,7 @@
 #include <marnav/seatalk/message.hpp>
 #include <marnav/geo/angle.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Position Latitude
@@ -33,7 +31,7 @@ public:
 	message_50(const message_50 &) = default;
 	message_50 & operator=(const message_50 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
@@ -45,7 +43,6 @@ public:
 
 	void set_lat(const geo::latitude & t) noexcept { lat_ = t; }
 };
-}
 }
 
 #endif

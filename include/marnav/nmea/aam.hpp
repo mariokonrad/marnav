@@ -8,9 +8,7 @@
 #include <marnav/units/units.hpp>
 #include <string>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief AAM - Waypoint Arrival Alarm
 ///
@@ -56,7 +54,7 @@ public:
 
 protected:
 	aam(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	status arrival_circle_entered_ = status::warning;
@@ -75,7 +73,6 @@ public:
 	void set_arrival_circle_radius(units::length t);
 	void set_waypoint_id(const waypoint & id) { waypoint_id_ = id; }
 };
-}
 }
 
 #endif

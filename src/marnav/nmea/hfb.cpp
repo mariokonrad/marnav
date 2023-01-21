@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include "checks.hpp"
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id hfb::ID;
 constexpr const char * hfb::TAG;
@@ -39,6 +37,5 @@ void hfb::append_data_to(std::string & s, const version &) const
 	append(s, to_string(unit::distance::meter));
 	append(s, to_string(distance_head_bottom_));
 	append(s, to_string(unit::distance::meter));
-}
 }
 }

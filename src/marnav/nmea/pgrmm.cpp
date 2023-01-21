@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id pgrmm::ID;
 constexpr const char * pgrmm::TAG;
@@ -36,6 +34,5 @@ void pgrmm::set_map_datum(const std::string & t) noexcept
 	} else {
 		map_datum_ = t.substr(0, 72);
 	}
-}
 }
 }

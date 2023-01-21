@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_lcd : public ::testing::Test
+class test_nmea_lcd : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_lcd, contruction)
+TEST_F(test_nmea_lcd, contruction)
 {
 	EXPECT_NO_THROW(nmea::lcd lcd);
 }
 
-TEST_F(Test_nmea_lcd, properties)
+TEST_F(test_nmea_lcd, properties)
 {
 	nmea_sentence_traits<nmea::lcd>();
 }
 
-TEST_F(Test_nmea_lcd, parse)
+TEST_F(test_nmea_lcd, parse)
 {
 	auto s = nmea::make_sentence("$GPLCD,1,001,000,001,000,002,000,003,000,004,000,,*44");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_lcd, parse)
 	ASSERT_NE(nullptr, lcd);
 }
 
-TEST_F(Test_nmea_lcd, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_lcd, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::lcd>(nmea::talker::none, {12, "@"}));
@@ -39,14 +38,14 @@ TEST_F(Test_nmea_lcd, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::lcd>(nmea::talker::none, {14, "@"}));
 }
 
-TEST_F(Test_nmea_lcd, empty_to_string)
+TEST_F(test_nmea_lcd, empty_to_string)
 {
 	nmea::lcd lcd;
 
 	EXPECT_STREQ("$GPLCD,0,000,000,,,,,,,,,,*40", nmea::to_string(lcd).c_str());
 }
 
-TEST_F(Test_nmea_lcd, set_time_diff_invalid_index)
+TEST_F(test_nmea_lcd, set_time_diff_invalid_index)
 {
 	nmea::lcd lcd;
 
@@ -55,7 +54,7 @@ TEST_F(Test_nmea_lcd, set_time_diff_invalid_index)
 	EXPECT_ANY_THROW(lcd.set_time_diff(nmea::lcd::max_differences, {0, 0}));
 }
 
-TEST_F(Test_nmea_lcd, get_time_diff_invalid_index)
+TEST_F(test_nmea_lcd, get_time_diff_invalid_index)
 {
 	nmea::lcd lcd;
 

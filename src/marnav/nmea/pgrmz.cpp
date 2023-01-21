@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include "checks.hpp"
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @cond DEV
 namespace
@@ -73,6 +71,5 @@ void pgrmz::append_data_to(std::string & s, const version &) const
 	append(s, to_string(altitude_));
 	append(s, to_string(unit::distance::feet));
 	append(s, to_string(fix_));
-}
 }
 }

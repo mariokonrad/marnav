@@ -7,9 +7,7 @@
 #include <cmath>
 #include <cassert>
 
-namespace marnav
-{
-namespace math
+namespace marnav::math
 {
 
 template <typename T,
@@ -22,10 +20,10 @@ public:
 
 	quaternion(value_type w = 1.0, value_type x = 0.0, value_type y = 0.0, value_type z = 0.0)
 	{
-		a[0] = w;
-		a[1] = x;
-		a[2] = y;
-		a[3] = z;
+		a_[0] = w;
+		a_[1] = x;
+		a_[2] = y;
+		a_[3] = z;
 	}
 
 	quaternion(const quaternion &) = default;
@@ -34,10 +32,10 @@ public:
 
 	quaternion(const vector3<T> & v)
 	{
-		a[0] = 0.0;
-		a[1] = v[0];
-		a[2] = v[1];
-		a[3] = v[2];
+		a_[0] = 0.0;
+		a_[1] = v[0];
+		a_[2] = v[1];
+		a_[3] = v[2];
 	}
 
 	/// Creates a quaternion for 3D rotation.
@@ -55,16 +53,16 @@ public:
 		// sin(phi / 2) with normalization
 		value_type s = sin(angle * 0.5) / d;
 
-		a[0] = cos(angle * 0.5);
-		a[1] = axis[0] * s;
-		a[2] = axis[1] * s;
-		a[3] = axis[2] * s;
+		a_[0] = cos(angle * 0.5);
+		a_[1] = axis[0] * s;
+		a_[2] = axis[1] * s;
+		a_[3] = axis[2] * s;
 	}
 
-	inline value_type w() const { return a[0]; }
-	inline value_type x() const { return a[1]; }
-	inline value_type y() const { return a[2]; }
-	inline value_type z() const { return a[3]; }
+	inline value_type w() const { return a_[0]; }
+	inline value_type x() const { return a_[1]; }
+	inline value_type y() const { return a_[2]; }
+	inline value_type z() const { return a_[3]; }
 
 	static quaternion make_from_euler(value_type yaw, value_type pitch, value_type roll)
 	{
@@ -85,10 +83,10 @@ public:
 		const value_type c_roll = cos(roll);
 		const value_type s_roll = sin(roll);
 
-		a[0] = c_roll * c_pitch * c_yaw + s_roll * s_pitch * s_yaw;
-		a[1] = c_roll * s_pitch * c_yaw + s_roll * c_pitch * s_yaw;
-		a[2] = c_roll * c_pitch * s_yaw - s_roll * s_pitch * c_yaw;
-		a[3] = s_roll * c_pitch * c_yaw - c_roll * s_pitch * s_yaw;
+		a_[0] = c_roll * c_pitch * c_yaw + s_roll * s_pitch * s_yaw;
+		a_[1] = c_roll * s_pitch * c_yaw + s_roll * c_pitch * s_yaw;
+		a_[2] = c_roll * c_pitch * s_yaw - s_roll * s_pitch * c_yaw;
+		a_[3] = s_roll * c_pitch * c_yaw - c_roll * s_pitch * s_yaw;
 
 		return *this;
 	}
@@ -112,14 +110,14 @@ public:
 
 	inline value_type length2() const
 	{
-		return a[0] * a[0] + a[1] * a[1] + a[2] * a[2] + a[3] * a[3];
+		return a_[0] * a_[0] + a_[1] * a_[1] + a_[2] * a_[2] + a_[3] * a_[3];
 	}
 
 	inline vector3<T> get_vector3() const { return vector3<T>{x(), y(), z()}; }
 
 	inline vector4<T> get_vector4() const { return vector4<T>{w(), x(), y(), z()}; }
 
-	inline value_type operator[](size_type index) const { return a[index]; }
+	inline value_type operator[](size_type index) const { return a_[index]; }
 
 	inline quaternion & operator=(const quaternion &) = default;
 
@@ -131,7 +129,7 @@ public:
 			return true;
 
 		for (size_type i = 0; i < 4; ++i)
-			if (!is_same(a[i], q.a[i]))
+			if (!is_same(a_[i], q.a_[i]))
 				return false;
 		return true;
 	}
@@ -146,22 +144,22 @@ public:
 
 	inline quaternion & operator*=(value_type s)
 	{
-		for (size_type i = 0; i < 4; ++i)
-			a[i] *= s;
+		for (auto & i : a_)
+			i *= s;
 		return *this;
 	}
 
 	inline quaternion & operator+=(const quaternion & q)
 	{
 		for (size_type i = 0; i < 4; ++i)
-			a[i] += q.a[i];
+			a_[i] += q.a_[i];
 		return *this;
 	}
 
 	inline quaternion & operator-=(const quaternion & q)
 	{
 		for (size_type i = 0; i < 4; ++i)
-			a[i] -= q.a[i];
+			a_[i] -= q.a_[i];
 		return *this;
 	}
 
@@ -239,11 +237,10 @@ public:
 	}
 
 private:
-	value_type a[4];
+	value_type a_[4];
 };
 
 using quat = quaternion<double>;
-}
 }
 
 #endif

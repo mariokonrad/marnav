@@ -3,14 +3,13 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_duration : public ::testing::Test
+class test_nmea_duration : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_duration, explicit_construction)
+TEST_F(test_nmea_duration, explicit_construction)
 {
 	EXPECT_ANY_THROW((nmea::duration{100, 0, 0, 0}));
 	EXPECT_ANY_THROW((nmea::duration{0, 60, 0, 0}));
@@ -18,35 +17,35 @@ TEST_F(Test_nmea_duration, explicit_construction)
 	EXPECT_ANY_THROW((nmea::duration{0, 0, 0, 1000}));
 }
 
-TEST_F(Test_nmea_duration, hour)
+TEST_F(test_nmea_duration, hour)
 {
 	nmea::duration t{1, 2, 3, 4};
 
 	EXPECT_EQ(1u, t.hour());
 }
 
-TEST_F(Test_nmea_duration, minutes)
+TEST_F(test_nmea_duration, minutes)
 {
 	nmea::duration t{1, 2, 3, 4};
 
 	EXPECT_EQ(2u, t.minutes());
 }
 
-TEST_F(Test_nmea_duration, seconds)
+TEST_F(test_nmea_duration, seconds)
 {
 	nmea::duration t{1, 2, 3, 4};
 
 	EXPECT_EQ(3u, t.seconds());
 }
 
-TEST_F(Test_nmea_duration, milliseconds)
+TEST_F(test_nmea_duration, milliseconds)
 {
 	nmea::duration t{1, 2, 3, 4};
 
 	EXPECT_EQ(4u, t.milliseconds());
 }
 
-TEST_F(Test_nmea_duration, comparison_equal)
+TEST_F(test_nmea_duration, comparison_equal)
 {
 	nmea::duration t0{1, 2, 3, 4};
 	nmea::duration t1{1, 2, 3, 4};
@@ -54,12 +53,12 @@ TEST_F(Test_nmea_duration, comparison_equal)
 	EXPECT_TRUE(t0 == t1);
 }
 
-TEST_F(Test_nmea_duration, invalid_format_for_double)
+TEST_F(test_nmea_duration, invalid_format_for_double)
 {
 	EXPECT_ANY_THROW(nmea::duration::parse("123.455.6"));
 }
 
-TEST_F(Test_nmea_duration, to_string)
+TEST_F(test_nmea_duration, to_string)
 {
 	nmea::duration t{99, 2, 3, 4};
 
@@ -69,7 +68,7 @@ TEST_F(Test_nmea_duration, to_string)
 	EXPECT_STREQ("990203", s.c_str());
 }
 
-TEST_F(Test_nmea_duration, chrono_construction)
+TEST_F(test_nmea_duration, chrono_construction)
 {
 	using namespace std::chrono;
 
@@ -102,7 +101,7 @@ TEST_F(Test_nmea_duration, chrono_construction)
 	EXPECT_EQ(nmea::duration(99, 0, 0, 999), nmea::duration(hours(99) + milliseconds(999)));
 }
 
-TEST_F(Test_nmea_duration, chrono_conversion)
+TEST_F(test_nmea_duration, chrono_conversion)
 {
 	using namespace std::chrono;
 
@@ -113,7 +112,7 @@ TEST_F(Test_nmea_duration, chrono_conversion)
 	EXPECT_EQ(hours(99) + milliseconds(999), nmea::duration(99, 0, 0, 999).chrono());
 }
 
-TEST_F(Test_nmea_duration, duration_cast)
+TEST_F(test_nmea_duration, duration_cast)
 {
 	using namespace std::chrono;
 

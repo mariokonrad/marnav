@@ -3,9 +3,7 @@
 
 #include <marnav/geo/angle.hpp>
 
-namespace marnav
-{
-namespace geo
+namespace marnav::geo
 {
 
 /// @brief Represents a position, consisting of latitude and longitude.
@@ -35,7 +33,6 @@ private:
 
 position deg2rad(const position & p);
 position rad2deg(const position & p);
-}
 }
 
 #endif

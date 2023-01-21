@@ -4,9 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief SFI - Scanning Frequency Information
 ///
@@ -44,7 +42,7 @@ public:
 
 protected:
 	sfi(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	uint32_t number_of_messages_ = 0;
@@ -60,7 +58,6 @@ public:
 	void set_message_number(uint32_t t) noexcept { message_number_ = t; }
 	void set_frequencies(const std::vector<scanning_frequency> & v);
 };
-}
 }
 
 #endif

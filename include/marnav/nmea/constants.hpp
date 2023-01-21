@@ -3,9 +3,7 @@
 
 #include <cstdint>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// Enumeration of all possible directions.
 enum class direction : char {
@@ -116,7 +114,6 @@ enum class type_of_point : char {
 	reference, ///< NMEA representation: 'R'
 	wheelover, ///< NMEA representation: 'W'
 };
-}
 }
 
 #endif

@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id alm::ID;
 constexpr const char * alm::TAG;
@@ -62,6 +60,5 @@ void alm::append_data_to(std::string & s, const version &) const
 	append(s, format(mean_anomaly_, 1, data_format::hex));
 	append(s, format(f0_clock_parameter_, 1, data_format::hex));
 	append(s, format(f1_clock_parameter_, 1, data_format::hex));
-}
 }
 }

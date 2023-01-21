@@ -6,7 +6,7 @@ namespace
 
 using namespace marnav::geo;
 
-class Test_geo_region : public ::testing::Test
+class test_geo_region : public ::testing::Test
 {
 public:
 	region create_arround_zero()
@@ -111,7 +111,7 @@ public:
 	}
 };
 
-TEST_F(Test_geo_region, construction_two_points)
+TEST_F(test_geo_region, construction_two_points)
 {
 	const auto reg = create_arround_zero();
 
@@ -124,14 +124,14 @@ TEST_F(Test_geo_region, construction_two_points)
 	EXPECT_TRUE(n > s) << "northern:" << n << ", southern:" << s;
 }
 
-TEST_F(Test_geo_region, construction_two_points_same_points)
+TEST_F(test_geo_region, construction_two_points_same_points)
 {
 	const position p{10.0, 20.0};
 
 	EXPECT_ANY_THROW((region{p, p}));
 }
 
-TEST_F(Test_geo_region, construction_two_points_upside_down)
+TEST_F(test_geo_region, construction_two_points_upside_down)
 {
 	const position p0{-10.0, 20.0};
 	const position p1{10.0, 15.0};
@@ -139,7 +139,7 @@ TEST_F(Test_geo_region, construction_two_points_upside_down)
 	EXPECT_ANY_THROW((region{p0, p1}));
 }
 
-TEST_F(Test_geo_region, construction_point_delta)
+TEST_F(test_geo_region, construction_point_delta)
 {
 	{
 		const auto reg = region{{0.0, 0.0}, 10.0, 5.0};
@@ -157,7 +157,7 @@ TEST_F(Test_geo_region, construction_point_delta)
 	}
 }
 
-TEST_F(Test_geo_region, construction_point_delta_date_line)
+TEST_F(test_geo_region, construction_point_delta_date_line)
 {
 	const auto reg = region{{0.0, 178.0}, 10.0, 5.0}; // wrap arround E->W at date line
 
@@ -167,7 +167,7 @@ TEST_F(Test_geo_region, construction_point_delta_date_line)
 	EXPECT_DOUBLE_EQ(longitude{-177.0}, reg.right());
 }
 
-TEST_F(Test_geo_region, inside_arround_zero)
+TEST_F(test_geo_region, inside_arround_zero)
 {
 	const auto reg = create_arround_zero();
 
@@ -183,7 +183,7 @@ TEST_F(Test_geo_region, inside_arround_zero)
 	EXPECT_FALSE(reg.inside({-3.0, 0.0})); // north, prime meridian
 }
 
-TEST_F(Test_geo_region, inside_date_line)
+TEST_F(test_geo_region, inside_date_line)
 {
 	const auto reg = create_date_line_south();
 

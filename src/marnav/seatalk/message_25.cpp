@@ -1,14 +1,10 @@
 #include <marnav/seatalk/message_25.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 message_25::message_25()
 	: message(ID)
-	, total_(0)
-	, trip_(0)
 {
 }
 
@@ -17,7 +13,7 @@ std::unique_ptr<message> message_25::parse(const raw & data)
 	check_size(data, SIZE);
 
 	std::unique_ptr<message> result = std::make_unique<message_25>();
-	message_25 & msg = static_cast<message_25 &>(*result);
+	auto & msg = static_cast<message_25 &>(*result);
 
 	// 25  Z4  XX  YY  UU  VV AW
 	// raw  1  2   3   4   5  6
@@ -50,6 +46,5 @@ raw message_25::get_data() const
 		static_cast<uint8_t>((trip_ >> 8) & 0xff), // VV
 		static_cast<uint8_t>((trip_ >> 16) & 0x0f) // AW
 	};
-}
 }
 }

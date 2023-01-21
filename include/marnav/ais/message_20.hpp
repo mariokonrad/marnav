@@ -4,9 +4,7 @@
 #include <marnav/ais/message.hpp>
 #include <marnav/utils/mmsi.hpp>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 /// @brief Data Link Management
 class message_20 : public message
@@ -42,41 +40,40 @@ public:
 protected:
 	message_20(const raw & bits);
 	void read_data(const raw & bits);
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 private:
 	// clang-format off
-	bitset_value<  6,  2, uint32_t> repeat_indicator = 0;
-	bitset_value<  8, 30, uint32_t> mmsi = 0;
-	bitset_value< 40, 12, uint32_t> offset_number_1 = 0;
-	bitset_value< 52,  4, uint32_t> reserved_slots_1 = 0;
-	bitset_value< 56,  3, uint32_t> timeout_1 = 0;
-	bitset_value< 59, 11, uint32_t> increment_1 = 0;
-	bitset_value< 70, 12, uint32_t> offset_number_2 = 0;
-	bitset_value< 82,  4, uint32_t> reserved_slots_2 = 0;
-	bitset_value< 86,  3, uint32_t> timeout_2 = 0;
-	bitset_value< 89, 11, uint32_t> increment_2 = 0;
-	bitset_value<100, 12, uint32_t> offset_number_3 = 0;
-	bitset_value<112,  4, uint32_t> reserved_slots_3 = 0;
-	bitset_value<116,  3, uint32_t> timeout_3 = 0;
-	bitset_value<119, 11, uint32_t> increment_3 = 0;
-	bitset_value<130, 12, uint32_t> offset_number_4 = 0;
-	bitset_value<142,  4, uint32_t> reserved_slots_4 = 0;
-	bitset_value<146,  3, uint32_t> timeout_4 = 0;
-	bitset_value<149, 11, uint32_t> increment_4 = 0;
+	bitset_value<  6,  2, uint32_t> repeat_indicator_ = 0;
+	bitset_value<  8, 30, uint32_t> mmsi_ = 0;
+	bitset_value< 40, 12, uint32_t> offset_number_1_ = 0;
+	bitset_value< 52,  4, uint32_t> reserved_slots_1_ = 0;
+	bitset_value< 56,  3, uint32_t> timeout_1_ = 0;
+	bitset_value< 59, 11, uint32_t> increment_1_ = 0;
+	bitset_value< 70, 12, uint32_t> offset_number_2_ = 0;
+	bitset_value< 82,  4, uint32_t> reserved_slots_2_ = 0;
+	bitset_value< 86,  3, uint32_t> timeout_2_ = 0;
+	bitset_value< 89, 11, uint32_t> increment_2_ = 0;
+	bitset_value<100, 12, uint32_t> offset_number_3_ = 0;
+	bitset_value<112,  4, uint32_t> reserved_slots_3_ = 0;
+	bitset_value<116,  3, uint32_t> timeout_3_ = 0;
+	bitset_value<119, 11, uint32_t> increment_3_ = 0;
+	bitset_value<130, 12, uint32_t> offset_number_4_ = 0;
+	bitset_value<142,  4, uint32_t> reserved_slots_4_ = 0;
+	bitset_value<146,  3, uint32_t> timeout_4_ = 0;
+	bitset_value<149, 11, uint32_t> increment_4_ = 0;
 	// clang-format on
 
 public:
-	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator; }
-	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi}; }
+	uint32_t get_repeat_indicator() const noexcept { return repeat_indicator_; }
+	utils::mmsi get_mmsi() const noexcept { return utils::mmsi{mmsi_}; }
 
-	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator = t; }
-	void set_mmsi(const utils::mmsi & t) noexcept { mmsi = t; }
+	void set_repeat_indicator(uint32_t t) noexcept { repeat_indicator_ = t; }
+	void set_mmsi(const utils::mmsi & t) noexcept { mmsi_ = t; }
 
 	entry get_entry(int index) const;
 	void set_entry(int index, entry e);
 };
-}
 }
 
 #endif

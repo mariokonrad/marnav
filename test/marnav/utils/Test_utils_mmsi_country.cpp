@@ -6,11 +6,11 @@ namespace
 {
 using marnav::utils::mmsi;
 
-class Test_utils_mmsi_country : public ::testing::Test
+class test_utils_mmsi_country : public ::testing::Test
 {
 };
 
-TEST_F(Test_utils_mmsi_country, invalid_code)
+TEST_F(test_utils_mmsi_country, invalid_code)
 {
 	const auto info = marnav::utils::mmsi_country(mmsi{});
 
@@ -19,7 +19,7 @@ TEST_F(Test_utils_mmsi_country, invalid_code)
 	EXPECT_TRUE(info.name.empty());
 }
 
-TEST_F(Test_utils_mmsi_country, valid_code)
+TEST_F(test_utils_mmsi_country, valid_code)
 {
 	const auto info = marnav::utils::mmsi_country(mmsi{269104520});
 

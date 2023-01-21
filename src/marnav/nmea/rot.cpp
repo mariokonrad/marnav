@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id rot::ID;
 constexpr const char * rot::TAG;
@@ -28,6 +26,5 @@ void rot::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(deg_per_minute_, 1));
 	append(s, to_string(data_valid_));
-}
 }
 }

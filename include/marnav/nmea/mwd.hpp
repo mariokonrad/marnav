@@ -5,9 +5,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief MWD - Wind Direction and Speed
 ///
@@ -49,7 +47,7 @@ public:
 
 protected:
 	mwd(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<double> direction_true_;
@@ -68,7 +66,6 @@ public:
 	void set_speed_knots(units::velocity t) noexcept;
 	void set_speed_mps(units::velocity t) noexcept;
 };
-}
 }
 
 #endif

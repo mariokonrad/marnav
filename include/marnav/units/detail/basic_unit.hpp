@@ -10,9 +10,7 @@
 // TODO: units for concentration??
 // TODO: units for density??
 
-namespace marnav
-{
-namespace units
+namespace marnav::units
 {
 template <class R>
 struct ratio_inv {
@@ -130,7 +128,6 @@ public: // add/sub
 private:
 	value_type value_ = {};
 };
-}
 }
 
 #endif

@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Engine RPM and PITCH
@@ -33,14 +31,14 @@ public:
 	message_05(const message_05 &) = default;
 	message_05 & operator=(const message_05 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	side_id side_;
-	int32_t rpm_;
-	int8_t percent_pitch_;
+	side_id side_{side_id::undefined};
+	int32_t rpm_{0};
+	int8_t percent_pitch_{0};
 
 public:
 	side_id get_side() const noexcept { return side_; }
@@ -51,7 +49,6 @@ public:
 	void set_rpm(int16_t t) noexcept { rpm_ = t; }
 	void set_percent_pitch(int8_t t) noexcept { percent_pitch_ = t; }
 };
-}
 }
 
 #endif

@@ -96,7 +96,7 @@ static std::vector<std::string> parse_fields_v4(const std::string & s)
 }
 }
 
-static void Benchmark_nmea_split_v0(benchmark::State & state)
+static void benchmark_nmea_split_v0(benchmark::State & state)
 {
 	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
@@ -106,9 +106,9 @@ static void Benchmark_nmea_split_v0(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_nmea_split_v0)->Range(0, 2);
+BENCHMARK(benchmark_nmea_split_v0)->Range(0, 2);
 
-static void Benchmark_nmea_split_v1(benchmark::State & state)
+static void benchmark_nmea_split_v1(benchmark::State & state)
 {
 	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
@@ -118,9 +118,9 @@ static void Benchmark_nmea_split_v1(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_nmea_split_v1)->Range(0, 2);
+BENCHMARK(benchmark_nmea_split_v1)->Range(0, 2);
 
-static void Benchmark_nmea_split_v2(benchmark::State & state)
+static void benchmark_nmea_split_v2(benchmark::State & state)
 {
 	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
@@ -130,9 +130,9 @@ static void Benchmark_nmea_split_v2(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_nmea_split_v2)->Range(0, 2);
+BENCHMARK(benchmark_nmea_split_v2)->Range(0, 2);
 
-static void Benchmark_nmea_split_v3(benchmark::State & state)
+static void benchmark_nmea_split_v3(benchmark::State & state)
 {
 	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
@@ -142,9 +142,9 @@ static void Benchmark_nmea_split_v3(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_nmea_split_v3)->Range(0, 2);
+BENCHMARK(benchmark_nmea_split_v3)->Range(0, 2);
 
-static void Benchmark_nmea_split_v4(benchmark::State & state)
+static void benchmark_nmea_split_v4(benchmark::State & state)
 {
 	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
@@ -154,9 +154,9 @@ static void Benchmark_nmea_split_v4(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_nmea_split_v4)->Range(0, 2);
+BENCHMARK(benchmark_nmea_split_v4)->Range(0, 2);
 
-static void Benchmark_nmea_split(benchmark::State & state)
+static void benchmark_nmea_split(benchmark::State & state)
 {
 	std::string sentence = SENTENCES[state.range(0)];
 	std::vector<std::string> result;
@@ -166,6 +166,6 @@ static void Benchmark_nmea_split(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_nmea_split)->Range(0, 2);
+BENCHMARK(benchmark_nmea_split)->Range(0, 2);
 
 BENCHMARK_MAIN();

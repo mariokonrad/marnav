@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id hsc::ID;
 constexpr const char * hsc::TAG;
@@ -44,6 +42,5 @@ void hsc::append_data_to(std::string & s, const version &) const
 	append(s, to_string(heading_true_ref_));
 	append(s, to_string(heading_mag_));
 	append(s, to_string(heading_mag_ref_));
-}
 }
 }

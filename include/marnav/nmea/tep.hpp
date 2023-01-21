@@ -3,9 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief TEP - Transit Satellite Predicted Elevation
 ///
@@ -36,7 +34,7 @@ public:
 
 protected:
 	tep(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	double elevation_ = 0.0;
@@ -46,7 +44,6 @@ public:
 
 	void set_elevation(double t) { elevation_ = t; }
 };
-}
 }
 
 #endif

@@ -12,9 +12,7 @@
 #include <type_traits>
 #include <vector>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief This is the base class for all sentences.
 class sentence
@@ -106,7 +104,7 @@ private:
 // Class `sentence` must be an abstract class, this protectes
 // against object slicing because it prevents an instance
 // of `sentence` itself, e.g. const nmea::sentence = nmea::bod{};
-static_assert(std::is_abstract<sentence>::value, "");
+static_assert(std::is_abstract<sentence>::value);
 
 /// Renders the specified sentence into a string.
 ///
@@ -302,7 +300,6 @@ std::unique_ptr<T> sentence_cast(std::unique_ptr<sentence> && s)
 }
 
 /// @}
-}
 }
 
 #endif

@@ -6,28 +6,28 @@ namespace
 
 using namespace marnav::seatalk;
 
-class Test_seatalk_message_05 : public ::testing::Test
+class test_seatalk_message_05 : public ::testing::Test
 {
 };
 
-TEST_F(Test_seatalk_message_05, construction)
+TEST_F(test_seatalk_message_05, construction)
 {
 	message_05 m;
 }
 
-TEST_F(Test_seatalk_message_05, parse_invalid_data_size)
+TEST_F(test_seatalk_message_05, parse_invalid_data_size)
 {
 	EXPECT_ANY_THROW(message_05::parse({5, 0x00}));
 	EXPECT_ANY_THROW(message_05::parse({7, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_05, parse_invalid_length)
+TEST_F(test_seatalk_message_05, parse_invalid_length)
 {
 	EXPECT_ANY_THROW(message_05::parse({0x05, 0x02, 0x00, 0x00, 0x00, 0x00}));
 	EXPECT_ANY_THROW(message_05::parse({0x05, 0x04, 0x00, 0x00, 0x00, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_05, parse)
+TEST_F(test_seatalk_message_05, parse)
 {
 	struct test_case {
 		raw data;
@@ -68,7 +68,7 @@ TEST_F(Test_seatalk_message_05, parse)
 	}
 }
 
-TEST_F(Test_seatalk_message_05, write_default)
+TEST_F(test_seatalk_message_05, write_default)
 {
 	const raw expected{0x05, 0x03, 0x00, 0x00, 0x00, 0x00};
 	message_05 m;
@@ -76,7 +76,7 @@ TEST_F(Test_seatalk_message_05, write_default)
 	EXPECT_EQ(expected, m.get_data());
 }
 
-TEST_F(Test_seatalk_message_05, write_different_sides)
+TEST_F(test_seatalk_message_05, write_different_sides)
 {
 	{
 		const raw expected{0x05, 0x03, 0x00, 0x00, 0x00, 0x00};
@@ -98,7 +98,7 @@ TEST_F(Test_seatalk_message_05, write_different_sides)
 	}
 }
 
-TEST_F(Test_seatalk_message_05, write_percent_pitch)
+TEST_F(test_seatalk_message_05, write_percent_pitch)
 {
 	{
 		const raw expected{0x05, 0x03, 0x00, 0x00, 0x00, 0x01};

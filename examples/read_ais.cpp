@@ -26,16 +26,13 @@ static const char DATA[]
 class dummy_device : public marnav::io::device
 {
 public:
-	dummy_device()
-		: index(0)
-	{
-	}
+	dummy_device() = default;
 
 	void open() override {}
 	void close() override {}
 
 	/// Just go through the data once.
-	virtual int read(char * buffer, uint32_t size) override
+	int read(char * buffer, uint32_t size) override
 	{
 		if (size != sizeof(*buffer))
 			throw std::invalid_argument{"buffer type not supported"};
@@ -46,13 +43,13 @@ public:
 		return 1;
 	}
 
-	virtual int write(const char *, uint32_t) override
+	int write(const char *, uint32_t) override
 	{
 		throw std::runtime_error{"operation not supported"};
 	}
 
 private:
-	unsigned int index;
+	unsigned int index{0};
 };
 
 // NMEA sentence reader which uses the dummy device.

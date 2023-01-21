@@ -2,16 +2,11 @@
 #include <marnav/math/floatingpoint.hpp>
 #include <cmath>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 message_26::message_26()
 	: message(ID)
-	, speed1_(0)
-	, speed2_(0)
-	, status_(0)
 {
 }
 
@@ -20,7 +15,7 @@ std::unique_ptr<message> message_26::parse(const raw & data)
 	check_size(data, SIZE);
 
 	std::unique_ptr<message> result = std::make_unique<message_26>();
-	message_26 & msg = static_cast<message_26 &>(*result);
+	auto & msg = static_cast<message_26 &>(*result);
 
 	msg.speed1_ = 0;
 	msg.speed1_ += data[2];
@@ -92,6 +87,5 @@ void message_26::set_sensor1_valid(bool t) noexcept
 	} else {
 		status_ &= ~0x40;
 	}
-}
 }
 }

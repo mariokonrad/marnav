@@ -5,11 +5,11 @@ namespace
 {
 using namespace marnav::ais;
 
-class Test_ais_binary_001_11 : public ::testing::Test
+class test_ais_binary_001_11 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_binary_001_11, default_values)
+TEST_F(test_ais_binary_001_11, default_values)
 {
 	binary_001_11 b;
 	raw r;
@@ -19,7 +19,7 @@ TEST_F(Test_ais_binary_001_11, default_values)
 	EXPECT_EQ(352 - 56, r.size());
 }
 
-TEST_F(Test_ais_binary_001_11, day)
+TEST_F(test_ais_binary_001_11, day)
 {
 	binary_001_11 b;
 
@@ -30,7 +30,7 @@ TEST_F(Test_ais_binary_001_11, day)
 	EXPECT_TRUE(!b.get_day());
 }
 
-TEST_F(Test_ais_binary_001_11, hour)
+TEST_F(test_ais_binary_001_11, hour)
 {
 	binary_001_11 b;
 
@@ -41,7 +41,7 @@ TEST_F(Test_ais_binary_001_11, hour)
 	EXPECT_TRUE(!b.get_hour());
 }
 
-TEST_F(Test_ais_binary_001_11, minute)
+TEST_F(test_ais_binary_001_11, minute)
 {
 	binary_001_11 b;
 

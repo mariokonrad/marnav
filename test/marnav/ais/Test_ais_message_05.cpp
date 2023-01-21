@@ -4,18 +4,17 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_ais_message_05 : public ::testing::Test
+class test_ais_message_05 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_05, parse)
+TEST_F(test_ais_message_05, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53", 0));
-	v.push_back(std::make_pair("1@0000000000000", 2));
+	v.emplace_back("55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53", 0);
+	v.emplace_back("1@0000000000000", 2);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -46,11 +45,11 @@ TEST_F(Test_ais_message_05, parse)
 	EXPECT_EQ(ais::data_terminal::ready, m->get_dte());
 }
 
-TEST_F(Test_ais_message_05, parse_422)
+TEST_F(test_ais_message_05, parse_422)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53", 0));
-	v.push_back(std::make_pair("1@0000000000000", 4));
+	v.emplace_back("55P5TL01VIaAL@7WKO@mBplU@<PDhh000000001S;AJ::4A80?4i@E53", 0);
+	v.emplace_back("1@0000000000000", 4);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -83,13 +82,13 @@ TEST_F(Test_ais_message_05, parse_422)
 	EXPECT_EQ(ais::data_terminal::not_ready, m->get_dte());
 }
 
-TEST_F(Test_ais_message_05, wrong_number_of_bits)
+TEST_F(test_ais_message_05, wrong_number_of_bits)
 {
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_05>(ais::raw(421)));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_05>(ais::raw(425)));
 }
 
-TEST_F(Test_ais_message_05, encode_default_values)
+TEST_F(test_ais_message_05, encode_default_values)
 {
 	ais::message_05 m;
 
@@ -103,7 +102,7 @@ TEST_F(Test_ais_message_05, encode_default_values)
 	EXPECT_EQ(2u, v[1].second);
 }
 
-TEST_F(Test_ais_message_05, set_callsign)
+TEST_F(test_ais_message_05, set_callsign)
 {
 	ais::message_05 m;
 	m.set_callsign("1234567");
@@ -116,7 +115,7 @@ TEST_F(Test_ais_message_05, set_callsign)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_05, set_callsign_too_large)
+TEST_F(test_ais_message_05, set_callsign_too_large)
 {
 	ais::message_05 m;
 	m.set_callsign("123456789012345678901234567890");
@@ -124,7 +123,7 @@ TEST_F(Test_ais_message_05, set_callsign_too_large)
 	EXPECT_STREQ("1234567", m.get_callsign().c_str());
 }
 
-TEST_F(Test_ais_message_05, set_shipname)
+TEST_F(test_ais_message_05, set_shipname)
 {
 	ais::message_05 m;
 	m.set_shipname("1234567");
@@ -137,7 +136,7 @@ TEST_F(Test_ais_message_05, set_shipname)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_05, set_shipname_too_large)
+TEST_F(test_ais_message_05, set_shipname_too_large)
 {
 	ais::message_05 m;
 	m.set_shipname("123456789012345678901234567890");
@@ -145,7 +144,7 @@ TEST_F(Test_ais_message_05, set_shipname_too_large)
 	EXPECT_STREQ("12345678901234567890", m.get_shipname().c_str());
 }
 
-TEST_F(Test_ais_message_05, set_destination)
+TEST_F(test_ais_message_05, set_destination)
 {
 	ais::message_05 m;
 	m.set_destination("1234567");
@@ -158,7 +157,7 @@ TEST_F(Test_ais_message_05, set_destination)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_05, set_destination_too_large)
+TEST_F(test_ais_message_05, set_destination_too_large)
 {
 	ais::message_05 m;
 	m.set_destination("123456789012345678901234567890");
@@ -166,7 +165,7 @@ TEST_F(Test_ais_message_05, set_destination_too_large)
 	EXPECT_STREQ("12345678901234567890", m.get_destination().c_str());
 }
 
-TEST_F(Test_ais_message_05, set_to_bow_exact)
+TEST_F(test_ais_message_05, set_to_bow_exact)
 {
 	const ais::vessel_dimension d(units::meters{4.0}, {}, {}, {});
 	ais::message_05 m;
@@ -175,7 +174,7 @@ TEST_F(Test_ais_message_05, set_to_bow_exact)
 	EXPECT_EQ(units::meters{4.0}, m.get_vessel_dimension().get_to_bow());
 }
 
-TEST_F(Test_ais_message_05, set_to_bow_rounded_up)
+TEST_F(test_ais_message_05, set_to_bow_rounded_up)
 {
 	const ais::vessel_dimension d(units::meters{4.6}, {}, {}, {});
 	ais::message_05 m;
@@ -184,7 +183,7 @@ TEST_F(Test_ais_message_05, set_to_bow_rounded_up)
 	EXPECT_EQ(units::meters{5.0}, m.get_vessel_dimension().get_to_bow());
 }
 
-TEST_F(Test_ais_message_05, set_to_bow_rounded_down)
+TEST_F(test_ais_message_05, set_to_bow_rounded_down)
 {
 	const ais::vessel_dimension d(units::meters{4.1}, {}, {}, {});
 	ais::message_05 m;
@@ -193,7 +192,7 @@ TEST_F(Test_ais_message_05, set_to_bow_rounded_down)
 	EXPECT_EQ(units::meters{4.0}, m.get_vessel_dimension().get_to_bow());
 }
 
-TEST_F(Test_ais_message_05, set_get_drought_meters)
+TEST_F(test_ais_message_05, set_get_drought_meters)
 {
 	ais::message_05 m;
 
@@ -201,7 +200,7 @@ TEST_F(Test_ais_message_05, set_get_drought_meters)
 	EXPECT_EQ(units::meters{1.5}, m.get_draught());
 }
 
-TEST_F(Test_ais_message_05, set_get_drought_meters_truncating_resolution)
+TEST_F(test_ais_message_05, set_get_drought_meters_truncating_resolution)
 {
 	ais::message_05 m;
 
@@ -211,7 +210,7 @@ TEST_F(Test_ais_message_05, set_get_drought_meters_truncating_resolution)
 	EXPECT_EQ(units::meters{1.6}, m.get_draught());
 }
 
-TEST_F(Test_ais_message_05, set_get_drought_feet)
+TEST_F(test_ais_message_05, set_get_drought_feet)
 {
 	ais::message_05 m;
 
@@ -221,7 +220,7 @@ TEST_F(Test_ais_message_05, set_get_drought_feet)
 	EXPECT_EQ(units::meters{1.0}, m.get_draught());
 }
 
-TEST_F(Test_ais_message_05, set_invalid_draught)
+TEST_F(test_ais_message_05, set_invalid_draught)
 {
 	ais::message_05 m;
 

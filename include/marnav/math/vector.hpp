@@ -6,9 +6,7 @@
 #include <marnav/math/type_traits.hpp>
 #include <type_traits>
 
-namespace marnav
-{
-namespace math
+namespace marnav::math
 {
 
 /// @cond DEV
@@ -76,8 +74,8 @@ public:
 public:
 	vector2(value_type x = 0.0, value_type y = 0.0)
 	{
-		a[0] = x;
-		a[1] = y;
+		a_[0] = x;
+		a_[1] = y;
 	}
 
 	vector2(const vector2 &) = default;
@@ -98,7 +96,7 @@ public:
 	/// Returns the angle of polar coordinate in the interval 0..2pi in radiants
 	inline value_type phi() const
 	{
-		value_type p = atan2(a[1], a[0]);
+		value_type p = atan2(a_[1], a_[0]);
 		if (p < 0)
 			p += 2.0 * pi;
 		return p;
@@ -131,13 +129,13 @@ public:
 		return vector2{*this}.normalize(len);
 	}
 
-	inline value_type x() const { return a[0]; }
+	inline value_type x() const { return a_[0]; }
 
-	inline value_type y() const { return a[1]; }
+	inline value_type y() const { return a_[1]; }
 
-	inline value_type operator[](size_type idx) const { return a[idx]; }
+	inline value_type operator[](size_type idx) const { return a_[idx]; }
 
-	inline value_type & operator[](size_type idx) { return a[idx]; }
+	inline value_type & operator[](size_type idx) { return a_[idx]; }
 
 	inline vector2 & operator=(const vector2 &) = default;
 
@@ -150,21 +148,21 @@ public:
 	inline vector2 & operator+=(const vector2 & v)
 	{
 		for (size_type i = 0; i < dimension; ++i)
-			a[i] += v.a[i];
+			a_[i] += v.a_[i];
 		return *this;
 	}
 
 	inline vector2 & operator-=(const vector2 & v)
 	{
 		for (size_type i = 0; i < dimension; ++i)
-			a[i] -= v.a[i];
+			a_[i] -= v.a_[i];
 		return *this;
 	}
 
 	inline vector2 & operator*=(value_type f)
 	{
-		for (size_type i = 0; i < dimension; ++i)
-			a[i] *= f;
+		for (auto & i : a_)
+			i *= f;
 		return *this;
 	}
 
@@ -179,7 +177,7 @@ public:
 	friend value_type operator*(const vector2 & a, const vector2 & b) { return a.dot(b); }
 
 private:
-	value_type a[dimension];
+	value_type a_[dimension];
 };
 
 /// A 3D vector.
@@ -199,9 +197,9 @@ public:
 public:
 	vector3(value_type x = 0.0, value_type y = 0.0, value_type z = 0.0)
 	{
-		a[0] = x;
-		a[1] = y;
-		a[2] = z;
+		a_[0] = x;
+		a_[1] = y;
+		a_[2] = z;
 	}
 
 	vector3(const vector3 &) = default;
@@ -226,8 +224,8 @@ public:
 
 	inline vector3 cross(const vector3 & v) const
 	{
-		return vector3(a[1] * v.a[2] - a[2] * v.a[1], a[2] * v.a[0] - a[0] * v.a[2],
-			a[0] * v.a[1] - a[1] * v.a[0]);
+		return vector3(a_[1] * v.a_[2] - a_[2] * v.a_[1], a_[2] * v.a_[0] - a_[0] * v.a_[2],
+			a_[0] * v.a_[1] - a_[1] * v.a_[0]);
 	}
 
 	inline value_type length() const { return std::sqrt(length2()); }
@@ -253,28 +251,28 @@ public:
 		const value_type len = length();
 		if (is_zero(len))
 			return 0.0;
-		return std::acos(a[2] / len) * 180.0 / pi;
+		return std::acos(a_[2] / len) * 180.0 / pi;
 	}
 
 	inline value_type get_sphere_phi() const
 	{
-		value_type b = std::atan2(a[1], a[0]);
+		value_type b = std::atan2(a_[1], a_[0]);
 		if (b < 0.0)
 			b += 2.0 * pi;
 		return b * 180.0 / pi;
 	}
 
-	inline value_type x() const { return a[0]; }
+	inline value_type x() const { return a_[0]; }
 
-	inline value_type y() const { return a[1]; }
+	inline value_type y() const { return a_[1]; }
 
-	inline value_type z() const { return a[2]; }
+	inline value_type z() const { return a_[2]; }
 
-	inline value_type operator[](size_type idx) const { return a[idx]; }
+	inline value_type operator[](size_type idx) const { return a_[idx]; }
 
-	inline value_type & operator[](size_type idx) { return a[idx]; }
+	inline value_type & operator[](size_type idx) { return a_[idx]; }
 
-	inline operator const value_type *() const { return a; }
+	inline operator const value_type *() const { return a_; }
 
 	inline vector3 & operator=(const vector3 &) = default;
 
@@ -287,21 +285,21 @@ public:
 	inline vector3 & operator+=(const vector3 & v)
 	{
 		for (size_type i = 0; i < dimension; ++i)
-			a[i] += v.a[i];
+			a_[i] += v.a_[i];
 		return *this;
 	}
 
 	inline vector3 & operator-=(const vector3 & v)
 	{
 		for (size_type i = 0; i < dimension; ++i)
-			a[i] -= v.a[i];
+			a_[i] -= v.a_[i];
 		return *this;
 	}
 
 	inline vector3 & operator*=(value_type f)
 	{
-		for (size_type i = 0; i < dimension; ++i)
-			a[i] *= f;
+		for (auto & i : a_)
+			i *= f;
 		return *this;
 	}
 
@@ -316,7 +314,7 @@ public:
 	friend value_type operator*(const vector3 & a, const vector3 & b) { return a.dot(b); }
 
 private:
-	value_type a[dimension];
+	value_type a_[dimension];
 };
 
 /// A 4D vector.
@@ -336,10 +334,10 @@ public:
 public:
 	vector4(value_type x = 0.0, value_type y = 0.0, value_type z = 0.0, value_type w = 0.0)
 	{
-		a[0] = x;
-		a[1] = y;
-		a[2] = z;
-		a[3] = w;
+		a_[0] = x;
+		a_[1] = y;
+		a_[2] = z;
+		a_[3] = w;
 	}
 
 	vector4(const vector4 &) = default;
@@ -364,9 +362,9 @@ public:
 		return vector4{*this}.normalize(len);
 	}
 
-	inline value_type operator[](size_type idx) const { return a[idx]; }
+	inline value_type operator[](size_type idx) const { return a_[idx]; }
 
-	inline value_type & operator[](size_type idx) { return a[idx]; }
+	inline value_type & operator[](size_type idx) { return a_[idx]; }
 
 	inline vector4 & operator=(const vector4 &) = default;
 
@@ -379,21 +377,21 @@ public:
 	inline vector4 & operator+=(const vector4 & v)
 	{
 		for (size_type i = 0; i < dimension; ++i)
-			a[i] += v.a[i];
+			a_[i] += v.a_[i];
 		return *this;
 	}
 
 	inline vector4 & operator-=(const vector4 & v)
 	{
 		for (size_type i = 0; i < dimension; ++i)
-			a[i] -= v.a[i];
+			a_[i] -= v.a_[i];
 		return *this;
 	}
 
 	inline vector4 & operator*=(value_type f)
 	{
-		for (size_type i = 0; i < dimension; ++i)
-			a[i] *= f;
+		for (auto & i : a_)
+			i *= f;
 		return *this;
 	}
 
@@ -408,7 +406,7 @@ public:
 	friend value_type operator*(const vector4 & a, const vector4 & b) { return a.dot(b); }
 
 private:
-	value_type a[dimension];
+	value_type a_[dimension];
 };
 
 /// A n-dimensional vector.
@@ -431,7 +429,7 @@ public:
 		static_assert(N >= 1, "invalid dimension of vector_n, constraint: N>=1");
 
 		for (size_type i = 0; i < dimension; ++i)
-			a[i] = 0.0;
+			a_[i] = 0.0;
 	}
 
 	vector_n(const vector_n &) = default;
@@ -440,7 +438,7 @@ public:
 
 	template <typename... Args>
 	vector_n(Args... args) noexcept
-		: a{args...}
+		: a_{args...}
 	{
 		static_assert(sizeof...(args) == N, "invalid number of arguments");
 		static_assert(all_same_type<T, Args...>::value, "invalid type detected");
@@ -464,9 +462,9 @@ public:
 		return vector_n{*this}.normalize(len);
 	}
 
-	inline value_type operator[](size_type idx) const { return a[idx]; }
+	inline value_type operator[](size_type idx) const { return a_[idx]; }
 
-	inline value_type & operator[](size_type idx) { return a[idx]; }
+	inline value_type & operator[](size_type idx) { return a_[idx]; }
 
 	inline vector_n & operator=(const vector_n &) = default;
 
@@ -479,21 +477,21 @@ public:
 	inline vector_n & operator+=(const vector_n & v)
 	{
 		for (size_type i = 0; i < dimension; ++i)
-			a[i] += v.a[i];
+			a_[i] += v.a_[i];
 		return *this;
 	}
 
 	inline vector_n & operator-=(const vector_n & v)
 	{
 		for (size_type i = 0; i < dimension; ++i)
-			a[i] -= v.a[i];
+			a_[i] -= v.a_[i];
 		return *this;
 	}
 
 	inline vector_n & operator*=(value_type f)
 	{
 		for (size_type i = 0; i < dimension; ++i)
-			a[i] *= f;
+			a_[i] *= f;
 		return *this;
 	}
 
@@ -514,7 +512,7 @@ public:
 	friend value_type operator*(const vector_n & a, const vector_n & b) { return a.dot(b); }
 
 private:
-	value_type a[dimension];
+	value_type a_[dimension];
 };
 
 using vec2 = vector2<double>;
@@ -594,7 +592,6 @@ T nullify(const T & v)
 }
 
 /// @}
-}
 }
 
 #endif

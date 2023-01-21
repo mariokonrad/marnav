@@ -1,9 +1,7 @@
 #include <marnav/nmea/ack.hpp>
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id ack::ID;
 constexpr const char * ack::TAG;
@@ -30,6 +28,5 @@ ack::ack(talker talk, fields::const_iterator first, fields::const_iterator last)
 void ack::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(number_));
-}
 }
 }

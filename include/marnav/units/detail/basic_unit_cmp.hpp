@@ -7,9 +7,7 @@
 #include <limits>
 #include <type_traits>
 
-namespace marnav
-{
-namespace units
+namespace marnav::units
 {
 // basic_unit operator==
 //
@@ -116,7 +114,6 @@ template <class U1, class R1, class U2, class R2,
 constexpr bool operator>=(const basic_unit<U1, R1> & v1, const basic_unit<U2, R2> & v2) noexcept
 {
 	return !(v1 < v2);
-}
 }
 }
 

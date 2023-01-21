@@ -3,9 +3,7 @@
 
 #include <string>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 
 /// Enumeration of all months of a year.
@@ -73,7 +71,6 @@ private:
 };
 
 std::string to_string(const date & d);
-}
 }
 
 #endif

@@ -3,9 +3,7 @@
 
 #include <marnav/nmea/vdm.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief VDO - AIS VHF Data-Link Own-Vessel Report
 ///
@@ -29,7 +27,6 @@ public:
 protected:
 	vdo(talker talk, fields::const_iterator first, fields::const_iterator last);
 };
-}
 }
 
 #endif

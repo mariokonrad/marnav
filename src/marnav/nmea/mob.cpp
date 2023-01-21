@@ -4,9 +4,7 @@
 #include <algorithm>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 namespace
 {
@@ -213,6 +211,5 @@ void mob::set_lon(const geo::longitude & t)
 void mob::set_mmsi(const utils::mmsi & t)
 {
 	mmsi_ = t;
-}
 }
 }

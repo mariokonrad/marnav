@@ -1,14 +1,11 @@
 #include <marnav/seatalk/message_53.hpp>
 #include <cmath>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 message_53::message_53()
 	: message(ID)
-	, cog_(0.0)
 {
 }
 
@@ -17,7 +14,7 @@ std::unique_ptr<message> message_53::parse(const raw & data)
 	check_size(data, SIZE);
 
 	std::unique_ptr<message> result = std::make_unique<message_53>();
-	message_53 & msg = static_cast<message_53 &>(*result);
+	auto & msg = static_cast<message_53 &>(*result);
 
 	//  53  U0 VW
 	// raw   1  2
@@ -44,6 +41,5 @@ raw message_53::get_data() const
 void message_53::set_cog(double t) noexcept
 {
 	cog_ = std::fmod(std::abs(t), 360.0);
-}
 }
 }

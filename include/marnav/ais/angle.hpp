@@ -3,9 +3,7 @@
 
 #include <marnav/geo/angle.hpp>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 /// Enumeration of angle scaling according to http://www.catb.org/gpsd/AIVDM.html
 enum class angle_scale { I1, I3, I4 };
@@ -21,7 +19,6 @@ marnav::geo::longitude to_geo_longitude(
 
 uint32_t to_longitude_minutes(
 	const marnav::geo::longitude & lon, std::size_t bits, angle_scale scale);
-}
 }
 
 #endif

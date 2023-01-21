@@ -9,9 +9,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @cond DEV
 namespace
@@ -70,7 +68,6 @@ void check_value(const std::optional<T> & value, std::initializer_list<T> option
 void check_status(status value, const char * name = nullptr);
 
 void check_status(const std::optional<status> & value, const char * name = nullptr);
-}
 }
 
 #endif

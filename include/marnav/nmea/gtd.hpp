@@ -5,9 +5,7 @@
 #include <array>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief GTD - Geographic Location in Time Differences
 ///
@@ -42,7 +40,7 @@ public:
 
 protected:
 	gtd(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::array<double, max_time_diffs> time_diffs_;
@@ -54,7 +52,6 @@ public:
 
 	void set_time_diff(int index, double value);
 };
-}
 }
 
 #endif

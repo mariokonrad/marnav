@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_mwv : public ::testing::Test
+class test_nmea_mwv : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_mwv, contruction)
+TEST_F(test_nmea_mwv, contruction)
 {
 	EXPECT_NO_THROW(nmea::mwv mwv);
 }
 
-TEST_F(Test_nmea_mwv, properties)
+TEST_F(test_nmea_mwv, properties)
 {
 	nmea_sentence_traits<nmea::mwv>();
 }
 
-TEST_F(Test_nmea_mwv, parse)
+TEST_F(test_nmea_mwv, parse)
 {
 	auto s = nmea::make_sentence("$IIMWV,084.0,R,10.4,N,A*04");
 	ASSERT_NE(nullptr, s);
@@ -39,7 +38,7 @@ TEST_F(Test_nmea_mwv, parse)
 	EXPECT_NEAR(10.4, speed->get<units::knots>().value(), 1e-8);
 }
 
-TEST_F(Test_nmea_mwv, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_mwv, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::mwv>(nmea::talker::none, {4, "@"}));
@@ -47,14 +46,14 @@ TEST_F(Test_nmea_mwv, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::mwv>(nmea::talker::none, {6, "@"}));
 }
 
-TEST_F(Test_nmea_mwv, empty_to_string)
+TEST_F(test_nmea_mwv, empty_to_string)
 {
 	nmea::mwv mwv;
 
 	EXPECT_STREQ("$IIMWV,,,,,*60", nmea::to_string(mwv).c_str());
 }
 
-TEST_F(Test_nmea_mwv, set_angle)
+TEST_F(test_nmea_mwv, set_angle)
 {
 	nmea::mwv mwv;
 	mwv.set_angle(12.5, nmea::reference::RELATIVE);
@@ -62,7 +61,7 @@ TEST_F(Test_nmea_mwv, set_angle)
 	EXPECT_STREQ("$IIMWV,12.5,R,,,*2A", nmea::to_string(mwv).c_str());
 }
 
-TEST_F(Test_nmea_mwv, set_speed_knots_explicit)
+TEST_F(test_nmea_mwv, set_speed_knots_explicit)
 {
 	nmea::mwv mwv;
 	mwv.set_speed(units::knots{22.5}, nmea::unit::velocity::knot);
@@ -70,7 +69,7 @@ TEST_F(Test_nmea_mwv, set_speed_knots_explicit)
 	EXPECT_STREQ("$IIMWV,,,22.5,N,*35", nmea::to_string(mwv).c_str());
 }
 
-TEST_F(Test_nmea_mwv, set_speed_knots_implicit)
+TEST_F(test_nmea_mwv, set_speed_knots_implicit)
 {
 	nmea::mwv mwv;
 	mwv.set_speed(units::knots{22.5});

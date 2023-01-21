@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id stalk::ID;
 constexpr const char * stalk::TAG;
@@ -49,6 +47,5 @@ void stalk::set_data(const raw & t)
 	if ((t.size() < MIN_FIELDS) || (t.size() > MAX_FIELDS))
 		throw std::invalid_argument{"invalid number of bytes in data"};
 	data_ = t;
-}
 }
 }

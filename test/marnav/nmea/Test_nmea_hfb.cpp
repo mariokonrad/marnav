@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_hfb : public ::testing::Test
+class test_nmea_hfb : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_hfb, contruction)
+TEST_F(test_nmea_hfb, contruction)
 {
 	EXPECT_NO_THROW(nmea::hfb hfb);
 }
 
-TEST_F(Test_nmea_hfb, properties)
+TEST_F(test_nmea_hfb, properties)
 {
 	nmea_sentence_traits<nmea::hfb>();
 }
 
-TEST_F(Test_nmea_hfb, parse)
+TEST_F(test_nmea_hfb, parse)
 {
 	auto s = nmea::make_sentence("$GPHFB,1.0,M,2.0,M*58");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_hfb, parse)
 	ASSERT_NE(nullptr, hfb);
 }
 
-TEST_F(Test_nmea_hfb, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_hfb, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::hfb>(nmea::talker::none, {3, "@"}));
@@ -39,7 +38,7 @@ TEST_F(Test_nmea_hfb, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::hfb>(nmea::talker::none, {5, "@"}));
 }
 
-TEST_F(Test_nmea_hfb, empty_to_string)
+TEST_F(test_nmea_hfb, empty_to_string)
 {
 	nmea::hfb hfb;
 

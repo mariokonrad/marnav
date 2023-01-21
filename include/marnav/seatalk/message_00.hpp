@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Depth below transducer
@@ -35,17 +33,17 @@ public:
 	message_00(const message_00 &) = default;
 	message_00 & operator=(const message_00 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	bool anchor_alarm_active_;
-	bool metric_display_units_;
-	bool transducer_defective_;
-	bool depth_alarm_active_;
-	bool shallow_depth_alarm_active_;
-	uint16_t depth_; // in 1/10th of feet, 1 m = 3.2808 feet
+	bool anchor_alarm_active_{false};
+	bool metric_display_units_{false};
+	bool transducer_defective_{false};
+	bool depth_alarm_active_{false};
+	bool shallow_depth_alarm_active_{false};
+	uint16_t depth_{0}; // in 1/10th of feet, 1 m = 3.2808 feet
 
 public:
 	bool get_anchor_alarm_active() const noexcept { return anchor_alarm_active_; }
@@ -66,7 +64,6 @@ public:
 	double get_depth_meters() const noexcept;
 	void set_depth_meters(double t) noexcept;
 };
-}
 }
 
 #endif

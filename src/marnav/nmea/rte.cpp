@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id rte::ID;
 constexpr const char * rte::TAG;
@@ -57,7 +55,7 @@ void rte::add_waypoint_id(const waypoint & id)
 	if (get_n_waypoints() >= max_waypoints)
 		throw std::runtime_error{"to many waypoints"};
 
-	waypoint_id_.push_back(id);
+	waypoint_id_.emplace_back(id);
 }
 
 void rte::clear_waypoint_id()
@@ -74,6 +72,5 @@ void rte::append_data_to(std::string & s, const version &) const
 
 	for (const auto & wp : waypoint_id_)
 		append(s, wp.value());
-}
 }
 }

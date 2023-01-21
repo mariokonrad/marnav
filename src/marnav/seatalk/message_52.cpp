@@ -2,14 +2,11 @@
 #include <marnav/math/floatingpoint.hpp>
 #include <cmath>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 message_52::message_52()
 	: message(ID)
-	, sog_(0)
 {
 }
 
@@ -18,7 +15,7 @@ std::unique_ptr<message> message_52::parse(const raw & data)
 	check_size(data, SIZE);
 
 	std::unique_ptr<message> result = std::make_unique<message_52>();
-	message_52 & msg = static_cast<message_52 &>(*result);
+	auto & msg = static_cast<message_52 &>(*result);
 
 	//  52  01 XX XX
 	// raw   1  2  3
@@ -47,6 +44,5 @@ double message_52::get_sog() const noexcept
 void message_52::set_sog(double t) noexcept
 {
 	sog_ = math::float_cast<decltype(sog_)>(std::floor(t * 10.0));
-}
 }
 }

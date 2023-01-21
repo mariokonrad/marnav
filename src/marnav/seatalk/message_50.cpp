@@ -1,9 +1,7 @@
 #include <marnav/seatalk/message_50.hpp>
 #include <marnav/math/floatingpoint.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 message_50::message_50()
@@ -16,7 +14,7 @@ std::unique_ptr<message> message_50::parse(const raw & data)
 	check_size(data, SIZE);
 
 	std::unique_ptr<message> result = std::make_unique<message_50>();
-	message_50 & msg = static_cast<message_50 &>(*result);
+	auto & msg = static_cast<message_50 &>(*result);
 
 	// 50  Z2  XX  YY  YY
 	// raw  1   2   3   4
@@ -49,6 +47,5 @@ raw message_50::get_data() const
 
 	return raw{static_cast<uint8_t>(ID), 0x02, static_cast<uint8_t>(lat_.degrees() & 0xff),
 		static_cast<uint8_t>((m >> 8) & 0xff), static_cast<uint8_t>((m >> 0) & 0xff)};
-}
 }
 }

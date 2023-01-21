@@ -7,9 +7,7 @@
 #include <marnav/nmea/waypoint.hpp>
 #include <marnav/units/units.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief BEC - Bearing and Distance to Waypoint - Dead Reckoning
 ///
@@ -55,7 +53,7 @@ public:
 
 protected:
 	bec(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	nmea::time time_utc_;
@@ -85,7 +83,6 @@ public:
 	void set_distance(units::length t);
 	void set_waypoint(const waypoint & id) { waypoint_id_ = id; }
 };
-}
 }
 
 #endif

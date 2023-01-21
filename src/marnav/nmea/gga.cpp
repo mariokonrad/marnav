@@ -3,9 +3,7 @@
 #include "convert.hpp"
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id gga::ID;
 constexpr const char * gga::TAG;
@@ -99,6 +97,5 @@ void gga::append_data_to(std::string & s, const version &) const
 	append(s, to_string_if(unit::distance::meter, geodial_separation_));
 	append(s, to_string(dgps_age_));
 	append(s, to_string(dgps_ref_));
-}
 }
 }

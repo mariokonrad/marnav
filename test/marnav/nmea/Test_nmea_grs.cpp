@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_grs : public ::testing::Test
+class test_nmea_grs : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_grs, contruction)
+TEST_F(test_nmea_grs, contruction)
 {
 	EXPECT_NO_THROW(nmea::grs grs);
 }
 
-TEST_F(Test_nmea_grs, properties)
+TEST_F(test_nmea_grs, properties)
 {
 	nmea_sentence_traits<nmea::grs>();
 }
 
-TEST_F(Test_nmea_grs, parse)
+TEST_F(test_nmea_grs, parse)
 {
 	auto s = nmea::make_sentence("$GPGRS,024603.00,1,-1.8,-2.7,0.3,,,,,,,,,*6C");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_grs, parse)
 	ASSERT_NE(nullptr, grs);
 }
 
-TEST_F(Test_nmea_grs, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_grs, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::grs>(nmea::talker::none, {13, "@"}));
@@ -39,7 +38,7 @@ TEST_F(Test_nmea_grs, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::grs>(nmea::talker::none, {15, "@"}));
 }
 
-TEST_F(Test_nmea_grs, empty_to_string)
+TEST_F(test_nmea_grs, empty_to_string)
 {
 	nmea::grs grs;
 

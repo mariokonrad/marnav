@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id dpt::ID;
 constexpr const char * dpt::TAG;
@@ -66,6 +64,5 @@ void dpt::append_data_to(std::string & s, const version &) const
 	append(s, to_string(depth_meter_));
 	append(s, to_string(transducer_offset_));
 	append(s, to_string(max_depth_));
-}
 }
 }

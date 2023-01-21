@@ -2,10 +2,9 @@
 #define MARNAV_IO_DEFAULT_SEATALK_SERIAL_HPP
 
 #include <marnav-io/serial.hpp>
+#include <memory>
 
-namespace marnav
-{
-namespace io
+namespace marnav::io
 {
 /// Returns a serial device with the default configuration for reading SeaTalk.
 ///
@@ -17,7 +16,6 @@ inline std::unique_ptr<serial> make_default_seatalk_serial(const std::string & p
 {
 	return std::make_unique<serial>(port, serial::baud::baud_4800, serial::databits::bit_8,
 		serial::stopbits::bit_1, serial::parity::mark);
-}
 }
 }
 

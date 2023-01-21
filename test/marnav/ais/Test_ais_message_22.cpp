@@ -6,11 +6,11 @@ namespace
 {
 using namespace marnav;
 
-class Test_ais_message_22 : public ::testing::Test
+class test_ais_message_22 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_22, parse)
+TEST_F(test_ais_message_22, parse)
 {
 	static const std::vector<std::vector<std::pair<std::string, uint32_t>>> TESTS = {
 		{{"F000000000000000000000000000", 0}},
@@ -27,7 +27,7 @@ TEST_F(Test_ais_message_22, parse)
 	}
 }
 
-TEST_F(Test_ais_message_22, encode_default_values_broadcast)
+TEST_F(test_ais_message_22, encode_default_values_broadcast)
 {
 	ais::message_22 m;
 
@@ -38,7 +38,7 @@ TEST_F(Test_ais_message_22, encode_default_values_broadcast)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_22, encode_default_values_addressed)
+TEST_F(test_ais_message_22, encode_default_values_addressed)
 {
 	ais::message_22 m;
 	m.set_addressed(true);
@@ -50,7 +50,7 @@ TEST_F(Test_ais_message_22, encode_default_values_addressed)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_22, non_addressed_region)
+TEST_F(test_ais_message_22, non_addressed_region)
 {
 	static const std::vector<std::pair<std::string, uint32_t>> raw
 		= {{"F030p?j2N2P73FiiNesU3FR10000", 0}};

@@ -9,9 +9,7 @@
 #include <marnav/utils/mmsi.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief MOB - Man over Board
 ///
@@ -98,7 +96,7 @@ public:
 
 protected:
 	mob(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<std::string> emitter_id_;
@@ -147,7 +145,6 @@ public:
 std::string to_string(mob::mob_status value);
 std::string to_string(mob::mob_position_source value);
 std::string to_string(mob::battery_status value);
-}
 }
 
 #endif

@@ -311,10 +311,10 @@ BENCHMARK(bench_dec_v2)->Range(0, 1lu << 48);
 BENCHMARK(bench_dec_v3)->Range(0, 1lu << 48);
 BENCHMARK(bench_dec_v4)->Range(0, 1lu << 48);
 
-BENCHMARK(bench_hex_v0)->Range(0, 1lu<<48);
-BENCHMARK(bench_hex_v1)->Range(0, 1lu<<48);
-BENCHMARK(bench_hex_v2)->Range(0, 1lu<<48);
-BENCHMARK(bench_hex_v3)->Range(0, 1lu<<48);
-BENCHMARK(bench_hex_v4)->Range(0, 1lu<<48);
+BENCHMARK(bench_hex_v0)->Range(0, 1lu << 48);
+BENCHMARK(bench_hex_v1)->Range(0, 1lu << 48);
+BENCHMARK(bench_hex_v2)->Range(0, 1lu << 48);
+BENCHMARK(bench_hex_v3)->Range(0, 1lu << 48);
+BENCHMARK(bench_hex_v4)->Range(0, 1lu << 48);
 
 BENCHMARK_MAIN();

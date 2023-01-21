@@ -6,14 +6,14 @@ namespace
 {
 using namespace marnav;
 
-class Test_ais_message_09 : public ::testing::Test
+class test_ais_message_09 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_09, parse)
+TEST_F(test_ais_message_09, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("91b55vRAQwOnDE<M05ICOp0208CM", 0));
+	v.emplace_back("91b55vRAQwOnDE<M05ICOp0208CM", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -22,13 +22,13 @@ TEST_F(Test_ais_message_09, parse)
 	ASSERT_TRUE(m != nullptr);
 }
 
-TEST_F(Test_ais_message_09, wrong_number_of_bits)
+TEST_F(test_ais_message_09, wrong_number_of_bits)
 {
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_09>(ais::raw(167)));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_09>(ais::raw(169)));
 }
 
-TEST_F(Test_ais_message_09, encode_default_values)
+TEST_F(test_ais_message_09, encode_default_values)
 {
 	ais::message_09 m;
 
@@ -39,7 +39,7 @@ TEST_F(Test_ais_message_09, encode_default_values)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_09, set_lat)
+TEST_F(test_ais_message_09, set_lat)
 {
 	ais::message_09 m;
 	m.set_lat(geo::latitude{12.34});
@@ -51,10 +51,10 @@ TEST_F(Test_ais_message_09, set_lat)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_09, get_lat)
+TEST_F(test_ais_message_09, get_lat)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("900000?www<tSF073qp>4?000000", 0));
+	v.emplace_back("900000?www<tSF073qp>4?000000", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -68,7 +68,7 @@ TEST_F(Test_ais_message_09, get_lat)
 	EXPECT_DOUBLE_EQ(expected, decoded);
 }
 
-TEST_F(Test_ais_message_09, set_lon)
+TEST_F(test_ais_message_09, set_lon)
 {
 	ais::message_09 m;
 	m.set_lon(geo::longitude{123.45});
@@ -80,10 +80,10 @@ TEST_F(Test_ais_message_09, set_lon)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_09, get_lon)
+TEST_F(test_ais_message_09, get_lon)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("900000?www8m6wPl4Q@00?000000", 0));
+	v.emplace_back("900000?www8m6wPl4Q@00?000000", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -97,7 +97,7 @@ TEST_F(Test_ais_message_09, get_lon)
 	EXPECT_DOUBLE_EQ(expected, decoded);
 }
 
-TEST_F(Test_ais_message_09, set_get_altitude)
+TEST_F(test_ais_message_09, set_get_altitude)
 {
 	ais::message_09 m;
 
@@ -107,7 +107,7 @@ TEST_F(Test_ais_message_09, set_get_altitude)
 	EXPECT_EQ(marnav::units::meters{123}, *m.get_altitude());
 }
 
-TEST_F(Test_ais_message_09, altitude_max_value)
+TEST_F(test_ais_message_09, altitude_max_value)
 {
 	ais::message_09 m;
 
@@ -117,7 +117,7 @@ TEST_F(Test_ais_message_09, altitude_max_value)
 	EXPECT_EQ(marnav::units::meters{4094}, *m.get_altitude());
 }
 
-TEST_F(Test_ais_message_09, set_get_sog)
+TEST_F(test_ais_message_09, set_get_sog)
 {
 	ais::message_09 m;
 
@@ -127,7 +127,7 @@ TEST_F(Test_ais_message_09, set_get_sog)
 	EXPECT_EQ(marnav::units::knots{45}, *m.get_speed());
 }
 
-TEST_F(Test_ais_message_09, sog_max_value)
+TEST_F(test_ais_message_09, sog_max_value)
 {
 	ais::message_09 m;
 

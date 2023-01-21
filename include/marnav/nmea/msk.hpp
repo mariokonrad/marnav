@@ -4,9 +4,7 @@
 #include <marnav/nmea/sentence.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief MSK - Control for a Beacon Receiver
 ///
@@ -43,7 +41,7 @@ public:
 
 protected:
 	msk(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	uint32_t frequency_ = 0;
@@ -63,7 +61,6 @@ public:
 	void set_bitrate(uint32_t rate, selection_mode mode) noexcept;
 	void set_frequency_mss_status(uint32_t t) noexcept { frequency_mss_status_ = t; }
 };
-}
 }
 
 #endif

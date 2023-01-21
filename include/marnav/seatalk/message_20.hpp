@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Speed through water
@@ -28,19 +26,18 @@ public:
 	message_20(const message_20 &) = default;
 	message_20 & operator=(const message_20 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint16_t speed_; // speed in 1/10th of knots
+	uint16_t speed_{0}; // speed in 1/10th of knots
 
 public:
 	uint16_t get_speed() const noexcept { return speed_; }
 
 	void set_speed(uint16_t t) noexcept { speed_ = t; }
 };
-}
 }
 
 #endif

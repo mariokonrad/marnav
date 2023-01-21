@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id osd::ID;
 constexpr const char * osd::TAG;
@@ -63,6 +61,5 @@ void osd::append_data_to(std::string & s, const version &) const
 	append(s, to_string(vessel_set_));
 	append(s, to_string(vessel_drift_));
 	append(s, to_string(speed_unit_));
-}
 }
 }

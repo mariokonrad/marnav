@@ -113,7 +113,7 @@ struct sentence_data {
 	}
 
 // clang-format off
-static std::vector<sentence_data> sentences = {
+static const std::vector<sentence_data> sentences = {
 	INFO(aam,   "$GPAAM,A,A,0.5,N,POINT1*6E"),
 	INFO(ack,   "$INACK,123*52"),
 	INFO(alm,   "$GPALM,1,1,15,1159,00,441d,4e,16be,fd5e,a10c9f,4a2da4,686e81,58cbe1,0a4,001*77"),
@@ -239,7 +239,7 @@ static void specific(benchmark::internal::Benchmark * b)
 }
 }
 
-static void Benchmark_make_sentence(benchmark::State & state)
+static void benchmark_make_sentence(benchmark::State & state)
 {
 	state.SetLabel(sentences[state.range(0)].tag);
 	while (state.KeepRunning()) {
@@ -248,9 +248,9 @@ static void Benchmark_make_sentence(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_make_sentence)->Apply(all_sentences);
+BENCHMARK(benchmark_make_sentence)->Apply(all_sentences);
 
-static void Benchmark_sentence_to_string(benchmark::State & state)
+static void benchmark_sentence_to_string(benchmark::State & state)
 {
 	state.SetLabel(sentences[state.range(0)].tag);
 	while (state.KeepRunning()) {
@@ -263,10 +263,10 @@ static void Benchmark_sentence_to_string(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_sentence_to_string)->Apply(all_sentences);
+BENCHMARK(benchmark_sentence_to_string)->Apply(all_sentences);
 
 template <class T>
-static void Benchmark_create_sentence(benchmark::State & state)
+static void benchmark_create_sentence(benchmark::State & state)
 {
 	state.SetLabel(sentences[state.range(0)].tag);
 	while (state.KeepRunning()) {
@@ -276,7 +276,7 @@ static void Benchmark_create_sentence(benchmark::State & state)
 }
 
 #define BENCHMARK_TEMPLATE_SENTENCE(s) \
-	BENCHMARK_TEMPLATE(Benchmark_create_sentence, nmea::s)->Apply(specific<nmea::s>)
+	BENCHMARK_TEMPLATE(benchmark_create_sentence, nmea::s)->Apply(specific<nmea::s>)
 
 // clang-format off
 BENCHMARK_TEMPLATE_SENTENCE(aam);
@@ -376,7 +376,7 @@ BENCHMARK_TEMPLATE_SENTENCE(ztg);
 
 #undef BENCHMARK_TEMPLATE_SENTENCE
 
-static void Benchmark_extract_id(benchmark::State & state)
+static void benchmark_extract_id(benchmark::State & state)
 {
 	state.SetLabel(sentences[state.range(0)].tag);
 	while (state.KeepRunning()) {
@@ -385,6 +385,6 @@ static void Benchmark_extract_id(benchmark::State & state)
 	}
 }
 
-BENCHMARK(Benchmark_extract_id)->Apply(all_sentences);
+BENCHMARK(benchmark_extract_id)->Apply(all_sentences);
 
 BENCHMARK_MAIN();

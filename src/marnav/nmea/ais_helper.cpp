@@ -1,8 +1,6 @@
 #include <marnav/nmea/ais_helper.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// Creates and returns a container of VDM sentences, created from the specified
 /// payload.
@@ -34,6 +32,5 @@ std::vector<std::unique_ptr<nmea::sentence>> make_vdms(
 	}
 
 	return sentences;
-}
 }
 }

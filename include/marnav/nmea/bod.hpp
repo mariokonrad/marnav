@@ -5,9 +5,7 @@
 #include <marnav/nmea/waypoint.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief BOD - Bearing - Waypoint to Waypoint
 ///
@@ -45,7 +43,7 @@ public:
 
 protected:
 	bod(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<double> bearing_true_;
@@ -64,7 +62,6 @@ public:
 	void set_waypoint_to(const waypoint & id) { waypoint_to_ = id; }
 	void set_waypoint_from(const waypoint & id) { waypoint_from_ = id; }
 };
-}
 }
 
 #endif

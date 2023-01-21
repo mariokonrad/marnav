@@ -97,33 +97,30 @@ static const uint8_t DATA[] = {
 class dummy_device : public ::io::device
 {
 public:
-	dummy_device()
-		: index(0)
-	{
-	}
+	dummy_device() = default;
 
 	void open() override {}
 	void close() override {}
 
 	/// Just go through the data once.
-	virtual int read(char * buffer, uint32_t size) override
+	int read(char * buffer, uint32_t size) override
 	{
 		if (size != sizeof(*buffer))
 			throw std::invalid_argument{"buffer type not supported"};
-		if (index >= sizeof(DATA))
+		if (index_ >= sizeof(DATA))
 			return 0; // end of data
-		*buffer = static_cast<char>(DATA[index]);
-		++index;
+		*buffer = static_cast<char>(DATA[index_]);
+		++index_;
 		return 1;
 	}
 
-	virtual int write(const char *, uint32_t) override
+	int write(const char *, uint32_t) override
 	{
 		throw std::runtime_error{"operation not supported"};
 	}
 
 private:
-	uint32_t index;
+	uint32_t index_{0};
 };
 
 class dummy_reader : public ::io::seatalk_reader
@@ -131,17 +128,16 @@ class dummy_reader : public ::io::seatalk_reader
 public:
 	dummy_reader()
 		: seatalk_reader(std::make_unique<dummy_device>())
-		, num_messages(0)
 	{
 	}
 
-	int get_num_messages() const { return num_messages; }
+	int get_num_messages() const { return num_messages_; }
 
 protected:
-	virtual void process_message(const seatalk::raw &) override { ++num_messages; }
+	void process_message(const seatalk::raw &) override { ++num_messages_; }
 
 private:
-	int num_messages;
+	int num_messages_{0};
 };
 
 /// Works only in a single threaded context (true for dummuy_device and seatalk_reader).
@@ -150,16 +146,15 @@ class message_reader : public ::io::seatalk_reader
 public:
 	message_reader()
 		: seatalk_reader(std::make_unique<dummy_device>())
-		, message_received(false)
 	{
 	}
 
 	bool read_message(seatalk::raw & data)
 	{
 		while (read()) {
-			if (message_received) {
-				data = message;
-				message_received = false;
+			if (message_received_) {
+				data = message_;
+				message_received_ = false;
 				return true;
 			}
 		}
@@ -167,22 +162,22 @@ public:
 	}
 
 protected:
-	virtual void process_message(const seatalk::raw & msg) override
+	void process_message(const seatalk::raw & msg) override
 	{
-		message = msg;
-		message_received = true;
+		message_ = msg;
+		message_received_ = true;
 	}
 
 private:
-	bool message_received;
-	seatalk::raw message;
+	bool message_received_{false};
+	seatalk::raw message_;
 };
 
-class Test_io_seatalk_reader : public ::testing::Test
+class test_io_seatalk_reader : public ::testing::Test
 {
 };
 
-TEST_F(Test_io_seatalk_reader, read_count_messages_and_collisions)
+TEST_F(test_io_seatalk_reader, read_count_messages_and_collisions)
 {
 	dummy_reader device;
 
@@ -193,7 +188,7 @@ TEST_F(Test_io_seatalk_reader, read_count_messages_and_collisions)
 	EXPECT_EQ(1u, device.get_collisions());
 }
 
-TEST_F(Test_io_seatalk_reader, read_message)
+TEST_F(test_io_seatalk_reader, read_message)
 {
 	message_reader dev;
 	seatalk::raw msg;
@@ -207,7 +202,7 @@ TEST_F(Test_io_seatalk_reader, read_message)
 	EXPECT_EQ(9, num_messages);
 }
 
-TEST_F(Test_io_seatalk_reader, read_first_message_depth)
+TEST_F(test_io_seatalk_reader, read_first_message_depth)
 {
 	message_reader dev;
 	seatalk::raw msg;
@@ -221,7 +216,7 @@ TEST_F(Test_io_seatalk_reader, read_first_message_depth)
 	EXPECT_EQ(0x00u, msg[4]);
 }
 
-TEST_F(Test_io_seatalk_reader, read_third_message_water_temperature)
+TEST_F(test_io_seatalk_reader, read_third_message_water_temperature)
 {
 	message_reader dev;
 	seatalk::raw msg;

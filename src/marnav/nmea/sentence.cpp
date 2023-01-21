@@ -2,9 +2,7 @@
 #include <marnav/nmea/checksum.hpp>
 #include <algorithm>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr int sentence::max_length;
 constexpr char sentence::start_token;
@@ -58,6 +56,5 @@ void sentence::append(std::string & s, const char t)
 {
 	s += field_delimiter;
 	s += t;
-}
 }
 }

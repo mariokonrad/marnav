@@ -5,11 +5,11 @@ namespace
 {
 using marnav::nmea::version;
 
-class Test_nmea_version : public ::testing::Test
+class test_nmea_version : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_version, properties)
+TEST_F(test_nmea_version, properties)
 {
 	using type = marnav::nmea::version;
 
@@ -46,7 +46,7 @@ TEST_F(Test_nmea_version, properties)
 	EXPECT_TRUE(std::is_nothrow_move_assignable_v<type>);
 }
 
-TEST_F(Test_nmea_version, default_construction)
+TEST_F(test_nmea_version, default_construction)
 {
 	const auto v = version{};
 
@@ -54,7 +54,7 @@ TEST_F(Test_nmea_version, default_construction)
 	EXPECT_EQ(0, v.minor());
 }
 
-TEST_F(Test_nmea_version, construction)
+TEST_F(test_nmea_version, construction)
 {
 	const auto v = version{4, 1};
 
@@ -62,7 +62,7 @@ TEST_F(Test_nmea_version, construction)
 	EXPECT_EQ(1, v.minor());
 }
 
-TEST_F(Test_nmea_version, comparison_equal)
+TEST_F(test_nmea_version, comparison_equal)
 {
 	EXPECT_TRUE(version(1, 0) == version(1, 0));
 	EXPECT_TRUE(version(2, 3) == version(2, 3));
@@ -75,7 +75,7 @@ TEST_F(Test_nmea_version, comparison_equal)
 	EXPECT_FALSE(version(4, 2) == version(4, 1));
 }
 
-TEST_F(Test_nmea_version, comparison_not_equal)
+TEST_F(test_nmea_version, comparison_not_equal)
 {
 	EXPECT_FALSE(version(1, 0) != version(1, 0));
 	EXPECT_FALSE(version(2, 3) != version(2, 3));
@@ -88,7 +88,7 @@ TEST_F(Test_nmea_version, comparison_not_equal)
 	EXPECT_TRUE(version(4, 2) != version(4, 1));
 }
 
-TEST_F(Test_nmea_version, comparison_less)
+TEST_F(test_nmea_version, comparison_less)
 {
 	EXPECT_TRUE(version(1, 0) < version(2, 0));
 	EXPECT_TRUE(version(2, 2) < version(2, 3));

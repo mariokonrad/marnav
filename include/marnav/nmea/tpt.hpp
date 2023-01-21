@@ -5,9 +5,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief TPT - Trawl Position True
 ///
@@ -43,7 +41,7 @@ public:
 
 protected:
 	tpt(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	units::meters range_;
@@ -59,7 +57,6 @@ public:
 	void set_bearing(double t) noexcept { bearing_ = t; }
 	void set_depth(units::length t) noexcept { depth_ = t.get<units::meters>(); }
 };
-}
 }
 
 #endif

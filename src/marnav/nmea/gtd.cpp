@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id gtd::ID;
 constexpr const char * gtd::TAG;
@@ -50,6 +48,5 @@ void gtd::append_data_to(std::string & s, const version &) const
 {
 	for (auto const & t : time_diffs_)
 		append(s, to_string(t));
-}
 }
 }

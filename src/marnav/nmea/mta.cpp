@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include "checks.hpp"
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id mta::ID;
 constexpr const char * mta::TAG;
@@ -37,6 +35,5 @@ void mta::append_data_to(std::string & s, const version &) const
 {
 	append(s, format(temperature_, 1));
 	append(s, to_string(unit::temperature::celsius));
-}
 }
 }

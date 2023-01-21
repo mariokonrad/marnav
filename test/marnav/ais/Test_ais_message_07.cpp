@@ -6,14 +6,14 @@ namespace
 {
 using namespace marnav;
 
-class Test_ais_message_07 : public ::testing::Test
+class test_ais_message_07 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_07, parse)
+TEST_F(test_ais_message_07, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("702R5`hwCjq8", 0));
+	v.emplace_back("702R5`hwCjq8", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -22,18 +22,18 @@ TEST_F(Test_ais_message_07, parse)
 	ASSERT_TRUE(m != nullptr);
 }
 
-TEST_F(Test_ais_message_07, wrong_number_of_bits)
+TEST_F(test_ais_message_07, wrong_number_of_bits)
 {
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_07>(ais::raw(71)));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_07>(ais::raw(169)));
 }
 
-TEST_F(Test_ais_message_07, test_data_from_kurt_schwer)
+TEST_F(test_ais_message_07, test_data_from_kurt_schwer)
 {
 	// see: https://fossies.org/linux/gpsd/test/sample.aivdm
 
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("7IiQ4T`UjA9lC;b:M<MWE@", 4));
+	v.emplace_back("7IiQ4T`UjA9lC;b:M<MWE@", 4);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -49,12 +49,12 @@ TEST_F(Test_ais_message_07, test_data_from_kurt_schwer)
 	EXPECT_EQ(0u, m->get_mmsi_4());
 }
 
-TEST_F(Test_ais_message_07, test_data_from_mike_green)
+TEST_F(test_ais_message_07, test_data_from_mike_green)
 {
 	// see: https://fossies.org/linux/gpsd/test/sample.aivdm
 
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("7`0Pv1L:Ac8rbgPKHA8`P", 2));
+	v.emplace_back("7`0Pv1L:Ac8rbgPKHA8`P", 2);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);

@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_pgrmm : public ::testing::Test
+class test_nmea_pgrmm : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_pgrmm, contruction)
+TEST_F(test_nmea_pgrmm, contruction)
 {
 	nmea::pgrmm pgrmm;
 }
 
-TEST_F(Test_nmea_pgrmm, properties)
+TEST_F(test_nmea_pgrmm, properties)
 {
 	nmea_sentence_traits<nmea::pgrmm>();
 }
 
-TEST_F(Test_nmea_pgrmm, parse)
+TEST_F(test_nmea_pgrmm, parse)
 {
 	auto s = nmea::make_sentence("$PGRMM,WGS 84*06");
 	ASSERT_NE(nullptr, s);
@@ -31,20 +30,20 @@ TEST_F(Test_nmea_pgrmm, parse)
 	ASSERT_NE(nullptr, pgrmm);
 }
 
-TEST_F(Test_nmea_pgrmm, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_pgrmm, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::pgrmm>(nmea::talker::none, {2, "@"}));
 }
 
-TEST_F(Test_nmea_pgrmm, empty_to_string)
+TEST_F(test_nmea_pgrmm, empty_to_string)
 {
 	nmea::pgrmm pgrmm;
 
 	EXPECT_STREQ("$PGRMM,*69", nmea::to_string(pgrmm).c_str());
 }
 
-TEST_F(Test_nmea_pgrmm, set_map_datum)
+TEST_F(test_nmea_pgrmm, set_map_datum)
 {
 	nmea::pgrmm pgrmm;
 	pgrmm.set_map_datum("WGS 84");
@@ -52,7 +51,7 @@ TEST_F(Test_nmea_pgrmm, set_map_datum)
 	EXPECT_STREQ("$PGRMM,WGS 84*06", nmea::to_string(pgrmm).c_str());
 }
 
-TEST_F(Test_nmea_pgrmm, set_map_datum_empty)
+TEST_F(test_nmea_pgrmm, set_map_datum_empty)
 {
 	nmea::pgrmm pgrmm;
 	pgrmm.set_map_datum("");
@@ -60,7 +59,7 @@ TEST_F(Test_nmea_pgrmm, set_map_datum_empty)
 	EXPECT_STREQ("$PGRMM,*69", nmea::to_string(pgrmm).c_str());
 }
 
-TEST_F(Test_nmea_pgrmm, set_map_datum_too_large)
+TEST_F(test_nmea_pgrmm, set_map_datum_too_large)
 {
 	nmea::pgrmm pgrmm;
 	pgrmm.set_map_datum(

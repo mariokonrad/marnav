@@ -1,9 +1,7 @@
 #include <marnav/geo/geodesic.hpp>
 #include <cmath>
 
-namespace marnav
-{
-namespace geo
+namespace marnav::geo
 {
 
 /// This geodesic functions may not be the best possible, but they are
@@ -293,6 +291,5 @@ distance_result distance_ellipsoid_lambert(const position & start, const positio
 	const double Y = (sigma + sin(sigma)) * (sqr(cos(P)) * sqr(sin(Q))) / sqr(sin(sigma / 2.0));
 
 	return distance_result{earth_radius * (sigma - (X + Y) / (2.0 * r))};
-}
 }
 }

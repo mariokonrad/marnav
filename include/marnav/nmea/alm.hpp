@@ -3,9 +3,7 @@
 
 #include <marnav/nmea/sentence.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief ALM - GPS Almanac Data
 ///
@@ -55,7 +53,7 @@ public:
 
 protected:
 	alm(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	uint32_t number_of_messages_ = 0;
@@ -112,7 +110,6 @@ public:
 	void set_f0_clock_parameter(uint32_t t) noexcept { f0_clock_parameter_ = t; }
 	void set_f1_clock_parameter(uint32_t t) noexcept { f1_clock_parameter_ = t; }
 };
-}
 }
 
 #endif

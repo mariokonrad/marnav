@@ -104,9 +104,7 @@
 /// @example parse_nmea.cpp
 /// This is an example on how to parse and handle NMEA sentences from a string.
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @cond DEV
 namespace
@@ -246,7 +244,7 @@ void ensure_checksum(
 		throw std::invalid_argument{"invalid format in nmea/ensure_checksum"};
 	if (s.size() != end_pos + 3) // short or no checksum
 		throw std::invalid_argument{"invalid format in nmea/ensure_checksum"};
-	const uint8_t expected_checksum = static_cast<uint8_t>(std::stoul(expected, nullptr, 16));
+	const auto expected_checksum = static_cast<uint8_t>(std::stoul(expected, nullptr, 16));
 	const uint8_t sum = checksum(begin(s) + start_pos, begin(s) + end_pos);
 	if (expected_checksum != sum)
 		throw checksum_error{expected_checksum, sum};
@@ -273,7 +271,7 @@ std::vector<std::string> get_supported_sentences_str()
 	std::vector<std::string> v;
 	v.reserve(std::distance(std::begin(known_sentences), std::end(known_sentences)));
 	for (const auto & s : known_sentences) {
-		v.push_back(s.TAG);
+		v.emplace_back(s.TAG);
 	}
 	return v;
 }
@@ -375,6 +373,5 @@ sentence_id extract_id(const std::string & s)
 	std::tie(talk, tag) = detail::parse_address(s.substr(search_pos + 1, pos - search_pos - 1));
 
 	return tag_to_id(tag);
-}
 }
 }

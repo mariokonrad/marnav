@@ -4,9 +4,7 @@
 #include <marnav/utils/bitset.hpp>
 #include <string>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 /// Type for raw AIS data.
 using raw = utils::bitset<uint8_t>;
@@ -46,7 +44,7 @@ protected:
 		using value_type = T;
 
 		bitset_value(value_type t)
-			: value(t)
+			: value_(t)
 		{
 		}
 
@@ -56,7 +54,7 @@ protected:
 		bitset_value(bitset_value &&) = default;
 		bitset_value & operator=(bitset_value &&) = default;
 
-		value_type get() const { return value; }
+		value_type get() const { return value_; }
 
 		template <typename U,
 			typename = typename std::enable_if<std::is_convertible<value_type, U>::value>::type>
@@ -65,16 +63,16 @@ protected:
 			return static_cast<U>(get());
 		}
 
-		operator value_type() const { return value; }
+		operator value_type() const { return value_; }
 
 		bitset_value & operator=(value_type t)
 		{
-			value = t;
+			value_ = t;
 			return *this;
 		}
 
 	private:
-		value_type value = {};
+		value_type value_ = {};
 	};
 
 	/// @{
@@ -102,7 +100,7 @@ protected:
 	{
 		typename std::underlying_type<typename T::value_type>::type tmp;
 		bits.get(tmp, T::offset, T::count);
-		t.value = static_cast<typename T::value_type>(tmp);
+		t.value_ = static_cast<typename T::value_type>(tmp);
 	}
 
 	/// The `bool` variant of `get`.
@@ -125,7 +123,7 @@ protected:
 		= 0>
 	static void get(const raw & bits, T & t)
 	{
-		bits.get(t.value, T::offset, T::count);
+		bits.get(t.value_, T::offset, T::count);
 	}
 
 	/// The `string` variant of `get`.
@@ -138,7 +136,7 @@ protected:
 		= 0>
 	static void get(const raw & bits, T & t)
 	{
-		t.value = read_string(bits, T::offset, T::count);
+		t.value_ = read_string(bits, T::offset, T::count);
 	}
 
 	/// @}
@@ -157,7 +155,7 @@ protected:
 	static void set(raw & bits, const T & t)
 	{
 		bits.set(
-			static_cast<typename std::underlying_type<typename T::value_type>::type>(t.value),
+			static_cast<typename std::underlying_type<typename T::value_type>::type>(t.value_),
 			T::offset, T::count);
 	}
 
@@ -168,7 +166,7 @@ protected:
 		= 0>
 	static void set(raw & bits, const T & t)
 	{
-		bits.set_bit(T::offset, t.value);
+		bits.set_bit(T::offset, t.value_);
 	}
 
 	/// The non `enum` and non `string` variant of `set`.
@@ -181,7 +179,7 @@ protected:
 		= 0>
 	static void set(raw & bits, const T & t)
 	{
-		bits.set(t.value, T::offset, T::count);
+		bits.set(t.value_, T::offset, T::count);
 	}
 
 	/// The `string` variant of `set`.
@@ -194,12 +192,11 @@ protected:
 		= 0>
 	static void set(raw & bits, const T & t)
 	{
-		write_string(bits, T::offset, T::count, t.value);
+		write_string(bits, T::offset, T::count, t.value_);
 	}
 
 	/// @}
 };
-}
 }
 
 #endif

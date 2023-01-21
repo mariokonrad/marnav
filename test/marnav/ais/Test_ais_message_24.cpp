@@ -4,17 +4,16 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_ais_message_24 : public ::testing::Test
+class test_ais_message_24 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_24, parse_part_a)
+TEST_F(test_ais_message_24, parse_part_a)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("H000000000000000000000000000", 0));
+	v.emplace_back("H000000000000000000000000000", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -23,10 +22,10 @@ TEST_F(Test_ais_message_24, parse_part_a)
 	ASSERT_TRUE(m != nullptr);
 }
 
-TEST_F(Test_ais_message_24, parse_part_b_normal)
+TEST_F(test_ais_message_24, parse_part_b_normal)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("H000004000000000000000000000", 0));
+	v.emplace_back("H000004000000000000000000000", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -35,10 +34,10 @@ TEST_F(Test_ais_message_24, parse_part_b_normal)
 	ASSERT_TRUE(m != nullptr);
 }
 
-TEST_F(Test_ais_message_24, parse_part_b_auxiliary)
+TEST_F(test_ais_message_24, parse_part_b_auxiliary)
 {
 	std::vector<std::pair<std::string, uint32_t>> v;
-	v.push_back(std::make_pair("H<?2hN\\000000000000000000000", 0));
+	v.emplace_back("H<?2hN\\000000000000000000000", 0);
 
 	auto result = ais::make_message(v);
 	ASSERT_TRUE(result != nullptr);
@@ -47,7 +46,7 @@ TEST_F(Test_ais_message_24, parse_part_b_auxiliary)
 	ASSERT_TRUE(m != nullptr);
 }
 
-TEST_F(Test_ais_message_24, is_auxiliary_vessel)
+TEST_F(test_ais_message_24, is_auxiliary_vessel)
 {
 	{
 		ais::message_24 m;
@@ -62,7 +61,7 @@ TEST_F(Test_ais_message_24, is_auxiliary_vessel)
 	}
 }
 
-TEST_F(Test_ais_message_24, encode_default_values_part_a)
+TEST_F(test_ais_message_24, encode_default_values_part_a)
 {
 	ais::message_24 m;
 	m.set_part_number(ais::message_24::part::A);
@@ -74,7 +73,7 @@ TEST_F(Test_ais_message_24, encode_default_values_part_a)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_24, encode_default_values_part_b_normal)
+TEST_F(test_ais_message_24, encode_default_values_part_b_normal)
 {
 	ais::message_24 m;
 	m.set_part_number(ais::message_24::part::B);
@@ -86,7 +85,7 @@ TEST_F(Test_ais_message_24, encode_default_values_part_b_normal)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_24, encode_default_values_part_b_auxiliary)
+TEST_F(test_ais_message_24, encode_default_values_part_b_auxiliary)
 {
 	ais::message_24 m;
 	m.set_mmsi(utils::mmsi{981119999});
@@ -99,7 +98,7 @@ TEST_F(Test_ais_message_24, encode_default_values_part_b_auxiliary)
 	EXPECT_EQ(0u, v[0].second);
 }
 
-TEST_F(Test_ais_message_24, wrong_number_of_bits)
+TEST_F(test_ais_message_24, wrong_number_of_bits)
 {
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_24>(ais::raw(167)));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_24>(ais::raw(169)));

@@ -1,9 +1,7 @@
 #ifndef MARNAV_UTILS_UNUSED_HPP
 #define MARNAV_UTILS_UNUSED_HPP
 
-namespace marnav
-{
-namespace utils
+namespace marnav::utils
 {
 /// Swallows everything thrown into it. Used to prevent the compiler
 /// complain about unused parameters like this:
@@ -39,7 +37,6 @@ namespace utils
 template <typename... Args>
 void unused(Args &&...)
 {
-}
 }
 }
 

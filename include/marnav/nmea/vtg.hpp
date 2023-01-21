@@ -5,9 +5,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief VTG - Track made good and Ground speed
 ///
@@ -48,7 +46,7 @@ public:
 
 protected:
 	vtg(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<double> track_true_;
@@ -70,7 +68,6 @@ public:
 	void set_speed_kmh(units::velocity t) noexcept;
 	void set_mode_indicator(mode_indicator t) noexcept { mode_ind_ = t; }
 };
-}
 }
 
 #endif

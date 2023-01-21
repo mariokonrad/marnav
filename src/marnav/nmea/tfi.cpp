@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 namespace
 {
@@ -86,6 +84,5 @@ void tfi::append_data_to(std::string & s, const version &) const
 {
 	for (auto const & t : sensors_)
 		append(s, to_string(t));
-}
 }
 }

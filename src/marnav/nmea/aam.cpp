@@ -3,9 +3,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id aam::ID;
 constexpr const char * aam::TAG;
@@ -60,6 +58,5 @@ void aam::append_data_to(std::string & s, const version &) const
 	append(s, to_string(arrival_circle_radius_.value()));
 	append(s, to_string(unit::distance::nm));
 	append(s, to_string(waypoint_id_));
-}
 }
 }

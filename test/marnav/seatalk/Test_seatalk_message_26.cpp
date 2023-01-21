@@ -6,28 +6,28 @@ namespace
 
 using namespace marnav;
 
-class Test_seatalk_message_26 : public ::testing::Test
+class test_seatalk_message_26 : public ::testing::Test
 {
 };
 
-TEST_F(Test_seatalk_message_26, construction)
+TEST_F(test_seatalk_message_26, construction)
 {
 	seatalk::message_26 m;
 }
 
-TEST_F(Test_seatalk_message_26, parse_invalid_data_size)
+TEST_F(test_seatalk_message_26, parse_invalid_data_size)
 {
 	EXPECT_ANY_THROW(seatalk::message_26::parse({6, 0x00}));
 	EXPECT_ANY_THROW(seatalk::message_26::parse({8, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_26, parse_invalid_length)
+TEST_F(test_seatalk_message_26, parse_invalid_length)
 {
 	EXPECT_ANY_THROW(seatalk::message_26::parse({0x26, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00}));
 	EXPECT_ANY_THROW(seatalk::message_26::parse({0x26, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00}));
 }
 
-TEST_F(Test_seatalk_message_26, parse)
+TEST_F(test_seatalk_message_26, parse)
 {
 	struct test_case {
 		seatalk::raw data;

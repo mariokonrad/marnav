@@ -6,9 +6,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief GBS - GPS Satellite Fault Detection
 ///
@@ -46,7 +44,7 @@ public:
 
 protected:
 	gbs(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	nmea::time time_utc_;
@@ -77,7 +75,6 @@ public:
 	void set_bias(units::length t) noexcept { bias_ = t.get<units::meters>(); }
 	void set_bias_dev(double t) noexcept { bias_dev_ = t; }
 };
-}
 }
 
 #endif

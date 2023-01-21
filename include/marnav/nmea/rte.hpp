@@ -7,9 +7,7 @@
 #include <optional>
 #include <vector>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief RTE - Routes
 ///
@@ -49,7 +47,7 @@ public:
 
 protected:
 	rte(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	uint32_t n_messages_ = 1;
@@ -73,7 +71,6 @@ public:
 	void add_waypoint_id(const waypoint & id);
 	void clear_waypoint_id();
 };
-}
 }
 
 #endif

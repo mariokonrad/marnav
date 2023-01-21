@@ -1,9 +1,7 @@
 #include <marnav/ais/message_04.hpp>
 #include <marnav/ais/angle.hpp>
 
-namespace marnav
-{
-namespace ais
+namespace marnav::ais
 {
 constexpr message_id message_04::ID;
 constexpr std::size_t message_04::SIZE_BITS;
@@ -33,20 +31,20 @@ message_04::message_04(const raw & bits)
 
 void message_04::read_data(const raw & bits)
 {
-	get(bits, repeat_indicator);
-	get(bits, mmsi);
-	get(bits, year);
-	get(bits, month);
-	get(bits, day);
-	get(bits, hour);
-	get(bits, minute);
-	get(bits, second);
-	get(bits, position_accuracy);
-	get(bits, longitude_minutes);
-	get(bits, latitude_minutes);
-	get(bits, epfd_fix);
-	get(bits, raim);
-	get(bits, radio_status);
+	get(bits, repeat_indicator_);
+	get(bits, mmsi_);
+	get(bits, year_);
+	get(bits, month_);
+	get(bits, day_);
+	get(bits, hour_);
+	get(bits, minute_);
+	get(bits, second_);
+	get(bits, position_accuracy_);
+	get(bits, longitude_minutes_);
+	get(bits, latitude_minutes_);
+	get(bits, epfd_fix_);
+	get(bits, raim_);
+	get(bits, radio_status_);
 }
 
 raw message_04::get_data() const
@@ -54,50 +52,49 @@ raw message_04::get_data() const
 	raw bits(SIZE_BITS);
 
 	bits.set(type(), 0, 6);
-	set(bits, repeat_indicator);
-	set(bits, mmsi);
-	set(bits, year);
-	set(bits, month);
-	set(bits, day);
-	set(bits, hour);
-	set(bits, minute);
-	set(bits, second);
-	set(bits, position_accuracy);
-	set(bits, longitude_minutes);
-	set(bits, latitude_minutes);
-	set(bits, epfd_fix);
-	set(bits, raim);
-	set(bits, radio_status);
+	set(bits, repeat_indicator_);
+	set(bits, mmsi_);
+	set(bits, year_);
+	set(bits, month_);
+	set(bits, day_);
+	set(bits, hour_);
+	set(bits, minute_);
+	set(bits, second_);
+	set(bits, position_accuracy_);
+	set(bits, longitude_minutes_);
+	set(bits, latitude_minutes_);
+	set(bits, epfd_fix_);
+	set(bits, raim_);
+	set(bits, radio_status_);
 
 	return bits;
 }
 
 std::optional<geo::longitude> message_04::get_lon() const
 {
-	if (longitude_minutes == longitude_not_available)
+	if (longitude_minutes_ == longitude_not_available)
 		return std::make_optional<geo::longitude>();
-	return to_geo_longitude(longitude_minutes, longitude_minutes.count, angle_scale::I4);
+	return to_geo_longitude(longitude_minutes_, longitude_minutes_.count, angle_scale::I4);
 }
 
 std::optional<geo::latitude> message_04::get_lat() const
 {
-	if (latitude_minutes == latitude_not_available)
+	if (latitude_minutes_ == latitude_not_available)
 		return std::make_optional<geo::latitude>();
-	return to_geo_latitude(latitude_minutes, latitude_minutes.count, angle_scale::I4);
+	return to_geo_latitude(latitude_minutes_, latitude_minutes_.count, angle_scale::I4);
 }
 
 void message_04::set_lon(const std::optional<geo::longitude> & t)
 {
-	longitude_minutes = t
-		? to_longitude_minutes(t.value(), longitude_minutes.count, angle_scale::I4)
+	longitude_minutes_ = t
+		? to_longitude_minutes(t.value(), longitude_minutes_.count, angle_scale::I4)
 		: longitude_not_available;
 }
 
 void message_04::set_lat(const std::optional<geo::latitude> & t)
 {
-	latitude_minutes = t
-		? to_latitude_minutes(t.value(), latitude_minutes.count, angle_scale::I4)
+	latitude_minutes_ = t
+		? to_latitude_minutes(t.value(), latitude_minutes_.count, angle_scale::I4)
 		: latitude_not_available;
-}
 }
 }

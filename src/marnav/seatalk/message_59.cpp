@@ -1,8 +1,6 @@
 #include <marnav/seatalk/message_59.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 namespace
 {
@@ -18,10 +16,6 @@ static uint8_t ensure_range(uint8_t value, uint8_t min, uint8_t max)
 
 message_59::message_59()
 	: message(ID)
-	, hours_(0)
-	, minutes_(0)
-	, seconds_(0)
-	, count_mode_(mode::up_and_start)
 {
 }
 
@@ -30,7 +24,7 @@ std::unique_ptr<message> message_59::parse(const raw & data)
 	check_size(data, SIZE);
 
 	std::unique_ptr<message> result = std::make_unique<message_59>();
-	message_59 & msg = static_cast<message_59 &>(*result);
+	auto & msg = static_cast<message_59 &>(*result);
 
 	//  59 22 SS MM XH
 	// raw  1  2  3  4
@@ -55,6 +49,5 @@ void message_59::set_timer(uint8_t hours, uint8_t minutes, uint8_t seconds, mode
 	minutes_ = ensure_range(minutes, 0, 59);
 	seconds_ = ensure_range(seconds, 0, 59);
 	count_mode_ = m;
-}
 }
 }

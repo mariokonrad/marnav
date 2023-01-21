@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_mss : public ::testing::Test
+class test_nmea_mss : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_mss, contruction)
+TEST_F(test_nmea_mss, contruction)
 {
 	EXPECT_NO_THROW(nmea::mss mss);
 }
 
-TEST_F(Test_nmea_mss, properties)
+TEST_F(test_nmea_mss, properties)
 {
 	nmea_sentence_traits<nmea::mss>();
 }
 
-TEST_F(Test_nmea_mss, parse)
+TEST_F(test_nmea_mss, parse)
 {
 	auto s = nmea::make_sentence("$GPMSS,12,34,123,456,1*44");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_mss, parse)
 	ASSERT_NE(nullptr, mss);
 }
 
-TEST_F(Test_nmea_mss, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_mss, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::mss>(nmea::talker::none, {4, "@"}));
@@ -39,7 +38,7 @@ TEST_F(Test_nmea_mss, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::mss>(nmea::talker::none, {6, "@"}));
 }
 
-TEST_F(Test_nmea_mss, empty_to_string)
+TEST_F(test_nmea_mss, empty_to_string)
 {
 	nmea::mss mss;
 

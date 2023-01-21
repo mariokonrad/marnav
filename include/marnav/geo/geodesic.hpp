@@ -3,9 +3,7 @@
 
 #include <marnav/geo/position.hpp>
 
-namespace marnav
-{
-namespace geo
+namespace marnav::geo
 {
 struct distance_result {
 	double distance = 0.0; // [m]
@@ -38,7 +36,6 @@ position point_ellipsoid_vincenty(const position &, double s, double alpha1, dou
 
 distance_result distance_ellipsoid_lambert(
 	const position & start, const position & destination);
-}
 }
 
 #endif

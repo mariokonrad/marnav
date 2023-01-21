@@ -5,9 +5,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief ITS - Trawl Door Spread 2 Distance
 ///
@@ -38,7 +36,7 @@ public:
 
 protected:
 	its(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	units::meters distance_;
@@ -48,7 +46,6 @@ public:
 
 	void set_distance(units::length t) noexcept { distance_ = t.get<units::meters>(); };
 };
-}
 }
 
 #endif

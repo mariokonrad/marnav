@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id stn::ID;
 constexpr const char * stn::TAG;
@@ -26,6 +24,5 @@ stn::stn(talker talk, fields::const_iterator first, fields::const_iterator last)
 void stn::append_data_to(std::string & s, const version &) const
 {
 	append(s, to_string(number_));
-}
 }
 }

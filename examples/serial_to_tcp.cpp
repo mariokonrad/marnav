@@ -16,37 +16,37 @@ class boost_asio_serial : public marnav::io::device
 {
 public:
 	boost_asio_serial(const std::string & port, int baud_rate = 4800)
-		: io()
-		, serial(io, port)
+		: io_()
+		, serial_(io_, port)
 	{
-		serial.set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
+		serial_.set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
 	}
 
-	virtual void open() override{};
+	void open() override{};
 
-	virtual void close() override { serial.close(); }
+	void close() override { serial_.close(); }
 
-	virtual int read(char * buffer, uint32_t size) override
+	int read(char * buffer, uint32_t size) override
 	{
 		if ((buffer == nullptr) || (size == 0))
 			throw std::invalid_argument{"invalid buffer or size"};
-		if (!serial.is_open())
+		if (!serial_.is_open())
 			throw std::runtime_error{"device not open"};
-		return boost::asio::read(serial, boost::asio::buffer(buffer, size));
+		return boost::asio::read(serial_, boost::asio::buffer(buffer, size));
 	}
 
-	virtual int write(const char * buffer, uint32_t size) override
+	int write(const char * buffer, uint32_t size) override
 	{
 		if (buffer == nullptr)
 			throw std::invalid_argument{"invalid buffer"};
-		if (!serial.is_open())
+		if (!serial_.is_open())
 			throw std::runtime_error{"device not open"};
-		return boost::asio::write(serial, boost::asio::buffer(buffer, size));
+		return boost::asio::write(serial_, boost::asio::buffer(buffer, size));
 	}
 
 private:
-	boost::asio::io_service io;
-	boost::asio::serial_port serial;
+	boost::asio::io_service io_;
+	boost::asio::serial_port serial_;
 };
 
 /// Blocking TCP client
@@ -56,27 +56,27 @@ class boost_asio_tcp_client
 {
 public:
 	boost_asio_tcp_client(const std::string & host, const std::string & port)
-		: io()
-		, socket(io)
+		: io_()
+		, socket_(io_)
 	{
-		boost::asio::ip::tcp::resolver resolver{io};
-		boost::asio::connect(socket, resolver.resolve({host, port}));
+		boost::asio::ip::tcp::resolver resolver{io_};
+		boost::asio::connect(socket_, resolver.resolve({host, port}));
 	}
 
-	~boost_asio_tcp_client() {}
+	~boost_asio_tcp_client() = default;
 
 	int write(const char * buffer, uint32_t size)
 	{
 		if (buffer == nullptr)
 			throw std::invalid_argument{"invalid buffer or size"};
-		if (!socket.is_open())
+		if (!socket_.is_open())
 			throw std::runtime_error{"device not open"};
-		return boost::asio::write(socket, boost::asio::buffer(buffer, size));
+		return boost::asio::write(socket_, boost::asio::buffer(buffer, size));
 	}
 
 private:
-	boost::asio::io_service io;
-	boost::asio::ip::tcp::socket socket;
+	boost::asio::io_service io_;
+	boost::asio::ip::tcp::socket socket_;
 };
 }
 

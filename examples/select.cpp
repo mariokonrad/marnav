@@ -19,37 +19,36 @@ class pipe : public marnav::io::device, virtual public marnav::io::selectable
 
 public:
 	pipe(std::string filename)
-		: fd(-1)
-		, filename(filename)
+		: filename_(filename)
 	{
 	}
 
-	virtual ~pipe() { close(); }
+	~pipe() override { close(); }
 
-	void create() { ::mkfifo(filename.c_str(), 0666); }
+	void create() { ::mkfifo(filename_.c_str(), 0666); }
 
 	void open_read()
 	{
 		if (fd >= 0)
 			return;
-		fd = ::open(filename.c_str(), O_RDONLY | O_NONBLOCK);
+		fd = ::open(filename_.c_str(), O_RDONLY | O_NONBLOCK);
 	}
 
 	void open_write()
 	{
 		if (fd >= 0)
 			return;
-		fd = ::open(filename.c_str(), O_WRONLY | O_NONBLOCK);
+		fd = ::open(filename_.c_str(), O_WRONLY | O_NONBLOCK);
 	}
 
 	void open_read_write()
 	{
 		if (fd >= 0)
 			return;
-		fd = ::open(filename.c_str(), O_RDWR | O_NONBLOCK);
+		fd = ::open(filename_.c_str(), O_RDWR | O_NONBLOCK);
 	}
 
-	virtual void close() override
+	void close() override
 	{
 		if (fd < 0)
 			return;
@@ -57,7 +56,7 @@ public:
 		fd = -1;
 	}
 
-	virtual int read(char * buffer, uint32_t size) override
+	int read(char * buffer, uint32_t size) override
 	{
 		if (!buffer)
 			throw std::invalid_argument{"buffer"};
@@ -67,7 +66,7 @@ public:
 		return ::read(fd, buffer, size);
 	}
 
-	virtual int write(const char * buffer, uint32_t size) override
+	int write(const char * buffer, uint32_t size) override
 	{
 		if (!buffer)
 			throw std::invalid_argument{"buffer"};
@@ -78,12 +77,12 @@ public:
 	}
 
 protected:
-	virtual void open() override {}
-	virtual int get_fd() const override { return fd; }
+	void open() override {}
+	int get_fd() const override { return fd; }
 
 private:
-	int fd;
-	std::string filename;
+	int fd{-1};
+	std::string filename_;
 };
 
 class selector
@@ -115,7 +114,7 @@ public:
 		}
 
 		// the actual select
-		auto rc = ::select(max_fd + 1, &rfds, 0, 0, 0);
+		auto rc = ::select(max_fd + 1, &rfds, nullptr, nullptr, nullptr);
 		if (rc < 0)
 			throw std::runtime_error{"select"};
 

@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id zda::ID;
 constexpr const char * zda::TAG;
@@ -53,6 +51,5 @@ void zda::append_data_to(std::string & s, const version &) const
 	append(s, format(y, 4));
 	append(s, format(local_zone_hours_, 2));
 	append(s, format(local_zone_minutes_, 2));
-}
 }
 }

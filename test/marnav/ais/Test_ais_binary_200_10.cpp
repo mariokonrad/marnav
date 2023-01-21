@@ -5,11 +5,11 @@ namespace
 {
 using namespace marnav::ais;
 
-class Test_ais_binary_200_10 : public ::testing::Test
+class test_ais_binary_200_10 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_binary_200_10, default_values)
+TEST_F(test_ais_binary_200_10, default_values)
 {
 	binary_200_10 b;
 	raw r;

@@ -1,19 +1,11 @@
 #include <marnav/seatalk/message_00.hpp>
 #include <cmath>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 message_00::message_00()
 	: message(ID)
-	, anchor_alarm_active_(false)
-	, metric_display_units_(false)
-	, transducer_defective_(false)
-	, depth_alarm_active_(false)
-	, shallow_depth_alarm_active_(false)
-	, depth_(0)
 {
 }
 
@@ -22,7 +14,7 @@ std::unique_ptr<message> message_00::parse(const raw & data)
 	check_size(data, SIZE);
 
 	std::unique_ptr<message> result = std::make_unique<message_00>();
-	message_00 & msg = static_cast<message_00 &>(*result);
+	auto & msg = static_cast<message_00 &>(*result);
 
 	const uint8_t flags = data[2];
 	msg.anchor_alarm_active_ = (flags & 0x80) != 0;
@@ -67,6 +59,5 @@ void message_00::set_depth_meters(double t) noexcept
 	} else {
 		depth_ = static_cast<uint16_t>(std::round(10.0 * (t * 3.2808)));
 	}
-}
 }
 }

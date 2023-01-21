@@ -5,9 +5,7 @@
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/waypoint.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief ZTE - Estimated time to event
 ///
@@ -38,7 +36,7 @@ public:
 
 protected:
 	zte(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	nmea::time time_utc_;
@@ -54,7 +52,6 @@ public:
 	void set_time_remaining(nmea::duration t) noexcept { time_remaining_ = t; }
 	void set_waypoint_id(const waypoint & t) { waypoint_id_ = t; }
 };
-}
 }
 
 #endif

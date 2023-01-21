@@ -6,9 +6,7 @@
 #include <marnav/geo/region.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief DSC - Digital Selective Calling Information
 ///
@@ -116,7 +114,7 @@ public:
 
 protected:
 	dsc(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	format_specifier fmt_spec_ = format_specifier::distress;
@@ -146,7 +144,6 @@ std::string to_name(dsc::format_specifier value);
 std::string to_name(dsc::category value);
 std::string to_name(dsc::acknowledgement value);
 std::string to_name(dsc::extension_indicator value);
-}
 }
 
 #endif

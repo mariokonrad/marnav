@@ -7,9 +7,7 @@
 #include <limits>
 #include <type_traits>
 
-namespace marnav
-{
-namespace units
+namespace marnav::units
 {
 template <class T, class VT,
 	typename std::enable_if<!std::is_floating_point<VT>::value, int>::type = 0>
@@ -72,7 +70,6 @@ constexpr bool operator>=(
 	const basic_quantity<T, VT> & v1, const basic_quantity<T, VT> & v2) noexcept
 {
 	return !(v1 < v2);
-}
 }
 }
 

@@ -3,9 +3,7 @@
 #include "convert.hpp"
 #include <marnav/nmea/io.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id gll::ID;
 constexpr const char * gll::TAG;
@@ -72,6 +70,5 @@ void gll::append_data_to(std::string & s, const version &) const
 	append(s, to_string(time_utc_));
 	append(s, to_string(data_valid_));
 	append(s, to_string(mode_ind_));
-}
 }
 }

@@ -5,9 +5,7 @@
 #include <marnav/nmea/time.hpp>
 #include <marnav/nmea/waypoint.hpp>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief ZFI - Elapsed time from point of interest
 ///
@@ -38,7 +36,7 @@ public:
 
 protected:
 	zfi(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	nmea::time time_utc_;
@@ -54,7 +52,6 @@ public:
 	void set_time_elapsed(nmea::duration t) noexcept { time_elapsed_ = t; }
 	void set_waypoint_id(const waypoint & t) { waypoint_id_ = t; }
 };
-}
 }
 
 #endif

@@ -5,16 +5,13 @@
 
 using namespace marnav::math;
 
-namespace marnav
-{
-namespace math
+namespace marnav::math
 {
 // instantiate all of them to achieve the right coverage information.
 template class matrix2<double>;
 template class matrix3<double>;
 template class matrix4<double>;
 template class matrix_n<8, double>;
-}
 }
 
 namespace
@@ -51,11 +48,11 @@ bool equals(const T & a, const T & b,
 	return true;
 }
 
-class Test_math_matrix : public ::testing::Test
+class test_math_matrix : public ::testing::Test
 {
 };
 
-TEST_F(Test_math_matrix, mat2_construction_default)
+TEST_F(test_math_matrix, mat2_construction_default)
 {
 	mat2 m;
 
@@ -65,7 +62,7 @@ TEST_F(Test_math_matrix, mat2_construction_default)
 	EXPECT_NEAR(1.0, m[3], 1e-8);
 }
 
-TEST_F(Test_math_matrix, mat2_comparison_equal)
+TEST_F(test_math_matrix, mat2_comparison_equal)
 {
 	mat2 m1;
 	mat2 m2;
@@ -81,7 +78,7 @@ TEST_F(Test_math_matrix, mat2_comparison_equal)
 	EXPECT_FALSE(m2 == m3);
 }
 
-TEST_F(Test_math_matrix, mat2_inverse_of_identity)
+TEST_F(test_math_matrix, mat2_inverse_of_identity)
 {
 	const mat2 m1;
 	const mat2 m2 = m1.inv();
@@ -89,7 +86,7 @@ TEST_F(Test_math_matrix, mat2_inverse_of_identity)
 	EXPECT_EQ(m1, m2);
 }
 
-TEST_F(Test_math_matrix, mat2_inverse)
+TEST_F(test_math_matrix, mat2_inverse)
 {
 	const mat2 m1{1.0, 2.0, 3.0, 4.0};
 	const mat2 m2 = m1.inv();
@@ -98,7 +95,7 @@ TEST_F(Test_math_matrix, mat2_inverse)
 	EXPECT_EQ(expected, m2);
 }
 
-TEST_F(Test_math_matrix, mat2_inverse_multiply)
+TEST_F(test_math_matrix, mat2_inverse_multiply)
 {
 	const mat2 m1{1.0, 2.0, 3.0, 4.0};
 	const mat2 m2 = m1.inv();
@@ -108,7 +105,7 @@ TEST_F(Test_math_matrix, mat2_inverse_multiply)
 	EXPECT_TRUE((expected == (m2 * m1)));
 }
 
-TEST_F(Test_math_matrix, mat3_inverse_of_identity)
+TEST_F(test_math_matrix, mat3_inverse_of_identity)
 {
 	const mat3 m1;
 	const mat3 m2 = m1.inv();
@@ -116,7 +113,7 @@ TEST_F(Test_math_matrix, mat3_inverse_of_identity)
 	EXPECT_EQ(m1, m2);
 }
 
-TEST_F(Test_math_matrix, mat3_inverse)
+TEST_F(test_math_matrix, mat3_inverse)
 {
 	const mat3 m1{1.0, 2.0, 3.0, 1.5, 0.5, 0.0, -0.5, 2.0, 1.5};
 	const mat3 m2 = m1.inv();
@@ -126,7 +123,7 @@ TEST_F(Test_math_matrix, mat3_inverse)
 	EXPECT_EQ(expected, m2);
 }
 
-TEST_F(Test_math_matrix, mat3_inverse_multiply)
+TEST_F(test_math_matrix, mat3_inverse_multiply)
 {
 	const mat3 m1{1.0, 2.0, 3.0, 1.5, 0.5, 0.0, -0.5, 2.0, 1.5};
 	const mat3 m2 = m1.inv();
@@ -139,7 +136,7 @@ TEST_F(Test_math_matrix, mat3_inverse_multiply)
 	EXPECT_TRUE(equals(expected, result2, 1e-9));
 }
 
-TEST_F(Test_math_matrix, mat2_add)
+TEST_F(test_math_matrix, mat2_add)
 {
 	const mat2 m1{1.0, 2.0, 3.0, 4.0};
 	const mat2 m2{10.0, 20.0, 30.0, 40.0};
@@ -149,7 +146,7 @@ TEST_F(Test_math_matrix, mat2_add)
 	EXPECT_TRUE((expected == m2 + m1));
 }
 
-TEST_F(Test_math_matrix, mat2_sub)
+TEST_F(test_math_matrix, mat2_sub)
 {
 	const mat2 m1{1.0, 2.0, 3.0, 4.0};
 	const mat2 m2{10.0, 20.0, 30.0, 40.0};
@@ -158,7 +155,7 @@ TEST_F(Test_math_matrix, mat2_sub)
 	EXPECT_TRUE((expected == m1 - m2));
 }
 
-TEST_F(Test_math_matrix, mat2_transpose)
+TEST_F(test_math_matrix, mat2_transpose)
 {
 	const mat2 m1{1.0, 2.0, 3.0, 4.0};
 	const mat2 expected{1.0, 3.0, 2.0, 4.0};
@@ -166,7 +163,7 @@ TEST_F(Test_math_matrix, mat2_transpose)
 	EXPECT_TRUE((expected == m1.transpose()));
 }
 
-TEST_F(Test_math_matrix, mat2_trace)
+TEST_F(test_math_matrix, mat2_trace)
 {
 	EXPECT_NEAR(5.0, (mat2{1.0, 2.0, 3.0, 4.0}.trace()), 1e-8);
 	EXPECT_NEAR(6.0, (mat2{1.5, 2.5, 3.5, 4.5}.trace()), 1e-8);

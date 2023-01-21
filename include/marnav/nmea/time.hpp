@@ -4,9 +4,7 @@
 #include <chrono>
 #include <string>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 
 /// Base class for time related classes.
@@ -127,7 +125,6 @@ template <class ToDuration>
 constexpr ToDuration duration_cast(const duration & d)
 {
 	return std::chrono::duration_cast<ToDuration>(d.chrono());
-}
 }
 }
 

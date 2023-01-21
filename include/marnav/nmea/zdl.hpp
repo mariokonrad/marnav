@@ -6,9 +6,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief ZDL - Time and Distance to Variable Point
 ///
@@ -45,7 +43,7 @@ public:
 
 protected:
 	zdl(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	duration time_to_point_;
@@ -61,7 +59,6 @@ public:
 	void set_distance(units::length t) noexcept { distance_ = t.get<units::nautical_miles>(); }
 	void set_type_point(type_of_point t) noexcept { type_point_ = t; }
 };
-}
 }
 
 #endif

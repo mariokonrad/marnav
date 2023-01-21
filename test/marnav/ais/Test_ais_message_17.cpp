@@ -6,11 +6,11 @@ namespace
 {
 using namespace marnav;
 
-class Test_ais_message_17 : public ::testing::Test
+class test_ais_message_17 : public ::testing::Test
 {
 };
 
-TEST_F(Test_ais_message_17, parse)
+TEST_F(test_ais_message_17, parse)
 {
 	std::vector<std::pair<std::string, uint32_t>> v
 		= {{"A02VqLPA4I6C07h5Ed1h<OrsuBTTwS?r:C?w`?la<gno1RTRwSP9:BcurA8a", 0},
@@ -36,7 +36,7 @@ TEST_F(Test_ais_message_17, parse)
 	EXPECT_EQ(376u, m->get_payload().size());
 }
 
-TEST_F(Test_ais_message_17, parse_negative_latitude)
+TEST_F(test_ais_message_17, parse_negative_latitude)
 {
 	std::vector<std::pair<std::string, uint32_t>> v
 		= {{"A;wUJKU>io;WlWuwH`W1PpnuN<isf;5iHtOM1S6q?vsvNrNGOqLcr5mfD6t", 2}};
@@ -60,7 +60,7 @@ TEST_F(Test_ais_message_17, parse_negative_latitude)
 	EXPECT_EQ(272u, m->get_payload().size());
 }
 
-TEST_F(Test_ais_message_17, encode_default_values)
+TEST_F(test_ais_message_17, encode_default_values)
 {
 	ais::message_17 m;
 
@@ -71,7 +71,7 @@ TEST_F(Test_ais_message_17, encode_default_values)
 	EXPECT_EQ(4u, v[0].second);
 }
 
-TEST_F(Test_ais_message_17, wrong_number_of_bits)
+TEST_F(test_ais_message_17, wrong_number_of_bits)
 {
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_17>(ais::raw(79)));
 	EXPECT_ANY_THROW(ais::message_parse<ais::message_17>(ais::raw(817)));

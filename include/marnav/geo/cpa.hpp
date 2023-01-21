@@ -5,9 +5,7 @@
 #include <chrono>
 #include <tuple>
 
-namespace marnav
-{
-namespace geo
+namespace marnav::geo
 {
 
 /// @brief This struct contains data about a vessel, needed to
@@ -20,7 +18,6 @@ struct vessel {
 
 std::tuple<position, position, std::chrono::seconds, bool> cpa(
 	const vessel & vessel1, const vessel & vessel2);
-}
 }
 
 #endif

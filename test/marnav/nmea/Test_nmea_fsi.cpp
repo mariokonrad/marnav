@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_fsi : public ::testing::Test
+class test_nmea_fsi : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_fsi, contruction)
+TEST_F(test_nmea_fsi, contruction)
 {
 	EXPECT_NO_THROW(nmea::fsi fsi);
 }
 
-TEST_F(Test_nmea_fsi, properties)
+TEST_F(test_nmea_fsi, properties)
 {
 	nmea_sentence_traits<nmea::fsi>();
 }
 
-TEST_F(Test_nmea_fsi, parse)
+TEST_F(test_nmea_fsi, parse)
 {
 	auto s = nmea::make_sentence("$GPFSI,156000,156025,,,*60");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_fsi, parse)
 	ASSERT_NE(nullptr, fsi);
 }
 
-TEST_F(Test_nmea_fsi, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_fsi, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::fsi>(nmea::talker::none, {4, "@"}));
@@ -39,14 +38,14 @@ TEST_F(Test_nmea_fsi, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::fsi>(nmea::talker::none, {6, "@"}));
 }
 
-TEST_F(Test_nmea_fsi, empty_to_string)
+TEST_F(test_nmea_fsi, empty_to_string)
 {
 	nmea::fsi fsi;
 
 	EXPECT_STREQ("$GPFSI,,,,,*67", nmea::to_string(fsi).c_str());
 }
 
-TEST_F(Test_nmea_fsi, set_power_level)
+TEST_F(test_nmea_fsi, set_power_level)
 {
 	std::vector<std::pair<uint32_t, std::string>> TEST = {
 		{0, "$GPFSI,,,,0,*57"},
@@ -68,13 +67,13 @@ TEST_F(Test_nmea_fsi, set_power_level)
 	}
 }
 
-TEST_F(Test_nmea_fsi, set_power_level_invalid)
+TEST_F(test_nmea_fsi, set_power_level_invalid)
 {
 	nmea::fsi fsi;
 	EXPECT_ANY_THROW(fsi.set_power_level(10));
 }
 
-TEST_F(Test_nmea_fsi, set_sentence_status)
+TEST_F(test_nmea_fsi, set_sentence_status)
 {
 	{
 		nmea::fsi fsi;

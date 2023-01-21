@@ -3,11 +3,11 @@
 
 namespace
 {
-class Test_nmea_split : public ::testing::Test
+class test_nmea_split : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_split, field_1_with_leading_start_token)
+TEST_F(test_nmea_split, field_1_with_leading_start_token)
 {
 	const auto result = marnav::nmea::detail::parse_fields("$A");
 
@@ -15,7 +15,7 @@ TEST_F(Test_nmea_split, field_1_with_leading_start_token)
 	EXPECT_STREQ("A", result[0].c_str());
 }
 
-TEST_F(Test_nmea_split, field_1_without_leading_start_token)
+TEST_F(test_nmea_split, field_1_without_leading_start_token)
 {
 	const auto result = marnav::nmea::detail::parse_fields("A");
 
@@ -23,7 +23,7 @@ TEST_F(Test_nmea_split, field_1_without_leading_start_token)
 	EXPECT_STREQ("", result[0].c_str());
 }
 
-TEST_F(Test_nmea_split, field_2_with_start_token)
+TEST_F(test_nmea_split, field_2_with_start_token)
 {
 	const auto result = marnav::nmea::detail::parse_fields("$A,B");
 
@@ -32,7 +32,7 @@ TEST_F(Test_nmea_split, field_2_with_start_token)
 	EXPECT_STREQ("B", result[1].c_str());
 }
 
-TEST_F(Test_nmea_split, field_1_terminated)
+TEST_F(test_nmea_split, field_1_terminated)
 {
 	const auto result = marnav::nmea::detail::parse_fields("$A*xx");
 
@@ -41,7 +41,7 @@ TEST_F(Test_nmea_split, field_1_terminated)
 	EXPECT_STREQ("xx", result[1].c_str());
 }
 
-TEST_F(Test_nmea_split, field_2_terminated)
+TEST_F(test_nmea_split, field_2_terminated)
 {
 	const auto result = marnav::nmea::detail::parse_fields("$A,B*xx");
 
@@ -51,7 +51,7 @@ TEST_F(Test_nmea_split, field_2_terminated)
 	EXPECT_STREQ("xx", result[2].c_str());
 }
 
-TEST_F(Test_nmea_split, field_2_oneempty_terminated)
+TEST_F(test_nmea_split, field_2_oneempty_terminated)
 {
 	const auto result = marnav::nmea::detail::parse_fields("$A,*xx");
 
@@ -61,14 +61,14 @@ TEST_F(Test_nmea_split, field_2_oneempty_terminated)
 	EXPECT_STREQ("xx", result[2].c_str());
 }
 
-TEST_F(Test_nmea_split, field_10_all_empty_terminated)
+TEST_F(test_nmea_split, field_10_all_empty_terminated)
 {
 	const auto result = marnav::nmea::detail::parse_fields("$,,,,,,,,,*xx");
 
 	ASSERT_EQ(11u, result.size());
 }
 
-TEST_F(Test_nmea_split, field_10_terminated)
+TEST_F(test_nmea_split, field_10_terminated)
 {
 	const auto result = marnav::nmea::detail::parse_fields("$0,1,2,3,4,5,6,7,8,9*xx");
 
@@ -86,7 +86,7 @@ TEST_F(Test_nmea_split, field_10_terminated)
 	EXPECT_STREQ("xx", result[10].c_str());
 }
 
-TEST_F(Test_nmea_split, only_terminator)
+TEST_F(test_nmea_split, only_terminator)
 {
 	const auto result = marnav::nmea::detail::parse_fields("$*xx");
 
@@ -95,7 +95,7 @@ TEST_F(Test_nmea_split, only_terminator)
 	EXPECT_STREQ("xx", result[1].c_str());
 }
 
-TEST_F(Test_nmea_split, empty_string)
+TEST_F(test_nmea_split, empty_string)
 {
 	const auto result = marnav::nmea::detail::parse_fields("");
 

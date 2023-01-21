@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_its : public ::testing::Test
+class test_nmea_its : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_its, contruction)
+TEST_F(test_nmea_its, contruction)
 {
 	EXPECT_NO_THROW(nmea::its its);
 }
 
-TEST_F(Test_nmea_its, properties)
+TEST_F(test_nmea_its, properties)
 {
 	nmea_sentence_traits<nmea::its>();
 }
 
-TEST_F(Test_nmea_its, parse)
+TEST_F(test_nmea_its, parse)
 {
 	auto s = nmea::make_sentence("$GPITS,1.0,M*3B");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_its, parse)
 	ASSERT_NE(nullptr, its);
 }
 
-TEST_F(Test_nmea_its, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_its, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::its>(nmea::talker::none, {1, "@"}));
@@ -39,7 +38,7 @@ TEST_F(Test_nmea_its, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::its>(nmea::talker::none, {3, "@"}));
 }
 
-TEST_F(Test_nmea_its, empty_to_string)
+TEST_F(test_nmea_its, empty_to_string)
 {
 	nmea::its its;
 

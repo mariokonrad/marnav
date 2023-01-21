@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_zdl : public ::testing::Test
+class test_nmea_zdl : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_zdl, contruction)
+TEST_F(test_nmea_zdl, contruction)
 {
 	EXPECT_NO_THROW(nmea::zdl zdl);
 }
 
-TEST_F(Test_nmea_zdl, properties)
+TEST_F(test_nmea_zdl, properties)
 {
 	nmea_sentence_traits<nmea::zdl>();
 }
 
-TEST_F(Test_nmea_zdl, parse)
+TEST_F(test_nmea_zdl, parse)
 {
 	auto s = nmea::make_sentence("$GPZDL,383401,12.3,R*28");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_zdl, parse)
 	ASSERT_NE(nullptr, zdl);
 }
 
-TEST_F(Test_nmea_zdl, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_zdl, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::zdl>(nmea::talker::none, {2, "@"}));
@@ -39,7 +38,7 @@ TEST_F(Test_nmea_zdl, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::zdl>(nmea::talker::none, {4, "@"}));
 }
 
-TEST_F(Test_nmea_zdl, empty_to_string)
+TEST_F(test_nmea_zdl, empty_to_string)
 {
 	nmea::zdl zdl;
 

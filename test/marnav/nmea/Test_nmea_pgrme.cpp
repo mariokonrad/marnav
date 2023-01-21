@@ -5,24 +5,23 @@
 
 namespace
 {
-
 using namespace marnav;
 
-class Test_nmea_pgrme : public ::testing::Test
+class test_nmea_pgrme : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_pgrme, contruction)
+TEST_F(test_nmea_pgrme, contruction)
 {
 	nmea::pgrme pgrme;
 }
 
-TEST_F(Test_nmea_pgrme, properties)
+TEST_F(test_nmea_pgrme, properties)
 {
 	nmea_sentence_traits<nmea::pgrme>();
 }
 
-TEST_F(Test_nmea_pgrme, parse)
+TEST_F(test_nmea_pgrme, parse)
 {
 	auto s = nmea::make_sentence("$PGRME,1.1,M,2.2,M,3.3,M*2E");
 	ASSERT_NE(nullptr, s);
@@ -31,7 +30,7 @@ TEST_F(Test_nmea_pgrme, parse)
 	ASSERT_NE(nullptr, pgrme);
 }
 
-TEST_F(Test_nmea_pgrme, parse_invalid_number_of_arguments)
+TEST_F(test_nmea_pgrme, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
 		nmea::detail::factory::sentence_parse<nmea::pgrme>(nmea::talker::none, {5, "@"}));
@@ -39,14 +38,14 @@ TEST_F(Test_nmea_pgrme, parse_invalid_number_of_arguments)
 		nmea::detail::factory::sentence_parse<nmea::pgrme>(nmea::talker::none, {7, "@"}));
 }
 
-TEST_F(Test_nmea_pgrme, empty_to_string)
+TEST_F(test_nmea_pgrme, empty_to_string)
 {
 	nmea::pgrme pgrme;
 
 	EXPECT_STREQ("$PGRME,,M,,M,,M*00", nmea::to_string(pgrme).c_str());
 }
 
-TEST_F(Test_nmea_pgrme, set_horizontal_position_error)
+TEST_F(test_nmea_pgrme, set_horizontal_position_error)
 {
 	nmea::pgrme pgrme;
 	pgrme.set_horizontal_position_error(units::meters{1.1});
@@ -54,7 +53,7 @@ TEST_F(Test_nmea_pgrme, set_horizontal_position_error)
 	EXPECT_STREQ("$PGRME,1.1,M,,M,,M*2E", nmea::to_string(pgrme).c_str());
 }
 
-TEST_F(Test_nmea_pgrme, set_vertical_position_error)
+TEST_F(test_nmea_pgrme, set_vertical_position_error)
 {
 	nmea::pgrme pgrme;
 	pgrme.set_vertical_position_error(units::meters{2.2});
@@ -62,7 +61,7 @@ TEST_F(Test_nmea_pgrme, set_vertical_position_error)
 	EXPECT_STREQ("$PGRME,,M,2.2,M,,M*2E", nmea::to_string(pgrme).c_str());
 }
 
-TEST_F(Test_nmea_pgrme, set_overall_spherical_equiv_position_error)
+TEST_F(test_nmea_pgrme, set_overall_spherical_equiv_position_error)
 {
 	nmea::pgrme pgrme;
 	pgrme.set_overall_spherical_equiv_position_error(units::meters{3.3});

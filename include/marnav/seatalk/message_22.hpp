@@ -3,9 +3,7 @@
 
 #include <marnav/seatalk/message.hpp>
 
-namespace marnav
-{
-namespace seatalk
+namespace marnav::seatalk
 {
 
 /// @brief Total Mileage
@@ -26,19 +24,18 @@ public:
 	message_22(const message_22 &) = default;
 	message_22 & operator=(const message_22 &) = default;
 
-	virtual raw get_data() const override;
+	raw get_data() const override;
 
 	static std::unique_ptr<message> parse(const raw & data);
 
 private:
-	uint32_t distance_; // in 1/10th nautical miles
+	uint32_t distance_{0}; // in 1/10th nautical miles
 
 public:
 	uint32_t get_distance() const noexcept { return distance_; }
 
 	void set_distance(uint32_t t) noexcept { distance_ = t; }
 };
-}
 }
 
 #endif

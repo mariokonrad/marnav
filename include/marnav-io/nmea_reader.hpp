@@ -4,9 +4,7 @@
 #include <marnav-io/device.hpp>
 #include <marnav/nmea/sentence.hpp>
 
-namespace marnav
-{
-namespace io
+namespace marnav::io
 {
 /// This class reads NMEA sentences from a device. Normally this would
 /// be a serial character device (e.g. \c /dev/ttyS0 or \c /dev/ttyUSB0).
@@ -18,7 +16,7 @@ namespace io
 class nmea_reader
 {
 public:
-	virtual ~nmea_reader();
+	virtual ~nmea_reader() = default;
 
 	nmea_reader(std::unique_ptr<device> && d);
 	nmea_reader(const nmea_reader &) = delete;
@@ -37,11 +35,10 @@ private:
 	void process_nmea();
 	bool read_data();
 
-	char raw_;
+	char raw_{0};
 	std::string sentence_;
 	std::unique_ptr<device> dev_; ///< Device to read data from.
 };
-}
 }
 
 #endif

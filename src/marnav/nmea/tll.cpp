@@ -4,9 +4,7 @@
 #include <marnav/nmea/io.hpp>
 #include <stdexcept>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id tll::ID;
 constexpr const char * tll::TAG;
@@ -70,6 +68,5 @@ void tll::append_data_to(std::string & s, const version &) const
 	append(s, to_string(time_utc_));
 	append(s, to_string(status_));
 	append(s, to_string(reference_target_));
-}
 }
 }

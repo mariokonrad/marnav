@@ -2,9 +2,7 @@
 #include <marnav/nmea/io.hpp>
 #include "checks.hpp"
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 constexpr sentence_id vdr::ID;
 constexpr const char * vdr::TAG;
@@ -64,6 +62,5 @@ void vdr::append_data_to(std::string & s, const version &) const
 	append(s, to_string_if(reference::MAGNETIC, degrees_magn_));
 	append(s, to_string(speed_));
 	append(s, to_string_if(unit::velocity::knot, speed_));
-}
 }
 }

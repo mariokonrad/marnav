@@ -6,9 +6,7 @@
 #include <initializer_list>
 #include <cassert>
 
-namespace marnav
-{
-namespace math
+namespace marnav::math
 {
 
 /// @cond DEV
@@ -164,66 +162,63 @@ public:
 	matrix2(
 		value_type x11 = 1.0, value_type x12 = 0.0, value_type x21 = 0.0, value_type x22 = 1.0)
 	{
-		x[0] = x11;
-		x[1] = x12;
-		x[2] = x21;
-		x[3] = x22;
+		x_[0] = x11;
+		x_[1] = x12;
+		x_[2] = x21;
+		x_[3] = x22;
 	}
 
-	inline value_type det() const { return (x[0] * x[3] - x[2] * x[1]); }
+	value_type det() const { return (x_[0] * x_[3] - x_[2] * x_[1]); }
 
-	inline bool operator==(const matrix2 & m) const
-	{
-		return detail::equal_matrix_nxn(*this, m);
-	}
+	bool operator==(const matrix2 & m) const { return detail::equal_matrix_nxn(*this, m); }
 
-	inline bool operator!=(const matrix2 & m) const { return !(*this == m); }
+	bool operator!=(const matrix2 & m) const { return !(*this == m); }
 
-	inline value_type & operator[](size_type i) { return x[i]; }
+	value_type & operator[](size_type i) { return x_[i]; }
 
-	inline value_type operator[](size_type i) const { return x[i]; }
+	value_type operator[](size_type i) const { return x_[i]; }
 
-	inline matrix2 & operator=(const matrix2 &) = default;
+	matrix2 & operator=(const matrix2 &) = default;
 
-	inline matrix2 & operator=(matrix2 &&) noexcept = default;
+	matrix2 & operator=(matrix2 &&) noexcept = default;
 
-	inline matrix2 & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
+	matrix2 & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
 
-	inline matrix2 & operator+=(const matrix2 & m) { return detail::add_matrix_nxn(*this, m); }
+	matrix2 & operator+=(const matrix2 & m) { return detail::add_matrix_nxn(*this, m); }
 
-	inline matrix2 & operator-=(const matrix2 & m) { return detail::sub_matrix_nxn(*this, m); }
+	matrix2 & operator-=(const matrix2 & m) { return detail::sub_matrix_nxn(*this, m); }
 
-	inline matrix2 & operator*=(const matrix2 & m)
+	matrix2 & operator*=(const matrix2 & m)
 	{
 		const value_type c[dimension * dimension]
-			= {x[0] * m.x[0] + x[1] * m.x[2], x[0] * m.x[1] + x[1] * m.x[3],
-				x[2] * m.x[0] + x[3] * m.x[2], x[2] * m.x[1] + x[3] * m.x[3]};
+			= {x_[0] * m.x_[0] + x_[1] * m.x_[2], x_[0] * m.x_[1] + x_[1] * m.x_[3],
+				x_[2] * m.x_[0] + x_[3] * m.x_[2], x_[2] * m.x_[1] + x_[3] * m.x_[3]};
 		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] = c[i];
+			x_[i] = c[i];
 		return *this;
 	}
 
-	inline value_type trace() const { return x[0] + x[3]; }
+	value_type trace() const { return x_[0] + x_[3]; }
 
-	inline matrix2 inv() const
+	matrix2 inv() const
 	{
 		const value_type d = det();
 		if (is_zero(d))
 			return matrix2{};
-		return (1.0 / d) * matrix2{x[3], -x[1], -x[2], x[0]};
+		return (1.0 / d) * matrix2{x_[3], -x_[1], -x_[2], x_[0]};
 	}
 
-	inline matrix2 transpose() const { return matrix2{x[0], x[2], x[1], x[3]}; }
+	matrix2 transpose() const { return matrix2{x_[0], x_[2], x_[1], x_[3]}; }
 
-	inline vector2<T> rowvec(size_type row) const // row in [0..1]
+	vector2<T> rowvec(size_type row) const // row in [0..1]
 	{
 		row *= 2;
-		return vector2<T>{x[row], x[row + 1]};
+		return vector2<T>{x_[row], x_[row + 1]};
 	}
 
-	inline vector2<T> colvec(size_type col) const // col in [0..1]
+	vector2<T> colvec(size_type col) const // col in [0..1]
 	{
-		return vector2<T>{x[col], x[col + 2]};
+		return vector2<T>{x_[col], x_[col + 2]};
 	}
 
 	friend matrix2 operator*(value_type f, const matrix2 & m) { return matrix2{m} *= f; }
@@ -236,18 +231,18 @@ public:
 
 	friend matrix2 operator*(const vector2<T> & v, const matrix2 & m)
 	{
-		value_type c1 = m.x[0] + m.x[2];
-		value_type c2 = m.x[1] + m.x[3];
+		value_type c1 = m.x_[0] + m.x_[2];
+		value_type c2 = m.x_[1] + m.x_[3];
 		return matrix2{v[0] * c1, v[0] * c2, v[1] * c1, v[1] * c2};
 	}
 
 	friend vector2<T> operator*(const matrix2 & m, const vector2<T> & v)
 	{
-		return vector2<T>{m.x[0] * v[0] + m.x[1] * v[1], m.x[2] * v[0] + m.x[3] * v[1]};
+		return vector2<T>{m.x_[0] * v[0] + m.x_[1] * v[1], m.x_[2] * v[0] + m.x_[3] * v[1]};
 	}
 
 private:
-	value_type x[dimension * dimension];
+	value_type x_[dimension * dimension];
 };
 
 /// @brief A 3x3 Matrix.
@@ -275,80 +270,77 @@ public:
 		value_type x21 = 0.0, value_type x22 = 1.0, value_type x23 = 0.0, value_type x31 = 0.0,
 		value_type x32 = 0.0, value_type x33 = 1.0)
 	{
-		x[0] = x11;
-		x[1] = x12;
-		x[2] = x13;
-		x[3] = x21;
-		x[4] = x22;
-		x[5] = x23;
-		x[6] = x31;
-		x[7] = x32;
-		x[8] = x33;
+		x_[0] = x11;
+		x_[1] = x12;
+		x_[2] = x13;
+		x_[3] = x21;
+		x_[4] = x22;
+		x_[5] = x23;
+		x_[6] = x31;
+		x_[7] = x32;
+		x_[8] = x33;
 	}
 
-	inline value_type det() const
+	value_type det() const
 	{
-		return x[0] * (x[4] * x[8] - x[7] * x[5]) - x[1] * (x[3] * x[8] - x[6] * x[5])
-			+ x[2] * (x[3] * x[7] - x[6] * x[4]);
+		return x_[0] * (x_[4] * x_[8] - x_[7] * x_[5]) - x_[1] * (x_[3] * x_[8] - x_[6] * x_[5])
+			+ x_[2] * (x_[3] * x_[7] - x_[6] * x_[4]);
 	}
 
-	inline value_type & operator[](size_type i) { return x[i]; }
+	value_type & operator[](size_type i) { return x_[i]; }
 
-	inline value_type operator[](size_type i) const { return x[i]; }
+	value_type operator[](size_type i) const { return x_[i]; }
 
-	inline bool operator==(const matrix3 & m) const
-	{
-		return detail::equal_matrix_nxn(*this, m);
-	}
+	bool operator==(const matrix3 & m) const { return detail::equal_matrix_nxn(*this, m); }
 
-	inline bool operator!=(const matrix3 & m) const { return !(*this == m); }
+	bool operator!=(const matrix3 & m) const { return !(*this == m); }
 
-	inline matrix3 & operator=(const matrix3 &) = default;
+	matrix3 & operator=(const matrix3 &) = default;
 
-	inline matrix3 & operator=(matrix3 &&) noexcept = default;
+	matrix3 & operator=(matrix3 &&) noexcept = default;
 
-	inline matrix3 & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
+	matrix3 & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
 
-	inline matrix3 & operator+=(const matrix3 & m) { return detail::add_matrix_nxn(*this, m); }
+	matrix3 & operator+=(const matrix3 & m) { return detail::add_matrix_nxn(*this, m); }
 
-	inline matrix3 & operator-=(const matrix3 & m) { return detail::sub_matrix_nxn(*this, m); }
+	matrix3 & operator-=(const matrix3 & m) { return detail::sub_matrix_nxn(*this, m); }
 
-	inline matrix3 & operator*=(const matrix3 & m)
+	matrix3 & operator*=(const matrix3 & m)
 	{
 		const value_type c[dimension * dimension]
-			= {x[0] * m.x[0] + x[1] * m.x[3] + x[2] * m.x[6],
-				x[0] * m.x[1] + x[1] * m.x[4] + x[2] * m.x[7],
-				x[0] * m.x[2] + x[1] * m.x[5] + x[2] * m.x[8],
-				x[3] * m.x[0] + x[4] * m.x[3] + x[5] * m.x[6],
-				x[3] * m.x[1] + x[4] * m.x[4] + x[5] * m.x[7],
-				x[3] * m.x[2] + x[4] * m.x[5] + x[5] * m.x[8],
-				x[6] * m.x[0] + x[7] * m.x[3] + x[8] * m.x[6],
-				x[6] * m.x[1] + x[7] * m.x[4] + x[8] * m.x[7],
-				x[6] * m.x[2] + x[7] * m.x[5] + x[8] * m.x[8]};
+			= {x_[0] * m.x_[0] + x_[1] * m.x_[3] + x_[2] * m.x_[6],
+				x_[0] * m.x_[1] + x_[1] * m.x_[4] + x_[2] * m.x_[7],
+				x_[0] * m.x_[2] + x_[1] * m.x_[5] + x_[2] * m.x_[8],
+				x_[3] * m.x_[0] + x_[4] * m.x_[3] + x_[5] * m.x_[6],
+				x_[3] * m.x_[1] + x_[4] * m.x_[4] + x_[5] * m.x_[7],
+				x_[3] * m.x_[2] + x_[4] * m.x_[5] + x_[5] * m.x_[8],
+				x_[6] * m.x_[0] + x_[7] * m.x_[3] + x_[8] * m.x_[6],
+				x_[6] * m.x_[1] + x_[7] * m.x_[4] + x_[8] * m.x_[7],
+				x_[6] * m.x_[2] + x_[7] * m.x_[5] + x_[8] * m.x_[8]};
 		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] = is_zero(c[i]) ? 0.0 : c[i];
+			x_[i] = is_zero(c[i]) ? 0.0 : c[i];
 		return *this;
 	}
 
-	inline value_type trace() const { return x[0] + x[4] + x[8]; }
+	value_type trace() const { return x_[0] + x_[4] + x_[8]; }
 
-	inline matrix3 transpose() const
+	matrix3 transpose() const
 	{
-		return matrix3(x[0], x[3], x[6], x[1], x[4], x[7], x[2], x[5], x[8]);
+		return matrix3(x_[0], x_[3], x_[6], x_[1], x_[4], x_[7], x_[2], x_[5], x_[8]);
 	}
 
-	inline vector3<T> rowvec(size_type row) const // row in [0..2]
+	vector3<T> rowvec(size_type row) const // row in [0..2]
 	{
 		row *= 3;
-		return vector3<T>{x[row], x[row + 1], x[row + 2]};
+		return vector3<T>{x_[row], x_[row + 1], x_[row + 2]};
 	}
 
-	inline vector3<T> colvec(size_type col) const // col in [0..2]
+	vector3<T> colvec(size_type col) const // col in [0..2]
 	{
-		return vector3<T>{x[col], x[col + 3], x[col + 6]};
+		return vector3<T>{x_[col], x_[col + 3], x_[col + 6]};
 	}
 
-	inline matrix3 inv() const { return detail::inverse_matrix_nxn(*this); }
+	matrix3 inv() const { return detail::inverse_matrix_nxn(*this); }
 
 	friend matrix3 operator*(value_type f, const matrix3 & m) { return matrix3{m} *= f; }
 
@@ -360,22 +352,22 @@ public:
 
 	friend matrix3 operator*(const vector3<T> & v, const matrix3 & m)
 	{
-		value_type c1 = m.x[0] + m.x[3] + m.x[6];
-		value_type c2 = m.x[1] + m.x[4] + m.x[7];
-		value_type c3 = m.x[2] + m.x[5] + m.x[8];
+		value_type c1 = m.x_[0] + m.x_[3] + m.x_[6];
+		value_type c2 = m.x_[1] + m.x_[4] + m.x_[7];
+		value_type c3 = m.x_[2] + m.x_[5] + m.x_[8];
 		return matrix3{v[0] * c1, v[0] * c2, v[0] * c3, v[1] * c1, v[1] * c2, v[1] * c3,
 			v[2] * c1, v[2] * c2, v[2] * c3};
 	}
 
 	friend vector3<T> operator*(const matrix3 & m, const vector3<T> & v)
 	{
-		return vector3<T>{m.x[0] * v[0] + m.x[1] * v[1] + m.x[2] * v[2],
-			m.x[3] * v[0] + m.x[4] * v[1] + m.x[5] * v[2],
-			m.x[6] * v[0] + m.x[7] * v[1] + m.x[8] * v[2]};
+		return vector3<T>{m.x_[0] * v[0] + m.x_[1] * v[1] + m.x_[2] * v[2],
+			m.x_[3] * v[0] + m.x_[4] * v[1] + m.x_[5] * v[2],
+			m.x_[6] * v[0] + m.x_[7] * v[1] + m.x_[8] * v[2]};
 	}
 
 private:
-	value_type x[dimension * dimension];
+	value_type x_[dimension * dimension];
 };
 
 /// @brief A 4x4 Matrix.
@@ -402,7 +394,7 @@ public:
 	matrix4()
 	{
 		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] = (i % (dimension + 1)) ? 0.0 : 1.0;
+			x_[i] = (i % (dimension + 1)) ? 0.0 : 1.0;
 	}
 
 	matrix4(std::initializer_list<T> v)
@@ -410,83 +402,80 @@ public:
 		assert(v.size() == dimension * dimension);
 		size_type i = 0;
 		for (auto j = begin(v); j != end(v); ++i, ++j)
-			x[i] = *j;
+			x_[i] = *j;
 	}
 
-	inline value_type det() const
+	value_type det() const
 	{
 		// rule of Sarrus
-		return x[0] * x[5] * x[10] * x[15] - x[12] * x[9] * x[6] * x[3]
-			+ x[1] * x[6] * x[11] * x[12] - x[13] * x[10] * x[7] * x[0]
-			+ x[2] * x[7] * x[8] * x[13] - x[14] * x[11] * x[4] * x[1]
-			+ x[3] * x[4] * x[9] * x[14] - x[15] * x[8] * x[5] * x[2];
+		return x_[0] * x_[5] * x_[10] * x_[15] - x_[12] * x_[9] * x_[6] * x_[3]
+			+ x_[1] * x_[6] * x_[11] * x_[12] - x_[13] * x_[10] * x_[7] * x_[0]
+			+ x_[2] * x_[7] * x_[8] * x_[13] - x_[14] * x_[11] * x_[4] * x_[1]
+			+ x_[3] * x_[4] * x_[9] * x_[14] - x_[15] * x_[8] * x_[5] * x_[2];
 	}
 
-	inline bool operator==(const matrix4 & m) const
-	{
-		return detail::equal_matrix_nxn(*this, m);
-	}
+	bool operator==(const matrix4 & m) const { return detail::equal_matrix_nxn(*this, m); }
 
-	inline bool operator!=(const matrix4 & m) const { return !(*this == m); }
+	bool operator!=(const matrix4 & m) const { return !(*this == m); }
 
-	inline matrix4 & operator=(const matrix4 &) = default;
+	matrix4 & operator=(const matrix4 &) = default;
 
-	inline matrix4 & operator=(matrix4 &&) noexcept = default;
+	matrix4 & operator=(matrix4 &&) noexcept = default;
 
-	inline matrix4 & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
+	matrix4 & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
 
-	inline matrix4 & operator+=(const matrix4 & m) { return detail::add_matrix_nxn(*this, m); }
+	matrix4 & operator+=(const matrix4 & m) { return detail::add_matrix_nxn(*this, m); }
 
-	inline matrix4 & operator-=(const matrix4 & m) { return detail::sub_matrix_nxn(*this, m); }
+	matrix4 & operator-=(const matrix4 & m) { return detail::sub_matrix_nxn(*this, m); }
 
-	inline matrix4 & operator*=(const matrix4 & m)
+	matrix4 & operator*=(const matrix4 & m)
 	{
 		const value_type c[dimension * dimension]
-			= {x[0] * m.x[0] + x[1] * m.x[4] + x[2] * m.x[8] + x[3] * m.x[12],
-				x[0] * m.x[1] + x[1] * m.x[5] + x[2] * m.x[9] + x[3] * m.x[13],
-				x[0] * m.x[2] + x[1] * m.x[6] + x[2] * m.x[10] + x[3] * m.x[14],
-				x[0] * m.x[3] + x[1] * m.x[7] + x[2] * m.x[11] + x[3] * m.x[15],
-				x[4] * m.x[0] + x[5] * m.x[4] + x[6] * m.x[8] + x[7] * m.x[12],
-				x[4] * m.x[1] + x[5] * m.x[5] + x[6] * m.x[9] + x[7] * m.x[13],
-				x[4] * m.x[2] + x[5] * m.x[6] + x[6] * m.x[10] + x[7] * m.x[14],
-				x[4] * m.x[3] + x[5] * m.x[7] + x[6] * m.x[11] + x[7] * m.x[15],
-				x[8] * m.x[0] + x[9] * m.x[4] + x[10] * m.x[8] + x[11] * m.x[12],
-				x[8] * m.x[1] + x[9] * m.x[5] + x[10] * m.x[9] + x[11] * m.x[13],
-				x[8] * m.x[2] + x[9] * m.x[6] + x[10] * m.x[10] + x[11] * m.x[14],
-				x[8] * m.x[3] + x[9] * m.x[7] + x[10] * m.x[11] + x[11] * m.x[15],
-				x[12] * m.x[0] + x[13] * m.x[4] + x[14] * m.x[8] + x[15] * m.x[12],
-				x[12] * m.x[1] + x[13] * m.x[5] + x[14] * m.x[9] + x[15] * m.x[13],
-				x[12] * m.x[2] + x[13] * m.x[6] + x[14] * m.x[10] + x[15] * m.x[14],
-				x[12] * m.x[3] + x[13] * m.x[7] + x[14] * m.x[11] + x[15] * m.x[15]};
+			= {x_[0] * m.x_[0] + x_[1] * m.x_[4] + x_[2] * m.x_[8] + x_[3] * m.x_[12],
+				x_[0] * m.x_[1] + x_[1] * m.x_[5] + x_[2] * m.x_[9] + x_[3] * m.x_[13],
+				x_[0] * m.x_[2] + x_[1] * m.x_[6] + x_[2] * m.x_[10] + x_[3] * m.x_[14],
+				x_[0] * m.x_[3] + x_[1] * m.x_[7] + x_[2] * m.x_[11] + x_[3] * m.x_[15],
+				x_[4] * m.x_[0] + x_[5] * m.x_[4] + x_[6] * m.x_[8] + x_[7] * m.x_[12],
+				x_[4] * m.x_[1] + x_[5] * m.x_[5] + x_[6] * m.x_[9] + x_[7] * m.x_[13],
+				x_[4] * m.x_[2] + x_[5] * m.x_[6] + x_[6] * m.x_[10] + x_[7] * m.x_[14],
+				x_[4] * m.x_[3] + x_[5] * m.x_[7] + x_[6] * m.x_[11] + x_[7] * m.x_[15],
+				x_[8] * m.x_[0] + x_[9] * m.x_[4] + x_[10] * m.x_[8] + x_[11] * m.x_[12],
+				x_[8] * m.x_[1] + x_[9] * m.x_[5] + x_[10] * m.x_[9] + x_[11] * m.x_[13],
+				x_[8] * m.x_[2] + x_[9] * m.x_[6] + x_[10] * m.x_[10] + x_[11] * m.x_[14],
+				x_[8] * m.x_[3] + x_[9] * m.x_[7] + x_[10] * m.x_[11] + x_[11] * m.x_[15],
+				x_[12] * m.x_[0] + x_[13] * m.x_[4] + x_[14] * m.x_[8] + x_[15] * m.x_[12],
+				x_[12] * m.x_[1] + x_[13] * m.x_[5] + x_[14] * m.x_[9] + x_[15] * m.x_[13],
+				x_[12] * m.x_[2] + x_[13] * m.x_[6] + x_[14] * m.x_[10] + x_[15] * m.x_[14],
+				x_[12] * m.x_[3] + x_[13] * m.x_[7] + x_[14] * m.x_[11] + x_[15] * m.x_[15]};
 		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] = is_zero(c[i]) ? 0.0 : c[i];
+			x_[i] = is_zero(c[i]) ? 0.0 : c[i];
 		return *this;
 	}
 
-	inline value_type & operator[](size_type i) { return x[i]; }
+	value_type & operator[](size_type i) { return x_[i]; }
 
-	inline value_type operator[](size_type i) const { return x[i]; }
+	value_type operator[](size_type i) const { return x_[i]; }
 
-	inline value_type trace() const { return x[0] + x[5] + x[10] + x[15]; }
+	value_type trace() const { return x_[0] + x_[5] + x_[10] + x_[15]; }
 
-	inline matrix4 transpose() const
+	matrix4 transpose() const
 	{
-		return matrix4{x[0], x[4], x[8], x[12], x[1], x[5], x[9], x[13], x[2], x[6], x[10],
-			x[14], x[3], x[7], x[11], x[15]};
+		return matrix4{x_[0], x_[4], x_[8], x_[12], x_[1], x_[5], x_[9], x_[13], x_[2], x_[6],
+			x_[10], x_[14], x_[3], x_[7], x_[11], x_[15]};
 	}
 
-	inline vector4<T> rowvec(size_type row) const // row in [0..3]
+	vector4<T> rowvec(size_type row) const // row in [0..3]
 	{
 		row *= 4;
-		return vector4<T>{x[row], x[row + 1], x[row + 2], x[row + 3]};
+		return vector4<T>{x_[row], x_[row + 1], x_[row + 2], x_[row + 3]};
 	}
 
-	inline vector4<T> colvec(size_type col) const // col in [0..3]
+	vector4<T> colvec(size_type col) const // col in [0..3]
 	{
-		return vector4<T>{x[col], x[col + 4], x[col + 8], x[col + 12]};
+		return vector4<T>{x_[col], x_[col + 4], x_[col + 8], x_[col + 12]};
 	}
 
-	inline matrix4 inv() const { return detail::inverse_matrix_nxn(*this); }
+	matrix4 inv() const { return detail::inverse_matrix_nxn(*this); }
 
 	friend matrix4 operator*(value_type f, const matrix4 & m) { return matrix4{m} *= f; }
 
@@ -498,10 +487,10 @@ public:
 
 	friend matrix4 operator*(const vector4<T> & v, const matrix4 & m)
 	{
-		const value_type c1 = m.x[0] + m.x[4] + m.x[8] + m.x[12];
-		const value_type c2 = m.x[1] + m.x[5] + m.x[9] + m.x[13];
-		const value_type c3 = m.x[2] + m.x[6] + m.x[10] + m.x[14];
-		const value_type c4 = m.x[3] + m.x[7] + m.x[11] + m.x[15];
+		const value_type c1 = m.x_[0] + m.x_[4] + m.x_[8] + m.x_[12];
+		const value_type c2 = m.x_[1] + m.x_[5] + m.x_[9] + m.x_[13];
+		const value_type c3 = m.x_[2] + m.x_[6] + m.x_[10] + m.x_[14];
+		const value_type c4 = m.x_[3] + m.x_[7] + m.x_[11] + m.x_[15];
 		return matrix4{v[0] * c1, v[0] * c2, v[0] * c3, v[0] * c4, v[1] * c1, v[1] * c2,
 			v[1] * c3, v[1] * c4, v[2] * c1, v[2] * c2, v[2] * c3, v[2] * c4, v[3] * c1,
 			v[3] * c2, v[3] * c3, v[3] * c4};
@@ -509,14 +498,14 @@ public:
 
 	friend vector4<T> operator*(const matrix4 & m, const vector4<T> & v)
 	{
-		return vec4{m.x[0] * v[0] + m.x[1] * v[1] + m.x[2] * v[2] + m.x[3] * v[3],
-			m.x[4] * v[0] + m.x[5] * v[1] + m.x[6] * v[2] + m.x[7] * v[3],
-			m.x[8] * v[0] + m.x[9] * v[1] + m.x[10] * v[2] + m.x[11] * v[3],
-			m.x[12] * v[0] + m.x[13] * v[1] + m.x[14] * v[2] + m.x[15] * v[3]};
+		return vec4{m.x_[0] * v[0] + m.x_[1] * v[1] + m.x_[2] * v[2] + m.x_[3] * v[3],
+			m.x_[4] * v[0] + m.x_[5] * v[1] + m.x_[6] * v[2] + m.x_[7] * v[3],
+			m.x_[8] * v[0] + m.x_[9] * v[1] + m.x_[10] * v[2] + m.x_[11] * v[3],
+			m.x_[12] * v[0] + m.x_[13] * v[1] + m.x_[14] * v[2] + m.x_[15] * v[3]};
 	}
 
 private:
-	value_type x[dimension * dimension];
+	value_type x_[dimension * dimension];
 };
 
 /// @brief A nxn Matrix.
@@ -543,7 +532,7 @@ public:
 		static_assert(N >= 1, "invalid dimension of matrix_n, constraint: N>=1");
 
 		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] = (i % (dimension + 1)) ? 0.0 : 1.0;
+			x_[i] = (i % (dimension + 1)) ? 0.0 : 1.0;
 	}
 
 	matrix_n(const matrix_n &) = default;
@@ -555,54 +544,45 @@ public:
 		assert(v.size() == dimension * dimension);
 		size_type i = 0;
 		for (auto j = begin(v); j != end(v); ++i, ++j)
-			x[i] = *j;
+			x_[i] = *j;
 	}
 
-	inline value_type & operator[](size_type i) { return x[i]; }
+	value_type & operator[](size_type i) { return x_[i]; }
 
-	inline value_type operator[](size_type i) const { return x[i]; }
+	value_type operator[](size_type i) const { return x_[i]; }
 
-	inline bool operator==(const matrix_n & m) const
-	{
-		return detail::equal_matrix_nxn(*this, m);
-	}
+	bool operator==(const matrix_n & m) const { return detail::equal_matrix_nxn(*this, m); }
 
-	inline bool operator!=(const matrix_n & m) const { return !(*this == m); }
+	bool operator!=(const matrix_n & m) const { return !(*this == m); }
 
-	inline matrix_n & operator=(const matrix_n &) = default;
+	matrix_n & operator=(const matrix_n &) = default;
 
-	inline matrix_n & operator=(matrix_n &&) noexcept = default;
+	matrix_n & operator=(matrix_n &&) noexcept = default;
 
-	inline matrix_n & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
+	matrix_n & operator*=(value_type f) { return detail::scale_matrix_nxn(*this, f); }
 
-	inline matrix_n & operator+=(const matrix_n & m)
-	{
-		return detail::add_matrix_nxn(*this, m);
-	}
+	matrix_n & operator+=(const matrix_n & m) { return detail::add_matrix_nxn(*this, m); }
 
-	inline matrix_n & operator-=(const matrix_n & m)
-	{
-		return detail::sub_matrix_nxn(*this, m);
-	}
+	matrix_n & operator-=(const matrix_n & m) { return detail::sub_matrix_nxn(*this, m); }
 
-	inline value_type trace() const
+	value_type trace() const
 	{
 		value_type s = 0.0;
 		for (size_type i = 0; i < dimension; ++i)
-			s += x[i * dimension + i];
+			s += x_[i * dimension + i];
 		return s;
 	}
 
-	inline matrix_n transpose() const
+	matrix_n transpose() const
 	{
 		matrix_n r;
 		for (size_type i = 0; i < dimension; ++i)
 			for (size_type j = 0; j < dimension; ++j)
-				r.x[i * dimension + j] = x[j * dimension + i];
+				r.x_[i * dimension + j] = x_[j * dimension + i];
 		return r;
 	}
 
-	inline matrix_n & operator*=(const matrix_n & m)
+	matrix_n & operator*=(const matrix_n & m)
 	{
 		value_type c[dimension * dimension];
 		for (size_type i = 0; i < dimension; ++i)
@@ -610,14 +590,14 @@ public:
 				const size_type idx = i * dimension + j;
 				c[idx] = 0.0;
 				for (size_type k = 0; k < dimension; ++k)
-					c[idx] += x[i * dimension + k] * m.x[k * dimension + j];
+					c[idx] += x_[i * dimension + k] * m.x_[k * dimension + j];
 			}
 		for (size_type i = 0; i < dimension * dimension; ++i)
-			x[i] = is_zero(c[i]) ? 0.0 : c[i];
+			x_[i] = is_zero(c[i]) ? 0.0 : c[i];
 		return *this;
 	}
 
-	inline value_type det() const
+	value_type det() const
 	{
 		// Regel von Sarrus
 		value_type r = 0.0;
@@ -626,30 +606,30 @@ public:
 			value_type am = 1.0;
 			for (size_type i = 0; i < dimension; ++i) {
 				const size_type k = (j + i) % dimension;
-				ap *= x[i * dimension + k];
-				am *= x[(dimension - 1 - i) * dimension + k];
+				ap *= x_[i * dimension + k];
+				am *= x_[(dimension - 1 - i) * dimension + k];
 			}
 			r += ap - am;
 		}
 		return r;
 	}
 
-	inline matrix_n inv() const { return detail::inverse_matrix_nxn(*this); }
+	matrix_n inv() const { return detail::inverse_matrix_nxn(*this); }
 
-	inline vector_n<N, T> rowvec(size_type row) const // row in [0..dimension-1]
+	vector_n<N, T> rowvec(size_type row) const // row in [0..dimension-1]
 	{
 		vector_n<N, T> v;
 		row *= dimension;
 		for (size_type i = 0; i < dimension; ++i)
-			v[i] = x[row + i];
+			v[i] = x_[row + i];
 		return v;
 	}
 
-	inline vector_n<N, T> colvec(size_type col) const // col in [0..N-1]
+	vector_n<N, T> colvec(size_type col) const // col in [0..N-1]
 	{
 		vector_n<N, T> v;
 		for (size_type i = 0; i < dimension; ++i)
-			v[i] = x[col + i * dimension];
+			v[i] = x_[col + i * dimension];
 		return v;
 	}
 
@@ -676,10 +656,10 @@ public:
 		vector_n<N, T> c;
 		for (size_type i = 0; i < dimension; ++i)
 			for (size_type j = 0; j < dimension; ++j)
-				c[i] += m.x[i * dimension + j];
+				c[i] += m.x_[i * dimension + j];
 		for (size_type i = 0; i < dimension; ++i)
 			for (size_type j = 0; j < dimension; ++j)
-				r.x[i * dimension + j] = c[j] * v[i];
+				r.x_[i * dimension + j] = c[j] * v[i];
 		return r;
 	}
 
@@ -688,18 +668,17 @@ public:
 		vector_n<N, T> r;
 		for (size_type i = 0; i < dimension; ++i)
 			for (size_type j = 0; j < dimension; ++j)
-				r[i] += m.x[j + i * dimension] * v[i];
+				r[i] += m.x_[j + i * dimension] * v[i];
 		return r;
 	}
 
 private:
-	value_type x[dimension * dimension];
+	value_type x_[dimension * dimension];
 };
 
 using mat2 = matrix2<double>;
 using mat3 = matrix3<double>;
 using mat4 = matrix4<double>;
-}
 }
 
 #endif

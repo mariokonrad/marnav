@@ -5,9 +5,7 @@
 #include <marnav/units/units.hpp>
 #include <optional>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 /// @brief OSD - Own Ship Data
 ///
@@ -58,7 +56,7 @@ public:
 
 protected:
 	osd(talker talk, fields::const_iterator first, fields::const_iterator last);
-	virtual void append_data_to(std::string &, const version &) const override;
+	void append_data_to(std::string &, const version &) const override;
 
 private:
 	std::optional<double> heading_; // degrees true
@@ -91,7 +89,6 @@ public:
 	void set_drift(double t) noexcept;
 	void set_speed_unit(unit::velocity u) noexcept;
 };
-}
 }
 
 #endif
