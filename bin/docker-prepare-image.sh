@@ -47,6 +47,7 @@ supported_compilers=(
 	"clang-12.0.0;ubuntu:20.04"
 	"clang-13.0.0;ubuntu:20.04"
 	"clang-14.0.0;debian:buster"
+	"clang-15.0.6;debian:buster"
 	)
 
 repository=${DOCKER_REPOSITORY:-marnav}
