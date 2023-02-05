@@ -8,13 +8,17 @@ if(UNIX)
 	set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 endif()
 
-file(WRITE ${CMAKE_BINARY_DIR}/io-test.cpp [[
-#include <fcntl.h>
-#include <termios.h>
-#include <unistd.h>
-int main() {}
-]])
-try_compile(support_for_io ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/io-test.cpp)
+if(ENABLE_MARNAV_IO)
+	file(WRITE ${CMAKE_BINARY_DIR}/io-test.cpp [[
+	#include <fcntl.h>
+	#include <termios.h>
+	#include <unistd.h>
+	int main() {}
+	]])
+	try_compile(support_for_io ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/io-test.cpp)
+else()
+	set(support_for_io FALSE)
+endif()
 
 ### lib: marnav
 

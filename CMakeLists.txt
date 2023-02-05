@@ -21,6 +21,7 @@ option(ENABLE_STATIC "Enable static library" ON)
 option(ENABLE_EXAMPLES "Enable Examples" ON)
 option(ENABLE_TESTS "Enable Tests" ON)
 option(ENABLE_TOOLS "Enable Tools" ON)
+option(ENABLE_MARNAV_IO "Enable build of marnav-io" ON)
 
 if(MSVC)
 	set(CMAKE_DEBUG_POSTFIX "d")
