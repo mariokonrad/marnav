@@ -36,6 +36,12 @@ TEST_F(test_nmea_format, format_dec_uint32)
 	}
 }
 
+TEST_F(test_nmea_format, format_dec_uint32_max)
+{
+	const auto result = nmea::format(std::numeric_limits<std::uint32_t>::max(), 1, nmea::data_format::dec);
+	EXPECT_STREQ("4294967295", result.c_str());
+}
+
 TEST_F(test_nmea_format, format_hex_uint32)
 {
 	struct entry {
@@ -90,6 +96,12 @@ TEST_F(test_nmea_format, format_dec_uint64)
 		const auto result = nmea::format(e.value, e.width, nmea::data_format::dec);
 		EXPECT_STREQ(e.expected, result.c_str());
 	}
+}
+
+TEST_F(test_nmea_format, format_dec_uint64_max)
+{
+	const auto result = nmea::format(std::numeric_limits<std::uint64_t>::max(), 1, nmea::data_format::dec);
+	EXPECT_STREQ("18446744073709551615", result.c_str());
 }
 
 TEST_F(test_nmea_format, format_hex_uint64)

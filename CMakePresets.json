@@ -73,6 +73,21 @@
 			}
 		},
 		{
+			"name": "gcc12-aarch64-linux-release",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_TOOLCHAIN_FILE": {
+					"type": "PATH",
+					"value": "${sourceDir}/cmake/toolchain-aarch64-linux-gcc12.cmake"
+				},
+				"CMAKE_BUILD_TYPE": "Release",
+				"ENABLE_EXAMPLES": "FALSE",
+				"ENABLE_TESTS": "TRUE",
+				"ENABLE_TOOLS": "FALSE",
+				"ENABLE_TESTS_BENCHMARK": "FALSE"
+			}
+		},
+		{
 			"name": "gcc9-release",
 			"binaryDir": "${sourceDir}/build/${presetName}",
 			"cacheVariables": {
@@ -494,6 +509,7 @@
 		{ "name": "gcc10-debug",                       "configurePreset": "gcc10-debug",                       "configuration": "Debug"   },
 		{ "name": "gcc10-arm-linux-gnueabihf-release", "configurePreset": "gcc10-arm-linux-gnueabihf-release", "configuration": "Release" },
 		{ "name": "gcc10-aarch64-linux-release",       "configurePreset": "gcc10-aarch64-linux-release",       "configuration": "Release" },
+		{ "name": "gcc12-aarch64-linux-release",       "configurePreset": "gcc12-aarch64-linux-release",       "configuration": "Release" },
 		{ "name": "gcc9-release",                      "configurePreset": "gcc9-release",                      "configuration": "Release" },
 		{ "name": "gcc9-debug",                        "configurePreset": "gcc9-debug",                        "configuration": "Debug"   },
 		{ "name": "gcc8-release",                      "configurePreset": "gcc8-release",                      "configuration": "Release" },
@@ -544,6 +560,7 @@
 		{ "name": "gcc10-debug",                       "configurePreset": "gcc10-debug",                       "configuration": "Debug"   },
 		{ "name": "gcc10-arm-linux-gnueabihf-release", "configurePreset": "gcc10-arm-linux-gnueabihf-release", "configuration": "Release" },
 		{ "name": "gcc10-aarch64-linux-release",       "configurePreset": "gcc10-aarch64-linux-release",       "configuration": "Release" },
+		{ "name": "gcc12-aarch64-linux-release",       "configurePreset": "gcc12-aarch64-linux-release",       "configuration": "Release" },
 		{ "name": "gcc9-release",                      "configurePreset": "gcc9-release",                      "configuration": "Release" },
 		{ "name": "gcc9-debug",                        "configurePreset": "gcc9-debug",                        "configuration": "Debug"   },
 		{ "name": "gcc8-release",                      "configurePreset": "gcc8-release",                      "configuration": "Release" },
