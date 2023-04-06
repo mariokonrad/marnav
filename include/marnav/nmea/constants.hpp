@@ -114,6 +114,13 @@ enum class type_of_point : char {
 	reference, ///< NMEA representation: 'R'
 	wheelover, ///< NMEA representation: 'W'
 };
+
+enum class frequency_index : uint8_t {
+	NOT_RECEIVED_OVER_AIR, /// NMEA representation: 0
+	F_490KHZ, /// NMEA representation:	1 = 490 kHz
+	F_518kHz, /// NMEA representation:	2 = 518 kHz
+	F_4209_5kHz, /// NMEA representation:	3 = 4209.5 kHz
+};
 }
 
 #endif

@@ -83,6 +83,8 @@ std::string to_name(sentence_id t)
 			return "Mean Temperature of Water (II)";
 		case sentence_id::MWV:
 			return "Wind Speed and Angle (II)";
+		case sentence_id::NRX:
+			return "Navtex";
 		case sentence_id::OSD:
 			return "Own Ship Data";
 		case sentence_id::RMA:

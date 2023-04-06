@@ -97,6 +97,21 @@ std::string to_string(type_of_point t)
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }
 
+std::string to_string(frequency_index t)
+{
+	switch (t) {
+		case frequency_index::NOT_RECEIVED_OVER_AIR:
+			return "Not Received Over Air";
+		case frequency_index::F_490KHZ:
+			return "490kHz";
+		case frequency_index::F_518kHz:
+			return "518kHz";
+		case frequency_index::F_4209_5kHz:
+			return "4209.5kHz";
+	}
+	return ""; // never reached, gcc does not get it, prevents compiler warning
+}
+
 std::string to_string(direction t)
 {
 	switch (t) {

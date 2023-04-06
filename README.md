@@ -82,6 +82,7 @@ Supported sentences for NMEA-0183 (read and write):
 - MTW: Mean Temperature of Water
 - MWD: Wind Direction and Speed
 - MWV: Wind Speed and Angle
+- NRX: Navtex message - global maritime safety information
 - OSD: Own Ship Data
 - RMA: Recommended Minimum Navigation Information
 - RMB: Recommended Minimum Navigation Information
@@ -541,6 +542,7 @@ A (non-complete) collection of resources from where information was gathered.
 - [DSC Position Request](http://www.thehulltruth.com/marine-electronics-forum/43945-dsc-position-request.html)
 - [NMEA-0183 Sentences DSC,DSE](http://www.cruisersforum.com/forums/f13/nmea-0183-sentences-dsc-dse-124887.html)
 - [NMEA-0183 Sentence ALR](https://www.cruisersforum.com/forums/f134/opencpn-and-external-nmea0183-alarms-81396.html)
+- [NMEA-0183 Sentence NRX (Navtex)](https://www.pentestpartners.com/security-blog/hacking-navtex-maritime-warning-messages/)
 - [SerialMon - NMEA 0183 Protocol](http://www.serialmon.com/protocols/nmea0183.html)
 - [SeaTalk Reference](http://thomasknauf.de/seatalk.htm) (by Thomas Knauf)
 - [Navigation Center - AIS Standard Class B Equipment Position Report](http://www.navcen.uscg.gov/?pageName=AISMessagesB)
