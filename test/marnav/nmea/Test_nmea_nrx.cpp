@@ -1,6 +1,6 @@
-#include <marnav/nmea/nrx.hpp>
+#include "marnav/nmea/nrx.hpp"
 #include "type_traits_helper.hpp"
-#include <marnav/nmea/nmea.hpp>
+#include "marnav/nmea/nmea.hpp"
 #include <gtest/gtest.h>
 
 namespace

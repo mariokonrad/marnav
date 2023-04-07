@@ -1,5 +1,5 @@
-#include <marnav/nmea/nrx.hpp>
-#include <marnav/nmea/io.hpp>
+#include "marnav/nmea/nrx.hpp"
+#include "marnav/nmea/io.hpp"
 #include <stdexcept>
 
 namespace marnav::nmea
