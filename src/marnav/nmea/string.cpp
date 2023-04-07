@@ -101,13 +101,13 @@ std::string to_string(frequency_index t)
 {
 	switch (t) {
 		case frequency_index::NOT_RECEIVED_OVER_AIR:
-			return "Not Received Over Air";
+			return "0";
 		case frequency_index::F_490KHZ:
-			return "490kHz";
+			return "1";
 		case frequency_index::F_518kHz:
-			return "518kHz";
+			return "2";
 		case frequency_index::F_4209_5kHz:
-			return "4209.5kHz";
+			return "3";
 	}
 	return ""; // never reached, gcc does not get it, prevents compiler warning
 }

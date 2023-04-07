@@ -24,7 +24,7 @@ TEST_F(test_nmea_nrx, properties)
 TEST_F(test_nmea_nrx, parse)
 {
 	auto s = nmea::make_sentence(
-		"$CRNRX,007,001,00,TD02,1,135600,27,06,2001,241,3,A,==========================*09");
+		"$CRNRX,007,001,00,TD02,1,135600,27,06,2001,241,3,A,==========================*18");
 	ASSERT_NE(nullptr, s);
 
 	auto nrx = nmea::sentence_cast<nmea::nrx>(s);
@@ -34,15 +34,104 @@ TEST_F(test_nmea_nrx, parse)
 TEST_F(test_nmea_nrx, parse_invalid_number_of_arguments)
 {
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::nrx>(nmea::talker::none, {4, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::nrx>(nmea::talker::none, {12, "@"}));
 	EXPECT_ANY_THROW(
-		nmea::detail::factory::sentence_parse<nmea::nrx>(nmea::talker::none, {6, "@"}));
+		nmea::detail::factory::sentence_parse<nmea::nrx>(nmea::talker::none, {14, "@"}));
 }
 
 TEST_F(test_nmea_nrx, empty_to_string)
 {
 	nmea::nrx nrx;
 
-	EXPECT_STREQ("$CRNRX,,,,,,,,,,,,V,*09", nmea::to_string(nrx).c_str());
+	EXPECT_STREQ("$CRNRX,000,000,00,,,,,,,,,,*79", nmea::to_string(nrx).c_str());
+}
+
+TEST_F(test_nmea_nrx, set_number_sentences)
+{
+	nmea::nrx nrx;
+	nrx.set_number_sentences(999);
+
+	EXPECT_STREQ("$CRNRX,999,000,00,,,,,,,,,,*70", nmea::to_string(nrx).c_str());
+}
+
+TEST_F(test_nmea_nrx, set_sentence_number)
+{
+	nmea::nrx nrx;
+	nrx.set_sentence_number(66);
+
+	EXPECT_STREQ("$CRNRX,000,066,00,,,,,,,,,,*79", nmea::to_string(nrx).c_str());
+}
+
+TEST_F(test_nmea_nrx, set_sequential_id)
+{
+	nmea::nrx nrx;
+	nrx.set_sequential_id(10);
+
+	EXPECT_STREQ("$CRNRX,000,000,10,,,,,,,,,,*78", nmea::to_string(nrx).c_str());
+}
+
+TEST_F(test_nmea_nrx, set_message_code)
+{
+	nmea::nrx nrx;
+	nrx.set_message_code({'T', 'D', 6});
+
+	EXPECT_STREQ("$CRNRX,000,000,00,TD06,,,,,,,,,*6F", nmea::to_string(nrx).c_str());
+}
+
+TEST_F(test_nmea_nrx, set_frequency_index)
+{
+	nmea::nrx nrx;
+	nrx.set_frequency_index(nmea::frequency_index::F_518kHz);
+
+	EXPECT_STREQ("$CRNRX,000,000,00,,2,,,,,,,,*4B", nmea::to_string(nrx).c_str());
+}
+
+TEST_F(test_nmea_nrx, set_time_utc)
+{
+	nmea::nrx nrx;
+	nrx.set_time_utc(nmea::time{14, 57, 6});
+
+	EXPECT_STREQ("$CRNRX,000,000,00,,,145706,,,,,,,*78", nmea::to_string(nrx).c_str());
+}
+
+TEST_F(test_nmea_nrx, set_date)
+{
+	nmea::nrx nrx;
+	nrx.set_date(nmea::date{2023, nmea::month::april, 7});
+
+	EXPECT_STREQ("$CRNRX,000,000,00,,,,07,04,2023,,,,*79", nmea::to_string(nrx).c_str());
+}
+
+TEST_F(test_nmea_nrx, set_total_characters)
+{
+	nmea::nrx nrx;
+	nrx.set_total_characters(156);
+
+	EXPECT_STREQ("$CRNRX,000,000,00,,,,,,,156,,,*4B", nmea::to_string(nrx).c_str());
+}
+
+TEST_F(test_nmea_nrx, set_total_bad_characters)
+{
+	nmea::nrx nrx;
+	nrx.set_total_bad_characters(61);
+
+	EXPECT_STREQ("$CRNRX,000,000,00,,,,,,,,61,,*7E", nmea::to_string(nrx).c_str());
+}
+
+TEST_F(test_nmea_nrx, set_status)
+{
+	nmea::nrx nrx;
+	nrx.set_status(nmea::status::ok);
+
+	EXPECT_STREQ("$CRNRX,000,000,00,,,,,,,,,A,*38", nmea::to_string(nrx).c_str());
+}
+
+TEST_F(test_nmea_nrx, set_message)
+{
+	nmea::nrx nrx;
+	nrx.set_message("WINDS^2C STRONGEST IN NORTH.^0D");
+
+	EXPECT_STREQ("$CRNRX,000,000,00,,,,,,,,,,WINDS^2C STRONGEST IN NORTH.^0D*2C",
+		nmea::to_string(nrx).c_str());
 }
 }

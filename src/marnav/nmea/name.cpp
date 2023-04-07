@@ -306,6 +306,8 @@ std::string to_name(talker t)
 			return "Satellite Telephone";
 		case talker::communications_mfhf:
 			return "Radio-Telephone (MF/HF)";
+		case talker::communications_telex:
+			return "Radio-Telex (MF/HF)";
 		case talker::communications_vhf:
 			return "Radio-Telephone (VHF)";
 		case talker::communications_scanning_receiver:
