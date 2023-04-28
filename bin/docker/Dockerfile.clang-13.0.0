@@ -1,11 +1,5 @@
-ARG base_image=debian:buster
-
-FROM ${base_image}
+FROM ubuntu:20.04
 LABEL maintainer="Mario Konrad <mario.konrad@gmx.net>"
-
-ARG compiler_version=14.0.0
-ARG cmake_version=3.24.1
-ARG boost_version=1.72.0
 
 RUN apt-get update \
  && apt-get install -y \
@@ -23,7 +17,7 @@ RUN mkdir -p /opt
 
 # install clang
 COPY install-clang.sh /tmp/
-RUN /tmp/install-clang.sh "${compiler_version}"
+RUN /tmp/install-clang.sh "13.0.0"
 ENV CXX=/usr/bin/clang++
 ENV CC=/usr/bin/clang
 ENV CXXFLAGS=-stdlib=libc++
@@ -32,12 +26,12 @@ ENV LD_LIBRARY_PATH=/usr/lib/x86_64-unknown-linux-gnu
 
 # install cmake
 COPY install-cmake.sh /tmp/
-RUN /tmp/install-cmake.sh "${cmake_version}"
+RUN /tmp/install-cmake.sh "3.24.1"
 ENV PATH /opt/local/cmake/bin:$PATH
 
 # install boost
 COPY install-boost.sh /tmp/
-RUN /tmp/install-boost.sh "${boost_version}" "clang" "-stdlib=libc++" "-stdlib=libc++"
+RUN /tmp/install-boost.sh "1.72.0" "clang" "-stdlib=libc++" "-stdlib=libc++"
 ENV BOOST_ROOT=/opt/local
 
 # add user

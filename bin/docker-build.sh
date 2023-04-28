@@ -4,36 +4,15 @@ export SCRIPT_BASE=$(dirname `readlink -f $0`)
 export BASE=${SCRIPT_BASE}/..
 export BUILD=${BASE}/build
 
-supported_compilers=(
-	"gcc-7.4.0"
-	"gcc-8.3.0"
-	"gcc-9.1.0"
-	"gcc-9.2.0"
-	"gcc-9.3.0"
-	"gcc-9.4.0"
-	"gcc-9.5.0"
-	"gcc-10.1.0"
-	"gcc-10.2.0"
-	"gcc-10.3.0"
-	"gcc-10.4.0"
-	"gcc-11.1.0"
-	"gcc-11.2.0"
-	"gcc-11.3.0"
-	"gcc-12.1.0"
-	"gcc-12.2.0"
-	"clang-5.0.2"
-	"clang-6.0.0"
-	"clang-7.1.0"
-	"clang-8.0.0"
-	"clang-9.0.0"
-	"clang-10.0.0"
-	"clang-10.0.0"
-	"clang-11.0.0"
-	"clang-12.0.0"
-	"clang-13.0.0"
-	"clang-14.0.0"
-	"clang-15.0.6"
-	)
+function scan_supported_images()
+{
+	find ${SCRIPT_BASE}/docker -type f -name "Dockerfile.*" | while read fn ; do
+		f=$(basename $fn)
+		echo ${f##Dockerfile.}
+	done | sort -Vr
+}
+
+supported_compilers=$(scan_supported_images)
 supported_build_types=("Debug" "Release")
 repository=${DOCKER_REPOSITORY:-marnav}
 account=${DOCKER_ACCOUNT:-mariokonrad}

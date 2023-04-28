@@ -3,6 +3,7 @@
 
 #include <marnav/utils/bitset.hpp>
 #include <string>
+#include <cstdint>
 
 namespace marnav::ais
 {

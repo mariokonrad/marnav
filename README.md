@@ -372,6 +372,7 @@ Compiler:
 - GCC 10
 - GCC 11
 - GCC 12
+- GCC 13
 - Clang 5
 - Clang 6
 - Clang 7
@@ -382,6 +383,9 @@ Compiler:
 - Clang 12
 - Clang 13
 - Clang 14
+- Clang 15
+- Clang 16
+- Clang 17
 - VC++ 14.34 (_MSC_VER=1934, Visual Studio 2022)
 
 Tools needed to build the library:

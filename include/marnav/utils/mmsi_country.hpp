@@ -2,6 +2,7 @@
 #define MARNAV_UTILS_MMSI_COUNTRY_HPP
 
 #include <string>
+#include <cstdint>
 
 namespace marnav::utils
 {

@@ -1,0 +1,22 @@
+FROM gcc:12.2.0
+LABEL maintainer="Mario Konrad <mario.konrad@gmx.net>"
+
+USER root
+RUN apt-get update \
+ && apt-get install -y apt-utils curl git-core ninja-build libqt5serialport5-dev \
+ && rm -fr /var/lib/apt/lists/*
+RUN mkdir -p /opt
+
+# install cmake
+COPY install-cmake.sh /tmp/
+RUN /tmp/install-cmake.sh "3.24.1"
+ENV PATH /opt/local/cmake/bin:$PATH
+
+# install boost
+COPY install-boost.sh /tmp/
+RUN /tmp/install-boost.sh "1.80.0" "gcc"
+ENV BOOST_ROOT=/opt/local
+
+# add user
+RUN useradd --groups users -M --uid 1000 user
+USER user

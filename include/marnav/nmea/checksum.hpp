@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <string>
+#include <cstdint>
 
 namespace marnav::nmea
 {
