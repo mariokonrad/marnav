@@ -6,7 +6,6 @@ namespace marnav::nmea
 {
 constexpr sentence_id nrx::ID;
 constexpr const char * nrx::TAG;
-constexpr int HEX_LENGTH = 2;
 
 nrx::nrx()
 	: sentence(ID, TAG, talker::communications_telex)
@@ -49,19 +48,8 @@ nrx::nrx(talker talk, fields::const_iterator first, fields::const_iterator last)
 	read(*(first + 9), m_total_characters);
 	read(*(first + 10), m_total_bad_characters);
 	read(*(first + 11), m_status);
-
-	std::string message;
-	read(*(first + 12), message);
-	fill_message_body(message);
-
+	read(*(first + 12), m_message);
 	check();
-}
-
-inline std::string hex_to_ascii(const std::string & s)
-{
-	if (s.size() != HEX_LENGTH)
-		return {};
-	return std::string{static_cast<char>(std::stoul(s.substr(0, HEX_LENGTH), nullptr, 16))};
 }
 
 inline std::string to_string(const std::optional<nrx::message_code> & m)
@@ -115,21 +103,6 @@ inline std::optional<nrx::message_code> nrx::fill_message_code(const std::string
 	code.b2_subject_indicator = *iter++;
 	code.b3_b4_serial = std::stol(m.substr(m.size() - 2));
 	return code;
-}
-
-inline void nrx::fill_message_body(std::string & message) noexcept
-{
-	constexpr char HEX_DELIMITER = '^';
-	constexpr int TO_REPLACE_LENGTH = HEX_LENGTH + sizeof(HEX_DELIMITER);
-
-	size_t pos = message.find(HEX_DELIMITER);
-	while (pos != std::string::npos) {
-		const std::string & ascii_str = hex_to_ascii(message.substr(pos + 1, HEX_LENGTH));
-		message.replace(pos, TO_REPLACE_LENGTH, ascii_str);
-		pos = message.find(HEX_DELIMITER);
-	}
-
-	m_message = message;
 }
 
 void nrx::check() const

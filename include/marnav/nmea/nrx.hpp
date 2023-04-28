@@ -119,7 +119,6 @@ public:
 
 private:
 	inline std::optional<message_code> fill_message_code(const std::string & m) noexcept;
-	inline void fill_message_body(std::string & message) noexcept;
 	inline void check() const;
 };
 }
