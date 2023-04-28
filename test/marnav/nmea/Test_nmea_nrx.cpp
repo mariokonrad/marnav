@@ -23,16 +23,67 @@ TEST_F(test_nmea_nrx, properties)
 
 TEST_F(test_nmea_nrx, parse)
 {
-	std::string_view msg
+	auto msg
 		= "$CRNRX,007,001,00,IE69,1,135600,27,06,2001,241,3,A,==========================*09";
 
-	auto s = nmea::make_sentence(msg.data());
+	auto s = nmea::make_sentence(msg);
 	ASSERT_NE(nullptr, s);
 
 	auto nrx = nmea::sentence_cast<nmea::nrx>(s);
 	ASSERT_NE(nullptr, nrx);
 
-	ASSERT_EQ(msg.data(), nmea::to_string(*nrx));
+	ASSERT_EQ(msg, nmea::to_string(*nrx));
+}
+
+TEST_F(test_nmea_nrx, parse_subsequence_2)
+{
+	auto msg
+		= "$CRNRX,007,002,00,,,,,,,,,,========^0D^0AISSUED ON SATURDAY 06 JANUARY 2001.*29";
+	auto s = nmea::make_sentence(msg);
+	auto nrx = nmea::sentence_cast<nmea::nrx>(s);
+	ASSERT_EQ(msg, nmea::to_string(*nrx));
+}
+
+TEST_F(test_nmea_nrx, parse_subsequence_3)
+{
+
+	auto msg
+		= "$CRNRX,007,003,00,,,,,,,,,,^0D^0AINSHORE WATERS FORECAST TO 12 MILES^0D^0AOFF*0D";
+	auto s = nmea::make_sentence(msg);
+	auto nrx = nmea::sentence_cast<nmea::nrx>(s);
+	ASSERT_EQ(msg, nmea::to_string(*nrx));
+}
+TEST_F(test_nmea_nrx, parse_subsequence_4)
+{
+	auto msg = "$CRNRX,007,004,00,,,,,,,,,,SHORE FROM 1700 UTC TO 0500 UTC.^0D^0A^0D^0ANORT*1E";
+	auto s = nmea::make_sentence(msg);
+	auto nrx = nmea::sentence_cast<nmea::nrx>(s);
+	ASSERT_EQ(msg, nmea::to_string(*nrx));
+}
+
+TEST_F(test_nmea_nrx, parse_subsequence_5)
+{
+	auto msg = "$CRNRX,007,005,00,,,,,,,,,,H FORELAND TO SELSEY BILL.^0D^0A12 HOURS FOREC*09";
+	auto s = nmea::make_sentence(msg);
+	auto nrx = nmea::sentence_cast<nmea::nrx>(s);
+	ASSERT_EQ(msg, nmea::to_string(*nrx));
+}
+
+TEST_F(test_nmea_nrx, parse_subsequence_6)
+{
+	auto msg
+		= "$CRNRX,007,006,00,,,,,,,,,,AST:^0D^0A^0ASHOWERY WINDS^2C STRONGEST IN NORTH.^0D*16";
+	auto s = nmea::make_sentence(msg);
+	auto nrx = nmea::sentence_cast<nmea::nrx>(s);
+	ASSERT_EQ(msg, nmea::to_string(*nrx));
+}
+
+TEST_F(test_nmea_nrx, parse_subsequence_7)
+{
+	auto msg = "$CRNRX,007,007,00,,,,,,,,,,^0A^0A*79";
+	auto s = nmea::make_sentence(msg);
+	auto nrx = nmea::sentence_cast<nmea::nrx>(s);
+	ASSERT_EQ(msg, nmea::to_string(*nrx));
 }
 
 TEST_F(test_nmea_nrx, parse_invalid_number_of_arguments)
