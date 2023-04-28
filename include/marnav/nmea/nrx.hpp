@@ -84,9 +84,9 @@ private:
 	uint16_t m_sentence_number;
 	int m_sequential_id;
 	std::optional<message_code> m_message_code;
+	std::optional<frequency_index> m_frequency_index;
 	std::optional<time> m_time_utc;
 	std::optional<date> m_date;
-	std::optional<frequency_index> m_frequency_index;
 	std::optional<uint32_t> m_total_characters;
 	std::optional<uint32_t> m_total_bad_characters;
 	std::optional<status> m_status;
@@ -118,7 +118,7 @@ public:
 	void set_message(const std::string & m) noexcept { m_message = m; }
 
 private:
-	inline void fill_message_code(const std::string & m) noexcept;
+	inline std::optional<message_code> fill_message_code(const std::string & m) noexcept;
 	inline void fill_message_body(std::string & message) noexcept;
 	inline void check() const;
 };

@@ -30,7 +30,7 @@ nrx::nrx(talker talk, fields::const_iterator first, fields::const_iterator last)
 
 	std::string message_code;
 	read(*(first + 3), message_code);
-	fill_message_code(message_code);
+	m_message_code = fill_message_code(message_code);
 
 	read(*(first + 4), m_frequency_index);
 	read(*(first + 5), m_time_utc);
@@ -103,16 +103,18 @@ void nrx::append_data_to(std::string & s, const version &) const
 	append(s, to_string(m_message));
 }
 
-inline void nrx::fill_message_code(const std::string & m) noexcept
+inline std::optional<nrx::message_code> nrx::fill_message_code(const std::string & m) noexcept
 {
 	constexpr int MESSAGE_CODE_LENGTH = 4;
+	if (m.size() != MESSAGE_CODE_LENGTH)
+		return {};
 
-	if (m.size() == MESSAGE_CODE_LENGTH) {
-		std::string::const_iterator iter = m.cbegin();
-		m_message_code->b1_transmitter_identity = *iter++;
-		m_message_code->b2_subject_indicator = *iter++;
-		m_message_code->b3_b4_serial = std::stol(m.substr(m.size() - 2));
-	}
+	std::string::const_iterator iter = m.cbegin();
+	nrx::message_code code;
+	code.b1_transmitter_identity = *iter++;
+	code.b2_subject_indicator = *iter++;
+	code.b3_b4_serial = std::stol(m.substr(m.size() - 2));
+	return code;
 }
 
 inline void nrx::fill_message_body(std::string & message) noexcept

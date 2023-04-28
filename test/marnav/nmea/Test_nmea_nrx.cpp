@@ -23,12 +23,16 @@ TEST_F(test_nmea_nrx, properties)
 
 TEST_F(test_nmea_nrx, parse)
 {
-	auto s = nmea::make_sentence(
-		"$CRNRX,007,001,00,TD02,1,135600,27,06,2001,241,3,A,==========================*18");
+	std::string_view msg
+		= "$CRNRX,007,001,00,IE69,1,135600,27,06,2001,241,3,A,==========================*09";
+
+	auto s = nmea::make_sentence(msg.data());
 	ASSERT_NE(nullptr, s);
 
 	auto nrx = nmea::sentence_cast<nmea::nrx>(s);
 	ASSERT_NE(nullptr, nrx);
+
+	ASSERT_EQ(msg.data(), nmea::to_string(*nrx));
 }
 
 TEST_F(test_nmea_nrx, parse_invalid_number_of_arguments)
