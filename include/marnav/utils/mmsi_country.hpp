@@ -1,6 +1,7 @@
 #ifndef MARNAV_UTILS_MMSI_COUNTRY_HPP
 #define MARNAV_UTILS_MMSI_COUNTRY_HPP
 
+#include <cstdint>
 #include <string>
 
 namespace marnav::utils

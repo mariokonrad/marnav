@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <stdexcept>
+#include <cstdint>
 #include <string>
 
 namespace marnav::nmea

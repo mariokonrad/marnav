@@ -1,4 +1,5 @@
 #include <marnav/utils/bitset.hpp>
+#include <cstdint>
 #include <iostream>
 
 int main(int, char **)

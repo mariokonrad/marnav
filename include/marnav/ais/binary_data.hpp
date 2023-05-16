@@ -2,6 +2,7 @@
 #define MARNAV_AIS_BINARY_DATA_HPP
 
 #include <marnav/utils/bitset.hpp>
+#include <cstdint>
 #include <string>
 
 namespace marnav::ais

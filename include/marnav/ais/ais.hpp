@@ -2,6 +2,7 @@
 #define MARNAV_AIS_DECODE_HPP
 
 #include <marnav/ais/message.hpp>
+#include <cstdint>
 #include <stdexcept>
 #include <vector>
 
