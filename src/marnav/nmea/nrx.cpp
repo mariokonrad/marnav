@@ -52,7 +52,7 @@ nrx::nrx(talker talk, fields::const_iterator first, fields::const_iterator last)
 	check();
 }
 
-inline std::string to_string(const std::optional<nrx::message_code> & m)
+std::string to_string(const std::optional<nrx::message_code> & m)
 {
 	if (!m.has_value())
 		return {};
