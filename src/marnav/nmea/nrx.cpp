@@ -91,7 +91,7 @@ void nrx::append_data_to(std::string & s, const version &) const
 	append(s, to_string(message_));
 }
 
-inline std::optional<nrx::message_code> nrx::fill_message_code(const std::string & m) noexcept
+std::optional<nrx::message_code> nrx::fill_message_code(const std::string & m) const
 {
 	constexpr int MESSAGE_CODE_LENGTH = 4;
 	if (m.size() != MESSAGE_CODE_LENGTH)
