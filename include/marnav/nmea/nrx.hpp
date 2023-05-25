@@ -64,9 +64,9 @@ public:
 	constexpr static const char * TAG = "NRX";
 
 	struct message_code {
-		char b1_transmitter_identity;
-		char b2_subject_indicator;
-		uint8_t b3_b4_serial;
+		char b1_transmitter_identity = '\0';
+		char b2_subject_indicator = '\0';
+		uint8_t b3_b4_serial = 0u;
 	};
 
 	nrx();
