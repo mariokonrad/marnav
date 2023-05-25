@@ -1,11 +1,11 @@
 #ifndef MARNAV_NMEA_NRX_HPP
 #define MARNAV_NMEA_NRX_HPP
 
-#include <optional>
-
 #include "marnav/nmea/date.hpp"
 #include "marnav/nmea/sentence.hpp"
 #include "marnav/nmea/time.hpp"
+
+#include <optional>
 
 namespace marnav::nmea
 {
