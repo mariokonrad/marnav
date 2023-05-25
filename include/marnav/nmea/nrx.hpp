@@ -118,8 +118,8 @@ public:
 	void set_message(const std::string & m) noexcept { message_ = m; }
 
 private:
-	inline std::optional<message_code> fill_message_code(const std::string & m) noexcept;
-	inline void check() const;
+	std::optional<message_code> fill_message_code(const std::string & m) const;
+	void check() const;
 };
 }
 #endif // MARNAV_NMEA_NRX_HPP
