@@ -337,16 +337,16 @@ void read(const std::string & s, frequency_index & value, data_format fmt)
 	read(s, t, fmt);
 	switch (t) {
 		case 0:
-			value = frequency_index::NOT_RECEIVED_OVER_AIR;
+			value = frequency_index::not_received_over_air;
 			break;
 		case 1:
-			value = frequency_index::F_490KHZ;
+			value = frequency_index::f_490_khz;
 			break;
 		case 2:
-			value = frequency_index::F_518kHz;
+			value = frequency_index::f_518_khz;
 			break;
 		case 3:
-			value = frequency_index::F_4209_5kHz;
+			value = frequency_index::f_4209_5_khz;
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/frequency_index"};

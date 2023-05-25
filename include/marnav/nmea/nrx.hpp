@@ -66,7 +66,7 @@ public:
 	struct message_code {
 		char b1_transmitter_identity = '\0';
 		char b2_subject_indicator = '\0';
-		uint8_t b3_b4_serial = 0u;
+		uint32_t b3_b4_serial = 0u;
 	};
 
 	nrx();
@@ -80,8 +80,8 @@ protected:
 	void append_data_to(std::string &, const version &) const override;
 
 private:
-	uint16_t number_sentences_;
-	uint16_t sentence_number_;
+	uint32_t number_sentences_;
+	uint32_t sentence_number_;
 	int sequential_id_;
 	std::optional<message_code> message_code_;
 	std::optional<frequency_index> frequency_index_;
@@ -93,9 +93,9 @@ private:
 	std::optional<std::string> message_;
 
 public:
-	uint16_t get_number_sentences() const { return number_sentences_; };
-	uint16_t get_sentence_number() const { return sentence_number_; };
-	uint8_t get_sequential_id() const { return sequential_id_; };
+	uint32_t get_number_sentences() const { return number_sentences_; };
+	uint32_t get_sentence_number() const { return sentence_number_; };
+	uint32_t get_sequential_id() const { return sequential_id_; };
 	std::optional<message_code> get_message_code() const { return message_code_; };
 	std::optional<frequency_index> get_frequency_index() const { return frequency_index_; };
 	std::optional<time> get_time_utc() const { return time_utc_; };
@@ -105,9 +105,9 @@ public:
 	std::optional<status> get_status() const { return status_; };
 	std::optional<std::string> get_message() const { return message_; };
 
-	void set_number_sentences(uint16_t value) { number_sentences_ = value; }
-	void set_sentence_number(uint16_t value) { sentence_number_ = value; }
-	void set_sequential_id(uint8_t value) { sequential_id_ = value; }
+	void set_number_sentences(uint32_t value) { number_sentences_ = value; }
+	void set_sentence_number(uint32_t value) { sentence_number_ = value; }
+	void set_sequential_id(uint32_t value) { sequential_id_ = value; }
 	void set_message_code(const message_code & t) noexcept { message_code_ = t; }
 	void set_frequency_index(frequency_index t) noexcept { frequency_index_ = t; }
 	void set_time_utc(const time & t) noexcept { time_utc_ = t; }

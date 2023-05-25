@@ -136,7 +136,7 @@ TEST_F(test_nmea_nrx, set_message_code)
 TEST_F(test_nmea_nrx, set_frequency_index)
 {
 	nmea::nrx nrx;
-	nrx.set_frequency_index(nmea::frequency_index::F_518kHz);
+	nrx.set_frequency_index(nmea::frequency_index::f_518_khz);
 
 	EXPECT_STREQ("$CRNRX,000,000,00,,2,,,,,,,,*4B", nmea::to_string(nrx).c_str());
 }
