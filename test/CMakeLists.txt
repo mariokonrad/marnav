@@ -92,7 +92,7 @@ target_sources(testrunner
 		marnav/nmea/Test_nmea_mtw.cpp
 		marnav/nmea/Test_nmea_mwd.cpp
 		marnav/nmea/Test_nmea_mwv.cpp
-                marnav/nmea/Test_nmea_nrx.cpp
+		marnav/nmea/Test_nmea_nrx.cpp
 		marnav/nmea/Test_nmea_osd.cpp
 		marnav/nmea/Test_nmea_pgrme.cpp
 		marnav/nmea/Test_nmea_pgrmm.cpp
