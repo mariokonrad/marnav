@@ -13,6 +13,18 @@ nrx::nrx()
 	, sentence_number_(0u)
 	, sequential_id_(0)
 {
+	reserved_characters_ = std::unordered_map<std::string, std::string>{
+		{"\r", "^0D"},
+		{"\n", "^0A"},
+		{"*", "^2A"},
+		{",", "^2C"},
+		{"$", "^24"},
+		{"!", "^21"},
+		{"\\", "^5C"},
+		{"^", "^5E"},
+		{"~", "^7E"},
+		{"<del>", "^7F"},
+	};
 }
 
 nrx::nrx(talker talk, fields::const_iterator first, fields::const_iterator last)
@@ -89,6 +101,27 @@ void nrx::append_data_to(std::string & s, const version &) const
 	append(s, to_string(total_bad_characters_));
 	append(s, to_string(status_));
 	append(s, to_string(message_));
+}
+
+void nrx::set_message(const std::string & m)
+{
+	constexpr int MAX_NMEA_SENTENCE_LENGTH = 79;
+	if (m.length() > MAX_NMEA_SENTENCE_LENGTH)
+		throw std::invalid_argument{"Message exceeds max nmea charachters"};
+
+	message_ = m;
+
+	if (!message_.has_value())
+		return;
+
+	std::for_each(std::begin(reserved_characters_), std::end(reserved_characters_),
+		[&](const std::pair<std::string, std::string> r) {
+			size_t start_pos = 0;
+			while ((start_pos = message_->find(r.first, start_pos)) != std::string::npos) {
+				message_->replace(start_pos, r.first.length(), r.second);
+				start_pos += r.first.length();
+			}
+		});
 }
 
 std::optional<nrx::message_code> nrx::fill_message_code(const std::string & m) const

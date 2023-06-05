@@ -140,9 +140,9 @@ TEST_F(test_nmea_nrx, set_status)
 TEST_F(test_nmea_nrx, set_message)
 {
 	nmea::nrx nrx;
-	nrx.set_message("WINDS^2C STRONGEST IN NORTH.^0D");
+	nrx.set_message("IB45\r\n260909 UTC MAR 07\r\nWWJP83");
 
-	EXPECT_STREQ("$CRNRX,000,000,00,,,,,,,,,,WINDS^2C STRONGEST IN NORTH.^0D*2C",
+	EXPECT_STREQ("$CRNRX,000,000,00,,,,,,,,,,IB45^0D^0A260909 UTC MAR 07^0D^0AWWJP83*5D",
 		nmea::to_string(nrx).c_str());
 }
 }

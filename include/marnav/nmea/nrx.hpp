@@ -92,6 +92,9 @@ private:
 	std::optional<status> status_;
 	std::optional<std::string> message_;
 
+	// Holds pre-defined reserved charachters
+	std::unordered_map<std::string, std::string> reserved_characters_;
+
 public:
 	uint32_t get_number_sentences() const { return number_sentences_; };
 	uint32_t get_sentence_number() const { return sentence_number_; };
@@ -115,7 +118,7 @@ public:
 	void set_total_characters(uint32_t t) noexcept { total_characters_ = t; }
 	void set_total_bad_characters(uint32_t t) noexcept { total_bad_characters_ = t; }
 	void set_status(status s) noexcept { status_ = s; }
-	void set_message(const std::string & m) noexcept { message_ = m; }
+	void set_message(const std::string & m);
 
 private:
 	std::optional<message_code> fill_message_code(const std::string & m) const;
