@@ -92,9 +92,6 @@ private:
 	std::optional<status> status_;
 	std::optional<std::string> message_;
 
-	// Holds pre-defined reserved charachters
-	std::unordered_map<std::string, std::string> reserved_characters_;
-
 public:
 	uint32_t get_number_sentences() const { return number_sentences_; };
 	uint32_t get_sentence_number() const { return sentence_number_; };
@@ -107,6 +104,12 @@ public:
 	std::optional<uint32_t> get_total_bad_characters() const { return total_bad_characters_; };
 	std::optional<status> get_status() const { return status_; };
 	std::optional<std::string> get_message() const { return message_; };
+
+	/**
+	 * @brief Return parsed reserved charachters which is showable (on screen)
+	 * @return 
+	 */
+	std::optional<std::string> get_parsed_message() const;
 
 	void set_number_sentences(uint32_t value) { number_sentences_ = value; }
 	void set_sentence_number(uint32_t value) { sentence_number_ = value; }

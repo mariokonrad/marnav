@@ -7,24 +7,26 @@ namespace marnav::nmea
 constexpr sentence_id nrx::ID;
 constexpr const char * nrx::TAG;
 
+// Holds pre-defined reserved charachters
+const std::unordered_map<std::string, std::string> reserved_characters{
+	{"\r", "^0D"},
+	{"\n", "^0A"},
+	{"*", "^2A"},
+	{",", "^2C"},
+	{"$", "^24"},
+	{"!", "^21"},
+	{"\\", "^5C"},
+	{"^", "^5E"},
+	{"~", "^7E"},
+	{"<del>", "^7F"},
+};
+
 nrx::nrx()
 	: sentence(ID, TAG, talker::communications_telex)
 	, number_sentences_(0u)
 	, sentence_number_(0u)
 	, sequential_id_(0)
 {
-	reserved_characters_ = std::unordered_map<std::string, std::string>{
-		{"\r", "^0D"},
-		{"\n", "^0A"},
-		{"*", "^2A"},
-		{",", "^2C"},
-		{"$", "^24"},
-		{"!", "^21"},
-		{"\\", "^5C"},
-		{"^", "^5E"},
-		{"~", "^7E"},
-		{"<del>", "^7F"},
-	};
 }
 
 nrx::nrx(talker talk, fields::const_iterator first, fields::const_iterator last)
@@ -103,6 +105,26 @@ void nrx::append_data_to(std::string & s, const version &) const
 	append(s, to_string(message_));
 }
 
+std::optional<std::string> nrx::get_parsed_message() const
+{
+	std::optional<std::string> m;
+
+	if (!message_.has_value())
+		return m;
+
+	m = message_;
+
+	size_t start_pos = 0;
+	for (const auto & [key, hex] : reserved_characters) {
+		start_pos = 0;
+		while ((start_pos = m->find(hex, start_pos)) != std::string::npos) {
+			m->replace(start_pos, hex.length(), key);
+			start_pos += key.length();
+		}
+	}
+	return m;
+}
+
 void nrx::set_message(const std::string & m)
 {
 	constexpr int MAX_NMEA_SENTENCE_LENGTH = 79;
@@ -114,14 +136,14 @@ void nrx::set_message(const std::string & m)
 	if (!message_.has_value())
 		return;
 
-	std::for_each(std::begin(reserved_characters_), std::end(reserved_characters_),
-		[&](const std::pair<std::string, std::string> r) {
-			size_t start_pos = 0;
-			while ((start_pos = message_->find(r.first, start_pos)) != std::string::npos) {
-				message_->replace(start_pos, r.first.length(), r.second);
-				start_pos += r.first.length();
-			}
-		});
+	size_t start_pos = 0;
+	for (const auto & [key, hex] : reserved_characters) {
+		start_pos = 0;
+		while ((start_pos = message_->find(key, start_pos)) != std::string::npos) {
+			message_->replace(start_pos, key.length(), hex);
+			start_pos += hex.length();
+		}
+	}
 }
 
 std::optional<nrx::message_code> nrx::fill_message_code(const std::string & m) const

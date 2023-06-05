@@ -25,6 +25,9 @@ target_link_libraries(create_nmea_from_ais_2 marnav::marnav)
 add_executable(parse_ais parse_ais.cpp)
 target_link_libraries(parse_ais marnav::marnav)
 
+add_executable(parse_nrx parse_nrx.cpp)
+target_link_libraries(parse_nrx marnav::marnav)
+
 if(NOT MSVC)
 	add_executable(select select.cpp)
 	target_link_libraries(select marnav::marnav)
