@@ -18,6 +18,7 @@ enum class talker {
 	computer_memory,
 	communications_satellite,
 	communications_mfhf,
+	communications_telex,
 	communications_vhf,
 	communications_scanning_receiver,
 	decca_navigation,

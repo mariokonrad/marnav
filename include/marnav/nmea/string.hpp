@@ -32,6 +32,7 @@ std::string to_string(route_mode t);
 std::string to_string(selection_mode t);
 std::string to_string(ais_channel t);
 std::string to_string(type_of_point t);
+std::string to_string(frequency_index t);
 std::string to_string(direction t);
 std::string to_string(reference t);
 std::string to_string(mode_indicator t);
