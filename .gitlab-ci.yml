@@ -6,16 +6,16 @@
     - cmake --build build --target test
     - bin/test-library.sh
 
-build:gcc-11.2.0:
+build:gcc-12.5.0:
   variables:
-    COMPILER: gcc-11.2.0
+    COMPILER: gcc-12.5.0
     BUILD_TYPE: Release
   image: mariokonrad/marnav:${COMPILER}
   <<: *build_definition
 
-build:clang-13.0.0:
+build:clang-15.0.6:
   variables:
-    COMPILER: clang-13.0.0
+    COMPILER: clang-15.0.6
     BUILD_TYPE: Release
   image: mariokonrad/marnav:${COMPILER}
   <<: *build_definition

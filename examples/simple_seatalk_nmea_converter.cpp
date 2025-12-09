@@ -38,7 +38,7 @@ int main(int, char **)
 		};
 
 	// open output port
-	boost::asio::io_service io;
+	boost::asio::io_context io;
 	boost::asio::serial_port serial{io, "/dev/ttyUSB1"};
 	serial.set_option(boost::asio::serial_port_base::baud_rate(4800));
 

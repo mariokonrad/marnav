@@ -1,7 +1,13 @@
+find_package(Qt5
+	COMPONENTS
+		Core
+		Widgets
+		SerialPort
+	HINTS
+		$ENV{QTHOME}
+	)
 
-find_package(Qt5Core)
-
-if(${Qt5Core_FOUND})
+if(TARGET Qt5::Core)
 	find_package(Qt5Widgets REQUIRED)
 	find_package(Qt5SerialPort REQUIRED)
 
@@ -12,12 +18,21 @@ if(${Qt5Core_FOUND})
 
 	set(CMAKE_AUTOMOC ON)
 
-	add_executable(qtnmeadiag
-		MainWindow.cpp
-		main.cpp
+	add_executable(qtnmeadiag)
+
+	target_sources(qtnmeadiag
+		PRIVATE
+			MainWindow.cpp
+			main.cpp
 		)
 
-	target_link_libraries(qtnmeadiag Qt5::SerialPort Qt5::Widgets Qt5::Core marnav::marnav)
+	target_link_libraries(qtnmeadiag
+		PRIVATE
+			Qt5::Core
+			Qt5::SerialPort
+			Qt5::Widgets
+			marnav::marnav
+		)
 
 else()
 	message(STATUS "Qt5 not found")

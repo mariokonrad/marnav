@@ -42,7 +42,7 @@ public:
 	}
 
 private:
-	boost::asio::io_service io_;
+	boost::asio::io_context io_;
 	boost::asio::serial_port serial_;
 };
 

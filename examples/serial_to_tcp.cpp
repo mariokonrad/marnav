@@ -45,7 +45,7 @@ public:
 	}
 
 private:
-	boost::asio::io_service io_;
+	boost::asio::io_context io_;
 	boost::asio::serial_port serial_;
 };
 
@@ -55,7 +55,7 @@ private:
 class boost_asio_tcp_client
 {
 public:
-	boost_asio_tcp_client(const std::string & host, const std::string & port)
+	boost_asio_tcp_client(boost::asio::ip::address_v4 host, std::uint16_t port)
 		: io_()
 		, socket_(io_)
 	{
@@ -75,7 +75,7 @@ public:
 	}
 
 private:
-	boost::asio::io_service io_;
+	boost::asio::io_context io_;
 	boost::asio::ip::tcp::socket socket_;
 };
 }
@@ -89,7 +89,7 @@ int main(int, char **)
 	io::default_nmea_reader input{std::make_unique<boost_asio_serial>("/dev/ttyUSB0", 38400)};
 
 	// open output port (TCP client), default port of certain navigational software
-	boost_asio_tcp_client output{"127.0.0.1", "2947"};
+	boost_asio_tcp_client output{boost::asio::ip::address_v4::loopback(), 2947};
 
 	std::string data;
 

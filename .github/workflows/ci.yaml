@@ -10,7 +10,7 @@ jobs:
   build-gcc:
     runs-on: ubuntu-latest
     container:
-      image: mariokonrad/marnav:gcc-12.2.0
+      image: mariokonrad/marnav:gcc-12.5.0
 
       # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#docker-container-filesystem=
       # Quote:

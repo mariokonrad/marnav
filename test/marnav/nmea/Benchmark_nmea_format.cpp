@@ -219,7 +219,7 @@ void bench_dec_v0(benchmark::State & state)
 {
 	while (state.KeepRunning()) {
 		const std::uint64_t data = state.range(0);
-		const auto s = v0::format(data, 10, marnav::nmea::data_format::dec);
+		auto s = v0::format(data, 10, marnav::nmea::data_format::dec);
 		benchmark::DoNotOptimize(s);
 	}
 }
@@ -228,7 +228,7 @@ void bench_hex_v0(benchmark::State & state)
 {
 	while (state.KeepRunning()) {
 		const std::uint64_t data = state.range(0);
-		const auto s = v0::format(data, 10, marnav::nmea::data_format::hex);
+		auto s = v0::format(data, 10, marnav::nmea::data_format::hex);
 		benchmark::DoNotOptimize(s);
 	}
 }
@@ -237,7 +237,7 @@ void bench_dec_v1(benchmark::State & state)
 {
 	while (state.KeepRunning()) {
 		const std::uint64_t data = state.range(0);
-		const auto s = v1::format(data, 10, marnav::nmea::data_format::dec);
+		auto s = v1::format(data, 10, marnav::nmea::data_format::dec);
 		benchmark::DoNotOptimize(s);
 	}
 }
@@ -246,7 +246,7 @@ void bench_hex_v1(benchmark::State & state)
 {
 	while (state.KeepRunning()) {
 		const std::uint64_t data = state.range(0);
-		const auto s = v1::format(data, 10, marnav::nmea::data_format::hex);
+		auto s = v1::format(data, 10, marnav::nmea::data_format::hex);
 		benchmark::DoNotOptimize(s);
 	}
 }
@@ -255,7 +255,7 @@ void bench_dec_v2(benchmark::State & state)
 {
 	while (state.KeepRunning()) {
 		const std::uint64_t data = state.range(0);
-		const auto s = v2::format(data, 10, marnav::nmea::data_format::dec);
+		auto s = v2::format(data, 10, marnav::nmea::data_format::dec);
 		benchmark::DoNotOptimize(s);
 	}
 }
@@ -264,7 +264,7 @@ void bench_hex_v2(benchmark::State & state)
 {
 	while (state.KeepRunning()) {
 		const std::uint64_t data = state.range(0);
-		const auto s = v2::format(data, 10, marnav::nmea::data_format::hex);
+		auto s = v2::format(data, 10, marnav::nmea::data_format::hex);
 		benchmark::DoNotOptimize(s);
 	}
 }
@@ -273,7 +273,7 @@ void bench_dec_v3(benchmark::State & state)
 {
 	while (state.KeepRunning()) {
 		const std::uint64_t data = state.range(0);
-		const auto s = v3::format(data, 10, marnav::nmea::data_format::dec);
+		auto s = v3::format(data, 10, marnav::nmea::data_format::dec);
 		benchmark::DoNotOptimize(s);
 	}
 }
@@ -282,7 +282,7 @@ void bench_hex_v3(benchmark::State & state)
 {
 	while (state.KeepRunning()) {
 		const std::uint64_t data = state.range(0);
-		const auto s = v3::format(data, 10, marnav::nmea::data_format::hex);
+		auto s = v3::format(data, 10, marnav::nmea::data_format::hex);
 		benchmark::DoNotOptimize(s);
 	}
 }
@@ -291,7 +291,7 @@ void bench_dec_v4(benchmark::State & state)
 {
 	while (state.KeepRunning()) {
 		const std::uint64_t data = state.range(0);
-		const auto s = v4::format(data, 10, marnav::nmea::data_format::dec);
+		auto s = v4::format(data, 10, marnav::nmea::data_format::dec);
 		benchmark::DoNotOptimize(s);
 	}
 }
@@ -300,7 +300,7 @@ void bench_hex_v4(benchmark::State & state)
 {
 	while (state.KeepRunning()) {
 		const std::uint64_t data = state.range(0);
-		const auto s = v4::format(data, 10, marnav::nmea::data_format::hex);
+		auto s = v4::format(data, 10, marnav::nmea::data_format::hex);
 		benchmark::DoNotOptimize(s);
 	}
 }

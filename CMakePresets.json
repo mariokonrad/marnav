@@ -1,11 +1,47 @@
 {
-	"version": 3,
+	"version": 6,
 	"cmakeMinimumRequired": {
-		"major": 3,
-		"minor": 19,
+		"major": 4,
+		"minor": 0,
 		"patch": 0
 	},
 	"configurePresets": [
+		{
+			"name": "gcc14-release",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "g++-14",
+				"CMAKE_C_COMPILER": "gcc-14",
+				"CMAKE_BUILD_TYPE": "Release"
+			}
+		},
+		{
+			"name": "gcc14-debug",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "g++-14",
+				"CMAKE_C_COMPILER": "gcc-14",
+				"CMAKE_BUILD_TYPE": "Debug"
+			}
+		},
+		{
+			"name": "gcc13-release",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "g++-13",
+				"CMAKE_C_COMPILER": "gcc-13",
+				"CMAKE_BUILD_TYPE": "Release"
+			}
+		},
+		{
+			"name": "gcc13-debug",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "g++-13",
+				"CMAKE_C_COMPILER": "gcc-13",
+				"CMAKE_BUILD_TYPE": "Debug"
+			}
+		},
 		{
 			"name": "gcc12-release",
 			"binaryDir": "${sourceDir}/build/${presetName}",
@@ -25,72 +61,6 @@
 			}
 		},
 		{
-			"name": "gcc11-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-11",
-				"CMAKE_C_COMPILER": "gcc-11",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "gcc11-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-11",
-				"CMAKE_C_COMPILER": "gcc-11",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "gcc10-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-10",
-				"CMAKE_C_COMPILER": "gcc-10",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "gcc10-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-10",
-				"CMAKE_C_COMPILER": "gcc-10",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "gcc10-arm-linux-gnueabihf-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_TOOLCHAIN_FILE": {
-					"type": "PATH",
-					"value": "${sourceDir}/cmake/toolchain-arm-linux-gnueabihf-gcc10.cmake"
-				},
-				"CMAKE_BUILD_TYPE": "Release",
-				"ENABLE_EXAMPLES": "FALSE",
-				"ENABLE_TESTS": "TRUE",
-				"ENABLE_TOOLS": "FALSE",
-				"ENABLE_TESTS_BENCHMARK": "FALSE"
-			}
-		},
-		{
-			"name": "gcc10-aarch64-linux-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_TOOLCHAIN_FILE": {
-					"type": "PATH",
-					"value": "${sourceDir}/cmake/toolchain-aarch64-linux-gcc10.cmake"
-				},
-				"CMAKE_BUILD_TYPE": "Release",
-				"ENABLE_EXAMPLES": "FALSE",
-				"ENABLE_TESTS": "TRUE",
-				"ENABLE_TOOLS": "FALSE",
-				"ENABLE_TESTS_BENCHMARK": "FALSE"
-			}
-		},
-		{
 			"name": "gcc12-aarch64-linux-release",
 			"binaryDir": "${sourceDir}/build/${presetName}",
 			"cacheVariables": {
@@ -103,108 +73,6 @@
 				"ENABLE_TESTS": "TRUE",
 				"ENABLE_TOOLS": "FALSE",
 				"ENABLE_TESTS_BENCHMARK": "FALSE"
-			}
-		},
-		{
-			"name": "gcc9-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-9",
-				"CMAKE_C_COMPILER": "gcc-9",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "gcc9-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-9",
-				"CMAKE_C_COMPILER": "gcc-9",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "gcc8-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-8",
-				"CMAKE_C_COMPILER": "gcc-8",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "gcc8-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-8",
-				"CMAKE_C_COMPILER": "gcc-8",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "gcc7-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-7",
-				"CMAKE_C_COMPILER": "gcc-7",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "gcc7-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-7",
-				"CMAKE_C_COMPILER": "gcc-7",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "gcc6-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-6",
-				"CMAKE_C_COMPILER": "gcc-6",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "gcc6-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-6",
-				"CMAKE_C_COMPILER": "gcc-6",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "gcc6-release-libonly",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-6",
-				"CMAKE_C_COMPILER": "gcc-6",
-				"CMAKE_BUILD_TYPE": "Release",
-				"ENABLE_EXAMPLES": "FALSE",
-				"ENABLE_TESTS": "FALSE",
-				"ENABLE_TOOLS": "FALSE"
-			}
-		},
-		{
-			"name": "gcc5-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-5",
-				"CMAKE_C_COMPILER": "gcc-5",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "gcc5-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-5",
-				"CMAKE_C_COMPILER": "gcc-5",
-				"CMAKE_BUILD_TYPE": "Debug"
 			}
 		},
 		{
@@ -229,8 +97,8 @@
 			"name": "gcc-bench",
 			"binaryDir": "${sourceDir}/build/${presetName}",
 			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-6",
-				"CMAKE_C_COMPILER": "gcc-6",
+				"CMAKE_CXX_COMPILER": "g++",
+				"CMAKE_C_COMPILER": "gcc",
 				"CMAKE_BUILD_TYPE": "Release",
 				"ENABLE_BNECHMARK": "TRUE"
 			}
@@ -239,8 +107,8 @@
 			"name": "gcc-sanitize",
 			"binaryDir": "${sourceDir}/build/${presetName}",
 			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-6",
-				"CMAKE_C_COMPILER": "gcc-6",
+				"CMAKE_CXX_COMPILER": "g++",
+				"CMAKE_C_COMPILER": "gcc",
 				"CMAKE_BUILD_TYPE": "Debug",
 				"ENABLE_SANITIZER": "TRUE"
 			}
@@ -249,10 +117,46 @@
 			"name": "gcc-coverage",
 			"binaryDir": "${sourceDir}/build/${presetName}",
 			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "g++-8",
-				"CMAKE_C_COMPILER": "gcc-8",
+				"CMAKE_CXX_COMPILER": "g++",
+				"CMAKE_C_COMPILER": "gcc",
 				"CMAKE_BUILD_TYPE": "Coverage",
 				"GCOV_PATH": "gcov-8"
+			}
+		},
+		{
+			"name": "clang19-release",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "clang++-19",
+				"CMAKE_C_COMPILER": "clang-19",
+				"CMAKE_BUILD_TYPE": "Release"
+			}
+		},
+		{
+			"name": "clang19-debug",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "clang++-19",
+				"CMAKE_C_COMPILER": "clang-19",
+				"CMAKE_BUILD_TYPE": "Debug"
+			}
+		},
+		{
+			"name": "clang18-release",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "clang++-18",
+				"CMAKE_C_COMPILER": "clang-18",
+				"CMAKE_BUILD_TYPE": "Release"
+			}
+		},
+		{
+			"name": "clang18-debug",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "clang++-18",
+				"CMAKE_C_COMPILER": "clang-18",
+				"CMAKE_BUILD_TYPE": "Debug"
 			}
 		},
 		{
@@ -306,204 +210,6 @@
 			"cacheVariables": {
 				"CMAKE_CXX_COMPILER": "clang++-15",
 				"CMAKE_C_COMPILER": "clang-15",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "clang14-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-14",
-				"CMAKE_C_COMPILER": "clang-14",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "clang14-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-14",
-				"CMAKE_C_COMPILER": "clang-14",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "clang13-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-13",
-				"CMAKE_C_COMPILER": "clang-13",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "clang13-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-13",
-				"CMAKE_C_COMPILER": "clang-13",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "clang12-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-12",
-				"CMAKE_C_COMPILER": "clang-12",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "clang12-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-12",
-				"CMAKE_C_COMPILER": "clang-12",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "clang11-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-11",
-				"CMAKE_C_COMPILER": "clang-11",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "clang11-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-11",
-				"CMAKE_C_COMPILER": "clang-11",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "clang10-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-10",
-				"CMAKE_C_COMPILER": "clang-10",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "clang10-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-10",
-				"CMAKE_C_COMPILER": "clang-10",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "clang9-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-9",
-				"CMAKE_C_COMPILER": "clang-9",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "clang9-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-9",
-				"CMAKE_C_COMPILER": "clang-9",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "clang8-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-8",
-				"CMAKE_C_COMPILER": "clang-8",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "clang8-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-7",
-				"CMAKE_C_COMPILER": "clang-7",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "clang7-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-7",
-				"CMAKE_C_COMPILER": "clang-7",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "clang7-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-7",
-				"CMAKE_C_COMPILER": "clang-7",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "clang60-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-6.0",
-				"CMAKE_C_COMPILER": "clang-6.0",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "clang60-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-6.0",
-				"CMAKE_C_COMPILER": "clang-6.0",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "clang50-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-5.0",
-				"CMAKE_C_COMPILER": "clang-5.0",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "clang50-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-5.0",
-				"CMAKE_C_COMPILER": "clang-5.0",
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "clang40-release",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-4.0",
-				"CMAKE_C_COMPILER": "clang-4.0",
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "clang40-debug",
-			"binaryDir": "${sourceDir}/build/${presetName}",
-			"cacheVariables": {
-				"CMAKE_CXX_COMPILER": "clang++-4.0",
-				"CMAKE_C_COMPILER": "clang-4.0",
 				"CMAKE_BUILD_TYPE": "Debug"
 			}
 		},
@@ -575,59 +281,28 @@
 		}
 	],
 	"buildPresets": [
+		{ "name": "gcc14-release",                     "configurePreset": "gcc14-release",                     "configuration": "Release" },
+		{ "name": "gcc14-debug",                       "configurePreset": "gcc14-debug",                       "configuration": "Debug"   },
+		{ "name": "gcc13-release",                     "configurePreset": "gcc13-release",                     "configuration": "Release" },
+		{ "name": "gcc13-debug",                       "configurePreset": "gcc13-debug",                       "configuration": "Debug"   },
 		{ "name": "gcc12-release",                     "configurePreset": "gcc12-release",                     "configuration": "Release" },
 		{ "name": "gcc12-debug",                       "configurePreset": "gcc12-debug",                       "configuration": "Debug"   },
-		{ "name": "gcc11-release",                     "configurePreset": "gcc11-release",                     "configuration": "Release" },
-		{ "name": "gcc11-debug",                       "configurePreset": "gcc11-debug",                       "configuration": "Debug"   },
-		{ "name": "gcc10-release",                     "configurePreset": "gcc10-release",                     "configuration": "Release" },
-		{ "name": "gcc10-debug",                       "configurePreset": "gcc10-debug",                       "configuration": "Debug"   },
-		{ "name": "gcc10-arm-linux-gnueabihf-release", "configurePreset": "gcc10-arm-linux-gnueabihf-release", "configuration": "Release" },
-		{ "name": "gcc10-aarch64-linux-release",       "configurePreset": "gcc10-aarch64-linux-release",       "configuration": "Release" },
 		{ "name": "gcc12-aarch64-linux-release",       "configurePreset": "gcc12-aarch64-linux-release",       "configuration": "Release" },
-		{ "name": "gcc9-release",                      "configurePreset": "gcc9-release",                      "configuration": "Release" },
-		{ "name": "gcc9-debug",                        "configurePreset": "gcc9-debug",                        "configuration": "Debug"   },
-		{ "name": "gcc8-release",                      "configurePreset": "gcc8-release",                      "configuration": "Release" },
-		{ "name": "gcc8-debug",                        "configurePreset": "gcc8-debug",                        "configuration": "Debug"   },
-		{ "name": "gcc7-release",                      "configurePreset": "gcc7-release",                      "configuration": "Release" },
-		{ "name": "gcc7-debug",                        "configurePreset": "gcc7-debug",                        "configuration": "Debug"   },
-		{ "name": "gcc6-release",                      "configurePreset": "gcc6-release",                      "configuration": "Release" },
-		{ "name": "gcc6-debug",                        "configurePreset": "gcc6-debug",                        "configuration": "Debug"   },
-		{ "name": "gcc6-release-libonly",              "configurePreset": "gcc6-release-libonly",              "configuration": "Release" },
-		{ "name": "gcc5-release",                      "configurePreset": "gcc5-release",                      "configuration": "Release" },
-		{ "name": "gcc5-debug",                        "configurePreset": "gcc5-debug",                        "configuration": "Debug"   },
 		{ "name": "gcc-release",                       "configurePreset": "gcc-release",                       "configuration": "Release" },
 		{ "name": "gcc-debug",                         "configurePreset": "gcc-debug",                         "configuration": "Debug"   },
 		{ "name": "gcc-bench",                         "configurePreset": "gcc-bench"                                                     },
 		{ "name": "gcc-sanitize",                      "configurePreset": "gcc-sanitize"                                                  },
 		{ "name": "gcc-coverage",                      "configurePreset": "gcc-coverage"                                                  },
+		{ "name": "clang19-release",                   "configurePreset": "clang19-release",                   "configuration": "Release" },
+		{ "name": "clang19-debug",                     "configurePreset": "clang19-debug",                     "configuration": "Debug"   },
+		{ "name": "clang18-release",                   "configurePreset": "clang18-release",                   "configuration": "Release" },
+		{ "name": "clang18-debug",                     "configurePreset": "clang18-debug",                     "configuration": "Debug"   },
 		{ "name": "clang17-release",                   "configurePreset": "clang17-release",                   "configuration": "Release" },
 		{ "name": "clang17-debug",                     "configurePreset": "clang17-debug",                     "configuration": "Debug"   },
 		{ "name": "clang16-release",                   "configurePreset": "clang16-release",                   "configuration": "Release" },
 		{ "name": "clang16-debug",                     "configurePreset": "clang16-debug",                     "configuration": "Debug"   },
 		{ "name": "clang15-release",                   "configurePreset": "clang15-release",                   "configuration": "Release" },
 		{ "name": "clang15-debug",                     "configurePreset": "clang15-debug",                     "configuration": "Debug"   },
-		{ "name": "clang14-release",                   "configurePreset": "clang14-release",                   "configuration": "Release" },
-		{ "name": "clang14-debug",                     "configurePreset": "clang14-debug",                     "configuration": "Debug"   },
-		{ "name": "clang13-release",                   "configurePreset": "clang13-release",                   "configuration": "Release" },
-		{ "name": "clang13-debug",                     "configurePreset": "clang13-debug",                     "configuration": "Debug"   },
-		{ "name": "clang12-release",                   "configurePreset": "clang12-release",                   "configuration": "Release" },
-		{ "name": "clang12-debug",                     "configurePreset": "clang12-debug",                     "configuration": "Debug"   },
-		{ "name": "clang11-release",                   "configurePreset": "clang11-release",                   "configuration": "Release" },
-		{ "name": "clang11-debug",                     "configurePreset": "clang11-debug",                     "configuration": "Debug"   },
-		{ "name": "clang10-release",                   "configurePreset": "clang10-release",                   "configuration": "Release" },
-		{ "name": "clang10-debug",                     "configurePreset": "clang10-debug",                     "configuration": "Debug"   },
-		{ "name": "clang9-release",                    "configurePreset": "clang9-release",                    "configuration": "Release" },
-		{ "name": "clang9-debug",                      "configurePreset": "clang9-debug",                      "configuration": "Debug"   },
-		{ "name": "clang8-release",                    "configurePreset": "clang8-release",                    "configuration": "Release" },
-		{ "name": "clang8-debug",                      "configurePreset": "clang8-debug",                      "configuration": "Debug"   },
-		{ "name": "clang7-release",                    "configurePreset": "clang7-release",                    "configuration": "Release" },
-		{ "name": "clang7-debug",                      "configurePreset": "clang7-debug",                      "configuration": "Debug"   },
-		{ "name": "clang60-release",                   "configurePreset": "clang60-release",                   "configuration": "Release" },
-		{ "name": "clang60-debug",                     "configurePreset": "clang60-debug",                     "configuration": "Debug"   },
-		{ "name": "clang50-release",                   "configurePreset": "clang50-release",                   "configuration": "Release" },
-		{ "name": "clang50-debug",                     "configurePreset": "clang50-debug",                     "configuration": "Debug"   },
-		{ "name": "clang40-release",                   "configurePreset": "clang40-release",                   "configuration": "Release" },
-		{ "name": "clang40-debug",                     "configurePreset": "clang40-debug",                     "configuration": "Debug"   },
 		{ "name": "clang-release",                     "configurePreset": "clang-release",                     "configuration": "Release" },
 		{ "name": "clang-debug",                       "configurePreset": "clang-debug",                       "configuration": "Debug"   },
 		{ "name": "vs2022-release-static",             "configurePreset": "vs2022-release-static",             "configuration": "Release" },
@@ -636,56 +311,28 @@
 		{ "name": "vs2022-debug-shared",               "configurePreset": "vs2022-debug-shared",               "configuration": "Debug"   }
 	],
 	"testPresets": [
+		{ "name": "gcc14-release",                     "configurePreset": "gcc14-release",                     "configuration": "Release" },
+		{ "name": "gcc14-debug",                       "configurePreset": "gcc14-debug",                       "configuration": "Debug"   },
+		{ "name": "gcc13-release",                     "configurePreset": "gcc13-release",                     "configuration": "Release" },
+		{ "name": "gcc13-debug",                       "configurePreset": "gcc13-debug",                       "configuration": "Debug"   },
 		{ "name": "gcc12-release",                     "configurePreset": "gcc12-release",                     "configuration": "Release" },
 		{ "name": "gcc12-debug",                       "configurePreset": "gcc12-debug",                       "configuration": "Debug"   },
-		{ "name": "gcc11-release",                     "configurePreset": "gcc11-release",                     "configuration": "Release" },
-		{ "name": "gcc11-debug",                       "configurePreset": "gcc11-debug",                       "configuration": "Debug"   },
-		{ "name": "gcc10-release",                     "configurePreset": "gcc10-release",                     "configuration": "Release" },
-		{ "name": "gcc10-debug",                       "configurePreset": "gcc10-debug",                       "configuration": "Debug"   },
-		{ "name": "gcc10-arm-linux-gnueabihf-release", "configurePreset": "gcc10-arm-linux-gnueabihf-release", "configuration": "Release" },
-		{ "name": "gcc10-aarch64-linux-release",       "configurePreset": "gcc10-aarch64-linux-release",       "configuration": "Release" },
 		{ "name": "gcc12-aarch64-linux-release",       "configurePreset": "gcc12-aarch64-linux-release",       "configuration": "Release" },
-		{ "name": "gcc9-release",                      "configurePreset": "gcc9-release",                      "configuration": "Release" },
-		{ "name": "gcc9-debug",                        "configurePreset": "gcc9-debug",                        "configuration": "Debug"   },
-		{ "name": "gcc8-release",                      "configurePreset": "gcc8-release",                      "configuration": "Release" },
-		{ "name": "gcc8-debug",                        "configurePreset": "gcc8-debug",                        "configuration": "Debug"   },
-		{ "name": "gcc7-release",                      "configurePreset": "gcc7-release",                      "configuration": "Release" },
-		{ "name": "gcc7-debug",                        "configurePreset": "gcc7-debug",                        "configuration": "Debug"   },
-		{ "name": "gcc6-release",                      "configurePreset": "gcc6-release",                      "configuration": "Release" },
-		{ "name": "gcc6-debug",                        "configurePreset": "gcc6-debug",                        "configuration": "Debug"   },
-		{ "name": "gcc5-release",                      "configurePreset": "gcc5-release",                      "configuration": "Release" },
-		{ "name": "gcc5-debug",                        "configurePreset": "gcc5-debug",                        "configuration": "Debug"   },
 		{ "name": "gcc-release",                       "configurePreset": "gcc-release",                       "configuration": "Release" },
 		{ "name": "gcc-debug",                         "configurePreset": "gcc-debug",                         "configuration": "Debug"   },
 		{ "name": "gcc-bench",                         "configurePreset": "gcc-bench"                                                     },
 		{ "name": "gcc-sanitize",                      "configurePreset": "gcc-sanitize"                                                  },
 		{ "name": "gcc-coverage",                      "configurePreset": "gcc-coverage"                                                  },
+		{ "name": "clang19-release",                   "configurePreset": "clang19-release",                   "configuration": "Release" },
+		{ "name": "clang19-debug",                     "configurePreset": "clang19-debug",                     "configuration": "Debug"   },
+		{ "name": "clang18-release",                   "configurePreset": "clang18-release",                   "configuration": "Release" },
+		{ "name": "clang18-debug",                     "configurePreset": "clang18-debug",                     "configuration": "Debug"   },
 		{ "name": "clang17-release",                   "configurePreset": "clang17-release",                   "configuration": "Release" },
 		{ "name": "clang17-debug",                     "configurePreset": "clang17-debug",                     "configuration": "Debug"   },
 		{ "name": "clang16-release",                   "configurePreset": "clang16-release",                   "configuration": "Release" },
 		{ "name": "clang16-debug",                     "configurePreset": "clang16-debug",                     "configuration": "Debug"   },
 		{ "name": "clang15-release",                   "configurePreset": "clang15-release",                   "configuration": "Release" },
 		{ "name": "clang15-debug",                     "configurePreset": "clang15-debug",                     "configuration": "Debug"   },
-		{ "name": "clang14-release",                   "configurePreset": "clang14-release",                   "configuration": "Release" },
-		{ "name": "clang14-debug",                     "configurePreset": "clang14-debug",                     "configuration": "Debug"   },
-		{ "name": "clang13-release",                   "configurePreset": "clang13-release",                   "configuration": "Release" },
-		{ "name": "clang13-debug",                     "configurePreset": "clang13-debug",                     "configuration": "Debug"   },
-		{ "name": "clang12-release",                   "configurePreset": "clang12-release",                   "configuration": "Release" },
-		{ "name": "clang12-debug",                     "configurePreset": "clang12-debug",                     "configuration": "Debug"   },
-		{ "name": "clang11-release",                   "configurePreset": "clang11-release",                   "configuration": "Release" },
-		{ "name": "clang11-debug",                     "configurePreset": "clang11-debug",                     "configuration": "Debug"   },
-		{ "name": "clang10-release",                   "configurePreset": "clang10-release",                   "configuration": "Release" },
-		{ "name": "clang10-debug",                     "configurePreset": "clang10-debug",                     "configuration": "Debug"   },
-		{ "name": "clang9-release",                    "configurePreset": "clang9-release",                    "configuration": "Release" },
-		{ "name": "clang9-debug",                      "configurePreset": "clang9-debug",                      "configuration": "Debug"   },
-		{ "name": "clang7-release",                    "configurePreset": "clang7-release",                    "configuration": "Release" },
-		{ "name": "clang7-debug",                      "configurePreset": "clang7-debug",                      "configuration": "Debug"   },
-		{ "name": "clang60-release",                   "configurePreset": "clang60-release",                   "configuration": "Release" },
-		{ "name": "clang60-debug",                     "configurePreset": "clang60-debug",                     "configuration": "Debug"   },
-		{ "name": "clang50-release",                   "configurePreset": "clang50-release",                   "configuration": "Release" },
-		{ "name": "clang50-debug",                     "configurePreset": "clang50-debug",                     "configuration": "Debug"   },
-		{ "name": "clang40-release",                   "configurePreset": "clang40-release",                   "configuration": "Release" },
-		{ "name": "clang40-debug",                     "configurePreset": "clang40-debug",                     "configuration": "Debug"   },
 		{ "name": "clang-release",                     "configurePreset": "clang-release",                     "configuration": "Release" },
 		{ "name": "clang-debug",                       "configurePreset": "clang-debug",                       "configuration": "Debug"   },
 		{ "name": "vs2022-release-static",             "configurePreset": "vs2022-release-static",             "configuration": "Release" },

@@ -26,13 +26,8 @@ ENV LD_LIBRARY_PATH=/usr/lib/x86_64-unknown-linux-gnu
 
 # install cmake
 COPY install-cmake.sh /tmp/
-RUN /tmp/install-cmake.sh "3.24.1"
+RUN /tmp/install-cmake.sh "4.2.0"
 ENV PATH /opt/local/cmake/bin:$PATH
-
-# install boost
-COPY install-boost.sh /tmp/
-RUN /tmp/install-boost.sh "1.72.0" "clang" "-stdlib=libc++" "-stdlib=libc++"
-ENV BOOST_ROOT=/opt/local
 
 # add user
 RUN useradd --groups users -M --uid 1000 user

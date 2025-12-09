@@ -18,19 +18,27 @@ function get_url()
 
 	# according to https://lists.boost.org/boost-users/2021/04/90883.php
 	# the new download location:
-	echo "https://boostorg.jfrog.io/artifactory/main/release/${boost_version}/source/boost_${boost_file}.tar.gz"
+	# echo "https://boostorg.jfrog.io/artifactory/main/release/${boost_version}/source/boost_${boost_file}.tar.gz"
 
 	# sourceforge backup?
 	#echo "https://kumisystems.dl.sourceforge.net/project/boost/boost/${boost_version}/boost_${boost_file}.tar.bz2"
+
+	# moved again
+	# echo "https://github.com/boostorg/boost/releases/download/boost-${boost_version}/boost-${boost_version}-b2-nodocs.tar.xz"
+
+	# 1.80 available from archives - TODO: this is obviously not maintenance friendly
+	echo "https://archives.boost.io/release/${boost_version}/source/boost_${boost_file}.tar.bz2"
 }
 
 curl -o /tmp/boost.tar.bz2 -L $(get_url)
 cd /tmp
-tar -xf boost.tar.bz2
+rm -fr boost
+mkdir boost
+tar -xf boost.tar.bz2 --strip-components=1 -C boost
 rm -f boost.tar.bz2
-cd boost_${boost_file}
+cd boost
 ./bootstrap.sh --with-toolset=${toolset} --prefix=${prefix} --with-libraries=system,program_options,thread
-./b2 -j3 --prefix=${prefix} \
+./b2 -j4 --prefix=${prefix} \
 	toolset=${toolset} \
 	${arg_cxxflags} \
 	${arg_linkflags} \
@@ -39,4 +47,4 @@ cd boost_${boost_file}
 	optimization=space \
 	install
 cd /opt
-rm -fr /tmp/boost_${boost_file}
+rm -fr /tmp/boost

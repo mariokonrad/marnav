@@ -47,6 +47,7 @@ function build()
 		mkdir -p ${builddir}
 	fi
 
+	docker_run ${dockerid} "cmake --version"
 	docker_run ${dockerid} "cmake -B ${builddir} -DCMAKE_BUILD_TYPE=${build_type} ${BASE}"
 	docker_run ${dockerid} "cmake --build ${builddir} -j ${NUM_PROC}"
 	docker_run ${dockerid} "cmake --build ${builddir} --target unittest"

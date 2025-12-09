@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.20..4.0)
 
 project(marnav
 	VERSION 0.14.0
@@ -68,13 +68,13 @@ if(ENABLE_TOOLS)
 	set(CXXOPTS_BUILD_EXAMPLES FALSE CACHE BOOL "" FORCE)
 	set(CXXOPTS_BUILD_TESTS FALSE CACHE BOOL "" FORCE)
 	FetchContent_Declare(cxxopts
-		URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/cxxopts"
+		URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/cxxopts-3.3.0"
 		)
 	FetchContent_MakeAvailable(cxxopts)
 
 	set(FMT_INSTALL TRUE CACHE BOOL "" FORCE)
 	FetchContent_Declare(fmt
-		URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/fmt"
+		URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/fmt-11.2.0"
 		)
 	FetchContent_MakeAvailable(fmt)
 endif()
@@ -104,7 +104,7 @@ if(ENABLE_TESTS)
 		set(gtest_disable_pthreads TRUE CACHE BOOL "" FORCE)
 	endif()
 	FetchContent_Declare(googletest
-		URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/googletest-1.11.0"
+		URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/googletest-1.17.0"
 		)
 	FetchContent_MakeAvailable(googletest)
 
@@ -112,7 +112,7 @@ if(ENABLE_TESTS)
 		set(BENCHMARK_ENABLE_TESTING FALSE CACHE BOOL "" FORCE)
 		set(BENCHMARK_ENABLE_GTEST_TESTS FALSE CACHE BOOL "" FORCE)
 		FetchContent_Declare(benchmark
-			URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/benchmark-1.6.0"
+			URL "${CMAKE_CURRENT_SOURCE_DIR}/extern/benchmark-1.9.4"
 			)
 		FetchContent_MakeAvailable(benchmark)
 	endif()

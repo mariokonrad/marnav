@@ -1,4 +1,4 @@
-find_package(Boost 1.53.0 COMPONENTS system)
+find_package(Boost 1.86.0 COMPONENTS system)
 
 if(NOT MSVC)
 	set_property(DIRECTORY PROPERTY COMPILE_OPTIONS

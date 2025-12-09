@@ -366,30 +366,18 @@ Tools and their versions are listed below, newer/older/other tools
 (i.e. compilers, etc.) may work, but not tested.
 
 Compiler:
-- GCC 7
-- GCC 8
-- GCC 9
-- GCC 10
-- GCC 11
 - GCC 12
 - GCC 13
-- Clang 5
-- Clang 6
-- Clang 7
-- Clang 8
-- Clang 9
-- Clang 10
-- Clang 11
-- Clang 12
-- Clang 13
-- Clang 14
+- GCC 14
+- GCC 15
 - Clang 15
 - Clang 16
 - Clang 17
+- Clang 18
 - VC++ 14.34 (_MSC_VER=1934, Visual Studio 2022)
 
 Tools needed to build the library:
-- cmake 3.19 or newer
+- cmake 4.0 or newer
 
 Tools needed to develop the library:
 - git
