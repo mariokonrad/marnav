@@ -49,7 +49,7 @@ function build_with_docker()
 	name=marnav
 	account=mariokonrad/
 
-	for dockerid in $(docker images ${account}${name} | grep -Ev "REPOSITORY" | sed -E 's/^([^[:space:]]+)\s+([^[:space:]]+)\s+.*$/\1:\2/' | sort -Vur) ; do
+	for dockerid in $(docker images --format table ${account}${name} | grep -Ev "REPOSITORY" | sed -E 's/^([^[:space:]]+)\s+([^[:space:]]+)\s+.*$/\1:\2/' | sort -Vur) ; do
 		for build_type in Debug Release ; do
 			cfg=$(echo "${dockerid}_${build_type}" | tr '/:' '__')
 
