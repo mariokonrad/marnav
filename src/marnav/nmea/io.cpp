@@ -218,6 +218,13 @@ void read(const std::string & s, uint32_t & value, data_format fmt)
 	detail::read_integer(s, value, fmt);
 }
 
+void read(const std::string & s, uint16_t & value, data_format fmt)
+{
+	uint32_t tmp{};
+	detail::read_integer(s, tmp, fmt);
+	value = tmp;
+}
+
 void read(const std::string & s, uint8_t & value, data_format fmt)
 {
 	uint32_t tmp = {};
@@ -321,6 +328,28 @@ void read(const std::string & s, type_of_point & value, data_format fmt)
 			break;
 		default:
 			throw std::runtime_error{"invalid data for nmea/type_of_point"};
+	}
+}
+
+void read(const std::string & s, frequency_index & value, data_format fmt)
+{
+	std::underlying_type_t<frequency_index> t;
+	read(s, t, fmt);
+	switch (t) {
+		case 0:
+			value = frequency_index::not_received_over_air;
+			break;
+		case 1:
+			value = frequency_index::f_490_khz;
+			break;
+		case 2:
+			value = frequency_index::f_518_khz;
+			break;
+		case 3:
+			value = frequency_index::f_4209_5_khz;
+			break;
+		default:
+			throw std::runtime_error{"invalid data for nmea/frequency_index"};
 	}
 }
 

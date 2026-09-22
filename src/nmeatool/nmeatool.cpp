@@ -72,6 +72,7 @@
 #include <marnav/nmea/mtw.hpp>
 #include <marnav/nmea/mwd.hpp>
 #include <marnav/nmea/mwv.hpp>
+#include <marnav/nmea/nrx.hpp>
 #include <marnav/nmea/osd.hpp>
 #include <marnav/nmea/r00.hpp>
 #include <marnav/nmea/rma.hpp>
@@ -694,6 +695,12 @@ static std::string render(const marnav::geo::region & t)
 		render(t.right()));
 }
 
+static std::string render(const marnav::nmea::nrx::message_code & t)
+{
+	return fmt::sprintf(
+		"%c%c%02u", t.b1_transmitter_identity, t.b2_subject_indicator, t.b3_b4_serial);
+}
+
 template <typename T>
 static std::string render(const std::optional<T> & t)
 {
@@ -1059,6 +1066,22 @@ static void print_detail_mwv(const marnav::nmea::sentence * s)
 	print("Angle", fmt::sprintf("%s %s", render(t->get_angle()), render(t->get_angle_ref())));
 	print("Speed", fmt::sprintf("%s %s", render(t->get_speed()), render(t->get_speed_unit())));
 	print("Data Valid", render(t->get_data_valid()));
+}
+
+static void print_detail_nrx(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::nrx>(s);
+	print("Number of Sentences", fmt::sprintf("%03u", t->get_number_sentences()));
+	print("Sentence Number", fmt::sprintf("%03u", t->get_sentence_number()));
+	print("Sequential ID", fmt::sprintf("%02u", t->get_sequential_id()));
+	print("Message Code", render(t->get_message_code()));
+	print("Frequency Index", render(t->get_frequency_index()));
+	print("Time UTC", render(t->get_time_utc()));
+	print("Date", render(t->get_utc_date()));
+	print("Total Characters", render(t->get_total_characters()));
+	print("Total Bad Characters", render(t->get_total_bad_characters()));
+	print("Status", render(t->get_status()));
+	print("Message", render(t->get_message()));
 }
 
 static void print_detail_gsv(const marnav::nmea::sentence * s)
@@ -2040,6 +2063,7 @@ static const std::vector<nmea_entry> & nmea_sentences()
 		ADD_SENTENCE(mtw),
 		ADD_SENTENCE(mwd),
 		ADD_SENTENCE(mwv),
+		ADD_SENTENCE(nrx),
 		ADD_SENTENCE(osd),
 		ADD_SENTENCE(r00),
 		ADD_SENTENCE(rma),

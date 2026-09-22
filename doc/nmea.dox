@@ -41,6 +41,7 @@ Supported sentences for NMEA-0183 (read and write):
 - \link marnav::nmea::mtw \c MTW \endlink : Mean Temperature of Water
 - \link marnav::nmea::mwd \c MWD \endlink : Wind Direction and Speed
 - \link marnav::nmea::mwv \c MWV \endlink : Wind Speed and Angle
+- \link marnav::nmea::nrx \c NRX \endlink : Navtex message - global maritime safety information
 - \link marnav::nmea::osd \c OSD \endlink : Own Ship Data
 - \link marnav::nmea::rma \c RMA \endlink : Recommended Minimum Navigation Information
 - \link marnav::nmea::rmb \c RMB \endlink : Recommended Minimum Navigation Information

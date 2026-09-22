@@ -50,6 +50,7 @@ enum class sentence_id : uint32_t {
 	MTW, ///< Mean Temperature of Water (II)
 	MWD, ///< Wind Directinon and Speed
 	MWV, ///< Wind Speed and Angle (II)
+	NRX, ///< Navtext message - global maritime safety information>
 	OSD, ///< Own Ship Data
 	RMA, ///< Recommended Minimum Navigation Information
 	RMB, ///< Recommended Minimum Navigation Information

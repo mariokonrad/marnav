@@ -20,6 +20,7 @@ static constexpr const struct entry {
 	{talker::computer_memory,                      "CM"},
 	{talker::communications_satellite,             "CS"},
 	{talker::communications_mfhf,                  "CT"},
+	{talker::communications_telex,                 "CR"},
 	{talker::communications_vhf,                   "CV"},
 	{talker::communications_scanning_receiver,     "CX"},
 	{talker::decca_navigation,                     "DE"},

@@ -195,6 +195,7 @@ target_sources(marnav
 		marnav/nmea/mwv.cpp
 		marnav/nmea/name.cpp
 		marnav/nmea/nmea.cpp
+		marnav/nmea/nrx.cpp
 		marnav/nmea/osd.cpp
 		marnav/nmea/pgrme.cpp
 		marnav/nmea/pgrmm.cpp

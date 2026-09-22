@@ -40,6 +40,7 @@
 #include <marnav/nmea/mtw.hpp>
 #include <marnav/nmea/mwd.hpp>
 #include <marnav/nmea/mwv.hpp>
+#include <marnav/nmea/nrx.hpp>
 #include <marnav/nmea/nmea.hpp>
 #include <marnav/nmea/osd.hpp>
 #include <marnav/nmea/pgrme.hpp>
@@ -156,6 +157,7 @@ static const std::vector<sentence_data> sentences = {
 	INFO(mtw,   "$IIMTW,9.5,C*2F"),
 	INFO(mwd,   "$WIMWD,12.4,T,,,,,,*0D"),
 	INFO(mwv,   "$IIMWV,084.0,R,10.4,N,A*04"),
+	INFO(nrx,	"$CRNRX,007,001,00,IB45,1,135600,27,06,2001,241,3,A,IB45 ^0D^0A260909 UTC MAR 07^0D^0AWWJP83 *24"),
 	INFO(osd,   "$IIOSD,123.4,A,,,,,,,*1F"),
 	INFO(pgrme, "$PGRME,22.0,M,52.9,M,51.0,M*14"),
 	INFO(pgrmm, "$PGRMM,WGS 84*06"),
@@ -321,6 +323,7 @@ BENCHMARK_TEMPLATE_SENTENCE(mta);
 BENCHMARK_TEMPLATE_SENTENCE(mtw);
 BENCHMARK_TEMPLATE_SENTENCE(mwd);
 BENCHMARK_TEMPLATE_SENTENCE(mwv);
+BENCHMARK_TEMPLATE_SENTENCE(nrx);
 BENCHMARK_TEMPLATE_SENTENCE(osd);
 BENCHMARK_TEMPLATE_SENTENCE(pgrme);
 BENCHMARK_TEMPLATE_SENTENCE(pgrmm);
