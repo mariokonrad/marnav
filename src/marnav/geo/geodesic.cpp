@@ -39,10 +39,10 @@ static double central_spherical_angle_rad(
 	// return acos(sin(p1_lat) * sin(p0_lat) + cos(p1_lat) * cos(p0_lat) * cos(p1_lon -
 	// p0_lon));
 
-	return atan(
-		sqrt(sqr(cos(p1_lat) * sin(p1_lon - p0_lon))
-			+ sqr(cos(p0_lat) * sin(p1_lat) - sin(p0_lat) * cos(p1_lat) * cos(p1_lon - p0_lon)))
-		/ (sin(p0_lat) * sin(p1_lat) + cos(p0_lat) * cos(p1_lat) * cos(p1_lon - p0_lon)));
+	return atan2(sqrt(sqr(cos(p1_lat) * sin(p1_lon - p0_lon))
+					 + sqr(cos(p0_lat) * sin(p1_lat)
+						 - sin(p0_lat) * cos(p1_lat) * cos(p1_lon - p0_lon))),
+		sin(p0_lat) * sin(p1_lat) + cos(p0_lat) * cos(p1_lat) * cos(p1_lon - p0_lon));
 }
 
 static double central_spherical_angle_rad(const position & p0, const position & p1)
@@ -279,17 +279,20 @@ distance_result distance_ellipsoid_lambert(const position & start, const positio
 
 	const double r = 1.0 / earth_flattening;
 
-	const double t1_lat = atan((r - 1.0) / r) * tan(p0.lat());
+	const double t1_lat = atan((r - 1.0) / r * tan(p0.lat()));
 	const double t1_lon = p0.lon();
-	const double t2_lat = atan((r - 1.0) / r) * tan(p1.lat());
+	const double t2_lat = atan((r - 1.0) / r * tan(p1.lat()));
 	const double t2_lon = p1.lon();
 
 	const double sigma = central_spherical_angle_rad(t1_lat, t1_lon, t2_lat, t2_lon);
+	if (sigma == 0.0)
+		return distance_result{0.0};
+
 	const double P = (t1_lat + t2_lat) / 2.0;
 	const double Q = (t2_lat - t1_lat) / 2.0;
 	const double X = (sigma - sin(sigma)) * (sqr(sin(P)) * sqr(cos(Q))) / sqr(cos(sigma / 2.0));
 	const double Y = (sigma + sin(sigma)) * (sqr(cos(P)) * sqr(sin(Q))) / sqr(sin(sigma / 2.0));
 
-	return distance_result{earth_radius * (sigma - (X + Y) / (2.0 * r))};
+	return distance_result{earth_semi_major_axis * (sigma - (X + Y) / (2.0 * r))};
 }
 }
