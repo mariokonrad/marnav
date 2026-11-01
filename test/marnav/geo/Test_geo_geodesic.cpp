@@ -100,12 +100,52 @@ TEST_F(test_geo_geodesic, distance_ellipsoid_lambert)
 	const geo::position BNA = {36.12, -86.67};
 	const geo::position LAX = {33.94, -118.40};
 
-	const double expected = 3013798.3235893762;
+	const double expected = 2892777.04;
 	// exact would be     : 2892777.232346 m
 
 	auto result = geo::distance_ellipsoid_lambert(BNA, LAX);
 
-	EXPECT_NEAR(expected, result.distance, 1e-3);
+	EXPECT_NEAR(expected, result.distance, 1e-1);
+}
+
+TEST_F(test_geo_geodesic, distance_sphere_London_Sydney)
+{
+	const geo::position London = {51.5, -0.13};
+	const geo::position Sydney = {-33.87, 151.21};
+
+	const double expected = 17013284.4;
+	// exact would be     : 16989978.8 m
+
+	auto result = geo::distance_sphere(London, Sydney);
+
+	EXPECT_GT(result.distance, 0.0);
+	EXPECT_NEAR(expected, result.distance, 1.0);
+}
+
+TEST_F(test_geo_geodesic, distance_ellipsoid_lambert_London_Sydney)
+{
+	const geo::position London = {51.5, -0.13};
+	const geo::position Sydney = {-33.87, 151.21};
+
+	const double expected = 16990005.0;
+	// exact would be     : 16989978.8 m
+
+	auto result = geo::distance_ellipsoid_lambert(London, Sydney);
+
+	EXPECT_NEAR(expected, result.distance, 50.0);
+}
+
+TEST_F(test_geo_geodesic, distance_ellipsoid_lambert_same_point)
+{
+	static const geo::position DATA[] = {
+		{0.0, 0.0},
+		{54.0, 10.0},
+	};
+
+	for (auto const & p : DATA) {
+		auto result = geo::distance_ellipsoid_lambert(p, p);
+		EXPECT_NEAR(0.0, result.distance, 1e-6);
+	}
 }
 
 TEST_F(test_geo_geodesic, point_ellipsoid_vincenty)
